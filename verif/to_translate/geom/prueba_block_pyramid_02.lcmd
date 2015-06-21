@@ -1,0 +1,46 @@
+\c{«block pyramid» creado por la intersección de cuatro planos (semiespacios).
+Ejemplo 1.9 de la tesis «La teoría de bloque aplicada a la dinámica
+de rocas» de Juan Carlos Ayes Zamudio}
+\path{"/usr/local/lib/macros_lcmd"}
+\incluye{"geotecnia/tuneles/teoria_bloques.lcmdm"}
+
+\def_prop["alpha1","double"]{@deg2rad(30)}
+\def_prop["beta1","double"]{@deg2rad(90)}
+\def_prop["alpha2","double"]{@deg2rad(40)}
+\def_prop["beta2","double"]{@deg2rad(320)}
+\def_prop["alpha3","double"]{@deg2rad(50)}
+\def_prop["beta3","double"]{@deg2rad(190)}
+\def_prop["alpha4","double"]{@deg2rad(10)}
+\def_prop["beta4","double"]{@deg2rad(80)}
+\def_prop["p","pos3d"]{[0,0,0]}
+
+\def_prop["P1","semiEspacio3d"]{}
+\P1{\setPlano{@calcPlanoBuzamiento(@alpha1,@beta1,@p)}}
+\def_prop["P2","semiEspacio3d"]{}
+\P2{\setPlano{@calcPlanoBuzamiento(@alpha2,@beta2,@p)}}
+\def_prop["P3","semiEspacio3d"]{}
+\P3{\setPlano{@calcPlanoBuzamiento(@alpha3,@beta3,@p)}}
+\def_prop["P4","semiEspacio3d"]{}
+\P4{\setPlano{@calcPlanoBuzamiento(@alpha4,@beta4,@p)} \swap{}}
+
+\def_prop["BP","blockPyramid"]{}
+\def_prop["vacio","double"]{}
+
+\BP
+  {
+    \semiespacios{@P1,@P2,@P3,@P4}
+    \set{vacio= @Vacio}
+  }
+
+
+
+\c{
+\print{"vacio= ",@vacio,"\n"}
+  }
+
+\if
+  {
+    \cond{(@abs(@vacio-1)<1e-16)}
+    \then{\print{"test block pyramid 02: pasa.\n"}}
+    \else{\print{"test block pyramid 02: falla.\n"}}
+  }

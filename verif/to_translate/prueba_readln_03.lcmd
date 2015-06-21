@@ -1,0 +1,122 @@
+\path{"/usr/local/lib/macros_lcmd"}
+\incluye{"sqlite/macros_sqlite.lcmm"}
+
+\def_prop["fNameIn","string"]{"./test_verif/esf_shell.lst"}
+\def_prop["dbName","string"]{"/tmp/esf_shell.db"}
+\def_prop["tbName","string"]{"esfShell"}
+\borra_archivo_si_existe{@dbName}
+
+\SQLTcreaDBase(@dbName){}
+\SQLTcreaTabla(@dbName,@tbName,"(ACCION string,ELEM integer,AXIL_X double,AXIL_Y double,RASANTE double,MOM_X double,MOM_Y double,TORSOR double,Q_X double,Q_Y double)"){}
+
+\nuevo_archivo_entrada["pp"]{@fNameIn}
+\def_prop["str1","string"]{}
+\def_prop["str1SB","string"]{}
+\fixedWidthReader
+  {
+    \setVectorIndices{0,8,9,20,21,32,33,44,45,56,57,68,69,80,81,92,93,104}
+  }
+\def_prop["csv","string"]{""}
+\def_prop["lst","list"]{}
+\def_prop["nmbAccion","string"]{""}
+\while
+  {
+    \cond{@good("pp")}
+\nverborrea{0}
+    \bucle
+      {
+        \set{str1= @readln("pp")}
+        \set{str1SB= @qBlancos(@str1)}
+        \if
+          {
+            \cond{@strlen(@str1)>0}
+            \then
+              {
+                \if
+                  {
+                    \cond{@regExpMatch(".*Accion.*",@str1)}
+                    \then
+                      {
+                        \set{nmbAccion= @copiaDesde(" ",@copiaHasta(":",@str1SB))}
+                      }
+                    \else
+                      {
+                        \if
+                           {
+                             \cond{@regExpMatch("[0-9]+.*",@str1SB)}
+                             \then
+                               {
+                                 \set{lst=@csv2list(@fixedWidth2Csv(@str1))}
+                                 \sqlite{\@dbName{\execute_sql{"insert into "+@tbName+" values('"+@nmbAccion+"',"+@lst.sqlValues+")"}}}
+                               }
+                           }
+                      }
+                  }
+              }
+          }
+      }
+  }
+\cierra_archivo_entrada{"pp"}
+
+\def_prop["idElem","double"]{0.0}
+\def_prop["sumNX","double"]{0.0}
+\def_prop["nX","double"]{0.0}
+\def_prop["sumMomX","double"]{0.0}
+\def_prop["momX","double"]{0.0}
+\def_prop["sumMomY","double"]{0.0}
+\def_prop["momY","double"]{0.0}
+\def_prop["sumQY","double"]{0.0}
+\def_prop["qY","double"]{0.0}
+\sqlite
+  {
+    \@dbName
+      {
+        \c{\newQuery{"q"} ya esta creada}
+        \defaultQuery
+          {
+            \get_result{"select * from " + @tbName + " where elem=10"}
+            \expr{i= 0}
+            \while
+              {
+                \cond{@fetch_row}
+                \bucle
+                  {
+                    \set{idElem= @getInt("ELEM")}
+                    \set{nmbAccion= @getStr("ACCION")}
+                    \set{nX=@getDouble("AXIL_X")}
+                    \set{momX=@getDouble("MOM_X")}
+                    \set{momY=@getDouble("MOM_Y")}
+                    \set{qY=@getDouble("Q_Y")}
+                    \expr{i=@tonum(i+1)}
+                    \set{sumNX= @sumNX+@nX}
+                    \set{sumMomX= @sumMomX+@momX}
+                    \set{sumMomY= @sumMomY+@momY}
+                    \set{sumQY= @sumQY+@qY}
+                    \c{\print{"i= ",i," nmbAccion= ",@nmbAccion," num= ",@idElem," momX: ",@momX," momY: ",@momY,"\n"}}
+                  }
+              }
+            \free_result{}
+          }
+      }
+  }
+
+\expr{ratio1= @abs(@sumNX-0.92342)/0.92342}
+\expr{ratio2= @abs(@sumMomX+19.82728)/19.82728}
+\expr{ratio3= @abs(@sumMomY+33.73049)/33.73049}
+\expr{ratio4= @abs(@sumQY+1.46699)/1.46699}
+
+\c{
+\print{"ratio1= ",ratio1,"\n"}
+\print{"ratio2= ",ratio2,"\n"}
+\print{"ratio3= ",ratio3,"\n"}
+\print{"ratio4= ",ratio4,"\n"}
+  }
+
+\borra_archivo_si_existe{@dbName}
+\if
+  {
+    \cond{(@abs(ratio1)<1e-5) & (@abs(ratio2)<1e-5) & (@abs(ratio3)<1e-5) & (@abs(ratio4)<1e-5)}
+    \then{\print{"verif readln 03: pasa.\n"}}
+    \else{\print{"verif readln 03: falla.\n"}}
+  }
+

@@ -1,0 +1,314 @@
+template <>
+inline void EntCmd::string_to<std::string>(std::string &t,const std::string &str) const
+  { t= this->interpretaString(str); }
+
+template <>
+inline void EntCmd::string_to<int>(int &t,const std::string &str) const
+  { t= this->interpretaInt(str); }
+
+template <>
+inline void EntCmd::string_to<char>(char &t,const std::string &str) const
+  { t= this->interpretaString(str)[0]; }
+
+template <>
+inline void EntCmd::string_to<double>(double &t,const std::string &str) const
+  { t= this->interpretaDouble(str); }
+
+template <>
+inline void EntCmd::string_to<ExprAlgebra>(ExprAlgebra &t,const std::string &str) const
+  { t= this->interpretaExpr(str); }
+
+
+
+//! @brief Devuelve una 1-upla a partir de una cadena de caracteres separada
+//! por comas como 'abc,ab,@i'.
+//!
+//! Si uno de los argumentos comienza con el carácter '@', entiende que el mismo
+//! se refiere a una propiedad del objeto.
+//! En otro caso supone que se trata de una cadena de caracteres literal.
+template <class TUPLA>
+inline TUPLA EntCmd::string_to_tuple1(const TUPLA &muestra,const std::string &str) const
+  {
+    std::deque<std::string> tmp= separa_csv(str);
+    const size_t ne= tmp.size(); //No. de elementos leídos.
+    const size_t nt= boost::tuples::length<TUPLA>::value; //No. de elementos de la n-upla.
+    TUPLA retval(muestra);
+    if(ne!=nt)
+      {
+        std::cerr << "Error en EntCmd::string_to_tuple; se pasaron " << ne
+                  << " elementos, para una n-upla de " << nt << " elementos." << std::endl;
+        return retval;
+      }
+
+    if(ne==0) return retval;
+    //Elemento 0
+    this->string_to(boost::tuples::get<0>(retval),tmp[0]);
+    if(ne>nt)
+      std::cerr << "Error, demasiados valores en la n-upla, se admiten hasta " << nt << '.' << std::endl;
+    return retval;
+  }
+
+//! @brief Devuelve una 2-upla a partir de una cadena de caracteres separada
+//! por comas como 'abc,ab,@i'.
+//!
+//! Si uno de los argumentos comienza con el carácter '@', entiende que el mismo
+//! se refiere a una propiedad del objeto.
+//! En otro caso supone que se trata de una cadena de caracteres literal.
+template <class TUPLA>
+inline TUPLA EntCmd::string_to_tuple2(const TUPLA &muestra,const std::string &str) const
+  {
+    std::deque<std::string> tmp= separa_csv(str);
+    const size_t ne= tmp.size(); //No. de elementos leídos.
+    const size_t nt= boost::tuples::length<TUPLA>::value; //No. de elementos de la n-upla.
+    TUPLA retval(muestra);
+    if(ne!=nt)
+      {
+        std::cerr << "Error en EntCmd::string_to_tuple; se pasaron " << ne
+                  << " elementos, para una n-upla de " << nt << " elementos." << std::endl;
+        return retval;
+      }
+
+    if(ne==0) return retval;
+    this->string_to(boost::tuples::get<0>(retval),tmp[0]); //Elemento 0
+    this->string_to(boost::tuples::get<1>(retval),tmp[1]); //Elemento 1
+    if(ne>nt)
+      std::cerr << "Error, demasiados valores en la n-upla, se admiten hasta " << nt << '.' << std::endl;
+    return retval;
+  }
+
+//! @brief Devuelve una 3-upla a partir de una cadena de caracteres separada
+//! por comas como 'abc,ab,@i'.
+//!
+//! Si uno de los argumentos comienza con el carácter '@', entiende que el mismo
+//! se refiere a una propiedad del objeto.
+//! En otro caso supone que se trata de una cadena de caracteres literal.
+template <class TUPLA>
+inline TUPLA EntCmd::string_to_tuple3(const TUPLA &muestra,const std::string &str) const
+  {
+    std::deque<std::string> tmp= separa_csv(str);
+    const size_t ne= tmp.size(); //No. de elementos leídos.
+    const size_t nt= boost::tuples::length<TUPLA>::value; //No. de elementos de la n-upla.
+    TUPLA retval(muestra);
+    if(ne!=nt)
+      {
+        std::cerr << "Error en EntCmd::string_to_tuple; se pasaron " << ne
+                  << " elementos, para una n-upla de " << nt << " elementos." << std::endl;
+        return retval;
+      }
+
+    if(ne==0) return retval;
+    //Elemento 0
+    this->string_to(boost::tuples::get<0>(retval),tmp[0]); //Elemento 0
+    this->string_to(boost::tuples::get<1>(retval),tmp[1]); //Elemento 1
+    this->string_to(boost::tuples::get<2>(retval),tmp[2]); //Elemento 2
+    if(ne>nt)
+      std::cerr << "Error, demasiados valores en la n-upla, se admiten hasta " << nt << '.' << std::endl;
+    return retval;
+  }
+
+//! @brief Devuelve una 4-upla a partir de una cadena de caracteres separada
+//! por comas como 'abc,ab,@i'.
+//!
+//! Si uno de los argumentos comienza con el carácter '@', entiende que el mismo
+//! se refiere a una propiedad del objeto.
+//! En otro caso supone que se trata de una cadena de caracteres literal.
+template <class TUPLA>
+inline TUPLA EntCmd::string_to_tuple4(const TUPLA &muestra,const std::string &str) const
+  {
+    std::deque<std::string> tmp= separa_csv(str);
+    const size_t ne= tmp.size(); //No. de elementos leídos.
+    const size_t nt= boost::tuples::length<TUPLA>::value; //No. de elementos de la n-upla.
+    TUPLA retval(muestra);
+    if(ne!=nt)
+      {
+        std::cerr << "Error en EntCmd::string_to_tuple; se pasaron " << ne
+                  << " elementos, para una n-upla de " << nt << " elementos." << std::endl;
+        return retval;
+      }
+
+    if(ne==0) return retval;
+    //Elemento 0
+    this->string_to(boost::tuples::get<0>(retval),tmp[0]); //Elemento 0
+    this->string_to(boost::tuples::get<1>(retval),tmp[1]); //Elemento 1
+    this->string_to(boost::tuples::get<2>(retval),tmp[2]); //Elemento 2
+    this->string_to(boost::tuples::get<3>(retval),tmp[3]); //Elemento 3
+    if(ne>nt)
+      std::cerr << "Error, demasiados valores en la n-upla, se admiten hasta " << nt << '.' << std::endl;
+    return retval;
+  }
+
+//! @brief Devuelve una 5-upla a partir de una cadena de caracteres separada
+//! por comas como 'abc,ab,@i'.
+//!
+//! Si uno de los argumentos comienza con el carácter '@', entiende que el mismo
+//! se refiere a una propiedad del objeto.
+//! En otro caso supone que se trata de una cadena de caracteres literal.
+template <class TUPLA>
+inline TUPLA EntCmd::string_to_tuple5(const TUPLA &muestra,const std::string &str) const
+  {
+    std::deque<std::string> tmp= separa_csv(str);
+    const size_t ne= tmp.size(); //No. de elementos leídos.
+    const size_t nt= boost::tuples::length<TUPLA>::value; //No. de elementos de la n-upla.
+    TUPLA retval(muestra);
+    if(ne!=nt)
+      {
+        std::cerr << "Error en EntCmd::string_to_tuple; se pasaron " << ne
+                  << " elementos, para una n-upla de " << nt << " elementos." << std::endl;
+        return retval;
+      }
+
+    if(ne==0) return retval;
+    //Elemento 0
+    this->string_to(boost::tuples::get<0>(retval),tmp[0]); //Elemento 0
+    this->string_to(boost::tuples::get<1>(retval),tmp[1]); //Elemento 1
+    this->string_to(boost::tuples::get<2>(retval),tmp[2]); //Elemento 2
+    this->string_to(boost::tuples::get<3>(retval),tmp[3]); //Elemento 3
+    this->string_to(boost::tuples::get<4>(retval),tmp[4]); //Elemento 4
+    if(ne>nt)
+      std::cerr << "Error, demasiados valores en la n-upla, se admiten hasta " << nt << '.' << std::endl;
+    return retval;
+  }
+
+//! @brief Devuelve una 6-upla a partir de una cadena de caracteres separada
+//! por comas como 'abc,ab,@i'.
+//!
+//! Si uno de los argumentos comienza con el carácter '@', entiende que el mismo
+//! se refiere a una propiedad del objeto.
+//! En otro caso supone que se trata de una cadena de caracteres literal.
+template <class TUPLA>
+inline TUPLA EntCmd::string_to_tuple6(const TUPLA &muestra,const std::string &str) const
+  {
+    std::deque<std::string> tmp= separa_csv(str);
+    const size_t ne= tmp.size(); //No. de elementos leídos.
+    const size_t nt= boost::tuples::length<TUPLA>::value; //No. de elementos de la n-upla.
+    TUPLA retval(muestra);
+    if(ne!=nt)
+      {
+        std::cerr << "Error en EntCmd::string_to_tuple; se pasaron " << ne
+                  << " elementos, para una n-upla de " << nt << " elementos." << std::endl;
+        return retval;
+      }
+
+    if(ne==0) return retval;
+    //Elemento 0
+    this->string_to(boost::tuples::get<0>(retval),tmp[0]); //Elemento 0
+    this->string_to(boost::tuples::get<1>(retval),tmp[1]); //Elemento 1
+    this->string_to(boost::tuples::get<2>(retval),tmp[2]); //Elemento 2
+    this->string_to(boost::tuples::get<3>(retval),tmp[3]); //Elemento 3
+    this->string_to(boost::tuples::get<4>(retval),tmp[4]); //Elemento 4
+    this->string_to(boost::tuples::get<5>(retval),tmp[5]); //Elemento 5
+    if(ne>nt)
+      std::cerr << "Error, demasiados valores en la n-upla, se admiten hasta " << nt << '.' << std::endl;
+    return retval;
+  }
+
+//! @brief Devuelve una 7-upla a partir de una cadena de caracteres separada
+//! por comas como 'abc,ab,@i'.
+//!
+//! Si uno de los argumentos comienza con el carácter '@', entiende que el mismo
+//! se refiere a una propiedad del objeto.
+//! En otro caso supone que se trata de una cadena de caracteres literal.
+template <class TUPLA>
+inline TUPLA EntCmd::string_to_tuple7(const TUPLA &muestra,const std::string &str) const
+  {
+    std::deque<std::string> tmp= separa_csv(str);
+    const size_t ne= tmp.size(); //No. de elementos leídos.
+    const size_t nt= boost::tuples::length<TUPLA>::value; //No. de elementos de la n-upla.
+    TUPLA retval(muestra);
+    if(ne!=nt)
+      {
+        std::cerr << "Error en EntCmd::string_to_tuple; se pasaron " << ne
+                  << " elementos, para una n-upla de " << nt << " elementos." << std::endl;
+        return retval;
+      }
+
+    if(ne==0) return retval;
+    //Elemento 0
+    this->string_to(boost::tuples::get<0>(retval),tmp[0]); //Elemento 0
+    this->string_to(boost::tuples::get<1>(retval),tmp[1]); //Elemento 1
+    this->string_to(boost::tuples::get<2>(retval),tmp[2]); //Elemento 2
+    this->string_to(boost::tuples::get<3>(retval),tmp[3]); //Elemento 3
+    this->string_to(boost::tuples::get<4>(retval),tmp[4]); //Elemento 4
+    this->string_to(boost::tuples::get<5>(retval),tmp[5]); //Elemento 5
+    this->string_to(boost::tuples::get<6>(retval),tmp[6]); //Elemento 6
+    if(ne>nt)
+      std::cerr << "Error, demasiados valores en la n-upla, se admiten hasta " << nt << '.' << std::endl;
+    return retval;
+  }
+
+//! @brief Devuelve una 8-upla a partir de una cadena de caracteres separada
+//! por comas como 'abc,ab,@i'.
+//!
+//! Si uno de los argumentos comienza con el carácter '@', entiende que el mismo
+//! se refiere a una propiedad del objeto.
+//! En otro caso supone que se trata de una cadena de caracteres literal.
+template <class TUPLA>
+inline TUPLA EntCmd::string_to_tuple8(const TUPLA &muestra,const std::string &str) const
+  {
+    std::deque<std::string> tmp= separa_csv(str);
+    const size_t ne= tmp.size(); //No. de elementos leídos.
+    const size_t nt= boost::tuples::length<TUPLA>::value; //No. de elementos de la n-upla.
+    TUPLA retval(muestra);
+    if(ne!=nt)
+      {
+        std::cerr << "Error en EntCmd::string_to_tuple; se pasaron " << ne
+                  << " elementos, para una n-upla de " << nt << " elementos." << std::endl;
+        return retval;
+      }
+
+    if(ne==0) return retval;
+    //Elemento 0
+    this->string_to(boost::tuples::get<0>(retval),tmp[0]); //Elemento 0
+    this->string_to(boost::tuples::get<1>(retval),tmp[1]); //Elemento 1
+    this->string_to(boost::tuples::get<2>(retval),tmp[2]); //Elemento 2
+    this->string_to(boost::tuples::get<3>(retval),tmp[3]); //Elemento 3
+    this->string_to(boost::tuples::get<4>(retval),tmp[4]); //Elemento 4
+    this->string_to(boost::tuples::get<5>(retval),tmp[5]); //Elemento 5
+    this->string_to(boost::tuples::get<6>(retval),tmp[6]); //Elemento 6
+    this->string_to(boost::tuples::get<7>(retval),tmp[7]); //Elemento 7
+    if(ne>nt)
+      std::cerr << "Error, demasiados valores en la n-upla, se admiten hasta " << nt << '.' << std::endl;
+    return retval;
+  }
+//! @brief Devuelve una 9-upla a partir de una cadena de caracteres separada
+//! por comas como 'abc,ab,@i'.
+//!
+//! Si uno de los argumentos comienza con el carácter '@', entiende que el mismo
+//! se refiere a una propiedad del objeto.
+//! En otro caso supone que se trata de una cadena de caracteres literal.
+template <class TUPLA>
+inline TUPLA EntCmd::string_to_tuple9(const TUPLA &muestra,const std::string &str) const
+  {
+    std::deque<std::string> tmp= separa_csv(str);
+    const size_t ne= tmp.size(); //No. de elementos leídos.
+    const size_t nt= boost::tuples::length<TUPLA>::value; //No. de elementos de la n-upla.
+    TUPLA retval(muestra);
+    if(ne!=nt)
+      {
+        std::cerr << "Error en EntCmd::string_to_tuple; se pasaron " << ne
+                  << " elementos, para una n-upla de " << nt << " elementos." << std::endl;
+        return retval;
+      }
+
+    if(ne==0) return retval;
+    //Elemento 0
+    this->string_to(boost::tuples::get<0>(retval),tmp[0]); //Elemento 0
+    this->string_to(boost::tuples::get<1>(retval),tmp[1]); //Elemento 1
+    this->string_to(boost::tuples::get<2>(retval),tmp[2]); //Elemento 2
+    this->string_to(boost::tuples::get<3>(retval),tmp[3]); //Elemento 3
+    this->string_to(boost::tuples::get<4>(retval),tmp[4]); //Elemento 4
+    this->string_to(boost::tuples::get<5>(retval),tmp[5]); //Elemento 5
+    this->string_to(boost::tuples::get<6>(retval),tmp[6]); //Elemento 6
+    this->string_to(boost::tuples::get<7>(retval),tmp[7]); //Elemento 7
+    this->string_to(boost::tuples::get<8>(retval),tmp[8]); //Elemento 8
+    if(ne>nt)
+      std::cerr << "Error, demasiados valores en la n-upla, se admiten hasta " << nt << '.' << std::endl;
+    return retval;
+  }
+
+template <class ForwardIterator>
+void ejecuta_bloque_map(ForwardIterator first, ForwardIterator last,CmdStatus &status,const std::string &bloque)
+  {
+    for(ForwardIterator i=first;i!=last;i++)
+      (*i).second.EjecutaBloque(status,bloque);
+  }
