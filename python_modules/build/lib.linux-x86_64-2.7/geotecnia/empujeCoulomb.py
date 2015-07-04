@@ -19,6 +19,7 @@ def ka_coulomb(a,b,fi,d):
     fi: Angulo de rozamiento interno del terreno (en radianes).
     d:  Angulo entre la línea de acción del empuje activo y la normal a la superficie
         del muro. (rozamiento tierras - fabrica) (en radianes).
+    Jiménez Salas, Geotecnia y Cimientos página 682 
     '''
     num= 1.0/math.cos(a)*math.cos(fi-a)
     r1=math.sqrt(math.cos(a+d))
