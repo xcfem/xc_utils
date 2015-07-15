@@ -36,6 +36,28 @@ pond.variableActions.gammaF= gammaf_variables
 pond.accidentalActions.gammaF= gammaf_accidentales
 pond.seismicActions.gammaF= gammaf_sismicas
 
+coefs_psi_SIA260_ponts_ferroviaires_voie_etroite= loadCombinations.DictCoefsPsi()
+
+coefs_psi_SIA260_ponts_ferroviaires_voie_etroite.insert("permanente",loadCombinations.CoefsPsi(1,1,1))
+coefs_psi_SIA260_ponts_ferroviaires_voie_etroite.insert("load_model_4",loadCombinations.CoefsPsi(1.0,1.0,0.3))
+coefs_psi_SIA260_ponts_ferroviaires_voie_etroite.insert("load_model_5",loadCombinations.CoefsPsi(1.0,1.0,0.3))
+coefs_psi_SIA260_ponts_ferroviaires_voie_etroite.insert("load_model_6",loadCombinations.CoefsPsi(0.0,1.0,0.0))
+coefs_psi_SIA260_ponts_ferroviaires_voie_etroite.insert("load_model_7",loadCombinations.CoefsPsi(0.0,1.0,0.0))
+coefs_psi_SIA260_ponts_ferroviaires_voie_etroite.insert("load_model_8",loadCombinations.CoefsPsi(0.0,1.0,0.0))
+coefs_psi_SIA260_ponts_ferroviaires_voie_etroite.insert("choc",loadCombinations.CoefsPsi(0.0,0.0,0.0))
+coefs_psi_SIA260_ponts_ferroviaires_voie_etroite.insert("vent",loadCombinations.CoefsPsi(0.8,0.5,0.0))
+coefs_psi_SIA260_ponts_ferroviaires_voie_etroite.insert("force_aerodynamiques_train",loadCombinations.CoefsPsi(1.0,0.5,0.0))
+coefs_psi_SIA260_ponts_ferroviaires_voie_etroite.insert("temperature",loadCombinations.CoefsPsi(0.6,0.6,0.5))
+coefs_psi_SIA260_ponts_ferroviaires_voie_etroite.insert("poussee_terres",loadCombinations.CoefsPsi(0.7,0.7,0.7))
+coefs_psi_SIA260_ponts_ferroviaires_voie_etroite.insert("pression_hydraulique",loadCombinations.CoefsPsi(0.7,0.7,0.7))
+
+combGeneratorPontFerroviaireVoieEtroite= loadCombinations.LoadCombGenerator()
+pond= combGeneratorPontFerroviaireVoieEtroite.defPonderacion("SIA260ULSType2",coefs_psi_SIA260_ponts_ferroviaires_voie_etroite)
+pond.permanentActions.gammaF= gammaf_permanentes
+pond.variableActions.gammaF= gammaf_variables
+pond.accidentalActions.gammaF= gammaf_accidentales
+pond.seismicActions.gammaF= gammaf_sismicas
+
 coefs_psi_SIA260_ponts_routes= loadCombinations.DictCoefsPsi()
 
 coefs_psi_SIA260_ponts_routes.insert("permanente",loadCombinations.CoefsPsi(1,1,1))

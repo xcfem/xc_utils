@@ -82,8 +82,8 @@ Pos3d Triedro3d::Vertice(const size_t &i) const
   }
 
 //! @brief Devuelve la distancia CON SIGNO desde el punto al tetraedro.
-//! La distancia se calcula como el máximo de la distancia del punto a cada uno de los planos
-//! que limitan el triedro.
+//! La distancia se calcula como el máximo de la distancia del punto 
+//! a cada uno de los planos que limitan el triedro.
 GEOM_FT Triedro3d::PseudoDist(const Pos3d &p) const
   {
     Poliedro3d tmp= GetPoliedro3d();

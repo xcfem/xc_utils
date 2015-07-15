@@ -33,6 +33,7 @@
 #include <CGAL/Polygon_with_holes_2.h>
 #include <CGAL/enum.h>
 #include <CGAL/Polyhedron_3.h>
+#include <CGAL/Tetrahedron_3.h>
 #include <iostream>
 #include <CGAL/IO/Geomview_stream.h>
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
@@ -74,6 +75,7 @@ typedef CGAL::Segment_3<GEOMKernel> CGSegmento_3;
 typedef CGAL::Plane_3<GEOMKernel> CGPlane_3;
 typedef CGAL::Iso_cuboid_3<GEOMKernel> CGIsoCuboid_3;
 typedef CGAL::Polyhedron_3<GEOMKernel> CGPoliedro_3;
+typedef CGAL::Tetrahedron_3<GEOMKernel> CGTetrahedron_3;
 typedef CGAL::Bbox_3 CGBbox_3;
 typedef CGAL::Aff_transformation_3<GEOMKernel> CGTrfAfin_3;
 

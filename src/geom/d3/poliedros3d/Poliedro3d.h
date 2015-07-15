@@ -25,7 +25,7 @@
 #define POLIEDRO3D_H
 
 #include <iostream>
-#include "../GeomObj3d.h"
+#include "PolyhedronBase.h"
 #include "../../tipos_cgal.h"
 #include "MapPoligonos.h"
 #include "enriched_polyhedron.h"
@@ -39,19 +39,18 @@ class Poligono3d;
 //! @ingroup GEOM
 //
 //! @brief Clase base para los poliedros.
-class Poliedro3d: public GeomObj3d
+class Poliedro3d: public PolyhedronBase
   {
   protected:
     CGPoliedro_3 cgpoliedro;
 
     Poliedro3d(const CGPoliedro_3 &cgp) 
-      : GeomObj3d(), cgpoliedro(cgp) {}
+      : PolyhedronBase(), cgpoliedro(cgp) {}
     void make_tetrahedron(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);
     void make_tetrahedron(const SemiEspacio3d &, const SemiEspacio3d &,const SemiEspacio3d &, const SemiEspacio3d &);
     void make_polyhedron(const std::deque<SemiEspacio3d> &);
     void semiespacios(const std::string &,const bool &clear= true);
 
-    bool procesa_comando(CmdStatus &status);
   public:
     typedef CGPoliedro_3::Vertex Vertex;
     typedef CGPoliedro_3::Facet Facet;
@@ -113,8 +112,6 @@ class Poliedro3d: public GeomObj3d
       { return cgpoliedro.size_of_halfedges(); }
     size_t GetNumCaras(void) const
       { return cgpoliedro.size_of_facets(); }
-    inline virtual unsigned short int Dimension(void) const
-      { return 3; }
 
     void clear(void)
       { cgpoliedro.clear(); }
@@ -126,13 +123,7 @@ class Poliedro3d: public GeomObj3d
 
     GeomObj::list_Pos3d getVertices(void) const;
 
-    virtual GEOM_FT Longitud(void) const;
     virtual GEOM_FT Area(void) const;
-    virtual GEOM_FT Volumen(void) const;
-    virtual GEOM_FT Ix(void) const;
-    virtual GEOM_FT Iy(void) const;
-    virtual GEOM_FT Iz(void) const;
-    virtual Pos3d Cdg(void) const;
 
     bool TocaCuadrante(const int &) const;
 
@@ -153,8 +144,6 @@ class Poliedro3d: public GeomObj3d
     friend Poliedro3d subdivide_quad_triangle(const Poliedro3d &pol,bool smooth_boundary);
     template <class InputIterator>
     friend Poliedro3d get_convex_hull(InputIterator first,InputIterator last);
-
-    any_const_ptr GetProp(const std::string &) const;
 
     void Print(std::ostream &os) const;
     void Print(CGview_stream &v) const;

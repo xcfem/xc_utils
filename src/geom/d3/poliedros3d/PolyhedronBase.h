@@ -19,40 +19,32 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//TETRAEDRO3D.h
+//POLYHEDRONBASE.h
 
-#ifndef TETRAEDRO3D_H
-#define TETRAEDRO3D_H
+#ifndef POLYHEDRONBASE_H
+#define POLYHEDRONBASE_H
 
 #include <iostream>
-#include "PolyhedronBase.h"
-#include "MapPoligonos.h"
+#include "../GeomObj3d.h"
 
 class SemiEspacio3d;
-class Poliedro3d;
+
 
 //! @ingroup GEOM
 //
 //! @brief Tetraedro.
-class Tetraedro3d: public PolyhedronBase
+class PolyhedronBase: public GeomObj3d
   {
-    CGTetrahedron_3 cgtetraedro;
   public:
-    Tetraedro3d(void);
-    Tetraedro3d(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);
-    Tetraedro3d(const SemiEspacio3d &, const SemiEspacio3d &,const SemiEspacio3d &, const SemiEspacio3d &);
-    GeomObj *clon(void) const
-      { return new Tetraedro3d(*this); }
-    Poliedro3d getPoliedro3d(void) const;
-    GEOM_FT Area(void) const;
-    GEOM_FT getVolumenSigno(void) const;
-    GEOM_FT Volumen(void) const;
-    double GetMax(short unsigned int i) const;
-    double GetMin(short unsigned int i) const;
-    bool In(const Pos3d &,const double &) const;
-    void Print(std::ostream &os) const;
+    inline virtual unsigned short int Dimension(void) const
+      { return 3; }
+    virtual GEOM_FT Longitud(void) const;
+    virtual GEOM_FT Volumen(void) const;
+    virtual GEOM_FT Ix(void) const;
+    virtual GEOM_FT Iy(void) const;
+    virtual GEOM_FT Iz(void) const;
+    virtual Pos3d Cdg(void) const;
   };
 
-MapPoligonos<CGPoliedro_3> getMapPoligonos(const Tetraedro3d &t);
 
 #endif

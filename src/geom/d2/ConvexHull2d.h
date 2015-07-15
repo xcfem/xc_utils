@@ -19,40 +19,21 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//TETRAEDRO3D.h
+//ConvexHull2d.h
 
-#ifndef TETRAEDRO3D_H
-#define TETRAEDRO3D_H
+#ifndef CONVEXHULL2D_H
+#define CONVEXHULL2D_H
 
-#include <iostream>
-#include "PolyhedronBase.h"
-#include "MapPoligonos.h"
+#include "xc_utils/src/geom/d2/GeomObj2d.h"
 
-class SemiEspacio3d;
-class Poliedro3d;
+class Poligono2d;
+
 
 //! @ingroup GEOM
 //
-//! @brief Tetraedro.
-class Tetraedro3d: public PolyhedronBase
-  {
-    CGTetrahedron_3 cgtetraedro;
-  public:
-    Tetraedro3d(void);
-    Tetraedro3d(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);
-    Tetraedro3d(const SemiEspacio3d &, const SemiEspacio3d &,const SemiEspacio3d &, const SemiEspacio3d &);
-    GeomObj *clon(void) const
-      { return new Tetraedro3d(*this); }
-    Poliedro3d getPoliedro3d(void) const;
-    GEOM_FT Area(void) const;
-    GEOM_FT getVolumenSigno(void) const;
-    GEOM_FT Volumen(void) const;
-    double GetMax(short unsigned int i) const;
-    double GetMin(short unsigned int i) const;
-    bool In(const Pos3d &,const double &) const;
-    void Print(std::ostream &os) const;
-  };
+//! @brief Devuelve el «convex hull» del conjunto de posiciones
+//! que se pasa como parámetro.
+Poligono2d get_convex_hull2d(const GeomObj::list_Pos2d &lp);
 
-MapPoligonos<CGPoliedro_3> getMapPoligonos(const Tetraedro3d &t);
 
 #endif

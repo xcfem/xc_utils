@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 import vtk
+import math
 
 flecha= vtk.vtkArrowSource()
 flecha.SetTipLength(0.35)
@@ -21,18 +23,34 @@ print "XXX FALTA DEFINIR LA FLECHA DOBLE"
 # flechaDobleMapper= vtk.vtkPolyDataMapper()
 # flechaDobleMapper.SetInput(flechaDoble)
 
+def parallelTo(actor,vDir):
+  nc= len(vDir)
+  if(nc!=3):
+    print "parallelTo: ", vDir, " wrong dimension (must be 3)."
+  else:
+    v= [vDir[0],vDir[1],vDir[2]]
+    thetaZ= math.degrees(math.atan2(v[1],v[0]));
+    actor.RotateZ(thetaZ);
+    thetaY= -math.degrees(math.atan2(v[2],math.sqrt((v[0]*v[0])+(v[1]*v[1]))));
+    actor.RotateY(thetaY);
 
-def dibujaFlecha(nmbActor,nmbRenderer, color, posicion, direccion, escala):
-   nmbActor= vtk.vtkActor()
-   nmbActor.SetMapper(flechaMapper)
-   nmbActor.paraleloA(direccion[0],direccion[1],direccion[2])
-   nmbActor.SetPosition(posicion[0],posicion[1],posicion[2])
-   nmbActor.SetScale(escala,escala/2,escala/2)
-   nmbActor.GetProperty().SetColor(color[0],color[1],color[2])
-   nmbRenderer.AddActor(nmbActor)
+def dibujaFlecha(renderer, color, posicion, direccion, escala):
+  arrowSource = vtk.vtkArrowSource()
+  #arrowSource.SetShaftRadius(0.01)
+  #arrowSource.SetTipLength(.9)
+  actor= vtk.vtkActor()
+  parallelTo(actor,direccion)
+  actor.SetPosition(posicion[0],posicion[1],posicion[2])
+  actor.SetScale(escala,escala/2,escala/2)
+  actor.GetProperty().SetColor(color[0],color[1],color[2])
+
+  mapper = vtk.vtkPolyDataMapper()
+  mapper.SetInputConnection(arrowSource.GetOutputPort())
+  actor.SetMapper(mapper)
+  renderer.AddActor(actor)
 
 
-def dibujaFlechaDoble(actor,renderer, color, posicion, direccion, escala):
+def dibujaFlechaDoble(renderer, color, posicion, direccion, escala):
   actor= vtk.vtkActor()
   actor.SetMapper(flechaDobleMapper)
   paraleloA(direccion[0],direccion[1],direccion[2])

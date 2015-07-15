@@ -136,6 +136,8 @@ BOOST_PYTHON_MODULE(geom)
       .def(self_ns::str(self_ns::self));
 
     class_<GeomObj2d, bases<GeomObj>, boost::noncopyable >("GeomObj2d", no_init)
+      .def("getMax",&GeomObj2d::GetMax)
+      .def("getMin",&GeomObj2d::GetMin)
       .def("getIx", pure_virtual(&GeomObj2d::Ix))
       .def("getIy", pure_virtual(&GeomObj2d::Iy))
       .def("getIz", &GeomObj2d::Iz)
@@ -145,6 +147,8 @@ BOOST_PYTHON_MODULE(geom)
       ;
 
     class_<GeomObj3d, bases<GeomObj>, boost::noncopyable >("GeomObj3d", no_init)
+      .def("getMax",&GeomObj3d::GetMax)
+      .def("getMin",&GeomObj3d::GetMin)
       .def("getIx", pure_virtual(&GeomObj3d::Ix))
       .def("getIy", pure_virtual(&GeomObj3d::Iy))
       .def("getIz", &GeomObj3d::Iz)

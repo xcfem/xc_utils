@@ -22,6 +22,7 @@
 //Tetraedro3c.cc
 
 #include "Tetraedro3d.h"
+#include "Poliedro3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include "xc_utils/src/geom/d3/SemiEspacio3d.h"
 #include "xc_utils/src/base/CmdStatus.h"
@@ -37,55 +38,78 @@ const Pos3d v4PorDefecto(0.0,0.0,0.0);
 
 //! @brief Constructor por defecto.
 Tetraedro3d::Tetraedro3d(void)
-  : Poliedro3d(v1PorDefecto,v2PorDefecto,v3PorDefecto,v4PorDefecto) {}
+  : cgtetraedro(v1PorDefecto.ToCGAL(),v2PorDefecto.ToCGAL(),v3PorDefecto.ToCGAL(),v4PorDefecto.ToCGAL()) {}
 
 //! @brief Constructor.
 Tetraedro3d::Tetraedro3d(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3)
-  : Poliedro3d(p0,p1,p2,p3) {}
+  : cgtetraedro(p0.ToCGAL(),p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL()){}
 
 //! @brief Constructor.
 Tetraedro3d::Tetraedro3d(const SemiEspacio3d &se0, const SemiEspacio3d &se1,const SemiEspacio3d &se2, const SemiEspacio3d &se3)
-  : Poliedro3d(se0,se1,se2,se3) {}
-
-//! @brief Interpreta comandos del objeto.
-bool Tetraedro3d::procesa_comando(CmdStatus &status)
+  : cgtetraedro()
   {
-    const std::string cmd= deref_cmd(status.Cmd());
-    const std::string str_msg= "(Tetraedro3d) Procesando comando: "+cmd;
-    if(verborrea>2)
-      std::clog << str_msg << std::endl;
-    if(cmd == "semiespacios")
-      {
-        semiespacios(status.GetBloque(),true);
-        if(GetNumVertices()!=4)
-	  std::cerr << str_msg
-                    << ". No se generó un tetraedro." << std::endl;
-        return true;
-      }
-    else
-      return Poliedro3d::procesa_comando(status);
+    Poliedro3d tmp(se0,se1,se2,se3);
+    GeomObj::list_Pos3d vertices= tmp.getVertices();
+    assert (vertices.size()==4);
+    cgtetraedro= CGTetrahedron_3(vertices[0].ToCGAL(),vertices[1].ToCGAL(),vertices[2].ToCGAL(),vertices[3].ToCGAL());
   }
+
+Poliedro3d Tetraedro3d::getPoliedro3d(void) const
+  {
+    return Poliedro3d(Pos3d(cgtetraedro.vertex(0)),Pos3d(cgtetraedro.vertex(1)),Pos3d(cgtetraedro.vertex(2)),Pos3d(cgtetraedro.vertex(3)));
+  }
+
+GEOM_FT Tetraedro3d::GetMax(unsigned short int i) const
+  {
+    CGPoint_3 vi= cgtetraedro.vertex(0);
+    GEOM_FT retval= vi.cartesian(i-1);
+    for(int j=1;j<4;j++)
+      {
+        vi= cgtetraedro.vertex(j);
+        retval= std::max(retval,vi.cartesian(i-1));
+      }
+    return retval;
+  }
+GEOM_FT Tetraedro3d::GetMin(unsigned short int i) const
+  {
+    CGPoint_3 vi= cgtetraedro.vertex(0);
+    GEOM_FT retval= vi.cartesian(i-1);
+    for(int j=1;j<4;j++)
+      {
+        vi= cgtetraedro.vertex(j);
+        retval= std::min(retval,vi.cartesian(i-1));
+      }
+    return retval;
+  }
+
+GEOM_FT Tetraedro3d::Area(void) const
+  { return getPoliedro3d().Area(); }
 
 //! @brief Devuelve el volumen con signo del tetraedro.
 GEOM_FT Tetraedro3d::getVolumenSigno(void) const
   {
-    m_double tmp(4,4);
-    const GeomObj::list_Pos3d vertices= getVertices();
-    assert(vertices.size()==4);
-    const Pos3d &p1= vertices[0];
-    tmp(1,1)= 1; tmp(1,2)= p1.x(); tmp(1,3)= p1.y(); tmp(1,4)= p1.z();
-    const Pos3d &p2= vertices[1];
-    tmp(2,1)= 1; tmp(2,2)= p2.x(); tmp(2,3)= p2.y(); tmp(2,4)= p2.z();
-    const Pos3d &p3= vertices[2];
-    tmp(3,1)= 1; tmp(3,2)= p3.x(); tmp(3,3)= p3.y(); tmp(3,4)= p3.z();
-    const Pos3d &p4= vertices[3];
-    tmp(4,1)= 1; tmp(4,2)= p4.x(); tmp(4,3)= p4.y(); tmp(4,4)= p4.z();
-    GEOM_FT retval= tmp.GetDet()/6;
-    return retval;
+    return cgtetraedro.volume();
   }
 
 //! @brief Devuelve el volumen del tetraedro.
 GEOM_FT Tetraedro3d::Volumen(void) const
   { return std::abs(getVolumenSigno()); }
 
+//! @brief Returns true if point inside tetrahedron.
+bool Tetraedro3d::In(const Pos3d &p,const double &tol) const
+  {
+    CGAL::Bounded_side side= cgtetraedro.bounded_side(p.ToCGAL());
+    return (side != CGAL::ON_UNBOUNDED_SIDE);
+  }
+
+//! @brief Prints object.
+void Tetraedro3d::Print(std::ostream &os) const
+  {
+    CGAL::set_ascii_mode(os);
+    CGAL::set_pretty_mode(os);
+    os << cgtetraedro << std::endl;
+  }
+
+MapPoligonos<CGPoliedro_3> getMapPoligonos(const Tetraedro3d &t)
+  { return t.getPoliedro3d().GetMapPoligonos(); }
 

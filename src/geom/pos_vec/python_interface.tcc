@@ -89,6 +89,7 @@ class_<MatrizPos2d, bases<m_pos2d> >("MatrizPos2d")
   ;
 
 
+GEOM_FT (Vector2d::*dotVector2d)(const Vector2d &) const= &Vector2d::GetDot;
 class_<Vector2d, bases<ProtoGeom> >("Vector2d")
   .def(init<double, double>())
   .def(init<Vector2d>())
@@ -98,6 +99,7 @@ class_<Vector2d, bases<ProtoGeom> >("Vector2d")
   .def("angulo", &Vector2d::Angulo, "Devuelve el ángulo que forma el vector con aquel que se pasa como parámetro (el orden de éstos importa)")
   .def("getAnguloEjeX", &Vector2d::AnguloEjeX)
   .def("getAnguloEjeY", &Vector2d::AnguloEjeY)
+  .def("dot", dotVector2d,"Returns scalar product.")
   .def("getModulo", &Vector2d::GetModulus)
   .def(self + self)          // __add__
   .def(self - self)           // __sub__
@@ -113,6 +115,7 @@ class_<Dir3d, boost::noncopyable>("Dir3d", no_init)
   .def(self_ns::str(self_ns::self))
   ;
 
+GEOM_FT (Vector3d::*dotVector3d)(const Vector3d &) const= &Vector3d::GetDot;
 class_<Vector3d, bases<ProtoGeom> >("Vector3d")
   .def(init<double, double, double>())
   .def(init<Vector3d>())
@@ -124,6 +127,7 @@ class_<Vector3d, bases<ProtoGeom> >("Vector3d")
   .def("angulo", &Vector3d::Angulo, "Devuelve el ángulo que forma el vector con aquel que se pasa como parámetro (el orden de éstos importa)")
   .def("perpendicular", &Vector3d::Perpendicular)
   .def("cross", &Vector3d::getCross)
+  .def("dot", dotVector3d,"Returns scalar product.")
   .def("getModulo", &Vector3d::GetModulus)
   .def(self + Vector3d())
   .def(self - Vector3d())
@@ -242,6 +246,7 @@ class_<SVD3d, bases<VDesliz3d> >("SVD3d")
   .def("getMomento",getMomento3D,return_internal_reference<>())
   //.def("getMomentoPos3d",getMomentoPos3d)
   //.def("getMomentoRecta3d",getMomentoRecta3d)
+  .def("reduceTo",&SVD3d::ReduceA)
   .def(VDesliz3d()+self) //Sobrecarga de operadores
   .def(self+VDesliz3d())
   .def(VDesliz3d()-self)

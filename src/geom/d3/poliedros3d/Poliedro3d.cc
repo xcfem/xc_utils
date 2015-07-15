@@ -65,12 +65,12 @@ Poliedro3d::Poliedro3d(const EPoliedro &e)
 
 //! @brief Constructor de copia.
 Poliedro3d::Poliedro3d(const Poliedro3d &otro) 
-  : GeomObj3d(otro), cgpoliedro(otro.cgpoliedro) {}
+  : PolyhedronBase(otro), cgpoliedro(otro.cgpoliedro) {}
 
 //! @brief Operador asignación.
 Poliedro3d &Poliedro3d::operator=(const Poliedro3d &otro)
   {
-    GeomObj3d::operator=(otro);
+    PolyhedronBase::operator=(otro);
     cgpoliedro= otro.cgpoliedro;
     return *this;
   }
@@ -117,28 +117,6 @@ void Poliedro3d::semiespacios(const std::string &str,const bool &cle)
                 << "se esperaban al menos cuatro semiespacios." << std::endl;
   }
 
-//! @brief Interpreta comandos del objeto.
-bool Poliedro3d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    const std::string str_msg= "(Poliedro3d) Procesando comando: "+cmd;
-    if(verborrea>2)
-      std::clog << str_msg << std::endl;
-    if(cmd == "semiespacios")
-      {
-        semiespacios(status.GetBloque());
-        return true;
-      }
-    else
-      return GeomObj3d::procesa_comando(status);
-  }
-
-GEOM_FT Poliedro3d::Longitud(void) const
-  {
-    std::cerr << "Poliedro3d::Longitud() no implementada." << std::endl;
-    return 0.0;
-  }
-
 //! @brief Devuelve la suma de las áreas de las caras.
 GEOM_FT Poliedro3d::Area(void) const
   {
@@ -148,31 +126,6 @@ GEOM_FT Poliedro3d::Area(void) const
     return retval;
   }
 
-GEOM_FT Poliedro3d::Volumen(void) const
-  {
-    std::cerr << "Poliedro3d::Volumen() no implementada." << std::endl;
-    return 0.0;
-  }
-GEOM_FT Poliedro3d::Ix(void) const
-  {
-    std::cerr << "Poliedro3d::Ix() no implementado." << std::endl;
-    return 0.0;
-  }
-GEOM_FT Poliedro3d::Iy(void) const
-  {
-    std::cerr << "Poliedro3d::Iy() no implementado." << std::endl;
-    return 0.0;
-  }
-GEOM_FT Poliedro3d::Iz(void) const
-  {
-    std::cerr << "Poliedro3d::Iy() no implementado." << std::endl;
-    return 0.0;
-  }
-Pos3d Poliedro3d::Cdg(void) const
-  {
-    std::cerr << "Poliedro3d::Cdg() no implementado." << std::endl;
-    return Pos3d();
-  }
 GEOM_FT Poliedro3d::GetMax(unsigned short int i) const
   {
     CGPoliedro_3::Vertex_const_iterator vi= cgpoliedro.vertices_begin();
@@ -330,40 +283,3 @@ bool Poliedro3d::TocaCuadrante(const int &cuadrante) const
     return false;
   }
 
-//! @brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-//! como parámetro
-any_const_ptr Poliedro3d::GetProp(const std::string &cod) const
-  {
-    if(cod=="getNumVertices")
-      {
-        tmp_gp_szt= GetNumVertices();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(cod=="getNumAristas")
-      {
-        tmp_gp_szt= GetNumAristas();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(cod=="getNumCaras")
-      {
-        tmp_gp_szt= GetNumCaras();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(cod=="getVertices")
-      {
-        tmp_gp_lpos3d= ListaPos3d(getVertices());
-        return any_const_ptr(tmp_gp_lpos3d);
-      }
-    else if(cod=="getArea")
-      {
-        tmp_gp_dbl= Area();
-        return any_const_ptr(tmp_gp_dbl);
-      }
-    else if(cod=="getVolumen")
-      {
-        tmp_gp_dbl= Volumen();
-        return any_const_ptr(tmp_gp_dbl);
-      }
-    else
-      return GeomObj3d::GetProp(cod);
-  }

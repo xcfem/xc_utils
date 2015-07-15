@@ -6,7 +6,7 @@ import math
 
 # Mononobe-Okabe theory.
 
-def active_hearch_pressure_coefficient_Kad(psi, phi, theta, delta_ad,beta):
+def active_earth_pressure_coefficient_Kad(psi, phi, theta, delta_ad,beta):
   ''' psi: back face inclination of the structure (< PI/2)ç
       phi: angle of internal friction of soil.
       theta: angle of weight with vertical:
@@ -36,7 +36,7 @@ def overpressure_dry(H, gamma_soil, kv, kh, psi, phi, delta_ad, beta, Kas):
       beta: slope inclination of terrain.
       Kas: statice earth pressure coefficient '''
   theta= math.atan(kh/(1+kv))
-  K_ad= active_hearch_pressure_coefficient_Kad(psi, phi, theta, delta_ad,beta)
+  K_ad= active_earth_pressure_coefficient_Kad(psi, phi, theta, delta_ad,beta)
   minuendo= (1+kv)*K_ad
   factor= minuendo-Kas
   return 0.5*gamma_soil*H**2*factor
