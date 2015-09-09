@@ -1,0 +1,3 @@
+\print{"\\"}
+\c{Si llega hasta aquí sin errores ha pasado el test}
+\print{"test backslash: pasa.\n"}

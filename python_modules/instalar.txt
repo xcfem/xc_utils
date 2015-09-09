@@ -1,0 +1,7 @@
+Para instalarlo en el directorio del propio usuario teclear
+
+python setup.py install --user
+
+Para instalarlo en /usr/local teclear:
+
+python setup.py install --prefix=/usr/local

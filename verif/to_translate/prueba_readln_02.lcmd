@@ -1,0 +1,97 @@
+\path{"/usr/local/lib/macros_lcmd"}
+\incluye{"sqlite/macros_sqlite.lcmm"}
+
+\def_prop["fNameIn","string"]{"./test_verif/esf_shell01.lst"}
+\def_prop["dbName","string"]{"/tmp/esf_shell01.db"}
+\def_prop["tbName","string"]{"esfShell"}
+\borra_archivo_si_existe{@dbName}
+
+\SQLTcreaDBase(@dbName){}
+\SQLTcreaTabla(@dbName,@tbName,"(ELEM integer,AXIL_X double,AXIL_Y double,RASANTE double,MOM_X double,MOM_Y double,TORSOR double,Q_X double,Q_Y double)"){}
+
+\nuevo_archivo_entrada["pp"]{@fNameIn}
+\def_prop["str1","string"]{}
+\fixedWidthReader
+  {
+    \setVectorIndices{0,8,9,20,21,32,33,44,45,56,57,68,69,80,81,92,93,104}
+    \c{\print{"vector: ",@getIndicesString,"\n"}}
+  }
+\def_prop["csv","string"]{""}
+\def_prop["lst","list"]{}
+\while
+  {
+    \cond{@good("pp")}
+    \bucle
+      {
+        \set{str1= @readln("pp")}
+        \if
+          {
+            \cond{@strlen(@str1)>0}
+            \then
+              {
+                \set{lst=@csv2list(@fixedWidth2Csv(@str1))}
+                \sqlite{\@dbName{\execute_sql{"insert into "+@tbName+" values("+@lst.sqlValues+")"}}}
+              }
+          }
+      }
+  }
+\cierra_archivo_entrada{"pp"}
+
+
+\def_prop["sumMomX","double"]{0.0}
+\def_prop["momX","double"]{0.0}
+\def_prop["sumMomY","double"]{0.0}
+\def_prop["momY","double"]{0.0}
+\def_prop["sumQY","double"]{0.0}
+\def_prop["qY","double"]{0.0}
+\sqlite
+  {
+    \@dbName
+      {
+        \c{\newQuery{"q"} ya esta creada}
+        \defaultQuery
+          {
+            \get_result{"select * from " + @tbName}
+            \expr{ratio1= (@num_rows-1)}
+            \expr{i=1}
+            \def_var["id","double"]{0.0}
+            \while
+              {
+                \cond{@fetch_row}
+                \bucle
+                  {
+                    \set{id= @getInt("ELEM")}
+                    \set{momX=@getDouble("MOM_X")}
+                    \set{momY=@getDouble("MOM_Y")}
+                    \set{qY=@getDouble("Q_Y")}
+                    \expr{i=@tonum(i+1)}
+                    \set{sumMomX= @sumMomX+@momX}
+                    \set{sumMomY= @sumMomY+@momY}
+                    \set{sumQY= @sumQY+@qY}
+                    \c{\print{"i= ",i," num= ",@id," momX: ",@momX," sumMomX: ",@sumMomX,"\n"}}
+                  }
+              }
+            \free_result{}
+          }
+      }
+  }
+
+\expr{ratio1= @abs(@sumMomX+281.54131)/281.54131}
+\expr{ratio2= @abs(@sumMomY-108.86590700)/108.86590700}
+\expr{ratio3= @abs(@sumQY+4.3039913)/4.3039913}
+
+
+\c{
+\print{"sumMomX= ",@sumMomX,"\n"}
+\print{"ratio1= ",ratio1,"\n"}
+\print{"ratio2= ",ratio2,"\n"}
+\print{"ratio3= ",ratio3,"\n"}
+  }
+
+\borra_archivo_si_existe{@dbName}
+\if
+  {
+    \cond{(@abs(ratio1)<1e-15) & (@abs(ratio2)<1e-15) & (@abs(ratio3)<1e-15)}
+    \then{\print{"verif readln 02: pasa.\n"}}
+    \else{\print{"verif readln 02: falla.\n"}}
+  }
