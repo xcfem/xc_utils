@@ -55,5 +55,35 @@ boost::python::object EntCmd_exec(boost::python::object self, const std::string 
 
 boost::python::object EntCmd_exec_file(boost::python::object self, const std::string &fileName);
 
+//Helper class to expose container like std::list
+inline void IndexError(void)
+  { PyErr_SetString(PyExc_IndexError, "Index out of range"); }
 
+template<class T>
+struct std_item
+{
+    typedef typename T::value_type V;
+    static V& get(T const& x, int i)
+      {
+        if( i<0 ) i+=x.size();
+        if( i>=0 && i<x.size() ) return x[i];
+        IndexError();
+      }
+    static void set(T const& x, int i, V const& v)
+      {
+        if( i<0 ) i+=x.size();
+        if( i>=0 && i<x.size() ) x[i]=v;
+        else IndexError();
+      }
+    static void del(T const& x, int i)
+      {
+        if( i<0 ) i+=x.size();
+        if( i>=0 && i<x.size() ) x.erase(i);
+        else IndexError();
+      }
+    static void add(T const& x, V const& v)
+      {
+        x.push_back(v);
+      }
+  };
 #endif
