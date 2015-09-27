@@ -4,6 +4,103 @@ from __future__ import division
 
 import math
 import cairo
+import geom
+
+class ArrowHead(object):
+  def __init__(self,style,lineColor):
+    self.style= style
+    self.length= 15
+    self.degrees= 0.25
+    self.lineColor= lineColor
+  def calcVertices(self, start, end):
+    angle= math.atan2(end.y - start.y, end.x - start.x) + math.pi
+    x1 = end.x + self.length * math.cos(angle - self.degrees)
+    y1 = end.y + self.length * math.sin(angle - self.degrees)
+    x2 = end.x + self.length * math.cos(angle + self.degrees)
+    y2 = end.y + self.length * math.sin(angle + self.degrees)
+    return [[x1,y1],[x2,y2]]
+
+class ArrowOpen(ArrowHead):
+  def __init__(self,lineColor):
+    super(ArrowOpen,self).__init__('open',lineColor)
+  def draw(self,ctx,start,end):
+    vertex= self.calcVertices(start, end)
+
+    ctx.set_source_rgb(self.lineColor[0],self.lineColor[1],self.lineColor[2])
+    ctx.move_to(end.x, end.y)
+    ctx.line_to(vertex[0][0], vertex[0][1])
+    ctx.stroke()
+
+    ctx.move_to(end.x, end.y)
+    ctx.line_to(vertex[1][0], vertex[1][1])
+    ctx.stroke()
+
+    ctx.move_to(start.x,start.y)
+    ctx.line_to(end.x,end.y)
+    ctx.stroke()
+
+class ArrowSolidBase(ArrowHead):
+  def __init__(self,lineColor,fillColor):
+    super(ArrowSolidBase,self).__init__('solid',lineColor)
+    self.fillColor= fillColor
+
+
+class ArrowSolid(ArrowSolidBase):
+  def __init__(self,lineColor,fillColor):
+    super(ArrowSolid,self).__init__('solid',lineColor,fillColor)
+  def draw(self,ctx,start,end):
+    vertices= self.calcVertices(start, end)
+    x1= vertices[0][0]
+    y1= vertices[0][1]
+    x2= vertices[1][0]
+    y2= vertices[1][1]
+    ctx.move_to (end.x, end.y)
+    ctx.line_to (x1, y1)
+    ctx.line_to (x2, y2)
+    ctx.close_path()
+
+    ctx.set_source_rgb(self.lineColor[0],self.lineColor[1],self.lineColor[2])
+    ctx.stroke_preserve()
+
+    ctx.set_source_rgb(self.fillColor[0],self.fillColor[1],self.fillColor[2])
+    ctx.fill()
+
+class ArrowDiamond(ArrowSolidBase):
+  def __init__(self,lineColor,fillColor):
+    super(ArrowDiamond,self).__init__('solid',lineColor,fillColor)
+  def draw(self,ctx,start,end):
+    vertices= self.calcVertices(start, end)
+    x1= vertices[0][0]
+    y1= vertices[0][1]
+    x2= vertices[1][0]
+    y2= vertices[1][1]
+    x3= end.x + self.length * 2 * math.cos(angle)
+    y3= end.y + self.length * 2 * math.sin(angle)
+
+    ctx.move_to (end.x, end.y)
+    ctx.line_to (x1, y1)
+    ctx.line_to (x3, y3)
+    ctx.line_to (x2, y2)
+    ctx.close_path()
+
+    ctx.set_source_rgb(self.lineColor[0],self.lineColor[1],self.lineColor[2])
+    ctx.stroke_preserve()
+
+    ctx.set_source_rgb(self.fillColor[0],self.fillColor[1],self.fillColor[2])
+    ctx.fill()
+
+class ArrowCircle(ArrowSolidBase):
+  def __init__(self,lineColor,fillColor):
+    super(ArrowCircle,self).__init__('solid',lineColor,fillColor)
+  def draw(self,ctx,start,end):
+    xc = end.x + self.length * math.cos(self.angle)
+    yc = end.y + self.length * math.sin(self.angle)
+
+    ctx.arc(xc, yc, self.length, 0.0, 2 * math.pi)
+    ctx.set_source_rgb(self.lineColor[0],self.lineColor[1],self.lineColor[2])
+    ctx.stroke_preserve()
+    ctx.set_source_rgb(self.fillColor[0],self.fillColor[1],self.fillColor[2])
+    ctx.fill()
 
 class Boundary(object):
   def __init__(self,xmin,ymin,xmax,ymax):
@@ -25,42 +122,42 @@ class TransformParams(object):
     self.w= w #User space width.
     self.h= h #User space height.
     self.bnd= bnd
-  def getScale(self):
+    self.x0= self.bnd.getXCenter()
+    self.y0= self.bnd.getYCenter()
     eX= self.w/self.bnd.getXWidth()
-    print "eX= ", eX
     eY= self.h/self.bnd.getYWidth()
-    print "eY= ", eY
-    return min(eX,eY)
+    self.scale= min(eX,eY)
   def applyTransform(self,ctx):
-    scale= self.getScale()
-    print "scale= ", scale
-    x0= scale*self.bnd.getXCenter()#-self.w/2.0
-    y0= scale*self.bnd.getYCenter()#-self.h/2.0
-    print "x0= ", x0, " y0= ", y0
-    ctx.translate(x0, y0)
-    ctx.scale(scale, scale)
-    
+    ctx.translate(self.x0+self.w/2.0, self.y0+self.h/2)
+    ctx.scale(self.scale, self.scale)
+    ctx.set_font_size(self.scale/10000)
 
-def plotPolygon(plg,ctx):
-  # Dibuja el contorno del polígono cuyo nombre se pasa como parámetro.ç
-  nv= plg.getNumVertices()
-  ptPlot= plg.getVertice(0)
-  ctx.move_to(ptPlot.x,ptPlot.y)
-  for i in range(1,nv):
-    ptPlot= plg.getVertice(i)
+  def plotPolygon(self, plg,ctx):
+    ''' Draws polygon countour'''
+    nv= plg.getNumVertices()
+    ptPlot= plg.getVertice(0)
+    ctx.move_to(ptPlot.x,ptPlot.y)
+    for i in range(1,nv):
+      ptPlot= plg.getVertice(i)
+      ctx.line_to(ptPlot.x,ptPlot.y)
+    ptPlot= plg.getVertice(0)
     ctx.line_to(ptPlot.x,ptPlot.y)
-  ptPlot= plg.getVertice(0)
-  ctx.line_to(ptPlot.x,ptPlot.y)
+  def plotEjesYZ(self,ctx):
+    '''Draws Y and Z axis.'''
+    long= self.scale/5000
+    xArrow= ArrowOpen([0,1,0])# Green color
+    xArrow.length= long/2
+    yArrow= ArrowOpen([0,0,1])# Blue color
+    yArrow.length= long/2
+    ctx.set_line_width(long/40)
+    xArrow.draw(ctx,geom.Pos2d(0,0),geom.Pos2d(long,0))
+    ctx.set_source_rgb(0, 1.0, 0) # Green color
+    ctx.move_to(long,0)
+    ctx.text_path("Y")
+    ctx.stroke()
+    yArrow.draw(ctx,geom.Pos2d(0,0),geom.Pos2d(0,long))
+    ctx.set_source_rgb(0, 0, 1.0) # Blue color
+    ctx.move_to(long/10,long)
+    ctx.text_path("Z")
+    ctx.stroke()
 
-def plotEjesYZ(long,ctx):
-  '''Dibuja los ejes Y y Z en el origen de coordenadas
-   con la longitud que se pasa como parámetro.'''
-  ctx.set_line_width(long/40)
-  ctx.move_to(0,0)
-  ctx.set_source_rgb(0, 1, 0) # Green color
-  ctx.line_to(long,0)
-  ctx.text_path("Y")
-  ctx.move_to(0,0)
-  ctx.set_source_rgb(0, 0, 1) # Blue color
-  ctx.move_to(0,long)
-  ctx.text_path("Z")
