@@ -21,68 +21,7 @@
 //----------------------------------------------------------------------------
 //python_interface.cxx
 
-#include <boost/python/module.hpp>
-#include <boost/python/def.hpp>
-#include <boost/python/class.hpp>
-#include <boost/python/suite/indexing/vector_indexing_suite.hpp>
-#include <boost/python/docstring_options.hpp>
-#include "xc_utils/src/geom/pos_vec/Pos2d.h"
-#include "xc_utils/src/geom/pos_vec/Pos3d.h"
-#include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
-#include "xc_utils/src/geom/pos_vec/MatrizPos3d.h"
-#include "xc_utils/src/geom/pos_vec/TritrizPos2d.h"
-#include "xc_utils/src/geom/pos_vec/TritrizPos3d.h"
-#include "xc_utils/src/geom/d1/Recta2d.h"
-#include "xc_utils/src/geom/pos_vec/Dir3d.h"
-#include "xc_utils/src/geom/d1/Recta3d.h"
-#include "xc_utils/src/geom/d1/func_por_puntos/FuncPorPuntosR_R.h"
-#include "xc_utils/src/geom/d1/func_por_puntos/FuncPorPuntosR2_R.h"
-#include "xc_utils/src/geom/d2/Superficie2d.h"
-#include "xc_utils/src/geom/d2/Semiplano2d.h"
-#include "xc_utils/src/geom/d2/Circulo2d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/SupPoligonal2d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/Triangulo2d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/Cuadrado2d.h"
-#include "xc_utils/src/geom/d1/Polilinea2d.h"
-#include "xc_utils/src/geom/pos_vec/ListaPos2d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/PoligonoConAgujeros2d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/bool_op_poligono2d.h"
-#include "xc_utils/src/geom/d1/Segmento2d.h"
-#include "xc_utils/src/geom/pos_vec/VDesliz2d.h"
-#include "xc_utils/src/geom/pos_vec/VDesliz3d.h"
-#include "xc_utils/src/geom/d1/SemiRecta2d.h"
-#include "xc_utils/src/geom/d1/SemiRecta3d.h"
-#include "xc_utils/src/geom/d1/Segmento3d.h"
-#include "xc_utils/src/geom/d3/SemiEspacio3d.h"
-#include "xc_utils/src/geom/pos_vec/ListaPos3d.h"
-#include "xc_utils/src/geom/d1/Polilinea3d.h"
-//#include "xc_utils/src/geom/d3/Solido3d.h"
-#include "xc_utils/src/geom/d2/Superficie3d.h"
-#include "xc_utils/src/geom/d2/EcuacionGeneralPlano3d.h"
-#include "xc_utils/src/geom/d2/Plano3d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/Cuadrilatero2d.h"
-#include "xc_utils/src/geom/d2/Rejilla2d.h"
-#include "xc_utils/src/geom/pos_vec/SVD2d.h"
-#include "xc_utils/src/geom/pos_vec/SVD3d.h"
-#include "xc_utils/src/geom/sis_ref/EjesPrincInercia2d.h"
-#include "xc_utils/src/geom/sis_ref/Ref1d3d.h"
-#include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
-#include "xc_utils/src/geom/sis_ref/Ref1d2d.h"
-#include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
-#include "xc_utils/src/geom/sis_ref/Ref3d3d.h"
-#include "xc_utils/src/geom/trf/Trf2d.h"
-#include "xc_utils/src/geom/trf/Escalado2d.h"
-#include "xc_utils/src/geom/trf/Escalado3d.h"
-#include "xc_utils/src/geom/trf/Identidad2d.h"
-#include "xc_utils/src/geom/trf/Identidad3d.h"
-#include "xc_utils/src/geom/trf/Reflexion2d.h"
-#include "xc_utils/src/geom/trf/Reflexion3d.h"
-#include "xc_utils/src/geom/trf/Revolucion3d.h"
-#include "xc_utils/src/geom/trf/Rotacion2d.h"
-#include "xc_utils/src/geom/trf/Rotacion3d.h"
-#include "xc_utils/src/geom/trf/Traslacion2d.h"
-#include "xc_utils/src/geom/trf/Traslacion3d.h"
+#include "python_interface.h"
 
 std::list<Poligono2d> from_python_list(boost::python::list &l)
   {
@@ -100,8 +39,6 @@ boost::python::list to_python_list(const std::list<Poligono2d> &l)
     return retval;
   }
 
-//! @brief Devuelve el resultado de repartir el área común entre los 
-//! polígonos de la lista mediante la técnica de Voronoi.
 boost::python::list python_particiona(boost::python::list &l)
   {
     std::list<Poligono2d> areas= from_python_list(l);
@@ -117,6 +54,10 @@ boost::python::list python_recorta(boost::python::list &l, const Poligono2d &plg
     areas= recorta(areas,plg);
     return to_python_list(areas);
   }
+
+void export_d1_entities(void);
+void export_d2_entities(void);
+void export_sys_trf(void);
 
 BOOST_PYTHON_MODULE(geom)
   {
@@ -138,6 +79,10 @@ BOOST_PYTHON_MODULE(geom)
     class_<GeomObj2d, bases<GeomObj>, boost::noncopyable >("GeomObj2d", no_init)
       .def("getMax",&GeomObj2d::GetMax)
       .def("getMin",&GeomObj2d::GetMin)
+      .add_property("getXMax",&GeomObj2d::GetXMax, "Returns maximum value for x coordinate.")
+      .add_property("getYMax",&GeomObj2d::GetYMax, "Returns maximum value for y coordinate.")
+      .add_property("getXMin",&GeomObj2d::GetXMin, "Returns minimum value for x coordinate.")
+      .add_property("getYMin",&GeomObj2d::GetYMin, "Returns minimum value for y coordinate.")
       .def("getIx", pure_virtual(&GeomObj2d::Ix))
       .def("getIy", pure_virtual(&GeomObj2d::Iy))
       .def("getIz", &GeomObj2d::Iz)
@@ -158,8 +103,9 @@ BOOST_PYTHON_MODULE(geom)
 
     #include "listas/python_interface.tcc"
     #include "pos_vec/python_interface.tcc"
-    #include "d1/python_interface.tcc"
 
+    export_d1_entities();
+    export_d2_entities();
 
 
     double (SemiEspacio3d::*AnguloConSemiEspacio3d)(const SemiEspacio3d &) const= &SemiEspacio3d::getAngulo;
@@ -177,10 +123,6 @@ BOOST_PYTHON_MODULE(geom)
       .def("getNormalInterior", &SemiEspacio3d::NormalInterior)
       .def("getPlanoLimite", &SemiEspacio3d::getPlanoLimite,return_internal_reference<>() );
 
-#include "d2/python_interface.tcc"
-#include "trf/python_interface.tcc"
-#include "sis_coo/python_interface.tcc"
-#include "sis_ref/python_interface.tcc"
-
-}
+    export_sys_trf();
+  }
 

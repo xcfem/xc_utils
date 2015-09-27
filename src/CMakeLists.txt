@@ -128,7 +128,7 @@ LINK_DIRECTORIES("/usr/lib/python2.6") # Not needed?
 ADD_DEFINITIONS(-fno-strict-aliasing)
 ADD_LIBRARY(xc_base SHARED nucleo/python_interface.cc)
 ADD_LIBRARY(loadCombinations SHARED loadCombinations/python_interface.cc)
-ADD_LIBRARY(geom SHARED geom/python_interface.cc)
+ADD_LIBRARY(geom SHARED geom/d1/export_d1_entities.cc geom/d2/export_d2_entities.cc geom/export_sys_trf.cc geom/python_interface.cc)
 
 INSTALL(TARGETS xc_utils loadCombinations geom DESTINATION lib)
 

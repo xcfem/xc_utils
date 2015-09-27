@@ -19,20 +19,15 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//python_interface.cxx
+//export_d1_entities.cxx
 
+#include "xc_utils/src/geom/python_interface.h"
 
-class_<dq_pos2d>("dq_pos2d")
-  .def(vector_indexing_suite<dq_pos2d>() )
- ;
+void export_d1_entities(void)
+  {
+    using namespace boost::python;
+    docstring_options doc_options;
 
-class_<poliPos2d, bases<dq_pos2d> >("poliPos2d")
-  ;
+#include "xc_utils/src/geom/d1/python_interface.tcc"
 
-class_<dq_pos3d>("dq_pos3d")
-  .def(vector_indexing_suite<dq_pos3d>() )
-  ;
-
-class_<poliPos3d, bases<dq_pos3d> >("poliPos3d")
-  ;
-
+  }

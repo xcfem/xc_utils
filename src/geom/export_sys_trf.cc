@@ -19,20 +19,16 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//python_interface.cxx
+//export_sys_trf.cxx
 
+#include "python_interface.h"
 
-class_<dq_pos2d>("dq_pos2d")
-  .def(vector_indexing_suite<dq_pos2d>() )
- ;
+void export_sys_trf(void)
+  {
+    using namespace boost::python;
+    docstring_options doc_options;
 
-class_<poliPos2d, bases<dq_pos2d> >("poliPos2d")
-  ;
-
-class_<dq_pos3d>("dq_pos3d")
-  .def(vector_indexing_suite<dq_pos3d>() )
-  ;
-
-class_<poliPos3d, bases<dq_pos3d> >("poliPos3d")
-  ;
-
+#include "trf/python_interface.tcc"
+#include "sis_coo/python_interface.tcc"
+#include "sis_ref/python_interface.tcc"
+  }
