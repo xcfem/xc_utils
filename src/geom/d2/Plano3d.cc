@@ -45,7 +45,28 @@ Plano3d::Plano3d(const CGPlane_3 &cgp)
 
 //! @brief Constructor: plano que pasa por tres puntos.
 Plano3d::Plano3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
-  : Superficie3d(), cgp(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL()) {}
+  : Superficie3d(), cgp(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL()) 
+  {
+    // const GEOM_FT tol2= 1e-3;
+    // const GEOM_FT d12= p1.dist2(p2);
+    // if(d12<tol2)
+    //   {
+    //     std::clog << "Plano3d; points p1= " << p1 << " and p2= " 
+    //               << p2 << " are too close d= " << sqrt(d12) << std::endl;
+    //   }
+    // const GEOM_FT d13= p1.dist2(p3);
+    // if(d13<tol2)
+    //   {
+    //     std::clog << "Plano3d; points p1= " << p1 << " and p3= " 
+    //               << p3 << " are too close d= " << sqrt(d13) << std::endl;
+    //   }
+    // const GEOM_FT d23= p2.dist2(p3);
+    // if(d23<tol2)
+    //   {
+    //     std::clog << "Plano3d; points p2= " << p2 << " and p3= " 
+    //               << p3 << " are too close d= " << sqrt(d23) << std::endl;
+    //   }  
+  }
 
 
 //! @brief Constructor: plano que pasa por el punto y es normal al vector.
@@ -108,89 +129,6 @@ GeomObj *Plano3d::clon(void) const
 
 void Plano3d::TresPuntos(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   { operator=(Plano3d(p1,p2,p3)); }
-
-bool Plano3d::procesa_comando(CmdStatus &status)
-  {
-    const std::string &cmd= deref_cmd(status.Cmd());
-    const std::string str_error= "(Plano3d) Procesando comando: " + cmd;
-    if(verborrea>2)
-      std::clog << str_error << cmd << std::endl;
-    if(cmd == "tres_puntos")
-      {
-        TresPuntos3d tp;
-        tp.LeeCmd(status);
-        TresPuntos(tp.Org(),tp.P1(),tp.P2());
-        return true;
-      }
-    else if(cmd == "3puntos")
-      {
-        std::vector<boost::any> param= interpretaVectorAny(status.GetString());
-        const int nc= param.size(); //No. de valores leídos.
-        if(nc<3)
-	  std::cerr << str_error
-                    << "Se esperaban tres argumentos de tipo punto, se obtuvieron: "
-                    << nc << std::endl;
-        else
-          {
-            Pos3d o= convert_to_pos3d(param[0]);
-            Pos3d p1= convert_to_pos3d(param[1]);
-            Pos3d p2= convert_to_pos3d(param[2]);
-            TresPuntos(o,p1,p2);
-          }
-        return true;
-      }
-    else if(cmd == "pto_y_vector")
-      {
-        std::vector<boost::any> param= interpretaVectorAny(status.GetString());
-        const int nc= param.size(); //No. de valores leídos.
-        if(nc<2)
-	  std::cerr << str_error
-                    << "Se esperaban dos argumentos, un punto y un vector, se obtuvieron: "
-                    << nc << std::endl;
-        else
-          {
-            Pos3d o= convert_to_pos3d(param[0]);
-            Vector3d v= convert_to_vector3d(param[1]);
-            operator=(Plano3d(o,v));
-          }
-        return true;
-      }
-    else if(cmd == "ecuacion_general")
-      {
-        std::vector<boost::any> param= interpretaVectorAny(status.GetString());
-        const int nc= param.size(); //No. de valores leídos.
-        if(nc<4)
-	  std::cerr << str_error
-                    << "Se esperaban cuatro argumentos reales, se obtuvieron: "
-                    << nc << std::endl;
-        else
-          {
-            const double a= convert_to_double(param[0]);
-            const double b= convert_to_double(param[1]);
-            const double c= convert_to_double(param[2]);
-            const double d= convert_to_double(param[3]);
-            EcuacionGeneralPlano3d eq(a,b,c,d);
-            operator=(Plano3d(eq));
-          }
-        return true;
-      }
-    else if(cmd == "swap")
-      {
-        status.GetString(); //Ignoramos argumentos.
-        Swap();
-        return true;
-      }
-    else
-      return Superficie3d::procesa_comando(status);
-  }
-// void Plano3d::SalvaCmd(std::ostream &os,const std::string &indent= "  ") const
-//   {
-//     const std::string str_indent= indent + "  ";
-//     os << indent << "\\plano" << std::endl
-//        << str_indent << '{' << std::endl;
-//     salva_miembros(os,str_indent+ "  ");
-//     os << str_indent  << '}' << std::endl;
-//   }
 
 //! @brief Devuelve el vector normal al plano con sentido hacia el lado "positivo".
 Vector3d Plano3d::Normal(void) const

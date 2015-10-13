@@ -50,8 +50,6 @@ class Ref2d3d;
 class Plano3d : public Superficie3d
   {
     CGPlane_3 cgp;
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
 
     typedef enum{DELANTE,DETRAS,DENTRO,CRUZA} clasif_poligono;
