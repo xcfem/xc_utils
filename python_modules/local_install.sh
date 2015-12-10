@@ -15,4 +15,4 @@ if [ ! -h $ln_xcBase ]; then
   echo "Making $ln_xcBase symlink."
   ln -si ../../lib/libxc_base.so $ln_xcBase
 fi
-sudo python setup.py install --prefix=/usr/local
+sudo python setup.py install --prefix=/usr/local --record installed_files.txt
