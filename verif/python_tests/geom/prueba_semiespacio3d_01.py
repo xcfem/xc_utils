@@ -27,7 +27,7 @@ deltaTeor=math.acos(0.1968/0.8907/0.99)
 
 ratio1= math.fabs(deltaTeor-delta)/deltaTeor
 if math.fabs(ratio1)<0.021:
-    print "test SemiEspacio3d 01: pasa."
+    print "test SemiEspacio3d 01: ok."
 else:
-    print "test SemiEspacio3d 01: falla."
+    print "test SemiEspacio3d 01: ERROR."
 

@@ -10,6 +10,6 @@
 \if
   {
     \cond{(@abs(ratio1)<1e-15)}
-    \then{\print{"verif append 01: pasa.\n"}}
-    \else{\print{"verif append 01: falla.\n"}}
+    \then{\print{"verif append 01: ok.\n"}}
+    \else{\print{"verif append 01: ERROR.\n"}}
   }

@@ -30,6 +30,6 @@
 \if
   {
     \cond{@e1 & @e2}
-    \then{\print{"prueba sqlite 02: pasa.\n"}}
-    \else{\print{"prueba sqlite 02: falla.\n"}}
+    \then{\print{"prueba sqlite 02: ok.\n"}}
+    \else{\print{"prueba sqlite 02: ERROR.\n"}}
   }

@@ -8,6 +8,6 @@
 \if
   {
     \cond{(@argc == 4) & (@argv(1) == "hola") & (@argv(2) == "pepito") & (@argv(3) == "juanita")}
-    \then{\print{"test cmd_args 01: pasa.\n"}}
-    \else{\print{"test cmd_args 01: falla.\n"}}
+    \then{\print{"test cmd_args 01: ok.\n"}}
+    \else{\print{"test cmd_args 01: ERROR.\n"}}
   }

@@ -37,6 +37,6 @@
 
 \if(@abs(ratio1)<1e-10)
   {
-    \then{\print{"test poligono_con_agujeros2d 01: pasa.\n"}}
-    \else{\print{"test poligono_con_agujeros2d 01: falla.\n"}}
+    \then{\print{"test poligono_con_agujeros2d 01: ok.\n"}}
+    \else{\print{"test poligono_con_agujeros2d 01: ERROR.\n"}}
   }

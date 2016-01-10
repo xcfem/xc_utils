@@ -36,6 +36,6 @@ n2=P2.getNormalExterior()
 n3=n1.cross(n2)
 
 if abs(ratio1)<1e-4:
-    print "test SemiEspacio3d 04: pasa."
+    print "test SemiEspacio3d 04: ok."
 else:
-    print "test SemiEspacio3d 04: falla."
+    print "test SemiEspacio3d 04: ERROR."

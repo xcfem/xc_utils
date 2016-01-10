@@ -114,13 +114,15 @@ SET(GnuGts gnu_gts/GTSSurface gnu_gts/GTSVertex gnu_gts/GTSEdge gnu_gts/GTSFace 
 
 SET(NUCLEO nucleo/aux_any nucleo/EntBase nucleo/MapParam nucleo/MapPropVar nucleo/EntProp nucleo/EntPropSorter nucleo/EntCmd nucleo/Signos nucleo/TokenList nucleo/BoostAnyStack nucleo/AnalisisLexico nucleo/AnalisisSintactico nucleo/InterpreteRPN nucleo/MatrizAny nucleo/CmdParser nucleo/PropParser nucleo/python_utils.cc)
 
+SET(VtkAux vtk_aux/vtkShStrArray vtk_aux/vtkLabeledShStrMapper vtk_aux/vtkTakePhotoDefs vtk_aux/vtkTakePhoto vtk_aux/vtkXOpenGLOffScreenRenderWindow vtk_aux/vtkDoubleHeadedArrowSource vtk_aux/vtkArcSource)
+
 SET(ca_coefs loadCombinations/coefs/GammaF loadCombinations/coefs/CoefsPsi loadCombinations/coefs/MapCoefsPsi)
 
 SET(ca_acciones loadCombinations/acciones/Accion loadCombinations/acciones/RelAcciones loadCombinations/acciones/VRAccion loadCombinations/acciones/ListaVRAccion loadCombinations/acciones/FamiliaAcciones loadCombinations/acciones/MapFamiliasAcc loadCombinations/acciones/AccionesClasificadas)
 
 SET(ca_combinaciones loadCombinations/combinaciones/Variacion loadCombinations/combinaciones/Variaciones loadCombinations/combinaciones/VectorCombinaciones loadCombinations/combinaciones/Combinaciones loadCombinations/combinaciones/MapPondAcciones loadCombinations/combinaciones/GeneradorCombinaciones)
 
-ADD_LIBRARY(xc_utils SHARED ${BASE} ${MYSQL} ${SQLITE} ${CMDLIBPLOT} ${cuadGauss} ${geom} ${GnuGts} ${NUCLEO} ${ca_coefs} ${ca_acciones} ${ca_combinaciones})
+ADD_LIBRARY(xc_utils SHARED ${BASE} ${MYSQL} ${SQLITE} ${CMDLIBPLOT} ${cuadGauss} ${geom} ${GnuGts} ${NUCLEO}  ${VtkAux} ${ca_coefs} ${ca_acciones} ${ca_combinaciones})
 
 #Interfaz Python
 LINK_LIBRARIES(xc_utils xc_basic ${VTK_BIB} ${CGAL_LIBRARIES} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${MySQLpp_LIBRARIES} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} boost_python ${Boost_LIBRARIES})
@@ -129,6 +131,7 @@ ADD_DEFINITIONS(-fno-strict-aliasing)
 ADD_LIBRARY(xc_base SHARED nucleo/python_interface.cc)
 ADD_LIBRARY(loadCombinations SHARED loadCombinations/python_interface.cc)
 ADD_LIBRARY(geom SHARED geom/d1/export_d1_entities.cc geom/d2/export_d2_entities.cc geom/export_sys_trf.cc geom/python_interface.cc)
+ADD_LIBRARY(vtk_aux SHARED vtk_aux/python_interface.cc)
 
 INSTALL(TARGETS xc_utils loadCombinations geom DESTINATION lib)
 

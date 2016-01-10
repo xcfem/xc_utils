@@ -22,9 +22,9 @@ ratio2=math.degrees(alpha)-45
 
 
 if math.fabs(ratio1)<1e-10 and math.fabs(ratio2)<1e-10:
-  print "test vector 2d 02: pasa."
+  print "test vector 2d 02: ok."
 else:
-  print "test vector 2d 02: falla."
+  print "test vector 2d 02: ERROR."
 
 
 

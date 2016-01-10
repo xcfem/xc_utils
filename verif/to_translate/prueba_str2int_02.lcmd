@@ -7,6 +7,6 @@
 \if
   {
     \cond{'(abs(ratio1)<1e-10)'}
-    \then{\print{"test str2int: pasa.\n"}}
-    \else{\print{"test str2int: falla.\n"}}
+    \then{\print{"test str2int: ok.\n"}}
+    \else{\print{"test str2int: ERROR.\n"}}
   }

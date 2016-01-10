@@ -21,9 +21,9 @@ ratio3=math.fabs(a)
 ratio4=math.fabs(b-2)
 
 if ratio1<1e-15 and ratio2<1e-15 and ratio3<1e-15 and ratio4<1e-15 :
-  print ("test recta2d 01: pasa.")
+  print ("test recta2d 01: ok.")
 else:
-  print ("test recta2d 01: falla.")
+  print ("test recta2d 01: ERROR.")
 
 
 

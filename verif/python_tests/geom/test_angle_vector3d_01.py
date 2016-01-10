@@ -12,12 +12,12 @@ angle=vec1.angulo(vec2)
 angleTeor=0.0
 ratio1=math.fabs(angleTeor-angle)#/angleTeor
 
-print "angle= ", math.degrees(angle)
+#print "angle= ", math.degrees(angle)
 
 if math.fabs(ratio1)<1e-4:
-  print "test vector3d 02: pasa."
+  print "test vector3d 02: ok."
 else:
-  print "test vector3d 02: falla."
+  print "test vector3d 02: ERROR."
 
 
 

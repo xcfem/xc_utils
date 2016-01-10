@@ -12,6 +12,6 @@
 \if
   {
     \cond{'(abs(ratio1)<1e-10)' & (prueba0==0)}
-    \then{\print{"test strlen: pasa.\n"}}
-    \else{\print{"test strlen: falla.\n"}}
+    \then{\print{"test strlen: ok.\n"}}
+    \else{\print{"test strlen: ERROR.\n"}}
   }

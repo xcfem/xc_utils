@@ -14,6 +14,6 @@ yCdg=ptsPrb.getCdg().y
 area=ptsPrb.getArea()
 
 if math.fabs(xCdg-1.0)<1e-15 and math.fabs(yCdg-1.0)<1e-15 and math.fabs(area)<1e-15:
-    print "test listPos2d 01: pasa."
+    print "test listPos2d 01: ok."
 else:
-    print "test listPos2d 01: falla."
+    print "test listPos2d 01: ERROR."

@@ -14,6 +14,6 @@
 \if
   {
     \cond{(@abs(ratio1)<1e-15) & (@abs(ratio2)<1e-15) & (@abs(ratio3)<1e-15)}
-    \then{\print{"test existeArchivo 01: pasa.\n"}}
-    \else{\print{"test existeArchivo 01: falla.\n"}}
+    \then{\print{"test existeArchivo 01: ok.\n"}}
+    \else{\print{"test existeArchivo 01: ERROR.\n"}}
   }

@@ -30,7 +30,7 @@ I12Teor=geom.Vector3d(0.7345,0.5753,0.2269)
 ratio1=(I12-I12Teor).getModulo()
 
 if math.fabs(ratio1)<1e-4:
-    print "test plano3d 04: pasa."
+    print "test plano3d 04: ok."
 else:
-    print "test plano3d 04: falla."
+    print "test plano3d 04: ERROR."
 #Terminar!!!

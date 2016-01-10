@@ -9,6 +9,6 @@
 \if
   {
     \cond{@s2=="hello Hellen"}
-    \then{\print{"test replace all: pasa.\n"}}
-    \else{\print{"test replace all: falla.\n"}}
+    \then{\print{"test replace all: ok.\n"}}
+    \else{\print{"test replace all: ERROR.\n"}}
   }

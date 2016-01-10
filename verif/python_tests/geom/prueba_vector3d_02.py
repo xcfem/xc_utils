@@ -13,9 +13,9 @@ deltaTeor=math.acos(32/2.4495/13.9284)
 ratio1=math.fabs(deltaTeor-delta)/deltaTeor
 
 if math.fabs(ratio1)<1e-4:
-  print "test vector3d 02: pasa."
+  print "test vector3d 02: ok."
 else:
-  print "test vector3d 02: falla."
+  print "test vector3d 02: ERROR."
 
 
 

@@ -26,7 +26,7 @@ ratio1= (sTeor-s)
 ratio1=ratio1.getModulo()
 
 if abs(ratio1)<1e-4:
-    print "test SemiEspacio3d 03: pasa."
+    print "test SemiEspacio3d 03: ok."
 else:
-    print "test SemiEspacio3d 01: falla."
+    print "test SemiEspacio3d 01: ERROR."
 

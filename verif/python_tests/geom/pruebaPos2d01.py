@@ -9,7 +9,9 @@ yPt= pos1.y
 
 #print("pos1.x= ",pos1.x," pos1.y= ",pos1.y)
 
+import os
+fname= os.path.basename(__file__)
 if(xPt==1. and yPt==2.):
-  print("test pos2d 01: pasa")
+  print "test ",fname,": ok."
 else:
-  print("test pos2d 01: falla")
+  print "test ",fname,": ERROR."

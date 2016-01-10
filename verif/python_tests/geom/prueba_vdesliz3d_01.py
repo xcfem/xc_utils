@@ -9,7 +9,7 @@ vectorDir=geom.Vector3d(1,2,3)
 vec1=geom.VDesliz3d(pto,vectorDir)
 
 if vec1.x==1 and vec1.y==2 and vec1.z==3:
-    print "test vdesliz3d 01: pasa."
+    print "test vdesliz3d 01: ok."
 else:
-    print "test vdesliz3d 01: falla."
+    print "test vdesliz3d 01: ERROR."
 

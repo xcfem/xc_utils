@@ -106,8 +106,8 @@
     
     \if(@ratio<1e-6)
       {
-        \then{\print{"test 04: pasa.\n"}}
-        \else{\print{"test 04: falla.\n"}}
+        \then{\print{"test 04: ok.\n"}}
+        \else{\print{"test 04: ERROR.\n"}}
       }
     
   }

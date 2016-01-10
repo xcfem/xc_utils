@@ -20,6 +20,6 @@ Res=svd1.getResultante()
 Mom=svd1.getMomento()
 
 if Res.x == 0 and Res.y == 0 and Res.z == 4 and Mom.x == 0 and Mom.y == 0 and Mom.z == 0: 
-    print "test svd3d 01: pasa."
+    print "test svd3d 01: ok."
 else:
-    print "test svd3d 01: falla."
+    print "test svd3d 01: ERROR."

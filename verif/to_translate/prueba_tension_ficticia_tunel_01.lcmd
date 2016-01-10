@@ -82,6 +82,6 @@
 \if
   {
     \cond{(@abs(ratio1)<1e-6) & (@abs(ratio2)<1e-6) & (@abs(ratio3)<1e-6) & (@abs(ratio4)<1e-6) & (@abs(ratio5)<1e-6) & (@abs(ratio6)<1e-6)}
-    \then{\print{"test Panet 01: pasa.\n"}}
-    \else{\print{"test Panet 01: falla.\n"}}
+    \then{\print{"test Panet 01: ok.\n"}}
+    \else{\print{"test Panet 01: ERROR.\n"}}
   }

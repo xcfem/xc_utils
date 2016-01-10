@@ -9,6 +9,6 @@
 \if
   {
     \cond{(@abs(ratio1)<1e-10) & (@abs(ratio2)<1e-10) }
-    \then{\print{"test img 01: pasa.\n"}}
-    \else{\print{"test img 01: falla.\n"}}
+    \then{\print{"test img 01: ok.\n"}}
+    \else{\print{"test img 01: ERROR.\n"}}
   }

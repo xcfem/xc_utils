@@ -46,7 +46,7 @@
     \if
       {
         \cond{(ratio1 < 1e-12) & (nCA < 1e-12) & (nCS < 1e-12) & (ratio2 < 1e-12) & (ratio3 < 1e-12) & (ratio4 < 1e-12)}
-        \then{\print{"test_01: pasa.\n"}}
-        \else{\print{"test_01: falla.\n"}}
+        \then{\print{"test_01: ok.\n"}}
+        \else{\print{"test_01: ERROR.\n"}}
       }
   }

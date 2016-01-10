@@ -92,6 +92,6 @@
 \if
   {
     \cond{(@abs(ratio1)<1e-15) & (@abs(ratio2)<1e-15) & (@abs(ratio3)<1e-15)}
-    \then{\print{"verif readln 02: pasa.\n"}}
-    \else{\print{"verif readln 02: falla.\n"}}
+    \then{\print{"verif readln 02: ok.\n"}}
+    \else{\print{"verif readln 02: ERROR.\n"}}
   }

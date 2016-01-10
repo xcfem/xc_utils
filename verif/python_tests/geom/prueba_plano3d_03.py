@@ -28,7 +28,7 @@ ratio2=math.fabs(dr)
 ratio3=math.fabs(d)
 
 if math.fabs(ratio1)<1e-4 and math.fabs(ratio2)<1e-4 and math.fabs(ratio3)<1e-4:
-    print "test plano3d 03: pasa."
+    print "test plano3d 03: ok."
 else:
-    print "test plano3d 03: falla."
+    print "test plano3d 03: ERROR."
 

@@ -10,9 +10,9 @@ vdir= r1.getVDir()
 tp=r1.tipo()
 
 if vdir.x==10. and vdir.y==10. and vdir.z==10.:
-    print "test recta3d 01: pasa."
+    print "test recta3d 01: ok."
 else:
-    print "test recta3d 01: falla."
+    print "test recta3d 01: ERROR."
 
 
 

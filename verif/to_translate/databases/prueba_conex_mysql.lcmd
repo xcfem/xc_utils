@@ -7,6 +7,6 @@
 \if
   {
     \cond{'en==0.0'}
-    \then{\print{"test conexión mysql: pasa.\n"}}
-    \else{\print{"testc onexión mysql: falla.\n"}}
+    \then{\print{"test conexión mysql: ok.\n"}}
+    \else{\print{"testc onexión mysql: ERROR.\n"}}
   }

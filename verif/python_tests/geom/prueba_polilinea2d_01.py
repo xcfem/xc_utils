@@ -20,7 +20,7 @@ ratio1=(longPol1-3)/3.
 ratio2=(longPol2-2)/2.
 
 if math.fabs(ratio1)<1e-10 and math.fabs(ratio2)<1e-10:
-    print "test polilinea 01: pasa."
+    print "test polilinea 01: ok."
 else:
-    print "test polilinea 01: falla."
+    print "test polilinea 01: ERROR."
 

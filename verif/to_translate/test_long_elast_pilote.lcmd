@@ -18,6 +18,6 @@
 \if
   {
     \cond{(@abs(ratio1)<1e-4) & (@abs(ratio2)<1e-4)}
-    \then{\print{"test longitud elastica pilote 01: pasa.\n"}}
-    \else{\print{"test longitud elastica pilote 01: falla.\n"}}
+    \then{\print{"test longitud elastica pilote 01: ok.\n"}}
+    \else{\print{"test longitud elastica pilote 01: ERROR.\n"}}
   }

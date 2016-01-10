@@ -23,9 +23,9 @@ ratio6=(IyCirc-(math.pi/4.))/(math.pi/4.)
 ratio7=PxyCirc
 
 if math.fabs(ratio1)<1e-10 and math.fabs(ratio2)<1e-10 and math.fabs(ratio3)<1e-10 and math.fabs(ratio4)<1e-10  and math.fabs(ratio5)<1e-10 and math.fabs(ratio6)<1e-10 and math.fabs(ratio7)<1e-10:
-  print "test circulo 01: pasa."
+  print "test circulo 01: ok."
 else:
-  print "test circulo 01: falla."
+  print "test circulo 01: ERROR."
 
 
 

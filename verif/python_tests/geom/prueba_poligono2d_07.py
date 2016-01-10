@@ -16,6 +16,6 @@ ratio1= (perimPol1-4)/4.
 ratio2= (perimPol2-2)/2.
 
 if abs(ratio1)<1e-10 and abs(ratio2)<1e-10:
-    print "test poligono2d 07: pasa."
+    print "test poligono2d 07: ok."
 else:
-    print "test poligono2d 07: falla."
+    print "test poligono2d 07: ERROR."

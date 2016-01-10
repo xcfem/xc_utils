@@ -16,7 +16,7 @@ p2=s3.getCdg()
 ratio1=math.fabs(p1.distPos2d(p2)-4)
 
 if ratio1<1e-15:
-    print "test segmento2d 02: pasa."
+    print "test segmento2d 02: ok."
 else:
-    print "test segmento2d 02: falla."
+    print "test segmento2d 02: ERROR."
 

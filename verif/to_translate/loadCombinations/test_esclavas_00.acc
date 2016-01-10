@@ -69,8 +69,8 @@
 
     \if(@ratio_elu_persistentes<1e-6)
       {
-        \then{\print{"test esclavas 00: pasa.\n"}}
-        \else{\print{"test esclavas 00: falla.\n"}}
+        \then{\print{"test esclavas 00: ok.\n"}}
+        \else{\print{"test esclavas 00: ERROR.\n"}}
       }
     
   }

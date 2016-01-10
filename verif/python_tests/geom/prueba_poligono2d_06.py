@@ -31,6 +31,6 @@ p2=list1[1]
 ratio2=(p2.getPerimetro()-perimetroTeorico)/perimetroTeorico
 
 if abs(ratio1)<1e-10 and abs(ratio2)<1e-10:
-    print "test polígono 06: pasa."
+    print "test polígono 06: ok."
 else:
-    print "test polígono 06: falla."
+    print "test polígono 06: ERROR."

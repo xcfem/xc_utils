@@ -10,7 +10,9 @@ zPt= pos1.z
 
 #print("pos1.x= ",pos1.x," pos1.y= ",pos1.y," pos1.z= ",pos1.z)
 
+import os
+fname= os.path.basename(__file__)
 if(xPt==1. and yPt==2. and zPt==3.):
-  print("test pos3d 01: pasa")
+  print "test ",fname,": ok."
 else:
-  print("test pos3d 01: falla")
+  print "test ",fname,": ERROR."

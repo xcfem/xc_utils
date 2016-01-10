@@ -41,6 +41,6 @@ de rocas» de Juan Carlos Ayes Zamudio}
 \if
   {
     \cond{(@abs(@vacio-1)<1e-16)}
-    \then{\print{"test block pyramid 02: pasa.\n"}}
-    \else{\print{"test block pyramid 02: falla.\n"}}
+    \then{\print{"test block pyramid 02: ok.\n"}}
+    \else{\print{"test block pyramid 02: ERROR.\n"}}
   }

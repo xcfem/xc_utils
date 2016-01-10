@@ -23,7 +23,7 @@ deltaTeor=math.radians(32.349)
 ratio1=math.fabs(deltaTeor-delta)/deltaTeor
 
 if math.fabs(ratio1)<1e-4:
-    print "test SemiEspacio3d 02: pasa."
+    print "test SemiEspacio3d 02: ok."
 else:
-    print "test SemiEspacio3d 02: falla."
+    print "test SemiEspacio3d 02: ERROR."
 

@@ -17,6 +17,6 @@
 \if
   {
     \cond{(@abs(ratio1)<1e-15)}
-    \then{\print{"test tetraedro 01: pasa.\n"}}
-    \else{\print{"test tetraedro 01: falla.\n"}}
+    \then{\print{"test tetraedro 01: ok.\n"}}
+    \else{\print{"test tetraedro 01: ERROR.\n"}}
   }

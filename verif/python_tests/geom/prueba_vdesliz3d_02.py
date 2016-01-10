@@ -16,7 +16,7 @@ fuerza=vec1.y
 mTeor=fuerza*brazo
 
 if m.x==0 and m.y==0and m.z==mTeor:
-    print "test vdesliz3d 02: pasa."
+    print "test vdesliz3d 02: ok."
 else:
-    print "test vdesliz3d 02: falla."
+    print "test vdesliz3d 02: ERROR."
 

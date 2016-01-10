@@ -22,7 +22,7 @@ mTeor=fuerza*brazo
 ratio1=(m-mTeor)/mTeor
 
 if m==mTeor:
-    print "test vdesliz3d 03: pasa."
+    print "test vdesliz3d 03: ok."
 else:
-    print "test vdesliz3d 03: falla."
+    print "test vdesliz3d 03: ERROR."
 

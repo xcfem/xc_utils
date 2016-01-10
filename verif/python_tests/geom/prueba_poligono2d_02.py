@@ -28,6 +28,6 @@ ratio6= (IyPol-(1/12.0))/(1/12.0)
 ratio7= PxyPol
 
 if abs(ratio1)<1e-10 and abs(ratio2)<1e-10 and abs(ratio3)<1e-10 and abs(ratio4)<1e-10 and abs(ratio5)<1e-10 and abs(ratio6)<1e-10 and abs(ratio7)<1e-10:
-    print "test polígono 02: pasa."
+    print "test polígono 02: ok."
 else:
-    print "test polígono 02: falla."
+    print "test polígono 02: ERROR."

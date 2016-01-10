@@ -53,6 +53,6 @@
 \if
   {
     \cond{(@abs(ratio1)<1e-10) & (@abs(ratio2-1)<1e-10) & @e1 & (!@e2)}
-    \then{\print{"prueba sqlite 01: pasa.\n"}}
-    \else{\print{"prueba sqlite 01: falla.\n"}}
+    \then{\print{"prueba sqlite 01: ok.\n"}}
+    \else{\print{"prueba sqlite 01: ERROR.\n"}}
   }

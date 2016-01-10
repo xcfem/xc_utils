@@ -123,8 +123,8 @@
     
     \if((@ratio_elu_persistentes<1e-6) & (@ratio_elu_sismicas<1e-6))
       {
-        \then{\print{"test esclavas 02: pasa.\n"}}
-        \else{\print{"test esclavas 02: falla.\n"}}
+        \then{\print{"test esclavas 02: ok.\n"}}
+        \else{\print{"test esclavas 02: ERROR.\n"}}
       }
     
   }

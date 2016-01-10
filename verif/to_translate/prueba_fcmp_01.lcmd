@@ -13,6 +13,6 @@
 
 \if((@abs(ratio1)<1e-15) & (@abs(ratio2)<1e-15) & (@abs(ratio3)<1e-15))
   {
-    \then{\print{"test fcmp 01: pasa.\n"}}
-    \else{\print{"test fcmp 01: falla.\n"}}
+    \then{\print{"test fcmp 01: ok.\n"}}
+    \else{\print{"test fcmp 01: ERROR.\n"}}
   }

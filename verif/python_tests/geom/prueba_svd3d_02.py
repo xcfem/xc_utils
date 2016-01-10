@@ -38,7 +38,7 @@ MomR=svd1.getMomentoRecta3d(r1) #devuelve el valor con signo (en función del se
 ##print "MomP.y =", MomP.y
 
 if Res.x == 0 and Res.y == 0 and Res.z == 4 and Mom.x == 0 and Mom.y == 0 and Mom.z == 0 and MomR == -4 and MomP.x == -4 and MomP.y == -4:
-    print "test svd3d 02: pasa."
+    print "test svd3d 02: ok."
 else:
-    print "test svd3d 02: falla."
+    print "test svd3d 02: ERROR."
 

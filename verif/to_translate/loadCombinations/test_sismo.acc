@@ -122,8 +122,8 @@
 
     \if((@ratio_elu_persistentes<1e-6) & (@ratio_elu_sismicas<1e-6))
       {
-        \then{\print{"test sismo: pasa.\n"}}
-        \else{\print{"test sismo: falla.\n"}}
+        \then{\print{"test sismo: ok.\n"}}
+        \else{\print{"test sismo: ERROR.\n"}}
       }
     
   }

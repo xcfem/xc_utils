@@ -27,6 +27,6 @@
 
 \if((@prb1 == @Rec.nombre) & (@prb2 == @Rec.nombre) & (@prb3 == @Rec.nombre))
   {
-    \then{\print{"test prueba_deref_01: pasa.\n"}}
-    \else{\print{"test prueba_deref_01: falla.\n"}}
+    \then{\print{"test prueba_deref_01: ok.\n"}}
+    \else{\print{"test prueba_deref_01: ERROR.\n"}}
   }

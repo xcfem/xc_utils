@@ -10,9 +10,9 @@ zV=vec1.z
 tp=vec1.tipo()
 
 if xV==1 and yV==2 and zV==3:
-  print "test vector3d 01: pasa."
+  print "test vector3d 01: ok."
 else:
-  print "test vector3d 01: falla."
+  print "test vector3d 01: ERROR."
 
 
 

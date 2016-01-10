@@ -60,6 +60,6 @@ de rocas» de Juan Carlos Ayes Zamudio}
 \if
   {
     \cond{(@abs(ratio1)<1e-6) & (@abs(ratio2)<1e-6) & (@abs(ratio3)<1e-6)}
-    \then{\print{"test block pyramid 01: pasa.\n"}}
-    \else{\print{"test block pyramid 01: falla.\n"}}
+    \then{\print{"test block pyramid 01: ok.\n"}}
+    \else{\print{"test block pyramid 01: ERROR.\n"}}
   }

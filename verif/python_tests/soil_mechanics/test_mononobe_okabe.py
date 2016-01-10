@@ -22,8 +22,8 @@ phi= math.radians(29.0985)
 phi_d= math.atan(math.tan(phi)/1.25)
 L= 12.5
 
-K_ad1= mononobe_okabe.active_hearch_pressure_coefficient_Kad(psi, phi_d, theta1, delta_ad,beta)
-K_ad2= mononobe_okabe.active_hearch_pressure_coefficient_Kad(psi, phi_d, theta2, delta_ad,beta)
+K_ad1= mononobe_okabe.active_earth_pressure_coefficient_Kad(psi, phi_d, theta1, delta_ad,beta)
+K_ad2= mononobe_okabe.active_earth_pressure_coefficient_Kad(psi, phi_d, theta2, delta_ad,beta)
 AEd1= mononobe_okabe.overpressure_dry(H, gamma_soil, kv, kh, psi, phi_d, delta_ad,beta,Kas)
 AEd2= mononobe_okabe.overpressure_dry(H, gamma_soil, -kv, kh, psi, phi_d, delta_ad,beta,Kas)
 

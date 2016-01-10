@@ -15,6 +15,6 @@ ratio3= areasTrib[2]-1
 ratio4= areasTrib[3]-1
 
 if abs(ratio1)<1e-10 and abs(ratio2)<1e-10:
-    print "test poligono2d 08: pasa."
+    print "test poligono2d 08: ok."
 else:
-    print "test poligono2d 08: falla."
+    print "test poligono2d 08: ERROR."
