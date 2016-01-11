@@ -63,25 +63,6 @@ Ref3d3d &Ref3d3d::operator=(const Ref3d3d &otro)
     return *this;
   }
 
-bool Ref3d3d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(Ref3d3d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "org")
-      {
-        org.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "ejes")
-      {
-        trf.LeeCmd(status);
-        return true;
-      }
-    else
-      return BaseRef::procesa_comando(status);
-  }
-
 Ref3d3d::~Ref3d3d(void)
   {}
 

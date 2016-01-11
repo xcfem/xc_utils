@@ -26,6 +26,7 @@ python ./python_tests/soil_mechanics/test_coulomb.py
 echo "$BLEU" "Geometry tests." "$NORMAL"
 python ./python_tests/geom/prueba_plano3d_02.py
 python ./python_tests/geom/test_coosys_01.py
+python ./python_tests/geom/test_refsys3d3d_01.py
 python ./python_tests/geom/prueba_poligono2d_04.py
 python ./python_tests/geom/prueba_polilinea2d_01.py
 python ./python_tests/geom/pruebaPos3d01.py

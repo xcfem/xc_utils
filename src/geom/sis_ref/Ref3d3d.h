@@ -45,7 +45,6 @@ class Ref3d3d : public Ref<SisCooRect3d3d>
 
   protected:
 
-    bool procesa_comando(CmdStatus &status);
 /*     void salva_org(ostream &os,const string &indent) const */
 /*       { */
 /*         os << indent << "\\org{"; */
