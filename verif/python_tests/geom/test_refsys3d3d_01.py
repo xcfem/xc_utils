@@ -4,7 +4,7 @@ import xc_base
 import geom
 p1=geom.Pos3d(1,1,1)
 p2=geom.Pos3d(2,2,2)
-ref= geom.Ref3d3d(p1,p2);
+ref= geom.Ref3d3d(p1,p2)
 
 
 v= geom.Vector3d(1,1,1)

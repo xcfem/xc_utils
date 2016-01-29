@@ -84,8 +84,9 @@ class Segmento3d : public Linea3d
     virtual Pos3d Cdg(void) const;
     Dir3d GetDir(void) const;
     Vector3d VDir(void) const;
-    double Angulo(const Vector3d &v) const;
-    friend double angulo(const Segmento3d &r,const Vector3d &v);
+    GEOM_FT Angulo(const Vector3d &v) const;
+    GEOM_FT Angulo(const Segmento3d &v) const;
+    friend GEOM_FT angulo(const Segmento3d &r,const Vector3d &v);
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Iz(void) const;

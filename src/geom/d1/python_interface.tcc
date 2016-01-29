@@ -41,6 +41,8 @@ class_<Linea3d, bases<GeomObj3d>, boost::noncopyable  >("Linea3d", no_init);
 class_<SemiRecta3d, bases<Linea3d> >("Ray3d")
   .def(init<SemiRecta3d>());
 
+GEOM_FT (Segmento3d::*AnguloVector3D)(const Vector3d &v) const= &Segmento3d::Angulo;
+GEOM_FT (Segmento3d::*AnguloSegmento3D)(const Segmento3d &v) const= &Segmento3d::Angulo;
 class_<Segmento3d, bases<Linea3d> >("LineSegment3d")
   .def(init<>())
   .def(init<Pos3d,Pos3d>())
@@ -51,6 +53,8 @@ class_<Segmento3d, bases<Linea3d> >("LineSegment3d")
   .def("getLongitud", &Segmento3d::Longitud)
   .def("getCdg", &Segmento3d::Cdg)
   .def("getPoint",&Segmento3d::PtoParametricas)
+  .def("getAngleWithVector",AnguloVector3D,"Returns the angle between the line segment and the vector.")
+  .def("getAngleWithLineSegment",AnguloSegmento3D,"Returns the angle between both line segments.")
   ;
 
 Pos3d (Recta3d::*ProyPos3d)(const Pos3d &) const= &Recta3d::Proyeccion;

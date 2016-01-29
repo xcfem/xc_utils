@@ -251,9 +251,13 @@ GeomObj3d::list_Pos3d Segmento3d::Interseccion(const Segmento3d &sg2) const
 GEOM_FT dist(const Pos3d &p,const Segmento3d &r)
   { return sqrt_FT(dist2(r,p)); }
 
-double Segmento3d::Angulo(const Vector3d &v) const
+//! @brief Returns angle with vector.
+GEOM_FT Segmento3d::Angulo(const Vector3d &v) const
   { return angulo(VDir(),v); }
-double angulo(const Segmento3d &r,const Vector3d &v)
+//! @brief Returns angle with another line segment.
+GEOM_FT Segmento3d::Angulo(const Segmento3d &s) const
+  { return Angulo(s.VDir()); }
+GEOM_FT angulo(const Segmento3d &r,const Vector3d &v)
   { return r.Angulo(v); }
 //Momento de inercia respecto al CDG en ejes locales.
 GEOM_FT Segmento3d::Ix(void) const
