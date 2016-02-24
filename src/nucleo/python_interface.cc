@@ -61,6 +61,12 @@ BOOST_PYTHON_MODULE(xc_base)
       // .def("count", &set_ints::count)
        ;
 
+    const EntProp *(EntProp::*getOwner)(void) const= &EntProp::Owner;
+    class_<EntProp,EntProp *, bases<EntCmd>, boost::noncopyable  >("EntProp", no_init)
+      //.add_property("verbosityLevel", make_function( &EntProp::GetNivelVerborrea, return_internal_reference<>() ), "returns verbosity level.")
+      .add_property("owner", make_function( getOwner, return_internal_reference<>() ), "returns object's owner (container).")
+      ;
+
     class_<EntCmd>("EntCmd")
       .add_property("logFileName", make_function( &EntCmd::getLogFileName, return_internal_reference<>() ), &EntCmd::setLogFileName)
       .add_property("errFileName", make_function( &EntCmd::getErrFileName, return_internal_reference<>() ), &EntCmd::setErrFileName)
