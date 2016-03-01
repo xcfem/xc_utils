@@ -61,7 +61,7 @@ class SVD3d: public VDesliz3d
     Recta3d RectaMomNulo(const double &tol= sqrt_mchne_eps_dbl) const;
     Pos3d PuntoAplic(const Plano3d &p) const;
 
-    SVD3d ReduceA(const Pos3d &Q);
+    SVD3d ReduceA(const Pos3d &Q) const;
 
     SVD3d &operator+=(const VDesliz3d &v);
     SVD3d &operator-=(const VDesliz3d &v);

@@ -179,7 +179,7 @@ bool SVD3d::ExisteRectaMomNulo(const double &tol) const
     return true;
   }
 
-SVD3d SVD3d::ReduceA(const Pos3d &Q)
+SVD3d SVD3d::ReduceA(const Pos3d &Q) const
   { return SVD3d(Q,getResultante(),getMomento(Q)); }
 
 SVD3d &SVD3d::operator+=(const VDesliz3d &v)
