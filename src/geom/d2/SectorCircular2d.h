@@ -57,6 +57,7 @@ class SectorCircular2d : public Circulo2d
     inline double &Theta2(void)
       { return theta2; }
     double Angulo(const Pos2d &p) const;
+    double getLambda(const Pos2d &) const;
     double AnguloComprendido(void) const;
     virtual GEOM_FT LongitudArco(void) const;
     virtual GEOM_FT Longitud(void) const;

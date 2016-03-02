@@ -135,6 +135,11 @@ Pos2d SectorCircular2d::PMed(void) const
 double SectorCircular2d::Angulo(const Pos2d &p) const
   { return Circulo2d::Angulo(p)-theta1; }
 
+//! @brief Returns the parameter of the point in the arc (distance to the arc's first point measured over the arc)
+double SectorCircular2d::getLambda(const Pos2d &p) const
+  { return Angulo(p)*Radio(); }
+
+
 //! @brief Devuelve el ángulo comprendido por el sector.
 double SectorCircular2d::AnguloComprendido(void) const
   { return theta2-theta1; }
