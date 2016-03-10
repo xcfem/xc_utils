@@ -25,31 +25,31 @@
 #include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/loadCombinations/coeffs/GammaF.h"
-#include "xc_utils/src/loadCombinations/coeffs/MapCoefsPsi.h"
+#include "xc_utils/src/loadCombinations/coeffs/PsiCoeffsMap.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
 
 //! @brief Constructor por defecto.
 cmb_acc::VRAccion::VRAccion(const std::string &n, const std::string &descrip,ListaVRAccion *fam)
-  : Accion(n,descrip), acc_familia(fam), coefs_psi(&MapCoefsPsi::getCoefsPorDefecto()) {}
+  : Accion(n,descrip), acc_familia(fam), coefs_psi(&PsiCoeffsMap::getCoefsPorDefecto()) {}
 
 //! @brief Constructor por defecto.
 cmb_acc::VRAccion::VRAccion(const Accion &a,ListaVRAccion *fam,const std::string &nmb_coefs)
-  : Accion(a), acc_familia(fam), coefs_psi(&MapCoefsPsi::getCoefsPorDefecto()) 
+  : Accion(a), acc_familia(fam), coefs_psi(&PsiCoeffsMap::getCoefsPorDefecto()) 
   {
-    setCoefsPsi(nmb_coefs);
+    setPsiCoeffs(nmb_coefs);
   }
 
 //! @brief Asigna los coeficientes de simultaneidad de la acción.
-void cmb_acc::VRAccion::setCoefsPsi(const std::string &nmb_coefs)
+void cmb_acc::VRAccion::setPsiCoeffs(const std::string &nmb_coefs)
   {
     if(!nmb_coefs.empty())
       {
-        const CoefsPsi *tmp=NULL;
+        const PsiCoeffs *tmp=NULL;
         if(acc_familia)
-          tmp= acc_familia->getPtrCoefsPsi()->getPtrCoefs(nmb_coefs);
+          tmp= acc_familia->getPtrPsiCoeffs()->getPtrCoefs(nmb_coefs);
         else
-          std::cerr << "VRAccion::setCoefsPsi; el puntero a la familia de acciones no está asignado." << std::endl;
+          std::cerr << "VRAccion::setPsiCoeffs; el puntero a la familia de acciones no está asignado." << std::endl;
         if(tmp)
            coefs_psi= tmp;
       }
@@ -64,9 +64,9 @@ bool cmb_acc::VRAccion::procesa_comando(CmdStatus &status)
     if(verborrea>2)
       std::clog << str_err << std::endl;
 
-    if(cmd == "setCoefsPsi")
+    if(cmd == "setPsiCoeffs")
       {
-        setCoefsPsi(interpretaString(status.GetString()));
+        setPsiCoeffs(interpretaString(status.GetString()));
         return true;
       }
     else

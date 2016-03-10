@@ -23,7 +23,7 @@
 
 #include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
 #include "xc_utils/src/loadCombinations/actions/FamiliaAcciones.h"
-#include "xc_utils/src/loadCombinations/load_combinations/Variacion.h"
+#include "xc_utils/src/loadCombinations/comb_analysis/Variation.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
@@ -76,15 +76,15 @@ bool cmb_acc::ListaVRAccion::procesa_comando(CmdStatus &status)
       return EntCmd::procesa_comando(status);
   }
 
-//! \fn cmb_acc::ListaVRAccion::FormaProdEscalar(const Variacion &v,short int r,const int &d,const short int &rr) const
+//! \fn cmb_acc::ListaVRAccion::FormaProdEscalar(const Variation &v,short int r,const int &d,const short int &rr) const
 //! @brief Forma producto escalar.
 //!
-//! @param v: Variación a sumar.
+//! @param v: Variation a sumar.
 //! @param r: Valor representativo para el caso general (r= -1 -> valor característico,r= 0 -> valor de combinación
 //! r= 1 -> valor frecuente, r= 2 -> valor cuasipermanente).
 //! @param d: Índice de la acción determinante (si no hay acción determinante d=-1).
 //! @param rr: Valor representativo a emplear para la acción determinante.
-cmb_acc::Accion cmb_acc::ListaVRAccion::FormaProdEscalar(const Variacion &var,short int r,const int &d,const short int &rr) const
+cmb_acc::Accion cmb_acc::ListaVRAccion::FormaProdEscalar(const Variation &var,short int r,const int &d,const short int &rr) const
   {
     const size_t num_acciones= size();
     Accion retval=Accion::NULA(); //Inicializar a cero.
@@ -102,14 +102,14 @@ cmb_acc::Accion cmb_acc::ListaVRAccion::FormaProdEscalar(const Variacion &var,sh
   }
 
 //! @brief Devuelve un puntero a la tabla de coeficientes de simultaneidad.
-const cmb_acc::MapCoefsPsi *cmb_acc::ListaVRAccion::getPtrCoefsPsi(void) const
+const cmb_acc::PsiCoeffsMap *cmb_acc::ListaVRAccion::getPtrPsiCoeffs(void) const
   {
     const FamiliaAcciones *tmp= dynamic_cast<const FamiliaAcciones *>(Owner());
     if(tmp)
-      return tmp->getPtrCoefsPsi();
+      return tmp->getPtrPsiCoeffs();
     else
       {
-	std::cerr << "ListaVRAccion::getPtrCoefsPsi; no se encontró el objeto propietario de éste." << std::endl;
+	std::cerr << "ListaVRAccion::getPtrPsiCoeffs; no se encontró el objeto propietario de éste." << std::endl;
         return NULL;
       }
   }

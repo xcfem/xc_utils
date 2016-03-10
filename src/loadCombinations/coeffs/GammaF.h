@@ -30,8 +30,8 @@
 
 
 namespace cmb_acc{
-class Variacion;
-class Variaciones;
+class Variation;
+class Variations;
 class ListaVRAccion;
 
 //! @ingroup CMBACC
@@ -47,7 +47,7 @@ class GammaFELS: public EntCmd
     //! @brief Lee el objeto desde archivo.
     virtual bool procesa_comando(CmdStatus &status);
     friend class GammaF;
-    Variacion Coefs(void) const;
+    Variation Coefs(void) const;
   public:
     //! @brief Constructor por defecto. Supone control normal.
     GammaFELS(const float &fav=0.0,const float &desfav=1.0);
@@ -73,9 +73,9 @@ class GammaFELU: public GammaFELS
     virtual bool procesa_comando(CmdStatus &status);
     friend class GammaF;
     //! @brief Devuelve los coeficientes de ponderación correspondientes a situación persistente o transitoria.
-    Variacion CoefsPT(void) const;
+    Variation CoefsPT(void) const;
     //! @brief Devuelve los coeficientes de ponderación correspondientes a situación accidental o sísmica.
-    Variacion CoefsAcc(void) const;
+    Variation CoefsAcc(void) const;
   public:
     //! @brief Constructor por defecto. Supone control normal.
     GammaFELU(const float &fav=0.0,const float &desfav=1.8,const float &fav_acc=0.0,const float &desfav_acc=1.0);
@@ -97,7 +97,7 @@ class GammaF: public EntCmd
     GammaFELS gammaf_els; //!< Coeficientes de ponderación en estados límite de servicio.
   protected:
     virtual bool procesa_comando(CmdStatus &status);
-    Variacion CoefsEls(void) const;
+    Variation CoefsEls(void) const;
   public:
     GammaF(const GammaFELU &gf_elu=GammaFELU(), const GammaFELS &gf_els=GammaFELS());
 
@@ -106,7 +106,7 @@ class GammaF: public EntCmd
     inline const GammaFELS &getGammaFELS(void) const
       { return gammaf_els; }
     //! @brief Devuelve los coeficientes de ponderación correspondientes a estado límite de servicio.
-    Variaciones calcula_variaciones(const bool &elu,const bool &sit_accidental,const int &d,const ListaVRAccion &) const;
+    Variations calcula_variations(const bool &elu,const bool &sit_accidental,const int &d,const ListaVRAccion &) const;
     virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 

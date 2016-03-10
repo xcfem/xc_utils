@@ -19,18 +19,18 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Variaciones.cxx
+//Variations.cxx
 
-#include "Variaciones.h"
+#include "Variations.h"
 #include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
 
 //! @brief Constructor.
-cmb_acc::Variaciones::Variaciones(const size_t &sz,const Variacion &v)
-  : std::vector<Variacion>(sz,v) {}
+cmb_acc::Variations::Variations(const size_t &sz,const Variation &v)
+  : std::vector<Variation>(sz,v) {}
 
-//! \fn void cmb_acc::Variaciones::print(std::ostream &os) const
-//! @brief Imprime las variaciones.
-void cmb_acc::Variaciones::print(std::ostream &os) const
+//! \fn void cmb_acc::Variations::print(std::ostream &os) const
+//! @brief Imprime las variations.
+void cmb_acc::Variations::print(std::ostream &os) const
   {
     if(size()<1) return;
     const_iterator i= begin();
@@ -41,45 +41,45 @@ void cmb_acc::Variaciones::print(std::ostream &os) const
     os << ']';
   }
 
-//! \fn cmb_acc::Variaciones cmb_acc::Variaciones::primera_combinacion(const Variacion &v)
+//! \fn cmb_acc::Variations cmb_acc::Variations::primera_combinacion(const Variation &v)
 //! @brief Devuelve la primera combinación.
-cmb_acc::Variaciones cmb_acc::Variaciones::primera_combinacion(const Variacion &v)
+cmb_acc::Variations cmb_acc::Variations::primera_combinacion(const Variation &v)
   {
     const size_t sz= v.size();
-    Variaciones retval(sz);
+    Variations retval(sz);
     for(size_t i=0;i<sz;i++)
-      retval[i]= Variacion(1,v[i]);
+      retval[i]= Variation(1,v[i]);
     return retval;
   }
 
-//! \fn cmb_acc::Variaciones cmb_acc::Variaciones::prod_cartesiano(const Variaciones &a,const Variaciones &b)
-//! @brief Devuelve el producto cartesiano de las variaciones que se pasan como parámetro.
-cmb_acc::Variaciones cmb_acc::Variaciones::prod_cartesiano(const Variaciones &a,const Variaciones &b,const ListaVRAccion &lvr)
+//! \fn cmb_acc::Variations cmb_acc::Variations::prod_cartesiano(const Variations &a,const Variations &b)
+//! @brief Devuelve el producto cartesiano de las variations que se pasan como parámetro.
+cmb_acc::Variations cmb_acc::Variations::prod_cartesiano(const Variations &a,const Variations &b,const ListaVRAccion &lvr)
   {
     const size_t sz_a= a.size();
     const size_t sz_b= b.size();
-    std::deque<Variacion> tmp;
+    std::deque<Variation> tmp;
     for(size_t i=0;i<sz_a;i++)
       for(size_t j=0;j<sz_b;j++)
         {
-          Variacion tmp_var= Variacion::concat(a[i],b[j]);
+          Variation tmp_var= Variation::concat(a[i],b[j]);
           tmp.push_back(tmp_var);
         }
     const size_t sz= tmp.size();
-    Variaciones retval(sz);
+    Variations retval(sz);
     for(size_t i= 0;i<sz;i++)
       retval[i]= tmp[i];
     return retval;
   }
 
-//! \fn cmb_acc::Variaciones cmb_acc::Variaciones::n_esima_combinacion(const Variacion &v,const size_t &n)
+//! \fn cmb_acc::Variations cmb_acc::Variations::n_esima_combinacion(const Variation &v,const size_t &n)
 //! @brief Devuelve la enésima combinación.
-cmb_acc::Variaciones cmb_acc::Variaciones::n_esima_combinacion(const Variacion &v,const int &d,const ListaVRAccion &lvr)
+cmb_acc::Variations cmb_acc::Variations::n_esima_combinacion(const Variation &v,const int &d,const ListaVRAccion &lvr)
   {
     const size_t n= lvr.size();
-    if(n<1) return Variaciones();
-    Variaciones primera= primera_combinacion(v);
-    Variaciones retval(primera);
+    if(n<1) return Variations();
+    Variations primera= primera_combinacion(v);
+    Variations retval(primera);
     if(n==1) return retval;
     if(primera.size()>1) //Hay más de un coeficiente para combinar.
       {
@@ -87,7 +87,7 @@ cmb_acc::Variaciones cmb_acc::Variaciones::n_esima_combinacion(const Variacion &
           retval= prod_cartesiano(primera,retval,lvr);
         if(d>=0) //Seleccionamos aquellos cuya acción dominante tiene coeficiente no nulo.
           {
-            std::deque<Variacion> tmp;
+            std::deque<Variation> tmp;
             const std::size_t sz= retval.size();
             for(size_t i=0;i<sz;i++)
               {
@@ -104,23 +104,23 @@ cmb_acc::Variaciones cmb_acc::Variaciones::n_esima_combinacion(const Variacion &
       {
         if(d>=0) //Hay una acción dominante.
           {
-            retval= Variaciones(1,Variacion(n,0.0));
+            retval= Variations(1,Variation(n,0.0));
             retval[0][d]= primera[0][0];
           }
         else
-          retval= Variaciones(1,Variacion(n,primera[0][0]));
+          retval= Variations(1,Variation(n,primera[0][0]));
       }
     if(retval.empty())
-      std::cerr << "¡Ojo! cmb_acc::Variaciones::n_esima_combinacion: no se obtuvieron combinaciones." << std::endl;
+      std::cerr << "¡Ojo! cmb_acc::Variations::n_esima_combinacion: no se obtuvieron combinaciones." << std::endl;
     return retval;
   }
 
-//! @brief Calculas las variaciones que pueden formarse.
-cmb_acc::Variaciones cmb_acc::Variaciones::Calcula(const Variacion &v,const int &d,const ListaVRAccion &lvr)
+//! @brief Calculas las variations que pueden formarse.
+cmb_acc::Variations cmb_acc::Variations::Calcula(const Variation &v,const int &d,const ListaVRAccion &lvr)
   { return n_esima_combinacion(v,d,lvr); }
 
 //! @brief Operador salida.
-std::ostream &cmb_acc::operator<<(std::ostream &os,const Variaciones &vs)
+std::ostream &cmb_acc::operator<<(std::ostream &os,const Variations &vs)
   {
     vs.print(os);
     return os;

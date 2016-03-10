@@ -19,14 +19,14 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Variacion.cxx
+//Variation.cxx
 
-#include "Variacion.h"
+#include "Variation.h"
 #include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
 
-//! \fn void cmb_acc::Variacion::print(std::ostream &os) const
+//! \fn void cmb_acc::Variation::print(std::ostream &os) const
 //! @brief Imprime la variación.
-void cmb_acc::Variacion::print(std::ostream &os) const
+void cmb_acc::Variation::print(std::ostream &os) const
   {
     if(size()<1) return;
     const_iterator i= begin();
@@ -37,14 +37,14 @@ void cmb_acc::Variacion::print(std::ostream &os) const
     os << ']';
   }
 
-//! \fn cmb_acc::Variacion cmb_acc::Variacion::concat(const cmb_acc::Variacion &a,const cmb_acc::Variacion &b)
+//! \fn cmb_acc::Variation cmb_acc::Variation::concat(const cmb_acc::Variation &a,const cmb_acc::Variation &b)
 //! @brief Concatena a la variación a la variación b
-cmb_acc::Variacion cmb_acc::Variacion::concat(const cmb_acc::Variacion &a,const cmb_acc::Variacion &b)
+cmb_acc::Variation cmb_acc::Variation::concat(const cmb_acc::Variation &a,const cmb_acc::Variation &b)
   {
     const size_t sz_a= a.size();
     const size_t sz_b= b.size();
     const size_t sz= sz_a+sz_b;
-    Variacion retval(sz);
+    Variation retval(sz);
     for(size_t i=0;i<sz_a;i++)
       retval[i]= a[i];
     for(size_t i=0;i<sz_b;i++)
@@ -54,7 +54,7 @@ cmb_acc::Variacion cmb_acc::Variacion::concat(const cmb_acc::Variacion &a,const 
 
 
 //! @brief Devuelve verdadero si las acciones que contiene la variaciónes son compatibles
-bool cmb_acc::Variacion::compatible(const ListaVRAccion &lvr)
+bool cmb_acc::Variation::compatible(const ListaVRAccion &lvr)
   {
     const size_t sz= size();
     for(register size_t i=0;i<sz;i++)
@@ -65,9 +65,9 @@ bool cmb_acc::Variacion::compatible(const ListaVRAccion &lvr)
     return true;
   }
 
-//! \fn std::ostream &cmb_acc::operator<<(std::ostream &os,const cmb_acc::Variacion &v)
+//! \fn std::ostream &cmb_acc::operator<<(std::ostream &os,const cmb_acc::Variation &v)
 //! @brief Operador salida.
-std::ostream &cmb_acc::operator<<(std::ostream &os,const cmb_acc::Variacion &v)
+std::ostream &cmb_acc::operator<<(std::ostream &os,const cmb_acc::Variation &v)
   {
     v.print(os);
     return os;

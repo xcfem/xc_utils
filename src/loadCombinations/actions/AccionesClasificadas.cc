@@ -22,13 +22,13 @@
 //AccionesClasificadas.cxx
 
 #include "AccionesClasificadas.h"
-#include "xc_utils/src/loadCombinations/load_combinations/LoadCombinationVector.h"
+#include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 
 //! \fn cmb_acc::AccionesClasificadas::AccionesClasificadas(void)
 //! @brief Constructor por defecto.
-cmb_acc::AccionesClasificadas::AccionesClasificadas(const MapCoefsPsi &coefs)
+cmb_acc::AccionesClasificadas::AccionesClasificadas(const PsiCoeffsMap &coefs)
   : G("Permanentes",GammaF(GammaFELU(1.0,1.5,1.0,1.0),GammaFELS(1.0,1.0))), //Coeficientes de ponderación por defecto 
                                                                             //para acciones permanentes.
     G_aster("Permanentes val. no cte."), 

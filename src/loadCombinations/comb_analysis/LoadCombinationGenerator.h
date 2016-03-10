@@ -19,44 +19,44 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//VRAccion.hxx
-//Valores representativos de una acción.
+//LoadCombinationGenerator.h
 
-#ifndef VRACCION_H
-#define VRACCION_H
+#ifndef LOADCOMBINATIONGENERATOR_H
+#define LOADCOMBINATIONGENERATOR_H
 
-#include "Accion.h"
+#include "MapPondAcciones.h"
 
 namespace cmb_acc{
 
-class GammaF;
-class PsiCoeffs;
+class LoadCombinations;
 
 //! @ingroup CMBACC
 //
-//! @brief Valores representativos de una acción.
-class VRAccion: public Accion
+//! @brief Objeto encargado de generar y gestionar las combinaciones.
+class LoadCombinationGenerator: public EntCmd
   {
   private:
-    ListaVRAccion *acc_familia; //!< Contenedor de la familia de acciones de la que ésta forma parte.
-    const PsiCoeffs *coefs_psi; //!< Coeficientes de simultaneidad para valor de combinación.
-
-    //! @brief Devuelve el coeficiente de combinación cuyo índice se pasa como parámetro.
-    inline double getPsi(short int r) const;
+    MapPondAcciones pond_acciones;
+    LoadCombinations *combinaciones;
 
   protected:
     virtual bool procesa_comando(CmdStatus &status);
-
-    friend class ListaVRAccion;
-    //! @brief Constructor por defecto.
-    VRAccion(const std::string &n="", const std::string &descrip="",ListaVRAccion *fam= NULL);
-    VRAccion(const Accion &a,ListaVRAccion *fam= NULL,const std::string &nmb_coefs= "");
   public:
-    Accion Valor(short int r) const;
-    void setPsiCoeffs(const std::string &);
+    LoadCombinationGenerator(EntCmd *owr= NULL);
+
+    AccionesClasificadas *defPonderacion(const std::string &,const PsiCoeffsMap &coefs= PsiCoeffsMap());
+    VRAccion &inserta(const std::string &pond,const std::string &,const Accion &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
+    void genera(void);
+    inline MapPondAcciones &getPondAcciones(void)
+      { return pond_acciones; }
+    inline void setPondAcciones(const MapPondAcciones &pa)
+      { pond_acciones= pa; }
+    inline LoadCombinations *getLoadCombinations(void)
+      { return combinaciones; }
+
     virtual any_const_ptr GetProp(const std::string &cod) const;
   };
-
 } //fin namespace nmb_acc.
+
 
 #endif

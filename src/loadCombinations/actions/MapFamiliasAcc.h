@@ -33,7 +33,7 @@ namespace cmb_acc {
 
 class FamiliaAcciones;
 class LoadCombinationVector;
-class MapCoefsPsi;
+class PsiCoeffsMap;
 class Accion;
 class VRAccion;
 class AccionesClasificadas;
@@ -68,7 +68,7 @@ class MapFamiliasAcc: public EntConNmb
     LoadCombinationVector GetLoadCombinations(const bool &elu,const bool &sit_accidental) const;
     virtual any_const_ptr GetProp(const std::string &cod) const;
     size_t getNumAcciones(void) const;
-    const MapCoefsPsi *getPtrCoefsPsi(void) const;
+    const PsiCoeffsMap *getPtrPsiCoeffs(void) const;
     bool Vacia(void) const;
     virtual ~MapFamiliasAcc(void);
   };

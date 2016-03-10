@@ -27,14 +27,14 @@
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/docstring_options.hpp>
 #include "xc_utils/src/loadCombinations/coeffs/GammaF.h"
-#include "xc_utils/src/loadCombinations/coeffs/CoefsPsi.h"
+#include "xc_utils/src/loadCombinations/coeffs/PsiCoeffs.h"
 #include "xc_utils/src/loadCombinations/actions/Accion.h"
 #include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
 #include "xc_utils/src/loadCombinations/actions/FamiliaAcciones.h"
 #include "xc_utils/src/loadCombinations/actions/AccionesClasificadas.h"
-#include "xc_utils/src/loadCombinations/load_combinations/LoadCombinationVector.h"
-#include "xc_utils/src/loadCombinations/load_combinations/LoadCombinations.h"
-#include "xc_utils/src/loadCombinations/load_combinations/LoadCombinationGenerator.h"
+#include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
+#include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinations.h"
+#include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationGenerator.h"
 
 BOOST_PYTHON_MODULE(loadCombinations)
   {
@@ -48,6 +48,6 @@ BOOST_PYTHON_MODULE(loadCombinations)
 
 #include "coeffs/python_interface.tcc"
 #include "actions/python_interface.tcc"
-#include "load_combinations/python_interface.tcc"
+#include "comb_analysis/python_interface.tcc"
   }
 

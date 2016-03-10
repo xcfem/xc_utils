@@ -27,7 +27,7 @@
 
 #include "FamiliaAcciones.h"
 #include "MapFamiliasAcc.h"
-#include "xc_utils/src/loadCombinations/coeffs/MapCoefsPsi.h"
+#include "xc_utils/src/loadCombinations/coeffs/PsiCoeffsMap.h"
 
 namespace cmb_acc{
 //! @ingroup CMBACC
@@ -41,7 +41,7 @@ class AccionesClasificadas: public EntCmd
     FamiliaAcciones Q; //!< Acciones variables.
     FamiliaAcciones A; //!< Acciones accidentales.
     FamiliaAcciones AS; //!< Acciones sísmicas.
-    MapCoefsPsi coefs_psi; //!< Coeficientes de simultaneidad de las acciones.
+    PsiCoeffsMap coefs_psi; //!< Coeficientes de simultaneidad de las acciones.
 
     LoadCombinationVector GetLoadCombinationsG(const bool &elu,const bool &sit_accidental) const;
     LoadCombinationVector GetLoadCombinationsG_aster(const bool &elu,const bool &sit_accidental) const;
@@ -57,7 +57,7 @@ class AccionesClasificadas: public EntCmd
     void for_each_accion(CmdStatus &,const std::string &);
     virtual bool procesa_comando(CmdStatus &status);
   public:
-    AccionesClasificadas(const MapCoefsPsi &coefs= MapCoefsPsi());
+    AccionesClasificadas(const PsiCoeffsMap &coefs= PsiCoeffsMap());
     inline virtual ~AccionesClasificadas(void) {}
 
     VRAccion &inserta(const std::string &,const Accion &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
@@ -84,9 +84,9 @@ class AccionesClasificadas: public EntCmd
     LoadCombinationVector GetCuasiPermanentes(void) const;
     LoadCombinationVector GetCombELS(void) const;
 
-    const MapCoefsPsi *getPtrCoefsPsi(void) const
+    const PsiCoeffsMap *getPtrPsiCoeffs(void) const
       { return &coefs_psi; }
-    const MapCoefsPsi &getCoefsPsi(void) const
+    const PsiCoeffsMap &getPsiCoeffs(void) const
       { return coefs_psi; }
     virtual any_const_ptr GetProp(const std::string &cod) const;
   };

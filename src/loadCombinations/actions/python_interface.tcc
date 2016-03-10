@@ -55,12 +55,12 @@ class_<MapFamiliasAcc, bases<EntConNmb>, boost::noncopyable >("MapFamiliasAcc", 
   ;
 
 class_<AccionesClasificadas, bases<EntCmd> >("AccionesClasificadas")
-  .def(init<MapCoefsPsi>())
+  .def(init<PsiCoeffsMap>())
   .add_property("permanentActions", make_function( &AccionesClasificadas::getAccionesPermanentes, return_internal_reference<>() ), &AccionesClasificadas::setAccionesPermanentes)
   .add_property("ncPermanentActions", make_function( &AccionesClasificadas::getAccionesPermanentesNC, return_internal_reference<>() ), &AccionesClasificadas::setAccionesPermanentesNC)
   .add_property("variableActions", make_function( &AccionesClasificadas::getAccionesVariables, return_internal_reference<>() ), &AccionesClasificadas::setAccionesVariables)
   .add_property("accidentalActions", make_function( &AccionesClasificadas::getAccionesAccidentales, return_internal_reference<>() ), &AccionesClasificadas::setAccionesAccidentales)
   .add_property("seismicActions", make_function( &AccionesClasificadas::getAccionesSismicas, return_internal_reference<>() ), &AccionesClasificadas::setAccionesSismicas)
-  .def("getCoefsPsi", &AccionesClasificadas::getCoefsPsi, return_value_policy<copy_const_reference>())
+  .def("getPsiCoeffs", &AccionesClasificadas::getPsiCoeffs, return_value_policy<copy_const_reference>())
 .def("insert", make_function(&AccionesClasificadas::inserta,return_internal_reference<>()))
   ;

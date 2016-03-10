@@ -26,7 +26,7 @@
 #include "FamiliaAcciones.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
-#include "xc_utils/src/loadCombinations/load_combinations/LoadCombinationVector.h"
+#include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
 #include "AccionesClasificadas.h"
 
 
@@ -98,14 +98,14 @@ cmb_acc::MapFamiliasAcc &cmb_acc::MapFamiliasAcc::operator=(const MapFamiliasAcc
   }
 
 //! @brief Devuelve un puntero a la tabla de coeficientes de simultaneidad.
-const cmb_acc::MapCoefsPsi *cmb_acc::MapFamiliasAcc::getPtrCoefsPsi(void) const
+const cmb_acc::PsiCoeffsMap *cmb_acc::MapFamiliasAcc::getPtrPsiCoeffs(void) const
   {
     const AccionesClasificadas *tmp= dynamic_cast<const AccionesClasificadas *>(Owner());
     if(tmp)
-      return tmp->getPtrCoefsPsi();
+      return tmp->getPtrPsiCoeffs();
     else
       {
-	std::cerr << "MapFamiliasAcc::getPtrCoefsPsi; no se encontró el objeto propietario de éste." << std::endl;
+	std::cerr << "MapFamiliasAcc::getPtrPsiCoeffs; no se encontró el objeto propietario de éste." << std::endl;
         return NULL;
       }
   }

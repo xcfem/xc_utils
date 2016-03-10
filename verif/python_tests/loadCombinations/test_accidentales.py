@@ -2,13 +2,13 @@
 
 import xc_base
 import loadCombinations
-from loadCombinationUtils import ehe_ctr_intenso
+from loadCombinationUtils import ehe
 
 dbName= "/tmp/test_accidentales.db"
 tbName= "combinaciones"
 
 lcg= loadCombinations.LoadCombGenerator()
-lcg.defPonderacion("EHEIntenso",ehe_ctr_intenso.coefs_psi_EHE)
+lcg.defPonderacion("EHEIntenso",ehe.coefs_psi_EHE)
 lcg.insert("EHEIntenso","accidentales",loadCombinations.Accion("A1","Hipot. 1"),"","")
 lcg.insert("EHEIntenso","accidentales",loadCombinations.Accion("A2","Hipot. 2"),"","")
 lcg.insert("EHEIntenso","accidentales",loadCombinations.Accion("A3","Hipot. 3"),"","")

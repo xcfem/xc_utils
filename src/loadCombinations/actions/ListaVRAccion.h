@@ -30,8 +30,8 @@
 #include "VRAccion.h"
 
 namespace cmb_acc{
-class Variacion;
-class MapCoefsPsi;
+class Variation;
+class PsiCoeffsMap;
 class FamiliaAcciones;
 
 //! @ingroup CMBACC
@@ -39,7 +39,7 @@ class FamiliaAcciones;
 //! @brief Lista de valores representativos de las acciones (objetos VRAccion).
 class ListaVRAccion: public std::deque<VRAccion>, public EntCmd
   {
-    friend class Variacion;
+    friend class Variation;
     friend class FamiliaAcciones;
 
     VRAccion &push_back(const VRAccion &a);
@@ -52,8 +52,8 @@ class ListaVRAccion: public std::deque<VRAccion>, public EntCmd
     inline Accion GetValor(const size_t &i,short int r) const
       { return (*this)[i].Valor(r); }
     VRAccion &inserta(const Accion &,const std::string &);
-    Accion FormaProdEscalar(const Variacion &v,short int r,const int &d=-1,const short int &rr=-1) const;
-    const MapCoefsPsi *getPtrCoefsPsi(void) const;
+    Accion FormaProdEscalar(const Variation &v,short int r,const int &d=-1,const short int &rr=-1) const;
+    const PsiCoeffsMap *getPtrPsiCoeffs(void) const;
     void Print(std::ostream &os) const;
     virtual any_const_ptr GetProp(const std::string &cod) const;
   };

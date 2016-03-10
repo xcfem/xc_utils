@@ -23,8 +23,8 @@
 
 #include "FamiliaAcciones.h"
 #include "AccionesClasificadas.h"
-#include "xc_utils/src/loadCombinations/load_combinations/Variaciones.h"
-#include "xc_utils/src/loadCombinations/load_combinations/LoadCombinationVector.h"
+#include "xc_utils/src/loadCombinations/comb_analysis/Variations.h"
+#include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
 #include "MapFamiliasAcc.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "Accion.h"
@@ -73,14 +73,14 @@ bool cmb_acc::FamiliaAcciones::procesa_comando(CmdStatus &status)
   }
 
 //! @brief Devuelve un apuntador a los coeficientes que aplican para esta familia.
-const cmb_acc::MapCoefsPsi *cmb_acc::FamiliaAcciones::getPtrCoefsPsi(void) const
+const cmb_acc::PsiCoeffsMap *cmb_acc::FamiliaAcciones::getPtrPsiCoeffs(void) const
   {
     const AccionesClasificadas *tmp= dynamic_cast<const AccionesClasificadas *>(Owner());
     if(tmp)
-      return tmp->getPtrCoefsPsi();
+      return tmp->getPtrPsiCoeffs();
     else
       {
-	std::cerr << "FamiliaAcciones::getPtrCoefsPsi; no se encontró el objeto propietario de éste." << std::endl;
+	std::cerr << "FamiliaAcciones::getPtrPsiCoeffs; no se encontró el objeto propietario de éste." << std::endl;
         return NULL;
       }
   }
@@ -100,13 +100,13 @@ cmb_acc::VRAccion &cmb_acc::FamiliaAcciones::inserta(const Accion &a,const std::
 //! @param rr: Valor representativo a emplear para la acción dominante.
 cmb_acc::LoadCombinationVector cmb_acc::FamiliaAcciones::GetLoadCombinations(const bool &elu,const bool &sit_accidental,short int r,const int &d,const short int &rr) const
   {
-    Variaciones var= CalculaVariaciones(elu,sit_accidental,d);
-    const size_t num_variaciones= var.size();
-    LoadCombinationVector retval(num_variaciones);
+    Variations var= CalculaVariations(elu,sit_accidental,d);
+    const size_t num_variations= var.size();
+    LoadCombinationVector retval(num_variations);
     FamiliaAcciones *this_no_const= const_cast<FamiliaAcciones *>(this);
-    for(size_t i=0;i<num_variaciones;i++)
+    for(size_t i=0;i<num_variations;i++)
       {
-        const Variacion &v_i= var[i];
+        const Variation &v_i= var[i];
         retval[i]= acciones.FormaProdEscalar(v_i,r,d,rr);
         retval[i].set_owner(this_no_const);
       }
@@ -115,10 +115,10 @@ cmb_acc::LoadCombinationVector cmb_acc::FamiliaAcciones::GetLoadCombinations(con
     return retval;
   }
 
-//! \fn cmb_acc::FamiliaAcciones::CalculaVariaciones(const bool &elu,const bool &sit_accidental) const
+//! \fn cmb_acc::FamiliaAcciones::CalculaVariations(const bool &elu,const bool &sit_accidental) const
 //! @brief ??
-cmb_acc::Variaciones cmb_acc::FamiliaAcciones::CalculaVariaciones(const bool &elu,const bool &sit_accidental,const int &d) const
-  { return gammaf.calcula_variaciones(elu,sit_accidental,d,acciones); }
+cmb_acc::Variations cmb_acc::FamiliaAcciones::CalculaVariations(const bool &elu,const bool &sit_accidental,const int &d) const
+  { return gammaf.calcula_variations(elu,sit_accidental,d,acciones); }
 
 //! \fn any_const_ptr cmb_acc::FamiliaAcciones::GetProp(const std::string &cod) const
 //! @brief Devuelve la propiedad del objeto cuyo código se pasa como parámetro.

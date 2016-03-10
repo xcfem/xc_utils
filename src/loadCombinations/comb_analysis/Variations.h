@@ -19,14 +19,14 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Variaciones.hxx
-//Conjunto de las posibles variaciones de dos elementos
+//Variations.hxx
+//Conjunto de las posibles variations de dos elementos
 //(gamma_f_fav y gamma_f_desfav) tomados de n en n.
 
-#ifndef VARIACIONES_HXX
-#define VARIACIONES_HXX
+#ifndef VARIATIONS_HXX
+#define VARIATIONS_HXX
 
-#include "Variacion.h"
+#include "Variation.h"
 
 namespace cmb_acc{
 
@@ -34,20 +34,20 @@ class ListaVRAccion;
 
 //! @ingroup CMBACC
 //
-//! @brief Conjunto de las posibles variaciones de dos elementos (gamma_f_fav y gamma_f_desfav) tomados de n en n.
-class Variaciones: public std::vector<Variacion>
+//! @brief Conjunto de las posibles variations de dos elementos (gamma_f_fav y gamma_f_desfav) tomados de n en n.
+class Variations: public std::vector<Variation>
   {
     void print(std::ostream &os) const;
-    static Variaciones primera_combinacion(const Variacion &v);
-    static Variaciones prod_cartesiano(const Variaciones &a,const Variaciones &b,const ListaVRAccion &lvr);
-    static Variaciones n_esima_combinacion(const Variacion &v,const int &d,const ListaVRAccion &lvr);
+    static Variations primera_combinacion(const Variation &v);
+    static Variations prod_cartesiano(const Variations &a,const Variations &b,const ListaVRAccion &lvr);
+    static Variations n_esima_combinacion(const Variation &v,const int &d,const ListaVRAccion &lvr);
   public:
-    Variaciones(const size_t &sz=0,const Variacion &v=Variacion());
-    static Variaciones Calcula(const Variacion &v,const int &d,const ListaVRAccion &lvr);
-    friend std::ostream &operator<<(std::ostream &os,const Variaciones &vs);
+    Variations(const size_t &sz=0,const Variation &v=Variation());
+    static Variations Calcula(const Variation &v,const int &d,const ListaVRAccion &lvr);
+    friend std::ostream &operator<<(std::ostream &os,const Variations &vs);
   };
 
-    std::ostream &operator<<(std::ostream &os,const Variaciones &vs);
+    std::ostream &operator<<(std::ostream &os,const Variations &vs);
 } //fin namespace nmb_acc.
 
 #endif

@@ -27,7 +27,7 @@
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/utils_any.h"
 #include "boost/regex.hpp"
-#include "xc_utils/src/loadCombinations/load_combinations/LoadCombinationVector.h"
+#include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
 
 //! @brief Elimina el factor que multiplica a la acción en la cadena de
 //! la forma "1.35*A" que se pasa como parámetro.

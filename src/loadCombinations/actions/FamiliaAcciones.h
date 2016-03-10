@@ -29,9 +29,9 @@
 #include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
 
 namespace cmb_acc{
-class Variaciones;
+class Variations;
 class LoadCombinationVector;
-class MapCoefsPsi;
+class PsiCoeffsMap;
 class AccionesClasificadas;
 class MapFamiliasAcc;
 
@@ -58,7 +58,7 @@ class FamiliaAcciones: public EntConNmb
     FamiliaAcciones(const std::string &nmb="",const GammaF &gf=GammaF());
     inline virtual ~FamiliaAcciones(void) {}
     VRAccion &inserta(const Accion &,const std::string &nmb_coefs_psi="");
-    Variaciones CalculaVariaciones(const bool &elu= true,const bool &sit_accidental= false,const int &d=-1) const;
+    Variations CalculaVariations(const bool &elu= true,const bool &sit_accidental= false,const int &d=-1) const;
     //! @brief Devuelve el número de acciones de la familia.
     inline size_t getNumAcciones(void) const
       { return acciones.size(); }
@@ -69,7 +69,7 @@ class FamiliaAcciones: public EntConNmb
       { gammaf= gf; }
     inline GammaF &getGammaF(void)
       { return gammaf; }
-    const MapCoefsPsi *getPtrCoefsPsi(void) const;
+    const PsiCoeffsMap *getPtrPsiCoeffs(void) const;
     LoadCombinationVector GetLoadCombinations(const bool &elu,const bool &sit_accidental,short int r,const int &d=-1,const short int &rr=-1) const;
     virtual any_const_ptr GetProp(const std::string &cod) const;
   };

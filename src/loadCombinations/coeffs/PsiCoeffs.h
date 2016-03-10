@@ -19,44 +19,38 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//LoadCombinationGenerator.h
+//PsiCoeffs.hxx
+//Valores representativos de una acción.
 
-#ifndef LOADCOMBINATIONGENERATOR_H
-#define LOADCOMBINATIONGENERATOR_H
+#ifndef PSICOEFFS_H
+#define PSICOEFFS_H
 
-#include "MapPondAcciones.h"
+#include "xc_utils/src/nucleo/EntCmd.h"
 
 namespace cmb_acc{
 
-class LoadCombinations;
-
 //! @ingroup CMBACC
 //
-//! @brief Objeto encargado de generar y gestionar las combinaciones.
-class LoadCombinationGenerator: public EntCmd
+//! @brief Coeficientes de simultaneidad de una acción.
+class PsiCoeffs: public EntCmd
   {
   private:
-    MapPondAcciones pond_acciones;
-    LoadCombinations *combinaciones;
+    double psi_0; //!< Coeficiente de simultaneidad para obtener el valor de combinación.
+    double psi_1; //!< Coeficiente de simultaneidad para obtener el valor frecuente.
+    double psi_2; //!< Coeficiente de sumultaneidad para obtener el valor cuasipermanente.
 
   protected:
     virtual bool procesa_comando(CmdStatus &status);
+
   public:
-    LoadCombinationGenerator(EntCmd *owr= NULL);
-
-    AccionesClasificadas *defPonderacion(const std::string &,const MapCoefsPsi &coefs= MapCoefsPsi());
-    VRAccion &inserta(const std::string &pond,const std::string &,const Accion &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
-    void genera(void);
-    inline MapPondAcciones &getPondAcciones(void)
-      { return pond_acciones; }
-    inline void setPondAcciones(const MapPondAcciones &pa)
-      { pond_acciones= pa; }
-    inline LoadCombinations *getLoadCombinations(void)
-      { return combinaciones; }
-
+    //! @brief Constructor por defecto.
+    PsiCoeffs(const double &p0= 1.0, const double &p1= 1.0, const double &p2= 1.0)
+      : EntCmd(),psi_0(p0), psi_1(p1), psi_2(p2) {}
+    //! @brief Constructor de copia.
+    const double &getPsi(short int r) const;
     virtual any_const_ptr GetProp(const std::string &cod) const;
   };
-} //fin namespace nmb_acc.
 
+} //fin namespace nmb_acc.
 
 #endif

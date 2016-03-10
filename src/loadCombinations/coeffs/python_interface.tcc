@@ -36,10 +36,10 @@ class_<GammaF, bases<EntCmd> >("GammaF")
   .add_property("getGammaFELU", make_function( &GammaF::getGammaFELU, return_internal_reference<>() ))
   .add_property("getGammaFELS", make_function( &GammaF::getGammaFELS, return_internal_reference<>() ));
 
-class_<CoefsPsi, bases<EntCmd> >("CoefsPsi")
+class_<PsiCoeffs, bases<EntCmd> >("PsiCoeffs")
   .def(init<double, double, double>())
-  .def("getPsi", &CoefsPsi::getPsi, return_value_policy<copy_const_reference>());
+  .def("getPsi", &PsiCoeffs::getPsi, return_value_policy<copy_const_reference>());
 
-class_<MapCoefsPsi, bases<EntCmd> >("DictCoefsPsi")
-  .def("get", &MapCoefsPsi::BuscaCoefs, return_value_policy<copy_const_reference>())
-  .def("insert", &MapCoefsPsi::insert);
+class_<PsiCoeffsMap, bases<EntCmd> >("PsiCoeffsDict")
+  .def("get", &PsiCoeffsMap::BuscaCoefs, return_value_policy<copy_const_reference>())
+  .def("insert", &PsiCoeffsMap::insert);

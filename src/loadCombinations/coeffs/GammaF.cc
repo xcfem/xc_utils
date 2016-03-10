@@ -23,8 +23,8 @@
 //Coeficientes de ponderación de acciones.
 
 #include "GammaF.h"
-#include "xc_utils/src/loadCombinations/load_combinations/Variacion.h"
-#include "xc_utils/src/loadCombinations/load_combinations/Variaciones.h"
+#include "xc_utils/src/loadCombinations/comb_analysis/Variation.h"
+#include "xc_utils/src/loadCombinations/comb_analysis/Variations.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
@@ -53,10 +53,10 @@ bool cmb_acc::GammaFELS::procesa_comando(CmdStatus &status)
   }
 
 //! @brief Devuelve los coeficientes de ponderación correspondientes a situaciones de servicio.
-cmb_acc::Variacion cmb_acc::GammaFELS::Coefs(void) const
+cmb_acc::Variation cmb_acc::GammaFELS::Coefs(void) const
   {
-    if(gamma_f_fav == gamma_f_desfav) return Variacion(1,gamma_f_fav); //Si son iguales devuelve solo uno.
-    Variacion retval(2,0.0); //Coeficientes de ponderación.
+    if(gamma_f_fav == gamma_f_desfav) return Variation(1,gamma_f_fav); //Si son iguales devuelve solo uno.
+    Variation retval(2,0.0); //Coeficientes de ponderación.
     retval[0]= gamma_f_fav; //Favorable.
     retval[1]= gamma_f_desfav; //Desfavorable.
     return retval;
@@ -98,15 +98,15 @@ bool cmb_acc::GammaFELU::procesa_comando(CmdStatus &status)
 
 //! @brief Devuelve los coeficientes de ponderación correspondientes 
 //! a situaciones persistentes o transitorias.
-cmb_acc::Variacion cmb_acc::GammaFELU::CoefsPT(void) const
+cmb_acc::Variation cmb_acc::GammaFELU::CoefsPT(void) const
   { return GammaFELS::Coefs(); }
 
 //! @brief Devuelve los coeficientes de ponderación correspondientes 
 //! a situaciones accidentales o sísmicas.
-cmb_acc::Variacion cmb_acc::GammaFELU::CoefsAcc(void) const
+cmb_acc::Variation cmb_acc::GammaFELU::CoefsAcc(void) const
   {
-    if(gamma_f_fav_acc == gamma_f_desfav_acc) return Variacion(1,gamma_f_fav_acc); //Si son iguales devuelve solo uno.
-    Variacion retval(2,0.0); //Coeficientes de ponderación.
+    if(gamma_f_fav_acc == gamma_f_desfav_acc) return Variation(1,gamma_f_fav_acc); //Si son iguales devuelve solo uno.
+    Variation retval(2,0.0); //Coeficientes de ponderación.
     retval[0]= gamma_f_fav_acc; //Favorable.
     retval[1]= gamma_f_desfav_acc; //Desfavorable.
     return retval;
@@ -150,28 +150,28 @@ bool cmb_acc::GammaF::procesa_comando(CmdStatus &status)
 
 //! @brief Devuelve los coeficientes de ponderación correspondientes 
 //! a estados límite de servicio.
-cmb_acc::Variacion cmb_acc::GammaF::CoefsEls(void) const
+cmb_acc::Variation cmb_acc::GammaF::CoefsEls(void) const
   { return gammaf_els.Coefs(); }
 
-//! \fn cmb_acc::GammaF::calcula_variaciones(const bool &elu,const bool &sit_accidental) const
-//! @brief Calcula las variaciones que pueden formarse con las acciones de la familia.
+//! \fn cmb_acc::GammaF::calcula_variations(const bool &elu,const bool &sit_accidental) const
+//! @brief Calcula las variations que pueden formarse con las acciones de la familia.
 //!
 //! @param n: Número de acciones de la familia.
 //! @param elu: Verdadero si se trata de un estado límite último.
 //! @param sit_accidental: Verdadero si se trata de una situación accidental o sísmica.
 //! @param d: Índice de la acción dominante (-1 si ninguna es dominante).
-cmb_acc::Variaciones cmb_acc::GammaF::calcula_variaciones(const bool &elu,const bool &sit_accidental,const int &d,const ListaVRAccion &lvr) const
+cmb_acc::Variations cmb_acc::GammaF::calcula_variations(const bool &elu,const bool &sit_accidental,const int &d,const ListaVRAccion &lvr) const
   {
     const size_t n= lvr.size();
-    Variaciones retval;
+    Variations retval;
     if(n<1) return retval;
     if(elu)
       if(sit_accidental)
-        retval= Variaciones::Calcula(gammaf_elu.CoefsAcc(),d,lvr);
+        retval= Variations::Calcula(gammaf_elu.CoefsAcc(),d,lvr);
       else
-        retval= Variaciones::Calcula(gammaf_elu.CoefsPT(),d,lvr);
+        retval= Variations::Calcula(gammaf_elu.CoefsPT(),d,lvr);
     else
-      retval= Variaciones::Calcula(gammaf_els.Coefs(),d,lvr);
+      retval= Variations::Calcula(gammaf_els.Coefs(),d,lvr);
     return retval;
   }
 

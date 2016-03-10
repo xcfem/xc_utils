@@ -116,11 +116,11 @@ SET(NUCLEO nucleo/aux_any nucleo/EntBase nucleo/MapParam nucleo/MapPropVar nucle
 
 SET(VtkAux vtk_aux/vtkShStrArray vtk_aux/vtkLabeledShStrMapper vtk_aux/vtkTakePhotoDefs vtk_aux/vtkTakePhoto vtk_aux/vtkXOpenGLOffScreenRenderWindow vtk_aux/vtkDoubleHeadedArrowSource vtk_aux/vtkArcSource)
 
-SET(ca_coefs loadCombinations/coeffs/GammaF loadCombinations/coeffs/CoefsPsi loadCombinations/coeffs/MapCoefsPsi)
+SET(ca_coefs loadCombinations/coeffs/GammaF loadCombinations/coeffs/PsiCoeffs loadCombinations/coeffs/PsiCoeffsMap)
 
 SET(ca_acciones loadCombinations/actions/Accion loadCombinations/actions/RelAcciones loadCombinations/actions/VRAccion loadCombinations/actions/ListaVRAccion loadCombinations/actions/FamiliaAcciones loadCombinations/actions/MapFamiliasAcc loadCombinations/actions/AccionesClasificadas)
 
-SET(ca_combinaciones loadCombinations/load_combinations/Variacion loadCombinations/load_combinations/Variaciones loadCombinations/load_combinations/LoadCombinationVector loadCombinations/load_combinations/LoadCombinations loadCombinations/load_combinations/MapPondAcciones loadCombinations/load_combinations/LoadCombinationGenerator)
+SET(ca_combinaciones loadCombinations/comb_analysis/Variation loadCombinations/comb_analysis/Variations loadCombinations/comb_analysis/LoadCombinationVector loadCombinations/comb_analysis/LoadCombinations loadCombinations/comb_analysis/MapPondAcciones loadCombinations/comb_analysis/LoadCombinationGenerator)
 
 ADD_LIBRARY(xc_utils SHARED ${BASE} ${MYSQL} ${SQLITE} ${CMDLIBPLOT} ${cuadGauss} ${geom} ${GnuGts} ${NUCLEO}  ${VtkAux} ${ca_coefs} ${ca_acciones} ${ca_combinaciones})
 

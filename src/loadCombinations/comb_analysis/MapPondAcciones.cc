@@ -54,7 +54,7 @@ const cmb_acc::AccionesClasificadas *cmb_acc::MapPondAcciones::busca_ponderacion
   }
 
 //! @brief Crea una nueva ponderacion con el nombre que se le pasa como parámetro.
-cmb_acc::AccionesClasificadas *cmb_acc::MapPondAcciones::crea_ponderacion(const std::string &nmb,const MapCoefsPsi &coefs)
+cmb_acc::AccionesClasificadas *cmb_acc::MapPondAcciones::crea_ponderacion(const std::string &nmb,const PsiCoeffsMap &coefs)
   {
     AccionesClasificadas *tmp =NULL;
     if(!existe(nmb)) //la ponderacion es nuevo.
@@ -106,7 +106,7 @@ void cmb_acc::MapPondAcciones::for_each_accion(CmdStatus &status,const std::stri
   }
 
 //! @brief Define una poderación de acciones.
-cmb_acc::AccionesClasificadas *cmb_acc::MapPondAcciones::defPonderacion(const std::string &nmb_ponderacion,const MapCoefsPsi &coefs)
+cmb_acc::AccionesClasificadas *cmb_acc::MapPondAcciones::defPonderacion(const std::string &nmb_ponderacion,const PsiCoeffsMap &coefs)
   {
     AccionesClasificadas *retval= crea_ponderacion(nmb_ponderacion,coefs);
     if(retval) retval->set_owner(this);

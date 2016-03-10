@@ -26,7 +26,7 @@
 #define MAPPONDACCIONES_H
 
 #include "xc_utils/src/nucleo/EntCmd.h"
-#include "xc_utils/src/loadCombinations/coeffs/MapCoefsPsi.h"
+#include "xc_utils/src/loadCombinations/coeffs/PsiCoeffsMap.h"
 #include <map>
 
 
@@ -51,7 +51,7 @@ class MapPondAcciones: public EntCmd
     map_ponderaciones ponderaciones; //!< Conjunto de ponderaciones.
 
     bool existe(const std::string &nmb) const;
-    AccionesClasificadas *crea_ponderacion(const std::string &nmb,const MapCoefsPsi &coefs= MapCoefsPsi());
+    AccionesClasificadas *crea_ponderacion(const std::string &nmb,const PsiCoeffsMap &coefs= PsiCoeffsMap());
     AccionesClasificadas *busca_ponderacion(const std::string &nmb);
     const AccionesClasificadas *busca_ponderacion(const std::string &nmb) const;
     void clear(void);
@@ -66,7 +66,7 @@ class MapPondAcciones: public EntCmd
     MapPondAcciones(const MapPondAcciones &otro);
     MapPondAcciones &operator=(const MapPondAcciones &otro);
     virtual ~MapPondAcciones(void);
-    cmb_acc::AccionesClasificadas *defPonderacion(const std::string &,const MapCoefsPsi &coefs= MapCoefsPsi());
+    cmb_acc::AccionesClasificadas *defPonderacion(const std::string &,const PsiCoeffsMap &coefs= PsiCoeffsMap());
 
     VRAccion &inserta(const std::string &pond,const std::string &,const Accion &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
 

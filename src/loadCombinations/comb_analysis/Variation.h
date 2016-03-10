@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Variacion.hxx
+//Variation.hxx
 
-#ifndef VARIACION_HXX
-#define VARIACION_HXX
+#ifndef VARIATION_HXX
+#define VARIATION_HXX
 
 #include <vector>
 #include <iostream>
@@ -34,16 +34,16 @@ class ListaVRAccion;
 //! @ingroup CMBACC
 //
 //! @brief Vector que almacena los coeficientes de la combinación lineal de acciones.
-class Variacion: public std::vector<double>
+class Variation: public std::vector<double>
   {
     void print(std::ostream &os) const;
   public:
     //! @brief Constructor.
-    Variacion(const size_t &sz=0,const double &valor=0.0)
+    Variation(const size_t &sz=0,const double &valor=0.0)
       : std::vector<double>(sz,valor) {}
-    static Variacion concat(const Variacion &a,const Variacion &b);
+    static Variation concat(const Variation &a,const Variation &b);
     bool compatible(const ListaVRAccion &lvr);
-    friend std::ostream &operator<<(std::ostream &os,const Variacion &v);
+    friend std::ostream &operator<<(std::ostream &os,const Variation &v);
   };
 } //fin namespace nmb_acc.
 

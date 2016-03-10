@@ -19,19 +19,19 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//CoefsPsi.cxx
+//PsiCoeffs.cxx
 
-#include "CoefsPsi.h"
+#include "PsiCoeffs.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
 
 //! @brief Lee el objeto desde archivo.
-bool cmb_acc::CoefsPsi::procesa_comando(CmdStatus &status)
+bool cmb_acc::PsiCoeffs::procesa_comando(CmdStatus &status)
   {
     const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
     if(verborrea>2)
-      std::clog << "(CoefsPsi) Procesando comando: " << cmd << std::endl;
+      std::clog << "(PsiCoeffs) Procesando comando: " << cmd << std::endl;
     if(cmd == "psi_0")
       {
         psi_0= status.GetFloat();
@@ -57,7 +57,7 @@ bool cmb_acc::CoefsPsi::procesa_comando(CmdStatus &status)
             psi_2= tmp[2];
           }
         else
-	  std::cerr << "(CoefsPsi) Procesando comando: " << cmd
+	  std::cerr << "(PsiCoeffs) Procesando comando: " << cmd
                     << " se esperaba un vector de dimensión 3.\n";
         return true;
       }
@@ -66,7 +66,7 @@ bool cmb_acc::CoefsPsi::procesa_comando(CmdStatus &status)
   }
 
 //! @brief Devuelve el coeficiente cuyo índice se pasa como parámetro.
-const double &cmb_acc::CoefsPsi::getPsi(short int r) const
+const double &cmb_acc::PsiCoeffs::getPsi(short int r) const
   {
     switch(r)
       {
@@ -77,14 +77,14 @@ const double &cmb_acc::CoefsPsi::getPsi(short int r) const
       case(2):
         return psi_2;
       default:
-	std::cerr << "cmb_acc::CoefsPsi::getPsi índice: " << r << " fuera de rango (0..2)." << std::endl;
+	std::cerr << "cmb_acc::PsiCoeffs::getPsi índice: " << r << " fuera de rango (0..2)." << std::endl;
         return psi_0;
       }
   }
 
 //! @brief Devuelve la propiedad del objeto cuyo código se pasa
 //! como parámetro.
-any_const_ptr cmb_acc::CoefsPsi::GetProp(const std::string &cod) const
+any_const_ptr cmb_acc::PsiCoeffs::GetProp(const std::string &cod) const
   {
     if(cod == "psi_0")
       return any_const_ptr(psi_0);

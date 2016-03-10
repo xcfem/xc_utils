@@ -19,38 +19,52 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//CoefsPsi.hxx
-//Valores representativos de una acción.
+//PsiCoeffsMap.h
+//Contenedor de coeficientes de simultaneidad de acciones.
 
-#ifndef COEFSPSI_H
-#define COEFSPSI_H
+#ifndef PSICOEFFSMAP_H
+#define PSICOEFFSMAP_H
 
 #include "xc_utils/src/nucleo/EntCmd.h"
+#include "PsiCoeffs.h"
+#include <map>
 
-namespace cmb_acc{
+
+namespace cmb_acc {
+
+class LoadCombinationVector;
 
 //! @ingroup CMBACC
 //
-//! @brief Coeficientes de simultaneidad de una acción.
-class CoefsPsi: public EntCmd
+//! @brief Contenedor de coeficientes de simultaneidad de acciones.
+class PsiCoeffsMap: public EntCmd
   {
-  private:
-    double psi_0; //!< Coeficiente de simultaneidad para obtener el valor de combinación.
-    double psi_1; //!< Coeficiente de simultaneidad para obtener el valor frecuente.
-    double psi_2; //!< Coeficiente de sumultaneidad para obtener el valor cuasipermanente.
-
-  protected:
-    virtual bool procesa_comando(CmdStatus &status);
-
   public:
-    //! @brief Constructor por defecto.
-    CoefsPsi(const double &p0= 1.0, const double &p1= 1.0, const double &p2= 1.0)
-      : EntCmd(),psi_0(p0), psi_1(p1), psi_2(p2) {}
-    //! @brief Constructor de copia.
-    const double &getPsi(short int r) const;
+    typedef std::map<std::string,PsiCoeffs> map_coefs;
+    typedef map_coefs::iterator iterator;
+    typedef map_coefs::const_iterator const_iterator;
+
+  private:
+    static PsiCoeffs coefs_por_defecto; //!< Coeficientes por defecto (todos =1.0).
+    map_coefs coefs; //!< Conjunto de coefs.
+
+    bool existe(const std::string &nmb) const;
+    PsiCoeffs *getPtrCoefs(const std::string &nmb);
+    PsiCoeffs *crea_coefs(const std::string &nmb);
+  protected:
+    friend class AccionesClasificadas;
+    void for_each(CmdStatus &,const std::string &);
+    virtual bool procesa_comando(CmdStatus &);
+  public:
+    PsiCoeffsMap(void);
+    size_t size(void) const;
+    static inline const PsiCoeffs &getCoefsPorDefecto(void)
+      { return coefs_por_defecto; }
+    const PsiCoeffs *getPtrCoefs(const std::string &nmb) const;
+    const PsiCoeffs &BuscaCoefs(const std::string &nmb) const;
+    void insert(const std::string &,const PsiCoeffs &);
     virtual any_const_ptr GetProp(const std::string &cod) const;
   };
-
-} //fin namespace nmb_acc.
+} // fin namespace cmb_acc
 
 #endif

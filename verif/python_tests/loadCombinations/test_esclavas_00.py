@@ -2,9 +2,9 @@
 
 import xc_base
 import loadCombinations
-from loadCombinationUtils import ehe_ctr_intenso
+from loadCombinationUtils import ehe
 
-lcg= ehe_ctr_intenso.combGenerator
+lcg= ehe.intenseControlCombGenerator
 PP1= lcg.insert("EHEIntenso","permanentes",loadCombinations.Accion("PP1","Peso propio"),"","")
 
 SC1= lcg.insert("EHEIntenso","variables",loadCombinations.Accion("SC1","Puente grúa"),"azotea_solo_conserv","")
