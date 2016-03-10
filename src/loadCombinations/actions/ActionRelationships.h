@@ -58,9 +58,6 @@ class ActionRelationships: public EntCmd
     bool match_any(const dq_string &,const dq_string &) const;
     bool match_all(const dq_string &,const dq_string &) const;
 
-  protected:
-    virtual bool procesa_comando(CmdStatus &status);
-
   public:
     ActionRelationships(void);
 
@@ -96,7 +93,6 @@ class ActionRelationships: public EntCmd
     std::string nombresIncompatibles(void) const;
     std::string nombresMaestras(void) const;
     void Print(std::ostream &os) const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 std::ostream &operator<<(std::ostream &os,const ActionRelationships &acc);

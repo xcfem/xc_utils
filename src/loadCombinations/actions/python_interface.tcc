@@ -47,7 +47,7 @@ class_<ActionRValueList, bases<EntCmd> >("ActionRValueListes")
 class_<ActionsFamily, bases<EntConNmb> >("ActionsFamily")
   .def(init<std::string, GammaF>())
   .add_property("gammaF", make_function( &ActionsFamily::getGammaF, return_internal_reference<>() ), &ActionsFamily::setGammaF)
-  .def("getNumAcciones", &ActionsFamily::getNumAcciones)
+  .def("getNumActions", &ActionsFamily::getNumActions)
   .def("insert", make_function(&ActionsFamily::inserta,return_internal_reference<>()))
   ;
 
@@ -56,11 +56,11 @@ class_<ActionsFamiliesMap, bases<EntConNmb>, boost::noncopyable >("ActionsFamili
 
 class_<ActionContainer, bases<EntCmd> >("ActionContainer")
   .def(init<PsiCoeffsMap>())
-  .add_property("permanentActions", make_function( &ActionContainer::getAccionesPermanentes, return_internal_reference<>() ), &ActionContainer::setAccionesPermanentes)
-  .add_property("ncPermanentActions", make_function( &ActionContainer::getAccionesPermanentesNC, return_internal_reference<>() ), &ActionContainer::setAccionesPermanentesNC)
-  .add_property("variableActions", make_function( &ActionContainer::getAccionesVariables, return_internal_reference<>() ), &ActionContainer::setAccionesVariables)
-  .add_property("accidentalActions", make_function( &ActionContainer::getAccionesAccidentales, return_internal_reference<>() ), &ActionContainer::setAccionesAccidentales)
-  .add_property("seismicActions", make_function( &ActionContainer::getAccionesSismicas, return_internal_reference<>() ), &ActionContainer::setAccionesSismicas)
+  .add_property("permanentActions", make_function( &ActionContainer::getPermanentActions, return_internal_reference<>() ), &ActionContainer::setPermanentActions)
+  .add_property("ncPermanentActions", make_function( &ActionContainer::getPermanentActionsNC, return_internal_reference<>() ), &ActionContainer::setPermanentActionsNC)
+  .add_property("variableActions", make_function( &ActionContainer::getVariableActions, return_internal_reference<>() ), &ActionContainer::setVariableActions)
+  .add_property("accidentalActions", make_function( &ActionContainer::getAccidentalActions, return_internal_reference<>() ), &ActionContainer::setAccidentalActions)
+  .add_property("seismicActions", make_function( &ActionContainer::getSeismicActions, return_internal_reference<>() ), &ActionContainer::setSeismicActions)
   .def("getPsiCoeffs", &ActionContainer::getPsiCoeffs, return_value_policy<copy_const_reference>())
 .def("insert", make_function(&ActionContainer::inserta,return_internal_reference<>()))
   ;

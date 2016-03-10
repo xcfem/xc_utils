@@ -58,9 +58,6 @@ class ActionWeightingMap: public EntCmd
     void copia(const map_ponderaciones &pond);
   protected:
     friend class ActionContainer;
-    void for_each(CmdStatus &,const std::string &);
-    void for_each_accion(CmdStatus &,const std::string &);
-    virtual bool procesa_comando(CmdStatus &);
   public:
     ActionWeightingMap(void);
     ActionWeightingMap(const ActionWeightingMap &otro);
@@ -77,7 +74,6 @@ class ActionWeightingMap: public EntCmd
     iterator end(void);
     const_iterator end(void) const;
     LoadCombinations getLoadCombinations(void);
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 } // fin namespace cmb_acc

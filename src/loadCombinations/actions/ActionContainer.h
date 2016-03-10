@@ -36,11 +36,11 @@ namespace cmb_acc{
 class ActionContainer: public EntCmd
   {
   private:
-    ActionsFamily G; //!< Acciones permanentes.
-    ActionsFamiliesMap G_aster; //!< Acciones permanentes de valor no constante.
-    ActionsFamily Q; //!< Acciones variables.
-    ActionsFamily A; //!< Acciones accidentales.
-    ActionsFamily AS; //!< Acciones sísmicas.
+    ActionsFamily G; //!< Permanent actions.
+    ActionsFamiliesMap G_aster; //!< Non-constant permanent actions.
+    ActionsFamily Q; //!< Variable actions.
+    ActionsFamily A; //!< Accidental actions.
+    ActionsFamily AS; //!< Earthquake actions.
     PsiCoeffsMap coefs_psi; //!< Coeficientes de simultaneidad de las acciones.
 
     LoadCombinationVector GetLoadCombinationsG(const bool &elu,const bool &sit_accidental) const;
@@ -54,24 +54,22 @@ class ActionContainer: public EntCmd
 
   protected:
     friend class ActionWeightingMap;
-    void for_each_accion(CmdStatus &,const std::string &);
-    virtual bool procesa_comando(CmdStatus &status);
   public:
     ActionContainer(const PsiCoeffsMap &coefs= PsiCoeffsMap());
     inline virtual ~ActionContainer(void) {}
 
     ActionRValue &inserta(const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
 
-    const ActionsFamily &getAccionesPermanentes(void) const;
-    void setAccionesPermanentes(const ActionsFamily &);
-    const ActionsFamiliesMap &getAccionesPermanentesNC(void) const;
-    void setAccionesPermanentesNC(const ActionsFamiliesMap &);
-    const ActionsFamily &getAccionesVariables(void) const;
-    void setAccionesVariables(const ActionsFamily &);
-    const ActionsFamily &getAccionesAccidentales(void) const;
-    void setAccionesAccidentales(const ActionsFamily &);
-    const ActionsFamily &getAccionesSismicas(void) const;
-    void setAccionesSismicas(const ActionsFamily &);
+    const ActionsFamily &getPermanentActions(void) const;
+    void setPermanentActions(const ActionsFamily &);
+    const ActionsFamiliesMap &getPermanentActionsNC(void) const;
+    void setPermanentActionsNC(const ActionsFamiliesMap &);
+    const ActionsFamily &getVariableActions(void) const;
+    void setVariableActions(const ActionsFamily &);
+    const ActionsFamily &getAccidentalActions(void) const;
+    void setAccidentalActions(const ActionsFamily &);
+    const ActionsFamily &getSeismicActions(void) const;
+    void setSeismicActions(const ActionsFamily &);
 
     //Estados límite últimos.
     LoadCombinationVector GetPersistentesOTransit(void) const;
@@ -88,7 +86,6 @@ class ActionContainer: public EntCmd
       { return &coefs_psi; }
     const PsiCoeffsMap &getPsiCoeffs(void) const
       { return coefs_psi; }
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 } //fin namespace nmb_acc.
 

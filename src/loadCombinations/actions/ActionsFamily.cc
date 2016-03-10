@@ -26,7 +26,6 @@
 #include "xc_utils/src/loadCombinations/comb_analysis/Variations.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
 #include "ActionsFamiliesMap.h"
-#include "xc_utils/src/base/CmdStatus.h"
 #include "Action.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
@@ -36,40 +35,6 @@ cmb_acc::ActionsFamily::ActionsFamily(const std::string &nmb,const GammaF &gf)
   : EntConNmb(nmb),gammaf(gf) 
   {
     acciones.set_owner(this);
-  }
-
-//! @brief Lanza la ejecución del bloque de código que se pasa
-//! como parámetro para cada una de las acciones de la familia.
-void cmb_acc::ActionsFamily::for_each_accion(CmdStatus &status,const std::string &bloque)
-  { acciones.for_each(status,bloque); }
-
-//! \fn cmb_acc::ActionsFamily::procesa_comando(CmdStatus &status)
-//! @brief Lee el objeto desde archivo.
-bool cmb_acc::ActionsFamily::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
-    if(verborrea>2)
-      std::clog << "(ActionsFamily) Procesando comando: " << cmd.c_str() << std::endl;
-    if(cmd == "gammaf") //Lee coeficientes de ponderación de acciones.
-      {
-        gammaf.set_owner(this);
-        gammaf.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "acciones")
-      {
-        acciones.set_owner(this);
-        acciones.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "for_each_accion")
-      {
-        const std::string bloque= status.GetBloque();
-        for_each_accion(status,bloque);
-        return true;
-      }
-    else
-      return EntConNmb::procesa_comando(status);
   }
 
 //! @brief Devuelve un apuntador a los coeficientes que aplican para esta familia.
@@ -120,29 +85,3 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionsFamily::GetLoadCombinations(const
 cmb_acc::Variations cmb_acc::ActionsFamily::CalculaVariations(const bool &elu,const bool &sit_accidental,const int &d) const
   { return gammaf.calcula_variations(elu,sit_accidental,d,acciones); }
 
-//! \fn any_const_ptr cmb_acc::ActionsFamily::GetProp(const std::string &cod) const
-//! @brief Devuelve la propiedad del objeto cuyo código se pasa como parámetro.
-any_const_ptr cmb_acc::ActionsFamily::GetProp(const std::string &cod) const
-  {
-    if(cod == "num_acciones")
-      {
-        tmp_gp_szt= acciones.size();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(cod == "num_familias")
-      {
-        tmp_gp_szt= 1;
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(cod == "lista_acciones")
-      {
-        tmp_gp_str= nombresAcciones(acciones.begin(),acciones.end());
-        return any_const_ptr(tmp_gp_str);
-      }
-    else if(cod == "acciones")
-      return any_const_ptr(&acciones);
-    else if(cod == "gammaf")
-      return any_const_ptr(&gammaf);
-    else
-      return EntConNmb::GetProp(cod);
-  }

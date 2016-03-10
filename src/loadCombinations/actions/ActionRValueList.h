@@ -43,10 +43,6 @@ class ActionRValueList: public std::deque<ActionRValue>, public EntCmd
     friend class ActionsFamily;
 
     ActionRValue &push_back(const ActionRValue &a);
-
-  protected:
-    void for_each(CmdStatus &,const std::string &);
-    virtual bool procesa_comando(CmdStatus &status);
   public:
     //! @brief Devuelve el valor de la acción de índice i
     inline Action GetValor(const size_t &i,short int r) const
@@ -55,7 +51,6 @@ class ActionRValueList: public std::deque<ActionRValue>, public EntCmd
     Action FormaProdEscalar(const Variation &v,short int r,const int &d=-1,const short int &rr=-1) const;
     const PsiCoeffsMap *getPtrPsiCoeffs(void) const;
     void Print(std::ostream &os) const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 std::ostream &operator<<(std::ostream &os,const ActionRValueList &vs);

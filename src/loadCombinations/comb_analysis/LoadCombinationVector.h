@@ -41,8 +41,6 @@ class LoadCombinationVector: public std::vector<Action>, public EntCmd
     size_t CuentaNulas(const double &tol) const;
     size_t CuentaDistintas(const LoadCombinationVector &s2) const;
     const LoadCombinationVector &GetDistintas(const LoadCombinationVector &s2) const;
-  protected:
-    virtual bool procesa_comando(CmdStatus &status);
   public:
     //! @brief Constructor.
     LoadCombinationVector(const size_t &sz= 0)
@@ -54,7 +52,6 @@ class LoadCombinationVector: public std::vector<Action>, public EntCmd
     const LoadCombinationVector &GetNoNulas(const double &tol) const;
     m_double getCoeficientes(const std::vector<std::string> &) const;
     void Print(std::ostream &os) const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 std::ostream &operator<<(std::ostream &os,const LoadCombinationVector &vc);

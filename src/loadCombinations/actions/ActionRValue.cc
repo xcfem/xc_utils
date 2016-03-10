@@ -23,7 +23,6 @@
 
 #include "xc_utils/src/loadCombinations/actions/ActionRValue.h"
 #include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
-#include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/loadCombinations/coeffs/GammaF.h"
 #include "xc_utils/src/loadCombinations/coeffs/PsiCoeffsMap.h"
 #include "xc_utils/src/base/any_const_ptr.h"
@@ -55,24 +54,6 @@ void cmb_acc::ActionRValue::setPsiCoeffs(const std::string &nmb_coefs)
       }
   }
 
-//! \fn cmb_acc::ActionRValue::procesa_comando(CmdStatus &status)
-//! @brief Lee el objeto desde archivo.
-bool cmb_acc::ActionRValue::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
-    const std::string str_err= "(ActionRValue) Procesando comando: " + cmd; 
-    if(verborrea>2)
-      std::clog << str_err << std::endl;
-
-    if(cmd == "setPsiCoeffs")
-      {
-        setPsiCoeffs(interpretaString(status.GetString()));
-        return true;
-      }
-    else
-      return Action::procesa_comando(status);
-  }
-
 double cmb_acc::ActionRValue::getPsi(short int r) const
   { return coefs_psi->getPsi(r); }
 
@@ -98,37 +79,4 @@ cmb_acc::Action cmb_acc::ActionRValue::Valor(short int r) const
         break;
       }
     return retval;
-  }
-
-//! \fn any_const_ptr cmb_acc::ActionRValue::GetProp(const std::string &cod) const
-//! @brief Devuelve la propiedad del objeto cuyo código se pasa
-//! como parámetro.
-any_const_ptr cmb_acc::ActionRValue::GetProp(const std::string &cod) const
-  {
-    if(verborrea>4)
-      std::clog << "ActionRValue::GetProp (" << nombre_clase() << "::GetProp) Buscando propiedad: " << cod << std::endl;
-    if(cod == "coefs_psi")
-      return any_const_ptr(coefs_psi);
-    else if(cod == "psi_0")
-      {
-        tmp_gp_dbl= getPsi(0);
-        return any_const_ptr(tmp_gp_dbl);
-      }
-    else if(cod == "psi_1")
-      {
-        tmp_gp_dbl= getPsi(1);
-        return any_const_ptr(tmp_gp_dbl);
-      }
-    else if(cod == "psi_2")
-      {
-        tmp_gp_dbl= getPsi(2);
-        return any_const_ptr(tmp_gp_dbl);
-      }
-    else if(cod == "incompatibles")
-      {
-        tmp_gp_str= ListaStrIncompatibles(acc_familia);
-        return any_const_ptr(tmp_gp_str);
-      }
-    else
-      return Action::GetProp(cod);
   }

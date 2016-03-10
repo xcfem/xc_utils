@@ -36,25 +36,20 @@ class LoadCombinations;
 class LoadCombinationGenerator: public EntCmd
   {
   private:
-    ActionWeightingMap pond_acciones;
+    ActionWeightingMap action_weighting;
     LoadCombinations *combinaciones;
-
-  protected:
-    virtual bool procesa_comando(CmdStatus &status);
   public:
     LoadCombinationGenerator(EntCmd *owr= NULL);
 
     ActionContainer *defPonderacion(const std::string &,const PsiCoeffsMap &coefs= PsiCoeffsMap());
     ActionRValue &inserta(const std::string &pond,const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
     void genera(void);
-    inline ActionWeightingMap &getPondAcciones(void)
-      { return pond_acciones; }
-    inline void setPondAcciones(const ActionWeightingMap &pa)
-      { pond_acciones= pa; }
+    inline ActionWeightingMap &getActionWeighting(void)
+      { return action_weighting; }
+    inline void setActionWeighting(const ActionWeightingMap &pa)
+      { action_weighting= pa; }
     inline LoadCombinations *getLoadCombinations(void)
       { return combinaciones; }
-
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 } //fin namespace nmb_acc.
 

@@ -41,7 +41,7 @@ class_<LoadCombinations, bases<EntCmd> >("Combinations")
 
 
 class_<LoadCombinationGenerator, bases<EntCmd> >("LoadCombGenerator")
-  .add_property("pondAcciones", make_function( &LoadCombinationGenerator::getPondAcciones, return_internal_reference<>() ), &LoadCombinationGenerator::setPondAcciones)
+  .add_property("actionWeighting", make_function( &LoadCombinationGenerator::getActionWeighting, return_internal_reference<>() ), &LoadCombinationGenerator::setActionWeighting)
   .def("defPonderacion", make_function(&LoadCombinationGenerator::defPonderacion,return_internal_reference<>()))
   .def("insert", make_function(&LoadCombinationGenerator::inserta,return_internal_reference<>()))
   .def("genera", &LoadCombinationGenerator::genera)

@@ -46,8 +46,6 @@ class LoadCombinations: public EntCmd
     LoadCombinationVector comb_sls_frec; //!< LoadCombinations para estados límite de servicio en situaciones frecuentes.
     LoadCombinationVector comb_sls_cuasi_perm; //!< LoadCombinations para estados límite de servicio en situaciones cuasi - permanentes.
 
-  protected:
-    virtual bool procesa_comando(CmdStatus &status);
   public:
     LoadCombinations(void);
     LoadCombinations(const ActionContainer &acc);
@@ -68,7 +66,7 @@ class LoadCombinations: public EntCmd
     inline LoadCombinationVector getSLSQuasiPermanentCombinations(void)
       { return comb_sls_cuasi_perm; }
 
-    virtual any_const_ptr GetProp(const std::string &cod) const;
+
   };
 } //fin namespace nmb_acc.
 

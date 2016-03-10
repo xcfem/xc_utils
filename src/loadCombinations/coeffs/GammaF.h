@@ -45,7 +45,7 @@ class GammaFELS: public EntCmd
     float gamma_f_desfav; //!< para efecto desfavorable.
 
     //! @brief Lee el objeto desde archivo.
-    virtual bool procesa_comando(CmdStatus &status);
+
     friend class GammaF;
     Variation Coefs(void) const;
   public:
@@ -59,7 +59,6 @@ class GammaFELS: public EntCmd
       { return gamma_f_desfav; }
     inline void setDesfavorable(const float &f)
       { gamma_f_desfav= f; }
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 //! @brief Coeficientes de mayoración de una familia de acciones (permanentes, variables,...), en estados límite últimos .
@@ -70,7 +69,7 @@ class GammaFELU: public GammaFELS
     float gamma_f_desfav_acc; //!< para efecto desfavorable en situacion accidental o sísmica.
   protected:
     //! @brief Lee el objeto desde archivo.
-    virtual bool procesa_comando(CmdStatus &status);
+
     friend class GammaF;
     //! @brief Devuelve los coeficientes de ponderación correspondientes a situación persistente o transitoria.
     Variation CoefsPT(void) const;
@@ -87,7 +86,6 @@ class GammaFELU: public GammaFELS
       { return gamma_f_desfav_acc; }
     inline void setDesfavorableAccidental(const float &f)
       { gamma_f_desfav_acc= f; }
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 //! @brief Coeficientes de ponderación de una familia de acciones en ELS y ELU.
@@ -96,7 +94,6 @@ class GammaF: public EntCmd
     GammaFELU gammaf_elu; //!< Coeficientes de ponderación en estados límite últimos.
     GammaFELS gammaf_els; //!< Coeficientes de ponderación en estados límite de servicio.
   protected:
-    virtual bool procesa_comando(CmdStatus &status);
     Variation CoefsEls(void) const;
   public:
     GammaF(const GammaFELU &gf_elu=GammaFELU(), const GammaFELS &gf_els=GammaFELS());
@@ -107,7 +104,6 @@ class GammaF: public EntCmd
       { return gammaf_els; }
     //! @brief Devuelve los coeficientes de ponderación correspondientes a estado límite de servicio.
     Variations calcula_variations(const bool &elu,const bool &sit_accidental,const int &d,const ActionRValueList &) const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 } //fin namespace nmb_acc.

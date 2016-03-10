@@ -22,7 +22,6 @@
 //PsiCoeffsMap.cc
 
 #include "PsiCoeffsMap.h"
-#include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
 
@@ -75,17 +74,6 @@ const cmb_acc::PsiCoeffs *cmb_acc::PsiCoeffsMap::getPtrCoefs(const std::string &
 cmb_acc::PsiCoeffsMap::PsiCoeffsMap(void)
   : EntCmd(), coefs() {}
 
-//! @brief Lanza la ejecución del bloque de código que se pasa
-//! como parámetro para cada una de las acciones del contenedor.
-void cmb_acc::PsiCoeffsMap::for_each(CmdStatus &status,const std::string &bloque)
-  {
-    for(iterator i= coefs.begin();i!=coefs.end();i++)
-      {
-        (*i).second.set_owner(this);
-        (*i).second.EjecutaBloque(status,bloque,"PsiCoeffsMap:for_each");
-      }
-  }
-
 //! @brief Crea coeficientes con el nombre que se le pasa como parámetro.
 cmb_acc::PsiCoeffs *cmb_acc::PsiCoeffsMap::crea_coefs(const std::string &nmb)
   {
@@ -105,54 +93,7 @@ cmb_acc::PsiCoeffs *cmb_acc::PsiCoeffsMap::crea_coefs(const std::string &nmb)
 void cmb_acc::PsiCoeffsMap::insert(const std::string &nmb,const PsiCoeffs &c)
   { coefs[nmb]= c; }
 
-//! @brief Lee un objeto PsiCoeffsMap desde archivo
-bool cmb_acc::PsiCoeffsMap::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    const std::string msg_proc_cmd= "(PsiCoeffsMap) Procesando comando: " + cmd;
-    if(verborrea>2)
-      std::clog << msg_proc_cmd << std::endl;
-
-    if(cmd == "defCoefs") //Definición de coeficientes.
-      {
-	std::string nmb_coefs= "";
-        std::deque<boost::any> fnc_indices= status.Parser().SeparaIndices(this);
-        if(fnc_indices.size()>0)
-          nmb_coefs= convert_to_string(fnc_indices[0]); //Nombre del set.
-        PsiCoeffs *s= crea_coefs(nmb_coefs);
-        if(s) s->LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "for_each")
-      {
-        for_each(status,status.GetBloque());
-        return true;
-      }
-    PsiCoeffs *coefs_ptr= getPtrCoefs(cmd);
-    if(coefs_ptr)
-      {
-        coefs_ptr->set_owner(this);
-        coefs_ptr->LeeCmd(status);
-        return true;
-      }
-    else
-      return EntCmd::procesa_comando(status);
-  }
-
 //! @brief Devuelve el número de coeficientes definidos.
 size_t cmb_acc::PsiCoeffsMap::size(void) const
  { return coefs.size(); }
 
-//! \brief Devuelve la propiedad del objeto cuyo código (de la propiedad) se pasa
-//! como parámetro.
-//!
-//! Soporta los códigos:
-any_const_ptr cmb_acc::PsiCoeffsMap::GetProp(const std::string &cod) const
-  {
-    if(cod == "size")
-      {
-        tmp_gp_szt= size();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    return EntCmd::GetProp(cod);
-  }

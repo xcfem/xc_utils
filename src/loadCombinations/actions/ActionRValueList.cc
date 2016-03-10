@@ -24,21 +24,9 @@
 #include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
 #include "xc_utils/src/loadCombinations/actions/ActionsFamily.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/Variation.h"
-#include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
 #include "xc_utils/src/nucleo/InterpreteRPN.h"
-
-//! @brief Lanza la ejecución del bloque de código que se pasa
-//! como parámetro para cada una de las acciones de la lista.
-void cmb_acc::ActionRValueList::for_each(CmdStatus &status,const std::string &bloque)
-  {
-    for(iterator i=begin();i!=end();i++)
-      {
-        (*i).set_owner(this);
-        (*i).EjecutaBloque(status,bloque,"ActionRValueList:for_each");
-      }
-  }
 
 cmb_acc::ActionRValue &cmb_acc::ActionRValueList::push_back(const ActionRValue &a)
   {
@@ -53,27 +41,6 @@ cmb_acc::ActionRValue &cmb_acc::ActionRValueList::inserta(const Action &a,const 
     ActionRValue acc(a,this,nmb_coefs_psi);
     acc.set_owner(this);
     return push_back(acc);
-  }
-
-bool cmb_acc::ActionRValueList::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
-    if(verborrea>2)
-      std::clog  << "(ActionRValueList) Procesando comando: " << cmd.c_str() << std::endl;
-    if(cmd == "accion")
-      {
-        ActionRValue acc("nil","nil",this);
-        acc.set_owner(this);
-        push_back(acc).LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "for_each")
-      {
-        for_each(status,status.GetBloque());
-        return true;
-      }
-    else
-      return EntCmd::procesa_comando(status);
   }
 
 //! \fn cmb_acc::ActionRValueList::FormaProdEscalar(const Variation &v,short int r,const int &d,const short int &rr) const
@@ -118,19 +85,6 @@ void cmb_acc::ActionRValueList::Print(std::ostream &os) const
   {
     for(const_iterator i=begin();i!=end();i++)
       os << *i << ' ';
-  }
-
-//! Devuelve la propiedad del objeto cuyo código se pasa
-//! como parámetro.
-any_const_ptr cmb_acc::ActionRValueList::GetProp(const std::string &cod) const
-  {
-    if(cod == "acc")
-      {
-        const size_t i= popSize_t(cod);
-        return any_const_ptr(&((*this).at(i)));
-      }
-    else
-      return EntCmd::GetProp(cod);
   }
 
 //! @brief Operador salida.

@@ -23,7 +23,6 @@
 
 #include "LoadCombinationVector.h"
 #include "xc_basic/src/texto/en_letra.h"
-#include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
 
@@ -65,28 +64,6 @@ const cmb_acc::LoadCombinationVector &cmb_acc::LoadCombinationVector::GetNoNulas
           cont++;
         }
     return retval;
-  }
-
-//! \fn cmb_acc::LoadCombinationVector::procesa_comando(CmdStatus &status)
-//! @brief Lee el objeto desde archivo.
-bool cmb_acc::LoadCombinationVector::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
-    if(verborrea>2)
-      std::clog << "(LoadCombinationVector) Procesando comando: " << cmd << std::endl;
-    if(cmd == "for_each")
-      {
-        const std::string bloque= status.GetBloque();
-        for(iterator i=begin();i!=end();i++)
-          {
-            Action &data= *i;
-            data.set_owner(this);
-            data.EjecutaBloque(status,bloque,"LoadCombinationVector:for_each");
-          }
-        return true;
-      }
-    else
-      return EntCmd::procesa_comando(status);
   }
 
         
@@ -236,30 +213,6 @@ void cmb_acc::LoadCombinationVector::Print(std::ostream &os) const
   {
     for(const_iterator i= begin(); i!=end();i++)
       os << (*i) << std::endl;
-  }
-
-//! \fn any_const_ptr cmb_acc::LoadCombinationVector::GetProp(const std::string &cod) const
-//! @brief Devuelve la propiedad del objeto cuyo código (de la propiedad) se pasa como parámetro.
-any_const_ptr cmb_acc::LoadCombinationVector::GetProp(const std::string &cod) const
-  {
-    if(cod == "num_combinaciones")
-      {
-        tmp_gp_szt= size();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(cod == "comb")
-      {
-        const size_t i= popSize_t(cod);
-        return any_const_ptr(&((*this)[i]));
-      }
-    else if(cod == "getCoeficientes")
-      {
-        const std::vector<std::string> base= popVectorString(cod);
-        tmp_gp_mdbl= getCoeficientes(base);
-        return any_const_ptr(tmp_gp_mdbl);
-      }
-    else
-      return EntCmd::GetProp(cod);
   }
 
 std::ostream &cmb_acc::operator<<(std::ostream &os,const LoadCombinationVector &vc)

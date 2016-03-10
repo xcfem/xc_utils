@@ -38,17 +38,12 @@ class PsiCoeffs: public EntCmd
     double psi_0; //!< Coeficiente de simultaneidad para obtener el valor de combinación.
     double psi_1; //!< Coeficiente de simultaneidad para obtener el valor frecuente.
     double psi_2; //!< Coeficiente de sumultaneidad para obtener el valor cuasipermanente.
-
-  protected:
-    virtual bool procesa_comando(CmdStatus &status);
-
   public:
     //! @brief Constructor por defecto.
     PsiCoeffs(const double &p0= 1.0, const double &p1= 1.0, const double &p2= 1.0)
       : EntCmd(),psi_0(p0), psi_1(p1), psi_2(p2) {}
     //! @brief Constructor de copia.
     const double &getPsi(short int r) const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 } //fin namespace nmb_acc.

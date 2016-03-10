@@ -22,7 +22,6 @@
 //ActionWeightingMap.cc
 
 #include "ActionWeightingMap.h"
-#include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/loadCombinations/actions/ActionContainer.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
@@ -86,25 +85,6 @@ cmb_acc::ActionWeightingMap &cmb_acc::ActionWeightingMap::operator=(const Action
     return *this;
   }
 
-//! @brief Lanza la ejecución del bloque de código que se pasa
-//! como parámetro para cada una de las ponderaciones del contenedor.
-void cmb_acc::ActionWeightingMap::for_each(CmdStatus &status,const std::string &bloque)
-  {
-    for(iterator i= ponderaciones.begin();i!=ponderaciones.end();i++)
-      {
-        (*i).second->set_owner(this);
-        (*i).second->EjecutaBloque(status,bloque,"ActionWeightingMap:for_each");
-      }
-  }
-
-//! @brief Lanza la ejecución del bloque de código que se pasa
-//! como parámetro para cada una de las acciones del contenedor.
-void cmb_acc::ActionWeightingMap::for_each_accion(CmdStatus &status,const std::string &bloque)
-  {
-    for(iterator i= ponderaciones.begin();i!=ponderaciones.end();i++)
-      (*i).second->for_each_accion(status,bloque);
-  }
-
 //! @brief Define una poderación de acciones.
 cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::defPonderacion(const std::string &nmb_ponderacion,const PsiCoeffsMap &coefs)
   {
@@ -123,47 +103,6 @@ cmb_acc::ActionRValue &cmb_acc::ActionWeightingMap::inserta(const std::string &p
                   << pond << "'\n";
       }
     return ponderacion_ptr->inserta(familia,acc,nmb_coefs_psi,subfamilia);
-  }
-
-//! @brief Lee un objeto ActionWeightingMap desde archivo
-bool cmb_acc::ActionWeightingMap::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    const std::string msg_proc_cmd= "(ActionWeightingMap) Procesando comando: " + cmd;
-    if(verborrea>2)
-      std::clog << msg_proc_cmd << std::endl;
-    if(cmd == "defPonderacion") //Definición de una ponderacion.
-      {
-	std::string nmb_ponderacion= "";
-        std::deque<boost::any> fnc_indices= status.Parser().SeparaIndices(this);
-        if(fnc_indices.size()>0)
-          nmb_ponderacion= convert_to_string(fnc_indices[0]); //Nombre del set.
-        ActionContainer *s= defPonderacion(nmb_ponderacion);
-        if(s)
-          s->LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "for_each")
-      {
-        const std::string bloque= status.GetBloque();
-        for_each(status,bloque);
-        return true;
-      }
-    else if(cmd == "for_each_accion")
-      {
-        const std::string bloque= status.GetBloque();
-        for_each_accion(status,bloque);
-        return true;
-      }
-    ActionContainer *ponderacion_ptr= busca_ponderacion(cmd);
-    if(ponderacion_ptr)
-      {
-        ponderacion_ptr->set_owner(this);
-        ponderacion_ptr->LeeCmd(status);
-        return true;
-      }
-    else
-      return EntCmd::procesa_comando(status);
   }
 
 //! @brief Borra todas las ponderaciones definidos.
@@ -221,21 +160,4 @@ cmb_acc::LoadCombinations cmb_acc::ActionWeightingMap::getLoadCombinations(void)
       retval.Concat(LoadCombinations(*(*i).second));
     return retval;
   }
-
-//! \brief Devuelve la propiedad del objeto cuyo código (de la propiedad) se pasa
-//! como parámetro.
-any_const_ptr cmb_acc::ActionWeightingMap::GetProp(const std::string &cod) const
-  {
-    const ActionContainer *ponderacion_ptr= busca_ponderacion(cod);
-    if(cod == "getSize")
-      {
-        tmp_gp_szt= ponderaciones.size();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(ponderacion_ptr)
-      return any_const_ptr(ponderacion_ptr);
-    else
-      return EntCmd::GetProp(cod);
-  }
-
 

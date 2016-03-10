@@ -31,12 +31,12 @@
 #include "ActionRelationships.h"
 
 //! \namespace<cmb_acc>
-//! Rutinas para generar combinaciones de acciones.
+//! Routines to generate combinations of actions.
 namespace cmb_acc{
 
 class ActionRValueList;
 
-//! @defgroup CMBACC Rutinas para generar combinaciones de acciones.
+//! @defgroup CMBACC Routines to generate combinations of actions.
 //
 //! @ingroup CMBACC
 //
@@ -51,13 +51,8 @@ class Action: public EntConNmb
     bool incompatible(const Action &f) const;
     void multiplica(const double &d);
     void suma(const Action &f);
-
-
-  protected:
-    virtual bool procesa_comando(CmdStatus &status);
-
   public:
-    static const double zero; //!< Valor por debajo del cual la accion se considera nula.
+    static const double zero; //!< Valor por debajo del cual the action is taken as zero.
     Action(const std::string &n="", const std::string &descrip="");
 
     static Action NULA(void);
@@ -103,19 +98,19 @@ class Action: public EntConNmb
         multiplica(d);
         return *this;
       }
-    //! @brief Suma a ésta la acción que se pasa como parámetro.
+    //! @brief Addition
     inline Action &operator+=(const Action &f)
       {
         suma(f);
         return *this;
       }
-    //! @brief Devuelve el producto de la acción por un escalar.
+    //! @brief Product by a scalar.
     inline friend Action operator*(const double &d,const Action &f)
       { return f.GetMult(d); }
-    //! @brief Devuelve el producto de la acción por un escalar.
+    //! @brief Product by a scalar.
     inline friend Action operator*(const Action &f,const double &d)
       { return d*f; }
-    //! @brief Suma de acciones.
+    //! @brief Addition.
     inline friend Action operator+(const Action &f1,const Action &f2)
       {
         Action retval(f1);
@@ -126,7 +121,6 @@ class Action: public EntConNmb
     std::string ListaStrIncompatibles(ActionRValueList *af) const;
     std::vector<double> getCoeficientes(const std::vector<std::string> &) const;
     void Print(std::ostream &os) const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 std::ostream &operator<<(std::ostream &os,const Action &acc);
@@ -146,9 +140,9 @@ std::deque<const Action *> listaIncompatibles(const Action *acc,InputIterator be
     return retval;
   }
 
-//! @brief Devuelve la lista de nombre de las acciones.
+//! @brief Returns a list with the action names.
 template <class InputIterator>
-std::string nombresAcciones(InputIterator begin,InputIterator end)
+std::string actionsNames(InputIterator begin,InputIterator end)
   {
     std::string retval;
     InputIterator i=begin;
@@ -158,9 +152,9 @@ std::string nombresAcciones(InputIterator begin,InputIterator end)
     return retval;
   }
 
-//! @brief Devuelve la lista de nombre de las acciones.
+//! @brief Returns a list with the action names.
 template <class InputIterator>
-std::string nombresPtrAcciones(InputIterator begin,InputIterator end)
+std::string actionPtrsNames(InputIterator begin,InputIterator end)
   {
     std::string retval;
     InputIterator i=begin;

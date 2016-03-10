@@ -60,14 +60,11 @@ class ActionsFamiliesMap: public EntConNmb
     ActionsFamiliesMap &operator=(const ActionsFamiliesMap &otro);
   protected:
     friend class ActionContainer;
-    void for_each_accion(CmdStatus &,const std::string &);
-    virtual bool procesa_comando(CmdStatus &);
   public:
     ActionsFamiliesMap(const std::string &nmb);
     ActionRValue &inserta(const std::string &,const Action &,const std::string &nmb_coefs_psi="");
     LoadCombinationVector GetLoadCombinations(const bool &elu,const bool &sit_accidental) const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
-    size_t getNumAcciones(void) const;
+    size_t getNumActions(void) const;
     const PsiCoeffsMap *getPtrPsiCoeffs(void) const;
     bool Vacia(void) const;
     virtual ~ActionsFamiliesMap(void);

@@ -23,7 +23,6 @@
 
 #include "ActionContainer.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
-#include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 
 //! \fn cmb_acc::ActionContainer::ActionContainer(void)
@@ -42,88 +41,6 @@ cmb_acc::ActionContainer::ActionContainer(const PsiCoeffsMap &coefs)
     Q.set_owner(this);
     A.set_owner(this);
     AS.set_owner(this);
-  }
-
-//! @brief Lanza la ejecución del bloque de código que se pasa
-//! como parámetro para cada una de las acciones del contenedor.
-void cmb_acc::ActionContainer::for_each_accion(CmdStatus &status,const std::string &bloque)
-  {
-    G.set_owner(this);
-    G.for_each_accion(status,bloque);
-    G_aster.set_owner(this);
-    G_aster.for_each_accion(status,bloque);
-    Q.set_owner(this);
-    Q.for_each_accion(status,bloque);
-    A.set_owner(this);
-    A.for_each_accion(status,bloque);
-    AS.set_owner(this);
-    AS.for_each_accion(status,bloque);
-  }
-
-//! \fn cmb_acc::ActionContainer::procesa_comando(CmdStatus &status)
-//! @brief Lee el objeto desde archivo.
-bool cmb_acc::ActionContainer::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
-    if(verborrea>2)
-      std::clog << "(ActionContainer) Procesando comando: " << cmd << std::endl;
-    if(cmd == "permanentes")
-      {
-        G.set_owner(this);
-        G.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "permanentes_nc")
-      {
-        G_aster.set_owner(this);
-        G_aster.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "variables")
-      {
-        Q.set_owner(this);
-        Q.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "accidentales")
-      {
-        A.set_owner(this);
-        A.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "sismicas")
-      {
-        AS.set_owner(this);
-        AS.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "for_each")
-      {
-        const std::string bloque= status.GetBloque();
-        G.set_owner(this);
-        G.EjecutaBloque(status,bloque,G.GetNombre()+":for_each");
-        G_aster.set_owner(this);
-        G_aster.EjecutaBloque(status,bloque,G_aster.GetNombre()+":for_each");
-        Q.set_owner(this);
-        Q.EjecutaBloque(status,bloque,Q.GetNombre()+":for_each");
-        A.set_owner(this);
-        A.EjecutaBloque(status,bloque,A.GetNombre()+":for_each");
-        AS.set_owner(this);
-        AS.EjecutaBloque(status,bloque,AS.GetNombre()+":for_each");
-        return true;
-      }
-    else if(cmd == "for_each_accion")
-      {
-        for_each_accion(status,status.GetBloque());
-        return true;
-      }
-    else if(cmd == "coefs_psi")
-      {
-        coefs_psi.LeeCmd(status);
-        return true;
-      }
-    else
-      return EntCmd::procesa_comando(status);
   }
 
 //! @brief Inserta la acción en la familia que se indica en la cadena de caracteres.
@@ -148,43 +65,43 @@ cmb_acc::ActionRValue &cmb_acc::ActionContainer::inserta(const std::string &fami
   }
 
 //! @brief Devuelve el conjunto de acciones permanentes.
-const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getAccionesPermanentes(void) const
+const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getPermanentActions(void) const
   { return G; }
 
 //! @brief Asigna el conjunto de acciones permanentes.
-void cmb_acc::ActionContainer::setAccionesPermanentes(const ActionsFamily &g)
+void cmb_acc::ActionContainer::setPermanentActions(const ActionsFamily &g)
   { G= g; }
 
 //! @brief Devuelve el conjunto de acciones permanentes de valor no constante.
-const cmb_acc::ActionsFamiliesMap &cmb_acc::ActionContainer::getAccionesPermanentesNC(void) const
+const cmb_acc::ActionsFamiliesMap &cmb_acc::ActionContainer::getPermanentActionsNC(void) const
   { return G_aster; }
 
 //! @brief Asigna el conjunto de acciones permanentes de valor no constante.
-void cmb_acc::ActionContainer::setAccionesPermanentesNC(const ActionsFamiliesMap &mfa)
+void cmb_acc::ActionContainer::setPermanentActionsNC(const ActionsFamiliesMap &mfa)
   { G_aster= mfa; }
 
 //! @brief Devuelve el conjunto de acciones variables.
-const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getAccionesVariables(void) const
+const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getVariableActions(void) const
   { return Q; }
 
 //! @brief Devuelve el conjunto de acciones variables.
-void cmb_acc::ActionContainer::setAccionesVariables(const ActionsFamily &fa)
+void cmb_acc::ActionContainer::setVariableActions(const ActionsFamily &fa)
   { Q= fa; }
 
 //! @brief Devuelve el conjunto de acciones accidentales.
-const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getAccionesAccidentales(void) const
+const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getAccidentalActions(void) const
   { return A; }
 
 //! @brief Asigna el conjunto de acciones accidentales.
-void cmb_acc::ActionContainer::setAccionesAccidentales(const ActionsFamily &fa)
+void cmb_acc::ActionContainer::setAccidentalActions(const ActionsFamily &fa)
   { A= fa; }
 
 //! @brief Devuelve el conjunto de acciones sísmicas.
-const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getAccionesSismicas(void) const
+const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getSeismicActions(void) const
   { return AS; }
 
 //! @brief Asigna el conjunto de acciones sísmicas.
-void cmb_acc::ActionContainer::setAccionesSismicas(const ActionsFamily &fa)
+void cmb_acc::ActionContainer::setSeismicActions(const ActionsFamily &fa)
   { AS= fa; }
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsG(const bool &elu,const bool &sit_accidental) const
@@ -271,7 +188,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetVariables(const Load
     LoadCombinationVector retval; //Inicializa con acciones permanentes.
     if(!Q.Vacia()) //Hay acciones variables.
       {
-        const size_t nq= Q.getNumAcciones();
+        const size_t nq= Q.getNumActions();
         LoadCombinationVector SQ;
         for(size_t i=0;i<nq;i++) //i: Índice de la acción determinante.
           {
@@ -300,7 +217,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccSis(const LoadCom
     LoadCombinationVector retval(previas);
     if(!Acc.Vacia()) //Existen acciones accidentales o sísmicas.
       {
-        const size_t na= Acc.getNumAcciones();
+        const size_t na= Acc.getNumActions();
         LoadCombinationVector SA;
         for(size_t i=0;i<na;i++) //i: Índice de la acción accidental o sísmica.
           {
@@ -474,22 +391,4 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCombELS(void) const
     if(verborrea>1) std::clog << "  Calculadas " << retval.size() << " combinaciones ELS." << std::endl;
     retval.Numera("H-ELS-");
     return retval;
-  }
-
-//! \fn any_const_ptr cmb_acc::ActionContainer::GetProp(const std::string &cod) const
-//! @brief Devuelve la propiedad del objeto cuyo código se pasa como parámetro.
-any_const_ptr cmb_acc::ActionContainer::GetProp(const std::string &cod) const
-  {
-    if(cod == "permanentes")
-      return any_const_ptr(&G);
-    else if(cod == "permanentes_nc")
-      return any_const_ptr(&G_aster);
-    else if(cod == "variables")
-      return any_const_ptr(&Q);
-    else if(cod == "accidentales")
-      return any_const_ptr(&A);
-    else if(cod == "sismicas")
-      return any_const_ptr(&AS);
-    else
-      return EntCmd::GetProp(cod);
   }

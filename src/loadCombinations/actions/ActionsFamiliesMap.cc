@@ -22,7 +22,6 @@
 //ActionsFamiliesMap.cc
 
 #include "ActionsFamiliesMap.h"
-#include "xc_utils/src/base/CmdStatus.h"
 #include "ActionsFamily.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
@@ -110,66 +109,6 @@ const cmb_acc::PsiCoeffsMap *cmb_acc::ActionsFamiliesMap::getPtrPsiCoeffs(void) 
       }
   }
 
-//! @brief Lanza la ejecución del bloque de código que se pasa
-//! como parámetro para cada una de las acciones del contenedor.
-void cmb_acc::ActionsFamiliesMap::for_each_accion(CmdStatus &status,const std::string &bloque)
-  {
-    for(iterator i= familias.begin();i!=familias.end();i++)
-      {
-        (*i).second->set_owner(this);
-        (*i).second->for_each_accion(status,bloque);
-      }
-  }
-
-
-//! @brief Lee un objeto ActionsFamiliesMap desde archivo
-bool cmb_acc::ActionsFamiliesMap::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    const std::string msg_proc_cmd= "(ActionsFamiliesMap) Procesando comando: " + cmd;
-    if(verborrea>2)
-      std::clog << msg_proc_cmd << std::endl;
-    if(cmd == "defActionsFamily") //Definición de una familia.
-      {
-	std::string nmb_familia_acc= "";
-        std::deque<boost::any> fnc_indices= status.Parser().SeparaIndices(this);
-        if(fnc_indices.size()>0)
-          nmb_familia_acc= convert_to_string(fnc_indices[0]); //Nombre del set.
-        ActionsFamily *s= crea_familia_acc(nmb_familia_acc);
-        if(s)
-          {
-            s->set_owner(this);
-            s->LeeCmd(status);
-          }
-        return true;
-      }
-    else if(cmd == "for_each")
-      {
-        const std::string bloque= status.GetBloque();
-        for(iterator i= familias.begin();i!=familias.end();i++)
-          {
-            (*i).second->set_owner(this);
-            (*i).second->EjecutaBloque(status,bloque,GetNombre()+":for_each");
-          }
-        return true;
-      }
-    else if(cmd == "for_each_accion")
-      {
-        const std::string bloque= status.GetBloque();
-        for_each_accion(status,bloque);
-        return true;
-      }
-    ActionsFamily *familia_ptr= busca_familia_acc(cmd);
-    if(familia_ptr)
-      {
-        familia_ptr->set_owner(this);
-        familia_ptr->LeeCmd(status);
-        return true;
-      }
-    else
-      return EntConNmb::procesa_comando(status);
-  }
-
 //! @brief Borra todas las familias definidos.
 void cmb_acc::ActionsFamiliesMap::clear(void)
   {
@@ -188,7 +127,7 @@ cmb_acc::ActionsFamiliesMap::~ActionsFamiliesMap(void)
   }
 
 //! @brief Devuelve el número de acciones de todas las familias.
-size_t cmb_acc::ActionsFamiliesMap::getNumAcciones(void) const
+size_t cmb_acc::ActionsFamiliesMap::getNumActions(void) const
   { 
     size_t retval= 0;
     if(!familias.empty())
@@ -196,7 +135,7 @@ size_t cmb_acc::ActionsFamiliesMap::getNumAcciones(void) const
         {          
           ActionsFamily *familia= (*i).second;
           if(familia)
-            retval+= familia->getNumAcciones();
+            retval+= familia->getNumActions();
 	}
     return retval;
   }
@@ -240,27 +179,4 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::GetLoadCombinations(
       }
     retval= getCompatibles(retval); //Filtramos las que contienen acciones incompatibles.
     return retval;
-  }
-
-//! \brief Devuelve la propiedad del objeto cuyo código (de la propiedad) se pasa
-//! como parámetro.
-//!
-//! Soporta los códigos:
-any_const_ptr cmb_acc::ActionsFamiliesMap::GetProp(const std::string &cod) const
-  {
-    const ActionsFamily *familia_ptr= busca_familia_acc(cod);
-    if(cod == "num_familias")
-      {
-        tmp_gp_szt= familias.size();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(cod == "num_acciones")
-      {
-        tmp_gp_szt= getNumAcciones();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(familia_ptr)
-      return any_const_ptr(familia_ptr);
-    else
-      return EntConNmb::GetProp(cod);
   }

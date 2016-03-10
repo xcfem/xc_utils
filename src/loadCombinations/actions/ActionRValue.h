@@ -45,8 +45,6 @@ class ActionRValue: public Action
     inline double getPsi(short int r) const;
 
   protected:
-    virtual bool procesa_comando(CmdStatus &status);
-
     friend class ActionRValueList;
     //! @brief Constructor por defecto.
     ActionRValue(const std::string &n="", const std::string &descrip="",ActionRValueList *fam= NULL);
@@ -54,7 +52,6 @@ class ActionRValue: public Action
   public:
     Action Valor(short int r) const;
     void setPsiCoeffs(const std::string &);
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 } //fin namespace nmb_acc.

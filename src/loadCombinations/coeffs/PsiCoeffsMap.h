@@ -53,8 +53,6 @@ class PsiCoeffsMap: public EntCmd
     PsiCoeffs *crea_coefs(const std::string &nmb);
   protected:
     friend class ActionContainer;
-    void for_each(CmdStatus &,const std::string &);
-    virtual bool procesa_comando(CmdStatus &);
   public:
     PsiCoeffsMap(void);
     size_t size(void) const;
@@ -63,7 +61,6 @@ class PsiCoeffsMap: public EntCmd
     const PsiCoeffs *getPtrCoefs(const std::string &nmb) const;
     const PsiCoeffs &BuscaCoefs(const std::string &nmb) const;
     void insert(const std::string &,const PsiCoeffs &);
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 } // fin namespace cmb_acc
 

@@ -23,7 +23,6 @@
 
 #include "LoadCombinations.h"
 #include "xc_utils/src/loadCombinations/actions/ActionContainer.h"
-#include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 
 //! @brief Constructor por defecto.
@@ -37,52 +36,6 @@ cmb_acc::LoadCombinations::LoadCombinations(const ActionContainer &acc)
     comb_sls_frec(acc.GetFrecuentes()), comb_sls_cuasi_perm(acc.GetCuasiPermanentes())
   {}
 
-//! \fn cmb_acc::LoadCombinations::procesa_comando(CmdStatus &status)
-//! @brief Lee el objeto desde archivo.
-bool cmb_acc::LoadCombinations::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
-    if(verborrea>2)
-      std::clog << "(LoadCombinations) Procesando comando: " << cmd << std::endl;
-    if(cmd == "comb_uls_transiententes")
-      {
-        comb_uls_transient.set_owner(this);
-        comb_uls_transient.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "comb_uls_accidentales")
-      {
-        comb_uls_accid.set_owner(this);
-        comb_uls_accid.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "comb_uls_sismicas")
-      {
-        comb_uls_sism.set_owner(this);
-        comb_uls_sism.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "comb_sls_poco_frecuentes")
-      {
-        comb_sls_poco_frec.set_owner(this);
-        comb_sls_poco_frec.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "comb_sls_frecuentes")
-      {
-        comb_sls_frec.set_owner(this);
-        comb_sls_frec.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "comb_sls_cuasi_permanentes")
-      {
-        comb_sls_cuasi_perm.set_owner(this);
-        comb_sls_cuasi_perm.LeeCmd(status);
-        return true;
-      }
-    else
-      return EntCmd::procesa_comando(status);
-  }
 
 //! @brief Concatena las combinaciones de ambos objetos.
 void cmb_acc::LoadCombinations::Concat(const LoadCombinations &otras)
@@ -94,33 +47,3 @@ void cmb_acc::LoadCombinations::Concat(const LoadCombinations &otras)
     comb_sls_frec= LoadCombinationVector::Concat(comb_sls_frec,otras.comb_sls_frec,0.0);
     comb_sls_cuasi_perm= LoadCombinationVector::Concat(comb_sls_cuasi_perm,otras.comb_sls_cuasi_perm,0.0);
   }
-
-//! @brief Devuelve la propiedad cuyo código se pasa como parámetro.
-any_const_ptr cmb_acc::LoadCombinations::GetProp(const std::string &cod) const
-  {
-    if(cod == "getNumCombULS")
-      {
-        tmp_gp_szt= comb_uls_transient.size()+comb_uls_accid.size()+comb_uls_sism.size();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(cod == "getNumCombELS")
-      {
-        tmp_gp_szt= comb_sls_poco_frec.size()+comb_sls_frec.size()+comb_sls_cuasi_perm.size();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(cod == "comb_uls_transiententes")
-      return any_const_ptr(&comb_uls_transient);
-    else if(cod == "comb_uls_accidentales")
-      return any_const_ptr(&comb_uls_accid);
-    else if(cod == "comb_uls_sismicas")
-      return any_const_ptr(&comb_uls_sism);
-    else if(cod == "comb_sls_poco_frecuentes")
-      return any_const_ptr(&comb_sls_poco_frec);
-    else if(cod == "comb_sls_frecuentes")
-      return any_const_ptr(&comb_sls_frec);
-    else if(cod == "comb_sls_cuasi_permanentes")
-      return any_const_ptr(&comb_sls_cuasi_perm);
-    else
-      return EntCmd::GetProp(cod);
-  }
-

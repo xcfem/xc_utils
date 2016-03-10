@@ -24,7 +24,6 @@
 #include "ActionRelationships.h"
 #include "xc_basic/src/texto/cadena_carac.h"
 #include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/utils_any.h"
 #include "boost/regex.hpp"
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
@@ -95,42 +94,13 @@ void cmb_acc::ActionRelationships::concat_maestras(const dq_string &otra)
       AgregaMaestra(*i);
   }
 
-//! \fn cmb_acc::ActionRelationships::procesa_comando(CmdStatus &status)
-//! @brief Lee el objeto desde archivo.
-bool cmb_acc::ActionRelationships::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
-    if(verborrea>2)
-      std::clog << "(Action) Procesando comando: " << cmd << std::endl;
-    if(cmd == "incompatibles")
-      {
-        const std::string str= q_blancos(interpretaString(status.GetString()));
-        if(str!="") AgregaIncompatible(str);
-        return true;
-      }
-    else if(cmd == "maestras")
-      {
-        const std::string str= q_blancos(interpretaString(status.GetString()));
-        if(str!="") AgregaMaestra(str);
-        return true;
-      }
-    else if(cmd == "no_determinante")
-      {
-        status.GetString(); //Ignoramos argumentos.
-        nodet= true;
-        return true;
-      }
-    else
-      return EntCmd::procesa_comando(status);
-  }
-
-//! @brief Devuelve verdadero si alguna de las cadenas de caracteres de nmbAccionesComb
+//! @brief Devuelve verdadero si alguna de las cadenas de caracteres de combActionsNames
 //! verifican la expresión regular "exprReg".
-bool cmb_acc::ActionRelationships::match(const std::string &exprReg,const dq_string &nmbAccionesComb) const
+bool cmb_acc::ActionRelationships::match(const std::string &exprReg,const dq_string &combActionsNames) const
   {
     bool retval= false;
     boost::regex expresion(exprReg); //Inicializamos la expresión regular.
-    for(const_iterator j= nmbAccionesComb.begin();j!=nmbAccionesComb.end();j++)
+    for(const_iterator j= combActionsNames.begin();j!=combActionsNames.end();j++)
       {
         const std::string &test= *j;
         retval= regex_match(test, expresion);
@@ -141,27 +111,27 @@ bool cmb_acc::ActionRelationships::match(const std::string &exprReg,const dq_str
 
 //! @brief Devuelve verdadero si alguna de las cadenas de caracteres que se pasan como parámetro
 //! verifica alguna de las expresiones del contenedor de expresiones regulares "exprReg".
-bool cmb_acc::ActionRelationships::match_any(const dq_string &exprReg,const dq_string &nmbAccionesComb) const
+bool cmb_acc::ActionRelationships::match_any(const dq_string &exprReg,const dq_string &combActionsNames) const
   {
     bool retval= false;
     for(const_iterator i= exprReg.begin();i!=exprReg.end();i++)
       {
         const std::string str= *i;
-        retval= match(str,nmbAccionesComb);
+        retval= match(str,combActionsNames);
         if(retval) break; //No hace falta seguir.
       }
     return retval;
   }
 
 //! @brief Devuelve verdadero si para cada una de las expresiones regulares de "exprReg"
-//! existe alguna cadena de caracteres de nmbAccionesComb que la verifica.
-bool cmb_acc::ActionRelationships::match_all(const dq_string &exprReg,const dq_string &nmbAccionesComb) const
+//! existe alguna cadena de caracteres de combActionsNames que la verifica.
+bool cmb_acc::ActionRelationships::match_all(const dq_string &exprReg,const dq_string &combActionsNames) const
   {
     bool retval= false;
     for(const_iterator i= exprReg.begin();i!=exprReg.end();i++)
       {
         const std::string str= *i;
-        retval= match(str,nmbAccionesComb);
+        retval= match(str,combActionsNames);
         if(!retval) break; //No hace falta seguir.
       }
     return retval;
@@ -202,10 +172,10 @@ void cmb_acc::ActionRelationships::updateMaestras(const std::string &nmb)
   {
     if(!maestras.empty())
       {
-        const dq_string nmbAccionesComb= get_nmb_acciones_combinacion(nmb); //Nombres de las acciones de esta combinacion.
+        const dq_string combActionsNames= get_nmb_acciones_combinacion(nmb); //Nombres de las acciones de esta combinacion.
         dq_string nuevas;
         for(const_iterator i= maestras.begin();i!=maestras.end();i++)
-          if(!match(*i,nmbAccionesComb)) //No se encontró la maestra.
+          if(!match(*i,combActionsNames)) //No se encontró la maestra.
             nuevas.push_back(*i);
         maestras= nuevas;
       }
@@ -227,25 +197,6 @@ void cmb_acc::ActionRelationships::Print(std::ostream &os) const
     os << "incompatibles: {" << nombresIncompatibles() << "}; maestras: {"
        << nombresMaestras() << "}";
     if(contiene_incomp) os << " contiente incompatibles." << std::endl;
-  }
-
-//! @brief Devuelve la propiedad cuyo código se pasa como parámetro.
-any_const_ptr cmb_acc::ActionRelationships::GetProp(const std::string &cod) const
-  {
-    if(cod == "contieneIncomp")
-      return any_const_ptr(contiene_incomp);
-    else if(cod == "getMaestras")
-      {
-        tmp_gp_str= nombresMaestras();
-        return any_const_ptr(tmp_gp_str);
-      }
-    else if(cod == "getIncompatibles")
-      {
-        tmp_gp_str= nombresIncompatibles();
-        return any_const_ptr(tmp_gp_str);
-      }
-    else
-      return EntCmd::GetProp(cod);
   }
 
 std::ostream &cmb_acc::operator<<(std::ostream &os,const ActionRelationships &a)

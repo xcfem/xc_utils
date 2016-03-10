@@ -25,32 +25,12 @@
 #include "GammaF.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/Variation.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/Variations.h"
-#include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
 
 cmb_acc::GammaFELS::GammaFELS(const float &fav,const float &desfav)
   : gamma_f_fav(fav), gamma_f_desfav(desfav) {}
 
-
-bool cmb_acc::GammaFELS::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
-    if(verborrea>2)
-      std::clog << "(GammaFELS) Procesando comando: " << cmd << std::endl;
-    if(cmd == "favorable")
-      {
-        gamma_f_fav= interpretaDouble(status.GetString());
-        return true;
-      }
-    else if(cmd == "desfavorable")
-      {
-        gamma_f_desfav= interpretaDouble(status.GetString());
-        return true;
-      }
-    else
-      return EntCmd::procesa_comando(status);
-  }
 
 //! @brief Devuelve los coeficientes de ponderación correspondientes a situaciones de servicio.
 cmb_acc::Variation cmb_acc::GammaFELS::Coefs(void) const
@@ -62,39 +42,8 @@ cmb_acc::Variation cmb_acc::GammaFELS::Coefs(void) const
     return retval;
   }
 
-//! \fn any_const_ptr cmb_acc::GammaFELS::GetProp(const std::string &cod) const
-//! @brief Devuelve la propiedad del objeto cuyo código se pasa como parámetro.
-any_const_ptr cmb_acc::GammaFELS::GetProp(const std::string &cod) const
-  {
-    if(cod == "favorable")
-      return any_const_ptr(gamma_f_fav);
-    else if(cod == "desfavorable")
-      return any_const_ptr(gamma_f_desfav);
-    else
-      return EntCmd::GetProp(cod);
-  }
-
 cmb_acc::GammaFELU::GammaFELU(const float &fav,const float &desfav,const float &fav_acc,const float &desfav_acc)
   : GammaFELS(fav,desfav), gamma_f_fav_acc(fav_acc), gamma_f_desfav_acc(desfav_acc) {}
-
-bool cmb_acc::GammaFELU::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
-    if(verborrea>2)
-      std::clog << "(GammaFELU) Procesando comando: " << cmd << std::endl;
-    if(cmd == "favorable_accidental")
-      {
-        gamma_f_fav_acc= status.GetFloat();
-        return true;
-      }
-    else if(cmd == "desfavorable_accidental")
-      {
-        gamma_f_desfav_acc= status.GetFloat();
-        return true;
-      }
-    else
-      return GammaFELS::procesa_comando(status);
-  }
 
 //! @brief Devuelve los coeficientes de ponderación correspondientes 
 //! a situaciones persistentes o transitorias.
@@ -112,41 +61,9 @@ cmb_acc::Variation cmb_acc::GammaFELU::CoefsAcc(void) const
     return retval;
   }
 
-//! \fn any_const_ptr cmb_acc::GammaFELU::GetProp(const std::string &cod) const
-//! @brief Devuelve la propiedad del objeto cuyo código se pasa como parámetro.
-any_const_ptr cmb_acc::GammaFELU::GetProp(const std::string &cod) const
-  {
-    if(cod == "favorable_accidental")
-      return any_const_ptr(gamma_f_fav_acc);
-    else if(cod == "desfavorable_accidental")
-      return any_const_ptr(gamma_f_desfav_acc);
-    else
-      return GammaFELS::GetProp(cod);
-  }
-
 //! @brief Constructor
 cmb_acc::GammaF::GammaF(const GammaFELU &gf_elu, const GammaFELS &gf_els)
   : EntCmd(), gammaf_elu(gf_elu), gammaf_els(gf_els) {}
-
-//! @brief Lectura desde archivo.
-bool cmb_acc::GammaF::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
-    if(verborrea>2)
-      std::clog << "(GammaF) Procesando comando: " << cmd << std::endl;
-    if(cmd == "gammaf_elu") //Lee coeficientes de ponderación de acciones en ELU.
-      {
-        gammaf_elu.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "gammaf_els") //Lee coeficientes de ponderación de acciones en ELS.
-      {
-        gammaf_els.LeeCmd(status);
-        return true;
-      }
-    else
-      return EntCmd::procesa_comando(status);
-  }
 
 //! @brief Devuelve los coeficientes de ponderación correspondientes 
 //! a estados límite de servicio.
@@ -173,16 +90,4 @@ cmb_acc::Variations cmb_acc::GammaF::calcula_variations(const bool &elu,const bo
     else
       retval= Variations::Calcula(gammaf_els.Coefs(),d,lvr);
     return retval;
-  }
-
-//! \fn any_const_ptr cmb_acc::GammaF::GetProp(const std::string &cod) const
-//! @brief Devuelve la propiedad del objeto cuyo código se pasa como parámetro.
-any_const_ptr cmb_acc::GammaF::GetProp(const std::string &cod) const
-  {
-    if(cod == "gammaf_elu")
-      return any_const_ptr(&gammaf_elu);
-    else if(cod == "gammaf_els")
-      return any_const_ptr(&gammaf_els);
-    else
-      return EntCmd::GetProp(cod);
   }

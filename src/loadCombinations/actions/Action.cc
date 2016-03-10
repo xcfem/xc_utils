@@ -27,7 +27,6 @@
 #include "xc_basic/src/texto/en_letra.h"
 #include "xc_basic/src/texto/latex.h"
 #include "xc_utils/src/base/Record.h"
-#include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
 #include "ActionRValueList.h"
@@ -157,32 +156,6 @@ void cmb_acc::Action::suma(const Action &f)
       set_owner(const_cast<EntCmd *>(f.Owner()));
   }
 
-//! \fn cmb_acc::Action::procesa_comando(CmdStatus &status)
-//! @brief Lee el objeto desde archivo.
-bool cmb_acc::Action::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
-    if(verborrea>2)
-      std::clog << "(Action) Procesando comando: " << cmd << std::endl;
-    if(cmd == "nombre")
-      {
-	SetNombre(interpretaString(status.GetString()));
-        return true;
-      }
-    else if(cmd == "descripcion")
-      {
-        descripcion= interpretaString(status.GetString());
-        return true;
-      }
-    else if(cmd == "relaciones")
-      {
-        relaciones.LeeCmd(status);
-        return true;
-      }
-    else
-      return EntConNmb::procesa_comando(status);
-  }
-
 //! @brief Devuelve verdadero si la acción que se pasa como parámetro es incompatible con esta,
 //! es decir que ambas no pueden estar presentes en la misma hipótesis.
 //!
@@ -223,7 +196,7 @@ std::string cmb_acc::Action::ListaStrIncompatibles(ActionRValueList *af) const
       {
         std::deque<const cmb_acc::Action *> incomp= listaIncompatibles(this,af->begin(),af->end());
         if(!incomp.empty())
-          retval= nombresPtrAcciones(incomp.begin(),incomp.end());
+          retval= actionPtrsNames(incomp.begin(),incomp.end());
       }
     else
       std::cerr << "El puntero a la familia de acciones es nulo." << std::endl;
@@ -235,45 +208,6 @@ void cmb_acc::Action::Print(std::ostream &os) const
   {
     os << GetNombre();
     relaciones.Print(os);
-  }
-
-//! @brief Devuelve la propiedad cuyo código se pasa como parámetro.
-any_const_ptr cmb_acc::Action::GetProp(const std::string &cod) const
-  {
-    if(cod == "getNombre")
-      {
-        tmp_gp_str= GetNombre();
-        return any_const_ptr(tmp_gp_str);
-      }
-    else if(cod == "getNombreExpandido")
-      {
-        tmp_gp_str= ascii2latex(GetNombreExpandido());
-        return any_const_ptr(tmp_gp_str);
-      }
-    else if(cod == "getDescripcion")
-      {
-        tmp_gp_str= GetDescripcion();
-        return any_const_ptr(tmp_gp_str);
-      }
-    else if(cod == "getDescomp")
-      {
-        const map_descomp tmp= getDescomp();
-        tmp_gp_record.clearProps();
-        for(map_descomp::const_iterator i= tmp.begin();i!=tmp.end();i++)
-          tmp_gp_record.crea_user_prop(i->first,i->second);
-        return any_const_ptr(tmp_gp_record);
-      }
-    else if(cod == "getRelaciones")
-      { return any_const_ptr(&relaciones); }
-    else if(cod == "getCoeficientes")
-      {
-        const std::vector<std::string> base= popVectorString(cod);
-        const std::vector<double> tmp= getCoeficientes(base);
-        tmp_gp_mdbl= m_double(1,tmp.size(),tmp.begin(),tmp.end());
-        return any_const_ptr(tmp_gp_mdbl);
-      }
-    else
-      return EntConNmb::GetProp(cod);
   }
 
 //! @brief Devuelve verdadero si las acciones de índices i y j son incompatibles.
