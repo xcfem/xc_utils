@@ -19,38 +19,38 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Accion.hxx
+//Action.hxx
 
-#ifndef ACCION_H
-#define ACCION_H
+#ifndef ACTION_H
+#define ACTION_H
 
 #include <string>
 #include <deque>
 #include <cmath>
 #include "xc_utils/src/base/EntConNmb.h"
-#include "RelAcciones.h"
+#include "ActionRelationships.h"
 
 //! \namespace<cmb_acc>
 //! Rutinas para generar combinaciones de acciones.
 namespace cmb_acc{
 
-class ListaVRAccion;
+class ActionRValueList;
 
 //! @defgroup CMBACC Rutinas para generar combinaciones de acciones.
 //
 //! @ingroup CMBACC
 //
 //! @brief Los objetos de esta clase representan una acción o una combinación de acciones.
-class Accion: public EntConNmb
+class Action: public EntConNmb
   {
     std::string descripcion; //!< Descripcion de la acción p. ej. "Viento derecho".
-    RelAcciones relaciones; //!< Relaciones de una acción con el resto.
+    ActionRelationships relaciones; //!< Relaciones de una acción con el resto.
     double f_pond; //!< Factor que pondera a la acción.
 
     void limpia_nombres(void);
-    bool incompatible(const Accion &f) const;
+    bool incompatible(const Action &f) const;
     void multiplica(const double &d);
-    void suma(const Accion &f);
+    void suma(const Action &f);
 
 
   protected:
@@ -58,9 +58,9 @@ class Accion: public EntConNmb
 
   public:
     static const double zero; //!< Valor por debajo del cual la accion se considera nula.
-    Accion(const std::string &n="", const std::string &descrip="");
+    Action(const std::string &n="", const std::string &descrip="");
 
-    static Accion NULA(void);
+    static Action NULA(void);
     //! @brief Asigna el nombre a la acción.
     inline void SetNombre(const std::string &nmb)
       { EntConNmb::Nombre()= nmb; }
@@ -71,7 +71,7 @@ class Accion: public EntConNmb
     //! @brief Asigna a la acción la descripción que se pasa como parámetro.
     inline void SetDescripcion(const std::string &desc)
       { descripcion= desc; }
-    const RelAcciones &getRelaciones(void) const
+    const ActionRelationships &getRelaciones(void) const
       { return relaciones; }
     inline double getWeightingFactor(void) const
       { return f_pond; }
@@ -81,9 +81,9 @@ class Accion: public EntConNmb
     map_descomp getDescomp(void) const;
 
     //! @brief Devuelve verdadero si esta acción es incompatible con la que se pasa como parámetro.
-    bool Incompatible(const Accion &f) const;
+    bool Incompatible(const Action &f) const;
     //! @brief Devuelve verdadero si esta acción es compatible con la que se pasa como parámetro.
-    inline bool Compatible(const Accion &f) const
+    inline bool Compatible(const Action &f) const
       { return !Incompatible(f); }
 
     bool Simple(void) const;
@@ -91,56 +91,56 @@ class Accion: public EntConNmb
     inline bool Nula(const double &tol= zero) const
       { return (fabs(f_pond)<tol); }
      //! @brief Devuelve la acción multiplicada por un escalar.
-    Accion GetMult(const double &d) const
+    Action GetMult(const double &d) const
       {
-        Accion retval(*this);
+        Action retval(*this);
         retval*=(d);
         return retval;
       }
     //! @brief Producto por un escalar.
-    inline Accion &operator*=(const double &d)
+    inline Action &operator*=(const double &d)
       {
         multiplica(d);
         return *this;
       }
     //! @brief Suma a ésta la acción que se pasa como parámetro.
-    inline Accion &operator+=(const Accion &f)
+    inline Action &operator+=(const Action &f)
       {
         suma(f);
         return *this;
       }
     //! @brief Devuelve el producto de la acción por un escalar.
-    inline friend Accion operator*(const double &d,const Accion &f)
+    inline friend Action operator*(const double &d,const Action &f)
       { return f.GetMult(d); }
     //! @brief Devuelve el producto de la acción por un escalar.
-    inline friend Accion operator*(const Accion &f,const double &d)
+    inline friend Action operator*(const Action &f,const double &d)
       { return d*f; }
     //! @brief Suma de acciones.
-    inline friend Accion operator+(const Accion &f1,const Accion &f2)
+    inline friend Action operator+(const Action &f1,const Action &f2)
       {
-        Accion retval(f1);
+        Action retval(f1);
         retval+=(f2);
         return retval;
       }
 
-    std::string ListaStrIncompatibles(ListaVRAccion *af) const;
+    std::string ListaStrIncompatibles(ActionRValueList *af) const;
     std::vector<double> getCoeficientes(const std::vector<std::string> &) const;
     void Print(std::ostream &os) const;
     virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
-std::ostream &operator<<(std::ostream &os,const Accion &acc);
+std::ostream &operator<<(std::ostream &os,const Action &acc);
 
-bool incompatibles(const Accion &acc_i,const Accion &acc_j);
+bool incompatibles(const Action &acc_i,const Action &acc_j);
 
 //! @brief Devuelve la lista de acciones incompatibles con aquella cuyo nombre se pasa como parámetro.
 template <class InputIterator>
-std::deque<const Accion *> listaIncompatibles(const Accion *acc,InputIterator begin,InputIterator end)
+std::deque<const Action *> listaIncompatibles(const Action *acc,InputIterator begin,InputIterator end)
   {
-    std::deque<const Accion *> retval;
+    std::deque<const Action *> retval;
     for(InputIterator i=begin;i!=end;i++)
       {
-        const Accion &data= *i;
+        const Action &data= *i;
         if(acc->Incompatible(data)) retval.push_back(&data);
       }
     return retval;

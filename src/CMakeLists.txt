@@ -118,9 +118,9 @@ SET(VtkAux vtk_aux/vtkShStrArray vtk_aux/vtkLabeledShStrMapper vtk_aux/vtkTakePh
 
 SET(ca_coefs loadCombinations/coeffs/GammaF loadCombinations/coeffs/PsiCoeffs loadCombinations/coeffs/PsiCoeffsMap)
 
-SET(ca_acciones loadCombinations/actions/Accion loadCombinations/actions/RelAcciones loadCombinations/actions/VRAccion loadCombinations/actions/ListaVRAccion loadCombinations/actions/FamiliaAcciones loadCombinations/actions/MapFamiliasAcc loadCombinations/actions/AccionesClasificadas)
+SET(ca_acciones loadCombinations/actions/Action loadCombinations/actions/ActionRelationships loadCombinations/actions/ActionRValue loadCombinations/actions/ActionRValueList loadCombinations/actions/ActionsFamily loadCombinations/actions/ActionsFamiliesMap loadCombinations/actions/ActionContainer)
 
-SET(ca_combinaciones loadCombinations/comb_analysis/Variation loadCombinations/comb_analysis/Variations loadCombinations/comb_analysis/LoadCombinationVector loadCombinations/comb_analysis/LoadCombinations loadCombinations/comb_analysis/MapPondAcciones loadCombinations/comb_analysis/LoadCombinationGenerator)
+SET(ca_combinaciones loadCombinations/comb_analysis/Variation loadCombinations/comb_analysis/Variations loadCombinations/comb_analysis/LoadCombinationVector loadCombinations/comb_analysis/LoadCombinations loadCombinations/comb_analysis/ActionWeightingMap loadCombinations/comb_analysis/LoadCombinationGenerator)
 
 ADD_LIBRARY(xc_utils SHARED ${BASE} ${MYSQL} ${SQLITE} ${CMDLIBPLOT} ${cuadGauss} ${geom} ${GnuGts} ${NUCLEO}  ${VtkAux} ${ca_coefs} ${ca_acciones} ${ca_combinaciones})
 

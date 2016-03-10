@@ -19,28 +19,28 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//AccionesClasificadas.h
+//ActionContainer.h
 //Almacena todas las familias de acciones para la estructura o el elemento estructural.
 
 #ifndef ACCIONESCLASIFICADAS_H
 #define ACCIONESCLASIFICADAS_H
 
-#include "FamiliaAcciones.h"
-#include "MapFamiliasAcc.h"
+#include "ActionsFamily.h"
+#include "ActionsFamiliesMap.h"
 #include "xc_utils/src/loadCombinations/coeffs/PsiCoeffsMap.h"
 
 namespace cmb_acc{
 //! @ingroup CMBACC
 //
 //! @brief Almacena todas las familias de acciones.
-class AccionesClasificadas: public EntCmd
+class ActionContainer: public EntCmd
   {
   private:
-    FamiliaAcciones G; //!< Acciones permanentes.
-    MapFamiliasAcc G_aster; //!< Acciones permanentes de valor no constante.
-    FamiliaAcciones Q; //!< Acciones variables.
-    FamiliaAcciones A; //!< Acciones accidentales.
-    FamiliaAcciones AS; //!< Acciones sísmicas.
+    ActionsFamily G; //!< Acciones permanentes.
+    ActionsFamiliesMap G_aster; //!< Acciones permanentes de valor no constante.
+    ActionsFamily Q; //!< Acciones variables.
+    ActionsFamily A; //!< Acciones accidentales.
+    ActionsFamily AS; //!< Acciones sísmicas.
     PsiCoeffsMap coefs_psi; //!< Coeficientes de simultaneidad de las acciones.
 
     LoadCombinationVector GetLoadCombinationsG(const bool &elu,const bool &sit_accidental) const;
@@ -50,28 +50,28 @@ class AccionesClasificadas: public EntCmd
     LoadCombinationVector GetLoadCombinationsAS(short int r,int d=-1,short int rr=-1) const;
     LoadCombinationVector GetPermanentes(const bool &elu,const bool &sit_accidental) const;
     LoadCombinationVector GetVariables(const LoadCombinationVector &permanentes,const bool &elu,const bool &sit_accidental,const short int &v) const;
-    LoadCombinationVector GetAccSis(const LoadCombinationVector &previas,const FamiliaAcciones &Acc) const;
+    LoadCombinationVector GetAccSis(const LoadCombinationVector &previas,const ActionsFamily &Acc) const;
 
   protected:
-    friend class MapPondAcciones;
+    friend class ActionWeightingMap;
     void for_each_accion(CmdStatus &,const std::string &);
     virtual bool procesa_comando(CmdStatus &status);
   public:
-    AccionesClasificadas(const PsiCoeffsMap &coefs= PsiCoeffsMap());
-    inline virtual ~AccionesClasificadas(void) {}
+    ActionContainer(const PsiCoeffsMap &coefs= PsiCoeffsMap());
+    inline virtual ~ActionContainer(void) {}
 
-    VRAccion &inserta(const std::string &,const Accion &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
+    ActionRValue &inserta(const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
 
-    const FamiliaAcciones &getAccionesPermanentes(void) const;
-    void setAccionesPermanentes(const FamiliaAcciones &);
-    const MapFamiliasAcc &getAccionesPermanentesNC(void) const;
-    void setAccionesPermanentesNC(const MapFamiliasAcc &);
-    const FamiliaAcciones &getAccionesVariables(void) const;
-    void setAccionesVariables(const FamiliaAcciones &);
-    const FamiliaAcciones &getAccionesAccidentales(void) const;
-    void setAccionesAccidentales(const FamiliaAcciones &);
-    const FamiliaAcciones &getAccionesSismicas(void) const;
-    void setAccionesSismicas(const FamiliaAcciones &);
+    const ActionsFamily &getAccionesPermanentes(void) const;
+    void setAccionesPermanentes(const ActionsFamily &);
+    const ActionsFamiliesMap &getAccionesPermanentesNC(void) const;
+    void setAccionesPermanentesNC(const ActionsFamiliesMap &);
+    const ActionsFamily &getAccionesVariables(void) const;
+    void setAccionesVariables(const ActionsFamily &);
+    const ActionsFamily &getAccionesAccidentales(void) const;
+    void setAccionesAccidentales(const ActionsFamily &);
+    const ActionsFamily &getAccionesSismicas(void) const;
+    void setAccionesSismicas(const ActionsFamily &);
 
     //Estados límite últimos.
     LoadCombinationVector GetPersistentesOTransit(void) const;

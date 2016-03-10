@@ -32,7 +32,7 @@
 namespace cmb_acc{
 class Variation;
 class Variations;
-class ListaVRAccion;
+class ActionRValueList;
 
 //! @ingroup CMBACC
 //
@@ -106,7 +106,7 @@ class GammaF: public EntCmd
     inline const GammaFELS &getGammaFELS(void) const
       { return gammaf_els; }
     //! @brief Devuelve los coeficientes de ponderación correspondientes a estado límite de servicio.
-    Variations calcula_variations(const bool &elu,const bool &sit_accidental,const int &d,const ListaVRAccion &) const;
+    Variations calcula_variations(const bool &elu,const bool &sit_accidental,const int &d,const ActionRValueList &) const;
     virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 

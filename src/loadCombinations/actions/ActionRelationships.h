@@ -19,7 +19,7 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//RelAcciones.hxx
+//ActionRelationships.hxx
 
 #ifndef RELACCIONES_H
 #define RELACCIONES_H
@@ -35,7 +35,7 @@ class LoadCombinationVector;
 //! @ingroup CMBACC
 //
 //! @brief Relaciones de una acción con el resto.
-class RelAcciones: public EntCmd
+class ActionRelationships: public EntCmd
   {
   public:
     typedef std::deque<std::string> dq_string;
@@ -62,7 +62,7 @@ class RelAcciones: public EntCmd
     virtual bool procesa_comando(CmdStatus &status);
 
   public:
-    RelAcciones(void);
+    ActionRelationships(void);
 
     //! @brief Agrega a la lista de incompatibles la expresión regular que se pasa como parámetro.
     inline void AgregaIncompatible(const std::string &str)
@@ -91,7 +91,7 @@ class RelAcciones: public EntCmd
     inline bool contieneIncomp(void) const
       { return contiene_incomp; }
 
-    void concat(const RelAcciones &otra);
+    void concat(const ActionRelationships &otra);
 
     std::string nombresIncompatibles(void) const;
     std::string nombresMaestras(void) const;
@@ -99,7 +99,7 @@ class RelAcciones: public EntCmd
     virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
-std::ostream &operator<<(std::ostream &os,const RelAcciones &acc);
+std::ostream &operator<<(std::ostream &os,const ActionRelationships &acc);
 
 const LoadCombinationVector &getCompatibles(const LoadCombinationVector &);
 const LoadCombinationVector &filtraCombsEsclavasHuerfanas(const LoadCombinationVector &);

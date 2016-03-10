@@ -19,23 +19,23 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//MapFamiliasAcc.cc
+//ActionsFamiliesMap.cc
 
-#include "MapFamiliasAcc.h"
+#include "ActionsFamiliesMap.h"
 #include "xc_utils/src/base/CmdStatus.h"
-#include "FamiliaAcciones.h"
+#include "ActionsFamily.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
-#include "AccionesClasificadas.h"
+#include "ActionContainer.h"
 
 
 //! @brief Devuelve verdadero si la familia existe.
-bool cmb_acc::MapFamiliasAcc::existe(const std::string &nmb) const
+bool cmb_acc::ActionsFamiliesMap::existe(const std::string &nmb) const
   { return (familias.find(nmb)!=familias.end()); }
 
 //! @brief Devuelve un puntero a la familia cuyo nombre se pasa como parámetro.
-cmb_acc::FamiliaAcciones *cmb_acc::MapFamiliasAcc::busca_familia_acc(const std::string &nmb)
+cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::busca_familia_acc(const std::string &nmb)
   {
     if(existe(nmb))
       return familias[nmb];
@@ -44,7 +44,7 @@ cmb_acc::FamiliaAcciones *cmb_acc::MapFamiliasAcc::busca_familia_acc(const std::
   }
 
 //! @brief Devuelve un puntero a la familia cuyo nombre se pasa como parámetro.
-const cmb_acc::FamiliaAcciones *cmb_acc::MapFamiliasAcc::busca_familia_acc(const std::string &nmb) const
+const cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::busca_familia_acc(const std::string &nmb) const
   {
     const_iterator i= familias.find(nmb);
     if(i!= familias.end())
@@ -54,12 +54,12 @@ const cmb_acc::FamiliaAcciones *cmb_acc::MapFamiliasAcc::busca_familia_acc(const
   }
 
 //! @brief Inserta la acción en la familia que se pasa como parámetro.
-cmb_acc::VRAccion &cmb_acc::MapFamiliasAcc::inserta(const std::string &familia,const Accion &acc,const std::string &nmb_coefs_psi)
+cmb_acc::ActionRValue &cmb_acc::ActionsFamiliesMap::inserta(const std::string &familia,const Action &acc,const std::string &nmb_coefs_psi)
   {
-    FamiliaAcciones *familia_ptr= busca_familia_acc(familia);
+    ActionsFamily *familia_ptr= busca_familia_acc(familia);
     if(!familia_ptr)
       {
-        std::cerr << "MapFamiliasAcc::inserta no se encontró la familia: '"
+        std::cerr << "ActionsFamiliesMap::inserta no se encontró la familia: '"
                   << familia << "'\n";
         const_iterator i= familias.begin();
         familia_ptr= (*i).second;
@@ -68,12 +68,12 @@ cmb_acc::VRAccion &cmb_acc::MapFamiliasAcc::inserta(const std::string &familia,c
   }
 
 //! @brief Crea una nueva familia con el nombre que se le pasa como parámetro.
-cmb_acc::FamiliaAcciones *cmb_acc::MapFamiliasAcc::crea_familia_acc(const std::string &nmb)
+cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::crea_familia_acc(const std::string &nmb)
   {
-    FamiliaAcciones *tmp =NULL;
+    ActionsFamily *tmp =NULL;
     if(!existe(nmb)) //la familia es nuevo.
       {
-        tmp= new FamiliaAcciones(nmb,GammaF(GammaFELU(1.0,1.6,1.0,1.0),GammaFELS(0.9,1.1)));//Coeficientes de ponderación por defecto 
+        tmp= new ActionsFamily(nmb,GammaF(GammaFELU(1.0,1.6,1.0,1.0),GammaFELS(0.9,1.1)));//Coeficientes de ponderación por defecto 
                                                                                             //para acciones permanentes de valor no constante.
         familias[nmb]= tmp;
       }
@@ -83,36 +83,36 @@ cmb_acc::FamiliaAcciones *cmb_acc::MapFamiliasAcc::crea_familia_acc(const std::s
   }
 
 //! @brief Constructor por defecto.
-cmb_acc::MapFamiliasAcc::MapFamiliasAcc(const std::string &nmb)
+cmb_acc::ActionsFamiliesMap::ActionsFamiliesMap(const std::string &nmb)
   : EntConNmb(nmb) {}
 
 //! @brief Constructor de copia (NO COPIA LAS FAMILIAS).
-cmb_acc::MapFamiliasAcc::MapFamiliasAcc(const MapFamiliasAcc &otro)
+cmb_acc::ActionsFamiliesMap::ActionsFamiliesMap(const ActionsFamiliesMap &otro)
   : EntConNmb(otro){}
 
 //! @brief Operador asignación (NO COPIA LAS FAMILIAS).
-cmb_acc::MapFamiliasAcc &cmb_acc::MapFamiliasAcc::operator=(const MapFamiliasAcc &otro)
+cmb_acc::ActionsFamiliesMap &cmb_acc::ActionsFamiliesMap::operator=(const ActionsFamiliesMap &otro)
   {
     EntConNmb::operator=(otro);
     return *this;
   }
 
 //! @brief Devuelve un puntero a la tabla de coeficientes de simultaneidad.
-const cmb_acc::PsiCoeffsMap *cmb_acc::MapFamiliasAcc::getPtrPsiCoeffs(void) const
+const cmb_acc::PsiCoeffsMap *cmb_acc::ActionsFamiliesMap::getPtrPsiCoeffs(void) const
   {
-    const AccionesClasificadas *tmp= dynamic_cast<const AccionesClasificadas *>(Owner());
+    const ActionContainer *tmp= dynamic_cast<const ActionContainer *>(Owner());
     if(tmp)
       return tmp->getPtrPsiCoeffs();
     else
       {
-	std::cerr << "MapFamiliasAcc::getPtrPsiCoeffs; no se encontró el objeto propietario de éste." << std::endl;
+	std::cerr << "ActionsFamiliesMap::getPtrPsiCoeffs; no se encontró el objeto propietario de éste." << std::endl;
         return NULL;
       }
   }
 
 //! @brief Lanza la ejecución del bloque de código que se pasa
 //! como parámetro para cada una de las acciones del contenedor.
-void cmb_acc::MapFamiliasAcc::for_each_accion(CmdStatus &status,const std::string &bloque)
+void cmb_acc::ActionsFamiliesMap::for_each_accion(CmdStatus &status,const std::string &bloque)
   {
     for(iterator i= familias.begin();i!=familias.end();i++)
       {
@@ -122,20 +122,20 @@ void cmb_acc::MapFamiliasAcc::for_each_accion(CmdStatus &status,const std::strin
   }
 
 
-//! @brief Lee un objeto MapFamiliasAcc desde archivo
-bool cmb_acc::MapFamiliasAcc::procesa_comando(CmdStatus &status)
+//! @brief Lee un objeto ActionsFamiliesMap desde archivo
+bool cmb_acc::ActionsFamiliesMap::procesa_comando(CmdStatus &status)
   {
     const std::string cmd= deref_cmd(status.Cmd());
-    const std::string msg_proc_cmd= "(MapFamiliasAcc) Procesando comando: " + cmd;
+    const std::string msg_proc_cmd= "(ActionsFamiliesMap) Procesando comando: " + cmd;
     if(verborrea>2)
       std::clog << msg_proc_cmd << std::endl;
-    if(cmd == "defFamiliaAcciones") //Definición de una familia.
+    if(cmd == "defActionsFamily") //Definición de una familia.
       {
 	std::string nmb_familia_acc= "";
         std::deque<boost::any> fnc_indices= status.Parser().SeparaIndices(this);
         if(fnc_indices.size()>0)
           nmb_familia_acc= convert_to_string(fnc_indices[0]); //Nombre del set.
-        FamiliaAcciones *s= crea_familia_acc(nmb_familia_acc);
+        ActionsFamily *s= crea_familia_acc(nmb_familia_acc);
         if(s)
           {
             s->set_owner(this);
@@ -159,7 +159,7 @@ bool cmb_acc::MapFamiliasAcc::procesa_comando(CmdStatus &status)
         for_each_accion(status,bloque);
         return true;
       }
-    FamiliaAcciones *familia_ptr= busca_familia_acc(cmd);
+    ActionsFamily *familia_ptr= busca_familia_acc(cmd);
     if(familia_ptr)
       {
         familia_ptr->set_owner(this);
@@ -171,7 +171,7 @@ bool cmb_acc::MapFamiliasAcc::procesa_comando(CmdStatus &status)
   }
 
 //! @brief Borra todas las familias definidos.
-void cmb_acc::MapFamiliasAcc::clear(void)
+void cmb_acc::ActionsFamiliesMap::clear(void)
   {
     for(iterator i= familias.begin();i!=familias.end();i++)
       {
@@ -181,20 +181,20 @@ void cmb_acc::MapFamiliasAcc::clear(void)
     familias.clear();
   }
 
-cmb_acc::MapFamiliasAcc::~MapFamiliasAcc(void)
+cmb_acc::ActionsFamiliesMap::~ActionsFamiliesMap(void)
   {
     familias.clear();
     clear();
   }
 
 //! @brief Devuelve el número de acciones de todas las familias.
-size_t cmb_acc::MapFamiliasAcc::getNumAcciones(void) const
+size_t cmb_acc::ActionsFamiliesMap::getNumAcciones(void) const
   { 
     size_t retval= 0;
     if(!familias.empty())
       for(const_iterator i= familias.begin();i!=familias.end();i++)
         {          
-          FamiliaAcciones *familia= (*i).second;
+          ActionsFamily *familia= (*i).second;
           if(familia)
             retval+= familia->getNumAcciones();
 	}
@@ -202,13 +202,13 @@ size_t cmb_acc::MapFamiliasAcc::getNumAcciones(void) const
   }
 
 //! brief Devuelve verdadero si las familias estan vacías.
-bool cmb_acc::MapFamiliasAcc::Vacia(void) const
+bool cmb_acc::ActionsFamiliesMap::Vacia(void) const
   {
     bool retval= true;
     if(!familias.empty())
       for(const_iterator i= familias.begin();i!=familias.end();i++)
         {
-          FamiliaAcciones *familia= (*i).second;
+          ActionsFamily *familia= (*i).second;
           if(familia)
             {
               if(!familia->Vacia()) //La familia contiene acciones.
@@ -225,17 +225,17 @@ bool cmb_acc::MapFamiliasAcc::Vacia(void) const
 //! @brief Devuelve las combinaciones correspondientes a acciones permanentes de valor no constante.
 //! @param elu: Verdadero si las combinaciones corresponden a estados límite últimos.
 //! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
-cmb_acc::LoadCombinationVector cmb_acc::MapFamiliasAcc::GetLoadCombinations(const bool &elu,const bool &sit_accidental) const
+cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::GetLoadCombinations(const bool &elu,const bool &sit_accidental) const
   {
     LoadCombinationVector retval;
     for(const_iterator i= familias.begin();i!=familias.end();i++)
       {
-        FamiliaAcciones *familia= (*i).second;
+        ActionsFamily *familia= (*i).second;
         assert(familia);
         if(!familia->Vacia()) //La familia contiene acciones.
           {
             LoadCombinationVector SG_aster= familia->GetLoadCombinations(elu,sit_accidental,-1);//Las permanentes siempre con valor característico.
-            retval= LoadCombinationVector::ProdCartesiano(retval,SG_aster,Accion::zero);
+            retval= LoadCombinationVector::ProdCartesiano(retval,SG_aster,Action::zero);
           }
       }
     retval= getCompatibles(retval); //Filtramos las que contienen acciones incompatibles.
@@ -246,9 +246,9 @@ cmb_acc::LoadCombinationVector cmb_acc::MapFamiliasAcc::GetLoadCombinations(cons
 //! como parámetro.
 //!
 //! Soporta los códigos:
-any_const_ptr cmb_acc::MapFamiliasAcc::GetProp(const std::string &cod) const
+any_const_ptr cmb_acc::ActionsFamiliesMap::GetProp(const std::string &cod) const
   {
-    const FamiliaAcciones *familia_ptr= busca_familia_acc(cod);
+    const ActionsFamily *familia_ptr= busca_familia_acc(cod);
     if(cod == "num_familias")
       {
         tmp_gp_szt= familias.size();

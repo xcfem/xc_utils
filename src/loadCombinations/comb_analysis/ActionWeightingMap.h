@@ -19,7 +19,7 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//MapPondAcciones.h
+//ActionWeightingMap.h
 //Contenedor de ponderaciones de acciones.
 
 #ifndef MAPPONDACCIONES_H
@@ -32,18 +32,18 @@
 
 namespace cmb_acc {
 
-class Accion;
-class VRAccion;
-class AccionesClasificadas;
+class Action;
+class ActionRValue;
+class ActionContainer;
 class LoadCombinations;
 
 //! @ingroup CMBACC
 //
 //! @brief Contenedor de ponderaciones de acciones.
-class MapPondAcciones: public EntCmd
+class ActionWeightingMap: public EntCmd
   {
   public:
-    typedef std::map<std::string,AccionesClasificadas *> map_ponderaciones;
+    typedef std::map<std::string,ActionContainer *> map_ponderaciones;
     typedef map_ponderaciones::iterator iterator;
     typedef map_ponderaciones::const_iterator const_iterator;
 
@@ -51,24 +51,24 @@ class MapPondAcciones: public EntCmd
     map_ponderaciones ponderaciones; //!< Conjunto de ponderaciones.
 
     bool existe(const std::string &nmb) const;
-    AccionesClasificadas *crea_ponderacion(const std::string &nmb,const PsiCoeffsMap &coefs= PsiCoeffsMap());
-    AccionesClasificadas *busca_ponderacion(const std::string &nmb);
-    const AccionesClasificadas *busca_ponderacion(const std::string &nmb) const;
+    ActionContainer *crea_ponderacion(const std::string &nmb,const PsiCoeffsMap &coefs= PsiCoeffsMap());
+    ActionContainer *busca_ponderacion(const std::string &nmb);
+    const ActionContainer *busca_ponderacion(const std::string &nmb) const;
     void clear(void);
     void copia(const map_ponderaciones &pond);
   protected:
-    friend class AccionesClasificadas;
+    friend class ActionContainer;
     void for_each(CmdStatus &,const std::string &);
     void for_each_accion(CmdStatus &,const std::string &);
     virtual bool procesa_comando(CmdStatus &);
   public:
-    MapPondAcciones(void);
-    MapPondAcciones(const MapPondAcciones &otro);
-    MapPondAcciones &operator=(const MapPondAcciones &otro);
-    virtual ~MapPondAcciones(void);
-    cmb_acc::AccionesClasificadas *defPonderacion(const std::string &,const PsiCoeffsMap &coefs= PsiCoeffsMap());
+    ActionWeightingMap(void);
+    ActionWeightingMap(const ActionWeightingMap &otro);
+    ActionWeightingMap &operator=(const ActionWeightingMap &otro);
+    virtual ~ActionWeightingMap(void);
+    cmb_acc::ActionContainer *defPonderacion(const std::string &,const PsiCoeffsMap &coefs= PsiCoeffsMap());
 
-    VRAccion &inserta(const std::string &pond,const std::string &,const Accion &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
+    ActionRValue &inserta(const std::string &pond,const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
 
     size_t size(void) const;
     bool Vacia(void) const;

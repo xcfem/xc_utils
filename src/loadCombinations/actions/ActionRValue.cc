@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//VRAccion.cxx
+//ActionRValue.cxx
 
-#include "xc_utils/src/loadCombinations/actions/VRAccion.h"
-#include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
+#include "xc_utils/src/loadCombinations/actions/ActionRValue.h"
+#include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/loadCombinations/coeffs/GammaF.h"
 #include "xc_utils/src/loadCombinations/coeffs/PsiCoeffsMap.h"
@@ -30,18 +30,18 @@
 #include "xc_utils/src/base/utils_any.h"
 
 //! @brief Constructor por defecto.
-cmb_acc::VRAccion::VRAccion(const std::string &n, const std::string &descrip,ListaVRAccion *fam)
-  : Accion(n,descrip), acc_familia(fam), coefs_psi(&PsiCoeffsMap::getCoefsPorDefecto()) {}
+cmb_acc::ActionRValue::ActionRValue(const std::string &n, const std::string &descrip,ActionRValueList *fam)
+  : Action(n,descrip), acc_familia(fam), coefs_psi(&PsiCoeffsMap::getCoefsPorDefecto()) {}
 
 //! @brief Constructor por defecto.
-cmb_acc::VRAccion::VRAccion(const Accion &a,ListaVRAccion *fam,const std::string &nmb_coefs)
-  : Accion(a), acc_familia(fam), coefs_psi(&PsiCoeffsMap::getCoefsPorDefecto()) 
+cmb_acc::ActionRValue::ActionRValue(const Action &a,ActionRValueList *fam,const std::string &nmb_coefs)
+  : Action(a), acc_familia(fam), coefs_psi(&PsiCoeffsMap::getCoefsPorDefecto()) 
   {
     setPsiCoeffs(nmb_coefs);
   }
 
 //! @brief Asigna los coeficientes de simultaneidad de la acción.
-void cmb_acc::VRAccion::setPsiCoeffs(const std::string &nmb_coefs)
+void cmb_acc::ActionRValue::setPsiCoeffs(const std::string &nmb_coefs)
   {
     if(!nmb_coefs.empty())
       {
@@ -49,18 +49,18 @@ void cmb_acc::VRAccion::setPsiCoeffs(const std::string &nmb_coefs)
         if(acc_familia)
           tmp= acc_familia->getPtrPsiCoeffs()->getPtrCoefs(nmb_coefs);
         else
-          std::cerr << "VRAccion::setPsiCoeffs; el puntero a la familia de acciones no está asignado." << std::endl;
+          std::cerr << "ActionRValue::setPsiCoeffs; el puntero a la familia de acciones no está asignado." << std::endl;
         if(tmp)
            coefs_psi= tmp;
       }
   }
 
-//! \fn cmb_acc::VRAccion::procesa_comando(CmdStatus &status)
+//! \fn cmb_acc::ActionRValue::procesa_comando(CmdStatus &status)
 //! @brief Lee el objeto desde archivo.
-bool cmb_acc::VRAccion::procesa_comando(CmdStatus &status)
+bool cmb_acc::ActionRValue::procesa_comando(CmdStatus &status)
   {
     const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
-    const std::string str_err= "(VRAccion) Procesando comando: " + cmd; 
+    const std::string str_err= "(ActionRValue) Procesando comando: " + cmd; 
     if(verborrea>2)
       std::clog << str_err << std::endl;
 
@@ -70,17 +70,17 @@ bool cmb_acc::VRAccion::procesa_comando(CmdStatus &status)
         return true;
       }
     else
-      return Accion::procesa_comando(status);
+      return Action::procesa_comando(status);
   }
 
-double cmb_acc::VRAccion::getPsi(short int r) const
+double cmb_acc::ActionRValue::getPsi(short int r) const
   { return coefs_psi->getPsi(r); }
 
-//! \fn cmb_acc::Accion cmb_acc::VRAccion::Valor(short int r) const
+//! \fn cmb_acc::Action cmb_acc::ActionRValue::Valor(short int r) const
 //! @brief Devuelve el valor representativo de la acción.
-cmb_acc::Accion cmb_acc::VRAccion::Valor(short int r) const
+cmb_acc::Action cmb_acc::ActionRValue::Valor(short int r) const
   {
-    Accion retval(*this);
+    Action retval(*this);
     switch(r)
       {
       case(-1):
@@ -100,13 +100,13 @@ cmb_acc::Accion cmb_acc::VRAccion::Valor(short int r) const
     return retval;
   }
 
-//! \fn any_const_ptr cmb_acc::VRAccion::GetProp(const std::string &cod) const
+//! \fn any_const_ptr cmb_acc::ActionRValue::GetProp(const std::string &cod) const
 //! @brief Devuelve la propiedad del objeto cuyo código se pasa
 //! como parámetro.
-any_const_ptr cmb_acc::VRAccion::GetProp(const std::string &cod) const
+any_const_ptr cmb_acc::ActionRValue::GetProp(const std::string &cod) const
   {
     if(verborrea>4)
-      std::clog << "VRAccion::GetProp (" << nombre_clase() << "::GetProp) Buscando propiedad: " << cod << std::endl;
+      std::clog << "ActionRValue::GetProp (" << nombre_clase() << "::GetProp) Buscando propiedad: " << cod << std::endl;
     if(cod == "coefs_psi")
       return any_const_ptr(coefs_psi);
     else if(cod == "psi_0")
@@ -130,5 +130,5 @@ any_const_ptr cmb_acc::VRAccion::GetProp(const std::string &cod) const
         return any_const_ptr(tmp_gp_str);
       }
     else
-      return Accion::GetProp(cod);
+      return Action::GetProp(cod);
   }

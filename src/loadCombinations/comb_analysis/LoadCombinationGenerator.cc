@@ -31,11 +31,11 @@ cmb_acc::LoadCombinationGenerator::LoadCombinationGenerator(EntCmd *owr)
   : EntCmd(owr), combinaciones(NULL) {}
 
 //! @brief Define la ponderación cuyo nombre se pasa como parámetro.
-cmb_acc::AccionesClasificadas *cmb_acc::LoadCombinationGenerator::defPonderacion(const std::string &nmb,const PsiCoeffsMap &coefs)
+cmb_acc::ActionContainer *cmb_acc::LoadCombinationGenerator::defPonderacion(const std::string &nmb,const PsiCoeffsMap &coefs)
   { return pond_acciones.defPonderacion(nmb,coefs); }
 
 //! @brief Inserta la acción que se pasa como parámetro.
-cmb_acc::VRAccion &cmb_acc::LoadCombinationGenerator::inserta(const std::string &pond,const std::string &familia,const Accion &acc,const std::string &nmb_coefs_psi,const std::string &subfamilia)
+cmb_acc::ActionRValue &cmb_acc::LoadCombinationGenerator::inserta(const std::string &pond,const std::string &familia,const Action &acc,const std::string &nmb_coefs_psi,const std::string &subfamilia)
   { return pond_acciones.inserta(pond,familia,acc,nmb_coefs_psi,subfamilia); }
 
 //! @brief Generación de combinaciones

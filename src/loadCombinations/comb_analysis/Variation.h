@@ -29,7 +29,7 @@
 
 namespace cmb_acc{
 
-class ListaVRAccion;
+class ActionRValueList;
 
 //! @ingroup CMBACC
 //
@@ -42,7 +42,7 @@ class Variation: public std::vector<double>
     Variation(const size_t &sz=0,const double &valor=0.0)
       : std::vector<double>(sz,valor) {}
     static Variation concat(const Variation &a,const Variation &b);
-    bool compatible(const ListaVRAccion &lvr);
+    bool compatible(const ActionRValueList &lvr);
     friend std::ostream &operator<<(std::ostream &os,const Variation &v);
   };
 } //fin namespace nmb_acc.

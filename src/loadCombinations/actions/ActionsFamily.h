@@ -19,21 +19,21 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//FamiliaAcciones.h
+//ActionsFamily.h
 
 
 #ifndef FAMILIAACCIONES_H
 #define FAMILIAACCIONES_H
 
 #include "xc_utils/src/loadCombinations/coeffs/GammaF.h"
-#include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
+#include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
 
 namespace cmb_acc{
 class Variations;
 class LoadCombinationVector;
 class PsiCoeffsMap;
-class AccionesClasificadas;
-class MapFamiliasAcc;
+class ActionContainer;
+class ActionsFamiliesMap;
 
 //! @ingroup CMBACC
 //
@@ -44,20 +44,20 @@ class MapFamiliasAcc;
 //! -Acciones variables.
 //! -Acciones accidentales.
 //! -Acciones sísmicas.
-class FamiliaAcciones: public EntConNmb
+class ActionsFamily: public EntConNmb
   {
     GammaF gammaf; //!< Coeficientes de ponderación para toda la familia.
-    ListaVRAccion acciones; //!< Contenedor de acciones de la familia.
+    ActionRValueList acciones; //!< Contenedor de acciones de la familia.
 
   protected:
-    friend class MapFamiliasAcc;
-    friend class AccionesClasificadas;
+    friend class ActionsFamiliesMap;
+    friend class ActionContainer;
     void for_each_accion(CmdStatus &,const std::string &);
     virtual bool procesa_comando(CmdStatus &status);
   public:
-    FamiliaAcciones(const std::string &nmb="",const GammaF &gf=GammaF());
-    inline virtual ~FamiliaAcciones(void) {}
-    VRAccion &inserta(const Accion &,const std::string &nmb_coefs_psi="");
+    ActionsFamily(const std::string &nmb="",const GammaF &gf=GammaF());
+    inline virtual ~ActionsFamily(void) {}
+    ActionRValue &inserta(const Action &,const std::string &nmb_coefs_psi="");
     Variations CalculaVariations(const bool &elu= true,const bool &sit_accidental= false,const int &d=-1) const;
     //! @brief Devuelve el número de acciones de la familia.
     inline size_t getNumAcciones(void) const

@@ -26,17 +26,17 @@
 #ifndef LOADCOMBINATIONVECTOR_HXX
 #define LOADCOMBINATIONVECTOR_HXX
 
-#include "xc_utils/src/loadCombinations/actions/Accion.h"
+#include "xc_utils/src/loadCombinations/actions/Action.h"
 #include "xc_basic/src/matrices/m_double.h"
 
 namespace cmb_acc{
 //! @ingroup CMBACC
 //
 //! @brief Cada elemento del vector es una combinación de acciones.
-class LoadCombinationVector: public std::vector<Accion>, public EntCmd
+class LoadCombinationVector: public std::vector<Action>, public EntCmd
   {
   private:
-    bool Existe(const Accion &f) const;
+    bool Existe(const Action &f) const;
     bool Nula(const double &tol) const;
     size_t CuentaNulas(const double &tol) const;
     size_t CuentaDistintas(const LoadCombinationVector &s2) const;
@@ -46,7 +46,7 @@ class LoadCombinationVector: public std::vector<Accion>, public EntCmd
   public:
     //! @brief Constructor.
     LoadCombinationVector(const size_t &sz= 0)
-      : std::vector<Accion>(sz), EntCmd() {}
+      : std::vector<Action>(sz), EntCmd() {}
     static LoadCombinationVector ProdCartesiano(const LoadCombinationVector &f1,const LoadCombinationVector &f2,const double &tol);
     static LoadCombinationVector Concat(const LoadCombinationVector &f1,const LoadCombinationVector &f2,const double &tol);
     void Numera(const std::string &prefijo= "H");

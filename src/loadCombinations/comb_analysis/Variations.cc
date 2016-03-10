@@ -22,7 +22,7 @@
 //Variations.cxx
 
 #include "Variations.h"
-#include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
+#include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
 
 //! @brief Constructor.
 cmb_acc::Variations::Variations(const size_t &sz,const Variation &v)
@@ -54,7 +54,7 @@ cmb_acc::Variations cmb_acc::Variations::primera_combinacion(const Variation &v)
 
 //! \fn cmb_acc::Variations cmb_acc::Variations::prod_cartesiano(const Variations &a,const Variations &b)
 //! @brief Devuelve el producto cartesiano de las variations que se pasan como parámetro.
-cmb_acc::Variations cmb_acc::Variations::prod_cartesiano(const Variations &a,const Variations &b,const ListaVRAccion &lvr)
+cmb_acc::Variations cmb_acc::Variations::prod_cartesiano(const Variations &a,const Variations &b,const ActionRValueList &lvr)
   {
     const size_t sz_a= a.size();
     const size_t sz_b= b.size();
@@ -74,7 +74,7 @@ cmb_acc::Variations cmb_acc::Variations::prod_cartesiano(const Variations &a,con
 
 //! \fn cmb_acc::Variations cmb_acc::Variations::n_esima_combinacion(const Variation &v,const size_t &n)
 //! @brief Devuelve la enésima combinación.
-cmb_acc::Variations cmb_acc::Variations::n_esima_combinacion(const Variation &v,const int &d,const ListaVRAccion &lvr)
+cmb_acc::Variations cmb_acc::Variations::n_esima_combinacion(const Variation &v,const int &d,const ActionRValueList &lvr)
   {
     const size_t n= lvr.size();
     if(n<1) return Variations();
@@ -116,7 +116,7 @@ cmb_acc::Variations cmb_acc::Variations::n_esima_combinacion(const Variation &v,
   }
 
 //! @brief Calculas las variations que pueden formarse.
-cmb_acc::Variations cmb_acc::Variations::Calcula(const Variation &v,const int &d,const ListaVRAccion &lvr)
+cmb_acc::Variations cmb_acc::Variations::Calcula(const Variation &v,const int &d,const ActionRValueList &lvr)
   { return n_esima_combinacion(v,d,lvr); }
 
 //! @brief Operador salida.

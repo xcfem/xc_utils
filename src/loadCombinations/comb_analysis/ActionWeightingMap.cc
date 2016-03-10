@@ -19,11 +19,11 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//MapPondAcciones.cc
+//ActionWeightingMap.cc
 
-#include "MapPondAcciones.h"
+#include "ActionWeightingMap.h"
 #include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/loadCombinations/actions/AccionesClasificadas.h"
+#include "xc_utils/src/loadCombinations/actions/ActionContainer.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
 #include "LoadCombinations.h"
@@ -31,11 +31,11 @@
 
 
 //! @brief Devuelve verdadero si la ponderacion existe.
-bool cmb_acc::MapPondAcciones::existe(const std::string &nmb) const
+bool cmb_acc::ActionWeightingMap::existe(const std::string &nmb) const
   { return (ponderaciones.find(nmb)!=ponderaciones.end()); }
 
 //! @brief Devuelve un puntero a la ponderacion cuyo nombre se pasa como parámetro.
-cmb_acc::AccionesClasificadas *cmb_acc::MapPondAcciones::busca_ponderacion(const std::string &nmb)
+cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::busca_ponderacion(const std::string &nmb)
   {
     if(existe(nmb))
       return ponderaciones[nmb];
@@ -44,7 +44,7 @@ cmb_acc::AccionesClasificadas *cmb_acc::MapPondAcciones::busca_ponderacion(const
   }
 
 //! @brief Devuelve un puntero a la ponderacion cuyo nombre se pasa como parámetro.
-const cmb_acc::AccionesClasificadas *cmb_acc::MapPondAcciones::busca_ponderacion(const std::string &nmb) const
+const cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::busca_ponderacion(const std::string &nmb) const
   {
     const_iterator i= ponderaciones.find(nmb);
     if(i!= ponderaciones.end())
@@ -54,12 +54,12 @@ const cmb_acc::AccionesClasificadas *cmb_acc::MapPondAcciones::busca_ponderacion
   }
 
 //! @brief Crea una nueva ponderacion con el nombre que se le pasa como parámetro.
-cmb_acc::AccionesClasificadas *cmb_acc::MapPondAcciones::crea_ponderacion(const std::string &nmb,const PsiCoeffsMap &coefs)
+cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::crea_ponderacion(const std::string &nmb,const PsiCoeffsMap &coefs)
   {
-    AccionesClasificadas *tmp =NULL;
+    ActionContainer *tmp =NULL;
     if(!existe(nmb)) //la ponderacion es nuevo.
       {
-        tmp= new AccionesClasificadas(coefs);
+        tmp= new ActionContainer(coefs);
         ponderaciones[nmb]= tmp;
       }
     else //la ponderacion existe
@@ -68,18 +68,18 @@ cmb_acc::AccionesClasificadas *cmb_acc::MapPondAcciones::crea_ponderacion(const 
   }
 
 //! @brief Constructor por defecto.
-cmb_acc::MapPondAcciones::MapPondAcciones(void)
+cmb_acc::ActionWeightingMap::ActionWeightingMap(void)
   : EntCmd() {}
 
 //! @brief Constructor de copia (NO COPIA LAS PONDERACIONES).
-cmb_acc::MapPondAcciones::MapPondAcciones(const MapPondAcciones &otro)
+cmb_acc::ActionWeightingMap::ActionWeightingMap(const ActionWeightingMap &otro)
   : EntCmd(otro)
   {
     copia(otro.ponderaciones);
   }
 
 //! @brief Operador asignación (NO COPIA LAS PONDERACIONES).
-cmb_acc::MapPondAcciones &cmb_acc::MapPondAcciones::operator=(const MapPondAcciones &otro)
+cmb_acc::ActionWeightingMap &cmb_acc::ActionWeightingMap::operator=(const ActionWeightingMap &otro)
   {
     EntCmd::operator=(otro);
     copia(otro.ponderaciones);
@@ -88,48 +88,48 @@ cmb_acc::MapPondAcciones &cmb_acc::MapPondAcciones::operator=(const MapPondAccio
 
 //! @brief Lanza la ejecución del bloque de código que se pasa
 //! como parámetro para cada una de las ponderaciones del contenedor.
-void cmb_acc::MapPondAcciones::for_each(CmdStatus &status,const std::string &bloque)
+void cmb_acc::ActionWeightingMap::for_each(CmdStatus &status,const std::string &bloque)
   {
     for(iterator i= ponderaciones.begin();i!=ponderaciones.end();i++)
       {
         (*i).second->set_owner(this);
-        (*i).second->EjecutaBloque(status,bloque,"MapPondAcciones:for_each");
+        (*i).second->EjecutaBloque(status,bloque,"ActionWeightingMap:for_each");
       }
   }
 
 //! @brief Lanza la ejecución del bloque de código que se pasa
 //! como parámetro para cada una de las acciones del contenedor.
-void cmb_acc::MapPondAcciones::for_each_accion(CmdStatus &status,const std::string &bloque)
+void cmb_acc::ActionWeightingMap::for_each_accion(CmdStatus &status,const std::string &bloque)
   {
     for(iterator i= ponderaciones.begin();i!=ponderaciones.end();i++)
       (*i).second->for_each_accion(status,bloque);
   }
 
 //! @brief Define una poderación de acciones.
-cmb_acc::AccionesClasificadas *cmb_acc::MapPondAcciones::defPonderacion(const std::string &nmb_ponderacion,const PsiCoeffsMap &coefs)
+cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::defPonderacion(const std::string &nmb_ponderacion,const PsiCoeffsMap &coefs)
   {
-    AccionesClasificadas *retval= crea_ponderacion(nmb_ponderacion,coefs);
+    ActionContainer *retval= crea_ponderacion(nmb_ponderacion,coefs);
     if(retval) retval->set_owner(this);
     return retval;
   }
 
 //! @brief Inserta la acción que se pasa como parámetro.
-cmb_acc::VRAccion &cmb_acc::MapPondAcciones::inserta(const std::string &pond,const std::string &familia,const Accion &acc,const std::string &nmb_coefs_psi,const std::string &subfamilia)
+cmb_acc::ActionRValue &cmb_acc::ActionWeightingMap::inserta(const std::string &pond,const std::string &familia,const Action &acc,const std::string &nmb_coefs_psi,const std::string &subfamilia)
   {
-    AccionesClasificadas *ponderacion_ptr= busca_ponderacion(pond);
+    ActionContainer *ponderacion_ptr= busca_ponderacion(pond);
     if(!ponderacion_ptr)
       {
-        std::cerr << "MapPondAcciones::inserta; no se encontró la ponderación: '"
+        std::cerr << "ActionWeightingMap::inserta; no se encontró la ponderación: '"
                   << pond << "'\n";
       }
     return ponderacion_ptr->inserta(familia,acc,nmb_coefs_psi,subfamilia);
   }
 
-//! @brief Lee un objeto MapPondAcciones desde archivo
-bool cmb_acc::MapPondAcciones::procesa_comando(CmdStatus &status)
+//! @brief Lee un objeto ActionWeightingMap desde archivo
+bool cmb_acc::ActionWeightingMap::procesa_comando(CmdStatus &status)
   {
     const std::string cmd= deref_cmd(status.Cmd());
-    const std::string msg_proc_cmd= "(MapPondAcciones) Procesando comando: " + cmd;
+    const std::string msg_proc_cmd= "(ActionWeightingMap) Procesando comando: " + cmd;
     if(verborrea>2)
       std::clog << msg_proc_cmd << std::endl;
     if(cmd == "defPonderacion") //Definición de una ponderacion.
@@ -138,7 +138,7 @@ bool cmb_acc::MapPondAcciones::procesa_comando(CmdStatus &status)
         std::deque<boost::any> fnc_indices= status.Parser().SeparaIndices(this);
         if(fnc_indices.size()>0)
           nmb_ponderacion= convert_to_string(fnc_indices[0]); //Nombre del set.
-        AccionesClasificadas *s= defPonderacion(nmb_ponderacion);
+        ActionContainer *s= defPonderacion(nmb_ponderacion);
         if(s)
           s->LeeCmd(status);
         return true;
@@ -155,7 +155,7 @@ bool cmb_acc::MapPondAcciones::procesa_comando(CmdStatus &status)
         for_each_accion(status,bloque);
         return true;
       }
-    AccionesClasificadas *ponderacion_ptr= busca_ponderacion(cmd);
+    ActionContainer *ponderacion_ptr= busca_ponderacion(cmd);
     if(ponderacion_ptr)
       {
         ponderacion_ptr->set_owner(this);
@@ -167,7 +167,7 @@ bool cmb_acc::MapPondAcciones::procesa_comando(CmdStatus &status)
   }
 
 //! @brief Borra todas las ponderaciones definidos.
-void cmb_acc::MapPondAcciones::clear(void)
+void cmb_acc::ActionWeightingMap::clear(void)
   {
     for(iterator i= ponderaciones.begin();i!=ponderaciones.end();i++)
       {
@@ -178,43 +178,43 @@ void cmb_acc::MapPondAcciones::clear(void)
   }
 
 //! @brief Copia las ponderaciones que se pasan comp parámetro.
-void cmb_acc::MapPondAcciones::copia(const map_ponderaciones &pond)
+void cmb_acc::ActionWeightingMap::copia(const map_ponderaciones &pond)
   {
     clear();
     for(const_iterator i= pond.begin();i!=pond.end();i++)
       {
         const std::string nmb= (*i).first;
-        const AccionesClasificadas *a= (*i).second;
+        const ActionContainer *a= (*i).second;
         assert(a);
-        ponderaciones[nmb]= new AccionesClasificadas(*a);
+        ponderaciones[nmb]= new ActionContainer(*a);
       }
   }
 
-cmb_acc::MapPondAcciones::~MapPondAcciones(void)
+cmb_acc::ActionWeightingMap::~ActionWeightingMap(void)
   {
     //ponderaciones.clear();
     clear();
   }
 
 //! @brief Devuelve el número de ponderaciones de todas las ponderaciones.
-size_t cmb_acc::MapPondAcciones::size(void) const
+size_t cmb_acc::ActionWeightingMap::size(void) const
   { return ponderaciones.size(); }
 
 //! brief Devuelve verdadero si las ponderaciones estan vacías.
-bool cmb_acc::MapPondAcciones::Vacia(void) const
+bool cmb_acc::ActionWeightingMap::Vacia(void) const
   { return ponderaciones.empty(); }
 
-cmb_acc::MapPondAcciones::iterator cmb_acc::MapPondAcciones::begin(void)
+cmb_acc::ActionWeightingMap::iterator cmb_acc::ActionWeightingMap::begin(void)
   { return ponderaciones.begin(); }
-cmb_acc::MapPondAcciones::const_iterator cmb_acc::MapPondAcciones::begin(void) const
+cmb_acc::ActionWeightingMap::const_iterator cmb_acc::ActionWeightingMap::begin(void) const
   { return ponderaciones.begin(); }
-cmb_acc::MapPondAcciones::iterator cmb_acc::MapPondAcciones::end(void)
+cmb_acc::ActionWeightingMap::iterator cmb_acc::ActionWeightingMap::end(void)
   { return ponderaciones.end(); }
-cmb_acc::MapPondAcciones::const_iterator cmb_acc::MapPondAcciones::end(void) const
+cmb_acc::ActionWeightingMap::const_iterator cmb_acc::ActionWeightingMap::end(void) const
   { return ponderaciones.end(); }
 
 //! @bried Devuelve las combinaciones correspondientes a todas las ponderaciones.
-cmb_acc::LoadCombinations cmb_acc::MapPondAcciones::getLoadCombinations(void)
+cmb_acc::LoadCombinations cmb_acc::ActionWeightingMap::getLoadCombinations(void)
   {
     LoadCombinations retval;
     for(const_iterator i= ponderaciones.begin();i!=ponderaciones.end();i++)
@@ -224,9 +224,9 @@ cmb_acc::LoadCombinations cmb_acc::MapPondAcciones::getLoadCombinations(void)
 
 //! \brief Devuelve la propiedad del objeto cuyo código (de la propiedad) se pasa
 //! como parámetro.
-any_const_ptr cmb_acc::MapPondAcciones::GetProp(const std::string &cod) const
+any_const_ptr cmb_acc::ActionWeightingMap::GetProp(const std::string &cod) const
   {
-    const AccionesClasificadas *ponderacion_ptr= busca_ponderacion(cod);
+    const ActionContainer *ponderacion_ptr= busca_ponderacion(cod);
     if(cod == "getSize")
       {
         tmp_gp_szt= ponderaciones.size();

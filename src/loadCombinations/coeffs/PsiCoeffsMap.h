@@ -52,7 +52,7 @@ class PsiCoeffsMap: public EntCmd
     PsiCoeffs *getPtrCoefs(const std::string &nmb);
     PsiCoeffs *crea_coefs(const std::string &nmb);
   protected:
-    friend class AccionesClasificadas;
+    friend class ActionContainer;
     void for_each(CmdStatus &,const std::string &);
     virtual bool procesa_comando(CmdStatus &);
   public:

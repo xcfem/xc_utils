@@ -24,7 +24,7 @@
 #ifndef LOADCOMBINATIONGENERATOR_H
 #define LOADCOMBINATIONGENERATOR_H
 
-#include "MapPondAcciones.h"
+#include "ActionWeightingMap.h"
 
 namespace cmb_acc{
 
@@ -36,7 +36,7 @@ class LoadCombinations;
 class LoadCombinationGenerator: public EntCmd
   {
   private:
-    MapPondAcciones pond_acciones;
+    ActionWeightingMap pond_acciones;
     LoadCombinations *combinaciones;
 
   protected:
@@ -44,12 +44,12 @@ class LoadCombinationGenerator: public EntCmd
   public:
     LoadCombinationGenerator(EntCmd *owr= NULL);
 
-    AccionesClasificadas *defPonderacion(const std::string &,const PsiCoeffsMap &coefs= PsiCoeffsMap());
-    VRAccion &inserta(const std::string &pond,const std::string &,const Accion &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
+    ActionContainer *defPonderacion(const std::string &,const PsiCoeffsMap &coefs= PsiCoeffsMap());
+    ActionRValue &inserta(const std::string &pond,const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
     void genera(void);
-    inline MapPondAcciones &getPondAcciones(void)
+    inline ActionWeightingMap &getPondAcciones(void)
       { return pond_acciones; }
-    inline void setPondAcciones(const MapPondAcciones &pa)
+    inline void setPondAcciones(const ActionWeightingMap &pa)
       { pond_acciones= pa; }
     inline LoadCombinations *getLoadCombinations(void)
       { return combinaciones; }

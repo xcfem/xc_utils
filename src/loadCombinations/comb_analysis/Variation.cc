@@ -22,7 +22,7 @@
 //Variation.cxx
 
 #include "Variation.h"
-#include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
+#include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
 
 //! \fn void cmb_acc::Variation::print(std::ostream &os) const
 //! @brief Imprime la variación.
@@ -54,7 +54,7 @@ cmb_acc::Variation cmb_acc::Variation::concat(const cmb_acc::Variation &a,const 
 
 
 //! @brief Devuelve verdadero si las acciones que contiene la variaciónes son compatibles
-bool cmb_acc::Variation::compatible(const ListaVRAccion &lvr)
+bool cmb_acc::Variation::compatible(const ActionRValueList &lvr)
   {
     const size_t sz= size();
     for(register size_t i=0;i<sz;i++)

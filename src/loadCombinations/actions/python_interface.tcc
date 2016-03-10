@@ -21,46 +21,46 @@
 //----------------------------------------------------------------------------
 //python_interface.tcc
 
-class_<RelAcciones, bases<EntCmd> >("RelAcciones")
-  .add_property("no_determinante", &RelAcciones::NoDeterminante, &RelAcciones::setNoDeterminante)
-  .def("agregaIncompatible", &RelAcciones::AgregaIncompatible)
-  .def("nombresIncompatibles", &RelAcciones::nombresIncompatibles)
-  .def("agregaMaestra", &RelAcciones::AgregaMaestra)
-  .def("nombresMaestras", &RelAcciones::nombresMaestras);
+class_<ActionRelationships, bases<EntCmd> >("ActionRelationships")
+  .add_property("no_determinante", &ActionRelationships::NoDeterminante, &ActionRelationships::setNoDeterminante)
+  .def("agregaIncompatible", &ActionRelationships::AgregaIncompatible)
+  .def("nombresIncompatibles", &ActionRelationships::nombresIncompatibles)
+  .def("agregaMaestra", &ActionRelationships::AgregaMaestra)
+  .def("nombresMaestras", &ActionRelationships::nombresMaestras);
 
-class_<Accion, bases<EntConNmb> >("Accion")
+class_<Action, bases<EntConNmb> >("Action")
   .def(init<std::string, std::string>())
-  .add_property("descripcion", make_function( &Accion::GetDescripcion, return_value_policy<copy_const_reference>() ), &Accion::SetDescripcion)
-  .add_property("getRelaciones", make_function( &Accion::getRelaciones, return_internal_reference<>() ))
-  .add_property("weightingFactor", &Accion::getWeightingFactor, &Accion::setWeightingFactor)
-  .def("getNombreExpandido", &Accion::GetNombreExpandido)
-  .def("getCoeficientes", &Accion::getCoeficientes)
-  .def("getDescomp", &Accion::getDescomp);
+  .add_property("descripcion", make_function( &Action::GetDescripcion, return_value_policy<copy_const_reference>() ), &Action::SetDescripcion)
+  .add_property("getRelaciones", make_function( &Action::getRelaciones, return_internal_reference<>() ))
+  .add_property("weightingFactor", &Action::getWeightingFactor, &Action::setWeightingFactor)
+  .def("getNombreExpandido", &Action::GetNombreExpandido)
+  .def("getCoeficientes", &Action::getCoeficientes)
+  .def("getDescomp", &Action::getDescomp);
 
-class_<VRAccion, bases<Accion>, boost::noncopyable >("VRAccion", no_init)
+class_<ActionRValue, bases<Action>, boost::noncopyable >("ActionRValue", no_init)
   ;
 
-class_<ListaVRAccion, bases<EntCmd> >("ListaVRAcciones")
-  .def("getValue",&ListaVRAccion::GetValor,"Returns action's i value.")
+class_<ActionRValueList, bases<EntCmd> >("ActionRValueListes")
+  .def("getValue",&ActionRValueList::GetValor,"Returns action's i value.")
   ;
 
-class_<FamiliaAcciones, bases<EntConNmb> >("FamiliaAcciones")
+class_<ActionsFamily, bases<EntConNmb> >("ActionsFamily")
   .def(init<std::string, GammaF>())
-  .add_property("gammaF", make_function( &FamiliaAcciones::getGammaF, return_internal_reference<>() ), &FamiliaAcciones::setGammaF)
-  .def("getNumAcciones", &FamiliaAcciones::getNumAcciones)
-  .def("insert", make_function(&FamiliaAcciones::inserta,return_internal_reference<>()))
+  .add_property("gammaF", make_function( &ActionsFamily::getGammaF, return_internal_reference<>() ), &ActionsFamily::setGammaF)
+  .def("getNumAcciones", &ActionsFamily::getNumAcciones)
+  .def("insert", make_function(&ActionsFamily::inserta,return_internal_reference<>()))
   ;
 
-class_<MapFamiliasAcc, bases<EntConNmb>, boost::noncopyable >("MapFamiliasAcc", no_init)
+class_<ActionsFamiliesMap, bases<EntConNmb>, boost::noncopyable >("ActionsFamiliesMap", no_init)
   ;
 
-class_<AccionesClasificadas, bases<EntCmd> >("AccionesClasificadas")
+class_<ActionContainer, bases<EntCmd> >("ActionContainer")
   .def(init<PsiCoeffsMap>())
-  .add_property("permanentActions", make_function( &AccionesClasificadas::getAccionesPermanentes, return_internal_reference<>() ), &AccionesClasificadas::setAccionesPermanentes)
-  .add_property("ncPermanentActions", make_function( &AccionesClasificadas::getAccionesPermanentesNC, return_internal_reference<>() ), &AccionesClasificadas::setAccionesPermanentesNC)
-  .add_property("variableActions", make_function( &AccionesClasificadas::getAccionesVariables, return_internal_reference<>() ), &AccionesClasificadas::setAccionesVariables)
-  .add_property("accidentalActions", make_function( &AccionesClasificadas::getAccionesAccidentales, return_internal_reference<>() ), &AccionesClasificadas::setAccionesAccidentales)
-  .add_property("seismicActions", make_function( &AccionesClasificadas::getAccionesSismicas, return_internal_reference<>() ), &AccionesClasificadas::setAccionesSismicas)
-  .def("getPsiCoeffs", &AccionesClasificadas::getPsiCoeffs, return_value_policy<copy_const_reference>())
-.def("insert", make_function(&AccionesClasificadas::inserta,return_internal_reference<>()))
+  .add_property("permanentActions", make_function( &ActionContainer::getAccionesPermanentes, return_internal_reference<>() ), &ActionContainer::setAccionesPermanentes)
+  .add_property("ncPermanentActions", make_function( &ActionContainer::getAccionesPermanentesNC, return_internal_reference<>() ), &ActionContainer::setAccionesPermanentesNC)
+  .add_property("variableActions", make_function( &ActionContainer::getAccionesVariables, return_internal_reference<>() ), &ActionContainer::setAccionesVariables)
+  .add_property("accidentalActions", make_function( &ActionContainer::getAccionesAccidentales, return_internal_reference<>() ), &ActionContainer::setAccionesAccidentales)
+  .add_property("seismicActions", make_function( &ActionContainer::getAccionesSismicas, return_internal_reference<>() ), &ActionContainer::setAccionesSismicas)
+  .def("getPsiCoeffs", &ActionContainer::getPsiCoeffs, return_value_policy<copy_const_reference>())
+.def("insert", make_function(&ActionContainer::inserta,return_internal_reference<>()))
   ;

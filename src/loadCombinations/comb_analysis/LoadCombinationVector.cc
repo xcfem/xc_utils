@@ -79,7 +79,7 @@ bool cmb_acc::LoadCombinationVector::procesa_comando(CmdStatus &status)
         const std::string bloque= status.GetBloque();
         for(iterator i=begin();i!=end();i++)
           {
-            Accion &data= *i;
+            Action &data= *i;
             data.set_owner(this);
             data.EjecutaBloque(status,bloque,"LoadCombinationVector:for_each");
           }
@@ -90,9 +90,9 @@ bool cmb_acc::LoadCombinationVector::procesa_comando(CmdStatus &status)
   }
 
         
-//! \fn bool cmb_acc::LoadCombinationVector::Existe(const Accion &f) const
+//! \fn bool cmb_acc::LoadCombinationVector::Existe(const Action &f) const
 //! @brief Devuelve verdadero si la combinación f se encuentra en ESTE vector.
-bool cmb_acc::LoadCombinationVector::Existe(const Accion &f) const
+bool cmb_acc::LoadCombinationVector::Existe(const Action &f) const
   {
     bool retval= false;
     const std::string nmb_f= f.GetNombre();

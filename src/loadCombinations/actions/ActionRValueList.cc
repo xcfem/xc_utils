@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//ListaVRAccion.cxx
+//ActionRValueList.cxx
 
-#include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
-#include "xc_utils/src/loadCombinations/actions/FamiliaAcciones.h"
+#include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
+#include "xc_utils/src/loadCombinations/actions/ActionsFamily.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/Variation.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
@@ -31,38 +31,38 @@
 
 //! @brief Lanza la ejecución del bloque de código que se pasa
 //! como parámetro para cada una de las acciones de la lista.
-void cmb_acc::ListaVRAccion::for_each(CmdStatus &status,const std::string &bloque)
+void cmb_acc::ActionRValueList::for_each(CmdStatus &status,const std::string &bloque)
   {
     for(iterator i=begin();i!=end();i++)
       {
         (*i).set_owner(this);
-        (*i).EjecutaBloque(status,bloque,"ListaVRAccion:for_each");
+        (*i).EjecutaBloque(status,bloque,"ActionRValueList:for_each");
       }
   }
 
-cmb_acc::VRAccion &cmb_acc::ListaVRAccion::push_back(const VRAccion &a)
+cmb_acc::ActionRValue &cmb_acc::ActionRValueList::push_back(const ActionRValue &a)
   {
-    std::deque<VRAccion>::push_back(a);
-    VRAccion &retval= back();
+    std::deque<ActionRValue>::push_back(a);
+    ActionRValue &retval= back();
     return retval;
   }
 
 //! @brief Inserta la acción que se pasa como parámetro.
-cmb_acc::VRAccion &cmb_acc::ListaVRAccion::inserta(const Accion &a,const std::string &nmb_coefs_psi)
+cmb_acc::ActionRValue &cmb_acc::ActionRValueList::inserta(const Action &a,const std::string &nmb_coefs_psi)
   {
-    VRAccion acc(a,this,nmb_coefs_psi);
+    ActionRValue acc(a,this,nmb_coefs_psi);
     acc.set_owner(this);
     return push_back(acc);
   }
 
-bool cmb_acc::ListaVRAccion::procesa_comando(CmdStatus &status)
+bool cmb_acc::ActionRValueList::procesa_comando(CmdStatus &status)
   {
     const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
     if(verborrea>2)
-      std::clog  << "(ListaVRAccion) Procesando comando: " << cmd.c_str() << std::endl;
+      std::clog  << "(ActionRValueList) Procesando comando: " << cmd.c_str() << std::endl;
     if(cmd == "accion")
       {
-        VRAccion acc("nil","nil",this);
+        ActionRValue acc("nil","nil",this);
         acc.set_owner(this);
         push_back(acc).LeeCmd(status);
         return true;
@@ -76,7 +76,7 @@ bool cmb_acc::ListaVRAccion::procesa_comando(CmdStatus &status)
       return EntCmd::procesa_comando(status);
   }
 
-//! \fn cmb_acc::ListaVRAccion::FormaProdEscalar(const Variation &v,short int r,const int &d,const short int &rr) const
+//! \fn cmb_acc::ActionRValueList::FormaProdEscalar(const Variation &v,short int r,const int &d,const short int &rr) const
 //! @brief Forma producto escalar.
 //!
 //! @param v: Variation a sumar.
@@ -84,13 +84,13 @@ bool cmb_acc::ListaVRAccion::procesa_comando(CmdStatus &status)
 //! r= 1 -> valor frecuente, r= 2 -> valor cuasipermanente).
 //! @param d: Índice de la acción determinante (si no hay acción determinante d=-1).
 //! @param rr: Valor representativo a emplear para la acción determinante.
-cmb_acc::Accion cmb_acc::ListaVRAccion::FormaProdEscalar(const Variation &var,short int r,const int &d,const short int &rr) const
+cmb_acc::Action cmb_acc::ActionRValueList::FormaProdEscalar(const Variation &var,short int r,const int &d,const short int &rr) const
   {
     const size_t num_acciones= size();
-    Accion retval=Accion::NULA(); //Inicializar a cero.
+    Action retval=Action::NULA(); //Inicializar a cero.
     for(size_t j=0;j<num_acciones;j++)
       {
-        Accion tmp= GetValor(j,r);
+        Action tmp= GetValor(j,r);
         if(d>-1) //Existe acción determinante
           if(j==size_t(d)) //Corresponde con el índice j.
             {
@@ -102,19 +102,19 @@ cmb_acc::Accion cmb_acc::ListaVRAccion::FormaProdEscalar(const Variation &var,sh
   }
 
 //! @brief Devuelve un puntero a la tabla de coeficientes de simultaneidad.
-const cmb_acc::PsiCoeffsMap *cmb_acc::ListaVRAccion::getPtrPsiCoeffs(void) const
+const cmb_acc::PsiCoeffsMap *cmb_acc::ActionRValueList::getPtrPsiCoeffs(void) const
   {
-    const FamiliaAcciones *tmp= dynamic_cast<const FamiliaAcciones *>(Owner());
+    const ActionsFamily *tmp= dynamic_cast<const ActionsFamily *>(Owner());
     if(tmp)
       return tmp->getPtrPsiCoeffs();
     else
       {
-	std::cerr << "ListaVRAccion::getPtrPsiCoeffs; no se encontró el objeto propietario de éste." << std::endl;
+	std::cerr << "ActionRValueList::getPtrPsiCoeffs; no se encontró el objeto propietario de éste." << std::endl;
         return NULL;
       }
   }
 
-void cmb_acc::ListaVRAccion::Print(std::ostream &os) const
+void cmb_acc::ActionRValueList::Print(std::ostream &os) const
   {
     for(const_iterator i=begin();i!=end();i++)
       os << *i << ' ';
@@ -122,7 +122,7 @@ void cmb_acc::ListaVRAccion::Print(std::ostream &os) const
 
 //! Devuelve la propiedad del objeto cuyo código se pasa
 //! como parámetro.
-any_const_ptr cmb_acc::ListaVRAccion::GetProp(const std::string &cod) const
+any_const_ptr cmb_acc::ActionRValueList::GetProp(const std::string &cod) const
   {
     if(cod == "acc")
       {
@@ -134,7 +134,7 @@ any_const_ptr cmb_acc::ListaVRAccion::GetProp(const std::string &cod) const
   }
 
 //! @brief Operador salida.
-std::ostream &cmb_acc::operator<<(std::ostream &os,const ListaVRAccion &lvr)
+std::ostream &cmb_acc::operator<<(std::ostream &os,const ActionRValueList &lvr)
   {
     lvr.Print(os);
     return os;

@@ -19,7 +19,7 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//MapFamiliasAcc.h
+//ActionsFamiliesMap.h
 //Contenedor de familias de acciones.
 
 #ifndef MAPFAMILIASACC_H
@@ -31,20 +31,20 @@
 
 namespace cmb_acc {
 
-class FamiliaAcciones;
+class ActionsFamily;
 class LoadCombinationVector;
 class PsiCoeffsMap;
-class Accion;
-class VRAccion;
-class AccionesClasificadas;
+class Action;
+class ActionRValue;
+class ActionContainer;
 
 //! @ingroup CMBACC
 //
 //! @brief Contenedor de familias de acciones.
-class MapFamiliasAcc: public EntConNmb
+class ActionsFamiliesMap: public EntConNmb
   {
   public:
-    typedef std::map<std::string,FamiliaAcciones *> map_familias;
+    typedef std::map<std::string,ActionsFamily *> map_familias;
     typedef map_familias::iterator iterator;
     typedef map_familias::const_iterator const_iterator;
 
@@ -52,25 +52,25 @@ class MapFamiliasAcc: public EntConNmb
     map_familias familias; //!< Conjunto de familias.
 
     bool existe(const std::string &nmb) const;
-    FamiliaAcciones *crea_familia_acc(const std::string &nmb);
-    FamiliaAcciones *busca_familia_acc(const std::string &nmb);
-    const FamiliaAcciones *busca_familia_acc(const std::string &nmb) const;
+    ActionsFamily *crea_familia_acc(const std::string &nmb);
+    ActionsFamily *busca_familia_acc(const std::string &nmb);
+    const ActionsFamily *busca_familia_acc(const std::string &nmb) const;
     void clear(void);
-    MapFamiliasAcc(const MapFamiliasAcc &otro);
-    MapFamiliasAcc &operator=(const MapFamiliasAcc &otro);
+    ActionsFamiliesMap(const ActionsFamiliesMap &otro);
+    ActionsFamiliesMap &operator=(const ActionsFamiliesMap &otro);
   protected:
-    friend class AccionesClasificadas;
+    friend class ActionContainer;
     void for_each_accion(CmdStatus &,const std::string &);
     virtual bool procesa_comando(CmdStatus &);
   public:
-    MapFamiliasAcc(const std::string &nmb);
-    VRAccion &inserta(const std::string &,const Accion &,const std::string &nmb_coefs_psi="");
+    ActionsFamiliesMap(const std::string &nmb);
+    ActionRValue &inserta(const std::string &,const Action &,const std::string &nmb_coefs_psi="");
     LoadCombinationVector GetLoadCombinations(const bool &elu,const bool &sit_accidental) const;
     virtual any_const_ptr GetProp(const std::string &cod) const;
     size_t getNumAcciones(void) const;
     const PsiCoeffsMap *getPtrPsiCoeffs(void) const;
     bool Vacia(void) const;
-    virtual ~MapFamiliasAcc(void);
+    virtual ~ActionsFamiliesMap(void);
   };
 } // fin namespace cmb_acc
 

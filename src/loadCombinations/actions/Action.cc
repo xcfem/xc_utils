@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Accion.cxx
+//Action.cxx
 
-#include "Accion.h"
+#include "Action.h"
 #include "boost/lexical_cast.hpp"
 #include "xc_basic/src/texto/cadena_carac.h"
 #include "xc_basic/src/texto/en_letra.h"
@@ -30,32 +30,32 @@
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
-#include "ListaVRAccion.h"
+#include "ActionRValueList.h"
 #include "xc_basic/src/funciones/algebra/ExprAlgebra.h"
 
-const double cmb_acc::Accion::zero= 1e-6;
+const double cmb_acc::Action::zero= 1e-6;
 
 //! @brief Constructor por defecto.
-cmb_acc::Accion::Accion(const std::string &n, const std::string &descrip)
+cmb_acc::Action::Action(const std::string &n, const std::string &descrip)
   : EntConNmb(n), descripcion(descrip),relaciones(), f_pond(1.0) {}
 
-//! \fn cmb_acc::Accion::NULA(void)
+//! \fn cmb_acc::Action::NULA(void)
 //! @brief Devuelve una acción nula.
-cmb_acc::Accion cmb_acc::Accion::NULA(void)
+cmb_acc::Action cmb_acc::Action::NULA(void)
   {
-    Accion retval;
+    Action retval;
     retval.f_pond= 0.0;
     return retval;
   }
 
 //! @brief Devuelve verdadero si la acción no es combinación de otras.
-bool cmb_acc::Accion::Simple(void) const
+bool cmb_acc::Action::Simple(void) const
   { return (GetNombre().find('+')==std::string::npos); }
 
 //! @brief Devuelve el nombre expandido aplicando la propiedad distributiva
 //! del producto es decir si la combinación se llama '1.5*G1+1.35*(G2+F2)'
 //! devuelve '1.5*G1+1.35*G2+1.35*F2'.
-const std::string cmb_acc::Accion::GetNombreExpandido(void) const
+const std::string cmb_acc::Action::GetNombreExpandido(void) const
   {
     std::string retval= GetNombre();
     if(has_char(retval,'('))
@@ -67,11 +67,11 @@ const std::string cmb_acc::Accion::GetNombreExpandido(void) const
   }
 
 //! @brief Devuelve la descomposición cuando la acción es una combinación.
-cmb_acc::Accion::map_descomp cmb_acc::Accion::getDescomp(void) const
+cmb_acc::Action::map_descomp cmb_acc::Action::getDescomp(void) const
   {
     map_descomp descomp;
     typedef std::deque<std::string> dq_string;
-    dq_string str_sumandos= RelAcciones::get_sumandos_combinacion(GetNombre());
+    dq_string str_sumandos= ActionRelationships::get_sumandos_combinacion(GetNombre());
     for(dq_string::iterator i= str_sumandos.begin();i!=str_sumandos.end();i++)
       {
         const std::string &str_sum_i= *i;
@@ -91,7 +91,7 @@ cmb_acc::Accion::map_descomp cmb_acc::Accion::getDescomp(void) const
 
 //! @brief Cuando se trata de una combinación, devuelve los coeficientes que
 //! multiplican a cada una de las acciones que se pasa como parámetro.
-std::vector<double> cmb_acc::Accion::getCoeficientes(const std::vector<std::string> &base) const
+std::vector<double> cmb_acc::Action::getCoeficientes(const std::vector<std::string> &base) const
   {
     const size_t sz= base.size();
     std::vector<double> retval(sz,0.0);
@@ -106,17 +106,17 @@ std::vector<double> cmb_acc::Accion::getCoeficientes(const std::vector<std::stri
     return retval;
   }
 
-//! \fn cmb_acc::Accion::limpia_nombres(void)
+//! \fn cmb_acc::Action::limpia_nombres(void)
 //! @brief ??
-void cmb_acc::Accion::limpia_nombres(void)
+void cmb_acc::Action::limpia_nombres(void)
   {
-    EntConNmb::Nombre()= RelAcciones::limpia(GetNombre());
-    descripcion= RelAcciones::limpia(descripcion);
+    EntConNmb::Nombre()= ActionRelationships::limpia(GetNombre());
+    descripcion= ActionRelationships::limpia(descripcion);
   }
 
-//! \fn cmb_acc::Accion::multiplica(const double &d)
+//! \fn cmb_acc::Action::multiplica(const double &d)
 //! @brief Multiplica la acción por el escalar que se pasa como parámetro.
-void cmb_acc::Accion::multiplica(const double &d)
+void cmb_acc::Action::multiplica(const double &d)
   {
     f_pond*= d;
     limpia_nombres();
@@ -125,9 +125,9 @@ void cmb_acc::Accion::multiplica(const double &d)
     descripcion= strnum + "*" + descripcion;
   }
 
-//! \fn cmb_acc::Accion::suma(const Accion &f)
+//! \fn cmb_acc::Action::suma(const Action &f)
 //! @brief Suma a ésta la acción que se pasa como parámetro (sólo en el caso de que sean compatibles).
-void cmb_acc::Accion::suma(const Accion &f)
+void cmb_acc::Action::suma(const Action &f)
   {
     if(f.Nula(zero)) return;
 
@@ -157,13 +157,13 @@ void cmb_acc::Accion::suma(const Accion &f)
       set_owner(const_cast<EntCmd *>(f.Owner()));
   }
 
-//! \fn cmb_acc::Accion::procesa_comando(CmdStatus &status)
+//! \fn cmb_acc::Action::procesa_comando(CmdStatus &status)
 //! @brief Lee el objeto desde archivo.
-bool cmb_acc::Accion::procesa_comando(CmdStatus &status)
+bool cmb_acc::Action::procesa_comando(CmdStatus &status)
   {
     const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
     if(verborrea>2)
-      std::clog << "(Accion) Procesando comando: " << cmd << std::endl;
+      std::clog << "(Action) Procesando comando: " << cmd << std::endl;
     if(cmd == "nombre")
       {
 	SetNombre(interpretaString(status.GetString()));
@@ -189,7 +189,7 @@ bool cmb_acc::Accion::procesa_comando(CmdStatus &status)
 //! La acción será incompatible cuando su nombre verifique alguna de las expresiones
 //! regulares contenidas en el miembro incompatibles.
 //! La acción no podrá ser incompatible consigo misma.
-bool cmb_acc::Accion::incompatible(const Accion &f) const
+bool cmb_acc::Action::incompatible(const Action &f) const
   {
     bool retval= false;
     if(this != &f) //La carga no puede ser incompatible consigo misma.
@@ -197,15 +197,15 @@ bool cmb_acc::Accion::incompatible(const Accion &f) const
     return retval;
   }
 
-//! \fn cmb_acc::Accion::Incompatible(const Accion &f) const
+//! \fn cmb_acc::Action::Incompatible(const Action &f) const
 //! @brief Devuelve verdadero si la acción que se pasa como parámetro es incompatible con esta,
 //! es decir que ambas no pueden estar presentes en la misma hipótesis.
 //!
-//! @param f: Accion cuya incompatibilidad con ésta se comprueba.
+//! @param f: Action cuya incompatibilidad con ésta se comprueba.
 //! La acción será incompatible cuando su nombre verifique alguna de las expresiones
 //! regulares contenidas en el miembro incompatibles.
 //! La acción no podrá ser incompatible consigo misma.
-bool cmb_acc::Accion::Incompatible(const Accion &f) const
+bool cmb_acc::Action::Incompatible(const Action &f) const
   {
     bool retval= false;
     if(this != &f) //La carga no puede ser incompatible consigo misma.
@@ -216,12 +216,12 @@ bool cmb_acc::Accion::Incompatible(const Accion &f) const
     return retval;
   }
 
-std::string cmb_acc::Accion::ListaStrIncompatibles(ListaVRAccion *af) const
+std::string cmb_acc::Action::ListaStrIncompatibles(ActionRValueList *af) const
   {
     std::string retval;
     if(af)
       {
-        std::deque<const cmb_acc::Accion *> incomp= listaIncompatibles(this,af->begin(),af->end());
+        std::deque<const cmb_acc::Action *> incomp= listaIncompatibles(this,af->begin(),af->end());
         if(!incomp.empty())
           retval= nombresPtrAcciones(incomp.begin(),incomp.end());
       }
@@ -231,14 +231,14 @@ std::string cmb_acc::Accion::ListaStrIncompatibles(ListaVRAccion *af) const
   }
 
 
-void cmb_acc::Accion::Print(std::ostream &os) const
+void cmb_acc::Action::Print(std::ostream &os) const
   {
     os << GetNombre();
     relaciones.Print(os);
   }
 
 //! @brief Devuelve la propiedad cuyo código se pasa como parámetro.
-any_const_ptr cmb_acc::Accion::GetProp(const std::string &cod) const
+any_const_ptr cmb_acc::Action::GetProp(const std::string &cod) const
   {
     if(cod == "getNombre")
       {
@@ -277,7 +277,7 @@ any_const_ptr cmb_acc::Accion::GetProp(const std::string &cod) const
   }
 
 //! @brief Devuelve verdadero si las acciones de índices i y j son incompatibles.
-bool cmb_acc::incompatibles(const Accion &acc_i,const Accion &acc_j)
+bool cmb_acc::incompatibles(const Action &acc_i,const Action &acc_j)
   {
     bool retval= false;
     if(&acc_i!=&acc_j) //Una acción nunca es incompatible consigo misma.
@@ -290,7 +290,7 @@ bool cmb_acc::incompatibles(const Accion &acc_i,const Accion &acc_j)
     return retval;
   }
 
-std::ostream &cmb_acc::operator<<(std::ostream &os,const Accion &a)
+std::ostream &cmb_acc::operator<<(std::ostream &os,const Action &a)
   {
     a.Print(os);
     return os;

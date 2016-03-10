@@ -21,7 +21,7 @@
 //----------------------------------------------------------------------------
 //python_interface.tcc
 
-typedef std::vector<Accion> v_accion;
+typedef std::vector<Action> v_accion;
 class_<v_accion >("v_accion")
   .def(vector_indexing_suite<v_accion >())
  ;

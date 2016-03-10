@@ -27,7 +27,7 @@
 #include "xc_utils/src/loadCombinations/comb_analysis/Variations.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
+#include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
 
 cmb_acc::GammaFELS::GammaFELS(const float &fav,const float &desfav)
   : gamma_f_fav(fav), gamma_f_desfav(desfav) {}
@@ -160,7 +160,7 @@ cmb_acc::Variation cmb_acc::GammaF::CoefsEls(void) const
 //! @param elu: Verdadero si se trata de un estado límite último.
 //! @param sit_accidental: Verdadero si se trata de una situación accidental o sísmica.
 //! @param d: Índice de la acción dominante (-1 si ninguna es dominante).
-cmb_acc::Variations cmb_acc::GammaF::calcula_variations(const bool &elu,const bool &sit_accidental,const int &d,const ListaVRAccion &lvr) const
+cmb_acc::Variations cmb_acc::GammaF::calcula_variations(const bool &elu,const bool &sit_accidental,const int &d,const ActionRValueList &lvr) const
   {
     const size_t n= lvr.size();
     Variations retval;

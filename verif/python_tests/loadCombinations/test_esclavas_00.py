@@ -5,15 +5,15 @@ import loadCombinations
 from loadCombinationUtils import ehe
 
 lcg= ehe.intenseControlCombGenerator
-PP1= lcg.insert("EHEIntenso","permanentes",loadCombinations.Accion("PP1","Peso propio"),"","")
+PP1= lcg.insert("EHEIntenso","permanentes",loadCombinations.Action("PP1","Peso propio"),"","")
 
-SC1= lcg.insert("EHEIntenso","variables",loadCombinations.Accion("SC1","Puente grúa"),"azotea_solo_conserv","")
+SC1= lcg.insert("EHEIntenso","variables",loadCombinations.Action("SC1","Puente grúa"),"azotea_solo_conserv","")
 SC1.getRelaciones.agregaIncompatible("SC.*")
 
-SC2= lcg.insert("EHEIntenso","variables",loadCombinations.Accion("SC2","Sobrecarga de uso cubierta"),"azotea_solo_conserv","")
+SC2= lcg.insert("EHEIntenso","variables",loadCombinations.Action("SC2","Sobrecarga de uso cubierta"),"azotea_solo_conserv","")
 SC2.getRelaciones.agregaIncompatible("SC.*")
 
-F1= lcg.insert("EHEIntenso","variables",loadCombinations.Accion("F1","Frenado puente grúa"),"azotea_solo_conserv","")
+F1= lcg.insert("EHEIntenso","variables",loadCombinations.Action("F1","Frenado puente grúa"),"azotea_solo_conserv","")
 F1.getRelaciones.agregaMaestra("SC1.*")
 
 lcg.genera()

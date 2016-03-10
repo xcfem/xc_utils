@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//RelAcciones.cxx
+//ActionRelationships.cxx
 
-#include "RelAcciones.h"
+#include "ActionRelationships.h"
 #include "xc_basic/src/texto/cadena_carac.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/CmdStatus.h"
@@ -31,7 +31,7 @@
 
 //! @brief Elimina el factor que multiplica a la acción en la cadena de
 //! la forma "1.35*A" que se pasa como parámetro.
-std::string cmb_acc::RelAcciones::limpia(const std::string &str)
+std::string cmb_acc::ActionRelationships::limpia(const std::string &str)
   {
     std::string retval= str;
     if(str.find('*')!=std::string::npos)
@@ -40,7 +40,7 @@ std::string cmb_acc::RelAcciones::limpia(const std::string &str)
   }
 
 //! @brief Devuelve los sumandos de la cadena de caracteres que se pasa como parámetro.
-std::deque<std::string> cmb_acc::RelAcciones::get_sumandos_combinacion(const std::string &str)
+std::deque<std::string> cmb_acc::ActionRelationships::get_sumandos_combinacion(const std::string &str)
   {
     std::deque<std::string> retval;
     if((has_char(str,'(')) || (has_char(str,')'))) //Tiene paréntesis
@@ -55,7 +55,7 @@ std::deque<std::string> cmb_acc::RelAcciones::get_sumandos_combinacion(const std
   }
 
 //! @brief Devuelve los nombres de las acciones que participan en la combinación.
-std::deque<std::string> cmb_acc::RelAcciones::get_nmb_acciones_combinacion(const std::string &str)
+std::deque<std::string> cmb_acc::ActionRelationships::get_nmb_acciones_combinacion(const std::string &str)
   {
     std::deque<std::string> retval= get_sumandos_combinacion(str);
     for(std::deque<std::string>::iterator i= retval.begin();i!=retval.end();i++)
@@ -64,11 +64,11 @@ std::deque<std::string> cmb_acc::RelAcciones::get_nmb_acciones_combinacion(const
   }
 
 //! @brief Constructor por defecto.
-cmb_acc::RelAcciones::RelAcciones(void)
+cmb_acc::ActionRelationships::ActionRelationships(void)
   : EntCmd(), incompatibles(0), maestras(0), nodet(false), contiene_incomp(false) {}
 
 //! @brief Devuelve una cadena de caracteres con los nombres de la lista que se pasa como parámetro separados por comas.
-std::string cmb_acc::RelAcciones::nombres(const dq_string &l) const
+std::string cmb_acc::ActionRelationships::nombres(const dq_string &l) const
   {
     std::string retval;
     if(!l.empty())
@@ -82,26 +82,26 @@ std::string cmb_acc::RelAcciones::nombres(const dq_string &l) const
   }
 
 //! @brief Añade a las acciones incompatibles la lista de expresiones regulares que se pasa como parámetro.
-void cmb_acc::RelAcciones::concat_incompatibles(const dq_string &otra)
+void cmb_acc::ActionRelationships::concat_incompatibles(const dq_string &otra)
   {
     for(const_iterator i= otra.begin();i!=otra.end();i++)
       AgregaIncompatible(*i);
   }
 
 //! @brief Añade a las acciones maestras la lista de expresiones regulares que se pasa como parámetro.
-void cmb_acc::RelAcciones::concat_maestras(const dq_string &otra)
+void cmb_acc::ActionRelationships::concat_maestras(const dq_string &otra)
   {
     for(const_iterator i= otra.begin();i!=otra.end();i++)
       AgregaMaestra(*i);
   }
 
-//! \fn cmb_acc::RelAcciones::procesa_comando(CmdStatus &status)
+//! \fn cmb_acc::ActionRelationships::procesa_comando(CmdStatus &status)
 //! @brief Lee el objeto desde archivo.
-bool cmb_acc::RelAcciones::procesa_comando(CmdStatus &status)
+bool cmb_acc::ActionRelationships::procesa_comando(CmdStatus &status)
   {
     const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
     if(verborrea>2)
-      std::clog << "(Accion) Procesando comando: " << cmd << std::endl;
+      std::clog << "(Action) Procesando comando: " << cmd << std::endl;
     if(cmd == "incompatibles")
       {
         const std::string str= q_blancos(interpretaString(status.GetString()));
@@ -126,7 +126,7 @@ bool cmb_acc::RelAcciones::procesa_comando(CmdStatus &status)
 
 //! @brief Devuelve verdadero si alguna de las cadenas de caracteres de nmbAccionesComb
 //! verifican la expresión regular "exprReg".
-bool cmb_acc::RelAcciones::match(const std::string &exprReg,const dq_string &nmbAccionesComb) const
+bool cmb_acc::ActionRelationships::match(const std::string &exprReg,const dq_string &nmbAccionesComb) const
   {
     bool retval= false;
     boost::regex expresion(exprReg); //Inicializamos la expresión regular.
@@ -141,7 +141,7 @@ bool cmb_acc::RelAcciones::match(const std::string &exprReg,const dq_string &nmb
 
 //! @brief Devuelve verdadero si alguna de las cadenas de caracteres que se pasan como parámetro
 //! verifica alguna de las expresiones del contenedor de expresiones regulares "exprReg".
-bool cmb_acc::RelAcciones::match_any(const dq_string &exprReg,const dq_string &nmbAccionesComb) const
+bool cmb_acc::ActionRelationships::match_any(const dq_string &exprReg,const dq_string &nmbAccionesComb) const
   {
     bool retval= false;
     for(const_iterator i= exprReg.begin();i!=exprReg.end();i++)
@@ -155,7 +155,7 @@ bool cmb_acc::RelAcciones::match_any(const dq_string &exprReg,const dq_string &n
 
 //! @brief Devuelve verdadero si para cada una de las expresiones regulares de "exprReg"
 //! existe alguna cadena de caracteres de nmbAccionesComb que la verifica.
-bool cmb_acc::RelAcciones::match_all(const dq_string &exprReg,const dq_string &nmbAccionesComb) const
+bool cmb_acc::ActionRelationships::match_all(const dq_string &exprReg,const dq_string &nmbAccionesComb) const
   {
     bool retval= false;
     for(const_iterator i= exprReg.begin();i!=exprReg.end();i++)
@@ -169,12 +169,12 @@ bool cmb_acc::RelAcciones::match_all(const dq_string &exprReg,const dq_string &n
 
 //! @brief Devuelve verdadero si la cadenas de caracteres que se pasan como parámetro
 //! verifica alguna de las expresiones del contenedor "incompatibles".
-bool cmb_acc::RelAcciones::matchIncompatibles(const dq_string &sumandos) const
+bool cmb_acc::ActionRelationships::matchIncompatibles(const dq_string &sumandos) const
   { return match_any(incompatibles,sumandos); }
 
 //! @brief Devuelve verdadero si la acción cuyo nombre se pasa como parámetro es incompatible con esta,
 //! es decir que ambas no pueden estar presentes en la misma hipótesis.
-bool cmb_acc::RelAcciones::incompatible(const std::string &nmb) const
+bool cmb_acc::ActionRelationships::incompatible(const std::string &nmb) const
   {
     bool retval= false;
     const std::deque<std::string> sumandos= get_nmb_acciones_combinacion(nmb);
@@ -184,7 +184,7 @@ bool cmb_acc::RelAcciones::incompatible(const std::string &nmb) const
 
 //! @brief Devuelve verdadero si la acción cuyo nombre se pasa como parámetro es maestra de esta,
 //! es decir que ambas no pueden estar presentes en la misma hipótesis.
-bool cmb_acc::RelAcciones::esclavaDe(const std::string &nmb) const
+bool cmb_acc::ActionRelationships::esclavaDe(const std::string &nmb) const
   { 
     bool retval= false;
     for(const_iterator i= maestras.begin();i!=maestras.end();i++)
@@ -198,7 +198,7 @@ bool cmb_acc::RelAcciones::esclavaDe(const std::string &nmb) const
 
 //! @brief Elimina de la lista de maestras aquellas que ya se encuentran en la lista de
 //! nombres de acciones que se pasa como parámetro.
-void cmb_acc::RelAcciones::updateMaestras(const std::string &nmb)
+void cmb_acc::ActionRelationships::updateMaestras(const std::string &nmb)
   {
     if(!maestras.empty())
       {
@@ -211,18 +211,18 @@ void cmb_acc::RelAcciones::updateMaestras(const std::string &nmb)
       }
   }
 
-void cmb_acc::RelAcciones::concat(const RelAcciones &otra)
+void cmb_acc::ActionRelationships::concat(const ActionRelationships &otra)
   {
     concat_incompatibles(otra.incompatibles);
     concat_maestras(otra.maestras);
   }
 
-std::string cmb_acc::RelAcciones::nombresIncompatibles(void) const
+std::string cmb_acc::ActionRelationships::nombresIncompatibles(void) const
   { return nombres(incompatibles); }
-std::string cmb_acc::RelAcciones::nombresMaestras(void) const
+std::string cmb_acc::ActionRelationships::nombresMaestras(void) const
   { return nombres(maestras); }
 
-void cmb_acc::RelAcciones::Print(std::ostream &os) const
+void cmb_acc::ActionRelationships::Print(std::ostream &os) const
   {
     os << "incompatibles: {" << nombresIncompatibles() << "}; maestras: {"
        << nombresMaestras() << "}";
@@ -230,7 +230,7 @@ void cmb_acc::RelAcciones::Print(std::ostream &os) const
   }
 
 //! @brief Devuelve la propiedad cuyo código se pasa como parámetro.
-any_const_ptr cmb_acc::RelAcciones::GetProp(const std::string &cod) const
+any_const_ptr cmb_acc::ActionRelationships::GetProp(const std::string &cod) const
   {
     if(cod == "contieneIncomp")
       return any_const_ptr(contiene_incomp);
@@ -248,7 +248,7 @@ any_const_ptr cmb_acc::RelAcciones::GetProp(const std::string &cod) const
       return EntCmd::GetProp(cod);
   }
 
-std::ostream &cmb_acc::operator<<(std::ostream &os,const RelAcciones &a)
+std::ostream &cmb_acc::operator<<(std::ostream &os,const ActionRelationships &a)
   {
     a.Print(os);
     return os;

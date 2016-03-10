@@ -22,7 +22,7 @@
 //LoadCombinations.cc
 
 #include "LoadCombinations.h"
-#include "xc_utils/src/loadCombinations/actions/AccionesClasificadas.h"
+#include "xc_utils/src/loadCombinations/actions/ActionContainer.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 
@@ -31,7 +31,7 @@ cmb_acc::LoadCombinations::LoadCombinations(void)
  {}
 
 //! @brief Constructor.
-cmb_acc::LoadCombinations::LoadCombinations(const AccionesClasificadas &acc)
+cmb_acc::LoadCombinations::LoadCombinations(const ActionContainer &acc)
   : comb_uls_transient(acc.GetPersistentesOTransit()), comb_uls_accid(acc.GetAccidentales()),
     comb_uls_sism(acc.GetSismicas()), comb_sls_poco_frec(acc.GetPocoFrecuentes()),
     comb_sls_frec(acc.GetFrecuentes()), comb_sls_cuasi_perm(acc.GetCuasiPermanentes())
