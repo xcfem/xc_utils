@@ -26,7 +26,7 @@
 #define MAPPONDACCIONES_H
 
 #include "xc_utils/src/nucleo/EntCmd.h"
-#include "xc_utils/src/loadCombinations/coefs/MapCoefsPsi.h"
+#include "xc_utils/src/loadCombinations/coeffs/MapCoefsPsi.h"
 #include <map>
 
 

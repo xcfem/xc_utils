@@ -21,8 +21,8 @@
 //----------------------------------------------------------------------------
 //ListaVRAccion.cxx
 
-#include "xc_utils/src/loadCombinations/acciones/ListaVRAccion.h"
-#include "xc_utils/src/loadCombinations/acciones/FamiliaAcciones.h"
+#include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
+#include "xc_utils/src/loadCombinations/actions/FamiliaAcciones.h"
 #include "xc_utils/src/loadCombinations/load_combinations/Variacion.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"

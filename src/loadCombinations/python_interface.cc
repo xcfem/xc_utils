@@ -26,12 +26,12 @@
 #include <boost/python/class.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/docstring_options.hpp>
-#include "xc_utils/src/loadCombinations/coefs/GammaF.h"
-#include "xc_utils/src/loadCombinations/coefs/CoefsPsi.h"
-#include "xc_utils/src/loadCombinations/acciones/Accion.h"
-#include "xc_utils/src/loadCombinations/acciones/ListaVRAccion.h"
-#include "xc_utils/src/loadCombinations/acciones/FamiliaAcciones.h"
-#include "xc_utils/src/loadCombinations/acciones/AccionesClasificadas.h"
+#include "xc_utils/src/loadCombinations/coeffs/GammaF.h"
+#include "xc_utils/src/loadCombinations/coeffs/CoefsPsi.h"
+#include "xc_utils/src/loadCombinations/actions/Accion.h"
+#include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
+#include "xc_utils/src/loadCombinations/actions/FamiliaAcciones.h"
+#include "xc_utils/src/loadCombinations/actions/AccionesClasificadas.h"
 #include "xc_utils/src/loadCombinations/load_combinations/LoadCombinationVector.h"
 #include "xc_utils/src/loadCombinations/load_combinations/LoadCombinations.h"
 #include "xc_utils/src/loadCombinations/load_combinations/LoadCombinationGenerator.h"
@@ -46,8 +46,8 @@ BOOST_PYTHON_MODULE(loadCombinations)
     class_<std::vector<double> >("StdVectorDouble")
         .def(vector_indexing_suite<std::vector<double> >() );
 
-#include "coefs/python_interface.tcc"
-#include "acciones/python_interface.tcc"
+#include "coeffs/python_interface.tcc"
+#include "actions/python_interface.tcc"
 #include "load_combinations/python_interface.tcc"
   }
 

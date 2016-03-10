@@ -25,8 +25,8 @@
 #ifndef FAMILIAACCIONES_H
 #define FAMILIAACCIONES_H
 
-#include "xc_utils/src/loadCombinations/coefs/GammaF.h"
-#include "xc_utils/src/loadCombinations/acciones/ListaVRAccion.h"
+#include "xc_utils/src/loadCombinations/coeffs/GammaF.h"
+#include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
 
 namespace cmb_acc{
 class Variaciones;

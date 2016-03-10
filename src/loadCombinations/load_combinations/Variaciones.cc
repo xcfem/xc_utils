@@ -22,7 +22,7 @@
 //Variaciones.cxx
 
 #include "Variaciones.h"
-#include "xc_utils/src/loadCombinations/acciones/ListaVRAccion.h"
+#include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
 
 //! @brief Constructor.
 cmb_acc::Variaciones::Variaciones(const size_t &sz,const Variacion &v)

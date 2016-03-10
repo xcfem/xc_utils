@@ -116,9 +116,9 @@ SET(NUCLEO nucleo/aux_any nucleo/EntBase nucleo/MapParam nucleo/MapPropVar nucle
 
 SET(VtkAux vtk_aux/vtkShStrArray vtk_aux/vtkLabeledShStrMapper vtk_aux/vtkTakePhotoDefs vtk_aux/vtkTakePhoto vtk_aux/vtkXOpenGLOffScreenRenderWindow vtk_aux/vtkDoubleHeadedArrowSource vtk_aux/vtkArcSource)
 
-SET(ca_coefs loadCombinations/coefs/GammaF loadCombinations/coefs/CoefsPsi loadCombinations/coefs/MapCoefsPsi)
+SET(ca_coefs loadCombinations/coeffs/GammaF loadCombinations/coeffs/CoefsPsi loadCombinations/coeffs/MapCoefsPsi)
 
-SET(ca_acciones loadCombinations/acciones/Accion loadCombinations/acciones/RelAcciones loadCombinations/acciones/VRAccion loadCombinations/acciones/ListaVRAccion loadCombinations/acciones/FamiliaAcciones loadCombinations/acciones/MapFamiliasAcc loadCombinations/acciones/AccionesClasificadas)
+SET(ca_acciones loadCombinations/actions/Accion loadCombinations/actions/RelAcciones loadCombinations/actions/VRAccion loadCombinations/actions/ListaVRAccion loadCombinations/actions/FamiliaAcciones loadCombinations/actions/MapFamiliasAcc loadCombinations/actions/AccionesClasificadas)
 
 SET(ca_combinaciones loadCombinations/load_combinations/Variacion loadCombinations/load_combinations/Variaciones loadCombinations/load_combinations/LoadCombinationVector loadCombinations/load_combinations/LoadCombinations loadCombinations/load_combinations/MapPondAcciones loadCombinations/load_combinations/LoadCombinationGenerator)
 

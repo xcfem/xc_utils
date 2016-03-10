@@ -21,11 +21,11 @@
 //----------------------------------------------------------------------------
 //VRAccion.cxx
 
-#include "xc_utils/src/loadCombinations/acciones/VRAccion.h"
-#include "xc_utils/src/loadCombinations/acciones/ListaVRAccion.h"
+#include "xc_utils/src/loadCombinations/actions/VRAccion.h"
+#include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
 #include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/loadCombinations/coefs/GammaF.h"
-#include "xc_utils/src/loadCombinations/coefs/MapCoefsPsi.h"
+#include "xc_utils/src/loadCombinations/coeffs/GammaF.h"
+#include "xc_utils/src/loadCombinations/coeffs/MapCoefsPsi.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
 

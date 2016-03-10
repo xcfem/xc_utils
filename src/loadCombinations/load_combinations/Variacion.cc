@@ -22,7 +22,7 @@
 //Variacion.cxx
 
 #include "Variacion.h"
-#include "xc_utils/src/loadCombinations/acciones/ListaVRAccion.h"
+#include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
 
 //! \fn void cmb_acc::Variacion::print(std::ostream &os) const
 //! @brief Imprime la variación.

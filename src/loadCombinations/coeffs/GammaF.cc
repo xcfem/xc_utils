@@ -27,7 +27,7 @@
 #include "xc_utils/src/loadCombinations/load_combinations/Variaciones.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/loadCombinations/acciones/ListaVRAccion.h"
+#include "xc_utils/src/loadCombinations/actions/ListaVRAccion.h"
 
 cmb_acc::GammaFELS::GammaFELS(const float &fav,const float &desfav)
   : gamma_f_fav(fav), gamma_f_desfav(desfav) {}

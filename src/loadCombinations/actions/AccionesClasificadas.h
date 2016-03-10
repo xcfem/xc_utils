@@ -27,7 +27,7 @@
 
 #include "FamiliaAcciones.h"
 #include "MapFamiliasAcc.h"
-#include "xc_utils/src/loadCombinations/coefs/MapCoefsPsi.h"
+#include "xc_utils/src/loadCombinations/coeffs/MapCoefsPsi.h"
 
 namespace cmb_acc{
 //! @ingroup CMBACC
