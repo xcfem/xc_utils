@@ -19,12 +19,12 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//VectorCombinaciones.hxx
+//LoadCombinationVector.hxx
 //Almacena las sumas correspondientes a cada una de las variaciones
 //de una familia de acciones.
 
-#ifndef VECTORCOMBINACIONES_HXX
-#define VECTORCOMBINACIONES_HXX
+#ifndef LOADCOMBINATIONVECTOR_HXX
+#define LOADCOMBINATIONVECTOR_HXX
 
 #include "xc_utils/src/loadCombinations/acciones/Accion.h"
 #include "xc_basic/src/matrices/m_double.h"
@@ -33,31 +33,31 @@ namespace cmb_acc{
 //! @ingroup CMBACC
 //
 //! @brief Cada elemento del vector es una combinación de acciones.
-class VectorCombinaciones: public std::vector<Accion>, public EntCmd
+class LoadCombinationVector: public std::vector<Accion>, public EntCmd
   {
   private:
     bool Existe(const Accion &f) const;
     bool Nula(const double &tol) const;
     size_t CuentaNulas(const double &tol) const;
-    size_t CuentaDistintas(const VectorCombinaciones &s2) const;
-    const VectorCombinaciones &GetDistintas(const VectorCombinaciones &s2) const;
+    size_t CuentaDistintas(const LoadCombinationVector &s2) const;
+    const LoadCombinationVector &GetDistintas(const LoadCombinationVector &s2) const;
   protected:
     virtual bool procesa_comando(CmdStatus &status);
   public:
     //! @brief Constructor.
-    VectorCombinaciones(const size_t &sz= 0)
+    LoadCombinationVector(const size_t &sz= 0)
       : std::vector<Accion>(sz), EntCmd() {}
-    static VectorCombinaciones ProdCartesiano(const VectorCombinaciones &f1,const VectorCombinaciones &f2,const double &tol);
-    static VectorCombinaciones Concat(const VectorCombinaciones &f1,const VectorCombinaciones &f2,const double &tol);
+    static LoadCombinationVector ProdCartesiano(const LoadCombinationVector &f1,const LoadCombinationVector &f2,const double &tol);
+    static LoadCombinationVector Concat(const LoadCombinationVector &f1,const LoadCombinationVector &f2,const double &tol);
     void Numera(const std::string &prefijo= "H");
-    const VectorCombinaciones &GetDistintas(void) const;
-    const VectorCombinaciones &GetNoNulas(const double &tol) const;
+    const LoadCombinationVector &GetDistintas(void) const;
+    const LoadCombinationVector &GetNoNulas(const double &tol) const;
     m_double getCoeficientes(const std::vector<std::string> &) const;
     void Print(std::ostream &os) const;
     virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
-std::ostream &operator<<(std::ostream &os,const VectorCombinaciones &vc);
+std::ostream &operator<<(std::ostream &os,const LoadCombinationVector &vc);
 
 } //fin namespace nmb_acc.
 

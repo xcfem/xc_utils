@@ -32,7 +32,7 @@
 
 namespace cmb_acc {
 
-class VectorCombinaciones;
+class LoadCombinationVector;
 
 //! @ingroup CMBACC
 //

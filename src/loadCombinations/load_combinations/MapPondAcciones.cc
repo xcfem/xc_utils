@@ -26,7 +26,7 @@
 #include "xc_utils/src/loadCombinations/acciones/AccionesClasificadas.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
-#include "Combinaciones.h"
+#include "LoadCombinations.h"
 
 
 
@@ -214,11 +214,11 @@ cmb_acc::MapPondAcciones::const_iterator cmb_acc::MapPondAcciones::end(void) con
   { return ponderaciones.end(); }
 
 //! @bried Devuelve las combinaciones correspondientes a todas las ponderaciones.
-cmb_acc::Combinaciones cmb_acc::MapPondAcciones::getCombinaciones(void)
+cmb_acc::LoadCombinations cmb_acc::MapPondAcciones::getLoadCombinations(void)
   {
-    Combinaciones retval;
+    LoadCombinations retval;
     for(const_iterator i= ponderaciones.begin();i!=ponderaciones.end();i++)
-      retval.Concat(Combinaciones(*(*i).second));
+      retval.Concat(LoadCombinations(*(*i).second));
     return retval;
   }
 

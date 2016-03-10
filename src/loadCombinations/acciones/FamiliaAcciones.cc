@@ -23,8 +23,8 @@
 
 #include "FamiliaAcciones.h"
 #include "AccionesClasificadas.h"
-#include "xc_utils/src/loadCombinations/combinaciones/Variaciones.h"
-#include "xc_utils/src/loadCombinations/combinaciones/VectorCombinaciones.h"
+#include "xc_utils/src/loadCombinations/load_combinations/Variaciones.h"
+#include "xc_utils/src/loadCombinations/load_combinations/LoadCombinationVector.h"
 #include "MapFamiliasAcc.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "Accion.h"
@@ -98,11 +98,11 @@ cmb_acc::VRAccion &cmb_acc::FamiliaAcciones::inserta(const Accion &a,const std::
 //! r= 1 -> valor frecuente, r= 2 -> valor cuasipermanente).
 //! @param d: Índice de la acción dominante (si no hay acción dominante d=-1).
 //! @param rr: Valor representativo a emplear para la acción dominante.
-cmb_acc::VectorCombinaciones cmb_acc::FamiliaAcciones::GetCombinaciones(const bool &elu,const bool &sit_accidental,short int r,const int &d,const short int &rr) const
+cmb_acc::LoadCombinationVector cmb_acc::FamiliaAcciones::GetLoadCombinations(const bool &elu,const bool &sit_accidental,short int r,const int &d,const short int &rr) const
   {
     Variaciones var= CalculaVariaciones(elu,sit_accidental,d);
     const size_t num_variaciones= var.size();
-    VectorCombinaciones retval(num_variaciones);
+    LoadCombinationVector retval(num_variaciones);
     FamiliaAcciones *this_no_const= const_cast<FamiliaAcciones *>(this);
     for(size_t i=0;i<num_variaciones;i++)
       {

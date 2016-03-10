@@ -19,31 +19,31 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Combinaciones.cc
+//LoadCombinations.cc
 
-#include "Combinaciones.h"
+#include "LoadCombinations.h"
 #include "xc_utils/src/loadCombinations/acciones/AccionesClasificadas.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 
 //! @brief Constructor por defecto.
-cmb_acc::Combinaciones::Combinaciones(void)
+cmb_acc::LoadCombinations::LoadCombinations(void)
  {}
 
 //! @brief Constructor.
-cmb_acc::Combinaciones::Combinaciones(const AccionesClasificadas &acc)
+cmb_acc::LoadCombinations::LoadCombinations(const AccionesClasificadas &acc)
   : comb_uls_transient(acc.GetPersistentesOTransit()), comb_uls_accid(acc.GetAccidentales()),
     comb_uls_sism(acc.GetSismicas()), comb_sls_poco_frec(acc.GetPocoFrecuentes()),
     comb_sls_frec(acc.GetFrecuentes()), comb_sls_cuasi_perm(acc.GetCuasiPermanentes())
   {}
 
-//! \fn cmb_acc::Combinaciones::procesa_comando(CmdStatus &status)
+//! \fn cmb_acc::LoadCombinations::procesa_comando(CmdStatus &status)
 //! @brief Lee el objeto desde archivo.
-bool cmb_acc::Combinaciones::procesa_comando(CmdStatus &status)
+bool cmb_acc::LoadCombinations::procesa_comando(CmdStatus &status)
   {
     const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
     if(verborrea>2)
-      std::clog << "(Combinaciones) Procesando comando: " << cmd << std::endl;
+      std::clog << "(LoadCombinations) Procesando comando: " << cmd << std::endl;
     if(cmd == "comb_uls_transiententes")
       {
         comb_uls_transient.set_owner(this);
@@ -85,18 +85,18 @@ bool cmb_acc::Combinaciones::procesa_comando(CmdStatus &status)
   }
 
 //! @brief Concatena las combinaciones de ambos objetos.
-void cmb_acc::Combinaciones::Concat(const Combinaciones &otras)
+void cmb_acc::LoadCombinations::Concat(const LoadCombinations &otras)
   {
-    comb_uls_transient= VectorCombinaciones::Concat(comb_uls_transient,otras.comb_uls_transient,0.0);
-    comb_uls_accid= VectorCombinaciones::Concat(comb_uls_accid,otras.comb_uls_accid,0.0);
-    comb_uls_sism= VectorCombinaciones::Concat(comb_uls_sism,otras.comb_uls_sism,0.0);
-    comb_sls_poco_frec= VectorCombinaciones::Concat(comb_sls_poco_frec,otras.comb_sls_poco_frec,0.0);
-    comb_sls_frec= VectorCombinaciones::Concat(comb_sls_frec,otras.comb_sls_frec,0.0);
-    comb_sls_cuasi_perm= VectorCombinaciones::Concat(comb_sls_cuasi_perm,otras.comb_sls_cuasi_perm,0.0);
+    comb_uls_transient= LoadCombinationVector::Concat(comb_uls_transient,otras.comb_uls_transient,0.0);
+    comb_uls_accid= LoadCombinationVector::Concat(comb_uls_accid,otras.comb_uls_accid,0.0);
+    comb_uls_sism= LoadCombinationVector::Concat(comb_uls_sism,otras.comb_uls_sism,0.0);
+    comb_sls_poco_frec= LoadCombinationVector::Concat(comb_sls_poco_frec,otras.comb_sls_poco_frec,0.0);
+    comb_sls_frec= LoadCombinationVector::Concat(comb_sls_frec,otras.comb_sls_frec,0.0);
+    comb_sls_cuasi_perm= LoadCombinationVector::Concat(comb_sls_cuasi_perm,otras.comb_sls_cuasi_perm,0.0);
   }
 
 //! @brief Devuelve la propiedad cuyo código se pasa como parámetro.
-any_const_ptr cmb_acc::Combinaciones::GetProp(const std::string &cod) const
+any_const_ptr cmb_acc::LoadCombinations::GetProp(const std::string &cod) const
   {
     if(cod == "getNumCombULS")
       {

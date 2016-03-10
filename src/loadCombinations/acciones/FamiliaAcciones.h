@@ -30,7 +30,7 @@
 
 namespace cmb_acc{
 class Variaciones;
-class VectorCombinaciones;
+class LoadCombinationVector;
 class MapCoefsPsi;
 class AccionesClasificadas;
 class MapFamiliasAcc;
@@ -70,7 +70,7 @@ class FamiliaAcciones: public EntConNmb
     inline GammaF &getGammaF(void)
       { return gammaf; }
     const MapCoefsPsi *getPtrCoefsPsi(void) const;
-    VectorCombinaciones GetCombinaciones(const bool &elu,const bool &sit_accidental,short int r,const int &d=-1,const short int &rr=-1) const;
+    LoadCombinationVector GetLoadCombinations(const bool &elu,const bool &sit_accidental,short int r,const int &d=-1,const short int &rr=-1) const;
     virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 } //fin namespace nmb_acc.

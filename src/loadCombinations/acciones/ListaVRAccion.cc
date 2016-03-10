@@ -23,7 +23,7 @@
 
 #include "xc_utils/src/loadCombinations/acciones/ListaVRAccion.h"
 #include "xc_utils/src/loadCombinations/acciones/FamiliaAcciones.h"
-#include "xc_utils/src/loadCombinations/combinaciones/Variacion.h"
+#include "xc_utils/src/loadCombinations/load_combinations/Variacion.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"

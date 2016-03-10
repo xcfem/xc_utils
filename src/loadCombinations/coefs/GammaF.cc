@@ -23,8 +23,8 @@
 //Coeficientes de ponderación de acciones.
 
 #include "GammaF.h"
-#include "xc_utils/src/loadCombinations/combinaciones/Variacion.h"
-#include "xc_utils/src/loadCombinations/combinaciones/Variaciones.h"
+#include "xc_utils/src/loadCombinations/load_combinations/Variacion.h"
+#include "xc_utils/src/loadCombinations/load_combinations/Variaciones.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/loadCombinations/acciones/ListaVRAccion.h"

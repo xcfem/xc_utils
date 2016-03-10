@@ -120,7 +120,7 @@ SET(ca_coefs loadCombinations/coefs/GammaF loadCombinations/coefs/CoefsPsi loadC
 
 SET(ca_acciones loadCombinations/acciones/Accion loadCombinations/acciones/RelAcciones loadCombinations/acciones/VRAccion loadCombinations/acciones/ListaVRAccion loadCombinations/acciones/FamiliaAcciones loadCombinations/acciones/MapFamiliasAcc loadCombinations/acciones/AccionesClasificadas)
 
-SET(ca_combinaciones loadCombinations/combinaciones/Variacion loadCombinations/combinaciones/Variaciones loadCombinations/combinaciones/VectorCombinaciones loadCombinations/combinaciones/Combinaciones loadCombinations/combinaciones/MapPondAcciones loadCombinations/combinaciones/GeneradorCombinaciones)
+SET(ca_combinaciones loadCombinations/load_combinations/Variacion loadCombinations/load_combinations/Variaciones loadCombinations/load_combinations/LoadCombinationVector loadCombinations/load_combinations/LoadCombinations loadCombinations/load_combinations/MapPondAcciones loadCombinations/load_combinations/LoadCombinationGenerator)
 
 ADD_LIBRARY(xc_utils SHARED ${BASE} ${MYSQL} ${SQLITE} ${CMDLIBPLOT} ${cuadGauss} ${geom} ${GnuGts} ${NUCLEO}  ${VtkAux} ${ca_coefs} ${ca_acciones} ${ca_combinaciones})
 

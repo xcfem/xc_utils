@@ -19,30 +19,30 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//GeneradorCombinaciones.h
+//LoadCombinationGenerator.h
 
-#ifndef GENERADORCOMBINACIONES_H
-#define GENERADORCOMBINACIONES_H
+#ifndef LOADCOMBINATIONGENERATOR_H
+#define LOADCOMBINATIONGENERATOR_H
 
 #include "MapPondAcciones.h"
 
 namespace cmb_acc{
 
-class Combinaciones;
+class LoadCombinations;
 
 //! @ingroup CMBACC
 //
 //! @brief Objeto encargado de generar y gestionar las combinaciones.
-class GeneradorCombinaciones: public EntCmd
+class LoadCombinationGenerator: public EntCmd
   {
   private:
     MapPondAcciones pond_acciones;
-    Combinaciones *combinaciones;
+    LoadCombinations *combinaciones;
 
   protected:
     virtual bool procesa_comando(CmdStatus &status);
   public:
-    GeneradorCombinaciones(EntCmd *owr= NULL);
+    LoadCombinationGenerator(EntCmd *owr= NULL);
 
     AccionesClasificadas *defPonderacion(const std::string &,const MapCoefsPsi &coefs= MapCoefsPsi());
     VRAccion &inserta(const std::string &pond,const std::string &,const Accion &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
@@ -51,7 +51,7 @@ class GeneradorCombinaciones: public EntCmd
       { return pond_acciones; }
     inline void setPondAcciones(const MapPondAcciones &pa)
       { pond_acciones= pa; }
-    inline Combinaciones *getLoadCombinations(void)
+    inline LoadCombinations *getLoadCombinations(void)
       { return combinaciones; }
 
     virtual any_const_ptr GetProp(const std::string &cod) const;

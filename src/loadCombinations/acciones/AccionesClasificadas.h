@@ -43,14 +43,14 @@ class AccionesClasificadas: public EntCmd
     FamiliaAcciones AS; //!< Acciones sísmicas.
     MapCoefsPsi coefs_psi; //!< Coeficientes de simultaneidad de las acciones.
 
-    VectorCombinaciones GetCombinacionesG(const bool &elu,const bool &sit_accidental) const;
-    VectorCombinaciones GetCombinacionesG_aster(const bool &elu,const bool &sit_accidental) const;
-    VectorCombinaciones GetCombinacionesQ(const bool &elu,const bool &sit_accidental,short int r,int d=-1,short int rr=-1) const;
-    VectorCombinaciones GetCombinacionesA(short int r,int d=-1,short int rr=-1) const;
-    VectorCombinaciones GetCombinacionesAS(short int r,int d=-1,short int rr=-1) const;
-    VectorCombinaciones GetPermanentes(const bool &elu,const bool &sit_accidental) const;
-    VectorCombinaciones GetVariables(const VectorCombinaciones &permanentes,const bool &elu,const bool &sit_accidental,const short int &v) const;
-    VectorCombinaciones GetAccSis(const VectorCombinaciones &previas,const FamiliaAcciones &Acc) const;
+    LoadCombinationVector GetLoadCombinationsG(const bool &elu,const bool &sit_accidental) const;
+    LoadCombinationVector GetLoadCombinationsG_aster(const bool &elu,const bool &sit_accidental) const;
+    LoadCombinationVector GetLoadCombinationsQ(const bool &elu,const bool &sit_accidental,short int r,int d=-1,short int rr=-1) const;
+    LoadCombinationVector GetLoadCombinationsA(short int r,int d=-1,short int rr=-1) const;
+    LoadCombinationVector GetLoadCombinationsAS(short int r,int d=-1,short int rr=-1) const;
+    LoadCombinationVector GetPermanentes(const bool &elu,const bool &sit_accidental) const;
+    LoadCombinationVector GetVariables(const LoadCombinationVector &permanentes,const bool &elu,const bool &sit_accidental,const short int &v) const;
+    LoadCombinationVector GetAccSis(const LoadCombinationVector &previas,const FamiliaAcciones &Acc) const;
 
   protected:
     friend class MapPondAcciones;
@@ -74,15 +74,15 @@ class AccionesClasificadas: public EntCmd
     void setAccionesSismicas(const FamiliaAcciones &);
 
     //Estados límite últimos.
-    VectorCombinaciones GetPersistentesOTransit(void) const;
-    VectorCombinaciones GetAccidentales(void) const;
-    VectorCombinaciones GetSismicas(void) const;
-    VectorCombinaciones GetCombELU(void) const;
+    LoadCombinationVector GetPersistentesOTransit(void) const;
+    LoadCombinationVector GetAccidentales(void) const;
+    LoadCombinationVector GetSismicas(void) const;
+    LoadCombinationVector GetCombELU(void) const;
     //Estados límite de servicio.
-    VectorCombinaciones GetPocoFrecuentes(void) const;
-    VectorCombinaciones GetFrecuentes(void) const;
-    VectorCombinaciones GetCuasiPermanentes(void) const;
-    VectorCombinaciones GetCombELS(void) const;
+    LoadCombinationVector GetPocoFrecuentes(void) const;
+    LoadCombinationVector GetFrecuentes(void) const;
+    LoadCombinationVector GetCuasiPermanentes(void) const;
+    LoadCombinationVector GetCombELS(void) const;
 
     const MapCoefsPsi *getPtrCoefsPsi(void) const
       { return &coefs_psi; }

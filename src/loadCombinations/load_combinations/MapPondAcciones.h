@@ -35,7 +35,7 @@ namespace cmb_acc {
 class Accion;
 class VRAccion;
 class AccionesClasificadas;
-class Combinaciones;
+class LoadCombinations;
 
 //! @ingroup CMBACC
 //
@@ -76,7 +76,7 @@ class MapPondAcciones: public EntCmd
     const_iterator begin(void) const;
     iterator end(void);
     const_iterator end(void) const;
-    Combinaciones getCombinaciones(void);
+    LoadCombinations getLoadCombinations(void);
     virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 

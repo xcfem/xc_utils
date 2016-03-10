@@ -19,27 +19,27 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//GeneradorCombinaciones.cc
+//LoadCombinationGenerator.cc
 
-#include "GeneradorCombinaciones.h"
+#include "LoadCombinationGenerator.h"
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/any_const_ptr.h"
-#include "Combinaciones.h"
+#include "LoadCombinations.h"
 
 //! @brief Constructor.
-cmb_acc::GeneradorCombinaciones::GeneradorCombinaciones(EntCmd *owr)
+cmb_acc::LoadCombinationGenerator::LoadCombinationGenerator(EntCmd *owr)
   : EntCmd(owr), combinaciones(NULL) {}
 
 //! @brief Define la ponderación cuyo nombre se pasa como parámetro.
-cmb_acc::AccionesClasificadas *cmb_acc::GeneradorCombinaciones::defPonderacion(const std::string &nmb,const MapCoefsPsi &coefs)
+cmb_acc::AccionesClasificadas *cmb_acc::LoadCombinationGenerator::defPonderacion(const std::string &nmb,const MapCoefsPsi &coefs)
   { return pond_acciones.defPonderacion(nmb,coefs); }
 
 //! @brief Inserta la acción que se pasa como parámetro.
-cmb_acc::VRAccion &cmb_acc::GeneradorCombinaciones::inserta(const std::string &pond,const std::string &familia,const Accion &acc,const std::string &nmb_coefs_psi,const std::string &subfamilia)
+cmb_acc::VRAccion &cmb_acc::LoadCombinationGenerator::inserta(const std::string &pond,const std::string &familia,const Accion &acc,const std::string &nmb_coefs_psi,const std::string &subfamilia)
   { return pond_acciones.inserta(pond,familia,acc,nmb_coefs_psi,subfamilia); }
 
 //! @brief Generación de combinaciones
-void cmb_acc::GeneradorCombinaciones::genera(void)
+void cmb_acc::LoadCombinationGenerator::genera(void)
   {
     if(combinaciones) //Ya se generaron anteriormente.
       {
@@ -47,16 +47,16 @@ void cmb_acc::GeneradorCombinaciones::genera(void)
         combinaciones= NULL;
       }
     else
-      combinaciones= new Combinaciones(pond_acciones.getCombinaciones());
+      combinaciones= new LoadCombinations(pond_acciones.getLoadCombinations());
   }
 
-//! \fn cmb_acc::GeneradorCombinaciones::procesa_comando(CmdStatus &status)
+//! \fn cmb_acc::LoadCombinationGenerator::procesa_comando(CmdStatus &status)
 //! @brief Lee el objeto desde archivo.
-bool cmb_acc::GeneradorCombinaciones::procesa_comando(CmdStatus &status)
+bool cmb_acc::LoadCombinationGenerator::procesa_comando(CmdStatus &status)
   {
     const std::string cmd= deref_cmd(status.Cmd()); //Desreferencia comando.
     if(verborrea>2)
-      std::clog << "(GeneradorCombinaciones) Procesando comando: " << cmd << std::endl;
+      std::clog << "(LoadCombinationGenerator) Procesando comando: " << cmd << std::endl;
     if(cmd == "pond_acciones")
       {
         pond_acciones.LeeCmd(status);
@@ -79,7 +79,7 @@ bool cmb_acc::GeneradorCombinaciones::procesa_comando(CmdStatus &status)
   }
 
 //! @brief Devuelve la propiedad cuyo código se pasa como parámetro.
-any_const_ptr cmb_acc::GeneradorCombinaciones::GetProp(const std::string &cod) const
+any_const_ptr cmb_acc::LoadCombinationGenerator::GetProp(const std::string &cod) const
   {
     if(cod == "combGeneradas")
       {

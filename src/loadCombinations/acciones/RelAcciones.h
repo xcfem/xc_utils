@@ -30,7 +30,7 @@
 //! Rutinas para generar combinaciones de acciones.
 namespace cmb_acc{
 
-class VectorCombinaciones;
+class LoadCombinationVector;
 
 //! @ingroup CMBACC
 //
@@ -101,8 +101,8 @@ class RelAcciones: public EntCmd
 
 std::ostream &operator<<(std::ostream &os,const RelAcciones &acc);
 
-const VectorCombinaciones &getCompatibles(const VectorCombinaciones &);
-const VectorCombinaciones &filtraCombsEsclavasHuerfanas(const VectorCombinaciones &);
+const LoadCombinationVector &getCompatibles(const LoadCombinationVector &);
+const LoadCombinationVector &filtraCombsEsclavasHuerfanas(const LoadCombinationVector &);
 
 } //fin namespace nmb_acc.
 

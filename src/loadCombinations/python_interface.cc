@@ -32,9 +32,9 @@
 #include "xc_utils/src/loadCombinations/acciones/ListaVRAccion.h"
 #include "xc_utils/src/loadCombinations/acciones/FamiliaAcciones.h"
 #include "xc_utils/src/loadCombinations/acciones/AccionesClasificadas.h"
-#include "xc_utils/src/loadCombinations/combinaciones/VectorCombinaciones.h"
-#include "xc_utils/src/loadCombinations/combinaciones/Combinaciones.h"
-#include "xc_utils/src/loadCombinations/combinaciones/GeneradorCombinaciones.h"
+#include "xc_utils/src/loadCombinations/load_combinations/LoadCombinationVector.h"
+#include "xc_utils/src/loadCombinations/load_combinations/LoadCombinations.h"
+#include "xc_utils/src/loadCombinations/load_combinations/LoadCombinationGenerator.h"
 
 BOOST_PYTHON_MODULE(loadCombinations)
   {
@@ -48,6 +48,6 @@ BOOST_PYTHON_MODULE(loadCombinations)
 
 #include "coefs/python_interface.tcc"
 #include "acciones/python_interface.tcc"
-#include "combinaciones/python_interface.tcc"
+#include "load_combinations/python_interface.tcc"
   }
 

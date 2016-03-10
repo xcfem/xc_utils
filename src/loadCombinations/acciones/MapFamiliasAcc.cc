@@ -26,7 +26,7 @@
 #include "FamiliaAcciones.h"
 #include "xc_utils/src/base/any_const_ptr.h"
 #include "xc_utils/src/base/utils_any.h"
-#include "xc_utils/src/loadCombinations/combinaciones/VectorCombinaciones.h"
+#include "xc_utils/src/loadCombinations/load_combinations/LoadCombinationVector.h"
 #include "AccionesClasificadas.h"
 
 
@@ -225,17 +225,17 @@ bool cmb_acc::MapFamiliasAcc::Vacia(void) const
 //! @brief Devuelve las combinaciones correspondientes a acciones permanentes de valor no constante.
 //! @param elu: Verdadero si las combinaciones corresponden a estados límite últimos.
 //! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
-cmb_acc::VectorCombinaciones cmb_acc::MapFamiliasAcc::GetCombinaciones(const bool &elu,const bool &sit_accidental) const
+cmb_acc::LoadCombinationVector cmb_acc::MapFamiliasAcc::GetLoadCombinations(const bool &elu,const bool &sit_accidental) const
   {
-    VectorCombinaciones retval;
+    LoadCombinationVector retval;
     for(const_iterator i= familias.begin();i!=familias.end();i++)
       {
         FamiliaAcciones *familia= (*i).second;
         assert(familia);
         if(!familia->Vacia()) //La familia contiene acciones.
           {
-            VectorCombinaciones SG_aster= familia->GetCombinaciones(elu,sit_accidental,-1);//Las permanentes siempre con valor característico.
-            retval= VectorCombinaciones::ProdCartesiano(retval,SG_aster,Accion::zero);
+            LoadCombinationVector SG_aster= familia->GetLoadCombinations(elu,sit_accidental,-1);//Las permanentes siempre con valor característico.
+            retval= LoadCombinationVector::ProdCartesiano(retval,SG_aster,Accion::zero);
           }
       }
     retval= getCompatibles(retval); //Filtramos las que contienen acciones incompatibles.

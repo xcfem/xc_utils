@@ -27,7 +27,7 @@
 #include "xc_utils/src/base/CmdStatus.h"
 #include "xc_utils/src/base/utils_any.h"
 #include "boost/regex.hpp"
-#include "xc_utils/src/loadCombinations/combinaciones/VectorCombinaciones.h"
+#include "xc_utils/src/loadCombinations/load_combinations/LoadCombinationVector.h"
 
 //! @brief Elimina el factor que multiplica a la acción en la cadena de
 //! la forma "1.35*A" que se pasa como parámetro.
@@ -255,16 +255,16 @@ std::ostream &cmb_acc::operator<<(std::ostream &os,const RelAcciones &a)
   }
 
 //! @brief Devuelve las combinaciones filtrando las que contienen acciones incompatibles.
-const cmb_acc::VectorCombinaciones &cmb_acc::getCompatibles(const VectorCombinaciones &comb)
+const cmb_acc::LoadCombinationVector &cmb_acc::getCompatibles(const LoadCombinationVector &comb)
   {
-    static VectorCombinaciones retval;
+    static LoadCombinationVector retval;
     const size_t sz= comb.size();
     if(sz<1)
       {
         retval.resize(0);
         return retval;
       }
-    VectorCombinaciones tmp(sz);
+    LoadCombinationVector tmp(sz);
     size_t cont=0;
     for(size_t i=0;i<sz;i++)
       if(!(comb[i].getRelaciones().contieneIncomp())) //Si no contiene acciones incompatibles.
@@ -279,16 +279,16 @@ const cmb_acc::VectorCombinaciones &cmb_acc::getCompatibles(const VectorCombinac
   }
 
 //! @brief Filtra las combinaciones casos en las que las acciones esclavas aparecen sin su maestra.
-const cmb_acc::VectorCombinaciones &cmb_acc::filtraCombsEsclavasHuerfanas(const cmb_acc::VectorCombinaciones &comb)
+const cmb_acc::LoadCombinationVector &cmb_acc::filtraCombsEsclavasHuerfanas(const cmb_acc::LoadCombinationVector &comb)
   {
-    static VectorCombinaciones retval;
+    static LoadCombinationVector retval;
     const size_t sz= comb.size();
     if(sz<1)
       {
         retval.resize(0);
         return retval;
       }
-    VectorCombinaciones tmp(sz);
+    LoadCombinationVector tmp(sz);
     size_t cont=0;
     for(size_t i=0;i<sz;i++)
       if(!(comb[i].getRelaciones().tieneHuerfanas())) //No contiene esclavas huerfanas.
