@@ -2,19 +2,19 @@
 
 import xc_base
 import loadCombinations
-from loadCombinationUtils import ehe_ctr_intenso
+from loadCombinationUtils import ehe
 
 dbName= "/tmp/test_accidentales.db"
 tbName= "combinaciones"
 
 lcg= loadCombinations.LoadCombGenerator()
-lcg.defPonderacion("EHEIntenso",ehe_ctr_intenso.coefs_psi_EHE)
-lcg.insert("EHEIntenso","accidentales",loadCombinations.Accion("A1","Hipot. 1"),"","")
-lcg.insert("EHEIntenso","accidentales",loadCombinations.Accion("A2","Hipot. 2"),"","")
-lcg.insert("EHEIntenso","accidentales",loadCombinations.Accion("A3","Hipot. 3"),"","")
-lcg.insert("EHEIntenso","accidentales",loadCombinations.Accion("A4","Hipot. 4"),"","")
-lcg.insert("EHEIntenso","accidentales",loadCombinations.Accion("A5","Hipot. 5"),"","")
-lcg.insert("EHEIntenso","accidentales",loadCombinations.Accion("A6","Hipot. 6"),"","")
+lcg.defPonderacion("EHEIntenso",ehe.coefs_psi_EHE)
+lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A1","Hipot. 1"),"","")
+lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A2","Hipot. 2"),"","")
+lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A3","Hipot. 3"),"","")
+lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A4","Hipot. 4"),"","")
+lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A5","Hipot. 5"),"","")
+lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A6","Hipot. 6"),"","")
 
 import os
 os.system("rm -f "+dbName)
