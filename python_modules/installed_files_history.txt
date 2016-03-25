@@ -137,6 +137,8 @@
 /usr/local/lib/python2.7/dist-packages/loadCombinationUtils/ehe_ctr_intenso.pyc
 /usr/local/lib/python2.7/dist-packages/loadCombinationUtils/ehe_ctr_normal.py
 /usr/local/lib/python2.7/dist-packages/loadCombinationUtils/ehe_ctr_normal.pyc
+/usr/local/lib/python2.7/dist-packages/loadCombinationUtils/ehe.py
+/usr/local/lib/python2.7/dist-packages/loadCombinationUtils/ehe.pyc
 /usr/local/lib/python2.7/dist-packages/loadCombinationUtils/export_combs.py
 /usr/local/lib/python2.7/dist-packages/loadCombinationUtils/export_combs.pyc
 /usr/local/lib/python2.7/dist-packages/loadCombinationUtils/iapf.py
