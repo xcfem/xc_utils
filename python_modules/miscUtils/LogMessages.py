@@ -11,7 +11,10 @@ __email__= "l.pereztato@gmail.com"
 
 import logging
 
-logging.addLevelName( logging.INFO, "\033[1;31m%s\033[1;0m" % logging.getLevelName(logging.INFO))
+#Maybe it's interesting to write all that stuff in a file (possibly with an echo in another terminal...).
+#logging.basicConfig(filename='example.log',level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG)
+#logging.addLevelName( logging.INFO, "\033[1;31m%s\033[1;0m" % logging.getLevelName(logging.INFO))
 logging.addLevelName( logging.WARNING, "\033[1;31m%s\033[1;0m" % logging.getLevelName(logging.WARNING))
 logging.addLevelName( logging.ERROR, "\033[1;41m%s\033[1;0m" % logging.getLevelName(logging.ERROR))
 
