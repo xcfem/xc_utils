@@ -153,6 +153,8 @@
 /usr/local/lib/python2.7/dist-packages/miscUtils/__init__.pyc
 /usr/local/lib/python2.7/dist-packages/miscUtils/LogMessages.py
 /usr/local/lib/python2.7/dist-packages/miscUtils/LogMessages.pyc
+/usr/local/lib/python2.7/dist-packages/miscUtils/string_utils.py
+/usr/local/lib/python2.7/dist-packages/miscUtils/string_utils.pyc
 /usr/local/lib/python2.7/dist-packages/sqliteUtils/ansysToEsfBarra.py
 /usr/local/lib/python2.7/dist-packages/sqliteUtils/ansysToEsfBarra.pyc
 /usr/local/lib/python2.7/dist-packages/sqliteUtils/__init__.py
