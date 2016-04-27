@@ -70,6 +70,10 @@ class_<Circulo2d, bases<Superficie2d> >("Circulo2d")
 
 class_<Superficie3d, bases<GeomObj3d>, boost::noncopyable  >("Superficie3d", no_init);
 
+class_<D2to3d, bases<Superficie3d>, boost::noncopyable  >("D2to3d", no_init)
+  .def("getPlane",&D2to3d::GetPlano)
+  ;
+
 class_<EcuacionGeneralPlano3d, boost::noncopyable>("EcuacionGeneralPlano3d", no_init)
   .def(init<double,double,double,double>());
 
@@ -102,6 +106,14 @@ class_<Plano3d, bases<Superficie3d> >("Plano3d")
   .def("getNormal", &Plano3d::Normal)
   .def("getBase1", &Plano3d::Base1)
   .def("getBase2", &Plano3d::Base2);
+
+class_<Poligono3d, bases<D2to3d> >("Poligono3d");
+
+class_<Triangulo3d, bases<Poligono3d>  >("Triangulo3d")
+  .def(init<Pos3d,Pos3d,Pos3d>())
+  .def(init<Triangulo3d>())
+  ;
+
 
 class_<Rejilla2d, bases<Superficie2d> >("Rejilla2d")
   .def(init<>())

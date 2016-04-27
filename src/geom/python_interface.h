@@ -66,6 +66,7 @@
 #include "xc_utils/src/geom/d2/Superficie3d.h"
 #include "xc_utils/src/geom/d2/EcuacionGeneralPlano3d.h"
 #include "xc_utils/src/geom/d2/Plano3d.h"
+#include "xc_utils/src/geom/d2/Triangulo3d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Cuadrilatero2d.h"
 #include "xc_utils/src/geom/d2/Rejilla2d.h"
 #include "xc_utils/src/geom/pos_vec/SVD2d.h"
