@@ -26,9 +26,8 @@
 #include "xc_basic/src/texto/cadena_carac.h"
 #include "xc_basic/src/texto/en_letra.h"
 #include "xc_basic/src/texto/latex.h"
-#include "xc_utils/src/base/Record.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
 #include "ActionRValueList.h"
 #include "xc_basic/src/funciones/algebra/ExprAlgebra.h"
 

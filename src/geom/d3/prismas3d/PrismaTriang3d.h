@@ -35,14 +35,12 @@ class PrismaTriang3d : public PrismaRecto3d<Triangulo3d>
   {
   public:
     typedef PrismaRecto3d<Triangulo3d> prisma_triang;
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     PrismaTriang3d(const Triangulo3d &tr= Triangulo3d(),const double &h=1.0);
     PrismaTriang3d(const PrismaTriang3d &otro);
     PrismaTriang3d &operator=(const PrismaTriang3d &c);
     virtual GeomObj *clon(void) const;
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
+    
   };
 #endif
 

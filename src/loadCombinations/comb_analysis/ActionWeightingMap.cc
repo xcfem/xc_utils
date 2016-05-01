@@ -23,8 +23,8 @@
 
 #include "ActionWeightingMap.h"
 #include "xc_utils/src/loadCombinations/actions/ActionContainer.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
 #include "LoadCombinations.h"
 
 
@@ -39,7 +39,7 @@ cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::busca_ponderacion(const s
     if(existe(nmb))
       return ponderaciones[nmb];
     else
-      return NULL;
+      return nullptr;
   }
 
 //! @brief Devuelve un puntero a la ponderacion cuyo nombre se pasa como parámetro.
@@ -49,13 +49,13 @@ const cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::busca_ponderacion(c
     if(i!= ponderaciones.end())
       return (*i).second;
     else
-      return NULL;
+      return nullptr;
   }
 
 //! @brief Crea una nueva ponderacion con el nombre que se le pasa como parámetro.
 cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::crea_ponderacion(const std::string &nmb,const PsiCoeffsMap &coefs)
   {
-    ActionContainer *tmp =NULL;
+    ActionContainer *tmp =nullptr;
     if(!existe(nmb)) //la ponderacion es nuevo.
       {
         tmp= new ActionContainer(coefs);
@@ -111,7 +111,7 @@ void cmb_acc::ActionWeightingMap::clear(void)
     for(iterator i= ponderaciones.begin();i!=ponderaciones.end();i++)
       {
         delete (*i).second;
-        (*i).second= NULL;
+        (*i).second= nullptr;
       }
     ponderaciones.clear();
   }

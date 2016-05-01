@@ -43,9 +43,6 @@ class Ref1d3d : public Ref<SisCooRect1d3d>
     typedef GeomObj3d::list_Pos3d list_Pos3d;
     typedef Ref<SisCooRect1d3d> BaseRef;
 
-  protected:
-
-    bool procesa_comando(CmdStatus &status);
   public:
     Ref1d3d(void);
     Ref1d3d(const Ref1d3d &otro);
@@ -59,7 +56,7 @@ class Ref1d3d : public Ref<SisCooRect1d3d>
     //Devuelve el vector unitario I en el sistema global.
     Recta3d GetEjeX(void) const; //Devuelve la recta que define el eje x.
 
-    //virtual void SalvaCmd(ostream &os,const string &indent= "  ") const;
+
     virtual ~Ref1d3d(void)
       {}
   };

@@ -49,7 +49,7 @@ class Poliedro3d: public PolyhedronBase
     void make_tetrahedron(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);
     void make_tetrahedron(const SemiEspacio3d &, const SemiEspacio3d &,const SemiEspacio3d &, const SemiEspacio3d &);
     void make_polyhedron(const std::deque<SemiEspacio3d> &);
-    void semiespacios(const std::string &,const bool &clear= true);
+    //void semiespacios(const std::string &,const bool &clear= true);
 
   public:
     typedef CGPoliedro_3::Vertex Vertex;

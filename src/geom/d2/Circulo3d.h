@@ -35,8 +35,6 @@ class Pos3d;
 class Circulo3d : public D2to3d
   {
     Circulo2d circ;
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     Circulo3d(void) : D2to3d(), circ() {}
     Circulo3d(const Pos3d &centro,const GEOM_FT &rad);
@@ -79,7 +77,7 @@ class Circulo3d : public D2to3d
 
     friend bool operator ==(const Circulo3d &a,const Circulo3d &b);
 
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
+    
     void Print(std::ostream &os) const;
   };
 

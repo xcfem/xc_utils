@@ -22,7 +22,7 @@
 //SemiRecta3d.cc
 
 #include "SemiRecta3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include "../pos_vec/Dir3d.h"
 #include "../pos_vec/Vector3d.h"
 #include "../pos_vec/Pos3d.h"
@@ -38,40 +38,6 @@ SemiRecta3d::SemiRecta3d(const Pos3d &p1,const Pos3d &p2)
   }
 void SemiRecta3d::DosPuntos(const Pos3d &p1,const Pos3d &p2)
   { (*this)= SemiRecta3d(p1,p2); }
-void SemiRecta3d::salva_miembros(std::ostream &os,const std::string &indent) const
-  {
-/*         salva_org(os,indent); */
-/*         os << indent << "\\dest{"; */
-/*         PtoParametricas(100.0).salva_miembros(os,""); */
-/*         os << '}' << std::endl; */
-  }
-void SemiRecta3d::salva_cmd(std::ostream &os,const std::string &indent,const std::string &obj) const
-  {
-    const std::string str_indent= indent + "  ";
-    os << indent << '\\' << obj << std::endl
-       << str_indent << '{' << std::endl;
-    salva_miembros(os,str_indent+ "  ");
-    os << str_indent  << '}' << std::endl;
-  }
-
-bool SemiRecta3d::procesa_comando(CmdStatus &status)
-  {
-    Pos3d o,d;
-    if(status.Cmd() == "org")
-      {
-        o.LeeCmd(status);
-        (*this)= SemiRecta3d(o,d);
-        return true;
-      }
-    else if(status.Cmd() == "dest")
-      {
-        d.LeeCmd(status);
-        (*this)= SemiRecta3d(o,d);
-        return true;
-      }
-    else
-      return Linea3d::procesa_comando(status);
-  }
 
 Dir3d SemiRecta3d::GetDir(void) const
   { return Dir3d(cgsr.direction()); }

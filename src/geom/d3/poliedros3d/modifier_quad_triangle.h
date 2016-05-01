@@ -57,7 +57,7 @@ class CModifierQuadTriangle: public CGAL::Modifier_base<HDS>
     // life cycle
     CModifierQuadTriangle(Polyhedron *pMesh)
       {
-        CGAL_assertion(pMesh != NULL);
+        CGAL_assertion(pMesh != nullptr);
         m_pMesh = pMesh;
       }
     ~CModifierQuadTriangle() {}
@@ -333,7 +333,7 @@ void CModifierQuadTriangle<HDS,Polyhedron,kernel>::smooth_trata_vertice_borde(co
     else // smooth using [1/4 1/2 1/4] cubic B-spline averaging mask 
       {
         const typename Polyhedron::Halfedge_handle& pHalfedge = pMesh->get_border_halfedge(pVertex);
-        CGAL_assertion(pHalfedge != NULL);
+        CGAL_assertion(pHalfedge != nullptr);
         const Point& next = pHalfedge->next()->vertex()->point();
         const Point& prev = pHalfedge->prev()->vertex()->point();
         pPos[3*index]   = prev.x()/4 + curr.x()/2 + next.x()/4;
@@ -354,7 +354,7 @@ void CModifierQuadTriangle<HDS,Polyhedron,kernel>::smooth_trata_vertice_interior
     CGAL_For_all(pHalfEdge,end)
       {
         const typename Polyhedron::Facet_handle& pFacet = pHalfEdge->facet();
-        CGAL_assertion(pFacet != NULL);
+        CGAL_assertion(pFacet != nullptr);
         unsigned int degree = Polyhedron::degree(pFacet);
         CGAL_assertion(degree == 4 || degree == 3);
         if(degree == 4) nb_quads++;
@@ -380,7 +380,7 @@ void CModifierQuadTriangle<HDS,Polyhedron,kernel>::smooth_trata_vertice_interior
     CGAL_For_all(pHalfEdge,end)
       {
         const typename Polyhedron::Facet_handle& pFacet = pHalfEdge->facet();
-        CGAL_assertion(pFacet != NULL);
+        CGAL_assertion(pFacet != nullptr);
         unsigned int degree = Polyhedron::degree(pFacet);
         CGAL_assertion(degree == 4 || degree == 3);
 
@@ -431,12 +431,12 @@ void CModifierQuadTriangle<HDS,Polyhedron,kernel>::smooth_set_new_positions(Poly
 template <class HDS,class Polyhedron,class kernel>
 void CModifierQuadTriangle<HDS,Polyhedron,kernel>::smooth(Polyhedron *pMesh,bool smooth_boundary)
   {
-    CGAL_assertion(pMesh != NULL);
+    CGAL_assertion(pMesh != nullptr);
 
     // alloc position vectors
     unsigned int nb_vertices = pMesh->size_of_vertices();
     typename kernel::FT *pPos = new typename kernel::FT[3*nb_vertices];
-    CGAL_assertion(pPos != NULL);
+    CGAL_assertion(pPos != nullptr);
 
     // compute nueva posición
     unsigned int index = 0;

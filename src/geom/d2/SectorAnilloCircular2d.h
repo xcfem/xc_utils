@@ -39,7 +39,6 @@ class SectorAnilloCircular2d : public SectorCircular2d
   protected:
     SectorCircular2d getSector(const double &R) const;
     SectorCircular2d SectorInterior(void) const;
-    bool procesa_comando(CmdStatus &status);
   public:
     SectorAnilloCircular2d(void) : SectorCircular2d(), rint(0.0) {}
     SectorAnilloCircular2d(const SectorCircular2d &c,const double &rint);

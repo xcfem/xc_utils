@@ -30,6 +30,7 @@ class Trf2d;
 class Semiplano2d;
 class Recta2d;
 class Segmento2d;
+class ListaPos2d;
 
 
 //! @ingroup GEOM
@@ -40,8 +41,6 @@ class Poligono2d: public SupPoligonal2d
     CGPoligono_2 cgpol; //Poligono de CGAL.
     template <class inputIterator>
     bool Overlap(inputIterator begin, inputIterator end) const;
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
 
     typedef CGPoligono_2::Vertex_iterator vertex_iterator; 
@@ -168,8 +167,7 @@ class Poligono2d: public SupPoligonal2d
 
     std::list<Poligono2d> Interseccion(const Semiplano2d &sp) const;
 
-    std::list<Poligono2d> crea_lista_poligono2d(const std::string &str) const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
+    //std::list<Poligono2d> crea_lista_poligono2d(const std::string &str) const;
   };
 
 inline Poligono2d transforma(const Trf2d &trf2d,const Poligono2d &pol2d)

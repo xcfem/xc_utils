@@ -22,31 +22,14 @@
 //VDesliz2d.cc
 
 #include "VDesliz2d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
-#include "xc_utils/src/nucleo/InterpreteRPN.h"
+
+
+
+
 
 //! @brief Constructor.
 VDesliz2d::VDesliz2d(const Pos2d &o,const Pos2d &p)
   : Vector2d(p-o), org(o) {}
-
-bool VDesliz2d::procesa_comando(CmdStatus &status)
-  {
-    //cerr << "(VDesliz2d) Procesando comando: " << status.Cmd() << endl;
-    if(status.Cmd() == "vector")
-      {
-        Vector2d::LeeCmd(status);
-        return true;
-      }
-    else if(status.Cmd() == "pto_aplic")
-      {
-        org.LeeCmd(status);
-        return true;
-      }
-    else
-      return Vector2d::procesa_comando(status);
-  }
 
 GEOM_FT VDesliz2d::Momento(const Pos2d &o) const
 //Momento de un vector deslizante respecto a un punto.
@@ -75,50 +58,3 @@ VDesliz2d operator-(const VDesliz2d &v)
     return neg;
   }
 
-//! \brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-any_const_ptr VDesliz2d::GetProp(const std::string &cod) const
-  {
-    if(cod=="org")
-      {
-        return any_const_ptr(&org);
-      }
-    else if(cod=="modulo")
-      {
-        tmp_gp_dbl= GetModulus();
-        return any_const_ptr(tmp_gp_dbl);
-      }
-    else if(cod=="momento") //Momento respecto al punto cuyas coordenadas se pasan como parámetro.
-      {
-        double x0= 0.0;
-        double y0= 0.0;
-        if(InterpreteRPN::Pila().size()>1)
-          {
-            x0= convert_to_double(InterpreteRPN::Pila().Pop());
-            y0= convert_to_double(InterpreteRPN::Pila().Pop());
-          }
-        else if(InterpreteRPN::Pila().size()>0)
-          {
-            x0= convert_to_double(InterpreteRPN::Pila().Pop());
-          }
-        tmp_gp_dbl= Momento(Pos2d(x0,y0));
-        return any_const_ptr(tmp_gp_dbl);
-      }
-    else if(cod=="brazo") //Brazo respecto al punto cuyas coordenadas se pasan como parámetro.
-      {
-        double x0= 0.0;
-        double y0= 0.0;
-        if(InterpreteRPN::Pila().size()>1)
-          {
-            x0= convert_to_double(InterpreteRPN::Pila().Pop());
-            y0= convert_to_double(InterpreteRPN::Pila().Pop());
-          }
-        else if(InterpreteRPN::Pila().size()>0)
-          {
-            x0= convert_to_double(InterpreteRPN::Pila().Pop());
-          }
-        tmp_gp_dbl= Momento(Pos2d(x0,y0))/GetModulus();
-        return any_const_ptr(tmp_gp_dbl);
-      }
-    else
-      return Vector2d::GetProp(cod);
-  }

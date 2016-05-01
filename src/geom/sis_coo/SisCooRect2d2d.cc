@@ -27,8 +27,8 @@
 #include "../pos_vec/Vector3d.h"
 #include "xc_basic/src/matrices/normaliza.h"
 #include "xc_basic/src/util/matem.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
+
 
 //! @brief Constructor por defecto.
 SisCooRect2d2d::SisCooRect2d2d(void): SisCooXd2d(2) {}
@@ -43,31 +43,6 @@ SisCooRect2d2d::SisCooRect2d2d(const VGlobal &vX)
 SisCoo *SisCooRect2d2d::Copia(void) const
   { return new SisCooRect2d2d(*this); }
 
-
-bool SisCooRect2d2d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-       std::clog << "(SisCooRect2d2d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "i")
-      {
-        VGlobal tmp;
-        tmp.LeeCmd(status);
-        PutI(tmp);
-        normaliza();
-        return true;
-      }
-    else if(cmd == "j")
-      {
-        VGlobal tmp;
-        tmp.LeeCmd(status);
-        PutI(tmp);
-        normaliza();
-        return true;
-      }
-    else
-      return SisCooXd2d::procesa_comando(status);
-  }
 //! @brief Devuelve el vector unitario I en el sistema global.
 SisCooRect2d2d::VGlobal SisCooRect2d2d::GetI(void) const
   { return GetVDirEje(1); }
@@ -103,25 +78,3 @@ SisCooRect2d2d::VLocal SisCooRect2d2d::GetCooLocales(const VGlobal &v) const
     return VLocal(tmp(1),tmp(2)); 
   }
 
-//! \brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-//! como parámetro.
-//!
-//! Soporta los códigos:
-//! i: Devuelve el vector unitario i.
-//! j: Devuelve el vector unitario j.
-any_const_ptr SisCooRect2d2d::GetProp(const std::string &cod) const
-  {
-    static VGlobal tmp_vg;
-    if(cod=="i")
-      {
-        tmp_vg= GetI();
-        return any_const_ptr(tmp_vg);
-      }
-    else if(cod=="j")
-      {
-        tmp_vg= GetJ();
-        return any_const_ptr(tmp_vg);
-      }
-    else
-      return SisCooXd2d::GetProp(cod);
-  }

@@ -37,11 +37,6 @@ class Dir3d;
 class SemiRecta3d : public Linea3d
   {
     CGSemiRecta_3 cgsr;
-
-  protected:
-    bool procesa_comando(CmdStatus &status);
-    virtual void salva_miembros(std::ostream &os,const std::string &indent) const;
-    virtual void salva_cmd(std::ostream &os,const std::string &indent= "  ",const std::string &obj= "semirecta") const;
   public:
     SemiRecta3d(void): Linea3d(),cgsr(CGPoint_3(0,0,0),CGPoint_3(1,0,0)) {}
     SemiRecta3d(const CGSemiRecta_3 &r)
@@ -117,8 +112,6 @@ class SemiRecta3d : public Linea3d
       { return (r1.cgsr==r2.cgsr); }
     inline void Print(std::ostream &os) const
       { os << PtoParametricas(0.0) << " " << PtoParametricas(100.0); }
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const
-      { salva_cmd(os,indent,"recta"); }
   };
 
 inline GEOM_FT angulo(const SemiRecta3d &r,const Vector3d &v)

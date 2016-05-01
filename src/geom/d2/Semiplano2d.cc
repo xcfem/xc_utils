@@ -25,7 +25,7 @@
 #include "GmGrupo2d.h"
 #include "xc_utils/src/geom/d1/SemiRecta2d.h"
 #include "xc_utils/src/geom/d1/Segmento2d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include "../pos_vec/Dir2d.h"
 #include "../pos_vec/Vector2d.h"
 
@@ -57,19 +57,6 @@ GeomObj *Semiplano2d::clon(void) const
   { return new Semiplano2d(*this); }
 void Semiplano2d::Swap(void)
   { lim.Swap(); }
-
-bool Semiplano2d::procesa_comando(CmdStatus &status)
-  {
-    Pos2d o,d;
-    if(status.Cmd() == "recta")
-      {
-        lim.LeeCmd(status);
-        (*this)= Semiplano2d(lim);
-        return true;
-      }
-    else
-      return Superficie2d::procesa_comando(status);
-  }
 
 bool Semiplano2d::Interseca(const SemiRecta2d &sr) const
   { return sr.Interseca(lim); }

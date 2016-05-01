@@ -51,8 +51,6 @@ class SqLiteObject: public EntCmd
     static SqLiteObject *busca_objeto(const std::string &nmb);
 
     std::string preprocesa_str_sql(const std::string &str) const;
-    bool procesa_comando_obj_sqlite(const std::string &cmd,CmdStatus &status);
-    bool procesa_comando(CmdStatus &status);
   public:
     SqLiteObject(void);
     virtual ~SqLiteObject(void);
@@ -65,6 +63,5 @@ class SqLiteObject: public EntCmd
 
     static SqLiteDatabase *getDatabase(const std::string &nmb);
     static SqLiteQuery *getQuery(const std::string &nmb);
-    any_const_ptr GetProp(const std::string &) const;
   };
 #endif

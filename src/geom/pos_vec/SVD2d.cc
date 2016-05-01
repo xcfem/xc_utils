@@ -25,47 +25,11 @@
 #include "VDesliz2d.h"
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 
 
 SVD2d::SVD2d(const VDesliz2d &v)
   : org(v.getOrg()), resul(v),mom(0.0) {}
-
-bool SVD2d::procesa_comando(CmdStatus &status)
-  {
-    //std::cerr << "(VDesliz) Procesando comando: " << status.Cmd() << std::endl;
-    if(status.Cmd() == "vector_desliz")
-      {
-        VDesliz2d v;
-        v.LeeCmd(status);
-        (*this)+= v;
-        return true;
-      }
-    else if(status.Cmd() == "org")
-      {
-        org.LeeCmd(status);
-        return true;
-      }
-    else if(status.Cmd() == "resultante")
-      {
-        resul.LeeCmd(status);
-        return true;
-      }
-    else if(status.Cmd() == "momento")
-      {
-        mom= status.GetFloat();
-        return true;
-      }
-    else if(status.Cmd() == "suma")
-      {
-        SVD2d tmp;
-        tmp.LeeCmd(status);
-        (*this)+=tmp;
-        return true;
-      }
-    else
-      return ProtoGeom::procesa_comando(status);
-  }
 
 GEOM_FT SVD2d::getMomento(const Pos2d &P) const
   //Campo de momentos del SVD2d.

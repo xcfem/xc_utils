@@ -22,12 +22,12 @@
 //LoadCombinationGenerator.cc
 
 #include "LoadCombinationGenerator.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 #include "LoadCombinations.h"
 
 //! @brief Constructor.
 cmb_acc::LoadCombinationGenerator::LoadCombinationGenerator(EntCmd *owr)
-  : EntCmd(owr), combinaciones(NULL) {}
+  : EntCmd(owr), combinaciones(nullptr) {}
 
 //! @brief Define la ponderación cuyo nombre se pasa como parámetro.
 cmb_acc::ActionContainer *cmb_acc::LoadCombinationGenerator::defPonderacion(const std::string &nmb,const PsiCoeffsMap &coefs)
@@ -43,7 +43,7 @@ void cmb_acc::LoadCombinationGenerator::genera(void)
     if(combinaciones) //Ya se generaron anteriormente.
       {
         delete combinaciones;
-        combinaciones= NULL;
+        combinaciones= nullptr;
       }
     else
       combinaciones= new LoadCombinations(action_weighting.getLoadCombinations());

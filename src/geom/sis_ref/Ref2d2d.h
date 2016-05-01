@@ -43,9 +43,6 @@ class Ref2d2d : public Ref<SisCooRect2d2d>
     typedef GeomObj2d::list_Pos2d list_Pos2d;
     typedef Ref<SisCooRect2d2d> BaseRef;
 
-  protected:
-
-    bool procesa_comando(CmdStatus &status);
   public:
     Ref2d2d(void);
     Ref2d2d(const Ref2d2d &otro);
@@ -60,7 +57,7 @@ class Ref2d2d : public Ref<SisCooRect2d2d>
     //Devuelve el vector unitario J en el sistema global.
     Recta2d GetEjeX(void) const; //Devuelve la recta que define el eje x.
     Recta2d GetEjeY(void) const; //Devuelve la recta que define el eje y.
-    //virtual void SalvaCmd(ostream &os,const string &indent= "  ") const;
+
     virtual ~Ref2d2d(void)
       {}
   };

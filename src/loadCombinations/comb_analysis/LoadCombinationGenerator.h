@@ -39,7 +39,7 @@ class LoadCombinationGenerator: public EntCmd
     ActionWeightingMap action_weighting;
     LoadCombinations *combinaciones;
   public:
-    LoadCombinationGenerator(EntCmd *owr= NULL);
+    LoadCombinationGenerator(EntCmd *owr= nullptr);
 
     ActionContainer *defPonderacion(const std::string &,const PsiCoeffsMap &coefs= PsiCoeffsMap());
     ActionRValue &inserta(const std::string &pond,const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");

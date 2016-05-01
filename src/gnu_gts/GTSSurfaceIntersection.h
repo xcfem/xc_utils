@@ -47,7 +47,7 @@ class GTSSurfaceIntersection
 
   public:
 
-    GTSSurfaceIntersection(GtsSurfaceInter *f= NULL);
+    GTSSurfaceIntersection(GtsSurfaceInter *f= nullptr);
     GTSSurfaceIntersection(GtsSurfaceInterClass *klass,
                            GTSSurface &s1, GTSSurface &s2);
     GTSSurfaceIntersection(const GTSSurfaceIntersection &otra);

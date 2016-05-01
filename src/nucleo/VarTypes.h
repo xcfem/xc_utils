@@ -64,15 +64,4 @@
 #include "xc_utils/src/geom/sis_coo/SisCooRect2d3d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
 
-#include "xc_utils/src/base/Path.h"
-#include "xc_utils/src/base/Lista.h"
-#include "xc_utils/src/base/Mapa.h"
-#include "xc_utils/src/base/CmdFuncPorPuntos.h"
-#include "xc_utils/src/mysql/MySqlConnection.h"
-#include "xc_utils/src/base/CmdTimer.h"
-#include "xc_utils/src/base/Record.h"
-#include "xc_utils/src/base/BloqueBase.h"
-#include "xc_utils/src/base/BloqueSub.h"
-#include "xc_utils/src/base/BloqueFunc.h"
-
 #endif

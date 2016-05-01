@@ -24,8 +24,8 @@
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
 #include "xc_utils/src/geom/pos_vec/Dir3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
+
 
     Ref1d3d::Ref1d3d(void): BaseRef() {}
     Ref1d3d::Ref1d3d(const Ref1d3d &otro): BaseRef(otro) {}
@@ -38,23 +38,6 @@
 	BaseRef::operator=(otro);
         return *this;
       }
-
-bool Ref1d3d::procesa_comando(CmdStatus &status)
-  {
-    //cerr << "(Ref1d3d) Procesando comando: " << cmd << endl;
-    if(status.Cmd() == "org")
-      {
-        org.LeeCmd(status);
-        return true;
-      }
-    else if(status.Cmd() == "ejes")
-      {
-        trf.LeeCmd(status);
-        return true;
-      }
-    else
-      return BaseRef::procesa_comando(status);
-  }
 Vector3d Ref1d3d::GetI(void) const
 //Devuelve el vector unitario I en el sistema global.
   { return GetVDirEje(1); }

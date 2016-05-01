@@ -38,11 +38,6 @@ class Dir3d;
 class Segmento3d : public Linea3d
   {
     CGSegmento_3 cgseg;
-
-  protected:
-    bool procesa_comando(CmdStatus &status);
-    virtual void salva_miembros(std::ostream &os,const  std::string &indent) const;
-    virtual void salva_cmd(std::ostream &os,const  std::string &indent= "  ",const  std::string &obj= "semirecta") const;
   public:
     Segmento3d(void);
     Segmento3d(const CGSegmento_3 &r);
@@ -92,7 +87,7 @@ class Segmento3d : public Linea3d
     virtual GEOM_FT Iz(void) const;
     friend bool operator==(const Segmento3d &r1,const Segmento3d &r2);
     void Print(std::ostream &os) const;
-    virtual void SalvaCmd(std::ostream &os,const  std::string &indent= "  ") const;
+    
   };
 
 inline GEOM_FT dist2(const Pos3d &p,const Segmento3d &r)

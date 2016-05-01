@@ -37,11 +37,11 @@ void GTSGraph::borra(void)
   {
     if(!borrar) return;
     if(gph) gts_object_destroy(GTS_OBJECT(gph));
-    gph= NULL;
+    gph= nullptr;
     borrar= false;
   }
 GTSGraph::GTSGraph(const GTSSurface &s)
-  : gph(NULL), borrar(false)
+  : gph(nullptr), borrar(false)
   { crea(s); }
 GTSGraph::GTSGraph(const GTSGraph &otro)
   : gph(otro.gph), borrar(false)

@@ -19,31 +19,22 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Locale.h
-//Entidad con nombre.
+//EntWOwner.h
+//Entidad con punetero a su propietaria.
 
-#ifndef LOCALE_H
-#define LOCALE_H
+#ifndef ENTWOWNER_H
+#define ENTWOWNER_H
 
-#include "EntWOwner.h"
-#include <locale>
+#include "../nucleo/EntCmd.h"
 
 //! @ingroup BASE
 //
-//!  @brief Acceso a locale para Peell.
-class Locale: public EntWOwner
+//!  @brief Entidad con puntero a su propietaria.
+class EntWOwner: public EntCmd
   {
-    friend class EntCmd;
-    std::locale loc;
   protected:
-    virtual bool procesa_comando(CmdStatus &status);
     //! @brief Constructor.
-    Locale(EntCmd *owr= NULL);
-
-    const std::locale &getLocale(void) const
-      { return loc; }
-    
-    any_const_ptr GetProp(const std::string &cod) const;
+    EntWOwner(EntCmd *owr);
   };
 
 #endif

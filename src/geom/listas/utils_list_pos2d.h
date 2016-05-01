@@ -27,6 +27,7 @@
 #include "xc_utils/src/geom/GeomObj.h"
 
 class BND2d;
+class Poligono2d;
 
 //Funciones auxiliares para la manipulación de listas 
 //de posiciones en 2d.

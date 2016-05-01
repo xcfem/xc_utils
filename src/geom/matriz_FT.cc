@@ -25,8 +25,8 @@
 #include "matriz_FT.h"
 #include "xc_basic/src/matrices/m_double.h"
 #include "tipos_cgal.h"
-#include "xc_utils/src/base/utils_any_const_ptr.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
+
 
 // GEOM_FT neutro_suma(const GEOM_FT &)
 //   { return double_to_FT(0.0); }

@@ -57,11 +57,9 @@ class GeomObj: public ProtoGeom
       //Una recta o un plano no lo tienen.
       { return false;}
     GEOM_FT AreaCdg(void) const;
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
 
     virtual void Print(std::ostream &os) const= 0;
     virtual void Plot(Plotter &) const {}
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 std::ostream &operator<<(std::ostream &, const GeomObj &);

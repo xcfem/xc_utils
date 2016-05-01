@@ -40,8 +40,6 @@ class SqLiteDatabase: public SqLiteObject
     Database db; //!< Base de datos SqLite.
     SqLiteQuery *defaultQuery;
     static sqlite3_stmt *tmpRes;
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     SqLiteDatabase(const std::string &nmb);
     inline Database &getDB(void)
@@ -51,6 +49,5 @@ class SqLiteDatabase: public SqLiteObject
 
     SqLiteQuery *getDefaultQuery(void);
     SqLiteQuery *NuevaQuery(const std::string &nmb);
-    any_const_ptr GetProp(const std::string &) const;
   };
 #endif

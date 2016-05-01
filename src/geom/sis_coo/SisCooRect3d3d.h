@@ -37,8 +37,6 @@ class SisCooRect3d3d: public SisCooXd3d
   public:
     typedef Vector3d VLocal; //Dimensión del vector en locales.
     typedef Pos3d PLocal; //Dimensión del vector en locales.
-  protected:
-    virtual bool procesa_comando(CmdStatus &status);
   public:
     SisCooRect3d3d(void): SisCooXd3d(3) {}
     SisCooRect3d3d(const SisCooRect3d3d &otro)
@@ -58,7 +56,6 @@ class SisCooRect3d3d: public SisCooXd3d
 
     VGlobal GetCooGlobales(const VLocal &v) const;
     VLocal GetCooLocales(const VGlobal &v) const;
-    any_const_ptr GetProp(const std::string &cod) const;
     virtual ~SisCooRect3d3d(void)
       {}
   };

@@ -33,8 +33,6 @@
 //! definido en un espacio de dos dimensiones.
 class SisCooRect1d2d: public SisCooXd2d
   {
-  protected:
-    virtual bool procesa_comando(CmdStatus &status);
   public:
     typedef GEOM_FT VLocal; //Dimensión del vector en locales.
     typedef GEOM_FT PLocal; //Dimensión del vector en locales.
@@ -49,7 +47,6 @@ class SisCooRect1d2d: public SisCooXd2d
 
     VGlobal GetCooGlobales(const VLocal &v) const;
     VLocal GetCooLocales(const VGlobal &v) const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
     virtual ~SisCooRect1d2d(void)
       {}
   };

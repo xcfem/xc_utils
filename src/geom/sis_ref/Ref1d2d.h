@@ -44,9 +44,6 @@ class Ref1d2d : public Ref<SisCooRect1d2d>
     typedef GeomObj2d::list_Pos2d list_Pos2d;
     typedef Ref<SisCooRect1d2d> BaseRef;
 
-  protected:
-
-    bool procesa_comando(CmdStatus &status);
   public:
     Ref1d2d(void);
     Ref1d2d(const Ref1d2d &otro);
@@ -59,7 +56,7 @@ class Ref1d2d : public Ref<SisCooRect1d2d>
     Vector2d GetI(void) const;
     //Devuelve el vector unitario I en el sistema global.
     Recta2d GetEjeX(void) const; //Devuelve la recta que define el eje x.
-    //virtual void SalvaCmd(ostream &os,const string &indent= "  ") const;
+
     virtual ~Ref1d2d(void)
       {}
   };

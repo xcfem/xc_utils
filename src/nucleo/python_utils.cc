@@ -23,7 +23,7 @@
 
 #include "python_utils.h"
 #include "xc_utils/src/nucleo/EntCmd.h"
-#include "xc_utils/src/base/EntConNmb.h"
+#include "xc_utils/src/nucleo/EntConNmb.h"
 #include "xc_basic/src/matrices/ProtoMatriz.h"
 #include "CImg.h"
 

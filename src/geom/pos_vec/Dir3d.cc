@@ -23,7 +23,7 @@
 
 #include "Dir3d.h"
 #include "Vector3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include "xc_utils/src/geom/matriz_FT.h"
 
 Dir3d::Dir3d(GEOM_FT x,GEOM_FT y,GEOM_FT z)

@@ -25,9 +25,9 @@
 #include "Recta2d.h"
 #include "../pos_vec/Dir3d.h"
 #include "../d2/Plano3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
+
 
 const Pos3d Recta3d::defaultOrg= Pos3d(0,0,0);
 const Pos3d Recta3d::defaultDest= Pos3d(1,0,0);
@@ -73,69 +73,7 @@ Recta3d::Recta3d(const RectaParametricas3d &param)
 
 void Recta3d::DosPuntos(const Pos3d &p1,const Pos3d &p2)
   { (*this)= Recta3d(p1,p2); }
-void Recta3d::salva_miembros(std::ostream &os,const std::string &indent) const
-  {
-/*         salva_org(os,indent); */
-/*         os << indent << "\\dest{"; */
-/*         PtoParametricas(100.0).salva_miembros(os,""); */
-/*         os << '}' << std::endl; */
-  }
-void Recta3d::salva_cmd(std::ostream &os,const std::string &indent,const std::string &obj) const
-  {
-    const std::string str_indent= indent + "  ";
-    os << indent << '\\' << obj << std::endl
-       << str_indent << '{' << std::endl;
-    salva_miembros(os,str_indent+ "  ");
-    os << str_indent  << '}' << std::endl;
-  }
 
-bool Recta3d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    const std::string str_error= "(Recta3d) Procesando comando: " + cmd;
-
-    if(verborrea>2)
-      std::cerr << str_error << std::endl;
-
-    static Pos3d o= defaultOrg;
-    static Pos3d d= defaultDest;
-    static Vector3d v= defaultVDir;
-    if(cmd == "org")
-      {
-        o.LeeCmd(status);
-        (*this)= Recta3d(o,d);
-        return true;
-      }
-    else if(cmd == "dest")
-      {
-        d.LeeCmd(status);
-        (*this)= Recta3d(o,d);
-        return true;
-      }
-    else if(cmd == "vDir")
-      {
-        v.LeeCmd(status);
-        (*this)= Recta3d(o,o+v);
-        return true;
-      }
-    else if(cmd == "puntos")
-      {
-        std::vector<boost::any> param= interpretaVectorAny(status.GetString());
-        const int nc= param.size(); //No. de valores leídos.
-        if(nc<2)
-	  std::cerr << str_error
-                    << "Se esperaban dos argumentos de tipo punto, se obtuvieron: " << nc << std::endl;
-        else
-          {
-            o= convert_to_pos3d(param[0]);
-            d= convert_to_pos3d(param[1]);
-            DosPuntos(o,d);
-          }
-        return true;
-      }
-    else
-      return Linea3d::procesa_comando(status);
-  }
 Dir3d Recta3d::GetDir(void) const
   { return Dir3d(cgr.direction()); }
 Vector3d Recta3d::VDir(void) const
@@ -348,42 +286,6 @@ GEOM_FT Recta3d::dist(const Pos3d &p) const
 //! @brief Devuelve la distancia desde el punto a la recta.
 GEOM_FT dist(const Pos3d &p,const Recta3d &r)
   { return sqrt_FT(dist2(r,p)); }
-
-//! \brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-any_const_ptr Recta3d::GetProp(const std::string &cod) const
-  {
-    static GEOM_FT tmp_ft= 0.0;
-    if(cod=="getPendiente")
-      {
-        tmp_ft= GetPendiente();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getVDir")
-      {
-        tmp_gp_vector3d= VDir();
-        return any_const_ptr(tmp_gp_vector3d);
-      }
-    else if(cod=="getProyVector")
-      {
-        const Vector3d v= popVector3d(cod);
-        tmp_gp_vector3d= Proyeccion(v);
-        return any_const_ptr(tmp_gp_vector3d);
-      }
-    else if(cod=="getProyPunto")
-      {
-        const Pos3d p= popPos3d(cod);
-        tmp_gp_pos3d= Proyeccion(p);
-        return any_const_ptr(tmp_gp_pos3d);
-      }
-    else if(cod=="getDist")
-      {
-        const Pos3d tmp= popPos3d(cod);
-        tmp_ft= dist(tmp);
-        return any_const_ptr(tmp_ft);
-      }
-    else
-      return Linea3d::GetProp(cod);
-  }
 
 bool colineales(const Recta3d &r1,const Recta3d &r2)
   {

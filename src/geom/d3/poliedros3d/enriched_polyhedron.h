@@ -352,7 +352,7 @@ template <class kernel, class items>
 bool Enriched_polyhedron<kernel,items>::is_border(Vertex_handle pVertex)
   {
     Halfedge_around_vertex_circulator pHalfEdge = pVertex->vertex_begin();
-    if(pHalfEdge == NULL) // isolated vertex
+    if(pHalfEdge == nullptr) // isolated vertex
       return true;
     Halfedge_around_vertex_circulator d = pHalfEdge;
     CGAL_For_all(pHalfEdge,d)
@@ -370,7 +370,7 @@ typename Enriched_polyhedron<kernel,items>::Halfedge_handle Enriched_polyhedron<
     CGAL_For_all(pHalfEdge,d)
       if(pHalfEdge->is_border())
         return pHalfEdge;
-    return NULL;
+    return nullptr;
   }
 
 // tag all halfedges
@@ -512,7 +512,7 @@ void Enriched_polyhedron<kernel,items>::superimpose_edges(bool skip_ordinary_edg
           {
             Facet_handle pFace1 = h->facet();
             Facet_handle pFace2 = h->opposite()->facet();
-            if(pFace1 == NULL || pFace2 == NULL) continue;
+            if(pFace1 == nullptr || pFace2 == nullptr) continue;
   
             const Point &p1 = h->vertex()->point();
             const Point &p2 = h->next()->vertex()->point();
@@ -679,7 +679,7 @@ void Enriched_polyhedron<kernel,items>::tag_component(Facet_handle pSeedFacet,
         CGAL_For_all(pHalfedge,end)
           {
             Facet_handle pNFacet = pHalfedge->opposite()->facet();
-            if(pNFacet != NULL && pNFacet->tag() == tag_free)
+            if(pNFacet != nullptr && pNFacet->tag() == tag_free)
               {
                 facets.push_front(pNFacet);
                 pNFacet->tag(tag_done);

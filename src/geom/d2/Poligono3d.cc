@@ -31,7 +31,7 @@
 #include "xc_utils/src/geom/d3/GmGrupo3d.h"
 #include "xc_utils/src/geom/d3/SemiEspacio3d.h"
 #include "xc_utils/src/geom/listas/auxiliares.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 
 Poligono3d::Poligono3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   : D2to3d(p1,p2,p3), plg2d()

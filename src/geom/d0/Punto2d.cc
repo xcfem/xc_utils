@@ -23,21 +23,8 @@
 
 #include "Punto2d.h"
 #include <plotter.h>
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/geom/trf/Trf2d.h"
 
-bool Punto2d::procesa_comando(CmdStatus &status)
-  {
-    const string &cmd= deref_cmd(status.Cmd());
-    //cerr << "(Punto2d) Procesando comando: " << cmd << endl;
-    if(cmd == "pos_2d")
-      {
-        org.LeeCmd(status);
-        return true;
-      }
-    else
-      return GeomObj::procesa_comando(status);
-  }
+#include "xc_utils/src/geom/trf/Trf2d.h"
 void Punto2d::Print(std::ostream &os) const
   { os << org; }
 void Punto2d::Plot(Plotter &plotter) const
@@ -53,11 +40,3 @@ void Punto2d::Transforma(const Trf2d &trf2d)
     (*this)= Punto2d(pA);
   }
 
-void Punto2d::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    const std::string str_indent= indent + "  ";
-    os << indent << "\\Punto2d" << std::endl
-       << str_indent << '{' << std::endl;
-    org.SalvaCmd(os,str_indent+ "  ");
-    os << str_indent  << '}' << std::endl;
-  }

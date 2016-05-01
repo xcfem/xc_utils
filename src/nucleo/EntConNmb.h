@@ -19,29 +19,44 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//BloqueIf.h
+//EntConNmb.h
 //Entidad con nombre.
 
-#ifndef BLOQUEIF_H
-#define BLOQUEIF_H
+#ifndef ENTCONNMB_H
+#define ENTCONNMB_H
 
-#include "BloqueCond.h"
+#include <string>
+#include "EntCmd.h"
 
+//! @ingroup CMDINTRP
+//
+//! @defgroup BASE Clases auxiliares del intérprete de comandos.
+//
 //! @ingroup BASE
 //
-//!  @brief Bloque If para Peell.
-class BloqueIf: public BloqueCond
+//!  @brief Objeto identificado por un nombre.
+class EntConNmb: public EntCmd
   {
-    friend class EntCmd;
-  protected:
-    std::string bloque_else; //!< Bloque de instrucciones a ejecutar si la condición resulta verdadera.
-
-    virtual bool procesa_comando(CmdStatus &status);
+  private:
+    std::string nmb; //!< @brief Nombre del objeto.
+  public:
     //! @brief Constructor.
-    BloqueIf(EntCmd *owner);
-    BloqueIf(EntCmd *owner,const std::string &,const std::string &thn="",const std::string &els="");
-    const std::string &BloqueThen(void) const;
-    const std::string &BloqueElse(void) const;
+    EntConNmb(const std::string &Nombre=""): nmb(Nombre) {}
+    //! @brief Devuelve el nombre del objeto.
+    const std::string &GetNombre(void) const
+      { return nmb; }
+    //! @brief Asigna el nombre del objeto.
+    void SetNombre(const std::string &s)
+      { nmb= s; }
+    //! @brief Devuelve una referencia al nombre del objeto.
+    std::string &Nombre(void)
+      { return nmb; }
+    //! @brief Compara el nombre del elemento con un nombre dado.
+    int operator==(const EntConNmb &otro) const
+      { return (nmb==otro.nmb); }
+    //! @brief Operador menor.
+    int operator<(const EntConNmb &otro) const
+      { return (nmb<otro.nmb); }
   };
 
 #endif

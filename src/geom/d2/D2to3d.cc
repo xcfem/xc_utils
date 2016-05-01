@@ -32,8 +32,8 @@
 #include "xc_utils/src/geom/listas/auxiliares.h"
 #include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
 #include "xc_utils/src/geom/pos_vec/MatrizPos3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
+
 
 //! @brief Constructor.
 D2to3d::D2to3d(void): Superficie3d(), ref() {}
@@ -70,20 +70,7 @@ D2to3d &D2to3d::operator=(const D2to3d &otro)
     return *this;
   }
 
-//! @brief Comandos
-bool D2to3d::procesa_comando(CmdStatus &status)
-  {
-    const std::string &cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(D2to3d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "ref")
-      {
-        ref.LeeCmd(status);
-        return true;
-      }
-    else
-      return Superficie3d::procesa_comando(status);
-  }
+
 Pos3d D2to3d::to_3d(const Pos2d &p2d) const
   { return ref.GetPosGlobal(p2d); }
 
@@ -116,11 +103,3 @@ bool operator ==(const D2to3d &a,const D2to3d &b)
 
 void D2to3d::Print(std::ostream &os) const
   { os << "Ref2d3d: " << ref << std::endl; }
-
-any_const_ptr D2to3d::GetProp(const std::string &cod) const
-  {
-    if(cod=="getRef")
-      return any_const_ptr(&ref);
-    else
-      return Superficie3d::GetProp(cod);
-  }

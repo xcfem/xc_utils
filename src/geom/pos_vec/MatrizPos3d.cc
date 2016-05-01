@@ -27,7 +27,7 @@
 #include "xc_utils/src/geom/d2/Triangulo3d.h"
 #include "xc_utils/src/geom/d2/Plano3d.h"
 #include "xc_utils/src/geom/d3/BND3d.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 #include "xc_utils/src/geom/trf/Trf3d.h"
 #include "xc_utils/src/geom/trf/Revolucion3d.h"
 

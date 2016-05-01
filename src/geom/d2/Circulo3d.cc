@@ -26,47 +26,15 @@
 #include "xc_utils/src/geom/d2/Plano3d.h"
 #include "xc_basic/src/util/matem.h"
 #include <plotter.h>
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/T3Cmd.h"
+
 #include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
 #include "xc_utils/src/geom/pos_vec/MatrizPos3d.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 
 //! @brief Circulo definido por tres puntos.
 Circulo3d Circulo3dTresPuntos(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   { return Circulo3d(p1,p2,p3); }
 
-bool Circulo3d::procesa_comando(CmdStatus &status)
-  {
-    const string &cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(Circulo3d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "centro")
-      {
-        Pos3d c;
-        c.LeeCmd(status);
-        const GEOM_FT r2= Radio2();
-        *this= Circulo3d(r2,c);
-        return true;
-      }
-    else if(cmd == "radio")
-      {
-        const Pos3d c= Centro();
-        const GEOM_FT r= double_to_FT(interpretaDouble(status.GetString()));
-        *this= Circulo3d(r*r,c);
-        return true;
-      }
-    else if(cmd == "3p")
-      {
-        Pos3d p1,p2,p3;
-        T3Cmd<Pos3d,Pos3d,Pos3d> tres_puntos(p1,"p1",p2,"p2",p3,"p3");
-        tres_puntos.LeeCmd(status);
-        *this= Circulo3dTresPuntos(p1,p2,p3);
-        return true;
-      }
-    else
-      return D2to3d::procesa_comando(status);
-  }
 Circulo3d::Circulo3d(const Pos3d &centro,const GEOM_FT &rad)
  : D2to3d(), circ()
   { circ= Circulo2d(to_2d(centro),rad); }
@@ -122,12 +90,6 @@ const MatrizPos3d &Circulo3d::PuntosPerimetro(const size_t &n,const double &thet
   {
     static MatrizPos3d retval= to_3d(circ.PuntosPerimetro(n,theta_inic));
     return retval;
-  }
-
-void Circulo3d::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    const std::string str_indent= indent + "  ";
-    cerr << "Circulo3d::SalvaCmd no implementada" << endl;
   }
 
 void Circulo3d::Print(std::ostream &os) const

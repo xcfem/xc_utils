@@ -40,13 +40,13 @@ void GTSVertex::borra(void)
   {
     if(!borrar) return;
     if(vt) gts_object_destroy(GTS_OBJECT(vt));
-    vt= NULL;
+    vt= nullptr;
     borrar= false;
   }
 GTSVertex::GTSVertex(GtsVertex *pvt)
   : vt(pvt), borrar(false) {}
 GTSVertex::GTSVertex(const double &x,const double &y,const double &z)
-  : vt(NULL), borrar(false)
+  : vt(nullptr), borrar(false)
   { crea(x,y,z); }
 GTSVertex::GTSVertex(const GTSVertex &otro)
   : vt(otro.vt), borrar(false)

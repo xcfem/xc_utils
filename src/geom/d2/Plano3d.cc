@@ -32,9 +32,9 @@
 #include "xc_utils/src/geom/d2/Triangulo3d.h"
 #include "xc_utils/src/geom/d3/GmGrupo3d.h"
 #include "xc_basic/src/util/mchne_eps.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
+
 #include "CGAL/linear_least_squares_fitting_3.h"
 
 Plano3d::Plano3d(void)
@@ -457,71 +457,6 @@ GEOM_FT Plano3d::AjusteMinimosCuadrados(const GeomObj3d::list_Pos3d &lp)
       puntos.push_back((*i).ToCGAL()); 
     GEOM_FT quality= linear_least_squares_fitting_3(puntos.begin(),puntos.end(),cgp,CGAL::Dimension_tag<0>());
     return quality;
-  }
-
-//! \brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-any_const_ptr Plano3d::GetProp(const std::string &cod) const
-  {
-    static GEOM_FT tmp_ft= 0.0;
-    if(cod=="getNormal")
-      {
-        tmp_gp_vector3d= Normal();
-        return any_const_ptr(tmp_gp_vector3d);
-      }
-    else if(cod=="getBase1")
-      {
-        tmp_gp_vector3d= Base1();
-        return any_const_ptr(tmp_gp_vector3d);
-      }
-    else if(cod=="getBase2")
-      {
-        tmp_gp_vector3d= Base2();
-        return any_const_ptr(tmp_gp_vector3d);
-      }
-    else if(cod=="getProyVector")
-      {
-        const Vector3d v= popVector3d(cod);
-        tmp_gp_vector3d= Proyeccion(v);
-        return any_const_ptr(tmp_gp_vector3d);
-      }
-    else if(cod=="getProyPunto")
-      {
-        const Pos3d p= popPos3d(cod);
-        tmp_gp_pos3d= Proyeccion(p);
-        return any_const_ptr(tmp_gp_pos3d);
-      }
-    else if(cod=="getProyRecta")
-      {
-        const Recta3d r= popRecta3d(cod);
-        tmp_gp_recta3d= Proyeccion(r);
-        if(!tmp_gp_recta3d.exists())
-	  std::cerr << "getProyRecta: se produjo un error al calcular la proyección." << std::endl;
-        return any_const_ptr(tmp_gp_recta3d);
-      }
-    else if(cod=="getPseudoDist")
-      {
-        const Pos3d tmp= popPos3d(cod);
-        tmp_ft= PseudoDist(tmp);
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getDist")
-      {
-        const Pos3d tmp= popPos3d(cod);
-        tmp_ft= dist(tmp);
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getInterseccionConRecta")
-      {
-        const Recta3d tmp= popRecta3d(cod);
-        GeomObj3d::list_Pos3d lista= interseccion(*this,tmp);
-        if(!lista.empty())
-          tmp_gp_pos3d= lista[0];
-	else
-	  std::cerr << "getInterseccionConRecta: la recta no corta al plano." << std::endl;
-        return any_const_ptr(tmp_gp_pos3d);
-      }
-    else
-      return Superficie3d::GetProp(cod);
   }
 
 //! @brief Devuelve el plano perpendicular a la recta r

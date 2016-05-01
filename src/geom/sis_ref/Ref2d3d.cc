@@ -25,9 +25,9 @@
 #include "xc_utils/src/geom/pos_vec/Dir3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/d2/Plano3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
+
 
 //! @brief Constructor.
 Ref2d3d::Ref2d3d(void): BaseRef() {}
@@ -55,38 +55,6 @@ Ref2d3d &Ref2d3d::operator =(const Ref2d3d &otro)
   {
     BaseRef::operator=(otro);
     return *this;
-  }
-
-bool Ref2d3d::procesa_comando(CmdStatus &status)
-  {
-    const std::string &cmd= deref_cmd(status.Cmd());
-    const std::string str_error= "(Ref2d3d) Procesando comando: " + cmd;
-    if(verborrea>2)
-      std::clog << str_error << cmd << std::endl;
-    if(cmd == "org")
-      {
-        org.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "setOrg")
-      {
-        std::vector<boost::any> param= interpretaVectorAny(status.GetString());
-        const int nc= param.size(); //No. de valores leídos.
-        if(nc<1)
-	  std::cerr << str_error
-                    << "Se esperaban un argumento de tipo punto, se obtuvieron: "
-                    << nc << std::endl;
-        else
-          org= convert_to_pos3d(param[0]);
-        return true;
-      }
-    else if(cmd == "ejes")
-      {
-        trf.LeeCmd(status);
-        return true;
-      }
-    else
-      return BaseRef::procesa_comando(status);
   }
 Vector3d Ref2d3d::GetI(void) const
 //Devuelve el vector unitario I en el sistema global.

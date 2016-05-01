@@ -37,13 +37,6 @@ class PrismaRecto3d : public Prisma3d
   {
     SolidExtruPlgno3d<PG> extru;
   protected:
-    bool procesa_comando(CmdStatus &status)
-      {
-        //cerr << "(PrismaRecto3d) Procesando comando: " << cmd << endl;
-	bool tmp= Prisma3d::procesa_comando(status);
-	extru.LeeCmd(status);
-        return tmp;
-      }
     inline unsigned int get_num_vertices_plgno(void) const
       { return extru.GetNumVertices(); }
   public:
@@ -115,17 +108,7 @@ class PrismaRecto3d : public Prisma3d
       { return extru.GetCdgBottom(); }
     inline Pos3d GetCdgFaceta(unsigned int faceta) const
       { return this->Faceta(faceta).Cdg(); }
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
+    
   };
 
-
-template<class PG>
-void PrismaRecto3d<PG>::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    const std::string str_indent= indent + "  ";
-    os << indent << "\\prisma_recto" << std::endl
-       << str_indent << '{' << std::endl;
-    //extru.salva_miembros(os,str_indent+ "  ");
-    os << str_indent  << '}' << std::endl;
-  }
 #endif

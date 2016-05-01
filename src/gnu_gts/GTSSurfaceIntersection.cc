@@ -35,7 +35,7 @@ void GTSSurfaceIntersection::borra(void)
   {
     if(!borrar) return;
     if(si) gts_object_destroy(GTS_OBJECT (si));
-    si= NULL;
+    si= nullptr;
     borrar= false;
   }
 
@@ -45,7 +45,7 @@ GTSSurfaceIntersection::GTSSurfaceIntersection(GtsSurfaceInter *f)
 GTSSurfaceIntersection::GTSSurfaceIntersection(GtsSurfaceInterClass *klass,
                                                GTSSurface &s1,
                                                GTSSurface &s2)
-  : si(NULL), borrar(true)
+  : si(nullptr), borrar(true)
   {
     /* build bounding box tree for first surface */
     GNode *tree1 = s1.BBoxTree();
@@ -111,8 +111,8 @@ GTSSurface GTSSurfaceIntersection::bool_op(const std::string &str_op,GTSSurface 
           {
             InterBoolean(retval, GTS_1_OUT_2);
             InterBoolean(retval, GTS_2_IN_1);
-            gts_surface_foreach_face (si->s2, (GtsFunc) gts_triangle_revert, NULL);
-            gts_surface_foreach_face (s2.get_ptr(), (GtsFunc) gts_triangle_revert, NULL);
+            gts_surface_foreach_face (si->s2, (GtsFunc) gts_triangle_revert, nullptr);
+            gts_surface_foreach_face (s2.get_ptr(), (GtsFunc) gts_triangle_revert, nullptr);
           }
         else
           {

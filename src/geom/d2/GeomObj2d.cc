@@ -28,26 +28,9 @@
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
 #include "xc_utils/src/geom/matriz_FT.h"
 #include "BND2d.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/geom/trf/Traslacion2d.h"
 
-//! @brief Procesador de comandos del objeto.
-bool GeomObj2d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(GeomObj2d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "mueve")
-      {
-        static Vector2d v;
-        v= interpretaVector2d(status.GetString());
-        Mueve(v);
-        return true;
-      }
-    else
-      return GeomObj::procesa_comando(status);
-  }
+
+#include "xc_utils/src/geom/trf/Traslacion2d.h"
 
 Pos2d GeomObj2d::GetPMax(void) const
   {
@@ -181,75 +164,6 @@ GEOM_FT GeomObj2d::I(const Pos2d &O,const Vector2d &e) const
 //! @brief Devuelve el momento polar de inercia respecto al punto o.
 GEOM_FT GeomObj2d::IO(const Pos2d &o) const
   { return (I(1,1,o)+I(2,2,o)+I(3,3,o))/2; }
-
-void GeomObj2d::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    os << indent << "\\c{SalvaCmd no implementada}" << std::endl;
-  }
-
-//! \brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-any_const_ptr GeomObj2d::GetProp(const std::string &cod) const
-  {
-    static GEOM_FT tmp_ft= 0.0;
-    static Pos2d cdg;
-    if(cod=="cdg")
-      {
-        cdg= Cdg();
-        return any_const_ptr(&cdg);
-      }
-    else if(cod=="xMax")
-      {
-        tmp_ft= GetXMax();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="yMax")
-      {
-        tmp_ft= GetYMax();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="xMin")
-      {
-        tmp_ft= GetXMin();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="yMin")
-      {
-        tmp_ft= GetYMin();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getIx")
-      {
-        tmp_ft= Ix();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getIy")
-      {
-        tmp_ft= Iy();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getPxy")
-      {
-        tmp_ft= Pxy();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="thetaP")
-      {
-        tmp_ft= Theta_p();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getI1")
-      {
-        tmp_ft= I1();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getI2")
-      {
-        tmp_ft= I2();
-        return any_const_ptr(tmp_ft);
-      }
-    else
-      return GeomObj::GetProp(cod);
-  }
 
 //! @brief Desplaza el objeto.
 void GeomObj2d::Mueve(const Vector2d &v)

@@ -38,7 +38,6 @@ class VDesliz3d : public Vector3d
   {
   protected:
     Pos3d org; //!< Punto que determina la línea de accion.
-    bool procesa_comando(CmdStatus &status);
   public:
     VDesliz3d(const Pos3d &o= Pos3d(),const Vector3d &v= Vector3d());
     VDesliz3d(const Pos3d &o,const Pos3d &p);
@@ -51,7 +50,6 @@ class VDesliz3d : public Vector3d
     friend VDesliz3d operator*(const VDesliz3d &m,const GEOM_FT &p);
     friend VDesliz3d operator*(const GEOM_FT &p,const VDesliz3d &m);
     friend VDesliz3d operator/(const VDesliz3d &m,const GEOM_FT &p);
-    virtual any_const_ptr GetProp(const std::string &cod) const;
     friend std::ostream &operator<<(std::ostream &os,const VDesliz3d &v);
   };
 

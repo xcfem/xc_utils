@@ -42,7 +42,6 @@ class SisCooXd3d: public SisCoo
     typedef Pos3d PGlobal; //!< Punto en el espacio de 3 dimensiones.
     typedef Dir3d DGlobal; //!< Dirección en el espacio de 3 dimensiones.
   protected:
-    virtual bool procesa_comando(CmdStatus &status);
     void vectores_unitarios(const VGlobal &i_,const VGlobal &j_,const VGlobal &k_);
     SisCooXd3d(const size_t &i)
       : SisCoo(i,3) {}

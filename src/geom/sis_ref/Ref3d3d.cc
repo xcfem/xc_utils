@@ -24,8 +24,8 @@
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/d2/Plano3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
+
 
 
 //! @brief Constructor.
@@ -103,15 +103,6 @@ Plano3d Ref3d3d::GetPlanoXZ(void) const
   { return Plano3d(org,1000.0*GetI(),1000.0*GetK()); }
 Plano3d Ref3d3d::GetPlanoYZ(void) const
   { return Plano3d(org,1000.0*GetJ(),1000.0*GetK()); }
-
-// void Ref3d3d::SalvaCmd(ostream &os,const string &indent= "  ") const
-//   {
-//     const string str_indent= indent + "  ";
-//     os << indent << "\\ref_3d" << endl
-//        << str_indent << '{' << endl;
-//     salva_miembros(os,str_indent+ "  ");
-//     os << str_indent  << '}' << endl;
-//   }
 
 // GEOM_FT Ref3d3d::GetZLocal(const Pos3d &p) const
 // //Devuelve la Z del punto p expresado en locales

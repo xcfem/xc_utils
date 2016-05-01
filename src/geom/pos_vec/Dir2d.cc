@@ -23,7 +23,7 @@
 
 #include "Dir2d.h"
 #include "Vector2d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include "xc_utils/src/geom/matriz_FT.h"
 
 Dir2d::Dir2d(const Vector2d &v)

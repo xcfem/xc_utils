@@ -41,10 +41,6 @@ class Segmento2d;
 class Pos2d: public ProtoGeom
   {
     CGPoint_2 cgpt;
-
-  protected:
-    bool procesa_comando(CmdStatus &status);
-    void salva_miembros(std::ostream &os,const std::string &indent) const;
   public:
     typedef Vector2d vector;
 
@@ -103,8 +99,6 @@ class Pos2d: public ProtoGeom
 
     void Print(std::ostream &os) const;
     void Plot(Plotter &psos) const;
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 std::ostream &operator << (std::ostream &stream,const Pos2d &n);

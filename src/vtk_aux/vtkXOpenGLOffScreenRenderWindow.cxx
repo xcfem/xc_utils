@@ -70,7 +70,7 @@ class vtkXOpenGLOffScreenRenderWindowInternal
   };
 
 vtkXOpenGLOffScreenRenderWindowInternal::vtkXOpenGLOffScreenRenderWindowInternal(vtkRenderWindow * vtkNotUsed(rw))
-  { this->ContextId = NULL; }
+  { this->ContextId = nullptr; }
 
 
 vtkCxxRevisionMacro(vtkXOpenGLOffScreenRenderWindow, "$Revision: 0.01 $")
@@ -124,15 +124,15 @@ XVisualInfo *vtkXOpenGLOffScreenRenderWindowTryForVisual(Display *DisplayId,
 
 XVisualInfo *vtkXOpenGLOffScreenRenderWindow::GetDesiredVisualInfo()
 {
-  XVisualInfo   *v = NULL;
+  XVisualInfo   *v = nullptr;
   int           multi;
   int           stereo = 0;
   
   // get the default display connection 
   if(!this->DisplayId)
     {
-    this->DisplayId = XOpenDisplay((char *)NULL); 
-    if(this->DisplayId == NULL) 
+    this->DisplayId = XOpenDisplay((char *)nullptr); 
+    if(this->DisplayId == nullptr) 
       {
       vtkErrorMacro(<< "bad X server connection.\n");
       }
@@ -189,16 +189,16 @@ XVisualInfo *vtkXOpenGLOffScreenRenderWindow::GetDesiredVisualInfo()
 
 vtkXOpenGLOffScreenRenderWindow::vtkXOpenGLOffScreenRenderWindow()
   {
-    this->ParentId = (Window)NULL;
+    this->ParentId = (Window)nullptr;
     this->ScreenSize[0] = 0;
     this->ScreenSize[1] = 0;
     this->OwnDisplay = 0;
     this->CursorHidden = 0;
     this->ForceMakeCurrent = 0;
     this->UsingHardware = 0;
-    this->DisplayId = (Display *)NULL;
-    this->WindowId = (Window)NULL;
-    this->NextWindowId = (Window)NULL;
+    this->DisplayId = (Display *)nullptr;
+    this->WindowId = (Window)nullptr;
+    this->NextWindowId = (Window)nullptr;
     this->ColorMap = (Colormap)0;
     this->OwnWindow = 0;
  
@@ -257,10 +257,10 @@ void vtkXOpenGLOffScreenRenderWindow::DestroyWindow(void)
     vtkRenderer* ren;
     this->Renderers->InitTraversal();
     for( ren = vtkOpenGLRenderer::SafeDownCast(this->Renderers->GetNextItemAsObject());
-        ren != NULL;
+        ren != nullptr;
         ren = vtkOpenGLRenderer::SafeDownCast(this->Renderers->GetNextItemAsObject())  )
       {
-        ren->SetRenderWindow(NULL);
+        ren->SetRenderWindow(nullptr);
         ren->SetRenderWindow(this);
       }
 
@@ -293,7 +293,7 @@ void vtkXOpenGLOffScreenRenderWindow::DestroyWindow(void)
 
 
         glXDestroyContext( this->DisplayId, this->Internal->ContextId);
-        this->Internal->ContextId = NULL;
+        this->Internal->ContextId = nullptr;
       }
     // then close the old window 
     if(this->OwnWindow && this->DisplayId && this->WindowId)
@@ -308,7 +308,7 @@ void vtkXOpenGLOffScreenRenderWindow::DestroyWindow(void)
     if(this->OwnDisplay && this->DisplayId)
       {
         XCloseDisplay(this->DisplayId);
-        this->DisplayId = NULL;
+        this->DisplayId = nullptr;
       }
 
     Capabilities= "";
@@ -325,14 +325,14 @@ vtkXOpenGLOffScreenRenderWindow::~vtkXOpenGLOffScreenRenderWindow()
     vtkRenderer* ren;
     this->Renderers->InitTraversal();
     for ( ren = vtkOpenGLRenderer::SafeDownCast(this->Renderers->GetNextItemAsObject());
-        ren != NULL;
+        ren != nullptr;
         ren = vtkOpenGLRenderer::SafeDownCast(this->Renderers->GetNextItemAsObject())  )
-      { ren->SetRenderWindow(NULL); }
+      { ren->SetRenderWindow(nullptr); }
 
     if(Internal)
       {
         delete Internal;
-        Internal= NULL;
+        Internal= nullptr;
       }
   }
 
@@ -375,8 +375,8 @@ void vtkXOpenGLOffScreenRenderWindow::CreateAWindow(void)
     // get the default display connection 
     if(!this->DisplayId)
       {
-	this->DisplayId = XOpenDisplay((char *)NULL); 
-	if(this->DisplayId == NULL) 
+	this->DisplayId = XOpenDisplay((char *)nullptr); 
+	if(this->DisplayId == nullptr) 
 	  {
 	    vtkErrorMacro(<<"bad X server connection.\n");
 	  }
@@ -491,7 +491,7 @@ void vtkXOpenGLOffScreenRenderWindow::WindowRemap()
   
   // set the default windowid 
   this->WindowId = this->NextWindowId;
-  this->NextWindowId = (Window)NULL;
+  this->NextWindowId = (Window)nullptr;
 
   // configure the window 
   this->WindowInitialize();
@@ -670,7 +670,7 @@ extern "C"
 
 void *vtkXOpenGLOffScreenRenderWindow::GetGenericContext()
 {
-  static GC gc = (GC) NULL;
+  static GC gc = (GC) nullptr;
   if(!gc) gc = XCreateGC(this->DisplayId, this->WindowId, 0, 0);
   return (void *) gc;
 }
@@ -691,8 +691,8 @@ int *vtkXOpenGLOffScreenRenderWindow::GetScreenSize()
   // get the default display connection 
   if(!this->DisplayId)
     {
-    this->DisplayId = XOpenDisplay((char *)NULL); 
-    if(this->DisplayId == NULL) 
+    this->DisplayId = XOpenDisplay((char *)nullptr); 
+    if(this->DisplayId == nullptr) 
       {
       vtkErrorMacro(<< "bad X server connection.\n");
       }
@@ -716,8 +716,8 @@ Display *vtkXOpenGLOffScreenRenderWindow::GetDisplayId()
   // get the default display connection 
   if(!this->DisplayId)
     {
-    this->DisplayId = XOpenDisplay((char *)NULL); 
-    if(this->DisplayId == NULL) 
+    this->DisplayId = XOpenDisplay((char *)nullptr); 
+    if(this->DisplayId == nullptr) 
       {
       vtkErrorMacro(<< "bad X server connection.\n");
       }
@@ -778,8 +778,8 @@ void vtkXOpenGLOffScreenRenderWindow::SetWindowInfo(char *info)
   // get the default display connection 
   if(!this->DisplayId)
     {
-    this->DisplayId = XOpenDisplay((char *)NULL); 
-    if(this->DisplayId == NULL) 
+    this->DisplayId = XOpenDisplay((char *)nullptr); 
+    if(this->DisplayId == nullptr) 
       {
       vtkErrorMacro(<< "bad X server connection.\n");
       }
@@ -811,8 +811,8 @@ void vtkXOpenGLOffScreenRenderWindow::SetParentInfo(char *info)
   // get the default display connection 
   if(!this->DisplayId)
     {
-    this->DisplayId = XOpenDisplay((char *)NULL); 
-    if(this->DisplayId == NULL) 
+    this->DisplayId = XOpenDisplay((char *)nullptr); 
+    if(this->DisplayId == nullptr) 
       {
       vtkErrorMacro(<< "bad X server connection.\n");
       }

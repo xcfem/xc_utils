@@ -39,8 +39,6 @@ class Polilinea2d;
 class PoligonoConAgujeros2d: public Superficie2d
   {
     CGPoligonoConAgujeros_2 cgpol; //Poligono de CGAL.
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     typedef CGPoligonoConAgujeros_2::Hole_const_iterator Hole_const_iterator;
  
@@ -66,7 +64,6 @@ class PoligonoConAgujeros2d: public Superficie2d
     void add_hole(const Poligono2d &);
     void contorno(const Poligono2d &);
 
-    any_const_ptr GetProp(const std::string &) const;
     void Print(std::ostream &) const;
   };
 

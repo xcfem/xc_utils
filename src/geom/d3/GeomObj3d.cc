@@ -28,25 +28,25 @@
 #include "../sis_ref/Ref3d3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/matriz_FT.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/geom/d3/SemiEspacio3d.h"
-#include "xc_utils/src/base/utils_any.h"
 
-std::deque<SemiEspacio3d> GeomObj3d::interpretaSemiEspacios3d(const std::string &str)
-  {
-    typedef std::deque<boost::any> dq_objetos;
-    const dq_objetos tmp= crea_deque_boost_any(str);
-    std::deque<SemiEspacio3d> retval;
-    for(dq_objetos::const_iterator i= tmp.begin();i!=tmp.end();i++)
-      {
-        if(boost_any_is_empty(*i))
-          std::cerr << "La expresión '" << str 
-                    << "' da como resultado un objeto vacío." << std::endl;
-        else
-          retval.push_back(convert_to_se3d(*i));
-      }
-    return retval;
-  }
+#include "xc_utils/src/geom/d3/SemiEspacio3d.h"
+
+
+// std::deque<SemiEspacio3d> GeomObj3d::interpretaSemiEspacios3d(const std::string &str)
+//   {
+//     typedef std::deque<boost::any> dq_objetos;
+//     const dq_objetos tmp= crea_deque_boost_any(str);
+//     std::deque<SemiEspacio3d> retval;
+//     for(dq_objetos::const_iterator i= tmp.begin();i!=tmp.end();i++)
+//       {
+//         if(boost_any_is_empty(*i))
+//           std::cerr << "La expresión '" << str 
+//                     << "' da como resultado un objeto vacío." << std::endl;
+//         else
+//           retval.push_back(convert_to_se3d(*i));
+//       }
+//     return retval;
+//   }
 
 Pos3d GeomObj3d::GetPMax(void) const
   {
@@ -158,85 +158,9 @@ matriz_FT GeomObj3d::I(const Pos3d &o) const
 GEOM_FT GeomObj3d::IO(const Pos3d &o) const
   { return (I(1,1,o)+I(2,2,o)+I(3,3,o))/2; }
 
-//! \brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-any_const_ptr GeomObj3d::GetProp(const std::string &cod) const
-  {
-    static GEOM_FT tmp_ft= 0.0;
-    if(cod=="cdg")
-      {
-        tmp_gp_pos3d= Cdg();
-        return any_const_ptr(&tmp_gp_pos3d);
-      }
-    else if(cod=="getXMax")
-      {
-        tmp_ft= GetXMax();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getYMax")
-      {
-        tmp_ft= GetYMax();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getZMax")
-      {
-        tmp_ft= GetZMax();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getXMin")
-      {
-        tmp_ft= GetXMin();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getYMin")
-      {
-        tmp_ft= GetYMin();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getZMin")
-      {
-        tmp_ft= GetZMin();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getIx")
-      {
-        tmp_ft= Ix();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getIy")
-      {
-        tmp_ft= Iy();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getIz")
-      {
-        tmp_ft= Iz();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getPxy")
-      {
-        tmp_ft= Pxy();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getPxz")
-      {
-        tmp_ft= Pxz();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getPyz")
-      {
-        tmp_ft= Pyz();
-        return any_const_ptr(tmp_ft);
-      }
-    else
-      return GeomObj::GetProp(cod);
-  }
 
-void GeomObj3d::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    os << indent << "\\c{SalvaCmd no implementada}" << std::endl;
-  }
 // SoGroup *GeomObj3d::Traza(void) const 
 //   {
 //     std::cerr << "Método Traza() no implementado." << std::endl;
-//     return NULL;
+//     return nullptr;
 //   }

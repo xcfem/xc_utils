@@ -39,9 +39,6 @@ class Segmento2d;
 class Semiplano2d : public Superficie2d
   {
     Recta2d lim; //Los puntos del semiplano son los que están a la derecha de la recta.
-  protected:
-    virtual bool procesa_comando(CmdStatus &status);
-
   public:
     Semiplano2d(void);
     explicit Semiplano2d(const Recta2d &r);

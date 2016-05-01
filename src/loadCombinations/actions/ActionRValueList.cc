@@ -24,9 +24,6 @@
 #include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
 #include "xc_utils/src/loadCombinations/actions/ActionsFamily.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/Variation.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
-#include "xc_utils/src/nucleo/InterpreteRPN.h"
 
 cmb_acc::ActionRValue &cmb_acc::ActionRValueList::push_back(const ActionRValue &a)
   {
@@ -77,7 +74,7 @@ const cmb_acc::PsiCoeffsMap *cmb_acc::ActionRValueList::getPtrPsiCoeffs(void) co
     else
       {
 	std::cerr << "ActionRValueList::getPtrPsiCoeffs; no se encontró el objeto propietario de éste." << std::endl;
-        return NULL;
+        return nullptr;
       }
   }
 

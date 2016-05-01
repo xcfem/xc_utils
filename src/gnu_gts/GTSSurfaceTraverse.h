@@ -44,7 +44,7 @@ class GTSSurfaceTraverse
     GTSSurfaceTraverse(const GTSSurface &s,const GTSFace &f);
     GTSSurfaceTraverse(const GTSSurfaceTraverse &otra);
     GTSSurfaceTraverse &operator=(const GTSSurfaceTraverse &otra);
-    GTSFace Next(guint *level= NULL) const;
+    GTSFace Next(guint *level= nullptr) const;
     ~GTSSurfaceTraverse(void);
   };
 

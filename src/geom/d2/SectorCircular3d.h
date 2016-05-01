@@ -35,9 +35,6 @@ class Pos3d;
 class SectorCircular3d : public D2to3d
   {
     SectorCircular2d sect_circ;
-
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     SectorCircular3d(void) : D2to3d(), sect_circ() {}
     SectorCircular3d(const Pos3d centro,const GEOM_FT &rad,const double &th1,const double &th2);
@@ -90,9 +87,8 @@ class SectorCircular3d : public D2to3d
 
     friend bool operator ==(const SectorCircular3d &a,const SectorCircular3d &b);
 
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
+    
     void Print(std::ostream &os) const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 #endif

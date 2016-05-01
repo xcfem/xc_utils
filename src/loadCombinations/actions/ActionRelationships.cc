@@ -23,8 +23,8 @@
 
 #include "ActionRelationships.h"
 #include "xc_basic/src/texto/cadena_carac.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+#include "xc_basic/src/funciones/algebra/ExprAlgebra.h"
+
 #include "boost/regex.hpp"
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
 

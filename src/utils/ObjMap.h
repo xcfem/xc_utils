@@ -100,7 +100,7 @@ void ObjMap<T>::clear(void)
     for(iterator i=ObjMap<T>::begin();i!=ObjMap<T>::end(); i++)
       {
         delete i->second;
-        i->second=NULL;
+        i->second=nullptr;
       }
     map_ptr::clear();
   }
@@ -113,7 +113,7 @@ T *ObjMap<T>::Busca(const std::string &clave)
     if(i!=ObjMap<T>::end())
       return i->second;
     else
-      return NULL;
+      return nullptr;
   }
 
 //! @brief Devuelve un puntero al objeto cuya clave se pasa como parámetro.
@@ -124,7 +124,7 @@ const T *ObjMap<T>::Busca(const std::string &clave) const
     if(i!=ObjMap<T>::end())
       return i->second;
     else
-      return NULL;
+      return nullptr;
   }
 
 //! @brief Inserta en el contenedor el objeto empleando la clave que se pasa como parámetro.

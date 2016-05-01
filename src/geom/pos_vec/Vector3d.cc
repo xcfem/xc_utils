@@ -24,12 +24,12 @@
 #include "Vector3d.h"
 #include "Pos3d.h"
 #include "Dir3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include "xc_utils/src/geom/matriz_FT.h"
 #include "xc_basic/src/matrices/op_tensor.h"
 //#include "Inventor/SbVec3f.h"
-#include "xc_utils/src/base/utils_any_const_ptr.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
+
 
 // Vector3d::Vector3d(const double &x,const double &y,const double &z)
 //   : cgvct(Vector_3_from_doubles(x,y,z)) {}
@@ -128,49 +128,6 @@ Vector3d Vector3d::getCross(const Vector3d &v) const
 //! @brief Producto del vector por una matriz.
 matriz_FT operator*(const matriz_FT &m,const Vector3d &v)
   { return m*v.GetMatriz(); }
-
-//! @brief Interpreta comandos del objeto.
-bool Vector3d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(Vector3d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "vx")
-      {
-        SetX(double_to_FT(interpretaDouble(status.GetString())));
-        return true;
-      }
-    else if(cmd == "vy")
-      {
-        SetY(double_to_FT(interpretaDouble(status.GetString())));
-        return true;
-      }
-    else if(cmd == "vz")
-      {
-        SetZ(double_to_FT(interpretaDouble(status.GetString())));
-        return true;
-      }
-    else if(cmd == "comp")
-      {
-        const std::vector<double> &crds= crea_vector_double(status.GetBloque());
-        const size_t sz= crds.size();
-        if(sz>=3)
-	  operator=(Vector3d(crds[0],crds[1],crds[2]));
-        else if(sz>1)
-          operator=(Vector3d(crds[0],crds[1],0.0));
-        else if(sz>0)
-          operator=(Vector3d(crds[0],0.0,0.0));
-        return true;
-      }
-    else if(cmd == "normaliza")
-      {
-        status.GetString(); //Ignoramos entrada.
-        Normaliza();
-        return true;
-      }
-    else
-      return ProtoGeom::procesa_comando(status);
-  }
 
 Vector3d &Vector3d::operator+=(const Vector3d &v)
   {
@@ -288,30 +245,6 @@ matriz_FT prod_tensor(const Vector3d &u,const Vector3d &v)
 
 matriz_FT operator&(const Vector3d &u,const Vector3d &v)
   { return prod_tensor(u,v); }
-
-//! @brief Devuelve la propiedad cuyo código se pasa como
-//! parámetro.
-any_const_ptr Vector3d::GetProp(const std::string &cod) const
-  {
-    static GEOM_FT tmp_dbl= 0.0;
-    if(cod=="x")
-      {
-        tmp_dbl= x();
-        return any_const_ptr(tmp_dbl);
-      }
-    else if(cod=="y")
-      {
-        tmp_dbl= y();
-        return any_const_ptr(tmp_dbl);
-      }
-    else if(cod=="z")
-      {
-        tmp_dbl= z();
-        return any_const_ptr(tmp_dbl);
-      }
-    else
-      return ProtoGeom::GetProp(cod);
-  }
 
 //! @brief Dado el vector v que se pasa como parámetro
 //! esta función devuelve la matriz que POSTmultiplicada

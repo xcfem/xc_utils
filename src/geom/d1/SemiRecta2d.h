@@ -38,11 +38,6 @@ class SemiRecta2d : public Linea2d
     CGSemiRecta_2 cgsr;
 
     friend class Segmento2d;
-
-  protected:
-    bool procesa_comando(CmdStatus &status);
-    virtual void salva_miembros(std::ostream &os,const std::string &indent) const;
-    virtual void salva_cmd(std::ostream &os,const std::string &indent= "  ",const std::string &obj= "semirecta") const;
   public:
     SemiRecta2d(void): Linea2d(),cgsr(CGPoint_2(0,0),CGPoint_2(1,0)) {}
     SemiRecta2d(const CGSemiRecta_2 &r)
@@ -138,8 +133,6 @@ class SemiRecta2d : public Linea2d
       { return (r1.cgsr==r2.cgsr); }
     void Print(std::ostream &os) const;
     void Plot(Plotter &psos) const;
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const
-      { salva_cmd(os,indent,"recta"); }
   };
 
 inline GEOM_FT dist2(const Pos2d &p,const SemiRecta2d &r)

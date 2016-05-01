@@ -27,7 +27,7 @@
 #include "xc_basic/src/matrices/matrizZ.h"
 #include "tipos_cgal.h"
 
-class any_const_ptr;
+
 
 //Elementos neutros para la suma y el producto.
 GEOM_FT neutro_suma(const GEOM_FT &);

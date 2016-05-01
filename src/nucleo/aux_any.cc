@@ -681,7 +681,7 @@ bool opera_rcl(const boost::any &a,const boost::any &b)
 //! intervenir en expresiones debe tratarse aquí.
 EntCmd *boost_any_entcmd_cast(boost::any &data)
   {
-    EntCmd *ptr_ent= NULL;
+    EntCmd *ptr_ent= nullptr;
     if(Lista *ptr= boost::any_cast<Lista>(&data))
       ptr_ent= ptr;
     else if(Mapa *ptr= boost::any_cast<Mapa>(&data))

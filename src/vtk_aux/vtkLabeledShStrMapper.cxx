@@ -44,7 +44,7 @@ vtkCxxSetObjectMacro(vtkLabeledShStrMapper,LabelTextProperty,vtkTextProperty)
 
 vtkLabeledShStrMapper::vtkLabeledShStrMapper()
 {
-  this->Input = NULL;
+  this->Input = nullptr;
 
   this->FieldDataArray = 0;
  
@@ -68,13 +68,13 @@ vtkLabeledShStrMapper::vtkLabeledShStrMapper()
 //----------------------------------------------------------------------------
 vtkLabeledShStrMapper::~vtkLabeledShStrMapper()
   {
-    if(this->TextMappers != NULL )
+    if(this->TextMappers != nullptr )
       {
         for (int i=0; i < this->NLabelsAlloc(); i++)
           { this->TextMappers[i]->Delete(); }
         delete [] this->TextMappers;
       }
-    this->SetLabelTextProperty(NULL);
+    this->SetLabelTextProperty(nullptr);
   }
 
 //----------------------------------------------------------------------------
@@ -83,7 +83,7 @@ void vtkLabeledShStrMapper::SetInput(vtkDataSet *input)
     if (input)
       { this->SetInputConnection(0, input->GetProducerPort()); }
     else
-      { this->SetInputConnection(0, 0); } // Setting a NULL input removes the connection.
+      { this->SetInputConnection(0, 0); } // Setting a nullptr input removes the connection.
   }
 
 //----------------------------------------------------------------------------
@@ -95,7 +95,7 @@ vtkDataSet *vtkLabeledShStrMapper::GetInput()
 // Release any graphics resources that are being consumed by this mapper.
 void vtkLabeledShStrMapper::ReleaseGraphicsResources(vtkWindow *win)
   {
-    if(this->TextMappers != NULL )
+    if(this->TextMappers != nullptr )
       {
         for (int i=0; i < this->NLabelsAlloc(); i++)
           { this->TextMappers[i]->ReleaseGraphicsResources(win); }

@@ -33,7 +33,6 @@ class VDesliz2d;
 class Recta2d;
 class Plano2d;
 class Ref2d2d;
-class CmdStatus;
 
 //! @ingroup GEOM
 //
@@ -43,8 +42,6 @@ class SVD2d: public ProtoGeom
     Pos2d org; //Punto al que se refiere el momento.
     Vector2d resul; //Resultante.
     GEOM_FT mom; //Momento respecto a org;
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     SVD2d(const Pos2d &O= Pos2d(),const Vector2d &R= Vector2d(),const GEOM_FT &Mo= 0.0)
       : org(O), resul(R), mom(Mo) {}

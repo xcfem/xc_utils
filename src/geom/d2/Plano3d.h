@@ -153,8 +153,6 @@ class Plano3d : public Superficie3d
 
     GEOM_FT AjusteMinimosCuadrados(const GeomObj3d::list_Pos3d &lp);
 
-    any_const_ptr GetProp(const std::string &) const;
-    //virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
     friend Plano3d FromCGAL(const CGPlane_3 &p);
     friend bool operator==(const Plano3d &p1,const Plano3d &p2);
     void Print(std::ostream &os) const;

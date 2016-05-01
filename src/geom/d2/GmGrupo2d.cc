@@ -22,7 +22,7 @@
 //GmGrupo2d.cc
 
 #include "GmGrupo2d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include <plotter.h>
 #include <iostream>
 
@@ -62,48 +62,6 @@ GEOM_FT GmGrupo2d::Pxy(void) const
     return 0.0;
   }
 
-bool GmGrupo2d::procesa_comando(CmdStatus &status)
-  {
-    //cerr << "(GmGrupo2d) Procesando comando: " << cmd << endl;
-    if(status.Cmd() == "punto2d")
-      {
-        Punto2d p;
-        p.LeeCmd(status);
-        push_back(p);
-        return true;
-      }
-    else if(status.Cmd() == "segmento2d")
-      {
-        Segmento2d s;
-        s.LeeCmd(status);
-        push_back(s);
-        return true;
-      }
-    else if(status.Cmd() == "semirrecta2d")
-      {
-        SemiRecta2d sr;
-        sr.LeeCmd(status);
-        push_back(sr);
-        return true;
-      }
-    else if(status.Cmd() == "recta2d")
-      {
-        Recta2d r;
-        r.LeeCmd(status);
-        push_back(r);
-        return true;
-      }
-    else if(status.Cmd() == "triangulo2d")
-      {
-        Triangulo2d t;
-        t.LeeCmd(status);
-        push_back(t);
-        return true;
-      }
-    else
-      return GmGrupo<GeomObj2d>::procesa_comando(status);
-  }
-
 Pos2d GmGrupo2d::Cdg(void) const
   {
     if(objetos.empty()) return Pos2d();
@@ -133,15 +91,6 @@ void GmGrupo2d::Transforma(const Trf2d &trf2d)
       (*i)->Transforma(trf2d);
   }
 
-void GmGrupo2d::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    const std::string str_indent= indent + "  ";
-    os << indent << "\\lista_geom" << endl;
-    os << str_indent << '{' << endl;
-    for(register pdeque_geom_obj::const_iterator i= objetos.begin();i!=objetos.end();i++)
-      (*i)->SalvaCmd(os,str_indent+"  ");
-    os << str_indent << "}\\c{fin lista_geom}" << endl;
-  }
 void GmGrupo2d::Print(std::ostream &stream) const
   {
     for(register pdeque_geom_obj::const_iterator i= objetos.begin();i!=objetos.end();i++)

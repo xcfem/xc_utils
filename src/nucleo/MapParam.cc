@@ -31,7 +31,7 @@
 void MapParam::libera(void)
   {
     if(params) delete params;
-    params= NULL;
+    params= nullptr;
   }
 
 //! @brief Copia el mapa de parámetros 
@@ -46,11 +46,11 @@ void MapParam::alloc(const map_params *p)
 
 //! @brief Constructor por defecto.
 MapParam::MapParam(void)
-  : params(NULL) {}
+  : params(nullptr) {}
 
 //! @brief Constructor de copia.
 MapParam::MapParam(const MapParam &otro)
-  : params(NULL)
+  : params(nullptr)
   { alloc(otro.params); }
 
 //! @brief Operador asignación.
@@ -254,7 +254,7 @@ void MapParam::Print(std::ostream &os) const
 //! usuario.
 boost::any *MapParam::GetUserParamPtr(const std::string &cod) const
   {
-    boost::any *retval= NULL;
+    boost::any *retval= nullptr;
     if(params)
       {
         const map_params::iterator i= params->find(cod);

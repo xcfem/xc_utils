@@ -43,23 +43,6 @@ class Ref3d3d : public Ref<SisCooRect3d3d>
     typedef GeomObj3d::list_Pos3d list_Pos3d;
     typedef Ref<SisCooRect3d3d> BaseRef;
 
-  protected:
-
-/*     void salva_org(ostream &os,const string &indent) const */
-/*       { */
-/*         os << indent << "\\org{"; */
-/*         org.salva_miembros(os,""); */
-/*         os << '}' << endl; */
-/*       } */
-/*     void salva_miembros(ostream &os,const string &indent) const */
-/*       { */
-/*         salva_org(os,indent); */
-/*         os << indent + "  }" << endl; */
-/*         os << indent << "\\ejes" << endl */
-/*            << indent + "  {" << endl; */
-/*         trf.SalvaCmd(os,indent+"  "); */
-/*         os << indent + "  }" << endl; */
-/*       } */
   public:
     Ref3d3d(void);
     Ref3d3d(const Ref3d3d &otro);
@@ -103,7 +86,7 @@ class Ref3d3d : public Ref<SisCooRect3d3d>
 /*         vt= trf * v; */
 /*         return vt; */
 /*       } */
-    //virtual void SalvaCmd(ostream &os,const string &indent= "  ") const;
+
     virtual ~Ref3d3d(void);
   };
 

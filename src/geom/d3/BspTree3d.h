@@ -44,9 +44,9 @@ class BspTree3d
     BspTree3d *front,*back; //Punteros a hijos.
   public:
     BspTree3d(void)
-      : particion(), poligonos(), front(NULL), back(NULL) {}
+      : particion(), poligonos(), front(nullptr), back(nullptr) {}
     BspTree3d(const lista_poligonos &poligonos)
-      : particion(), poligonos(), front(NULL), back(NULL)
+      : particion(), poligonos(), front(nullptr), back(nullptr)
       { Build_BSP_Tree(this,poligonos); }
     inline BspTree3d *Delante(void) const
       { return front; }

@@ -41,7 +41,6 @@ class Circulo2d : public Superficie2d
 
   protected:
     void puntos_arco(const double &theta_inic,const double &delta_theta,MatrizPos2d &ptos) const;
-    bool procesa_comando(CmdStatus &status);
   public:
     Circulo2d(void) : Superficie2d(), cgcirc() {}
     Circulo2d(const Pos2d &centro,const GEOM_FT &rad);
@@ -90,8 +89,7 @@ class Circulo2d : public Superficie2d
 
     friend int operator ==(const Circulo2d &a,const Circulo2d &b)
       { return ( a.cgcirc == b.cgcirc ); };
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
+    
     void Print(std::ostream &os) const;
     void Plot(Plotter &) const;
   };

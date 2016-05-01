@@ -25,9 +25,9 @@
 #include "Poliedro3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include "xc_utils/src/geom/d3/SemiEspacio3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
+
 #include "xc_basic/src/matrices/m_double.h"
 #include "xc_utils/src/geom/pos_vec/ListaPos3d.h"
 

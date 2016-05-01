@@ -28,6 +28,7 @@
 #include "../GeomObj3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include "xc_utils/src/geom/d3/SemiEspacio3d.h"
+#include "xc_basic/src/matrices/m_double.h"
 
 
 //! @ingroup GEOM
@@ -42,7 +43,6 @@ class BlockPyramid: public GeomObj3d
     static bool es_interior(const SemiEspacio3d &,const Vector3d &);
     bool es_interior(const Vector3d &) const;
     std::deque<Vector3d> haz_vectores_interiores(void) const;
-    bool procesa_comando(CmdStatus &status);
   public:
     BlockPyramid(void);
     BlockPyramid(const std::deque<SemiEspacio3d> &);
@@ -65,7 +65,6 @@ class BlockPyramid: public GeomObj3d
     std::deque<Vector2d> getVectoresExternos(const Ref2d3d &) const;
     bool Vacio(void) const;
     void Print(std::ostream &os) const;
-    any_const_ptr GetProp(const std::string &) const;
   };
 
 #endif

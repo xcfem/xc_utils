@@ -23,7 +23,7 @@
 
 #include "BspTree3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 
 void Split_Polygon(const BspTree3d::poligono &pg,const Plano3d &particion,
                    BspTree3d::lista_poligonos &front_pieces,BspTree3d::lista_poligonos &back_pieces)

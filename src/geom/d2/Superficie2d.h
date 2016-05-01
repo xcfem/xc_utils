@@ -49,7 +49,6 @@ class Superficie2d : public GeomObj2d
       { return Area(); }
     //Devuelve verdadero si el punto esta sobre la Superficie.
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const= 0;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 #endif
 

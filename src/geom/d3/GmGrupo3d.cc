@@ -22,7 +22,7 @@
 //GmGrupo3d.cc
 
 #include "GmGrupo3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 
 #include "xc_utils/src/geom/pos_vec/Dir3d.h"
 #include "xc_utils/src/geom/d0/Punto3d.h"
@@ -61,41 +61,6 @@ GEOM_FT GmGrupo3d::Pxy(void) const
     return 0.0;
   }
 
-bool GmGrupo3d::procesa_comando(CmdStatus &status)
-  {
-    //std::cerr << "(GmGrupo3d) Procesando comando: " << cmd << std::endl;
-    if(status.Cmd() == "punto3d")
-      {
-        Punto3d p;
-        p.LeeCmd(status);
-        push_back(p);
-        return true;
-      }
-    else if(status.Cmd() == "segmento3d")
-      {
-        Segmento3d s;
-        s.LeeCmd(status);
-        push_back(s);
-        return true;
-      }
-    else if(status.Cmd() == "semirrecta3d")
-      {
-        SemiRecta3d sr;
-        sr.LeeCmd(status);
-        push_back(sr);
-        return true;
-      }
-    else if(status.Cmd() == "recta3d")
-      {
-        Recta3d r;
-        r.LeeCmd(status);
-        push_back(r);
-        return true;
-      }
-    else
-      return GeomObj::procesa_comando(status);
-  }
-
 Pos3d GmGrupo3d::Cdg(void) const
   {
     if(objetos.empty()) return Pos3d();
@@ -116,13 +81,3 @@ Pos3d GmGrupo3d::Cdg(void) const
     num= num*(1/denom);
     return Origen3d+num;
   }
-void GmGrupo3d::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    const std::string str_indent= indent + "  ";
-    os << indent << "\\lista_geom" << std::endl;
-    os << str_indent << '{' << std::endl;
-    for(register pdeque_geom_obj::const_iterator i= objetos.begin();i!=objetos.end();i++)
-      (*i)->SalvaCmd(os,str_indent+"  ");
-    os << str_indent << "}\\c{fin lista_geom}" << std::endl;
-  }
-

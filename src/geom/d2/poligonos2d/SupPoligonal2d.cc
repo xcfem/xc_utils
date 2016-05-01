@@ -30,20 +30,12 @@
 #include "xc_basic/src/util/matem.h"
 #include "../BND2d.h"
 #include <plotter.h>
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
-#include "xc_utils/src/geom/pos_vec/ListaPos2d.h"
-#include "xc_utils/src/nucleo/aux_any.h"
-#include "xc_utils/src/nucleo/InterpreteRPN.h"
-#include "xc_utils/src/base/CmdStatus.h"
 
-bool SupPoligonal2d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(SupPoligonal2D) Procesando comando: " << cmd << std::endl;
-    return Superficie2d::procesa_comando(status);
-  }
+
+#include "xc_utils/src/geom/pos_vec/ListaPos2d.h"
+
+
+
 
 //! @brief Devuelve los vertices del polígono.
 GeomObj::list_Pos2d SupPoligonal2d::getVertices(void) const
@@ -321,16 +313,6 @@ void SupPoligonal2d::Plot(Plotter &plotter) const
   }
 
 
-void SupPoligonal2d::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    cerr << "SupPoligonal2d::SalvaCmd no implementada" << endl;
-//     const std::string str_indent= indent + "  ";
-//     os << indent << "\\sup_poligonal" << endl
-//        << str_indent << '{' << endl;
-//     salva_miembros(os,str_indent+ "  ");
-//     os << str_indent  << '}' << endl;
-  }
-
 //! @brief Devuelve verdadero si la recta y el Poligono
 //! tienen algun punto en común.
 bool SupPoligonal2d::Overlap(const Recta2d &r) const
@@ -424,61 +406,6 @@ Segmento2d SupPoligonal2d::Clip(const Segmento2d &sg) const
                     << lista.size() << " tramos." << std::endl;
       }
     return retval;
-  }
-
-//! @brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-any_const_ptr SupPoligonal2d::GetProp(const std::string &cod) const
-  {
-    if(cod == "getNumVertices")
-      {
-        tmp_gp_szt= GetNumVertices();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(cod == "getNumLados")
-      {
-        tmp_gp_szt= GetNumLados();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(cod=="getVertices")
-      {
-        tmp_gp_lpos2d= ListaPos2d(getVertices());
-        return any_const_ptr(tmp_gp_lpos2d);
-      }
-    else if(cod == "at")
-      {
-        const size_t i= popSize_t(cod);
-        tmp_gp_pos2d= Vertice0(i-1);
-        return any_const_ptr(tmp_gp_pos2d);
-      }
-    else if(cod=="getPosTangAprox")
-      {
-        Vector2d tmp= popVector2d(cod);
-        tmp_gp_lpos2d= ListaPos2d(getPosTangAprox(tmp));
-        return any_const_ptr(tmp_gp_lpos2d);
-      }
-    else if(cod=="overlapWithLine")
-      {
-        if(InterpreteRPN::Pila().size()>0)
-          {
-            tmp_gp_bool= false;
-	    boost::any tmp= InterpreteRPN::Pila().Pop();
-            if(boost_any_is_recta2d(tmp))
-              tmp_gp_bool= Overlap(boost_any_to_recta2d(tmp));
-            else
-              {
-                err_tipo_argumento(std::cerr,1,"GetProp",cod,"string",boost_any_tipo_operando(tmp));
-                return any_const_ptr();
-              }
-            return any_const_ptr(tmp_gp_bool);
-          }
-        else
-          {
-            err_num_argumentos(std::cerr,1,"GetProp",cod);
-            return any_const_ptr();
-          }
-      }
-    else
-      return Superficie2d::GetProp(cod);
   }
 
 //! @brief Devuelve la intersección del polígono con la recta.

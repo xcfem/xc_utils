@@ -25,9 +25,9 @@
 #include <iostream>
 #include <plotter.h>
 #include "Vector2d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/utils_any_const_ptr.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
+
+
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include "xc_utils/src/geom/d1/SemiRecta2d.h"
 #include "xc_utils/src/geom/d1/Segmento2d.h"
@@ -95,43 +95,6 @@ Pos2d Pos2d::operator+(const Vector2d &v) const
     return retval;
   }
 
-//! @brief Lee un objeto Pos2d desde archivo
-bool Pos2d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(Pos2d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "x")
-      {
-        const double tmp= interpretaDouble(status.GetString());
-        cgpt= CGPoint_2(double_to_FT(tmp),cgpt.y());
-        return true;
-      }
-    else if(cmd == "y")
-      {
-        const double tmp= interpretaDouble(status.GetString());
-        cgpt= CGPoint_2(cgpt.x(),double_to_FT(tmp));
-        return true;
-      }
-    else if(cmd == "coo")
-      {
-        const std::vector<double> &crds= crea_vector_double(status.GetBloque());
-        const size_t sz= crds.size();
-        if(sz>=2)
-          cgpt= CGPoint_2(crds[0],crds[1]);
-        else if(sz>0)
-          cgpt= CGPoint_2(crds[0],0.0);
-        return true;
-      }
-    else
-      return ProtoGeom::procesa_comando(status);
-  }
-void Pos2d::salva_miembros(std::ostream &os,const std::string &indent) const
-  {
-    os << indent << "\\x{" << x()
-                 << "} \\y{" << y() 
-                 << "} }";
-  }
 Vector2d Pos2d::VectorPos(void) const
   //Devuelve el vector de posición del punto.
   { return (*this)-Origen2d; }
@@ -165,14 +128,6 @@ bool Pos2d::domina_a(const Pos2d &b) const
 
 bool colineales(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3)
   { return collinear(p1.cgpt,p2.cgpt,p3.cgpt); } 
-
-void Pos2d::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    const std::string str_indent= indent + "  ";
-    os << indent << "\\Pos2d{";
-    salva_miembros(os,"");
-    os << '}' << endl;
-  }
 
 void Pos2d::Print(std::ostream &stream) const
   {
@@ -215,33 +170,6 @@ GEOM_FT Pos2d::dist(const Segmento2d &sg) const
 void Pos2d::Plot(Plotter &plotter) const
   {
     plotter.fmarker(x(),y(),5,4.0); //Dibuja una cruz (5).
-  }
-//! \brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-//! como parámetro.
-//!
-//! Soporta los códigos:
-//! x: Devuelve la coordenada x del punto.
-//! y: Devuelve la coordenada y del punto.
-any_const_ptr Pos2d::GetProp(const std::string &cod) const
-  {
-    static GEOM_FT tmp_ft= 0.0;
-    if(cod=="x")
-      {
-        tmp_ft= x();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="y")
-      {
-        tmp_ft= y();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getVectorPos")
-      {
-        tmp_gp_vector2d= VectorPos();
-        return any_const_ptr(tmp_gp_vector2d);
-      }
-    else
-      return ProtoGeom::GetProp(cod);
   }
 
 std::ostream &operator<<(std::ostream &stream,const Pos2d &n)

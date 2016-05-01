@@ -22,7 +22,7 @@
 //SemiRecta2d.cc
 
 #include "SemiRecta2d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include <plotter.h>
 #include "../pos_vec/Dir2d.h"
 #include "../pos_vec/Vector2d.h"
@@ -42,40 +42,6 @@ SemiRecta2d::SemiRecta2d(const Pos2d &p1,const Vector2d &vdir)
   : Linea2d(), cgsr(p1.ToCGAL(),vdir.ToCGAL()) {}
 void SemiRecta2d::DosPuntos(const Pos2d &p1,const Pos2d &p2)
   { (*this)= SemiRecta2d(p1,p2); }
-void SemiRecta2d::salva_miembros(std::ostream &os,const  std::string &indent) const
-  {
-/*         salva_org(os,indent); */
-/*         os << indent << "\\dest{"; */
-/*         PtoParametricas(100.0).salva_miembros(os,""); */
-/*         os << '}' << endl; */
-  }
-void SemiRecta2d::salva_cmd(std::ostream &os,const  std::string &indent,const  std::string &obj) const
-  {
-    const  std::string str_indent= indent + "  ";
-    os << indent << '\\' << obj << endl
-       << str_indent << '{' << endl;
-    salva_miembros(os,str_indent+ "  ");
-    os << str_indent  << '}' << endl;
-  }
-
-bool SemiRecta2d::procesa_comando(CmdStatus &status)
-  {
-    Pos2d o,d;
-    if(status.Cmd() == "org")
-      {
-        o.LeeCmd(status);
-        (*this)= SemiRecta2d(o,d);
-        return true;
-      }
-    else if(status.Cmd() == "dest")
-      {
-        d.LeeCmd(status);
-        (*this)= SemiRecta2d(o,d);
-        return true;
-      }
-    else
-      return Linea2d::procesa_comando(status);
-  }
 
 Dir2d SemiRecta2d::GetDir(void) const
   { return Dir2d(cgsr.direction()); }

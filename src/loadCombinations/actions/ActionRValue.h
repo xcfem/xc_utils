@@ -47,8 +47,8 @@ class ActionRValue: public Action
   protected:
     friend class ActionRValueList;
     //! @brief Constructor por defecto.
-    ActionRValue(const std::string &n="", const std::string &descrip="",ActionRValueList *fam= NULL);
-    ActionRValue(const Action &a,ActionRValueList *fam= NULL,const std::string &nmb_coefs= "");
+    ActionRValue(const std::string &n="", const std::string &descrip="",ActionRValueList *fam= nullptr);
+    ActionRValue(const Action &a,ActionRValueList *fam= nullptr,const std::string &nmb_coefs= "");
   public:
     Action Valor(short int r) const;
     void setPsiCoeffs(const std::string &);

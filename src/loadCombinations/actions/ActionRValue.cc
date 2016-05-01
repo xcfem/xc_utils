@@ -25,8 +25,8 @@
 #include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
 #include "xc_utils/src/loadCombinations/coeffs/GammaF.h"
 #include "xc_utils/src/loadCombinations/coeffs/PsiCoeffsMap.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
 
 //! @brief Constructor por defecto.
 cmb_acc::ActionRValue::ActionRValue(const std::string &n, const std::string &descrip,ActionRValueList *fam)
@@ -44,7 +44,7 @@ void cmb_acc::ActionRValue::setPsiCoeffs(const std::string &nmb_coefs)
   {
     if(!nmb_coefs.empty())
       {
-        const PsiCoeffs *tmp=NULL;
+        const PsiCoeffs *tmp=nullptr;
         if(acc_familia)
           tmp= acc_familia->getPtrPsiCoeffs()->getPtrCoefs(nmb_coefs);
         else

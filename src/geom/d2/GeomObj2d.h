@@ -37,8 +37,6 @@ class matriz_FT;
 //! @brief Clase base para las entidades geométricas en dos dimensiones.
 class GeomObj2d: public GeomObj
   {
-  protected:
-    bool procesa_comando(CmdStatus &status);  
   public:
    typedef PoliPos<Pos2d> list_Pos2d;
 /*     typedef MatrizT<Pos3d,vector<Pos3d> > m_pos3d; */
@@ -115,10 +113,7 @@ class GeomObj2d: public GeomObj
     matriz_FT I(const Pos2d &o) const;
 
     virtual void Mueve(const Vector2d &);
-    virtual void Transforma(const Trf2d &trf2d)= 0;
-
-    virtual any_const_ptr GetProp(const std::string &cod) const;
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
+    virtual void Transforma(const Trf2d &trf2d)= 0;    
   };
 
 //! @brief Devuelve el objeto transformado.

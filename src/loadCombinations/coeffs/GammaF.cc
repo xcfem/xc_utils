@@ -25,7 +25,7 @@
 #include "GammaF.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/Variation.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/Variations.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 #include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
 
 cmb_acc::GammaFELS::GammaFELS(const float &fav,const float &desfav)

@@ -24,8 +24,8 @@
 #include "PoligonoConAgujeros2d.h"
 #include "Poligono2d.h"
 #include "xc_utils/src/geom/pos_vec/Vector2d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
+
 
 //! @brief Constructor por defecto.
 PoligonoConAgujeros2d::PoligonoConAgujeros2d(void)
@@ -41,29 +41,6 @@ GeomObj *PoligonoConAgujeros2d::clon(void) const
 
 void PoligonoConAgujeros2d::contorno(const Poligono2d &plg)
   { cgpol= CGPoligonoConAgujeros_2(plg.ToCGAL()); }
-
-//! @brief Carga el objeto desde archivo.
-bool PoligonoConAgujeros2d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(PoligonoConAgujeros2D) Procesando comando: " << cmd << std::endl;
-
-    if(cmd == "contorno")
-      {
-        const Poligono2d plg= interpretaPoligono2d(status.GetString());
-        cgpol= CGPoligonoConAgujeros_2(plg.ToCGAL());
-        return true;
-      }
-    else if(cmd == "add_hole")
-      {
-        const Poligono2d plg= interpretaPoligono2d(status.GetString());
-        add_hole(plg);
-        return true;
-      }
-    else
-      return Superficie2d::procesa_comando(status);
-  }
 
 GEOM_FT PoligonoConAgujeros2d::Longitud(void) const
   {
@@ -266,12 +243,6 @@ GEOM_FT PoligonoConAgujeros2d::Pxy(void) const
 //! la forma del que se le pasa como parámetro.
 void PoligonoConAgujeros2d::add_hole(const Poligono2d &p)
   { cgpol.add_hole(p.ToCGAL()); }
-
-//! @brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-any_const_ptr PoligonoConAgujeros2d::GetProp(const std::string &cod) const
-  {
-      return Superficie2d::GetProp(cod);
-  }
 
 //! @brief Aplica la transformación que se pasa como parámetro
 PoligonoConAgujeros2d PoligonoConAgujeros2d::getTransformado(const Trf2d &trf2d)

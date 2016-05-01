@@ -23,10 +23,10 @@
 
 #include "VDesliz3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/utils_any.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/nucleo/InterpreteRPN.h"
+
+
+
+
 
 //! @brief Constructor.
 VDesliz3d::VDesliz3d(const Pos3d &o,const Vector3d &v)
@@ -35,25 +35,6 @@ VDesliz3d::VDesliz3d(const Pos3d &o,const Vector3d &v)
 //! @brief Constructor.
 VDesliz3d::VDesliz3d(const Pos3d &o,const Pos3d &p)
   : Vector3d(p-o), org(o) {}
-
-bool VDesliz3d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(VDesliz3d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "pto_aplic")
-      {
-        org.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "punto")
-      {
-        org= interpretaPos3d(status.GetString());
-        return true;
-      }
-    else
-      return Vector3d::procesa_comando(status);
-  }
 
 //! @brief Momento de un vector deslizante respecto a un eje.
 //! Es el momento respecto a un punto
@@ -104,34 +85,6 @@ VDesliz3d operator*(const GEOM_FT &p,const VDesliz3d &m)
 
 VDesliz3d operator/(const VDesliz3d &m,const GEOM_FT &p)
   { return m*(1/p); }
-
-//! @brief Devuelve una propiedad del objeto.
-any_const_ptr VDesliz3d::GetProp(const std::string &cod) const
-  {
-    if(verborrea>4)
-      std::clog << "VDesliz3d::GetProp (" << nombre_clase() << "::GetProp) Buscando propiedad: " << cod << std::endl;
-    if(cod=="getOrg")
-      return any_const_ptr(org);
-    if(cod=="getVector")
-      {
-        tmp_gp_vector3d= getVector();        
-        return any_const_ptr(tmp_gp_vector3d);
-      }
-    else if(cod=="getMomentoRespectoPunto")
-      {
-        const Pos3d tmp= popPos3d(cod);
-        tmp_gp_vdesliz3d= getMomento(tmp);
-        return any_const_ptr(tmp_gp_vdesliz3d);
-      }
-    else if(cod=="getMomentoRespectoEje")
-      {
-        const Recta3d eje= popRecta3d(cod);
-        tmp_gp_dbl= getMomento(eje);
-        return any_const_ptr(tmp_gp_dbl);
-      }
-    else
-      return Vector3d::GetProp(cod);
-  }
 
 std::ostream &operator<<(std::ostream &os,const VDesliz3d &v)
   {

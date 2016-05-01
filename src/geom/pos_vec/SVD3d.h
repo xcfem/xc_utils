@@ -32,7 +32,6 @@
 class Recta3d;
 class Plano3d;
 class Ref3d3d;
-class CmdStatus;
 
 
 //! @ingroup GEOM
@@ -41,8 +40,6 @@ class CmdStatus;
 class SVD3d: public VDesliz3d
   {
     Vector3d mom; //Momento respecto a org;
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     SVD3d(const Pos3d &O= Pos3d(),const Vector3d &R= Vector3d(),const Vector3d &Mo= Vector3d());
     explicit SVD3d(const VDesliz3d &v);
@@ -72,7 +69,6 @@ class SVD3d: public VDesliz3d
     friend SVD3d operator-(const SVD3d &s1,const SVD3d &s2);
     friend SVD3d operator*(const GEOM_FT &d, const SVD3d &s);
     friend SVD3d operator*(const SVD3d &s,const GEOM_FT &d);
-    virtual any_const_ptr GetProp(const std::string &cod) const;
     void Print(std::ostream &os) const;
     void PrintLtx(std::ostream &os,const std::string &ud_long= " m",const GEOM_FT &f_long=1.0, const std::string &ud_f= " N",const GEOM_FT &f_f=1.0) const;
     friend std::ostream &operator<<(std::ostream &os, const SVD3d &svd3d);

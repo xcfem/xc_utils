@@ -24,7 +24,7 @@
 #include "Triangulo2d.h"
 #include "Poligono2d.h"
 #include "xc_utils/src/geom/d1/Segmento2d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include <plotter.h>
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
@@ -82,29 +82,7 @@ Poligono2d Triangulo2d::GetPoligono(void) const
     return retval;
   }
 
-bool Triangulo2d::procesa_comando(CmdStatus &status)
-  {
-    const string &cmd= deref_cmd(status.Cmd());
-    //cerr << "(Triangulo2d) Procesando comando: " << cmd << endl;
-    static Pos2d p1,p2,p3;
-    if(cmd == "p1")
-      {
-        p1.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "p2")
-      {
-        p2.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "p3")
-      {
-        p3.LeeCmd(status);
-        return true;
-      }
-    (*this)= Triangulo2d(p1,p2,p3);
-    return SupPoligonal2d::procesa_comando(status);
-  }
+
 void Triangulo2d::Print(std::ostream &os) const
   { os << cgtriang; }
 void Triangulo2d::Plot(Plotter &plotter) const
@@ -125,10 +103,4 @@ void Triangulo2d::Transforma(const Trf2d &trf2d)
     const Pos2d pB= trf2d.Transforma(Vertice(2));
     const Pos2d pC= trf2d.Transforma(Vertice(3));
     (*this)= Triangulo2d(pA,pB,pC);
-  }
-
-void Triangulo2d::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    const std::string str_indent= indent + "  ";
-    std::cerr << "Triangulo2d::SalvaCmd no implementada" << std::endl;
   }

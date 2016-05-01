@@ -22,8 +22,8 @@
 //PsiCoeffsMap.cc
 
 #include "PsiCoeffsMap.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
 
 cmb_acc::PsiCoeffs cmb_acc::PsiCoeffsMap::coefs_por_defecto;
 
@@ -39,8 +39,8 @@ cmb_acc::PsiCoeffs *cmb_acc::PsiCoeffsMap::getPtrCoefs(const std::string &nmb)
     else
       {
 	std::cerr << "cmb_acc::PsiCoeffsMap::getPtrCoefs; no se encontraron los coeficientes de nombre: '"
-                  << nmb << "' se devuelve NULL." << std::endl;
-        return NULL;
+                  << nmb << "' se devuelve nullptr." << std::endl;
+        return nullptr;
       }
   }
 
@@ -65,8 +65,8 @@ const cmb_acc::PsiCoeffs *cmb_acc::PsiCoeffsMap::getPtrCoefs(const std::string &
     else
       {
 	std::cerr << "cmb_acc::PsiCoeffsMap::getPtrCoefs; no se encontraron los coeficientes de nombre: '"
-                  << nmb << "' se devuelve NULL." << std::endl;
-        return NULL;
+                  << nmb << "' se devuelve nullptr." << std::endl;
+        return nullptr;
       }
   }
 
@@ -77,7 +77,7 @@ cmb_acc::PsiCoeffsMap::PsiCoeffsMap(void)
 //! @brief Crea coeficientes con el nombre que se le pasa como parámetro.
 cmb_acc::PsiCoeffs *cmb_acc::PsiCoeffsMap::crea_coefs(const std::string &nmb)
   {
-    PsiCoeffs *retval= NULL;
+    PsiCoeffs *retval= nullptr;
     if(existe(nmb))
       retval= &(coefs.find(nmb)->second);
     else //los coeficientes son nuevos.

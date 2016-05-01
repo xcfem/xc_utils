@@ -27,7 +27,7 @@
 #include "xc_utils/src/gnu_gts/GTSSurface.h"
 #include "xc_utils/src/gnu_gts/GTSEdge.h"
 #include "xc_utils/src/gnu_gts/MapTriangulos.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 
 template <class HDS>
 class Build_poliedro: public CGAL::Modifier_base<HDS>

@@ -30,14 +30,13 @@
 class Segmento2d;
 class SemiRecta2d;
 class Recta2d;
+class ListaPos2d;
 
 //! @ingroup GEOM
 //
 //! @brief Polilínea en dos dimensiones.
 class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
   {
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     Polilinea2d(void);
     explicit Polilinea2d(const GeomObj::list_Pos2d &);
@@ -118,7 +117,6 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     Pos2d Cdg(void) const
       { return GeomObj::list_Pos2d::Cdg(); }
 
-    virtual any_const_ptr GetProp(const std::string &cod) const;
     void Print(std::ostream &stream) const;
     void Plot(Plotter &) const;
   };

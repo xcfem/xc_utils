@@ -22,7 +22,7 @@
 //Cuadrado2d.cc
 
 #include "Cuadrado2d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include "xc_utils/src/geom/d1/SemiRecta2d.h"
 #include "xc_utils/src/geom/d1/Segmento2d.h"
@@ -31,26 +31,3 @@
 Cuadrado2d::Cuadrado2d(const Pos2d &o,const GEOM_FT &l)
   : Cuadrilatero2d(o,o+Vector2d(l,0),o+Vector2d(l,l),o+Vector2d(0,l)) {}
 
-bool Cuadrado2d::procesa_comando(CmdStatus &status)
-  {
-    //cerr << "(Cuadrado2d) Procesando comando: " << cmd << endl;
-    if(status.Cmd() == "lado")
-      {
-        GEOM_FT lado= status.GetFloat();
-        (*this)= Cuadrado2d(lado);
-        return true;
-      }
-    else
-      return Cuadrilatero2d::procesa_comando(status);
-  }
-
-void Cuadrado2d::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    std::cerr << "Cuadrado2d::SalvaCmd no implementada." << std::endl;
-    const std::string str_indent= indent + "  ";
-    os << indent << "\\cuadrado" << std::endl
-       << str_indent << '{' << std::endl;
-    //salva_miembros(os,str_indent+ "  ");
-    //os << str_indent + "  \\lado{" << lado << '}' << std::endl;
-    os << str_indent  << '}' << std::endl;
-  }

@@ -25,7 +25,6 @@
 #define DIR3D_H
 
 #include "../tipos_cgal.h"
-#include "xc_utils/src/nucleo/EntCmd.h"
 
 class Vector3d;
 class matriz_FT;
@@ -37,9 +36,6 @@ class matriz_FT;
 class Dir3d
   {
     CGDirection_3 cgd;
-
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     Dir3d(const CGDirection_3 &d)
       : cgd(d) {}

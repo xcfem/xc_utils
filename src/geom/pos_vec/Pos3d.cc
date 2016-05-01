@@ -25,9 +25,9 @@
 #include "Pos2d.h"
 #include "../d2/Plano3d.h"
 #include "Vector3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/utils_any_const_ptr.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
+
+
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/d1/SemiRecta3d.h"
 #include "xc_utils/src/geom/d1/Segmento3d.h"
@@ -68,53 +68,6 @@ Pos3d Pos3d::operator+(const Vector3d &v) const
   {
     Pos3d retval(ToCGAL()+v.ToCGAL());
     return retval;
-  }
-
-//! @brief Interpreta comandos del objeto.
-bool Pos3d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    static GEOM_FT x=0,y=0,z=0;
-    x= cgpt.x(); y= cgpt.y(); z= cgpt.z();
-    if(verborrea>2)
-      std::clog << "(Pos3d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "x")
-      {
-        x= interpretaDouble(status.GetString());
-        cgpt= CGPoint_3(x,y,z);
-        return true;
-      }
-    else if(cmd == "y")
-      {
-        y= interpretaDouble(status.GetString());
-        cgpt= CGPoint_3(x,y,z);
-        return true;
-      }
-    else if(cmd == "z")
-      {
-        z= interpretaDouble(status.GetString());
-        cgpt= CGPoint_3(x,y,z);
-        return true;
-      }
-    else if(cmd == "pos") //Posición del punto.
-      {
-        (*this)= interpretaPos3d(status.GetString());
-        return true;
-      }
-    else if(cmd == "coo")
-      {
-        const std::vector<double> &crds= crea_vector_double(status.GetBloque());
-        const size_t sz= crds.size();
-        if(sz>=3)
-          cgpt= CGPoint_3(crds[0],crds[1],crds[2]);
-        else if(sz>1)
-          cgpt= CGPoint_3(crds[0],crds[1],0.0);
-        else if(sz>0)
-          cgpt= CGPoint_3(crds[0],0.0,0.0);
-        return true;
-      }
-    else
-      return ProtoGeom::procesa_comando(status);
   }
 
 //! @brief Devuelve el vector de posición del punto.
@@ -288,13 +241,6 @@ GEOM_FT Pos3d::dist(const SemiEspacio3d &se) const
 GEOM_FT Pos3d::dist(const Solido3d &s) const
   { return s.dist(*this); }
 
-void Pos3d::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    const std::string str_indent= indent + "  ";
-    os << indent << "\\Pos3d{";
-    salva_miembros(os,"");
-    os << '}' << std::endl;
-  }
 std::ostream &operator<<(std::ostream &stream,const Pos3d &n)
   {
 //     stream << "x= " << to_double(n.x()) << ','
@@ -325,35 +271,6 @@ bool colineales(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   { return collinear(p1.cgpt,p2.cgpt,p3.cgpt); } 
 bool coplanarios(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4)
   { return coplanar(p1.cgpt,p2.cgpt,p3.cgpt,p4.cgpt); } 
-
-
-//! @brief Devuelve una propiedad del objeto.
-any_const_ptr Pos3d::GetProp(const std::string &cod) const
-  {
-    static GEOM_FT tmp_ft= 0.0;
-    if(cod=="x")
-      {
-        tmp_ft= x();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="y")
-      {
-        tmp_ft= y();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="z")
-      {
-        tmp_ft= z();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getVectorPos")
-      {
-        tmp_gp_vector3d= VectorPos();
-        return any_const_ptr(tmp_gp_vector3d);
-      }
-    else
-      return ProtoGeom::GetProp(cod);
-  }
 
 
 

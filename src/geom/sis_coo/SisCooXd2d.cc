@@ -25,7 +25,7 @@
 #include "../pos_vec/Vector2d.h"
 #include "../pos_vec/Dir2d.h"
 #include "../pos_vec/Pos2d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 
 //! @brief Define un sistema de coordenadas de dimensión ne
 //! en un espacio de dimensión 2.
@@ -42,10 +42,6 @@ SisCooXd2d::SisCooXd2d(const size_t &ne,const VGlobal &vX)
 SisCooXd2d::SisCooXd2d(const size_t &ne,const PGlobal &o,const PGlobal &p)
   : SisCoo(ne,2)
   { VectorEjeX(p-o); }
-
-
-bool SisCooXd2d::procesa_comando(CmdStatus &status)
-  { return SisCoo::procesa_comando(status); }
 
 void SisCooXd2d::PutFila(const size_t &eje,const VGlobal &v)
   { SisCoo::PutFila(eje,traspuesta(v.GetMatriz())); }

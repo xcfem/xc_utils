@@ -37,13 +37,13 @@ void GTSFace::borra(void)
   {
     if(!borrar) return;
     if(fc) gts_object_destroy(GTS_OBJECT(fc));
-    fc= NULL;
+    fc= nullptr;
     borrar= false;
   }
 GTSFace::GTSFace(GtsFace *f)
   :fc(f), borrar(false) {}
 GTSFace::GTSFace(GTSEdge &e1,GTSEdge &e2,GTSEdge &e3)
-  : fc(NULL), borrar(false)
+  : fc(nullptr), borrar(false)
   { crea(e1,e2,e3); }
 GTSFace::GTSFace(const GTSFace &otra)
   :fc(otra.fc), borrar(false) {}
@@ -55,7 +55,7 @@ GTSFace &GTSFace::operator=(const GTSFace &otra)
     return *this;
   }
 bool GTSFace::Null(void) const
-  { return (fc==NULL); }
+  { return (fc==nullptr); }
 
 GTSFace::~GTSFace(void)
   { borra(); }

@@ -39,9 +39,9 @@ static gboolean triangle_add(GtsTriangle *t,MapTriangulos *mt)
 
 bool MapVertices::chequea_vertice(GtsVertex *v)
   {
-    g_return_val_if_fail (v != NULL, FALSE);
-    g_return_val_if_fail (GTS_OBJECT (v)->reserved == NULL, FALSE);
-    g_assert (GTS_OBJECT (v)->reserved == NULL);
+    g_return_val_if_fail (v != nullptr, FALSE);
+    g_return_val_if_fail (GTS_OBJECT (v)->reserved == nullptr, FALSE);
+    g_assert (GTS_OBJECT (v)->reserved == nullptr);
     return true;
   }
 
@@ -77,10 +77,10 @@ IndVerticesTriangulo::IndVerticesTriangulo(GtsTriangle *t)
   }
 bool IndVerticesTriangulo::chequea_edges(GtsTriangle *t)
   {
-    g_return_val_if_fail(t != NULL, false);
-    g_return_val_if_fail(t->e1 != NULL, false);
-    g_return_val_if_fail(t->e2 != NULL, false);
-    g_return_val_if_fail(t->e3 != NULL, false);
+    g_return_val_if_fail(t != nullptr, false);
+    g_return_val_if_fail(t->e1 != nullptr, false);
+    g_return_val_if_fail(t->e2 != nullptr, false);
+    g_return_val_if_fail(t->e3 != nullptr, false);
     g_return_val_if_fail(t->e1 != t->e2 && t->e1 != t->e3 && t->e2 != t->e3, false);
     g_assert(gts_segments_touch (GTS_SEGMENT (t->e1), GTS_SEGMENT (t->e2)));
     g_return_val_if_fail (gts_segments_touch (GTS_SEGMENT (t->e1), GTS_SEGMENT (t->e3)), FALSE);
@@ -88,7 +88,7 @@ bool IndVerticesTriangulo::chequea_edges(GtsTriangle *t)
     g_return_val_if_fail (GTS_SEGMENT (t->e1)->v1 != GTS_SEGMENT (t->e1)->v2, FALSE);
     g_return_val_if_fail (GTS_SEGMENT (t->e2)->v1 != GTS_SEGMENT (t->e2)->v2, FALSE);
     g_return_val_if_fail (GTS_SEGMENT (t->e3)->v1 != GTS_SEGMENT (t->e3)->v2, FALSE);
-    g_return_val_if_fail (GTS_OBJECT (t)->reserved == NULL, FALSE);
+    g_return_val_if_fail (GTS_OBJECT (t)->reserved == nullptr, FALSE);
     return true;
   }
 void IndVerticesTriangulo::Print(std::ostream &os) const

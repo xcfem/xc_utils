@@ -22,17 +22,3 @@
 //Punto3d.cc
 
 #include "Punto3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-bool Punto3d::procesa_comando(CmdStatus &status)
-  {
-    const std::string &cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(Punto3d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "pos_3d")
-      {
-        org.LeeCmd(status);
-        return true;
-      }
-    else
-      return GeomObj::procesa_comando(status);
-  }

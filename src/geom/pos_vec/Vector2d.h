@@ -41,8 +41,6 @@ class matriz_FT;
 class Vector2d: public ProtoGeom
   {
     CGVector_2 cgvct;
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     Vector2d(void): ProtoGeom(), cgvct(CGAL::NULL_VECTOR) {}
     Vector2d(const CGVector_2 &v)
@@ -118,7 +116,6 @@ class Vector2d: public ProtoGeom
     Vector2d Perpendicular(const Vector2d &v) const;
     void Print(std::ostream &stream) const;
     void Plot(Plotter &psos) const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
     friend std::ostream &operator<<(std::ostream &stream,const Vector2d &n);
     inline virtual ~Vector2d(void) {}
   };

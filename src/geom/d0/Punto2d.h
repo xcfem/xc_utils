@@ -33,9 +33,6 @@
 class Punto2d : public GeomObj2d
   {
     Pos2d org;
-
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     Punto2d(void) : GeomObj2d() {}
     explicit Punto2d(const Pos2d &p): GeomObj2d(), org(p) {}
@@ -77,7 +74,7 @@ class Punto2d : public GeomObj2d
 
     friend int operator ==(const Punto2d &a,const Punto2d &b)
       { return ( a.org == b.org ); };
-    virtual void SalvaCmd(std::ostream &,const std::string &indent= "  ") const;
+    
     void Print(std::ostream &os) const;
     void Plot(Plotter &psos) const;
   };

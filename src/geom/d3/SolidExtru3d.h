@@ -41,21 +41,6 @@ class SolidExtru3d : public Solido3d
   protected:
     S scc; //Superficie que genera el sólido de extrusión.
     GEOM_FT l; //Longitud del sólido de extrusión (negativa si es indefinido).
-  protected:
-    bool procesa_comando(CmdStatus &status)
-      {
-        //cerr << "(PrismaRecto) Procesando comando: " << cmd << std::endl;
-	scc.LeeCmd(status);
-        return true;
-      }
-    void salva_miembros(std::ostream &os,const std::string &indent) const
-      {
-        os << indent << "\\base" << std::endl;
-        os << indent+"  " << '{' << std::endl;
-        scc.SalvaCmd(os,indent+ "    ");
-        os << indent+"  " << '}' << std::endl;
-        os << indent << "\\altura{" << l << '}' << std::endl;
-      }
   public:
     SolidExtru3d(void): Solido3d(), scc(),l(1.0) {}
     SolidExtru3d(const S &secc,const GEOM_FT &lng): scc(secc), l(lng) {}
@@ -145,14 +130,6 @@ class SolidExtru3d : public Solido3d
       { return GeomObj3d::I(); }
     Pos3d Cdg(void) const
       { return scc.Cdg(); }
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const
-      {
-        const std::string str_indent= indent + "  ";
-        os << indent << "\\Solido3d_extrusion" << std::endl
-           << str_indent << '{' << std::endl;
-        salva_miembros(os,str_indent+ "  ");
-        os << str_indent  << '}' << std::endl;
-      }
   };
 
 #endif

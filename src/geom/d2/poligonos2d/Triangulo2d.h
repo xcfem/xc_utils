@@ -39,9 +39,6 @@ class Poligono2d;
 class Triangulo2d : public SupPoligonal2d
   {
     CGTriangulo_2 cgtriang;
-
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     Triangulo2d(void) : SupPoligonal2d(), cgtriang() {}
     Triangulo2d(const Pos2d p1,const Pos2d &p2,const Pos2d &p3)
@@ -86,7 +83,7 @@ class Triangulo2d : public SupPoligonal2d
       { return ( a.cgtriang == b.cgtriang ); };
     inline friend bool intersecan(const Triangulo2d &tr1,const Triangulo2d &tr2)
       { return do_intersect(tr1.cgtriang,tr2.cgtriang); }
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
+    
     void Print(std::ostream &os) const;
     void Plot(Plotter &) const;
   };

@@ -37,8 +37,6 @@ class GmGrupo2d : public GmGrupo<GeomObj2d>
   {
 
     virtual GEOM_FT inercia(const Recta2d &e) const;
-    virtual bool procesa_comando(CmdStatus &status);
-
   public:
     typedef pdeque_geom_obj::const_iterator const_iterator;
     typedef pdeque_geom_obj::iterator iterator;
@@ -66,7 +64,7 @@ class GmGrupo2d : public GmGrupo<GeomObj2d>
 
     void Transforma(const Trf2d &trf2d);
 
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
+    
   };
 
 #endif

@@ -43,7 +43,6 @@ class SisCooXd2d: public SisCoo
     typedef Dir2d DGlobal; //!< Dirección en el espacio de 2 dimensiones.
     typedef Pos2d PGlobal; //!< Punto en el espacio de 2 dimensiones.
   protected:
-    virtual bool procesa_comando(CmdStatus &status);
     SisCooXd2d(const size_t &);
     SisCooXd2d(const size_t &,const VGlobal &);
     SisCooXd2d(const size_t &,const PGlobal &,const PGlobal &);

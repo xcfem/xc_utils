@@ -46,7 +46,7 @@ class GTSFace
     friend class GTSSurface;
     friend class GTSSurfaceTraverse;
 
-    GTSFace(GtsFace *f= NULL);
+    GTSFace(GtsFace *f= nullptr);
     GTSFace(GTSEdge &e1,GTSEdge &e2,GTSEdge &e3);
     GTSFace(const GTSFace &otra);
     GTSFace &operator=(const GTSFace &otra);

@@ -34,13 +34,6 @@ class SolidExtruPlgno3d : public SolidExtru3d<PG>
   {
   public:
     typedef SolidExtru3d<PG> solid_extru_pg;
-  protected:
-    bool procesa_comando(CmdStatus &status)
-      {
-        //cerr << "(SolidExtruPlgno3d) Procesando comando: " << cmd << endl;
-	solid_extru_pg::LeeCmd(status);
-        return true;
-      }
     inline unsigned int get_num_vertices_plgno(void) const
       { return this->scc.GetNumVertices(); }
   public:
@@ -70,7 +63,7 @@ class SolidExtruPlgno3d : public SolidExtru3d<PG>
       { return solid_extru_pg::I(); }
     inline Pos3d Cdg(void) const
       { return solid_extru_pg::Cdg(); }
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
+    
   };
 
 template <class PG>
@@ -95,16 +88,6 @@ Pos3d SolidExtruPlgno3d<PG>::Vertice(unsigned int i) const
     else
       p= this->GetBase(1).Vertice(j);
     return p;
-  }
-
-template <class PG>
-void SolidExtruPlgno3d<PG>::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    const std::string str_indent= indent + "  ";
-    os << indent << "\\prisma_recto" << std::endl
-       << str_indent << '{' << std::endl;
-    solid_extru_pg::salva_miembros(os,str_indent+ "  ");
-    os << str_indent  << '}' << std::endl;
   }
 
 /* template <class PG> */

@@ -29,17 +29,15 @@
 #include "xc_utils/src/geom/d1/Polilinea2d.h"
 #include "xc_utils/src/geom/d2/Semiplano2d.h"
 #include "xc_utils/src/geom/d2/BND2d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include <CGAL/Boolean_set_operations_2.h>
 #include <boost/any.hpp>
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/Lista.h"
-#include "xc_utils/src/base/utils_any.h"
+
 #include "xc_utils/src/geom/cdg.h"
 #include "xc_utils/src/geom/trf/Traslacion2d.h"
 #include "xc_utils/src/geom/listas/utils_list_pos2d.h"
 #include "xc_utils/src/geom/pos_vec/ListaPos2d.h"
-#include "xc_utils/src/nucleo/InterpreteRPN.h"
+
 
 //! @brief Constructor por defecto.
 Poligono2d::Poligono2d(void)
@@ -80,40 +78,6 @@ Poligono2d::Poligono2d(const std::list<Poligono2d> &lp)
 //! @brief Constructor virtual.
 GeomObj *Poligono2d::clon(void) const
   { return new Poligono2d(*this); }
-
-bool Poligono2d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(Poligono2s) Procesando comando: " << cmd << std::endl;
-    if(cmd == "addVertice")
-      {
-        static Pos2d p;
-        p.LeeCmd(status);
-        push_back(p);
-        return true;
-      }
-    else if(cmd == "une")
-      {
-        const std::list<Poligono2d> l= crea_lista_poligono2d(status.GetString());
-        une(l);
-        return true;
-      }
-    else if(cmd == "asigna")
-      {
-        const Poligono2d plg= interpretaPoligono2d(status.GetString());
-        (*this)= plg;
-        return true;
-      }
-    else if(cmd == "clip")
-      {
-        const Poligono2d plg= interpretaPoligono2d(status.GetString());
-        (*this)= Poligono2d(Clip(plg));
-        return true;
-      }
-    else
-      return SupPoligonal2d::procesa_comando(status);
-  }
 
 //! @brief Devuelve un polígono paralelo a éste a distancia
 //! «d». Por el exterior si la distancia es positiva o por
@@ -438,62 +402,17 @@ void Poligono2d::une(const std::list<Poligono2d> &l)
       }
   }
 
-//! @brief Devuelve la lista de polígonos que resulta de interpretar la cadena de caracteres que se pasa como parámetro.
-std::list<Poligono2d> Poligono2d::crea_lista_poligono2d(const std::string &str) const
-  {
-    check_comillas(str);
-    const std::deque<boost::any> tmp= crea_deque_boost_any(str);
-    const size_t sz= tmp.size();
-    std::list<Poligono2d> retval;
-    for(size_t i= 0;i<sz;i++)
-      retval.push_back(convert_to_poligono2d(tmp[i]));
-    return retval;
-  }
-
-//! Devuelve la propiedad del objeto cuyo código se pasa 
-//! como parámetro. 
-any_const_ptr Poligono2d::GetProp(const std::string &cod) const 
-  {
-    if(verborrea>4)
-      std::clog << "(Lista::GetProp) Buscando propiedad: " << cod << std::endl;
-
-    if(cod=="getRecubrimiento")
-      {
-        Pos2d tmp= popPos2d(cod);
-        tmp_gp_dbl= GetRecubrimiento(tmp);
-        return any_const_ptr(tmp_gp_dbl);
-      }
-    else if(cod=="getRecubrimientos")
-      {
-        ListaPos2d tmp= popListaPos2d(cod);
-        tmp_gp_lista.clear();
-        const size_t sz= tmp.GetNumPuntos();
-        if(sz>0)
-          {
-            std::deque<GEOM_FT> recubs= GetRecubrimientos(tmp);
-            for(size_t i= 0;i<sz;i++)
-	      tmp_gp_lista.Inserta(recubs[i]);
-          }
-        return any_const_ptr(tmp_gp_lista);
-      }
-    else if(cod=="offset")
-      {
-        GEOM_FT d= popDouble(cod);
-        tmp_gp_pol2d= Offset(d);
-        return any_const_ptr(tmp_gp_pol2d);
-      }
-    else if(cod=="getAreasTributarias")
-      {
-        const std::vector<double> areas= getAreasTributarias();
-        const size_t sz= areas.size();
-        tmp_gp_vany.resize(sz);
-        for(size_t i= 0;i<sz;i++)
-          tmp_gp_vany[i]= areas[i];
-        return any_const_ptr(tmp_gp_vany);
-      }
-    else
-      return SupPoligonal2d::GetProp(cod);
-  }
+// //! @brief Devuelve la lista de polígonos que resulta de interpretar la cadena de caracteres que se pasa como parámetro.
+// std::list<Poligono2d> Poligono2d::crea_lista_poligono2d(const std::string &str) const
+//   {
+//     check_comillas(str);
+//     const std::deque<boost::any> tmp= crea_deque_boost_any(str);
+//     const size_t sz= tmp.size();
+//     std::list<Poligono2d> retval;
+//     for(size_t i= 0;i<sz;i++)
+//       retval.push_back(convert_to_poligono2d(tmp[i]));
+//     return retval;
+//   }
 
 Pos2d cdg(const std::list<Poligono2d> &l)
   { return cdg(l.begin(),l.end()); }

@@ -27,7 +27,7 @@
 #include <string>
 #include <deque>
 #include <cmath>
-#include "xc_utils/src/base/EntConNmb.h"
+#include "xc_utils/src/nucleo/EntConNmb.h"
 #include "ActionRelationships.h"
 
 //! \namespace<cmb_acc>

@@ -19,34 +19,6 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//ArchivosEntrada.cxx
+//EntConNmb.cc
 
-#include "ArchivosEntrada.h"
-#include <cassert>
-
-
-//! @brief Constructor.
-ArchivosEntrada::ArchivosEntrada(std::istream *input)
-  :ArchivosES<std::istream,std::ifstream>(input)
-  {
-    if(!def_file)
-      std::cerr << "Puntero nulo en archivos de entrada." << std::endl;
-  }
-
-//! @brief Devuelve verdadero si se puede seguir leyendo del archivo.
-bool ArchivosEntrada::good(const std::string &nombre) const
-  {
-    const_iterator i= map_archivos.find(nombre);
-    if(i!=map_archivos.end())
-      {
-        std::ifstream *tmp= (*i).second;
-        assert(tmp);
-        return tmp->good();
-      }
-    else
-      {
-        std::cerr << "ArchivosEntrada::good; no existe ningún archivo abierto con el nombre: '" 
-                  << nombre << "'\n";
-        return false;
-      }
-  }
+#include "EntConNmb.h"

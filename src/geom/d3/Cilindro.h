@@ -36,8 +36,6 @@ class Cilindro : public SolidExtru3d<Circulo3d>
   {
   public:
     typedef SolidExtru3d<Circulo3d> solid_extru_cil;
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     Cilindro(void);
     Cilindro(const Circulo3d &secc,const GEOM_FT &lng);

@@ -23,15 +23,15 @@
 
 #include "Segmento2d.h"
 #include <plotter.h>
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include "../pos_vec/Dir2d.h"
 #include "../pos_vec/Vector2d.h"
 #include "../pos_vec/Pos2d.h"
 #include "xc_utils/src/geom/pos_vec/VectorPos2d.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
-#include "xc_utils/src/nucleo/aux_any.h"
+
+
+
 
 //! @brief Constructor.
 Segmento2d::Segmento2d(const Pos2d &p1,const Pos2d &p2)
@@ -48,42 +48,6 @@ void Segmento2d::DosPuntos(const Pos2d &p1,const Pos2d &p2)
 
 GeomObj *Segmento2d::clon(void) const
   { return new Segmento2d(*this); }
-
-void Segmento2d::salva_miembros(std::ostream &os,const std::string &indent) const
-  {
-/*         salva_org(os,indent); */
-/*         os << indent << "\\dest{"; */
-/*         PtoParametricas(100.0).salva_miembros(os,""); */
-/*         os << '}' << endl; */
-  }
-void Segmento2d::salva_cmd(std::ostream &os,const std::string &indent,const std::string &obj) const
-  {
-    const std::string str_indent= indent + "  ";
-    os << indent << '\\' << obj << endl
-       << str_indent << '{' << endl;
-    salva_miembros(os,str_indent+ "  ");
-    os << str_indent  << '}' << endl;
-  }
-
-//! @brief Lee un objeto Segmento2d desde archivo.
-bool Segmento2d::procesa_comando(CmdStatus &status)
-  {
-    static Pos2d o,d;
-    if(status.Cmd() == "org")
-      {
-        o.LeeCmd(status);
-        (*this)= Segmento2d(o,d);
-        return true;
-      }
-    else if(status.Cmd() == "dest")
-      {
-        d.LeeCmd(status);
-        (*this)= Segmento2d(o,d);
-        return true;
-      }
-    else
-      return Linea2d::procesa_comando(status);
-  }
 
 //! @brief Devuelve la dirección del segmento.
 Dir2d Segmento2d::GetDir(void) const
@@ -366,24 +330,6 @@ void Segmento2d::Transforma(const Trf2d &trf2d)
     const Pos2d p1= trf2d.Transforma(Origen());
     const Pos2d p2= trf2d.Transforma(Destino());
     (*this)= Segmento2d(p1,p2);
-  }
-
-//! @brief Devuelve la propiedad cuyo código se pasa como parámetro.
-any_const_ptr Segmento2d::GetProp(const std::string &cod) const
-  {
-    if(cod=="getVDir")
-      {
-        tmp_gp_vector2d= VDir();
-        return any_const_ptr(tmp_gp_vector2d);
-      }
-    else if(cod=="offset")
-      {
-        GEOM_FT d= popDouble(cod);
-        tmp_gp_segmento2d= Offset(d);
-        return any_const_ptr(tmp_gp_segmento2d);
-      }
-    else
-      return Linea2d::GetProp(cod);
   }
 
 void Segmento2d::Print(std::ostream &os) const

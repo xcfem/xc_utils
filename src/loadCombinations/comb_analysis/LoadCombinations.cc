@@ -23,7 +23,7 @@
 
 #include "LoadCombinations.h"
 #include "xc_utils/src/loadCombinations/actions/ActionContainer.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 
 //! @brief Constructor por defecto.
 cmb_acc::LoadCombinations::LoadCombinations(void)

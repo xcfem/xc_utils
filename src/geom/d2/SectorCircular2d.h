@@ -36,8 +36,6 @@ class SectorCircular2d : public Circulo2d
   {
     double theta1; //!< Ángulo que define el punto inicial del arco.
     double theta2; //!< Ángulo que define el punto final del arco.
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     SectorCircular2d(void);
     SectorCircular2d(const Circulo2d &c,const double &th1,const double &th2);

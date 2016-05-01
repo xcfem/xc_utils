@@ -23,15 +23,14 @@
 
 #include "ListaPos2d.h"
 #include <plotter.h>
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include "xc_utils/src/geom/trf/Traslacion2d.h"
 #include "xc_utils/src/geom/listas/utils_list_pos2d.h"
-#include "xc_utils/src/base/utils_any.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
+
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include "xc_utils/src/geom/d1/Segmento2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
-#include "xc_utils/src/base/Lista.h"
 #include "xc_utils/src/geom/d2/BND2d.h"
 
 ListaPos2d::ListaPos2d(void)
@@ -39,35 +38,6 @@ ListaPos2d::ListaPos2d(void)
 
 ListaPos2d::ListaPos2d(const GeomObj::list_Pos2d &l)
   : GeomObj2d(), lista_ptos(l) {}
-
-//! @brief Lee un objeto ListaPos2d desde archivo.
-bool ListaPos2d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(ListaPos2d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "addPt")
-      {
-        Pos2d p;
-        p.LeeCmd(status);
-        AgregaPunto(p);
-        return true;
-      }
-    else if(cmd == "inserta")
-      {
-        const Pos2d p= interpretaPos2d(status.GetBloque());
-        AgregaPunto(p);
-        return true;
-      }
-    else if(cmd == "clear")
-      {
-        status.GetBloque();
-        lista_ptos.clear();
-        return true;
-      }
-    else
-      return GeomObj2d::procesa_comando(status);
-  }
 
 //! @brief Agrega a la lista el punto que se pasa como parámetro.
 const Pos2d *ListaPos2d::AgregaPunto(const Pos2d &p)
@@ -127,9 +97,8 @@ Pos2d &ListaPos2d::operator[](const size_t &i)
       return lista_ptos[i];
     else
       {
-        const std::string posLectura= get_ptr_status()->getPosicionLecturaActual();
         std::cerr << "ListaPos2d; indice: " << i << " fuera de rango. "
-                  << posLectura << std::endl;
+                  << std::endl;
         exit(0);
       }
   }
@@ -142,9 +111,8 @@ const Pos2d &ListaPos2d::operator[](const size_t &i) const
       return lista_ptos[i];
     else
       {
-        const std::string posLectura= get_ptr_status()->getPosicionLecturaActual();
         std::cerr << "ListaPos2d; indice: " << i << " fuera de rango. "
-                  << posLectura << std::endl;
+                  << std::endl;
         exit(0);
       }
   }
@@ -211,45 +179,6 @@ std::deque<GEOM_FT> &ListaPos2d::GetRecubrimientos(const Poligono2d &plg) const
 
 double ListaPos2d::GetSeparacionMedia(void) const
   { return lista_ptos.GetSeparacionMedia(); }
-
-//! Devuelve la propiedad del objeto cuyo código se pasa 
-//! como parámetro. 
-any_const_ptr ListaPos2d::GetProp(const std::string &cod) const 
-  {
-    if(verborrea>4)
-      std::clog << "(Lista::GetProp) Buscando propiedad: " << cod << std::endl;
-    if(cod == "size")
-      {
-        tmp_gp_szt= GetNumPuntos();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(cod == "getSeparacionMedia")
-      {
-        tmp_gp_dbl= GetSeparacionMedia();
-        return any_const_ptr(tmp_gp_dbl);
-      }
-    else if(cod=="getRecubrimientos")
-      {
-        Poligono2d tmp= popPoligono2d(cod);
-        tmp_gp_lista.clear();
-        const size_t sz= GetNumPuntos();
-        if(sz>0)
-          {
-            std::deque<GEOM_FT> recubs= GetRecubrimientos(tmp);
-            for(size_t i= 0;i<sz;i++)
-	      tmp_gp_lista.Inserta(recubs[i]);
-          }
-        return any_const_ptr(tmp_gp_lista);
-      }
-    else if(cod == "at")
-      {
-        const size_t i= popSize_t(cod);
-        tmp_gp_pos2d= lista_ptos.at(i-1);
-        return any_const_ptr(tmp_gp_pos2d);
-      }
-    else
-      return GeomObj2d::GetProp(cod);
-  }
 
 void ListaPos2d::Print(std::ostream &stream) const
   {

@@ -37,8 +37,6 @@ class SqLiteQuery: public SqLiteObject
   {
     Query q; //!< Consulta SqLite.
 
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     SqLiteQuery(Database &db);
     SqLiteQuery(SqLiteDatabase &db);
@@ -75,8 +73,6 @@ class SqLiteQuery: public SqLiteObject
     long int getLongInt(void) const;
     unsigned long int getULongInt(void) const;
     double getDouble(void) const;
-
-    any_const_ptr GetProp(const std::string &) const;
 
   };
 #endif

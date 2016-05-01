@@ -23,7 +23,7 @@
 
 #include "ActionContainer.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 
 //! \fn cmb_acc::ActionContainer::ActionContainer(void)
 //! @brief Constructor por defecto.

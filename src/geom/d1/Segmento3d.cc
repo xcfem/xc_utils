@@ -22,7 +22,7 @@
 //Segmento3d.cc
 
 #include "Segmento3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include "../pos_vec/Dir3d.h"
 #include "../pos_vec/Vector3d.h"
 #include "../pos_vec/Pos3d.h"
@@ -97,40 +97,6 @@ bool Segmento3d::In(const Pos3d &p, const double &tol) const
 
 void Segmento3d::DosPuntos(const Pos3d &p1,const Pos3d &p2)
   { (*this)= Segmento3d(p1,p2); }
-void Segmento3d::salva_miembros(std::ostream &os,const std::string &indent) const
-  {
-/*         salva_org(os,indent); */
-/*         os << indent << "\\dest{"; */
-/*         PtoParametricas(100.0).salva_miembros(os,""); */
-/*         os << '}' << std::endl; */
-  }
-void Segmento3d::salva_cmd(std::ostream &os,const std::string &indent,const std::string &obj) const
-  {
-    const std::string str_indent= indent + "  ";
-    os << indent << '\\' << obj << std::endl
-       << str_indent << '{' << std::endl;
-    salva_miembros(os,str_indent+ "  ");
-    os << str_indent  << '}' << std::endl;
-  }
-
-bool Segmento3d::procesa_comando(CmdStatus &status)
-  {
-    Pos3d o,d;
-    if(status.Cmd() == "org")
-      {
-        o.LeeCmd(status);
-        (*this)= Segmento3d(o,d);
-        return true;
-      }
-    else if(status.Cmd() == "dest")
-      {
-        d.LeeCmd(status);
-        (*this)= Segmento3d(o,d);
-        return true;
-      }
-    else
-      return Linea3d::procesa_comando(status);
-  }
 
 Dir3d Segmento3d::GetDir(void) const
   { return Dir3d(cgseg.direction()); }
@@ -272,5 +238,4 @@ bool operator==(const Segmento3d &r1,const Segmento3d &r2)
   { return (r1.cgseg==r2.cgseg); }
 void Segmento3d::Print(std::ostream &os) const
   { os << Origen() << " " << Destino(); }
-void Segmento3d::SalvaCmd(std::ostream &os,const  std::string &indent) const
-  { salva_cmd(os,indent,"segmento3d"); }
+

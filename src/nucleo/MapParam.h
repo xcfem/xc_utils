@@ -48,7 +48,7 @@ class MapParam
     typedef map_params::value_type param_value_type; //!< Tipo de los valores del contenedor de parámetros.
     map_params *params;//!< Contenedor de parámetros.
     void libera(void);
-    void alloc(const map_params *p= NULL);
+    void alloc(const map_params *p= nullptr);
   protected:
     inline map_params *get_map_params(void)
       { return params; }

@@ -44,7 +44,7 @@ class SemiEspacio3d;
 class GeomObj3d: public GeomObj
   {
   protected:
-    std::deque<SemiEspacio3d> interpretaSemiEspacios3d(const std::string &str);
+    //std::deque<SemiEspacio3d> interpretaSemiEspacios3d(const std::string &str);
   public:
     typedef PoliPos<Pos3d> list_Pos3d;
 
@@ -106,8 +106,7 @@ class GeomObj3d: public GeomObj
     GEOM_FT IO(const Pos3d &o) const;
     matriz_FT I(void) const;
     matriz_FT I(const Pos3d &o) const;
-    any_const_ptr GetProp(const std::string &cod) const;
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
+    
   };
 
 #endif

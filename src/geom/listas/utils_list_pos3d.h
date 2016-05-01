@@ -28,6 +28,7 @@
 
 class BND3d;
 class Trf3d;
+class Vector3d;
 
 //Funciones auxiliares para la manipulación de listas 
 //de posiciones en 3d.

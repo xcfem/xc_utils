@@ -36,13 +36,11 @@ class TresPuntos3d : public ProtoGeom
     Pos3d _p1;
     Pos3d _p2;
   protected:
-    bool procesa_comando(CmdStatus &status);
     //void salva_miembros(std::ostream &os,const std::string &indent) const;
   public:
     TresPuntos3d(void): ProtoGeom() {}
     TresPuntos3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3): ProtoGeom()
       { TresPuntos3d(p1,p2,p3); }
-    //virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
     const Pos3d &Org(void) const
       { return _org; }
     const Pos3d &P1(void) const

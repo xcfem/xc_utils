@@ -67,10 +67,6 @@ class Recta3d : public Linea3d
     CGRecta_3 cgr;
     static const Pos3d defaultOrg;
     static const Pos3d defaultDest;
-  protected:
-    bool procesa_comando(CmdStatus &status);
-    virtual void salva_miembros(std::ostream &os,const std::string &indent) const;
-    virtual void salva_cmd(std::ostream &os,const std::string &indent= "  ",const std::string &obj= "recta") const;
   public:
     Recta3d(void);
     explicit Recta3d(const CGRecta_3 &r);
@@ -155,11 +151,8 @@ class Recta3d : public Linea3d
     //Momento de inercia respecto al CDG en ejes locales.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
-    any_const_ptr GetProp(const std::string &cod) const;
     inline void Print(std::ostream &os) const
       { os << PtoParametricas(0.0) << " " << PtoParametricas(100.0); }
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const
-      { salva_cmd(os,indent,"recta"); }
   };
 
 const Recta3d EjeX3d(Pos3d(0,0,0),Pos3d(1,0,0));

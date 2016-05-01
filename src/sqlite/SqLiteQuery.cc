@@ -23,11 +23,7 @@
 
 #include "SqLiteQuery.h"
 #include "SqLiteDatabase.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
 #include "xc_basic/src/sqlitepp/Database.h"
-#include "xc_utils/src/nucleo/InterpreteRPN.h"
 
 //! @brief Constructor.
 SqLiteQuery::SqLiteQuery(Database &db)
@@ -40,33 +36,6 @@ SqLiteQuery::SqLiteQuery(SqLiteDatabase &db)
 //! @brief Constructor.
 SqLiteQuery::SqLiteQuery(Database &db,const std::string &sql)
   : SqLiteObject(), q(db,sql) {}
-
-//! @brief Lectura de la Timer desde archivo.
-bool SqLiteQuery::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(SqLiteQuery (" << size_t(this) << ")) Procesando comando: " << cmd << std::endl;
-
-    if(cmd == "execute_sql") //Ejecuta una sentencia SQL.
-      {
-        execute(preprocesa_str_sql(status.GetBloque()));
-        return true;
-      }
-    else if(cmd == "get_result")
-      {
-        get_result(preprocesa_str_sql(status.GetBloque()));
-        return true;
-      }
-    else if(cmd == "free_result")
-      {
-	status.GetBloque(); //Ignoramos entrada.
-        free_result();
-        return true;
-      }
-    else
-      return SqLiteObject::procesa_comando(status);
-  }
 
 int SqLiteQuery::GetErrno(void)
   { return q.GetErrno(); }
@@ -175,130 +144,3 @@ double SqLiteQuery::getDouble(void) const
   { return const_cast<Query *>(&q)->getnum(); }
 
 
-//! Devuelve la propiedad del objeto cuyo código se pasa 
-//! como parámetro. 
-any_const_ptr SqLiteQuery::GetProp(const std::string &cod) const 
-  {
-    if(verborrea>4)
-      std::clog << "SqLiteQuery::GetProp (" << nombre_clase() << "::GetProp) Buscando propiedad: " << cod << std::endl;
-    if(cod=="num_rows")
-      {
-        tmp_gp_lint= num_rows();
-        return any_const_ptr(tmp_gp_lint);
-      }
-    else if(cod=="fetch_row")
-      {
-        tmp_gp_bool= fetch_row();
-        return any_const_ptr(tmp_gp_bool);
-      }
-    else if(cod=="getStr")
-      {
-        if(InterpreteRPN::Pila().size()>0)
-          {
-            const std::string fieldName= boost_any_to_string(InterpreteRPN::Pila().Pop());
-            tmp_gp_str= getStr(fieldName);
-            return any_const_ptr(tmp_gp_str);
-          }
-        else
-          {
-            err_num_argumentos(std::cerr,1,"GetProp",cod);
-            return any_const_ptr();
-          }
-      }
-    else if(cod=="getInt")
-      {
-        if(InterpreteRPN::Pila().size()>0)
-          {
-            const std::string fieldName= boost_any_to_string(InterpreteRPN::Pila().Pop());
-            tmp_gp_int= getInt(fieldName);
-            return any_const_ptr(tmp_gp_int);
-          }
-        else
-          {
-            err_num_argumentos(std::cerr,1,"GetProp",cod);
-            return any_const_ptr();
-          }
-      }
-    else if(cod=="getSizeT")
-      {
-        if(InterpreteRPN::Pila().size()>0)
-          {
-            const std::string fieldName= boost_any_to_string(InterpreteRPN::Pila().Pop());
-            tmp_gp_szt= getSizeT(fieldName);
-            return any_const_ptr(tmp_gp_szt);
-          }
-        else
-          {
-            err_num_argumentos(std::cerr,1,"GetProp",cod);
-            return any_const_ptr();
-          }
-      }
-    else if(cod=="getLongInt")
-      {
-        if(InterpreteRPN::Pila().size()>0)
-          {
-            const std::string fieldName= boost_any_to_string(InterpreteRPN::Pila().Pop());
-            tmp_gp_lint= getLongInt(fieldName);
-            return any_const_ptr(tmp_gp_lint);
-          }
-        else
-          {
-            err_num_argumentos(std::cerr,1,"GetProp",cod);
-            return any_const_ptr();
-          }
-      }
-    else if(cod=="getDouble")
-      {
-        if(InterpreteRPN::Pila().size()>0)
-          {
-            const std::string fieldName= boost_any_to_string(InterpreteRPN::Pila().Pop());
-            tmp_gp_dbl= getDouble(fieldName);
-            return any_const_ptr(tmp_gp_dbl);
-          }
-        else
-          {
-            err_num_argumentos(std::cerr,1,"GetProp",cod);
-            return any_const_ptr();
-          }
-      }
-    else if(cod=="fieldIndex")
-      {
-        if(InterpreteRPN::Pila().size()>0)
-          {
-            const std::string fieldName= boost_any_to_string(InterpreteRPN::Pila().Pop());
-            tmp_gp_int= const_cast<Query *>(&q)->field_index(fieldName);
-            return any_const_ptr(tmp_gp_int);
-          }
-        else
-          {
-            err_num_argumentos(std::cerr,1,"GetProp",cod);
-            return any_const_ptr();
-          }
-      }
-    else if(cod=="errorCode")
-      {
-        tmp_gp_int= const_cast<Query *>(&q)->GetErrno();
-        return any_const_ptr(tmp_gp_int);
-      }
-    else if(cod=="error")
-      {
-        tmp_gp_str= q.GetError();
-        return any_const_ptr(tmp_gp_str);
-      }
-    else if(cod=="lastQuery")
-      {
-        tmp_gp_str= q.GetLastQuery();
-        return any_const_ptr(tmp_gp_str);
-      }
-    else if(cod=="numColumns")
-      {
-        tmp_gp_szt= q.num_cols();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(cod=="fieldNames")
-      {
-        tmp_gp_str= q.field_names();
-        return any_const_ptr(tmp_gp_str);
-      }
-    return SqLiteObject::GetProp(cod);
-  }

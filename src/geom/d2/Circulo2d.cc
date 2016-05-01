@@ -28,12 +28,10 @@
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
 #include <plotter.h>
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/T3Cmd.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 #include "xc_utils/src/geom/trf/Trf2d.h"
-#include "xc_utils/src/base/utils_any.h"
-#include "xc_utils/src/nucleo/InterpreteRPN.h"
+
+
 
 
 //! @brief Circulo definido por el radio y tangente a dos rectas.
@@ -75,39 +73,6 @@ Circulo2d Circulo2dRTT(const GEOM_FT &radio,const Recta2d &p,const Recta2d &l,co
         const Pos2d centro= ref.GetPosGlobal(Pos2d(h,k)); //Centro del círculo.
         return Circulo2d(centro,radio);
       }
-  }
-
-
-bool Circulo2d::procesa_comando(CmdStatus &status)
-  {
-    const string &cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(Circulo2d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "centro")
-      {
-        Pos2d c;
-        c.LeeCmd(status);
-        const GEOM_FT r2= Radio2();
-        *this= Circulo2d(r2,c);
-        return true;
-      }
-    else if(cmd == "radio")
-      {
-        const Pos2d c= Centro();
-        const GEOM_FT r= double_to_FT(interpretaDouble(status.GetString()));
-        *this= Circulo2d(r*r,c);
-        return true;
-      }
-    else if(cmd == "3p")
-      {
-        Pos2d p1,p2,p3;
-        T3Cmd<Pos2d,Pos2d,Pos2d> tres_puntos(p1,"p1",p2,"p2",p3,"p3");
-        tres_puntos.LeeCmd(status);
-        *this= Circulo2d(p1,p2,p3);
-        return true;
-      }
-    else
-      return Superficie2d::procesa_comando(status);
   }
 
 //! @brief Construye el círculo a partir del centro y el radio.
@@ -238,29 +203,6 @@ void Circulo2d::Transforma(const Trf2d &trf2d)
     (*this)= Circulo2d(pA,Radio());
   }
 
-//! @brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-//! como parámetro.
-any_const_ptr Circulo2d::GetProp(const std::string &cod) const
-  {
-    if(cod=="getPoligonoInscrito")
-      {
-        if(InterpreteRPN::Pila().size()>1)
-          {
-            const double thetaI= convert_to_double(InterpreteRPN::Pila().Pop());
-            const size_t nl= convert_to_size_t(InterpreteRPN::Pila().Pop());
-            tmp_gp_pol2d= getPoligonoInscrito(nl,thetaI);
-            return any_const_ptr(tmp_gp_pol2d);
-          }
-        else
-          {
-            err_num_argumentos(std::cerr,2,"GetProp",cod);
-            return any_const_ptr();
-          }
-      }
-    else
-      return Superficie2d::GetProp(cod);
-  }
-
 void Circulo2d::Print(std::ostream &os) const
   {
     os << "x centro: " << Centro().x() 
@@ -271,10 +213,4 @@ void Circulo2d::Plot(Plotter &plotter) const
   {
     const Pos2d c= Centro();
     plotter.fcircle(c.x(),c.y(),Radio());
-  }
-
-void Circulo2d::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    const std::string str_indent= indent + "  ";
-    std::cerr << "Circulo2d::SalvaCmd no implementada" << std::endl;
   }

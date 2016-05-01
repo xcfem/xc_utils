@@ -26,7 +26,7 @@
 #include <boost/python/def.hpp>
 #include <boost/python/class.hpp>
 #include "xc_utils/src/nucleo/EntCmd.h"
-#include "xc_utils/src/base/EntConNmb.h"
+#include "xc_utils/src/nucleo/EntConNmb.h"
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include "xc_basic/src/matrices/ProtoMatriz.h"
 

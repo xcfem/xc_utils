@@ -37,11 +37,11 @@ void GTSSplit::borra(void)
   {
     if(!borrar) return;
     if(spt) gts_object_destroy(GTS_OBJECT(spt));
-    spt= NULL;
+    spt= nullptr;
     borrar= false;
   }
 GTSSplit::GTSSplit(const GTSVertex &v,const GTSVertex &v1,const GTSVertex &v2)
-  : spt(NULL), borrar(false)
+  : spt(nullptr), borrar(false)
   { crea(v,v1,v2); }
 GTSSplit::GTSSplit(const GTSSplit &otro)
   : spt(otro.spt), borrar(false)
@@ -55,9 +55,9 @@ GTSSplit &GTSSplit::operator=(const GTSSplit &otra)
   }
 
 void GTSSplit::Collapse(void)
-//Collapses the vertex split vs. Any new edge created during the process will be of class klass. If heap is not NULL, the new edges will be inserted into it and the destroyed edges will be removed from it.
+//Collapses the vertex split vs. Any new edge created during the process will be of class klass. If heap is not nullptr, the new edges will be inserted into it and the destroyed edges will be removed from it.
   {
-    gts_split_collapse(spt,gts_edge_class (),NULL);
+    gts_split_collapse(spt,gts_edge_class (),nullptr);
   }
 
   

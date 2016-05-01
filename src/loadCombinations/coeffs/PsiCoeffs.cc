@@ -22,8 +22,6 @@
 //PsiCoeffs.cxx
 
 #include "PsiCoeffs.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
 
 //! @brief Devuelve el coeficiente cuyo índice se pasa como parámetro.
 const double &cmb_acc::PsiCoeffs::getPsi(short int r) const

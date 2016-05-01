@@ -25,8 +25,8 @@
 
 
 ErrLogFiles::ErrLogFiles(void)
-  : nmbErrFile("cerr"), salida_err_file(NULL),
-    nmbLogFile("clog"), salida_log_file(NULL) {}
+  : nmbErrFile("cerr"), salida_err_file(nullptr),
+    nmbLogFile("clog"), salida_log_file(nullptr) {}
 
 std::ostream &ErrLogFiles::getErrFile(void)
   {
@@ -41,7 +41,7 @@ void ErrLogFiles::setErrFileName(const std::string &filename)
     if(salida_err_file)
       {
         delete salida_err_file;
-        salida_err_file= NULL;
+        salida_err_file= nullptr;
         nmbErrFile= "";
       }
     nmbErrFile= filename;
@@ -71,7 +71,7 @@ void ErrLogFiles::setLogFileName(const std::string &filename)
     if(salida_log_file)
       {
         delete salida_log_file;
-        salida_log_file= NULL;
+        salida_log_file= nullptr;
         nmbLogFile= "";
       }
     nmbLogFile= filename;

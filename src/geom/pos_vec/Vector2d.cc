@@ -27,9 +27,9 @@
 #include <plotter.h>
 #include "xc_basic/src/matrices/giros.h"
 #include "xc_utils/src/geom/matriz_FT.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/utils_any_const_ptr.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
+
+
 
 // Vector2d::Vector2d(const double &x,const double &y)
 //   : ProtoGeom(), cgvct(Vector_2_from_doubles(x,y)) {}
@@ -45,24 +45,7 @@ Vector2d::Vector2d(const matriz_FT &m)
   }
 Vector2d::Vector2d(const Pos2d &p1,const Pos2d &p2)
   : ProtoGeom(), cgvct(p1.ToCGAL(),p2.ToCGAL()) {}
-bool Vector2d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      clog << "(Vector2d) Procesando comando: " << cmd << endl;
-    if(cmd == "vx")
-      {
-        SetX(double_to_FT(interpretaDouble(status.GetString())));
-        return true;
-      }
-    else if(cmd == "vy")
-      {
-        SetY(double_to_FT(interpretaDouble(status.GetString())));
-        return true;
-      }
-    else
-      return ProtoGeom::procesa_comando(status);
-  }
+
 bool Vector2d::Nulo(void) const
   { return ((*this)==VectorNulo2d); }
 void Vector2d::SetX(const GEOM_FT &vx)
@@ -265,33 +248,6 @@ matriz_FT prod_tensor(const Vector2d &u,const Vector2d &v)
 matriz_FT operator&(const Vector2d &u,const Vector2d &v)
   { return prod_tensor(u,v); }
 
-//! @brief Devuelve la propiedad cuyo código se pasa como parámetro.
-any_const_ptr Vector2d::GetProp(const std::string &cod) const
-  {
-    static GEOM_FT tmp_ft= 0.0;
-    if(cod=="x")
-      {
-        tmp_ft= x();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="y")
-      {
-        tmp_ft= y();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getAnguloEjeX")
-      {
-        tmp_ft= AnguloEjeX();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getAnguloEjeY")
-      {
-        tmp_ft= AnguloEjeY();
-        return any_const_ptr(tmp_ft);
-      }
-    else
-      return ProtoGeom::GetProp(cod);
-  }
 
 
 

@@ -22,21 +22,9 @@
 //PrismaTriang3d.cc
 
 #include "PrismaTriang3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
 
-bool PrismaTriang3d::procesa_comando(CmdStatus &status)
-  {
-    //cerr << "(PrismaTriang3d) Procesando comando: " << cmd << endl;
-    if(status.Cmd() == "lado")
-      {
-//         const double lado= status.GetFloat();
-//         Seccion()= Cuadrado(lado);
-        return true;
-      }
-    else
-      return prisma_triang::procesa_comando(status);
-  }
+
+
 PrismaTriang3d::PrismaTriang3d(const Triangulo3d &tr,const double &h)
   : prisma_triang(Triangulo3d(tr),h) {}
 PrismaTriang3d::PrismaTriang3d(const PrismaTriang3d &c)
@@ -49,11 +37,3 @@ PrismaTriang3d &PrismaTriang3d::operator=(const PrismaTriang3d &c)
 GeomObj *PrismaTriang3d::clon(void) const
   { return new PrismaTriang3d(*this); }
 
-void PrismaTriang3d::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    const std::string str_indent= indent + "  ";
-    os << indent << "\\PrismaTriang3d" << std::endl;
-    os << str_indent << '{' << std::endl;
-	//prisma_PrismaTriang3d::salva_miembros(os,str_indent+"  ");
-    os << str_indent << '}' << std::endl;
-  }

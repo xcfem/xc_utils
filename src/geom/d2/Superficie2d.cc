@@ -22,7 +22,7 @@
 //Superficie2d.cc
 
 #include "Superficie2d.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 #include <cstdlib>
 #include <cmath>
 #include "xc_basic/src/util/matem.h"
@@ -31,15 +31,3 @@
 GEOM_FT Superficie2d::Area(void) const
   { return NAN; }
 
-//! @brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-any_const_ptr Superficie2d::GetProp(const std::string &cod) const
-  {
-    static GEOM_FT tmp_ft= 0.0;
-    if(cod=="getPerimetro")
-      {
-        tmp_ft= Perimetro();
-        return any_const_ptr(tmp_ft);
-      }
-    else
-      return GeomObj2d::GetProp(cod);
-  }

@@ -25,24 +25,9 @@
 #include "../pos_vec/Vector3d.h"
 #include "../pos_vec/Dir3d.h"
 #include "../pos_vec/Pos3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
 
-bool SisCooRect1d3d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(SisCooRect1d3d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "vdir")
-      {
-        Vector3d tmp;
-        tmp.LeeCmd(status);
-        SisCooRect1d3d::operator=(SisCooRect1d3d(tmp));
-        return true;
-      }
-    else
-      return SisCooXd3d::procesa_comando(status);
-  }
+
+
 SisCooRect1d3d::SisCooRect1d3d(const VGlobal &vX)
   : SisCooXd3d(1,vX)  //Eje 1 paralelo a Vx.
   {}
@@ -60,22 +45,5 @@ SisCooRect1d3d::VLocal SisCooRect1d3d::GetCooLocales(const SisCooRect1d3d::VGlob
   {
     const matriz_FT tmp= SisCooXd3d::GetCooLocales(v);
     return VLocal(tmp(1));
-  }
-
-//! \brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-//! como parámetro.
-//!
-//! Soporta los códigos:
-//! i: Devuelve el vector unitario i.
-any_const_ptr SisCooRect1d3d::GetProp(const std::string &cod) const
-  {
-    static VGlobal tmp_vg;
-    if(cod=="i")
-      {
-        tmp_vg= GetI();
-        return any_const_ptr(tmp_vg);
-      }
-    else
-      return SisCooXd3d::GetProp(cod);
   }
 

@@ -33,8 +33,6 @@
 class Rejilla2d: public Superficie2d
   {
     MatrizPos2d puntos; //!< Puntos de la malla.
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     Rejilla2d(void);
     Rejilla2d(int numSubdivIJ, int numSubdivJK);
@@ -63,12 +61,8 @@ class Rejilla2d: public Superficie2d
     Cuadrilatero2d GetQuad(const size_t &i,const size_t &j) const;
     bool In(const Pos2d &, const double &) const;
     
-    void EjecutaBloqueForEachPoint(CmdStatus &,const std::string &);
-    void EjecutaBloqueForEachQuad(CmdStatus &,const std::string &);
-
     void Transforma(const Trf2d &trf2d);
 
-    virtual any_const_ptr GetProp(const std::string &cod) const;
     void Print(std::ostream &os) const;
   };
 

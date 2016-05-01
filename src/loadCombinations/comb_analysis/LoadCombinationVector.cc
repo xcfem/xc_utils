@@ -23,8 +23,8 @@
 
 #include "LoadCombinationVector.h"
 #include "xc_basic/src/texto/en_letra.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
 
         
 //! \fn bool cmb_acc::LoadCombinationVector::Nula(const double &tol) const

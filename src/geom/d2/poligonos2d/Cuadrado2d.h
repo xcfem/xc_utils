@@ -32,8 +32,6 @@
 //! @brief Cuadrado en dos dimensiones.
 class Cuadrado2d : public Cuadrilatero2d
   {
-  protected: 
-    bool procesa_comando(CmdStatus &status);
   public:
     Cuadrado2d(const GEOM_FT &l= 1.0)
       : Cuadrilatero2d(Pos2d(0,0),Pos2d(l,0),Pos2d(l,l),Pos2d(0,l)) {}
@@ -56,7 +54,7 @@ class Cuadrado2d : public Cuadrilatero2d
 /*         retval.Offset(offset); */
 /*         return retval; */
 /*       } */
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
+    
 
   };
 

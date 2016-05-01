@@ -38,11 +38,11 @@ void GTSSurfaceTraverse::borra(void)
   {
     if(!borrar) return;
     if(sft) gts_surface_traverse_destroy(sft);
-    sft= NULL;
+    sft= nullptr;
     borrar= false;
   }
 GTSSurfaceTraverse::GTSSurfaceTraverse(const GTSSurface &s,const GTSFace &f)
-  : sft(NULL), borrar(false)
+  : sft(nullptr), borrar(false)
   { crea(s,f); }
 GTSSurfaceTraverse::GTSSurfaceTraverse(const GTSSurfaceTraverse &otra)
   : sft(otra.sft), borrar(false)

@@ -31,9 +31,6 @@
 //! @brief Rectángulo en dos dimensiones.
 class Rectangulo2d: public Cuadrilatero2d
   {
-  protected:
-    bool procesa_comando(CmdStatus &status);
-    //    void salva_miembros(std::ostream &os,const string &indent) const;
   public:
     Rectangulo2d(const double &b=1.0,const double &h=1.0): Cuadrilatero2d()
       {
@@ -77,14 +74,6 @@ class Rectangulo2d: public Cuadrilatero2d
 /*       { return altura; } */
 /*     inline double &Altura(void) */
 /*       { return altura; } */
-/*     virtual void SalvaCmd(std::ostream &os,const string &indent= "  ") const */
-/*       { */
-/*         const string str_indent= indent + "  "; */
-/*         os << indent << "\\rectangulo" << endl */
-/*            << str_indent << '{' << endl; */
-/*         salva_miembros(os,str_indent+ "  "); */
-/*         os << str_indent  << '}' << endl; */
-/*       } */
   };
 
 #endif

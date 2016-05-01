@@ -38,8 +38,6 @@ class GmGrupo3d : public GmGrupo<GeomObj3d>
   {
 
     virtual GEOM_FT inercia(const Recta3d &e) const;
-    virtual bool procesa_comando(CmdStatus &status);
-
   public:
     typedef pdeque_geom_obj::const_iterator const_iterator;
     typedef pdeque_geom_obj::iterator iterator;
@@ -62,7 +60,7 @@ class GmGrupo3d : public GmGrupo<GeomObj3d>
     GEOM_FT Pxy(void) const;
     //Producto de inercia respecto al CDG en ejes locales.
 
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
+    
   };
 
 #endif

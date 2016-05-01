@@ -22,21 +22,16 @@
 //GeomObj.cc
 
 #include "GeomObj.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 #include <iostream>
 
 //! @brief Constructor
 GeomObj::GeomObj(void) 
   : ProtoGeom() {}
-
-void GeomObj::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    os << indent << "\\c{SalvaCmd no implementada}" << std::endl;
-  }
 // SoGroup *GeomObj::Traza(void) const 
 //   {
 //     cerr << "Método Traza() no implementado." << endl;
-//     return NULL;
+//     return nullptr;
 //   }
 GEOM_FT GeomObj::AreaCdg(void) const
   {
@@ -46,29 +41,6 @@ GEOM_FT GeomObj::AreaCdg(void) const
     if(d==2) return Area();
     if(d==3) return Volumen();
     return 1.0;
-  }
-
-//! \brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-any_const_ptr GeomObj::GetProp(const std::string &cod) const
-  {
-    static GEOM_FT tmp_ft= 0.0;
-    if(cod=="getLongitud")
-      {
-        tmp_ft= Longitud();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getArea")
-      {
-        tmp_ft= Area();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getVolumen")
-      {
-        tmp_ft= Volumen();
-        return any_const_ptr(tmp_ft);
-      }
-    else
-      return ProtoGeom::GetProp(cod);
   }
 
 std::ostream &operator<<(std::ostream &os, const GeomObj &go)

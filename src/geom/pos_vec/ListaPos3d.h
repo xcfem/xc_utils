@@ -42,7 +42,6 @@ class ListaPos3d: public GeomObj3d
     typedef GeomObj::list_Pos3d::const_iterator puntos_const_iterator;
   protected:
     list_Pos3d lista_ptos;
-    bool procesa_comando(CmdStatus &status);
     Pos3d &operator[](const size_t &i);
   public:
     ListaPos3d(void);
@@ -101,7 +100,6 @@ class ListaPos3d: public GeomObj3d
 
     void Print(std::ostream &stream) const;
     void Plot(Plotter &) const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 #endif

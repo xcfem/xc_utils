@@ -25,7 +25,7 @@
 #include "../pos_vec/Vector3d.h"
 #include "../pos_vec/Dir3d.h"
 #include "../pos_vec/Pos3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 
 //! @brief Define un sistema de coordenadas de dimensión i
 //! el eje x tendrá la dirección y sentido del vector que
@@ -48,9 +48,6 @@ SisCooXd3d::SisCooXd3d(const size_t &i,const PGlobal &p1,const PGlobal &p2, cons
 SisCooXd3d::SisCooXd3d(const size_t &i,const VGlobal &v1,const VGlobal &v2,const VGlobal &v3)
   : SisCoo(i,3)
   { vectores_unitarios(v1,v2,v3); }
-
-bool SisCooXd3d::procesa_comando(CmdStatus &status)
-  { return SisCoo::procesa_comando(status); }
 
 void SisCooXd3d::PutFila(const size_t &eje,const VGlobal &v)
   { SisCoo::PutFila(eje,traspuesta(v.GetMatriz())); }

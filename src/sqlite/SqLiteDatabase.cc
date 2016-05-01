@@ -23,46 +23,14 @@
 
 #include "SqLiteDatabase.h"
 #include "SqLiteQuery.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
-
 Database::Mutex SqLiteDatabase::mutex;
 StderrLog SqLiteDatabase::log;
-sqlite3_stmt *SqLiteDatabase::tmpRes= NULL;
+sqlite3_stmt *SqLiteDatabase::tmpRes= nullptr;
 
 //! @brief Constructor.
 SqLiteDatabase::SqLiteDatabase(const std::string &nmb)
-  : SqLiteObject(), db(mutex,nmb,&log), defaultQuery(NULL) 
+  : SqLiteObject(), db(mutex,nmb,&log), defaultQuery(nullptr) 
   { defaultQuery= NuevaQuery("defaultQuery"); }
-
-//! @brief Lectura desde archivo.
-bool SqLiteDatabase::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(SqLiteDatabase) Procesando comando: " << cmd << std::endl;
-
-    if(cmd == "newQuery") //Crea una consulta.
-      {
-        NuevaQuery(interpretaString(status.GetBloque()));
-        return true;
-      }
-    else if(cmd == "execute_sql") //Ejecuta una sentencia SQL.
-      {
-        if(!defaultQuery)
-          defaultQuery= NuevaQuery("defaultQuery");
-        defaultQuery->execute(preprocesa_str_sql(status.GetBloque()));
-        return true;
-      }
-    else if(cmd == "borraTabla")
-      {
-        borraTabla(interpretaString(status.GetBloque()));
-        return true;
-      }
-    else
-      return SqLiteObject::procesa_comando(status);
-  }
 
 //! @brief Devuelve verdadero si existe la tabla cuyo nombre se pasa como parámetro.
 bool SqLiteDatabase::existeTabla(const std::string &nmbTabla) const
@@ -108,22 +76,3 @@ SqLiteQuery *SqLiteDatabase::NuevaQuery(const std::string &nmb)
     return retval;
   }
 
-//! Devuelve la propiedad del objeto cuyo código se pasa 
-//! como parámetro. 
-any_const_ptr SqLiteDatabase::GetProp(const std::string &cod) const 
-  {
-    if(verborrea>4)
-      std::clog << "SqLiteDatabase::GetProp (" << nombre_clase() << "::GetProp) Buscando propiedad: " << cod << std::endl;
-    if(cod == "getNombre")
-      {
-        tmp_gp_str= db.getNombre();
-        return any_const_ptr(tmp_gp_str);
-      }
-    else if(cod == "existeTabla")
-      {
-        tmp_gp_bool= existeTabla(popString(cod));
-        return any_const_ptr(tmp_gp_bool);
-      }
-    else
-      return SqLiteObject::GetProp(cod);
-  }

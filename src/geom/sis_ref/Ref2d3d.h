@@ -43,10 +43,6 @@ class Ref2d3d : public Ref<SisCooRect2d3d>
   public:
     typedef GeomObj3d::list_Pos3d list_Pos3d;
     typedef Ref<SisCooRect2d3d> BaseRef;
-
-  protected:
-
-    bool procesa_comando(CmdStatus &status);
   public:
     Ref2d3d(void);
     Ref2d3d(const Ref2d3d &otro);

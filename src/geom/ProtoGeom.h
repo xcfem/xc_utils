@@ -35,8 +35,6 @@ class ProtoGeom: public EntCmd
   {
   private:
     bool exts; //! False when solution is not possible: intersection of parallel planes.
-  protected:
-    virtual void printprop(std::ostream *out_file,const any_const_ptr &nmb_prop) const;
   public:
     ProtoGeom(void);
     virtual void Print(std::ostream &os) const;

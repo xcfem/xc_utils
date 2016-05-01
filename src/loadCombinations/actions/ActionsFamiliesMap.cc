@@ -23,8 +23,8 @@
 
 #include "ActionsFamiliesMap.h"
 #include "ActionsFamily.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
 #include "ActionContainer.h"
 
@@ -39,7 +39,7 @@ cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::busca_familia_acc(const std
     if(existe(nmb))
       return familias[nmb];
     else
-      return NULL;
+      return nullptr;
   }
 
 //! @brief Devuelve un puntero a la familia cuyo nombre se pasa como parámetro.
@@ -49,7 +49,7 @@ const cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::busca_familia_acc(con
     if(i!= familias.end())
       return (*i).second;
     else
-      return NULL;
+      return nullptr;
   }
 
 //! @brief Inserta la acción en la familia que se pasa como parámetro.
@@ -69,7 +69,7 @@ cmb_acc::ActionRValue &cmb_acc::ActionsFamiliesMap::inserta(const std::string &f
 //! @brief Crea una nueva familia con el nombre que se le pasa como parámetro.
 cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::crea_familia_acc(const std::string &nmb)
   {
-    ActionsFamily *tmp =NULL;
+    ActionsFamily *tmp =nullptr;
     if(!existe(nmb)) //la familia es nuevo.
       {
         tmp= new ActionsFamily(nmb,GammaF(GammaFELU(1.0,1.6,1.0,1.0),GammaFELS(0.9,1.1)));//Coeficientes de ponderación por defecto 
@@ -105,7 +105,7 @@ const cmb_acc::PsiCoeffsMap *cmb_acc::ActionsFamiliesMap::getPtrPsiCoeffs(void) 
     else
       {
 	std::cerr << "ActionsFamiliesMap::getPtrPsiCoeffs; no se encontró el objeto propietario de éste." << std::endl;
-        return NULL;
+        return nullptr;
       }
   }
 
@@ -115,7 +115,7 @@ void cmb_acc::ActionsFamiliesMap::clear(void)
     for(iterator i= familias.begin();i!=familias.end();i++)
       {
         delete (*i).second;
-        (*i).second= NULL;
+        (*i).second= nullptr;
       }
     familias.clear();
   }

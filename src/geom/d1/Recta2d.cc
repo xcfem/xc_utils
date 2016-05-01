@@ -24,15 +24,15 @@
 #include "Recta2d.h"
 #include "xc_basic/src/util/matem.h"
 #include <plotter.h>
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include "../pos_vec/Dir2d.h"
 #include "../pos_vec/Vector2d.h"
 #include "../pos_vec/Pos3d.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
 #include "Segmento2d.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
-#include "xc_utils/src/nucleo/aux_any.h"
+
 
 //! @brief Devuelve el parámetro que corresponde al punto
 //! sobre la recta.
@@ -96,76 +96,6 @@ void Recta2d::Swap(void)
 
 void Recta2d::DosPuntos(const Pos2d &p1,const Pos2d &p2)
   { (*this)= Recta2d(p1,p2); }
-void Recta2d::salva_miembros(std::ostream &os,const std::string &indent) const
-  {
-/*         salva_org(os,indent); */
-/*         os << indent << "\\dest{"; */
-/*         PtoParametricas(100.0).salva_miembros(os,""); */
-/*         os << '}' << endl; */
-  }
-void Recta2d::salva_cmd(std::ostream &os,const std::string &indent,const std::string &obj) const
-  {
-    const std::string str_indent= indent + "  ";
-    os << indent << '\\' << obj << endl
-       << str_indent << '{' << endl;
-    salva_miembros(os,str_indent+ "  ");
-    os << str_indent  << '}' << endl;
-  }
-
-bool Recta2d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd=  status.Cmd();
-    const std::string str_error= "(Recta2d) Procesando comando: " + cmd;
-    if(verborrea>2)
-      std::clog << str_error << std::endl;
-    static Pos2d o,d;
-    if(cmd == "org")
-      {
-        o.LeeCmd(status);
-        (*this)= Recta2d(o,d);
-        return true;
-      }
-    else if(cmd == "dest")
-      {
-        d.LeeCmd(status);
-        (*this)= Recta2d(o,d);
-        return true;
-      }
-    else if(cmd == "dosPuntos")
-      {
-        std::vector<boost::any> param= interpretaVectorAny(status.GetString());
-        const int nc= param.size(); //No. de valores leídos.
-        if(nc<2)
-	  std::cerr << str_error
-                    << "Se esperaban dos argumentos de tipo vector, se obtuvieron: "
-                    << nc << std::endl;
-        else
-          {
-            Pos2d p1= convert_to_pos2d(param[0]);
-            Pos2d p2= convert_to_pos2d(param[1]);
-            (*this)= Recta2d(p1,p2);
-          }
-        return true;
-      }
-    else if(cmd == "puntoyVector")
-      {
-        std::vector<boost::any> param= interpretaVectorAny(status.GetString());
-        const int nc= param.size(); //No. de valores leídos.
-        if(nc<2)
-	  std::cerr << str_error
-                    << "Se esperaban dos argumentos de tipo vector, se obtuvieron: "
-                    << nc << std::endl;
-        else
-          {
-            Pos2d p= convert_to_pos2d(param[0]);
-            Vector2d v= convert_to_vector2d(param[1]);
-            (*this)= Recta2d(p,v);
-          }
-        return true;
-      }
-    else
-      return Linea2d::procesa_comando(status);
-  }
 
 //! @brief Devuelve la longitud de la recta.
 GEOM_FT Recta2d::Longitud(void) const
@@ -552,55 +482,12 @@ void Recta2d::Transforma(const Trf2d &trf2d)
     (*this)= Recta2d(p1,p2);
   }
 
-//! \brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-any_const_ptr Recta2d::GetProp(const std::string &cod) const
-  {
-    if(verborrea>4)
-      std::clog << "(Recta2d::GetProp) Buscando propiedad: " << cod << std::endl;
-
-    static GEOM_FT tmp_ft= 0.0;
-    static Pos2d cdg;
-    if(cod=="getParamA")
-      {
-        tmp_ft= GetParamA();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getParamB")
-      {
-        tmp_ft= GetParamB();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getDist")
-      {
-        const Pos2d tmp= popPos2d(cod);
-        tmp_ft= dist(tmp);
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getVDir")
-      {
-        tmp_gp_vector2d= VDir();
-        return any_const_ptr(tmp_gp_vector2d);
-      }
-    else if(cod=="offset")
-      {
-        const GEOM_FT d= popDouble(cod);
-        tmp_gp_recta2d= Offset(d);
-        return any_const_ptr(tmp_gp_recta2d);
-      }
-    else
-      return Linea2d::GetProp(cod);
-  }
-
 void Recta2d::Print(std::ostream &os) const
   { os << PtoParametricas(0.0) << " " << PtoParametricas(100.0); }
 void Recta2d::Plot(Plotter &psos) const
 //La recta no se dibuja, primero hay que recortarla.
   {
   }
-
-
-void Recta2d::SalvaCmd(std::ostream &os,const std::string &indent) const
-  { salva_cmd(os,indent,"recta"); }
 
 Recta2d mediatriz(const Pos2d &p1,const Pos2d &p2)
   { 

@@ -39,11 +39,11 @@ void GTSEdge::borra(void)
   {
     if(!borrar) return;
     if(edg) gts_object_destroy(GTS_OBJECT(edg));
-    edg= NULL;
+    edg= nullptr;
     borrar= false;
   }
 GTSEdge::GTSEdge(GTSVertex &v1,GTSVertex &v2)
-  : edg(NULL), borrar(false)
+  : edg(nullptr), borrar(false)
 { crea(v1,v2); }
 GTSEdge::GTSEdge(const GTSEdge &otro)
   : edg(otro.edg), borrar(false)

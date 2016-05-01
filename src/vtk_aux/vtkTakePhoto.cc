@@ -31,8 +31,8 @@ vtkStandardNewMacro(vtkTakePhoto)
 
 //! @brief Constructor por defecto.
 vtkTakePhoto::vtkTakePhoto(void)
-  : name("vtkFileSnapshot"),renWin(NULL),
-   w2if(NULL),format(POSTSCRIPT)
+  : name("vtkFileSnapshot"),renWin(nullptr),
+   w2if(nullptr),format(POSTSCRIPT)
   {
     w2if= vtkWindowToImageFilter::New();
     w2if->Register(this);

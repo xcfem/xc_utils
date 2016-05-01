@@ -26,6 +26,7 @@
 
 #include "../d2/GeomObj2d.h"
 
+class Poligono2d;
 
 //! @ingroup GEOM
 //
@@ -38,7 +39,6 @@ class ListaPos2d: public GeomObj2d
     typedef GeomObj::list_Pos2d::const_iterator puntos_const_iterator;
   protected:
     list_Pos2d lista_ptos;
-    bool procesa_comando(CmdStatus &status);
     Pos2d &operator[](const size_t &i);
   public:
     ListaPos2d(void);
@@ -97,7 +97,6 @@ class ListaPos2d: public GeomObj2d
 
     void Print(std::ostream &stream) const;
     void Plot(Plotter &) const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 #endif

@@ -19,39 +19,12 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//BloqueCond.cc
+//EntWOwner.cc
 
-#include "BloqueCond.h"
-#include "xc_utils/src/base/CmdStatus.h"
-
-//! @brief Constructor.
-BloqueCond::BloqueCond(EntCmd *owner)
-  : BloqueBase(owner,"cond") {}
+#include "EntWOwner.h"
 
 //! @brief Constructor.
-BloqueCond::BloqueCond(EntCmd *owner,const std::string &cnd,const std::string &b)
-  : BloqueBase(owner,"cond",b), cond(cnd) {}
+EntWOwner::EntWOwner(EntCmd *owr)
+  : EntCmd(owr) {}
 
-//! @brief Devuelve verdadero si se cumple la condición
-//! definida en cond.
-bool BloqueCond::verdadero(void) const
-  { return EntCmd::verdadero(cond); }
 
-//! Lee un objeto BloqueCond desde archivo
-//! Soporta los comandos:
-//! -cond: Lee la condición del if.
-//! -then: Lee el código a ejecutar si se cumple la condición.
-//! -else: Lee el código a ejecutar si no se cumple la condición.
-bool BloqueCond::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "BloqueCond; procesando comando: " << cmd << std::endl;
-    if(cmd == "cond")
-      {
-        cond= status.GetBloque();
-        return true;
-      }
-    else
-      return BloqueBase::procesa_comando(status);
-  }

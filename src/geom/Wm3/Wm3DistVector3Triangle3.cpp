@@ -10,7 +10,7 @@
 
 #include "Wm3DistVector3Triangle3.h"
 #include "Wm3Math.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 
 namespace Wm3
 {

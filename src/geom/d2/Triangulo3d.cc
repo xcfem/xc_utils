@@ -24,7 +24,7 @@
 #include "Triangulo3d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Triangulo2d.h"
 #include "../Wm3/Wm3DistVector3Triangle3.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 
 Triangulo3d::Triangulo3d(const Ref2d3d &rf,const Triangulo2d &t)
   : Poligono3d(rf,t.GetPoligono()) {}

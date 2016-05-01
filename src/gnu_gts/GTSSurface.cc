@@ -50,17 +50,17 @@ void GTSSurface::borra(void)
   {
     if(!borrar) return;
     if(s) gts_object_destroy(GTS_OBJECT(s));
-    s= NULL;
+    s= nullptr;
     borrar= false;
   }
 
 GTSSurface::GTSSurface(GtsSurface *ptr)
   : s(ptr), borrar(false) {}
 GTSSurface::GTSSurface(void)
-  : s(NULL), borrar(false)
+  : s(nullptr), borrar(false)
   { crea(); }
 GTSSurface::GTSSurface(const GTSSurface &otra)
-  : s(NULL), borrar(false)
+  : s(nullptr), borrar(false)
   {
     crea();
     gts_surface_copy(s,otra.s);
@@ -102,7 +102,7 @@ bool GTSSurface::IsOrientable(void) const
 GTSSurface GTSSurface::AutoInterseca(void) const
   { return GTSSurface(gts_surface_is_self_intersecting(s)); }
 bool GTSSurface::Vacia(void) const
-  { return (s == NULL); }
+  { return (s == nullptr); }
 bool GTSSurface::CheckSelfIntersection(bool verbose) const
 //Devuelve verdadero si la superficie interseca consigo misma.
   {
@@ -138,12 +138,12 @@ guint GTSSurface::GetNumCaras(void) const
 
 static void pick_first_face (GtsFace * f, GtsFace ** first)
   {
-    if (*first == NULL)
+    if (*first == nullptr)
       *first = f;
   }
 GTSSurfaceTraverse GTSSurface::Begin(void) const
   {
-    GtsFace *first= NULL;
+    GtsFace *first= nullptr;
     gts_surface_foreach_face (s, (GtsFunc) pick_first_face, &first);
     return GTSSurfaceTraverse(*this,GTSFace(first));
   }

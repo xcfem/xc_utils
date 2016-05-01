@@ -40,7 +40,6 @@ class SisCoo: public ProtoGeom
   {
     matriz_FT rot; //Matriz cuyas filas son los vectores básicos.
   protected:
-    virtual bool procesa_comando(CmdStatus &status);
     void identidad(void);
     void put(const size_t &i,const size_t &j,const GEOM_FT &);
     void normaliza(void);
@@ -79,7 +78,6 @@ class SisCoo: public ProtoGeom
 
     virtual void Print(std::ostream &os) const;
     friend std::ostream &operator<<(std::ostream &os,const SisCoo &sc);
-    virtual any_const_ptr GetProp(const std::string &cod) const;
     inline friend bool operator==(const SisCoo &a,const SisCoo &b)
       { return (a.rot==b.rot); } 
     inline friend bool operator!=(const SisCoo &a,const SisCoo &b)

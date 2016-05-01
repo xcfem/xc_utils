@@ -24,23 +24,15 @@
 #include "ProtoGeom.h"
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
 #include "xc_utils/src/geom/pos_vec/Vector2d.h"
-#include "xc_utils/src/base/utils_any_const_ptr.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
+
 #include "matriz_FT.h"
 #include <iostream>
-#include "xc_utils/src/nucleo/aux_any.h"
+
 
 //! @brief Constructor.
 ProtoGeom::ProtoGeom(void)
   :exts(true) {}
-
-//! @brief Imprime el valor de una propiedad geométrica del objeto (ver GetProp()).
-void ProtoGeom::printprop(std::ostream *out_file,const any_const_ptr &prop) const
-  {
-     //Suponemos que es el nombre de una propiedad.
-    if(const_ptr_is_empty(prop)) return;
-    const_ptr_print(*out_file,prop);
-  }
 
 void ProtoGeom::Print(std::ostream &os) const
   { os << "nil_geom_obj"; }

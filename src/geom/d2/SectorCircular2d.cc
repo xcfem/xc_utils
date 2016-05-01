@@ -27,8 +27,7 @@
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include <plotter.h>
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/T3Cmd.h"
+
 #include "boost/progress.hpp"
 
 
@@ -82,34 +81,6 @@ SectorCircular2d &SectorCircular2d::operator=(const SectorCircular2d &p)
 Superficie2d *SectorCircular2d::clon(void) const
   { return new SectorCircular2d(*this); }
 
-
-bool SectorCircular2d::procesa_comando(CmdStatus &status)
-  {
-    const string &cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(SectorCircular2d) Procesando comando: " << cmd << std::endl;
-    static Pos2d c;
-    if(cmd == "theta1")
-      {
-        theta1= interpretaDouble(status.GetString());
-        return true;
-      }
-    else if(cmd == "theta2")
-      {
-        theta2= interpretaDouble(status.GetString());
-        return true;
-      }
-    else if(cmd == "3p")
-      {
-        Pos2d p1,p2,p3;
-        T3Cmd<Pos2d,Pos2d,Pos2d> tres_puntos(p1,"p1",p2,"p2",p3,"p3");
-        tres_puntos.LeeCmd(status);
-        *this= SectorCircular2dTresPuntos(p1,p2,p3);
-        return true;
-      }
-    else
-      return Circulo2d::procesa_comando(status);
-  }
 
 //! @brief Devuelve la posición del centro de gravedad del sector circular.
 Pos2d SectorCircular2d::Cdg(void) const

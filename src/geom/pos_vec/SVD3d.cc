@@ -26,8 +26,8 @@
 #include "xc_utils/src/geom/d2/Plano3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/sis_ref/Ref3d3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
 
 //Ecuación del producto vectorial: x ^ a = b
 //Ver libro "Mecánica teórica de los sistemas de sólidos rígidos" de José Antonio Fernández Palacios.
@@ -56,35 +56,6 @@ SVD3d::SVD3d(const Pos3d &O,const Vector3d &R,const Vector3d &Mo)
 
 SVD3d::SVD3d(const VDesliz3d &v)
   : VDesliz3d(v), mom(0,0,0) {}
-
-//! Lee un objeto SVD3d desde archivo
-bool SVD3d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(SVD3d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "momento")
-      {
-        mom.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "suma_vector")
-      {
-        VDesliz3d tmp;
-        tmp.LeeCmd(status);
-        (*this)+=tmp;
-        return true;
-      }
-    else if(cmd == "suma")
-      {
-        SVD3d tmp;
-        tmp.LeeCmd(status);
-        (*this)+=tmp;
-        return true;
-      }
-    else
-      return VDesliz3d::procesa_comando(status);
-  }
 
 //! @brief Campo de momentos del SVD3d.
 //! Devuelve el momento del SVD3d respecto al punto P.
@@ -240,39 +211,6 @@ SVD3d operator*(const GEOM_FT &d, const SVD3d &s)
 //! @brief Devuelve el producto del sistema de vectores deslizantes por un escalar.
 SVD3d operator*(const SVD3d &s,const GEOM_FT &d)
   { return d*s; }
-
-//! @brief Devuelve una propiedad del objeto.
-any_const_ptr SVD3d::GetProp(const std::string &cod) const
-  {
-    if(verborrea>4)
-      std::clog << "SVD3d::GetProp (" << nombre_clase() << "::GetProp) Buscando propiedad: " << cod << std::endl;
-    if(cod=="getResultante")
-      {
-        tmp_gp_vector3d= getResultante();
-        return any_const_ptr(tmp_gp_vector3d);
-      }
-    else if(cod=="getMomento")
-      return any_const_ptr(mom);
-    else if(cod=="getMomentoRespectoPunto")
-      {
-        const Pos3d tmp= popPos3d(cod);
-        tmp_gp_vdesliz3d= getMomento(tmp);
-        return any_const_ptr(tmp_gp_vdesliz3d);
-      }
-    else if(cod=="getMomentoRespectoEje")
-      {
-        const Recta3d eje= popRecta3d(cod);
-        tmp_gp_dbl= getMomento(eje);
-        return any_const_ptr(tmp_gp_dbl);
-      }
-    else if(cod=="getEjeCentral")
-      {
-        tmp_gp_recta3d= EjeCentral();
-        return any_const_ptr(tmp_gp_recta3d);
-      }
-    else
-      return VDesliz3d::GetProp(cod);
-  }
 
 //! @brief Imprime el sistema de vectores deslizantes.
 void SVD3d::Print(std::ostream &os) const

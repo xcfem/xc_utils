@@ -24,11 +24,11 @@
 #include "Polilinea2d.h"
 #include "Segmento2d.h"
 #include <plotter.h>
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include "xc_utils/src/geom/listas/utils_list_pos2d.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
 #include "xc_utils/src/geom/pos_vec/ListaPos2d.h"
 
 //! @brief Constructor por defecto.
@@ -43,22 +43,6 @@ Polilinea2d::Polilinea2d(const GeomObj::list_Pos2d &l)
 Polilinea2d::Polilinea2d(const ListaPos2d &l)
   : Linea2d(), GeomObj::list_Pos2d(l.getPuntos()){}
 
-//! @brief Lee un objeto Polilinea2d desde archivo.
-bool Polilinea2d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(Polilinea2d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "addVertice")
-      {
-        static Pos2d p;
-        p.LeeCmd(status);
-        AgregaVertice(p);
-        return true;
-      }
-    else
-      return Linea2d::procesa_comando(status);
-  }
 const Pos2d *Polilinea2d::AgregaVertice(const Pos2d &p)
   {
     GeomObj::list_Pos2d::push_back(p);
@@ -259,22 +243,6 @@ GeomObj::list_Pos2d Polilinea2d::Interseccion(const Segmento2d &sg) const
           retval.Agrega(tmp);
       }
     return retval;
-  }
-
-//! \brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-any_const_ptr Polilinea2d::GetProp(const std::string &cod) const
-  {
-    if(verborrea>4)
-      std::clog << "(Polilinea2d::GetProp) Buscando propiedad: " << cod << std::endl;
-
-    if(cod=="offset")
-      {
-        GEOM_FT d= popDouble(cod);
-        tmp_gp_polilinea2d= Offset(d);
-        return any_const_ptr(tmp_gp_polilinea2d);
-      }
-    else
-      return Linea2d::GetProp(cod);
   }
 
 void Polilinea2d::Print(std::ostream &stream) const

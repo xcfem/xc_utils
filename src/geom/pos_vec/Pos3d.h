@@ -45,14 +45,6 @@ class Solido3d;
 class Pos3d : public ProtoGeom
   {
     CGPoint_3 cgpt;
-  protected:
-    bool procesa_comando(CmdStatus &status);
-    void salva_miembros(std::ostream &os,const std::string &indent) const
-      {
-        os << indent << "\\x{" << x() << '}'
-                     << " \\y{" << y() << '}' 
-                     << " \\z{" << z() << "}";
-      }
   public:
     typedef Vector3d vector;
     typedef CGPoint_3::Cartesian_const_iterator Cartesian_const_iterator;
@@ -107,7 +99,6 @@ class Pos3d : public ProtoGeom
       { return ToCGAL().cartesian_end(); }
     size_t dimension(void) const
       { return cgpt.dimension(); }
-    virtual any_const_ptr GetProp(const std::string &cod) const;
     Vector3d VectorPos(void) const; //Devuelve el vector de posición del punto.
     bool domina_a(const Pos3d &b) const;
 
@@ -142,7 +133,6 @@ class Pos3d : public ProtoGeom
     friend bool colineales(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
     friend bool coplanarios(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4);
     friend std::ostream &operator<<(std::ostream &stream,const Pos3d &n);
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
     inline friend bool operator==(const Pos3d &a,const Pos3d &b)
       { return (a.cgpt==b.cgpt); }
     inline friend bool operator!=(const Pos3d &a,const Pos3d &b)

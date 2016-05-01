@@ -23,10 +23,10 @@
 
 #include "SisCoo.h"
 #include "../pos_vec/Pos3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include "xc_basic/src/texto/cadena_carac.h"
 #include "xc_basic/src/funciones/algebra/ExprAlgebra.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 
 //! @brief Define un sistema de coordenadas de ne dimensiones
 //! en un espacio de dimensión dim.
@@ -92,31 +92,7 @@ void SisCoo::identidad(void)
 //! @brief Asigna un valor al elemento (i,j) de la matriz.
 void SisCoo::put(const size_t &i,const size_t &j,const GEOM_FT &rot_ij)
   { rot(i,j)= rot_ij; }
-//! @brief Lee los miembros desde archivo.
-bool SisCoo::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(SisCoo) Procesando comando: " << cmd << std::endl;
-    if(cmd == "rot")
-      {
-        const std::string &args= status.Parser().GetArgs();
-        std::vector<int> indices= crea_vector_int(args);
-        const size_t nc= indices.size(); //no. de índices.
-        if(nc!=2)
-	  std::cerr << "SisCoo::procesa_comando; error procesando comando: "
-                    << cmd << " se leyeron " << nc
-                    << " índices, se esperaban 2." << std::endl;
-        if(rot.CheckIndices(indices[0],indices[1]))
-          rot(indices[0],indices[1])= double_to_FT(interpretaDouble(status.GetString()));
-        else
-          std::cerr << "SisCoo::procesa_comando; indices: '"
-                    << args << "' fuera de rango." << std::endl;
-        return true;
-      }
-    else
-      return ProtoGeom::procesa_comando(status);
-  }
+
 //! @brief Devuelve la fila i de la matriz.
 matriz_FT SisCoo::GetFila(const size_t &i) const
   {
@@ -207,41 +183,6 @@ matriz_FT SisCoo::GetCooLocales(const matriz_FT &v) const
 //! @brief Imprime la matriz.
 void SisCoo::Print(std::ostream &os) const
   { os << rot; }
-
-//! \brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-//! como parámetro.
-//!
-//! Soporta los códigos:
-//! matriz: Devuelve la matriz cuyas filas son los vectores unitarios del sistema de coordenadas.
-any_const_ptr SisCoo::GetProp(const std::string &cod) const
-  {
-    static bool tmp_gp_bool= false;
-    if(cod=="matriz")
-      return any_const_ptr(rot);
-    if(cod=="es_normal")
-      {
-        tmp_gp_bool= EsNormal();
-        return any_const_ptr(tmp_gp_bool);
-      }
-    if(cod=="es_ortogonal")
-      {
-        tmp_gp_bool= EsOrtogonal();
-        return any_const_ptr(tmp_gp_bool);
-      }
-    if(cod=="es_ortonormal")
-      {
-        tmp_gp_bool= EsOrtonormal();
-        return any_const_ptr(tmp_gp_bool);
-      }
-    if(cod=="es_dextrogiro")
-      {
-        tmp_gp_bool= EsDextrogiro();
-        return any_const_ptr(tmp_gp_bool);
-      }
-    else
-      return ProtoGeom::GetProp(cod);
-  }
-
 
 std::ostream &operator<<(std::ostream &os,const SisCoo &sc)
   {

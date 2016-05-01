@@ -26,27 +26,9 @@
 #include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
 #include "xc_utils/src/geom/d1/Recta2d.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
 
-
-bool SectorAnilloCircular2d::procesa_comando(CmdStatus &status)
-  {
-    const std::string &cmd= deref_cmd(status.Cmd());
-    const std::string str_aviso= "(SectorAnilloCircular2d) Procesando comando: " + cmd;
-    if(verborrea>2)
-      std::clog << str_aviso << std::endl;
-    static Pos2d c;
-    if(cmd == "rInt")
-      {
-        rint= double_to_FT(interpretaDouble(status.GetString()));
-        if(rint>=Radio())
-	  std::clog << str_aviso << " el radio interior es mayor o igual que el exterior." << std::endl; 
-        return true;
-      }
-    else
-      return SectorCircular2d::procesa_comando(status);
-  }
 
 //! @brief Construye el círculo a partir del centro y el radio.
 SectorAnilloCircular2d::SectorAnilloCircular2d(const SectorCircular2d &c,const double &r)

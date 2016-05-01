@@ -27,8 +27,8 @@
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
 #include "ActionsFamiliesMap.h"
 #include "Action.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
 
 //! @brief Constructor por defecto.
 cmb_acc::ActionsFamily::ActionsFamily(const std::string &nmb,const GammaF &gf)
@@ -46,7 +46,7 @@ const cmb_acc::PsiCoeffsMap *cmb_acc::ActionsFamily::getPtrPsiCoeffs(void) const
     else
       {
 	std::cerr << "ActionsFamily::getPtrPsiCoeffs; no se encontró el objeto propietario de éste." << std::endl;
-        return NULL;
+        return nullptr;
       }
   }
 

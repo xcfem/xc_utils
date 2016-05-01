@@ -38,11 +38,6 @@ class VectorPos2d;
 class Segmento2d : public Linea2d
   {
     CGSegmento_2 cgseg;
-
-  protected:
-    bool procesa_comando(CmdStatus &status);
-    virtual void salva_miembros(std::ostream &os,const  std::string &indent) const;
-    virtual void salva_cmd(std::ostream &os,const  std::string &indent= "  ",const  std::string &obj= "semirecta") const;
   public:
     Segmento2d(void): Linea2d(),cgseg(CGPoint_2(0,0),CGPoint_2(1,0)) {}
     Segmento2d(const CGSegmento_2 &r)
@@ -150,11 +145,8 @@ class Segmento2d : public Linea2d
 
     inline friend bool operator==(const Segmento2d &r1,const Segmento2d &r2)
       { return (r1.cgseg==r2.cgseg); }
-    virtual any_const_ptr GetProp(const std::string &cod) const;
     void Print(std::ostream &os) const;
     void Plot(Plotter &) const;
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const
-      { salva_cmd(os,indent,"recta"); }
   };
 
 inline GEOM_FT dist2(const Pos2d &p,const Segmento2d &r)

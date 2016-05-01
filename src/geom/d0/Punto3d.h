@@ -33,9 +33,6 @@
 class Punto3d : public GeomObj3d
   {
     Pos3d org;
-
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     Punto3d(void) : GeomObj3d() {}
     Punto3d(GEOM_FT x,GEOM_FT y,GEOM_FT z=0) : GeomObj3d(), org(Pos3d(x,y,z))
@@ -83,14 +80,6 @@ class Punto3d : public GeomObj3d
       { return org(i); }
     friend int operator ==(const Punto3d &a,const Punto3d &b)
       { return ( a.org == b.org ); };
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const
-      {
-        const std::string str_indent= indent + "  ";
-        os << indent << "\\Punto3d" << std::endl
-           << str_indent << '{' << std::endl;
-        org.SalvaCmd(os,str_indent+ "  ");
-        os << str_indent  << '}' << std::endl;
-      }
     inline void Print(std::ostream &os) const
       { os << org; }
   };

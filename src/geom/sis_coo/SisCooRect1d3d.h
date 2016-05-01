@@ -37,8 +37,6 @@ class SisCooRect1d3d: public SisCooXd3d
     typedef GEOM_FT VLocal; //Dimensión del vector en locales.
     typedef GEOM_FT PLocal; //Dimensión del punto en locales.
 
-  protected:
-    virtual bool procesa_comando(CmdStatus &status);
   public:
     SisCooRect1d3d(void): SisCooXd3d(1) {}
     SisCooRect1d3d(const PGlobal &o,const PGlobal &p);
@@ -51,7 +49,6 @@ class SisCooRect1d3d: public SisCooXd3d
     VGlobal GetI(void) const; //Devuelve el vector unitario I en el sistema global.
     VGlobal GetCooGlobales(const VLocal &v) const;
     VLocal GetCooLocales(const VGlobal &v) const;
-    any_const_ptr GetProp(const std::string &cod) const;
     virtual ~SisCooRect1d3d(void)
       {}
   };

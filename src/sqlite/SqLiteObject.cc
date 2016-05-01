@@ -25,11 +25,8 @@
 #include "SqLiteDatabase.h"
 #include "SqLiteQuery.h"
 #include "boost/algorithm/string/trim.hpp"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
 #include "xc_basic/src/sqlitepp/StderrLog.h"
-#include "xc_utils/src/nucleo/InterpreteRPN.h"
+
 
 SqLiteObject::map_sql_objs SqLiteObject::SqLiteObjs;
 
@@ -42,7 +39,7 @@ void SqLiteObject::borra_queries(void)
         if(tmp)
           {
             delete (*i).second;
-            (*i).second= NULL;
+            (*i).second= nullptr;
             SqLiteObjs.erase(i);            
           }
       }
@@ -58,7 +55,7 @@ void SqLiteObject::borra_databases(void)
         if(tmp)
           {
             delete (*i).second;
-            (*i).second= NULL;
+            (*i).second= nullptr;
             SqLiteObjs.erase(i);            
           }
       }
@@ -71,7 +68,7 @@ void SqLiteObject::borra_objetos(void)
     for(sql_objs_iterator i= SqLiteObjs.begin();i!=SqLiteObjs.end();i++) //Borramos el resto de objetos.
       {
         delete (*i).second;
-        (*i).second= NULL;
+        (*i).second= nullptr;
       }
     SqLiteObjs.clear();
   }
@@ -94,7 +91,7 @@ void SqLiteObject::inserta_objeto(const std::string &nmb,SqLiteObject *ptr)
 //! @brief Devuelve un puntero al objeto cuyo nombre se pasa como parámetro (si existe). 
 SqLiteObject *SqLiteObject::busca_objeto(const std::string &nmb)
   {
-    SqLiteObject *retval= NULL;
+    SqLiteObject *retval= nullptr;
     sql_objs_iterator i= SqLiteObjs.find(nmb);
     if(i!= SqLiteObjs.end()) //El objeto existe.
       retval= (*i).second;
@@ -105,84 +102,6 @@ SqLiteObject *SqLiteObject::busca_objeto(const std::string &nmb)
 //! @brief Constructor.
 SqLiteObject::SqLiteObject(void)
   {}
-
-bool SqLiteObject::procesa_comando_obj_sqlite(const std::string &cmd,CmdStatus &status)
-  {
-    SqLiteObject *tmp= busca_objeto(cmd);
-    if(tmp) //Encuentra el objeto al que se refiere el comando.
-      {
-        tmp->set_owner(this);
-        tmp->LeeCmd(status);
-        return true;
-      }
-    else
-      return false;
-  }
-
-//! @brief Lectura del objeto desde archivo.
-bool SqLiteObject::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(SqLiteObject) Procesando comando: " << cmd << std::endl;
-
-    if(cmd == "erase") //Borra un objeto.
-      {
-        BorraObjeto(interpretaString(status.GetBloque()));
-        return true;
-      }
-    else if(cmd == "clearQueries") //Borra todas las consultas.
-      {
-        status.GetBloque(); //Ignora entrada.
-        borra_queries();
-        return true;
-      }
-    else if(cmd == "clearDatabases") //Borra todas las bases de datos.
-      {
-        status.GetBloque(); //Ignora entrada.
-        borra_databases();
-        return true;
-      }
-    else if(cmd == "clearAll") //Borra todos los objetos.
-      {
-        status.GetBloque(); //Ignora entrada.
-        clearAll();
-        return true;
-      }
-    else if(cmd == "openDB") //Abre una base de datos.
-      {
-        const std::string path= interpretaString(status.GetBloque());
-        if(existe_archivo(path))
-          NuevaDatabase(path);
-        else
-	  std::cerr << "(SqLiteObject) Procesando comando: " << cmd
-                    << "; no existe el archivo " << path << std::endl;
-        return true;
-      }
-    else if(cmd == "newDB") //Crea una base de datos.
-      {
-        NuevaDatabase(interpretaString(status.GetBloque()));
-        return true;
-      }
-    else if(cmd == "newQuery") //Crea una consulta.
-      {
-        const CmdParser &parser= status.Parser();
-        if(parser.TieneIndices())
-          {
-            interpreta(parser.GetIndices());
-            if(InterpreteRPN::HayArgumentos(1,cmd))
-              {
-                const std::string tag_db= convert_to_string(InterpreteRPN::Pila().Pop()); //Tag de la base de datos.
-                NuevaQuery(interpretaString(status.GetBloque()),tag_db);
-              }
-          }
-        return true;
-      }
-    else if(procesa_comando_obj_sqlite(cmd,status))
-      return true;
-    else
-      return EntCmd::procesa_comando(status);
-  }
 
 //! @brief Destructor.
 SqLiteObject::~SqLiteObject(void)
@@ -216,14 +135,14 @@ void SqLiteObject::NuevaQuery(const std::string &nmb,const std::string &nmb_db)
 //! @brief Preprocesa una cadena de caracteres que contiene una sentencia SQL.
 std::string SqLiteObject::preprocesa_str_sql(const std::string &str) const
   {
-    return boost::trim_copy_if(interpretaString(str),boost::is_any_of("\""));
+    return boost::trim_copy_if(str,boost::is_any_of("\""));
   }
 
 
 //! @brief Devuelve la base de datos cuyo nombre se pasa como parámetro. 
 SqLiteDatabase *SqLiteObject::getDatabase(const std::string &nmb)
   {
-    SqLiteDatabase *retval= NULL;
+    SqLiteDatabase *retval= nullptr;
     sql_objs_iterator i= SqLiteObjs.find(nmb);
     if(i!= SqLiteObjs.end()) //El objeto existe.
       retval= dynamic_cast<SqLiteDatabase *>((*i).second);
@@ -233,7 +152,7 @@ SqLiteDatabase *SqLiteObject::getDatabase(const std::string &nmb)
 //! @brief Devuelve la consulta cuyo nombre se pasa como parámetro. 
 SqLiteQuery *SqLiteObject::getQuery(const std::string &nmb)
   {
-    SqLiteQuery *retval= NULL;
+    SqLiteQuery *retval= nullptr;
     sql_objs_iterator i= SqLiteObjs.find(nmb);
     if(i!= SqLiteObjs.end()) //El objeto existe.
       retval= dynamic_cast<SqLiteQuery *>((*i).second);
@@ -247,17 +166,8 @@ void SqLiteObject::BorraObjeto(const std::string &nmb)
     if(i!= SqLiteObjs.end()) //El objeto existe.
       {
         delete (*i).second;
-        (*i).second= NULL;
+        (*i).second= nullptr;
         SqLiteObjs.erase(i);
       }
-  }
-
-//! Devuelve la propiedad del objeto cuyo código se pasa 
-//! como parámetro. 
-any_const_ptr SqLiteObject::GetProp(const std::string &cod) const 
-  {
-    if(verborrea>4)
-      std::clog << "SqLiteObject::GetProp (" << nombre_clase() << "::GetProp) Buscando propiedad: " << cod << std::endl;
-    return EntCmd::GetProp(cod);
   }
 

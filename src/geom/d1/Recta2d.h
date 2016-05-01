@@ -66,11 +66,6 @@ class Recta2d : public Linea2d
 
     friend class SemiRecta2d;
     friend class Segmento2d;
-
-  protected:
-    bool procesa_comando(CmdStatus &status);
-    virtual void salva_miembros(std::ostream &os,const std::string &indent) const;
-    virtual void salva_cmd(std::ostream &os,const std::string &indent= "  ",const std::string &obj= "recta") const;
   public:
     Recta2d(void);
     explicit Recta2d(const CGRecta_2 &r);
@@ -155,10 +150,9 @@ class Recta2d : public Linea2d
 
     friend bool operator==(const Recta2d &r1,const Recta2d &r2);
 
-    virtual any_const_ptr GetProp(const std::string &cod) const;
     void Print(std::ostream &os) const;
     void Plot(Plotter &psos) const;
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
+    
   };
 
 double angulo(const Recta2d &r,const Vector2d &v);

@@ -22,28 +22,5 @@
 //Rectangulo2d.cc
 
 #include "Rectangulo2d.h"
-#include "xc_utils/src/base/CmdStatus.h"
 
-bool Rectangulo2d::procesa_comando(CmdStatus &status)
-  {
-    //cerr << "(Rectangulo2d) Procesando comando: " << cmd << endl;
-    static double base=1.0,altura=1.0;
-    if(status.Cmd() == "altura")
-      {
-        altura= status.GetFloat();
-        return true;
-      }
-    else if(status.Cmd() == "base")
-      {
-        base= status.GetFloat();
-        return true;
-      }
-    (*this)= Rectangulo2d(base,altura);
-    return Cuadrilatero2d::procesa_comando(status);
-  }
-// void Rectangulo2d::salva_miembros(std::ostream &os,const string &indent) const
-//   {
-//     os << indent + "\\base{" << lado << '}' << endl;
-//     os << indent + "\\altura{" << altura << '}' << endl;
-//   }
 

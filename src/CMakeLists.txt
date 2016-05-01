@@ -84,13 +84,8 @@ ADD_DEFINITIONS(-Wall -O3 -march=native -frounding-math -pedantic -fPIC)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x")
 #SET(CMAKE_VERBOSE_MAKEFILE ON)
 
-SET(BASE base/EntradaComandos base/Path base/ArchivosSalida base/ArchivosEntrada base/MapAuxData base/CmdStatus base/PilaLlamadas base/Buscadores base/EntWOwner base/BloqueBase base/BloqueCond base/BloqueIf base/BloqueSwitchStr base/BloqueWhile base/BloqueFor base/BloqueSub base/BloqueFunc base/EntConNmb base/CmdMatriz base/CmdVectorBase base/CmdVectorDenso base/utils_any base/utils_any_const_ptr base/ErrLogFiles base/Record base/Lista base/Mapa base/Locale base/CmdTimer base/CmdFuncPorPuntos base/CmdFixedWidthReader)
-
-SET(MYSQL mysql/MySqlObject mysql/MySqlConnection mysql/MySqlQuery mysql/MySqlResult mysql/MySqlRow mysql/MySqlColData)
 
 SET(SQLITE sqlite/SqLiteObject sqlite/SqLiteQuery sqlite/SqLiteDatabase)
-
-SET(CMDLIBPLOT libplot/CmdPlotter)
 
 SET(cuadGauss CuadGauss/Cuadratura2D CuadGauss/Cuadratura3D CuadGauss/gssleg CuadGauss/PuntosGauss CuadGauss/PsoGss1d CuadGauss/PsoGss2d CuadGauss/PsoGss3d)
 
@@ -112,7 +107,7 @@ SET(geom geom/pos_vec/VDesliz3d geom/pos_vec/VFijo3d geom/pos_vec/Vector2d geom/
 
 SET(GnuGts gnu_gts/GTSSurface gnu_gts/GTSVertex gnu_gts/GTSEdge gnu_gts/GTSFace gnu_gts/GTSSplit gnu_gts/GTSSurfaceTraverse gnu_gts/GTSSurfaceIntersection gnu_gts/GTSBBoxTree gnu_gts/GTSGraph gnu_gts/MapTriangulos)
 
-SET(NUCLEO nucleo/aux_any nucleo/EntBase nucleo/MapParam nucleo/MapPropVar nucleo/EntProp nucleo/EntPropSorter nucleo/EntCmd nucleo/Signos nucleo/TokenList nucleo/BoostAnyStack nucleo/AnalisisLexico nucleo/AnalisisSintactico nucleo/InterpreteRPN nucleo/MatrizAny nucleo/CmdParser nucleo/PropParser nucleo/python_utils.cc)
+SET(NUCLEO nucleo/EntProp nucleo/EntCmd nucleo/Signos nucleo/TokenList nucleo/EntConNmb nucleo/EntWOwner nucleo/ErrLogFiles nucleo/python_utils.cc)
 
 SET(VtkAux vtk_aux/vtkShStrArray vtk_aux/vtkLabeledShStrMapper vtk_aux/vtkTakePhotoDefs vtk_aux/vtkTakePhoto vtk_aux/vtkXOpenGLOffScreenRenderWindow vtk_aux/vtkDoubleHeadedArrowSource vtk_aux/vtkArcSource)
 
@@ -122,7 +117,7 @@ SET(ca_acciones loadCombinations/actions/Action loadCombinations/actions/ActionR
 
 SET(ca_combinaciones loadCombinations/comb_analysis/Variation loadCombinations/comb_analysis/Variations loadCombinations/comb_analysis/LoadCombinationVector loadCombinations/comb_analysis/LoadCombinations loadCombinations/comb_analysis/ActionWeightingMap loadCombinations/comb_analysis/LoadCombinationGenerator)
 
-ADD_LIBRARY(xc_utils SHARED ${BASE} ${MYSQL} ${SQLITE} ${CMDLIBPLOT} ${cuadGauss} ${geom} ${GnuGts} ${NUCLEO}  ${VtkAux} ${ca_coefs} ${ca_acciones} ${ca_combinaciones})
+ADD_LIBRARY(xc_utils SHARED ${MYSQL} ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${NUCLEO}  ${VtkAux} ${ca_coefs} ${ca_acciones} ${ca_combinaciones})
 
 #Interfaz Python
 LINK_LIBRARIES(xc_utils xc_basic ${VTK_BIB} ${CGAL_LIBRARIES} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${MySQLpp_LIBRARIES} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} boost_python ${Boost_LIBRARIES})

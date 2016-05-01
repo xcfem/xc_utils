@@ -39,9 +39,6 @@
 class SemiEspacio3d : public GeomObj3d
   {
     Plano3d lim; 
-  protected:
-    virtual bool procesa_comando(CmdStatus &status);
-
   public:
     SemiEspacio3d(const Plano3d &p= Plano3d());
     const Plano3d &getPlanoLimite(void) const;
@@ -88,7 +85,6 @@ class SemiEspacio3d : public GeomObj3d
     virtual GEOM_FT Pxy(void) const;
     virtual GEOM_FT Iz(void) const;
     friend bool operator==(const SemiEspacio3d &r1,const SemiEspacio3d &r2);
-    any_const_ptr GetProp(const std::string &) const;
     void Print(std::ostream &os) const;
   };
 

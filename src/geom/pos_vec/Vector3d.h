@@ -40,9 +40,6 @@ class SbVec3f;
 class Vector3d: public ProtoGeom
   {
     CGVector_3 cgvct;
-
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     Vector3d(void): cgvct(CGAL::NULL_VECTOR){}
     Vector3d(const CGVector_3 &v)
@@ -105,7 +102,6 @@ class Vector3d: public ProtoGeom
     friend matriz_FT operator*(const matriz_FT &m,const Vector3d &v);
     friend std::ostream &operator<<(std::ostream &stream,const Vector3d &n);
 
-    any_const_ptr GetProp(const std::string &cod) const;
     inline virtual ~Vector3d(void) {}
   };
 

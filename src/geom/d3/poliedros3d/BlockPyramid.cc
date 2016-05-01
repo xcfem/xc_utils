@@ -22,12 +22,12 @@
 //BlockPyramid3c.cc
 
 #include "BlockPyramid.h"
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include "xc_utils/src/geom/d1/Recta3d.h"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 #include "xc_utils/src/geom/pos_vec/Vector2d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
-#include "xc_utils/src/base/utils_any.h"
+
 
 //! @brief Devuelve el haz de vectores que resulta de intersecar los
 //! semiespacios 2 a 2.
@@ -91,24 +91,6 @@ BlockPyramid::BlockPyramid(void)
 //! @brief Constructor.
 BlockPyramid::BlockPyramid(const std::deque<SemiEspacio3d> &se)
   : GeomObj3d(), semiespacios(se) {}
-
-//! @brief Interpreta comandos del objeto.
-bool BlockPyramid::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    const std::string str_msg= "(BlockPyramid) Procesando comando: "+cmd;
-    if(verborrea>2)
-      std::clog << str_msg << std::endl;
-    if(cmd == "semiespacios")
-      {
-        const std::deque<SemiEspacio3d> se= interpretaSemiEspacios3d(status.GetBloque());
-        for(std::deque<SemiEspacio3d>::const_iterator i=se.begin();i!=se.end();i++)
-          semiespacios.push_back(*i);
-        return true;
-      }
-    else
-      return GeomObj3d::procesa_comando(status);
-  }
 
 //! @brief Devuelve la longitud del objeto.
 GEOM_FT BlockPyramid::Longitud(void) const
@@ -259,47 +241,6 @@ bool BlockPyramid::Vacio(void) const
   {
     const std::deque<Vector3d> haz= haz_vectores_interiores();
     return haz.empty();
-  }
-
-//! @brief Devuelve la propiedad cuyo código se pasa
-//! como parámetro.
-any_const_ptr BlockPyramid::GetProp(const std::string &cod) const
-  {
-    if(cod=="getVectoresBorde")
-      {
-        tmp_gp_mdbl= getVectoresBorde();
-        return any_const_ptr(tmp_gp_mdbl);
-      }
-    else if(cod=="getVectoresBorde")
-      {
-        tmp_gp_mdbl= getVectoresBorde();
-        return any_const_ptr(tmp_gp_mdbl);
-      }
-    else if(cod=="getVectorExterno1")
-      {
-        const Ref2d3d ref= popRef2d3d(cod);
-        tmp_gp_vector2d= getVectorExterno1(ref);
-        return any_const_ptr(tmp_gp_vector2d);
-      }
-    else if(cod=="getVectorExterno2")
-      {
-        const Ref2d3d ref= popRef2d3d(cod);
-        tmp_gp_vector2d= getVectorExterno2(ref);
-        return any_const_ptr(tmp_gp_vector2d);
-      }
-    else if(cod=="esInterior")
-      {
-        const Vector3d v= popVector3d(cod);
-        tmp_gp_bool= es_interior(v);
-        return any_const_ptr(tmp_gp_bool);
-      }
-    else if(cod=="Vacio")
-      {
-        tmp_gp_bool= Vacio();
-        return any_const_ptr(tmp_gp_bool);
-      }
-    else
-      return GeomObj3d::GetProp(cod);
   }
 
 //! @brief Imprime el objeto.

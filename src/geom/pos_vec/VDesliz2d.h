@@ -36,8 +36,6 @@
 class VDesliz2d : public Vector2d
   {
     Pos2d org; //Punto que determina la línea de accion.
-  protected:
-    bool procesa_comando(CmdStatus &status);
   public:
     VDesliz2d(const Pos2d &o= Pos2d(),const Vector2d &v= Vector2d())
       : Vector2d(v), org(o) {}
@@ -58,7 +56,6 @@ class VDesliz2d : public Vector2d
       { return org+(const Vector2d &)(*this); }
     const Vector2d &getVector(void) const
       { return *this; }
-    virtual any_const_ptr GetProp(const std::string &cod) const;
     friend VDesliz2d operator*(const VDesliz2d &m,const GEOM_FT &p)
       { return VDesliz2d(m.getOrg(),m.getVector()*p); }
     friend VDesliz2d operator*(const GEOM_FT &p,const VDesliz2d &m)

@@ -22,9 +22,9 @@
 //SemiEspacio3d.cc
 
 #include "SemiEspacio3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
+
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 
@@ -39,31 +39,6 @@ const Plano3d &SemiEspacio3d::getPlanoLimite(void) const
 
 void SemiEspacio3d::setPlanoLimite(const Plano3d &p)
   { lim= p; }
-
-bool SemiEspacio3d::procesa_comando(CmdStatus &status)
-  {
-    const std::string &cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(SemiEspacio3d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "setPlano")
-      {
-        lim= interpretaPlano3d(status.GetString());
-        return true;
-      }
-    else if(cmd == "planoLimite")
-      {
-        lim.LeeCmd(status);
-        return true;
-      }
-    else if(cmd == "swap")
-      {
-        status.GetString();
-        Swap();
-        return true;
-      }
-    else
-      return GeomObj3d::procesa_comando(status);
-  }
 
 //! @brief Devuelve verdadero si el punto está dentro del semiplano.
 //! los puntos de la recta límite son del semiplano
@@ -164,79 +139,6 @@ Vector3d SemiEspacio3d::NormalExterior(void) const
 //! el semiespacio dirigido hacia el exterior del mismo.
 Vector3d SemiEspacio3d::NormalInterior(void) const
   { return -NormalExterior(); }
-
-//! @brief Devuelve la propiedad del objeto que tiene por código la cadena que se pasa
-//! como parámetro
-any_const_ptr SemiEspacio3d::GetProp(const std::string &cod) const
-  {
-    static GEOM_FT tmp_ft= 0.0;
-    if(cod=="getNormalExterior")
-      {
-        tmp_gp_vector3d= NormalExterior();
-        return any_const_ptr(tmp_gp_vector3d);
-      }
-    else if(cod=="getNormalInterior")
-      {
-        tmp_gp_vector3d= NormalInterior();
-        return any_const_ptr(tmp_gp_vector3d);
-      }
-    else if(cod=="getBase1")
-      {
-        tmp_gp_vector3d= lim.Base1();
-        return any_const_ptr(tmp_gp_vector3d);
-      }
-    else if(cod=="getBase2")
-      {
-        tmp_gp_vector3d= lim.Base2();
-        return any_const_ptr(tmp_gp_vector3d);
-      }
-    else if(cod=="getDistSigno")
-      {
-        const Pos3d tmp= popPos3d(cod);
-        tmp_ft= distSigno(tmp);
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getDistSigno2")
-      {
-        const Pos3d tmp= popPos3d(cod);
-        tmp_ft= distSigno2(tmp);
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getDist")
-      {
-        const Pos3d tmp= popPos3d(cod);
-        tmp_ft= dist(tmp);
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getDist2")
-      {
-        const Pos3d tmp= popPos3d(cod);
-        tmp_ft= dist2(tmp);
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getInterseccionConRecta")
-      {
-        const Recta3d tmp= popRecta3d(cod);
-        GeomObj3d::list_Pos3d lista= interseccion(lim,tmp);
-        if(!lista.empty())
-          tmp_gp_pos3d= lista[0];
-	else
-	  std::cerr << "getInterseccionConRecta: la recta no corta al plano." << std::endl;
-        return any_const_ptr(tmp_gp_pos3d);
-      }
-    else if(cod=="getLima")
-      {
-        const SemiEspacio3d tmp= popSemiEspacio3d(cod);
-        tmp_gp_recta3d= getLima(tmp);
-        return any_const_ptr(tmp_gp_recta3d);
-      }
-    else if(cod=="getPlanoLimite")
-      {
-        return any_const_ptr(lim);
-      }
-    else
-      return GeomObj3d::GetProp(cod);
-  }
 
 //! @brief Imprime el semiespacio
 void SemiEspacio3d::Print(std::ostream &os) const

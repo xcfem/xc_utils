@@ -23,12 +23,11 @@
 
 #include "ListaPos3d.h"
 #include <plotter.h>
-#include "xc_utils/src/base/CmdStatus.h"
+
 #include "xc_utils/src/geom/trf/Traslacion3d.h"
 #include "xc_utils/src/geom/listas/utils_list_pos3d.h"
-#include "xc_utils/src/base/utils_any.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/Lista.h"
+
+
 #include "xc_utils/src/geom/d3/BND3d.h"
 
 
@@ -37,35 +36,6 @@ ListaPos3d::ListaPos3d(void)
 
 ListaPos3d::ListaPos3d(const GeomObj::list_Pos3d &l)
   : GeomObj3d(), lista_ptos(l) {}
-
-//! @brief Lee un objeto ListaPos3d desde archivo.
-bool ListaPos3d::procesa_comando(CmdStatus &status)
-  {
-    const std::string cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(ListaPos3d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "addPt")
-      {
-        Pos3d p;
-        p.LeeCmd(status);
-        AgregaPunto(p);
-        return true;
-      }
-    else if(cmd == "inserta")
-      {
-        const Pos3d p= interpretaPos3d(status.GetBloque());
-        AgregaPunto(p);
-        return true;
-      }
-    else if(cmd == "clear")
-      {
-        status.GetBloque();
-        lista_ptos.clear();
-        return true;
-      }
-    else
-      return GeomObj3d::procesa_comando(status);
-  }
 
 const Pos3d *ListaPos3d::AgregaPunto(const Pos3d &p)
   {
@@ -86,9 +56,8 @@ Pos3d &ListaPos3d::operator[](const size_t &i)
       return lista_ptos[i];
     else
       {
-        const std::string posLectura= get_ptr_status()->getPosicionLecturaActual();
         std::cerr << "ListaPos3d; indice: " << i << " fuera de rango. "
-                  << posLectura << std::endl;
+                  << std::endl;
         exit(0);
       }
   }
@@ -101,9 +70,8 @@ const Pos3d &ListaPos3d::operator[](const size_t &i) const
       return lista_ptos[i];
     else
       {
-        const std::string posLectura= get_ptr_status()->getPosicionLecturaActual();
         std::cerr << "ListaPos3d; indice: " << i << " fuera de rango. "
-                  << posLectura << std::endl;
+                  << std::endl;
         exit(0);
       }
   }
@@ -167,37 +135,6 @@ std::deque<GEOM_FT> &ListaPos3d::GetSeparaciones(void) const
 
 double ListaPos3d::GetSeparacionMedia(void) const
   { return lista_ptos.GetSeparacionMedia(); }
-
-//! Devuelve la propiedad del objeto cuyo código se pasa 
-//! como parámetro. 
-any_const_ptr ListaPos3d::GetProp(const std::string &cod) const 
-  {
-    if(verborrea>4)
-      std::clog << "(Lista::GetProp) Buscando propiedad: " << cod << std::endl;
-    if(cod == "vacia")
-      {
-        tmp_gp_bool= lista_ptos.empty();
-        return any_const_ptr(tmp_gp_bool);
-      }
-    else if(cod == "size")
-      {
-        tmp_gp_szt= GetNumPuntos();
-        return any_const_ptr(tmp_gp_szt);
-      }
-    else if(cod == "getSeparacionMedia")
-      {
-        tmp_gp_dbl= GetSeparacionMedia();
-        return any_const_ptr(tmp_gp_dbl);
-      }
-    else if(cod == "at")
-      {
-        const size_t i= popInt(cod);
-        tmp_gp_pos3d= lista_ptos.at(i-1);
-        return any_const_ptr(tmp_gp_pos3d);
-      }
-    else
-      return GeomObj3d::GetProp(cod);
-  }
 
 void ListaPos3d::Print(std::ostream &stream) const
   {

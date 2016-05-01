@@ -36,9 +36,9 @@
 #include "VertexMap.h"
 #include <set>
 #include "xc_utils/src/geom/pos_vec/ListaPos3d.h"
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/any_const_ptr.h"
-#include "xc_utils/src/base/utils_any.h"
+
+
+
 
 
 //! @brief Constructor por defecto.
@@ -99,23 +99,23 @@ void Poliedro3d::make_tetrahedron(const SemiEspacio3d &se1, const SemiEspacio3d 
     make_polyhedron(se);
   }
 
-//! @brief Interpreta los semiespacios que definen el poliedro.
-//! @param cle Si es verdadero borra los vértices, caras y aristas
-//! que se hubieran definido previamente.
-void Poliedro3d::semiespacios(const std::string &str,const bool &cle)
-  {
-    const std::deque<SemiEspacio3d> se= interpretaSemiEspacios3d(str);
-    const size_t sz= se.size();
-    if(sz>=4)
-      {
-        if(cle)
-          clear();
-        make_polyhedron(se);
-      }
-    else
-      std::cerr << "Poliedro3d::semiespacios; "
-                << "se esperaban al menos cuatro semiespacios." << std::endl;
-  }
+// //! @brief Interpreta los semiespacios que definen el poliedro.
+// //! @param cle Si es verdadero borra los vértices, caras y aristas
+// //! que se hubieran definido previamente.
+// void Poliedro3d::semiespacios(const std::string &str,const bool &cle)
+//   {
+//     const std::deque<SemiEspacio3d> se= interpretaSemiEspacios3d(str);
+//     const size_t sz= se.size();
+//     if(sz>=4)
+//       {
+//         if(cle)
+//           clear();
+//         make_polyhedron(se);
+//       }
+//     else
+//       std::cerr << "Poliedro3d::semiespacios; "
+//                 << "se esperaban al menos cuatro semiespacios." << std::endl;
+//   }
 
 //! @brief Devuelve la suma de las áreas de las caras.
 GEOM_FT Poliedro3d::Area(void) const

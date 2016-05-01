@@ -26,13 +26,12 @@
 #include "xc_utils/src/geom/d2/Plano3d.h"
 #include "xc_basic/src/util/matem.h"
 #include <plotter.h>
-#include "xc_utils/src/base/CmdStatus.h"
-#include "xc_utils/src/base/T3Cmd.h"
+
 #include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
 #include "xc_utils/src/geom/pos_vec/MatrizPos3d.h"
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
 #include "boost/progress.hpp"
-#include "xc_utils/src/base/any_const_ptr.h"
+
 
 //! @brief Constructor de copia
 SectorCircular3d::SectorCircular3d(const SectorCircular3d &otro)
@@ -49,52 +48,6 @@ SectorCircular3d &SectorCircular3d::operator=(const SectorCircular3d &p)
 //! @brief Constructor virtual.
 D2to3d *SectorCircular3d::clon(void) const
   { return new SectorCircular3d(*this); }
-
-bool SectorCircular3d::procesa_comando(CmdStatus &status)
-  {
-    const string &cmd= deref_cmd(status.Cmd());
-    if(verborrea>2)
-      std::clog << "(SectorCircular3d) Procesando comando: " << cmd << std::endl;
-    if(cmd == "centro")
-      {
-        Pos3d c;
-        c.LeeCmd(status);
-        const GEOM_FT r2= Radio2();
-        const double th1= Theta1();
-        const double th2= Theta2();
-        *this= SectorCircular3d(r2,c,th1,th2);
-        return true;
-      }
-    else if(cmd == "radio")
-      {
-        const Pos3d c= Centro();
-        const GEOM_FT r= double_to_FT(interpretaDouble(status.GetString()));
-        const double th1= Theta1();
-        const double th2= Theta2();
-        *this= SectorCircular3d(r*r,c,th1,th2);
-        return true;
-      }
-    else if(cmd == "theta1")
-      {
-        Theta1()= interpretaDouble(status.GetString());
-        return true;
-      }
-    else if(cmd == "theta2")
-      {
-        Theta2()= interpretaDouble(status.GetString());
-        return true;
-      }
-    else if(cmd == "3p")
-      {
-        Pos3d p1,p2,p3;
-        T3Cmd<Pos3d,Pos3d,Pos3d> tres_puntos(p1,"p1",p2,"p2",p3,"p3");
-        tres_puntos.LeeCmd(status);
-        *this= SectorCircular3d(p1,p2,p3);
-        return true;
-      }
-    else
-      return D2to3d::procesa_comando(status);
-  }
 
 //! @brief Constructor.
 SectorCircular3d::SectorCircular3d(const Pos3d centro,const GEOM_FT &rad,const double &th1,const double &th2)
@@ -195,78 +148,8 @@ MatrizPos3d SectorCircular3d::PuntosArco(const size_t &n) const
     return retval;
   }
 
-void SectorCircular3d::SalvaCmd(std::ostream &os,const std::string &indent) const
-  {
-    const std::string str_indent= indent + "  ";
-    cerr << "SectorCircular3d::SalvaCmd no implementada" << endl;
-  }
-
 void SectorCircular3d::Print(std::ostream &os) const
   { os << sect_circ; }
-
-any_const_ptr SectorCircular3d::GetProp(const std::string &cod) const
-  {
-    static GEOM_FT tmp_ft= 0.0;
-    static Pos3d tmp_pos3d;
-    static Vector3d tmp_vec3d;
-    if(cod=="getRadio")
-      {
-        tmp_ft= Radio();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getDiametro")
-      {
-        tmp_ft= Diametro();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getAnguloComprendido")
-      {
-        tmp_ft= AnguloComprendido();
-        return any_const_ptr(tmp_ft);
-      }
-    else if(cod=="getTheta1")
-      {
-        tmp_ft= Theta1();
-        return any_const_ptr(&tmp_pos3d);
-      }
-    else if(cod=="getTheta2")
-      {
-        tmp_ft= Theta2();
-        return any_const_ptr(&tmp_pos3d);
-      }
-    else if(cod=="getCentro")
-      {
-        tmp_pos3d= Centro();
-        return any_const_ptr(&tmp_pos3d);
-      }
-    else if(cod=="getPInic")
-      {
-        tmp_pos3d= PInic();
-        return any_const_ptr(&tmp_pos3d);
-      }
-    else if(cod=="getPFin")
-      {
-        tmp_pos3d= PFin();
-        return any_const_ptr(&tmp_pos3d);
-      }
-    else if(cod=="getPMed")
-      {
-        tmp_pos3d= PMed();
-        return any_const_ptr(&tmp_pos3d);
-      }
-    else if(cod=="getOPInic")
-      {
-        tmp_vec3d= Vector3d(Centro(),PInic());
-        return any_const_ptr(&tmp_pos3d);
-      }
-    else if(cod=="getOPFin")
-      {
-        tmp_vec3d= Vector3d(Centro(),PFin());
-        return any_const_ptr(&tmp_pos3d);
-      }
-    else
-      return D2to3d::GetProp(cod);
-  }
 
 bool operator ==(const SectorCircular3d &a,const SectorCircular3d &b)
   {

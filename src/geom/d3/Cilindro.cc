@@ -37,13 +37,6 @@ Cilindro &Cilindro::operator=(const Cilindro &se)
     return *this;
   }
 
-bool Cilindro::procesa_comando(CmdStatus &status)
-  {
-    //cerr << "(Cilindro) Procesando comando: " << cmd << endl;
-    solid_extru_cil::LeeCmd(status);
-    return true;
-  }
-
 //! @brief Constructor virtual.
 GeomObj *Cilindro::clon(void) const
   { return new Cilindro(*this); }

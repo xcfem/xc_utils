@@ -57,8 +57,6 @@ class D2to3d: public Superficie3d
 
     const Ref2d3d &get_ref(void) const
       { return ref; }
-    bool procesa_comando(CmdStatus &status);
-
   public:
     D2to3d(void);
     D2to3d(const D2to3d &otro);
@@ -73,7 +71,6 @@ class D2to3d: public Superficie3d
 
     friend bool operator ==(const D2to3d &a,const D2to3d &b);
     void Print(std::ostream &os) const;
-    virtual any_const_ptr GetProp(const std::string &cod) const;
   };
 
 #endif

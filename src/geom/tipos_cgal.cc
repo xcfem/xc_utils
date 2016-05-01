@@ -23,8 +23,6 @@
 
 #include "tipos_cgal.h"
 #include "CGAL/to_rational.h"
-#include "xc_utils/src/base/utils_any_const_ptr.h"
-#include "xc_utils/src/base/any_const_ptr.h"
 
 GEOM_FT double_to_FT(const double &d)
   {

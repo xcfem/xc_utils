@@ -43,7 +43,6 @@ class SupPoligonal2d: public Superficie2d
       { return Vertice(i).x()*Vertice(i+1).y()-Vertice(i+1).x()*Vertice(i).y(); }
     GEOM_FT momento_signo(const int &p,const int &q) const;
   protected:
-    bool procesa_comando(CmdStatus &status);
     Segmento2d Lado0(unsigned int i, unsigned int j) const;
   public:
     SupPoligonal2d(void): Superficie2d(){}
@@ -98,10 +97,9 @@ class SupPoligonal2d: public Superficie2d
     Segmento2d Clip(const SemiRecta2d &) const;
     Segmento2d Clip(const Segmento2d &) const;
 
-    virtual void SalvaCmd(std::ostream &os,const std::string &indent= "  ") const;
+    
     void Print(std::ostream &os) const;
     void Plot(Plotter &plotter) const;
-    any_const_ptr GetProp(const std::string &) const;
   };
 
 

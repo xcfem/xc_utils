@@ -25,7 +25,6 @@
 #define REF_H
 
 #include "../ProtoGeom.h"
-#include "xc_utils/src/base/any_const_ptr.h"
 
 //! @ingroup GEOM
 //
@@ -94,7 +93,6 @@ class Ref : public ProtoGeom
         os << "origen= " << r.org << " transformación= " << r.trf;
         return os;
       }
-    virtual any_const_ptr GetProp(const std::string &cod) const;
     virtual ~Ref(void)
       {}
   };
@@ -124,18 +122,6 @@ typename Ref<SC>::PLocal Ref<SC>::GetPosLocal(const PGlobal &p) const
 template<class SC>
 typename Ref<SC>::VLocal Ref<SC>::GetCooLocales(const VGlobal &v) const
   { return trf.GetCooLocales(v); }
-
-//! @brief Devuelve una propiedad del objeto.
-template<class SC>
-any_const_ptr Ref<SC>::GetProp(const std::string &cod) const
-  {
-    if(cod == "org")
-      return any_const_ptr(org);
-    else if(cod == "sis_coo")
-      return any_const_ptr(trf);
-    else
-      return ProtoGeom::GetProp(cod);
-  }
 
 #endif
 
