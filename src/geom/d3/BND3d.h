@@ -73,9 +73,10 @@ class BND3d: public GeomObj3d
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Iz(void) const;
-    void PutPMax(const Pos3d &pmax);
-    void PutPMin(const Pos3d &pmin);
-    void PutPMinMax(const Pos3d &pmin,const Pos3d &pmax);
+    void Update(const Pos3d &);
+    void PutPMax(const Pos3d &);
+    void PutPMin(const Pos3d &);
+    void PutPMinMax(const Pos3d &,const Pos3d &);
     Pos3d GetPMax(void) const;
     Pos3d GetPMin(void) const;
     inline GEOM_FT GetMax(unsigned short int i) const
@@ -87,7 +88,7 @@ class BND3d: public GeomObj3d
     CGBbox_3 GetCGALBbox_3(void) const;
     Pos3d Cdg(void) const;
     Pos3d Vertice(unsigned int i) const;
-    unsigned short int RegionCode(const Pos3d &p,const double &tol= 0.0) const;
+    unsigned short int RegionCode(const Pos3d &,const double &tol= 0.0) const;
     bool In(const Pos3d &p,const double &tol= 0.0) const;
     bool ClipLine(const Pos3d &p1,const Pos3d &p2) const;
     BND3d Offset(const GEOM_FT &o) const;

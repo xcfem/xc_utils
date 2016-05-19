@@ -60,6 +60,34 @@ GEOM_FT BND3d::Iz(void) const
     return 0;
   }
 
+//! @brief Updates (enlarges) the boundary with the point.
+void BND3d::Update(const Pos3d &p)
+  {
+    if(!In(p))
+      {
+        GEOM_FT xmin= GetXMin();
+        GEOM_FT xmax= GetXMax();
+        GEOM_FT ymin= GetYMin();
+        GEOM_FT ymax= GetYMax();
+        GEOM_FT zmin= GetZMin();
+        GEOM_FT zmax= GetZMax();
+        if(p.x()< xmin)
+          xmin= p.x();
+        else if(p.x()>xmax)
+          xmax= p.x();
+        if(p.y()<ymin)
+          ymin= p.y();
+        else if(p.y()>ymax)
+          ymax= p.y();
+        if(p.z()<zmin)
+          zmin= p.z();
+        else if(p.z()>zmax)
+          zmax= p.z();
+        PutPMin(Pos3d(xmin,ymin,zmin));
+        PutPMax(Pos3d(xmax,ymax,zmax));
+      }
+  }
+
 void BND3d::PutPMax(const Pos3d &pmax)
   { BND3d::operator=(BND3d(GetPMin(),pmax)); }
 void BND3d::PutPMin(const Pos3d &pmin)

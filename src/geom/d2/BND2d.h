@@ -74,9 +74,10 @@ class BND2d: public GeomObj2d
     inline virtual GEOM_FT Pxy(void) const
       { return 0.0; }
 
-    void PutPMax(const Pos2d &pmax);
-    void PutPMin(const Pos2d &pmin);
-    void PutPMinMax(const Pos2d &pmin,const Pos2d &pmax);
+    void Update(const Pos2d &);
+    void PutPMax(const Pos2d &);
+    void PutPMin(const Pos2d &);
+    void PutPMinMax(const Pos2d &,const Pos2d &);
     Pos2d GetPMax(void) const;
     Pos2d GetPMin(void) const;
     inline GEOM_FT GetMax(unsigned short int i) const

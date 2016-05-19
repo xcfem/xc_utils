@@ -36,6 +36,26 @@
 BND2d::BND2d(const Pos2d &p_min,const Pos2d &p_max)
   : GeomObj2d(), cgrectg(p_min.ToCGAL(),p_max.ToCGAL()) {}
 
+void BND2d::Update(const Pos2d &p)
+  {
+    if(!In(p))
+      {
+        GEOM_FT xmin= GetXMin();
+        GEOM_FT xmax= GetXMax();
+        GEOM_FT ymin= GetYMin();
+        GEOM_FT ymax= GetYMax();
+        if(p.x()< xmin)
+          xmin= p.x();
+        else if(p.x()>xmax)
+          xmax= p.x();
+        if(p.y()<ymin)
+          ymin= p.y();
+        else if(p.y()>ymax)
+          ymax= p.y();
+        PutPMin(Pos2d(xmin,ymin));
+        PutPMax(Pos2d(xmax,ymax));
+      }
+  }
 void BND2d::PutPMax(const Pos2d &pmax)
   { BND2d::operator=(BND2d(GetPMin(),pmax)); }
 void BND2d::PutPMin(const Pos2d &pmin)

@@ -57,6 +57,7 @@ boost::python::list python_recorta(boost::python::list &l, const Poligono2d &plg
 
 void export_d1_entities(void);
 void export_d2_entities(void);
+void export_d3_entities(void);
 void export_sys_trf(void);
 
 BOOST_PYTHON_MODULE(geom)
@@ -106,23 +107,7 @@ BOOST_PYTHON_MODULE(geom)
 
     export_d1_entities();
     export_d2_entities();
-
-
-    double (SemiEspacio3d::*AnguloConSemiEspacio3d)(const SemiEspacio3d &) const= &SemiEspacio3d::getAngulo;
-    double (SemiEspacio3d::*AnguloConPlano3d)(const Plano3d &) const= &SemiEspacio3d::getAngulo;
-    double (SemiEspacio3d::*AnguloConVector3d)(const Vector3d &) const= &SemiEspacio3d::getAngulo;
-
-    class_<SemiEspacio3d, bases<GeomObj3d> >("SemiEspacio3d")
-      .def(init<Plano3d>())
-      .def(init<SemiEspacio3d>())
-      .def("anguloConSemiEspacio3d", AnguloConSemiEspacio3d)
-      .def("anguloConPlano3d", AnguloConPlano3d)
-      .def("anguloConVector3d", AnguloConVector3d)
-      .def("getLima", &SemiEspacio3d::getLima)
-      .def("getNormalExterior", &SemiEspacio3d::NormalExterior)
-      .def("getNormalInterior", &SemiEspacio3d::NormalInterior)
-      .def("getPlanoLimite", &SemiEspacio3d::getPlanoLimite,return_internal_reference<>() );
-
+    export_d3_entities();
     export_sys_trf();
   }
 
