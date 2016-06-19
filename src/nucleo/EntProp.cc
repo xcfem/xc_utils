@@ -30,7 +30,6 @@
 #include "boost/algorithm/string.hpp"
 #include <cxxabi.h>
 #include <sys/stat.h>
-#include "boost/regex.hpp"
 
 #include <cctype>
 #include "CImg.h"

@@ -91,16 +91,6 @@ class_<Polilinea2d, bases<Linea2d, poliPos2d> >("Polilinea2d")
   .def("getIntersectionWithSegment", intersectionWithSegment)
   ;
 
-class_<Polilinea3d, bases<Linea3d, poliPos3d> >("Polilinea3d")
-  .def(init<>())
-//.def(init<ListaPos3d>())
-  .def(init<Polilinea3d>())
-  .def("agregaVertice", &Polilinea3d::AgregaVertice,return_internal_reference<>() )
-  .def("getNumVertices", &Polilinea3d::GetNumVertices)
-  .def("getNumSegmentos", &Polilinea3d::GetNumSegmentos)
-  .def("getLongitud", &Polilinea3d::Longitud)
-  .def("getIntersection", &Polilinea3d::getIntersection)
-  ;
 
 GEOM_FT (Segmento2d::*AnguloVector)(const Vector2d &v) const= &Segmento2d::Angulo;
 GEOM_FT (Segmento2d::*AnguloSegmento)(const Segmento2d &v) const= &Segmento2d::Angulo;
@@ -123,6 +113,21 @@ class_<Segmento2d, bases<Linea2d> >("Segmento2d")
   .def("offsetVector",OffsetSegmentoVector)
   .def("offsetDouble",OffsetSegmentoDouble);
   
+class_<Polilinea3d, bases<Linea3d, poliPos3d> >("Polilinea3d")
+  .def(init<>())
+//.def(init<ListaPos3d>())
+  .def(init<Polilinea3d>())
+  .def("agregaVertice", &Polilinea3d::AgregaVertice,return_internal_reference<>() )
+  .def("getNumVertices", &Polilinea3d::GetNumVertices)
+  .def("getNumSegmentos", &Polilinea3d::GetNumSegmentos)
+  .def("getLongitud", &Polilinea3d::Longitud)
+  .def("getIntersection", &Polilinea3d::getIntersection)
+  ;
 
+typedef std::deque<Polilinea3d> dq_polyline3D;
+
+class_<dq_polyline3D>("dq_polyline3D")
+  .def(vector_indexing_suite<dq_polyline3D>() )
+  ;
 
 #include "func_por_puntos/python_interface.tcc"
