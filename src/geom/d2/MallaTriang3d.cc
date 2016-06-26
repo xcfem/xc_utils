@@ -26,7 +26,7 @@
 #include "Triedro3d.h"
 #include "xc_utils/src/gnu_gts/GTSSurface.h"
 #include "xc_utils/src/gnu_gts/GTSEdge.h"
-#include "xc_utils/src/gnu_gts/MapTriangulos.h"
+#include "xc_utils/src/gnu_gts/TriangleMap.h"
 
 
 template <class HDS>
@@ -41,20 +41,20 @@ class Build_poliedro: public CGAL::Modifier_base<HDS>
         const size_t num_facetas= sf.GetNumCaras();
         const size_t num_aristas= sf.GetNumAristas();
         const size_t num_vertices= sf.GetNumVertices();
-        MapTriangulos mt= sf.GetMapTriangulos();
+        TriangleMap mt= sf.GetTriangleMap();
         // Postcondition: `hds' is a valid polyhedral surface.
         CGAL::Polyhedron_incremental_builder_3<HDS> B( hds, true);
         B.begin_surface(num_vertices,num_facetas,num_aristas);
-        typedef MapTriangulos::vertices_const_iterator vconst_iter;
-        typedef MapTriangulos::caras_const_iterator cconst_iter;
-        for(vconst_iter i= mt.VerticesBegin();
-            i!=mt.VerticesEnd();i++)
+        const VerticesMap &vertices= mt.getVertices();
+        for(VerticesMap::const_iterator i= vertices.begin();
+            i!= vertices.end();i++)
           {
             const Pos3d coo_vertice= (*i).second;
             B.add_vertex(coo_vertice.ToCGAL());        
           }
-        for(cconst_iter j= mt.CarasBegin();
-            j!=mt.CarasEnd();j++)
+        const TriangleFaces &triangles= mt.getFaces();
+        for(TriangleFaces::const_iterator j= triangles.begin();
+            j!=triangles.end();j++)
           {
             B.begin_facet();
             B.add_vertex_to_facet((*j).V1()-1);

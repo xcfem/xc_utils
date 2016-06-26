@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //GTSSurfacetraverse.h
-//C++ wraper para la clase GtsSurfaceTraverse de la biblioteca GTS.
+//C++ wrapper para la clase GtsSurfaceTraverse de la biblioteca GTS.
 
 #ifndef GTS_SURFACETRAVERSE_H
 #define GTS_SURFACETRAVERSE_H

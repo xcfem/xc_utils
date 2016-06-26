@@ -19,7 +19,7 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//python_interface.cxx
+//python_interface.cc
 
 #include <boost/python/module.hpp>
 #include <boost/python/def.hpp>

@@ -103,9 +103,9 @@ SET(geomD3 geom/d3/BND3d geom/d3/GeomObj3d geom/d3/BspTree3d geom/d3/Cilindro ge
 
 SET(funcPorPuntos geom/d1/func_por_puntos/FuncPorPuntosR_R geom/d1/func_por_puntos/FuncPorPuntosR2_R)
 
-SET(geom geom/pos_vec/VDesliz3d geom/pos_vec/VFijo3d geom/pos_vec/Vector2d geom/pos_vec/Vector3d geom/pos_vec/Pos2d geom/pos_vec/ListaPos2d geom/pos_vec/Pos3d geom/pos_vec/ListaPos3d geom/pos_vec/Dir3d geom/pos_vec/Dir2d geom/pos_vec/VDesliz2d geom/pos_vec/VFijo2d geom/pos_vec/SVD3d geom/pos_vec/SVD2d geom/pos_vec/MatrizPos2d geom/pos_vec/BaseRefCajaTritriz geom/pos_vec/RangoTritriz geom/pos_vec/TritrizPos2d geom/pos_vec/MatrizPos3d geom/pos_vec/TritrizPos3d geom/listas/TresPuntos3d geom/listas/utils_list_pos2d geom/listas/utils_list_pos3d geom/Wm3/Wm3Math geom/Wm3/Wm3Distance geom/Wm3/Wm3DistVector3Triangle3 ${geomD0} ${geomD1} ${geomD2} ${geomD3} ${geomSisCooRef} ${geomTrfs} ${funcPorPuntos} geom/tipos_cgal geom/GeomObj geom/matriz_FT geom/ProtoGeom)
+SET(geom geom/pos_vec/VDesliz3d geom/pos_vec/VFijo3d geom/pos_vec/Vector2d geom/pos_vec/Vector3d geom/pos_vec/Pos2d geom/pos_vec/ListaPos2d geom/pos_vec/Pos3d geom/pos_vec/KDTreePos geom/pos_vec/ListaPos3d geom/pos_vec/Dir3d geom/pos_vec/Dir2d geom/pos_vec/VDesliz2d geom/pos_vec/VFijo2d geom/pos_vec/SVD3d geom/pos_vec/SVD2d geom/pos_vec/MatrizPos2d geom/pos_vec/BaseRefCajaTritriz geom/pos_vec/RangoTritriz geom/pos_vec/TritrizPos2d geom/pos_vec/MatrizPos3d geom/pos_vec/TritrizPos3d geom/listas/TresPuntos3d geom/listas/utils_list_pos2d geom/listas/utils_list_pos3d geom/Wm3/Wm3Math geom/Wm3/Wm3Distance geom/Wm3/Wm3DistVector3Triangle3 ${geomD0} ${geomD1} ${geomD2} ${geomD3} ${geomSisCooRef} ${geomTrfs} ${funcPorPuntos} geom/tipos_cgal geom/GeomObj geom/matriz_FT geom/ProtoGeom)
 
-SET(GnuGts gnu_gts/GTSSurface gnu_gts/GTSVertex gnu_gts/GTSEdge gnu_gts/GTSFace gnu_gts/GTSSplit gnu_gts/GTSSurfaceTraverse gnu_gts/GTSSurfaceIntersection gnu_gts/GTSBBoxTree gnu_gts/GTSGraph gnu_gts/MapTriangulos)
+SET(GnuGts gnu_gts/GTSSurface gnu_gts/GTSVertex gnu_gts/GTSEdge gnu_gts/GTSFace gnu_gts/GTSSplit gnu_gts/GTSSurfaceTraverse gnu_gts/GTSSurfaceIntersection gnu_gts/GTSBBoxTree gnu_gts/GTSGraph gnu_gts/TriangleMap)
 
 SET(NUCLEO nucleo/EntProp nucleo/EntCmd nucleo/Signos nucleo/TokenList nucleo/EntConNmb nucleo/EntWOwner nucleo/ErrLogFiles nucleo/python_utils.cc)
 
@@ -126,6 +126,7 @@ ADD_DEFINITIONS(-fno-strict-aliasing)
 ADD_LIBRARY(xc_base SHARED nucleo/python_interface.cc)
 ADD_LIBRARY(loadCombinations SHARED loadCombinations/python_interface.cc)
 ADD_LIBRARY(geom SHARED geom/d1/export_d1_entities.cc geom/d2/export_d2_entities.cc geom/d3/export_d3_entities.cc geom/export_sys_trf.cc geom/python_interface.cc)
+ADD_LIBRARY(xcGnuGts SHARED gnu_gts/python_interface.cc)
 ADD_LIBRARY(vtk_aux SHARED vtk_aux/python_interface.cc)
 
 INSTALL(TARGETS xc_utils loadCombinations geom DESTINATION lib)

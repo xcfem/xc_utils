@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //GTSSuface.h
-//C++ wraper para la clase GtsSurface de la biblioteca GTS.
+//C++ wrapper para la clase GtsSurface de la biblioteca GTS.
 
 #ifndef GTS_SURFACE_H
 #define GTS_SURFACE_H
@@ -34,7 +34,7 @@ class GTSBBoxTree;
 class GTSGraph;
 class GTSSplit;
 class Vector3d;
-class MapTriangulos;
+class TriangleMap;
 
 class GTSSurface
   {
@@ -73,8 +73,8 @@ class GTSSurface
     bool Vacia(void) const;
     bool CheckSelfIntersection(bool verbose) const;
 
-    void AgregaCara(GTSFace &f);
-    void EliminaCara(GTSFace &f);
+    void appendFace(GTSFace &f);
+    void removeFace(GTSFace &f);
     void Merge(const GTSSurface &otra);
 
     guint GetNumVertices(void) const;
@@ -99,7 +99,7 @@ class GTSSurface
     //Devuelve la suma de las áreas (con signo) de las caras.
       { return gts_surface_area(s); }
 
-    MapTriangulos GetMapTriangulos(void) const;
+    TriangleMap GetTriangleMap(void) const;
 
     ~GTSSurface(void);
   };

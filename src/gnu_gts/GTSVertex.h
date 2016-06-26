@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //GTSVertex.h
-//C++ wraper para la clase GtsVertex de la biblioteca GTS.
+//C++ wrapper para la clase GtsVertex de la biblioteca GTS.
 
 #ifndef GTS_VERTEX_H
 #define GTS_VERTEX_H
@@ -46,7 +46,8 @@ class GTSVertex
     friend class GTSEdge;
     friend class GTSSplit;
 
-    GTSVertex(const double &x,const double &y,const double &z);
+    GTSVertex(const Pos3d &);
+    GTSVertex(const double &x= 0.0,const double &y= 0.0,const double &z= 0.0);
     GTSVertex(GtsVertex *pvt);
     GTSVertex(const GTSVertex &otro);
     GTSVertex &operator=(const GTSVertex &otra);

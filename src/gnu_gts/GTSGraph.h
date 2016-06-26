@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //GTSGraph.h
-//C++ wraper para la clase GtsGraph de la biblioteca GTS.
+//C++ wrapper para la clase GtsGraph de la biblioteca GTS.
 
 #ifndef GTS_GRAPH_H
 #define GTS_GRAPH_H

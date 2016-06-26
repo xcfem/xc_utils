@@ -32,7 +32,7 @@
 #include "GTSSurfaceIntersection.h"
 #include "GTSGraph.h"
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
-#include "MapTriangulos.h"
+#include "TriangleMap.h"
 
 using namespace std;
 
@@ -117,14 +117,15 @@ bool GTSSurface::CheckSelfIntersection(bool verbose) const
     return false;
   }
 
-void GTSSurface::AgregaCara(GTSFace &f)
+void GTSSurface::appendFace(GTSFace &f)
   {
     gts_surface_add_face(s,f.get_ptr());
     f.borrar= false; //Al parecer, desde aqui ESTE objeto se encarga
                      //de borrar la cara.
   }
-void GTSSurface::EliminaCara(GTSFace &f)
+void GTSSurface::removeFace(GTSFace &f)
   { gts_surface_remove_face(s,f.get_ptr()); }
+
 void GTSSurface::Merge(const GTSSurface &otra)
 //Añade a esta todas las caras de 'otra' que no estén ya en esta.
   { gts_surface_merge(s,otra.s); }
@@ -188,6 +189,6 @@ GTSSurface Diferencia(const GTSSurface &a,const GTSSurface &b,bool check_self_in
     return BoolOp(si,s1,s2,"diff",check_self_intersection,verbose);
   }
 
-MapTriangulos GTSSurface::GetMapTriangulos(void) const
-  { return getMapTriangulos(*this); }
+TriangleMap GTSSurface::GetTriangleMap(void) const
+  { return getTriangleMap(*this); }
 

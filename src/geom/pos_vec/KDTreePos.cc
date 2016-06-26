@@ -19,28 +19,21 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//GTSBBoxTree.h
-//C++ wrapper para la clase GtsBBoxClass de la biblioteca GTS.
+//KDTreePos.cc
 
-#ifndef GTS_BBOXTREE_H
-#define GTS_BBOXTREE_H
+#include "KDTreePos.h"
+#include "xc_basic/src/util/matem.h"
+#include "xc_utils/src/geom/pos_vec/Pos3d.h"
 
-#include "gts.h"
-
-class GTSBBoxTree
+//! @brief Constructor.
+KDTreePos::KDTreePos(const Pos3d &p)
+  { d[0] = p.x(); d[1] = p.y(); d[2] = p.z(); }
+  
+//! @brief Distancia entre posiciones.
+double KDTreePos::distance_to(const KDTreePos &otra) const
   {
-    GtsBBox *bbt;
-  protected:
-    GtsBBox const *get_const_ptr(void) const
-      { return bbt; }
-    GtsBBox *get_ptr(void)
-      { return bbt; }
-
-  public:
-
-    GTSBBoxTree(GtsBBox *b= nullptr);
-    GTSBBoxTree(const GTSBBoxTree &otra);
-  };
-
-
-#endif
+    double dist = sqr(d[0]-otra.d[0]);
+    dist+= sqr(d[1]-otra.d[1]);
+    dist+= sqr(d[2]-otra.d[2]);
+    return sqrt(dist);
+  }

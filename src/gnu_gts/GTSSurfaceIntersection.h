@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //GTSSurfaceIntersection.h
-//C++ wraper para la clase GtsFace de la biblioteca GTS.
+//C++ wrapper para la clase GtsFace de la biblioteca GTS.
 
 #ifndef GTS_SURFACEINTERSECTION_H
 #define GTS_SURFACEINTERSECTION_H

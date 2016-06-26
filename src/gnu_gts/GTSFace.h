@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //GTSFace.h
-//C++ wraper para la clase GtsFace de la biblioteca GTS.
+//C++ wrapper para la clase GtsFace de la biblioteca GTS.
 
 #ifndef GTS_FACE_H
 #define GTS_FACE_H

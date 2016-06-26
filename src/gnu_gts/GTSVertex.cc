@@ -43,14 +43,27 @@ void GTSVertex::borra(void)
     vt= nullptr;
     borrar= false;
   }
+
+//! @brief Constructor.
 GTSVertex::GTSVertex(GtsVertex *pvt)
   : vt(pvt), borrar(false) {}
+
+//! @brief Constructor.
 GTSVertex::GTSVertex(const double &x,const double &y,const double &z)
   : vt(nullptr), borrar(false)
   { crea(x,y,z); }
+
+//! @brief Constructor.
+GTSVertex::GTSVertex(const Pos3d &p)
+  : vt(nullptr), borrar(false)
+  { crea(p.x(),p.y(),p.z()); }
+
+//! @brief Copy constructor.
 GTSVertex::GTSVertex(const GTSVertex &otro)
   : vt(otro.vt), borrar(false)
   {}
+
+//! @brief Assignment operator.
 GTSVertex &GTSVertex::operator=(const GTSVertex &otra)
   {
     borra();

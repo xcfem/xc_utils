@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //GTSSplit.h
-//C++ wraper para la clase GtsSplit de la biblioteca GTS.
+//C++ wrapper para la clase GtsSplit de la biblioteca GTS.
 
 #ifndef GTS_SPLIT_H
 #define GTS_SPLIT_H

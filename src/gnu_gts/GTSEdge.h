@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //GTSEdge.h
-//C++ wraper para la clase GtsEdge de la biblioteca GTS.
+//C++ wrapper para la clase GtsEdge de la biblioteca GTS.
 
 #ifndef GTS_EDGE_H
 #define GTS_EDGE_H
