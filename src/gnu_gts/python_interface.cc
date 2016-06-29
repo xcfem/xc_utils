@@ -41,7 +41,7 @@
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
 
 
-BOOST_PYTHON_MODULE(loadCombinations)
+BOOST_PYTHON_MODULE(xcGnuGts)
   {
     using namespace boost::python;
     docstring_options doc_options;
@@ -109,7 +109,11 @@ BOOST_PYTHON_MODULE(loadCombinations)
     class_<TriangleFaces, bases<deque_triang> >("TriangleFaces")
       ;
 
+    const VerticesMap &(TriangleMap::*GetVertices)(void) const= &TriangleMap::getVertices;
+    const TriangleFaces &(TriangleMap::*GetFaces)(void) const= &TriangleMap::getFaces;
     class_<TriangleMap>("TriangleMap")
+      .def("getVertices",make_function(GetVertices,return_internal_reference<>()),"Returns the vertices container.")
+      .def("getFaces",make_function(GetFaces,return_internal_reference<>()),"Returns the faces container.")
       ;
 
   }

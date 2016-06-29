@@ -5,6 +5,11 @@ if [ ! -h $ln_geom ]; then
   echo "Making $ln_geom symlink."
   ln -si ../../lib/libgeom.so $ln_geom
 fi
+ln_xcGnuGts=./extensions/xcGnuGts.so
+if [ ! -h $ln_xcGnuGts ]; then
+  echo "Making $ln_xcGnuGts symlink."
+  ln -si ../../lib/libxcGnuGts.so $ln_xcGnuGts
+fi
 ln_loadComb=./extensions/loadCombinations.so
 if [ ! -h $ln_loadComb ]; then
   echo "Making $ln_loadComb symlink."
