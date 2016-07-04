@@ -98,7 +98,13 @@ BOOST_PYTHON_MODULE(xcGnuGts)
     class_<VerticesMap, bases<map_szt_pos3d> >("VerticesMap")
       ;
 
+    const size_t &(TriangleVerticesIndexes::*v1)(void) const= &TriangleVerticesIndexes::V1;
+    const size_t &(TriangleVerticesIndexes::*v2)(void) const= &TriangleVerticesIndexes::V2;
+    const size_t &(TriangleVerticesIndexes::*v3)(void) const= &TriangleVerticesIndexes::V3;
     class_<TriangleVerticesIndexes>("TriangleVerticesIndexes", init<const size_t &,const size_t &,const size_t &>())
+      .def("getV1",make_function(v1,return_value_policy<copy_const_reference>()),"Returns first vertex index.")
+      .def("getV2",make_function(v2,return_value_policy<copy_const_reference>()),"Returns second vertex index.")
+      .def("getV3",make_function(v3,return_value_policy<copy_const_reference>()),"Returns third vertex index.")
       ;
 
     typedef std::deque<TriangleVerticesIndexes> deque_triang;
