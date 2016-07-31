@@ -40,8 +40,8 @@ SqLiteQuery::SqLiteQuery(Database &db,const std::string &sql)
 int SqLiteQuery::GetErrno(void)
   { return q.GetErrno(); }
 
-std::string SqLiteQuery::GetError(void)
-  { return q.GetError(); }
+std::string SqLiteQuery::getError(void) const
+  { return q.getError(); }
 
 bool SqLiteQuery::execute(const std::string &sql)
   { return q.execute(sql); }

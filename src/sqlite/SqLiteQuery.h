@@ -43,7 +43,7 @@ class SqLiteQuery: public SqLiteObject
     SqLiteQuery(Database &db,const std::string &sql);
 
     int GetErrno(void);
-    std::string GetError(void);
+    std::string getError(void) const;
     bool execute(const std::string &sql);
     sqlite3_stmt *get_result(const std::string& sql);
     void free_result();

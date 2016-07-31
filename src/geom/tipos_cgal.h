@@ -38,6 +38,12 @@
 #include <CGAL/IO/Geomview_stream.h>
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 
+#ifdef __GNUC__
+#define VARIABLE_IS_NOT_USED __attribute__ ((unused))
+#else
+#define VARIABLE_IS_NOT_USED
+#endif
+
 //typedef CGAL::Homogeneous<CGAL::Gmpz>  GEOMKernel; //kernel.
 typedef CGAL::Exact_predicates_inexact_constructions_kernel GEOMKernel; //kernel.
 typedef GEOMKernel::RT GEOM_RT;
@@ -101,6 +107,6 @@ CGVector_3 Vector_3_from_cartesianas(const GEOM_FT &x,const GEOM_FT &y,const GEO
 CGPoint_3 Point_3_from_doubles(const double &x,const double &y,const double &z);
 CGVector_3 Vector_3_from_doubles(const double &x,const double &y,const double &z);
 
-const GEOM_FT M_PI_FT= double_to_FT(M_PI);
+const GEOM_FT VARIABLE_IS_NOT_USED M_PI_FT= double_to_FT(M_PI);
 
 #endif

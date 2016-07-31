@@ -14,7 +14,7 @@ if [ $REPLY != "s" ]; then
 	exit 1
 fi
 
-apt-get install cimg-dev cmake g++ gfortran gnuplot libboost-filesystem-dev libboost-python-dev libboost-regex-dev libboost-system-dev libcgal-dev libglib2.0-dev libgmp3-dev libgtk2.0-dev libgtkgl2.0-dev libgtkglextmm-x11-1.2-dev libgtkmm-2.4-dev libgts-bin libgts-dev libhdf5-mpi-dev libmpfr-dev libmysql++-dev libplot-dev libsqlite3-dev libvtk5-dev libX11-dev python-dev
+apt-get install cimg-dev cmake g++ gfortran gnuplot libboost-filesystem-dev libboost-python-dev libboost-regex-dev libboost-system-dev libcgal-dev libglib2.0-dev libgmp3-dev libgtk2.0-dev libgtkgl2.0-dev libgtkglextmm-x11-1.2-dev libgtkmm-2.4-dev libgts-bin libgts-dev libhdf5-mpi-dev libmpfr-dev libmysql++-dev libplot-dev libsqlite3-dev libvtk5-dev python-dev
 
 
 
