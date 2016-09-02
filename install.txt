@@ -1,4 +1,4 @@
-xc_utiIs installation.
+xc_utils installation.
 
 0.- Patience (please).
 
@@ -39,7 +39,8 @@ xc_utiIs installation.
       You can find a list of the Ubuntu (or Debian) packages you need to
       fulfill the installation in "doc/needed_packages.txt". If you have
       a Debian, Ubuntu or (probably) Linux Mint distribution you can
-      run the "doc/install_debian_packages.sh" to install all needed packages.
+      run the "doc/install_*whatever*_packages.sh" to install all
+      needed packages (*whatever* can be debian, ubuntu16,...).
 
 2.- Make a directory to place files inside (Debian administrators 
     know what to do):
