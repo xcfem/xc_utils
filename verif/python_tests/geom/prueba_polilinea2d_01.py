@@ -19,8 +19,11 @@ longPol2=pol2.getLongitud()
 ratio1=(longPol1-3)/3.
 ratio2=(longPol2-2)/2.
 
+import os
+fname= os.path.basename(__file__)
 if math.fabs(ratio1)<1e-10 and math.fabs(ratio2)<1e-10:
-    print "test polilinea 01: ok."
+  print "test ",fname,": ok."
 else:
-    print "test polilinea 01: ERROR."
+  print "test ",fname,": ERROR."
+
 

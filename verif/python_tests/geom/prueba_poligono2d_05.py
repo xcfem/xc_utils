@@ -23,7 +23,10 @@ ratio1=(p1.getPerimetro()-perimetroTeorico)/perimetroTeorico
 p2=list1[1]
 ratio2=(p2.getPerimetro()-perimetroTeorico)/perimetroTeorico
 
+import os
+fname= os.path.basename(__file__)
 if abs(ratio1)<1e-10 and abs(ratio2)<1e-10:
-    print "test polígono 05: ok."
+  print "test ",fname,": ok."
 else:
-    print "test polígono 05: ERROR."
+  print "test ",fname,": ERROR."
+

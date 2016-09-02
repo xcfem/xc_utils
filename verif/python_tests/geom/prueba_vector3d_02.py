@@ -12,10 +12,12 @@ delta=vec1.angulo(vec2)
 deltaTeor=math.acos(32/2.4495/13.9284)
 ratio1=math.fabs(deltaTeor-delta)/deltaTeor
 
+import os
+fname= os.path.basename(__file__)
 if math.fabs(ratio1)<1e-4:
-  print "test vector3d 02: ok."
+  print "test ",fname,": ok."
 else:
-  print "test vector3d 02: ERROR."
+  print "test ",fname,": ERROR."
 
 
 

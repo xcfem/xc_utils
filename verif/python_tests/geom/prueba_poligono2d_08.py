@@ -14,7 +14,9 @@ ratio2= areasTrib[1]-1
 ratio3= areasTrib[2]-1
 ratio4= areasTrib[3]-1
 
+import os
+fname= os.path.basename(__file__)
 if abs(ratio1)<1e-10 and abs(ratio2)<1e-10:
-    print "test poligono2d 08: ok."
+  print "test ",fname,": ok."
 else:
-    print "test poligono2d 08: ERROR."
+  print "test ",fname,": ERROR."

@@ -31,6 +31,7 @@ python ./python_tests/geom/prueba_poligono2d_04.py
 python ./python_tests/geom/prueba_polilinea2d_01.py
 python ./python_tests/geom/pruebaPos3d01.py
 python ./python_tests/geom/prueba_recta2d_01.py
+python ./python_tests/geom/test_line2d_intersection.py
 #python ./python_tests/geom/prueba_plano3d_04.py
 python ./python_tests/geom/prueba_vdesliz3d_03.py
 python ./python_tests/geom/prueba_list_pos2d_01.py

@@ -13,7 +13,10 @@ xCdg=ptsPrb.getCdg().x
 yCdg=ptsPrb.getCdg().y
 area=ptsPrb.getArea()
 
+import os
+fname= os.path.basename(__file__)
 if math.fabs(xCdg-1.0)<1e-15 and math.fabs(yCdg-1.0)<1e-15 and math.fabs(area)<1e-15:
-    print "test listPos2d 01: ok."
+  print "test ",fname,": ok."
 else:
-    print "test listPos2d 01: ERROR."
+  print "test ",fname,": ERROR."
+

@@ -10,8 +10,11 @@ base1=plano.getBase1()
 base2=plano.getBase2()
 tp=plano.tipo()
 
+import os
+fname= os.path.basename(__file__)
 if normal.x==0 and normal.y==0 and normal.z==1:
-    print "test plano3d 01: ok."
+  print "test ",fname,": ok."
 else:
-    print "test plano3d 01: ERROR."
+  print "test ",fname,": ERROR."
+
 

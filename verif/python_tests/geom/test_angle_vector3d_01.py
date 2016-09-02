@@ -14,10 +14,12 @@ ratio1=math.fabs(angleTeor-angle)#/angleTeor
 
 #print "angle= ", math.degrees(angle)
 
+import os
+fname= os.path.basename(__file__)
 if math.fabs(ratio1)<1e-4:
-  print "test vector3d 02: ok."
+  print "test ",fname,": ok."
 else:
-  print "test vector3d 02: ERROR."
+  print "test ",fname,": ERROR."
 
 
 

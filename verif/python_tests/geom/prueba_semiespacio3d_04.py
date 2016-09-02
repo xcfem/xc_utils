@@ -35,7 +35,9 @@ n1=P1.getNormalExterior()
 n2=P2.getNormalExterior()
 n3=n1.cross(n2)
 
+import os
+fname= os.path.basename(__file__)
 if abs(ratio1)<1e-4:
-    print "test SemiEspacio3d 04: ok."
+  print "test ",fname,": ok."
 else:
-    print "test SemiEspacio3d 04: ERROR."
+  print "test ",fname,": ERROR."

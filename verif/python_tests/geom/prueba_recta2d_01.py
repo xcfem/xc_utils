@@ -20,10 +20,12 @@ b=r3.getParamB()
 ratio3=math.fabs(a)
 ratio4=math.fabs(b-2)
 
+import os
+fname= os.path.basename(__file__)
 if ratio1<1e-15 and ratio2<1e-15 and ratio3<1e-15 and ratio4<1e-15 :
-  print ("test recta2d 01: ok.")
+  print "test ",fname,": ok."
 else:
-  print ("test recta2d 01: ERROR.")
+  print "test ",fname,": ERROR."
 
 
 

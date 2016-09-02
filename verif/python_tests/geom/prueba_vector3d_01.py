@@ -9,10 +9,13 @@ zV=vec1.z
 
 tp=vec1.tipo()
 
+import os
+fname= os.path.basename(__file__)
 if xV==1 and yV==2 and zV==3:
-  print "test vector3d 01: ok."
+  print "test ",fname,": ok."
 else:
-  print "test vector3d 01: ERROR."
+  print "test ",fname,": ERROR."
+
 
 
 

@@ -19,7 +19,10 @@ svd1+=vec
 Res=svd1.getResultante()
 Mom=svd1.getMomento()
 
+import os
+fname= os.path.basename(__file__)
 if Res.x == 0 and Res.y == 0 and Res.z == 4 and Mom.x == 0 and Mom.y == 0 and Mom.z == 0: 
-    print "test svd3d 01: ok."
+  print "test ",fname,": ok."
 else:
-    print "test svd3d 01: ERROR."
+  print "test ",fname,": ERROR."
+

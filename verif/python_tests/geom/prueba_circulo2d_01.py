@@ -22,10 +22,12 @@ ratio5=(IxCirc-(math.pi/4.))/(math.pi/4.)
 ratio6=(IyCirc-(math.pi/4.))/(math.pi/4.)
 ratio7=PxyCirc
 
+import os
+fname= os.path.basename(__file__)
 if math.fabs(ratio1)<1e-10 and math.fabs(ratio2)<1e-10 and math.fabs(ratio3)<1e-10 and math.fabs(ratio4)<1e-10  and math.fabs(ratio5)<1e-10 and math.fabs(ratio6)<1e-10 and math.fabs(ratio7)<1e-10:
-  print "test circulo 01: ok."
+  print "test ",fname,": ok."
 else:
-  print "test circulo 01: ERROR."
+  print "test ",fname,": ERROR."
 
 
 

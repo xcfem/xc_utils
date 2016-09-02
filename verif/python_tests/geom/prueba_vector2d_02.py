@@ -21,10 +21,12 @@ ratio2=math.degrees(alpha)-45
 
 
 
+import os
+fname= os.path.basename(__file__)
 if math.fabs(ratio1)<1e-10 and math.fabs(ratio2)<1e-10:
-  print "test vector 2d 02: ok."
+  print "test ",fname,": ok."
 else:
-  print "test vector 2d 02: ERROR."
+  print "test ",fname,": ERROR."
 
 
 

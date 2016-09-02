@@ -29,8 +29,11 @@ I12Teor=geom.Vector3d(0.7345,0.5753,0.2269)
 
 ratio1=(I12-I12Teor).getModulo()
 
+import os
+fname= os.path.basename(__file__)
 if math.fabs(ratio1)<1e-4:
-    print "test plano3d 04: ok."
+  print "test ",fname,": ok."
 else:
-    print "test plano3d 04: ERROR."
+  print "test ",fname,": ERROR."
+
 #Terminar!!!

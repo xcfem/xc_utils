@@ -34,7 +34,10 @@ ratio5= (IxPol-(1/12.0))/(1/12.0)
 ratio6= (IyPol-(1/12.0))/(1/12.0)
 ratio7= PxyPol
 
+import os
+fname= os.path.basename(__file__)
 if abs(ratio1)<1e-10 and abs(ratio2)<1e-10 and abs(ratio3)<1e-10 and abs(ratio4)<1e-10 and abs(ratio5)<1e-10 and abs(ratio6)<1e-10 and abs(ratio7)<1e-10:
-    print "test polígono 03: ok."
+  print "test ",fname,": ok."
 else:
-    print "test polígono 03: ERROR."
+  print "test ",fname,": ERROR."
+

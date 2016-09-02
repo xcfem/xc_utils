@@ -15,8 +15,11 @@ p2=s3.getCdg()
 
 ratio1=math.fabs(p1.distPos2d(p2)-4)
 
+import os
+fname= os.path.basename(__file__)
 if ratio1<1e-15:
-    print "test segmento2d 02: ok."
+  print "test ",fname,": ok."
 else:
-    print "test segmento2d 02: ERROR."
+  print "test ",fname,": ERROR."
+
 

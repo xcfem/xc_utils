@@ -28,13 +28,16 @@ class_<SemiRecta2d, bases<Linea2d> >("SemiRecta2d")
 
 Recta2d (Recta2d::*OffsetVector)(const Vector2d &v) const= &Recta2d::Offset;
 Recta2d (Recta2d::*OffsetDouble)(const GEOM_FT &) const= &Recta2d::Offset;
+GeomObj::list_Pos2d (Recta2d::*intersectionWithR2D)(const Recta2d &) const= &Recta2d::Interseccion;
 class_<Recta2d, bases<Linea2d> >("Recta2d")
   .def(init<Pos2d, Pos2d>())
   .def(init<Recta2d>())
-  .def("OffsetVector",OffsetVector)
-  .def("OffsetDouble",OffsetDouble)
-  .def("getParamA",&Recta2d::GetParamA)
-  .def("getParamB",&Recta2d::GetParamB);
+  .def("OffsetVector",OffsetVector,"returns a parallel line obtained by adding the vector to the points that define this line.")
+  .def("OffsetDouble",OffsetDouble,"returns a parallel line.")
+  .def("getParamA",&Recta2d::GetParamA,"returns line slope; 'a' parameter from equation (y= a*x+b).")
+  .def("getParamB",&Recta2d::GetParamB,"returns line y-intercept; 'b' parameter from equation (y= a*x+b).")
+  .def("getIntersectionWithLine", intersectionWithR2D)
+  ;
 
 class_<Linea3d, bases<GeomObj3d>, boost::noncopyable  >("Linea3d", no_init);
 

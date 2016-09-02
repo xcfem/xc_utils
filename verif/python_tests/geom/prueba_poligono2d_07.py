@@ -15,7 +15,10 @@ perimPol2=pol2.getPerimetro()
 ratio1= (perimPol1-4)/4.
 ratio2= (perimPol2-2)/2.
 
+import os
+fname= os.path.basename(__file__)
 if abs(ratio1)<1e-10 and abs(ratio2)<1e-10:
-    print "test poligono2d 07: ok."
+  print "test ",fname,": ok."
 else:
-    print "test poligono2d 07: ERROR."
+  print "test ",fname,": ERROR."
+

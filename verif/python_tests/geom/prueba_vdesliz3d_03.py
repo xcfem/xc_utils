@@ -21,8 +21,10 @@ m=vec1.getMomentoRecta3d(r1)
 mTeor=fuerza*brazo
 ratio1=(m-mTeor)/mTeor
 
+import os
+fname= os.path.basename(__file__)
 if m==mTeor:
-    print "test vdesliz3d 03: ok."
+  print "test ",fname,": ok."
 else:
-    print "test vdesliz3d 03: ERROR."
+  print "test ",fname,": ERROR."
 

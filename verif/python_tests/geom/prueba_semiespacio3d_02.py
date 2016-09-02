@@ -22,8 +22,10 @@ deltaTeor=math.radians(32.349)
 
 ratio1=math.fabs(deltaTeor-delta)/deltaTeor
 
+import os
+fname= os.path.basename(__file__)
 if math.fabs(ratio1)<1e-4:
-    print "test SemiEspacio3d 02: ok."
+  print "test ",fname,": ok."
 else:
-    print "test SemiEspacio3d 02: ERROR."
+  print "test ",fname,": ERROR."
 

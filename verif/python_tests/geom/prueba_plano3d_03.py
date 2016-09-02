@@ -27,8 +27,10 @@ ratio1=ITeor.distPos3d(I)
 ratio2=math.fabs(dr)
 ratio3=math.fabs(d)
 
+import os
+fname= os.path.basename(__file__)
 if math.fabs(ratio1)<1e-4 and math.fabs(ratio2)<1e-4 and math.fabs(ratio3)<1e-4:
-    print "test plano3d 03: ok."
+  print "test ",fname,": ok."
 else:
-    print "test plano3d 03: ERROR."
+  print "test ",fname,": ERROR."
 

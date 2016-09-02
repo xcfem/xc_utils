@@ -25,8 +25,10 @@ sTeor=geom.Vector3d(0.5488,0.7818,0.2959)
 ratio1= (sTeor-s)
 ratio1=ratio1.getModulo()
 
+import os
+fname= os.path.basename(__file__)
 if abs(ratio1)<1e-4:
-    print "test SemiEspacio3d 03: ok."
+  print "test ",fname,": ok."
 else:
-    print "test SemiEspacio3d 01: ERROR."
+  print "test ",fname,": ERROR."
 

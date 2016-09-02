@@ -15,8 +15,11 @@ m=vec1.getMomentoPos3d(pos1)
 fuerza=vec1.y
 mTeor=fuerza*brazo
 
+import os
+fname= os.path.basename(__file__)
 if m.x==0 and m.y==0and m.z==mTeor:
-    print "test vdesliz3d 02: ok."
+  print "test ",fname,": ok."
 else:
-    print "test vdesliz3d 02: ERROR."
+  print "test ",fname,": ERROR."
+
 
