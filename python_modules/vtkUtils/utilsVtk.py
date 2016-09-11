@@ -12,7 +12,7 @@ flecha.SetShaftResolution(10)
 flechaMapper= vtk.vtkPolyDataMapper()
 flechaMapper.SetInput(flecha.GetOutput())
 
-print "XXX FALTA DEFINIR LA FLECHA DOBLE"
+#print "XXX FALTA DEFINIR LA FLECHA DOBLE"
 # flechaDoble= vtk.vtkDblArrowSource()
 # flechaDoble.SetTipLength(0.35)
 # flechaDoble.SetTipRadius(0.1)

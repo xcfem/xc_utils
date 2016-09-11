@@ -29,11 +29,8 @@
 #include <map>
 #include <cmath>
 #include <sstream>
-#include <boost/any.hpp>
-#include "xc_utils/src/nucleo/aux_any.h"
 
 #include <boost/algorithm/string.hpp>
-#include "xc_basic/src/texto/cadena_carac.h"
 #include <limits>
 #include <cstdlib>
 
