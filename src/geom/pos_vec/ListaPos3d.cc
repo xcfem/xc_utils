@@ -79,7 +79,7 @@ const Pos3d &ListaPos3d::operator[](const size_t &i) const
 //! @brief Devuelve verdadero si el punto está en el conjunto.
 bool ListaPos3d::In(const Pos3d &p, const double &tol) const
   {
-    for(register puntos_const_iterator j=lista_ptos.begin();j != lista_ptos.end();j++)
+    for(register point_const_iterator j=lista_ptos.begin();j != lista_ptos.end();j++)
       if(dist2(*j,p)<=tol) return true;
     return false;
   }
@@ -140,7 +140,7 @@ void ListaPos3d::Print(std::ostream &stream) const
   {
     if(!lista_ptos.empty())
       {
-        register puntos_const_iterator i= lista_ptos.begin();
+        register point_const_iterator i= lista_ptos.begin();
         stream << *i; i++;
         for(; i!=lista_ptos.end(); i++)
           stream << ", " << *i;

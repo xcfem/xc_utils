@@ -65,8 +65,8 @@ ListaPos2d ListaPos2d::Offset(const GEOM_FT &d) const
     const size_t nv= GetNumPuntos();
     if(nv>1)
       {
-        puntos_const_iterator i= puntos_begin();
-        puntos_const_iterator j= i;j++;
+        point_const_iterator i= puntos_begin();
+        point_const_iterator j= i;j++;
         const Segmento2d s1= Segmento2d(*i,*j).Offset(d);
         Recta2d r1= s1.RectaSoporte();
         retval.AgregaPunto(s1.Origen());
@@ -79,7 +79,7 @@ ListaPos2d ListaPos2d::Offset(const GEOM_FT &d) const
             Pos2d ptIntersection= punto_interseccion(r1,r2);
             retval.AgregaPunto(ptIntersection);
             if(!ptIntersection.exists())
-	      std::cerr << "Polilinea2d::Offset; no se encontró la intersección"
+	      std::cerr << "ListaPos2d::Offset; no se encontró la intersección"
                         << " entre las rectas r1: "
                         << r1 << " y r2: " << r2 << std::endl;
             r1= r2;
@@ -88,6 +88,7 @@ ListaPos2d ListaPos2d::Offset(const GEOM_FT &d) const
       }
     return retval;
   }
+
 
 //! @brief Devuelve una referencia al objeto cuyo
 //! índice se pasa como parámetro.
@@ -120,7 +121,7 @@ const Pos2d &ListaPos2d::operator[](const size_t &i) const
 //! @brief Devuelve verdadero si el punto está en el conjunto.
 bool ListaPos2d::In(const Pos2d &p, const double &tol) const
   {
-    for(register puntos_const_iterator j=lista_ptos.begin();j != lista_ptos.end();j++)
+    for(register point_const_iterator j=lista_ptos.begin();j != lista_ptos.end();j++)
       if(dist2(*j,p)<=tol) return true;
     return false;
   }
@@ -183,7 +184,7 @@ double ListaPos2d::GetSeparacionMedia(void) const
 void ListaPos2d::Print(std::ostream &stream) const
   {
     if(lista_ptos.empty()) return;
-    register puntos_const_iterator i= lista_ptos.begin();
+    register point_const_iterator i= lista_ptos.begin();
     stream << *i; i++;
     for(; i!=lista_ptos.end(); i++)
       stream << ", " << *i;

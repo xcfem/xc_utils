@@ -98,6 +98,8 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
     Pos3d Cdg(void) const
       { return GeomObj::list_Pos3d::Cdg(); }
 
+    iterator getFarthestPointFromSegment(iterator it1, iterator it2, GEOM_FT &pMaxDist);
+
     void Print(std::ostream &stream) const;
   };
 

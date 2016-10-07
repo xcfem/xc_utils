@@ -38,8 +38,8 @@ class ListaPos3d: public GeomObj3d
   {
   public:
     typedef GeomObj::list_Pos3d list_Pos3d;
-    typedef GeomObj::list_Pos3d::iterator puntos_iterator;
-    typedef GeomObj::list_Pos3d::const_iterator puntos_const_iterator;
+    typedef GeomObj::list_Pos3d::iterator point_iterator;
+    typedef GeomObj::list_Pos3d::const_iterator point_const_iterator;
   protected:
     list_Pos3d lista_ptos;
     Pos3d &operator[](const size_t &i);
@@ -50,9 +50,9 @@ class ListaPos3d: public GeomObj3d
       { return new ListaPos3d(*this); }
     inline size_t GetNumPuntos(void) const
       { return lista_ptos.size(); }
-    inline puntos_const_iterator puntos_begin(void) const
+    inline point_const_iterator puntos_begin(void) const
       { return lista_ptos.begin(); }
-    const puntos_const_iterator puntos_end(void) const
+    const point_const_iterator puntos_end(void) const
       { return lista_ptos.end(); }
     inline short unsigned int Dimension(void) const
       { return 0; }

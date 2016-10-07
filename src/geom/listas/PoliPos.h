@@ -78,6 +78,11 @@ class PoliPos : public std::deque<pos>
       { *this= this->GetSwap(); }
     std::deque<GEOM_FT> &GetSeparaciones(void) const;
     GEOM_FT GetSeparacionMedia(void) const;
+
+    virtual iterator getFarthestPointFromSegment(iterator it1, iterator it2, GEOM_FT &pMaxDist);
+    void simplify(GEOM_FT epsilon, iterator it1, iterator it2);
+    void simplify(GEOM_FT epsilon);
+
     void Cat(const PoliPos<pos> &l);
     template <class inputIterator>
     void Cat(inputIterator begin, inputIterator end);
@@ -268,6 +273,62 @@ PoliPos<pos> PoliPos<pos>::GetMenores(unsigned short int i,const GEOM_FT &d) con
     for(register const_iterator j=this->begin();j != this->end();j++)
       if ((*j)(i) < d) retval.push_back(*j);
     return retval;
+  }
+
+/**
+   * @param i1 iterator to the first point.
+   * @param i2 iterator to the second point.
+   * @param pMaxDist pointer to the maximum distance of _line[return index].
+   * @return the index of the point farthest fromthe segment (t1,t2).
+   */
+template <class pos>
+typename PoliPos<pos>::iterator PoliPos<pos>::getFarthestPointFromSegment(iterator , iterator , GEOM_FT &)
+  {
+    std::cerr << "getFarthestPointFromSegment must be redefined in derived classes." << std::endl;
+    return this->begin();
+  }
+
+/**
+   * Douglas Peucker algorithm implementation. 
+   * Recursively delete points that are within epsilon.
+   * @param epsilon the higher the more aggressive.
+   * @param iterator of the first point in a segment.
+   * @param iterator of the last point in a segment.
+   */
+template <class pos>
+void PoliPos<pos>::simplify(GEOM_FT epsilon, iterator it1, iterator it2)
+  {
+    if (distance(it1, it2) <= 1) return;
+
+    // Acquire the farthest point from the segment it1, it2
+    GEOM_FT dist= -1.0;
+    iterator index= getFarthestPointFromSegment(it1, it2, dist);
+
+    // If the farthest point exceeds epsilon, recurse, with index as pivot.
+    if (dist > epsilon)
+      {
+        simplify(epsilon, it1, index);
+        simplify(epsilon, index, it2);
+      }
+    else
+      {
+        // Delete everything except it1 and it2.
+        auto it = it1;
+        it++;
+        for (; it != it2; )
+	  { this->erase(it++); }
+      }
+  }
+
+/**
+ * @param epsilon The higher, the more points gotten rid of.
+ */
+template <class pos>
+void PoliPos<pos>::simplify(GEOM_FT epsilon)
+  {
+    iterator i= this->begin();
+    iterator j= this->end(); --j; //Last point.
+    simplify(epsilon,i,j);
   }
 
 template <class pos>

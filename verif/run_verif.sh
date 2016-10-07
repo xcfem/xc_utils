@@ -29,6 +29,8 @@ python ./python_tests/geom/test_coosys_01.py
 python ./python_tests/geom/test_refsys3d3d_01.py
 python ./python_tests/geom/prueba_poligono2d_04.py
 python ./python_tests/geom/prueba_polilinea2d_01.py
+python ./python_tests/geom/test_polyline2d_02.py
+python ./python_tests/geom/test_polyline3d_01.py
 python ./python_tests/geom/pruebaPos3d01.py
 python ./python_tests/geom/prueba_recta2d_01.py
 python ./python_tests/geom/test_line2d_intersection.py

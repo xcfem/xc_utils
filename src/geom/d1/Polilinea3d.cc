@@ -171,6 +171,40 @@ Polilinea3d Polilinea3d::Separa(const Pos3d &p,const short int &sgn) const
     return result;
   }
 
+/**
+   * @param i1 iterator to the first point.
+   * @param i2 iterator to the second point.
+   * @param pMaxDist pointer to the maximum distance of _line[return index].
+   * @return the index of the point farthest fromthe segment (t1,t2).
+   */
+Polilinea3d::iterator Polilinea3d::getFarthestPointFromSegment(iterator it1, iterator it2, GEOM_FT &pMaxDist)
+  {
+    // Keep track of the point with the maximum distance.
+    iterator maxIt = it1;
+    maxIt++;
+    Segmento3d s= Segmento3d(*it1,*it2);
+    GEOM_FT maxDist= s.dist(*maxIt);
+
+    iterator it = it1;
+    it++;
+    while(it != it2)
+      {
+        Segmento3d s= Segmento3d(*it1,*it2);
+        GEOM_FT dist= s.dist(*it);
+        if(dist > maxDist)
+	  {
+            maxIt = it;
+            maxDist = dist;
+          }
+
+        it++;
+      }
+    // Assign pMaxDist.
+    pMaxDist = maxDist;
+    return maxIt;
+  }
+
+
 void Polilinea3d::Print(std::ostream &stream) const
   {
     if(empty()) return;

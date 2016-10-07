@@ -245,6 +245,40 @@ GeomObj::list_Pos2d Polilinea2d::Interseccion(const Segmento2d &sg) const
     return retval;
   }
 
+/**
+   * @param i1 iterator to the first point.
+   * @param i2 iterator to the second point.
+   * @param pMaxDist pointer to the maximum distance of _line[return index].
+   * @return the index of the point farthest fromthe segment (t1,t2).
+   */
+Polilinea2d::iterator Polilinea2d::getFarthestPointFromSegment(iterator it1, iterator it2, GEOM_FT &pMaxDist)
+  {
+    // Keep track of the point with the maximum distance.
+    iterator maxIt = it1;
+    maxIt++;
+    Segmento2d s= Segmento2d(*it1,*it2);
+    GEOM_FT maxDist= s.dist(*maxIt);
+
+    iterator it = it1;
+    it++;
+    while(it != it2)
+      {
+        Segmento2d s= Segmento2d(*it1,*it2);
+        GEOM_FT dist= s.dist(*it);
+        if(dist > maxDist)
+	  {
+            maxIt = it;
+            maxDist = dist;
+          }
+
+        it++;
+      }
+    // Assign pMaxDist.
+    pMaxDist = maxDist;
+    return maxIt;
+  }
+
+
 void Polilinea2d::Print(std::ostream &stream) const
   {
     if(empty()) return;

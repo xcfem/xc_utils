@@ -289,9 +289,10 @@ class_<TritrizPos3d, bases<t_pos3d> >("TritrizPos3d")
 class_<ListaPos2d, bases<GeomObj2d> >("ListaPos2d")
   .def(init<>())
   .def(init<ListaPos2d>())
-  .def("getArea", &ListaPos2d::Area)
-  .def("getCdg", &ListaPos2d::Cdg)
-  .def("agregaPunto", &ListaPos2d::AgregaPunto,return_internal_reference<>() )
+  .def("getArea", &ListaPos2d::Area,"returns enclosed area.")
+  .def("getCdg", &ListaPos2d::Cdg,"returns center of gravity.")
+  .def("agregaPunto", &ListaPos2d::AgregaPunto,return_internal_reference<>(),"appends a point to the end of the list." )
+  .def("getNumberOfVertices", &ListaPos2d::GetNumPuntos,"returns the number of vertices.")
   .def(self_ns::str(self_ns::self))
   ;
 

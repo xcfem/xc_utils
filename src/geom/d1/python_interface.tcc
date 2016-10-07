@@ -76,6 +76,7 @@ class_<Recta3d, bases<Linea3d> >("Recta3d")
 GeomObj::list_Pos2d (Polilinea2d::*intersectionWithLine)(const Recta2d &) const= &Polilinea2d::Interseccion;
 GeomObj::list_Pos2d (Polilinea2d::*intersectionWithRay)(const SemiRecta2d &) const= &Polilinea2d::Interseccion;
 GeomObj::list_Pos2d (Polilinea2d::*intersectionWithSegment)(const Segmento2d &) const= &Polilinea2d::Interseccion;
+void (Polilinea2d::*simplify2DPoly)(GEOM_FT epsilon)= &Polilinea2d::simplify;
 class_<Polilinea2d, bases<Linea2d, poliPos2d> >("Polilinea2d")
   .def(init<>())
   .def(init<ListaPos2d>())
@@ -92,6 +93,7 @@ class_<Polilinea2d, bases<Linea2d, poliPos2d> >("Polilinea2d")
   .def("getIntersectionWithLine", intersectionWithLine)
   .def("getIntersectionWithRay", intersectionWithRay)
   .def("getIntersectionWithSegment", intersectionWithSegment)
+  .def("simplify", simplify2DPoly,"returns center of gravity.")
   ;
 
 
@@ -115,7 +117,8 @@ class_<Segmento2d, bases<Linea2d> >("Segmento2d")
   .def("anguloSegmento",AnguloSegmento)
   .def("offsetVector",OffsetSegmentoVector)
   .def("offsetDouble",OffsetSegmentoDouble);
-  
+
+void (Polilinea3d::*simplify3DPoly)(GEOM_FT epsilon)= &Polilinea3d::simplify;
 class_<Polilinea3d, bases<Linea3d, poliPos3d> >("Polilinea3d")
   .def(init<>())
 //.def(init<ListaPos3d>())
@@ -125,6 +128,7 @@ class_<Polilinea3d, bases<Linea3d, poliPos3d> >("Polilinea3d")
   .def("getNumSegmentos", &Polilinea3d::GetNumSegmentos)
   .def("getLongitud", &Polilinea3d::Longitud)
   .def("getIntersection", &Polilinea3d::getIntersection)
+  .def("simplify", simplify3DPoly,"returns center of gravity.")
   ;
 
 typedef std::deque<Polilinea3d> dq_polyline3D;

@@ -117,6 +117,8 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     Pos2d Cdg(void) const
       { return GeomObj::list_Pos2d::Cdg(); }
 
+    iterator getFarthestPointFromSegment(iterator it1, iterator it2, GEOM_FT &pMaxDist);
+
     void Print(std::ostream &stream) const;
     void Plot(Plotter &) const;
   };

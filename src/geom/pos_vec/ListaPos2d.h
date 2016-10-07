@@ -35,8 +35,8 @@ class ListaPos2d: public GeomObj2d
   {
   public:
     typedef GeomObj::list_Pos2d list_Pos2d;
-    typedef GeomObj::list_Pos2d::iterator puntos_iterator;
-    typedef GeomObj::list_Pos2d::const_iterator puntos_const_iterator;
+    typedef GeomObj::list_Pos2d::iterator point_iterator;
+    typedef GeomObj::list_Pos2d::const_iterator point_const_iterator;
   protected:
     list_Pos2d lista_ptos;
     Pos2d &operator[](const size_t &i);
@@ -47,9 +47,9 @@ class ListaPos2d: public GeomObj2d
       { return new ListaPos2d(*this); }
     inline size_t GetNumPuntos(void) const
       { return lista_ptos.size(); }
-    inline puntos_const_iterator puntos_begin(void) const
+    inline point_const_iterator puntos_begin(void) const
       { return lista_ptos.begin(); }
-    const puntos_const_iterator puntos_end(void) const
+    const point_const_iterator puntos_end(void) const
       { return lista_ptos.end(); }
     inline short unsigned int Dimension(void) const
       { return 0; }
