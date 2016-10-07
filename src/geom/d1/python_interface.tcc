@@ -93,7 +93,7 @@ class_<Polilinea2d, bases<Linea2d, poliPos2d> >("Polilinea2d")
   .def("getIntersectionWithLine", intersectionWithLine)
   .def("getIntersectionWithRay", intersectionWithRay)
   .def("getIntersectionWithSegment", intersectionWithSegment)
-  .def("simplify", simplify2DPoly,"returns center of gravity.")
+  .def("simplify", simplify2DPoly,"simplification of the polyline (Douglas-Peucker algorithm).")
   ;
 
 
@@ -128,7 +128,7 @@ class_<Polilinea3d, bases<Linea3d, poliPos3d> >("Polilinea3d")
   .def("getNumSegmentos", &Polilinea3d::GetNumSegmentos)
   .def("getLongitud", &Polilinea3d::Longitud)
   .def("getIntersection", &Polilinea3d::getIntersection)
-  .def("simplify", simplify3DPoly,"returns center of gravity.")
+  .def("simplify", simplify3DPoly,"simplification of the polyline (Douglas-Peucker algorithm).")
   ;
 
 typedef std::deque<Polilinea3d> dq_polyline3D;
