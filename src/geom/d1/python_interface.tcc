@@ -93,6 +93,7 @@ class_<Polilinea2d, bases<Linea2d, poliPos2d> >("Polilinea2d")
   .def("getIntersectionWithLine", intersectionWithLine)
   .def("getIntersectionWithRay", intersectionWithRay)
   .def("getIntersectionWithSegment", intersectionWithSegment)
+  .def("isClosed",&Polilinea2d::isClosed,"returns true if the last vertex is coincident with the first one -dist(first,last)<tol*length-.")
   .def("simplify", simplify2DPoly,"simplification of the polyline (Douglas-Peucker algorithm).")
   ;
 
@@ -128,6 +129,7 @@ class_<Polilinea3d, bases<Linea3d, poliPos3d> >("Polilinea3d")
   .def("getNumSegmentos", &Polilinea3d::GetNumSegmentos)
   .def("getLongitud", &Polilinea3d::Longitud)
   .def("getIntersection", &Polilinea3d::getIntersection)
+  .def("isClosed",&Polilinea3d::isClosed,"returns true if the last vertex is coincident with the first one -dist(first,last)<tol*length-.")
   .def("simplify", simplify3DPoly,"simplification of the polyline (Douglas-Peucker algorithm).")
   ;
 

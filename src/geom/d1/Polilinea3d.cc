@@ -171,6 +171,7 @@ Polilinea3d Polilinea3d::Separa(const Pos3d &p,const short int &sgn) const
     return result;
   }
 
+
 /**
    * @param i1 iterator to the first point.
    * @param i2 iterator to the second point.

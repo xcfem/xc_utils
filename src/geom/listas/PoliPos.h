@@ -60,12 +60,13 @@ class PoliPos : public std::deque<pos>
       }
     inline void Agrega(const PoliPos<pos> &p)
       { Cat(p); }
-    void AgregaSiNuevo(const pos &p);
+    void AgregaSiNuevo(const pos &);
     const_iterator find(const pos &p) const
       { return std::find(this->begin(),this->end(),p); }
     iterator find(const pos &p)
       { return std::find(this->begin(),this->end(),p); }
     bool In(const pos &p) const;
+    bool isClosed(const GEOM_FT &tol= 1e-6) const;
     GEOM_FT Longitud(void) const;
     GEOM_FT GetMax(unsigned short i) const;
     GEOM_FT GetMin(unsigned short i) const;
@@ -79,6 +80,7 @@ class PoliPos : public std::deque<pos>
     std::deque<GEOM_FT> &GetSeparaciones(void) const;
     GEOM_FT GetSeparacionMedia(void) const;
 
+    iterator getFarthestPoint(const pos &);
     virtual iterator getFarthestPointFromSegment(iterator it1, iterator it2, GEOM_FT &pMaxDist);
     void simplify(GEOM_FT epsilon, iterator it1, iterator it2);
     void simplify(GEOM_FT epsilon);
@@ -107,9 +109,22 @@ void PoliPos<pos>::AgregaSiNuevo(const pos &p)
       this->push_back(p);
   }
 
+//! @brief True if dist(lastPoint,firstPoint)< tol*length
+template <class pos>
+bool PoliPos<pos>::isClosed(const GEOM_FT &tol) const
+  {
+    bool retval= false;
+    const GEOM_FT treshold= tol*Longitud();
+    const pos &first= this->front();
+    const pos &last= this->back();
+    if(dist(first,last)<treshold)
+      retval= true;
+    return retval;
+  }
+
+//! @brief Devuelve la longitud de la PoliPos.
 template <class pos>
 GEOM_FT PoliPos<pos>::Longitud(void) const
-//Devuelve la longitud de la PoliPos.
   {
     if(this->size()<2) return 0.0;
     GEOM_FT temp = 0;
@@ -121,6 +136,7 @@ GEOM_FT PoliPos<pos>::Longitud(void) const
       }
     return temp;
   }
+
 template <class pos>
 GEOM_FT PoliPos<pos>::GetMax(unsigned short j) const
 //Devuelve el valor mínimo de la coordenada j.
@@ -275,6 +291,26 @@ PoliPos<pos> PoliPos<pos>::GetMenores(unsigned short int i,const GEOM_FT &d) con
     return retval;
   }
 
+//! @brief Returns the farthest point from those of the list.
+template <class pos>
+typename PoliPos<pos>::iterator PoliPos<pos>::getFarthestPoint(const pos &p)
+  {
+    iterator i= this->begin();
+    iterator retval= i; i++;
+    GEOM_FT maxDist= dist(p,*retval);
+    GEOM_FT d= 0.0;
+    for(;i!= this->end();i++)
+      {
+    	d= dist(p,*i);
+    	if(d>maxDist)
+    	  {
+    	    maxDist= d;
+    	    retval= i;
+    	  }
+      }
+    return retval;
+  }
+
 /**
    * @param i1 iterator to the first point.
    * @param i2 iterator to the second point.
@@ -326,9 +362,22 @@ void PoliPos<pos>::simplify(GEOM_FT epsilon, iterator it1, iterator it2)
 template <class pos>
 void PoliPos<pos>::simplify(GEOM_FT epsilon)
   {
-    iterator i= this->begin();
-    iterator j= this->end(); --j; //Last point.
-    simplify(epsilon,i,j);
+    const bool closed= this->isClosed();
+    if(closed)
+      {
+        iterator i= this->begin();
+	iterator j= this->getFarthestPoint(*i);
+	simplify(epsilon,i,j);
+	i= j;
+        j= this->end(); --j; //Last point.
+        simplify(epsilon,i,j);
+      }
+    else
+      {
+        iterator i= this->begin();
+        iterator j= this->end(); --j; //Last point.
+        simplify(epsilon,i,j);
+      }
   }
 
 template <class pos>
