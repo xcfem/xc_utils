@@ -111,6 +111,8 @@
 /usr/local/lib/python2.7/dist-packages/geotecnia/cimientos/long_elastica_pilote.pyc
 /usr/local/lib/python2.7/dist-packages/geotecnia/cimientos/roz_cimiento_terreno.py
 /usr/local/lib/python2.7/dist-packages/geotecnia/cimientos/roz_cimiento_terreno.pyc
+/usr/local/lib/python2.7/dist-packages/geotecnia/earthPressureRankine.py
+/usr/local/lib/python2.7/dist-packages/geotecnia/earthPressureRankine.pyc
 /usr/local/lib/python2.7/dist-packages/geotecnia/empujeCoulomb.py
 /usr/local/lib/python2.7/dist-packages/geotecnia/empujeCoulomb.pyc
 /usr/local/lib/python2.7/dist-packages/geotecnia/__init__.py

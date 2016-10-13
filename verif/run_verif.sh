@@ -21,6 +21,7 @@ python ./python_tests/test_execPy.py
 echo "$BLEU" "Soil mechanics." "$NORMAL"
 python ./python_tests/soil_mechanics/test_mononobe_okabe.py
 python ./python_tests/soil_mechanics/test_coulomb.py
+python ./python_tests/soil_mechanics/test_rankine.py
 
 #Test de combinaciones.
 echo "$BLEU" "Geometry tests." "$NORMAL"
