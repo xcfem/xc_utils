@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 #Function defined as a series of constant values in consecutive intervals:
+#
 #          ________V1_________               ____V4____
 #          |                 |____V2_____    |        |
 #  ___V0___|                 |          |_V3_|        |
