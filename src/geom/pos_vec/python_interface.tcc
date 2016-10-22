@@ -236,7 +236,7 @@ class_<VDesliz3d, bases<Vector3d> >("VDesliz3d")
   ;
 
 
-const Vector3d & (SVD3d::*getMomento3D)(void) const= &SVD3d::getMomento;
+const Vector3d &(SVD3d::*getMomento3D)(void) const= &SVD3d::getMomento;
 const Vector3d &(SVD3d::*getResultante3D)(void) const= &SVD3d::getResultante;
 
 class_<SVD3d, bases<VDesliz3d> >("SVD3d")

@@ -19,6 +19,10 @@ svd1+=vec
 Res=svd1.getResultante()
 Mom=svd1.getMomento()
 
+#It seems there is a bug in svd.getResultante() it returns a SVD3d instead of a Vector3d.
+print 'type<Res>= ', type(Res)
+print 'Res= ', Res
+
 import os
 fname= os.path.basename(__file__)
 if Res.x == 0 and Res.y == 0 and Res.z == 4 and Mom.x == 0 and Mom.y == 0 and Mom.z == 0: 
