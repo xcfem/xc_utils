@@ -20,8 +20,8 @@ Res=svd1.getResultante()
 Mom=svd1.getMomento()
 
 #It seems there is a bug in svd.getResultante() it returns a SVD3d instead of a Vector3d.
-print 'type<Res>= ', type(Res)
-print 'Res= ', Res
+#print 'type<Res>= ', type(Res)
+#print 'Res= ', Res
 
 import os
 fname= os.path.basename(__file__)
