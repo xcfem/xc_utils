@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
 import math
-import scipy
+from scipy.constants import g
 
 '''FrictionalSoil.py: frictional (or cohesionless) soil model.'''
 
@@ -34,4 +34,4 @@ class FrictionalSoil(object):
     return (1+sinPhi)/(1-sinPhi)
   def gamma(self):
     '''Unit weight of soil'''
-    return self.rho*scipy.constants.g
+    return self.rho*g
