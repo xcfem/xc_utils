@@ -115,6 +115,8 @@
 /usr/local/lib/python2.7/dist-packages/geotecnia/earthPressureRankine.pyc
 /usr/local/lib/python2.7/dist-packages/geotecnia/empujeCoulomb.py
 /usr/local/lib/python2.7/dist-packages/geotecnia/empujeCoulomb.pyc
+/usr/local/lib/python2.7/dist-packages/geotecnia/FrictionalCohesionalSoil.py
+/usr/local/lib/python2.7/dist-packages/geotecnia/FrictionalCohesionalSoil.pyc
 /usr/local/lib/python2.7/dist-packages/geotecnia/FrictionalSoil.py
 /usr/local/lib/python2.7/dist-packages/geotecnia/FrictionalSoil.pyc
 /usr/local/lib/python2.7/dist-packages/geotecnia/__init__.py
