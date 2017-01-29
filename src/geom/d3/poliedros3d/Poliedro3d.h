@@ -32,7 +32,7 @@
 
 class Plano3d;
 class SemiEspacio3d;
-class MallaTriang3d;
+class Triang3dMesh;
 class Poligono3d;
 
 
@@ -130,7 +130,7 @@ class Poliedro3d: public PolyhedronBase
     MapPoligonos<CGPoliedro_3> GetMapPoligonos(void) const
       { return getMapPoligonos(cgpoliedro); }
     EPoliedro GetEnriquecido(void) const;
-    MallaTriang3d Triangula(void) const;
+    Triang3dMesh Triangula(void) const;
 
     GEOM_FT PseudoDist(const Pos3d &p) const;
     inline virtual GEOM_FT dist(const Pos3d &p) const

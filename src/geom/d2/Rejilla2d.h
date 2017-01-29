@@ -32,7 +32,7 @@
 //! @brief Rejilla en dos dimensiones.
 class Rejilla2d: public Superficie2d
   {
-    MatrizPos2d puntos; //!< Puntos de la malla.
+    MatrizPos2d puntos; //!< mesh points
   public:
     Rejilla2d(void);
     Rejilla2d(int numSubdivIJ, int numSubdivJK);

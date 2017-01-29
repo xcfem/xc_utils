@@ -57,7 +57,7 @@ Pos2d MatrizPos2d::pos_lagrangiana(const size_t &i,const size_t &j) const
     return Pos2d(x,y);
   }
 
-//! @brief Devuelve el máximo de las distancias entre los puntos de la malla
+//! @brief Devuelve el máximo de las distancias entre los mesh points
 //! y los correspondientes de la interpolación de Lagrange (ver pág IX-19 del manual de SAP90).
 GEOM_FT MatrizPos2d::dist_lagrange(void) const
   {
@@ -72,7 +72,7 @@ GEOM_FT MatrizPos2d::dist_lagrange(void) const
 size_t MatrizPos2d::GetNumQuads(void) const
   { return (fls-1)*(cls-1); }
 
-//! @brief Asigna a los puntos interiores de la malla
+//! @brief Asigna a los puntos interiores of the mesh
 //! los correspondientes de la interpolación de Lagrange (ver pág IX-19 del manual de SAP90).
 //! Devuelve la distancia máxima obtenida.
 GEOM_FT MatrizPos2d::ciclo_lagrange(void)
@@ -83,7 +83,7 @@ GEOM_FT MatrizPos2d::ciclo_lagrange(void)
     return dist_lagrange();
   }
 
-//! @brief Asigna a los puntos interiores de la malla
+//! @brief Asigna a los puntos interiores of the mesh
 //! los correspondientes de la interpolación de Lagrange (ver pág IX-19 del manual de SAP90).
 GEOM_FT MatrizPos2d::Lagrange(const GEOM_FT &tol)
   {
@@ -200,7 +200,7 @@ GEOM_FT MatrizPos2d::Pxy(void) const
     return GetPxy()-GetArea()*d2;
   }
 
-//! Devuelve el triángulo inscrito en la malla cuyo vértice inferior izquierdo
+//! Devuelve el triángulo inscrito in the mesh cuyo vértice inferior izquierdo
 //! es el de índices i,j y que queda bajo la diagonal que lo une con
 //! el vértice de índices i+1,j+1.
 //                                                                             i+1,j +---+ i+1,j+1
@@ -211,7 +211,7 @@ GEOM_FT MatrizPos2d::Pxy(void) const
 Triangulo2d MatrizPos2d::GetTriangulo1(const size_t &i,const size_t &j) const
   { return Triangulo2d((*this)(i,j),(*this)(i,j+1),(*this)(i+1,j+1)); }
 
-//! Devuelve el triángulo inscrito en la malla cuyo vértice inferior izquierdo
+//! Devuelve el triángulo inscrito in the mesh cuyo vértice inferior izquierdo
 //! es el de índices i,j y que queda bajo la diagonal que lo une con
 //! el vértice de índices i+1,j+1.
 //                                                                             i+1,j +---+ i+1,j+1

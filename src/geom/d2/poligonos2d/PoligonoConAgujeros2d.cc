@@ -39,7 +39,7 @@ PoligonoConAgujeros2d::PoligonoConAgujeros2d(const Poligono2d &p)
 GeomObj *PoligonoConAgujeros2d::clon(void) const
   { return new PoligonoConAgujeros2d(*this); }
 
-void PoligonoConAgujeros2d::contorno(const Poligono2d &plg)
+void PoligonoConAgujeros2d::contour(const Poligono2d &plg)
   { cgpol= CGPoligonoConAgujeros_2(plg.ToCGAL()); }
 
 GEOM_FT PoligonoConAgujeros2d::Longitud(void) const

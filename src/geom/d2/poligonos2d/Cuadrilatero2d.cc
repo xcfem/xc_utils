@@ -41,7 +41,7 @@ Triangulo2d Cuadrilatero2d::SegundoTriangulo(void) const
   { return Triangulo2d(Vertice(1),Vertice(3),Vertice(4)); }
 
 
-MatrizPos2d Cuadrilatero2d::Malla(int n1,int n2) const
+MatrizPos2d Cuadrilatero2d::genMesh(int n1,int n2) const
   {
     MatrizPos2d l1(Vertice(1),Vertice(2),n1);
     MatrizPos2d l2(Vertice(2),Vertice(3),n2);
@@ -50,8 +50,8 @@ MatrizPos2d Cuadrilatero2d::Malla(int n1,int n2) const
     return MatrizPos2d(l1,l2,l3,l4);
   }
 
-//! @brief Devuelve una malla de puntos (la rutina esta tomada de OpenSees).
-MatrizPos2d Cuadrilatero2d::MallaBilin(const size_t &nDiv12,const size_t &nDiv23) const
+//! @brief Returns a point mesh (la rutina esta tomada de OpenSees).
+MatrizPos2d Cuadrilatero2d::genBilinMesh(const size_t &nDiv12,const size_t &nDiv23) const
   {
     MatrizPos2d retval(nDiv23+1,nDiv12+1);
     if(nDiv12 > 0  && nDiv23 > 0)

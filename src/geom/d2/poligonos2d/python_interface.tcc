@@ -74,7 +74,7 @@ class_<Triangulo2d, bases<Poligono2d> >("Triangulo2d")
 class_<PoligonoConAgujeros2d, bases<Superficie2d> >("PoligonoConAgujeros2d")
   .def(init<>())
   .def(init<Poligono2d>())
-  .def("contorno",&PoligonoConAgujeros2d::contorno)
+  .def("contour",&PoligonoConAgujeros2d::contour)
   .def("addHole",&PoligonoConAgujeros2d::add_hole)
   ;
 

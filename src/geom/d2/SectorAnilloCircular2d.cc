@@ -177,8 +177,8 @@ MatrizPos2d SectorAnilloCircular2d::PuntosPerimetro(const size_t &n) const
       std::cerr << "SectorAnilloCircular2d::Puntos; el número de puntos ha de ser mayor o igual a cuatro." << std::endl;
     return retval;
   }
-//! @brief Devuelve una malla de puntos equiespaciados sobre el sector del anillo circular.
-MatrizPos2d SectorAnilloCircular2d::Malla(const size_t &nDivRad,const size_t &nDivCirc) const
+//! @brief Returns a point mesh equiespaciados sobre el sector del anillo circular.
+MatrizPos2d SectorAnilloCircular2d::genMesh(const size_t &nDivRad,const size_t &nDivCirc) const
   {
     MatrizPos2d retval(nDivCirc+1,nDivRad+1);
     if(nDivRad>0  && nDivCirc>0)

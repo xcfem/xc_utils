@@ -22,7 +22,7 @@
 //Poliedro3d.cc
 
 #include "Poliedro3d.h"
-#include "../../d2/MallaTriang3d.h"
+#include "../../d2/Triang3dMesh.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include "xc_utils/src/geom/d2/Plano3d.h"
 #include "xc_utils/src/geom/d2/Poligono3d.h"
@@ -219,7 +219,7 @@ Poliedro3d subdivide_quad_triangle(const Poliedro3d &pol,bool smooth_boundary)
     return Poliedro3d(retval);
   }
 
-MallaTriang3d Poliedro3d::Triangula(void) const
+Triang3dMesh Poliedro3d::Triangula(void) const
   {
     EPoliedro retval(GetEnriquecido());
     EPoliedro::Facet_iterator pFacet;
@@ -246,7 +246,7 @@ MallaTriang3d Poliedro3d::Triangula(void) const
             }
 
       }
-    return MallaTriang3d(Poliedro3d(retval));
+    return Triang3dMesh(Poliedro3d(retval));
   }
 
 GEOM_FT Poliedro3d::PseudoDist(const Pos3d &p) const

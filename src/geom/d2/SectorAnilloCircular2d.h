@@ -82,7 +82,7 @@ class SectorAnilloCircular2d : public SectorCircular2d
     MatrizPos2d PuntosArcoExt(const size_t &n) const;
     MatrizPos2d PuntosArcoInt(const size_t &n) const;
     MatrizPos2d PuntosPerimetro(const size_t &n) const;
-    MatrizPos2d Malla(const size_t &m,const size_t &n) const;
+    MatrizPos2d genMesh(const size_t &m,const size_t &n) const;
     Poligono2d getPoligono2d(const size_t &n) const;
 
     void Print(std::ostream &os) const;

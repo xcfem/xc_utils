@@ -62,7 +62,7 @@ class PoligonoConAgujeros2d: public Superficie2d
     void Transforma(const Trf2d &);
 
     void add_hole(const Poligono2d &);
-    void contorno(const Poligono2d &);
+    void contour(const Poligono2d &);
 
     void Print(std::ostream &) const;
   };

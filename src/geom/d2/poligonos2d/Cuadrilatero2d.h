@@ -68,7 +68,7 @@ class Cuadrilatero2d: public Poligono2d
       }
     Triangulo2d PrimerTriangulo(void) const;
     Triangulo2d SegundoTriangulo(void) const;
-    MatrizPos2d Malla(int n1,int n2) const;
-    MatrizPos2d MallaBilin(const size_t &n1,const size_t &n2) const;
+    MatrizPos2d genMesh(int n1,int n2) const;
+    MatrizPos2d genBilinMesh(const size_t &n1,const size_t &n2) const;
   };
 #endif

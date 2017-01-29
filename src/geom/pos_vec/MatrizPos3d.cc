@@ -71,7 +71,7 @@ Pos3d MatrizPos3d::pos_lagrangiana(const size_t &i,const size_t &j) const
     return Pos3d(x,y,z);
   }
 
-//! @brief Devuelve el máximo de las distancias entre los puntos de la malla
+//! @brief Devuelve el máximo de las distancias entre los mesh points
 //! y los correspondientes de la interpolación de Lagrange (ver pág IX-19 del manual de SAP90).
 GEOM_FT MatrizPos3d::dist_lagrange(void) const
   {
@@ -82,7 +82,7 @@ GEOM_FT MatrizPos3d::dist_lagrange(void) const
     return retval;
   }
 
-//! @brief Asigna a los puntos interiores de la malla
+//! @brief Asigna a los puntos interiores of the mesh.
 //! los correspondientes de la interpolación de Lagrange (ver pág IX-19 del manual de SAP90).
 //! Devuelve la distancia máxima obtenida.
 GEOM_FT MatrizPos3d::ciclo_lagrange(void)
@@ -93,7 +93,7 @@ GEOM_FT MatrizPos3d::ciclo_lagrange(void)
     return dist_lagrange();
   }
 
-//! @brief Asigna a los puntos interiores de la malla
+//! @brief Asigna a los puntos interiores of the mesh
 //! los correspondientes de la interpolación de Lagrange (ver pág IX-19 del manual de SAP90).
 GEOM_FT MatrizPos3d::Lagrange(const GEOM_FT &tol)
   {
@@ -126,7 +126,7 @@ MatrizPos3d cuadrilatero(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const P
   { return MatrizPos3d(p1,p2,p3,p4,ndiv1,ndiv2); }
 
 
-//! Devuelve el triángulo inscrito en la malla cuyo vértice inferior izquierdo
+//! Devuelve el triángulo inscrito in the mesh cuyo vértice inferior izquierdo
 //! es el de índices i,j y que queda bajo la diagonal que lo une con
 //! el vértice de índices i+1,j+1.
 //!                                                                              i+1,j +---+ i+1,j+1
@@ -137,7 +137,7 @@ MatrizPos3d cuadrilatero(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const P
 Triangulo3d MatrizPos3d::GetTriangulo1(const size_t &i,const size_t &j) const
   { return Triangulo3d((*this)(i,j),(*this)(i,j+1),(*this)(i+1,j+1)); }
 
-//! Devuelve el triángulo inscrito en la malla cuyo vértice inferior izquierdo
+//! Devuelve el triángulo inscrito in the mesh cuyo vértice inferior izquierdo
 //! es el de índices i,j y que queda bajo la diagonal que lo une con
 //! el vértice de índices i+1,j+1.
 //!                                                                              i+1,j +---+ i+1,j+1
@@ -153,12 +153,12 @@ Triangulo3d MatrizPos3d::GetTriangulo2(const size_t &i,const size_t &j) const
 //! Como el objeto esta formado "aproximadamente" por la unión de triángulos           |2 /|
 //! la distancia se calcula como el mínimo de las distancias                           | / |
 //! a cada uno de los triángulos.                                                      |/ 1|
-//! Cada malla se cubre con dos triángulos                                         i,j +---+ i,j+1
+//! Cada mesh cell se cubre con dos triángulos                                         i,j +---+ i,j+1
 GEOM_FT dist2(const MatrizPos3d &ptos,const Pos3d &pt)
   {
     if(ptos.size()<1) return NAN; //El conjunto está vacío.
     GEOM_FT d= dist2(ptos(1,1),pt);
-    if(ptos.size()==1) return d; //La malla degenera en un punto.
+    if(ptos.size()==1) return d; //Degenerated mesh (only a point)
     //Distancia a los triángulos.
     const size_t fls= ptos.getNumFilas();
     const size_t cls= ptos.getNumCols();
@@ -196,7 +196,7 @@ bool dist_menor(const MatrizPos3d &ptos,const Pos3d &pt,const GEOM_FT &d_max)
     const GEOM_FT d_max2(d_max*d_max);
     if(ptos.size()<1) return false; //El conjunto está vacío.
     GEOM_FT d= dist2(ptos(1,1),pt);
-    if(ptos.size()==1) //La malla degenera en un punto.
+    if(ptos.size()==1) //Degenerated mesh (only a point).
       return (d<d_max2);
     if(d<d_max2) //Ya cumple, el primer punto está suficientemente cerca.
       return true;
@@ -243,7 +243,7 @@ GEOM_FT dist(const MatrizPos3d &ptos,const Pos3d &pt)
 
 
 //! Máximo de las distancias del punto a cada uno de los planos
-//! definidos por los triángulos inscritos en las mallas                         i+1,j +---+ i+1,j+1
+//! definidos por los triángulos inscritos on the mesh cells                         i+1,j +---+ i+1,j+1
 //!                                                                                    |2 /|
 //!                                                                                    | / |
 //!                                                                                    |/ 1|
@@ -252,7 +252,7 @@ GEOM_FT pseudo_dist2(const MatrizPos3d &ptos,const Pos3d &pt)
   {
     if(ptos.size()<1) return NAN; //El conjunto está vacío.
     GEOM_FT d= dist2(ptos(1,1),pt);
-    if(ptos.size()==1) return d; //La malla degenera en un punto.
+    if(ptos.size()==1) return d; //Degenerated mesh.
     //Distancia a los triángulos.
     const size_t fls= ptos.getNumFilas();
     const size_t cls= ptos.getNumCols();
