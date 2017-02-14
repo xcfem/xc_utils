@@ -65,8 +65,7 @@ Recta3d::Recta3d(const Plano3d &p1,const Plano3d &p2)
       setExists(false);
   }
 
-//Constructor de la recta a partir de su ecuacion en
-//parametricas.
+//! @brief Constructs the line from its parametric equation.
 Recta3d::Recta3d(const RectaParametricas3d &param)
   : Linea3d(), cgr(defaultOrg.ToCGAL(),defaultDest.ToCGAL())
   { Parametricas(param); }

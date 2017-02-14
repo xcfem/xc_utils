@@ -99,18 +99,17 @@ class Recta3d : public Linea3d
     Recta2d ProyeccionYZ2d(void) const;
 
     GEOM_FT GetPendiente(void) const;
+    //! @brief Returns the parametric equations of the line as:
+    //!   v[0]: point in the line.
+    //!   v[1]: dir vector for the line.
     RectaParametricas3d GetParametricas(void) const
-    //Devuelve las ecuaciones parametricas de la recta de la siguiente forma:
-    //   v[0]: coordenadas del origen.
-    //   v[1]: vector direcci'on de la recta.
       { return RectaParametricas3d(Punto(0),VDir()); }
+    //! @brief Devuelve un punto de la recta a una "distancia"
+    //! lambda del origen.
     Pos3d PtoParametricas(const GEOM_FT &lambda) const
-    //Devuelve un punto de la recta a una "distancia"
-    //lambda del origen.
       { return Punto(0)+lambda*VDir(); }
+    //! @brief Defines the line from its parametric equation.
     void Parametricas(const RectaParametricas3d &param)
-    //Constructor de la recta a partir de su ecuacion en
-    //parametricas.
       { DosPuntos(param.GetPunto(0.0),param.GetPunto(100.0)); }
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const
     //Devuelve verdadero si el punto está sobre la recta.

@@ -38,7 +38,7 @@ class Segmento3d;
 class Polilinea3d;
 class Poligono3d;
 class GmGrupo3d;
-class EcuacionGeneralPlano3d;
+class GeneralEquationOfPlane;
 class SisCooRect2d3d;
 class Ref2d3d;
 
@@ -66,7 +66,7 @@ class Plano3d : public Superficie3d
     Plano3d(const Segmento3d &s,const Vector3d &v);
     Plano3d(const Poligono3d &trg);
     Plano3d(const Plano3d &otro);
-    Plano3d(const EcuacionGeneralPlano3d &eg);
+    Plano3d(const GeneralEquationOfPlane &eg);
     Plano3d(const GeomObj3d::list_Pos3d &lp);
     Plano3d &operator=(const Plano3d &otro);
 
@@ -111,8 +111,8 @@ class Plano3d : public Superficie3d
     void Put(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
       { TresPuntos(p1,p2,p3); }
 
-    EcuacionGeneralPlano3d GetEcuacionGeneral(void) const;
-    void EcuacionGeneral(const EcuacionGeneralPlano3d &eq);
+    GeneralEquationOfPlane getGeneralEquation(void) const;
+    void GeneralEquation(const GeneralEquationOfPlane &eq);
     GEOM_FT x(const Pos2d &p) const;
     GEOM_FT y(const Pos2d &p) const;
     GEOM_FT z(const Pos2d &p) const;

@@ -71,9 +71,9 @@ Recta2d::Recta2d(const CGRecta_2 &r)
 Recta2d::Recta2d(const Recta2d &r)
   : Linea2d(),cgr(r.cgr) {}
 
-//! @brief Constructor de la recta a partir de su ecuacion en paramétricas.
+//! @brief Constructs the line from its parametric equation.
 Recta2d::Recta2d(const RectaParametricas2d &param): Linea2d(),cgr(CGPoint_2(0,0),CGPoint_2(1,0))
-      { Parametricas(param); }
+  { Parametricas(param); }
 
 //! @brief Operador asignación.
 Recta2d &Recta2d::operator=(const Recta2d &r)
@@ -126,15 +126,18 @@ Vector2d Recta2d::Proyeccion(const Vector2d &v) const
     return dot(v,d)*d;
   }
 
-//! @brief Devuelve el valor de a que corresponde a la ecuación de la recta: a*x + b*y + c= 0
+//! @brief Returns the a parameter of the line equation in general
+//! form: a*x + b*y + c= 0
 GEOM_RT Recta2d::a(void) const
   { return cgr.a(); }
 
-//! @brief Devuelve el valor de b que corresponde a la ecuación de la recta: a*x + b*y + c= 0
+//! @brief Returns the b parameter of the line equation in general
+//! form: a*x + b*y + c= 0
 GEOM_RT Recta2d::b(void) const
   { return cgr.b(); }
 
-//! @brief Devuelve el valor de c que corresponde a la ecuación de la recta: a*x + b*y + c= 0
+//! @brief Returns the c parameter of the line equation in general
+//! form: a*x + b*y + c= 0
 GEOM_RT Recta2d::c(void) const
   { return cgr.c(); }
 
@@ -191,9 +194,9 @@ GEOM_FT Recta2d::Parametro(const Pos2d &p) const
     return r.Parametro(tmp);
   }
 
-//! @brief Devuelve las ecuaciones parametricas de la recta de la siguiente forma:
-//!   v[0]: coordenadas del origen.
-//!   v[1]: vector direcci'on de la recta.
+//! @brief Returns the line equation in parametric form a:
+//!   v[0]: point in the line.
+//!   v[1]: dir vector.
 RectaParametricas2d Recta2d::GetParametricas(void) const
   { return RectaParametricas2d(Punto(0),VDir()); }
 
@@ -202,8 +205,7 @@ RectaParametricas2d Recta2d::GetParametricas(void) const
 Pos2d Recta2d::PtoParametricas(const GEOM_FT &lambda) const
   { return Punto(0)+lambda*VDir(); }
 
-//! @brief Definición de la recta a partir de su ecuacion en
-//! parametricas.
+//! @brief Line redefined from a parametric equation.
 void Recta2d::Parametricas(const RectaParametricas2d &param)
   { DosPuntos(param.GetPunto(0.0),param.GetPunto(100.0)); }
 

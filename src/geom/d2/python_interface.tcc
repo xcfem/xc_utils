@@ -76,7 +76,7 @@ class_<D2to3d, bases<Superficie3d>, boost::noncopyable  >("D2to3d", no_init)
   .def("getPlane",&D2to3d::GetPlano)
   ;
 
-class_<EcuacionGeneralPlano3d, boost::noncopyable>("EcuacionGeneralPlano3d", no_init)
+class_<GeneralEquationOfPlane, boost::noncopyable>("GeneralEquationOfPlane", no_init)
   .def(init<double,double,double,double>());
 
 double (Plano3d::*AnguloPlano3d)(const Plano3d &p) const= &Plano3d::Angulo;
@@ -94,7 +94,7 @@ class_<Plano3d, bases<Superficie3d> >("Plano3d")
   .def(init<Pos3d,Vector3d>())
   .def(init<Pos3d,Vector3d,Vector3d>())
   .def(init<Recta3d,Pos3d>()) 
-  .def(init<EcuacionGeneralPlano3d>()) 
+  .def(init<GeneralEquationOfPlane>()) 
   .def(init<Plano3d>())
   .def("getAnguloPlano3d",AnguloPlano3d)
   .def("getAnguloVector3d",AnguloVector3d)

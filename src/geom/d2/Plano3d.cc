@@ -23,7 +23,7 @@
 
 #include "Plano3d.h"
 #include "../listas/TresPuntos3d.h"
-#include "EcuacionGeneralPlano3d.h"
+#include "GeneralEquationOfPlane.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/d1/SemiRecta3d.h"
 #include "xc_utils/src/geom/d1/Segmento3d.h"
@@ -111,7 +111,7 @@ Plano3d::Plano3d(const GeomObj3d::list_Pos3d &lp): Superficie3d(), cgp()
 Plano3d::Plano3d(const Poligono3d &pg3d)
   : Superficie3d(), cgp()
   { *this= pg3d.GetPlano(); }
-Plano3d::Plano3d(const EcuacionGeneralPlano3d &eg)
+Plano3d::Plano3d(const GeneralEquationOfPlane &eg)
   : Superficie3d(), cgp(eg.a(),eg.b(),eg.c(),eg.d()) {}
 
 Plano3d::Plano3d(const Plano3d &otro)
@@ -239,9 +239,9 @@ GEOM_FT Plano3d::PseudoDist2(const Pos3d &p) const
 GEOM_FT Plano3d::dist2(const Pos3d &p) const
   { return p.dist2(Proyeccion(p)); }
 
-//! @brief Devuelve la ecuacion general del plano ax + by + cz + d = 0
-EcuacionGeneralPlano3d Plano3d::GetEcuacionGeneral(void) const
-  { return EcuacionGeneralPlano3d(cgp.a(),cgp.b(),cgp.c(),cgp.d()); }
+//! @brief Returns the plane equation in general form: ax + by + cz + d = 0
+GeneralEquationOfPlane Plano3d::getGeneralEquation(void) const
+  { return GeneralEquationOfPlane(cgp.a(),cgp.b(),cgp.c(),cgp.d()); }
 
 //! @brief Devuelve la posición del centro de gravedad del plano.
 //! Como el plano es infinito cualquier punto del mismo
@@ -269,24 +269,25 @@ void Plano3d::Print(std::ostream &os) const
 //! y = p.x()
 //! z = p.y()
 GEOM_FT Plano3d::x(const Pos2d &p) const
-  { return GetEcuacionGeneral().x(p); }
+  { return getGeneralEquation().x(p); }
 
 //! @brief Devuelve la coordenada y del punto del plano */
 //! tal que:
 //! x = p.x()
 //! z = p.y()
 GEOM_FT Plano3d::y(const Pos2d &p) const
-  { return GetEcuacionGeneral().y(p); }
+  { return getGeneralEquation().y(p); }
 
 //! @brief Devuelve la coordenada z del punto del plano */
 //! tal que:
 //! x = p.x()
 //! y = p.y()
 GEOM_FT Plano3d::z(const Pos2d &p) const
-  { return GetEcuacionGeneral().z(p); }
+  { return getGeneralEquation().z(p); }
 
-//! @brief Calcula el plano de ecuacion general ax + by + cz + d = 0
-void Plano3d::EcuacionGeneral(const EcuacionGeneralPlano3d &eq)
+//! @brief Creates a Plano3d object from the its equation
+//! in general form: general ax + by + cz + d = 0
+void Plano3d::GeneralEquation(const GeneralEquationOfPlane &eq)
   { operator=(Plano3d(eq)); }
 
 //! @brief Returns true if intesection exists.
