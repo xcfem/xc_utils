@@ -91,7 +91,7 @@ SET(cuadGauss CuadGauss/Cuadratura2D CuadGauss/Cuadratura3D CuadGauss/gssleg Cua
 
 SET(geomTrfs geom/trf/Trf geom/trf/Trf2d geom/trf/Rotacion2d geom/trf/Trf3d geom/trf/Traslacion2d geom/trf/Escalado3d geom/trf/Escalado2d geom/trf/Identidad2d geom/trf/Identidad3d geom/trf/Traslacion3d geom/trf/Reflexion2d geom/trf/Rotacion3d geom/trf/Reflexion3d geom/trf/Revolucion3d)
 
-SET(geomSisCooRef geom/sis_coo/SisCoo geom/sis_coo/SisCooRect1d3d geom/sis_coo/SisCooRect2d3d geom/sis_coo/SisCooRect3d3d geom/sis_coo/SisCooRect1d2d geom/sis_coo/SisCooRect2d2d geom/sis_coo/SisCooXd3d geom/sis_coo/SisCooXd2d geom/ geom/sis_ref/Ref1d2d geom/sis_ref/Ref3d3d geom/sis_ref/Ref2d2d geom/sis_ref/Ref1d3d geom/sis_ref/Ref2d3d geom/sis_ref/EjesPrincInercia2d)
+SET(geomSisCooRef geom/sis_coo/SisCoo geom/sis_coo/SisCooRect1d3d geom/sis_coo/SisCooRect2d3d geom/sis_coo/SisCooRect3d3d geom/sis_coo/SisCooRect1d2d geom/sis_coo/SisCooRect2d2d geom/sis_coo/SisCooXd3d geom/sis_coo/SisCooXd2d geom/ geom/sis_ref/Ref1d2d geom/sis_ref/Ref3d3d geom/sis_ref/Ref2d2d geom/sis_ref/Ref1d3d geom/sis_ref/Ref2d3d geom/sis_ref/PrincipalAxesOfInertia2D)
 
 SET(geomD0 geom/d0/Punto3d geom/d0/Punto2d)
 

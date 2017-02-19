@@ -19,7 +19,7 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//EjesPrincInercia2d.h
+//PrincipalAxesOfInertia2D.h
 
 #ifndef EJESPRINCINERCIA2D_H
 #define EJESPRINCINERCIA2D_H
@@ -31,16 +31,15 @@ class Ref2d2d;
 
 //! @ingroup GEOM
 //
-//! @brief Ejes principales de inercia en dos dimensiones.
-class EjesPrincInercia2d
+//! @brief Principals axes of inertia in planar geometry.
+class PrincipalAxesOfInertia2D
   {
-    Pos2d cdg; //Centro de gravedad.
-    Vector2d eje1; //Ejes principal de inercia
-                   //correspondiente al momento principal mayor. 
-    GEOM_FT i1; //Momento de inercia principal mayor;
-    GEOM_FT i2; //Momento de inercia principal menor;
+    Pos2d cdg; //! Centroid.
+    Vector2d eje1; //!< Direction of the first principal moment of inertia.
+    GEOM_FT i1; //!< First principal moment of inertia.
+    GEOM_FT i2; //!< Second principal moment of inertia.
   public:
-    EjesPrincInercia2d(const Pos2d &cdg_,const GEOM_FT &Ix,const GEOM_FT &Iy,const GEOM_FT &Pxy);
+    PrincipalAxesOfInertia2D(const Pos2d &cdg_,const GEOM_FT &Ix,const GEOM_FT &Iy,const GEOM_FT &Pxy);
     Ref2d2d GetEjes(void) const;
     const GEOM_FT &I1() const;
     const GEOM_FT &I2() const;
@@ -49,7 +48,7 @@ class EjesPrincInercia2d
     Vector2d getVDirEje2(void) const;
   };
 
-std::ostream &operator<<(std::ostream &os,const EjesPrincInercia2d &ejes);
+std::ostream &operator<<(std::ostream &os,const PrincipalAxesOfInertia2D &ejes);
 
 
 #endif

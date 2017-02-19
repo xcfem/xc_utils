@@ -71,7 +71,7 @@
 #include "xc_utils/src/geom/d2/Rejilla2d.h"
 #include "xc_utils/src/geom/pos_vec/SVD2d.h"
 #include "xc_utils/src/geom/pos_vec/SVD3d.h"
-#include "xc_utils/src/geom/sis_ref/EjesPrincInercia2d.h"
+#include "xc_utils/src/geom/sis_ref/PrincipalAxesOfInertia2D.h"
 #include "xc_utils/src/geom/sis_ref/Ref1d3d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
 #include "xc_utils/src/geom/sis_ref/Ref1d2d.h"

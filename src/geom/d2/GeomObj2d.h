@@ -25,7 +25,7 @@
 #define GEOMOBJ2D_H
 
 #include "xc_utils/src/geom/GeomObj.h"
-#include "xc_utils/src/geom/sis_ref/EjesPrincInercia2d.h"
+#include "xc_utils/src/geom/sis_ref/PrincipalAxesOfInertia2D.h"
 
 class BND2d;
 class Dir2d;
@@ -87,14 +87,13 @@ class GeomObj2d: public GeomObj
     Recta2d EjeI_b(void) const;
     //Devuelve el otro eje principal de inercia (no sabemos si
     //el mayor o el menor).
-    Ref2d2d EjesPrincipalesInercia(void) const;
-    //Devuelve los ejes principales de inercia.
+    Ref2d2d PrincipalAxesOfInertia(void) const;
     GEOM_FT I1(void) const;
     //Devuelve el momento de inercia principal mayor.
     GEOM_FT I2(void) const;
     //Devuelve el momento de inercia principal menor.
-    inline EjesPrincInercia2d Inercia(void)
-      { return EjesPrincInercia2d(Cdg(),Ix(),Iy(),Pxy()); }
+    inline PrincipalAxesOfInertia2D Inercia(void)
+      { return PrincipalAxesOfInertia2D(Cdg(),Ix(),Iy(),Pxy()); }
     GEOM_FT I( const unsigned short int &i,
               const unsigned short int &j) const;
     //! @brief Devuelve el area que se emplea para calcular el momento de inercia

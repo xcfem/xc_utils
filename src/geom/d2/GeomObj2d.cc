@@ -81,7 +81,7 @@ Recta2d GeomObj2d::EjeI_b(void) const
   { return Recta2d(Cdg(),DirEjeI_b()); }
 
 //! @brief Devuelve los ejes principales de inercia.
-Ref2d2d GeomObj2d::EjesPrincipalesInercia(void) const
+Ref2d2d GeomObj2d::PrincipalAxesOfInertia(void) const
   { return Ref2d2d(Cdg(),DirEjeI_a()); }
 
 //! @brief Devuelve el momento de inercia principal mayor.

@@ -38,7 +38,7 @@ class_<Ref1d2d , bases<ref_SisCooRect1d2d> >("Ref1d2d")
   .def(init<const Pos2d &,const Vector2d &>())
   .def(init<const Pos2d &,const Dir2d &>())
   .def(init<const Pos2d &,const Pos2d &>())
-  .def("getI",&SisCooRect1d2d::GetI)
+  .def("getI",&Ref1d2d::GetI)
   ;
 
 typedef Ref<SisCooRect1d3d> ref_SisCooRect1d3d;
@@ -59,7 +59,7 @@ class_<Ref1d3d , bases<ref_SisCooRect1d3d> >("Ref1d3d")
   .def(init<const Pos3d &,const Vector3d &>())
   .def(init<const Pos3d &,const Dir3d &>())
   .def(init<const Pos3d &,const Pos3d &>())
-  .def("getI",&SisCooRect1d3d::GetI)
+  .def("getI",&Ref1d3d::GetI)
   ;
 
 typedef Ref<SisCooRect2d2d> ref_SisCooRect2d2d;
@@ -80,8 +80,8 @@ class_<Ref2d2d , bases<ref_SisCooRect2d2d> >("Ref2d2d")
   .def(init<const Pos2d &,const Vector2d &>())
   .def(init<const Pos2d &,const Dir2d &>())
   .def(init<const Pos2d &,const Pos2d &>())
-  .def("getI",&SisCooRect2d2d::GetI)
-  .def("getJ",&SisCooRect2d2d::GetJ)
+  .def("getI",&Ref2d2d::GetI)
+  .def("getJ",&Ref2d2d::GetJ)
   ;
 
 typedef Ref<SisCooRect2d3d> ref_SisCooRect2d3d;
@@ -102,8 +102,8 @@ class_<Ref2d3d , bases<ref_SisCooRect2d3d> >("Ref2d3d")
   .def(init<const Pos3d &,const Pos3d &,const Pos3d &>())
   .def(init<const Pos3d &,const Vector3d &>())
   .def(init<const Pos3d &,const Vector3d &,const Vector3d &>())
-  .def("getI",&SisCooRect2d3d::GetI)
-  .def("getJ",&SisCooRect2d3d::GetJ)
+  .def("getI",&Ref2d3d::GetI)
+  .def("getJ",&Ref2d3d::GetJ)
   ;
 
 typedef Ref<SisCooRect3d3d> ref_SisCooRect3d3d;
@@ -126,8 +126,13 @@ class_<Ref3d3d , bases<ref_SisCooRect3d3d> >("Ref3d3d")
   .def(init<const Pos3d &,const Vector3d &,const Vector3d &>())
   .def(init<const Pos3d &,const Vector3d &,const Vector3d &,const Vector3d &>())
   .def(init<const Recta3d &,const Pos3d &>())
-  .def("getI",&SisCooRect3d3d::GetI)
-  .def("getJ",&SisCooRect3d3d::GetJ)
-  .def("getK",&SisCooRect3d3d::GetK)
+  .def("getI",&Ref3d3d::GetI)
+  .def("getJ",&Ref3d3d::GetJ)
+  .def("getK",&Ref3d3d::GetK)
  ;
 
+class_<PrincipalAxesOfInertia2D>("PrincipalAxesOfInertia2D",init<const Pos2d &,const GEOM_FT &,const GEOM_FT &,const GEOM_FT &>())
+  .add_property("I1",  make_function( &PrincipalAxesOfInertia2D::I1,  return_value_policy<copy_const_reference>() ),"first principal moment of inertia.")
+  .add_property("I2",  make_function( &PrincipalAxesOfInertia2D::I2,  return_value_policy<copy_const_reference>() ),"second principal moment of inertia.")
+  .def("getVDirEje1", &PrincipalAxesOfInertia2D::getVDirEje1,"returns the direction vector of the first principal moment of inertia")
+ ;

@@ -70,6 +70,7 @@ python ./python_tests/geom/prueba_svd3d_01.py
 #python ./python_tests/geom/prueba_semiespacio3d_03.py
 python ./python_tests/geom/test_angle_vector3d_01.py
 python ./python_tests/geom/test_2drotation_01.py
+python ./python_tests/geom/test_principal_axes_of_inertia2D_01.py
 
 #VTK
 #python ./python_tests/vtk/plot_cone.py

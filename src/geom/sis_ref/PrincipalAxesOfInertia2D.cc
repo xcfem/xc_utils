@@ -21,13 +21,13 @@
 //----------------------------------------------------------------------------
 //GeomObj2d.cc
 
-#include "EjesPrincInercia2d.h"
+#include "PrincipalAxesOfInertia2D.h"
 #include "xc_basic/src/util/inercia.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
 
 
 //! @brief Constructor.
-EjesPrincInercia2d::EjesPrincInercia2d(const Pos2d &cdg_,const GEOM_FT &Ix,const GEOM_FT &Iy,const GEOM_FT &Pxy)
+PrincipalAxesOfInertia2D::PrincipalAxesOfInertia2D(const Pos2d &cdg_,const GEOM_FT &Ix,const GEOM_FT &Iy,const GEOM_FT &Pxy)
   : cdg(cdg_), eje1(1,0), i1(0.0), i2(0.0)
   {
     double th1= theta_inercia(Ix,Iy,Pxy);
@@ -45,19 +45,19 @@ EjesPrincInercia2d::EjesPrincInercia2d(const Pos2d &cdg_,const GEOM_FT &Ix,const
       }
     eje1= Vector2d(cos(th1),sin(th1));
   }
-Ref2d2d EjesPrincInercia2d::GetEjes(void) const
+Ref2d2d PrincipalAxesOfInertia2D::GetEjes(void) const
   { return Ref2d2d(cdg,eje1); }
-const GEOM_FT &EjesPrincInercia2d::I1(void) const
+const GEOM_FT &PrincipalAxesOfInertia2D::I1(void) const
   { return i1; }
-const GEOM_FT &EjesPrincInercia2d::I2(void) const
+const GEOM_FT &PrincipalAxesOfInertia2D::I2(void) const
   { return i2; }
 
 //! @brief Devuelve el vector dirección del eje de
 //! inercia principal menor.
-Vector2d EjesPrincInercia2d::getVDirEje2(void) const
+Vector2d PrincipalAxesOfInertia2D::getVDirEje2(void) const
   { return Vector2d(-eje1.y(),eje1.x()); }
 
-std::ostream &operator<<(std::ostream &os,const EjesPrincInercia2d &ejes)
+std::ostream &operator<<(std::ostream &os,const PrincipalAxesOfInertia2D &ejes)
   {
     os << "Ejes: " << ejes.GetEjes() << std::endl
        << "I1= " << ejes.I1() << std::endl
