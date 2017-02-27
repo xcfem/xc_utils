@@ -131,6 +131,7 @@ class_<Polilinea3d, bases<Linea3d, poliPos3d> >("Polilinea3d")
   .def("getIntersection", &Polilinea3d::getIntersection)
   .def("isClosed",&Polilinea3d::isClosed,"returns true if the last vertex is coincident with the first one -dist(first,last)<tol*length-.")
   .def("simplify", simplify3DPoly,"simplification of the polyline (Douglas-Peucker algorithm).")
+  .def("getCdg", &Polilinea3d::Cdg)
   ;
 
 typedef std::deque<Polilinea3d> dq_polyline3D;
