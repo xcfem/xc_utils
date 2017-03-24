@@ -36,7 +36,7 @@
 inline bool cond_compat_eq_prod_vect(const Vector3d &a,const Vector3d &b)
   { return (dot(a,b)<=0); }
 
-//! @brief Solución de la ecuación x ^ a = b siendo x, a y b vectores deslizantes
+//! @brief Solución de la ecuación x ^ a = b siendo x, a y b sliding vectors
 //! y ^ el producto vectorial.
 Recta3d sol_eq_prod_vect(const Vector3d &a,const Vector3d &b)
   {
@@ -187,7 +187,7 @@ SVD3d &SVD3d::operator*=(const GEOM_FT &d)
     return *this;
   }
 
-//! @brief Devuelve la suma de los sistemas de vectores deslizantes.
+//! @brief Devuelve the sum of the sliding vectors systems.
 SVD3d operator+(const SVD3d &s1,const SVD3d &s2)
   {
     SVD3d retval(s1);
@@ -195,31 +195,32 @@ SVD3d operator+(const SVD3d &s1,const SVD3d &s2)
     return retval;
   }
 
-//! @brief Devuelve la resta de los sistemas de vectores deslizantes.
+//! @brief Devuelve the difference of sliding vectors systems.
 SVD3d operator-(const SVD3d &s1,const SVD3d &s2)
   {
     SVD3d retval(s1);
     retval-=s2;
     return retval;
   }
-//! @brief Devuelve el producto del sistema de vectores deslizantes por un escalar.
+
+//! @brief Devuelve the product of the sliding vectors system by a scalar.
 SVD3d operator*(const GEOM_FT &d, const SVD3d &s)
   {
     SVD3d retval(s);
     return retval*=d;
   }
-//! @brief Devuelve el producto del sistema de vectores deslizantes por un escalar.
+//! @brief Devuelve the product of the sliding vectors system by a scalar.
 SVD3d operator*(const SVD3d &s,const GEOM_FT &d)
   { return d*s; }
 
-//! @brief Imprime el sistema de vectores deslizantes.
+//! @brief Imprime el sliding vectors system.
 void SVD3d::Print(std::ostream &os) const
   {
     os << "Resultante R=" << getResultante()
        << " , momento respecto a " << org << " Mo= " << mom; 
   }
 
-//! @brief Devuelve la suma de los vectores deslizantes.
+//! @brief Devuelve la suma de los sliding vectors.
 SVD3d operator+(const VDesliz3d &v1,const VDesliz3d &v2)
   {
     SVD3d suma(v1);
@@ -227,8 +228,8 @@ SVD3d operator+(const VDesliz3d &v1,const VDesliz3d &v2)
     return suma;
   }
 
-//! @brief Devuelve la suma del sistema de vectores
-//! deslizantes con el vector deslizante.
+//! @brief Devuelve the sum of the sliding vector system
+//! with the vector being passed as parameter.
 SVD3d operator+(const SVD3d &s,const VDesliz3d &v)
   {
     SVD3d suma(s);
@@ -236,8 +237,8 @@ SVD3d operator+(const SVD3d &s,const VDesliz3d &v)
     return suma;
   }
 
-//! @brief Devuelve la suma del sistema de vectores
-//! deslizantes con el vector deslizante.
+//! @brief Devuelve the sum of the sliding vector system
+//! with the vector being passed as parameter.
 SVD3d operator+(const VDesliz3d &v,const SVD3d &s)
   { return s+v; }
 
@@ -249,7 +250,7 @@ SVD3d operator-(const SVD3d &svd3d)
     return retval;
   }
 
-//! @brief Imprime el sistema de vectores deslizantes.
+//! @brief Prints.
 std::ostream &operator<<(std::ostream &os, const SVD3d &svd3d)
   {
     svd3d.Print(os);
