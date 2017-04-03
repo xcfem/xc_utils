@@ -19,10 +19,22 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Escalado3d.cc
+//Scaling2d.h
+//Rotación en el plano.
 
-#include "Escalado3d.h"
-#include "../pos_vec/Vector3d.h"
+#ifndef SCALING2D_H
+#define SCALING2D_H
 
-Escalado3d::Escalado3d(const GEOM_FT &fe)
-  : Trf3d(CGAL::Scaling(),fe) {}
+#include "Trf2d.h"
+
+
+//! @ingroup GEOM
+//
+//! @brief Scaling en dos dimensiones.
+class Scaling2d: public Trf2d
+  {
+  public:
+    Scaling2d(const GEOM_FT &fe= 1.0);
+  };
+
+#endif

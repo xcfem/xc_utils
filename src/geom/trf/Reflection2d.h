@@ -19,13 +19,33 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Traslacion3d.cc
+//Reflection2d.h
+//Rotación en el plano.
 
-#include "Traslacion3d.h"
-#include "../pos_vec/Vector3d.h"
+#ifndef REFLECTION2D_H
+#define REFLECTION2D_H
 
-Traslacion3d::Traslacion3d(void)
-  : Trf3d(CGAL::Translation(),Vector3d(0,0,0)) {}
+#include "Trf2d.h"
 
-Traslacion3d::Traslacion3d(const Vector3d &v)
-  : Trf3d(CGAL::Translation(),v) {}
+class Recta2d;
+
+
+//! @ingroup GEOM
+//
+//! @brief Reflexión en dos dimensiones.
+class Reflection2d: public Trf2d
+  {
+  private:
+    static Reflection2d crea_reflection2d(const  Pos2d &Q,const Vector2d &d);
+
+    Reflection2d( const GEOM_FT & m00,const GEOM_FT & m01,const GEOM_FT & m02,
+                 const GEOM_FT & m10,const GEOM_FT & m11,const GEOM_FT & m12);
+/*     Reflection2d( const GEOM_RT & m00,const GEOM_RT & m01,const GEOM_RT & m02, */
+/*                  const GEOM_RT & m10,const GEOM_RT & m11,const GEOM_RT & m12, */
+/*                  const GEOM_RT & hw = GEOM_RT(1.0)); */
+  public:
+    Reflection2d(const Pos2d &Q,const Vector2d &d);
+    Reflection2d(const Recta2d &r);
+  };
+
+#endif

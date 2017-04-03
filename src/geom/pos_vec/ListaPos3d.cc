@@ -24,7 +24,7 @@
 #include "ListaPos3d.h"
 #include <plotter.h>
 
-#include "xc_utils/src/geom/trf/Traslacion3d.h"
+#include "xc_utils/src/geom/trf/Translation3d.h"
 #include "xc_utils/src/geom/listas/utils_list_pos3d.h"
 
 

@@ -19,22 +19,29 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Traslacion2d.h
-//Traslación en el plano.
+//Reflection3d.h
+//Rotación en el plano.
 
-#ifndef TRASLACION2D_H
-#define TRASLACION2D_H
+#ifndef REFLECTION3D_H
+#define REFLECTION3D_H
 
-#include "Trf2d.h"
+#include "Trf3d.h"
+
+class Plano3d;
 
 
 //! @ingroup GEOM
 //
-//! @brief Traslación en dos dimensiones.
-class Traslacion2d: public Trf2d
+//! @brief Reflexión en 3d.
+class Reflection3d: public Trf3d
   {
+  private:
+    static matriz_FT matriz_reflection3d(const Pos3d &Q,const Vector3d &d);
+
   public:
-    Traslacion2d(const Vector2d &v);
+    Reflection3d(void);
+    Reflection3d(const Pos3d &Q,const Vector3d &d);
+    Reflection3d(const Plano3d &M);
   };
 
 #endif

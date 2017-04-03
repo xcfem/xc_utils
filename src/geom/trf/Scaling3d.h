@@ -19,22 +19,22 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Rotacion2d.h
-//Rotación en el plano.
+//Scaling3d.h
+//Scaling de un objeto en 3 dimensiones.
 
-#ifndef ROTACION2D_H
-#define ROTACION2D_H
+#ifndef SCALING3D_H
+#define SCALING3D_H
 
-#include "Trf2d.h"
+#include "Trf3d.h"
 
 
 //! @ingroup GEOM
 //
-//! @brief Rotación en dos dimensiones.
-class Rotacion2d: public Trf2d
+//! @brief Scaling en tres dimensiones.
+class Scaling3d: public Trf3d
   {
   public:
-    Rotacion2d(const double &ang_rad= 0.0);
+    Scaling3d(const GEOM_FT &fe= 1.0);
   };
 
 #endif

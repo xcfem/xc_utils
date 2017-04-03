@@ -19,33 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Reflexion2d.h
-//Rotación en el plano.
+//Scaling3d.cc
 
-#ifndef REFLEXION2D_H
-#define REFLEXION2D_H
+#include "Scaling3d.h"
+#include "../pos_vec/Vector3d.h"
 
-#include "Trf2d.h"
-
-class Recta2d;
-
-
-//! @ingroup GEOM
-//
-//! @brief Reflexión en dos dimensiones.
-class Reflexion2d: public Trf2d
-  {
-  private:
-    static Reflexion2d crea_reflexion2d(const  Pos2d &Q,const Vector2d &d);
-
-    Reflexion2d( const GEOM_FT & m00,const GEOM_FT & m01,const GEOM_FT & m02,
-                 const GEOM_FT & m10,const GEOM_FT & m11,const GEOM_FT & m12);
-/*     Reflexion2d( const GEOM_RT & m00,const GEOM_RT & m01,const GEOM_RT & m02, */
-/*                  const GEOM_RT & m10,const GEOM_RT & m11,const GEOM_RT & m12, */
-/*                  const GEOM_RT & hw = GEOM_RT(1.0)); */
-  public:
-    Reflexion2d(const Pos2d &Q,const Vector2d &d);
-    Reflexion2d(const Recta2d &r);
-  };
-
-#endif
+Scaling3d::Scaling3d(const GEOM_FT &fe)
+  : Trf3d(CGAL::Scaling(),fe) {}

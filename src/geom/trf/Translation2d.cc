@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Rotacion2d.cc
+//Translation2d.cc
 
-#include "Rotacion2d.h"
+#include "Translation2d.h"
 #include "../pos_vec/Vector2d.h"
 
-Rotacion2d::Rotacion2d(const double &ang_rad)
-  : Trf2d(CGAL::Rotation(),sin(ang_rad),cos(ang_rad)) {}
+Translation2d::Translation2d(const Vector2d &v)
+  : Trf2d(CGAL::Translation(),v) {}

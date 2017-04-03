@@ -63,13 +63,13 @@
 // //    -1 [[ m00 m01]
 // //  hw    [ m10 m11]] 
 // //
-// // contiene la información sobre escalado y rotación, 
+// // contiene la información sobre scaling y rotación, 
 // // el vector:
 // //
 // //    -1 [[ m02]
 // //  hw    [ m12]] 
 // //
-// // contiene la parte traslacional de la transformación.
+// // contiene la parte translational de la transformación.
 //   : Trf(), cgtrf(m00,m01,m02,m10,m11,m12,hw) {}
 
 Trf2d::Trf2d( const GEOM_FT & m00,const GEOM_FT & m01,const GEOM_FT & m02,

@@ -24,7 +24,7 @@
 #include "ListaPos2d.h"
 #include <plotter.h>
 
-#include "xc_utils/src/geom/trf/Traslacion2d.h"
+#include "xc_utils/src/geom/trf/Translation2d.h"
 #include "xc_utils/src/geom/listas/utils_list_pos2d.h"
 
 

@@ -24,7 +24,7 @@
 #include "Revolucion3d.h"
 #include "../pos_vec/MatrizPos3d.h"
 #include "../pos_vec/TritrizPos3d.h"
-#include "Rotacion3d.h"
+#include "Rotation3d.h"
 
 //! @brief Constructor.
 Revolucion3d::Revolucion3d(const Recta3d &e,const GEOM_FT &th,const size_t &nd)
@@ -41,7 +41,7 @@ MatrizPos3d Revolucion3d::Aplica0d(const Pos3d &p) const
     GEOM_FT ang(inc_angulo);
     for(size_t i=2;i<=ndiv+1;i++)
       {
-        const Rotacion3d trf(eje,ang);
+        const Rotation3d trf(eje,ang);
         retval(1,i)= trf(p);
         ang+= inc_angulo;
       }
@@ -62,7 +62,7 @@ MatrizPos3d Revolucion3d::Aplica1d(const MatrizPos3d &m) const
         GEOM_FT ang(inc_angulo);
         for(size_t i=2;i<=ndiv+1;i++)
           {
-            const Rotacion3d trf(eje,ang);
+            const Rotation3d trf(eje,ang);
             for(size_t j=1;j<=npuntos;j++)
               retval(i,j)= trf(m(i,1));
             ang+= inc_angulo;
@@ -78,7 +78,7 @@ MatrizPos3d Revolucion3d::Aplica1d(const MatrizPos3d &m) const
         GEOM_FT ang(inc_angulo);
         for(size_t i=2;i<=ndiv+1;i++)
           {
-            const Rotacion3d trf(eje,ang);
+            const Rotation3d trf(eje,ang);
             for(size_t j=1;j<=npuntos;j++)
               retval(i,j)= trf(m(1,i));
             ang+= inc_angulo;
@@ -105,7 +105,7 @@ TritrizPos3d Revolucion3d::Aplica2d(const MatrizPos3d &m) const
         GEOM_FT ang(inc_angulo);
         for(size_t i=2;i<=ncapas;i++)
           {
-            const Rotacion3d trf(eje,ang);
+            const Rotation3d trf(eje,ang);
             retval(i)= trf(m);
             ang+= inc_angulo;
 	  }

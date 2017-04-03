@@ -30,7 +30,7 @@
 #include "BND2d.h"
 
 
-#include "xc_utils/src/geom/trf/Traslacion2d.h"
+#include "xc_utils/src/geom/trf/Translation2d.h"
 
 Pos2d GeomObj2d::GetPMax(void) const
   {
@@ -168,6 +168,6 @@ GEOM_FT GeomObj2d::IO(const Pos2d &o) const
 //! @brief Desplaza el objeto.
 void GeomObj2d::Mueve(const Vector2d &v)
   {
-    Traslacion2d m(v);
+    Translation2d m(v);
     Transforma(m);
   }

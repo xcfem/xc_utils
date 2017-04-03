@@ -19,22 +19,25 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Escalado3d.h
-//Escalado de un objeto en 3 dimensiones.
+//Rotation3d.h
+//Rotación en el plano.
 
-#ifndef ESCALADO3D_H
-#define ESCALADO3D_H
+#ifndef ROTATION3D_H
+#define ROTATION3D_H
 
 #include "Trf3d.h"
+
+class Recta3d;
 
 
 //! @ingroup GEOM
 //
-//! @brief Escalado en tres dimensiones.
-class Escalado3d: public Trf3d
+//! @brief Rotación en tres dimensiones.
+class Rotation3d: public Trf3d
   {
   public:
-    Escalado3d(const GEOM_FT &fe= 1.0);
+    Rotation3d(void);
+    Rotation3d(const Recta3d &eje,const GEOM_FT &ang_rad);
   };
 
 #endif

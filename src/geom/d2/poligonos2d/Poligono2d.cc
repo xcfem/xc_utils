@@ -34,7 +34,7 @@
 #include <boost/any.hpp>
 
 #include "xc_utils/src/geom/cdg.h"
-#include "xc_utils/src/geom/trf/Traslacion2d.h"
+#include "xc_utils/src/geom/trf/Translation2d.h"
 #include "xc_utils/src/geom/listas/utils_list_pos2d.h"
 #include "xc_utils/src/geom/pos_vec/ListaPos2d.h"
 

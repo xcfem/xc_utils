@@ -6,7 +6,7 @@ import math
 
 u=geom.Vector2d(1,1)
 alpha=math.radians(90)
-rot2d= geom.Rotacion2d(alpha)
+rot2d= geom.Rotation2d(alpha)
 v= rot2d.getTrfVector2d(u)
 
 ratio1= abs(v.x+u.y)

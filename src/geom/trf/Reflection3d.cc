@@ -19,46 +19,51 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Rotacion3d.cc
+//Reflection3d.cc
 
-#include "Rotacion3d.h"
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "Reflection3d.h"
 #include "xc_utils/src/geom/matriz_FT.h"
+#include "xc_utils/src/geom/pos_vec/Vector3d.h"
+#include "xc_utils/src/geom/pos_vec/Pos3d.h"
+#include "xc_utils/src/geom/d2/Plano3d.h"
 
-//! Rotación en 3d según se describe en "Geometric tools for computer graphics"
-//! Philip J. Schneider Morgan Kaufmann Publishers, página 141
-matriz_FT matriz_rotacion_3d(const Recta3d &eje,const double &theta)
+
+//! Reflexión en 3d según se describe en "Geometric tools for computer graphics"
+//! Philip J. Schneider Morgan Kaufmann Publishers, página 153
+matriz_FT Reflection3d::matriz_reflection3d(const  Pos3d &Q,const Vector3d &n)
   {
+    const Vector3d nn= n.Normalizado();
     matriz_FT retval(4,4);
-    const GEOM_FT cos_theta= double_to_FT(cos(theta));
-    const GEOM_FT sin_theta= double_to_FT(sin(theta));
     const matriz_FT I= identidad(matriz_FT(3,3));
-    const Vector3d u= eje.VDir();
-    const matriz_FT T_u_theta_1= cos_theta*I;
-    const matriz_FT T_u_theta_2= (double_to_FT(1.0)-cos_theta)*prod_tensor(u,u);
-    const matriz_FT T_u_theta_3= sin_theta*skew_symm_matrix_pre(u);
-    const matriz_FT T_u_theta= traspuesta(T_u_theta_1+T_u_theta_2+T_u_theta_3);
-    retval.PutCaja(1,1,T_u_theta);
-    const Pos3d Q= eje.Punto();
-    const Vector3d tmp= T_u_theta*Q.VectorPos();
-    const Vector3d VQ= Q.VectorPos()-tmp;
+    const matriz_FT T_n= traspuesta(I-2*prod_tensor(nn,nn));
+    retval.PutCaja(1,1,T_n);
+    const Vector3d VQ= double_to_FT(2)*dot(Q.VectorPos(),nn)*nn;
     retval.PutCaja(1,4,VQ.GetMatriz());
     retval(4,4)=1;
     return retval;
   }
 
 //! @brief Constructor por defecto.
-Rotacion3d::Rotacion3d(void)
+Reflection3d::Reflection3d(void)
   : Trf3d()
   {
-    matriz_FT rr=  identidad(4);
-    PutMatrizHomogeneas(rr);
+    matriz_FT rf=  matriz_reflection3d(Pos3d(0.0,0.0,0.0),Vector3d(0.0,0.0,1.0));
+    PutMatrizHomogeneas(rf);
   }
 
 //! @brief Constructor.
-Rotacion3d::Rotacion3d(const Recta3d &eje,const GEOM_FT &theta)
+Reflection3d::Reflection3d(const Pos3d &Q,const Vector3d &d)
   : Trf3d()
   {
-    matriz_FT rr=  matriz_rotacion_3d(eje,theta);
-    PutMatrizHomogeneas(rr);
+    matriz_FT rf=  matriz_reflection3d(Q,d);
+    PutMatrizHomogeneas(rf);
   }
+
+//! @brief Constructor.
+Reflection3d::Reflection3d(const Plano3d &p)
+  : Trf3d()
+  {
+    matriz_FT rf=  matriz_reflection3d(p.Punto(),p.Normal());
+    PutMatrizHomogeneas(rf);
+  }
+

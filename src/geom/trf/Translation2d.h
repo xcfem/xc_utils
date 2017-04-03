@@ -19,25 +19,22 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Rotacion3d.h
-//Rotación en el plano.
+//Translation2d.h
+//Traslación en el plano.
 
-#ifndef ROTACION3D_H
-#define ROTACION3D_H
+#ifndef TRANSLATION2D_H
+#define TRANSLATION2D_H
 
-#include "Trf3d.h"
-
-class Recta3d;
+#include "Trf2d.h"
 
 
 //! @ingroup GEOM
 //
-//! @brief Rotación en tres dimensiones.
-class Rotacion3d: public Trf3d
+//! @brief Traslación en dos dimensiones.
+class Translation2d: public Trf2d
   {
   public:
-    Rotacion3d(void);
-    Rotacion3d(const Recta3d &eje,const GEOM_FT &ang_rad);
+    Translation2d(const Vector2d &v);
   };
 
 #endif

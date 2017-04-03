@@ -19,22 +19,22 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Escalado2d.h
+//Rotation2d.h
 //Rotación en el plano.
 
-#ifndef ESCALADO2D_H
-#define ESCALADO2D_H
+#ifndef ROTATION2D_H
+#define ROTATION2D_H
 
 #include "Trf2d.h"
 
 
 //! @ingroup GEOM
 //
-//! @brief Escalado en dos dimensiones.
-class Escalado2d: public Trf2d
+//! @brief Rotación en dos dimensiones.
+class Rotation2d: public Trf2d
   {
   public:
-    Escalado2d(const GEOM_FT &fe= 1.0);
+    Rotation2d(const double &ang_rad= 0.0);
   };
 
 #endif

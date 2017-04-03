@@ -19,29 +19,13 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Reflexion3d.h
-//Rotación en el plano.
+//Translation3d.cc
 
-#ifndef REFLEXION3D_H
-#define REFLEXION3D_H
+#include "Translation3d.h"
+#include "../pos_vec/Vector3d.h"
 
-#include "Trf3d.h"
+Translation3d::Translation3d(void)
+  : Trf3d(CGAL::Translation(),Vector3d(0,0,0)) {}
 
-class Plano3d;
-
-
-//! @ingroup GEOM
-//
-//! @brief Reflexión en 3d.
-class Reflexion3d: public Trf3d
-  {
-  private:
-    static matriz_FT matriz_reflexion3d(const Pos3d &Q,const Vector3d &d);
-
-  public:
-    Reflexion3d(void);
-    Reflexion3d(const Pos3d &Q,const Vector3d &d);
-    Reflexion3d(const Plano3d &M);
-  };
-
-#endif
+Translation3d::Translation3d(const Vector3d &v)
+  : Trf3d(CGAL::Translation(),v) {}

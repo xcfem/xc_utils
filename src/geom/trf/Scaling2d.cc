@@ -19,23 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Traslacion3d.h
-//Traslación en el plano.
+//Scaling2d.cc
 
-#ifndef TRASLACION3D_H
-#define TRASLACION3D_H
+#include "Scaling2d.h"
+#include "../pos_vec/Vector2d.h"
 
-#include "Trf3d.h"
-
-
-//! @ingroup GEOM
-//
-//! @brief Traslación en tres dimensiones.
-class Traslacion3d: public Trf3d
-  {
-  public:
-    Traslacion3d(void);
-    Traslacion3d(const Vector3d &v);
-  };
-
-#endif
+Scaling2d::Scaling2d(const GEOM_FT &fe)
+  : Trf2d(CGAL::Scaling(),fe) {}
