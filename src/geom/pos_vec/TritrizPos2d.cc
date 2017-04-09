@@ -33,7 +33,7 @@ TritrizPos2d::TritrizPos2d(const size_t capas)
 Pos2d TritrizPos2d::GetCentro(void) const
   { return get_centro(*this,Segmento2d()); }
 
-TritrizPos2d crea_uniform_grid(const BND2d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z)
+TritrizPos2d create_uniform_grid(const BND2d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z)
   {
     const size_t ncapas= ndiv_z+1;
     TritrizPos2d retval(ncapas);

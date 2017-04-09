@@ -53,7 +53,7 @@ class TritrizPos3d: public TritrizPos<Pos3d>
 
 class BND3d;
 
-TritrizPos3d crea_uniform_grid(const BND3d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z);
+TritrizPos3d create_uniform_grid(const BND3d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z);
 TritrizPos3d crea_vol_revolucion(const Revolucion3d &r,const MatrizPos3d &m);
 
 #endif

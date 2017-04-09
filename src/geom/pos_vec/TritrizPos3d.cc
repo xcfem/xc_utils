@@ -54,7 +54,7 @@ TritrizPos3d TritrizPos3d::Transforma(const Trf3d &trf) const
     return retval;
   }
 
-TritrizPos3d crea_uniform_grid(const BND3d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z)
+TritrizPos3d create_uniform_grid(const BND3d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z)
   {
     const size_t ncapas= ndiv_z+1;
     TritrizPos3d retval(ncapas);

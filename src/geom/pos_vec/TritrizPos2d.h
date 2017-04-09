@@ -42,6 +42,6 @@ class TritrizPos2d: public TritrizPos<Pos2d>
 
 class BND2d;
 
-TritrizPos2d crea_uniform_grid(const BND2d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z= 0);
+TritrizPos2d create_uniform_grid(const BND2d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z= 0);
 
 #endif
