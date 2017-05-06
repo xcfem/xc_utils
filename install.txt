@@ -2,7 +2,7 @@ xc_utils installation.
 
 0.- Patience (please).
 
-    I'ts not always easy to verify than installation works properly
+    It’s not always easy to verify than installation works properly
     (obviously the developer's machine is the worst place to test
     installation process). If you find a bug in the installation please 
     feel free to write to l.pereztato@gmail.com.
@@ -11,13 +11,13 @@ xc_utils installation.
 
     xc_utils is a C++ (and fortran) library, so a C++ and a Fortran
     compiler are necessary. You can use the library as a Python module
-    so you need a Python interpreter tooo. The library was tested
+    so you need a Python interpreter too. The library was tested
     with GNU C++ and Fortran version 4.8.2
     
 
     - You will also need CMake ((http://www.cmake.org/).
-    - The library is suposed to be used over Linux, maybe it's possible
-      to use it with other Unix flavors.
+    - The library is supposed to be used over Linux, maybe it's possible
+      to use it with other Unix flavours.
     - Libraries needed:
 
          -Boost c++ libraries (<http://www.boost.org/>).
@@ -37,7 +37,7 @@ xc_utils installation.
          -X11 (libX11-dev).
 
       You can find a list of the Ubuntu (or Debian) packages you need to
-      fulfill the installation in "doc/needed_packages.txt". If you have
+      fulfil the installation in "doc/needed_packages.txt". If you have
       a Debian, Ubuntu or (probably) Linux Mint distribution you can
       run the "doc/install_*whatever*_packages.sh" to install all
       needed packages (*whatever* can be debian, ubuntu16,...).
