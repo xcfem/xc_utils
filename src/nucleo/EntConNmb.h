@@ -41,7 +41,8 @@ class EntConNmb: public EntCmd
     std::string nmb; //!< @brief Nombre del objeto.
   public:
     //! @brief Constructor.
-    EntConNmb(const std::string &Nombre=""): nmb(Nombre) {}
+  EntConNmb(const std::string &Nombre="",EntCmd *owr= nullptr)
+      : EntCmd(owr), nmb(Nombre) {}
     //! @brief Devuelve el nombre del objeto.
     const std::string &GetNombre(void) const
       { return nmb; }
