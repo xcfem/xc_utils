@@ -56,8 +56,8 @@ class Action: public EntConNmb
     Action(const std::string &n="", const std::string &descrip="");
 
     static Action NULA(void);
-    //! @brief Asigna el nombre a la acción.
-    inline void SetNombre(const std::string &nmb)
+    //! @brief Sets the name to the action.
+    inline void setName(const std::string &nmb)
       { EntConNmb::Nombre()= nmb; }
     const std::string GetNombreExpandido(void) const;
     //! @brief Devuelve la descripción de la acción.
@@ -146,9 +146,9 @@ std::string actionsNames(InputIterator begin,InputIterator end)
   {
     std::string retval;
     InputIterator i=begin;
-    retval= (*i).GetNombre(); i++;
+    retval= (*i).getName(); i++;
     for(;i!=end;i++)
-      retval+= "," + (*i).GetNombre();
+      retval+= "," + (*i).getName();
     return retval;
   }
 
@@ -158,9 +158,9 @@ std::string actionPtrsNames(InputIterator begin,InputIterator end)
   {
     std::string retval;
     InputIterator i=begin;
-    retval= (*i)->GetNombre(); i++;
+    retval= (*i)->getName(); i++;
     for(;i!=end;i++)
-      retval+= "," + (*i)->GetNombre();
+      retval+= "," + (*i)->getName();
     return retval;
   }
 } //fin namespace nmb_acc.

@@ -72,9 +72,9 @@ const cmb_acc::LoadCombinationVector &cmb_acc::LoadCombinationVector::GetNoNulas
 bool cmb_acc::LoadCombinationVector::Existe(const Action &f) const
   {
     bool retval= false;
-    const std::string nmb_f= f.GetNombre();
+    const std::string nmb_f= f.getName();
     for(size_t i=0;i<size();i++)
-      if((*this)[i].GetNombre()==nmb_f)
+      if((*this)[i].getName()==nmb_f)
         {
           retval= true;
           break;
@@ -190,7 +190,7 @@ void cmb_acc::LoadCombinationVector::Numera(const std::string &prefijo)
   {
     size_t cont= 1;
     for(iterator i= begin(); i!=end();i++,cont++)
-      (*i).SetNombre(prefijo + num2str(cont) + "= " + (*i).GetNombre());
+      (*i).setName(prefijo + num2str(cont) + "= " + (*i).getName());
   }
 
 //! @brief Devuelve los coeficientes que corresponden a las acciones que se pasan como parámetro

@@ -38,26 +38,26 @@
 class EntConNmb: public EntCmd
   {
   private:
-    std::string nmb; //!< @brief Nombre del objeto.
+    std::string name; //!< @brief Object name.
   public:
     //! @brief Constructor.
   EntConNmb(const std::string &Nombre="",EntCmd *owr= nullptr)
-      : EntCmd(owr), nmb(Nombre) {}
-    //! @brief Devuelve el nombre del objeto.
-    const std::string &GetNombre(void) const
-      { return nmb; }
-    //! @brief Asigna el nombre del objeto.
-    void SetNombre(const std::string &s)
-      { nmb= s; }
+      : EntCmd(owr), name(Nombre) {}
+    //! @brief Return the object name.
+    const std::string &getName(void) const
+      { return name; }
+    //! @brief Set the  object name.
+    void setName(const std::string &s)
+      { name= s; }
     //! @brief Devuelve una referencia al nombre del objeto.
     std::string &Nombre(void)
-      { return nmb; }
+      { return name; }
     //! @brief Compara el nombre del elemento con un nombre dado.
     int operator==(const EntConNmb &otro) const
-      { return (nmb==otro.nmb); }
+      { return (name==otro.name); }
     //! @brief Operador menor.
     int operator<(const EntConNmb &otro) const
-      { return (nmb<otro.nmb); }
+      { return (name<otro.name); }
   };
 
 #endif

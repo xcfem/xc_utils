@@ -81,8 +81,8 @@ BOOST_PYTHON_MODULE(xc_base)
   ;
 
     class_<EntConNmb, bases<EntCmd> >("EntConNmb")
-      .add_property("nombre", make_function( &EntConNmb::GetNombre, return_value_policy<copy_const_reference>()), &EntConNmb::SetNombre,"DEPRECATED returns object name.")
-      .add_property("name", make_function( &EntConNmb::GetNombre, return_value_policy<copy_const_reference>()), &EntConNmb::SetNombre,"returns object name.")
+      .add_property("nombre", make_function( &EntConNmb::getName, return_value_policy<copy_const_reference>()), &EntConNmb::setName,"DEPRECATED returns object name.")
+      .add_property("name", make_function( &EntConNmb::getName, return_value_policy<copy_const_reference>()), &EntConNmb::setName,"returns object name.")
       ;
 
     class_<ProtoMatriz, boost::noncopyable>("ProtoMatriz", no_init)

@@ -48,14 +48,14 @@ cmb_acc::Action cmb_acc::Action::NULA(void)
 
 //! @brief Devuelve verdadero si la acción no es combinación de otras.
 bool cmb_acc::Action::Simple(void) const
-  { return (GetNombre().find('+')==std::string::npos); }
+  { return (getName().find('+')==std::string::npos); }
 
 //! @brief Devuelve el nombre expandido aplicando la propiedad distributiva
 //! del producto es decir si la combinación se llama '1.5*G1+1.35*(G2+F2)'
 //! devuelve '1.5*G1+1.35*G2+1.35*F2'.
 const std::string cmb_acc::Action::GetNombreExpandido(void) const
   {
-    std::string retval= GetNombre();
+    std::string retval= getName();
     if(has_char(retval,'('))
       {
         const ExprAlgebra tmp(retval);
@@ -69,7 +69,7 @@ cmb_acc::Action::map_descomp cmb_acc::Action::getDescomp(void) const
   {
     map_descomp descomp;
     typedef std::deque<std::string> dq_string;
-    dq_string str_sumandos= ActionRelationships::get_sumandos_combinacion(GetNombre());
+    dq_string str_sumandos= ActionRelationships::get_sumandos_combinacion(getName());
     for(dq_string::iterator i= str_sumandos.begin();i!=str_sumandos.end();i++)
       {
         const std::string &str_sum_i= *i;
@@ -108,7 +108,7 @@ std::vector<double> cmb_acc::Action::getCoeficientes(const std::vector<std::stri
 //! @brief ??
 void cmb_acc::Action::limpia_nombres(void)
   {
-    EntConNmb::Nombre()= ActionRelationships::limpia(GetNombre());
+    EntConNmb::Nombre()= ActionRelationships::limpia(getName());
     descripcion= ActionRelationships::limpia(descripcion);
   }
 
@@ -119,7 +119,7 @@ void cmb_acc::Action::multiplica(const double &d)
     f_pond*= d;
     limpia_nombres();
     const std::string strnum= num2str(f_pond,2);
-    EntConNmb::Nombre()= strnum + "*" + GetNombre();
+    EntConNmb::Nombre()= strnum + "*" + getName();
     descripcion= strnum + "*" + descripcion;
   }
 
@@ -135,18 +135,18 @@ void cmb_acc::Action::suma(const Action &f)
     if(f.relaciones.contieneIncomp())
       relaciones.setContieneIncomp(true);
 
-    if(GetNombre().size()>0)
+    if(getName().size()>0)
       {
-        EntConNmb::Nombre()+= " + " + f.GetNombre();
+        EntConNmb::Nombre()+= " + " + f.getName();
         descripcion+= " + " + f.descripcion;
       }
     else
       {
-	EntConNmb::Nombre()= f.GetNombre();
+	EntConNmb::Nombre()= f.getName();
         descripcion= f.descripcion;
       }
     relaciones.concat(f.relaciones);
-    relaciones.updateMaestras(GetNombre());
+    relaciones.updateMaestras(getName());
     if(Nula(zero) && f.Nula(zero)) //Si ambas son nulas la suma es nula.
       f_pond= 0.0;
     else //En otro caso no lo sabemos.
@@ -165,7 +165,7 @@ bool cmb_acc::Action::incompatible(const Action &f) const
   {
     bool retval= false;
     if(this != &f) //La carga no puede ser incompatible consigo misma.
-      retval= relaciones.incompatible(f.GetNombre());
+      retval= relaciones.incompatible(f.getName());
     return retval;
   }
 
@@ -182,8 +182,8 @@ bool cmb_acc::Action::Incompatible(const Action &f) const
     bool retval= false;
     if(this != &f) //La carga no puede ser incompatible consigo misma.
       {
-        retval= relaciones.incompatible(f.GetNombre());
-        if(!retval) retval= f.relaciones.incompatible(GetNombre());
+        retval= relaciones.incompatible(f.getName());
+        if(!retval) retval= f.relaciones.incompatible(getName());
       }
     return retval;
   }
@@ -205,7 +205,7 @@ std::string cmb_acc::Action::ListaStrIncompatibles(ActionRValueList *af) const
 
 void cmb_acc::Action::Print(std::ostream &os) const
   {
-    os << GetNombre();
+    os << getName();
     relaciones.Print(os);
   }
 
