@@ -4,13 +4,13 @@
    "Principios de ingeniería de cimentaciones." Braja M. Das, página 353 y
    de la tabla 10.3 de Geotécnia y Cimientos II. Jiménez Salas, página 683
 '''
-from geotecnia import empujeCoulomb
+from geotecnia import earth_pressure
 import math
 
-ka1= empujeCoulomb.ka_coulomb(math.radians(0),math.radians(0),math.radians(28),math.radians(0))
-ka2= empujeCoulomb.ka_coulomb(math.radians(0),math.radians(0),math.radians(30),math.radians(5))
-ka3= empujeCoulomb.ka_coulomb(math.radians(0),math.radians(0),math.radians(32),math.radians(10))
-ka4= empujeCoulomb.ka_coulomb(math.radians(-20),math.radians(-20),math.radians(40),math.radians(10))
+ka1= earth_pressure.ka_coulomb(math.radians(0),math.radians(0),math.radians(28),math.radians(0))
+ka2= earth_pressure.ka_coulomb(math.radians(0),math.radians(0),math.radians(30),math.radians(5))
+ka3= earth_pressure.ka_coulomb(math.radians(0),math.radians(0),math.radians(32),math.radians(10))
+ka4= earth_pressure.ka_coulomb(math.radians(-20),math.radians(-20),math.radians(40),math.radians(10))
 
 ratio1= abs(ka1-0.3610)/0.3610
 ratio2= abs(ka2-0.3189)/0.3189
