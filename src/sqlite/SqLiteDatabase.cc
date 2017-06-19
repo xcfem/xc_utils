@@ -70,7 +70,7 @@ SqLiteQuery *SqLiteDatabase::NuevaQuery(const std::string &nmb)
           std::cerr << "SqLiteObject::NuevaQuery; el puntero al objeto es nulo." << std::endl;
       }
     else
-      if(verborrea>1)
+      if(verbosity>1)
         std::clog << "SqLiteObject::NuevaQuery; no se pudo crear la consulta de nombre: '"
                   << nmb << "' ya existe un objeto con ese nombre." << std::endl;
     return retval;

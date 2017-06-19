@@ -192,11 +192,11 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetVariables(const Load
         LoadCombinationVector SQ;
         for(size_t i=0;i<nq;i++) //i: Índice de la acción determinante.
           {
-            if(verborrea>1) std::clog << std::endl << "    Obteniendo combinaciones de acciones variables con acción determinante: " << i << " ...";
+            if(verbosity>1) std::clog << std::endl << "    Obteniendo combinaciones de acciones variables con acción determinante: " << i << " ...";
             LoadCombinationVector temp= GetLoadCombinationsQ(elu,sit_accidental,v,i,v-1); //Acción determinante con valor v
                                                                                      //resto con valor v-1.
             SQ= LoadCombinationVector::Concat(SQ,temp,Action::zero);
-            if(verborrea>1) std::clog << "hecho." << std::endl;
+            if(verbosity>1) std::clog << "hecho." << std::endl;
           }
         retval= LoadCombinationVector::ProdCartesiano(permanentes,SQ,Action::zero);
         if(elu) retval= LoadCombinationVector::Concat(permanentes,retval,Action::zero); //Si ELU consideramos también las cargas permanentes SOLAS.
@@ -237,18 +237,18 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccSis(const LoadCom
 //! @brief Devuelve las combinaciones correspondientes a estados límite últimos en situaciones persistentes o transitorias.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPersistentesOTransit(void) const
   {
-    if(verborrea>1) std::clog << "Obteniendo combinaciones de acciones para ELU en situaciones persistentes o transitorias..." << std::endl; 
-    if(verborrea>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
+    if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para ELU en situaciones persistentes o transitorias..." << std::endl; 
+    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
     LoadCombinationVector retval= GetPermanentes(true,false); //ELU, situación no accidental.
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
     retval= GetVariables(retval,true,false,0);//ELU, acción determinante con valor característico
                                               //resto con valor de combinación.
-    if(verborrea>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
+    if(verbosity>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
     retval= filtraCombsEsclavasHuerfanas(getCompatibles(retval)); //Filtramos las que contienen acciones incompatibles.
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
     return retval;
   }
 
@@ -258,21 +258,21 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccidentales(void) c
   {
     LoadCombinationVector retval;
     if(A.Vacia()) return retval; //No hay acciones accidentales.
-    if(verborrea>1) std::clog << "Obteniendo combinaciones de acciones para ELU en situaciones accidentales..." << std::endl;
-    if(verborrea>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
+    if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para ELU en situaciones accidentales..." << std::endl;
+    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
     retval= GetPermanentes(true,true); //ELU, situación accidental.
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
     retval= GetVariables(retval,true,true,2); //ELU, acción determinante con valor frecuente
                                               //resto con valor de cuasipermanente.
-    if(verborrea>1) std::clog << "  hecho." << std::endl;
-    if(verborrea>1) std::clog << "  Obteniendo combinaciones de acciones accidentales...";
+    if(verbosity>1) std::clog << "  hecho." << std::endl;
+    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones accidentales...";
     retval= GetAccSis(retval,A);
-    if(verborrea>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
+    if(verbosity>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
     retval= filtraCombsEsclavasHuerfanas(getCompatibles(retval)); //Filtramos las que contienen acciones incompatibles.
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
     return retval;
   }
 
@@ -283,24 +283,24 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetSismicas(void) const
   {
     LoadCombinationVector retval;
     if(AS.Vacia()) return retval; //No hay acciones sismicas.
-    if(verborrea>1) std::clog << "Obteniendo combinaciones de acciones para ELU en situaciones sísmicas..." << std::endl;
-    if(verborrea>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
+    if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para ELU en situaciones sísmicas..." << std::endl;
+    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
     retval= GetPermanentes(true,true); //ELU, situación accidental.
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
     if(!Q.Vacia()) //Hay acciones variables.
       {
         LoadCombinationVector SQ= GetLoadCombinationsQ(true,true,2); //ELU, todas con valor cuasipermanente.
         retval= LoadCombinationVector::ProdCartesiano(retval,SQ,Action::zero);
       }
-    if(verborrea>1) std::clog << "  hecho." << std::endl;
-    if(verborrea>1) std::clog << "  Obteniendo combinaciones de acciones sísmicas...";
+    if(verbosity>1) std::clog << "  hecho." << std::endl;
+    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones sísmicas...";
     retval= GetAccSis(retval,AS);
-    if(verborrea>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
+    if(verbosity>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
     retval= filtraCombsEsclavasHuerfanas(getCompatibles(retval)); //Filtramos las que contienen acciones incompatibles.
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
     return retval;
   }
 
@@ -314,7 +314,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCombELU(void) const
     LoadCombinationVector sismicas= GetSismicas();
     retval= LoadCombinationVector::Concat(retval,sismicas,0.0);
     retval= filtraCombsEsclavasHuerfanas(getCompatibles(retval)); //Filtramos las que contienen acciones incompatibles.
-    if(verborrea>1) std::clog << "  Calculadas " << retval.size() << " combinaciones ELU." << std::endl;
+    if(verbosity>1) std::clog << "  Calculadas " << retval.size() << " combinaciones ELU." << std::endl;
     retval.Numera("H-ELU-");
     return retval;
   }
@@ -326,18 +326,18 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCombELU(void) const
 //! @brief Devuelve las combinaciones correspondientes a situaciones poco frecuentes en ESTADO LIMITE DE SERVICIO.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPocoFrecuentes(void) const
   {
-    if(verborrea>1) std::clog << "Obteniendo combinaciones de acciones para ELS en situaciones persistentes o transitorias..." << std::endl; 
-    if(verborrea>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
+    if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para ELS en situaciones persistentes o transitorias..." << std::endl; 
+    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
     LoadCombinationVector retval= GetPermanentes(false,false); //ELS, situación no accidental (obviamente).
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
     retval= GetVariables(retval,false,false,0);//ELS, acción determinante con valor característico
                                                //resto con valor de combinación.
-    if(verborrea>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
+    if(verbosity>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
     retval= filtraCombsEsclavasHuerfanas(getCompatibles(retval)); //Filtramos las que contienen acciones incompatibles.
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
     return retval;
   }
 
@@ -345,18 +345,18 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPocoFrecuentes(void)
 //! @brief Devuelve las combinaciones correspondientes a situaciones persistentes o transitorias.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetFrecuentes(void) const
   {
-    if(verborrea>1) std::clog << "Obteniendo combinaciones de acciones para ELS en situaciones persistentes o transitorias..." << std::endl; 
-    if(verborrea>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
+    if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para ELS en situaciones persistentes o transitorias..." << std::endl; 
+    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
     LoadCombinationVector retval= GetPermanentes(false,false); //ELS, situación no accidental (obviamente).
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
     retval= GetVariables(retval,false,false,1);//ELS, acción determinante con valor frecuente
                                                //resto con valor de cuasipermanente. 
-    if(verborrea>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
+    if(verbosity>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
     retval= filtraCombsEsclavasHuerfanas(getCompatibles(retval)); //Filtramos las que contienen acciones incompatibles.
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
     return retval;
   }
 
@@ -364,17 +364,17 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetFrecuentes(void) con
 //! @brief Devuelve las combinaciones correspondientes a situaciones persistentes o transitorias.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCuasiPermanentes(void) const
   {
-    if(verborrea>1) std::clog << "Obteniendo combinaciones de acciones para ELS en situaciones persistentes o transitorias..." << std::endl; 
-    if(verborrea>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
+    if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para ELS en situaciones persistentes o transitorias..." << std::endl; 
+    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
     LoadCombinationVector retval= GetPermanentes(false,false); //ELS, situación no accidental.
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
     retval= GetVariables(retval,false,false,2);//ELS, todas con valor cuasipermanente.
-    if(verborrea>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
+    if(verbosity>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
     retval= filtraCombsEsclavasHuerfanas(getCompatibles(retval)); //Filtramos las que contienen acciones incompatibles.
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "hecho." << std::endl;
-    if(verborrea>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
+    if(verbosity>1) std::clog << "hecho." << std::endl;
     return retval;
   }
 
@@ -388,7 +388,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCombELS(void) const
     LoadCombinationVector cp= GetCuasiPermanentes();
     retval= LoadCombinationVector::Concat(retval,cp,0.0);
     retval= filtraCombsEsclavasHuerfanas(getCompatibles(retval)); //Filtramos las que contienen acciones incompatibles.
-    if(verborrea>1) std::clog << "  Calculadas " << retval.size() << " combinaciones ELS." << std::endl;
+    if(verbosity>1) std::clog << "  Calculadas " << retval.size() << " combinaciones ELS." << std::endl;
     retval.Numera("H-ELS-");
     return retval;
   }

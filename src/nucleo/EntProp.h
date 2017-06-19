@@ -34,12 +34,13 @@ class EntProp
   private:
     EntProp *owner; //! Objeto propietario de ESTE.
   protected:
-    static int verborrea; //!< Nivel de verborrea.
+    static int verbosity; //!< Verbosity level.
    public:
     EntProp(EntProp *owr= nullptr);
     EntProp(const EntProp &otro);
     EntProp &operator=(const EntProp &otro);
-    static const int &GetNivelVerborrea(void);
+    static const int &getVerbosityLevel(void);
+    static void setVerbosityLevel(const int &);
     virtual std::string nombre_clase(void) const;
     void set_owner(EntProp *owr);
     inline EntProp *Owner(void)

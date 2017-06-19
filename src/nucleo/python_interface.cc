@@ -63,8 +63,11 @@ BOOST_PYTHON_MODULE(xc_base)
 
     const EntProp *(EntProp::*getOwner)(void) const= &EntProp::Owner;
     class_<EntProp,EntProp *, boost::noncopyable  >("EntProp", no_init)
-      //.add_property("verbosityLevel", make_function( &EntProp::GetNivelVerborrea, return_internal_reference<>() ), "returns verbosity level.")
       .add_property("owner", make_function( getOwner, return_internal_reference<>() ), "returns object's owner (container).")
+      .def("setVerbosityLevel", &EntProp::setVerbosityLevel,"Set verbosity level.")
+        .staticmethod("setVerbosityLevel")
+      // .def("getVerbosityLevel", make_function(&EntProp::getVerbosityLevel, return_internal_reference<>() ),"Get verbosity level.")
+      //   .staticmethod("getVerbosityLevel")
       ;
 
     class_<EntCmd, bases<EntProp> >("EntCmd")

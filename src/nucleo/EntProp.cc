@@ -35,7 +35,7 @@
 #include "CImg.h"
 
 //Variables estáticas de EntProp.
-int EntProp::verborrea= 0;
+int EntProp::verbosity= 1;
 
 //! @brief Constructor por defecto.
 EntProp::EntProp(EntProp *owr)
@@ -81,9 +81,13 @@ std::string EntProp::nombre_clase(void) const
     return tmp;
   }
 
-//! @brief Devuelve el nivel de verborrea.
-const int &EntProp::GetNivelVerborrea(void)
-  { return verborrea; }
+//! @brief Get the value of the verbosity level.
+const int &EntProp::getVerbosityLevel(void)
+  { return verbosity; }
+
+//! @brief Set the value of the verbosity level.
+void EntProp::setVerbosityLevel(const int &vl)
+  { verbosity= vl; }
 
 //! @brief Asigna el propietario del objeto.
 void EntProp::set_owner(EntProp *owr)

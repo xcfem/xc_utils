@@ -37,7 +37,7 @@
 Segmento2d::Segmento2d(const Pos2d &p1,const Pos2d &p2)
   : Linea2d(), cgseg(p1.ToCGAL(),p2.ToCGAL())
   {
-    if(verborrea>2 && EsDegenerada())
+    if(verbosity>2 && EsDegenerada())
       {
         clog << "Segmento2d::Segmento2d: La recta es degenerada, los puntos: "
              << p1 << " y " << p2 << " coinciden." << endl;
