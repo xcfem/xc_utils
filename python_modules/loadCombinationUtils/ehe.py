@@ -5,10 +5,10 @@ import loadCombinations
 
 coefs_psi_EHE= loadCombinations.PsiCoeffsDict()
 
-coefs_psi_EHE.insert("permanente",loadCombinations.PsiCoeffs(1,1,1))
-coefs_psi_EHE.insert("nieve",loadCombinations.PsiCoeffs(0.6,0.2,0.0))
-coefs_psi_EHE.insert("viento",loadCombinations.PsiCoeffs(0.6,0.5,0.0))
-coefs_psi_EHE.insert("term",loadCombinations.PsiCoeffs(0.6,0.5,0.0))
+coefs_psi_EHE.insert("permanent",loadCombinations.PsiCoeffs(1,1,1))
+coefs_psi_EHE.insert("snow",loadCombinations.PsiCoeffs(0.6,0.2,0.0))
+coefs_psi_EHE.insert("wind",loadCombinations.PsiCoeffs(0.6,0.5,0.0))
+coefs_psi_EHE.insert("thermal",loadCombinations.PsiCoeffs(0.6,0.5,0.0))
 coefs_psi_EHE.insert("sismo",loadCombinations.PsiCoeffs(0,0,0))
 coefs_psi_EHE.insert("azotea_solo_conserv",loadCombinations.PsiCoeffs(0.7,0.5,0.3))
 coefs_psi_EHE.insert("vivienda",loadCombinations.PsiCoeffs(0.7,0.5,0.3))

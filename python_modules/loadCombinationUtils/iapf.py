@@ -30,10 +30,10 @@ gammaf_accidentales_IAPF= loadCombinations.GammaF(loadCombinations.GammaFELU(0,0
 
 coefs_psi_IAPF= loadCombinations.PsiCoeffsDict()
 
-coefs_psi_IAPF.insert("permanente",loadCombinations.PsiCoeffs(1,1,1))
-coefs_psi_IAPF.insert("nieve",loadCombinations.PsiCoeffs(0.6,0.2,0.0))
-coefs_psi_IAPF.insert("viento",loadCombinations.PsiCoeffs(0.6,0.5,0.0))
-coefs_psi_IAPF.insert("term",loadCombinations.PsiCoeffs(0.6,0.5,0.0))
+coefs_psi_IAPF.insert("permanent",loadCombinations.PsiCoeffs(1,1,1))
+coefs_psi_IAPF.insert("snow",loadCombinations.PsiCoeffs(0.6,0.2,0.0))
+coefs_psi_IAPF.insert("wind",loadCombinations.PsiCoeffs(0.6,0.5,0.0))
+coefs_psi_IAPF.insert("thermal",loadCombinations.PsiCoeffs(0.6,0.5,0.0))
 coefs_psi_IAPF.insert("sismo",loadCombinations.PsiCoeffs(0,0,0))
 coefs_psi_IAPF.insert("arranque_frenado",loadCombinations.PsiCoeffs(0.6,0.2,0))
 coefs_psi_IAPF.insert("por_defecto",loadCombinations.PsiCoeffs(0.7,0.7,0.6))

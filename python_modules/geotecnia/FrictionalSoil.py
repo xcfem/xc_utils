@@ -29,7 +29,7 @@ class FrictionalSoil(object):
     '''Returns Jaky's earth pressure at rest.'''
     return 1.0-math.sin(self.phi)
   def Kp(self):
-    '''assive earth pressure coefficient.'''
+    '''Passive earth pressure coefficient.'''
     sinPhi= math.sin(self.phi)
     return (1+sinPhi)/(1-sinPhi)
   def gamma(self):

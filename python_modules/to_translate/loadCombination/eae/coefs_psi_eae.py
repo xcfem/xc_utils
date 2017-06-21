@@ -13,8 +13,8 @@
 
     \defCoefs["eae_por_defecto"]{\psi_0{0.7} \psi_1{0.7} \psi_2{0.6}}
 
-    \defCoefs["eae_viento"]{\psi_0{0.6} \psi_1{0.2} \psi_2{0.0}}
-    \defCoefs["eae_nieve_mas1000"]{\psi_0{0.7} \psi_1{0.5} \psi_2{0.2}}
-    \defCoefs["eae_nieve_menos1000"]{\psi_0{0.5} \psi_1{0.2} \psi_2{0.0}}
-    \defCoefs["eae_term"]{\psi_0{0.6} \psi_1{0.5} \psi_2{0.0}}
+    \defCoefs["eae_wind"]{\psi_0{0.6} \psi_1{0.2} \psi_2{0.0}}
+    \defCoefs["eae_snow_mas1000"]{\psi_0{0.7} \psi_1{0.5} \psi_2{0.2}}
+    \defCoefs["eae_snow_menos1000"]{\psi_0{0.5} \psi_1{0.2} \psi_2{0.0}}
+    \defCoefs["eae_thermal"]{\psi_0{0.6} \psi_1{0.5} \psi_2{0.0}}
   }
