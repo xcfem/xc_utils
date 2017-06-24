@@ -71,6 +71,12 @@ class_<Recta3d, bases<Linea3d> >("Recta3d")
   .def("getProyVector3d",ProyVector3d)
   .def("getVDir",&Recta3d::VDir)
   .def("getPoint",&Recta3d::PtoParametricas)
+  .def("getXY2DProjection",&Recta3d::ProyeccionXY2d,"Return the projection of the line onto the XY plane as a 2D line.")
+  .def("getXZ2DProjection",&Recta3d::ProyeccionXZ2d,"Return the projection of the line onto the XZ plane as a 2D line.")
+  .def("getYZ2DProjection",&Recta3d::ProyeccionYZ2d,"Return the projection of the line onto the YZ plane as a 2D line.")
+  .def("getXY3DProjection",&Recta3d::ProyeccionXY3d,"Return the projection of the line onto the XY plane as a 3D line.")
+  .def("getXZ3DProjection",&Recta3d::ProyeccionXZ3d,"Return the projection of the line onto the XZ plane as a 3D line.")
+  .def("getYZ3DProjection",&Recta3d::ProyeccionYZ3d,"Return the projection of the line onto the YZ plane as a 3D line.")
  ;
 
 GeomObj::list_Pos2d (Polilinea2d::*intersectionWithLine)(const Recta2d &) const= &Polilinea2d::Interseccion;
