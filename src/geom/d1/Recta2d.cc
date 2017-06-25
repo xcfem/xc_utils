@@ -141,8 +141,8 @@ GEOM_RT Recta2d::b(void) const
 GEOM_RT Recta2d::c(void) const
   { return cgr.c(); }
 
-//! @brief Devuelve la pendiente de la recta.
-GEOM_FT Recta2d::GetPendiente(void) const
+//! @brief Return the slope of the line.
+GEOM_FT Recta2d::getSlope(void) const
   { return GetParamA(); }
 
 //! @brief Return the a parameter (y=a*x+b) of the horizontal

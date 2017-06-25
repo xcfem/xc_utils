@@ -54,7 +54,7 @@ class Segmento3d : public Linea3d
     Recta3d RectaSoporte(void) const;
     Pos3d Origen(void) const;
     Pos3d Destino(void) const;
-    GEOM_FT GetPendiente(void) const;
+    GEOM_FT getSlope(void) const;
     const Pos3d Punto(const int &i) const;
     Pos3d PtoParametricas(const GEOM_FT &lambda) const;
     double getParamCooNatural(const GEOM_FT &) const;

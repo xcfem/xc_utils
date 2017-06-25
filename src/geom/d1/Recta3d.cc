@@ -159,7 +159,7 @@ Recta2d Recta3d::YZ2DProjection(void) const
   }
 
 //! brief Devuelve el ángulo con el plano XY.
-GEOM_FT Recta3d::GetPendiente(void) const
+GEOM_FT Recta3d::getSlope(void) const
   { return angulo(*this,PlanoXY3d); }
 
 bool Recta3d::Paralela(const Recta3d &r) const

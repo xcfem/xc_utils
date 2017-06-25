@@ -69,8 +69,8 @@ Pos3d Segmento3d::Origen(void) const
   { return Pos3d(cgseg.source()); }
 Pos3d Segmento3d::Destino(void) const
   { return Pos3d(cgseg.target()); }
-GEOM_FT Segmento3d::GetPendiente(void) const
-  { return RectaSoporte().GetPendiente(); }
+GEOM_FT Segmento3d::getSlope(void) const
+  { return RectaSoporte().getSlope(); }
 const Pos3d Segmento3d::Punto(const int &i) const
   { return Pos3d(cgseg.point(i)); }
 

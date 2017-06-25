@@ -388,8 +388,8 @@ Recta3d Plano3d::TrazaXZ(void) const
 Recta3d Plano3d::TrazaYZ(void) const
   { return Interseccion(PlanoYZ3d); }
 
-//! @brief Devuelve la recta de máxima pendiente del plano respecto al XY.
-Recta3d Plano3d::RectaMaximaPendienteXY(void) const
+//! @brief Return the maximum slope line with respect to the XY plane.
+Recta3d Plano3d::getMaximumSlopeLineXY(void) const
   {
     Recta3d retval;
     Recta3d traza= TrazaXY();
@@ -402,8 +402,8 @@ Recta3d Plano3d::RectaMaximaPendienteXY(void) const
     return retval;
   }
 
-//! @brief Devuelve la recta de máxima pendiente del plano respecto al XZ.
-Recta3d Plano3d::RectaMaximaPendienteXZ(void) const
+//! @brief Return the maximum slope line with respect to the XZ plane.
+Recta3d Plano3d::getMaximumSlopeLineXZ(void) const
   {
     Recta3d retval;
     Recta3d traza= TrazaXZ();
@@ -416,8 +416,8 @@ Recta3d Plano3d::RectaMaximaPendienteXZ(void) const
     return retval;
   }
 
-//! @brief Devuelve la recta de máxima pendiente del plano respecto al YZ.
-Recta3d Plano3d::RectaMaximaPendienteYZ(void) const
+//! @brief Return the maximum slope line with respect to the YZ plane.
+Recta3d Plano3d::getMaximumSlopeLineYZ(void) const
   {
     Recta3d retval;
     Recta3d traza= TrazaYZ();
@@ -438,16 +438,16 @@ GEOM_FT Plano3d::Angulo(const Plano3d &p) const
 GEOM_FT Plano3d::Angulo(const Vector3d &v) const
   { return angulo(*this,v); }
 
-//! @brief Devuelve la pendiente respecto al plano XY
-GEOM_FT Plano3d::AnguloPendienteXY(void) const
+//! @brief Returns the slope angle with respect to the XY plane
+GEOM_FT Plano3d::getSlopeAngleXY(void) const
   { return angulo(*this,PlanoXY3d); }
 
-//! @brief Devuelve la pendiente respecto al plano XZ
-GEOM_FT Plano3d::AnguloPendienteXZ(void) const
+//! @brief Returns the slope angle with respect to the XZ plane
+GEOM_FT Plano3d::getSlopeAngleXZ(void) const
   { return angulo(*this,PlanoXZ3d); }
 
-//! @brief Devuelve la pendiente respecto al plano YZ
-GEOM_FT Plano3d::AnguloPendienteYZ(void) const
+//! @brief Returns the slope angle with respect to the YZ plane
+GEOM_FT Plano3d::getSlopeAngleYZ(void) const
   { return angulo(*this,PlanoYZ3d); }
 
 //! @brief Calcula el plano que mejor se ajusta a la nube de puntos.

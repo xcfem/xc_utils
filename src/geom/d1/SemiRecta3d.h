@@ -64,8 +64,8 @@ class SemiRecta3d : public Linea3d
       { return Recta3d(cgsr.supporting_line()); }
     Pos3d Origen(void) const
       { return Pos3d(cgsr.source()); }
-    inline GEOM_FT GetPendiente(void) const
-      { return RectaSoporte().GetPendiente(); }
+    inline GEOM_FT getSlope(void) const
+      { return RectaSoporte().getSlope(); }
     const Pos3d Punto(const int &i) const
       { return Pos3d(cgsr.point(i)); }
     //! @brief Devuelve un punto de la recta a una "distancia" lambda del origen.

@@ -98,7 +98,7 @@ class Recta3d : public Linea3d
     Recta2d XZ2DProjection(void) const;
     Recta2d YZ2DProjection(void) const;
 
-    GEOM_FT GetPendiente(void) const;
+    GEOM_FT getSlope(void) const;
     //! @brief Returns the parametric equations of the line as:
     //!   v[0]: point in the line.
     //!   v[1]: dir vector for the line.

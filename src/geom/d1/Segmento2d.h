@@ -65,8 +65,8 @@ class Segmento2d : public Linea2d
       { return Pos2d(cgseg.source()); }
     Pos2d Destino(void) const
       { return Pos2d(cgseg.target()); }
-    inline GEOM_FT GetPendiente(void) const
-      { return RectaSoporte().GetPendiente(); }
+    inline GEOM_FT getSlope(void) const
+      { return RectaSoporte().getSlope(); }
     const Pos2d Punto(const int &i) const
       { return Pos2d(cgseg.point(i)); }
     Pos2d PtoParametricas(const GEOM_FT &) const;

@@ -132,9 +132,9 @@ class Plano3d : public Superficie3d
     Recta3d TrazaXY(void) const;
     Recta3d TrazaXZ(void) const;
     Recta3d TrazaYZ(void) const;
-    Recta3d RectaMaximaPendienteXY(void) const;
-    Recta3d RectaMaximaPendienteXZ(void) const;
-    Recta3d RectaMaximaPendienteYZ(void) const;
+    Recta3d getMaximumSlopeLineXY(void) const;
+    Recta3d getMaximumSlopeLineXZ(void) const;
+    Recta3d getMaximumSlopeLineYZ(void) const;
 
     bool Interseca(const Plano3d &p) const;
     Recta3d Interseccion(const Plano3d &p) const;
@@ -147,9 +147,9 @@ class Plano3d : public Superficie3d
 
     GEOM_FT Angulo(const Plano3d &p) const;
     GEOM_FT Angulo(const Vector3d &) const;
-    GEOM_FT AnguloPendienteXY(void) const;
-    GEOM_FT AnguloPendienteXZ(void) const;
-    GEOM_FT AnguloPendienteYZ(void) const;
+    GEOM_FT getSlopeAngleXY(void) const;
+    GEOM_FT getSlopeAngleXZ(void) const;
+    GEOM_FT getSlopeAngleYZ(void) const;
 
     GEOM_FT AjusteMinimosCuadrados(const GeomObj3d::list_Pos3d &lp);
 

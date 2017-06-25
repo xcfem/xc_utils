@@ -65,8 +65,8 @@ class SemiRecta2d : public Linea2d
       { return Recta2d(cgsr.supporting_line()); }
     Pos2d Origen(void) const
       { return Pos2d(cgsr.source()); }
-    inline GEOM_FT GetPendiente(void) const
-      { return RectaSoporte().GetPendiente(); }
+    inline GEOM_FT getSlope(void) const
+      { return RectaSoporte().getSlope(); }
     const Pos2d Punto(const int &i) const
       { return Pos2d(cgsr.point(i)); }
     Pos2d PtoParametricas(const GEOM_FT &lambda) const
