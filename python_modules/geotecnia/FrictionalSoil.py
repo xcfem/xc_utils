@@ -17,21 +17,28 @@ class FrictionalSoil(object):
   :ivar phi:    internal friction angle of the soil
   :ivar rho:   soil density (mass per unit volume)
   '''
-  def __init__(self,phi,rho= 2100.0):
+  def __init__(self,phi,rho= 2100.0,gammaMPhi= 1.0):
     '''Constructor.
 
-    :param phi:    internal friction angle of the soil
-    :param rho:   soil density (mass per unit volume)
+        Args:
+            :phi: (float) internal friction angle of the soil
+            :rho: (float) soil density (mass per unit volume)
+            :gammaMPhi: (float) partial reduction factor for internal 
+                        friction angle of the soil.
     '''
     self.phi= phi
+    self.gammaMPhi= gammaMPhi
     self.rho= rho
   def K0Jaky(self):
     '''Returns Jaky's earth pressure at rest.'''
-    return 1.0-math.sin(self.phi)
+    return 1.0-math.sin(self.getDesignPhi())
   def Kp(self):
     '''Passive earth pressure coefficient.'''
-    sinPhi= math.sin(self.phi)
+    sinPhi= math.sin(self.getDesignPhi())
     return (1+sinPhi)/(1-sinPhi)
   def gamma(self):
     '''Unit weight of soil'''
     return self.rho*g
+  def getDesignPhi(self):
+    '''Return the design value of the soil internal friction angle.'''
+    return self.phi/self.gammaMPhi

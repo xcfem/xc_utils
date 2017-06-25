@@ -24,16 +24,20 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
 
   :ivar c:    soil cohesion
   '''
-  def __init__(self,phi,c,rho= 2100.0):
+  def __init__(self,phi,c,rho= 2100.0,gammaMPhi= 1.0,gammaMc= 1.0):
     '''Constructor.
 
-    :param phi:    internal friction angle of the soil.
-    :param c: soil cohesion.
-    :param rho:   soil density (mass per unit volume).
+        Args:
+            :c: (float) soil cohesion.
+            :gammaMc: (float) partial reduction factor for soil cohesion.
     '''
     super(FrictionalCohesionalSoil,self).__init__(phi,rho)
     self.c= c
+    self.gammaMc= gammaMc
     
+  def getDesignC(self):
+    '''Return the design value of the soil cohesion.'''
+    return self.c/self.gammaMc
   def sq(self,Beff,Leff):
     '''Factor that introduces the effect of foundation shape on
        the overburden component.
@@ -64,7 +68,7 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
                     (see figure 12 in page 44 of reference[2]).
     '''
     k= min(D,2.0*Beff)/Beff
-    return 1+2*math.tan(self.phi)*(1-math.sin(self.phi))**2*math.atan(k)
+    return 1+2*math.tan(self.getDesignPhi())*(1-math.sin(self.getDesignPhi()))**2*math.atan(k)
 
   def tq(self,psi= 0.0):
     '''Factor that introduces the effect of the proximity of an slope.
@@ -82,14 +86,14 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
                    (see figure 4.8 in page 104 of reference [3])
                    favourable effect when eta<0.0.
     '''
-    if(self.phi!=0):
-      return math.exp(-2*eta*math.tan(self.phi))
+    if(self.getDesignPhi()!=0):
+      return math.exp(-2*eta*math.tan(self.getDesignPhi()))
     else:
       return 1.0
   
   def Nq(self):
     '''Returns the overburden multiplier for the Brinch-Hasen formula.'''
-    return self.Kp()*math.exp(math.pi*math.tan(self.phi))
+    return self.Kp()*math.exp(math.pi*math.tan(self.getDesignPhi()))
 
   def sc(self,Beff,Leff):
     '''Factor that introduces the effect of foundation shape on
@@ -116,11 +120,11 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
     :param Leff: Length of the effective foundation area
                 (see figure 12 in page 44 of reference[2]).
     '''
-    if(self.phi!=0.0):
+    if(self.getDesignPhi()!=0.0):
       iq= self.iq(deltaB,deltaL)
       return (iq*self.Nq()-1.0)/(self.Nq()-1.0)
     else: #See expresion (15) in reference [2]
-      resist= Beff*Leff*self.c
+      resist= Beff*Leff*self.getDesignC()
       if(Hload<=resist):
         twoAlpha= math.acos(Hload/resist)
         return 0.5+(twoAlpha+math.sin(twoAlpha))/(math.pi+2.0)
@@ -136,7 +140,7 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
                     (see figure 12 in page 44 of reference[2]).
     '''
     k= min(D,2.0*Beff)/Beff
-    return 1+2*self.Nq()/self.Nc()*(1-math.sin(self.phi))**2*math.atan(k)
+    return 1+2*self.Nq()/self.Nc()*(1-math.sin(self.getDesignPhi()))**2*math.atan(k)
   
   def tc(self,psi= 0.0):
     '''Factor that introduces the effect of the proximity of an slope.
@@ -145,7 +149,7 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
                    (see figure 4.7 in page 102 of reference [3])
                    must be determined by iterations.
     '''
-    if(self.phi!=0.0):
+    if(self.getDesignPhi()!=0.0):
       return (self.tq(psi)*self.Nq()-1.0)/(self.Nq()-1.0)
     else:
       return 1-0.4*psi
@@ -157,15 +161,15 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
                    (see figure 4.8 in page 104 of reference [3])
                    favourable effect when eta<0.0.
     '''
-    if(self.phi!=0.0):
+    if(self.getDesignPhi()!=0.0):
       return (self.rq(eta)*self.Nq()-1.0)/(self.Nq()-1.0)
     else:
       return 1-0.4*eta
 
   def Nc(self):
     '''Returns the cohesion multiplier for the Brinch-Hasen formula.'''
-    if(self.phi!=0.0):
-      return (self.Nq()-1.0)*(1.0/math.tan(self.phi))
+    if(self.getDesignPhi()!=0.0):
+      return (self.Nq()-1.0)*(1.0/math.tan(self.getDesignPhi()))
     else:
       return math.pi+2.0
                                                          
@@ -220,7 +224,7 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
        :param NgammaCoef: 1.5 in reference [1], 1.8 in reference 2 
                           and 2 in reference 3
     '''
-    return NgammaCoef*(self.Nq()-1.0)*math.tan(self.phi)
+    return NgammaCoef*(self.Nq()-1.0)*math.tan(self.getDesignPhi())
 
   def quGamma(self,D,Beff,Leff,Vload,HloadB,HloadL,NgammaCoef= 1.5,psi= 0.0,eta= 0.0):
     '''Gamma "component" of the ultimate bearing capacity pressure of the soil.
@@ -263,7 +267,7 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
     deltaB= math.atan(HloadB/Vload)
     deltaL= math.atan(HloadL/Vload)
     Hload= math.sqrt(HloadB**2+HloadL**2)
-    return self.c*self.Nc()*self.dc(D,Beff)*self.ic(deltaB,deltaL,Hload,Beff,Leff)*self.sc(Beff,Leff)*self.tc(psi)*self.rc(eta)
+    return self.getDesignC()*self.Nc()*self.dc(D,Beff)*self.ic(deltaB,deltaL,Hload,Beff,Leff)*self.sc(Beff,Leff)*self.tc(psi)*self.rc(eta)
 
   def quQ(self,q,D,Beff,Leff,Vload,HloadB,HloadL,psi= 0.0,eta= 0.0):
     '''Overburden "component of the ultimate bearing capacity pressure of the soil.
