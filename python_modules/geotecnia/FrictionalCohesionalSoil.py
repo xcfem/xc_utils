@@ -3,6 +3,7 @@ from __future__ import division
 import math
 import FrictionalSoil as fs
 from miscUtils import LogMessages as lmsg
+from scipy.optimize import fminbound
 
 '''FrictionalCohesionalSoil.py: soil with friction and cohesion soil model.
 
@@ -10,7 +11,7 @@ References:
 
 [1] Chapter 4-3 of Foundation Analysis and Design, Ed. 5 by Joseph E. Bowles.
 [2] Brinch Hansen. A general formula for bearing capacity. The Danish Geotechnical Institute. Bulletin 11. Copenhagen 1961.
-[3] Guía de cimentaciones en obras de carretera. Ministerio de Fomento (spain). 2002.
+[3] Guía de cimentaciones en obras de carretera. Ministerio de Fomento (spain). 2002 (https://books.google.ch/books?id=a0eoygAACAAJ).
 '''
 
 __author__= "Luis C. Pérez Tato (LCPT)"
@@ -314,3 +315,113 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
     cComp= self.quCohesion(D,Beff,Leff,Vload,HloadB,HloadL,psi,eta)
     qComp= self.quQ(q,D,Beff,Leff,Vload,HloadB,HloadL,psi,eta)
     return gammaComp+cComp+qComp
+
+class StratifiedSoil(object):
+  '''Soil with layers with different properties.
+
+  Soil with layers of different properties as described in
+  4.5.5.7 "Guía de cimentaciones en obras de carreteras"
+  (https://books.google.ch/books?id=a0eoygAACAAJ)
+  2009
+
+  :ivar hi:    (float list) layer thicknesses.
+  :ivar rhoi: (float list) layer densities.
+  :ivar phii: (float list) layer internal friction angle.
+  :ivar ci: (float list) layer cohesions.
+  '''
+  def __init__(self,hi,rhoi,phii,ci):
+    '''Constructor.
+
+        Args:
+            :hi:    (float list) layer thicknesses.
+            :rhoi: (float list) layer densities.
+            :phii: (float list) layer internal friction angle.
+            :ci: (float list) layer cohesions.
+    '''
+    self.hi= hi
+    self.rhoi= rhoi
+    self.phii= phii
+    self.ci= ci
+
+  def getAffectedHeights(self,affectedDepth):
+    '''Returns the layer at depths less than H.'''
+    th= 0.0
+    retval= list()
+    for h in self.hi:
+      if((th+h)<affectedDepth):
+        retval.append(h)
+      else:
+        retval.append(affectedDepth-th)
+        break
+      th+= h
+    return retval
+  def getEquivalentRho(self,affectedDepth):
+    '''Return equivalent density.'''
+    affectedHeights= self.getAffectedHeights(affectedDepth)
+    sz= len(affectedHeights)
+    retval= 0.0
+    for i in range(0,sz):
+      h= affectedHeights[i]
+      rho= self.rhoi[i]
+      retval+= h*rho
+    retval/= affectedDepth
+    return retval
+  def getEquivalentC(self,affectedDepth):
+    '''Return equivalent cohesion.'''
+    affectedHeights= self.getAffectedHeights(affectedDepth)
+    sz= len(affectedHeights)
+    retval= 0.0
+    for i in range(0,sz):
+      h= affectedHeights[i]
+      c= self.ci[i]
+      retval+= h*c
+    retval/= affectedDepth
+    return retval
+  def getEquivalentPhi(self,affectedDepth):
+    '''Return equivalent cohesion.'''
+    affectedHeights= self.getAffectedHeights(affectedDepth)
+    sz= len(affectedHeights)
+    retval= 0.0
+    for i in range(0,sz):
+      h= affectedHeights[i]
+      phi= self.phii[i]
+      retval+= h*math.log(math.tan(phi))
+    retval/= affectedDepth
+    retval= math.exp(retval)
+    retval= math.atan(retval)
+    return retval
+
+  def computeAffectedDepth(self,Beff):
+    '''Computes affected depth.
+
+        Args:
+            :Beff: (float) width of the effective foundation area
+                  (see figure 12 in page 44 of reference[2]).
+    '''
+    Bmin= Beff
+    Bmax= 3.0*Beff
+    # define the starting guess 
+    start_guess= (Bmin+Bmax)/2.0
+
+    # define the acceptable range for Beff
+    my_ranges = (Bmin,Bmax)
+
+    # minimize 
+    return fminbound(self.getEquivalentPhi, Bmin, Bmax)
+
+  def getEquivalentSoil(self,Beff,gMPhi,gMc):
+    '''Computes affected depth.
+
+        Args:
+            :Beff: (float) width of the effective foundation area
+                  (see figure 12 in page 44 of reference[2]).
+            :gammaMPhi: (float) partial reduction factor for internal 
+                        friction angle of the soil.
+            :gammaMc: (float) partial reduction factor for soil cohesion.
+    '''
+    H= self.computeAffectedDepth(1.5)
+    equivalentRho= self.getEquivalentRho(H)
+    equivalentC= self.getEquivalentC(H)
+    equivalentPhi= self.getEquivalentPhi(H)
+    return FrictionalCohesionalSoil(phi= equivalentPhi,c=equivalentC,rho= equivalentRho,gammaMPhi= gMPhi,gammaMc= gMc)
+    
