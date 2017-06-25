@@ -86,9 +86,9 @@ class Recta2d : public Linea2d
     virtual GEOM_FT GetMin(unsigned short int) const
       { return NAN; }
 
-    Pos2d Proyeccion(const Pos2d &p) const;
-    Vector2d Proyeccion(const Vector2d &) const;
-    GeomObj::list_Pos2d Proyecta(const GeomObj::list_Pos2d &ptos) const;
+    Pos2d Projection(const Pos2d &p) const;
+    Vector2d Projection(const Vector2d &) const;
+    GeomObj::list_Pos2d Project(const GeomObj::list_Pos2d &ptos) const;
     
     GEOM_RT a(void) const;
     GEOM_RT b(void) const;

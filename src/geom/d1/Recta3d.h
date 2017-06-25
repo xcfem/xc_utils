@@ -88,15 +88,15 @@ class Recta3d : public Linea3d
 
     double getLambda(unsigned short int i,const double &d,const Vector3d &i_) const;
 
-    Pos3d Proyeccion(const Pos3d &) const;
-    Vector3d Proyeccion(const Vector3d &) const;
-    Recta3d ProyeccionXY3d(void) const;
-    Recta3d ProyeccionXZ3d(void) const;
-    Recta3d ProyeccionYZ3d(void) const;
+    Pos3d Projection(const Pos3d &) const;
+    Vector3d Projection(const Vector3d &) const;
+    Recta3d XY3DProjection(void) const;
+    Recta3d XZ3DProjection(void) const;
+    Recta3d YZ3DProjection(void) const;
 
-    Recta2d ProyeccionXY2d(void) const;
-    Recta2d ProyeccionXZ2d(void) const;
-    Recta2d ProyeccionYZ2d(void) const;
+    Recta2d XY2DProjection(void) const;
+    Recta2d XZ2DProjection(void) const;
+    Recta2d YZ2DProjection(void) const;
 
     GEOM_FT GetPendiente(void) const;
     //! @brief Returns the parametric equations of the line as:
@@ -116,7 +116,7 @@ class Recta3d : public Linea3d
       { return cgr.has_on(p.ToCGAL()); }
     //! @brief Devuelve el cuadrado de la distancia desde el punto a la recta.
     virtual GEOM_FT dist2(const Pos3d &p) const
-      { return p.dist2(Proyeccion(p)); }
+      { return p.dist2(Projection(p)); }
     virtual GEOM_FT dist(const Pos3d &p) const;
 
     Plano3d Perpendicular(const Pos3d &p) const;

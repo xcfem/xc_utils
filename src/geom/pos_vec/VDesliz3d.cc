@@ -36,13 +36,13 @@ VDesliz3d::VDesliz3d(const Pos3d &o,const Vector3d &v)
 VDesliz3d::VDesliz3d(const Pos3d &o,const Pos3d &p)
   : Vector3d(p-o), org(o) {}
 
-//! @brief Momento de un vector deslizante respecto a un eje.
-//! Es el momento respecto a un punto
-//! del eje proyectado sobre el eje.
+//! @brief Moment of a sliding vector with respect to an axis.
+//! Is the momento with respect to an axis point
+//! projected onto the axis.
 GEOM_FT VDesliz3d::getMomento(const Recta3d &e) const
   { return dot(getMomento(e.Punto()),e.VDir().Normalizado()); }
 
-//! @brief Momento de un vector deslizante respecto a un punto.
+//! @brief Momento de un sliding vector respecto a un punto.
 VDesliz3d VDesliz3d::getMomento(const Pos3d &o) const
   {
     VDesliz3d retval(o);

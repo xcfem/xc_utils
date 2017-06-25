@@ -29,6 +29,8 @@ class_<SemiRecta2d, bases<Linea2d> >("SemiRecta2d")
 Recta2d (Recta2d::*OffsetVector)(const Vector2d &v) const= &Recta2d::Offset;
 Recta2d (Recta2d::*OffsetDouble)(const GEOM_FT &) const= &Recta2d::Offset;
 GeomObj::list_Pos2d (Recta2d::*intersectionWithR2D)(const Recta2d &) const= &Recta2d::Interseccion;
+Pos2d (Recta2d::*Pos2dProj)(const Pos2d &) const= &Recta2d::Projection;
+Vector2d (Recta2d::*Vector2dProj)(const Vector2d &) const= &Recta2d::Projection;
 class_<Recta2d, bases<Linea2d> >("Recta2d")
   .def(init<Pos2d, Pos2d>())
   .def(init<Recta2d>())
@@ -37,6 +39,9 @@ class_<Recta2d, bases<Linea2d> >("Recta2d")
   .def("getParamA",&Recta2d::GetParamA,"returns line slope; 'a' parameter from equation (y= a*x+b).")
   .def("getParamB",&Recta2d::GetParamB,"returns line y-intercept; 'b' parameter from equation (y= a*x+b).")
   .def("getIntersectionWithLine", intersectionWithR2D)
+  .def("getPos2dProj",Pos2dProj,"return the projection of a point onto the line.")
+  .def("getVector2dProj",Vector2dProj,"return the projection of a vector onto the line.")
+  .def("getVDir",&Recta2d::VDir,"return the line direction vector.")
   ;
 
 class_<Linea3d, bases<GeomObj3d>, boost::noncopyable  >("Linea3d", no_init);
@@ -60,23 +65,23 @@ class_<Segmento3d, bases<Linea3d> >("LineSegment3d")
   .def("getAngleWithLineSegment",AnguloSegmento3D,"Returns the angle between both line segments.")
   ;
 
-Pos3d (Recta3d::*ProyPos3d)(const Pos3d &) const= &Recta3d::Proyeccion;
-Vector3d (Recta3d::*ProyVector3d)(const Vector3d &) const= &Recta3d::Proyeccion;
+Pos3d (Recta3d::*Pos3dProj)(const Pos3d &) const= &Recta3d::Projection;
+Vector3d (Recta3d::*Vector3dProj)(const Vector3d &) const= &Recta3d::Projection;
 
 class_<Recta3d, bases<Linea3d> >("Recta3d")
   .def(init<Pos3d, Pos3d>())
   .def(init<Pos3d, Dir3d>())
   .def(init<Recta3d>())
-  .def("getProyPos3d",ProyPos3d)
-  .def("getProyVector3d",ProyVector3d)
-  .def("getVDir",&Recta3d::VDir)
+  .def("getPos3dProj",Pos3dProj,"return the projection of a point onto the line.")
+  .def("getVector3dProj",Vector3dProj,"return the projection of a vector onto the line.")
+  .def("getVDir",&Recta3d::VDir,"return the line direction vector.")
   .def("getPoint",&Recta3d::PtoParametricas)
-  .def("getXY2DProjection",&Recta3d::ProyeccionXY2d,"Return the projection of the line onto the XY plane as a 2D line.")
-  .def("getXZ2DProjection",&Recta3d::ProyeccionXZ2d,"Return the projection of the line onto the XZ plane as a 2D line.")
-  .def("getYZ2DProjection",&Recta3d::ProyeccionYZ2d,"Return the projection of the line onto the YZ plane as a 2D line.")
-  .def("getXY3DProjection",&Recta3d::ProyeccionXY3d,"Return the projection of the line onto the XY plane as a 3D line.")
-  .def("getXZ3DProjection",&Recta3d::ProyeccionXZ3d,"Return the projection of the line onto the XZ plane as a 3D line.")
-  .def("getYZ3DProjection",&Recta3d::ProyeccionYZ3d,"Return the projection of the line onto the YZ plane as a 3D line.")
+  .def("getXY2DProjection",&Recta3d::XY2DProjection,"Return the projection of the line onto the XY plane as a 2D line.")
+  .def("getXZ2DProjection",&Recta3d::XZ2DProjection,"Return the projection of the line onto the XZ plane as a 2D line.")
+  .def("getYZ2DProjection",&Recta3d::YZ2DProjection,"Return the projection of the line onto the YZ plane as a 2D line.")
+  .def("getXY3DProjection",&Recta3d::XY3DProjection,"Return the projection of the line onto the XY plane as a 3D line.")
+  .def("getXZ3DProjection",&Recta3d::XZ3DProjection,"Return the projection of the line onto the XZ plane as a 3D line.")
+  .def("getYZ3DProjection",&Recta3d::YZ3DProjection,"Return the projection of the line onto the YZ plane as a 3D line.")
  ;
 
 GeomObj::list_Pos2d (Polilinea2d::*intersectionWithLine)(const Recta2d &) const= &Polilinea2d::Interseccion;

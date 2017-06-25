@@ -118,13 +118,13 @@ class Pos3d : public ProtoGeom
 
     int Cuadrante(void) const; //Devuelve el cuadrante en el que se encuentra el punto.
 
-    Pos3d ProyeccionXY3d(void) const; //Devuelve la proyección sobre el plano XY.
-    Pos3d ProyeccionXZ3d(void) const; //Devuelve la proyección sobre el plano XZ.
-    Pos3d ProyeccionYZ3d(void) const; //Devuelve la proyección sobre el plano YZ.
+    Pos3d XY3DProjection(void) const; //Return projection onto XY plane.
+    Pos3d XZ3DProjection(void) const; //Return projection onto XZ plane.
+    Pos3d YZ3DProjection(void) const; //Return projection onto YZ plane.
 
-    Pos2d ProyeccionXY2d(void) const; //Devuelve la proyección sobre el plano XY.
-    Pos2d ProyeccionXZ2d(void) const; //Devuelve la proyección sobre el plano XZ.
-    Pos2d ProyeccionYZ2d(void) const; //Devuelve la proyección sobre el plano YZ.
+    Pos2d XY2DProjection(void) const; //Return projection onto XY plane.
+    Pos2d XZ2DProjection(void) const; //Return projection onto XZ plane.
+    Pos2d YZ2DProjection(void) const; //Return projection onto YZ plane.
 
     Pos3d getModArgX(const GEOM_FT &mod,const GEOM_FT &giroX) const;
     Pos3d getModArgY(const GEOM_FT &mod,const GEOM_FT &giroY) const;

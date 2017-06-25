@@ -157,15 +157,16 @@ Vector3d Vector3d::operator*(const GEOM_FT &d) const
 Vector3d Vector3d::operator/(const GEOM_FT &d) const
   { return Vector3d(ToCGAL()*(1/d)); }
 
-//! @brief Devuelve un vector que resulta de proyectar v
-//! sobre el plano perpendicular a ESTE vector.
-//! Se emplea para ortogonalizar una base.
+//! @brief Return the vector obtained from projecting v
+//! onto the perpendicular direction to this vector.
+//! Used to orthogonalize a base.
 Vector3d Vector3d::Perpendicular(const Vector3d &v) const
   {
     Vector3d retval(0,0,0);
     if( Nulo() || v.Nulo() )
       {
-	std::cerr << "Vector3d::Perpendicular; Uno de los vectores: "
+	std::cerr << nombre_clase() << "::" << __FUNCTION__
+		  << "; One of the vectors: "
                   << *this << " o " << v << " es nulo."
                   << " La operación no tiene sentido, se devuelve un vector nulo." << std::endl;
       }

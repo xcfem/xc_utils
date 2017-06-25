@@ -8,7 +8,7 @@ ELSE (${CMAKE_VERSION_STRING} GREATER 2.8.4)
   MESSAGE ("CMake version is not greater than 2.8.4")
 ENDIF (${CMAKE_VERSION_STRING} GREATER 2.8.4)
 
-#Nombre del proyecto.
+#Project name.
 PROJECT(xc_utils)
 
 SET(build_setup_dir $ENV{HOME}/.xc_build)

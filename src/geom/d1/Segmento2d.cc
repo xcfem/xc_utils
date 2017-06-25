@@ -173,8 +173,8 @@ bool Segmento2d::In(const Pos2d &p, const double &tol) const
 GEOM_FT Segmento2d::dist2(const Pos2d &p) const
   {
     const Recta2d r= RectaSoporte();
-    const Pos2d proy= r.Proyeccion(p);
-    GEOM_FT retval= p.dist2(proy); //Válido si el punto proyectado está en el segmento.
+    const Pos2d proj= r.Projection(p);
+    GEOM_FT retval= p.dist2(proj); //Ok if projected point inside segment.
     const Pos2d A= Origen();
     const Pos2d B= Destino();
     const GEOM_FT denom= (B.x()-A.x())*(B.x()-A.x())+(B.y()-A.y())*(B.y()-A.y());

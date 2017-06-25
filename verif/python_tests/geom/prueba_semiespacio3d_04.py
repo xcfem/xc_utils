@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-#Proyección de un vector sobre un plano.
-#Ejemplo 1.13 de la tesis «La teoría de bloque aplicada a la dinámica
-#de rocas» de Juan Carlos Ayes Zamudio
+#Projection of a vector onto a plane.
+#Example 1.13 of the thesis «La teoría de bloque aplicada a la dinámica
+#de rocas» by Juan Carlos Ayes Zamudio
 
 import xc_base
 import geom
@@ -25,7 +25,7 @@ P2=geom.SemiEspacio3d(plBuz2)
 
 r=P1.getLima(P2)
 
-s=r.getProyVector3d(R)
+s=r.getVector3dProj(R)
 s=s.normalizado()
 sTeor=geom.Vector3d(-0.7650,-0.5992,-0.2363)
 ratio1= sTeor-s

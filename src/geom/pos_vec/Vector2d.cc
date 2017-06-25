@@ -170,16 +170,17 @@ Vector2d Vector2d::Perpendicular(const Orientacion &o) const
     retval.cgvct = cgvct.perpendicular(o);
     return retval;
   }
-//! @brief Devuelve un vector que resulta de proyectar v
-//! sobre la dirección perpendicular a ESTE vector.
-//! Se emplea para ortogonalizar una base.
+//! @brief Return the vector obtained from projecting v
+//! onto the perpendicular direction to this vector.
+//! Used to orthogonalize a base.
 Vector2d Vector2d::Perpendicular(const Vector2d &v) const
   {
     Vector2d retval(0,0);
     if( Nulo() || v.Nulo() )
       {
-	std::cerr << "Vector2d::Perpendicular; Uno de los vectores: "
-                  << *this << " o " << v << " es nulo."
+	std::cerr << nombre_clase() << "::" << __FUNCTION__
+		  << "; One of the vectors: "
+                  << *this << " o " << v << " is null."
                   << " La operación no tiene sentido, se devuelve un vector nulo." << std::endl;
       }
     else

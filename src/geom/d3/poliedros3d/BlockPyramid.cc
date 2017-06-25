@@ -167,19 +167,19 @@ m_double BlockPyramid::getVectoresBorde(void) const
     return retval;
   }
 
-Vector2d BlockPyramid::getVectorExterno1(const Ref2d3d &planoProy) const
+Vector2d BlockPyramid::getVectorExterno1(const Ref2d3d &projPlane) const
   {
     const std::deque<Vector3d> haz= haz_vectores_interiores();
     Vector2d retval;
     if(!haz.empty())
       {
         std::deque<Vector3d>::const_iterator i= haz.begin();
-        retval= planoProy.GetCooLocales(*i);
+        retval= projPlane.GetCooLocales(*i);
         double angulo= retval.AnguloEjeX();
         i++;
         for(;i!=haz.end();i++)
           {
-            const Vector2d tmpV= planoProy.GetCooLocales(*i);
+            const Vector2d tmpV= projPlane.GetCooLocales(*i);
             const double tmpAng= tmpV.AnguloEjeX();
             if(tmpAng<angulo)
               {
@@ -194,19 +194,19 @@ Vector2d BlockPyramid::getVectorExterno1(const Ref2d3d &planoProy) const
     return retval;
   }
 
-Vector2d BlockPyramid::getVectorExterno2(const Ref2d3d &planoProy) const
+Vector2d BlockPyramid::getVectorExterno2(const Ref2d3d &projPlane) const
   {
     const std::deque<Vector3d> haz= haz_vectores_interiores();
     Vector2d retval;
     if(!haz.empty())
       {
         std::deque<Vector3d>::const_iterator i= haz.begin();
-        retval= planoProy.GetCooLocales(*i);
+        retval= projPlane.GetCooLocales(*i);
         double angulo= retval.AnguloEjeX();
         i++;
         for(;i!=haz.end();i++)
           {
-            const Vector2d tmpV= planoProy.GetCooLocales(*i);
+            const Vector2d tmpV= projPlane.GetCooLocales(*i);
             const double tmpAng= tmpV.AnguloEjeX();
             if(tmpAng>angulo)
               {
@@ -221,9 +221,9 @@ Vector2d BlockPyramid::getVectorExterno2(const Ref2d3d &planoProy) const
     return retval;
   }
 
-//! @brief Devuelve los pares de vectores externos de la
-//! proyección de la pirámide.
-//! a: Define la dirección de proyección (eje del túnel).
+//! @brief Return the pairs of external vectors of the
+//! projected pyramid.
+//! a: Return the projection direction (tunnel axis).
 std::deque<Vector2d> BlockPyramid::getVectoresExternos(const Ref2d3d &a) const
   {
     std::deque<Vector2d> retval;

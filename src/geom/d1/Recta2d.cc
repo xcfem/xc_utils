@@ -115,12 +115,12 @@ Vector2d Recta2d::VersorDir(void) const
 double Recta2d::getLambda(unsigned short int i,const double &d,const Vector2d &i_) const
   { return (d-Punto(0)(i))/i_(i);}
 
-//! @brief Devuelve la proyección ortogonal de p sobre la recta.
-Pos2d Recta2d::Proyeccion(const Pos2d &p) const
+//! @brief Return orthogonal projection of p onto the line.
+Pos2d Recta2d::Projection(const Pos2d &p) const
   { return Pos2d(cgr.projection(p.ToCGAL())); }
 
-//! @brief Devuelve la proyección ortogonal de v sobre la recta.
-Vector2d Recta2d::Proyeccion(const Vector2d &v) const
+//! @brief Return orthogonal projection of v onto the line.
+Vector2d Recta2d::Projection(const Vector2d &v) const
   {
     const Vector2d d= VDir().Normalizado();
     return dot(v,d)*d;
@@ -145,24 +145,30 @@ GEOM_RT Recta2d::c(void) const
 GEOM_FT Recta2d::GetPendiente(void) const
   { return GetParamA(); }
 
-//! @brief Devuelve el parámetro a (y=a*x+b) de la proyección horizontal de la recta.
+//! @brief Return the a parameter (y=a*x+b) of the horizontal
+//! projection of the line.
 GEOM_FT Recta2d::GetParamA(void) const
   {
     if(EsVertical())
       {
-        clog << "Recta2d::GetParamA: La recta es vertical, la pendiente es infinita." << endl;
+        clog << nombre_clase() << "::" << __FUNCTION__
+	     << "; line is vertical, infinite slope."
+	     << std::endl;
         return NAN;
       }
     else
       return -(cgr.a()/cgr.b());
   }
 
-//! @brief Devuelve el parámetro b (y=a*x+b) de la recta.
+//! @brief Return the b parameter (y=a*x+b) of the horizontal
+//! projection of the line.
 GEOM_FT Recta2d::GetParamB(void) const
   {
     if(EsVertical())
       {
-        clog << "Recta2d::GetParamB: La recta es vertical, corta al eje y en el infinito." << endl;
+        clog << nombre_clase() << "::" << __FUNCTION__
+	     << "; vertical line, it intercepts y axis at infinity."
+	     << std::endl;
         return NAN;
       }
     else
@@ -181,15 +187,14 @@ GEOM_FT Recta2d::GetY(const GEOM_FT &x) const
 //! @brief Devuelve el parámetro que corresponde al punto
 //! sobre la recta.
 //!
-//! Devuelve el parámetro que corresponde al punto
-//! sobre la recta. Si el punto no esta sobre la recta
-//! se calcula el parámetro de su proyección sobre
-//! la misma.
+//! Returns the parameter that corresponds to the point
+//! on the line. If the points lies not on the line
+//! we compute the parameter of its projection onto it.
 GEOM_FT Recta2d::Parametro(const Pos2d &p) const
   {
     Pos2d tmp(p);
     if(!In(tmp))
-      tmp= Proyeccion(tmp);
+      tmp= Projection(tmp);
     RectaParametricas2d r= GetParametricas();
     return r.Parametro(tmp);
   }
@@ -213,9 +218,9 @@ void Recta2d::Parametricas(const RectaParametricas2d &param)
 bool menor_param(const Pos3d &p1, const Pos3d &p2)
   { return (p1.z()<p2.z()); }
 
-//! @brief Devuelve los puntos que se pasan como parámetro
-//! en una lista ordenada por el valor de su proyección sobre la
-//! recta de menor a mayor. El origen es Recta2d::Punto(0).
+//! @brief Return the points ordered by the value of the parameter
+//! of its projection onto the line from lowest to highest.
+//! Origin is at Recta2d::Punto(0).
 GeomObj::list_Pos2d Recta2d::Ordena(const GeomObj::list_Pos2d &ptos) const
   {
     GeomObj::list_Pos2d retval;
@@ -233,13 +238,12 @@ GeomObj::list_Pos2d Recta2d::Ordena(const GeomObj::list_Pos2d &ptos) const
     return retval;
   }
 
-//! @brief Devuelve los puntos que se pasan como parámetro
-//! proyectados sobre la recta.
-GeomObj::list_Pos2d Recta2d::Proyecta(const GeomObj::list_Pos2d &ptos) const
+//! @brief Return the projections of the points onto the line.
+GeomObj::list_Pos2d Recta2d::Project(const GeomObj::list_Pos2d &ptos) const
   {
     GeomObj::list_Pos2d retval;
     for(GeomObj::list_Pos2d::const_iterator i= ptos.begin();i!=ptos.end();i++)
-      retval.push_back(Proyeccion(*i));
+      retval.push_back(Projection(*i));
     return retval;
   }
 
@@ -353,7 +357,7 @@ GEOM_FT dist2(const Recta2d &r1,const Recta2d &r2)
       if(r1 != r2) //NO son la misma recta.
         {
           const Pos2d p1= r1.Punto(0);
-          const Pos2d p2= r2.Proyeccion(p1);
+          const Pos2d p2= r2.Projection(p1);
           retval= dist2(p1,p2);
 	}
     return retval;

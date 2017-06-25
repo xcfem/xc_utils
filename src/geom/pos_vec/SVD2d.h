@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //SVD2d.h
-//Sistema de vectores deslizantes.
+//Sliding vectors system.
 
 #ifndef SVD2D_H
 #define SVD2D_H
@@ -36,7 +36,7 @@ class Ref2d2d;
 
 //! @ingroup GEOM
 //
-//! @brief Sistema de vectores deslizantes.
+//! @brief Sliding vectors system.
 class SVD2d: public ProtoGeom
   {
     Pos2d org; //Punto al que se refiere el momento.

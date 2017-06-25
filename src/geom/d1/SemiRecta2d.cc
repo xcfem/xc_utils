@@ -53,9 +53,9 @@ Vector2d SemiRecta2d::VDir(void) const
 GEOM_FT SemiRecta2d::dist2(const Pos2d &p) const
   {
     Recta2d r= RectaSoporte();
-    Pos2d proy= r.Proyeccion(p);
-    GEOM_FT retval= p.dist2(proy); //Válido si el punto proyectado está en la semirrecta.
-    if(!In(proy)) //El punto está fuera de la semirrecta.
+    Pos2d proj= r.Projection(p);
+    GEOM_FT retval= p.dist2(proj); //Ok if projection inside half-line.
+    if(!In(proj)) //Projection outside half-line.
       retval= p.dist2(Origen());
     return retval;
   }

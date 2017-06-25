@@ -115,8 +115,8 @@ GEOM_FT Segmento3d::getLambda(const Pos3d &p) const
 GEOM_FT Segmento3d::dist2(const Pos3d &p) const
   {
     const Recta3d r= RectaSoporte();
-    const Pos3d proy= r.Proyeccion(p);
-    GEOM_FT retval= p.dist2(proy); //Válido si el punto proyectado está en el segmento.
+    const Pos3d proj= r.Projection(p);
+    GEOM_FT retval= p.dist2(proj); //Ok if projected point inside segment.
     const Pos3d A= Origen();
     const Pos3d B= Destino();
     const GEOM_FT denom= (B.x()-A.x())*(B.x()-A.x())+(B.y()-A.y())*(B.y()-A.y())+(B.z()-A.z())*(B.z()-A.z());

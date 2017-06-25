@@ -32,7 +32,7 @@
 
 //! @ingroup GEOM
 //
-//! @brief Vector deslizante en dos dimensiones.
+//! @brief sliding vector en dos dimensiones.
 class VDesliz2d : public Vector2d
   {
     Pos2d org; //Punto que determina la línea de accion.
@@ -49,7 +49,7 @@ class VDesliz2d : public Vector2d
         return *this;
       }
     GEOM_FT Momento(const Pos2d &o) const;
-      //Momento de un vector deslizante respecto a un punto.
+      //Momento de un sliding vector respecto a un punto.
     const Pos2d &getOrg(void) const
       { return org; }
     const Pos2d getDest(void) const

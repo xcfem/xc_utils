@@ -155,23 +155,23 @@ void Plano3d::Swap(void)
 Plano3d Plano3d::GetSwap(void) const
   { return Plano3d(cgp.opposite()); }
 
-//! @brief Devuelve la proyección del punto sobre el plano.
-Pos3d Plano3d::Proyeccion(const Pos3d &p) const
+//! @brief Return the projection of the point onto this plane.
+Pos3d Plano3d::Projection(const Pos3d &p) const
   { return Pos3d(cgp.projection(p.ToCGAL())); }
 
-//! @brief Devuelve la proyección del vector sobre el plano.
-Vector3d Plano3d::Proyeccion(const Vector3d &v) const
+//! @brief Return the projection of the vector onto this plane.
+Vector3d Plano3d::Projection(const Vector3d &v) const
   {
     const Vector3d n= Normal().Normalizado();
     return cross(cross(n,v),n);
   }
 
-//! @brief Devuelve la proyección de la recta sobre el plano.
-Recta3d Plano3d::Proyeccion(const Recta3d &r) const
+//! @brief Return the projection of the line onto this plane.
+Recta3d Plano3d::Projection(const Recta3d &r) const
   {
     Recta3d retval;
-    const Pos3d p0= Proyeccion(r.Punto(0));
-    const Pos3d p1= Proyeccion(r.Punto(100));
+    const Pos3d p0= Projection(r.Punto(0));
+    const Pos3d p1= Projection(r.Punto(100));
     const double d= p0.dist(p1);
     if(d>mchne_eps_dbl)
       retval= Recta3d(p0,p1);
@@ -180,15 +180,15 @@ Recta3d Plano3d::Proyeccion(const Recta3d &r) const
     return retval;
   }
 
-GeomObj3d::list_Pos3d Plano3d::Proyeccion(const GeomObj3d::list_Pos3d &ptos) const
+GeomObj3d::list_Pos3d Plano3d::Projection(const GeomObj3d::list_Pos3d &ptos) const
   {
     GeomObj3d::list_Pos3d retval;
     for(GeomObj3d::list_Pos3d::const_iterator i=ptos.begin();i!=ptos.end();i++)
-      retval.push_back(Proyeccion(*i));
+      retval.push_back(Projection(*i));
     return retval;
   }
-// Poligono Plano3d::Proyeccion(const Poligono &pg) const
-//   { return pg.Proyeccion(*this); }
+// Poligono Plano3d::Projection(const Poligono &pg) const
+//   { return pg.Projection(*this); }
 
 //! @brief Devuelve un punto arbitrario del plano.
 Pos3d Plano3d::Punto(void) const
@@ -237,7 +237,7 @@ GEOM_FT Plano3d::PseudoDist2(const Pos3d &p) const
 
 //Devuelve la distancia l cuadrado desde el punto al plano.
 GEOM_FT Plano3d::dist2(const Pos3d &p) const
-  { return p.dist2(Proyeccion(p)); }
+  { return p.dist2(Projection(p)); }
 
 //! @brief Returns the plane equation in general form: ax + by + cz + d = 0
 GeneralEquationOfPlane Plano3d::getGeneralEquation(void) const
@@ -667,13 +667,14 @@ Pos3d punto_interseccion(const Segmento3d &sg, const Plano3d &p)
 GEOM_FT angulo(const Recta3d &r,const Plano3d &p)
   {
     GEOM_FT retval;
-    const Recta3d rProj= p.Proyeccion(r);
+    const Recta3d rProj= p.Projection(r);
     if(rProj.exists())
       retval= angulo(r,rProj);
     else
       {
         retval= NAN;
-        std::cerr << "angulo(recta,plano): se produjo un error al calcular la proyección." << std::endl;
+        std::cerr << __FUNCTION__
+		  << "; error when computing projection." << std::endl;
       }
     return retval;
   }

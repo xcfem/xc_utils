@@ -134,33 +134,33 @@ int Pos3d::Cuadrante(void) const
           return 7;
   }
 
-Pos3d Pos3d::ProyeccionXY3d(void) const
-//Devuelve la proyeccion sobre el plano XY.
-  { return PlanoXY3d.Proyeccion(*this); }
-Pos3d Pos3d::ProyeccionXZ3d(void) const
-//Devuelve la proyeccion sobre el plano XZ.
-  { return PlanoXZ3d.Proyeccion(*this); }
-Pos3d Pos3d::ProyeccionYZ3d(void) const
-//Devuelve la proyeccion sobre el plano YZ.
-  { return PlanoYZ3d.Proyeccion(*this); }
+//! @brief Return the projection onto XY plane.
+Pos3d Pos3d::XY3DProjection(void) const
+  { return PlanoXY3d.Projection(*this); }
+//! @brief Return the projection onto XZ plane.
+Pos3d Pos3d::XZ3DProjection(void) const
+  { return PlanoXZ3d.Projection(*this); }
+//! @brief Return the projection onto YZ plane.
+Pos3d Pos3d::YZ3DProjection(void) const
+  { return PlanoYZ3d.Projection(*this); }
 
-Pos2d Pos3d::ProyeccionXY2d(void) const
-//Devuelve la proyeccion sobre el plano XY.
+//! @brief Return the projection onto XY plane.
+Pos2d Pos3d::XY2DProjection(void) const
   {
-    Pos3d p3d= ProyeccionXY3d();
+    Pos3d p3d= XY3DProjection();
     return Pos2d(p3d.x(),p3d.y());
   }
-Pos2d Pos3d::ProyeccionXZ2d(void) const
-//Devuelve la proyeccion sobre el plano XZ.
+//! @brief Return the projection onto XZ plane.
+Pos2d Pos3d::XZ2DProjection(void) const
   {
-    Pos3d p3d= ProyeccionXZ3d();
+    Pos3d p3d= XZ3DProjection();
     return Pos2d(p3d.x(),p3d.z());
   }
 
-//! @brief Devuelve la proyeccion sobre el plano YZ.
-Pos2d Pos3d::ProyeccionYZ2d(void) const
+//! @brief Return the projection onto YZ plane.
+Pos2d Pos3d::YZ2DProjection(void) const
   {
-    Pos3d p3d= ProyeccionYZ3d();
+    Pos3d p3d= YZ3DProjection();
     return Pos2d(p3d.y(),p3d.z());
   }
 

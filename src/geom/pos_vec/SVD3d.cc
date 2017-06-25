@@ -93,9 +93,9 @@ void SVD3d::PrintLtx(std::ostream &os,const std::string &ud_long,const GEOM_FT &
        << "Momento: " << mom*f_f << ud_f << ud_long << "\\\\" << std::endl;
   }
 
-//! @brief Momento de un SVD3d respecto a un eje.
-//! Es el momento respecto a un punto
-//! del eje proyectado sobre el eje.
+//! @brief Moment with respect to an axis.
+//! Is the moment with respect a point on the axis
+//! projected onto the axis.
 GEOM_FT SVD3d::getMomento(const Recta3d &e) const
   { return dot(SVD3d::getMomento(e.Punto()),e.VDir().Normalizado()); }
 
@@ -242,7 +242,7 @@ SVD3d operator+(const SVD3d &s,const VDesliz3d &v)
 SVD3d operator+(const VDesliz3d &v,const SVD3d &s)
   { return s+v; }
 
-//! @brief Cambia de signo al vector deslizante.
+//! @brief Cambia de signo al sliding vector.
 SVD3d operator-(const SVD3d &svd3d)
   {
     SVD3d retval(svd3d);

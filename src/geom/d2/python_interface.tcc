@@ -81,9 +81,9 @@ class_<GeneralEquationOfPlane, boost::noncopyable>("GeneralEquationOfPlane", no_
 
 double (Plano3d::*AnguloPlano3d)(const Plano3d &p) const= &Plano3d::Angulo;
 double (Plano3d::*AnguloVector3d)(const Vector3d &) const= &Plano3d::Angulo;
-Pos3d (Plano3d::*ProyeccionPos3d)(const Pos3d &) const= &Plano3d::Proyeccion;
-Vector3d (Plano3d::*ProyeccionVector3d)(const Vector3d &) const= &Plano3d::Proyeccion;
-Recta3d (Plano3d::*ProyeccionRecta3d)(const Recta3d &) const= &Plano3d::Proyeccion;
+Pos3d (Plano3d::*Pos3dProjection)(const Pos3d &) const= &Plano3d::Projection;
+Vector3d (Plano3d::*Vector3dProjection)(const Vector3d &) const= &Plano3d::Projection;
+Recta3d (Plano3d::*Recta3dProjection)(const Recta3d &) const= &Plano3d::Projection;
 Recta3d (Plano3d::*IntersPlano3d)(const Plano3d &p) const= &Plano3d::Interseccion;
 Pos3d (Plano3d::*IntersRecta3d)(const Recta3d &p) const= &Plano3d::Interseccion;
 Pos3d (Plano3d::*IntersSemiRecta3d)(const SemiRecta3d &p) const= &Plano3d::Interseccion;
@@ -98,9 +98,9 @@ class_<Plano3d, bases<Superficie3d> >("Plano3d")
   .def(init<Plano3d>())
   .def("getAnguloPlano3d",AnguloPlano3d)
   .def("getAnguloVector3d",AnguloVector3d)
-  .def("getProyeccionPos3d",ProyeccionPos3d)
-  .def("getProyeccionVector3d",ProyeccionVector3d)
-  .def("getProyeccionRecta3d",ProyeccionRecta3d)
+  .def("getPos3dProjection",Pos3dProjection)
+  .def("getVector3dProjection",Vector3dProjection)
+  .def("getRecta3dProjection",Recta3dProjection)
   .def("getIntersPlano3d",IntersPlano3d)
   .def("getIntersRecta3d",IntersRecta3d)
   .def("getIntersSemiRecta3d",IntersSemiRecta3d)

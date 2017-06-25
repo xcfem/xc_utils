@@ -32,7 +32,7 @@ VDesliz2d::VDesliz2d(const Pos2d &o,const Pos2d &p)
   : Vector2d(p-o), org(o) {}
 
 GEOM_FT VDesliz2d::Momento(const Pos2d &o) const
-//Momento de un vector deslizante respecto a un punto.
+//Momento de un sliding vector respecto a un punto.
   {
     GEOM_FT retval(0.0);
     if(!this->Nulo()) //Si ESTE vector no es nulo.

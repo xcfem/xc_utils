@@ -81,39 +81,38 @@ Vector3d Recta3d::VDir(void) const
 double Recta3d::getLambda(unsigned short int i,const double &d,const Vector3d &i_) const
       { return (d-Punto(0)(i))/i_(i);}
 
-
-//! @brief Devuelve la proyección ortogonal de p sobre la recta.
-Pos3d Recta3d::Proyeccion(const Pos3d &p) const
+//! @brief Return the orthogonal projection onto the line.
+Pos3d Recta3d::Projection(const Pos3d &p) const
   { return Pos3d(cgr.projection(p.ToCGAL())); }
 
-//! @brief Devuelve la proyección ortogonal de v sobre la recta.
-Vector3d Recta3d::Proyeccion(const Vector3d &v) const
+//! @brief Return the projection onto the line.
+Vector3d Recta3d::Projection(const Vector3d &v) const
   {
     const Vector3d d= VDir().Normalizado();
     return dot(v,d)*d;
   }
 
-//! @brief Devuelve la proyeccion sobre el plano XY.
-Recta3d Recta3d::ProyeccionXY3d(void) const
-  { return PlanoXY3d.Proyeccion(*this); }
+//! @brief Return the projection onto the XY plane.
+Recta3d Recta3d::XY3DProjection(void) const
+  { return PlanoXY3d.Projection(*this); }
 
-//! @brief Devuelve la proyeccion sobre el plano XZ.
-Recta3d Recta3d::ProyeccionXZ3d(void) const
-  { return PlanoXZ3d.Proyeccion(*this); }
+//! @brief Return the projection onto the XZ plane.
+Recta3d Recta3d::XZ3DProjection(void) const
+  { return PlanoXZ3d.Projection(*this); }
 
-//! @brief Devuelve la proyeccion sobre el plano YZ.
-Recta3d Recta3d::ProyeccionYZ3d(void) const
-  { return PlanoYZ3d.Proyeccion(*this); }
+//! @brief Return the projection onto the YZ plane.
+Recta3d Recta3d::YZ3DProjection(void) const
+  { return PlanoYZ3d.Projection(*this); }
 
-//! @brief Devuelve la proyeccion sobre el plano XY.
-Recta2d Recta3d::ProyeccionXY2d(void) const
+//! @brief Return the projection onto the XY plane.
+Recta2d Recta3d::XY2DProjection(void) const
   {
     Recta2d retval;
-    Recta3d r3d= ProyeccionXY3d();
+    Recta3d r3d= XY3DProjection();
     if(r3d.exists())
       {
-        const Pos2d p1= r3d.Punto(0).ProyeccionXY2d();
-        const Pos2d p2= r3d.Punto(100).ProyeccionXY2d();
+        const Pos2d p1= r3d.Punto(0).XY2DProjection();
+        const Pos2d p2= r3d.Punto(100).XY2DProjection();
         const double d= p1.dist(p2);
         if(d>mchne_eps_dbl)
           retval= Recta2d(p1,p2);
@@ -123,15 +122,15 @@ Recta2d Recta3d::ProyeccionXY2d(void) const
     return retval;
   }
 
-//! @brief Devuelve la proyeccion sobre el plano XZ.
-Recta2d Recta3d::ProyeccionXZ2d(void) const
+//! @brief Return the projection onto the XZ plane.
+Recta2d Recta3d::XZ2DProjection(void) const
   {
     Recta2d retval;
-    Recta3d r3d= ProyeccionXZ3d();
+    Recta3d r3d= XZ3DProjection();
     if(r3d.exists())
       {
-        const Pos2d p1= r3d.Punto(0).ProyeccionXZ2d();
-        const Pos2d p2= r3d.Punto(100).ProyeccionXZ2d();
+        const Pos2d p1= r3d.Punto(0).XZ2DProjection();
+        const Pos2d p2= r3d.Punto(100).XZ2DProjection();
         const double d= p1.dist(p2);
         if(d>mchne_eps_dbl)
           retval= Recta2d(p1,p2);
@@ -141,15 +140,15 @@ Recta2d Recta3d::ProyeccionXZ2d(void) const
     return retval;
   }
 
-//! @brief Devuelve la proyeccion sobre el plano YZ.
-Recta2d Recta3d::ProyeccionYZ2d(void) const
+//! @brief Return the projection onto the YZ plane.
+Recta2d Recta3d::YZ2DProjection(void) const
   {
     Recta2d retval;
-    Recta3d r3d= ProyeccionYZ3d();
+    Recta3d r3d= YZ3DProjection();
     if(r3d.exists())
       {
-        const Pos2d p1= r3d.Punto(0).ProyeccionYZ2d();
-        const Pos2d p2= r3d.Punto(100).ProyeccionYZ2d();
+        const Pos2d p1= r3d.Punto(0).YZ2DProjection();
+        const Pos2d p2= r3d.Punto(100).YZ2DProjection();
         const double d= p1.dist(p2);
         if(d>mchne_eps_dbl)
           retval= Recta2d(p1,p2);
@@ -176,7 +175,7 @@ GEOM_FT coo_interseccion(const GeomObj2d::list_Pos2d &int_a, const GeomObj2d::li
     if(!int_b.empty()) pint_b= To3d(*int_b.begin(),coo+2);
 
     GEOM_FT retval=0.0;
-    if((!int_a.empty()) && (!int_b.empty())) //Ambas proyecciones dan intersección.
+    if((!int_a.empty()) && (!int_b.empty())) //Both projections intercepts.
       {
         if(fabs(pint_a(coo)-pint_b(coo))<tol)
           retval= (pint_a(coo)+pint_b(coo))/2;
@@ -188,15 +187,17 @@ GEOM_FT coo_interseccion(const GeomObj2d::list_Pos2d &int_a, const GeomObj2d::li
           }
       }
     else
-      if(!int_a.empty()) //La primera proyección da intersección
+      if(!int_a.empty()) //First projection intercepts.
         retval= pint_a(coo);
       else
-        if(!int_b.empty()) //La segunda proyeccion da intersección.
+        if(!int_b.empty()) //Second projection intercepts.
           retval= pint_b(coo);
-        else //Niguna de las dos proyecciones da intersección.
+        else //None of the projections intercepts.
           {
-            std::cerr << "interseccion(Recta3d,Recta3d): Error al calcular la coordenada " << coo << " de la intersección."
-                 << std::endl;
+            std::cerr << __FUNCTION__
+	              << "; error when computing" << coo
+		      << " coordinate of the intersection."
+                      << std::endl;
           }
     return retval;
   }
@@ -248,16 +249,17 @@ GeomObj3d::list_Pos3d Recta3d::Interseccion(const Recta3d &r2,const double &tol)
     const double tol2= tol*tol;
     bool exists= true;
 
-    const Recta2d r1_xy= (*this).ProyeccionXY2d();
-    const Recta2d r1_xz= (*this).ProyeccionXZ2d();
-    const Recta2d r1_yz= (*this).ProyeccionYZ2d();
+    const Recta2d r1_xy= (*this).XY2DProjection();
+    const Recta2d r1_xz= (*this).XZ2DProjection();
+    const Recta2d r1_yz= (*this).YZ2DProjection();
 
-    const Recta2d r2_xy= r2.ProyeccionXY2d();
-    const Recta2d r2_xz= r2.ProyeccionXZ2d();
-    const Recta2d r2_yz= r2.ProyeccionYZ2d();
+    const Recta2d r2_xy= r2.XY2DProjection();
+    const Recta2d r2_xz= r2.XZ2DProjection();
+    const Recta2d r2_yz= r2.YZ2DProjection();
     exists= (r1_xy.exists() && r1_xz.exists() && r1_yz.exists() && r2_xy.exists() && r2_xz.exists() && r2_yz.exists());
     if(!exists)
-      std::cerr << "interseccion(Recta3d,Recta3d): se produjo un error al calcular las proyecciones." 
+      std::cerr << nombre_clase() << "::" << __FUNCTION__
+	        << "; error when computing projections." 
                 << std::endl;
 
     const GeomObj2d::list_Pos2d int_xy= interseccion(r1_xy,r2_xy);

@@ -33,7 +33,7 @@ class Recta3d;
 
 //! @ingroup GEOM
 //
-//! @brief Vector deslizante en tres dimensiones.
+//! @brief sliding vector en tres dimensiones.
 class VDesliz3d : public Vector3d
   {
   protected:

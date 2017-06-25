@@ -44,13 +44,13 @@ Dir3d SemiRecta3d::GetDir(void) const
 Vector3d SemiRecta3d::VDir(void) const
   { return GetDir().GetVector(); }
 
-//! @brief Devuelve la distancia desde el punto a la semirrecta.
+//! @brief Returns the squared distand from the point.
 GEOM_FT SemiRecta3d::dist2(const Pos3d &p) const
   {
     const Recta3d r= RectaSoporte();
-    const Pos3d proy= r.Proyeccion(p);
-    GEOM_FT retval= p.dist2(proy); //Válido si el punto proyectado está en la semirrecta.
-    if(!In(proy)) //El punto está fuera de la semirrecta.
+    const Pos3d proj= r.Projection(p);
+    GEOM_FT retval= p.dist2(proj); //OK if projection inside half-line.
+    if(!In(proj)) //Projection outside half-line.
       retval= p.dist2(Origen());
     return retval;
   }

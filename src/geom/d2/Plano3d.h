@@ -78,11 +78,11 @@ class Plano3d : public Superficie3d
       { return NAN; }
     virtual GEOM_FT GetMin(unsigned short int i) const
       { return NAN; }
-    Pos3d Proyeccion(const Pos3d &) const;
-    Vector3d Proyeccion(const Vector3d &) const;
-    Recta3d Proyeccion(const Recta3d &) const;
-    GeomObj3d::list_Pos3d Proyeccion(const GeomObj3d::list_Pos3d &) const;
-    //Poligono3d Proyeccion(const Poligono3d &) const;
+    Pos3d Projection(const Pos3d &) const;
+    Vector3d Projection(const Vector3d &) const;
+    Recta3d Projection(const Recta3d &) const;
+    GeomObj3d::list_Pos3d Projection(const GeomObj3d::list_Pos3d &) const;
+    //Poligono3d Projection(const Poligono3d &) const;
 
     virtual Vector3d Normal(void) const;
     Vector3d Base1(void) const;

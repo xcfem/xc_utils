@@ -61,9 +61,9 @@ class GeomObj3d: public GeomObj
     GEOM_FT GetXMin(void) const { return GetMin(1); }
     GEOM_FT GetYMin(void) const { return GetMin(2); }
     GEOM_FT GetZMin(void) const { return GetMin(3); }
-    virtual void ProyX(void) {}
-    virtual void ProyY(void) {}
-    virtual void ProyZ(void) {}
+    virtual void XProjection(void) {}
+    virtual void YProjection(void) {}
+    virtual void ZProjection(void) {}
     Pos3d GetPMax(void) const;
     Pos3d GetPMin(void) const;
     BND3d Bnd(void) const;

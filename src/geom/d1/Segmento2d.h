@@ -83,9 +83,9 @@ class Segmento2d : public Linea2d
     //Asigna valores a los puntos que definen la recta.
       { DosPuntos(p1,p2); }
 
-    //! @brief Devuelve los puntos que se pasan como parámetro
-    //! en una lista ordenada por el valor de su proyección sobre la
-    //! recta de menor a mayor. El origen es Recta2d::Punto(0).
+    //! @brief Returns the points ordered by the value of the 
+    //! parameter of its projection onto the line from lowest
+    //! to highest. Origin is at Recta2d::Punto(0).
     GeomObj::list_Pos2d Ordena(const GeomObj::list_Pos2d &ptos) const
       { return RectaSoporte().Ordena(ptos); }
 

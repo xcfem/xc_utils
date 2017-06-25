@@ -12,12 +12,12 @@ class XYFoldingPlanes(object):
   def getIntersectionWith3DLine(self,p0, p1):
     retval= []
     err= 0.0
-    proyP0= geom.Pos2d(p0.x,p0.y)
-    proyP1= geom.Pos2d(p1.x,p1.y)
-    line2d= geom.Recta2d(proyP0,proyP1)
-    proy= self.xyPline.getIntersectionWithLine(line2d)
-    for p in proy:
-      lmb= p.distPos2d(proyP0)/proyP1.distPos2d(proyP0)
+    P0proj= geom.Pos2d(p0.x,p0.y)
+    P1proj= geom.Pos2d(p1.x,p1.y)
+    line2d= geom.Recta2d(P0proj,P1proj)
+    proj= self.xyPline.getIntersectionWithLine(line2d)
+    for p in proj:
+      lmb= p.distPos2d(P0proj)/P1proj.distPos2d(P0proj)
       pInt= geom.LineSegment3d(p0,p1).getPoint(lmb)
       err= (pInt.x-p.x)**2+(pInt.y-p.y)**2
       if(err>1e-6):
@@ -32,12 +32,12 @@ class XYFoldingPlanes(object):
     retval= []
     p0= segment3d.getOrigen()
     p1= segment3d.getDestino()
-    proyP0= geom.Pos2d(p0.x,p0.y)
-    proyP1= geom.Pos2d(p1.x,p1.y)
-    segment2d= geom.Segmento2d(proyP0,proyP1)
-    proy= self.xyPline.getIntersectionWithSegment(segment2d)
-    for p in proy:
-      lmb= p.distPos2d(proyP0)/proyP1.distPos2d(proyP0)
+    P0proj= geom.Pos2d(p0.x,p0.y)
+    P1proj= geom.Pos2d(p1.x,p1.y)
+    segment2d= geom.Segmento2d(P0proj,P1proj)
+    proj= self.xyPline.getIntersectionWithSegment(segment2d)
+    for p in proj:
+      lmb= p.distPos2d(P0proj)/P1proj.distPos2d(P0proj)
       pInt= segment3d.getPoint(lmb)
       retval.append(pInt)
     return retval  

@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //SVD3d.h
-//Sistema de vectores deslizantes.
+//Sliding vectors system.
 
 #ifndef SVD3D_H
 #define SVD3D_H
@@ -36,7 +36,7 @@ class Ref3d3d;
 
 //! @ingroup GEOM
 //
-//! @brief Sistema de vectores deslizantes en un espacio tridimensional.
+//! @brief Sliding vectors system en un espacio tridimensional.
 class SVD3d: public VDesliz3d
   {
     Vector3d mom; //Momento respecto a org;
