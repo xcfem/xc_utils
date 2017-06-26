@@ -8,17 +8,17 @@ import math
 from geotecnia import mononobe_okabe
 
 
-H= 7.6
-kh= 0.096
-kv= kh/2.0
-Kas= 1.0/3.0
-gamma_soil= 20e3
-psi= math.radians(90)
-beta= 0
-delta_ad= 0
+H= 7.6 # height of the structure.
+kh= 0.096 # seismic coefficient of horizontal acceleration.
+kv= kh/2.0 # seismic coefficient of vertical acceleration.
+Kas= 1.0/3.0 #static earth pressure coefficient
+gamma_soil= 20e3 #unit weight of soil (backfill)
+psi= math.radians(90) #back face inclination of the structure (< PI/2)
+beta= 0 #slope inclination of backfill.
+delta_ad= 0 #angle of friction soil - structure.
 theta1= math.radians(5.3)
 theta2= math.radians(5.8)
-phi= math.radians(29.0985)
+phi= math.radians(29.0985) #angle of internal friction of soil.
 phi_d= math.atan(math.tan(phi)/1.25)
 L= 12.5
 
