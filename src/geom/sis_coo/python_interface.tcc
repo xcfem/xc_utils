@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //python_interface.cxx
-class_<SisCoo, bases<ProtoGeom>, boost::noncopyable >("SisCoo", no_init)
+class_<SisCoo, bases<ProtoGeom>, boost::noncopyable >("CooSys", no_init)
   .add_property("NumEjes",&SisCoo::NumEjes)
   .add_property("EsNormal",&SisCoo::EsNormal)
   .add_property("EsOrtogonal",&SisCoo::EsOrtogonal)
@@ -28,17 +28,17 @@ class_<SisCoo, bases<ProtoGeom>, boost::noncopyable >("SisCoo", no_init)
   .add_property("EsDextrogiro",&SisCoo::EsDextrogiro)
   ;
 
-class_<SisCooXd2d, bases<SisCoo>, boost::noncopyable >("SisCooXd2d", no_init)
+class_<SisCooXd2d, bases<SisCoo>, boost::noncopyable >("CooSysXd2d", no_init)
   .def("getVDirEje",&SisCooXd2d::GetVDirEje)
   .def("getDirEje",&SisCooXd2d::GetDirEje)
   ;
 
-class_<SisCooXd3d, bases<SisCoo>, boost::noncopyable >("SisCooXd3d", no_init)
+class_<SisCooXd3d, bases<SisCoo>, boost::noncopyable >("CooSysXd3d", no_init)
   .def("getVDirEje",&SisCooXd3d::GetVDirEje)
   .def("getDirEje",&SisCooXd3d::GetDirEje)
   ;
 
-class_<SisCooRect1d2d, bases<SisCooXd2d>, boost::noncopyable >("SisCooRect1d2d", no_init)
+class_<SisCooRect1d2d, bases<SisCooXd2d>, boost::noncopyable >("CooSysRect1d2d", no_init)
   .def(init<const Pos2d &,const Pos2d &>())
   .def(init<const Vector2d &>())
   .def("getI",&SisCooRect1d2d::GetI)
@@ -46,7 +46,7 @@ class_<SisCooRect1d2d, bases<SisCooXd2d>, boost::noncopyable >("SisCooRect1d2d",
   .def("getCooLocales",&SisCooRect1d2d::GetCooLocales)
   ;
 
-class_<SisCooRect1d3d, bases<SisCooXd3d> >("SisCooRect1d3d")
+class_<SisCooRect1d3d, bases<SisCooXd3d> >("CooSysRect1d3d")
   .def(init<const Pos3d &,const Pos3d &>())
   .def(init<const Vector3d &>())
   .def("getI",&SisCooRect1d3d::GetI)
@@ -54,7 +54,7 @@ class_<SisCooRect1d3d, bases<SisCooXd3d> >("SisCooRect1d3d")
   .def("getCooLocales",&SisCooRect1d3d::GetCooLocales)
   ;
 
-class_<SisCooRect2d2d, bases<SisCooXd2d> >("SisCooRect2d2d")
+class_<SisCooRect2d2d, bases<SisCooXd2d> >("CooSysRect2d2d")
   .def(init<const Pos2d &,const Pos2d &>())
   .def(init<const Vector2d &>())
   .def("getI",&SisCooRect2d2d::GetI)
@@ -63,7 +63,7 @@ class_<SisCooRect2d2d, bases<SisCooXd2d> >("SisCooRect2d2d")
   .def("getCooLocales",&SisCooRect2d2d::GetCooLocales)
   ;
 
-class_<SisCooRect2d3d, bases<SisCooXd3d> >("SisCooRect2d3d")
+class_<SisCooRect2d3d, bases<SisCooXd3d> >("CooSysRect2d3d")
   .def(init<const Pos3d &,const Pos3d &, const Pos3d &>())
   .def(init<const Vector3d &>())
   .def(init<const Vector3d &,const Vector3d &>())
@@ -73,7 +73,7 @@ class_<SisCooRect2d3d, bases<SisCooXd3d> >("SisCooRect2d3d")
   .def("getCooLocales",&SisCooRect2d3d::GetCooLocales)
   ;
 
-class_<SisCooRect3d3d, bases<SisCooXd3d> >("SisCooRect3d3d")
+class_<SisCooRect3d3d, bases<SisCooXd3d> >("CooSysRect3d3d")
   .def(init<const Pos3d &,const Pos3d &>())
   .def(init<const Pos3d &,const Pos3d &, const Pos3d &>())
   .def(init<const Vector3d &,const Vector3d &>())

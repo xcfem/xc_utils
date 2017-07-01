@@ -25,7 +25,7 @@ double (SemiEspacio3d::*AnguloConSemiEspacio3d)(const SemiEspacio3d &) const= &S
 double (SemiEspacio3d::*AnguloConPlano3d)(const Plano3d &) const= &SemiEspacio3d::getAngulo;
 double (SemiEspacio3d::*AnguloConVector3d)(const Vector3d &) const= &SemiEspacio3d::getAngulo;
 
-class_<SemiEspacio3d, bases<GeomObj3d> >("SemiEspacio3d")
+class_<SemiEspacio3d, bases<GeomObj3d> >("SemiSpace3d")
   .def(init<Plano3d>())
   .def(init<SemiEspacio3d>())
   .def("anguloConSemiEspacio3d", AnguloConSemiEspacio3d)

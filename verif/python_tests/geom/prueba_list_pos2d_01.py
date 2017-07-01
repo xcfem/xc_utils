@@ -4,7 +4,7 @@ import xc_base
 import geom
 import math
 
-ptsPrb=geom.ListaPos2d()
+ptsPrb=geom.ListPos2d()
 ptsPrb.agregaPunto(geom.Pos2d(0,0))
 ptsPrb.agregaPunto(geom.Pos2d(2,0))
 ptsPrb.agregaPunto(geom.Pos2d(2,2))

@@ -60,7 +60,7 @@ typedef MatrizPos<Pos2d> m_pos2d;
 class_<m_pos2d, bases<mt_pos2d> >("m_pos2d")
   ;
 
-class_<MatrizPos2d, bases<m_pos2d> >("MatrizPos2d")
+class_<MatrizPos2d, bases<m_pos2d> >("MatrixPos2d")
   .def("getNumQuads",&MatrizPos2d::GetNumQuads)
   .def("getNumPoints",&MatrizPos2d::size)
   .def("getMax",&MatrizPos2d::GetMax)
@@ -273,7 +273,7 @@ typedef MatrizPos<Pos3d> m_pos3d;
 class_<m_pos3d, bases<mt_pos3d> >("m_pos3d")
   ;
 
-class_<MatrizPos3d, bases<m_pos3d> >("MatrizPos3d")
+class_<MatrizPos3d, bases<m_pos3d> >("MatrixPos3d")
   ;
 
 typedef std::vector<m_pos3d > ttz_pos3d;
@@ -288,7 +288,7 @@ class_<t_pos3d, bases<ttz_pos3d> >("t_pos3d")
 class_<TritrizPos3d, bases<t_pos3d> >("TritrizPos3d")
   ;
 
-class_<ListaPos2d, bases<GeomObj2d> >("ListaPos2d")
+class_<ListaPos2d, bases<GeomObj2d> >("ListPos2d")
   .def(init<>())
   .def(init<ListaPos2d>())
   .def("getArea", &ListaPos2d::Area,"returns enclosed area.")
@@ -298,7 +298,7 @@ class_<ListaPos2d, bases<GeomObj2d> >("ListaPos2d")
   .def(self_ns::str(self_ns::self))
   ;
 
-class_<ListaPos3d, bases<GeomObj3d> >("ListaPos3d")
+class_<ListaPos3d, bases<GeomObj3d> >("ListPos3d")
   .def(init<>())
   .def(init<ListaPos3d>())
   .def("getCdg", &ListaPos3d::Cdg)

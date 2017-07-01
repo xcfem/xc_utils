@@ -7,7 +7,7 @@ v2=geom.Vector3d(-1,0,0)
 v3=geom.Vector3d(0,0,1)
 
 v= geom.Vector3d(1,1,1)
-sc= geom.SisCooRect3d3d(v1,v2,v3);
+sc= geom.CooSysRect3d3d(v1,v2,v3);
 vTrf= sc.getCooLocales(v)
 vTrfTeor= geom.Vector3d(1,-1,1)
 ratio= (vTrf-vTrfTeor).getModulo()
