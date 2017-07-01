@@ -4,7 +4,7 @@ import xc_base
 import geom
 import math
 
-circ1=geom.Circulo2d(geom.Pos2d(0.0,0.0),1.0)
+circ1=geom.Circle2d(geom.Pos2d(0.0,0.0),1.0)
 
 areaCirc=circ1.getArea()
 perimetroCirc=circ1.getPerimetro()

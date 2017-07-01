@@ -3,7 +3,7 @@ import geom
 o=geom.Pos3d(0,0,0)
 v=geom.Vector3d(0,0,1)
 
-plano=geom.Plano3d(o,v)
+plano=geom.Plane3d(o,v)
 normal=plano.getNormal()
 base1=plano.getBase1()
 base2=plano.getBase2()

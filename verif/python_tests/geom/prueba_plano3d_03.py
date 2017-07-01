@@ -14,7 +14,7 @@ C=1.
 D=4.
 
 ITeor=geom.Pos3d(3,-1,1)
-P=geom.Plano3d(geom.GeneralEquationOfPlane(2,3,1,-4))
+P=geom.Plane3d(geom.GeneralEquationOfPlane(2,3,1,-4))
 pto=geom.Pos3d(1,1,-2)
 vDir=geom.Dir3d(2,-2,3)
 

@@ -21,7 +21,7 @@
 //----------------------------------------------------------------------------
 //python_interface.cxx
 
-class_<Superficie2d, bases<GeomObj2d>, boost::noncopyable  >("Superficie2d", no_init);
+class_<Superficie2d, bases<GeomObj2d>, boost::noncopyable  >("Surface2d", no_init);
 
 class_<Semiplano2d, bases<Superficie2d> >("HalfPlane2d")
   .def(init<>())
@@ -52,7 +52,7 @@ class_<BND2d, bases<GeomObj2d> >("BND2d")
   .def("getMin", &BND2d::GetMin,"returns minimum value of i coordinate.")
   ;
 
-class_<Circulo2d, bases<Superficie2d> >("Circulo2d")
+class_<Circulo2d, bases<Superficie2d> >("Circle2d")
   .def(init<>())
   .def(init<Pos2d, Pos2d, Pos2d>())
   .def(init<Pos2d,double>())
@@ -70,7 +70,7 @@ class_<Circulo2d, bases<Superficie2d> >("Circulo2d")
 #include "poligonos2d/python_interface.tcc"
 
 
-class_<Superficie3d, bases<GeomObj3d>, boost::noncopyable  >("Superficie3d", no_init);
+class_<Superficie3d, bases<GeomObj3d>, boost::noncopyable  >("Surface3d", no_init);
 
 class_<D2to3d, bases<Superficie3d>, boost::noncopyable  >("D2to3d", no_init)
   .def("getPlane",&D2to3d::GetPlano)
@@ -89,7 +89,7 @@ Pos3d (Plano3d::*IntersRecta3d)(const Recta3d &p) const= &Plano3d::Interseccion;
 Pos3d (Plano3d::*IntersSemiRecta3d)(const SemiRecta3d &p) const= &Plano3d::Interseccion;
 Pos3d (Plano3d::*IntersSegmento3d)(const Segmento3d &p) const= &Plano3d::Interseccion;
 
-class_<Plano3d, bases<Superficie3d> >("Plano3d")
+class_<Plano3d, bases<Superficie3d> >("Plane3d")
   .def(init<Pos3d,Pos3d,Pos3d>())
   .def(init<Pos3d,Vector3d>())
   .def(init<Pos3d,Vector3d,Vector3d>())
@@ -109,15 +109,15 @@ class_<Plano3d, bases<Superficie3d> >("Plano3d")
   .def("getBase1", &Plano3d::Base1)
   .def("getBase2", &Plano3d::Base2);
 
-class_<Poligono3d, bases<D2to3d> >("Poligono3d");
+class_<Poligono3d, bases<D2to3d> >("Polygon3d");
 
-class_<Triangulo3d, bases<Poligono3d>  >("Triangulo3d")
+class_<Triangulo3d, bases<Poligono3d>  >("Triangle3d")
   .def(init<Pos3d,Pos3d,Pos3d>())
   .def(init<Triangulo3d>())
   ;
 
 
-class_<Rejilla2d, bases<Superficie2d> >("Rejilla2d")
+class_<Rejilla2d, bases<Superficie2d> >("Grid2d")
   .def(init<>())
   .def("getMax",&Rejilla2d::GetMax)
   .def("getMin",&Rejilla2d::GetMin)
