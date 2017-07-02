@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+'''Compute the intersection of two straight lines.'''
 import xc_base
 import geom
 import math
