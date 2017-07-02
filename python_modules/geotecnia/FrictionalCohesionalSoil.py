@@ -5,7 +5,7 @@ import FrictionalSoil as fs
 from miscUtils import LogMessages as lmsg
 from scipy.optimize import fminbound
 
-'''FrictionalCohesionalSoil.py: soil with friction and cohesion soil model.
+'''FrictionalCohesionalSoil.py: soil with friction and cohesion.
 
 References: 
 

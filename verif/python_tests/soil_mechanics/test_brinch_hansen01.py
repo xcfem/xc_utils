@@ -5,6 +5,7 @@
 
    See "Guía de cimentaciones en obras de carretera. Ministerio de Fomento
    (Spain) 2002 Table on page 101.
+   (https://books.google.ch/books?id=a0eoygAACAAJ)
 '''
 
 __author__= "Luis C. Pérez Tato (LCPT)"
