@@ -24,6 +24,8 @@ typedef Ref<SisCooRect1d2d> ref_SisCooRect1d2d;
 const ref_SisCooRect1d2d::PGlobal &(ref_SisCooRect1d2d::*getOrg1d2d)(void) const= &ref_SisCooRect1d2d::Org;
 const SisCooRect1d2d &(ref_SisCooRect1d2d::*getCoordTransformation1d2d)(void) const= &ref_SisCooRect1d2d::Trf;
 class_<ref_SisCooRect1d2d, bases<ProtoGeom>, boost::noncopyable >("ref_CooSysRect1d2d", no_init)
+  .add_property("Org", make_function(getOrg1d2d,return_internal_reference<>()), &ref_SisCooRect1d2d::setOrg,"Origin of the reference frame.")
+  .add_property("Trf", make_function(getCoordTransformation1d2d,return_internal_reference<>()), &ref_SisCooRect1d2d::setTrf,"Coordinate system of the reference frame.")
   .def("getVDirEje",&ref_SisCooRect1d2d::GetVDirEje)
   .def("getPosGlobal",&ref_SisCooRect1d2d::GetPosGlobal)
   .def("getCooGlobales",&ref_SisCooRect1d2d::GetCooGlobales)
@@ -45,6 +47,8 @@ typedef Ref<SisCooRect1d3d> ref_SisCooRect1d3d;
 const ref_SisCooRect1d3d::PGlobal &(ref_SisCooRect1d3d::*getOrg1d3d)(void) const= &ref_SisCooRect1d3d::Org;
 const SisCooRect1d3d &(ref_SisCooRect1d3d::*getCoordTransformation1d3d)(void) const= &ref_SisCooRect1d3d::Trf;
 class_<ref_SisCooRect1d3d, bases<ProtoGeom>, boost::noncopyable >("ref_CooSysRect1d3d", no_init)
+  .add_property("Org", make_function(getOrg1d3d,return_internal_reference<>()), &ref_SisCooRect1d3d::setOrg,"Origin of the reference frame.")
+  .add_property("Trf", make_function(getCoordTransformation1d3d,return_internal_reference<>()), &ref_SisCooRect1d3d::setTrf,"Coordinate system of the reference frame.")
   .def("getVDirEje",&ref_SisCooRect1d3d::GetVDirEje)
   .def("getPosGlobal",&ref_SisCooRect1d3d::GetPosGlobal)
   .def("getCooGlobales",&ref_SisCooRect1d3d::GetCooGlobales)
@@ -66,6 +70,8 @@ typedef Ref<SisCooRect2d2d> ref_SisCooRect2d2d;
 const ref_SisCooRect2d2d::PGlobal &(ref_SisCooRect2d2d::*getOrg2d2d)(void) const= &ref_SisCooRect2d2d::Org;
 const SisCooRect2d2d &(ref_SisCooRect2d2d::*getCoordTransformation2d2d)(void) const= &ref_SisCooRect2d2d::Trf;
 class_<ref_SisCooRect2d2d, bases<ProtoGeom>, boost::noncopyable >("ref_CooSysRect2d2d", no_init)
+  .add_property("Org", make_function(getOrg2d2d,return_internal_reference<>()), &ref_SisCooRect2d2d::setOrg,"Origin of the reference frame.")
+  .add_property("Trf", make_function(getCoordTransformation2d2d,return_internal_reference<>()), &ref_SisCooRect2d2d::setTrf,"Coordinate system of the reference frame.")
   .def("getVDirEje",&ref_SisCooRect2d2d::GetVDirEje)
   .def("getPosGlobal",&ref_SisCooRect2d2d::GetPosGlobal)
   .def("getCooGlobales",&ref_SisCooRect2d2d::GetCooGlobales)
@@ -88,6 +94,8 @@ typedef Ref<SisCooRect2d3d> ref_SisCooRect2d3d;
 const ref_SisCooRect2d3d::PGlobal &(ref_SisCooRect2d3d::*getOrg2d3d)(void) const= &ref_SisCooRect2d3d::Org;
 const SisCooRect2d3d &(ref_SisCooRect2d3d::*getCoordTransformation2d3d)(void) const= &ref_SisCooRect2d3d::Trf;
 class_<ref_SisCooRect2d3d, bases<ProtoGeom>, boost::noncopyable >("ref_CooSysRect2d3d", no_init)
+  .add_property("Org", make_function(getOrg2d3d,return_internal_reference<>()), &ref_SisCooRect2d3d::setOrg,"Origin of the reference frame.")
+  .add_property("Trf", make_function(getCoordTransformation2d3d,return_internal_reference<>()), &ref_SisCooRect2d3d::setTrf,"Coordinate system of the reference frame.")
   .def("getVDirEje",&ref_SisCooRect2d3d::GetVDirEje)
   .def("getPosGlobal",&ref_SisCooRect2d3d::GetPosGlobal)
   .def("getCooGlobales",&ref_SisCooRect2d3d::GetCooGlobales)
@@ -110,6 +118,8 @@ typedef Ref<SisCooRect3d3d> ref_SisCooRect3d3d;
 const ref_SisCooRect3d3d::PGlobal &(ref_SisCooRect3d3d::*getOrg3d3d)(void) const= &ref_SisCooRect3d3d::Org;
 const SisCooRect3d3d &(ref_SisCooRect3d3d::*getCoordTransformation3d3d)(void) const= &ref_SisCooRect3d3d::Trf;
 class_<ref_SisCooRect3d3d, bases<ProtoGeom>, boost::noncopyable >("ref_CooSysRect3d3d", no_init)
+  .add_property("Org", make_function(getOrg3d3d,return_internal_reference<>()), &ref_SisCooRect3d3d::setOrg,"Origin of the reference frame.")
+  .add_property("Trf", make_function(getCoordTransformation3d3d,return_internal_reference<>()), &ref_SisCooRect3d3d::setTrf,"Coordinate system of the reference frame.")
   .def("getVDirEje",&ref_SisCooRect3d3d::GetVDirEje)
   .def("getPosGlobal",&ref_SisCooRect3d3d::GetPosGlobal)
   .def("getCooGlobales",&ref_SisCooRect3d3d::GetCooGlobales)

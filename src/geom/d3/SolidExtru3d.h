@@ -106,7 +106,7 @@ class SolidExtru3d : public Solido3d
 /*       {  */
 /*         Pos3d p= GetCdgBase(i); */
 /*         S secc= scc; */
-/*         secc.PutOrg(p); */
+/*         secc.setOrg(p); */
 /*         return secc; */
 /*       } */
     inline virtual GEOM_FT GetMax(unsigned short int i) const

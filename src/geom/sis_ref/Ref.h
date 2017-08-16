@@ -50,8 +50,6 @@ class Ref : public ProtoGeom
 
   public:
     Ref(void): org(), trf() {}
-    Ref(const Ref &otro)
-      : org(otro.org), trf(otro.trf) {}
     Ref(const PGlobal &o, const SC &sc=SC())
       : org(o), trf(sc) {}
     Ref(const PGlobal &o,const VGlobal &vX)
@@ -60,22 +58,18 @@ class Ref : public ProtoGeom
       : org(o), trf(dirX.GetVector()) {}
     Ref(const PGlobal &o,const PGlobal &p)
       : org(o), trf(o,p) {}
-    Ref &operator =(const Ref &otro)
-      {
-        trf= otro.trf;
-        org= otro.org;
-        return *this;
-      }
     PGlobal &Org(void)
       { return org; }
     const PGlobal &Org(void) const
       { return org; }
-    void PutOrg(const PGlobal &p)
+    void setOrg(const PGlobal &p)
       { org= p; }
     SC &Trf(void)
       { return trf; }
     const SC &Trf(void) const
       { return trf; }
+    void setTrf(const SC &t)
+      { trf= t; }
     VGlobal GetVDirEje(const size_t &i) const
       { return trf.GetVDirEje(i); }
     PGlobal GetPosGlobal(const PLocal &p) const;
