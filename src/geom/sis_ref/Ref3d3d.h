@@ -45,14 +45,13 @@ class Ref3d3d : public Ref<SisCooRect3d3d>
 
   public:
     Ref3d3d(void);
-    Ref3d3d(const Ref3d3d &otro);
     Ref3d3d(const Pos3d &o);
+    Ref3d3d(const Pos3d &,const SisCooRect3d3d &);
     Ref3d3d(const Pos3d &o,const Pos3d &p);
     Ref3d3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
     Ref3d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2);
     Ref3d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2,const Vector3d &v3);
     Ref3d3d(const Recta3d &r,const Pos3d &p);
-    Ref3d3d &operator =(const Ref3d3d &otro);
     Vector3d GetI(void) const;
     //Devuelve el vector unitario I en el sistema global.
     Vector3d GetJ(void) const;

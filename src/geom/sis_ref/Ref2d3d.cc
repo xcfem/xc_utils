@@ -26,17 +26,17 @@
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/d2/Plano3d.h"
 
-
-
+//! @brief Constructor.
+Ref2d3d::Ref2d3d(void)
+  : BaseRef() {}
 
 //! @brief Constructor.
-Ref2d3d::Ref2d3d(void): BaseRef() {}
+Ref2d3d::Ref2d3d(const Pos3d &o)
+  : BaseRef(o) {}
 
 //! @brief Constructor.
-Ref2d3d::Ref2d3d(const Ref2d3d &otro): BaseRef(otro) {}
-
-//! @brief Constructor.
-Ref2d3d::Ref2d3d(const Pos3d &o) : BaseRef(o) {}
+Ref2d3d::Ref2d3d(const Pos3d &o,const SisCooRect2d3d &sc)
+  : BaseRef(o,sc) {}
 
 //! @brief Constructor.
 Ref2d3d::Ref2d3d(const Pos3d &o,const Pos3d &p,const Pos3d &q)
@@ -50,30 +50,29 @@ Ref2d3d::Ref2d3d(const Pos3d &o,const Vector3d &v)
 Ref2d3d::Ref2d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2)
   : BaseRef(o,SisCooRect2d3d(v1,v2)) {}
 
-//! @brief Operador asignación.
-Ref2d3d &Ref2d3d::operator =(const Ref2d3d &otro)
-  {
-    BaseRef::operator=(otro);
-    return *this;
-  }
+
+//! @brief Devuelve el vector unitario I en el sistema global.
 Vector3d Ref2d3d::GetI(void) const
-//Devuelve el vector unitario I en el sistema global.
   { return GetVDirEje(1); }
+
+//! @brief Devuelve el vector unitario I en el sistema global.
 Vector3d Ref2d3d::GetJ(void) const
-//Devuelve el vector unitario I en el sistema global.
   { return GetVDirEje(2); }
+
+//! @brief Devuelve la recta que define el eje x.
 Recta3d Ref2d3d::GetEjeX(void) const
-//Devuelve la recta que define el eje x.
   {
     const Pos3d dest(org+1000.0*GetI());
     return Recta3d(org,dest);
   }
+
+//! @brief Devuelve la recta que define el eje x.
 Recta3d Ref2d3d::GetEjeY(void) const
-//Devuelve la recta que define el eje x.
   {
     const Pos3d dest(org+1000.0*GetJ());
     return Recta3d(org,dest);
   }
+
 Plano3d Ref2d3d::GetPlanoXY(void) const
   { return Plano3d(org,1000.0*GetI(),1000.0*GetJ()); }
 

@@ -28,16 +28,12 @@
 
 
 Ref1d2d::Ref1d2d(void): BaseRef() {}
-Ref1d2d::Ref1d2d(const Ref1d2d &otro): BaseRef(otro) {}
 Ref1d2d::Ref1d2d(const Pos2d &o) : BaseRef(o) {}
+Ref1d2d::Ref1d2d(const Pos2d &o,const SisCooRect1d2d &sc): BaseRef(o,sc) {}
 Ref1d2d::Ref1d2d(const Pos2d &o,const Vector2d &vX): BaseRef(o,vX) {}
 Ref1d2d::Ref1d2d(const Pos2d &o,const Dir2d &dirX): BaseRef(o,dirX) {}
 Ref1d2d::Ref1d2d(const Pos2d &o,const Pos2d &p): BaseRef(o,p) {}
-Ref1d2d &Ref1d2d::operator =(const Ref1d2d &otro)
-  {
-    BaseRef::operator=(otro);
-    return *this;
-  }
+
 Vector2d Ref1d2d::GetI(void) const
 //Devuelve el vector unitario I en el sistema global.
   { return GetVDirEje(1); }

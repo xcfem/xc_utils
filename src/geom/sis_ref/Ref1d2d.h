@@ -36,8 +36,8 @@ class Dir2d;
 
 //! @ingroup SisRef
 //! 
-//! @brief Sistema de referencia unidimensional definido
-//! en un sistema de referencia bidimensional.
+//! @brief 1D Reference system defined in a
+//! bi-dimensional one.
 class Ref1d2d : public Ref<SisCooRect1d2d>
   {
   public:
@@ -46,12 +46,11 @@ class Ref1d2d : public Ref<SisCooRect1d2d>
 
   public:
     Ref1d2d(void);
-    Ref1d2d(const Ref1d2d &otro);
-    Ref1d2d(const Pos2d &o);
+    Ref1d2d(const Pos2d &);
+    Ref1d2d(const Pos2d &,const SisCooRect1d2d &);
     Ref1d2d(const Pos2d &o,const Vector2d &vX);
     Ref1d2d(const Pos2d &o,const Dir2d &dirX);
     Ref1d2d(const Pos2d &o,const Pos2d &p);
-    Ref1d2d &operator =(const Ref1d2d &otro);
 
     Vector2d GetI(void) const;
     //Devuelve el vector unitario I en el sistema global.

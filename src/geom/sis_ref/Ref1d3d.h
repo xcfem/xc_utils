@@ -35,8 +35,8 @@ class Recta3d;
 
 //! @ingroup SisRef
 //! 
-//! @brief Sistema de referencia unidimensional definido
-//! en un sistema de referencia tridimensional.
+//! @brief 1D reference system defined in a
+//! three-dimensional one.
 class Ref1d3d : public Ref<SisCooRect1d3d>
   {
   public:
@@ -45,17 +45,14 @@ class Ref1d3d : public Ref<SisCooRect1d3d>
 
   public:
     Ref1d3d(void);
-    Ref1d3d(const Ref1d3d &otro);
     Ref1d3d(const Pos3d &o);
+    Ref1d3d(const Pos3d &,const SisCooRect1d3d &);
     Ref1d3d(const Pos3d &o,const Vector3d &vX);
     Ref1d3d(const Pos3d &o,const Dir3d &dirX);
     Ref1d3d(const Pos3d &o,const Pos3d &p);
-    Ref1d3d &operator =(const Ref1d3d &otro);
 
     Vector3d GetI(void) const;
-    //Devuelve el vector unitario I en el sistema global.
-    Recta3d GetEjeX(void) const; //Devuelve la recta que define el eje x.
-
+    Recta3d GetEjeX(void) const;
 
     virtual ~Ref1d3d(void)
       {}

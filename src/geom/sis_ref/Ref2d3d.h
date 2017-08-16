@@ -45,12 +45,11 @@ class Ref2d3d : public Ref<SisCooRect2d3d>
     typedef Ref<SisCooRect2d3d> BaseRef;
   public:
     Ref2d3d(void);
-    Ref2d3d(const Ref2d3d &otro);
     Ref2d3d(const Pos3d &o);
+    Ref2d3d(const Pos3d &,const SisCooRect2d3d &);
     Ref2d3d(const Pos3d &o,const Pos3d &p,const Pos3d &q);
     Ref2d3d(const Pos3d &o,const Vector3d &v);
     Ref2d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2);
-    Ref2d3d &operator =(const Ref2d3d &otro);
     Vector3d GetI(void) const;
     //Devuelve el vector unitario I en el sistema global.
     Vector3d GetJ(void) const;

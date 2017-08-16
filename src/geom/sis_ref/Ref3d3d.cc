@@ -25,17 +25,15 @@
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/d2/Plano3d.h"
 
-
-
-
 //! @brief Constructor.
 Ref3d3d::Ref3d3d(void): BaseRef() {}
 
 //! @brief Constructor.
-Ref3d3d::Ref3d3d(const Ref3d3d &otro): BaseRef(otro) {}
+Ref3d3d::Ref3d3d(const Pos3d &o) : BaseRef(o) {}
 
 //! @brief Constructor.
-Ref3d3d::Ref3d3d(const Pos3d &o) : BaseRef(o) {}
+Ref3d3d::Ref3d3d(const Pos3d &o,const SisCooRect3d3d &sc)
+  : BaseRef(o,sc) {}
 
 //! @brief Constructor.
 Ref3d3d::Ref3d3d(const Pos3d &o,const Pos3d &p) : BaseRef(o,p) {}
@@ -55,13 +53,6 @@ Ref3d3d::Ref3d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2,const Vect
 //! @brief Constructor.
 Ref3d3d::Ref3d3d(const Recta3d &r,const Pos3d &p)
   : BaseRef(r.Punto(0),SisCooRect3d3d(r.Punto(0),r.Punto(100),p)) {}
-
-//! @brief Operador asignación.
-Ref3d3d &Ref3d3d::operator=(const Ref3d3d &otro)
-  {
-    BaseRef::operator=(otro);
-    return *this;
-  }
 
 Ref3d3d::~Ref3d3d(void)
   {}

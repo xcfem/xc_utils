@@ -45,12 +45,11 @@ class Ref2d2d : public Ref<SisCooRect2d2d>
 
   public:
     Ref2d2d(void);
-    Ref2d2d(const Ref2d2d &otro);
     Ref2d2d(const Pos2d &o);
+    Ref2d2d(const Pos2d &,const SisCooRect2d2d &);
     Ref2d2d(const Pos2d &o,const Vector2d &vX);
     Ref2d2d(const Pos2d &o,const Dir2d &dirX);
     Ref2d2d(const Pos2d &o,const Pos2d &p);
-    Ref2d2d &operator =(const Ref2d2d &otro);
     Vector2d GetI(void) const;
     //Devuelve el vector unitario I en el sistema global.
     Vector2d GetJ(void) const;
