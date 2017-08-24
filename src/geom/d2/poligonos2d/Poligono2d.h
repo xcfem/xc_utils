@@ -53,6 +53,7 @@ class Poligono2d: public SupPoligonal2d
     explicit Poligono2d(const CGPoligono_2 &);
     explicit Poligono2d(const std::list<Poligono2d> &lp);
     explicit Poligono2d(const Polilinea2d &);
+    explicit Poligono2d(const boost::python::list &);
     virtual GeomObj *clon(void) const;
     const CGPoligono_2 &ToCGAL(void) const
       { return cgpol; }

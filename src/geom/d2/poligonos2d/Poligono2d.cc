@@ -62,6 +62,15 @@ Poligono2d::Poligono2d(const Polilinea2d &p)
       push_back(*i);
   }
 
+//! @brief Constructor (Python interface).
+Poligono2d::Poligono2d(const boost::python::list &l)
+  {
+    const int sz= len(l);
+    // copy the components
+    for(int i=0; i<sz; i++)
+      push_back(boost::python::extract<Pos2d>(l[i]));
+  }
+
 //! @brief Constructor.
 Poligono2d::Poligono2d(const std::list<Poligono2d> &lp)
   {
