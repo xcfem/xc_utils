@@ -85,9 +85,21 @@ Superficie2d *SectorCircular2d::clon(void) const
 //! @brief Devuelve la posición del centro de gravedad del sector circular.
 Pos2d SectorCircular2d::Cdg(void) const
   {
-    std::cerr << "SectorCircular2d::Cdg() no implementada." << std::endl;
-    return Centro();
+    const GEOM_FT theta= AnguloComprendido()/2.0;
+    const GEOM_FT lambda= 2.0/3.0*sin(theta)/theta;
+    const Vector2d v= lambda*(PMed()-Centro());
+    return Centro()+v;
   }
+
+//! @brief Return the position of the arc centroid.
+Pos2d SectorCircular2d::ArcCentroid(void) const
+  {
+    const GEOM_FT theta= AnguloComprendido()/2.0;
+    const GEOM_FT lambda= sin(theta)/theta;
+    const Vector2d v= lambda*(PMed()-Centro());
+    return Centro()+v;
+  }
+
 
 //! @brief Devuelve el punto inicial del arco.
 Pos2d SectorCircular2d::PInic(void) const

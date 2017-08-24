@@ -49,6 +49,7 @@ class SectorCircular3d : public D2to3d
     Pos3d PFin(void) const;
     Pos3d PMed(void) const;
     virtual Pos3d Cdg(void) const;
+    virtual Pos3d ArcCentroid(void) const;
     GEOM_FT Radio2(void) const;
     GEOM_FT Radio(void) const;
     GEOM_FT Diametro(void) const;

@@ -99,6 +99,11 @@ Pos3d SectorCircular3d::PMed(void) const
 
 Pos3d SectorCircular3d::Cdg(void) const
   { return Centro(); }
+
+//! @brief Return the position of the arc centroid.
+Pos3d SectorCircular3d::ArcCentroid(void) const
+  { return to_3d(sect_circ.ArcCentroid()); }
+
 GEOM_FT SectorCircular3d::Radio2(void) const
   { return sect_circ.Radio2(); }
 GEOM_FT SectorCircular3d::Radio(void) const

@@ -43,6 +43,7 @@ class SectorCircular2d : public Circulo2d
     SectorCircular2d &operator=(const SectorCircular2d &p);
     virtual Superficie2d *clon(void) const;
     virtual Pos2d Cdg(void) const;
+    virtual Pos2d ArcCentroid(void) const;
     Pos2d PInic(void) const;
     Pos2d PFin(void) const;
     Pos2d PMed(void) const;
