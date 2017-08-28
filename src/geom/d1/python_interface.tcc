@@ -64,6 +64,7 @@ class_<Segmento3d, bases<Linea3d> >("LineSegment3d")
   .def("getPoint",&Segmento3d::PtoParametricas)
   .def("getAngleWithVector",AnguloVector3D,"Returns the angle between the line segment and the vector.")
   .def("getAngleWithLineSegment",AnguloSegmento3D,"Returns the angle between both line segments.")
+  .def("getVDir",&Segmento3d::VDir,"return the direction vector of the segment.")
   ;
 
 Pos3d (Recta3d::*Pos3dProj)(const Pos3d &) const= &Recta3d::Projection;
