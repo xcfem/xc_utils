@@ -71,13 +71,8 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
     Polilinea3d GetMenores(unsigned short int i,const GEOM_FT &d) const;
     //Devuelve una Polilinea3d con los vertices cuya coordenada i
     //es menor que d.
-    Segmento3d GetSegmento(const list_Pos3d::const_iterator &i) const
-    //Devuelve el segmento a continuación de la posicion i
-      {
-	list_Pos3d::const_iterator j= i; j++;
-        Segmento3d s(*i,*j);
-        return s;
-      }
+    Segmento3d GetSegmento(const list_Pos3d::const_iterator &) const;
+    Segmento3d GetSegmento(const size_t &) const;
 /*     virtual list_Pos3d Int(unsigned short int i, const double d) const */
 /*       { */
 /*         std::cerr << "Polilinea3d Int(i,d) no implementada" << endl; */

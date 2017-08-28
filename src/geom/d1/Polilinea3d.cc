@@ -38,6 +38,27 @@ size_t Polilinea3d::GetNumSegmentos(void) const
     return retval;
   }
 
+//! @brief Return the segment pointed by the iterator.
+Segmento3d Polilinea3d::GetSegmento(const list_Pos3d::const_iterator &i) const
+  {
+    list_Pos3d::const_iterator j= i; j++;
+    Segmento3d s(*i,*j);
+    return s;
+  }
+
+//! @brief Return the i-th segment (firt on has index 1).
+Segmento3d Polilinea3d::GetSegmento(const size_t &i) const
+  {
+    const size_t ns= GetNumSegmentos();
+    if(i>ns)
+      std::cerr << nombre_clase() << "::" << __FUNCTION__
+	        << "; you asked for the " << i
+	        << "-th and " << ns
+                << "-th is the last one." << std::endl;
+    return Segmento3d((*this)[i-1],(*this)[i]);
+  }
+
+
 void Polilinea3d::Mueve(const Vector3d &v)
 //Los puntos de la Polilinea3d estaran siempre en globales.
   {

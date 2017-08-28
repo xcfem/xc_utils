@@ -89,7 +89,7 @@ GeomObj::list_Pos2d (Polilinea2d::*intersectionWithLine)(const Recta2d &) const=
 GeomObj::list_Pos2d (Polilinea2d::*intersectionWithRay)(const SemiRecta2d &) const= &Polilinea2d::Interseccion;
 GeomObj::list_Pos2d (Polilinea2d::*intersectionWithSegment)(const Segmento2d &) const= &Polilinea2d::Interseccion;
 void (Polilinea2d::*simplify2DPoly)(GEOM_FT epsilon)= &Polilinea2d::simplify;
-Segmento2d (Polilinea2d::*getSegment)(const size_t &) const= &Polilinea2d::GetSegmento;
+Segmento2d (Polilinea2d::*get2DSegment)(const size_t &) const= &Polilinea2d::GetSegmento;
 class_<Polilinea2d, bases<Linea2d, poliPos2d> >("Polilinea2d")
   .def(init<>())
   .def(init<ListaPos2d>())
@@ -108,7 +108,7 @@ class_<Polilinea2d, bases<Linea2d, poliPos2d> >("Polilinea2d")
   .def("getIntersectionWithSegment", intersectionWithSegment)
   .def("isClosed",&Polilinea2d::isClosed,"returns true if the last vertex is coincident with the first one -dist(first,last)<tol*length-.")
   .def("simplify", simplify2DPoly,"simplification of the polyline (Douglas-Peucker algorithm).")
-  .def("getSegment", getSegment, "return the i-th segement.")  
+  .def("getSegment", get2DSegment, "return the i-th segment.")  
   ;
 
 
@@ -134,6 +134,7 @@ class_<Segmento2d, bases<Linea2d> >("Segmento2d")
   .def("offsetDouble",OffsetSegmentoDouble);
 
 void (Polilinea3d::*simplify3DPoly)(GEOM_FT epsilon)= &Polilinea3d::simplify;
+Segmento3d (Polilinea3d::*get3DSegment)(const size_t &) const= &Polilinea3d::GetSegmento;
 class_<Polilinea3d, bases<Linea3d, poliPos3d> >("Polilinea3d")
   .def(init<>())
 //.def(init<ListaPos3d>())
@@ -146,7 +147,7 @@ class_<Polilinea3d, bases<Linea3d, poliPos3d> >("Polilinea3d")
   .def("isClosed",&Polilinea3d::isClosed,"returns true if the last vertex is coincident with the first one -dist(first,last)<tol*length-.")
   .def("simplify", simplify3DPoly,"simplification of the polyline (Douglas-Peucker algorithm).")
   .def("getCdg", &Polilinea3d::Cdg)
-  .def("getSegment", &Polilinea3d::GetSegmento, "return the i-th segement.")
+  .def("getSegment", get3DSegment, "return the i-th segment.")
   ;
 
 typedef std::deque<Polilinea3d> dq_polyline3D;

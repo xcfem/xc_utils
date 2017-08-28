@@ -158,25 +158,27 @@ Segmento2d Polilinea2d::GetSegmento(const size_t &i) const
   {
     const size_t ns= GetNumSegmentos();
     if(i>ns)
-      std::cerr << "Polilinea2d::GetSegmento: el segmento " << ns
-           << " es el último de la polilinea." << std::endl;
+      std::cerr << nombre_clase() << "::" << __FUNCTION__
+	        << "; you asked for the " << i
+	        << "-th and " << ns
+                << "-th is the last one." << std::endl;
     Segmento2d s(Vertice(i),Vertice(i+1));
     return s;
   }
 
 GEOM_FT Polilinea2d::Ix(void) const
   {
-    std::cerr << "Polilinea2d Ix() no implementada" << std::endl;
+    std::cerr << "Polilinea2d Ix() not implemented" << std::endl;
     return 0.0;
   }
 GEOM_FT Polilinea2d::Iy(void) const
   {
-    std::cerr << "Polilinea2d Iy() no implementada" << std::endl;
+    std::cerr << "Polilinea2d Iy() not implemented" << std::endl;
     return 0.0;
   }
 GEOM_FT Polilinea2d::Iz(void) const
   {
-    std::cerr << "Polilinea2d Iz() no implementada" << std::endl;
+    std::cerr << "Polilinea2d Iz() not implemented" << std::endl;
     return 0.0;
   }
 
