@@ -4,7 +4,7 @@ from __future__ import division
 
 import math
 
-# Mononobe-Okabe theory.
+'''Mononobe-Okabe theory.'''
 
 def active_earth_pressure_coefficient_Kad(psi, phi, theta, delta_ad,beta):
   ''' Return the active earth pressure coefficient according

@@ -125,6 +125,8 @@
 /usr/local/lib/python2.7/dist-packages/geotecnia/__init__.pyc
 /usr/local/lib/python2.7/dist-packages/geotecnia/mononobe_okabe.py
 /usr/local/lib/python2.7/dist-packages/geotecnia/mononobe_okabe.pyc
+/usr/local/lib/python2.7/dist-packages/geotecnia/settlement.py
+/usr/local/lib/python2.7/dist-packages/geotecnia/settlement.pyc
 /usr/local/lib/python2.7/dist-packages/geotecnia/tuneles/borrar_teoria_bloques.py
 /usr/local/lib/python2.7/dist-packages/geotecnia/tuneles/borrar_teoria_bloques.pyc
 /usr/local/lib/python2.7/dist-packages/geotecnia/tuneles/__init__.py

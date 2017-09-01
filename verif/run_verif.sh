@@ -26,6 +26,7 @@ python ./python_tests/soil_mechanics/test_rankine.py
 python ./python_tests/soil_mechanics/test_brinch_hansen01.py
 python ./python_tests/soil_mechanics/test_brinch_hansen02.py
 python ./python_tests/soil_mechanics/test_stratified_soil.py
+python ./python_tests/soil_mechanics/test_boussinesq.py
 
 #Test de combinaciones.
 echo "$BLEU" "Geometry tests." "$NORMAL"
