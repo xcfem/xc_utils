@@ -55,6 +55,7 @@ class GeomObj2d: public GeomObj
     Pos2d GetPMin(void) const;
     BND2d Bnd(void) const;
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
+    virtual bool Out(const Pos2d &p, const double &tol= 0.0) const;
     virtual GEOM_FT PesoCdg(void) const
       //Devuelve el peso para el cálculo del CDG
       //por defecto es 1

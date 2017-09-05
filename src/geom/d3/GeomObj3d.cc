@@ -63,14 +63,14 @@ BND3d GeomObj3d::Bnd(void) const
 //Devuelve la extension del objeto.
   { return BND3d(GetPMin(),GetPMax()); }
 
-//! @brief Devuelve verdadero si el punto esta sobre el objeto.
+//! @brief Return true if point lies inside the object.
 bool GeomObj3d::In(const Pos3d &p, const double &tol) const
   {
     std::cerr << "Función 'In', no definida" << std::endl;
     return (BND3d().In(p,tol));
   }
 
-//! @brief Devuelve verdadero si el punto no esta sobre el objeto.
+//! @brief Devuelve true if the point lies outside the object.
 bool GeomObj3d::Out(const Pos3d &p, const double &tol) const
   { return !In(p,tol); }
 

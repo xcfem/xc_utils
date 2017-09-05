@@ -49,12 +49,17 @@ Pos2d GeomObj2d::GetPMin(void) const
 BND2d GeomObj2d::Bnd(void) const
   { return BND2d(GetPMin(),GetPMax()); }
 
-//! @brief Devuelve verdadero si el punto esta sobre el objeto.
+//! @brief Return true if the point lies inside the object.
 bool GeomObj2d::In(const Pos2d &p, const double &tol) const
   { 
     std::cerr << "Método In(p,tol) no implementado" << std::endl;
     return false;
   }
+
+//! @brief Return true if the point lies outside the object.
+bool GeomObj2d::Out(const Pos2d &p, const double &tol) const
+  { return !In(p,tol); }
+
 
 //! @brief Devuelve el ángulo que define un eje principal de inercia.
 double GeomObj2d::Theta_p(void) const
