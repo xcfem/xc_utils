@@ -26,20 +26,27 @@
 
 #include "xc_utils/src/geom/matriz_FT.h"
 
+//! @brief Constructor from (x,y,z) components.
 Dir3d::Dir3d(GEOM_FT x,GEOM_FT y,GEOM_FT z)
   : cgd(x,y,z) {}
 
+//! @brief Constructor from a Vector3d.
 Dir3d::Dir3d(const Vector3d &v)
   : cgd(v.ToCGAL()) {}
+
+//! @brief Returns the x, y and z components in a row matrix.
 matriz_FT Dir3d::GetMatriz(void) const
   {
     matriz_FT retval(3,1,0.0);
     retval(1)= cgd.dx(); retval(2)= cgd.dy(); retval(3)= cgd.dz();
     return retval;
   }
+
+//! @brief Returns the x, y and z components in a vector.
 Vector3d Dir3d::GetVector(void) const
   { return Vector3d(cgd.vector()); }
 
+//! @brief Insertion into an output stream.
 std::ostream &operator<<(std::ostream &stream,const Dir3d &n)
   {
     stream << "[[" << n.dx() << "][" << n.dy() << "]["

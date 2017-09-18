@@ -120,8 +120,8 @@ SET(ca_combinaciones loadCombinations/comb_analysis/Variation loadCombinations/c
 ADD_LIBRARY(xc_utils SHARED ${MYSQL} ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${NUCLEO}  ${VtkAux} ${ca_coefs} ${ca_acciones} ${ca_combinaciones})
 
 #Interfaz Python
-LINK_LIBRARIES(xc_utils xc_basic ${VTK_BIB} ${CGAL_LIBRARIES} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${MySQLpp_LIBRARIES} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} boost_python ${Boost_LIBRARIES})
-LINK_DIRECTORIES("/usr/lib/python2.6") # Not needed?
+LINK_LIBRARIES(xc_utils xc_basic ${VTK_BIB} ${CGAL_LIBRARIES} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${MySQLpp_LIBRARIES} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} boost_python ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
+LINK_DIRECTORIES("/usr/lib/python2.7") # Not needed?
 ADD_DEFINITIONS(-fno-strict-aliasing)
 ADD_LIBRARY(xc_base SHARED nucleo/python_interface.cc)
 ADD_LIBRARY(loadCombinations SHARED loadCombinations/python_interface.cc)
