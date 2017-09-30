@@ -43,7 +43,7 @@ EntProp::EntProp(EntProp *owr)
   {
     if(this == owner)
       std::cerr << "EntProp constructor por defecto; ¡ojo!, objeto de clase: '" 
-                << nombre_clase() << "', propietario de sí mismo." << std::endl;
+                << getClassName() << "', propietario de sí mismo." << std::endl;
   }
 
 //! @brief Constructor de copia.
@@ -52,7 +52,7 @@ EntProp::EntProp(const EntProp &otro)
   {
     if(this == owner)
       std::cerr << "EntProp constructor de copia; ¡ojo!, objeto de clase: '"
-                << nombre_clase() << "', propietario de sí mismo." << std::endl;
+                << getClassName() << "', propietario de sí mismo." << std::endl;
   }
 
 //! @brief Operador asignación.
@@ -61,15 +61,15 @@ EntProp &EntProp::operator=(const EntProp &otro)
     owner= otro.owner;
     if(this == owner)
       {
-        std::cerr << "EntProp operador asignación; ¡ojo!, objeto de clase: '" << nombre_clase() 
+        std::cerr << "EntProp operador asignación; ¡ojo!, objeto de clase: '" << getClassName() 
                   << "', propietario de sí mismo." << std::endl;
         owner= nullptr;
       }
     return *this;
   }
 
-//! @brief Devuelve el nombre de la clase.
-std::string EntProp::nombre_clase(void) const
+//! @brief Returns demangled class name.
+std::string EntProp::getClassName(void) const
   {
     std::string tmp= typeid(*this).name();
     std::bad_exception  e;

@@ -133,7 +133,7 @@ void SisCooXd3d::VectorEjeX(const VGlobal &i_)
   {
     if(i_.Nulo())
       {
-        std::cerr << nombre_clase() << "::" << __FUNCTION__
+        std::cerr << getClassName() << "::" << __FUNCTION__
 		  << "; vector: " << i_ << " is zero."
 	          << " System parallel to global axis will be returned."
                   << std::endl;

@@ -52,7 +52,7 @@ BND2d GeomObj2d::Bnd(void) const
 //! @brief Return true if the point lies inside the object.
 bool GeomObj2d::In(const Pos2d &p, const double &tol) const
   { 
-    std::cerr << nombre_clase() << "::" << __FUNCTION__
+    std::cerr << getClassName() << "::" << __FUNCTION__
 	      << "; método In(p,tol) no implementado" << std::endl;
     return false;
   }

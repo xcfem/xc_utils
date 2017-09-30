@@ -79,8 +79,8 @@ BOOST_PYTHON_MODULE(xc_base)
       .def("evalPy", &EntCmd_eval,"Evaluates expresion.")
       .def("execPy", &EntCmd_exec,"Executes code block.")
       .def("execFilePy", &EntCmd_exec_file,"Executes code block.")
-      .def("tipo", &EntCmd::nombre_clase,"DEPRECATED Devuelve el nombre de la clase.")
-      .def("type", &EntCmd::nombre_clase,"Returns class name.")
+      .def("tipo", &EntCmd::getClassName,"DEPRECATED Devuelve el nombre de la clase.")
+      .def("type", &EntCmd::getClassName,"Returns class name.")
   ;
 
     class_<EntConNmb, bases<EntCmd> >("EntConNmb")

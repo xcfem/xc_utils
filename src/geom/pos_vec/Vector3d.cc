@@ -165,7 +165,7 @@ Vector3d Vector3d::Perpendicular(const Vector3d &v) const
     Vector3d retval(0,0,0);
     if( Nulo() || v.Nulo() )
       {
-	std::cerr << nombre_clase() << "::" << __FUNCTION__
+	std::cerr << getClassName() << "::" << __FUNCTION__
 		  << "; One of the vectors: "
                   << *this << " o " << v << " es nulo."
                   << " La operación no tiene sentido, se devuelve un vector nulo." << std::endl;

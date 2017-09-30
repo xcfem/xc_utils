@@ -151,7 +151,7 @@ GEOM_FT Recta2d::GetParamA(void) const
   {
     if(EsVertical())
       {
-        clog << nombre_clase() << "::" << __FUNCTION__
+        clog << getClassName() << "::" << __FUNCTION__
 	     << "; line is vertical, infinite slope."
 	     << std::endl;
         return NAN;
@@ -166,7 +166,7 @@ GEOM_FT Recta2d::GetParamB(void) const
   {
     if(EsVertical())
       {
-        clog << nombre_clase() << "::" << __FUNCTION__
+        clog << getClassName() << "::" << __FUNCTION__
 	     << "; vertical line, it intercepts y axis at infinity."
 	     << std::endl;
         return NAN;

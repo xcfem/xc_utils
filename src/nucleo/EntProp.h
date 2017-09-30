@@ -41,7 +41,7 @@ class EntProp
     EntProp &operator=(const EntProp &otro);
     static const int &getVerbosityLevel(void);
     static void setVerbosityLevel(const int &);
-    virtual std::string nombre_clase(void) const;
+    virtual std::string getClassName(void) const;
     void set_owner(EntProp *owr);
     inline EntProp *Owner(void)
       { return owner; }

@@ -178,7 +178,7 @@ Vector2d Vector2d::Perpendicular(const Vector2d &v) const
     Vector2d retval(0,0);
     if( Nulo() || v.Nulo() )
       {
-	std::cerr << nombre_clase() << "::" << __FUNCTION__
+	std::cerr << getClassName() << "::" << __FUNCTION__
 		  << "; One of the vectors: "
                   << *this << " o " << v << " is null."
                   << " La operación no tiene sentido, se devuelve un vector nulo." << std::endl;

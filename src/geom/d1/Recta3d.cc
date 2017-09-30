@@ -258,7 +258,7 @@ GeomObj3d::list_Pos3d Recta3d::Interseccion(const Recta3d &r2,const double &tol)
     const Recta2d r2_yz= r2.YZ2DProjection();
     exists= (r1_xy.exists() && r1_xz.exists() && r1_yz.exists() && r2_xy.exists() && r2_xz.exists() && r2_yz.exists());
     if(!exists)
-      std::cerr << nombre_clase() << "::" << __FUNCTION__
+      std::cerr << getClassName() << "::" << __FUNCTION__
 	        << "; error when computing projections." 
                 << std::endl;
 

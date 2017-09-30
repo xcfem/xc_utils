@@ -158,7 +158,7 @@ Segmento2d Polilinea2d::GetSegmento(const size_t &i) const
   {
     const size_t ns= GetNumSegmentos();
     if(i>ns)
-      std::cerr << nombre_clase() << "::" << __FUNCTION__
+      std::cerr << getClassName() << "::" << __FUNCTION__
 	        << "; you asked for the " << i
 	        << "-th and " << ns
                 << "-th is the last one." << std::endl;
