@@ -17,7 +17,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 #
-# See http://www.xcingenieria.com/ or email : l.perez@xcingenieria.com
+# See https://github.com/lcpt/xc_utils or email : l.pereztato@gmail.com
 #
 
 from distutils.core import setup, sys
