@@ -40,7 +40,7 @@ class_<BND2d, bases<GeomObj2d> >("BND2d")
   .add_property("volume", &BND2d::Volumen, "returns object's volume.")
 
 
-  .def("update", &BND3d::Update)
+  .def("update", &BND2d::Update)
   .add_property("pMax", &BND2d::GetPMax, &BND2d::PutPMax,"upper right corner.")
   .add_property("pMin", &BND2d::GetPMin, &BND2d::PutPMin,"lower left corner.")
 
