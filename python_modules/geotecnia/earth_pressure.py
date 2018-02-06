@@ -37,22 +37,30 @@ class RankineSoil(fs.FrictionalSoil):
     r= math.sqrt(cBeta**2-cPhi**2)
     return cBeta*(cBeta+r)/(cBeta-r)
 
-# Empujes según Coulomb.
-# La teoría de Coulomb es válida si la superficie de terreno contenido es plana y la superficie de contacto con el muro también es plana.
-# Expresiones tomadas del libro de Calavera "Muros de contención y muros de sótano", capítulo 3
+# Earth pressure according to Coulomb's Theory.
+# This theory is valid if the backfill surface is plane and the wall-bacfill
+# contact surface is also plane.
+# Expressions taken from the book:
+# @book{calavera2001muros,
+#   title={Muros de contenci{\'o}n y muros de s{\'o}tano},
+#   author={CALAVERA, J.A. and Ruiz, J.C. and Instituto T{\'e}cnico de Materiales y Construcciones (Madrid)},
+#   isbn={9788488764102},
+#   url={https://books.google.ch/books?id=f41cOgAACAAJ},
+#   year={2001},
+#   publisher={INTEMAC INSTITUTO TECNICO DE MATERIALES Y CONSTRUCCIONES}
+# }
 
-# Coeficientes de empuje.
+# Earth pressure coefficients.
 
 def ka_coulomb(a,b,fi,d):
     '''
     ka_coulomb(a,b,fi,d):
     Devuelve el coeficiente de empuje activo según la teoría de Coulomb 
     a partir de:
-    a:  Angulo del trasdós del muro con la vertical (en radianes).
-    b:  Angulo de la superficie del terreno contenido, con la horizontal (en radianes).
-    fi: Angulo de rozamiento interno del terreno (en radianes).
-    d:  Angulo entre la línea de acción del empuje activo y la normal a la superficie
-        del muro. (rozamiento tierras - fabrica) (en radianes).
+    a:  angle of the back of the retaining wall (radians).
+    b:  slope of the backfill (radians).
+    fi: internal friction angle of the soil (radians).
+    d:  friction angle between soil an back of retaining wall (radians).
     Jiménez Salas, Geotecnia y Cimientos página 682 
     '''
     num= 1.0/math.cos(a)*math.cos(fi-a)
@@ -64,11 +72,10 @@ def kah_coulomb(a,b,fi,d):
     '''
     Devuelve la componente horizontal del coeficiente de empuje activo
     según la teoría de Coulomb a partir de:
-    a:  Angulo del trasdós del muro con la vertical (en radianes).
-    b:  Angulo de la superficie del terreno contenido, con la horizontal (en radianes).
-    fi: Angulo de rozamiento interno del terreno (en radianes).
-    d:  Angulo entre la línea de acción del empuje activo y la normal
-        a la superficie del muro. (rozamiento tierras - fabrica) (en radianes).
+    a:  angle of the back of the retaining wall (radians).
+    b:  slope of the backfill (radians).
+    fi: internal friction angle of the soil (radians).
+    d:  friction angle between soil an back of retaining wall (radians).
     '''
     return (ka_coulomb(a,b,fi,d)*math.cos(a+d))
 
@@ -77,13 +84,25 @@ def kav_coulomb(a,b,fi,d):
     kav_coulomb(a,b,fi,d):
     Devuelve la componente vertical del coeficiente de empuje activo
     según la teoría de Coulomb a partir de:
-    a:  Angulo del trasdós del muro con la vertical (en radianes).
-    b:  Angulo de la superficie del terreno contenido, con la horizontal (en radianes).
-    fi: Angulo de rozamiento interno del terreno (en radianes).
-    d:  Angulo entre la línea de acción del empuje activo y la normal
-        a la superficie del muro. (rozamiento tierras - fabrica) (en radianes).
+    a:  angle of the back of the retaining wall (radians).
+    b:  slope of the backfill (radians).
+    fi: internal friction angle of the soil (radians).
+    d:  friction angle between soil an back of retaining wall (radians).
     '''
     return (ka_coulomb(a,b,fi,d)*math.sin(a,d))
+
+def k_janssen(k,d,B,z):
+    '''
+    k_janssen(k,d,B,z)
+    Lateral earth pressure coefficient for limited backfille according
+    to Janssen's Theory (1895) and Kniss et Al (2007):
+    k: lateral earth pressure (usually k= K_0).
+    d: friction angle between soil an back of retaining wall (radians).
+    B: width of the backfill (radians).
+    z: depth from top of wall.
+    '''
+    tanD= math.tan(d)
+    return 1/(2*tanD)*(B/z)*(1-e**(-2*k*z/B*tanD))
 
 
 #Empujes unitarios debidos a cargas sobre el terreno.
@@ -94,11 +113,10 @@ def ep_coulomb(a,b,fi,d,p):
     Devuelve el empuje unitario producido por una sobrecarga uniforme p que actúa
     sobre la superficie del terreno contenido.
     según la teoría de Coulomb a partir de:
-    a:  Angulo del trasdós del muro con la vertical (en radianes).
-    b:  Angulo de la superficie del terreno contenido, con la horizontal (en radianes).
-    fi: Angulo de rozamiento interno del terreno (en radianes).
-    d:  Angulo entre la línea de acción del empuje activo y la normal
-        a la superficie del muro. (rozamiento tierras - fabrica) (en radianes).
+    a:  angle of the back of the retaining wall (radians).
+    b:  slope of the backfill (radians).
+    fi: internal friction angle of the soil (radians).
+    d:  friction angle between soil an back of retaining wall (radians).
     p: Sobrecarga uniforme.
     '''
     return(ka_coulomb(a,b,fi,d)*p*math.cos(a)/float(math.cos(b-a)))
