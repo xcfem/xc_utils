@@ -129,10 +129,9 @@ void SVD3d::Neg(void)
 //Lugar geométrico de los puntos cuyo momento es paralelo a la
 //resultante.
 Recta3d SVD3d::EjeCentral(void) const
-{ return sol_eq_prod_vect(getResultante(),mom); }
+  { return sol_eq_prod_vect(getResultante(),mom); }
 
-//Lugar geométrico de los puntos cuyo momento es paralelo a la
-//resultante.
+//! @brief Lugar geométrico de los puntos de momento nulo.
 Recta3d SVD3d::RectaMomNulo(const double &tol) const
   {
     if(ExisteRectaMomNulo(tol))

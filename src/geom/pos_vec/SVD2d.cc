@@ -31,9 +31,8 @@
 SVD2d::SVD2d(const VDesliz2d &v)
   : org(v.getOrg()), resul(v),mom(0.0) {}
 
+//! @brief Return the moment about P.
 GEOM_FT SVD2d::getMomento(const Pos2d &P) const
-  //Campo de momentos del SVD2d.
-  //Devuelve el momento del SVD2d respecto al punto P.
   {
     VDesliz2d R(org,resul);
     return mom+R.Momento(P);
@@ -98,3 +97,33 @@ bool SVD2d::Nulo(void) const
     if(mom!=0) retval= false;
     return retval;
   }
+
+//! @brief Lugar geométrico de los puntos de momento nulo.
+Recta2d SVD2d::RectaMomNulo(void) const
+  {
+    Recta2d retval; //= Recta2d(Pos2d(NAN,NAN),Pos2d(NAN,NAN));
+    const GEOM_FT rx= resul.x();
+    const GEOM_FT ry= resul.y();
+    const GEOM_FT k= mom+rx*org.y()-ry*org.x(); 
+    if(rx!=0.0)
+      {
+	const GEOM_FT xA= 1.0;
+	const GEOM_FT yA= (ry*xA+k)/rx;
+	const GEOM_FT xB= 1.0e3;
+	const GEOM_FT yB= (ry*xB+k)/rx;
+        retval= Recta2d(Pos2d(xA,yA),Pos2d(xB,yB));
+      }
+    else if(ry!=0.0)
+      {
+	const GEOM_FT x= -k/ry;
+        retval= Recta2d(Pos2d(x,0.0),Pos2d(x,1e3));
+      }
+    else if(mom==0.0)
+      std::clog << getClassName() << "::" << __FUNCTION__
+	        << "; all points have zero moment." << std::endl; 
+    else
+      std::clog << getClassName() << "::" << __FUNCTION__
+	        << "; no point has zero moment." << std::endl; 
+    return retval;
+  }
+

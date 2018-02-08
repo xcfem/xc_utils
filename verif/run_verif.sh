@@ -52,7 +52,6 @@ python ./python_tests/geom/prueba_vector3d_01.py
 python ./python_tests/geom/prueba_vector2d_02.py
 #python ./python_tests/geom/prueba_semiespacio3d_02.py
 python ./python_tests/geom/pruebaPos2d01.py
-python ./python_tests/geom/prueba_svd3d_02.py
 python ./python_tests/geom/prueba_recta3d_01.py
 python ./python_tests/geom/prueba_vdesliz3d_02.py
 #python ./python_tests/geom/prueba_semiespacio3d_04.py
@@ -70,7 +69,9 @@ python ./python_tests/geom/prueba_vector2d_01.py
 python ./python_tests/geom/prueba_segmento2d_02.py
 python ./python_tests/geom/prueba_poligono2d_08.py
 python ./python_tests/geom/prueba_vector3d_02.py
+python ./python_tests/geom/svd2d_test_01.py
 python ./python_tests/geom/prueba_svd3d_01.py
+python ./python_tests/geom/prueba_svd3d_02.py
 #python ./python_tests/geom/prueba_semiespacio3d_03.py
 python ./python_tests/geom/test_angle_vector3d_01.py
 python ./python_tests/geom/test_2drotation_01.py

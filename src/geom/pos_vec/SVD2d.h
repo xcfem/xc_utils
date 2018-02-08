@@ -45,16 +45,7 @@ class SVD2d: public ProtoGeom
   public:
     SVD2d(const Pos2d &O= Pos2d(),const Vector2d &R= Vector2d(),const GEOM_FT &Mo= 0.0)
       : org(O), resul(R), mom(Mo) {}
-    SVD2d(const SVD2d &otro)
-      : org(otro.org),resul(otro.resul),mom(otro.mom) {}
     SVD2d(const VDesliz2d &v);
-    const SVD2d &operator=(const SVD2d &otro)
-      {
-        org= otro.org;
-        resul= otro.resul;
-        mom= otro.mom;
-        return *this;
-      }
     Pos2d GetOrg(void) const
       { return org; }
     //Resultante y momento.
@@ -71,6 +62,7 @@ class SVD2d: public ProtoGeom
         mom= -mom;
       }
     SVD2d ReduceA(const Pos2d &Q);
+    Recta2d RectaMomNulo(void) const;
 
     SVD2d &operator+=(const VDesliz2d &v);
     SVD2d &operator-=(const VDesliz2d &v);

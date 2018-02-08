@@ -8,7 +8,7 @@ pol1.agregaVertice(geom.Pos2d(1,1))
 pol1.agregaVertice(geom.Pos2d(0,1))
 areaPol=pol1.getArea()
 perimetroPol=pol1.getPerimetro()
-CdgPol=CdgPol=pol1.getCdg()
+CdgPol=pol1.getCdg()
 xCdgPol=CdgPol.x
 yCdgPol=CdgPol.y
 IxPol=pol1.getIx()
