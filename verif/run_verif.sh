@@ -70,6 +70,7 @@ python ./python_tests/geom/prueba_segmento2d_02.py
 python ./python_tests/geom/prueba_poligono2d_08.py
 python ./python_tests/geom/prueba_vector3d_02.py
 python ./python_tests/geom/svd2d_test_01.py
+python ./python_tests/geom/svd2d_test_02.py
 python ./python_tests/geom/prueba_svd3d_01.py
 python ./python_tests/geom/prueba_svd3d_02.py
 #python ./python_tests/geom/prueba_semiespacio3d_03.py

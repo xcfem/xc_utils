@@ -223,6 +223,8 @@ class_<SVD2d, bases<VDesliz2d> >("SVD2d")
   .def(self-SVD2d())
   .def(self+=SVD2d())
   .def(self-=SVD2d())
+  .def(self * double())
+  .def(double() * self)
   .def(self_ns::str(self_ns::self))
   ;
 
@@ -264,6 +266,8 @@ class_<SVD3d, bases<VDesliz3d> >("SVD3d")
   .def(self-SVD3d())
   .def(self+=SVD3d())
   .def(self-=SVD3d())
+  .def(self * double())
+  .def(double() * self)
   .def(self_ns::str(self_ns::self))
   ;
 
