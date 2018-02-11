@@ -35,12 +35,20 @@ class_<SupPoligonal2d, bases<Superficie2d>, boost::noncopyable >("SupPoligonal2d
   .def("getNormalVertice",&SupPoligonal2d::getVertex0Normal)
   .def("getPolilinea",&SupPoligonal2d::GetPolilinea);
 
+typedef std::list<Poligono2d> polygon_2D_list;
+class_<polygon_2D_list >("polygon_2D_list")
+  .def("__iter__", iterator<polygon_2D_list >())
+  .add_property("size", &polygon_2D_list::size)
+  .def("__len__", &polygon_2D_list::size)
+  .def("empty", &polygon_2D_list::empty)
+  .def("append", static_cast<void (polygon_2D_list::*)(const Poligono2d&)>(&polygon_2D_list::push_back))
+  ;
 
 void (Poligono2d::*unePoligono2d)(const Poligono2d &) =&Poligono2d::une;
 Segmento2d (Poligono2d::*recortaRecta)(const Recta2d &) const=&Poligono2d::Clip;
 Segmento2d (Poligono2d::*recortaSemiRecta)(const SemiRecta2d &) const=&Poligono2d::Clip;
 Segmento2d (Poligono2d::*recortaSegmento)(const Segmento2d &) const=&Poligono2d::Clip;
-class_<Poligono2d, bases<SupPoligonal2d> >("Poligono2d")
+class_<Poligono2d, Poligono2d *, bases<SupPoligonal2d> >("Poligono2d")
   .def(init<>())
   .def(init<Polilinea2d>())
   .def(init<Poligono2d>())
