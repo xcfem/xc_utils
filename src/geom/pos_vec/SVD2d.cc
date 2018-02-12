@@ -104,7 +104,7 @@ Recta2d SVD2d::RectaMomNulo(void) const
     Recta2d retval; //= Recta2d(Pos2d(NAN,NAN),Pos2d(NAN,NAN));
     const GEOM_FT rx= resul.x();
     const GEOM_FT ry= resul.y();
-    const GEOM_FT k= mom+rx*org.y()-ry*org.x(); 
+    const GEOM_FT k= rx*org.y()-ry*org.x()-mom; 
     if(rx!=0.0)
       {
 	const GEOM_FT xA= 1.0;
@@ -123,7 +123,14 @@ Recta2d SVD2d::RectaMomNulo(void) const
 	        << "; all points have zero moment." << std::endl; 
     else
       std::clog << getClassName() << "::" << __FUNCTION__
-	        << "; no point has zero moment." << std::endl; 
+	        << "; no point has zero moment." << std::endl;
+    const Pos2d p= retval.Punto();
+    const GEOM_FT m= getMomento(p);
+    if(abs(m)>1E-6)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "ERROR in computing zero moment line; "
+                << " moment for point: " << p
+	        << " m= " << m << " not zero." << std::endl;
     return retval;
   }
 
