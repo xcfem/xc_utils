@@ -195,6 +195,10 @@ class_<VDesliz2d, bases<Vector2d> >("VDesliz2d")
   .def("getOrg", &VDesliz2d::getOrg,return_internal_reference<>())
   // .def("getMomentoPos2d",getMomentoPos2d)
   // .def("getMomentoRecta2d",getMomentoRecta2d)
+  .def(self + self)          // __add__
+  .def(self - self)           // __sub__
+  .def(self * double())
+  .def(double() * self)
   .def(self_ns::str(self_ns::self))
   ;
 
@@ -204,7 +208,7 @@ Vector2d (SVD2d::*getResultante2D)(void) const= &SVD2d::getResultante;
 
 class_<SVD2d, bases<VDesliz2d> >("SVD2d")
   .def(init<Pos2d,Vector2d,GEOM_FT>())
-  // .def(init<VDesliz2d>())
+  .def(init<VDesliz2d>())
   .def("getResultante",getResultante2D)
   .def("getMomento",getMomento2D)
   .def("reduceTo",&SVD2d::ReduceA,"Sets the reference point to express the moments with respect to.")
@@ -238,6 +242,10 @@ class_<VDesliz3d, bases<Vector3d> >("VDesliz3d")
   .def("getOrg", &VDesliz3d::getOrg,return_internal_reference<>())
   .def("getMomentoPos3d",getMomentoPos3d)
   .def("getMomentoRecta3d",getMomentoRecta3d)
+  .def(self + self)          // __add__
+  .def(self - self)           // __sub__
+  .def(self * double())
+  .def(double() * self)
   .def(self_ns::str(self_ns::self))
   ;
 
