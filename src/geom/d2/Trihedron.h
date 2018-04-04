@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Triedro3d.h
+//Trihedron.h
 
-#ifndef TRIEDRO3D_H
-#define TRIEDRO3D_H
+#ifndef TRIHEDRON_H
+#define TRIHEDRON_H
 
 #include "../d3/GeomObj3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
@@ -34,19 +34,19 @@ class Poliedro3d;
 //! @ingroup GEOM
 //
 //! @brief Ángulo formado por tres planos que pasan por un punto.
-class Triedro3d: public GeomObj3d
+class Trihedron: public GeomObj3d
   {
     Pos3d p0;
     Triangulo3d tr;
   protected:
     Plano3d get_plano(const size_t &i) const;
   public:
-    Triedro3d(void);
-    Triedro3d(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);
-    Triedro3d(const Pos3d &p0, const Triangulo3d &tr);
+    Trihedron(void);
+    Trihedron(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);
+    Trihedron(const Pos3d &p0, const Triangulo3d &tr);
     virtual GeomObj *clon(void) const
-      { return new Triedro3d(*this); }
-    ~Triedro3d(void) {}
+      { return new Trihedron(*this); }
+    ~Trihedron(void) {}
     void Put( const Pos3d &p0, const Pos3d &p1,
               const Pos3d &p2, const Pos3d &p3);
     void Put(const Pos3d &p0, const Triangulo3d &tr);

@@ -59,7 +59,7 @@ class Triang3dMesh: public Poliedro3d
     typedef Poliedro3d::Halfedge_handle Halfedge_handle;
 
   protected:
-    Facet_const_iterator busca_triedro(const Pos3d &org,const Pos3d &p,const double &tol) const;
+    Facet_const_iterator find_trihedron(const Pos3d &org,const Pos3d &p,const double &tol) const;
 
   public:
 
@@ -79,7 +79,7 @@ class Triang3dMesh: public Poliedro3d
 
     Triangulo3d GetTrianguloCara(const Facet_const_iterator &f) const;
 
-    Facet_const_iterator BuscaTriedro(const Pos3d &org,const Pos3d &p,const double &tol) const;
+    Facet_const_iterator findTrihedron(const Pos3d &org,const Pos3d &p,const double &tol) const;
 
     friend Triang3dMesh GTSSurface2Triang3dMesh(const GTSSurface &gts_surf);
   };

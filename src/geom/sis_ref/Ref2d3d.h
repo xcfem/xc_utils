@@ -57,11 +57,6 @@ class Ref2d3d : public Ref<SisCooRect2d3d>
     Recta3d GetEjeX(void) const; //Devuelve la recta que define el eje x.
     Recta3d GetEjeY(void) const; //Devuelve la recta que define el eje y.
     void PuntoVector(const Pos3d &o,const Vector3d &vX);
-    void DosPuntos(const Pos3d &o,const Pos3d &p1);
-    //Genera el triedro trirrectángulo cuyo origen esta en el punto o
-    //y cuyos ejes se orientan:
-    //eje x de o a p1;
-    //eje y perpendicular a x.
 
     Plano3d GetPlanoXY(void) const; //Devuelve el plano XY.
 

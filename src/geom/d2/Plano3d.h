@@ -45,8 +45,7 @@ class Ref2d3d;
 
 //! @ingroup GEOM
 //
-//! @brief Plano en tres dimensiones. Se define como el
-//! plano xy del triedro definido por el miembro "ref".
+//! @brief Plane in a three-dimensional space.
 class Plano3d : public Superficie3d
   {
     CGPlane_3 cgp;

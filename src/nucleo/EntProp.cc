@@ -61,7 +61,8 @@ EntProp &EntProp::operator=(const EntProp &otro)
     owner= otro.owner;
     if(this == owner)
       {
-        std::cerr << "EntProp operador asignación; ¡ojo!, objeto de clase: '" << getClassName() 
+        std::cerr << "EntProp operador asignación; ¡ojo!, objeto de clase: '"
+		  << getClassName() 
                   << "', propietario de sí mismo." << std::endl;
         owner= nullptr;
       }

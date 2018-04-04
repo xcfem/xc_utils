@@ -23,7 +23,7 @@
 
 #include "Triang3dMesh.h"
 #include "xc_utils/src/geom/d2/Triangulo3d.h"
-#include "Triedro3d.h"
+#include "Trihedron.h"
 #include "xc_utils/src/gnu_gts/GTSSurface.h"
 #include "xc_utils/src/gnu_gts/GTSEdge.h"
 #include "xc_utils/src/gnu_gts/TriangleMap.h"
@@ -132,9 +132,10 @@ Triangulo3d Triang3dMesh::GetTrianguloCara(const Facet_const_iterator &f) const
                        Pos3d(h->next()->vertex()->point()),
                        Pos3d(h->next()->next()->vertex()->point()));
   }
-Triang3dMesh::Facet_const_iterator Triang3dMesh::busca_triedro(const Pos3d &org,const Pos3d &p,const double &tol) const
-  //Busca el triedro formado por el punto org y una de las facetas
-  //que contiene al punto p que se pasa como parámetro.
+
+//! @brief Finds the trihedron formed by org and one of the facets
+//! that contains p. 
+Triang3dMesh::Facet_const_iterator Triang3dMesh::find_trihedron(const Pos3d &org,const Pos3d &p,const double &tol) const
   {
     const size_t nf= GetNumCaras();
     Facet_const_iterator retval= facets_end();
@@ -142,8 +143,8 @@ Triang3dMesh::Facet_const_iterator Triang3dMesh::busca_triedro(const Pos3d &org,
     for(Facet_const_iterator i= facets_begin();i!=facets_end();i++)
       {
         Triangulo3d tf(GetTrianguloCara(i));
-        Triedro3d triedro(org,tf.Vertice(1),tf.Vertice(2),tf.Vertice(3));
-        if(triedro.In(p,tol))
+        Trihedron trihedron(org,tf.Vertice(1),tf.Vertice(2),tf.Vertice(3));
+        if(trihedron.In(p,tol))
           {
             retval= i;
             break;
@@ -151,5 +152,8 @@ Triang3dMesh::Facet_const_iterator Triang3dMesh::busca_triedro(const Pos3d &org,
       }
     return retval;
   }
-Triang3dMesh::Facet_const_iterator Triang3dMesh::BuscaTriedro(const Pos3d &org,const Pos3d &p,const double &tol) const
-   { return busca_triedro(org,p,tol); }
+
+//! @brief Finds the trihedron formed by org and one of the facets
+//! that contains p. 
+Triang3dMesh::Facet_const_iterator Triang3dMesh::findTrihedron(const Pos3d &org,const Pos3d &p,const double &tol) const
+   { return find_trihedron(org,p,tol); }

@@ -19,27 +19,27 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Triedro3d.cc
+//Trihedron.cc
 
-#include "Triedro3d.h"
+#include "Trihedron.h"
 #include "xc_utils/src/geom/d2/Plano3d.h"
 #include "xc_utils/src/geom/d3/poliedros3d/Poliedro3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 
-Triedro3d::Triedro3d(void)
+Trihedron::Trihedron(void)
   : GeomObj3d(), p0(Pos3d(0,0,0)), tr(Pos3d(1,0,0),Pos3d(0,1,0),Pos3d(0,0,1)) {}
-Triedro3d::Triedro3d( const Pos3d &P0, const Pos3d &p1, const Pos3d &p2, const Pos3d &p3)
+Trihedron::Trihedron( const Pos3d &P0, const Pos3d &p1, const Pos3d &p2, const Pos3d &p3)
   : GeomObj3d(), p0(P0), tr(p1,p2,p3) {}
-Triedro3d::Triedro3d(const Pos3d &P0, const Triangulo3d &TR)
+Trihedron::Trihedron(const Pos3d &P0, const Triangulo3d &TR)
   : GeomObj3d(), p0(P0), tr(TR){}
 
-Poliedro3d Triedro3d::GetPoliedro3d(void) const
+Poliedro3d Trihedron::GetPoliedro3d(void) const
   {
     Poliedro3d retval(Vertice(0),Vertice(1),Vertice(2),Vertice(3));
     return retval;
   }
 
-Plano3d Triedro3d::get_plano(const size_t &i) const
+Plano3d Trihedron::get_plano(const size_t &i) const
   {
     Poliedro3d tmp(GetPoliedro3d());
     Poliedro3d::Facet_const_iterator j= tmp.facets_begin();
@@ -48,23 +48,22 @@ Plano3d Triedro3d::get_plano(const size_t &i) const
     return tmp.GetPlanoCara(j);
   }
 
-//! @brief Devuelve el triángulo que sirve de base al triedro.
-const Triangulo3d &Triedro3d::Base(void) const
+//! @brief Return the triangle that is the trihedron base.
+const Triangulo3d &Trihedron::Base(void) const
   { return tr; }
 
-//! @brief Devuelve la cúspide del triedro.
-const Pos3d &Triedro3d::Cuspide(void) const
+//! @brief Return the trihedron apex.
+const Pos3d &Trihedron::Cuspide(void) const
   { return p0; }
 
 
-//! @brief Devuelve la recta que pasa por la cúspide del triedro
-//! y por el CDG de su base.
-Recta3d Triedro3d::Eje(void) const
+//! @brief Return the straight line that passes through the trihedron apex.
+Recta3d Trihedron::Eje(void) const
   { return Recta3d(p0,tr.Cdg()); }
 
-//! @brief Devuelve el ángulo del cono que, con vértice en la cúspide,
-//! contiene al triedro.
-GEOM_FT Triedro3d::GetAnguloConico(void) const
+//! @brief Return the angle of the cone that has the same apex
+//! and contains the trihedron.
+GEOM_FT Trihedron::GetAnguloConico(void) const
   {
     const Recta3d eje= Eje();
     GEOM_FT angConico= angulo(eje,Recta3d(p0,Vertice(1)));
@@ -73,7 +72,7 @@ GEOM_FT Triedro3d::GetAnguloConico(void) const
     return angConico;
   }
 
-Pos3d Triedro3d::Vertice(const size_t &i) const
+Pos3d Trihedron::Vertice(const size_t &i) const
   {
     if(i==0)
       return p0;
@@ -81,10 +80,11 @@ Pos3d Triedro3d::Vertice(const size_t &i) const
       return tr.Vertice(i);
   }
 
-//! @brief Devuelve la distancia CON SIGNO desde el punto al tetraedro.
-//! La distancia se calcula como el máximo de la distancia del punto 
-//! a cada uno de los planos que limitan el triedro.
-GEOM_FT Triedro3d::PseudoDist(const Pos3d &p) const
+//! @brief Return the SIGNED distance from the point to the trihedron.
+//!
+//! The distance is computed as the maximum of the distances from the point to
+//! each of the three planes that meet in the apex.
+GEOM_FT Trihedron::PseudoDist(const Pos3d &p) const
   {
     Poliedro3d tmp= GetPoliedro3d();
     Poliedro3d::Facet_const_iterator j= tmp.facets_begin();
@@ -99,8 +99,8 @@ GEOM_FT Triedro3d::PseudoDist(const Pos3d &p) const
     return dmax;
   }
 
-//! @brief Devuelve verdadero si el punto esta contenido en el triedro.
-bool Triedro3d::In(const Pos3d &p,const double &tol) const
+//! @brief Return true if the point is inside the thriedron.
+bool Trihedron::In(const Pos3d &p,const double &tol) const
   {
     const Recta3d eje= Eje();
     GEOM_FT d= eje.dist(p);
@@ -135,30 +135,30 @@ bool Triedro3d::In(const Pos3d &p,const double &tol) const
     return retval;
   }
 
-void Triedro3d::Put( const Pos3d &P0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3)
+void Trihedron::Put( const Pos3d &P0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3)
   { Put(P0,Triangulo3d(p1,p2,p3)); }
 
-void Triedro3d::Put(const Pos3d &P0,const Triangulo3d &TR)
+void Trihedron::Put(const Pos3d &P0,const Triangulo3d &TR)
   {
     p0= P0;
     tr= TR;
   }
 
-GEOM_FT Triedro3d::GetMax(short unsigned int i) const
+GEOM_FT Trihedron::GetMax(short unsigned int i) const
   { return GetPoliedro3d().GetMax(i); }
-GEOM_FT Triedro3d::GetMin(short unsigned int i) const
+GEOM_FT Trihedron::GetMin(short unsigned int i) const
   { return GetPoliedro3d().GetMin(i); }
-Pos3d Triedro3d::Cdg() const
+Pos3d Trihedron::Cdg() const
   { return GetPoliedro3d().Cdg(); }
 
 //! @brief Devuelve verdadero si alguno de los vertices del triángulo toca el cuadrante
 //! que se pasa como parámetro.
-bool Triedro3d::TocaCuadrante(const int &cuadrante) const
+bool Trihedron::TocaCuadrante(const int &cuadrante) const
   {
     return tr.TocaCuadrante(cuadrante); 
   }
 
-void Triedro3d::Print(std::ostream &os) const
+void Trihedron::Print(std::ostream &os) const
   {
     Poliedro3d tmp= GetPoliedro3d();
     Poliedro3d::Vertex_const_iterator i= tmp.vertices_begin();
