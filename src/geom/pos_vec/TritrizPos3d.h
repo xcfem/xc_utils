@@ -41,11 +41,11 @@ class TritrizPos3d: public TritrizPos<Pos3d>
     Pos3d GetCentro(void) const;
     TritrizPos3d(const size_t &capas= 1);
     TritrizPos3d(const size_t &capas,const MatrizPos<Pos3d> &);
-    TritrizPos3d(const MatrizPos<Pos3d> &puntos_l1,const MatrizPos<Pos3d> &puntos_l2,
-                 const MatrizPos<Pos3d> &puntos_l3,const MatrizPos<Pos3d> &puntos_l4,
+    TritrizPos3d(const MatrizPos<Pos3d> &l1_points,const MatrizPos<Pos3d> &l2_points,
+                 const MatrizPos<Pos3d> &l3_points,const MatrizPos<Pos3d> &l4_points,
                  const size_t &ndiv_12,const size_t &ndiv_13);
-    TritrizPos3d(const MatrizPos3d &puntos_l1,const MatrizPos3d &puntos_l2,
-                 const MatrizPos3d &puntos_l3,const MatrizPos3d &puntos_l4,
+    TritrizPos3d(const MatrizPos3d &l1_points,const MatrizPos3d &l2_points,
+                 const MatrizPos3d &l3_points,const MatrizPos3d &l4_points,
                  const size_t &ndiv_12,const size_t &ndiv_13);
     void Transforma(const Trf3d &trf);
     TritrizPos3d Transforma(const Trf3d &trf) const;

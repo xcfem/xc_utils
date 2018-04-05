@@ -99,7 +99,7 @@ class Pos3d : public ProtoGeom
       { return ToCGAL().cartesian_end(); }
     size_t dimension(void) const
       { return cgpt.dimension(); }
-    Vector3d VectorPos(void) const; //Devuelve el vector de posición del punto.
+    Vector3d VectorPos(void) const;
     bool domina_a(const Pos3d &b) const;
 
     GEOM_FT dist(const Pos3d &) const;
@@ -116,7 +116,7 @@ class Pos3d : public ProtoGeom
     GEOM_FT dist(const SemiEspacio3d &) const;
     GEOM_FT dist(const Solido3d &) const;
 
-    int Cuadrante(void) const; //Devuelve el cuadrante en el que se encuentra el punto.
+    int Cuadrante(void) const;
 
     Pos3d XY3DProjection(void) const; //Return projection onto XY plane.
     Pos3d XZ3DProjection(void) const; //Return projection onto XZ plane.

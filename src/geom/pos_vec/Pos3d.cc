@@ -49,28 +49,28 @@ Pos3d &Pos3d::operator-=(const Vector3d &v)
     return *this;
   }
 
-//! @brief Vector diferencia entre puntos.
+//! @brief Vector between the points.
 Vector3d Pos3d::operator-(const Pos3d &p) const
   {
     Vector3d retval(ToCGAL()-p.ToCGAL());
     return retval;
   }
 
-//! @brief Punto que resulta al restar el vector.
+//! @brief Point obtained by subtraction of the vector.
 Pos3d Pos3d::operator-(const Vector3d &v) const
   {
     Pos3d retval(ToCGAL()-v.ToCGAL());
     return retval;
   }
 
-//! @brief Punto que resulta al sumar el vector.
+//! @brief Point obtained by addition of the vector.
 Pos3d Pos3d::operator+(const Vector3d &v) const
   {
     Pos3d retval(ToCGAL()+v.ToCGAL());
     return retval;
   }
 
-//! @brief Devuelve el vector de posición del punto.
+//! @brief Return the position vector of the point.
 Vector3d Pos3d::VectorPos(void) const
   { return (*this)-Origen3d; }
 
@@ -105,6 +105,7 @@ void Pos3d::Set(unsigned short int i,const GEOM_FT &v)
       }
   }
 
+//! @brief Return the quadrant of the point.
 int Pos3d::Cuadrante(void) const
   {
     const bool x_no_neg= (x()>=0);
@@ -187,57 +188,55 @@ bool Pos3d::domina_a(const Pos3d &b) const
     return true;
   }
 
-//! @brief Devuelve la distancia
-//! al punto que se pasa como parámetro.
+//! @brief Return the distance to the point.
 GEOM_FT Pos3d::dist(const Pos3d &p) const
   { return sqrt_FT(dist2(p)); }
 
-//! @brief Devuelve el cuadrado de la distancia
-//! al punto que se pasa como parámetro.
+//! @brief Return the squared distance to the point.
 GEOM_FT Pos3d::dist2(const Pos3d &p) const
   { return squared_distance(cgpt,p.cgpt); }
 
-//! @brief Devuelve el cuadrado de la distancia a la recta.
+//! @brief Devuelve el cuadrado de la distance a la recta.
 GEOM_FT Pos3d::dist2(const Recta3d &r) const
   { return r.dist2(*this); }
   
-//! @brief Devuelve la distancia a la recta.
+//! @brief Return the distance a la recta.
 GEOM_FT Pos3d::dist(const Recta3d &r) const
   { return r.dist(*this); }
 
-//! @brief Devuelve el cuadrado de la distancia a la semirrecta.
+//! @brief Devuelve el cuadrado de la distance a la semirrecta.
 GEOM_FT Pos3d::dist2(const SemiRecta3d &sr) const
   { return sr.dist2(*this); }
 
-//! @brief Devuelve la distancia a la semirrecta.
+//! @brief Return the distance a la semirrecta.
 GEOM_FT Pos3d::dist(const SemiRecta3d &sr) const
   { return sr.dist(*this); }
 
-//! @brief Devuelve el cuadrado de la distancia al segmento.
+//! @brief Devuelve el cuadrado de la distance al segmento.
 GEOM_FT Pos3d::dist2(const Segmento3d &sg) const
   { return sg.dist2(*this); }
 
-//! @brief Devuelve la distancia al segmento.
+//! @brief Return the distance al segmento.
 GEOM_FT Pos3d::dist(const Segmento3d &sg) const
   { return sg.dist(*this); }
 
-//! @brief Devuelve el cuadrado de la distancia al plano.
+//! @brief Devuelve el cuadrado de la distance al plano.
 GEOM_FT Pos3d::dist2(const Plano3d &p) const
   { return p.dist2(*this); }
 
-//! @brief Devuelve la distancia al plano.
+//! @brief Return the distance al plano.
 GEOM_FT Pos3d::dist(const Plano3d &p) const
   { return p.dist(*this); }
 
-//! @brief Devuelve el cuadrado de la distancia al semiespacio.
+//! @brief Devuelve el cuadrado de la distance al semiespacio.
 GEOM_FT Pos3d::dist2(const SemiEspacio3d &se) const
   { return se.dist2(*this); }
 
-//! @brief Devuelve la distancia al semiespacio.
+//! @brief Return the distance al semiespacio.
 GEOM_FT Pos3d::dist(const SemiEspacio3d &se) const
   { return se.dist(*this); }
 
-//! @brief Devuelve la distancia al sólido.
+//! @brief Return the distance al sólido.
 GEOM_FT Pos3d::dist(const Solido3d &s) const
   { return s.dist(*this); }
 

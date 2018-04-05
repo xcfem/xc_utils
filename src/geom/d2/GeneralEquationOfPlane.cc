@@ -42,32 +42,32 @@ GeneralEquationOfPlane::GeneralEquationOfPlane(const GEOM_FT &fa,const GEOM_FT &
 GEOM_FT GeneralEquationOfPlane::Eval(const Pos3d &p) const
   { return a()*p.x()+b()*p.y()+c()*p.z()+d(); }
 
-//! @brief Devuelve la coordenada x del punto del plano
-//! cuyas y y z son las que se pasan como parámetro.
+//! @brief Devuelve la x coordinate del point of the plano
+//! which y and z are those from the argument.
 GEOM_FT GeneralEquationOfPlane::x(const GEOM_FT &y,const GEOM_FT &z) const
       { return -(d()+b()*y+c()*z)/a(); }
 
-//! @brief Devuelve la coordenada x del punto del plano
-//! cuyas y y z son las del punto que se pasa como parámetro.
+//! @brief Return the x coordinate of the point of the plane
+//! which y and z are those from the argument.
 GEOM_FT GeneralEquationOfPlane::x(const Pos2d &p) const
   { return x(p.x(),p.y()); }
 
-//! @brief Devuelve la coordenada y del punto del plano
-//! cuyas x y z son las que se pasan como parámetro.
+//! @brief Return the y coordinate del point of the plano
+//! which x and z are those from the argument.
 GEOM_FT GeneralEquationOfPlane::y(const GEOM_FT &x,const GEOM_FT &z) const
       { return -(d()+a()*x+c()*z)/b(); }
 
-//! @brief Devuelve la coordenada y del punto del plano
-//! cuyas x y z son las del punto que se pasa como parámetro.
+//! @brief Return the y coordinate del point of the plano
+//! which x and z are those from the argument.
 GEOM_FT GeneralEquationOfPlane::y(const Pos2d &p) const
   { return y(p.x(),p.y()); }
 
-//! @brief Devuelve la coordenada z del punto del plano
-//! cuyas x e y son las que se pasan como parámetro.
+//! @brief Return the z coordinate del point of the plano
+//! which x and y are those from the argument.
 GEOM_FT GeneralEquationOfPlane::z(const GEOM_FT &x,const GEOM_FT &y) const
       { return -(d()+a()*x+b()*y)/c(); }
 
-//! @brief Devuelve la coordenada z del punto del plano
-//! cuyas x e y son las del punto que se pasa como parámetro.
+//! @brief Return the z coordinate del point of the plano
+//! which x and y are those from the argument.
 GEOM_FT GeneralEquationOfPlane::z(const Pos2d &p) const
   { return z(p.x(),p.y()); }

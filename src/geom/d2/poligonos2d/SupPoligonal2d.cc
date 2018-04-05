@@ -125,10 +125,10 @@ Pos2d SupPoligonal2d::Cdg(void) const
      const GEOM_FT area= Area();
      return Pos2d(Momento(1,0)/area,Momento(0,1)/area);
   }
-//! @brief Devuelve el centroide (punto interior al polígono).
-//! Devuelve el centroide (punto interior al polígono).
-//! Ver libro Sistemas de Información Geográfica de
-//! Joaquín Bosque Sendra (Ed. Rialp).
+//! @brief Return the centroid (point interior to the polygon).
+//! Return the centroid (point interior to the polygon).
+//! See the book Sistemas de Información Geográfica de
+//! Joaquín Bosque Sendra (Ed. Rialp ).
 Pos2d SupPoligonal2d::Centroide(void) const
   {
     Pos2d retval= Cdg();
@@ -185,9 +185,8 @@ GEOM_FT SupPoligonal2d::Pxy(void) const
     return Ixy-Area()*dx*dy; //Teorema de los ejes paralelos.
   }
 
-//! @brief devuelve los puntos en los que el polígono es
-//! aproximadamente tangente a la dirección que se pasa como
-//! parámetro.
+//! @brief Return the points for which the polygon is almost tangent
+//! to the direction argument.
 // XXX Posiblemente falle con polígonos no convexos.
 GeomObj::list_Pos2d SupPoligonal2d::getPosTangAprox(const Vector2d &v) const
   {
@@ -231,13 +230,14 @@ GeomObj::list_Pos2d SupPoligonal2d::getPosTangAprox(const Vector2d &v) const
     return retval;
   }
 
-//! @brief Devuelve la distancia desde el punto al perímetro
-//! La distancia se calcula como el máximo de:
-//! -Las distancias (con signo) del punto a cada una de las semiplanos
-//!  que contienen a un lado.
-//! Si los vértices están dados en sentido horario, las distancias positivas
-//! corresponden a puntos AL MISMO LADO DEL POLÍGONO respecto al segmento, en caso contrario
-//! es necesario cambiar el signo de la distancia. 
+//! @brief Return the distance from the point to the perímeter
+//! The distance is computed as the maximum of:
+//! -The signed distances from the point to each of the half-planes
+//!  that contain a side.
+// If the vertices are in couterclockwise order, positive distances
+// correspond to point AT THE SAME SIDE OF THE POLYGON with respect
+// to the segment, otherwise the sign of the computed distance must
+// be changed.
 GEOM_FT SupPoligonal2d::DistSigno(const Pos2d &p,const bool &sentido_horario) const
   {
      const short int signo= (sentido_horario ? 1 : -1);
@@ -278,12 +278,11 @@ GEOM_FT SupPoligonal2d::DistSigno(const Pos2d &p,const bool &sentido_horario) co
     return retval;
   }
 
-//! @brief Devuelve la distancia desde el punto al polígono.
-//! La distancia se calcula como el máximo de:
-//! -Las distancias (con signo) del punto a cada uno de los planos
-//!  que contienen a un lado y son perpendiculares al plano 
-//!  que contiene al polígono.
-//! Si el punto está dentro del polígono se devuelve 0.
+//! @brief Return the distance from the point to the polígono.
+//! The distance is computed as the maximim of:
+//! -The signed distances from the point to each of the planes that contain
+//! one of the sides and are perpendicular to the surface.
+//! If the point is inside the surface 0 is returned.
 GEOM_FT SupPoligonal2d::Dist(const Pos2d &p) const
   {
     const GEOM_FT retval= DistSigno(p);
@@ -313,16 +312,14 @@ void SupPoligonal2d::Plot(Plotter &plotter) const
   }
 
 
-//! @brief Devuelve verdadero si la recta y el Poligono
-//! tienen algun punto en común.
+//! @brief Return true if the line and the polygonal surface overlap.
 bool SupPoligonal2d::Overlap(const Recta2d &r) const
   {
     GeomObj::list_Pos2d tmp= GetPolilinea().Interseccion(r);
     return !tmp.empty();
   }
   
-//! @brief Devuelve verdadero si la semirrecta y el Poligono
-//! tienen algun punto en común.
+//! @brief Return true if the ray and the polygonal surface overlap.
 bool SupPoligonal2d::Overlap(const SemiRecta2d &sr) const
   {
     GeomObj::list_Pos2d tmp= GetPolilinea().Interseccion(sr);

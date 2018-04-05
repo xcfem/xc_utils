@@ -59,8 +59,8 @@ Pos3d GeomObj3d::GetPMin(void) const
     return p;
   }
 
+//! @brief Return the boudary of the object.
 BND3d GeomObj3d::Bnd(void) const
-//Devuelve la extension del objeto.
   { return BND3d(GetPMin(),GetPMax()); }
 
 //! @brief Return true if point lies inside the object.
@@ -112,7 +112,7 @@ GEOM_FT GeomObj3d::I(const Pos3d &O,const Vector3d &e) const
 //! @brief Devuelve el momento de inercia respecto a la recta que se pasa
 //! como parámetro.
 GEOM_FT GeomObj3d::I(const Recta3d &r) const
-  { return I(r.Punto(),r.VDir()); }
+  { return I(r.Point(),r.VDir()); }
 
 //! @brief Devuelve el momento de inercia (i,j) respecto eje paralelo al i
 //! que pasa por o.
@@ -145,7 +145,7 @@ matriz_FT GeomObj3d::I(void) const
     return i;
   }
 
-//! @brief Devuelve el tensor de inercia respector al punto o.
+//! @brief Devuelve el tensor de inercia with respect to the point o.
 matriz_FT GeomObj3d::I(const Pos3d &o) const
   {
     matriz_FT Ig= I();
@@ -154,13 +154,13 @@ matriz_FT GeomObj3d::I(const Pos3d &o) const
     return Ig+m*(Abs2(og)*identidad(Ig)-(og & og));
   }
 
-//! @brief Devuelve el momento polar de inercia respecto al punto o.
+//! @brief Devuelve el momento polar de inercia with respect to the point o.
 GEOM_FT GeomObj3d::IO(const Pos3d &o) const
   { return (I(1,1,o)+I(2,2,o)+I(3,3,o))/2; }
 
 
 // SoGroup *GeomObj3d::Traza(void) const 
 //   {
-//     std::cerr << "Método Traza() no implementado." << std::endl;
+//     std::cerr << "Método Traza() not implemented." << std::endl;
 //     return nullptr;
 //   }

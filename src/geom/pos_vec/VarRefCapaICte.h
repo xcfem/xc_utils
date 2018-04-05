@@ -29,7 +29,7 @@
 
 //! @ingroup GEOM
 //
-//! @brief Referencia a una capa de la tritriz cuyos puntos tienen el índice I constante.
+//! @brief Reference to a layer de la tritriz which points have constant I index.
 template <class TRITRIZ>
 class VarRefCapaICte: public VarRefCajaTritriz<TRITRIZ>
   {

@@ -33,7 +33,8 @@ class Poliedro3d;
 
 //! @ingroup GEOM
 //
-//! @brief Ángulo formado por tres planos que pasan por un punto.
+//! @brief A geometric figure composed of three planes meeting at
+//! a single vertex.
 class Trihedron: public GeomObj3d
   {
     Pos3d p0;

@@ -54,7 +54,7 @@ class Segmento2d : public Linea2d
     const CGSegmento_2 &ToCGAL(void) const
       { return cgseg; }
     virtual GeomObj *clon(void) const;
-    void DosPuntos(const Pos2d &p1,const Pos2d &p2);
+    void TwoPoints(const Pos2d &p1,const Pos2d &p2);
     virtual GEOM_FT GetMax(unsigned short int i) const
       { return std::max(Origen()(i),Destino()(i)); }
     virtual GEOM_FT GetMin(unsigned short int i) const
@@ -67,7 +67,7 @@ class Segmento2d : public Linea2d
       { return Pos2d(cgseg.target()); }
     inline GEOM_FT getSlope(void) const
       { return RectaSoporte().getSlope(); }
-    const Pos2d Punto(const int &i) const
+    const Pos2d Point(const int &i) const
       { return Pos2d(cgseg.point(i)); }
     Pos2d PtoParametricas(const GEOM_FT &) const;
     double getParamCooNatural(const GEOM_FT &) const;
@@ -79,13 +79,13 @@ class Segmento2d : public Linea2d
     virtual bool In(const Pos2d &, const double &tol= 0.0) const;
     virtual GEOM_FT dist2(const Pos2d &p) const;
     GEOM_FT dist(const Pos2d &p) const;
+    //! @brief Set the points that define the segment.
     void Put(const Pos2d &p1,const Pos2d &p2)
-    //Asigna valores a los puntos que definen la recta.
-      { DosPuntos(p1,p2); }
+      { TwoPoints(p1,p2); }
 
     //! @brief Returns the points ordered by the value of the 
     //! parameter of its projection onto the line from lowest
-    //! to highest. Origin is at Recta2d::Punto(0).
+    //! to highest. Origin is at Recta2d::Point(0).
     GeomObj::list_Pos2d Ordena(const GeomObj::list_Pos2d &ptos) const
       { return RectaSoporte().Ordena(ptos); }
 
@@ -203,9 +203,9 @@ inline bool colineales(const SemiRecta2d &sr,const Segmento2d &sg)
 inline bool colineales(const Segmento2d &sg1,const Segmento2d &sg2)
   { return colineales(sg1,sg2.RectaSoporte()); }
 
-Pos2d punto_interseccion(const Segmento2d &, const Recta2d &);
-Pos2d punto_interseccion(const Recta2d &, const Segmento2d &);
-Pos2d punto_interseccion(const Segmento2d &, const Segmento2d &);
+Pos2d intersection_point(const Segmento2d &, const Recta2d &);
+Pos2d intersection_point(const Recta2d &, const Segmento2d &);
+Pos2d intersection_point(const Segmento2d &, const Segmento2d &);
 
 inline Recta2d mediatriz(const Segmento2d &sg)
   { return sg.Mediatriz(); }

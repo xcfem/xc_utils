@@ -52,8 +52,8 @@ MatrizPos3d::MatrizPos3d(const Pos3d &p1,const Pos3d &p2,const size_t &num,const
 MatrizPos3d::MatrizPos3d(const Pos3d &p0,const Pos3d &p1,const Pos3d &p2,const size_t &ndiv1,const size_t &ndiv2)
   : MatrizPos<Pos3d>(p0,p1,p2,ndiv1,ndiv2) {}
 
-MatrizPos3d::MatrizPos3d(const MatrizPos3d &puntos_l1,const MatrizPos3d &puntos_l2,const MatrizPos3d &puntos_l3,const MatrizPos3d &puntos_l4)
-  : MatrizPos<Pos3d>(puntos_l1,puntos_l2,puntos_l3,puntos_l4) {}
+MatrizPos3d::MatrizPos3d(const MatrizPos3d &l1_points,const MatrizPos3d &l2_points,const MatrizPos3d &l3_points,const MatrizPos3d &l4_points)
+  : MatrizPos<Pos3d>(l1_points,l2_points,l3_points,l4_points) {}
 
 MatrizPos3d::MatrizPos3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2)
   : MatrizPos<Pos3d>(cuadrilatero<Pos3d>(p1,p2,p3,p4,ndiv1,ndiv2)) {}
@@ -72,29 +72,29 @@ Pos3d MatrizPos3d::pos_lagrangiana(const size_t &i,const size_t &j) const
   }
 
 //! @brief Devuelve el máximo de las distancias entre los mesh points
-//! y los correspondientes de la interpolación de Lagrange (ver pág IX-19 del manual de SAP90).
+//! y corresponding to the Lagrange interpolation (see page IX-19 of the SAP90 manual).
 GEOM_FT MatrizPos3d::dist_lagrange(void) const
   {
     GEOM_FT retval(0.0);
-    for(size_t i=2;i<fls;i++) //Puntos interiores.
+    for(size_t i=2;i<fls;i++) //interior points.
       for(size_t j=2;j<cls;j++)
         retval= std::max(retval,dist((*this)(i,j),pos_lagrangiana(i,j)));
     return retval;
   }
 
-//! @brief Asigna a los puntos interiores of the mesh.
-//! los correspondientes de la interpolación de Lagrange (ver pág IX-19 del manual de SAP90).
-//! Devuelve la distancia máxima obtenida.
+//! @brief Set the interior points of the mesh.
+//! corresponding to the Lagrange interpolation (see page IX-19 of the SAP90 manual).
+//! Return the distance máxima obtenida.
 GEOM_FT MatrizPos3d::ciclo_lagrange(void)
   {
-    for(size_t i=2;i<fls;i++) //Puntos interiores.
+    for(size_t i=2;i<fls;i++) //interior points.
       for(size_t j=2;j<cls;j++)
         (*this)(i,j)= pos_lagrangiana(i,j);
     return dist_lagrange();
   }
 
-//! @brief Asigna a los puntos interiores of the mesh
-//! los correspondientes de la interpolación de Lagrange (ver pág IX-19 del manual de SAP90).
+//! @brief Set the interior points of the mesh
+//! corresponding to the Lagrange interpolation (see page IX-19 of the SAP90 manual).
 GEOM_FT MatrizPos3d::Lagrange(const GEOM_FT &tol)
   {
     GEOM_FT err= dist_lagrange();
@@ -117,7 +117,7 @@ GEOM_FT MatrizPos3d::Lagrange(const GEOM_FT &tol)
 void MatrizPos3d::Transforma(const Trf3d &trf)
   { trf.Transforma(*this); }
 
-//! @brief Devuelve la superficie de revolución que se obtiene al aplicar
+//! @brief Return the superficie de revolución que se obtiene al aplicar
 //! a la matriz la transformación la revolución cuya definición se pasa como parámetro.
 MatrizPos3d crea_sup_revolucion(const Revolucion3d &r,const MatrizPos3d &m)
   { return r(m); }
@@ -149,9 +149,10 @@ Triangulo3d MatrizPos3d::GetTriangulo2(const size_t &i,const size_t &j) const
   { return Triangulo3d((*this)(i,j),(*this)(i+1,j+1),(*this)(i+1,j)); }
 
 
-//! @brief Distancia del punto a la superficie definida por la matriz de puntos         i+1,j +---+ i+1,j+1
+//! @brief Distance from the point to the surface defined by the matrix of
+//! points i+1,j +---+ i+1,j+1
 //! Como el objeto esta formado "aproximadamente" por la unión de triángulos           |2 /|
-//! la distancia se calcula como el mínimo de las distancias                           | / |
+//! la distance se calcula como el mínimo de las distancias                           | / |
 //! a cada uno de los triángulos.                                                      |/ 1|
 //! Cada mesh cell se cubre con dos triángulos                                         i,j +---+ i,j+1
 GEOM_FT dist2(const MatrizPos3d &ptos,const Pos3d &pt)
@@ -162,7 +163,7 @@ GEOM_FT dist2(const MatrizPos3d &ptos,const Pos3d &pt)
     //Distancia a los triángulos.
     const size_t fls= ptos.getNumFilas();
     const size_t cls= ptos.getNumCols();
-    if(fls<2) //Solo hay una fila de puntos.
+    if(fls<2) //There is only a point row.
       {
         for(size_t j=1;j<cls;j++) //Hasta la penúltima columna.
           {
@@ -170,7 +171,7 @@ GEOM_FT dist2(const MatrizPos3d &ptos,const Pos3d &pt)
             d= std::min(d,s.dist2(pt));
           }
       }
-    if(cls<2) //Solo hay una columna de puntos.
+    if(cls<2) //There is only a point column.
       {
         for(size_t i=1;i<fls;i++) //Hasta la penúltima fila.
           {
@@ -189,8 +190,8 @@ GEOM_FT dist2(const MatrizPos3d &ptos,const Pos3d &pt)
     return d;
   }
 
-//! @brief Devuelve verdadero si la distancia del punto a la superficie definida por 
-//! la matriz de puntos es menor que la que se pasa como parámetro.
+//! @brief Return true if the distance from the point to the surface
+//! defined by the point matrix is less than the argument.
 bool dist_menor(const MatrizPos3d &ptos,const Pos3d &pt,const GEOM_FT &d_max)
   {
     const GEOM_FT d_max2(d_max*d_max);
@@ -198,11 +199,11 @@ bool dist_menor(const MatrizPos3d &ptos,const Pos3d &pt,const GEOM_FT &d_max)
     GEOM_FT d= dist2(ptos(1,1),pt);
     if(ptos.size()==1) //Degenerated mesh (only a point).
       return (d<d_max2);
-    if(d<d_max2) //Ya cumple, el primer punto está suficientemente cerca.
+    if(d<d_max2) //It's already OK, the first point is near enough..
       return true;
     const size_t fls= ptos.getNumFilas();
     const size_t cls= ptos.getNumCols();
-    if(fls<2) //Solo hay una fila de puntos.
+    if(fls<2) //There is only a point row.
       {
         for(size_t j=1;j<cls;j++) //Hasta la penúltima columna.
           {
@@ -212,7 +213,7 @@ bool dist_menor(const MatrizPos3d &ptos,const Pos3d &pt,const GEOM_FT &d_max)
               return true;
           }
       }
-    if(cls<2) //Solo hay una columna de puntos.
+    if(cls<2) //There is only a point column.
       {
         for(size_t i=1;i<fls;i++) //Hasta la penúltima fila.
           {
@@ -242,8 +243,9 @@ GEOM_FT dist(const MatrizPos3d &ptos,const Pos3d &pt)
   { return sqrt_FT(dist2(ptos,pt)); }
 
 
-//! Máximo de las distancias del punto a cada uno de los planos
-//! definidos por los triángulos inscritos on the mesh cells                         i+1,j +---+ i+1,j+1
+//! Maximum of the distances from the point to each of the planes
+//! defined by the triangles inscribed in the mesh cells
+//! i+1,j +---+ i+1,j+1
 //!                                                                                    |2 /|
 //!                                                                                    | / |
 //!                                                                                    |/ 1|
@@ -256,7 +258,7 @@ GEOM_FT pseudo_dist2(const MatrizPos3d &ptos,const Pos3d &pt)
     //Distancia a los triángulos.
     const size_t fls= ptos.getNumFilas();
     const size_t cls= ptos.getNumCols();
-    if(fls<2) //Solo hay una fila de puntos.
+    if(fls<2) //There is only a point row.
       {
         for(size_t j=1;j<cls;j++) //Hasta la penúltima columna.
           {
@@ -264,7 +266,7 @@ GEOM_FT pseudo_dist2(const MatrizPos3d &ptos,const Pos3d &pt)
             d= std::max(d,s.dist2(pt));
           }
       }
-    if(cls<2) //Solo hay una columna de puntos.
+    if(cls<2) //There is only a point column.
       {
         for(size_t i=1;i<fls;i++) //Hasta la penúltima fila.
           {
@@ -291,14 +293,17 @@ GEOM_FT pseudo_dist(const MatrizPos3d &ptos,const Pos3d &pt)
 BND3d get_bnd(const MatrizPos3d &ptos)
   {
     BND3d retval;
-    if(ptos.size()<1) //El conjunto está vacío.
+    if(ptos.size()<1) //Empty set.
       {
-	std::cerr << "get_bnd; la matriz de puntos está vacia." << std::endl;
+	std::cerr << __FUNCTION__
+		  << "; the point matrix is empty." << std::endl;
         return retval;
       }
     if(ptos.size()<2)
       {
-	std::cerr << "La matriz sólo tiene un punto." << std::endl;
+	std::cerr << __FUNCTION__
+		  << "; the matrix has only a point."
+		  << std::endl;
         retval= BND3d(ptos(1,1),ptos(1,1));
         return retval;
       }

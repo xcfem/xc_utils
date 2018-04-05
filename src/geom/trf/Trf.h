@@ -26,6 +26,7 @@
 #define TRF_H
 
 #include "../tipos_cgal.h"
+#include "xc_utils/src/nucleo/EntCmd.h"
 
 class matriz_FT;
 
@@ -33,7 +34,7 @@ class matriz_FT;
 //! @ingroup GEOM
 //
 //! @brief Clase base para las transformaciones de coordenadas.
-class Trf
+class Trf: public EntCmd
   {
   public:
     inline virtual ~Trf(void) {}

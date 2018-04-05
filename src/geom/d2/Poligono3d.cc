@@ -94,17 +94,17 @@ std::vector<Poligono3d> Poligono3d::getPoligonosTributarios(void) const
 
 GEOM_FT Poligono3d::Ix(void) const
   {
-    std::cerr << "Poligono3d::Ix() no implementada, se devuelve 0." << std::endl;
+    std::cerr << "Poligono3d::Ix() not implemented, 0 is returned." << std::endl;
     return 0;
   }
 GEOM_FT Poligono3d::Iy(void) const
   {
-    std::cerr << "Poligono3d::Iy() no implementada, se devuelve 0." << std::endl;
+    std::cerr << "Poligono3d::Iy() not implemented, 0 is returned." << std::endl;
     return 0;
   }
 GEOM_FT Poligono3d::Iz(void) const
   {
-    std::cerr << "Poligono3d::Iz() no implementada, se devuelve 0." << std::endl;
+    std::cerr << "Poligono3d::Iz() not implemented, 0 is returned." << std::endl;
     return 0;
   }
 
@@ -128,15 +128,17 @@ void Poligono3d::Print(std::ostream &os) const
       os << ", " << Vertice(i);
   }
 
-//! @brief Devuelve el cuadrado de la distancia desde el punto al polígono
-//! La distancia se calcula como el máximo de:
-//!  -La distancia desde el punto al plano que contiene al polígono.
-//! -Las distancias (con signo) del punto a cada uno de los semiespacios
-//!  definidos por el plano que contiene a un lado y es normal al polígono.
+//! @brief Devuelve the squared distance from from point to polygon.
 //!
-//! Si los vértices están dados en sentido horario, las distancias positivas
-//! corresponden a puntos AL MISMO LADO DEL POLÍGONO respecto al segmento, en caso contrario
-//! es necesario cambiar el signo de la distancia. 
+//! The distance is computed as the maximum of:
+//!  -The distance from the point to the plane that contains the polygon.
+//!  -The signed distances from the point to each of the half-spaces
+//!  defined by the plane that contains the polygon.
+//!
+// If the vertices are in couterclockwise order, positive distances
+// correspond to point AT THE SAME SIDE OF THE POLYGON with respect
+// to the segment, otherwise the sign of the computed distance must
+// be changed.
 GEOM_FT Poligono3d::distSigno2(const Pos3d &p,const bool &sentido_horario) const
   {
     const short int signo= (sentido_horario ? 1 : -1);
@@ -159,12 +161,12 @@ GEOM_FT Poligono3d::distSigno2(const Pos3d &p,const bool &sentido_horario) const
 GEOM_FT Poligono3d::distSigno(const Pos3d &p,const bool &sentido_horario) const
   { return sqrt_FT(::Abs(distSigno2(p,sentido_horario))); }
 
-//! @brief Devuelve la distancia desde el punto al polígono.
-//! La distancia se calcula como el máximo de las 
-//! distancias (con signo) del punto a cada uno de los planos
-//!  que contienen a un lado y son perpendiculares al plano 
-//!  que contiene al polígono.
-//! Si el punto está dentro del polígono se devuelve 0.
+//! @brief Return the distance from point to polygon.
+//! Distance is computed as the maximum of the distances
+//! (signed) from the point to each of the planes
+//! that contain a side and are normal to the plane 
+//! that contains the polygon.
+//! If the point is inside the polygon 0 is returned.
 GEOM_FT Poligono3d::dist2(const Pos3d &p) const
   {
     const GEOM_FT retval= distSigno2(p);
@@ -172,12 +174,11 @@ GEOM_FT Poligono3d::dist2(const Pos3d &p) const
   }
 
 
-//! @brief Devuelve la distancia desde el punto al polígono.
-//!La distancia se calcula como el máximo de:
-//! -Las distancias (con signo) del punto a cada uno de los planos
-//!  que contienen a un lado y son perpendiculares al plano 
-//!  que contiene al polígono.
-//! Si el punto está dentro del polígono se devuelve 0.
+//! @brief Return the distance from point to polygon.
+//! This distance is computed as the maximum of the signed distances from the
+//! point to each of the planes that contain a side and are perpendicular to the
+//! plane that contains the polygon.
+//! In the point is inside the polygon 0 is returned.
 GEOM_FT Poligono3d::dist(const Pos3d &p) const
   {
     const GEOM_FT retval= distSigno(p);
@@ -197,8 +198,8 @@ std::list<Poligono3d> Poligono3d::Corta(const Plano3d &pl) const
     GeomObj3d *ptr=(*gint.begin());
     const Recta3d r= *((Recta3d *)ptr);
 
-    const Pos2d p2dA= to_2d(r.Punto());
-    const Pos2d p2dB= to_2d(r.Punto(100));
+    const Pos2d p2dA= to_2d(r.Point());
+    const Pos2d p2dB= to_2d(r.Point(100));
     const Recta2d r2d(p2dA,p2dB);
 
     std::list<Poligono2d> inter= corta(plg2d,r2d);
@@ -208,7 +209,7 @@ std::list<Poligono3d> Poligono3d::Corta(const Plano3d &pl) const
     return retval;
   }
 
-//! @brief Devuelve verdadero si alguno de los vertices toca el cuadrante
+//! @brief Return true if alguno de los vertices toca el cuadrante
 //! que se pasa como parámetro.
 bool Poligono3d::TocaCuadrante(const int &cuadrante) const
   {

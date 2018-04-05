@@ -19,12 +19,6 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-#ifndef	CUADRATURA1D_H
-#define	CUADRATURA1D_H
+//ThreePoints3d.cc
 
-#include "PuntosGauss.h"
-
-typedef PuntosGauss Cuadratura1D;
-
-
-#endif
+#include "ThreePoints3d.h"

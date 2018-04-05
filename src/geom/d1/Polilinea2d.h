@@ -57,11 +57,11 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     void Transforma(const Trf2d &trf2d);
     
 /*     inline virtual void GiraX(double ang) */
-/*       { Ref2d::GiraX(ang); TrfPuntos(); } */
+/*       { Ref2d::GiraX(ang); TrfPoints(); } */
 /*     inline virtual void GiraY(double ang) */
-/*       { Ref2d::GiraY(ang); TrfPuntos();  } */
+/*       { Ref2d::GiraY(ang); TrfPoints();  } */
 /*     inline virtual void GiraZ(double ang) */
-/*       { Ref2d::GiraZ(ang); TrfPuntos();  } */
+/*       { Ref2d::GiraZ(ang); TrfPoints();  } */
     const Pos2d *AgregaVertice(const Pos2d &p);
     template <class InputIterator>
     inline void assign(InputIterator first,
@@ -79,12 +79,12 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
     virtual GEOM_FT Longitud(void) const
-    //Devuelve la longitud de la Polilinea2d.
+    //Return the longitud de la Polilinea2d.
       { return GeomObj::list_Pos2d::Longitud(); }
     virtual GEOM_FT GetMax(unsigned short int i) const;
-    //Devuelve el valor maximo de la coordenada i.
+    //Return the maximum value of the i coordinate.
     virtual GEOM_FT GetMin(unsigned short int i) const;
-    //Devuelve el valor minimo de la coordenada i.
+    //Return the minimum value of the i coordinate.
     Polilinea2d GetMayores(unsigned short int i,const GEOM_FT &d) const;
     //Devuelve una Polilinea2d con los vertices cuya coordenada i
     //es mayor que d.
@@ -96,7 +96,7 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     Segmento2d GetSegmento(const size_t &i) const;
 /*     virtual list_Pos2d Int(unsigned short int i, const double d) const */
 /*       { */
-/*         cerr << "Polilinea2d Int(i,d) no implementada" << endl; */
+/*         cerr << "Polilinea2d Int(i,d) not implemented" << endl; */
 /*         return list_Pos2d(); */
 /*       } */
     Polilinea2d Offset(const GEOM_FT &d) const;
@@ -107,7 +107,7 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     list_Pos2d Interseccion(const SemiRecta2d &sr) const;
     list_Pos2d Interseccion(const Segmento2d &sr) const;
     Polilinea2d Corta(unsigned short int i,const GEOM_FT &d) const;
-    //Devuelve la Polilinea2d con los vertices correspondientes a los
+    //Return the Polilinea2d con los vertices correspondientes a los
     //cortes con el plano coord_i= d
     Polilinea2d Separa(const Pos2d &p,const short int &sgn) const;
     //Suponemos que p es vertice de la Polilinea2d

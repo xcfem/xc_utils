@@ -32,22 +32,22 @@
 //! @brief Rejilla en dos dimensiones.
 class Rejilla2d: public Superficie2d
   {
-    MatrizPos2d puntos; //!< mesh points
+    MatrizPos2d points; //!< mesh points
   public:
     Rejilla2d(void);
     Rejilla2d(int numSubdivIJ, int numSubdivJK);
     explicit Rejilla2d(const MatrizPos2d &m)
-      : Superficie2d(), puntos(m) {}
+      : Superficie2d(), points(m) {}
     virtual ~Rejilla2d(void);
     virtual GeomObj *clon(void) const
       { return new Rejilla2d(*this); }
 
     inline const Pos2d &operator()(const size_t &i,const size_t &j) const
-      { return puntos(i,j); }
+      { return points(i,j); }
     inline Pos2d &operator()(const size_t &i,const size_t &j)
-      { return puntos(i,j); }
+      { return points(i,j); }
     inline MatrizPos2d &getPoints(void)
-      { return puntos; }
+      { return points; }
 
     GEOM_FT GetMax(unsigned short int i) const;
     GEOM_FT GetMin(unsigned short int i) const;
@@ -57,7 +57,7 @@ class Rejilla2d: public Superficie2d
     GEOM_FT Pxy(void) const;
     Pos2d Cdg(void) const;
     const matriz_FT &GetVertCoords(const size_t &,const size_t &) const;
-    Pos2d GetPunto(const size_t &,const size_t &) const;
+    Pos2d getPoint(const size_t &,const size_t &) const;
     Cuadrilatero2d GetQuad(const size_t &i,const size_t &j) const;
     bool In(const Pos2d &, const double &) const;
     

@@ -34,8 +34,8 @@
 class SisCooRect1d3d: public SisCooXd3d
   {
   public:
-    typedef GEOM_FT VLocal; //Dimensión del vector en locales.
-    typedef GEOM_FT PLocal; //Dimensión del punto en locales.
+    typedef GEOM_FT VLocal; //Dimension of the vector in local coordinates.
+    typedef GEOM_FT PLocal; //Dimension of the point in local coordinates.
 
   public:
     SisCooRect1d3d(void): SisCooXd3d(1) {}

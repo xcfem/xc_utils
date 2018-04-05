@@ -52,7 +52,7 @@ Ref3d3d::Ref3d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2,const Vect
 
 //! @brief Constructor.
 Ref3d3d::Ref3d3d(const Recta3d &r,const Pos3d &p)
-  : BaseRef(r.Punto(0),SisCooRect3d3d(r.Punto(0),r.Punto(100),p)) {}
+  : BaseRef(r.Point(0),SisCooRect3d3d(r.Point(0),r.Point(100),p)) {}
 
 Ref3d3d::~Ref3d3d(void)
   {}
@@ -68,21 +68,21 @@ Vector3d Ref3d3d::GetK(void) const
   { return GetVDirEje(3); }
 
 Recta3d Ref3d3d::GetEjeX(void) const
-//Devuelve la recta que define el eje x.
+//Return the recta que define el eje x.
   {
     const Pos3d dest(org+1000.0*GetI());
     return Recta3d(org,dest);
   }
 
 Recta3d Ref3d3d::GetEjeY(void) const
-//Devuelve la recta que define el eje y.
+//Return the recta que define el eje y.
   {
     const Pos3d dest(org+1000.0*GetJ());
     return Recta3d(org,dest);
   }
 
 Recta3d Ref3d3d::GetEjeZ(void) const
-//Devuelve la recta que define el eje z.
+//Return the recta que define el eje z.
   {
     const Pos3d dest(org+1000.0*GetK());
     return Recta3d(org,dest);
@@ -96,8 +96,7 @@ Plano3d Ref3d3d::GetPlanoYZ(void) const
   { return Plano3d(org,1000.0*GetJ(),1000.0*GetK()); }
 
 // GEOM_FT Ref3d3d::GetZLocal(const Pos3d &p) const
-// //Devuelve la Z del punto p expresado en locales
-// //expresada en coordenadas locales.
+// //Return the local Z of the point p expressed in local coordinates
 //   {
 //     m_double inv(trf.GetCol(3));
 //     inv.Trn();

@@ -39,58 +39,58 @@ ListaPos2d::ListaPos2d(void)
 ListaPos2d::ListaPos2d(const GeomObj::list_Pos2d &l)
   : GeomObj2d(), lista_ptos(l) {}
 
-//! @brief Agrega a la lista el punto que se pasa como parámetro.
-const Pos2d *ListaPos2d::AgregaPunto(const Pos2d &p)
+//! @brief Appends the point to the list.
+const Pos2d *ListaPos2d::appendPoint(const Pos2d &p)
   {
     lista_ptos.push_back(p);
     return &(*lista_ptos.rbegin());
   }
 
-//! @brief Agrega a la lista el punto que se pasa como parámetro.
-//! se agregó para facilitarle las cosas a boot.Python.
-void ListaPos2d::agregaPunto(const Pos2d &p)
-  { AgregaPunto(p); }
+//! @brief Appends the point to the list.
+//! added to make things easier to boost.Python.
+void ListaPos2d::appendPointPy(const Pos2d &p)
+  { appendPoint(p); }
 
-//! @brief Aplica a los puntos la transformación que se pasa como parámetro.
+//! @brief Applies the transformation to the points.
 void ListaPos2d::Transforma(const Trf2d &trf2d)
   { trf2d.Transforma(lista_ptos.begin(),lista_ptos.end()); }
 
-//! @brief Devuelve la lista de vértices de una polilínea paralela
+//! @brief Return the lista de vértices de una polilínea paralela
 //! a la formada con los vértices de ésta a la distancia
-//! que se pasa como parámetro. Si la distancia es positiva,
+//! que se pasa como parámetro. Si la distance es positiva,
 //! la nueva polilínea quedará a la derecha de la anterior.
 ListaPos2d ListaPos2d::Offset(const GEOM_FT &d) const
   {
     ListaPos2d retval;
-    const size_t nv= GetNumPuntos();
+    const size_t nv= getNumberOfPoints();
     if(nv>1)
       {
-        point_const_iterator i= puntos_begin();
+        point_const_iterator i= points_begin();
         point_const_iterator j= i;j++;
         const Segmento2d s1= Segmento2d(*i,*j).Offset(d);
         Recta2d r1= s1.RectaSoporte();
-        retval.AgregaPunto(s1.Origen());
+        retval.appendPoint(s1.Origen());
         Segmento2d s2= s1;
         i++;j++;//Siguiente segmento.
-        for(;j != puntos_end();i++,j++)
+        for(;j != points_end();i++,j++)
           {
             s2= Segmento2d(*i,*j).Offset(d);
             Recta2d r2= s2.RectaSoporte();
-            Pos2d ptIntersection= punto_interseccion(r1,r2);
-            retval.AgregaPunto(ptIntersection);
+            Pos2d ptIntersection= intersection_point(r1,r2);
+            retval.appendPoint(ptIntersection);
             if(!ptIntersection.exists())
 	      std::cerr << "ListaPos2d::Offset; no se encontró la intersección"
                         << " entre las rectas r1: "
                         << r1 << " y r2: " << r2 << std::endl;
             r1= r2;
           }
-        retval.AgregaPunto(s2.Destino());
+        retval.appendPoint(s2.Destino());
       }
     return retval;
   }
 
 
-//! @brief Devuelve una referencia al objeto cuyo
+//! @brief Return a reference al objeto cuyo
 //! índice se pasa como parámetro.
 Pos2d &ListaPos2d::operator[](const size_t &i)
   {
@@ -104,7 +104,7 @@ Pos2d &ListaPos2d::operator[](const size_t &i)
       }
   }
 
-//! @brief Devuelve una referencia al objeto cuyo
+//! @brief Return a reference al objeto cuyo
 //! índice se pasa como parámetro.
 const Pos2d &ListaPos2d::operator[](const size_t &i) const
   {
@@ -118,31 +118,32 @@ const Pos2d &ListaPos2d::operator[](const size_t &i) const
       }
   }
 
-//! @brief Devuelve verdadero si el punto está en el conjunto.
+//! @brief Return true if the point belongs to the set.
 bool ListaPos2d::In(const Pos2d &p, const double &tol) const
   {
     for(register point_const_iterator j=lista_ptos.begin();j != lista_ptos.end();j++)
       if(dist2(*j,p)<=tol) return true;
     return false;
   }
-//! @brief Devuelve el valor maximo de la coordenada i.
+//! @brief Return the maximum value of the i coordinate.
 GEOM_FT ListaPos2d::GetMax(unsigned short int i) const
   { return lista_ptos.GetMax(i); }
 
-//! @brief Devuelve el valor minimo de la coordenada i.
+//! @brief Return the minimum value of the i coordinate.
 GEOM_FT ListaPos2d::GetMin(unsigned short int i) const
   { return lista_ptos.GetMin(i); }
 
-//! @brief Devuelve una ListaPos2d con los puntos cuya coordenada i
-//! es mayor que d.
+//! @brief Return a ListaPos2d with the points which i coordinate is greater
+//! than d.
 ListaPos2d ListaPos2d::GetMayores(unsigned short int i,const GEOM_FT &d) const
   {
     ListaPos2d retval;
     retval.lista_ptos= lista_ptos.GetMayores(i,d);
     return retval;
   }
-//! @brief Devuelve una ListaPos2d con los puntos cuya coordenada i
-//! es menor que d.
+
+//! @brief Return a ListaPos2d with the points which i coordinate is less
+//! than d.
 ListaPos2d ListaPos2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
   {
     ListaPos2d retval;
@@ -152,23 +153,23 @@ ListaPos2d ListaPos2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 
 
 //! @brief Devuelve el vértice i-ésimo (el primero es el 1).
-const Pos2d &ListaPos2d::Punto(const size_t &i) const
+const Pos2d &ListaPos2d::Point(const size_t &i) const
   { return lista_ptos[i-1]; }
 
 
 GEOM_FT ListaPos2d::Ix(void) const
   {
-    std::cerr << "ListaPos2d Ix() no implementada" << std::endl;
+    std::cerr << "ListaPos2d Ix() not implemented" << std::endl;
     return 0.0;
   }
 GEOM_FT ListaPos2d::Iy(void) const
   {
-    std::cerr << "ListaPos2d Iy() no implementada" << std::endl;
+    std::cerr << "ListaPos2d Iy() not implemented" << std::endl;
     return 0.0;
   }
 GEOM_FT ListaPos2d::Iz(void) const
   {
-    std::cerr << "ListaPos2d Iz() no implementada" << std::endl;
+    std::cerr << "ListaPos2d Iz() not implemented" << std::endl;
     return 0.0;
   }
 
@@ -191,5 +192,5 @@ void ListaPos2d::Print(std::ostream &stream) const
   }
 void ListaPos2d::Plot(Plotter &plotter) const
   {
-    std::cerr << "ListaPos2d::Plot no implementada." << std::endl;
+    std::cerr << "ListaPos2d::Plot not implemented." << std::endl;
   }

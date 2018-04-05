@@ -47,7 +47,7 @@ class Superficie2d : public GeomObj2d
       { return 0.0; }
     virtual inline GEOM_FT IArea(void) const
       { return Area(); }
-    //Devuelve verdadero si el punto esta sobre la Superficie.
+    //@brief Return true if the points is on sobre la Superficie.
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const= 0;
   };
 #endif

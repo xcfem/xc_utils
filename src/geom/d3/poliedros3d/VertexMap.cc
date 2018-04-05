@@ -64,7 +64,7 @@ ListaPos3d VerticesCara::getPosVertices(const std::vector<Pos3d> &vertices) cons
   {
     ListaPos3d retval;
     for(const_iterator i=begin();i!=end();i++)
-      retval.AgregaPunto(vertices[*i]);
+      retval.appendPoint(vertices[*i]);
     return retval;
   }
 
@@ -87,7 +87,7 @@ std::list<VerticesArista> VerticesCara::getAristas(void) const
     return retval;
   }
 
-//! @brief Devuelve verdadero si la cara contiene la arista
+//! @brief Return true if la cara contiene la arista
 //! que se pasa como parámetro.
 bool VerticesCara::tieneArista(const VerticesArista &arista) const
   {
@@ -112,7 +112,7 @@ bool VerticesCara::tieneArista(const VerticesArista &arista) const
     return retval;
   }
 
-//! @brief Devuelve verdadero si la cara contiene la arista
+//! @brief Return true if la cara contiene la arista
 //! que se pasa como parámetro y está orientada igual.
 bool VerticesCara::tieneAristaOrientada(const VerticesArista &arista) const
   {
@@ -217,7 +217,7 @@ size_t VertexMap::getNumVertices(void) const
 size_t VertexMap::getNumCaras(void) const
   { return caras.size(); }
 
-//! @brief Devuelve la cara cuyo índice se pasa como parámetro.
+//! @brief Return the cara cuyo índice se pasa como parámetro.
 const VerticesCara &VertexMap::getCara(const size_t &i) const
   { return caras[i]; }
 

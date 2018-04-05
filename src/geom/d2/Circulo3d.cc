@@ -31,8 +31,8 @@
 #include "xc_utils/src/geom/pos_vec/MatrizPos3d.h"
 
 
-//! @brief Circulo definido por tres puntos.
-Circulo3d Circulo3dTresPuntos(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
+//! @brief Circulo defined by three points.
+Circulo3d Circulo3dThreepoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   { return Circulo3d(p1,p2,p3); }
 
 Circulo3d::Circulo3d(const Pos3d &centro,const GEOM_FT &rad)
@@ -67,16 +67,16 @@ GEOM_FT Circulo3d::Iz(void) const
 
 GEOM_FT Circulo3d::GetMax(unsigned short int i) const
   {
-    cerr << "Circulo3d::GetMax(i), no implementada." << endl;
+    cerr << "Circulo3d::GetMax(i), not implemented." << endl;
     return 1;
   }
 GEOM_FT Circulo3d::GetMin(unsigned short int i) const
   {
-    cerr << "Circulo3d::GetMin(i), no implementada." << endl;
+    cerr << "Circulo3d::GetMin(i), not implemented." << endl;
     return -1;
   }
 
-//! @brief Devuelve verdadero si el punto esta sobre el círculo.
+//! @brief Return true if the points is inside the circle.
 bool Circulo3d::In(const Pos3d &p, const double &tol) const
   {
     if(GetPlano().In(p,tol))
@@ -85,10 +85,10 @@ bool Circulo3d::In(const Pos3d &p, const double &tol) const
       return false;
   }
 
-//! @brief Devuelve n puntos equiespaciados sobre la circunferencia perimetral.
-const MatrizPos3d &Circulo3d::PuntosPerimetro(const size_t &n,const double &theta_inic) const
+//! @brief Return n points equally spaced on the object perimeter.
+const MatrizPos3d &Circulo3d::getPointsOnPerimeter(const size_t &n,const double &theta_inic) const
   {
-    static MatrizPos3d retval= to_3d(circ.PuntosPerimetro(n,theta_inic));
+    static MatrizPos3d retval= to_3d(circ.getPointsOnPerimeter(n,theta_inic));
     return retval;
   }
 

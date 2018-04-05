@@ -110,7 +110,7 @@ Poligono2d Poligono2d::Offset(const GEOM_FT &d) const
     return retval;
   }
 
-//! @brief Devuelve verdadero si el punto está contenido en el polígono.
+//! @brief Return true if the point is inside the polygon.
 bool Poligono2d::In(const Pos2d &p, const double &tol) const
   {
     if(cgpol.has_on_boundary(p.ToCGAL())) return true;
@@ -126,24 +126,21 @@ bool Poligono2d::In(const Polilinea2d &p) const
 bool Poligono2d::In(const Poligono2d &p) const
   { return In(p.vertices_begin(),p.vertices_end()); }
 
-//! @brief Devuelve verdadero si el polígono contiene al punto.
+//! @brief Return true if the polygon contains the point.
 bool Poligono2d::Overlap(const Pos2d &p) const
   { return In(p); }
 
 
-//! @brief Devuelve verdadero si la recta y el Poligono
-//! tienen algun punto en común.
+//! @brief Return true if the line and the polygon overlap.
 bool Poligono2d::Overlap(const Recta2d &r) const
   { return SupPoligonal2d::Overlap(r); }
 
   
-//! @brief Devuelve verdadero si la semirrecta y el Poligono
-//! tienen algun punto en común.
+//! @brief Return true if the ray and the polygon overlap.
 bool Poligono2d::Overlap(const SemiRecta2d &sr) const
   { return SupPoligonal2d::Overlap(sr); }
 
-//! @brief Devuelve verdadero si el segmento y el Poligono
-//! tienen algun punto en común.
+//! @brief Return true if the segment and the polygon overlap.
 bool Poligono2d::Overlap(const Segmento2d &sg) const
   {
     bool retval= false;
@@ -159,13 +156,11 @@ bool Poligono2d::Overlap(const Segmento2d &sg) const
     return retval;
   }
 
-//! @brief Devuelve verdadero si ambos el BND y el poligono
-//! tienen algun punto en común.
+//! @brief Return true if the boundary and the polygon overlap.
 bool Poligono2d::Overlap(const BND2d &bnd) const
   { return bnd.Overlap(*this); }
 
-//! @brief Devuelve verdadero si la el polígono se superpone
-//! con la polilinea que se pasa como parámetro.
+//! @brief Return true if the polyline and the polygon overlap.
 bool Poligono2d::Overlap(const Polilinea2d &p) const
   {
     bool retval= Overlap(p.begin(),p.end());
@@ -287,7 +282,7 @@ std::vector<Poligono2d> Poligono2d::getPoligonosTributarios(void) const
   {
     const size_t nv= GetNumVertices();
     const Pos2d cdg= Cdg();
-    const Poligono2d pMed= agrega_puntos_medios(*this);
+    const Poligono2d pMed= append_mid_points(*this);
     const size_t nvPMed= pMed.GetNumVertices();
     std::vector<Poligono2d> retval(nv);
     for(size_t i=0;i<nv;i++)
@@ -326,9 +321,9 @@ std::vector<double> Poligono2d::getAreasTributarias(void) const
 std::deque<GEOM_FT> &Poligono2d::GetRecubrimientos(const ListaPos2d &l) const
   { return l.GetRecubrimientos(*this); }
 
-//! @brief Devuelve un polígono con un vértice en el punto medio
-//! de cada lado del polígono primitivo (se usa en XC::GeomSection::getAnchoMecanico).
-Poligono2d agrega_puntos_medios(const Poligono2d &plg)
+//! @brief Return a polygon with a vertex on the mid-point of each side of
+//! the argument (used in GeomSection::getAnchoMecanico).
+Poligono2d append_mid_points(const Poligono2d &plg)
   {
     Poligono2d retval;
     const size_t num_vertices= plg.GetNumVertices();

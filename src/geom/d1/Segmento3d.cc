@@ -40,8 +40,9 @@ Segmento3d::Segmento3d(const Pos3d &p1,const Pos3d &p2)
   {
     if(EsDegenerada())
       {
-        std::clog << "Segmento3d::Segmento3d: La recta es degenerada, los puntos: "
-             << p1 << " y " << p2 << " coinciden." << std::endl;
+        std::clog << getClassName() << "::" << __FUNCTION__
+		  << "; degenerated line, the points: "
+             << p1 << " and " << p2 << " are the same." << std::endl;
       }
   }
 
@@ -71,31 +72,30 @@ Pos3d Segmento3d::Destino(void) const
   { return Pos3d(cgseg.target()); }
 GEOM_FT Segmento3d::getSlope(void) const
   { return RectaSoporte().getSlope(); }
-const Pos3d Segmento3d::Punto(const int &i) const
+const Pos3d Segmento3d::Point(const int &i) const
   { return Pos3d(cgseg.point(i)); }
 
-//! @brief Devuelve un punto de la recta a una "distancia"
-//! lambda del origen.
+//! @brief Return a point of the line at a distance lambda from its origin.
 Pos3d Segmento3d::PtoParametricas(const GEOM_FT &lambda) const
-  { return Punto(0)+lambda*VDir(); }
+  { return Point(0)+lambda*VDir(); }
 
-//! @brief Devuelve la coordenada paramétrica que corresponde
+//! @brief Return the coordenada paramétrica que corresponde
 //! a la coordenada natural se pasa como parámetro.
 double Segmento3d::getParamCooNatural(const GEOM_FT &chi) const
   { return (chi+1.0)/2.0; }
 
-//! @brief Devuelve el punto del segmento cuyas coordenada
+//! @brief Return the point del segmento cuyas coordenada
 //! natural se pasa como parámetro.
 Pos3d Segmento3d::PtoCooNatural(const GEOM_FT &chi) const
   { return PtoParametricas(getParamCooNatural(chi)); }
 
 inline bool Segmento3d::EsDegenerada(void) const
   { return cgseg.is_degenerate(); }
+//! @brief Return true if the point is in the segment.
 bool Segmento3d::In(const Pos3d &p, const double &tol) const
-//Devuelve verdadero si el punto está sobre la semirrecta.
   { return cgseg.has_on(p.ToCGAL()); }
 
-void Segmento3d::DosPuntos(const Pos3d &p1,const Pos3d &p2)
+void Segmento3d::TwoPoints(const Pos3d &p1,const Pos3d &p2)
   { (*this)= Segmento3d(p1,p2); }
 
 Dir3d Segmento3d::GetDir(void) const
@@ -111,7 +111,7 @@ GEOM_FT Segmento3d::getLambda(const Pos3d &p) const
     return dot(v,dir);
   }
 
-//! @brief Devuelve el cuadrado de la distancia desde el punto al segmento.
+//! @brief Devuelve el cuadrado de la distance from the point al segmento.
 GEOM_FT Segmento3d::dist2(const Pos3d &p) const
   {
     const Recta3d r= RectaSoporte();
@@ -131,7 +131,7 @@ GEOM_FT Segmento3d::dist2(const Pos3d &p) const
     return retval;
   }
 
-//! @brief Devuelve la distancia desde el punto al segmento.
+//! @brief Return the distance from the point al segmento.
 GEOM_FT Segmento3d::dist(const Pos3d &p) const
   { return sqrt(dist2(p)); }
 
@@ -142,7 +142,7 @@ bool Segmento3d::Paralelo(const SemiRecta3d &sr) const
 bool Segmento3d::Paralelo(const Segmento3d &r) const
   { return paralelas(RectaSoporte(),r.RectaSoporte()); }
 
-//! @brief Devuelve la longitud del segmento.
+//! @brief Return the longitud del segmento.
 GEOM_FT Segmento3d::Longitud(void) const
   { return Origen().dist(Destino()); }
 
@@ -155,7 +155,7 @@ Pos3d Segmento3d::Cdg(void) const
   }
 
 GeomObj3d::list_Pos3d Segmento3d::Interseccion(const Recta3d &r) const
-//Devuelve el punto intersección de recta y segmento, if doesn't exists la
+//Return the point intersección de recta and segmento, if doesn't exists la
 //intersección devuelve la lista vacía.
   {
     const Recta3d sop= RectaSoporte();
@@ -163,13 +163,13 @@ GeomObj3d::list_Pos3d Segmento3d::Interseccion(const Recta3d &r) const
     if(!retval.empty()) //Intersection exists.
       {
         const Pos3d &pint= *retval.begin();
-        if(!In(pint)) //el punto intersección NO está en el segmento.
+        if(!In(pint)) //the intersection point is NOT on the segment.
           retval.erase(retval.begin(),retval.end());
       }
     return retval;
   }
 GeomObj3d::list_Pos3d Segmento3d::Interseccion(const SemiRecta3d &sr) const
-//Devuelve el punto intersección de semirrecta y segmento, if doesn't exists la
+//Return the point intersección de semirrecta and segmento, if doesn't exists la
 //intersección devuelve la lista vacía.
   {
     const Recta3d sop= RectaSoporte();
@@ -177,13 +177,13 @@ GeomObj3d::list_Pos3d Segmento3d::Interseccion(const SemiRecta3d &sr) const
     if(!retval.empty()) //Intersection exists.
       {
         const Pos3d &pint= *retval.begin();
-        if(!In(pint)) //el punto intersección NO está en el segmento.
+        if(!In(pint)) //the intersection point is NOT on the segment.
           retval.erase(retval.begin(),retval.end());
       }
     return retval;
   }
 
-//! @brief Devuelve la intersección de la Linea con un plano coord_i=cte.
+//! @brief Return the intersección de la Linea con un plano coord_i=cte.
 GeomObj3d::list_Pos3d Segmento3d::Interseccion(unsigned short int i, const double &d) const
   {
     GeomObj3d::list_Pos3d lp;
@@ -199,16 +199,16 @@ GeomObj3d::list_Pos3d Segmento3d::Interseccion(unsigned short int i, const doubl
   }
 
 GeomObj3d::list_Pos3d Segmento3d::Interseccion(const Segmento3d &sg2) const
-//Devuelve el punto intersección entre segmentos, if doesn't exists la
+//Return the point intersección entre segmentos, if doesn't exists la
 //intersección devuelve la lista vacía.
   {
     const Recta3d sop= RectaSoporte();
     GeomObj3d::list_Pos3d retval= sg2.Interseccion(sop);
     if(!retval.empty()) //Intersection exists
       {
-        const Pos3d &pint= *retval.begin(); //Este punto esta en sg2 y en la recta
-                                            //soporte de sg1.
-        if(!In(pint)) //el punto intersección NO está en sg1.
+        const Pos3d &pint= *retval.begin(); //This point is on sg2 and on
+	                                    // the recta soporte de sg1.
+        if(!In(pint)) //the intersection point is NOT on sg1.
           retval.erase(retval.begin(),retval.end());
       }
     return retval;

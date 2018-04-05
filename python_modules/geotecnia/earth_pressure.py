@@ -139,7 +139,7 @@ def eql_coulomb(x,H,z,ql):
     x:  Distancia entre la coronación del trasdós y la línea de aplicación de
               la carga.
     H:  Profundidad del extremo inferior del trasdós.
-    z:  Profundidad del punto en el que se obtiene el empuje.
+    z:  depth of the point for which the pressure is computed.
     ql: Valor de la sobrecarga lineal.
     '''
     m=x/float(H)
@@ -157,10 +157,10 @@ def eqp_coulomb(x,H,z,qp):
     Devuelve el empuje unitario producido por una sobrecarga puntual qp, vertical, que actúa
     sobre la superficie del terreno y está contenida en el plano vertical de la sección del muro
     sobre la que se calcula el empuje, from:
-    x:  Distancia desde la coronación del trasdós al punto de aplicación de
-              la carga.
+    x:  Distance from the top of the trasdós to the point of application 
+        of the load.
     H:  Profundidad del extremo inferior del trasdós.
-    z:  Profundidad del punto en el que se obtiene el empuje.
+    z:  depth of the point for which the pressure is computed.
     qp: carga puntual
     '''
     m=x/float(H)

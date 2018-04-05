@@ -4,7 +4,7 @@
 '''Devuelve el plano de buzamiento definido por:
    alpha: Ángulo de buzamiento.
    beta: Dirección del buzamiento.
-   p: Punto por el que pasa el plano.'''
+   p: point for which the plane passes through.'''
 def calcPlanoBuzamiento(alpha,beta,pos3d p):
   A= math.sin(alpha)*sin(beta)
   B= math.sin(alpha)*cos(beta)
@@ -44,7 +44,7 @@ def procesaAnguloPoliedrico(nmbAng,nmbTunel):
                         else:
                           {
                             print "  Pirámide:\n"
-                            print "    puntos de tangencia= ",ptsTang,"\n"
+                            print "    points of tangency= ",ptsTang,"\n"
                             print "    cúspide= ",p3,"\n"
                             \psplot
                               {
@@ -98,9 +98,8 @@ def procesaAnguloPoliedrico(nmbAng,nmbTunel):
       }
   }
 
-'''Calcula los puntos de tangencia de los vectores
-   externos con la sección.'''
-def calcPuntosTangencia(nmbSeccion,vector2d vt1,vector2d vt2):
+'''Computes the points of tangency of the external vectors with the section.'''
+def computePointsOfTangency(nmbSeccion,vector2d vt1,vector2d vt2):
   {
     retval= 
     \nmbSeccion{retval= getPosTangAprox(vt1)}

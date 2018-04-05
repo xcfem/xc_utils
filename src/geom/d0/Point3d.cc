@@ -19,6 +19,6 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//TresPuntos3d.cc
+//Point3d.cc
 
-#include "TresPuntos3d.h"
+#include "Point3d.h"

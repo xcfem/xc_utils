@@ -51,7 +51,7 @@ const double areaMin= 1/(escala*escala);
 inline double double2intdouble(const double &d)
   { return sgn(d)*floor(std::abs(d)*escala); }
 
-Point convierte_punto(const CGPoint_2 &p)
+Point convert_point(const CGPoint_2 &p)
   { return Point(double2intdouble(p.hx()),double2intdouble(p.hy()),double2intdouble(p.hw())); }
 
 Poligono2d devuelve_poligono(const Poligono2d &p)
@@ -72,7 +72,7 @@ Nef_polyhedron Poligono2d_to_Nef_2(const Poligono2d &poly)
     std::list<Point> l_of_p;        
     while(it != poly.vertices_end())
       {
-        l_of_p.push_back(convierte_punto(*it));
+        l_of_p.push_back(convert_point(*it));
         it++;
       }
     return Nef_polyhedron(l_of_p.begin(),l_of_p.end(),Nef_polyhedron::INCLUDED);
@@ -257,11 +257,11 @@ Nef_polyhedron interseca(const Poligono2d &p1,const Poligono2d &p2)
     return n1.intersection(n2);
   }
 
-//! @brief Devuelve la intersección del polígono con el semiplano.
-// Cuando el vector dirección (VDir()) de la recta tiene el módulo muy
-// grande, falla al calcular la intersección. El problema se corrigió
-// definiendo la recta con puntos más proximos entre si (separados 100
-// unidades de longitud).
+//! @brief Return the intersection of the polygon with the half-plane.
+// When the direction vector (VDir()) of the line has a very big modulus,
+// , the function crashes when computing the intersection. The problem was
+// fixed defining the line with points that were nearer between them
+// (100 units apart).
 Nef_polyhedron interseca(const Poligono2d &p,const Semiplano2d &sp)
   {
     Nef_polyhedron n2=Semiplano2d_to_Nef_2(sp);

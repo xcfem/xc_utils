@@ -19,44 +19,29 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PuntosGauss.h
+//GaussPoints.cc
+#include "gssleg.h"
 
-#ifndef	PUNTOSGAUSS_H
-#define	PUNTOSGAUSS_H
+#include "GaussPoints.h"
 
-#include <cmath>
-#include <vector>
-#include "PsoGss1d.h"
-
-typedef std::vector<PsoGss1D> ConjPG; //Pesos de Gauss;
-
-
-class PuntosGauss : public ConjPG
+//! Generate the Gauss points between x1 y x2 for n ordinates.
+GaussPoints::GaussPoints(double x1, double x2, int n) : ConjPG(n)
   {
-  public:
-    PuntosGauss() : ConjPG(0) {}
-    PuntosGauss(double x1, double x2, int n);
-    inline size_t Size() const
-      { return size(); }
-    inline const PsoGss1D &Get(int p) const
-      { return (*this)[p]; }
-    friend std::ostream& operator<<(std::ostream& o, const PuntosGauss& gpts);
-  };
+    v_double w(n); //pesos.
+    v_double x(n); //abcisas.
+    int i;
 
-#endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    gss_leg(x1, x2, x, w);
+    for(i=0;i<n;i++)
+      {
+        (*this)[i].w = w[i];
+        (*this)[i].x = x[i];
+      }
+  }
+std::ostream& operator<<(std::ostream& o, const GaussPoints& gpts)
+  {
+    GaussPoints::const_iterator i;
+    for(i=gpts.begin();i!=gpts.end();i++)
+      o << (*i) << ", ";
+    return o;
+  }

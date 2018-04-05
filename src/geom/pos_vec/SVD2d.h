@@ -39,7 +39,7 @@ class Ref2d2d;
 //! @brief Sliding vectors system.
 class SVD2d: public ProtoGeom
   {
-    Pos2d org; //Punto al que se refiere el momento.
+    Pos2d org; //Origin.
     Vector2d resul; //Resultante.
     GEOM_FT mom; //Momento respecto a org;
   public:

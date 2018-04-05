@@ -116,7 +116,7 @@ GEOM_FT PoligonoConAgujeros2d::GetMin(unsigned short int i) const
     return temp;
   }
 
-//! @brief Devuelve verdadero si el punto está contenido en el polígono.
+//! @brief Return true if the point is inside the object.
 bool PoligonoConAgujeros2d::In(const Pos2d &p, const double &tol) const
   {
     bool retval= false;

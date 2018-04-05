@@ -19,40 +19,44 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//FuncPorPuntosR2_R.h
+//GaussPoints.h
 
-#ifndef FUNCPORPUNTOSR2_R_H
-#define FUNCPORPUNTOSR2_R_H
+#ifndef	GAUSSPOINTS_H
+#define	GAUSSPOINTS_H
 
-#include "FuncPorPuntosR2_T.h"
-#include <deque>
+#include <cmath>
+#include <vector>
+#include "PsoGss1d.h"
 
-typedef std::deque<double> dq_double;
+typedef std::vector<PsoGss1D> ConjPG; //Pesos de Gauss;
 
-//! @brief función de R2 en R definida por puntos.
-//!
-//! Función que a los puntos del dominio le asigna un
-//! real.
-class FuncPorPuntosR2_R: public FuncPorPuntosR2_T<double>
+
+class GaussPoints : public ConjPG
   {
   public:
-    typedef FuncPorPuntosR2_T<double> fR2_R;
-    typedef std::pair<int,int> filacol;
-    //! Constructor.
-    FuncPorPuntosR2_R(const size_t &fls=1,const size_t &cls=1)
-      : fR2_R(fls,cls) {}
-    //! Constructor.
-    FuncPorPuntosR2_R(const MatrizPos2d &dom,const double &vdef)
-      : fR2_R(dom,vdef) {}
-    FuncPorPuntosR2_R(const MatrizPos2d &dom,const m_valores &v)
-      : fR2_R(dom,v) {}
-    filacol PosMax(void) const;
-    double Max(void) const;
-    Pos2d PuntoMax(void) const;
-    filacol PosMin(void) const;
-    double Min(void) const;
-    Pos2d PuntoMin(void) const;
+    GaussPoints() : ConjPG(0) {}
+    GaussPoints(double x1, double x2, int n);
+    inline size_t Size() const
+      { return size(); }
+    inline const PsoGss1D &Get(int p) const
+      { return (*this)[p]; }
+    friend std::ostream& operator<<(std::ostream& o, const GaussPoints& gpts);
   };
 
-
 #endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

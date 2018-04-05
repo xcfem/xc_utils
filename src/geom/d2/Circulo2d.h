@@ -40,7 +40,7 @@ class Circulo2d : public Superficie2d
     CGCirculo_2 cgcirc;
 
   protected:
-    void puntos_arco(const double &theta_inic,const double &delta_theta,MatrizPos2d &ptos) const;
+    void arc_points(const double &theta_inic,const double &delta_theta,MatrizPos2d &ptos) const;
   public:
     Circulo2d(void) : Superficie2d(), cgcirc() {}
     Circulo2d(const Pos2d &centro,const GEOM_FT &rad);
@@ -58,7 +58,7 @@ class Circulo2d : public Superficie2d
       { return new Circulo2d(*this); }
     Pos2d Centro(void) const;
     virtual Pos2d Cdg(void) const;
-    Pos2d Punto(const double &ang) const;
+    Pos2d Point(const double &ang) const;
     inline GEOM_FT Radio2(void) const
       { return cgcirc.squared_radius(); }
     GEOM_FT Radio(void) const;
@@ -82,7 +82,7 @@ class Circulo2d : public Superficie2d
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
-    MatrizPos2d PuntosPerimetro(const size_t &n,const double &theta_inic= 0.0) const;
+    MatrizPos2d getPointsOnPerimeter(const size_t &n,const double &theta_inic= 0.0) const;
     Poligono2d getPoligonoInscrito(const size_t &n,const double &theta_inic= 0.0) const;
 
     void Transforma(const Trf2d &trf2d);

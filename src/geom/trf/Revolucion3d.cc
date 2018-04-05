@@ -31,8 +31,8 @@ Revolucion3d::Revolucion3d(const Recta3d &e,const GEOM_FT &th,const size_t &nd)
   : eje(e), theta(th), ndiv(nd)
   {}
 
-//! @brief Devuelve la fila de puntos que resulta de aplicar la revolución al punto
-//! que se pasa como parámetro.
+//! @brief Return the point row that results from apply the revolution
+//! to the argument.
 MatrizPos3d Revolucion3d::Aplica0d(const Pos3d &p) const
   {
     MatrizPos3d retval(1,ndiv+1);
@@ -48,38 +48,38 @@ MatrizPos3d Revolucion3d::Aplica0d(const Pos3d &p) const
     return retval;
   }
 
-//! @brief Devuelve la matriz de puntos que resulta de aplicar la revolución al punto
-//! que se pasa como parámetro.  
+//! @brief Return the point matrix that results from apply the revolution
+//! to the argument.
 MatrizPos3d Revolucion3d::Aplica1d(const MatrizPos3d &m) const
   {
-    const size_t npuntos= m.size();
-    if(m.EsColumna()) //Es matriz columna, colocaremos los puntos por filas.
+    const size_t nPoints= m.size();
+    if(m.EsColumna()) //Column matrix, put points by rows.
       {
-        MatrizPos3d retval(npuntos,ndiv+1);
-        for(size_t i=1;i<=npuntos;i++) //Puntos de la primera columna.
+        MatrizPos3d retval(nPoints,ndiv+1);
+        for(size_t i=1;i<=nPoints;i++) //Points of the first column.
           retval(i,1)= m(i,1);
         const GEOM_FT inc_angulo= theta/ndiv;
         GEOM_FT ang(inc_angulo);
         for(size_t i=2;i<=ndiv+1;i++)
           {
             const Rotation3d trf(eje,ang);
-            for(size_t j=1;j<=npuntos;j++)
+            for(size_t j=1;j<=nPoints;j++)
               retval(i,j)= trf(m(i,1));
             ang+= inc_angulo;
           }
         return retval;
       }
-    else if(m.EsFila()) //Es matriz columna, colocaremos los puntos por columnas.
+    else if(m.EsFila()) //Column matrix, put points by columns.
       {
-        MatrizPos3d retval(ndiv+1,npuntos);
-        for(size_t j=1;j<=npuntos;j++) //Puntos de la primera fila.
+        MatrizPos3d retval(ndiv+1,nPoints);
+        for(size_t j=1;j<=nPoints;j++) //Points of the first row.
           retval(1,j)= m(1,j);
         const GEOM_FT inc_angulo= theta/ndiv;
         GEOM_FT ang(inc_angulo);
         for(size_t i=2;i<=ndiv+1;i++)
           {
             const Rotation3d trf(eje,ang);
-            for(size_t j=1;j<=npuntos;j++)
+            for(size_t j=1;j<=nPoints;j++)
               retval(i,j)= trf(m(1,i));
             ang+= inc_angulo;
           }
@@ -87,17 +87,20 @@ MatrizPos3d Revolucion3d::Aplica1d(const MatrizPos3d &m) const
       }
     else
       {
-	std::cerr << "Revolucion3d::Aplica1d; la matriz es bidimensional,"
-                  << " el resultado no es una matriz de puntos" 
-                  << " emplear Revolucion3d::Aplica2d." << std::endl;
+	std::cerr << getClassName() << "::" << __FUNCTION__
+	          << "; bi-dimensional matrix,"
+                  << " the result is not a point matrix" 
+                  << " use " << getClassName() << "::Aplica2d."
+		  << std::endl;
         return MatrizPos3d();
       }
   }
 
-//! @brief Devuelve la matriz de puntos que resulta de aplicar la revolución a la matriz bidimensional que se pasa como parámetro.  
+//! @brief Return the point matrix that results from apply the revolution
+//! to the bi-dimensional matrix passed as argument.
 TritrizPos3d Revolucion3d::Aplica2d(const MatrizPos3d &m) const
   {
-    if(!m.EsFila() && !m.EsColumna()) //Matriz bidimensional.
+    if(!m.EsFila() && !m.EsColumna()) //bi-dimensional matrix.
       {
         const size_t ncapas= ndiv+1;
 	TritrizPos3d retval(ncapas,m);
@@ -113,9 +116,11 @@ TritrizPos3d Revolucion3d::Aplica2d(const MatrizPos3d &m) const
       }
     else
       {
-	std::cerr << "Revolucion3d::Aplica2d; la matriz es unidimensional,"
-                  << " el resultado es una matriz de puntos" 
-                  << " emplear Revolucion3d::Aplica1d." << std::endl;
+	std::cerr << getClassName() << "::" << __FUNCTION__
+	          << "; uni-dimensional matrix,"
+                  << " the result is a point matrix" 
+                  << " use " << getClassName() << "::Aplica1d."
+		  << std::endl;
         return TritrizPos3d();
       }
   }

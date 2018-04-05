@@ -29,7 +29,8 @@
 
 //! @ingroup GEOM
 //
-//! @brief Referencia a una capa de la tritriz cuyos puntos tienen el índice J constante.
+//! @brief Reference to a layer of the tritriz which points have
+//! constant J index.
 template <class TRITRIZ>
 class ConstRefCapaJCte: public ConstRefCajaTritriz<TRITRIZ>
   {
@@ -38,7 +39,7 @@ class ConstRefCapaJCte: public ConstRefCajaTritriz<TRITRIZ>
 
     explicit ConstRefCapaJCte(const TRITRIZ &m,const size_t &capa=1,const size_t &f= 1,const size_t &c= 1);
     ConstRefCapaJCte(const TRITRIZ &m,const size_t &,const size_t &,const size_t &,const size_t &,const size_t &);
-    ConstRefCapaJCte(const TRITRIZ &t,const RangoIndice &rango_capas,const size_t &f,const RangoIndice &rango_cols);
+    ConstRefCapaJCte(const TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const RangoIndice &rango_cols);
     inline virtual ~ConstRefCapaJCte(void) {}
     virtual const_reference operator()(size_t capa=1,size_t col=1) const
       { return ConstRefCajaTritriz<TRITRIZ>::operator()(capa,1,col); }
@@ -53,7 +54,7 @@ ConstRefCapaJCte<TRITRIZ>::ConstRefCapaJCte(const TRITRIZ &t,const size_t &f,con
   : ConstRefCajaTritriz<TRITRIZ>(t,RangoTritriz(RangoIndice(capa1,capa2),f,RangoIndice(c1,c2))) {}
 
 template<class TRITRIZ>
-ConstRefCapaJCte<TRITRIZ>::ConstRefCapaJCte(const TRITRIZ &t,const RangoIndice &rango_capas,const size_t &f,const RangoIndice &rango_cols)
-  : ConstRefCajaTritriz<TRITRIZ>(t,rango_capas,f,rango_cols) {}
+ConstRefCapaJCte<TRITRIZ>::ConstRefCapaJCte(const TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const RangoIndice &rango_cols)
+  : ConstRefCajaTritriz<TRITRIZ>(t,layer_range,f,rango_cols) {}
 
 #endif

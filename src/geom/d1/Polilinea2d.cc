@@ -41,7 +41,7 @@ Polilinea2d::Polilinea2d(const GeomObj::list_Pos2d &l)
 
 //! @brief Constructor.
 Polilinea2d::Polilinea2d(const ListaPos2d &l)
-  : Linea2d(), GeomObj::list_Pos2d(l.getPuntos()){}
+  : Linea2d(), GeomObj::list_Pos2d(l.getPoints()){}
 
 const Pos2d *Polilinea2d::AgregaVertice(const Pos2d &p)
   {
@@ -57,11 +57,11 @@ size_t Polilinea2d::GetNumSegmentos(void) const
     return retval;
   }
 
-//! @brief Aplica a los puntos la transformación que se pasa como parámetro.
+//! @brief Applies the transformation to the points que se pasa como parámetro.
 void Polilinea2d::Transforma(const Trf2d &trf2d)
   { trf2d.Transforma(begin(),end()); }
 
-//! @brief Devuelve verdadero si el punto está en la polilínea.
+//! @brief Return true if the point is in the polyline.
 bool Polilinea2d::In(const Pos2d &p, const double &tol) const
   {
     for(register const_iterator j=begin();j != end();j++)
@@ -69,11 +69,11 @@ bool Polilinea2d::In(const Pos2d &p, const double &tol) const
     return false;
   }
 
-//! @brief Devuelve el valor maximo de la coordenada i.
+//! @brief Return the maximum value of the i coordinate.
 GEOM_FT Polilinea2d::GetMax(unsigned short int i) const
   { return GeomObj::list_Pos2d::GetMax(i); }
 
-//! @brief Devuelve el valor minimo de la coordenada i.
+//! @brief Return the minimum value of the i coordinate.
 GEOM_FT Polilinea2d::GetMin(unsigned short int i) const
   { return GeomObj::list_Pos2d::GetMin(i); }
 
@@ -108,7 +108,7 @@ Polilinea2d Polilinea2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 //      return l_int;
 //   }
 // Polilinea2d Polilinea2d::Corta(unsigned short int i,const double &d) const
-// //Devuelve la Polilinea2d con los vertices correspondientes a los
+// //Return the Polilinea2d con los vertices correspondientes a los
 // //cortes con el plano coord_i= d
 //   {
 //     Polilinea2d result; //Lista de intersecciones
@@ -131,7 +131,7 @@ const Pos2d &Polilinea2d::Vertice(const size_t &i) const
   { return GeomObj::list_Pos2d::operator[](i-1); }
 
 //! @brief Devuelve una polilínea paralela a ésta a la distancia
-//! que se pasa como parámetro. Si la distancia es positiva,
+//! que se pasa como parámetro. Si la distance es positiva,
 //! la nueva polilínea quedará a la derecha de la anterior.
 Polilinea2d Polilinea2d::Offset(const GEOM_FT &d) const
   {
@@ -198,8 +198,8 @@ Polilinea2d Polilinea2d::Separa(const Pos2d &p,const short int &sgn) const
     return result;
   }
 
-//! @brief Devuelve los puntos de intersección de la polilínea con
-//! la recta que se pasa como parámetro.
+//! @brief Return the points of intersection of the polyline with
+//! the argument.
 GeomObj::list_Pos2d Polilinea2d::Interseccion(const Recta2d &r) const
   {
     list_Pos2d retval;
@@ -214,8 +214,9 @@ GeomObj::list_Pos2d Polilinea2d::Interseccion(const Recta2d &r) const
       }
     return retval;
   }
-//! @brief Devuelve los puntos de intersección de la polilínea con
-//! la semirecta que se pasa como parámetro.GeomObj::list_Pos2d::
+
+//! @brief Return the points of intersection of the polyline with
+//! the argument.
 GeomObj::list_Pos2d Polilinea2d::Interseccion(const SemiRecta2d &sr) const
   {
     list_Pos2d retval;
@@ -230,8 +231,9 @@ GeomObj::list_Pos2d Polilinea2d::Interseccion(const SemiRecta2d &sr) const
       }
     return retval;
   }
-//! @brief Devuelve los puntos de intersección de la polilínea con
-//! el segmento que se pasa como parámetro.
+
+//! @brief Return the points of intersection of the polyline with
+//! the argument.
 GeomObj::list_Pos2d Polilinea2d::Interseccion(const Segmento2d &sg) const
   {
     list_Pos2d retval;

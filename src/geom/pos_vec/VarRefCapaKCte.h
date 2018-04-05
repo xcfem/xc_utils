@@ -27,7 +27,8 @@
 
 //! @ingroup GEOM
 //
-//! @brief Referencia a una capa de la tritriz cuyos puntos tienen el índice K constante.
+//! @brief Reference to a layer de la tritriz which points
+//! have constant K index.
 template <class TRITRIZ>
 class VarRefCapaKCte: public VarRefCajaTritriz<TRITRIZ>
   {

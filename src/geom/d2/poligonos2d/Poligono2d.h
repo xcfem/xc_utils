@@ -174,7 +174,7 @@ class Poligono2d: public SupPoligonal2d
 inline Poligono2d transforma(const Trf2d &trf2d,const Poligono2d &pol2d)
   { return getTransformado(pol2d,trf2d); }
 
-Poligono2d agrega_puntos_medios(const Poligono2d &);
+Poligono2d append_mid_points(const Poligono2d &);
 
 std::list<Poligono2d> interseccion(const Poligono2d &p1,const Poligono2d &p2);
 std::list<Poligono2d> interseccion(const Poligono2d &p,const Semiplano2d &r);

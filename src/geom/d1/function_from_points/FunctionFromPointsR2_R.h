@@ -19,34 +19,39 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-#ifndef	CUADRATURA2D_H
-#define	CUADRATURA2D_H
+//FunctionFromPointsR2_R.h
 
-#include <vector>
-#include "PsoGss2d.h"
-#include "PuntosGauss.h"
+#ifndef FUNCTIONFROMPOINTSR2_R_H
+#define FUNCTIONFROMPOINTSR2_R_H
 
-typedef std::vector<PsoGss2D> ConjPG2;
+#include "FunctionFromPointsR2_T.h"
+#include <deque>
 
+typedef std::deque<double> dq_double;
 
-class Cuadratura2D : public ConjPG2
+//! @brief función de R2 en R defined on a set of points.
+//!
+//! Function that assigns a real to the points of its domain.
+class FunctionFromPointsR2_R: public FunctionFromPointsR2_T<double>
   {
   public:
-    Cuadratura2D( double x1, double x2,double y1, double y2,int nx, int ny);
-    inline size_t Size() const
-      { return size(); }
-    inline const PsoGss2D &Get(int p) const
-      { return (*this)[p]; }
-    friend std::ostream& operator<<(std::ostream& o, const Cuadratura2D& gpts);
+    typedef FunctionFromPointsR2_T<double> fR2_R;
+    typedef std::pair<int,int> filacol;
+    //! Constructor.
+    FunctionFromPointsR2_R(const size_t &fls=1,const size_t &cls=1)
+      : fR2_R(fls,cls) {}
+    //! Constructor.
+    FunctionFromPointsR2_R(const MatrizPos2d &dom,const double &vdef)
+      : fR2_R(dom,vdef) {}
+    FunctionFromPointsR2_R(const MatrizPos2d &dom,const m_values &v)
+      : fR2_R(dom,v) {}
+    filacol PosMax(void) const;
+    double Max(void) const;
+    Pos2d getMaxPoint(void) const;
+    filacol PosMin(void) const;
+    double Min(void) const;
+    Pos2d getMinPoint(void) const;
   };
 
-const Cuadratura2D TwoByTwo(-1.0,1.0,-1.0,1.0,2,2);
 
 #endif
-
-
-
-
-
-
-

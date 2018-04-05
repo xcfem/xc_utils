@@ -28,7 +28,7 @@
 #include "xc_utils/src/geom/d3/BND3d.h"
 
 
-//! @brief Desplaza los puntos de la lista.
+//! @brief Moves the points of the list.
 void mueve(GeomObj::list_Pos3d &l,const Vector3d &v)
   {
     for(register GeomObj::list_Pos3d::iterator j=l.begin();j != l.end();j++)

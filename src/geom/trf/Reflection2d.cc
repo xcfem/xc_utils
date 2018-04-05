@@ -67,5 +67,5 @@ Reflection2d::Reflection2d(const Pos2d &Q,const Vector2d &d)
   : Trf2d(crea_reflection2d(Q,d)) {}
 
 Reflection2d::Reflection2d(const Recta2d &r)
-  : Trf2d(crea_reflection2d(r.Punto(),r.VersorDir())) {}
+  : Trf2d(crea_reflection2d(r.Point(),r.VersorDir())) {}
 

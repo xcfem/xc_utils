@@ -39,9 +39,9 @@ class Dir2d;
 class SisCooXd2d: public SisCoo
   {
   public:
-    typedef Vector2d VGlobal; //!< Vector en el espacio de 2 dimensiones.
-    typedef Dir2d DGlobal; //!< Dirección en el espacio de 2 dimensiones.
-    typedef Pos2d PGlobal; //!< Punto en el espacio de 2 dimensiones.
+    typedef Vector2d VGlobal; //!< Vector in the 2D space.
+    typedef Dir2d DGlobal; //!< Direction in the 2D space.
+    typedef Pos2d PGlobal; //!< Point the 2D space.
   protected:
     SisCooXd2d(const size_t &);
     SisCooXd2d(const size_t &,const VGlobal &);
@@ -52,9 +52,9 @@ class SisCooXd2d: public SisCoo
 
   public:
     virtual VGlobal GetVDirEje(const size_t &eje) const;
-    //Devuelve el vector dirección del eje que se pasa como parámetro.
+    //Devuelve el direction vector del eje que se pasa como parámetro.
     virtual DGlobal GetDirEje(const size_t &eje) const;
-    //Devuelve la dirección del eje que se pasa como parámetro.
+    //Return the dirección del eje que se pasa como parámetro.
 
     VGlobal GetCooGlobales(const matriz_FT &v) const;
     matriz_FT GetCooLocales(const VGlobal &v) const;

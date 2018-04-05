@@ -71,8 +71,8 @@ class Triangulo2d : public SupPoligonal2d
       { return 0.0; }
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
+    //! @brief Return true if the point is inside the triangle.
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const
-    //Devuelve verdadero si el punto est'a sobre el Plano.
       { return (cgtriang.has_on_positive_side(p.ToCGAL()) || cgtriang.has_on_boundary(p.ToCGAL())); }
 
     Poligono2d GetPoligono(void) const;

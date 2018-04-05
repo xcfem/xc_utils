@@ -26,6 +26,7 @@
 #define REVOLUCION3D_H
 
 #include "xc_utils/src/geom/d1/Recta3d.h"
+#include "Trf3d.h"
 
 class MatrizPos3d;
 class TritrizPos3d;
@@ -34,7 +35,7 @@ class TritrizPos3d;
 //! @ingroup GEOM
 //
 //! @brief Revolución.
-class Revolucion3d
+class Revolucion3d: public Trf3d
   {
     Recta3d eje; //Eje de revolución.
     GEOM_FT theta; //!< Ángulo barrido por la revolución.

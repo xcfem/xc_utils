@@ -31,11 +31,11 @@ class MatrizPos2d;
 
 //! @ingroup GEOM
 //
-//! @brief Sector circular en dos dimensiones.
+//! @brief 2D circular sector.
 class SectorCircular2d : public Circulo2d
   {
-    double theta1; //!< Ángulo que define el punto inicial del arco.
-    double theta2; //!< Ángulo que define el punto final del arco.
+    double theta1; //!< Angle that defines the start point of the arc.
+    double theta2; //!< Angle that defines the end point of the arc.
   public:
     SectorCircular2d(void);
     SectorCircular2d(const Circulo2d &c,const double &th1,const double &th2);
@@ -68,14 +68,14 @@ class SectorCircular2d : public Circulo2d
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
-    MatrizPos2d PuntosArco(const size_t &n) const;
+    MatrizPos2d getArcPoints(const size_t &n) const;
 
     void Print(std::ostream &os) const;
     void Plot(Plotter &) const;
   };
 
 bool operator==(const SectorCircular2d &a,const SectorCircular2d &b);
-SectorCircular2d SectorCircular2dTresPuntos(const Pos2d &,const Pos2d &,const Pos2d &);
+SectorCircular2d SectorCircular2dThreepoints(const Pos2d &,const Pos2d &,const Pos2d &);
 
 
 #endif

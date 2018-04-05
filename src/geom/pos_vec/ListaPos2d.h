@@ -45,21 +45,21 @@ class ListaPos2d: public GeomObj2d
     explicit ListaPos2d(const GeomObj::list_Pos2d &l);
     virtual GeomObj *clon(void) const
       { return new ListaPos2d(*this); }
-    inline size_t GetNumPuntos(void) const
+    inline size_t getNumberOfPoints(void) const
       { return lista_ptos.size(); }
-    inline point_const_iterator puntos_begin(void) const
+    inline point_const_iterator points_begin(void) const
       { return lista_ptos.begin(); }
-    const point_const_iterator puntos_end(void) const
+    const point_const_iterator points_end(void) const
       { return lista_ptos.end(); }
     inline short unsigned int Dimension(void) const
       { return 0; }
 
-    const GeomObj::list_Pos2d &getPuntos(void) const
+    const GeomObj::list_Pos2d &getPoints(void) const
       { return lista_ptos; }
     const Pos2d &operator[](const size_t &i) const;
 
-    const Pos2d *AgregaPunto(const Pos2d &p);
-    void agregaPunto(const Pos2d &p);
+    const Pos2d *appendPoint(const Pos2d &p);
+    void appendPointPy(const Pos2d &p);
     template <class InputIterator>
     inline void assign(InputIterator first, InputIterator last)
       //Inserta los vértices comprendidos en [first,last) antes
@@ -74,7 +74,7 @@ class ListaPos2d: public GeomObj2d
     //Producto de inercia.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
-    //! @brief Devuelve la longitud de la ListaPos2d.
+    //! @brief Return the longitud de la ListaPos2d.
     virtual GEOM_FT Longitud(void) const
       { return 0.0; }
     //! @brief Devuelve el área de la ListaPos2d.
@@ -84,7 +84,7 @@ class ListaPos2d: public GeomObj2d
     virtual GEOM_FT GetMin(unsigned short int i) const;
     ListaPos2d GetMayores(unsigned short int i,const GEOM_FT &d) const;
     ListaPos2d GetMenores(unsigned short int i,const GEOM_FT &d) const;
-    const Pos2d &Punto(const size_t &i) const;
+    const Pos2d &Point(const size_t &i) const;
     Pos2d Cdg(void) const
       { return lista_ptos.Cdg(); }
 

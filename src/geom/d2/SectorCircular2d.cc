@@ -31,8 +31,8 @@
 #include "boost/progress.hpp"
 
 
-//! @brief Sector circular definido por tres puntos p1->p2->p3.
-SectorCircular2d SectorCircular2dTresPuntos(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3)
+//! @brief Circular sector defined by three points p1->p2->p3.
+SectorCircular2d SectorCircular2dThreepoints(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3)
   {
     const Circulo2d tmp= Circulo2d(p1,p2,p3);
     const double th1= tmp.Angulo(p1);
@@ -82,7 +82,7 @@ Superficie2d *SectorCircular2d::clon(void) const
   { return new SectorCircular2d(*this); }
 
 
-//! @brief Devuelve la posición del centro de gravedad del sector circular.
+//! @brief Return the posición del centro de gravedad del sector circular.
 Pos2d SectorCircular2d::Cdg(void) const
   {
     const GEOM_FT theta= AnguloComprendido()/2.0;
@@ -101,20 +101,21 @@ Pos2d SectorCircular2d::ArcCentroid(void) const
   }
 
 
-//! @brief Devuelve el punto inicial del arco.
+//! @brief Return the point inicial del arco.
 Pos2d SectorCircular2d::PInic(void) const
-  { return Punto(theta1); }
+  { return Point(theta1); }
 
-//! @brief Devuelve el punto final del arco.
+//! @brief Return the point final del arco.
 Pos2d SectorCircular2d::PFin(void) const
-  { return Punto(theta2); }
+  { return Point(theta2); }
 
-//! @brief Devuelve el punto medio del arco.
+//! @brief Return the point medio del arco.
 Pos2d SectorCircular2d::PMed(void) const
-  { return Punto((theta1+theta2)/2); }
+  { return Point((theta1+theta2)/2); }
 
-//! @brief Devuelve el ángulo que forma la dirección de la línea que
-//! une el centro del círculo con el punto inicial del sector.
+//! @brief Return the angle between the line from the center of the circle
+//! to the point p and the line from the center of the circle to the sector
+//! start point.
 double SectorCircular2d::Angulo(const Pos2d &p) const
   { return Circulo2d::Angulo(p)-theta1; }
 
@@ -127,11 +128,11 @@ double SectorCircular2d::getLambda(const Pos2d &p) const
 double SectorCircular2d::AnguloComprendido(void) const
   { return theta2-theta1; }
 
-//! @brief Devuelve la longitud del arco del sector circular.
+//! @brief Return the longitud del arco del sector circular.
 GEOM_FT SectorCircular2d::LongitudArco(void) const
   { return double_to_FT(AnguloComprendido())*Radio(); }
 
-//! @brief Devuelve la longitud del sector circular.
+//! @brief Return the longitud del sector circular.
 GEOM_FT SectorCircular2d::Longitud(void) const
   { return LongitudArco()+ Diametro(); }
 
@@ -139,16 +140,17 @@ GEOM_FT SectorCircular2d::Longitud(void) const
 GEOM_FT SectorCircular2d::Area(void) const
   { return double_to_FT(AnguloComprendido())*Radio2()/2; }
 
-//! @brief Devuelve el valor máximo de la coordenada i de los puntos del sector circular.
+//! @brief Return the maximum value of the i coordinate of the object points.
 GEOM_FT SectorCircular2d::GetMax(unsigned short int i) const
   {
-    std::cerr << "SectorCircular2d::GetMax() no implementada." << std::endl;
+    std::cerr << "SectorCircular2d::GetMax() not implemented." << std::endl;
     return 0;
   }
-//! @brief Devuelve el valor mínimo de la coordenada i de los puntos del sector circular.
+
+//! @brief Devuelve el valor mínimo of the i coordinate of the object points.
 GEOM_FT SectorCircular2d::GetMin(unsigned short int i) const
   {
-    std::cerr << "SectorCircular2d::GetMin() no implementada." << std::endl;
+    std::cerr << "SectorCircular2d::GetMin() not implemented." << std::endl;
     return 0;
   }
 
@@ -156,7 +158,7 @@ GEOM_FT SectorCircular2d::GetMin(unsigned short int i) const
 //! eje paralelo al x que pasa por su centro.
 GEOM_FT SectorCircular2d::Ix(void) const
   {
-    std::cerr << "SectorCircular2d::Ix() no implementada." << std::endl;
+    std::cerr << "SectorCircular2d::Ix() not implemented." << std::endl;
     return 0;
   }
 
@@ -164,7 +166,7 @@ GEOM_FT SectorCircular2d::Ix(void) const
 //! eje paralelo al y que pasa por su centro.
 GEOM_FT SectorCircular2d::Iy(void) const
   {
-    std::cerr << "SectorCircular2d::Iy() no implementada." << std::endl;
+    std::cerr << "SectorCircular2d::Iy() not implemented." << std::endl;
     return 0;
   }
 
@@ -172,7 +174,7 @@ GEOM_FT SectorCircular2d::Iy(void) const
 //! eje paralelo al z que pasa por su centro.
 GEOM_FT SectorCircular2d::Iz(void) const
   {
-    std::cerr << "SectorCircular2d::Iz() no implementada." << std::endl;
+    std::cerr << "SectorCircular2d::Iz() not implemented." << std::endl;
     return 0;
   }
 
@@ -180,11 +182,11 @@ GEOM_FT SectorCircular2d::Iz(void) const
 //! los ejes paralelos a x e y que pasan por su centro.
 GEOM_FT SectorCircular2d::Pxy(void) const
   {
-    std::cerr << "SectorCircular2d::Pxy() no implementada." << std::endl;
+    std::cerr << "SectorCircular2d::Pxy() not implemented." << std::endl;
     return 0;
   }
 
-//! @brief Devuelve verdadero si el punto est'a sobre el sector circular.
+//! @brief Return true if the points lies inside the object.
 bool SectorCircular2d::In(const Pos2d &p, const double &tol) const
   {
     if(Circulo2d::In(p,tol))
@@ -196,8 +198,8 @@ bool SectorCircular2d::In(const Pos2d &p, const double &tol) const
       return false;
   }
 
-//! @brief Devuelve n puntos equiespaciados sobre el arco del sector circular.
-MatrizPos2d SectorCircular2d::PuntosArco(const size_t &n) const
+//! @brief Return n points equally spaced over the arc of the circular sector.
+MatrizPos2d SectorCircular2d::getArcPoints(const size_t &n) const
   {
     MatrizPos2d retval;
     if(n>1)
@@ -205,17 +207,19 @@ MatrizPos2d SectorCircular2d::PuntosArco(const size_t &n) const
         retval= MatrizPos2d(n,1);
         if(n==2)
           {
-            retval(1,1)= PInic(); //Puntos inicial y final
+            retval(1,1)= PInic(); //Initial and final points
             retval(n,1)= PFin();
           }
         else
           {
             const double delta_theta= AnguloComprendido()/(n-1);
-            puntos_arco(theta1,delta_theta,retval);
+            arc_points(theta1,delta_theta,retval);
           }
       }
     else
-      std::cerr << "SectorCircular2d::Puntos; el número de puntos ha de ser mayor o igual a dos." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+		<< "; the number of points must be greater than two."
+		<< std::endl;
     return retval;
   }
 
@@ -227,7 +231,7 @@ void SectorCircular2d::Print(std::ostream &os) const
   }
 void SectorCircular2d::Plot(Plotter &plotter) const
   {
-    std::cerr << "SectorCircular2d::Plot(plotter) no implementada." << std::endl;
+    std::cerr << "SectorCircular2d::Plot(plotter) not implemented." << std::endl;
     return;
   }
 

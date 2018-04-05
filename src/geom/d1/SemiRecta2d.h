@@ -56,7 +56,7 @@ class SemiRecta2d : public Linea2d
       { return cgsr; }
     virtual GeomObj *clon(void) const
       { return new SemiRecta2d(*this); }
-    void DosPuntos(const Pos2d &p1,const Pos2d &p2);
+    void TwoPoints(const Pos2d &p1,const Pos2d &p2);
     virtual GEOM_FT GetMax(unsigned short int) const
       { return NAN; }
     virtual GEOM_FT GetMin(unsigned short int) const
@@ -67,28 +67,27 @@ class SemiRecta2d : public Linea2d
       { return Pos2d(cgsr.source()); }
     inline GEOM_FT getSlope(void) const
       { return RectaSoporte().getSlope(); }
-    const Pos2d Punto(const int &i) const
+    const Pos2d Point(const int &i) const
       { return Pos2d(cgsr.point(i)); }
+    //@brief Return a point of the line at a distance lambda from its origin.
     Pos2d PtoParametricas(const GEOM_FT &lambda) const
-    //Devuelve un punto de la recta a una "distancia"
-    //lambda del origen.
-      { return Punto(0)+lambda*VDir(); }
+      { return Point(0)+lambda*VDir(); }
     inline bool EsVertical(void) const
       { return cgsr.is_vertical(); }
     inline bool EsDegenerada(void) const
       { return cgsr.is_degenerate(); }
+    //@brief Return true if the points is on the ray.
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const
-    //Devuelve verdadero si el punto está sobre la semirrecta.
       { return cgsr.has_on(p.ToCGAL()); }
     GEOM_FT dist2(const Pos2d &p) const;
     GEOM_FT dist(const Pos2d &p) const;
+    //! @brief Set the points that define the ray.
     void Put(const Pos2d &p1,const Pos2d &p2)
-    //Asigna valores a los puntos que definen la recta.
-      { DosPuntos(p1,p2); }
+      { TwoPoints(p1,p2); }
 
     //! @brief Returns the points ordered by the value of the 
     //! parameter of its projection onto the line from lowest
-    //! to highest. Origin is at Recta2d::Punto(0).
+    //! to highest. Origin is at Recta2d::Point(0).
     GeomObj::list_Pos2d Ordena(const GeomObj::list_Pos2d &ptos) const
       { return RectaSoporte().Ordena(ptos); }
 
@@ -162,7 +161,7 @@ inline GeomObj2d::list_Pos2d interseccion(const SemiRecta2d &sr,const Recta2d &r
 inline GeomObj2d::list_Pos2d interseccion(const Recta2d &r, const SemiRecta2d &sr)
   { return sr.Interseccion(r); }
 inline GeomObj2d::list_Pos2d interseccion(const SemiRecta2d &sr1,const SemiRecta2d &sr2)
-//Devuelve el punto intersección de ambas rectas, si no existe la
+//Return the point intersección de ambas rectas, si no existe la
 //intersección devuelve la lista vacía.
   { return sr1.Interseccion(sr2); }
 

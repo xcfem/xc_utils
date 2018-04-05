@@ -22,7 +22,7 @@
 //Plano3d.cc
 
 #include "Plano3d.h"
-#include "../listas/TresPuntos3d.h"
+#include "../listas/ThreePoints3d.h"
 #include "GeneralEquationOfPlane.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/d1/SemiRecta3d.h"
@@ -43,7 +43,7 @@ Plano3d::Plano3d(void)
 Plano3d::Plano3d(const CGPlane_3 &cgp)
   : Superficie3d(), cgp(cgp) {}
 
-//! @brief Constructor: plano que pasa por tres puntos.
+//! @brief Constructor: plane defined by three points.
 Plano3d::Plano3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   : Superficie3d(), cgp(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL()) 
   {
@@ -69,11 +69,11 @@ Plano3d::Plano3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   }
 
 
-//! @brief Constructor: plano que pasa por el punto y es normal al vector.
+//! @brief Constructor: plane defined by the point and the normal vector.
 Plano3d::Plano3d(const Pos3d &o,const Vector3d &v)
   : Superficie3d(), cgp(o.ToCGAL(),v.ToCGAL()) {}
 
-//! @brief Convierte la clasificación del punto en la correspondiente de polígono.
+//! @brief Converts the point classification to the polygon one.
 Plano3d::clasif_poligono Plano3d::clfpnt2clfpol(const CGAL::Oriented_side os)
   {
     clasif_poligono retval= DETRAS;
@@ -102,11 +102,12 @@ Plano3d::Plano3d(const GeomObj3d::list_Pos3d &lp): Superficie3d(), cgp()
   {
     if(lp.size()<3)
       {
-        std::cerr << "Plano3d(list_Pos3d): La lista ha de contener al menos tres puntos." 
+        std::cerr << getClassName() << "::" << __FUNCTION__
+		  << "; the list must contain at least three points." 
              << std::endl;
       }
     GeomObj3d::list_Pos3d::const_iterator i= lp.begin();
-    TresPuntos(*i,*i++,*i++);
+    ThreePoints(*i,*i++,*i++);
   }
 Plano3d::Plano3d(const Poligono3d &pg3d)
   : Superficie3d(), cgp()
@@ -127,7 +128,7 @@ Plano3d &Plano3d::operator=(const Plano3d &otro)
 GeomObj *Plano3d::clon(void) const
   { return new Plano3d(*this); }
 
-void Plano3d::TresPuntos(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
+void Plano3d::ThreePoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   { operator=(Plano3d(p1,p2,p3)); }
 
 //! @brief Devuelve el vector normal al plano con sentido hacia el lado "positivo".
@@ -170,8 +171,8 @@ Vector3d Plano3d::Projection(const Vector3d &v) const
 Recta3d Plano3d::Projection(const Recta3d &r) const
   {
     Recta3d retval;
-    const Pos3d p0= Projection(r.Punto(0));
-    const Pos3d p1= Projection(r.Punto(100));
+    const Pos3d p0= Projection(r.Point(0));
+    const Pos3d p1= Projection(r.Point(100));
     const double d= p0.dist(p1);
     if(d>mchne_eps_dbl)
       retval= Recta3d(p0,p1);
@@ -190,8 +191,8 @@ GeomObj3d::list_Pos3d Plano3d::Projection(const GeomObj3d::list_Pos3d &ptos) con
 // Poligono Plano3d::Projection(const Poligono &pg) const
 //   { return pg.Projection(*this); }
 
-//! @brief Devuelve un punto arbitrario del plano.
-Pos3d Plano3d::Punto(void) const
+//! @brief Return an arbitrary point on the plane.
+Pos3d Plano3d::Point(void) const
   { return Pos3d(cgp.point()); }
 
 bool Plano3d::LadoPositivo(const Pos3d &p) const
@@ -199,7 +200,7 @@ bool Plano3d::LadoPositivo(const Pos3d &p) const
 bool Plano3d::LadoNegativo(const Pos3d &p) const
   { return cgp.has_on_negative_side(p.ToCGAL()); }
 
-//Devuelve verdadero si el punto está sobre el Plano.
+//! @brief Return true if the point is in the plane.
 bool Plano3d::In(const Pos3d &p, const GEOM_FT &tol) const
   { 
     bool retval= false;
@@ -210,13 +211,13 @@ bool Plano3d::In(const Pos3d &p, const GEOM_FT &tol) const
     return retval;
   }
 
-CGAL::Oriented_side Plano3d::ClasificaPunto(const Pos3d &p) const
+CGAL::Oriented_side Plano3d::ClassifyPoint(const Pos3d &p) const
   { return cgp.oriented_side(p.ToCGAL()); }
 
 GEOM_FT Plano3d::dist(const Pos3d &p) const
   { return sqrt_FT(dist2(p)); }
 
-//! @brief Devuelve la distancia con signo desde el punto al Plano.
+//! @brief Return the signed distance from the point.
 GEOM_FT Plano3d::PseudoDist(const Pos3d &p) const
   {
     GEOM_FT retval= dist(p);
@@ -225,7 +226,7 @@ GEOM_FT Plano3d::PseudoDist(const Pos3d &p) const
     else
       return retval;
   }
-//! @brief Devuelve la distancia con signo desde el punto al Plano.
+//! @brief Return the signed squared distance from the point.
 GEOM_FT Plano3d::PseudoDist2(const Pos3d &p) const
   {
     GEOM_FT retval= dist2(p);
@@ -235,7 +236,7 @@ GEOM_FT Plano3d::PseudoDist2(const Pos3d &p) const
       return retval;
   }
 
-//Devuelve la distancia l cuadrado desde el punto al plano.
+//! @brief Return the squared distance from the point.
 GEOM_FT Plano3d::dist2(const Pos3d &p) const
   { return p.dist2(Projection(p)); }
 
@@ -243,16 +244,15 @@ GEOM_FT Plano3d::dist2(const Pos3d &p) const
 GeneralEquationOfPlane Plano3d::getGeneralEquation(void) const
   { return GeneralEquationOfPlane(cgp.a(),cgp.b(),cgp.c(),cgp.d()); }
 
-//! @brief Devuelve la posición del centro de gravedad del plano.
-//! Como el plano es infinito cualquier punto del mismo
-//! es su centro de gravedad.
+//! @brief Return the position of the centroid.
+//! Any point in the plane can be its centroid.
 Pos3d Plano3d::Cdg(void) const
-  { return Punto(); }
+  { return Point(); }
 
 Plano3d::clasif_poligono Plano3d::ClasificaPoligono(const Poligono3d &pol) const
   {
     GeomObj::list_Pos3d lv= pol.ListaVertices();
-    return ClasificaPuntos(lv.begin(),lv.end());
+    return ClassifyPoints(lv.begin(),lv.end());
   }
 
 Plano3d FromCGAL(const CGPlane_3 &p)
@@ -264,22 +264,22 @@ bool operator==(const Plano3d &p1,const Plano3d &p2)
 void Plano3d::Print(std::ostream &os) const
   { os << Normal() << std::endl; }
 
-//! @brief Devuelve la coordenada x del punto del plano */
-//! tal que:
+//! @brief Return the x coordinate of the point of the plane
+//! such:
 //! y = p.x()
 //! z = p.y()
 GEOM_FT Plano3d::x(const Pos2d &p) const
   { return getGeneralEquation().x(p); }
 
-//! @brief Devuelve la coordenada y del punto del plano */
-//! tal que:
+//! @brief Return the y coordinate of the point of the plane
+//! such:
 //! x = p.x()
 //! z = p.y()
 GEOM_FT Plano3d::y(const Pos2d &p) const
   { return getGeneralEquation().y(p); }
 
-//! @brief Devuelve la coordenada z del punto del plano */
-//! tal que:
+//! @brief Return the z coordinate of the point of the plane
+//! such:
 //! x = p.x()
 //! y = p.y()
 GEOM_FT Plano3d::z(const Pos2d &p) const
@@ -376,15 +376,15 @@ Pos3d Plano3d::Interseccion(const Segmento3d &sg) const
 //     return retval;
 //   }
 
-//! @brief Devuelve la intersección del plano con el XY.
+//! @brief Return the intersección del plano con el XY.
 Recta3d Plano3d::TrazaXY(void) const
   { return Interseccion(PlanoXY3d); }
 
-//! @brief Devuelve la intersección del plano con el XZ.
+//! @brief Return the intersección del plano con el XZ.
 Recta3d Plano3d::TrazaXZ(void) const
   { return Interseccion(PlanoXZ3d); }
 
-//! @brief Devuelve la intersección del plano con el YZ.
+//! @brief Return the intersección del plano con el YZ.
 Recta3d Plano3d::TrazaYZ(void) const
   { return Interseccion(PlanoYZ3d); }
 
@@ -395,8 +395,8 @@ Recta3d Plano3d::getMaximumSlopeLineXY(void) const
     Recta3d traza= TrazaXY();
     if(traza.exists())
       {
-        Pos3d punto(Punto());
-        Plano3d p(perpendicular(traza,punto));
+        Pos3d point(Point());
+        Plano3d p(perpendicular(traza,point));
         retval= recta_interseccion(p,*this);
       }
     return retval;
@@ -409,8 +409,8 @@ Recta3d Plano3d::getMaximumSlopeLineXZ(void) const
     Recta3d traza= TrazaXZ();
     if(traza.exists())
       {
-        Pos3d punto(Punto());
-        Plano3d p(perpendicular(traza,punto));
+        Pos3d point(Point());
+        Plano3d p(perpendicular(traza,point));
         retval= recta_interseccion(p,*this);
       }
     return retval;
@@ -423,8 +423,8 @@ Recta3d Plano3d::getMaximumSlopeLineYZ(void) const
     Recta3d traza= TrazaYZ();
     if(traza.exists())
       {
-        Pos3d punto(Punto());
-        Plano3d p(perpendicular(traza,punto));
+        Pos3d point(Point());
+        Plano3d p(perpendicular(traza,point));
         retval= recta_interseccion(p,*this);
       }
     return retval;
@@ -450,18 +450,17 @@ GEOM_FT Plano3d::getSlopeAngleXZ(void) const
 GEOM_FT Plano3d::getSlopeAngleYZ(void) const
   { return angulo(*this,PlanoYZ3d); }
 
-//! @brief Calcula el plano que mejor se ajusta a la nube de puntos.
+//! @brief Compute the plane that best suits the point cloud.
 GEOM_FT Plano3d::AjusteMinimosCuadrados(const GeomObj3d::list_Pos3d &lp)
   {
-    std::list<CGPoint_3> puntos;
+    std::list<CGPoint_3> points;
     for(GeomObj3d::list_Pos3d::const_iterator i=lp.begin(); i!=lp.end();i++)
-      puntos.push_back((*i).ToCGAL()); 
-    GEOM_FT quality= linear_least_squares_fitting_3(puntos.begin(),puntos.end(),cgp,CGAL::Dimension_tag<0>());
+      points.push_back((*i).ToCGAL()); 
+    GEOM_FT quality= linear_least_squares_fitting_3(points.begin(),points.end(),cgp,CGAL::Dimension_tag<0>());
     return quality;
   }
 
-//! @brief Devuelve el plano perpendicular a la recta r
-//! que pasa por el punto p.
+//! @brief Return the plane normal to r that passes through p.
 Plano3d perpendicular(const Recta3d &r, const Pos3d &p)
   { return r.Perpendicular(p); }
 
@@ -482,7 +481,7 @@ Recta3d recta_interseccion(const Plano3d &p1, const Plano3d &p2)
   }
 
 //! @brief Intersección de tres planos.
-Pos3d punto_interseccion(const Plano3d &p1, const Plano3d &p2, const Plano3d &p3)
+Pos3d intersection_point(const Plano3d &p1, const Plano3d &p2, const Plano3d &p3)
   {
     Pos3d retval;
     GmGrupo3d tmp= interseccion(p1,p2);
@@ -490,7 +489,7 @@ Pos3d punto_interseccion(const Plano3d &p1, const Plano3d &p2, const Plano3d &p3
       {
         const Recta3d *ptr_recta= dynamic_cast<const Recta3d *>(tmp.begin()->get_const_ptr());
         if(ptr_recta)
-          retval= punto_interseccion(p3,*ptr_recta);
+          retval= intersection_point(p3,*ptr_recta);
       }
     else
       retval.setExists(false);
@@ -511,12 +510,14 @@ GmGrupo3d interseccion(const Plano3d &p1, const Plano3d &p2)
             CGPlane_3 planoi;
             if(CGAL::assign(planoi, result))
               {
-                std::cerr << "interseccion(Plano3d,Plano3d): Los planos coinciden." 
+                std::cerr << __FUNCTION__
+		          << "; the planes are the same." 
                           << std::endl;
               }
             else
               {
-                std::cerr << "interseccion(Plano3d,Plano3d): Error desconocido." 
+                std::cerr << __FUNCTION__
+			  << "; unknown error." 
                           << std::endl;
               }
 	  }
@@ -524,7 +525,7 @@ GmGrupo3d interseccion(const Plano3d &p1, const Plano3d &p2)
     return retval;
   }
 
-//! @brief Devuelve la intersección de la recta con el plano.
+//! @brief Return the intersección de la recta con el plano.
 GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const Recta3d &r)
   {
     GeomObj3d::list_Pos3d retval;
@@ -539,19 +540,21 @@ GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const Recta3d &r)
         else
           if(CGAL::assign(ri, result))
             {
-              std::cerr << "interseccion(Plano3d,Recta3d): El plano contiene a la recta." 
-                   << std::endl;
+              std::cerr << __FUNCTION__
+			<< "(Plano3d,Recta3d): the plane contains the line." 
+                        << std::endl;
             }
           else
             {
-              std::cerr << "interseccion(Plano3d,Recta3d): Error desconocido." 
-                   << std::endl;
+              std::cerr << __FUNCTION__
+			<< "(Plano3d,Recta3d): unknown error." 
+                        << std::endl;
             }
       }
     return retval;
   }
 
-//! @brief Devuelve la intersección de la recta con el plano.
+//! @brief Return the intersección de la recta con el plano.
 GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const SemiRecta3d &sr)
   {
     GeomObj3d::list_Pos3d retval;
@@ -566,13 +569,15 @@ GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const SemiRecta3d &sr)
         else
           if(CGAL::assign(ri, result))
             {
-              std::cerr << "interseccion(Plano3d,SemiRecta3d): El plano contiene a la recta." 
+              std::cerr << __FUNCTION__
+			<< "(Plano3d,SemiRecta3d): the plane contains the line." 
                    << std::endl;
             }
           else
             {
-              std::cerr << "interseccion(Plano3d,SemiRecta3d): Error desconocido." 
-                   << std::endl;
+              std::cerr << __FUNCTION__
+			<< "(Plano3d,SemiRecta3d): unknown error." 
+                        << std::endl;
             }
       }
     // else
@@ -580,11 +585,11 @@ GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const SemiRecta3d &sr)
     return retval;    
   }
 
-//! @brief Devuelve la intersección de la semirrecta con el plano.
+//! @brief Return the intersección de la semirrecta con el plano.
 GeomObj3d::list_Pos3d interseccion(const SemiRecta3d &sr, const Plano3d &p)
   { return interseccion(p,sr); }
 
-//! @brief Devuelve la intersección del segmento con el plano.
+//! @brief Return the intersección del segmento con el plano.
 GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const Segmento3d &sg)
   {
     GeomObj3d::list_Pos3d retval;
@@ -599,13 +604,15 @@ GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const Segmento3d &sg)
         else
           if(CGAL::assign(ri, result))
             {
-              std::cerr << "interseccion(Plano3d,Segmento3d): El plano contiene a la recta." 
-                   << std::endl;
+              std::cerr << __FUNCTION__
+			<< "(Plano3d,Segmento3d): the plane contains"
+		        << " the segment." << std::endl;
             }
           else
             {
-              std::cerr << "interseccion(Plano3d,Segmentoed): Error desconocido." 
-                   << std::endl;
+              std::cerr << __FUNCTION__
+			<< "(Plano3d,Segmento3d): unknown error." 
+                        << std::endl;
             }
       }
     // else
@@ -613,7 +620,7 @@ GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const Segmento3d &sg)
     return retval;    
   }
 
-//! @brief Devuelve la intersección de la recta con el plano.
+//! @brief Return the intersección de la recta con el plano.
 GeomObj3d::list_Pos3d interseccion(const Segmento3d &sg, const Plano3d &p)
   { return interseccion(p,sg); }
 
@@ -623,7 +630,7 @@ GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const Polilinea3d &pl)
 GeomObj3d::list_Pos3d interseccion(const Polilinea3d &pl, const Plano3d &p)
   { return pl.getIntersection(p); }
 
-Pos3d punto_interseccion(const Plano3d &p, const Recta3d &r)
+Pos3d intersection_point(const Plano3d &p, const Recta3d &r)
   {
     Pos3d retval;
     GeomObj3d::list_Pos3d tmp= interseccion(p,r);
@@ -634,10 +641,10 @@ Pos3d punto_interseccion(const Plano3d &p, const Recta3d &r)
     return retval;
   }
 
-Pos3d punto_interseccion(const Recta3d &r, const Plano3d &p)
-  { return punto_interseccion(p,r); }
+Pos3d intersection_point(const Recta3d &r, const Plano3d &p)
+  { return intersection_point(p,r); }
 
-Pos3d punto_interseccion(const Plano3d &p, const SemiRecta3d &sr)
+Pos3d intersection_point(const Plano3d &p, const SemiRecta3d &sr)
   {
     Pos3d retval;
     GeomObj3d::list_Pos3d tmp= interseccion(p,sr);
@@ -648,10 +655,10 @@ Pos3d punto_interseccion(const Plano3d &p, const SemiRecta3d &sr)
     return retval;
   }
 
-Pos3d punto_interseccion(const SemiRecta3d &sr, const Plano3d &p)
-  { return punto_interseccion(p,sr); }
+Pos3d intersection_point(const SemiRecta3d &sr, const Plano3d &p)
+  { return intersection_point(p,sr); }
 
-Pos3d punto_interseccion(const Plano3d &p, const Segmento3d &sg)
+Pos3d intersection_point(const Plano3d &p, const Segmento3d &sg)
   {
     Pos3d retval;
     GeomObj3d::list_Pos3d tmp= interseccion(p,sg);
@@ -661,8 +668,8 @@ Pos3d punto_interseccion(const Plano3d &p, const Segmento3d &sg)
       retval.setExists(false);
     return retval;
   }
-Pos3d punto_interseccion(const Segmento3d &sg, const Plano3d &p)
-  { return punto_interseccion(p,sg); }
+Pos3d intersection_point(const Segmento3d &sg, const Plano3d &p)
+  { return intersection_point(p,sg); }
 
 GEOM_FT angulo(const Recta3d &r,const Plano3d &p)
   {
@@ -698,8 +705,8 @@ GEOM_FT angulo(const Plano3d &p1,const Plano3d &p2)
 GeomObj3d::list_Pos3d interseccion(const Recta3d &r, const Plano3d &p)
   { return interseccion(p,r); }
 
-//! @brief Devuelve los puntos de intersección entre los planos.
-GeomObj3d::list_Pos3d puntos_interseccion(const std::deque<Plano3d> &planos)
+//! @brief Return the points of intersection between the planes.
+GeomObj3d::list_Pos3d intersection_points(const std::deque<Plano3d> &planos)
   {
     GeomObj3d::list_Pos3d retval;
     const size_t sz= planos.size();
@@ -707,18 +714,18 @@ GeomObj3d::list_Pos3d puntos_interseccion(const std::deque<Plano3d> &planos)
       for(size_t j=i+1;j<sz;j++)
         for(size_t k=j+1;k<sz;k++)
 	  {
-            const Pos3d p= punto_interseccion(planos[i],planos[j],planos[k]);
+            const Pos3d p= intersection_point(planos[i],planos[j],planos[k]);
             if(p.exists())
               retval.push_back(p);
           }
     return retval;
   }
 
-//! @brief Devuelve verdadero si la recta es paralela al plano.
+//! @brief Return true if la recta es paralela al plano.
 bool paralelos(const Plano3d &p, const Recta3d &r)
   { return(!do_intersect(p.ToCGAL(),r.ToCGAL())); }
 
-//! @brief Devuelve verdadero si los planos son paralelos.
+//! @brief Return true if los planos son paralelos.
 bool paralelos(const Plano3d &p1, const Plano3d &p2)
   { return(!do_intersect(p1.ToCGAL(),p2.ToCGAL())); }
 

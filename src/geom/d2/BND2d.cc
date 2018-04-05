@@ -94,7 +94,7 @@ GEOM_FT BND2d::Iy(void) const
   { return (Altura()*Anchura()*Anchura()*Anchura())/12; }
 
 
-//! @brief Devuelve verdadero si el BND contiene al punto.
+//! @brief Return true it the boundary contains the point.
 bool BND2d::In(const Pos2d &p) const
   {
     const GEOM_FT xmin= GetXMin();
@@ -121,32 +121,27 @@ bool BND2d::In(const Polilinea2d &p) const
 bool BND2d::In(const Poligono2d &p) const
   { return In(p.vertices_begin(),p.vertices_end()); }
 
-//! @brief Devuelve verdadero si el BND contiene al punto.
+//! @brief Return true if the boundary contains the point.
 bool BND2d::Overlap(const Pos2d &p) const
   { return In(p); }
 
-//! @brief Devuelve verdadero si la recta y el BND
-//! tienen algun punto en común.
+//! @brief Return true if the line and the boundary overlap.
 bool BND2d::Overlap(const Recta2d &r) const
   { return Interseca(r); }
   
-//! @brief Devuelve verdadero si la semirrecta y el BND
-//! tienen algun punto en común.
+//! @brief Return true if the ray and the boundary overlap.
 bool BND2d::Overlap(const SemiRecta2d &sr) const
   { return Interseca(sr); }
 
-//! @brief Devuelve verdadero si el segmento y el BND
-//! tienen algun punto en común.
+//! @brief Return true if the segment and the boundary overlap.
 bool BND2d::Overlap(const Segmento2d &sg) const
   { return Interseca(sg); }
 
-//! @brief Devuelve verdadero si ambos BND
-//! tienen algun punto en común.
+//! @brief Return true if boundary overlap.
 bool BND2d::Overlap(const BND2d &bnd) const
   { return do_intersect(cgrectg,bnd.cgrectg); }
 
-//! @brief Devuelve verdadero si la polilínea y el BND
-//! tienen algun punto en común.
+//! @brief Return true if the polyline and the boundary overlap.
 bool BND2d::Overlap(const Polilinea2d &p) const
   {
     bool retval= Overlap(p.begin(),p.end());

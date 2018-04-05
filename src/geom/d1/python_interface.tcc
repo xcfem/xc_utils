@@ -157,4 +157,4 @@ class_<dq_polyline3D>("dq_polyline3D")
   .def(vector_indexing_suite<dq_polyline3D>() )
   ;
 
-#include "func_por_puntos/python_interface.tcc"
+#include "function_from_points/python_interface.tcc"

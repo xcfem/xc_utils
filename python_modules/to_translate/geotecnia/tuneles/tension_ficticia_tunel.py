@@ -14,25 +14,25 @@ def calcNumeroEstab(sigma0,sigmaC):
     N= 6: Frente inestable'''
   return 2*sigma0/sigmaC
 
-# Puntos que definen lambda0 en función del número de estabilidad.
+# Points that define lambda0 in function of the stability number.
 ptosLambda0= 
 \ptosLambda0
   {
-    \punto{0,0.265}
-    \punto{1,0.265}
-    \punto{3,0.58}
+    geom.Pos2d(0,0.265)
+    geom.Pos2d(1,0.265)
+    geom.Pos2d(3,0.58)
   }
 
-'''Puntos que definen el número de estabilidad «N», en función del cociente entre el
-radio de la excavación y el radio de plastificación.'''
+'''Points that define the stability number "N" in function of the
+   ratio between the excavation radius and the plastification radius.'''
 ptosNumeroEstab= 
 \ptosNumeroEstab
   {
-    \punto{1,1}
-    \punto{1.125,1.5}
-    \punto{1.45,2}
-    \punto{1.75,2.5}
-    \punto{2.15,3}
+    geom.Pos2d(1,1)
+    geom.Pos2d(1.125,1.5)
+    geom.Pos2d(1.45,2)
+    geom.Pos2d(1.75,2.5)
+    geom.Pos2d(2.15,3)
   }
 
 ''' Devuelve el valor del número de estabilidad a partir de los valores de:
@@ -41,16 +41,16 @@ ptosNumeroEstab=
 def calcNumeroEstabFromRp(r,rp):
   return ptosNumeroEstab.valor(rp/r)
 
-'''Puntos que definen el cociente entre el
-radio de la excavación y el radio de plastificación a partir del número de estabilidad.'''
+'''Points that define the ratio between the excavation radius and the
+   plastification radius from the number of stability.'''
 ptosRadioPlastificacion= 
 \ptosRadioPlastificacion
   {
-    \punto{1,1}
-    \punto{1.5,1.125}
-    \punto{2,1.45}
-    \punto{2.5,1.75}
-    \punto{3,2.15}
+    geom.Pos2d(1,1)
+    geom.Pos2d(1.5,1.125)
+    geom.Pos2d(2,1.45)
+    geom.Pos2d(2.5,1.75)
+    geom.Pos2d(3,2.15)
   }
 
 ''' Devuelve el redio de plastificación a partir de los valores de:

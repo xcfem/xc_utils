@@ -48,20 +48,20 @@ class ListaPos3d: public GeomObj3d
     explicit ListaPos3d(const GeomObj::list_Pos3d &l);
     virtual GeomObj *clon(void) const
       { return new ListaPos3d(*this); }
-    inline size_t GetNumPuntos(void) const
+    inline size_t getNumberOfPoints(void) const
       { return lista_ptos.size(); }
-    inline point_const_iterator puntos_begin(void) const
+    inline point_const_iterator points_begin(void) const
       { return lista_ptos.begin(); }
-    const point_const_iterator puntos_end(void) const
+    const point_const_iterator points_end(void) const
       { return lista_ptos.end(); }
     inline short unsigned int Dimension(void) const
       { return 0; }
 
-    const GeomObj::list_Pos3d &getPuntos(void) const
+    const GeomObj::list_Pos3d &getPoints(void) const
       { return lista_ptos; }
     const Pos3d &operator[](const size_t &i) const;
 
-    const Pos3d *AgregaPunto(const Pos3d &p);
+    const Pos3d *appendPoint(const Pos3d &p);
     template <class InputIterator>
     inline void assign(InputIterator first, InputIterator last)
       //Inserta los vértices comprendidos en [first,last) antes
@@ -76,7 +76,7 @@ class ListaPos3d: public GeomObj3d
     //Producto de inercia.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
-    //! @brief Devuelve la longitud de la ListaPos3d.
+    //! @brief Return the longitud de la ListaPos3d.
     virtual GEOM_FT Longitud(void) const
       { return 0.0; }
     //! @brief Devuelve el área de la ListaPos3d.
@@ -89,7 +89,7 @@ class ListaPos3d: public GeomObj3d
     virtual GEOM_FT GetMin(unsigned short int i) const;
     ListaPos3d GetMayores(unsigned short int i,const GEOM_FT &d) const;
     ListaPos3d GetMenores(unsigned short int i,const GEOM_FT &d) const;
-    const Pos3d &Punto(const size_t &i) const;
+    const Pos3d &Point(const size_t &i) const;
     Pos3d Cdg(void) const
       { return lista_ptos.Cdg(); }
 

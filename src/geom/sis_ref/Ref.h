@@ -38,15 +38,15 @@ template<class SC>
 class Ref : public ProtoGeom
   {
   public:
-    typedef typename SC::VGlobal VGlobal; //!< Dimensión del vector global.
-    typedef typename SC::DGlobal DGlobal; //!< Dimensión de la dirección global.
-    typedef typename SC::PGlobal PGlobal; //!< Dimensión dle punto global.
-    typedef typename SC::VLocal VLocal; //!< Dimensión del vector local.
-    typedef typename SC::PLocal PLocal; //!< Dimensión del punto local.
+    typedef typename SC::VGlobal VGlobal; //!< Dimension of the global vector.
+    typedef typename SC::DGlobal DGlobal; //!< Dimension of the global direction.
+    typedef typename SC::PGlobal PGlobal; //!< Dimension of the global point.
+    typedef typename SC::VLocal VLocal; //!< Dimension of the local vector.
+    typedef typename SC::PLocal PLocal; //!< Dimension of the local point.
     
   protected:
-    PGlobal org; //!< Origen del sistema de coordenadas.
-    SC trf;  //!< Ejes del sistem de coordenadas transformacion local --> global.
+    PGlobal org; //!< Origen of the sistema de coordenadas.
+    SC trf;  //!< Ejes of the sistem de coordenadas transformacion local --> global.
 
   public:
     Ref(void): org(), trf() {}
@@ -91,7 +91,8 @@ class Ref : public ProtoGeom
       {}
   };
 
-//! @brief Devuelve la posicion del punto p expresado en locales expresada en coordenadas globales.
+//! @brief Return the position of the point p (expressed in local coordinates)
+//! expresssed in global coordinates.
 template<class SC>
 typename Ref<SC>::PGlobal Ref<SC>::GetPosGlobal(const PLocal &p) const
   {
@@ -104,7 +105,8 @@ template<class SC>
 typename Ref<SC>::VGlobal Ref<SC>::GetCooGlobales(const VLocal &v) const
   { return trf.GetCooGlobales(v); }
 
-//! @brief Devuelve la posicion del punto p expresado en globales expresada en coordenadas locales.
+//! @brief Return the position of the point p (expressed in global coordinates)
+//! expresssed in local coordinates.
 template<class SC>
 typename Ref<SC>::PLocal Ref<SC>::GetPosLocal(const PGlobal &p) const
   {

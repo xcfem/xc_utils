@@ -47,9 +47,9 @@ void SVD2d::Print(std::ostream &os) const
 void SVD2d::PrintLtx(std::ostream &os,const std::string &ud_long,const GEOM_FT &f_long, const std::string &ud_f,const GEOM_FT &f_f) const
   {
     //Se asume que imprimimos en una tabla.
-    os << "Punto de aplicación: " << org.VectorPos()*f_long << ud_long << "\\\\" << std::endl
-       << "Resultante: " << resul*f_f << ud_f << "\\\\" << std::endl 
-       << "Momento: " << mom*f_f << ud_f << ud_long << "\\\\" << std::endl;
+    os << "Point of application: " << org.VectorPos()*f_long << ud_long << "\\\\" << std::endl
+       << "Resultant: " << resul*f_f << ud_f << "\\\\" << std::endl 
+       << "Moment: " << mom*f_f << ud_f << ud_long << "\\\\" << std::endl;
   }
 Vector2d SVD2d::getResultante(const Ref2d2d &ref) const
   { return ref.GetCooLocales(resul); } 
@@ -70,14 +70,14 @@ SVD2d &SVD2d::operator-=(const VDesliz2d &v)
     return *this;
   }
 SVD2d &SVD2d::operator+=(const SVD2d &s)
-  //El punto org se conserva.
+  //The origin is preserved.
   {
     resul= resul + s.resul;
     mom= mom + s.getMomento(org);
     return *this;
   }
 SVD2d &SVD2d::operator-=(const SVD2d &s)
-  //El punto org se conserva.
+  //The origin is preserved.
   {
     resul= resul - s.resul;
     mom= mom - s.getMomento(org);
@@ -98,7 +98,7 @@ bool SVD2d::Nulo(void) const
     return retval;
   }
 
-//! @brief Lugar geométrico de los puntos de momento nulo.
+//! @brief Line of points with zero moment.
 Recta2d SVD2d::RectaMomNulo(void) const
   {
     Recta2d retval; //= Recta2d(Pos2d(NAN,NAN),Pos2d(NAN,NAN));
@@ -124,7 +124,7 @@ Recta2d SVD2d::RectaMomNulo(void) const
     else
       std::clog << getClassName() << "::" << __FUNCTION__
 	        << "; no point has zero moment." << std::endl;
-    const Pos2d p= retval.Punto();
+    const Pos2d p= retval.Point();
     const GEOM_FT m= getMomento(p);
     if(abs(m)>1E-6)
       std::cerr << getClassName() << "::" << __FUNCTION__

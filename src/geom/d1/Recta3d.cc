@@ -43,13 +43,15 @@ Recta3d::Recta3d(const Pos3d &p1,const Pos3d &p2)
   {
     if(cgr.is_degenerate())
       {
-        std::clog << "Recta3d::Recta3d: La recta es degenerada, los puntos: "
-             << p1 << " y " << p2 << " coinciden." << std::endl;
+        std::clog << getClassName() << "::" << __FUNCTION__
+	          << ": degenerated line, the points: "
+             << p1 << " and " << p2 << " are the same." << std::endl;
       }
     const double d= p1.dist(p2);
     if(d<mchne_eps_dbl)
-      std::cerr << "Recta3d::Recta3d: La recta está mal definida, los puntos: "
-		<< p1 << " y " << p2 << " están muy próximos d(p1,p2)= "
+      std::cerr << getClassName() << "::" << __FUNCTION__
+		<< "; ill defined line, the points: "
+		<< p1 << " and " << p2 << " are too close d(p1,p2)= "
                 << d << ".\n";
   }
 Recta3d::Recta3d(const Pos3d &p,const Dir3d &dir)
@@ -70,7 +72,7 @@ Recta3d::Recta3d(const RectaParametricas3d &param)
   : Linea3d(), cgr(defaultOrg.ToCGAL(),defaultDest.ToCGAL())
   { Parametricas(param); }
 
-void Recta3d::DosPuntos(const Pos3d &p1,const Pos3d &p2)
+void Recta3d::TwoPoints(const Pos3d &p1,const Pos3d &p2)
   { (*this)= Recta3d(p1,p2); }
 
 Dir3d Recta3d::GetDir(void) const
@@ -79,7 +81,7 @@ Vector3d Recta3d::VDir(void) const
   { return Vector3d(cgr.to_vector()); }
 
 double Recta3d::getLambda(unsigned short int i,const double &d,const Vector3d &i_) const
-      { return (d-Punto(0)(i))/i_(i);}
+      { return (d-Point(0)(i))/i_(i);}
 
 //! @brief Return the orthogonal projection onto the line.
 Pos3d Recta3d::Projection(const Pos3d &p) const
@@ -111,8 +113,8 @@ Recta2d Recta3d::XY2DProjection(void) const
     Recta3d r3d= XY3DProjection();
     if(r3d.exists())
       {
-        const Pos2d p1= r3d.Punto(0).XY2DProjection();
-        const Pos2d p2= r3d.Punto(100).XY2DProjection();
+        const Pos2d p1= r3d.Point(0).XY2DProjection();
+        const Pos2d p2= r3d.Point(100).XY2DProjection();
         const double d= p1.dist(p2);
         if(d>mchne_eps_dbl)
           retval= Recta2d(p1,p2);
@@ -129,8 +131,8 @@ Recta2d Recta3d::XZ2DProjection(void) const
     Recta3d r3d= XZ3DProjection();
     if(r3d.exists())
       {
-        const Pos2d p1= r3d.Punto(0).XZ2DProjection();
-        const Pos2d p2= r3d.Punto(100).XZ2DProjection();
+        const Pos2d p1= r3d.Point(0).XZ2DProjection();
+        const Pos2d p2= r3d.Point(100).XZ2DProjection();
         const double d= p1.dist(p2);
         if(d>mchne_eps_dbl)
           retval= Recta2d(p1,p2);
@@ -147,8 +149,8 @@ Recta2d Recta3d::YZ2DProjection(void) const
     Recta3d r3d= YZ3DProjection();
     if(r3d.exists())
       {
-        const Pos2d p1= r3d.Punto(0).YZ2DProjection();
-        const Pos2d p2= r3d.Punto(100).YZ2DProjection();
+        const Pos2d p1= r3d.Point(0).YZ2DProjection();
+        const Pos2d p2= r3d.Point(100).YZ2DProjection();
         const double d= p1.dist(p2);
         if(d>mchne_eps_dbl)
           retval= Recta2d(p1,p2);
@@ -182,7 +184,7 @@ GEOM_FT coo_interseccion(const GeomObj2d::list_Pos2d &int_a, const GeomObj2d::li
         else
           {
             std::cerr << "coo_interseccion(int_a,int_b): Error al promediar la coordenada " << coo 
-                 << " de la intersección. Los valores obtenidos: " << pint_a(coo) << " y " << pint_b(coo)
+                 << " de la intersección. Los valores obtenidos: " << pint_a(coo) << " and " << pint_b(coo)
                  << " son muy diferentes." << std::endl;
           }
       }
@@ -201,18 +203,18 @@ GEOM_FT coo_interseccion(const GeomObj2d::list_Pos2d &int_a, const GeomObj2d::li
           }
     return retval;
   }
-//Devuelve verdadero si las rectas intersecan.
+//Return true if las rectas intersecan.
 bool Recta3d::Interseca(const Recta3d &r2) const
   {
     if(!coplanarias(*this,r2)) return false; //No son coplanarias.
     if(colineales(*this,r2)) return true; //Son la misma.
     if(paralelas(*this,r2))
-      return false; //Son distintas y paralelas.
+      return false; //Son distintas and paralelas.
     else
       return true;
   }
 
-//! @brief Devuelve la intersección de la Linea con un plano coord_i=cte.
+//! @brief Return the intersección de la Linea con un plano coord_i=cte.
 GeomObj3d::list_Pos3d Recta3d::Interseccion(unsigned short int i, const double &d) const
   {
     GeomObj::list_Pos3d lp;
@@ -224,7 +226,7 @@ GeomObj3d::list_Pos3d Recta3d::Interseccion(unsigned short int i, const double &
     Pos3d p;
     p.Set(i,d);
     const Vector3d i_= VDir();
-    const Pos3d org(Punto(0));
+    const Pos3d org(Point(0));
     if (fabs(i_(i))<1.0E-12) return lp;
     const double l= getLambda(i,d,i_);
     p.Set(j,org(j)+l*i_(j));
@@ -233,7 +235,7 @@ GeomObj3d::list_Pos3d Recta3d::Interseccion(unsigned short int i, const double &
     return lp;
   }
 
-//Devuelve el punto intersección con la recta r2, if not exists la
+//Return the point intersección con la recta r2, if not exists la
 //intersección devuelve la lista vacía.
 GeomObj3d::list_Pos3d Recta3d::Interseccion(const Recta3d &r2,const double &tol) const
   {
@@ -241,8 +243,9 @@ GeomObj3d::list_Pos3d Recta3d::Interseccion(const Recta3d &r2,const double &tol)
     if(!intersecan(*this,r2)) return retval;
     if(colineales(*this,r2))
       {
-        std::cerr << "interseccion(Recta3d,Recta3d): Las rectas coinciden, todos sus puntos pertenecen a la intersección." 
-             << std::endl;
+        std::cerr << getClassName() << "::" << __FUNCTION__
+		  << ": lines are the same, all its points belong"
+	          << " to the intersection." << std::endl;
         return retval;
       }
 
@@ -280,18 +283,18 @@ GeomObj3d::list_Pos3d Recta3d::Interseccion(const Recta3d &r2,const double &tol)
     return retval;
   }
 
-//! @brief Devuelve el cuadrado de la distancia desde el punto a la recta.
+//! @brief Devuelve el cuadrado de la distance from the point a la recta.
 GEOM_FT Recta3d::dist(const Pos3d &p) const
   { return sqrt_FT(dist2(p)); }
 
-//! @brief Devuelve la distancia desde el punto a la recta.
+//! @brief Return the distance from the point a la recta.
 GEOM_FT dist(const Pos3d &p,const Recta3d &r)
   { return sqrt_FT(dist2(r,p)); }
 
 bool colineales(const Recta3d &r1,const Recta3d &r2)
   {
-    const Pos3d p1= r2.Punto(0);
-    const Pos3d p2= r2.Punto(100);
+    const Pos3d p1= r2.Point(0);
+    const Pos3d p2= r2.Point(100);
     if( r1.In(p1) && r1.In(p2) )
       return true;
     else
@@ -300,9 +303,9 @@ bool colineales(const Recta3d &r1,const Recta3d &r2)
 
 bool coplanarias(const Recta3d &r1,const Recta3d &r2)
   {
-    const Pos3d p1= r2.Punto(0);
-    const Pos3d p2= r2.Punto(100);
-    const Pos3d p3= r1.Punto(0);
-    const Pos3d p4= r1.Punto(100);
+    const Pos3d p1= r2.Point(0);
+    const Pos3d p2= r2.Point(100);
+    const Pos3d p3= r1.Point(0);
+    const Pos3d p4= r1.Point(100);
     return coplanarios(p1,p2,p3,p4);
   }

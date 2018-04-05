@@ -28,7 +28,7 @@
 Solido3d::Solido3d(void)
   : GeomObj3d(){}
 
-//! @brief Devuelve la distancia al punto que se pasa como parámetro.
+//! @brief Return the distance to the argument.
 GEOM_FT Solido3d::dist(const Pos3d &p) const
   {
     std::cerr << "Solido3d::dist; la función distancia no está definida."

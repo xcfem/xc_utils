@@ -73,7 +73,7 @@ class Circulo3d : public D2to3d
     virtual GEOM_FT GetMin(unsigned short int i) const;
 
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const;
-    const MatrizPos3d &PuntosPerimetro(const size_t &n,const double &theta_inic= 0.0) const;
+    const MatrizPos3d &getPointsOnPerimeter(const size_t &n,const double &theta_inic= 0.0) const;
 
     friend bool operator ==(const Circulo3d &a,const Circulo3d &b);
 
@@ -81,7 +81,7 @@ class Circulo3d : public D2to3d
     void Print(std::ostream &os) const;
   };
 
-Circulo3d Circulo3dTresPuntos(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
+Circulo3d Circulo3dThreepoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
 
 #endif
 

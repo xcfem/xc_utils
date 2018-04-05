@@ -41,7 +41,7 @@ class Linea3d : public GeomObj3d
       { return 0.0; }
     virtual GEOM_FT Volumen(void) const
       { return 0.0; }
-    //Devuelve verdadero si el punto esta sobre la Linea.
+    //@brief Return true if the points is on sobre la Linea.
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const= 0;
     //Devuelve la intersección de la Linea con un plano coord_i=cte.
 /*     virtual list_Pos3d Int(unsigned short int i, const double &d) const= 0; */

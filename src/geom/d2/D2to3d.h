@@ -61,10 +61,10 @@ class D2to3d: public Superficie3d
     D2to3d(void);
     D2to3d(const D2to3d &otro);
     D2to3d &operator =(const D2to3d &otro);
-    void TresPuntos(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
+    void ThreePoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
 
     inline virtual unsigned short int Dimension(void) const
-    //Devuelve la dimensión del objeto 0, 1, 2 ó 3.
+    //Return the dimensión del objeto 0, 1, 2 ó 3.
       { return 2; }
 
     Plano3d GetPlano(void) const;

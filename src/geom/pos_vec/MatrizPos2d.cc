@@ -46,8 +46,8 @@ MatrizPos2d::MatrizPos2d(const Pos2d &p0,const Pos2d &p1,const Pos2d &p2,const s
   : MatrizPos<Pos2d>(p0,p1,p2,ndiv1,ndiv2) {}
 
 //! @brief Constructor.
-MatrizPos2d::MatrizPos2d(const MatrizPos2d &puntos_l1,const MatrizPos2d &puntos_l2,const MatrizPos2d &puntos_l3,const MatrizPos2d &puntos_l4)
-  : m_pos(puntos_l1,puntos_l2,puntos_l3,puntos_l4) {}
+MatrizPos2d::MatrizPos2d(const MatrizPos2d &l1_points,const MatrizPos2d &l2_points,const MatrizPos2d &l3_points,const MatrizPos2d &l4_points)
+  : m_pos(l1_points,l2_points,l3_points,l4_points) {}
 
 Pos2d MatrizPos2d::pos_lagrangiana(const size_t &i,const size_t &j) const
   {
@@ -57,12 +57,13 @@ Pos2d MatrizPos2d::pos_lagrangiana(const size_t &i,const size_t &j) const
     return Pos2d(x,y);
   }
 
-//! @brief Devuelve el máximo de las distancias entre los mesh points
-//! y los correspondientes de la interpolación de Lagrange (ver pág IX-19 del manual de SAP90).
+//! @brief Return the maximum distance between the mesh points
+//! and the corresponding ones in the Lagrange interpolation
+//! (see page IX-19 of the SAP90 manual).
 GEOM_FT MatrizPos2d::dist_lagrange(void) const
   {
     GEOM_FT retval(0.0);
-    for(size_t i=2;i<fls;i++) //Puntos interiores.
+    for(size_t i=2;i<fls;i++) //Interior points.
       for(size_t j=2;j<cls;j++)
         retval= std::max(retval,dist((*this)(i,j),pos_lagrangiana(i,j)));
     return retval;
@@ -72,19 +73,19 @@ GEOM_FT MatrizPos2d::dist_lagrange(void) const
 size_t MatrizPos2d::GetNumQuads(void) const
   { return (fls-1)*(cls-1); }
 
-//! @brief Asigna a los puntos interiores of the mesh
-//! los correspondientes de la interpolación de Lagrange (ver pág IX-19 del manual de SAP90).
-//! Devuelve la distancia máxima obtenida.
+//! @brief Set the interior points of the mesh
+//! corresponding to Lagrange interpolation (see page IX-19 from SAP90 manual).
+//! Return the maximum computed distance.
 GEOM_FT MatrizPos2d::ciclo_lagrange(void)
   {
-    for(size_t i=2;i<fls;i++) //Puntos interiores.
+    for(size_t i=2;i<fls;i++) //Interior points.
       for(size_t j=2;j<cls;j++)
         (*this)(i,j)= pos_lagrangiana(i,j);
     return dist_lagrange();
   }
 
-//! @brief Asigna a los puntos interiores of the mesh
-//! los correspondientes de la interpolación de Lagrange (ver pág IX-19 del manual de SAP90).
+//! @brief Set the interior points of the mesh
+//! corresponding to Lagrange interpolation (see page IX-19 from SAP90 manual).
 GEOM_FT MatrizPos2d::Lagrange(const GEOM_FT &tol)
   {
     GEOM_FT err= dist_lagrange();
@@ -223,30 +224,30 @@ Triangulo2d MatrizPos2d::GetTriangulo2(const size_t &i,const size_t &j) const
   { return Triangulo2d((*this)(i,j),(*this)(i+1,j+1),(*this)(i+1,j)); }
 
 
-//! @brief Devuelve la coordenada x del punto i,j.
+//! @brief Return the x coordinate of point i,j.
 GEOM_FT MatrizPos2d::GetX(const size_t &i,const size_t &j) const
   { return (*this)(i,j).x(); }
 
-//! @brief Devuelve la coordenada y del punto i,j.
+//! @brief Return the y coordinate of point i,j.
 GEOM_FT MatrizPos2d::GetY(const size_t &i,const size_t &j) const
   { return (*this)(i,j).y(); }
 
-//! @brief Devuelve las coordenadas del punto i,j.
+//! @brief Devuelve las coordenadas of point i,j.
 const matriz_FT &MatrizPos2d::GetVertCoords(const size_t &i,const size_t &j) const
   {
-    const Pos2d tmp= GetPunto(i,j);
+    const Pos2d tmp= getPoint(i,j);
     static matriz_FT tmp_m(1,2);
     tmp_m(1,1)= tmp.x();
     tmp_m(1,2)= tmp.y();
     return tmp_m;
   }
 
-//! @brief Devuelve el punto i,j.
-Pos2d MatrizPos2d::GetPunto(const size_t &i,const size_t &j) const
+//! @brief Return the point i,j.
+Pos2d MatrizPos2d::getPoint(const size_t &i,const size_t &j) const
 { return (*this)(i,j); }
 
 
-//! @brief Devuelve la el cuadrilátero i,j:
+//! @brief Return the el cuadrilátero i,j:
 //                                                                             i+1,j +---+ i+1,j+1
 //                                                                                   |   |
 //                                                                                   |   |
@@ -287,7 +288,7 @@ GEOM_FT MatrizPos2d::GetAreaQuad(const size_t &i,const size_t &j) const
 Pos2d MatrizPos2d::GetCentroideQuad(const size_t &i,const size_t &j) const
   { return GetQuad(i,j).Centroide(); }
 
-//! @brief Devuelve el valor maximo de la coordenada k.
+//! @brief Return the maximum value of the k coordinate.
 GEOM_FT MatrizPos2d::GetMax(unsigned short int k) const
   {
     register GEOM_FT mx= (*this)(1,1)(k);
@@ -297,7 +298,7 @@ GEOM_FT MatrizPos2d::GetMax(unsigned short int k) const
     return mx;
   }
 
-//! @brief Devuelve el valor minimo de la coordenada k.
+//! @brief Return the minimum value of the k coordinate.
 GEOM_FT MatrizPos2d::GetMin(unsigned short int k) const
   {
     register GEOM_FT mn= (*this)(1,1)(k);
@@ -307,8 +308,7 @@ GEOM_FT MatrizPos2d::GetMin(unsigned short int k) const
     return mn;
   }
 
-//! @brief Aplica a los puntos la transformación que se
-//! pasa como parámetro.
+//! @brief Applies the transformation to the points.
 void MatrizPos2d::Transforma(const Trf2d &trf2d)
   {
     for(size_t i=1;i<=fls;i++)

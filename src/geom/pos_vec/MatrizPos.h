@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //MatrizPos.h
-//Matriz de puntos
+//Matrix of points
 
 #ifndef MATRIZPOS_H
 #define MATRIZPOS_H
@@ -49,7 +49,7 @@ class MatrizPos: public MatrizT<POS,std::vector<POS> >
     MatrizPos(const POS &p1,const POS &p2,const size_t &ndiv);
     MatrizPos(const POS &p1,const POS &p2,const std::vector<GEOM_FT> &longs);
     MatrizPos(const POS &p0,const POS &p1,const POS &p2,const size_t &ndiv1,const size_t &ndiv2);
-    MatrizPos(const MatrizPos &puntos_l1,const MatrizPos &puntos_l2,const MatrizPos &puntos_l3,const MatrizPos &puntos_l4);
+    MatrizPos(const MatrizPos &l1_points,const MatrizPos &l2_points,const MatrizPos &l3_points,const MatrizPos &l4_points);
     inline MatrizPos<POS> GetCaja(size_t f1, size_t c1, size_t f2, size_t c2) const
       { return MatrizPos(*this,f1,c1,f2,c2); }
     inline MatrizPos<POS> GetFila(size_t fila) const
@@ -58,9 +58,9 @@ class MatrizPos: public MatrizT<POS,std::vector<POS> >
       { return GetCaja(1,col,this->fls,col); }
   };
 
-//! Construye la matriz de puntos entre p1 y p2 de manera que, el primer punto es el p1,
-//! el número de puntos es num y cada punto se obtiene sumando al anterior el producto del
-//! vector p1p2 por "ratio".
+//! Build the point matrix between p1 and p2 in such way that, the firs point
+//! is p1, the number of point is num and each point is obtained by summing
+//! the product of ratio by the p1p2 vector to the previous one.
 template <class POS>
 MatrizPos<POS>::MatrizPos(const POS &p1,const POS &p2,const size_t &num,const GEOM_FT &ratio)
   : m_pos(num,1)
@@ -74,10 +74,11 @@ MatrizPos<POS>::MatrizPos(const POS &p1,const POS &p2,const size_t &num,const GE
       }
   }
 
-//! Construye la matriz de puntos entre p1 y p2 de manera que, el primer punto es el p1,
-//! el último punto es el p2 y los puntos intermedios son los que resultan al dividir 
-//! el segmento p1p2 en "ndiv" partes. Es decir que si ndiv=1 sólo crea los puntos p1 y p2
-//! si ndiv=2 crea los puntos p1, el punto medio del segmento y p2, y así sucesivamente.
+//! Build the point matrix between p1 and p2 in such way that, the firs point
+//! is p1, the last one is p2 and the intermediate points result from dividing
+//! the segment p1p2 in ndiv equal parts. So if ndiv= 1 only the p1 and p2
+//! points are created. If ndiv= 2 the midpoint of the segment is created
+//! in addition to p1 and p2, and so on...
 template <class POS>
 MatrizPos<POS>::MatrizPos(const POS &p1,const POS &p2,const size_t &ndiv)
   : m_pos(ndiv+1,1)
@@ -97,10 +98,9 @@ MatrizPos<POS>::MatrizPos(const POS &p1,const POS &p2,const size_t &ndiv)
       }
   }
 
-//! Construye la matriz de puntos de p1 a p2 de manera que, el primer punto es el p1,
-//! el último es p2, el número de puntos es longs.size()+1 y los puntos interiores
-//! son los que dividen el segmento p1,p2 en longitudes proporcionales a las que
-//! se pasan como parámetro.
+//! Build the point matrix between p1 and p2 in such way that, the firs point
+//! is p1 the last one is p2, the number of points is longs.size()+1 and the
+//! lenghts of interior segments are proportional to those in longs.
 //!
 //!       l[0]     l[1]     l[2]     l[3]     l[4]
 //!    *-------+----------+-----+-----------+-----+
@@ -158,20 +158,20 @@ MatrizPos<POS>::MatrizPos(const POS &p0,const POS &p1,const POS &p2,const size_t
   }
 
 template <class POS>
-MatrizPos<POS>::MatrizPos(const MatrizPos &ptos_l1,const MatrizPos &ptos_l2,const MatrizPos &ptos_l3,const MatrizPos &ptos_l4)
-  : m_pos(ptos_l1.getNumFilas(),ptos_l2.getNumFilas())
-//Se le pasan estos puntos (X) ordenados según indican las flechas.
-//                 ptos_l3
+MatrizPos<POS>::MatrizPos(const MatrizPos &l1_points,const MatrizPos &l2_points,const MatrizPos &l3_points,const MatrizPos &l4_points)
+  : m_pos(l1_points.getNumFilas(),l2_points.getNumFilas())
+//The arguments are the points (X) in the following order (see rows).
+//                 l3_points
 //                  --->
 //              X---X---X---X
 //            ^ |           | ^
-//  ptos_l4   | X           X | ptos_l2
+//  l4_points   | X           X | l2_points
 //              |           |
 //              X---X---X---X
 //                  --->
-//                 ptos_l1
+//                 l1_points
 //
-// y devuelve estos otros:
+// and return those points:
 //
 //              X---X---X---X
 //            ^ |   |   |   | 
@@ -180,23 +180,23 @@ MatrizPos<POS>::MatrizPos(const MatrizPos &ptos_l1,const MatrizPos &ptos_l2,cons
 //              X---X---X---X
 //                  --->
 //
-//Las filas son cuasi-paralelas a l2 y l4
-//Las columnas son cuasi-paralelas a 11 y l3
+//The rows are quasi-parallel to the lines l2 and l4
+//The columns are quasi-parallel to 11 y l3
   {
-    const size_t num_filas= ptos_l1.getNumFilas();
-    const size_t num_cols= ptos_l2.getNumFilas();
-    MatrizPos puntos_fila= ptos_l4;
+    const size_t num_filas= l1_points.getNumFilas();
+    const size_t num_cols= l2_points.getNumFilas();
+    MatrizPos row_points= l4_points;
     for(size_t i=1;i<=num_filas;i++)
       {
         if(i>1)
           {
             if(i==num_filas)
-              puntos_fila= ptos_l2;
+              row_points= l2_points;
             else
-              puntos_fila= MatrizPos(ptos_l1(i,1),ptos_l3(i,1),num_cols-1);
+              row_points= MatrizPos(l1_points(i,1),l3_points(i,1),num_cols-1);
           }
         for(size_t j=1;j<=num_cols;j++)
-          (*this)(i,j)= puntos_fila(j,1);
+          (*this)(i,j)= row_points(j,1);
       }
   }
 
@@ -230,8 +230,8 @@ POS get_centro(const MatrizPos<POS> &m,const SEG &sg)
     return retval;
   }
 
-//! @brief Genera puntos en un cuadrilátero (ver pág IX-16 del manual de SAP90).
-//Se le pasan estos puntos (X):
+//! @brief Generate point in a quadrilateral (see page IX-16 of the SAP90 manual).
+// The arguments are the points (X):
 //                        
 //            q3             q4
 //              X-----------X
@@ -241,8 +241,8 @@ POS get_centro(const MatrizPos<POS> &m,const SEG &sg)
 //              X-----------X
 //            q1             q2
 //                 
-// y el número de divisiones en la dirección q1->q2 (ndiv1) y q1->q3 (ndiv2)
-// y devuelve estos otros:
+// and the number of divisions in directions q1->q2 (ndiv1) and q1->q3 (ndiv2)
+// and returns the points:
 //
 //              X---X---X---X
 //            ^ |   |   |   | 
@@ -261,22 +261,23 @@ MatrizPos<POS> cuadrilatero(const POS &q1,const POS &q2,const POS &q3,const POS 
     return MatrizPos<POS>(l1,l2,l3,l4);
   }
 
-//! @brief Genera puntos mediante el algoritimo que SAP90 denomina "generación frontal" (ver pág IX-18 del manual de SAP90).
-// Se supone que el primer punto de ambas listas es el mismo.
+//! @brief Generate the points by means of the algorithm that SAP90
+//! names "frontal generation" (see page IX-18 of the SAP90 manual).
+//! The first point of both lists is supposed to be the same.
 template <class POS>
-MatrizPos<POS> generacion_frontal(const MatrizPos<POS> &ptos_l1,const MatrizPos<POS> &ptos_l2)
+MatrizPos<POS> generacion_frontal(const MatrizPos<POS> &l1_points,const MatrizPos<POS> &l2_points)
   {
-    const size_t nptos1= ptos_l1.getNumFilas();
-    const size_t nptos2= ptos_l2.getNumFilas();
+    const size_t nptos1= l1_points.getNumFilas();
+    const size_t nptos2= l2_points.getNumFilas();
     const size_t ntot= nptos1*nptos2;
     MatrizPos<POS> retval(nptos1,nptos2);
 
-    //Puntos de la primera fila.
+    //Points of the first row.
     for(size_t j=1;j<=nptos1;j++)
-      retval(1,j)= ptos_l1(j);
-    //Puntos de la primera columna.
+      retval(1,j)= l1_points(j);
+    //Points of the first column.
     for(size_t i=2;i<=nptos1;i++)
-      retval(i,1)= ptos_l2(i);
+      retval(i,1)= l2_points(i);
     
     for(size_t i=2;i<=nptos1;i++)
       {

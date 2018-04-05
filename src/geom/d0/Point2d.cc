@@ -19,36 +19,24 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-#ifndef	CUADRATURA3D_H
-#define	CUADRATURA3D_H
+//Point2d.cc
 
-#include <vector>
-#include "PuntosGauss.h"
-#include "PsoGss3d.h"
+#include "Point2d.h"
+#include <plotter.h>
 
-class Pos3d;
-
-typedef std::vector<PsoGss3D> ConjPG3;
-
-class Cuadratura3D : public ConjPG3
+#include "xc_utils/src/geom/trf/Trf2d.h"
+void Point2d::Print(std::ostream &os) const
+  { os << org; }
+void Point2d::Plot(Plotter &plotter) const
   {
-    int num_dim;
-  public:
-    Cuadratura3D(const Pos3d &p1,const Pos3d &p2,int nx = 2, int ny = 1, int nz = 1);
-    inline size_t Size() const
-      { return size(); }
-    inline const PsoGss3D &Get(int p) const
-      { return (*this)[p]; }
-    inline int NumDim() const
-      { return num_dim; }
-    friend std::ostream& operator<<(std::ostream& o, const Cuadratura3D& gpts);
-  };
+    org.Plot(plotter);
+  }
 
-#endif
-
-
-
-
-
-
+//! @brief Aplica al objeto la transformación que se
+//! pasa como parámetro.
+void Point2d::Transforma(const Trf2d &trf2d)
+  {
+    const Pos2d pA= trf2d.Transforma(org);
+    (*this)= Point2d(pA);
+  }
 

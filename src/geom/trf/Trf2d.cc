@@ -116,8 +116,8 @@ Pos2d Trf2d::Transforma(const Pos2d &p) const
   { return Pos2d(Transforma(p.ToCGAL())); }
 Vector2d Trf2d::Transforma(const Vector2d &v) const
   { return Vector2d(cgtrf.transform(v.ToCGAL())); }
+//! @brief Return the transformed points.
 GeomObj::list_Pos2d Trf2d::Transforma(const GeomObj::list_Pos2d &lp2d) const
-//Devuelve los puntos de la lista transformados.
   {
     GeomObj::list_Pos2d retval(lp2d);
     Transforma(retval.begin(),retval.end());

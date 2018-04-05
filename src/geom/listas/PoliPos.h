@@ -96,12 +96,12 @@ class PoliPos : public std::deque<pos>
   };
 
 
-//! @brief Devuelve verdadero si el punto esta en la lista.
+//! @brief Return true if the points is on en la lista.
 template <class pos>
 bool PoliPos<pos>::In(const pos &p) const
   { return (find(p)!=this->end()); }
 
-//! @brief Agrega el punto si no está ya en la lista.
+//! @brief Appends the point to the list (if not already there).
 template <class pos>
 void PoliPos<pos>::AgregaSiNuevo(const pos &p)
   {
@@ -229,7 +229,7 @@ PoliPos<pos> PoliPos<pos>::GetSwap(void) const
     return retval;
   }
 
-//! @brief Calcula la distancia de cada punto al más próximo.
+//! @brief Compute the distance from each point to the nearest one.
 template <class pos>
 std::deque<GEOM_FT> &PoliPos<pos>::GetSeparaciones(void) const
   {
@@ -257,7 +257,7 @@ std::deque<GEOM_FT> &PoliPos<pos>::GetSeparaciones(void) const
       }
     return retval;
   }
-//! @brief Devuelve la distancia media entre puntos.
+//! @brief Return the average distance between points.
 template <class pos>
 GEOM_FT PoliPos<pos>::GetSeparacionMedia(void) const
   {

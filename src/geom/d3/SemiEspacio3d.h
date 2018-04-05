@@ -32,7 +32,7 @@
 
 //! @ingroup GEOM
 //
-//! @brief Los puntos del semiespacio son los que están a la
+//! @brief The points of the half-space son los que están a la
 //! "espalda" del plano, entendiendo por tales aquellos
 //! tales que al evaluar la ecuación general del plano
 //! dan un valor menor o igual que cero.
@@ -97,7 +97,7 @@ inline GEOM_FT dist(const SemiEspacio3d &r,const Pos3d &p)
 inline bool operator!=(const SemiEspacio3d &r1,const SemiEspacio3d &r2)
   { return !(r1==r2); }
 
-TripletMap<Pos3d> puntos_interseccion(const std::deque<SemiEspacio3d> &);
+TripletMap<Pos3d> intersection_points(const std::deque<SemiEspacio3d> &);
 TripletMap<Pos3d> vertices_poliedro(const std::deque<SemiEspacio3d> &, const double &tol= 1e-10);
 std::deque<Recta3d> rectas_interseccion(const std::deque<SemiEspacio3d> &);
 std::deque<Vector3d> vectores_normales(const std::deque<SemiEspacio3d> &);

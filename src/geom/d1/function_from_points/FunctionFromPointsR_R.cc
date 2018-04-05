@@ -19,27 +19,27 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//FuncPorPuntosR_R.cc
+//FunctionFromPointsR_R.cc
 
-#include "FuncPorPuntosR_R.h"
+#include "FunctionFromPointsR_R.h"
 #include <set>
 
 //! @brief Operador asignación.
-FuncPorPuntosR_R &FuncPorPuntosR_R::operator=(const FuncPorPuntosR_R &otra)
+FunctionFromPointsR_R &FunctionFromPointsR_R::operator=(const FunctionFromPointsR_R &otra)
   {
-    FuncPorPuntosR_T<double>::operator=(otra);
+    FunctionFromPointsR_T<double>::operator=(otra);
     return *this;
   }
 
 //! @brief Operador asignación. Iguala a una constante.
-FuncPorPuntosR_R &FuncPorPuntosR_R::operator=(const double &c)
+FunctionFromPointsR_R &FunctionFromPointsR_R::operator=(const double &c)
   {
     (*this)= asigna(*this,c);
     return *this;
   }
 
-//! @brief Devuelve la posición del máximo.
-FuncPorPuntosR_R::const_iterator FuncPorPuntosR_R::PosMax(void) const
+//! @brief Return the posición del máximo.
+FunctionFromPointsR_R::const_iterator FunctionFromPointsR_R::PosMax(void) const
   {
     const_iterator i= begin();
     const_iterator retval= i;
@@ -52,8 +52,8 @@ FuncPorPuntosR_R::const_iterator FuncPorPuntosR_R::PosMax(void) const
         }
     return retval;
   }
-//! @brief Devuelve la posición del mínimo.
-FuncPorPuntosR_R::const_iterator FuncPorPuntosR_R::PosMin(void) const
+//! @brief Return the posición del mínimo.
+FunctionFromPointsR_R::const_iterator FunctionFromPointsR_R::PosMin(void) const
   {
     const_iterator i= begin();
     const_iterator retval= i;
@@ -68,7 +68,7 @@ FuncPorPuntosR_R::const_iterator FuncPorPuntosR_R::PosMin(void) const
   }
 
 //! @brief Devuelve el dominio en el que se define la función.
-dq_double FuncPorPuntosR_R::Dominio(void) const
+dq_double FunctionFromPointsR_R::Dominio(void) const
   {
     dq_double retval(2,0.0);
     retval[0]= begin()->first;
@@ -77,7 +77,7 @@ dq_double FuncPorPuntosR_R::Dominio(void) const
   }
 
 //! @brief Devuelve las abcisas en las que se define la función.
-dq_double FuncPorPuntosR_R::Abcisas(void) const
+dq_double FunctionFromPointsR_R::Abcisas(void) const
   {
     dq_double retval;
     const_iterator i= begin();
@@ -87,7 +87,7 @@ dq_double FuncPorPuntosR_R::Abcisas(void) const
   }
 
 //! @brief Devuelve las ordenadas correspondientes a cada abcisa.
-dq_double FuncPorPuntosR_R::Ordenadas(void) const
+dq_double FunctionFromPointsR_R::Ordenadas(void) const
   {
     dq_double retval;
     const_iterator i= begin();
@@ -96,8 +96,8 @@ dq_double FuncPorPuntosR_R::Ordenadas(void) const
     return retval;
   }
 
-//! @brief Devuelve los puntos en los que se anula la función.
-dq_double FuncPorPuntosR_R::Ceros(void) const
+//! @brief Return the roots of the function.
+dq_double FunctionFromPointsR_R::Ceros(void) const
   {
     dq_double retval;
     const_iterator i= begin();
@@ -119,7 +119,7 @@ dq_double FuncPorPuntosR_R::Ceros(void) const
     return retval;
   }
 
-double FuncPorPuntosR_R::firstX(void) const
+double FunctionFromPointsR_R::firstX(void) const
   {
     double retval= 0.0;
     if(!empty())
@@ -128,7 +128,7 @@ double FuncPorPuntosR_R::firstX(void) const
       std::cerr << "La función está sin definir." << std::endl;
     return retval;
   }
-double FuncPorPuntosR_R::firstY(void) const
+double FunctionFromPointsR_R::firstY(void) const
   {
     double retval= 0.0;
     if(!empty())
@@ -137,7 +137,7 @@ double FuncPorPuntosR_R::firstY(void) const
       std::cerr << "La función está sin definir." << std::endl;
     return retval;
   }
-double FuncPorPuntosR_R::lastX(void) const
+double FunctionFromPointsR_R::lastX(void) const
   {
     double retval= 0.0;
     if(!empty())
@@ -146,7 +146,7 @@ double FuncPorPuntosR_R::lastX(void) const
       std::cerr << "La función está sin definir." << std::endl;
     return retval;
   }
-double FuncPorPuntosR_R::lastY(void) const
+double FunctionFromPointsR_R::lastY(void) const
   {
     double retval= 0.0;
     if(!empty())
@@ -158,7 +158,7 @@ double FuncPorPuntosR_R::lastY(void) const
 
 
 //! @brief Devuelve el área bajo la función.
-double FuncPorPuntosR_R::Area(void) const
+double FunctionFromPointsR_R::Area(void) const
   {
     double retval= 0.0;
     const_iterator i= begin();
@@ -174,10 +174,10 @@ double FuncPorPuntosR_R::Area(void) const
     return retval;
   }
 
-//! @brief Devuelve las abcisas entre x0 y x1 (ambas inclusive).
-FuncPorPuntosR_R getSub(const FuncPorPuntosR_R &f1,const double &x0,const double &x1)
+//! @brief Devuelve las abcisas entre x0 and x1 (ambas inclusive).
+FunctionFromPointsR_R getSub(const FunctionFromPointsR_R &f1,const double &x0,const double &x1)
   {
-    FuncPorPuntosR_R retval;
+    FunctionFromPointsR_R retval;
     double X0= x0;
     double X1= x1;
     if(X1<X0)
@@ -194,74 +194,74 @@ FuncPorPuntosR_R getSub(const FuncPorPuntosR_R &f1,const double &x0,const double
     return retval;
   }
 
-//! @brief Devuelve la parte de la función entre x0 y x1.
-FuncPorPuntosR_R FuncPorPuntosR_R::sub(const double &x0,const double &x1) const
+//! @brief Return the parte de la función entre x0 and x1.
+FunctionFromPointsR_R FunctionFromPointsR_R::sub(const double &x0,const double &x1) const
   { return getSub(*this,x0,x1); }
 
 
-//! @brief Devuelve la función cambiada de signo.
-FuncPorPuntosR_R FuncPorPuntosR_R::getNeg(void) const
+//! @brief Return the función cambiada de signo.
+FunctionFromPointsR_R FunctionFromPointsR_R::getNeg(void) const
   { return (*this)*-1.0; }
 
 //! @brief Cambia de signo la función.
-FuncPorPuntosR_R &FuncPorPuntosR_R::Neg(void)
+FunctionFromPointsR_R &FunctionFromPointsR_R::Neg(void)
   {
     (*this)= getNeg();
     return *this;
   }
 
-FuncPorPuntosR_R &FuncPorPuntosR_R::operator+=(const double &c)
+FunctionFromPointsR_R &FunctionFromPointsR_R::operator+=(const double &c)
   {
     (*this)= (*this)+c;
     return *this;
   }
-FuncPorPuntosR_R &FuncPorPuntosR_R::operator+=(const FuncPorPuntosR_R &f)
+FunctionFromPointsR_R &FunctionFromPointsR_R::operator+=(const FunctionFromPointsR_R &f)
   {
     (*this)= (*this)+f;
     return *this;
   }
-FuncPorPuntosR_R &FuncPorPuntosR_R::operator-=(const double &c)
+FunctionFromPointsR_R &FunctionFromPointsR_R::operator-=(const double &c)
   {
     (*this)= (*this)+(-c);
     return *this;
   }
-FuncPorPuntosR_R &FuncPorPuntosR_R::operator-=(const FuncPorPuntosR_R &f)
+FunctionFromPointsR_R &FunctionFromPointsR_R::operator-=(const FunctionFromPointsR_R &f)
   {
     (*this)= (*this)-f;
     return *this;
   }
-FuncPorPuntosR_R &FuncPorPuntosR_R::operator*=(const double &c)
+FunctionFromPointsR_R &FunctionFromPointsR_R::operator*=(const double &c)
   {
     (*this)= (*this)*c;
     return *this;
   }
-FuncPorPuntosR_R &FuncPorPuntosR_R::operator*=(const FuncPorPuntosR_R &f)
+FunctionFromPointsR_R &FunctionFromPointsR_R::operator*=(const FunctionFromPointsR_R &f)
   {
     (*this)= (*this)*f;
     return *this;
   }
-FuncPorPuntosR_R &FuncPorPuntosR_R::operator/=(const double &c)
+FunctionFromPointsR_R &FunctionFromPointsR_R::operator/=(const double &c)
   {
     (*this)= (*this)*(1.0/c);
     return *this;
   }
-FuncPorPuntosR_R &FuncPorPuntosR_R::operator/=(const FuncPorPuntosR_R &f)
+FunctionFromPointsR_R &FunctionFromPointsR_R::operator/=(const FunctionFromPointsR_R &f)
   {
     (*this)= (*this)/f;
     return *this;
   }
 
-//! @brief Devuelve la función que resulta de integrar entre x0 y x1.
-FuncPorPuntosR_R FuncPorPuntosR_R::integra(const double &x0,const double &x1,const double &d) const
+//! @brief Return the función que resulta de integrar entre x0 and x1.
+FunctionFromPointsR_R FunctionFromPointsR_R::integra(const double &x0,const double &x1,const double &d) const
   {
     double delta(d);
-    FuncPorPuntosR_R retval;
+    FunctionFromPointsR_R retval;
     const double longIntervalo= x1-x0;
     if(delta<0.0)
       delta= (x1-x0)/100;
     if(delta<=0.0)
       {
-        std::cerr << "FuncPorPuntosR_R::integra() Attempting to integrate time step" 
+        std::cerr << "FunctionFromPointsR_R::integra() Attempting to integrate time step" 
                   << delta << "<= 0\n";
         return retval;
       }
@@ -291,24 +291,24 @@ FuncPorPuntosR_R FuncPorPuntosR_R::integra(const double &x0,const double &x1,con
   }
 
 //! @brief Asigna a la función una constante.
-FuncPorPuntosR_R asigna(const FuncPorPuntosR_R &f,const double &c)
+FunctionFromPointsR_R asigna(const FunctionFromPointsR_R &f,const double &c)
   {
-    FuncPorPuntosR_R retval;
-    for(FuncPorPuntosR_R::const_iterator i= f.begin();i!=f.end();i++)
+    FunctionFromPointsR_R retval;
+    for(FunctionFromPointsR_R::const_iterator i= f.begin();i!=f.end();i++)
       retval.Inserta((*i).first,c);
     return retval;
   }
 
 //! @brief Suma a la función una constante.
-FuncPorPuntosR_R operator+(const FuncPorPuntosR_R &f,const double &c)
+FunctionFromPointsR_R operator+(const FunctionFromPointsR_R &f,const double &c)
   {
-    FuncPorPuntosR_R retval;
-    for(FuncPorPuntosR_R::const_iterator i= f.begin();i!=f.end();i++)
+    FunctionFromPointsR_R retval;
+    for(FunctionFromPointsR_R::const_iterator i= f.begin();i!=f.end();i++)
       retval.Inserta((*i).first,(*i).second+c);
     return retval;
   }
 
-dq_double merge_abcisas(const FuncPorPuntosR_R &f1,const FuncPorPuntosR_R &f2)
+dq_double merge_abcisas(const FunctionFromPointsR_R &f1,const FunctionFromPointsR_R &f2)
   {
     dq_double retval;
     const dq_double a= f1.Abcisas();
@@ -327,9 +327,9 @@ dq_double merge_abcisas(const FuncPorPuntosR_R &f1,const FuncPorPuntosR_R &f2)
   }
 
 //! @brief Suma dos funciones.
-FuncPorPuntosR_R operator+(const FuncPorPuntosR_R &f1,const FuncPorPuntosR_R &f2)
+FunctionFromPointsR_R operator+(const FunctionFromPointsR_R &f1,const FunctionFromPointsR_R &f2)
   {
-    FuncPorPuntosR_R retval;
+    FunctionFromPointsR_R retval;
     dq_double abcisas= merge_abcisas(f1,f2);
     for(dq_double::const_iterator i= abcisas.begin();i!=abcisas.end();i++)
       retval.Inserta((*i),f1.Valor(*i)+f2.Valor(*i));
@@ -337,9 +337,9 @@ FuncPorPuntosR_R operator+(const FuncPorPuntosR_R &f1,const FuncPorPuntosR_R &f2
   }
 
 //! @brief Resta dos funciones.
-FuncPorPuntosR_R operator-(const FuncPorPuntosR_R &f1,const FuncPorPuntosR_R &f2)
+FunctionFromPointsR_R operator-(const FunctionFromPointsR_R &f1,const FunctionFromPointsR_R &f2)
   {
-    FuncPorPuntosR_R retval;
+    FunctionFromPointsR_R retval;
     dq_double abcisas= merge_abcisas(f1,f2);
     for(dq_double::const_iterator i= abcisas.begin();i!=abcisas.end();i++)
       retval.Inserta((*i),f1.Valor(*i)-f2.Valor(*i));
@@ -347,9 +347,9 @@ FuncPorPuntosR_R operator-(const FuncPorPuntosR_R &f1,const FuncPorPuntosR_R &f2
   }
 
 //! @brief Multiplica dos funciones.
-FuncPorPuntosR_R operator*(const FuncPorPuntosR_R &f1,const FuncPorPuntosR_R &f2)
+FunctionFromPointsR_R operator*(const FunctionFromPointsR_R &f1,const FunctionFromPointsR_R &f2)
   {
-    FuncPorPuntosR_R retval;
+    FunctionFromPointsR_R retval;
     dq_double abcisas= merge_abcisas(f1,f2);
     for(dq_double::const_iterator i= abcisas.begin();i!=abcisas.end();i++)
       retval.Inserta((*i),f1.Valor(*i)*f2.Valor(*i));
@@ -357,9 +357,9 @@ FuncPorPuntosR_R operator*(const FuncPorPuntosR_R &f1,const FuncPorPuntosR_R &f2
   }
 
 //! @brief Divide dos funciones.
-FuncPorPuntosR_R operator/(const FuncPorPuntosR_R &f1,const FuncPorPuntosR_R &f2)
+FunctionFromPointsR_R operator/(const FunctionFromPointsR_R &f1,const FunctionFromPointsR_R &f2)
   {
-    FuncPorPuntosR_R retval;
+    FunctionFromPointsR_R retval;
     dq_double abcisas= merge_abcisas(f1,f2);
     for(dq_double::const_iterator i= abcisas.begin();i!=abcisas.end();i++)
       retval.Inserta((*i),f1.Valor(*i)/f2.Valor(*i));
@@ -367,10 +367,10 @@ FuncPorPuntosR_R operator/(const FuncPorPuntosR_R &f1,const FuncPorPuntosR_R &f2
   }
 
 //! @brief Multiplica la función por una constante.
-FuncPorPuntosR_R operator*(const double &c,const FuncPorPuntosR_R &f)
+FunctionFromPointsR_R operator*(const double &c,const FunctionFromPointsR_R &f)
   {
-    FuncPorPuntosR_R retval;
-    for(FuncPorPuntosR_R::const_iterator i= f.begin();i!=f.end();i++)
+    FunctionFromPointsR_R retval;
+    for(FunctionFromPointsR_R::const_iterator i= f.begin();i!=f.end();i++)
       retval.Inserta((*i).first,(*i).second*c);
     return retval;
   }

@@ -249,11 +249,10 @@ Triang3dMesh Poliedro3d::Triangula(void) const
     return Triang3dMesh(Poliedro3d(retval));
   }
 
+//! @brief Return the SIGNED distance from the point to the tetrahedron.
+//! The distance is computed as the maximum of the distances from the point
+//! to each of the planes that limit the tetrahedron.
 GEOM_FT Poliedro3d::PseudoDist(const Pos3d &p) const
-//Devuelve la distancia CON SIGNO desde el punto al tetraedro.
-//La distancia se calcula como el máximo de:
-// -La distancia del punto a cada uno de los planos
-//  que limitan el tetraedro.
   {
     const size_t nv= GetNumVertices();
     assert(nv>0);

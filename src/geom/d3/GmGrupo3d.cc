@@ -25,7 +25,7 @@
 
 
 #include "xc_utils/src/geom/pos_vec/Dir3d.h"
-#include "xc_utils/src/geom/d0/Punto3d.h"
+#include "xc_utils/src/geom/d0/Point3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/d1/SemiRecta3d.h"
 #include "xc_utils/src/geom/d1/Segmento3d.h"
@@ -57,7 +57,7 @@ GEOM_FT GmGrupo3d::Iz(void) const
 { return inercia(Recta3d(Cdg(),Dir3d(0.0,0.0,1.0))); }
 GEOM_FT GmGrupo3d::Pxy(void) const
   {
-    std::cerr << "GmGrupo3d::Pxy no implementada, se devuelve 0." << std::endl;
+    std::cerr << "GmGrupo3d::Pxy not implemented, 0 is returned." << std::endl;
     return 0.0;
   }
 

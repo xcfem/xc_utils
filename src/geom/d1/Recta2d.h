@@ -36,7 +36,7 @@
 class RectaParametricas2d
   {
     Pos2d org; //Origen de la recta.
-    Vector2d dir; //Vector dirección.
+    Vector2d dir; //direction vector.
   public:
     RectaParametricas2d(const Pos2d &o,const Vector2d &d)
       : org(o), dir(d) {}
@@ -44,9 +44,8 @@ class RectaParametricas2d
       { return org; }
     inline const Vector2d &GetDir(void) const
       { return dir; }
-    inline Pos2d GetPunto(const GEOM_FT &lambda) const
-    //Devuelve un punto de la recta a una "distancia"
-    //lambda del origen.
+    //! @brief Return a point at a distance lambda from its origin.
+    inline Pos2d getPoint(const GEOM_FT &lambda) const
       { return org+lambda*dir; }
     GEOM_FT Parametro(const Pos2d &p) const;
   };
@@ -80,7 +79,7 @@ class Recta2d : public Linea2d
     virtual GeomObj *clon(void) const;
     void Swap(void);
 
-    void DosPuntos(const Pos2d &p1,const Pos2d &p2);
+    void TwoPoints(const Pos2d &p1,const Pos2d &p2);
     virtual GEOM_FT GetMax(unsigned short int) const
       { return NAN; }
     virtual GEOM_FT GetMin(unsigned short int) const
@@ -100,7 +99,7 @@ class Recta2d : public Linea2d
     GEOM_FT GetY(const GEOM_FT &x) const;
     GEOM_FT Parametro(const Pos2d &p) const;
     GeomObj::list_Pos2d Ordena(const GeomObj::list_Pos2d &ptos) const;
-    Pos2d Punto(const int &i=0) const;
+    Pos2d Point(const int &i=0) const;
 
     double getLambda(unsigned short int i,const double &d,const Vector2d &i_) const;
 
@@ -176,7 +175,7 @@ inline bool paralelas(const Recta2d &r1,const Recta2d &r2)
 
 bool intersecan(const Recta2d &r1,const Recta2d &r2);
 GeomObj2d::list_Pos2d interseccion(const Recta2d &r1,const Recta2d &r2);
-Pos2d punto_interseccion(const Recta2d &, const Recta2d &);
+Pos2d intersection_point(const Recta2d &, const Recta2d &);
 
 bool colineales(const Recta2d &r1,const Recta2d &r2);
 

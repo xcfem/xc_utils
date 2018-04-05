@@ -19,44 +19,46 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//FuncPorPuntosR2_T.h
+//FunctionFromPointsR2_T.h
 
-#ifndef FUNCPORPUNTOSR2_T_H
-#define FUNCPORPUNTOSR2_T_H
+#ifndef FUNCTIONFROMPOINTSR2_T_H
+#define FUNCTIONFROMPOINTSR2_T_H
 
 #include <map>
 #include <iostream>
 #include <xc_utils/src/geom/pos_vec/MatrizPos2d.h>
 #include <xc_utils/src/geom/pos_vec/Vector2d.h>
 
-//! @brief función de R2 en T definida por puntos.
+//! @brief función de R2 en T defined on a set of points.
 //!
-//! Función que a cada punto P del plano le asigna un
-//! valor de clase T. La correspondencia se define por puntos,
-//! esto es, por pares (p1,T1), (p2,T2), ...
+//! Function that for each point P of the plane le asigna un
+//! valor de clase T. The correspondence is established by points,
+//! that is, by pairs (x1,T1), (x2,T2), ...
 template <class T>
-class FuncPorPuntosR2_T
+class FunctionFromPointsR2_T
   {
   public:
-    typedef MatrizT<T,std::vector<T> > m_valores;
+    typedef MatrizT<T,std::vector<T> > m_values;
   private:
-    MatrizPos2d dominio; //< @brief Puntos en los que se define la función.
-    m_valores valores; //< @brief Valores de la función en cada punto.
+    MatrizPos2d dominio; //< @brief Points where the function is defined.
+    m_values valores; //< @brief Function values on each point.
   public:
-    //! Constructor.
-    FuncPorPuntosR2_T(const size_t &fls=1,const size_t &cls=1)
+    //! @brief Constructor.
+    FunctionFromPointsR2_T(const size_t &fls=1,const size_t &cls=1)
       : dominio(fls,cls), valores(fls,cls) {}
-    //! Constructor.
-    FuncPorPuntosR2_T(const MatrizPos2d &dom,const T &vdef)
-      : dominio(dom), valores(m_valores(dom.getNumFilas(),dom.getNumCols(),vdef)) {}
-    FuncPorPuntosR2_T(const MatrizPos2d &dom,const m_valores &v);
+    //! @brief Constructor.
+    FunctionFromPointsR2_T(const MatrizPos2d &dom,const T &vdef)
+      : dominio(dom), valores(m_values(dom.getNumFilas(),dom.getNumCols(),vdef)) {}
+    //! @brief Constructor.
+    FunctionFromPointsR2_T(const MatrizPos2d &dom,const m_values &v);
+    std::string getClassName(void) const;
     //! @brief Devuelve el número de filas del dominio.
     size_t GetNumFilas(void) const
       { return dominio.getNumFilas(); }
     //! @brief Devuelve el número de columnas del dominio.
     size_t GetNumCols(void) const
       { return dominio.getNumCols(); }
-    //! @brief Devuelve verdadero si no tiene puntos.
+    //! @brief Return true if there are no points.
     size_t empty(void) const
       { return dominio.empty(); }
     const Pos2d &Posicion(const size_t &i,const size_t &j) const;
@@ -67,36 +69,54 @@ class FuncPorPuntosR2_T
 
 //! Constructor.
 template <class T>
-FuncPorPuntosR2_T<T>::FuncPorPuntosR2_T(const MatrizPos2d &dom,const m_valores &v)
-  : dominio(dom), valores(m_valores(dom.getNumFilas(),dom.getNumCols(),T()))
+FunctionFromPointsR2_T<T>::FunctionFromPointsR2_T(const MatrizPos2d &dom,const m_values &v)
+  : dominio(dom), valores(m_values(dom.getNumFilas(),dom.getNumCols(),T()))
   {
     if((v.getNumFilas()==dom.getNumFilas()) && (v.getNumCols()==dom.getNumCols()) )
       valores= v;
     else
       {
-	std::cerr << "FuncPorPuntosR2_T<T>::Constructor: La matriz de valores"
-                  << " tiene dimensiones distintas a la de puntos." << std::endl;
+	std::cerr << this->getClassName() << "::" << __FUNCTION__
+		  << ": the value matrix has dimensions different"
+	          << " than those of the point matrix."
+		  << std::endl;
       }
   }
 
-//! @brief Devuelve el punto de índices (i,j).
+//! @brief Returns demangled class name.
 template <class T>
-const Pos2d &FuncPorPuntosR2_T<T>::Posicion(const size_t &i,const size_t &j) const
+std::string FunctionFromPointsR2_T<T>::getClassName(void) const
+  {
+    std::string tmp= typeid(*this).name();
+    std::bad_exception  e;
+    int status;
+    char *realname= abi::__cxa_demangle(tmp.c_str(), 0, 0, &status);
+    if(realname)
+      tmp= std::string(realname);
+    free(realname);
+    return tmp;
+  }
+
+
+//! @brief Return the point de índices (i,j).
+template <class T>
+const Pos2d &FunctionFromPointsR2_T<T>::Posicion(const size_t &i,const size_t &j) const
   { return dominio(i,j); }
-//! @brief Devuelve una referencia al punto de índices (i,j).
+//! @brief Return a reference to the point at position (i,j).
 template <class T>
-Pos2d &FuncPorPuntosR2_T<T>::Posicion(const size_t &i,const size_t &j)
+Pos2d &FunctionFromPointsR2_T<T>::Posicion(const size_t &i,const size_t &j)
   { return dominio(i,j); }
-//! @brief Devuelve el valor correspondiente al punto de índices (i,j).
+//! @brief Return the value that corresponds to the point a position (i,j).
 template <class T>
-const T &FuncPorPuntosR2_T<T>::Valor(const size_t &i,const size_t &j) const
+const T &FunctionFromPointsR2_T<T>::Valor(const size_t &i,const size_t &j) const
   { return valores(i,j); }
-//! @brief Devuelve una referencia al valor correspondiente al punto de índices (i,j).
+//! @brief Return a reference to the the value that corresponds to the point
+//! a position (i,j).
 template <class T>
-T &FuncPorPuntosR2_T<T>::Valor(const size_t &i,const size_t &j)
+T &FunctionFromPointsR2_T<T>::Valor(const size_t &i,const size_t &j)
   { return valores(i,j); }
 template <class T>
-std::ostream &operator<<(std::ostream &os, const FuncPorPuntosR2_T<T> &m)
+std::ostream &operator<<(std::ostream &os, const FunctionFromPointsR2_T<T> &m)
   {
     const size_t fls= m.GetNumFilas();
     const size_t cls= m.GetNumCols();

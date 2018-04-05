@@ -32,65 +32,66 @@
 
 //! @brief Constructor.
 Rejilla2d::Rejilla2d(void)
-  : Superficie2d(), puntos(1,1) {}
+  : Superficie2d(), points(1,1) {}
 
 Rejilla2d::Rejilla2d(int numSubdivIJ, int numSubdivJK)
-  : Superficie2d(), puntos(numSubdivIJ,numSubdivJK) {}
+  : Superficie2d(), points(numSubdivIJ,numSubdivJK) {}
 
 Rejilla2d::~Rejilla2d(void)
   {}
 
 //! @brief Devuelve el área de la rejilla.
 GEOM_FT Rejilla2d::Area(void) const
-  { return puntos.GetArea();  }
+  { return points.GetArea();  }
 
 //! @briefMomento de inercia respecto al CDG en ejes locales.
 GEOM_FT Rejilla2d::Ix(void) const
-  { return puntos.Ix(); }
+  { return points.Ix(); }
 
 //! @brief Momento de inercia respecto al CDG en ejes locales.
 GEOM_FT Rejilla2d::Iy(void) const
-  { return puntos.Iy(); }
+  { return points.Iy(); }
 
 //! @brief Producto de inercia respecto al CDG en ejes locales.
 GEOM_FT Rejilla2d::Pxy(void) const
-  { return puntos.Pxy(); }
+  { return points.Pxy(); }
 
 //! @brief Devuelve el centro de gravedad de la rejilla.
 Pos2d Rejilla2d::Cdg(void) const
-  { return puntos.GetCdg(); }
+  { return points.GetCdg(); }
 
-//! @brief Devuelve las coordenadas del punto i,j.
+//! @brief Devuelve las coordenadas of point i,j.
 const matriz_FT &Rejilla2d::GetVertCoords(const size_t &i,const size_t &j) const
-  { return puntos.GetVertCoords(i,j); }
+  { return points.GetVertCoords(i,j); }
 
-//! @brief Devuelve el punto i,j.
-Pos2d Rejilla2d::GetPunto(const size_t &i,const size_t &j) const
-  { return puntos.GetPunto(i,j); }
+//! @brief Return the point i,j.
+Pos2d Rejilla2d::getPoint(const size_t &i,const size_t &j) const
+  { return points.getPoint(i,j); }
 
 //! @brief Devuelve el cuadrilátero correspondiente a la celda i,j:
 Cuadrilatero2d Rejilla2d::GetQuad(const size_t &i,const size_t &j) const
-  { return puntos.GetQuad(i,j); }
+  { return points.GetQuad(i,j); }
 
-//! @brief Devuelve verdadero si el punto está dentro de la rejilla.
+//! @brief Return true if the point belongs to the grid.
 bool Rejilla2d::In(const Pos2d &p, const double &tol) const
-  { return puntos.In(p,tol); }
+  { return points.In(p,tol); }
 
-//! @brief Devuelve el valor maximo de la coordenada i.
+//! @brief Return the maximum value of the i coordinate.
 GEOM_FT Rejilla2d::GetMax(unsigned short int i) const
-  { return puntos.GetMax(i); }
+  { return points.GetMax(i); }
 
-//! @brief Devuelve el valor minimo de la coordenada i.
+//! @brief Return the minimum value of the i coordinate.
 GEOM_FT Rejilla2d::GetMin(unsigned short int i) const
-  { return puntos.GetMin(i); }
+  { return points.GetMin(i); }
 
 
 //! @brief Aplica al objeto la transformación que se
 //! pasa como parámetro.
 void Rejilla2d::Transforma(const Trf2d &trf2d)
-  { puntos.Transforma(trf2d); }
+  { points.Transforma(trf2d); }
 
 void Rejilla2d::Print(std::ostream &os) const
   {
-    std::cerr << "Rejilla2d::Print, no implementada." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
   }

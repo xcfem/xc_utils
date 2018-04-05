@@ -56,7 +56,7 @@ class SVD3d: public VDesliz3d
     Recta3d EjeCentral(void) const;
     bool ExisteRectaMomNulo(const double &tol= sqrt_mchne_eps_dbl) const;
     Recta3d RectaMomNulo(const double &tol= sqrt_mchne_eps_dbl) const;
-    Pos3d PuntoAplic(const Plano3d &p) const;
+    Pos3d PointOfApplication(const Plano3d &p) const;
 
     SVD3d ReduceA(const Pos3d &Q) const;
 

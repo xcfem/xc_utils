@@ -43,11 +43,11 @@ SisCooXd3d::SisCooXd3d(const size_t &i,const VGlobal &v1,const VGlobal &v2)
 
 SisCooXd3d::SisCooXd3d(const size_t &i,const PGlobal &o,const PGlobal &p)
   : SisCoo(i,3)
-  { DosPuntos(o,p); }
+  { TwoPoints(o,p); }
 
 SisCooXd3d::SisCooXd3d(const size_t &i,const PGlobal &p1,const PGlobal &p2, const PGlobal &p3)
   : SisCoo(i,3)
-  { TresPuntos(p1,p2,p3); }
+  { ThreePoints(p1,p2,p3); }
 SisCooXd3d::SisCooXd3d(const size_t &i,const VGlobal &v1,const VGlobal &v2,const VGlobal &v3)
   : SisCoo(i,3)
   { vectores_unitarios(v1,v2,v3); }
@@ -55,10 +55,10 @@ SisCooXd3d::SisCooXd3d(const size_t &i,const VGlobal &v1,const VGlobal &v2,const
 void SisCooXd3d::PutFila(const size_t &eje,const VGlobal &v)
   { SisCoo::PutFila(eje,traspuesta(v.GetMatriz())); }
 
-//! @brief Devuelve la dirección del eje que se pasa como parámetro.
+//! @brief Return the dirección del eje que se pasa como parámetro.
 SisCooXd3d::DGlobal SisCooXd3d::GetDirEje(const size_t &eje) const
   { return DGlobal(GetVDirEje(1)); }
-//! @brief Devuelve el vector dirección del eje que se pasa como parámetro.
+//! @brief Devuelve el direction vector del eje que se pasa como parámetro.
 SisCooXd3d::VGlobal SisCooXd3d::GetVDirEje(const size_t &eje) const
   { 
     const matriz_FT fila= GetFila(eje);
@@ -66,7 +66,7 @@ SisCooXd3d::VGlobal SisCooXd3d::GetVDirEje(const size_t &eje) const
   }
 //! Devuelve las componentes del vector v 
 //! que se pasa como parámetro expresado en coordenadas locales
-//! expresado en coordenadas globales.
+//! expresado en global coordinates.
 SisCooXd3d::VGlobal SisCooXd3d::GetCooGlobales(const matriz_FT &v) const
   {
     const matriz_FT tmp= SisCoo::GetCooGlobales(v);
@@ -157,19 +157,20 @@ void SisCooXd3d::VectorEjeX(const VGlobal &i_)
 
 //! @brief Construye el sistema de coordenadas formado por los vectores:
 //! i_ el vector op (ver VectorEjeX).
-void SisCooXd3d::DosPuntos(const PGlobal &o,const PGlobal &p)
+void SisCooXd3d::TwoPoints(const PGlobal &o,const PGlobal &p)
   { VectorEjeX(p-o); }
-//! Genera el sistema de coordenadas cuyos ejes se orientan:
-//! eje x de o a p1;
-//! eje y perpendicular a x contenido en el plano 
-//! definido por los tres puntos y sentido positivo hacia p2.
-void SisCooXd3d::TresPuntos(const PGlobal &o,const PGlobal &p1,const PGlobal &p2)
+
+//! @brief Create the coordinate system with axis oriented as follows:
+//! x axis: from o to p1;
+//! y axis: normal to x and contained in the plane defined 
+//! by the three points and pointing to p2.
+void SisCooXd3d::ThreePoints(const PGlobal &o,const PGlobal &p1,const PGlobal &p2)
   {
     if(colineales(o,p1,p2))
       {
-        std::cerr << "SisCooXd3d::TresPuntos: Los tres puntos: " 
+        std::cerr << getClassName() << "::" << __FUNCTION__ 
              << o << ' ' << p1 << ' ' << p2 
-             << " son colineales. No se hicieron cambios"
+             << " are collinear. Doing nothing."
              << std::endl;
         return;
       }

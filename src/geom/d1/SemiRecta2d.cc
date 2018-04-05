@@ -34,13 +34,14 @@ SemiRecta2d::SemiRecta2d(const Pos2d &p1,const Pos2d &p2)
   {
     if(EsDegenerada())
       {
-        clog << "SemiRecta2d::SemiRecta2d: La recta es degenerada, los puntos: "
-             << p1 << " y " << p2 << " coinciden." << endl;
+        clog << getClassName() << "::" << __FUNCTION__
+	     << "; degenerated line, the points: "
+             << p1 << " and " << p2 << " are the same." << endl;
       }
   }
 SemiRecta2d::SemiRecta2d(const Pos2d &p1,const Vector2d &vdir)
   : Linea2d(), cgsr(p1.ToCGAL(),vdir.ToCGAL()) {}
-void SemiRecta2d::DosPuntos(const Pos2d &p1,const Pos2d &p2)
+void SemiRecta2d::TwoPoints(const Pos2d &p1,const Pos2d &p2)
   { (*this)= SemiRecta2d(p1,p2); }
 
 Dir2d SemiRecta2d::GetDir(void) const
@@ -48,8 +49,8 @@ Dir2d SemiRecta2d::GetDir(void) const
 Vector2d SemiRecta2d::VDir(void) const
   { return GetDir().GetVector(); }
 
-//! @brief Devuelve el cuadrado de la distancia 
-//! desde el punto a la semirrecta.
+//! @brief Devuelve el cuadrado de la distance 
+//! from the point a la semirrecta.
 GEOM_FT SemiRecta2d::dist2(const Pos2d &p) const
   {
     Recta2d r= RectaSoporte();
@@ -60,15 +61,15 @@ GEOM_FT SemiRecta2d::dist2(const Pos2d &p) const
     return retval;
   }
 
-//! @brief Devuelve la distancia 
-//! desde el punto a la semirrecta.
+//! @brief Return the distance 
+//! from the point a la semirrecta.
 GEOM_FT SemiRecta2d::dist(const Pos2d &p) const
   { return sqrt_FT(dist2(p)); }
 
 bool SemiRecta2d::Interseca(const Recta2d &r) const
   { return do_intersect(r.cgr,cgsr); }
 
-//! @brief Devuelve la intersección de la semirrecta con un plano coord_i=cte.
+//! @brief Return the intersección de la semirrecta con un plano coord_i=cte.
 GeomObj2d::list_Pos2d SemiRecta2d::Interseccion(unsigned short int i, const double &d) const
   {
     GeomObj2d::list_Pos2d lp;
@@ -83,7 +84,7 @@ GeomObj2d::list_Pos2d SemiRecta2d::Interseccion(unsigned short int i, const doub
     return lp;
   }
 
-//! @brief Devuelve el punto intersección de recta y semirrecta, si doesn't exists la
+//! @brief Return the point intersección de recta and semirrecta, si doesn't exists la
 //! intersección devuelve la lista vacía.
 GeomObj2d::list_Pos2d SemiRecta2d::Interseccion(const Recta2d &r) const
   {
@@ -97,7 +98,7 @@ GeomObj2d::list_Pos2d SemiRecta2d::Interseccion(const Recta2d &r) const
           retval.push_back(Pos2d(ptoi));
         else
           {
-            cerr << "SemiRecta2d::Interseccion(Recta2d): Error desconocido." << endl
+            cerr << "SemiRecta2d::Interseccion(Recta2d): unknown error." << endl
                  << "sg: " << *this << endl
                  << "r: " << r << endl;
           }
@@ -105,15 +106,16 @@ GeomObj2d::list_Pos2d SemiRecta2d::Interseccion(const Recta2d &r) const
     return retval;
   }
 
-//Devuelve el punto intersección de ambas rectas, if doesn't exists la
+//Return the point intersección de ambas rectas, if doesn't exists la
 //intersección devuelve la lista vacía.
 GeomObj2d::list_Pos2d SemiRecta2d::Interseccion(const SemiRecta2d &r2) const
   {
     GeomObj2d::list_Pos2d retval;
     if(*this == r2)
       {
-        cerr << "SemiRecta2d::interseccion(SemiRecta2d): Las semirectas coinciden, todos sus puntos pertenecen a la intersección." 
-             << endl;
+        cerr << getClassName() << "::" << __FUNCTION__
+	     << "; rays are the same, all its points belong"
+	     << " to the intersection." << std::endl;
         return retval;
       }
     if(Interseca(r2))
@@ -125,7 +127,7 @@ GeomObj2d::list_Pos2d SemiRecta2d::Interseccion(const SemiRecta2d &r2) const
           retval.push_back(Pos2d(ptoi));
         else
           {
-            cerr << "interseccion(SemiRecta2d,SemiRecta2d): Error desconocido." 
+            cerr << "interseccion(SemiRecta2d,SemiRecta2d): unknown error." 
                  << endl;
           }
       }
@@ -138,7 +140,7 @@ GeomObj2d::list_Pos2d SemiRecta2d::Interseccion(const SemiRecta2d &r2) const
 void SemiRecta2d::Transforma(const Trf2d &trf2d)
   {
     const Pos2d p1= trf2d.Transforma(Origen());
-    const Pos2d p2= trf2d.Transforma(Punto(100));
+    const Pos2d p2= trf2d.Transforma(Point(100));
     (*this)= SemiRecta2d(p1,p2);
   }
 

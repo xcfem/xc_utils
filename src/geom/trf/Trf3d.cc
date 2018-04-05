@@ -131,7 +131,7 @@ matriz_FT Trf3d::Homogeneas(void) const
     return retval;
   }
 
-//! @brief Devuelve el transformado del punto que se pasa como parámetro.
+//! @brief Return the transformed of the point.
 Pos3d Trf3d::Transforma(const Pos3d &p) const
   { return Pos3d(cgtrf.transform(p.ToCGAL())); }
 
@@ -139,14 +139,14 @@ Pos3d Trf3d::Transforma(const Pos3d &p) const
 Vector3d Trf3d::Transforma(const Vector3d &v) const
   { return Vector3d(cgtrf.transform(v.ToCGAL())); }
 
-//! @brief Transforma los puntos de la matriz que se pasa como parámetro.
+//! @brief Transform the points of the matrix.
 void Trf3d::Transforma(MatrizPos3d &m) const
   {
     for(MatrizPos3d::iterator i= m.begin();i!=m.end();i++)
       (*i)= Transforma(*i);
   }
 
-//! @brief Transforma los puntos de la matriz que se pasa como parámetro.
+//! @brief Transform the points of the matrix.
 const MatrizPos3d &Trf3d::Transforma(const MatrizPos3d &m) const
   {
     static MatrizPos3d retval;
@@ -155,7 +155,7 @@ const MatrizPos3d &Trf3d::Transforma(const MatrizPos3d &m) const
     return retval;
   }
 
-//! @brief Transforma los puntos de la tritriz que se pasa como parámetro.
+//! @brief Transform the points of the argument.
 void Trf3d::Transforma(TritrizPos3d &m) const
   {
     const size_t ncapas= m.GetCapas();
@@ -167,7 +167,7 @@ void Trf3d::Transforma(TritrizPos3d &m) const
           m(i,j,k)= Transforma(m(i,j,k));
   }
 
-//! @brief Transforma los puntos de la Tritriz que se pasa como parámetro.
+//! @brief Transform the points of the argument.
 const TritrizPos3d &Trf3d::Transforma(const TritrizPos3d &m) const
   {
     static TritrizPos3d retval;
@@ -176,7 +176,7 @@ const TritrizPos3d &Trf3d::Transforma(const TritrizPos3d &m) const
     return retval;
   }
 
-//! @brief Transforma el punto que se pasa como parámetro.
+//! @brief Transform the point.
 Pos3d Trf3d::operator()(const Pos3d &p) const
   { return Transforma(p); }
 //! @brief Transforma el vector que se pasa como parámetro.

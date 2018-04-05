@@ -27,7 +27,7 @@
 
 //! @ingroup GEOM
 //
-//! @brief Referencia a una capa fila de la tritriz cuyos puntos tienen los índices J y K constantes.
+//! @brief Reference to a layer fila de la tritriz which points have los índices J y K constantes.
 template <class TRITRIZ>
 class ConstRefFilaI: public ConstRefCajaTritriz<TRITRIZ>
   {
@@ -36,7 +36,7 @@ class ConstRefFilaI: public ConstRefCajaTritriz<TRITRIZ>
 
     explicit ConstRefFilaI(const TRITRIZ &m,const size_t &f= 1,const size_t &c= 1);
     ConstRefFilaI(const TRITRIZ &m,const size_t &,const size_t &,const size_t &,const size_t &);
-    ConstRefFilaI(const TRITRIZ &t,const RangoIndice &rango_capas,const size_t &f,const size_t &c);
+    ConstRefFilaI(const TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const size_t &c);
     inline virtual ~ConstRefFilaI(void) {}
     virtual const_reference operator()(size_t capa=1) const
       { return ConstRefCajaTritriz<TRITRIZ>::operator()(capa,1,1); }
@@ -58,8 +58,8 @@ ConstRefFilaI<TRITRIZ>::ConstRefFilaI(const TRITRIZ &t,const size_t &capa1,const
 
 //! @brief Constructor.
 template<class TRITRIZ>
-ConstRefFilaI<TRITRIZ>::ConstRefFilaI(const TRITRIZ &t,const RangoIndice &rango_capas,const size_t &f,const size_t &c)
-  : ConstRefCajaTritriz<TRITRIZ>(t,rango_capas,f,c)
+ConstRefFilaI<TRITRIZ>::ConstRefFilaI(const TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const size_t &c)
+  : ConstRefCajaTritriz<TRITRIZ>(t,layer_range,f,c)
   {}
 
 #endif

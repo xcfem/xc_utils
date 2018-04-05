@@ -49,7 +49,7 @@ class Linea2d : public GeomObj2d
       { return 0.0; }
     virtual GEOM_FT Volumen(void) const
       { return 0.0; }
-    //Devuelve verdadero si el punto esta sobre la Linea.
+    //@brief Return true if the points is on sobre la Linea.
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const= 0;
   };
 #endif

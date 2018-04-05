@@ -37,7 +37,7 @@ class Recta3d;
 class VDesliz3d : public Vector3d
   {
   protected:
-    Pos3d org; //!< Punto que determina la línea de accion.
+    Pos3d org; //!< Point that fix the line of action.
   public:
     VDesliz3d(const Pos3d &o= Pos3d(),const Vector3d &v= Vector3d());
     VDesliz3d(const Pos3d &o,const Pos3d &p);

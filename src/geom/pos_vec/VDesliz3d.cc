@@ -40,9 +40,9 @@ VDesliz3d::VDesliz3d(const Pos3d &o,const Pos3d &p)
 //! Is the momento with respect to an axis point
 //! projected onto the axis.
 GEOM_FT VDesliz3d::getMomento(const Recta3d &e) const
-  { return dot(getMomento(e.Punto()),e.VDir().Normalizado()); }
+  { return dot(getMomento(e.Point()),e.VDir().Normalizado()); }
 
-//! @brief Momento de un sliding vector respecto a un punto.
+//! @brief Moment of a sliding vector with respect to a point.
 VDesliz3d VDesliz3d::getMomento(const Pos3d &o) const
   {
     VDesliz3d retval(o);

@@ -32,11 +32,12 @@ SemiRecta3d::SemiRecta3d(const Pos3d &p1,const Pos3d &p2)
   {
     if(EsDegenerada())
       {
-        std::clog << "SemiRecta3d::SemiRecta3d: La recta es degenerada, los puntos: "
-             << p1 << " y " << p2 << " coinciden." << std::endl;
+        std::clog << getClassName() << "::" << __FUNCTION__
+		  << "; degenerate line, the points: "
+             << p1 << " and " << p2 << " are the same." << std::endl;
       }
   }
-void SemiRecta3d::DosPuntos(const Pos3d &p1,const Pos3d &p2)
+void SemiRecta3d::TwoPoints(const Pos3d &p1,const Pos3d &p2)
   { (*this)= SemiRecta3d(p1,p2); }
 
 Dir3d SemiRecta3d::GetDir(void) const
@@ -55,20 +56,20 @@ GEOM_FT SemiRecta3d::dist2(const Pos3d &p) const
     return retval;
   }
 
-//! @brief Devuelve la distancia 
-//! desde el punto a la semirrecta.
+//! @brief Return the distance 
+//! from the point a la semirrecta.
 GEOM_FT SemiRecta3d::dist(const Pos3d &p) const
   { return sqrt_FT(dist2(p)); }
 
-//! @brief Devuelve verdadero si son paralelas.
+//! @brief Return true if son paralelas.
 bool SemiRecta3d::Paralela(const SemiRecta3d &r) const
   { return (GetDir()== r.GetDir()); }
 
-//! @brief Devuelve verdadero si son paralelas.
+//! @brief Return true if son paralelas.
 bool SemiRecta3d::Paralela(const Recta3d &r) const
   { return (GetDir()== r.GetDir()); }
 
-//! @brief Devuelve el punto intersección de recta y semirrecta, if doesn't exists la
+//! @brief Return the point intersección de recta and semirrecta, if doesn't exists la
 //! intersección devuelve la lista vacía.
 GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(const Recta3d &r) const
   {
@@ -77,13 +78,13 @@ GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(const Recta3d &r) const
     if(!retval.empty()) //Intersection exists.
       {
         const Pos3d &pint= *retval.begin();
-        if(!In(pint)) //el punto intersección NO está en la semirrecta.
+        if(!In(pint)) //intersection point is NOT on the ray.
           retval.erase(retval.begin(),retval.end());
       }
     return retval;
   }
 
-//! @brief Devuelve la intersección de la semirrecta con un plano coord_i=cte.
+//! @brief Return the intersección de la semirrecta con un plano coord_i=cte.
 GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(unsigned short int i, const double &d) const
   {
     GeomObj3d::list_Pos3d lp;
@@ -98,7 +99,7 @@ GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(unsigned short int i, const doub
     return lp;
   }
 
-//! @brief Devuelve el punto intersección de ambas semirectas, if doesn't exists
+//! @brief Return the point intersección de ambas semirectas, if doesn't exists
 //! intersección devuelve la lista vacía.
 GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(const SemiRecta3d &sr) const
   {
@@ -107,7 +108,7 @@ GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(const SemiRecta3d &sr) const
     if(!retval.empty()) //Intersection exists.
       {
         const Pos3d &pint= *retval.begin();
-        if(!In(pint)) //el punto intersección NO está en ESTA semirrecta.
+        if(!In(pint)) //intersection point is NOT on the ray.
           retval.erase(retval.begin(),retval.end());
       }
     return retval;

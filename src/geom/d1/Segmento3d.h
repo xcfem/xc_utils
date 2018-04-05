@@ -48,14 +48,14 @@ class Segmento3d : public Linea3d
     const CGSegmento_3 &ToCGAL(void) const
       { return cgseg; }
     virtual GeomObj *clon(void) const;
-    void DosPuntos(const Pos3d &p1,const Pos3d &p2);
+    void TwoPoints(const Pos3d &p1,const Pos3d &p2);
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
     Recta3d RectaSoporte(void) const;
     Pos3d Origen(void) const;
     Pos3d Destino(void) const;
     GEOM_FT getSlope(void) const;
-    const Pos3d Punto(const int &i) const;
+    const Pos3d Point(const int &i) const;
     Pos3d PtoParametricas(const GEOM_FT &lambda) const;
     double getParamCooNatural(const GEOM_FT &) const;
     Pos3d PtoCooNatural(const GEOM_FT &chi) const;

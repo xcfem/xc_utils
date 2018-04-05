@@ -37,19 +37,19 @@
 //! @brief Circulo definido por el radio y tangente a dos rectas.
 //!
 //! Basado en Mathematical elements for computer graphics
-//! (Rogers and Adams) página 234 y siguientes.
+//! (Rogers and Adams) page 234 y siguientes.
 Circulo2d Circulo2dRTT(const GEOM_FT &radio,const Recta2d &p,const Recta2d &l,const bool &left,const bool &far)
   {
     std::cerr << "Circulo2dRTT no está probada." << std::endl;
-    const GeomObj2d::list_Pos2d ptos_int= p.Interseccion(l);
-    if(ptos_int.size()<1)
+    const GeomObj2d::list_Pos2d points_int= p.Interseccion(l);
+    if(points_int.size()<1)
       {
         std::cerr << "Circulo2dRTT, error; las rectas son paralelas." << std::endl;
         return Circulo2d();
       }
     else
       {
-        const Pos2d &o= *ptos_int.begin();
+        const Pos2d &o= *points_int.begin();
         const Recta2d bisect= bisectriz(p,l);
         Ref2d2d ref(o,bisect.GetDir()); //Origen en la intersección, eje x según la recta bisectriz.
         const double theta= angulo(bisect,p); //Angulo entre la bisectriz y la recta p.
@@ -83,22 +83,22 @@ Circulo2d::Circulo2d(const Pos2d &centro,const GEOM_FT &rad)
 Circulo2d::Circulo2d(const GEOM_FT &rad2,const Pos2d &centro)
   : Superficie2d(), cgcirc(centro.ToCGAL(),rad2) {}
 
-//! @brief Construye el círculo a partir de tres puntos.
+//! @brief Build the circle from three points.
 //!
 //! Basado en Mathematical elements for computer graphics
-//! (Rogers and Adams) página 233.
+//! (Rogers and Adams) page 233.
 Circulo2d::Circulo2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3)
   : Superficie2d(), cgcirc(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL())
   {}
 Pos2d Circulo2d::Centro(void) const
   { return Pos2d(cgcirc.center()); }
 
-//! @brief Devuelve la posición del centro de gravedad del círculo.
+//! @brief Return the posición del centro de gravedad del círculo.
 Pos2d Circulo2d::Cdg(void) const
   { return Centro(); }
 
-//! @brief Devuelve el punto del círculo correspondiente al ángulo que se pasa como parámetro.
-Pos2d Circulo2d::Punto(const double &ang) const
+//! @brief Return the point del círculo correspondiente al ángulo que se pasa como parámetro.
+Pos2d Circulo2d::Point(const double &ang) const
   {
     const Pos2d o= Centro();
     const GEOM_FT r= Radio();
@@ -111,8 +111,8 @@ Pos2d Circulo2d::Punto(const double &ang) const
 GEOM_FT Circulo2d::Radio(void) const
   { return sqrt_FT(Radio2()); }
 
-//! @brief Devuelve el ángulo que forma la dirección de la línea que
-//! une el centro del círculo con el punto p con la dirección del eje x.
+//! @brief Return the angle between the line that passes through the center
+//! and the p point and the x axis.
 double Circulo2d::Angulo(const Pos2d &p) const
   {
     static const Vector2d horiz(1,0);
@@ -121,16 +121,16 @@ double Circulo2d::Angulo(const Pos2d &p) const
     return retval;
   }
 
-//! @brief Devuelve la longitud del círculo.
+//! @brief Return the longitud del círculo.
 GEOM_FT Circulo2d::Longitud(void) const
   { return M_PI_FT*Diametro(); }
 //! @brief Devuelve el área del círculo.
 GEOM_FT Circulo2d::Area(void) const
   { return M_PI_FT*Radio2(); }
-//! @brief Devuelve el valor máximo de la coordenada i de los puntos del círculo.
+//! @brief Return the maximum value of the i coordinate of the points of the circle.
 GEOM_FT Circulo2d::GetMax(unsigned short int i) const
   { return Centro()(i)+Radio(); }
-//! @brief Devuelve el valor mínimo de la coordenada i de los puntos del círculo.
+//! @brief Devuelve el valor mínimo of the i coordinate of the points of the circle.
 GEOM_FT Circulo2d::GetMin(unsigned short int i) const
   { return Centro()(i)-Radio(); }
 //! @brief Devuelve el momento de inercia del círculo respecto al 
@@ -139,7 +139,7 @@ GEOM_FT Circulo2d::Ix(void) const
   { return M_PI_FT/4*sqr(Radio2()); }
 
 
-//! @brief Devuelve verdadero si el punto est'a sobre el circulo.
+//! @brief Return true if the point is on the circle.
 bool Circulo2d::In(const Pos2d &p, const double &tol) const
   { return (cgcirc.has_on_positive_side(p.ToCGAL()) || cgcirc.has_on_boundary(p.ToCGAL())); }
 
@@ -148,8 +148,8 @@ bool Circulo2d::In(const Pos2d &p, const double &tol) const
 double Circulo2d::AnguloComprendido(void) const
   { return 2*M_PI; }
 
-//! @brief Devuelve n puntos equiespaciados sobre el círculo.
-void Circulo2d::puntos_arco(const double &theta_inic,const double &delta_theta,MatrizPos2d &ptos) const
+//! @brief Return n points equally espaces over the circle perimenter.
+void Circulo2d::arc_points(const double &theta_inic,const double &delta_theta,MatrizPos2d &ptos) const
   {
     const GEOM_FT r= Radio();
     GEOM_FT x= r*double_to_FT(cos(theta_inic));
@@ -170,18 +170,20 @@ void Circulo2d::puntos_arco(const double &theta_inic,const double &delta_theta,M
     return;
   }
 
-//! @brief Devuelve n puntos equiespaciados sobre la circunferencia que forma el perímetro.
-MatrizPos2d Circulo2d::PuntosPerimetro(const size_t &n,const double &theta_inic) const
+//! @brief Return n points equally spaced over the cicumference.
+MatrizPos2d Circulo2d::getPointsOnPerimeter(const size_t &n,const double &theta_inic) const
   {
     MatrizPos2d retval;
     if(n>0)
       {
         retval= MatrizPos2d(n,1);
         const double delta_theta= 2*M_PI/n;
-        puntos_arco(theta_inic,delta_theta,retval);
+        arc_points(theta_inic,delta_theta,retval);
       }
     else
-      std::cerr << "ERROR en Circulo2d::Puntos; el número de puntos ha de ser mayor que cero." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; ERROR: number of points must be greater than zero."
+		<< std::endl;
     return retval;
   }
 
@@ -189,9 +191,9 @@ MatrizPos2d Circulo2d::PuntosPerimetro(const size_t &n,const double &theta_inic)
 Poligono2d Circulo2d::getPoligonoInscrito(const size_t &n,const double &theta_inic) const
   {
     Poligono2d retval;
-    const MatrizPos2d puntos= PuntosPerimetro(n,theta_inic);
+    const MatrizPos2d points= getPointsOnPerimeter(n,theta_inic);
     for(size_t i= 1;i<=n;i++)
-      retval.push_back(puntos(i,1));
+      retval.push_back(points(i,1));
     return retval;
   }
 

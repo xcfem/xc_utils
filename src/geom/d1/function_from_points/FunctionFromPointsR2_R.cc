@@ -19,12 +19,12 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//FuncPorPuntosR2_R.cc
+//FunctionFromPointsR2_R.cc
 
-#include "FuncPorPuntosR2_R.h"
+#include "FunctionFromPointsR2_R.h"
 
-//! @brief Devuelve la fila y columna del máximo.
-FuncPorPuntosR2_R::filacol FuncPorPuntosR2_R::PosMax(void) const
+//! @brief Return the fila and columna del máximo.
+FunctionFromPointsR2_R::filacol FunctionFromPointsR2_R::PosMax(void) const
   {
     filacol retval;
     retval.first= 1;
@@ -45,20 +45,20 @@ FuncPorPuntosR2_R::filacol FuncPorPuntosR2_R::PosMax(void) const
         }
     return retval;
   }
-//! @brief Devuelve el valor máximo de los valores definidos.
-double FuncPorPuntosR2_R::Max(void) const
+//! @brief Return the maximum value de los valores definidos.
+double FunctionFromPointsR2_R::Max(void) const
   {
     const filacol fc= PosMax();
     return Valor(fc.first,fc.second);
   }
-//! @brief Devuelve la posición del valor máximo de los valores definidos.
-Pos2d FuncPorPuntosR2_R::PuntoMax(void) const
+//! @brief Return the position that corresponds to the maximum.
+Pos2d FunctionFromPointsR2_R::getMaxPoint(void) const
   {
     const filacol fc= PosMax();
     return Posicion(fc.first,fc.second);
   }
-//! @brief Devuelve la fila y columna del mínimo.
-FuncPorPuntosR2_R::filacol FuncPorPuntosR2_R::PosMin(void) const
+//! @brief Return the fila and columna del mínimo.
+FunctionFromPointsR2_R::filacol FunctionFromPointsR2_R::PosMin(void) const
   {
     filacol retval;
     retval.first= 1;
@@ -80,13 +80,13 @@ FuncPorPuntosR2_R::filacol FuncPorPuntosR2_R::PosMin(void) const
     return retval;
   }
 //! @brief Devuelve el valor mínimo de los valores definidos.
-double FuncPorPuntosR2_R::Min(void) const
+double FunctionFromPointsR2_R::Min(void) const
   {
     const filacol fc= PosMin();
     return Valor(fc.first,fc.second);
   }
-//! @brief Devuelve la posición del valor mínimo de los valores definidos.
-Pos2d FuncPorPuntosR2_R::PuntoMin(void) const
+//! @brief Return the posición del valor mínimo de los valores definidos.
+Pos2d FunctionFromPointsR2_R::getMinPoint(void) const
   {
     const filacol fc= PosMin();
     return Posicion(fc.first,fc.second);

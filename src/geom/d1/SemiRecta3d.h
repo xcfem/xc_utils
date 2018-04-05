@@ -55,7 +55,7 @@ class SemiRecta3d : public Linea3d
       { return new SemiRecta3d(*this); }
     const CGSemiRecta_3 &ToCGAL(void) const
       { return cgsr; }
-    void DosPuntos(const Pos3d &p1,const Pos3d &p2);
+    void TwoPoints(const Pos3d &p1,const Pos3d &p2);
     virtual GEOM_FT GetMax(unsigned short int) const
       { return NAN; }
     virtual GEOM_FT GetMin(unsigned short int) const
@@ -66,21 +66,21 @@ class SemiRecta3d : public Linea3d
       { return Pos3d(cgsr.source()); }
     inline GEOM_FT getSlope(void) const
       { return RectaSoporte().getSlope(); }
-    const Pos3d Punto(const int &i) const
+    const Pos3d Point(const int &i) const
       { return Pos3d(cgsr.point(i)); }
-    //! @brief Devuelve un punto de la recta a una "distancia" lambda del origen.
+    //! @brief Return a point of the line at a distance lambda from its origin.
     Pos3d PtoParametricas(const GEOM_FT &lambda) const
-      { return Punto(0)+lambda*VDir(); }
+      { return Point(0)+lambda*VDir(); }
     inline bool EsDegenerada(void) const
       { return cgsr.is_degenerate(); }
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const
-    //Devuelve verdadero si el punto está sobre la semirrecta.
+    //Return true if the point is on the object.
       { return cgsr.has_on(p.ToCGAL()); }
     virtual GEOM_FT dist2(const Pos3d &p) const;
     GEOM_FT dist(const Pos3d &p) const;
+    //! @brief Set the points that define the line.
     void Put(const Pos3d &p1,const Pos3d &p2)
-    //Asigna valores a los puntos que definen la recta.
-      { DosPuntos(p1,p2); }
+      { TwoPoints(p1,p2); }
 
     bool Paralela(const SemiRecta3d &r) const;
     bool Paralela(const Recta3d &r) const;
@@ -89,7 +89,7 @@ class SemiRecta3d : public Linea3d
     GeomObj3d::list_Pos3d Interseccion(const Recta3d &r) const;
     GeomObj3d::list_Pos3d Interseccion(const SemiRecta3d &sr) const;
 
-    //Devuelve el punto intersección de ambas rectas, si no existe la
+    //Return the point intersección de ambas rectas, si no existe la
     //intersección devuelve la lista vacía.
     inline virtual GEOM_FT Longitud(void) const
       { return NAN; }

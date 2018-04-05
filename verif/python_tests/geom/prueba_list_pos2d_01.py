@@ -5,10 +5,10 @@ import geom
 import math
 
 ptsPrb=geom.ListPos2d()
-ptsPrb.agregaPunto(geom.Pos2d(0,0))
-ptsPrb.agregaPunto(geom.Pos2d(2,0))
-ptsPrb.agregaPunto(geom.Pos2d(2,2))
-ptsPrb.agregaPunto(geom.Pos2d(0,2))
+ptsPrb.appendPoint(geom.Pos2d(0,0))
+ptsPrb.appendPoint(geom.Pos2d(2,0))
+ptsPrb.appendPoint(geom.Pos2d(2,2))
+ptsPrb.appendPoint(geom.Pos2d(0,2))
 xCdg=ptsPrb.getCdg().x
 yCdg=ptsPrb.getCdg().y
 area=ptsPrb.getArea()

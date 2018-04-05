@@ -71,10 +71,10 @@ class Poligono3d: public D2to3d
     inline std::vector<double> getAreasTributarias(void) const
       { return plg2d.getAreasTributarias(); }
     inline Pos3d Vertice(unsigned int i) const
-      //Devuelve la posición del vértice.
+      //Return the posición del vértice.
       { return to_3d(plg2d.Vertice(i)); }
     inline Pos3d Vertice0(unsigned int j) const
-      //Devuelve la posición del vértice de indice j (j=0..GetNumVertices()-1)
+      //Return the posición del vértice de indice j (j=0..GetNumVertices()-1)
       { return to_3d(plg2d.Vertice0(j)); }
     GeomObj::list_Pos3d ListaVertices(void) const;
     Segmento3d Lado0(unsigned int i) const;
@@ -116,7 +116,7 @@ Poligono3d::Poligono3d(InputIterator first,InputIterator last)
     const Pos3d p1= *i; i++;
     const Pos3d p2= *i; i++;
     const Pos3d p3= *i; i++;
-    TresPuntos(p1,p2,p3);
+    ThreePoints(p1,p2,p3);
     push_back(p1);
     push_back(p2);
     push_back(p3);

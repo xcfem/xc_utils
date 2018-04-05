@@ -35,7 +35,7 @@
 //! @brief sliding vector en dos dimensiones.
 class VDesliz2d : public Vector2d
   {
-    Pos2d org; //Punto que determina la línea de accion.
+    Pos2d org; //Point that fixes the line of action.
   public:
     VDesliz2d(const Pos2d &o= Pos2d(),const Vector2d &v= Vector2d())
       : Vector2d(v), org(o) {}
@@ -49,7 +49,7 @@ class VDesliz2d : public Vector2d
         return *this;
       }
     GEOM_FT Momento(const Pos2d &o) const;
-      //Momento de un sliding vector respecto a un punto.
+      //Momento de un sliding vector with respect to a point.
     const Pos2d &getOrg(void) const
       { return org; }
     const Pos2d getDest(void) const

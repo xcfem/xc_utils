@@ -38,9 +38,9 @@ class Pos3d;
 class SisCooXd3d: public SisCoo
   {
   public:
-    typedef Vector3d VGlobal; //!< Vector en el espacio de 3 dimensiones.
-    typedef Pos3d PGlobal; //!< Punto en el espacio de 3 dimensiones.
-    typedef Dir3d DGlobal; //!< Dirección en el espacio de 3 dimensiones.
+    typedef Vector3d VGlobal; //!< Vector in the 3D space.
+    typedef Pos3d PGlobal; //!< Point in the 3D space.
+    typedef Dir3d DGlobal; //!< Direction in the 3D space.
   protected:
     void vectores_unitarios(const VGlobal &i_,const VGlobal &j_,const VGlobal &k_);
     SisCooXd3d(const size_t &i)
@@ -54,14 +54,14 @@ class SisCooXd3d: public SisCoo
 
     void PutFila(const size_t &eje,const VGlobal &v);
     void VectorEjeX(const VGlobal &v);
-    void DosPuntos(const PGlobal &o,const PGlobal &p);
-    void TresPuntos(const PGlobal &o,const PGlobal &p1,const PGlobal &p2);
+    void TwoPoints(const PGlobal &o,const PGlobal &p);
+    void ThreePoints(const PGlobal &o,const PGlobal &p1,const PGlobal &p2);
 
   public:
     //@ brief Constructor virtual.
     virtual SisCooXd3d *CopiaXd3d(void) const= 0;
     virtual VGlobal GetVDirEje(const size_t &eje) const;
-    //Devuelve el vector dirección del eje que se pasa como parámetro.
+    //Devuelve el direction vector del eje que se pasa como parámetro.
     virtual DGlobal GetDirEje(const size_t &eje) const;
 
     VGlobal GetCooGlobales(const matriz_FT &v) const;

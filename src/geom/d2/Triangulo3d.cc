@@ -40,14 +40,14 @@ Triangulo3d &Triangulo3d::operator =(const Triangulo3d &otro)
     return *this;
   }
 
-//! @brief Devuelve el cuadrado de la distancia del punto al triángulo.
+//! @brief Return the squared distance from the point to the triángulo.
 GEOM_FT Triangulo3d::dist2(const Pos3d &p) const
   {
     Wm3::DistVector3Triangle3ft d(p.VectorPos(),*this);
     return d.GetSquared();
   }
 
-//! @brief Devuelve la distancia del punto al triángulo.
+//! @brief Return the distance from the point to the triángulo.
 GEOM_FT Triangulo3d::dist(const Pos3d &p) const
   {
     Wm3::DistVector3Triangle3ft d(p.VectorPos(),*this);

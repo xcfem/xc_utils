@@ -30,16 +30,16 @@
 
 TritrizPos3d::TritrizPos3d(const size_t &capas)
   : TritrizPos<Pos3d>(capas) {}
-TritrizPos3d::TritrizPos3d(const size_t &capas,const MatrizPos<Pos3d> &puntos)
-  : TritrizPos<Pos3d>(capas,puntos) {}
-TritrizPos3d::TritrizPos3d(const MatrizPos<Pos3d> &puntos_l1,const MatrizPos<Pos3d> &puntos_l2,
-                           const MatrizPos<Pos3d> &puntos_l3,const MatrizPos<Pos3d> &puntos_l4,
+TritrizPos3d::TritrizPos3d(const size_t &capas,const MatrizPos<Pos3d> &points)
+  : TritrizPos<Pos3d>(capas,points) {}
+TritrizPos3d::TritrizPos3d(const MatrizPos<Pos3d> &l1_points,const MatrizPos<Pos3d> &l2_points,
+                           const MatrizPos<Pos3d> &l3_points,const MatrizPos<Pos3d> &l4_points,
                            const size_t &ndiv_12,const size_t &ndiv_13)
-  : TritrizPos<Pos3d>(puntos_l1,puntos_l2,puntos_l3,puntos_l4,ndiv_12,ndiv_13) {}
-TritrizPos3d::TritrizPos3d(const MatrizPos3d &puntos_l1,const MatrizPos3d &puntos_l2,
-                           const MatrizPos3d &puntos_l3,const MatrizPos3d &puntos_l4,
+  : TritrizPos<Pos3d>(l1_points,l2_points,l3_points,l4_points,ndiv_12,ndiv_13) {}
+TritrizPos3d::TritrizPos3d(const MatrizPos3d &l1_points,const MatrizPos3d &l2_points,
+                           const MatrizPos3d &l3_points,const MatrizPos3d &l4_points,
                            const size_t &ndiv_12,const size_t &ndiv_13)
-  : TritrizPos<Pos3d>(puntos_l1,puntos_l2,puntos_l3,puntos_l4,ndiv_12,ndiv_13) {}
+  : TritrizPos<Pos3d>(l1_points,l2_points,l3_points,l4_points,ndiv_12,ndiv_13) {}
 
 Pos3d TritrizPos3d::GetCentro(void) const
   { return get_centro(*this,Segmento3d()); }

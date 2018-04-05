@@ -10,7 +10,7 @@ def calcPlanoBuzamiento(alpha,beta,p):
     Devuelve el plano de buzamiento definido por:
     alpha: Ángulo de buzamiento.
     beta: Dirección del buzamiento.
-    p: Punto por el que pasa el plano
+    p: point for which the plane passes through.
     '''
     A=math.sin(alpha)*math.sin(beta)
     B=math.sin(alpha)*math.cos(beta)

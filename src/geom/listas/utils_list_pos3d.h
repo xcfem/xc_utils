@@ -39,17 +39,15 @@ class Vector3d;
 //! @brief Suma a las posiciones de la lista el vector que
 //! se pasa como parámetro.
 void mueve(GeomObj::list_Pos3d &l,const Vector3d &);
-//! @brief Aplica a los puntos de la lista la transformación
-//! que se pasa como parámetro.
+//! @brief Applies the transformation to the points of the list.
 void transforma(GeomObj::list_Pos3d &l,const Trf3d &);
-//! @brief Devuelve los máximos de las coordenadas X,Y,Z
-//! de los puntos que se pasan como parámetro.
+//! @brief Return the maxima of the X,Y,Z coordinates
+//! of the points.
 Pos3d getPMax(const GeomObj::list_Pos3d &l);
-//! @brief Devuelve los mínimos de las coordenadas X,Y,Z
-//! de los puntos que se pasan como parámetro.
+//! @brief Return the minima of the X,Y,Z coordinates
+//! of the points.
 Pos3d getPMin(const GeomObj::list_Pos3d &l);
-//! @brief Devuelve el «boundary» de 
-//! los puntos que se pasan como parámetro.
+//! @brief Return the boundary of the points.
 BND3d getBnd(const GeomObj::list_Pos3d &l);
 
 #endif

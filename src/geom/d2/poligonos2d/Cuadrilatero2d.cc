@@ -64,7 +64,7 @@ MatrizPos2d Cuadrilatero2d::genBilinMesh(const size_t &nDiv12,const size_t &nDiv
         for(size_t j= 0;j<nDiv23+1;j++)
           for(size_t i= 0;i<nDiv12+1;i++)
             {
-              //Coordenadas naturales de los puntos
+              //natural coordinates of the points
               xi= -1.0 + deltaXi  * i;
               eta= -1.0 + deltaEta * j;
 

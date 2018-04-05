@@ -19,6 +19,12 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Punto3d.cc
+#ifndef	CUADRATURA1D_H
+#define	CUADRATURA1D_H
 
-#include "Punto3d.h"
+#include "GaussPoints.h"
+
+typedef GaussPoints Cuadratura1D;
+
+
+#endif

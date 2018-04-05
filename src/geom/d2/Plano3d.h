@@ -72,7 +72,7 @@ class Plano3d : public Superficie3d
     virtual GeomObj *clon(void) const;
     const CGPlane_3 &ToCGAL(void) const
       { return cgp; }
-    void TresPuntos(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
+    void ThreePoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
     virtual GEOM_FT GetMax(unsigned short int) const
       { return NAN; }
     virtual GEOM_FT GetMin(unsigned short int i) const
@@ -96,19 +96,19 @@ class Plano3d : public Superficie3d
     bool LadoNegativo(const Pos3d &p) const;
     virtual bool In(const Pos3d &p, const GEOM_FT &tol= 0.0) const;
 
-    CGAL::Oriented_side ClasificaPunto(const Pos3d &p) const;
+    CGAL::Oriented_side ClassifyPoint(const Pos3d &p) const;
 
     template <typename InputIterator>
-    clasif_poligono ClasificaPuntos(InputIterator first,InputIterator last) const;
+    clasif_poligono ClassifyPoints(InputIterator first,InputIterator last) const;
     clasif_poligono ClasificaPoligono(const Poligono3d &pol) const;
 
     GEOM_FT PseudoDist(const Pos3d &p) const;
     GEOM_FT PseudoDist2(const Pos3d &p) const;
     virtual GEOM_FT dist2(const Pos3d &p) const;
     virtual GEOM_FT dist(const Pos3d &p) const;
-    //! @brief Asigna valores a los puntos que definen el Plano.
+    //! @brief Set the points that define the plane.
     void Put(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
-      { TresPuntos(p1,p2,p3); }
+      { ThreePoints(p1,p2,p3); }
 
     GeneralEquationOfPlane getGeneralEquation(void) const;
     void GeneralEquation(const GeneralEquationOfPlane &eq);
@@ -117,7 +117,7 @@ class Plano3d : public Superficie3d
     GEOM_FT z(const Pos2d &p) const;
 
     virtual Pos3d Cdg(void) const;
-    Pos3d Punto(void) const;
+    Pos3d Point(void) const;
     //! @brief Momento de inercia respecto al CDG en ejes locales.
     inline virtual GEOM_FT Ix(void) const
       { return NAN; }
@@ -172,15 +172,13 @@ GEOM_FT angulo(const Plano3d &,const Plano3d &);
 
 
 Plano3d perpendicular(const Recta3d &r, const Pos3d &p);
-//Devuelve el plano perpendicular a la recta r
-//que pasa por el punto p.
 
 bool paralelos(const Plano3d &p, const Recta3d &r);
 bool paralelos(const Plano3d &p1, const Plano3d &p2);
 
 
 Recta3d recta_interseccion(const Plano3d &, const Plano3d &);
-Pos3d punto_interseccion(const Plano3d &, const Plano3d &,const Plano3d &);
+Pos3d intersection_point(const Plano3d &, const Plano3d &,const Plano3d &);
 GmGrupo3d interseccion(const Plano3d &p1, const Plano3d &p2);
 GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const Recta3d &r);
 GeomObj3d::list_Pos3d interseccion(const Recta3d &r, const Plano3d &p);
@@ -190,37 +188,37 @@ GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const Segmento3d &);
 GeomObj3d::list_Pos3d interseccion(const Segmento3d &, const Plano3d &p);
 GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const Polilinea3d &r);
 GeomObj3d::list_Pos3d interseccion(const Polilinea3d &r, const Plano3d &p);
-Pos3d punto_interseccion(const Plano3d &p, const Recta3d &r);
-Pos3d punto_interseccion(const Recta3d &r, const Plano3d &p);
-Pos3d punto_interseccion(const Plano3d &p, const SemiRecta3d &r);
-Pos3d punto_interseccion(const SemiRecta3d &r, const Plano3d &p);
-Pos3d punto_interseccion(const Plano3d &p, const Segmento3d &r);
-Pos3d punto_interseccion(const Segmento3d &r, const Plano3d &p);
+Pos3d intersection_point(const Plano3d &p, const Recta3d &r);
+Pos3d intersection_point(const Recta3d &r, const Plano3d &p);
+Pos3d intersection_point(const Plano3d &p, const SemiRecta3d &r);
+Pos3d intersection_point(const SemiRecta3d &r, const Plano3d &p);
+Pos3d intersection_point(const Plano3d &p, const Segmento3d &r);
+Pos3d intersection_point(const Segmento3d &r, const Plano3d &p);
 
-GeomObj3d::list_Pos3d puntos_interseccion(const std::deque<Plano3d> &);
+GeomObj3d::list_Pos3d intersection_points(const std::deque<Plano3d> &);
 
 template <typename InputIterator>
-Plano3d::clasif_poligono Plano3d::ClasificaPuntos(InputIterator first,InputIterator last) const
+Plano3d::clasif_poligono Plano3d::ClassifyPoints(InputIterator first,InputIterator last) const
   {
     InputIterator i= first;
-    CGAL::Oriented_side cf_pinic= ClasificaPunto(*i); i++;
+    CGAL::Oriented_side cf_pinic= ClassifyPoint(*i); i++;
     for(;i!=last;i++)
       {
-        const CGAL::Oriented_side cf_punto= ClasificaPunto(*i);
-        if(cf_punto!=cf_pinic)
+        const CGAL::Oriented_side cf_point= ClassifyPoint(*i);
+        if(cf_point!=cf_pinic)
           {
-            if(cf_pinic!=CGAL::ON_ORIENTED_BOUNDARY) //Punto inicial fuera de plano.
-              if(cf_punto!=CGAL::ON_ORIENTED_BOUNDARY) //Punto *i fuera de plano.
+            if(cf_pinic!=CGAL::ON_ORIENTED_BOUNDARY) //Start point out of plane.
+              if(cf_point!=CGAL::ON_ORIENTED_BOUNDARY) //Point *i out of plane.
                 return CRUZA;
-              else //Punto *i dentro de plano.
+              else //Point *i inside the plane.
                 continue;
-            else //Punto inicial dentro de plano.
-              if(cf_punto!=CGAL::ON_ORIENTED_BOUNDARY) //Punto *i fuera de plano.
+            else //Start point inside the plane.
+              if(cf_point!=CGAL::ON_ORIENTED_BOUNDARY) //Point *i out of plane.
                 {
-                  cf_pinic= cf_punto;
+                  cf_pinic= cf_point;
                   continue;
                 }
-              else //Punto *i dentro de plano.
+              else //Point *i inside the plane.
                 continue;
           }
       }

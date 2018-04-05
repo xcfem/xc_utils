@@ -26,7 +26,7 @@
 #include "xc_utils/src/geom/matriz_FT.h"
 
 //! Rotación en 3d según se describe en "Geometric tools for computer graphics"
-//! Philip J. Schneider Morgan Kaufmann Publishers, página 141
+//! Philip J. Schneider Morgan Kaufmann Publishers, page 141
 matriz_FT matriz_rotation_3d(const Recta3d &eje,const double &theta)
   {
     matriz_FT retval(4,4);
@@ -39,7 +39,7 @@ matriz_FT matriz_rotation_3d(const Recta3d &eje,const double &theta)
     const matriz_FT T_u_theta_3= sin_theta*skew_symm_matrix_pre(u);
     const matriz_FT T_u_theta= traspuesta(T_u_theta_1+T_u_theta_2+T_u_theta_3);
     retval.PutCaja(1,1,T_u_theta);
-    const Pos3d Q= eje.Punto();
+    const Pos3d Q= eje.Point();
     const Vector3d tmp= T_u_theta*Q.VectorPos();
     const Vector3d VQ= Q.VectorPos()-tmp;
     retval.PutCaja(1,4,VQ.GetMatriz());

@@ -27,7 +27,8 @@
 
 //! @ingroup GEOM
 //
-//! @brief Referencia a una capa fila de la tritriz cuyos puntos tienen los índices J y K constantes.
+//! @brief Reference to a row de la tritriz which points have constant
+//! K indexes.
 template <class TRITRIZ>
 class VarRefFilaK: public VarRefCajaTritriz<TRITRIZ>
   {

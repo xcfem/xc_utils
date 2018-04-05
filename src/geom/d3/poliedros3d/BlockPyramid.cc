@@ -46,16 +46,16 @@ std::deque<Vector3d> BlockPyramid::haz_vectores(void) const
     return retval;
   }
 
-//! @brief Devuelve verdadero si el vector está orientado hacia
+//! @brief Return true if el vector está orientado hacia
 //! dentro del semiespacio.
 bool BlockPyramid::es_interior(const SemiEspacio3d &se,const Vector3d &v)
   {
-    const Pos3d p= se.getPlano().Punto()+1e4*v;
+    const Pos3d p= se.getPlano().Point()+1e4*v;
     const bool retval= se.In(p,1e-4);
     return retval;
   }
 
-//! @brief Devuelve verdadero si el vector está orientado hacia
+//! @brief Return true if el vector está orientado hacia
 //! dentro de todos y cada uno de los semiespacios.
 bool BlockPyramid::es_interior(const Vector3d &v) const
   {
@@ -92,63 +92,63 @@ BlockPyramid::BlockPyramid(void)
 BlockPyramid::BlockPyramid(const std::deque<SemiEspacio3d> &se)
   : GeomObj3d(), semiespacios(se) {}
 
-//! @brief Devuelve la longitud del objeto.
+//! @brief Return the longitud del objeto.
 GEOM_FT BlockPyramid::Longitud(void) const
   {
-    std::cerr << "BlockPyramid::Longitud() no implementada." << std::endl;
+    std::cerr << "BlockPyramid::Longitud() not implemented." << std::endl;
     return 0.0;
   }
 
 //! @brief Devuelve el área del objeto.
 GEOM_FT BlockPyramid::Area(void) const
   {
-    std::cerr << "BlockPyramid::Area() no implementada." << std::endl;
+    std::cerr << "BlockPyramid::Area() not implemented." << std::endl;
     return 0.0;
   }
 
 //! @brief Devuelve el volumen del objeto.
 GEOM_FT BlockPyramid::Volumen(void) const
   {
-    std::cerr << "BlockPyramid::Volumen() no implementada." << std::endl;
+    std::cerr << "BlockPyramid::Volumen() not implemented." << std::endl;
     return 0.0;
   }
 
 //! @brief Devuelve el momento de inercia respecto al eje x.
 GEOM_FT BlockPyramid::Ix(void) const
   {
-    std::cerr << "BlockPyramid::Ix() no implementado." << std::endl;
+    std::cerr << "BlockPyramid::Ix() not implemented." << std::endl;
     return 0.0;
   }
 
 //! @brief Devuelve el momento de inercia respecto al eje y.
 GEOM_FT BlockPyramid::Iy(void) const
   {
-    std::cerr << "BlockPyramid::Iy() no implementado." << std::endl;
+    std::cerr << "BlockPyramid::Iy() not implemented." << std::endl;
     return 0.0;
   }
 
 //! @brief Devuelve el momento de inercia respecto al eje z.
 GEOM_FT BlockPyramid::Iz(void) const
   {
-    std::cerr << "BlockPyramid::Iy() no implementado." << std::endl;
+    std::cerr << "BlockPyramid::Iy() not implemented." << std::endl;
     return 0.0;
   }
 
-//! @brief Devuelve la posición del centro de gravedad.
+//! @brief Return the posición del centro de gravedad.
 Pos3d BlockPyramid::Cdg(void) const
   {
-    std::cerr << "BlockPyramid::Cdg() no implementado." << std::endl;
+    std::cerr << "BlockPyramid::Cdg() not implemented." << std::endl;
     return Pos3d();
   }
 
 GEOM_FT BlockPyramid::GetMax(unsigned short int i) const
   {
-    std::cerr << "BlockPyramid::GetMax() no implementado." << std::endl;
+    std::cerr << "BlockPyramid::GetMax() not implemented." << std::endl;
     return 0.0;
   }
 GEOM_FT BlockPyramid::GetMin(unsigned short int i) const
   {
-    std::cerr << "BlockPyramid::GetMin() no implementado." << std::endl;
+    std::cerr << "BlockPyramid::GetMin() not implemented." << std::endl;
     return 0.0;
   }
 
@@ -236,7 +236,7 @@ std::deque<Vector2d> BlockPyramid::getVectoresExternos(const Ref2d3d &a) const
     return retval;
   }
 
-//! @brief Devuelve verdadero si no tiene bordes.
+//! @brief Return true if has no borders.
 bool BlockPyramid::Vacio(void) const
   {
     const std::deque<Vector3d> haz= haz_vectores_interiores();

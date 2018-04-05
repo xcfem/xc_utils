@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //VectorPos.h
-//Vector de puntos
+//Positions vector.
 
 #ifndef VECTORPOS_H
 #define VECTORPOS_H

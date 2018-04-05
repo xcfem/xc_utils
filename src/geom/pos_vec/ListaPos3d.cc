@@ -37,18 +37,18 @@ ListaPos3d::ListaPos3d(void)
 ListaPos3d::ListaPos3d(const GeomObj::list_Pos3d &l)
   : GeomObj3d(), lista_ptos(l) {}
 
-const Pos3d *ListaPos3d::AgregaPunto(const Pos3d &p)
+const Pos3d *ListaPos3d::appendPoint(const Pos3d &p)
   {
     lista_ptos.push_back(p);
     return &(*lista_ptos.rbegin());
   }
 
-//! @brief Aplica a los puntos la transformación que se pasa como parámetro.
+//! @brief Applies the transformation to the points.
 void ListaPos3d::Transforma(const Trf3d &trf3d)
   { trf3d.Transforma(lista_ptos.begin(),lista_ptos.end()); }
 
 
-//! @brief Devuelve una referencia al objeto cuyo
+//! @brief Return a reference al objeto cuyo
 //! índice se pasa como parámetro.
 Pos3d &ListaPos3d::operator[](const size_t &i)
   {
@@ -62,7 +62,7 @@ Pos3d &ListaPos3d::operator[](const size_t &i)
       }
   }
 
-//! @brief Devuelve una referencia al objeto cuyo
+//! @brief Return a reference al objeto cuyo
 //! índice se pasa como parámetro.
 const Pos3d &ListaPos3d::operator[](const size_t &i) const
   {
@@ -76,31 +76,32 @@ const Pos3d &ListaPos3d::operator[](const size_t &i) const
       }
   }
 
-//! @brief Devuelve verdadero si el punto está en el conjunto.
+//! @brief Returns true if the points belongs to the list.
 bool ListaPos3d::In(const Pos3d &p, const double &tol) const
   {
     for(register point_const_iterator j=lista_ptos.begin();j != lista_ptos.end();j++)
       if(dist2(*j,p)<=tol) return true;
     return false;
   }
-//! @brief Devuelve el valor maximo de la coordenada i.
+//! @brief Return the maximum value of the i coordinate.
 GEOM_FT ListaPos3d::GetMax(unsigned short int i) const
   { return lista_ptos.GetMax(i); }
 
-//! @brief Devuelve el valor minimo de la coordenada i.
+//! @brief Return the minimum value of the i coordinate.
 GEOM_FT ListaPos3d::GetMin(unsigned short int i) const
   { return lista_ptos.GetMin(i); }
 
-//! @brief Devuelve una ListaPos3d con los puntos cuya coordenada i
-//! es mayor que d.
+//! @brief Return a ListaPos2d with the points which i coordinate is greater
+//! than d.
 ListaPos3d ListaPos3d::GetMayores(unsigned short int i,const GEOM_FT &d) const
   {
     ListaPos3d retval;
     retval.lista_ptos= lista_ptos.GetMayores(i,d);
     return retval;
   }
-//! @brief Devuelve una ListaPos3d con los puntos cuya coordenada i
-//! es menor que d.
+
+//! @brief Return a ListaPos2d with the points which i coordinate is less
+//! than d.
 ListaPos3d ListaPos3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
   {
     ListaPos3d retval;
@@ -110,23 +111,23 @@ ListaPos3d ListaPos3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 
 
 //! @brief Devuelve el vértice i-ésimo (el primero es el 1).
-const Pos3d &ListaPos3d::Punto(const size_t &i) const
+const Pos3d &ListaPos3d::Point(const size_t &i) const
   { return lista_ptos[i-1]; }
 
 
 GEOM_FT ListaPos3d::Ix(void) const
   {
-    std::cerr << "ListaPos3d Ix() no implementada" << std::endl;
+    std::cerr << "ListaPos3d Ix() not implemented" << std::endl;
     return 0.0;
   }
 GEOM_FT ListaPos3d::Iy(void) const
   {
-    std::cerr << "ListaPos3d Iy() no implementada" << std::endl;
+    std::cerr << "ListaPos3d Iy() not implemented" << std::endl;
     return 0.0;
   }
 GEOM_FT ListaPos3d::Iz(void) const
   {
-    std::cerr << "ListaPos3d Iz() no implementada" << std::endl;
+    std::cerr << "ListaPos3d Iz() not implemented" << std::endl;
     return 0.0;
   }
 
@@ -148,5 +149,5 @@ void ListaPos3d::Print(std::ostream &stream) const
   }
 void ListaPos3d::Plot(Plotter &plotter) const
   {
-    std::cerr << "ListaPos3d::Plot no implementada." << std::endl;
+    std::cerr << "ListaPos3d::Plot not implemented." << std::endl;
   }

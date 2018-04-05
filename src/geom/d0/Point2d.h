@@ -19,44 +19,33 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Punto3d.h
+//Point2d.h
 
-#ifndef PUNTO3D_H
-#define PUNTO3D_H
+#ifndef POINT2D_H
+#define POINT2D_H
 
-#include "../d3/GeomObj3d.h"
-#include "../pos_vec/Pos3d.h"
+#include "../d2/GeomObj2d.h"
+#include "../pos_vec/Pos2d.h"
 
 //! @ingroup GEOM
 //
-//! @brief Punto en tres dimensiones.
-class Punto3d : public GeomObj3d
+//! @brief Point in 2D.
+class Point2d : public GeomObj2d
   {
-    Pos3d org;
+    Pos2d org;
   public:
-    Punto3d(void) : GeomObj3d() {}
-    Punto3d(GEOM_FT x,GEOM_FT y,GEOM_FT z=0) : GeomObj3d(), org(Pos3d(x,y,z))
+    Point2d(void) : GeomObj2d() {}
+    explicit Point2d(const Pos2d &p): GeomObj2d(), org(p) {}
+    Point2d(GEOM_FT x,GEOM_FT y) : GeomObj2d(), org(Pos2d(x,y))
       {}
-    Punto3d(const Punto3d &otro) : GeomObj3d(otro), org(otro.org) {}
-    Punto3d &operator=(const Punto3d &p)
-      {
-	GeomObj3d::operator=(p);
-        org= p.org;
-        return *this;
-      }
-    Punto3d &operator=(const Pos3d &p)
-      {
-	org= p;
-        return *this;
-      }
-    operator const Pos3d &()
+    operator const Pos2d &()
       { return org; }
-    inline Pos3d GetPos(void) const
-    //Devuelve la posicion del Punto3d en el sistema global.
+    inline Pos2d GetPos(void) const
+    //Return the posicion del Point2d en el sistema global.
       { return org; }
-    virtual GeomObj3d *clon(void) const
-      { return new Punto3d(*this); }
-    virtual Pos3d Cdg(void) const
+    virtual GeomObj2d *clon(void) const
+      { return new Point2d(*this); }
+    virtual Pos2d Cdg(void) const
       { return org; }
     inline virtual unsigned short int Dimension(void) const
       { return 0; }
@@ -70,18 +59,24 @@ class Punto3d : public GeomObj3d
       { return 0.0; }
     virtual GEOM_FT Iy(void) const
       { return 0.0; }
+    virtual GEOM_FT Pxy(void) const
+      { return 0.0; }
     virtual GEOM_FT Iz(void) const
       { return 0.0; }
-    inline bool domina_a(const Punto3d &b) const
+    inline bool domina_a(const Point2d &b) const
       { return org.domina_a(b.org); }
     inline virtual GEOM_FT GetMax(unsigned short int i) const
       { return org(i); }
     inline virtual GEOM_FT GetMin(unsigned short int i) const
       { return org(i); }
-    friend int operator ==(const Punto3d &a,const Punto3d &b)
+
+    void Transforma(const Trf2d &trf2d);
+
+    friend int operator ==(const Point2d &a,const Point2d &b)
       { return ( a.org == b.org ); };
-    inline void Print(std::ostream &os) const
-      { os << org; }
+    
+    void Print(std::ostream &os) const;
+    void Plot(Plotter &psos) const;
   };
 #endif
 

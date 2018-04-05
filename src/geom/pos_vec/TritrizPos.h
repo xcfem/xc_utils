@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //TritrizPos.h
-//Vector de matrices de puntos
+//Array of point matrices.
 
 #ifndef TRITRIZPOS_H
 #define TRITRIZPOS_H
@@ -96,17 +96,17 @@ class TritrizPos: public std::vector<MatrizPos<POS> >
       { return const_ref_capa_i_cte(*this,capa,rango_filas,rango_cols); }
     const_ref_capa_j_cte GetConstRefCapaJCte(size_t f=1,size_t capa=1, size_t c=1) const
       { return const_ref_capa_j_cte(*this,capa,f,c); }
-    const_ref_capa_j_cte GetConstRefCapaJCte(const RangoIndice &rango_capas,size_t f,const RangoIndice &rango_cols) const
-      { return const_ref_capa_j_cte(*this,rango_capas,f,rango_cols); }
+    const_ref_capa_j_cte GetConstRefCapaJCte(const RangoIndice &layer_range,size_t f,const RangoIndice &rango_cols) const
+      { return const_ref_capa_j_cte(*this,layer_range,f,rango_cols); }
     const_ref_capa_k_cte GetConstRefCapaKCte(size_t c=1,size_t capa=1, size_t f=1) const
       { return const_ref_capa_k_cte(*this,c,capa,f); }
-    const_ref_capa_k_cte GetConstRefCapaKCte(const RangoIndice &rango_capas,const RangoIndice &rango_filas,const size_t &c) const
-      { return const_ref_capa_k_cte(*this,rango_capas,rango_filas,c); }
+    const_ref_capa_k_cte GetConstRefCapaKCte(const RangoIndice &layer_range,const RangoIndice &rango_filas,const size_t &c) const
+      { return const_ref_capa_k_cte(*this,layer_range,rango_filas,c); }
 
     const_ref_fila_i GetConstRefFilaI(size_t f=1,size_t c=1) const
       { return const_ref_fila_i(*this,f,c); }
-    const_ref_fila_i GetConstRefFilaI(const RangoIndice &rango_capas,size_t f,size_t c) const
-      { return const_ref_fila_i(*this,rango_capas,f,c); }
+    const_ref_fila_i GetConstRefFilaI(const RangoIndice &layer_range,size_t f,size_t c) const
+      { return const_ref_fila_i(*this,layer_range,f,c); }
     const_ref_fila_j GetConstRefFilaJ(size_t capa=1,size_t c=1) const
       { return const_ref_fila_j(*this,capa,c); }
     const_ref_fila_j GetConstRefFilaJ(size_t capa,const RangoIndice &rango_filas,size_t c) const
@@ -127,17 +127,17 @@ class TritrizPos: public std::vector<MatrizPos<POS> >
       { return var_ref_capa_i_cte(*this,capa,rango_filas,rango_cols); }
     var_ref_capa_j_cte GetVarRefCapaJCte(size_t f=1,size_t capa=1, size_t c=1)
       { return var_ref_capa_j_cte(*this,capa,f,c); }
-    var_ref_capa_j_cte GetVarRefCapaJCte(const RangoIndice &rango_capas,size_t f,const RangoIndice &rango_cols)
-      { return var_ref_capa_j_cte(*this,rango_capas,f,rango_cols); }
+    var_ref_capa_j_cte GetVarRefCapaJCte(const RangoIndice &layer_range,size_t f,const RangoIndice &rango_cols)
+      { return var_ref_capa_j_cte(*this,layer_range,f,rango_cols); }
     var_ref_capa_k_cte GetVarRefCapaKCte(size_t c=1,size_t capa=1, size_t f=1)
       { return var_ref_capa_k_cte(*this,c,capa,f); }
-    var_ref_capa_k_cte GetVarRefCapaKCte(const RangoIndice &rango_capas,const RangoIndice &rango_filas,const size_t &c)
-      { return var_ref_capa_k_cte(*this,rango_capas,rango_filas,c); }
+    var_ref_capa_k_cte GetVarRefCapaKCte(const RangoIndice &layer_range,const RangoIndice &rango_filas,const size_t &c)
+      { return var_ref_capa_k_cte(*this,layer_range,rango_filas,c); }
 
     var_ref_fila_i GetVarRefFilaI(size_t f=1,size_t c=1)
       { return var_ref_fila_i(*this,f,c); }
-    var_ref_fila_i GetVarRefFilaI(const RangoIndice &rango_capas,size_t f,size_t c)
-      { return var_ref_fila_i(*this,rango_capas,f,c); }
+    var_ref_fila_i GetVarRefFilaI(const RangoIndice &layer_range,size_t f,size_t c)
+      { return var_ref_fila_i(*this,layer_range,f,c); }
     var_ref_fila_j GetVarRefFilaJ(size_t f=1,size_t c=1)
       { return var_ref_fila_j(*this,f,c); }
     var_ref_fila_j GetVarRefFilaJ(size_t capa,const RangoIndice &rango_filas,size_t c)
@@ -158,20 +158,20 @@ class TritrizPos: public std::vector<MatrizPos<POS> >
     POS GetCentro(void) const;
   };
 
-//! @brief Genera la tritriz de puntos a partir de los que se pasan como parámetro.
+//! @brief Generate the point tritriz from the arguments.
 template <class POS>
-TritrizPos<POS>::TritrizPos( const m_pos &puntos_l1,const m_pos &puntos_l2,
-                             const m_pos &puntos_l3,const m_pos &puntos_l4,
+TritrizPos<POS>::TritrizPos( const m_pos &l1_points,const m_pos &l2_points,
+                             const m_pos &l3_points,const m_pos &l4_points,
                              const size_t &ndiv_12,const size_t &ndiv_14)
-  : std::vector<m_pos>(puntos_l1.size())
+  : std::vector<m_pos>(l1_points.size())
   {
     const size_t ncapas= this->size();
-    for(size_t i=1;i<=ncapas;i++) //Iteramos en las "capas" de puntos.
+    for(size_t i=1;i<=ncapas;i++) //Iteration of the point "layers".
       {
-        const POS &p1= puntos_l1(i); //1er. punto del cuadrilatero.
-        const POS &p2= puntos_l2(i); //2o. punto del cuadrilatero.
-        const POS &p3= puntos_l3(i); //3er. punto del cuadrilatero.
-        const POS &p4= puntos_l4(i); //4o. punto del cuadrilatero.
+        const POS &p1= l1_points(i); //1st. point of the quadrangle. 
+        const POS &p2= l2_points(i); //2nd. point of the quadrangle. 
+        const POS &p3= l3_points(i); //3rd. point of the quadrangle. 
+        const POS &p4= l4_points(i); //4th. point of the quadrangle. 
         const m_pos lado1= m_pos(p1,p2,ndiv_12);
         const m_pos lado2= m_pos(p2,p3,ndiv_14);
         const m_pos lado3= m_pos(p4,p3,ndiv_12);

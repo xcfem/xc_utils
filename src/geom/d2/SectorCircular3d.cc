@@ -64,7 +64,7 @@ SectorCircular3d::SectorCircular3d(const Pos3d &c,const double &r,const Vector3d
   { sect_circ= SectorCircular2d(Circulo2d(to_2d(c),r),th1,th2); }
 
  
-//! @brief Constructor; sector circular definido por tres puntos p1->p2->p3.
+//! @brief Constructor; sector circular defined by three points p1->p2->p3.
 SectorCircular3d::SectorCircular3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   : D2to3d(p1,p2,p3), sect_circ()
   {
@@ -74,26 +74,26 @@ SectorCircular3d::SectorCircular3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &
     const Circulo2d C(pA,pB,pC);
     const Pos2d po= C.Centro();
     //Ajustamos el centro y los ejes del sistema de coordenadas.
-    TresPuntos(to_3d(po),p1,p3);
+    ThreePoints(to_3d(po),p1,p3);
     const Pos2d pa= to_2d(p1);
     const Pos2d pb= to_2d(p2);
     const Pos2d pc= to_2d(p3);
-    sect_circ= SectorCircular2dTresPuntos(pa,pb,pc);
+    sect_circ= SectorCircular2dThreepoints(pa,pb,pc);
   }
 
 //! @brief Devuelve el centro del círculo.
 Pos3d SectorCircular3d::Centro(void) const
   { return to_3d(sect_circ.Centro()); }
 
-//! @brief Devuelve el punto inicial del arco.
+//! @brief Return the point inicial del arco.
 Pos3d SectorCircular3d::PInic(void) const
   { return to_3d(sect_circ.PInic()); }
 
-//! @brief Devuelve el punto final del arco.
+//! @brief Return the point final del arco.
 Pos3d SectorCircular3d::PFin(void) const
   { return to_3d(sect_circ.PFin()); }
 
-//! @brief Devuelve el punto medio del arco.
+//! @brief Return the point medio del arco.
 Pos3d SectorCircular3d::PMed(void) const
   { return to_3d(sect_circ.PMed()); }
 
@@ -129,16 +129,17 @@ GEOM_FT SectorCircular3d::Iz(void) const
 
 GEOM_FT SectorCircular3d::GetMax(unsigned short int i) const
   {
-    std::cerr << "SectorCircular3d::GetMax(i), no implementada." << std::endl;
+    std::cerr << "SectorCircular3d::GetMax(i), not implemented." << std::endl;
     return 1;
   }
 GEOM_FT SectorCircular3d::GetMin(unsigned short int i) const
   {
-    std::cerr << "SectorCircular3d::GetMin(i), no implementada." << std::endl;
+    std::cerr << "SectorCircular3d::GetMin(i), not implemented." << std::endl;
     return -1;
   }
+
+//! @brief Return true if the point is in the plane.
 bool SectorCircular3d::In(const Pos3d &p, const double &tol) const
-//Devuelve verdadero si el punto est'a sobre el Plano.
   {
     if(GetPlano().In(p,tol))
       return sect_circ.In(to_2d(p),tol);
@@ -146,10 +147,10 @@ bool SectorCircular3d::In(const Pos3d &p, const double &tol) const
       return false;
   }
 
-//! @brief Devuelve n puntos equiespaciados sobre el arco de círculo.
-MatrizPos3d SectorCircular3d::PuntosArco(const size_t &n) const
+//! @brief Return n points equally spaced over the circle arc.
+MatrizPos3d SectorCircular3d::getArcPoints(const size_t &n) const
   {
-    MatrizPos3d retval= to_3d(sect_circ.PuntosArco(n));
+    MatrizPos3d retval= to_3d(sect_circ.getArcPoints(n));
     return retval;
   }
 

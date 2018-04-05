@@ -19,18 +19,18 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//TresPuntos3d.h
+//ThreePoints3d.h
 
-#ifndef TRESPUNTOS3D_H
-#define TRESPUNTOS3D_H
+#ifndef THREEPOINTS3D_H
+#define THREEPOINTS3D_H
 
 #include "../pos_vec/Pos3d.h"
 
 
 //! @ingroup GEOM
 //
-//! @brief Estructura de datos que almacena tres puntos.
-class TresPuntos3d : public ProtoGeom
+//! @brief Data structure that stores three points.
+class ThreePoints3d : public ProtoGeom
   {
     Pos3d _org;
     Pos3d _p1;
@@ -38,9 +38,9 @@ class TresPuntos3d : public ProtoGeom
   protected:
     //void salva_miembros(std::ostream &os,const std::string &indent) const;
   public:
-    TresPuntos3d(void): ProtoGeom() {}
-    TresPuntos3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3): ProtoGeom()
-      { TresPuntos3d(p1,p2,p3); }
+    ThreePoints3d(void): ProtoGeom() {}
+    ThreePoints3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3): ProtoGeom()
+      { ThreePoints3d(p1,p2,p3); }
     const Pos3d &Org(void) const
       { return _org; }
     const Pos3d &P1(void) const

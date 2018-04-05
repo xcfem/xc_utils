@@ -29,7 +29,7 @@
 
 
 //! Reflexión en 3d según se describe en "Geometric tools for computer graphics"
-//! Philip J. Schneider Morgan Kaufmann Publishers, página 153
+//! Philip J. Schneider Morgan Kaufmann Publishers, page 153
 matriz_FT Reflection3d::matriz_reflection3d(const  Pos3d &Q,const Vector3d &n)
   {
     const Vector3d nn= n.Normalizado();
@@ -63,7 +63,7 @@ Reflection3d::Reflection3d(const Pos3d &Q,const Vector3d &d)
 Reflection3d::Reflection3d(const Plano3d &p)
   : Trf3d()
   {
-    matriz_FT rf=  matriz_reflection3d(p.Punto(),p.Normal());
+    matriz_FT rf=  matriz_reflection3d(p.Point(),p.Normal());
     PutMatrizHomogeneas(rf);
   }
 

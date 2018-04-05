@@ -37,18 +37,14 @@ class Poligono2d;
 //! @brief Suma a las posiciones de la lista el vector que
 //! se pasa como parámetro.
 void mueve(GeomObj::list_Pos2d &l,const Vector2d &);
-//! @brief Aplica a los puntos de la lista la transformación
-//! que se pasa como parámetro.
+//! @brief Applies the transformation to the points of the list.
 void transforma(GeomObj::list_Pos2d &l,const Trf2d &);
 void plot(Plotter &,const GeomObj::list_Pos2d &l);
-//! @brief Devuelve los máximos de las coordenadas X e Y
-//! de los puntos que se pasan como parámetro.
+//! @brief Return the maxima of the X and Y coordinates of the points.
 Pos2d getPMax(const GeomObj::list_Pos2d &l);
-//! @brief Devuelve los mínimos de las coordenadas X e Y
-//! de los puntos que se pasan como parámetro.
+//! @brief Return the minima of the X and Y coordinates of the points.
 Pos2d getPMin(const GeomObj::list_Pos2d &l);
-//! @brief Devuelve el «boundary» de 
-//! los puntos que se pasan como parámetro.
+//! @brief Return the boundary of the points.
 BND2d getBnd(const GeomObj::list_Pos2d &l);
 std::deque<GEOM_FT> &getRecubrimientos(const GeomObj::list_Pos2d &l,const Poligono2d &);
 #endif

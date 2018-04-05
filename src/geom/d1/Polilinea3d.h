@@ -46,11 +46,11 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
     size_t GetNumSegmentos(void) const;
 
 /*     inline virtual void GiraX(double ang) */
-/*       { Ref3d::GiraX(ang); TrfPuntos(); } */
+/*       { Ref3d::GiraX(ang); TrfPoints(); } */
 /*     inline virtual void GiraY(double ang) */
-/*       { Ref3d::GiraY(ang); TrfPuntos();  } */
+/*       { Ref3d::GiraY(ang); TrfPoints();  } */
 /*     inline virtual void GiraZ(double ang) */
-/*       { Ref3d::GiraZ(ang); TrfPuntos();  } */
+/*       { Ref3d::GiraZ(ang); TrfPoints();  } */
     const Pos3d *AgregaVertice(const Pos3d &p);
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const;
 
@@ -59,12 +59,12 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
     virtual GEOM_FT Iz(void) const;
 
     virtual GEOM_FT Longitud(void) const
-      //Devuelve la longitud de la Polilinea3d.
+      //Return the longitud de la Polilinea3d.
       { return GeomObj::list_Pos3d::Longitud(); }
     virtual GEOM_FT GetMax(unsigned short int i) const;
-    //Devuelve el valor maximo de la coordenada i.
+    //Return the maximum value of the i coordinate.
     virtual GEOM_FT GetMin(unsigned short int i) const;
-    //Devuelve el valor minimo de la coordenada i.
+    //Return the minimum value of the i coordinate.
     Polilinea3d GetMayores(unsigned short int i,const GEOM_FT &d) const;
     //Devuelve una Polilinea3d con los vertices cuya coordenada i
     //es mayor que d.
@@ -75,7 +75,7 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
     Segmento3d GetSegmento(const size_t &) const;
 /*     virtual list_Pos3d Int(unsigned short int i, const double d) const */
 /*       { */
-/*         std::cerr << "Polilinea3d Int(i,d) no implementada" << endl; */
+/*         std::cerr << "Polilinea3d Int(i,d) not implemented" << endl; */
 /*         return list_Pos3d(); */
 /*       } */
     list_Pos3d Int(unsigned short int i,const GEOM_FT &d) const;
@@ -83,7 +83,7 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
     //coord_i= d
     list_Pos3d getIntersection(const Plano3d &) const;
     Polilinea3d Corta(unsigned short int i,const GEOM_FT &d) const;
-    //Devuelve la Polilinea3d con los vertices correspondientes a los
+    //Return the Polilinea3d con los vertices correspondientes a los
     //cortes con el plano coord_i= d
     Polilinea3d Separa(const Pos3d &p,const short int &sgn) const;
     //Suponemos que p es vertice de la Polilinea3d

@@ -59,8 +59,8 @@ Segmento3d Polilinea3d::GetSegmento(const size_t &i) const
   }
 
 
+//! @brief Moves the polyline.
 void Polilinea3d::Mueve(const Vector3d &v)
-//Los puntos de la Polilinea3d estaran siempre en globales.
   {
     for(register list_Pos3d::iterator j=begin();j != end();j++)
       (*j)= (*j) + v;

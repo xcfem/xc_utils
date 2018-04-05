@@ -38,7 +38,7 @@ class Segmento2d;
 //! @brief Semiplano en dos dimensiones.
 class Semiplano2d : public Superficie2d
   {
-    Recta2d lim; //Los puntos del semiplano son los que están a la derecha de la recta.
+    Recta2d lim; //The points of the half-plane are those we lie to the right of the line.
   public:
     Semiplano2d(void);
     explicit Semiplano2d(const Recta2d &r);
@@ -69,23 +69,23 @@ class Semiplano2d : public Superficie2d
       { return lim.EsDegenerada(); }
     inline const Recta2d &getBorde(void) const
       { return lim; }
+    //! @brief Return true if the point is inside the half-plane.
+    //! The points of the edge line belong to the half-plane.
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const
-    //Devuelve verdadero si el punto está dentro del semiplano.
-    //los puntos de la recta límite son del semiplano
       { 
         if(lim.In(p,tol)) return true;
         if(lim.LadoDerecho(p)) return true;
         return false;
       }
+    //! @brief Return the signed distance from the point to the half-plane.
     GEOM_FT DistSigno(const Pos2d &p) const
-    //Devuelve la distancia al cuadrado desde el punto al semiplano.
       {
         GEOM_FT retval= lim.dist(p);
         if(In(p)) retval= -retval;
         return retval;
       }
+    //! @brief Return the distance from the point to the half-plane.
     inline virtual GEOM_FT Dist(const Pos2d &p) const
-    //Devuelve la distancia al cuadrado desde el punto al semiplano.
       { return fabs(DistSigno(p)); }
 
     Semiplano2d getNormalizado(void) const;

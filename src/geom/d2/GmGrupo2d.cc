@@ -27,7 +27,7 @@
 #include <iostream>
 
 #include "xc_utils/src/geom/pos_vec/Dir2d.h"
-#include "xc_utils/src/geom/d0/Punto2d.h"
+#include "xc_utils/src/geom/d0/Point2d.h"
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include "xc_utils/src/geom/d1/SemiRecta2d.h"
 #include "xc_utils/src/geom/d1/Segmento2d.h"
@@ -58,7 +58,7 @@ GEOM_FT GmGrupo2d::Iy(void) const
   { return inercia(Recta2d(Cdg(),Dir2d(0.0,1.0))); }
 GEOM_FT GmGrupo2d::Pxy(void) const
   {
-    cerr << "GmGrupo2d::Pxy no implementada, se devuelve 0." << endl;
+    cerr << "GmGrupo2d::Pxy not implemented, 0 is returned." << endl;
     return 0.0;
   }
 
@@ -84,7 +84,7 @@ Pos2d GmGrupo2d::Cdg(void) const
     return Origen2d+num;
   }
 
-//! @brief Aplica a los puntos la transformación que se pasa como parámetro.
+//! @brief Applies the transformation to the points.
 void GmGrupo2d::Transforma(const Trf2d &trf2d)
   {
     for(pdeque_geom_obj::iterator i= objetos.begin();i!=objetos.end();i++)

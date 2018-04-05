@@ -75,10 +75,10 @@ template <class InputIterator>
 Poliedro3d get_convex_hull(InputIterator first,InputIterator last)
   {
     Poliedro3d retval;
-    const size_t num_puntos= last-first;
-    std::vector<Point_3> points(num_puntos);
+    const size_t num_points= last-first;
+    std::vector<Point_3> points(num_points);
     GeomObj::list_Pos3d::const_iterator j= first;
-    for(register size_t i=0;i<num_puntos;i++)
+    for(register size_t i=0;i<num_points;i++)
       {
         points[i]= Pos3d_to_Point_3(*j);
         j++;

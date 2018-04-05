@@ -34,11 +34,9 @@
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
 
-//! @brief Devuelve el parámetro que corresponde al punto
-//! sobre la recta.
+//! @brief Return the parameter that corresponds to the point over the line.
 //!
-//! Devuelve el parámetro que corresponde al punto
-//! sobre la recta. Se supone que el punto esta sobre la recta.
+//! The point is supposed to belong to the line.
 GEOM_FT RectaParametricas2d::Parametro(const Pos2d &p) const
   {
     Vector2d v= p-org;
@@ -53,12 +51,14 @@ Recta2d::Recta2d(const Pos2d &p1,const Pos2d &p2)
   {
     if(EsDegenerada())
       {
-        clog << "Recta2d::Recta2d: La recta es degenerada, los puntos: "
-             << p1 << " y " << p2 << " coinciden." << endl;
+        clog << getClassName() << "::" << __FUNCTION__
+	     << "; degenerated line, the points: "
+             << p1 << " and " << p2 << " are the same." << endl;
       }
     if(p1.dist(p2)<mchne_eps_dbl)
-      std::cerr << "Recta2d::Recta2d: La recta está mal definida, los puntos: "
-             << p1 << " y " << p2 << " están muy próximos." << endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+		<< "; bad definition for line, the points: "
+             << p1 << " and " << p2 << " are too close." << endl;
   }
 Recta2d::Recta2d(const Pos2d &p,const Dir2d &dir)
   : Linea2d(), cgr(p.ToCGAL(),dir.ToCGAL()) {}
@@ -94,10 +94,10 @@ GeomObj *Recta2d::clon(void) const
 void Recta2d::Swap(void)
   { cgr= cgr.opposite(); }
 
-void Recta2d::DosPuntos(const Pos2d &p1,const Pos2d &p2)
+void Recta2d::TwoPoints(const Pos2d &p1,const Pos2d &p2)
   { (*this)= Recta2d(p1,p2); }
 
-//! @brief Devuelve la longitud de la recta.
+//! @brief Return the longitud de la recta.
 GEOM_FT Recta2d::Longitud(void) const
   { return NAN; }
 
@@ -113,7 +113,7 @@ Vector2d Recta2d::VersorDir(void) const
   { return VDir().Normalizado(); }
 
 double Recta2d::getLambda(unsigned short int i,const double &d,const Vector2d &i_) const
-  { return (d-Punto(0)(i))/i_(i);}
+  { return (d-Point(0)(i))/i_(i);}
 
 //! @brief Return orthogonal projection of p onto the line.
 Pos2d Recta2d::Projection(const Pos2d &p) const
@@ -184,8 +184,7 @@ GEOM_FT Recta2d::GetY(const GEOM_FT &x) const
       }
     return cgr.y_at_x(x);
   }
-//! @brief Devuelve el parámetro que corresponde al punto
-//! sobre la recta.
+//! @brief Return the parameter of the point on the line.
 //!
 //! Returns the parameter that corresponds to the point
 //! on the line. If the points lies not on the line
@@ -203,16 +202,16 @@ GEOM_FT Recta2d::Parametro(const Pos2d &p) const
 //!   v[0]: point in the line.
 //!   v[1]: dir vector.
 RectaParametricas2d Recta2d::GetParametricas(void) const
-  { return RectaParametricas2d(Punto(0),VDir()); }
+  { return RectaParametricas2d(Point(0),VDir()); }
 
-//! @brief Devuelve un punto de la recta a una "distancia"
-//! lambda del origen.
+//! @brief Return a point of the line at a distance delta
+//! from its origin.
 Pos2d Recta2d::PtoParametricas(const GEOM_FT &lambda) const
-  { return Punto(0)+lambda*VDir(); }
+  { return Point(0)+lambda*VDir(); }
 
 //! @brief Line redefined from a parametric equation.
 void Recta2d::Parametricas(const RectaParametricas2d &param)
-  { DosPuntos(param.GetPunto(0.0),param.GetPunto(100.0)); }
+  { TwoPoints(param.getPoint(0.0),param.getPoint(100.0)); }
 
 //! @brief SOLO SE USA EN Ordena.
 bool menor_param(const Pos3d &p1, const Pos3d &p2)
@@ -220,7 +219,7 @@ bool menor_param(const Pos3d &p1, const Pos3d &p2)
 
 //! @brief Return the points ordered by the value of the parameter
 //! of its projection onto the line from lowest to highest.
-//! Origin is at Recta2d::Punto(0).
+//! Origin is at Recta2d::Point(0).
 GeomObj::list_Pos2d Recta2d::Ordena(const GeomObj::list_Pos2d &ptos) const
   {
     GeomObj::list_Pos2d retval;
@@ -247,26 +246,26 @@ GeomObj::list_Pos2d Recta2d::Project(const GeomObj::list_Pos2d &ptos) const
     return retval;
   }
 
-//! @brief Devuelve la recta perpendicular a r que pasa por p.
+//! @brief Return the recta perpendicular a r que pasa por p.
 Recta2d Recta2d::Perpendicular(const Pos2d &p) const
   { return Recta2d(cgr.perpendicular(p.ToCGAL())); }
 
-//! @brief Devuelve la recta que resulta de aplicar a ésta el desplazamiento v.
+//! @brief Return the recta que resulta de aplicar a ésta el desplazamiento v.
 Recta2d Recta2d::Offset(const Vector2d &v) const
   {
-    const Pos2d p= Punto()+v;
+    const Pos2d p= Point()+v;
     return Recta2d(p,VDir());
   }
 
-//! @brief Devuelve la recta paralela a ésta que pasa por p.
+//! @brief Return the recta paralela a ésta que pasa por p.
 Recta2d Recta2d::Paralela(const Pos2d &p) const
   {
-    const Vector2d v= p-Punto();
+    const Vector2d v= p-Point();
     return Offset(v);
   }
 
 //! @brief Devuelve una recta paralela a ésta a la distancia
-//! que se pasa como parámetro. Si la distancia es positiva,
+//! que se pasa como parámetro. Si la distance es positiva,
 //! la nueva recta quedará a la derecha de la anterior.
 Recta2d Recta2d::Offset(const GEOM_FT &d) const
   {
@@ -275,17 +274,17 @@ Recta2d Recta2d::Offset(const GEOM_FT &d) const
     return Offset(n);
   }
 
-//! @brief Asigna valores a los puntos que definen la recta.
+//! @brief Set the points that define the line.
 void Recta2d::Put(const Pos2d &p1,const Pos2d &p2)
-  { DosPuntos(p1,p2); }
+  { TwoPoints(p1,p2); }
 
 
 
-//! @brief Devuelve verdadero si la recta corta a la que se pasa como parámetro.
+//! @brief Return true if la recta corta a la que se pasa como parámetro.
 bool Recta2d::Interseca(const Recta2d &r2) const
   { return do_intersect(cgr,r2.cgr); }
 
-//! @brief Devuelve la intersección de la Linea con un plano coord_i=cte.
+//! @brief Return the intersección de la Linea con un plano coord_i=cte.
 GeomObj2d::list_Pos2d Recta2d::Interseccion(unsigned short int i, const double &d) const
   {
     GeomObj::list_Pos2d lp;
@@ -295,7 +294,7 @@ GeomObj2d::list_Pos2d Recta2d::Interseccion(unsigned short int i, const double &
     Pos2d p;
     p.Set(i,d);
     const Vector2d i_= VDir();
-    const Pos2d org(Punto(0));
+    const Pos2d org(Point(0));
     if (fabs(i_(i))<1.0E-12) return lp;
     const double l= getLambda(i,d,i_);
     p.Set(j,org(j)+l*i_(j));
@@ -303,7 +302,7 @@ GeomObj2d::list_Pos2d Recta2d::Interseccion(unsigned short int i, const double &
     return lp;
   }
 
-//! @brief Devuelve el punto intersección de ambas rectas, if doesn't exists la
+//! @brief Return the point intersección de ambas rectas, if doesn't exists la
 //! intersección devuelve la lista vacía.
 GeomObj2d::list_Pos2d Recta2d::Interseccion(const Recta2d &r2) const
   {
@@ -322,7 +321,9 @@ GeomObj2d::list_Pos2d Recta2d::Interseccion(const Recta2d &r2) const
       }
     if(colineales(*this,r2))
       {
-	std::cerr << "Recta2d::Interseccion(Recta2d): Las rectas coinciden, todos sus puntos pertenecen a la intersección." 
+	std::cerr << getClassName() << "::" << __FUNCTION__
+		  << "; the lines are the same, "
+	          << "all its points belong to the intersection." 
              << endl;
         return retval;
       }
@@ -335,7 +336,9 @@ GeomObj2d::list_Pos2d Recta2d::Interseccion(const Recta2d &r2) const
           retval.push_back(Pos2d(ptoi));
         else
           {
-            cerr << "recta2d::Interseccion(Recta2d): Error desconocido al intersecar las rectas:" << endl
+            cerr << getClassName() << "::" << __FUNCTION__
+		 << "; unknown error when computing the intersection"
+                 << " of the lines:" << endl
                  << "  r: " << *this << endl
                  << "  r2: " << r2 << endl;
           }
@@ -343,20 +346,20 @@ GeomObj2d::list_Pos2d Recta2d::Interseccion(const Recta2d &r2) const
     return retval;
   }
 
-//! @brief Devuelve un punto arbitrario de la recta.
-//! Si i==j, se cumple que Punto(i) == Punto(j).
+//! @brief Return an arbitrary point of the line.
+//! Si i==j, se cumple que Point(i) == Point(j).
 //! Además, l is directed from point(i)  to point(j), for all i < j.
-Pos2d Recta2d::Punto(const int &i) const
+Pos2d Recta2d::Point(const int &i) const
   { return Pos2d(cgr.point(i)); }
 
-//! @brief Devuelve la distancia al cuadrado entre las dos rectas.
+//! @brief Return the distance al cuadrado entre las dos rectas.
 GEOM_FT dist2(const Recta2d &r1,const Recta2d &r2)
   {
     GEOM_FT retval= 0.0;
     if(!intersecan(r1,r2)) //son paralelas
       if(r1 != r2) //NO son la misma recta.
         {
-          const Pos2d p1= r1.Punto(0);
+          const Pos2d p1= r1.Point(0);
           const Pos2d p2= r2.Projection(p1);
           retval= dist2(p1,p2);
 	}
@@ -382,42 +385,42 @@ double angulo(const Recta2d &r1,const Recta2d &r2)
 bool Recta2d::Paralela(const Recta2d &r) const
   { return (paralelas(GetDir(),r.GetDir())); }
 
-//! @brief Devuelve la recta bisectriz de ESTA
-//! y la que se pasa como parámetro.
+//! @brief Return the recta bisectriz de ESTA
+//! and la que se pasa como parámetro.
 Recta2d Recta2d::Bisectriz(const Recta2d &r) const
   { return Recta2d(bisector(this->ToCGAL(),r.ToCGAL())); }
 
 Recta2d Recta2d::getNormalizada(void) const
-  { return Recta2d(Punto(),VersorDir()); }
+  { return Recta2d(Point(),VersorDir()); }
 
-//! @brief Devuelve verdadero si la recta es vertical.
+//! @brief Return true if la recta es vertical.
 bool Recta2d::EsVertical(void) const
   { return cgr.is_vertical(); }
 
-//! @brief Devuelve verdadero si la recta es degenerada.
+//! @brief Return true if la recta es degenerada.
 bool Recta2d::EsDegenerada(void) const
   { return cgr.is_degenerate(); }
 
-//! @brief Devuelve verdadero si el punto está sobre la recta.
+//! @brief Return true if the point is on the line.
 bool Recta2d::In(const Pos2d &p, const double &tol) const
   { return cgr.has_on(p.ToCGAL()); }
 
-//! @brief Devuelve verdadero si el punto está al lado derecho de la recta.
+//! @brief Return true if the point is on the right side of the line.
 bool Recta2d::LadoDerecho(const Pos2d &p) const
   { return cgr.has_on_negative_side(p.ToCGAL()); }
 
-//! @brief Devuelve verdadero si el punto está al lado derecho de la recta.
+//! @brief Return true if the point is on the left side of the line.
 bool Recta2d::LadoIzquierdo(const Pos2d &p) const
   { return cgr.has_on_positive_side(p.ToCGAL()); }
 
-//! @brief Devuelve la distancia al cuadrado desde el punto a la recta.
+//! @brief Return the squared distance from the point to the line.
 GEOM_FT Recta2d::dist2(const Pos2d &p) const
   {
     const GEOM_FT A= a(),B= b(), C= c();
     return sqr(A*p.x()+B*p.y()+C)/(A*A+B*B);
   }
 
-//! @brief Devuelve la distancia al cuadrado desde el punto a la recta.
+//! @brief Return the distance al cuadrado from the point a la recta.
 GEOM_FT Recta2d::dist(const Pos2d &p) const
   { return sqrt(dist2(p)); }
 
@@ -445,14 +448,14 @@ bool operator==(const Recta2d &r1,const Recta2d &r2)
       return (r1.cgr==r2.cgr); 
   }
 
-//! @brief Devuelve la distancia entre las rectas.
+//! @brief Return the distance entre las rectas.
 GEOM_FT dist(const Recta2d &r1,const Recta2d &r2)
   { return sqrt_FT(dist2(r1,r2)); } 
 
 bool colineales(const Recta2d &r1,const Recta2d &r2)
   {
-    const Pos2d p1= r2.Punto(0);
-    const Pos2d p2= r2.Punto(10);
+    const Pos2d p1= r2.Point(0);
+    const Pos2d p2= r2.Point(10);
     if( r1.In(p1) && r1.In(p2) )
       return true;
     else
@@ -463,12 +466,12 @@ bool colineales(const Recta2d &r1,const Recta2d &r2)
 bool intersecan(const Recta2d &r1,const Recta2d &r2)
   { return r1.Interseca(r2); }
 
-//! @brief Devuelve la intersección.
+//! @brief Return the intersección.
 GeomObj2d::list_Pos2d interseccion(const Recta2d &r1,const Recta2d &r2)
   { return r1.Interseccion(r2); }
 
-//! @brief Devuelve el punto de intersección (if exists).
-Pos2d punto_interseccion(const Recta2d &r1, const Recta2d &r2)
+//! @brief Return the point de intersección (if exists).
+Pos2d intersection_point(const Recta2d &r1, const Recta2d &r2)
   {
     Pos2d retval;
     GeomObj2d::list_Pos2d tmp= interseccion(r1,r2);
@@ -483,8 +486,8 @@ Pos2d punto_interseccion(const Recta2d &r1, const Recta2d &r2)
 //! pasa como parámetro.
 void Recta2d::Transforma(const Trf2d &trf2d)
   {
-    const Pos2d p1= trf2d.Transforma(Punto(0));
-    const Pos2d p2= trf2d.Transforma(Punto(100));
+    const Pos2d p1= trf2d.Transforma(Point(0));
+    const Pos2d p2= trf2d.Transforma(Point(100));
     (*this)= Recta2d(p1,p2);
   }
 

@@ -19,31 +19,31 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//FuncPorPuntosR_T.h
+//FunctionFromPointsR_T.h
 
-#ifndef FUNCPORPUNTOSR_T_H
-#define FUNCPORPUNTOSR_T_H
+#ifndef FUNCTIONFROMPOINTSR_T_H
+#define FUNCTIONFROMPOINTSR_T_H
 
 #include <map>
 #include <iostream>
 #include <vector>
 #include <boost/python/list.hpp>
 
-//! @brief función de R en T definida por puntos.
+//! @brief function from R to T defined on a set of points.
 //!
-//! Función que a cada punto x de la recta real le asigna un
-//! valor de clase T. La correspondencia se define por puntos,
-//! esto es, por pares (x1,T1), (x2,T2), ...
+//! Function that for each point x de la recta real le asigna un
+//! valor de clase T. The correspondence is established by points,
+//! that is, by pairs (x1,T1), (x2,T2), ...
 template <class T>
-class FuncPorPuntosR_T
+class FunctionFromPointsR_T
   {
   public:
-    typedef std::map<double,T> map_valores;
-    typedef typename map_valores::iterator iterator;
-    typedef typename map_valores::const_iterator const_iterator;
-    typedef typename map_valores::const_reverse_iterator const_reverse_iterator;
+    typedef std::map<double,T> value_map;
+    typedef typename value_map::iterator iterator;
+    typedef typename value_map::const_iterator const_iterator;
+    typedef typename value_map::const_reverse_iterator const_reverse_iterator;
   private:
-    map_valores puntos;
+    value_map points;
   public:
     T Valor(const double &) const;
     std::vector<T> Valores(const std::vector<double> &) const;
@@ -51,39 +51,39 @@ class FuncPorPuntosR_T
       { return Valor(z); }
     std::vector<T> operator()(const std::vector<double> &zs) const
       { return Valores(zs); }
-    //! @brief Devuelve un iterador al principio de la tabla de puntos.
+    //! @brief Return an iterator to the beginning of the point container.
     const_iterator begin(void) const
-      { return puntos.begin(); }
-    //! @brief Devuelve un iterador inverso al final de la tabla de puntos.
+      { return points.begin(); }
+    //! @brief Return an reverse iterator to the end of the point container.
     const_reverse_iterator rbegin(void) const
-      { return puntos.rbegin(); }
-    //! @brief Devuelve un iterador al final de la tabla de puntos.
+      { return points.rbegin(); }
+    //! @brief Return an iterator to the end of the point container.
     const_iterator end(void) const
-      { return puntos.end(); }
-    //! @brief Devuelve un iterador al principio de la tabla de puntos.
+      { return points.end(); }
+    //! @brief Return an iterator to the beginning of the point container.
     const_reverse_iterator rend(void) const
-      { return puntos.rend(); }
-    //! @brief Devuelve el número de puntos que definen la función.
+      { return points.rend(); }
+    //! @brief Return the number of points that define the function.
     size_t size(void) const
-      { return puntos.size(); }
-    //! @brief Devuelve verdadero si no tiene puntos.
+      { return points.size(); }
+    //! @brief Return true if there are no points.
     size_t empty(void) const
-      { return puntos.empty(); }
+      { return points.empty(); }
     void Inserta(const double &x,const T &y);
     void clear(void)
-      { puntos.clear(); }
+      { points.clear(); }
   };
 
 //! @brief Devuelve el valor que corresponde a la abcisa z.
 template <class T>
-T FuncPorPuntosR_T<T>::Valor(const double &z) const
+T FunctionFromPointsR_T<T>::Valor(const double &z) const
   {
     T retval= T();
-    if(puntos.empty()) return retval; //Si esta vacío devolvemos el valor por defecto.
-    const_iterator j= puntos.upper_bound(z);
-    if(j==begin()) //La abcisa z es menor que todas las de los puntos.
+    if(points.empty()) return retval; //Si esta vacío devolvemos el valor por defecto.
+    const_iterator j= points.upper_bound(z);
+    if(j==begin()) //Abscissae z is smaller that all the rest.
       j++;//retval= (*j).second/(*j).first*z;
-    if(j==end()) //La abcisa z es mayor que todas las de los puntos.
+    if(j==end()) //Abscissae z is greater that all the rest.
       j--;//retval= (*j).second/(*j).first*z;
     const_iterator i= j;
     i--;
@@ -99,28 +99,28 @@ T FuncPorPuntosR_T<T>::Valor(const double &z) const
 
 //! @brief Devuelve los valores que corresponden a las abcisas z.
 template <class T>
-std::vector<T> FuncPorPuntosR_T<T>::Valores(const std::vector<double> &zs) const
+std::vector<T> FunctionFromPointsR_T<T>::Valores(const std::vector<double> &zs) const
   {
     const size_t sz= zs.size();
     std::vector<T> retval(sz);
-    if(puntos.empty()) return retval; //Si esta vacío devolvemos el valor por defecto.
+    if(points.empty()) return retval; //Si esta vacío devolvemos el valor por defecto.
     for(size_t i= 0;i<sz;i++)
       retval[i]= Valor(zs[i]);
     return retval;
   }
 
-//! @brief Inserta el par (x,y) como punto de la función.
+//! @brief Inserts the pair (x,y) as a point of the function.
 template <class T>
-void FuncPorPuntosR_T<T>::Inserta(const double &x,const T &y)
+void FunctionFromPointsR_T<T>::Inserta(const double &x,const T &y)
   {
-    puntos[x]= y;
+    points[x]= y;
   }
 template <class T>
-std::ostream &operator<<(std::ostream &os, const FuncPorPuntosR_T<T> &lt)
+std::ostream &operator<<(std::ostream &os, const FunctionFromPointsR_T<T> &lt)
   {
     if(!lt.empty())
       {
-        typename FuncPorPuntosR_T<T>::const_iterator i= lt.begin();
+        typename FunctionFromPointsR_T<T>::const_iterator i= lt.begin();
         os << "x= " << (*i).first
            << " y= " << (*i).second;
         i++;

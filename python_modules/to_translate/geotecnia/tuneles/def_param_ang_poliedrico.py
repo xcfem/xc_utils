@@ -18,14 +18,14 @@ if(not(JPvacio))
         if(angI1I2<PI)
             \then
               {
-                ptsTang= calcPuntosTangencia("seccionTunel",I1,I2)
+                ptsTang= computePointsOfTangency("seccionTunel",I1,I2)
                 r1= 
                 p1= ptsTang.at(1)
                 \r1{\puntoyVector{[p1,I1]}}
                 r2= 
                 p2= ptsTang.at(2)
                 \r2{\puntoyVector{[p2,I2]}}
-                p3= punto_interseccion(r1,r2)
+                p3= intersection_point(r1,r2)
               }
           }
       }

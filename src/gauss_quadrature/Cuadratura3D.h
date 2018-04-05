@@ -19,30 +19,36 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PuntosGauss.cc
-#include "gssleg.h"
+#ifndef	CUADRATURA3D_H
+#define	CUADRATURA3D_H
 
-#include "PuntosGauss.h"
+#include <vector>
+#include "GaussPoints.h"
+#include "PsoGss3d.h"
 
-//! Genera los puntos de Gauss entre x1 y x2 para un número
-//! de ordenadas n.
-PuntosGauss::PuntosGauss(double x1, double x2, int n) : ConjPG(n)
+class Pos3d;
+
+typedef std::vector<PsoGss3D> ConjPG3;
+
+class Cuadratura3D : public ConjPG3
   {
-    v_double w(n); //pesos.
-    v_double x(n); //abcisas.
-    int i;
+    int num_dim;
+  public:
+    Cuadratura3D(const Pos3d &p1,const Pos3d &p2,int nx = 2, int ny = 1, int nz = 1);
+    inline size_t Size() const
+      { return size(); }
+    inline const PsoGss3D &Get(int p) const
+      { return (*this)[p]; }
+    inline int NumDim() const
+      { return num_dim; }
+    friend std::ostream& operator<<(std::ostream& o, const Cuadratura3D& gpts);
+  };
 
-    gss_leg(x1, x2, x, w);
-    for(i=0;i<n;i++)
-      {
-        (*this)[i].w = w[i];
-        (*this)[i].x = x[i];
-      }
-  }
-std::ostream& operator<<(std::ostream& o, const PuntosGauss& gpts)
-  {
-    PuntosGauss::const_iterator i;
-    for(i=gpts.begin();i!=gpts.end();i++)
-      o << (*i) << ", ";
-    return o;
-  }
+#endif
+
+
+
+
+
+
+

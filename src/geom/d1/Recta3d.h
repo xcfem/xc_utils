@@ -40,7 +40,7 @@
 class RectaParametricas3d
   {
     Pos3d org; //Origen de la recta.
-    Vector3d dir; //Vector dirección.
+    Vector3d dir; //direction vector.
   public:
     RectaParametricas3d(const Pos3d &o,const Vector3d &d)
       : org(o), dir(d) {}
@@ -48,9 +48,8 @@ class RectaParametricas3d
       { return org; }
     inline const Vector3d &GetDir(void) const
       { return dir; }
-    inline Pos3d GetPunto(const GEOM_FT &lambda) const
-    //Devuelve un punto de la recta a una "distancia"
-    //lambda del origen.
+    //! @brief Return a point at a distance lambda from its origin.
+    inline Pos3d getPoint(const GEOM_FT &lambda) const
       { return org+lambda*dir; }
   };
 
@@ -76,14 +75,14 @@ class Recta3d : public Linea3d
     Recta3d(const RectaParametricas3d &param);
     virtual GeomObj *clon(void) const
       { return new Recta3d(*this); }
-    void DosPuntos(const Pos3d &p1,const Pos3d &p2);
+    void TwoPoints(const Pos3d &p1,const Pos3d &p2);
     virtual GEOM_FT GetMax(unsigned short int) const
       { return NAN; }
     virtual GEOM_FT GetMin(unsigned short int i) const
       { return NAN; }
     const CGRecta_3 &ToCGAL(void) const
       { return cgr; }
-    inline Pos3d Punto(const int &i=0) const
+    inline Pos3d Point(const int &i=0) const
       { return Pos3d(cgr.point(i)); }
 
     double getLambda(unsigned short int i,const double &d,const Vector3d &i_) const;
@@ -103,26 +102,25 @@ class Recta3d : public Linea3d
     //!   v[0]: point in the line.
     //!   v[1]: dir vector for the line.
     RectaParametricas3d GetParametricas(void) const
-      { return RectaParametricas3d(Punto(0),VDir()); }
-    //! @brief Devuelve un punto de la recta a una "distancia"
-    //! lambda del origen.
+      { return RectaParametricas3d(Point(0),VDir()); }
+    //! @brief Return a point at a distance lambda from its origin.
     Pos3d PtoParametricas(const GEOM_FT &lambda) const
-      { return Punto(0)+lambda*VDir(); }
+      { return Point(0)+lambda*VDir(); }
     //! @brief Defines the line from its parametric equation.
     void Parametricas(const RectaParametricas3d &param)
-      { DosPuntos(param.GetPunto(0.0),param.GetPunto(100.0)); }
+      { TwoPoints(param.getPoint(0.0),param.getPoint(100.0)); }
+    //! @brief Return true if the point is on the line.
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const
-    //Devuelve verdadero si el punto está sobre la recta.
       { return cgr.has_on(p.ToCGAL()); }
-    //! @brief Devuelve el cuadrado de la distancia desde el punto a la recta.
+    //! @brief Return the squared distance from the point to the line.
     virtual GEOM_FT dist2(const Pos3d &p) const
       { return p.dist2(Projection(p)); }
     virtual GEOM_FT dist(const Pos3d &p) const;
 
     Plano3d Perpendicular(const Pos3d &p) const;
+    //! @brief Set the points that define the line.
     void Put(const Pos3d &p1,const Pos3d &p2)
-    //Asigna valores a los puntos que definen la recta.
-      { DosPuntos(p1,p2); }
+      { TwoPoints(p1,p2); }
     bool Paralela(const Recta3d &r) const;
 
     bool Interseca(const Recta3d &r2) const;

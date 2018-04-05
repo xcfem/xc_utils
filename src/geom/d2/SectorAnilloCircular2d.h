@@ -79,9 +79,9 @@ class SectorAnilloCircular2d : public SectorCircular2d
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
-    MatrizPos2d PuntosArcoExt(const size_t &n) const;
-    MatrizPos2d PuntosArcoInt(const size_t &n) const;
-    MatrizPos2d PuntosPerimetro(const size_t &n) const;
+    MatrizPos2d getExtArcPoints(const size_t &n) const;
+    MatrizPos2d getIntArcPoints(const size_t &n) const;
+    MatrizPos2d getPointsOnPerimeter(const size_t &n) const;
     MatrizPos2d genMesh(const size_t &m,const size_t &n) const;
     Poligono2d getPoligono2d(const size_t &n) const;
 

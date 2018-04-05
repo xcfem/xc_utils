@@ -69,7 +69,7 @@ class MatrizPos2d: public MatrizPos<Pos2d>
     GEOM_FT GetX(const size_t &,const size_t &) const;
     GEOM_FT GetY(const size_t &,const size_t &) const;
     const matriz_FT &GetVertCoords(const size_t &,const size_t &) const;
-    Pos2d GetPunto(const size_t &,const size_t &) const;
+    Pos2d getPoint(const size_t &,const size_t &) const;
     Cuadrilatero2d GetQuad(const size_t &i,const size_t &j) const;
     double GetAreaQuad(const size_t &i,const size_t &j) const;
     Pos2d GetCentroideQuad(const size_t &i,const size_t &j) const;

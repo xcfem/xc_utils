@@ -74,8 +74,8 @@ class Ref3d3d : public Ref<SisCooRect3d3d>
 /*       { trf.GiraZ(ang_rad); } */
 
     //double GetZLocal(const Pos3d &p) const;
-    //Devuelve la Z del punto p expresado en locales
-    //expresada en coordenadas locales.
+    //Return the la Z of the point p expressed in local coordinates
+    //expressed in local coordinates.
 
     //Devuelve el vector v expresado en globales
     //expresado en coordenadas locales.

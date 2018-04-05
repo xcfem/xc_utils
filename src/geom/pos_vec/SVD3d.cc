@@ -58,17 +58,18 @@ SVD3d::SVD3d(const VDesliz3d &v)
   : VDesliz3d(v), mom(0,0,0) {}
 
 //! @brief Campo de momentos del SVD3d.
-//! Devuelve el momento del SVD3d respecto al punto P.
+//! Devuelve el momento del SVD3d with respect to the point P.
 VDesliz3d SVD3d::getMomento(const Pos3d &P) const
   {
     const VDesliz3d m2= VDesliz3d::getMomento(P);
     return VDesliz3d(P,mom+m2);
   }
 
-//! @brief Devuelve la intersección de la recta de puntos cuyo momento es nulo (if exists)
-//! con el plano que se pasa como parámetro.
-//! Se usa, por ejemplo, para calcular el punto de aplicación del bloque de compresiones del hormigón.
-Pos3d SVD3d::PuntoAplic(const Plano3d &p) const
+//! @brief Return the intersection of the zero moment line (if exists)
+//! with the plane.
+//! It's used, for example, to compunte the point of application of
+//! the compression block in a reinforced concrete section.
+Pos3d SVD3d::PointOfApplication(const Plano3d &p) const
   {
     Pos3d retval(NAN,NAN,NAN);
     if(ExisteRectaMomNulo())
@@ -78,17 +79,18 @@ Pos3d SVD3d::PuntoAplic(const Plano3d &p) const
         if(ptos.size()>0)
           retval= (*ptos.begin());
         else
-          std::cerr << "La recta de puntos de momento nulo es paralela a la sección" << std::endl;
+          std::cerr << "The line of zero moment points is parallel to the plane."
+		    << std::endl;
       }
     else
-      std::cerr << "No existen de puntos de momento nulo" << std::endl;
+      std::cerr << "There are no points with zero moment." << std::endl;
     return retval;
   }
 
 void SVD3d::PrintLtx(std::ostream &os,const std::string &ud_long,const GEOM_FT &f_long, const std::string &ud_f,const GEOM_FT &f_f) const
   {
     //Se asume que imprimimos en una tabla.
-    os << "Punto de aplicación: " << org.VectorPos()*f_long << ud_long << "\\\\" << std::endl
+    os << "Point of application: " << org.VectorPos()*f_long << ud_long << "\\\\" << std::endl
        << "Resultante: " << getResultante()*f_f << ud_f << "\\\\" << std::endl 
        << "Momento: " << mom*f_f << ud_f << ud_long << "\\\\" << std::endl;
   }
@@ -97,7 +99,7 @@ void SVD3d::PrintLtx(std::ostream &os,const std::string &ud_long,const GEOM_FT &
 //! Is the moment with respect a point on the axis
 //! projected onto the axis.
 GEOM_FT SVD3d::getMomento(const Recta3d &e) const
-  { return dot(SVD3d::getMomento(e.Punto()),e.VDir().Normalizado()); }
+  { return dot(SVD3d::getMomento(e.Point()),e.VDir().Normalizado()); }
 
 //! @brief Devuelve el vector momento expresado en el sistema
 //! de referencia que se pasa como parámetro.
@@ -126,12 +128,11 @@ void SVD3d::Neg(void)
     mom=-mom;
   }
 
-//Lugar geométrico de los puntos cuyo momento es paralelo a la
-//resultante.
+//! @brief Return the central axis of the system (moment paraller to resultant).
 Recta3d SVD3d::EjeCentral(void) const
   { return sol_eq_prod_vect(getResultante(),mom); }
 
-//! @brief Lugar geométrico de los puntos de momento nulo.
+//! @brief Return the line of the points with zero moment.
 Recta3d SVD3d::RectaMomNulo(const double &tol) const
   {
     if(ExisteRectaMomNulo(tol))
@@ -140,8 +141,7 @@ Recta3d SVD3d::RectaMomNulo(const double &tol) const
       return Recta3d(Pos3d(NAN,NAN,NAN),Pos3d(NAN,NAN,NAN));
   }
 
-//Devuelve verdadero if exists una recta cuyos puntos
-//tienen momento nulo.
+//! @brief Return true if the line of the points with zero moment exists.
 bool SVD3d::ExisteRectaMomNulo(const double &tol) const
   {
     if((VDesliz3d::Nulo()) && !(mom.Nulo())) return false;
@@ -165,7 +165,7 @@ SVD3d &SVD3d::operator-=(const VDesliz3d &v)
     return *this;
   }
 SVD3d &SVD3d::operator+=(const SVD3d &s)
-  //El punto org se conserva.
+  //The org point is preserved.
   {
     VDesliz3d::operator+=(s);
     mom= mom + s.getMomento(org);
@@ -173,7 +173,7 @@ SVD3d &SVD3d::operator+=(const SVD3d &s)
   }
 
 SVD3d &SVD3d::operator-=(const SVD3d &s)
-  //El punto org se conserva.
+  //The org point is preserved.
   {
     VDesliz3d::operator-=(s);
     mom= mom - s.getMomento(org);
@@ -219,7 +219,7 @@ void SVD3d::Print(std::ostream &os) const
        << " , momento respecto a " << org << " Mo= " << mom; 
   }
 
-//! @brief Devuelve la suma de los sliding vectors.
+//! @brief Return the suma de los sliding vectors.
 SVD3d operator+(const VDesliz3d &v1,const VDesliz3d &v2)
   {
     SVD3d suma(v1);

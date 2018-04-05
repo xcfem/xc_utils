@@ -74,29 +74,29 @@ Pos2d &Pos2d::operator-=(const Vector2d &v)
     return *this;
   }
 
-//! @brief Vector diferencia entre puntos.
+//! @brief Vector between points.
 Vector2d Pos2d::operator-(const Pos2d &p) const
   {
     Vector2d retval(ToCGAL()-p.ToCGAL());
     return retval;
   }
 
-//! @brief Punto que resulta al restar el vector.
+//! @brief Return the point obtained by subtracting the vector.
 Pos2d Pos2d::operator-(const Vector2d &v) const
   {
     Pos2d retval(ToCGAL()-v.ToCGAL());
     return retval;
   }
 
-//! @brief Punto que resulta al sumar el vector.
+//! @brief Return the point obtained by adding the vector.
 Pos2d Pos2d::operator+(const Vector2d &v) const
   {
     Pos2d retval(ToCGAL()+v.ToCGAL());
     return retval;
   }
 
+//! @brief Return the position vector of the point.
 Vector2d Pos2d::VectorPos(void) const
-  //Devuelve el vector de posición del punto.
   { return (*this)-Origen2d; }
 
 void Pos2d::SetX(const GEOM_FT &vx)
@@ -135,35 +135,35 @@ void Pos2d::Print(std::ostream &stream) const
            << "y= " << y();
   }
 
-//! @brief Devuelve la distancia al punto.
+//! @brief Return the distance to the point.
 GEOM_FT Pos2d::dist(const Pos2d &p) const
   { return sqrt_FT(dist2(p)); }
 
-//! @brief Devuelve el cuadrado de la distancia al punto.
+//! @brief Return the squared distance to the point.
 GEOM_FT Pos2d::dist2(const Pos2d &p) const
   { return squared_distance(cgpt,p.cgpt); }
 
-//! @brief Devuelve el cuadrado de la distancia a la recta.
+//! @brief Return the squared distance to the line.
 GEOM_FT Pos2d::dist2(const Recta2d &r) const
   { return r.dist2(*this); }
   
-//! @brief Devuelve la distancia a la recta.
+//! @brief Return the distance to the line.
 GEOM_FT Pos2d::dist(const Recta2d &r) const
   { return r.dist(*this); }
 
-//! @brief Devuelve el cuadrado de la distancia a la semirrecta.
+//! @brief Return the squared distance to the ray.
 GEOM_FT Pos2d::dist2(const SemiRecta2d &sr) const
   { return sr.dist2(*this); }
 
-//! @brief Devuelve la distancia a la semirrecta.
+//! @brief Return the distance to the ray.
 GEOM_FT Pos2d::dist(const SemiRecta2d &sr) const
   { return sr.dist(*this); }
 
-//! @brief Devuelve el cuadrado de la distancia al segmento.
+//! @brief Devuelve el cuadrado de la distance al segmento.
 GEOM_FT Pos2d::dist2(const Segmento2d &sg) const
   { return sg.dist2(*this); }
 
-//! @brief Devuelve la distancia al segmento.
+//! @brief Return the distance al segmento.
 GEOM_FT Pos2d::dist(const Segmento2d &sg) const
   { return sg.dist(*this); }
 

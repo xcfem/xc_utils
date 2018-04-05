@@ -34,8 +34,8 @@
 class SisCooRect2d2d: public SisCooXd2d
   {
   public:
-    typedef Vector2d VLocal; //Dimensión del vector en locales.
-    typedef Pos2d PLocal; //Dimensión del punto en locales.
+    typedef Vector2d VLocal; //!< Dimension of the vector in local coordinates.
+    typedef Pos2d PLocal; //!< Dimension of the point in local coordinates.
 
 
     SisCooRect2d2d(void);
