@@ -43,7 +43,7 @@ cmb_acc::ActionContainer::ActionContainer(const PsiCoeffsMap &coefs)
     AS.set_owner(this);
   }
 
-//! @brief Inserta la acción en la familia que se indica en la cadena de caracteres.
+//! @brief Inserta la acción en la familia que se indica en la text string.
 cmb_acc::ActionRValue &cmb_acc::ActionContainer::inserta(const std::string &familia,const Action &acc,const std::string &nmb_coefs_psi,const std::string &subfamilia)
   {
     if(familia=="permanentes")
@@ -109,7 +109,7 @@ void cmb_acc::ActionContainer::setSeismicActions(const ActionsFamily &fa)
 //! @param elu: Verdadero si las combinaciones corresponden a estados límite últimos.
 //! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsG(const bool &elu,const bool &sit_accidental) const
-  { return G.GetLoadCombinations(elu,sit_accidental,-1); } //Las permanentes siempre con valor característico.
+  { return G.GetLoadCombinations(elu,sit_accidental,-1); } //Las permanentes siempre con characteristic value.
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsG_aster(const bool &elu,const bool &sit_accidental) const
 //! @brief Devuelve las combinaciones que se forman con las acciones permanentes de valor no constante.
@@ -123,7 +123,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsG_as
 //! @param elu: Verdadero si las combinaciones corresponden a estados límite últimos.
 //! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
 //! @param r: Valor representativo a emplear para el caso general.
-//! - r= -1 -> valor característico.
+//! - r= -1 -> characteristic value.
 //! - r= 0 -> valor de combinación.
 //! - r= 1 -> valor frecuente.
 //! - r= 2 -> valor cuasipermanente.
@@ -135,7 +135,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsQ(co
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsA(short int r,int d,short int rr) const
 //! @brief Devuelve las combinaciones que se forman con las acciones accidentales.
 //! @param r: Valor representativo a emplear para el caso general.
-//! - r= -1 -> valor característico.
+//! - r= -1 -> characteristic value.
 //! - r= 0 -> valor de combinación.
 //! - r= 1 -> valor frecuente.
 //! - r= 2 -> valor cuasipermanente.
@@ -147,7 +147,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsA(sh
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsAS(short int r,int d,short int rr) const
 //! @brief Devuelve las combinaciones que se forman con las acciones sísmicas.
 //! @param r: Valor representativo a emplear para el caso general.
-//! - r= -1 -> valor característico.
+//! - r= -1 -> characteristic value.
 //! - r= 0 -> valor de combinación.
 //! - r= 1 -> valor frecuente.
 //! - r= 2 -> valor cuasipermanente.
@@ -221,7 +221,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccSis(const LoadCom
         LoadCombinationVector SA;
         for(size_t i=0;i<na;i++) //i: Índice de la acción accidental o sísmica.
           {
-            LoadCombinationVector temp= Acc.GetLoadCombinations(true,true,0,i,-1); //Acción accidental o sísmica i con valor característico
+            LoadCombinationVector temp= Acc.GetLoadCombinations(true,true,0,i,-1); //Acción accidental o sísmica i con characteristic value
                                                                               //resto con valor de combinación (QUE DEBE SER NULO).
             SA= LoadCombinationVector::Concat(SA,temp,Action::zero);
           }
@@ -242,7 +242,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPersistentesOTransit
     LoadCombinationVector retval= GetPermanentes(true,false); //ELU, situación no accidental.
     if(verbosity>1) std::clog << "hecho." << std::endl;
     if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
-    retval= GetVariables(retval,true,false,0);//ELU, acción determinante con valor característico
+    retval= GetVariables(retval,true,false,0);//ELU, acción determinante con characteristic value
                                               //resto con valor de combinación.
     if(verbosity>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
     retval= filtraCombsEsclavasHuerfanas(getCompatibles(retval)); //Filtramos las que contienen acciones incompatibles.
@@ -331,7 +331,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPocoFrecuentes(void)
     LoadCombinationVector retval= GetPermanentes(false,false); //ELS, situación no accidental (obviamente).
     if(verbosity>1) std::clog << "hecho." << std::endl;
     if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
-    retval= GetVariables(retval,false,false,0);//ELS, acción determinante con valor característico
+    retval= GetVariables(retval,false,false,0);//ELS, acción determinante con characteristic value
                                                //resto con valor de combinación.
     if(verbosity>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
     retval= filtraCombsEsclavasHuerfanas(getCompatibles(retval)); //Filtramos las que contienen acciones incompatibles.

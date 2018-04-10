@@ -22,7 +22,7 @@
 //LoadCombinationVector.cxx
 
 #include "LoadCombinationVector.h"
-#include "xc_basic/src/texto/en_letra.h"
+#include "xc_basic/src/text/en_letra.h"
 
 
 
@@ -184,8 +184,8 @@ cmb_acc::LoadCombinationVector cmb_acc::LoadCombinationVector::Concat(const Load
   }
         
 //! \fn void cmb_acc::LoadCombinationVector::Numera(const std::string &prefijo)
-//! @brief Añade al nombre de cada uno de los elementos del vector el texto
-//! "HNNN=" como prefijo siendo NNN el número de hipótesis
+//! @brief Appends the prefix text 'HNNN=' to the name of each of the vector
+//! components, where NNN is the hypothesis number.
 void cmb_acc::LoadCombinationVector::Numera(const std::string &prefijo)
   {
     size_t cont= 1;

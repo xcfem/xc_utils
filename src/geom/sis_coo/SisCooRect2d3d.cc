@@ -26,7 +26,7 @@
 #include "../pos_vec/Vector3d.h"
 #include "../pos_vec/Vector2d.h"
 
-#include "xc_basic/src/texto/cadena_carac.h"
+#include "xc_basic/src/text/text_string.h"
 
 
 

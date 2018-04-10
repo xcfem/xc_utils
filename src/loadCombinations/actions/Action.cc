@@ -23,9 +23,9 @@
 
 #include "Action.h"
 #include "boost/lexical_cast.hpp"
-#include "xc_basic/src/texto/cadena_carac.h"
-#include "xc_basic/src/texto/en_letra.h"
-#include "xc_basic/src/texto/latex.h"
+#include "xc_basic/src/text/text_string.h"
+#include "xc_basic/src/text/en_letra.h"
+#include "xc_basic/src/text/latex.h"
 
 
 #include "ActionRValueList.h"

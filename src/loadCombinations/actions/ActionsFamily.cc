@@ -59,7 +59,7 @@ cmb_acc::ActionRValue &cmb_acc::ActionsFamily::inserta(const Action &a,const std
 //!
 //! @param elu: Verdadero si se trata de un estado límite último.
 //! @param sit_accidental: Verdadero si estamos en situación accidental.
-//! @param r: Valor representativo para el caso general (r= -1 -> valor característico,r= 0 -> valor de combinación
+//! @param r: Valor representativo para el caso general (r= -1 -> characteristic value,r= 0 -> valor de combinación
 //! r= 1 -> valor frecuente, r= 2 -> valor cuasipermanente).
 //! @param d: Índice de la acción dominante (si no hay acción dominante d=-1).
 //! @param rr: Valor representativo a emplear para la acción dominante.

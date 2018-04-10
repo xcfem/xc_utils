@@ -19,8 +19,8 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //vtkLabeledShStrMapper.h
-//Modificación de vtkLabeledDataMapper para mostrar cadenas
-//de caracteres cortas (han de caber en el espacio de un double).
+//Modification of vtkLabeledDataMapper to display short text strings
+//(the must fit in the memory space for a double).
 
 #ifndef __vtkLabeledShStrMapper_h
 #define __vtkLabeledShStrMapper_h

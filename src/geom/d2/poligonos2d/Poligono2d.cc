@@ -406,7 +406,7 @@ void Poligono2d::une(const std::list<Poligono2d> &l)
       }
   }
 
-// //! @brief Devuelve la lista de polígonos que resulta de interpretar la cadena de caracteres que se pasa como parámetro.
+// //! @brief Devuelve la lista de polígonos que resulta de interpretar la text string que se pasa como parámetro.
 // std::list<Poligono2d> Poligono2d::crea_lista_poligono2d(const std::string &str) const
 //   {
 //     check_comillas(str);

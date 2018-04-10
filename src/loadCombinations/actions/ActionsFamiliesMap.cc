@@ -173,7 +173,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::GetLoadCombinations(
         assert(familia);
         if(!familia->Vacia()) //La familia contiene acciones.
           {
-            LoadCombinationVector SG_aster= familia->GetLoadCombinations(elu,sit_accidental,-1);//Las permanentes siempre con valor característico.
+            LoadCombinationVector SG_aster= familia->GetLoadCombinations(elu,sit_accidental,-1);//Las permanentes siempre con characteristic value.
             retval= LoadCombinationVector::ProdCartesiano(retval,SG_aster,Action::zero);
           }
       }

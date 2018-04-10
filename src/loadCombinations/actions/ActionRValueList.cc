@@ -44,7 +44,7 @@ cmb_acc::ActionRValue &cmb_acc::ActionRValueList::inserta(const Action &a,const 
 //! @brief Forma producto escalar.
 //!
 //! @param v: Variation a sumar.
-//! @param r: Valor representativo para el caso general (r= -1 -> valor característico,r= 0 -> valor de combinación
+//! @param r: Valor representativo para el caso general (r= -1 -> characteristic value,r= 0 -> valor de combinación
 //! r= 1 -> valor frecuente, r= 2 -> valor cuasipermanente).
 //! @param d: Índice de la acción determinante (si no hay acción determinante d=-1).
 //! @param rr: Valor representativo a emplear para la acción determinante.

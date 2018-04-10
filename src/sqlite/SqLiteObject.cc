@@ -132,7 +132,7 @@ void SqLiteObject::NuevaQuery(const std::string &nmb,const std::string &nmb_db)
   }
 
 
-//! @brief Preprocesa una cadena de caracteres que contiene una sentencia SQL.
+//! @brief Preprocesa una text string que contiene una sentencia SQL.
 std::string SqLiteObject::preprocesa_str_sql(const std::string &str) const
   {
     return boost::trim_copy_if(str,boost::is_any_of("\""));

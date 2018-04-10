@@ -26,7 +26,7 @@
 #include "xc_utils/src/geom/pos_vec/Vector2d.h"
 #include "xc_utils/src/geom/pos_vec/Dir2d.h"
 
-#include "xc_basic/src/texto/cadena_carac.h"
+#include "xc_basic/src/text/text_string.h"
 #include "xc_basic/src/funciones/algebra/ExprAlgebra.h"
 
 

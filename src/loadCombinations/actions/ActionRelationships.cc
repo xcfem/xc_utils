@@ -22,7 +22,7 @@
 //ActionRelationships.cxx
 
 #include "ActionRelationships.h"
-#include "xc_basic/src/texto/cadena_carac.h"
+#include "xc_basic/src/text/text_string.h"
 #include "xc_basic/src/funciones/algebra/ExprAlgebra.h"
 
 #include "boost/regex.hpp"
@@ -38,7 +38,7 @@ std::string cmb_acc::ActionRelationships::limpia(const std::string &str)
     return retval;
   }
 
-//! @brief Devuelve los sumandos de la cadena de caracteres que se pasa como parámetro.
+//! @brief Devuelve los sumandos de la text string que se pasa como parámetro.
 std::deque<std::string> cmb_acc::ActionRelationships::get_sumandos_combinacion(const std::string &str)
   {
     std::deque<std::string> retval;
@@ -66,7 +66,7 @@ std::deque<std::string> cmb_acc::ActionRelationships::get_nmb_acciones_combinaci
 cmb_acc::ActionRelationships::ActionRelationships(void)
   : EntCmd(), incompatibles(0), maestras(0), nodet(false), contiene_incomp(false) {}
 
-//! @brief Devuelve una cadena de caracteres con los nombres de la lista que se pasa como parámetro separados por comas.
+//! @brief Devuelve una text string con los nombres de la lista que se pasa como parámetro separados por comas.
 std::string cmb_acc::ActionRelationships::nombres(const dq_string &l) const
   {
     std::string retval;
@@ -94,7 +94,7 @@ void cmb_acc::ActionRelationships::concat_maestras(const dq_string &otra)
       AgregaMaestra(*i);
   }
 
-//! @brief Devuelve verdadero si alguna de las cadenas de caracteres de combActionsNames
+//! @brief Devuelve verdadero si alguna de las text strings de combActionsNames
 //! verifican la expresión regular "exprReg".
 bool cmb_acc::ActionRelationships::match(const std::string &exprReg,const dq_string &combActionsNames) const
   {
@@ -109,7 +109,7 @@ bool cmb_acc::ActionRelationships::match(const std::string &exprReg,const dq_str
     return retval;
   }
 
-//! @brief Devuelve verdadero si alguna de las cadenas de caracteres que se pasan como parámetro
+//! @brief Devuelve verdadero si alguna de las text strings que se pasan como parámetro
 //! verifica alguna de las expresiones del contenedor de expresiones regulares "exprReg".
 bool cmb_acc::ActionRelationships::match_any(const dq_string &exprReg,const dq_string &combActionsNames) const
   {
@@ -124,7 +124,7 @@ bool cmb_acc::ActionRelationships::match_any(const dq_string &exprReg,const dq_s
   }
 
 //! @brief Devuelve verdadero si para cada una de las expresiones regulares de "exprReg"
-//! existe alguna cadena de caracteres de combActionsNames que la verifica.
+//! existe alguna text string de combActionsNames que la verifica.
 bool cmb_acc::ActionRelationships::match_all(const dq_string &exprReg,const dq_string &combActionsNames) const
   {
     bool retval= false;
@@ -137,7 +137,7 @@ bool cmb_acc::ActionRelationships::match_all(const dq_string &exprReg,const dq_s
     return retval;
   }
 
-//! @brief Devuelve verdadero si la cadenas de caracteres que se pasan como parámetro
+//! @brief Devuelve verdadero si la text strings que se pasan como parámetro
 //! verifica alguna de las expresiones del contenedor "incompatibles".
 bool cmb_acc::ActionRelationships::matchIncompatibles(const dq_string &sumandos) const
   { return match_any(incompatibles,sumandos); }

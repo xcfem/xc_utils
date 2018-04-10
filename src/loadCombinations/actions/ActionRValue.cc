@@ -65,7 +65,7 @@ cmb_acc::Action cmb_acc::ActionRValue::Valor(short int r) const
     switch(r)
       {
       case(-1):
-        break; //Valor característico.
+        break; //characteristic value.
       case(0):
         retval*=getPsi(0); //Valor de combinación.
         break;

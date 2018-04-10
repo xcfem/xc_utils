@@ -66,7 +66,7 @@ long SqLiteQuery::num_rows(void) const
 const void *SqLiteQuery::getBlob(const std::string &fieldName) const
   { return const_cast<Query *>(&q)->getblob(fieldName); }
 
-//! @brief Devuelve el valor del campo denominado fieldName como cadena de caracteres.
+//! @brief Devuelve el valor del campo denominado fieldName como text string.
 std::string SqLiteQuery::getStr(const std::string &fieldName) const
   { return std::string(const_cast<Query *>(&q)->getstr(fieldName)); }
 
@@ -95,7 +95,7 @@ double SqLiteQuery::getDouble(const std::string &fieldName) const
 const void *SqLiteQuery::getBlob(const int &index) const
   { return const_cast<Query *>(&q)->getblob(index); }
 
-//! @brief Devuelve el valor del campo de índice 'index' como cadena de caracteres.
+//! @brief Devuelve el valor del campo de índice 'index' como text string.
 std::string SqLiteQuery::getStr(const int &index) const
   { return std::string(const_cast<Query *>(&q)->getstr(index)); }
 
@@ -119,7 +119,7 @@ unsigned long int SqLiteQuery::getULongInt(const int &index) const
 double SqLiteQuery::getDouble(const int &index) const
   { return const_cast<Query *>(&q)->getnum(index); }
 
-//! @brief Devuelve el valor del siguiente campo como cadena de caracteres.
+//! @brief Devuelve el valor del siguiente campo como text string.
 std::string SqLiteQuery::getStr(void) const
   { return std::string(const_cast<Query *>(&q)->getstr()); }
 

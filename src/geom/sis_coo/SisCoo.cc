@@ -24,7 +24,7 @@
 #include "SisCoo.h"
 #include "../pos_vec/Pos3d.h"
 
-#include "xc_basic/src/texto/cadena_carac.h"
+#include "xc_basic/src/text/text_string.h"
 #include "xc_basic/src/funciones/algebra/ExprAlgebra.h"
 
 
