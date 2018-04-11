@@ -132,9 +132,9 @@ template <class T>
 T *ObjMap<T>::insert(const std::string &clave,const T &c)
   {
     T *previo= Busca(clave);
-    if(previo) //Si ya existe un elemento con esta clave lo borramos.
+    if(previo) //If an object with the same key already exists: erase it.
       {
-	std::cerr << getClassName() << "::" << __FUNCTION__
+	std::cerr << this->getClassName() << "::" << __FUNCTION__
 	          << "; object with key: '" << clave
 		  << "' already exists." << std::endl;
         delete previo;

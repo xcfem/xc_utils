@@ -110,6 +110,6 @@ def computePointsOfTangency(nmbSeccion,vector2d vt1,vector2d vt2):
     pt1= 
     pt1= retval.at(1)
     \retval{\clear{}}
-    \retval{\inserta{pt0} \inserta{pt1}}
+    \retval{insert(pt0) insert(pt1)}
     return retval
   }

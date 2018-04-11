@@ -12,7 +12,7 @@ def SQLTcreaTablaComb(nmbDBase,nmbTabla):
     SQLTcreaTabla(nmbDBase,nmbTabla,nmbAccs){}
   }
 
-def SQLTinsertaCombs(nmbDBase,nmbTabla):
+def SQLTinsertCombs(nmbDBase,nmbTabla):
   {
     sqlCmd= ""  
     \for_each
