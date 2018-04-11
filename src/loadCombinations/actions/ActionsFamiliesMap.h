@@ -62,7 +62,7 @@ class ActionsFamiliesMap: public EntConNmb
     friend class ActionContainer;
   public:
     ActionsFamiliesMap(const std::string &nmb);
-    ActionRValue &inserta(const std::string &,const Action &,const std::string &nmb_coefs_psi="");
+    ActionRValue &insert(const std::string &,const Action &,const std::string &nmb_coefs_psi="");
     LoadCombinationVector GetLoadCombinations(const bool &elu,const bool &sit_accidental) const;
     size_t getNumActions(void) const;
     const PsiCoeffsMap *getPtrPsiCoeffs(void) const;

@@ -49,7 +49,7 @@ class ObjMap: private std::map<std::string,T *>
 
     ObjMap(void);
     void Borra(const std::string &);
-    T *Inserta(const std::string &,const T &);
+    T *insert(const std::string &,const T &);
     T *Busca(const std::string &);
     const T *Busca(const std::string &) const;
     inline const_iterator find(const std::string &s) const
@@ -68,7 +68,7 @@ ObjMap<T>::ObjMap(const ObjMap &otro)
   : map_ptr()
   {
     for(const_iterator i=otro.begin();i!=otro.end();i++)
-      Inserta(i->first,*(i->second));
+      insert(i->first,*(i->second));
   }
 
 //! @brief Operador de asignación.
@@ -77,7 +77,7 @@ const ObjMap<T> &ObjMap<T>::operator=(const ObjMap &otro)
   {
     clear();
     for(const_iterator i=otro.begin();i!=otro.end();i++)
-      Inserta(i->first,*(i->second));
+      insert(i->first,*(i->second));
     return *this;
   }
 
@@ -127,14 +127,16 @@ const T *ObjMap<T>::Busca(const std::string &clave) const
       return nullptr;
   }
 
-//! @brief Inserta en el contenedor el objeto empleando la clave que se pasa como parámetro.
+//! @brief Insert the object in the container usen the key argument.
 template <class T>
-T *ObjMap<T>::Inserta(const std::string &clave,const T &c)
+T *ObjMap<T>::insert(const std::string &clave,const T &c)
   {
     T *previo= Busca(clave);
     if(previo) //Si ya existe un elemento con esta clave lo borramos.
       {
-	std::cerr << "ObjMap::Inserta; ya existía el objeto de clave: " << clave << std::endl;
+	std::cerr << getClassName() << "::" << __FUNCTION__
+	          << "; object with key: '" << clave
+		  << "' already exists." << std::endl;
         delete previo;
         map_ptr::erase(clave);
       } 

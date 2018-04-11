@@ -50,10 +50,10 @@ const cmb_acc::PsiCoeffsMap *cmb_acc::ActionsFamily::getPtrPsiCoeffs(void) const
       }
   }
 
-//! @brief Inserta la acción que se le pasa como parámetro y le asigna los coeficientes de
-//! simultaneidad cuyo nombre se pasa como parámetro.
-cmb_acc::ActionRValue &cmb_acc::ActionsFamily::inserta(const Action &a,const std::string &nmb_coefs_psi)
-  { return acciones.inserta(a,nmb_coefs_psi); }
+//! @brief Insert the action argument and sets the "psi" load combination
+//! factors.
+cmb_acc::ActionRValue &cmb_acc::ActionsFamily::insert(const Action &a,const std::string &nmb_coefs_psi)
+  { return acciones.insert(a,nmb_coefs_psi); }
 
 //! @brief ??
 //!

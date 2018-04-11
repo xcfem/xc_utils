@@ -63,11 +63,9 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
 /*     inline virtual void GiraZ(double ang) */
 /*       { Ref2d::GiraZ(ang); TrfPoints();  } */
     const Pos2d *AgregaVertice(const Pos2d &p);
+    //! @brief Insert the vertices between [first,last) antes
     template <class InputIterator>
-    inline void assign(InputIterator first,
-                       InputIterator last)
-      //Inserta los vértices comprendidos en [first,last) antes
-      //antes del vértice al que se refiere i.
+    inline void assign(InputIterator first, InputIterator last)
       { GeomObj::list_Pos2d::assign(first,last); }
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
 

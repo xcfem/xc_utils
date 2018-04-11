@@ -62,10 +62,9 @@ class ListaPos3d: public GeomObj3d
     const Pos3d &operator[](const size_t &i) const;
 
     const Pos3d *appendPoint(const Pos3d &p);
+    //! @brief Insert the vertices between [first,last).
     template <class InputIterator>
     inline void assign(InputIterator first, InputIterator last)
-      //Inserta los vértices comprendidos en [first,last) antes
-      //antes del vértice al que se refiere i.
       { lista_ptos.assign(first,last); }
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const;
 

@@ -47,7 +47,7 @@ class SqLiteObject: public EntCmd
     static void borra_queries(void);
     static void borra_databases(void);
     static void borra_objetos(void);
-    static void inserta_objeto(const std::string &nmb,SqLiteObject *ptr);
+    static void insert_object(const std::string &nmb,SqLiteObject *ptr);
     static SqLiteObject *busca_objeto(const std::string &nmb);
 
     std::string preprocesa_str_sql(const std::string &str) const;

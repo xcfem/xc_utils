@@ -65,7 +65,7 @@ SqLiteQuery *SqLiteDatabase::NuevaQuery(const std::string &nmb)
       {
         retval= new SqLiteQuery(db);
         if(retval)
-          inserta_objeto(nmb,retval);
+          insert_object(nmb,retval);
         else
           std::cerr << "SqLiteObject::NuevaQuery; el puntero al objeto es nulo." << std::endl;
       }

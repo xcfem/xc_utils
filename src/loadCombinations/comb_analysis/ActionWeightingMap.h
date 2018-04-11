@@ -65,7 +65,7 @@ class ActionWeightingMap: public EntCmd
     virtual ~ActionWeightingMap(void);
     cmb_acc::ActionContainer *defPonderacion(const std::string &,const PsiCoeffsMap &coefs= PsiCoeffsMap());
 
-    ActionRValue &inserta(const std::string &pond,const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
+    ActionRValue &insert(const std::string &pond,const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
 
     size_t size(void) const;
     bool Vacia(void) const;

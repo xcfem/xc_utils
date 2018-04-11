@@ -61,9 +61,8 @@ class ListaPos2d: public GeomObj2d
     const Pos2d *appendPoint(const Pos2d &p);
     void appendPointPy(const Pos2d &p);
     template <class InputIterator>
+    //! Insert the vertices between [first,last).
     inline void assign(InputIterator first, InputIterator last)
-      //Inserta los vértices comprendidos en [first,last) antes
-      //antes del vértice al que se refiere i.
       { lista_ptos.assign(first,last); }
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
 

@@ -32,8 +32,8 @@ cmb_acc::ActionRValue &cmb_acc::ActionRValueList::push_back(const ActionRValue &
     return retval;
   }
 
-//! @brief Inserta la acción que se pasa como parámetro.
-cmb_acc::ActionRValue &cmb_acc::ActionRValueList::inserta(const Action &a,const std::string &nmb_coefs_psi)
+//! @brief Insert the action being passed as parameter.
+cmb_acc::ActionRValue &cmb_acc::ActionRValueList::insert(const Action &a,const std::string &nmb_coefs_psi)
   {
     ActionRValue acc(a,this,nmb_coefs_psi);
     acc.set_owner(this);

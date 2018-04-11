@@ -48,7 +48,7 @@ class_<ActionsFamily, bases<EntConNmb> >("ActionsFamily")
   .def(init<std::string, GammaF>())
   .add_property("gammaF", make_function( &ActionsFamily::getGammaF, return_internal_reference<>() ), &ActionsFamily::setGammaF)
   .def("getNumActions", &ActionsFamily::getNumActions)
-  .def("insert", make_function(&ActionsFamily::inserta,return_internal_reference<>()))
+  .def("insert", make_function(&ActionsFamily::insert,return_internal_reference<>()))
   ;
 
 class_<ActionsFamiliesMap, bases<EntConNmb>, boost::noncopyable >("ActionsFamiliesMap", no_init)
@@ -62,5 +62,5 @@ class_<ActionContainer, bases<EntCmd> >("ActionContainer")
   .add_property("accidentalActions", make_function( &ActionContainer::getAccidentalActions, return_internal_reference<>() ), &ActionContainer::setAccidentalActions)
   .add_property("seismicActions", make_function( &ActionContainer::getSeismicActions, return_internal_reference<>() ), &ActionContainer::setSeismicActions)
   .def("getPsiCoeffs", &ActionContainer::getPsiCoeffs, return_value_policy<copy_const_reference>())
-.def("insert", make_function(&ActionContainer::inserta,return_internal_reference<>()))
+.def("insert", make_function(&ActionContainer::insert,return_internal_reference<>()))
   ;

@@ -52,18 +52,19 @@ const cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::busca_familia_acc(con
       return nullptr;
   }
 
-//! @brief Inserta la acción en la familia que se pasa como parámetro.
-cmb_acc::ActionRValue &cmb_acc::ActionsFamiliesMap::inserta(const std::string &familia,const Action &acc,const std::string &nmb_coefs_psi)
+//! @brief Insert the action in the family.
+cmb_acc::ActionRValue &cmb_acc::ActionsFamiliesMap::insert(const std::string &familia,const Action &acc,const std::string &nmb_coefs_psi)
   {
     ActionsFamily *familia_ptr= busca_familia_acc(familia);
     if(!familia_ptr)
       {
-        std::cerr << "ActionsFamiliesMap::inserta no se encontró la familia: '"
-                  << familia << "'\n";
+        std::cerr << getClassName() << "::" << __FUNCTION__
+		  << "; family: '"
+                  << familia << "' not found.\n";
         const_iterator i= familias.begin();
         familia_ptr= (*i).second;
       }
-    return familia_ptr->inserta(acc,nmb_coefs_psi);
+    return familia_ptr->insert(acc,nmb_coefs_psi);
   }
 
 //! @brief Crea una nueva familia con el nombre que se le pasa como parámetro.

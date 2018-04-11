@@ -43,24 +43,25 @@ cmb_acc::ActionContainer::ActionContainer(const PsiCoeffsMap &coefs)
     AS.set_owner(this);
   }
 
-//! @brief Inserta la acción en la familia que se indica en la text string.
-cmb_acc::ActionRValue &cmb_acc::ActionContainer::inserta(const std::string &familia,const Action &acc,const std::string &nmb_coefs_psi,const std::string &subfamilia)
+//! @brief Insert the action into the family identified by the string.
+cmb_acc::ActionRValue &cmb_acc::ActionContainer::insert(const std::string &familia,const Action &acc,const std::string &nmb_coefs_psi,const std::string &subfamilia)
   {
     if(familia=="permanentes")
-      return G.inserta(acc,nmb_coefs_psi);
+      return G.insert(acc,nmb_coefs_psi);
     else if(familia=="permanentes_nc")
-      return G_aster.inserta(subfamilia,acc,nmb_coefs_psi);
+      return G_aster.insert(subfamilia,acc,nmb_coefs_psi);
     else if(familia=="variables")
-      return Q.inserta(acc,nmb_coefs_psi);
+      return Q.insert(acc,nmb_coefs_psi);
     else if(familia=="accidentales")
-      return A.inserta(acc,nmb_coefs_psi);
+      return A.insert(acc,nmb_coefs_psi);
     else if(familia=="sismicas")
-      return AS.inserta(acc,nmb_coefs_psi);
+      return AS.insert(acc,nmb_coefs_psi);
     else
       {
-        std::cerr << "ActionContainer::inserta; load family: '"
+        std::cerr << getClassName() << "::" << __FUNCTION__
+	          << "; load family: '"
                   << familia << "' not found. Added to variable loads.\n";
-        return Q.inserta(acc,nmb_coefs_psi);
+        return Q.insert(acc,nmb_coefs_psi);
       }
   }
 

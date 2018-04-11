@@ -73,8 +73,8 @@ void SqLiteObject::borra_objetos(void)
     SqLiteObjs.clear();
   }
 
-//! @brief Inserta el objeto cuyo puntero se pasa como parámetro en el contenedor
-void SqLiteObject::inserta_objeto(const std::string &nmb,SqLiteObject *ptr)
+//! @brief Inerts the object into the container.
+void SqLiteObject::insert_object(const std::string &nmb,SqLiteObject *ptr)
   {
     assert(ptr);
     sql_objs_iterator i= SqLiteObjs.find(nmb);
@@ -115,7 +115,7 @@ void SqLiteObject::NuevaDatabase(const std::string &nmb)
   { 
     SqLiteObject *ptr= new SqLiteDatabase(nmb);
     if(ptr)
-      inserta_objeto(nmb,ptr);
+      insert_object(nmb,ptr);
     else
       std::cerr << "SqLiteObject::NuevoObjetoSql; el puntero al objeto es nulo." << std::endl;
   }

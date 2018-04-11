@@ -69,7 +69,7 @@ class FunctionFromPointsR_T
     //! @brief Return true if there are no points.
     size_t empty(void) const
       { return points.empty(); }
-    void Inserta(const double &x,const T &y);
+    void insert(const double &x,const T &y);
     void clear(void)
       { points.clear(); }
   };
@@ -111,7 +111,7 @@ std::vector<T> FunctionFromPointsR_T<T>::Valores(const std::vector<double> &zs) 
 
 //! @brief Inserts the pair (x,y) as a point of the function.
 template <class T>
-void FunctionFromPointsR_T<T>::Inserta(const double &x,const T &y)
+void FunctionFromPointsR_T<T>::insert(const double &x,const T &y)
   {
     points[x]= y;
   }

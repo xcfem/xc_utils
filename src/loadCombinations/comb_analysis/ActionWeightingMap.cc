@@ -85,7 +85,7 @@ cmb_acc::ActionWeightingMap &cmb_acc::ActionWeightingMap::operator=(const Action
     return *this;
   }
 
-//! @brief Define una poderación de acciones.
+//! @brief Define una ponderación de acciones.
 cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::defPonderacion(const std::string &nmb_ponderacion,const PsiCoeffsMap &coefs)
   {
     ActionContainer *retval= crea_ponderacion(nmb_ponderacion,coefs);
@@ -93,16 +93,17 @@ cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::defPonderacion(const std:
     return retval;
   }
 
-//! @brief Inserta la acción que se pasa como parámetro.
-cmb_acc::ActionRValue &cmb_acc::ActionWeightingMap::inserta(const std::string &pond,const std::string &familia,const Action &acc,const std::string &nmb_coefs_psi,const std::string &subfamilia)
+//! @brief Insert the action being passed as parameter.
+cmb_acc::ActionRValue &cmb_acc::ActionWeightingMap::insert(const std::string &pond,const std::string &familia,const Action &acc,const std::string &nmb_coefs_psi,const std::string &subfamilia)
   {
     ActionContainer *ponderacion_ptr= busca_ponderacion(pond);
     if(!ponderacion_ptr)
       {
-        std::cerr << "ActionWeightingMap::inserta; no se encontró la ponderación: '"
-                  << pond << "'\n";
+        std::cerr << getClassName() << "::" << __FUNCTION__
+	          << "; weighting: '"
+                  << pond << "' not found.\n";
       }
-    return ponderacion_ptr->inserta(familia,acc,nmb_coefs_psi,subfamilia);
+    return ponderacion_ptr->insert(familia,acc,nmb_coefs_psi,subfamilia);
   }
 
 //! @brief Borra todas las ponderaciones definidos.

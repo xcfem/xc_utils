@@ -190,7 +190,7 @@ FunctionFromPointsR_R getSub(const FunctionFromPointsR_R &f1,const double &x0,co
       if((X0<*i) && (*i<X1))
         tmp.insert(*i);
     for(std::set<double>::const_iterator i= tmp.begin();i!=tmp.end();i++)
-        retval.Inserta(*i,f1.Valor(*i));
+        retval.insert(*i,f1.Valor(*i));
     return retval;
   }
 
@@ -269,7 +269,7 @@ FunctionFromPointsR_R FunctionFromPointsR_R::integra(const double &x0,const doub
     // Add one to get ceiling out of type cast
     const size_t numSteps = (int)(longIntervalo/delta + 1.0);
 
-    retval.Inserta(x0,0.0);
+    retval.insert(x0,0.0);
     // Set the second point
     // Assuming initial condition is zero, i.e. F(0) = 0
     double previousValue= (*this)(x0); // Temporary storage to avoid accessing same value twice
@@ -284,7 +284,7 @@ FunctionFromPointsR_R FunctionFromPointsR_R::integra(const double &x0,const doub
         currentValue = (*this)(dummyX);
         // Apply the trapezoidal rule to update the integrated value
         acum+= delta*(currentValue+previousValue)/2.0;
-        retval.Inserta(dummyX,acum);
+        retval.insert(dummyX,acum);
         previousValue = currentValue;
       }
     return retval;
@@ -295,7 +295,7 @@ FunctionFromPointsR_R asigna(const FunctionFromPointsR_R &f,const double &c)
   {
     FunctionFromPointsR_R retval;
     for(FunctionFromPointsR_R::const_iterator i= f.begin();i!=f.end();i++)
-      retval.Inserta((*i).first,c);
+      retval.insert((*i).first,c);
     return retval;
   }
 
@@ -304,7 +304,7 @@ FunctionFromPointsR_R operator+(const FunctionFromPointsR_R &f,const double &c)
   {
     FunctionFromPointsR_R retval;
     for(FunctionFromPointsR_R::const_iterator i= f.begin();i!=f.end();i++)
-      retval.Inserta((*i).first,(*i).second+c);
+      retval.insert((*i).first,(*i).second+c);
     return retval;
   }
 
@@ -332,7 +332,7 @@ FunctionFromPointsR_R operator+(const FunctionFromPointsR_R &f1,const FunctionFr
     FunctionFromPointsR_R retval;
     dq_double abcisas= merge_abcisas(f1,f2);
     for(dq_double::const_iterator i= abcisas.begin();i!=abcisas.end();i++)
-      retval.Inserta((*i),f1.Valor(*i)+f2.Valor(*i));
+      retval.insert((*i),f1.Valor(*i)+f2.Valor(*i));
     return retval;
   }
 
@@ -342,7 +342,7 @@ FunctionFromPointsR_R operator-(const FunctionFromPointsR_R &f1,const FunctionFr
     FunctionFromPointsR_R retval;
     dq_double abcisas= merge_abcisas(f1,f2);
     for(dq_double::const_iterator i= abcisas.begin();i!=abcisas.end();i++)
-      retval.Inserta((*i),f1.Valor(*i)-f2.Valor(*i));
+      retval.insert((*i),f1.Valor(*i)-f2.Valor(*i));
     return retval;
   }
 
@@ -352,7 +352,7 @@ FunctionFromPointsR_R operator*(const FunctionFromPointsR_R &f1,const FunctionFr
     FunctionFromPointsR_R retval;
     dq_double abcisas= merge_abcisas(f1,f2);
     for(dq_double::const_iterator i= abcisas.begin();i!=abcisas.end();i++)
-      retval.Inserta((*i),f1.Valor(*i)*f2.Valor(*i));
+      retval.insert((*i),f1.Valor(*i)*f2.Valor(*i));
     return retval;
   }
 
@@ -362,7 +362,7 @@ FunctionFromPointsR_R operator/(const FunctionFromPointsR_R &f1,const FunctionFr
     FunctionFromPointsR_R retval;
     dq_double abcisas= merge_abcisas(f1,f2);
     for(dq_double::const_iterator i= abcisas.begin();i!=abcisas.end();i++)
-      retval.Inserta((*i),f1.Valor(*i)/f2.Valor(*i));
+      retval.insert((*i),f1.Valor(*i)/f2.Valor(*i));
     return retval;
   }
 
@@ -371,7 +371,7 @@ FunctionFromPointsR_R operator*(const double &c,const FunctionFromPointsR_R &f)
   {
     FunctionFromPointsR_R retval;
     for(FunctionFromPointsR_R::const_iterator i= f.begin();i!=f.end();i++)
-      retval.Inserta((*i).first,(*i).second*c);
+      retval.insert((*i).first,(*i).second*c);
     return retval;
   }
 

@@ -82,7 +82,7 @@ int VerticesKDTree::getNearestBallPoint(const Pos3d &p, const double &r) const
 
 static gboolean vertex_add(GtsVertex *v,TriangleMap *mt)
   {
-    mt->InsertaVertice(v);
+    mt->insertVertex(v);
     return TRUE;
   }
 static gboolean triangle_add(GtsTriangle *t,TriangleMap *mt)
@@ -99,13 +99,15 @@ bool VerticesMap::chequea_vertice(GtsVertex *v)
     return true;
   }
 
-void VerticesMap::Inserta(GtsVertex *v)
+void VerticesMap::insert(GtsVertex *v)
   {
     if(!chequea_vertice(v))
-      std::cerr << "VerticesMap: se intentó insertar un vértice erróneo." << std::endl;
-    Inserta(size_t(v),Vertex2Pos3d(*v));
+      std::cerr << "VerticesMap::" << __FUNCTION__
+	        << ": triying to insert an erroneous vertex."
+		<< std::endl;
+    insert(size_t(v),Vertex2Pos3d(*v));
   }
-void VerticesMap::Inserta(const size_t &i,const Pos3d &p)
+void VerticesMap::insert(const size_t &i,const Pos3d &p)
   { (*this)[i]= p; }
 void VerticesMap::Print(std::ostream &os) const
   {
@@ -181,8 +183,8 @@ void TriangleFaces::Print(std::ostream &os) const
   }
 
 
-void TriangleMap::InsertaVertice(GtsVertex *v)
-  { mv.Inserta(v); }
+void TriangleMap::insertVertex(GtsVertex *v)
+  { mv.insert(v); }
 
 void TriangleMap::AppendFace(GtsTriangle *t)
   { faces.push_back(TriangleVerticesIndexes(t)); }

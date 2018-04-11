@@ -47,7 +47,7 @@ class ActionRValueList: public std::deque<ActionRValue>, public EntCmd
     //! @brief Devuelve el valor de la acción de índice i
     inline Action GetValor(const size_t &i,short int r) const
       { return (*this)[i].Valor(r); }
-    ActionRValue &inserta(const Action &,const std::string &);
+    ActionRValue &insert(const Action &,const std::string &);
     Action FormaProdEscalar(const Variation &v,short int r,const int &d=-1,const short int &rr=-1) const;
     const PsiCoeffsMap *getPtrPsiCoeffs(void) const;
     void Print(std::ostream &os) const;

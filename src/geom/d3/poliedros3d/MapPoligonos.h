@@ -97,12 +97,12 @@ class MapPosVertices: protected std::map<size_t,TPOS>
       { return map_p3d::begin(); }
     inline iterator end(void)
       { return map_p3d::end(); }
-    void Inserta(const size_t &i,const TPOS &p);
+    void insert(const size_t &i,const TPOS &p);
     void Print(std::ostream &os) const;
   };
 
 template <class TPOS>
-void MapPosVertices<TPOS>::Inserta(const size_t &i,const TPOS &p)
+void MapPosVertices<TPOS>::insert(const size_t &i,const TPOS &p)
   { (*this)[i]= p; }
 template <class TPOS>
 void MapPosVertices<TPOS>::Print(std::ostream &os) const
@@ -151,7 +151,7 @@ MapPoligonos<TPOL>::MapPoligonos(const TPOL &pol)
     for(VCI vi = pol.vertices_begin();
             vi != pol.vertices_end(); ++vi)
       {
-        mv.Inserta(cont,vi->point());
+        mv.insert(cont,vi->point());
         cont++;
       }
     const Index index(pol.vertices_begin(),pol.vertices_end());

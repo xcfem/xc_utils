@@ -82,8 +82,8 @@ class VerticesMap: public std::map<size_t,Pos3d>
     friend class TriangleMap;
 
   public:
-    void Inserta(GtsVertex *v);
-    void Inserta(const size_t &i,const Pos3d &p);
+    void insert(GtsVertex *v);
+    void insert(const size_t &i,const Pos3d &p);
     void Print(std::ostream &os) const;
     void Borra(void);
   };
@@ -143,7 +143,7 @@ class TriangleMap
     inline TriangleFaces &getFaces(void)
       { return faces; }
 
-    void InsertaVertice(GtsVertex *v);
+    void insertVertex(GtsVertex *v);
     void AppendFace(GtsTriangle *t);
     void Renumera(void);
     void Print(std::ostream &os) const;

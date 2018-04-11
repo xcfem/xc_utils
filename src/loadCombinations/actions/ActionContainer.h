@@ -58,7 +58,7 @@ class ActionContainer: public EntCmd
     ActionContainer(const PsiCoeffsMap &coefs= PsiCoeffsMap());
     inline virtual ~ActionContainer(void) {}
 
-    ActionRValue &inserta(const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
+    ActionRValue &insert(const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
 
     const ActionsFamily &getPermanentActions(void) const;
     void setPermanentActions(const ActionsFamily &);

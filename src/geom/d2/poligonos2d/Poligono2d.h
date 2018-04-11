@@ -62,15 +62,15 @@ class Poligono2d: public SupPoligonal2d
       { return cgpol.size(); }
     inline void push_back(const Pos2d &p)
       { cgpol.push_back(p.ToCGAL()); }
+    //! @brief Insert vertex q before the vertex pointed by i.
     inline vertex_iterator insert(vertex_iterator i,const Pos2d &q)
-      //Inserta el vértice q antes del vértice al que se refiere i.
       { return cgpol.insert(i,q.ToCGAL()); }
+    //! @brief Insert the vertices between [first,last) before
+    //! the vertex pointed by i.
     template <class InputIterator>
     inline void insert(vertex_iterator i,
                        InputIterator first,
                        InputIterator last)
-      //Inserta los vértices comprendidos en [first,last) antes
-      //antes del vértice al que se refiere i.
       { cgpol.insert(i,first,last); }
     void set(vertex_iterator pos,const Pos2d &p)
       //Modifica la posición del vértice al que se refiere pos

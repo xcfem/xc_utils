@@ -387,7 +387,7 @@ void PoliPos<pos>::Cat(const PoliPos<pos> &l)
       this->push_back(*k);
   }
 
-//!@brief Inserta los objetos que se pasan como parámetro.
+//!@brief Insert the objects between [first,last).
 template <class pos> template<class inputIterator>
 void PoliPos<pos>::Cat(inputIterator begin, inputIterator end)
   {

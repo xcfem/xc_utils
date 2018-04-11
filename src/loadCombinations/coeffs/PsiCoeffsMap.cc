@@ -89,7 +89,7 @@ cmb_acc::PsiCoeffs *cmb_acc::PsiCoeffsMap::crea_coefs(const std::string &nmb)
     return retval;
   }
 
-//! @brief Inserta los coeficientes que se pasan como parámetro
+//! @brief Inserts the coefficients.
 void cmb_acc::PsiCoeffsMap::insert(const std::string &nmb,const PsiCoeffs &c)
   { coefs[nmb]= c; }
 
