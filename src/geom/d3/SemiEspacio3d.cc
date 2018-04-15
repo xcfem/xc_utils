@@ -33,7 +33,7 @@
 SemiEspacio3d::SemiEspacio3d(const Plano3d &p)
   : GeomObj3d(), lim(p) {}
 
-//! @brief Devuelve el plano que limita el semiespacio.
+//! @brief Return el plano que limita el semiespacio.
 const Plano3d &SemiEspacio3d::getPlanoLimite(void) const
   { return lim; }
 
@@ -68,22 +68,22 @@ GEOM_FT SemiEspacio3d::dist(const Pos3d &p) const
 GEOM_FT SemiEspacio3d::dist2(const Pos3d &p) const
   { return fabs(distSigno2(p)); }
 
-//! @brief Devuelve el ángulo que forma con el half-space que
+//! @brief Return el ángulo que forma con el half-space que
 //! se pasa como parámetro.
 GEOM_FT SemiEspacio3d::getAngulo(const SemiEspacio3d &se) const
   { return angulo(lim,se.getPlano()); }
 
-//! @brief Devuelve el ángulo que forma con el plano que
+//! @brief Return el ángulo que forma con el plano que
 //! se pasa como parámetro.
 GEOM_FT SemiEspacio3d::getAngulo(const Plano3d &p) const
   { return angulo(lim,p); }
 
-//! @brief Devuelve el ángulo que forma con el vector que
+//! @brief Return el ángulo que forma con el vector que
 //! se pasa como parámetro.
 GEOM_FT SemiEspacio3d::getAngulo(const Vector3d &v) const
   { return angulo(v,lim); }
 
-//! @brief Devuelve la arista de la intersección entre semiespacios.
+//! @brief Return la arista de la intersección entre semiespacios.
 Recta3d SemiEspacio3d::getLima(const SemiEspacio3d &se) const
   {
      const Recta3d retval= lim.Interseccion(se.lim);
@@ -93,7 +93,7 @@ Recta3d SemiEspacio3d::getLima(const SemiEspacio3d &se) const
      return retval;
   }
 
-//!brief Devuelve la dimensión del objeto 0, 1, 2 ó 3.
+//!brief Return la dimensión del objeto 0, 1, 2 ó 3.
 unsigned short int SemiEspacio3d::Dimension(void) const
   { return 3; }
 GEOM_FT SemiEspacio3d::Longitud(void) const
@@ -105,23 +105,23 @@ GEOM_FT SemiEspacio3d::Volumen(void) const
 Pos3d SemiEspacio3d::Cdg(void) const
   { return lim.Cdg(); }
 
-//! @brief Devuelve el momento de inercia respecto al CDG en ejes locales.
+//! @brief Return el momento de inercia respecto al CDG en ejes locales.
 GEOM_FT SemiEspacio3d::Ix(void) const
   { return NAN; }
 
-//! @brief Devuelve el momento de inercia respecto al CDG en ejes locales.
+//! @brief Return el momento de inercia respecto al CDG en ejes locales.
 GEOM_FT SemiEspacio3d::Iy(void) const
   { return NAN; }
 
-//! @brief Devuelve el producto de inercia.
+//! @brief Return el producto de inercia.
 GEOM_FT SemiEspacio3d::Pxy(void) const
   { return NAN; }
 
-//! @brief Devuelve el momento de inercia respecto al CDG en ejes locales.
+//! @brief Return el momento de inercia respecto al CDG en ejes locales.
 GEOM_FT SemiEspacio3d::Iz(void) const
   { return NAN; }
 
-//! @brief Devuelve verdadero si los semiespacios son iguales.
+//! @brief Return verdadero si los semiespacios son iguales.
 bool operator==(const SemiEspacio3d &r1,const SemiEspacio3d &r2)
   {
     if(&r1.lim==&r2.lim)
@@ -130,12 +130,12 @@ bool operator==(const SemiEspacio3d &r1,const SemiEspacio3d &r2)
       return (r1.lim==r2.lim); 
   }
 
-//! @brief Devuelve un vector normal al plano que limita
+//! @brief Return un vector normal al plano que limita
 //! el half-space dirigido hacia el exterior del mismo.
 Vector3d SemiEspacio3d::NormalExterior(void) const
   { return lim.Normal(); }
 
-//! @brief Devuelve un vector normal al plano que limita
+//! @brief Return un vector normal al plano que limita
 //! el half-space dirigido hacia el exterior del mismo.
 Vector3d SemiEspacio3d::NormalInterior(void) const
   { return -NormalExterior(); }
@@ -160,7 +160,7 @@ TripletMap<Pos3d> intersection_points(const std::deque<SemiEspacio3d> &se)
     return retval;
   }
 
-//! @brief Devuelve los vertices del poliedro intersección de los semiespacios.
+//! @brief Return los vertices del poliedro intersección de los semiespacios.
 TripletMap<Pos3d> vertices_poliedro(const std::deque<SemiEspacio3d> &se, const double &tol)
   {
     TripletMap<Pos3d> tmp= intersection_points(se);
@@ -195,7 +195,7 @@ TripletMap<Pos3d> vertices_poliedro(const std::deque<SemiEspacio3d> &se, const d
     return retval;
   }
 
-//! @brief Devuelve las rectas de intersección entre los semiespacios.
+//! @brief Return las rectas de intersección entre los semiespacios.
 std::deque<Recta3d> rectas_interseccion(const std::deque<SemiEspacio3d> &se)
   {
     std::deque<Recta3d> retval;
@@ -210,7 +210,7 @@ std::deque<Recta3d> rectas_interseccion(const std::deque<SemiEspacio3d> &se)
     return retval;
   }
 
-//! @brief Devuelve los vectores normales a cada uno de los semiespacios.
+//! @brief Return los vectores normales a cada uno de los semiespacios.
 std::deque<Vector3d> vectores_normales(const std::deque<SemiEspacio3d> &se)
   {
     std::deque<Vector3d> retval;
@@ -220,14 +220,14 @@ std::deque<Vector3d> vectores_normales(const std::deque<SemiEspacio3d> &se)
     return retval;
   }
 
-//! @brief Devuelve el ángulo entre los semiespacios.
+//! @brief Return el ángulo entre los semiespacios.
 GEOM_FT angulo(const SemiEspacio3d &se1,const SemiEspacio3d &se2)
   { return se1.getAngulo(se2); }
 
-//! @brief Devuelve el ángulo entre el half-space y el vector.
+//! @brief Return el ángulo entre el half-space y el vector.
 GEOM_FT angulo(const Vector3d &v,const SemiEspacio3d &se)
   { return se.getAngulo(v); }
 
-//! @brief Devuelve el ángulo entre el half-space y el vector.
+//! @brief Return el ángulo entre el half-space y el vector.
 GEOM_FT angulo(const SemiEspacio3d &se,const Vector3d &v)
   { return se.getAngulo(v); }

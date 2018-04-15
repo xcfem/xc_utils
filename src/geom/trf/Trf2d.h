@@ -69,9 +69,9 @@ class Trf2d: public Trf
         return *this;
       }
     //Trf2d Inversa(void) const;
-      //Devuelve la transformación inversa.
+      //Return la transformación inversa.
     virtual GEOM_FT Cartesianas(const size_t &i,const size_t &j) const
-    //Devuelve el elemento (i,j) de la matriz de transformación en cartesianas.
+    //Return el elemento (i,j) de la matriz de transformación en cartesianas.
     //       -              -
     //       | m11  m12 m13 |
     //       | m21  m22 m23 |
@@ -79,7 +79,7 @@ class Trf2d: public Trf
     //       -              -
       { return cgtrf.m(i-1,j-1); }
     virtual GEOM_FT Homogeneas(const size_t &i,const size_t &j) const
-    //Devuelve el elemento (i,j) de la matriz de transformación en homogéneas.
+    //Return el elemento (i,j) de la matriz de transformación en homogéneas.
     //       -              -
     //       | m11  m12 m13 |
     //       | m21  m22 m23 |

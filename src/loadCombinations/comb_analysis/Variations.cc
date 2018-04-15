@@ -42,7 +42,7 @@ void cmb_acc::Variations::print(std::ostream &os) const
   }
 
 //! \fn cmb_acc::Variations cmb_acc::Variations::primera_combinacion(const Variation &v)
-//! @brief Devuelve la primera combinación.
+//! @brief Return la primera combinación.
 cmb_acc::Variations cmb_acc::Variations::primera_combinacion(const Variation &v)
   {
     const size_t sz= v.size();
@@ -53,7 +53,7 @@ cmb_acc::Variations cmb_acc::Variations::primera_combinacion(const Variation &v)
   }
 
 //! \fn cmb_acc::Variations cmb_acc::Variations::prod_cartesiano(const Variations &a,const Variations &b)
-//! @brief Devuelve el producto cartesiano de las variations que se pasan como parámetro.
+//! @brief Return el producto cartesiano de las variations que se pasan como parámetro.
 cmb_acc::Variations cmb_acc::Variations::prod_cartesiano(const Variations &a,const Variations &b,const ActionRValueList &lvr)
   {
     const size_t sz_a= a.size();
@@ -73,7 +73,7 @@ cmb_acc::Variations cmb_acc::Variations::prod_cartesiano(const Variations &a,con
   }
 
 //! \fn cmb_acc::Variations cmb_acc::Variations::n_esima_combinacion(const Variation &v,const size_t &n)
-//! @brief Devuelve la enésima combinación.
+//! @brief Return la enésima combinación.
 cmb_acc::Variations cmb_acc::Variations::n_esima_combinacion(const Variation &v,const int &d,const ActionRValueList &lvr)
   {
     const size_t n= lvr.size();

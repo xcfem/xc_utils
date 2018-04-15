@@ -36,9 +36,8 @@ class MatrizPos2d;
 
 //! @ingroup GEOM
 //
-//! @brief Clase que sirve para colocar objetos de dimension 2
-//! (circulo, elipse, polígonos, ...) en el espacio de
-//! tridimensional.
+//! @brief Class that places 2D objects
+//! (circle, ellipse, polygons, ...) in a 3D space.
 class D2to3d: public Superficie3d
   {
     Ref2d3d ref;

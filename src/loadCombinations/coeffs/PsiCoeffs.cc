@@ -23,7 +23,7 @@
 
 #include "PsiCoeffs.h"
 
-//! @brief Devuelve el coeficiente cuyo índice se pasa como parámetro.
+//! @brief Return el coeficiente cuyo índice se pasa como parámetro.
 const double &cmb_acc::PsiCoeffs::getPsi(short int r) const
   {
     switch(r)

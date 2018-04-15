@@ -60,7 +60,7 @@ class Action: public EntConNmb
     inline void setName(const std::string &nmb)
       { EntConNmb::Nombre()= nmb; }
     const std::string GetNombreExpandido(void) const;
-    //! @brief Devuelve la descripción de la acción.
+    //! @brief Return la descripción de la acción.
     inline const std::string &GetDescripcion(void) const
       { return descripcion; }
     //! @brief Asigna a la acción la descripción que se pasa como parámetro.
@@ -75,17 +75,17 @@ class Action: public EntConNmb
     typedef std::map<std::string,float> map_descomp;
     map_descomp getDescomp(void) const;
 
-    //! @brief Devuelve verdadero si esta acción es incompatible con la que se pasa como parámetro.
+    //! @brief Return verdadero si esta acción es incompatible con la que se pasa como parámetro.
     bool Incompatible(const Action &f) const;
-    //! @brief Devuelve verdadero si esta acción es compatible con la que se pasa como parámetro.
+    //! @brief Return verdadero si esta acción es compatible con la que se pasa como parámetro.
     inline bool Compatible(const Action &f) const
       { return !Incompatible(f); }
 
     bool Simple(void) const;
-    //! @brief Devuelve verdadero si la acción es nula.
+    //! @brief Return verdadero si la acción es nula.
     inline bool Nula(const double &tol= zero) const
       { return (fabs(f_pond)<tol); }
-     //! @brief Devuelve la acción multiplicada por un escalar.
+     //! @brief Return la acción multiplicada por un escalar.
     Action GetMult(const double &d) const
       {
         Action retval(*this);
@@ -127,7 +127,7 @@ std::ostream &operator<<(std::ostream &os,const Action &acc);
 
 bool incompatibles(const Action &acc_i,const Action &acc_j);
 
-//! @brief Devuelve la lista de acciones incompatibles con aquella cuyo nombre se pasa como parámetro.
+//! @brief Return la lista de acciones incompatibles con aquella cuyo nombre se pasa como parámetro.
 template <class InputIterator>
 std::deque<const Action *> listaIncompatibles(const Action *acc,InputIterator begin,InputIterator end)
   {

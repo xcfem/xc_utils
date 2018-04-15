@@ -122,7 +122,7 @@ bool PoliPos<pos>::isClosed(const GEOM_FT &tol) const
     return retval;
   }
 
-//! @brief Devuelve la longitud de la PoliPos.
+//! @brief Return la longitud de la PoliPos.
 template <class pos>
 GEOM_FT PoliPos<pos>::Longitud(void) const
   {
@@ -139,7 +139,7 @@ GEOM_FT PoliPos<pos>::Longitud(void) const
 
 template <class pos>
 GEOM_FT PoliPos<pos>::GetMax(unsigned short j) const
-//Devuelve el valor mínimo de la coordenada j.
+//Return el valor mínimo de la coordenada j.
   {
     GEOM_FT retval(0.0);
     if(!this->empty())
@@ -154,7 +154,7 @@ GEOM_FT PoliPos<pos>::GetMax(unsigned short j) const
 
 template <class pos>
 GEOM_FT PoliPos<pos>::GetMin(unsigned short j) const
-//Devuelve el valor mínimo de la coordenada j.
+//Return el valor mínimo de la coordenada j.
   {
     GEOM_FT retval(0.0);
     if(!this->empty())
@@ -168,7 +168,7 @@ GEOM_FT PoliPos<pos>::GetMin(unsigned short j) const
   }
 
 template <class pos>
-//! @brief Devuelve el centro de gravedad del polígono.
+//! @brief Return el centro de gravedad del polígono.
 pos PoliPos<pos>::Cdg(void) const
   {
     if(this->size()<1) return pos();
@@ -183,7 +183,7 @@ pos PoliPos<pos>::Cdg(void) const
   }
 
 template <class pos>
-//! @brief Devuelve el centro de gravedad del polígono.
+//! @brief Return el centro de gravedad del polígono.
 pos PoliPos<pos>::CdgPonderado(const std::deque<GEOM_FT> &areas) const
   {
     pos retval;
@@ -218,7 +218,7 @@ pos PoliPos<pos>::CdgPonderado(const std::deque<GEOM_FT> &areas) const
 
 template <class pos>
 PoliPos<pos> PoliPos<pos>::GetSwap(void) const
-  //Devuelve una lista con los elementos en orden inverso
+  //Return una lista con los elementos en orden inverso
   //al de esta.
   {
     PoliPos<pos> retval(*this);

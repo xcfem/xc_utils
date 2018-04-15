@@ -160,14 +160,14 @@ Recta2d Recta3d::YZ2DProjection(void) const
     return retval;
   }
 
-//! brief Devuelve el ángulo con el plano XY.
+//! brief Return el ángulo con el plano XY.
 GEOM_FT Recta3d::getSlope(void) const
   { return angulo(*this,PlanoXY3d); }
 
 bool Recta3d::Paralela(const Recta3d &r) const
   { return paralelas(GetDir(),r.GetDir()); }
 Plano3d Recta3d::Perpendicular(const Pos3d &p) const
-//Devuelve el plano perpendicular a r que pasa por p.
+//Return el plano perpendicular a r que pasa por p.
   { return Plano3d(cgr.perpendicular_plane(p.ToCGAL())); }
 
 GEOM_FT coo_interseccion(const GeomObj2d::list_Pos2d &int_a, const GeomObj2d::list_Pos2d &int_b,const size_t &coo,const double &tol)
@@ -283,7 +283,7 @@ GeomObj3d::list_Pos3d Recta3d::Interseccion(const Recta3d &r2,const double &tol)
     return retval;
   }
 
-//! @brief Devuelve el cuadrado de la distance from the point a la recta.
+//! @brief Return el cuadrado de la distance from the point a la recta.
 GEOM_FT Recta3d::dist(const Pos3d &p) const
   { return sqrt_FT(dist2(p)); }
 

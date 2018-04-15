@@ -36,15 +36,15 @@ SisCooRect1d2d::SisCooRect1d2d(const PGlobal &p1,const PGlobal &p2)
   : SisCooXd2d(1,p1,p2) {} //Eje 1 desde p1 a p2.
 
 SisCooRect1d2d::VGlobal SisCooRect1d2d::GetI(void) const
-//Devuelve el vector unitario I en el sistema global.
+//Return el vector unitario I en el sistema global.
   { return GetVDirEje(1); }
 SisCooRect1d2d::VGlobal SisCooRect1d2d::GetCooGlobales(const VLocal &v) const
-//Devuelve las componentes del vector v 
+//Return las componentes del vector v 
 //que se pasa como parámetro expresado en locales
 //expresadas en coordenadas globales.
   { return SisCooXd2d::GetCooGlobales(matriz_FT(1,1,v)); }
 SisCooRect1d2d::VLocal SisCooRect1d2d::GetCooLocales(const SisCooRect1d2d::VGlobal &v) const
-//Devuelve las componentes del vector v expresado en locales
+//Return las componentes del vector v expresado en locales
 //expresadas en coordenadas globales.
   {
     const matriz_FT tmp= SisCooXd2d::GetCooLocales(v);

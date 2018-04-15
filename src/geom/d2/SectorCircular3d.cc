@@ -81,7 +81,7 @@ SectorCircular3d::SectorCircular3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &
     sect_circ= SectorCircular2dThreepoints(pa,pb,pc);
   }
 
-//! @brief Devuelve el centro del círculo.
+//! @brief Return el centro del círculo.
 Pos3d SectorCircular3d::Centro(void) const
   { return to_3d(sect_circ.Centro()); }
 

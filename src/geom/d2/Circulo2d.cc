@@ -51,7 +51,7 @@ Circulo2d Circulo2dRTT(const GEOM_FT &radio,const Recta2d &p,const Recta2d &l,co
       {
         const Pos2d &o= *points_int.begin();
         const Recta2d bisect= bisectriz(p,l);
-        Ref2d2d ref(o,bisect.GetDir()); //Origen en la intersección, eje x según la recta bisectriz.
+        Ref2d2d ref(o,bisect.GetDir()); //Origen en la intersección, x axis según la recta bisectriz.
         const double theta= angulo(bisect,p); //Angulo entre la bisectriz y la recta p.
         const GEOM_FT sintheta= double_to_FT(sin(theta));
         const GEOM_FT costheta= double_to_FT(cos(theta));
@@ -107,7 +107,7 @@ Pos2d Circulo2d::Point(const double &ang) const
     return Pos2d(x,y);
   }
 
-//! @brief Devuelve el radio del círculo.
+//! @brief Return el radio del círculo.
 GEOM_FT Circulo2d::Radio(void) const
   { return sqrt_FT(Radio2()); }
 
@@ -124,16 +124,16 @@ double Circulo2d::Angulo(const Pos2d &p) const
 //! @brief Return the longitud del círculo.
 GEOM_FT Circulo2d::Longitud(void) const
   { return M_PI_FT*Diametro(); }
-//! @brief Devuelve el área del círculo.
+//! @brief Return el área del círculo.
 GEOM_FT Circulo2d::Area(void) const
   { return M_PI_FT*Radio2(); }
 //! @brief Return the maximum value of the i coordinate of the points of the circle.
 GEOM_FT Circulo2d::GetMax(unsigned short int i) const
   { return Centro()(i)+Radio(); }
-//! @brief Devuelve el valor mínimo of the i coordinate of the points of the circle.
+//! @brief Return el valor mínimo of the i coordinate of the points of the circle.
 GEOM_FT Circulo2d::GetMin(unsigned short int i) const
   { return Centro()(i)-Radio(); }
-//! @brief Devuelve el momento de inercia del círculo respecto al 
+//! @brief Return el momento de inercia del círculo respecto al 
 //! eje paralelo al x que pasa por su centro.
 GEOM_FT Circulo2d::Ix(void) const
   { return M_PI_FT/4*sqr(Radio2()); }
@@ -144,7 +144,7 @@ bool Circulo2d::In(const Pos2d &p, const double &tol) const
   { return (cgcirc.has_on_positive_side(p.ToCGAL()) || cgcirc.has_on_boundary(p.ToCGAL())); }
 
 
-//! @brief Devuelve el ángulo comprendido por círculo (2*pi).
+//! @brief Return el ángulo comprendido por círculo (2*pi).
 double Circulo2d::AnguloComprendido(void) const
   { return 2*M_PI; }
 
@@ -187,7 +187,7 @@ MatrizPos2d Circulo2d::getPointsOnPerimeter(const size_t &n,const double &theta_
     return retval;
   }
 
-//! @brief Devuelve el polígono de n lados inscrito en la circunferencia que forma el perímetro.
+//! @brief Return el polígono de n lados inscrito en la circunferencia que forma el perímetro.
 Poligono2d Circulo2d::getPoligonoInscrito(const size_t &n,const double &theta_inic) const
   {
     Poligono2d retval;

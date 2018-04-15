@@ -31,7 +31,7 @@
 #include "xc_utils/src/geom/d1/Segmento3d.h"
 
 GEOM_FT GmGrupo3d::inercia(const Recta3d &e) const
-//Devuelve el momento de inercia respecto a la recta e
+//Return el momento de inercia respecto a la recta e
   {
     if(objetos.empty()) return 0.0;
     if(!igual_dimension())

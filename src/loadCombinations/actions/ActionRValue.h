@@ -41,7 +41,7 @@ class ActionRValue: public Action
     ActionRValueList *acc_familia; //!< Contenedor de la familia de acciones de la que ésta forma parte.
     const PsiCoeffs *coefs_psi; //!< Coeficientes de simultaneidad para valor de combinación.
 
-    //! @brief Devuelve el coeficiente de combinación cuyo índice se pasa como parámetro.
+    //! @brief Return el coeficiente de combinación cuyo índice se pasa como parámetro.
     inline double getPsi(short int r) const;
 
   protected:

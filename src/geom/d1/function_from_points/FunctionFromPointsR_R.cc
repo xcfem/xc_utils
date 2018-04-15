@@ -67,7 +67,7 @@ FunctionFromPointsR_R::const_iterator FunctionFromPointsR_R::PosMin(void) const
     return retval;
   }
 
-//! @brief Devuelve el dominio en el que se define la función.
+//! @brief Return el dominio en el que se define la función.
 dq_double FunctionFromPointsR_R::Dominio(void) const
   {
     dq_double retval(2,0.0);
@@ -76,7 +76,7 @@ dq_double FunctionFromPointsR_R::Dominio(void) const
     return retval;
   }
 
-//! @brief Devuelve las abcisas en las que se define la función.
+//! @brief Return las abcisas en las que se define la función.
 dq_double FunctionFromPointsR_R::Abcisas(void) const
   {
     dq_double retval;
@@ -86,7 +86,7 @@ dq_double FunctionFromPointsR_R::Abcisas(void) const
     return retval;
   }
 
-//! @brief Devuelve las ordenadas correspondientes a cada abcisa.
+//! @brief Return las ordenadas correspondientes a cada abcisa.
 dq_double FunctionFromPointsR_R::Ordenadas(void) const
   {
     dq_double retval;
@@ -157,7 +157,7 @@ double FunctionFromPointsR_R::lastY(void) const
   }
 
 
-//! @brief Devuelve el área bajo la función.
+//! @brief Return el área bajo la función.
 double FunctionFromPointsR_R::Area(void) const
   {
     double retval= 0.0;
@@ -174,7 +174,7 @@ double FunctionFromPointsR_R::Area(void) const
     return retval;
   }
 
-//! @brief Devuelve las abcisas entre x0 and x1 (ambas inclusive).
+//! @brief Return las abcisas entre x0 and x1 (ambas inclusive).
 FunctionFromPointsR_R getSub(const FunctionFromPointsR_R &f1,const double &x0,const double &x1)
   {
     FunctionFromPointsR_R retval;

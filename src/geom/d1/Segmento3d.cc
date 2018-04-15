@@ -103,7 +103,7 @@ Dir3d Segmento3d::GetDir(void) const
 Vector3d Segmento3d::VDir(void) const
   { return GetDir().GetVector(); }
 
-//! @brief Devuelve el parámetro «lambda» tal que p= Origen()+lambda*VDir()
+//! @brief Return el parámetro «lambda» tal que p= Origen()+lambda*VDir()
 GEOM_FT Segmento3d::getLambda(const Pos3d &p) const
   {
     const Vector3d v(Origen(),p);
@@ -111,7 +111,7 @@ GEOM_FT Segmento3d::getLambda(const Pos3d &p) const
     return dot(v,dir);
   }
 
-//! @brief Devuelve el cuadrado de la distance from the point al segmento.
+//! @brief Return el cuadrado de la distance from the point al segmento.
 GEOM_FT Segmento3d::dist2(const Pos3d &p) const
   {
     const Recta3d r= RectaSoporte();

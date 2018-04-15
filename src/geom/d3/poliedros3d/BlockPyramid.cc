@@ -29,7 +29,7 @@
 #include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
 
 
-//! @brief Devuelve el haz de vectores que resulta de intersecar los
+//! @brief Return el haz de vectores que resulta de intersecar los
 //! semiespacios 2 a 2.
 std::deque<Vector3d> BlockPyramid::haz_vectores(void) const
   {
@@ -99,35 +99,35 @@ GEOM_FT BlockPyramid::Longitud(void) const
     return 0.0;
   }
 
-//! @brief Devuelve el área del objeto.
+//! @brief Return el área del objeto.
 GEOM_FT BlockPyramid::Area(void) const
   {
     std::cerr << "BlockPyramid::Area() not implemented." << std::endl;
     return 0.0;
   }
 
-//! @brief Devuelve el volumen del objeto.
+//! @brief Return el volumen del objeto.
 GEOM_FT BlockPyramid::Volumen(void) const
   {
     std::cerr << "BlockPyramid::Volumen() not implemented." << std::endl;
     return 0.0;
   }
 
-//! @brief Devuelve el momento de inercia respecto al eje x.
+//! @brief Return el momento de inercia respecto al x axis.
 GEOM_FT BlockPyramid::Ix(void) const
   {
     std::cerr << "BlockPyramid::Ix() not implemented." << std::endl;
     return 0.0;
   }
 
-//! @brief Devuelve el momento de inercia respecto al eje y.
+//! @brief Return el momento de inercia respecto al y axis.
 GEOM_FT BlockPyramid::Iy(void) const
   {
     std::cerr << "BlockPyramid::Iy() not implemented." << std::endl;
     return 0.0;
   }
 
-//! @brief Devuelve el momento de inercia respecto al eje z.
+//! @brief Return el momento de inercia respecto al z axis.
 GEOM_FT BlockPyramid::Iz(void) const
   {
     std::cerr << "BlockPyramid::Iy() not implemented." << std::endl;

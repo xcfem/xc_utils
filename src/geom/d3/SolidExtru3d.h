@@ -87,7 +87,7 @@ class SolidExtru3d : public Solido3d
     inline virtual GEOM_FT Iz(void) const
       { return (scc.Ix()+scc.Iy())*l; }
 /*     inline Pos3d GetCdgBase(unsigned short int i) const */
-/*     //Devuelve el centro de gravedad de una de las bases. */
+/*     //Return el centro de gravedad de una de las bases. */
 /*     //0 la base inferior (z=-l/2) y 1 la */
 /*     //base superior (z=+l/2). */
 /*       {  */
@@ -110,21 +110,21 @@ class SolidExtru3d : public Solido3d
 /*         return secc; */
 /*       } */
     inline virtual GEOM_FT GetMax(unsigned short int i) const
-    //Devuelve el valor maximo de la coordenada i.
+    //Return el valor maximo de la coordenada i.
       { 
         //return max(GetBase(0).GetMax(i),GetBase(1).GetMax(i));
 	std::cerr << "SolidExtru3d::GetMax no implementada" << std::endl;
         return 0.0;
       }
     inline virtual GEOM_FT GetMin(unsigned short int i) const
-    //Devuelve el valor minimo de la coordenada i.
+    //Return el valor minimo de la coordenada i.
       {
         //return min(GetBase(0).GetMin(i),GetBase(1).GetMin(i));
 	std::cerr << "SolidExtru3d::GetMax no implementada" << std::endl;
         return 0.0;
       }
     BND3d Bnd(void) const
-    //Devuelve la extension del objeto.
+    //Return la extension del objeto.
       { return GeomObj3d::Bnd(); }
     matriz_FT I(void) const
       { return GeomObj3d::I(); }

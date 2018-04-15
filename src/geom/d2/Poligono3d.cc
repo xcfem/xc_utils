@@ -78,7 +78,7 @@ bool Poligono3d::In(const Pos3d &p,const double &tol)
     return plg2d.In(p2d,tol);
   }
 
-//! @brief Devuelve el centro de gravedad del polígono.
+//! @brief Return el centro de gravedad del polígono.
 Pos3d Poligono3d::Cdg(void) const
   { return to_3d(plg2d.Cdg()); }
 
@@ -128,7 +128,7 @@ void Poligono3d::Print(std::ostream &os) const
       os << ", " << Vertice(i);
   }
 
-//! @brief Devuelve the squared distance from from point to polygon.
+//! @brief Return the squared distance from from point to polygon.
 //!
 //! The distance is computed as the maximum of:
 //!  -The distance from the point to the plane that contains the polygon.
@@ -186,7 +186,7 @@ GEOM_FT Poligono3d::dist(const Pos3d &p) const
   }
 
 std::list<Poligono3d> Poligono3d::Corta(const Plano3d &pl) const
-//Devuelve los polígonos que resultan de cortar por el plano
+//Return los polígonos que resultan de cortar por el plano
 //pl, el polígono p, que se pasa como parámetro.
   {
     std::list<Poligono3d> retval;

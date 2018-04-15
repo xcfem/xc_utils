@@ -38,7 +38,7 @@
 //!  
 class SisCoo: public ProtoGeom
   {
-    matriz_FT rot; //Matriz cuyas filas son los vectores básicos.
+    matriz_FT rot; //Basis vector matrix (as rows).
   protected:
     void identidad(void);
     void put(const size_t &i,const size_t &j,const GEOM_FT &);
@@ -57,22 +57,22 @@ class SisCoo: public ProtoGeom
     virtual SisCoo *Copia(void) const= 0;
   public:
     virtual size_t NumEjes(void) const
-      { return rot.getNumFilas(); }
+      { return rot.getNumberOfRows(); }
     bool EsNormal(void) const;
     bool EsOrtogonal(void) const;
     bool EsOrtonormal(void) const;
     bool EsDextrogiro(void) const;
-    matriz_FT GetFila(const size_t &i) const;
-    void PutFila(const size_t &eje,const matriz_FT &v);
+    matriz_FT getRow(const size_t &i) const;
+    void putRow(const size_t &eje,const matriz_FT &v);
 
     virtual matriz_FT TransAGlobal(void) const;
-      //Devuelve la matriz que transforma un vector expresado
+      //Return the matrix que transforma un vector expresado
       // en locales al mismo vector expresado en globales.
     virtual matriz_FT TransDeGlobal(void) const;
-      //Devuelve la matriz que transforma un vector expresado
+      //Return the matrix que transforma un vector expresado
       // en globales al mismo vector expresado en locales.
     matriz_FT GetTransA(const SisCoo &dest) const;
-      //Devuelve la matriz de transformación desde este sistema a dest.
+      //Return the transformation matrix desde este sistema a dest.
     matriz_FT GetCooGlobales(const matriz_FT &v) const;
     matriz_FT GetCooLocales(const matriz_FT &v) const;
 

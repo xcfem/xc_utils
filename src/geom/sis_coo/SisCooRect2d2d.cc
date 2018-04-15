@@ -43,10 +43,10 @@ SisCooRect2d2d::SisCooRect2d2d(const VGlobal &vX)
 SisCoo *SisCooRect2d2d::Copia(void) const
   { return new SisCooRect2d2d(*this); }
 
-//! @brief Devuelve el vector unitario I en el sistema global.
+//! @brief Return el vector unitario I en el sistema global.
 SisCooRect2d2d::VGlobal SisCooRect2d2d::GetI(void) const
   { return GetVDirEje(1); }
-//! @brief Devuelve el vector unitario J en el sistema global.
+//! @brief Return el vector unitario J en el sistema global.
 SisCooRect2d2d::VGlobal SisCooRect2d2d::GetJ(void) const
   { return GetVDirEje(2); }
 //! @brief Asigna el vector unitario I.
@@ -66,11 +66,11 @@ void SisCooRect2d2d::PutJ(const VGlobal &j)
     put(1,2,-j(1)); //Para que sea ortogonal y dextrógiro.
   }
 
-//! @brief Devuelve las componentes del vector v expresado en locales
+//! @brief Return las componentes del vector v expresado en locales
 //! expresadas en coordenadas globales.
 SisCooRect2d2d::VGlobal SisCooRect2d2d::GetCooGlobales(const VLocal &v) const
   { return SisCooXd2d::GetCooGlobales(v.GetMatriz()); }
-//! @brief Devuelve las componentes del vector v expresado en locales
+//! @brief Return las componentes del vector v expresado en locales
 //expresadas en coordenadas globales.
 SisCooRect2d2d::VLocal SisCooRect2d2d::GetCooLocales(const VGlobal &v) const
   {

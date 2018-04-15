@@ -26,6 +26,6 @@
 #include <cmath>
 #include "xc_basic/src/util/matem.h"
 
-//! @brief Devuelve el area de la superficie.
+//! @brief Return el area de la superficie.
 GEOM_FT Superficie3d::Area(void) const
   { return NAN; }

@@ -28,10 +28,10 @@
 #include <plotter.h>
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
-//! @brief Devuelve la base opuesta al vértice i.
+//! @brief Return la base opuesta al vértice i.
 Segmento2d Triangulo2d::Base(const size_t &i) const
   { return Lado(i%3+1); }
-//! @brief Devuelve la altura correspondiente al vértice i.
+//! @brief Return la altura correspondiente al vértice i.
 Segmento2d Triangulo2d::Altura(const size_t &i) const
   {
     if(Degenerado())

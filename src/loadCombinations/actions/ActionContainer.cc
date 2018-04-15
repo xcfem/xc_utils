@@ -65,7 +65,7 @@ cmb_acc::ActionRValue &cmb_acc::ActionContainer::insert(const std::string &famil
       }
   }
 
-//! @brief Devuelve el conjunto de acciones permanentes.
+//! @brief Return el conjunto de acciones permanentes.
 const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getPermanentActions(void) const
   { return G; }
 
@@ -73,7 +73,7 @@ const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getPermanentActions(void
 void cmb_acc::ActionContainer::setPermanentActions(const ActionsFamily &g)
   { G= g; }
 
-//! @brief Devuelve el conjunto de acciones permanentes de valor no constante.
+//! @brief Return el conjunto de acciones permanentes de valor no constante.
 const cmb_acc::ActionsFamiliesMap &cmb_acc::ActionContainer::getPermanentActionsNC(void) const
   { return G_aster; }
 
@@ -81,15 +81,15 @@ const cmb_acc::ActionsFamiliesMap &cmb_acc::ActionContainer::getPermanentActions
 void cmb_acc::ActionContainer::setPermanentActionsNC(const ActionsFamiliesMap &mfa)
   { G_aster= mfa; }
 
-//! @brief Devuelve el conjunto de acciones variables.
+//! @brief Return el conjunto de acciones variables.
 const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getVariableActions(void) const
   { return Q; }
 
-//! @brief Devuelve el conjunto de acciones variables.
+//! @brief Return el conjunto de acciones variables.
 void cmb_acc::ActionContainer::setVariableActions(const ActionsFamily &fa)
   { Q= fa; }
 
-//! @brief Devuelve el conjunto de acciones accidentales.
+//! @brief Return el conjunto de acciones accidentales.
 const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getAccidentalActions(void) const
   { return A; }
 
@@ -97,7 +97,7 @@ const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getAccidentalActions(voi
 void cmb_acc::ActionContainer::setAccidentalActions(const ActionsFamily &fa)
   { A= fa; }
 
-//! @brief Devuelve el conjunto de acciones sísmicas.
+//! @brief Return el conjunto de acciones sísmicas.
 const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getSeismicActions(void) const
   { return AS; }
 
@@ -106,21 +106,21 @@ void cmb_acc::ActionContainer::setSeismicActions(const ActionsFamily &fa)
   { AS= fa; }
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsG(const bool &elu,const bool &sit_accidental) const
-//! @brief Devuelve las combinaciones que se forman con las acciones permanentes.
+//! @brief Return las combinaciones que se forman con las acciones permanentes.
 //! @param elu: Verdadero si las combinaciones corresponden a estados límite últimos.
 //! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsG(const bool &elu,const bool &sit_accidental) const
   { return G.GetLoadCombinations(elu,sit_accidental,-1); } //Las permanentes siempre con characteristic value.
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsG_aster(const bool &elu,const bool &sit_accidental) const
-//! @brief Devuelve las combinaciones que se forman con las acciones permanentes de valor no constante.
+//! @brief Return las combinaciones que se forman con las acciones permanentes de valor no constante.
 //! @param elu: Verdadero si las combinaciones corresponden a estados límite últimos.
 //! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsG_aster(const bool &elu,const bool &sit_accidental) const
   { return G_aster.GetLoadCombinations(elu,sit_accidental); } 
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsQ(const bool &elu,const bool &sit_accidental,short int r,int d,short int rr) const
-//! @brief Devuelve las combinaciones que se forman con las acciones variables.
+//! @brief Return las combinaciones que se forman con las acciones variables.
 //! @param elu: Verdadero si las combinaciones corresponden a estados límite últimos.
 //! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
 //! @param r: Valor representativo a emplear para el caso general.
@@ -134,7 +134,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsQ(co
   { return Q.GetLoadCombinations(elu,sit_accidental,r,d,rr); }
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsA(short int r,int d,short int rr) const
-//! @brief Devuelve las combinaciones que se forman con las acciones accidentales.
+//! @brief Return las combinaciones que se forman con las acciones accidentales.
 //! @param r: Valor representativo a emplear para el caso general.
 //! - r= -1 -> characteristic value.
 //! - r= 0 -> valor de combinación.
@@ -146,7 +146,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsA(sh
   { return A.GetLoadCombinations(true,true,r,d,rr); }
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsAS(short int r,int d,short int rr) const
-//! @brief Devuelve las combinaciones que se forman con las acciones sísmicas.
+//! @brief Return las combinaciones que se forman con las acciones sísmicas.
 //! @param r: Valor representativo a emplear para el caso general.
 //! - r= -1 -> characteristic value.
 //! - r= 0 -> valor de combinación.
@@ -158,7 +158,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsAS(s
   { return AS.GetLoadCombinations(true,true,r,d,rr); }
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPermanentes(const bool &elu,const bool &sit_accidental) const
-//! @brief Devuelve las combinaciones correspondientes a acciones permanentes y permanentes de valor no constante.
+//! @brief Return las combinaciones correspondientes a acciones permanentes y permanentes de valor no constante.
 //! @param elu: Verdadero si las combinaciones corresponden a estados límite últimos.
 //! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPermanentes(const bool &elu,const bool &sit_accidental) const
@@ -179,7 +179,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPermanentes(const bo
   }
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetVariables(const LoadCombinationVector &permanentes,const bool &elu,const bool &sit_accidental,const short int &v) const
-//! @brief Devuelve las combinaciones que corresponden a acciones permanentes (incluso no constantes) y variables.
+//! @brief Return las combinaciones que corresponden a acciones permanentes (incluso no constantes) y variables.
 //! @param permanentes: LoadCombinations de las acciones permanentes obtenidas mediante cmb_acc::ActionContainer::GetPermanentes.
 //! @param elu: Verdadero si las combinaciones corresponden a estados límite últimos.
 //! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
@@ -210,7 +210,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetVariables(const Load
   }
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccSis(const LoadCombinationVector &previas,const ActionsFamily &Acc) const
-//! @brief Devuelve las combinaciones correspondientes en situaciones accidentales o sísmicas.
+//! @brief Return las combinaciones correspondientes en situaciones accidentales o sísmicas.
 //! @param previas: LoadCombinations de las acciones permanentes y variables obtenidas mediante cmb_acc::ActionContainer::GetVariables.
 //! @param Acc: Familia de acciones accidentales o sísmicas.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccSis(const LoadCombinationVector &previas,const ActionsFamily &Acc) const
@@ -235,7 +235,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccSis(const LoadCom
 
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPersistentesOTransit(void) const
-//! @brief Devuelve las combinaciones correspondientes a estados límite últimos en situaciones persistentes o transitorias.
+//! @brief Return las combinaciones correspondientes a estados límite últimos en situaciones persistentes o transitorias.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPersistentesOTransit(void) const
   {
     if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para ELU en situaciones persistentes o transitorias..." << std::endl; 
@@ -254,7 +254,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPersistentesOTransit
   }
 
 //! \fn cmb_acc::ActionContainer::GetAccidentales(void) const
-//! @brief Devuelve las combinaciones correspondientes a  estados límite últimos en situaciones accidentales.
+//! @brief Return las combinaciones correspondientes a  estados límite últimos en situaciones accidentales.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccidentales(void) const
   {
     LoadCombinationVector retval;
@@ -279,7 +279,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccidentales(void) c
 
 
 //! \fn cmb_acc::ActionContainer::GetSismicas(void) const
-//! @brief Devuelve las combinaciones correspondientes a  estados límite últimos en situaciones sísmicas.
+//! @brief Return las combinaciones correspondientes a  estados límite últimos en situaciones sísmicas.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetSismicas(void) const
   {
     LoadCombinationVector retval;
@@ -306,7 +306,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetSismicas(void) const
   }
 
 //! \fn cmb_acc::ActionContainer::GetCombELU(void) const
-//! @brief Devuelve las combinaciones correspondientes a todas las situaciones de ESTADO LIMITE ÚLTIMO.
+//! @brief Return las combinaciones correspondientes a todas las situaciones de ESTADO LIMITE ÚLTIMO.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCombELU(void) const
   {
     LoadCombinationVector retval= GetPersistentesOTransit(); //Situaciones persistentes o transitorias.
@@ -324,7 +324,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCombELU(void) const
 
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPocoFrecuentes(void) const
-//! @brief Devuelve las combinaciones correspondientes a situaciones poco frecuentes en ESTADO LIMITE DE SERVICIO.
+//! @brief Return las combinaciones correspondientes a situaciones poco frecuentes en ESTADO LIMITE DE SERVICIO.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPocoFrecuentes(void) const
   {
     if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para ELS en situaciones persistentes o transitorias..." << std::endl; 
@@ -343,7 +343,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPocoFrecuentes(void)
   }
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetFrecuentes(void) const
-//! @brief Devuelve las combinaciones correspondientes a situaciones persistentes o transitorias.
+//! @brief Return las combinaciones correspondientes a situaciones persistentes o transitorias.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetFrecuentes(void) const
   {
     if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para ELS en situaciones persistentes o transitorias..." << std::endl; 
@@ -362,7 +362,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetFrecuentes(void) con
   }
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCuasiPermanentes(void) const
-//! @brief Devuelve las combinaciones correspondientes a situaciones persistentes o transitorias.
+//! @brief Return las combinaciones correspondientes a situaciones persistentes o transitorias.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCuasiPermanentes(void) const
   {
     if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para ELS en situaciones persistentes o transitorias..." << std::endl; 
@@ -380,7 +380,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCuasiPermanentes(voi
   }
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCombELS(void) const
-//! @brief Devuelve las combinaciones correspondientes a todas las situaciones de ESTADO LIMITE DE SERVICIO.
+//! @brief Return las combinaciones correspondientes a todas las situaciones de ESTADO LIMITE DE SERVICIO.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCombELS(void) const
   {
     LoadCombinationVector retval= GetPocoFrecuentes(); //LoadCombinations poco frecuentes.

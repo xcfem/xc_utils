@@ -101,7 +101,7 @@ void Recta2d::TwoPoints(const Pos2d &p1,const Pos2d &p2)
 GEOM_FT Recta2d::Longitud(void) const
   { return NAN; }
 
-//! @brief Devuelve el centro de gravedad de la recta.
+//! @brief Return el centro de gravedad de la recta.
 Pos2d Recta2d::Cdg(void) const
   { return Pos2d(NAN,NAN); }
 
@@ -264,7 +264,7 @@ Recta2d Recta2d::Paralela(const Pos2d &p) const
     return Offset(v);
   }
 
-//! @brief Devuelve una recta paralela a ésta a la distancia
+//! @brief Return una recta paralela a ésta a la distancia
 //! que se pasa como parámetro. Si la distance es positiva,
 //! la nueva recta quedará a la derecha de la anterior.
 Recta2d Recta2d::Offset(const GEOM_FT &d) const
@@ -366,19 +366,19 @@ GEOM_FT dist2(const Recta2d &r1,const Recta2d &r2)
     return retval;
   }
 
-//! @brief Devuelve el ángulo con el vector que se pasa como parámetro.
+//! @brief Return el ángulo con el vector que se pasa como parámetro.
 double Recta2d::Angulo(const Vector2d &v) const
   { return angulo(VDir(),v); }
 
-//! @brief Devuelve el ángulo con el eje Y.
+//! @brief Return el ángulo con el Y axis.
 double Recta2d::Azimuth(void) const
   { return angulo(VDir(),Vector2d(0,1)); }
 
-//! @brief Devuelve el ángulo de la recta con el vector.
+//! @brief Return el ángulo de la recta con el vector.
 double angulo(const Recta2d &r,const Vector2d &v)
   { return r.Angulo(v); }
 
-//! @brief Devuelve el ángulo entre las rectas.
+//! @brief Return el ángulo entre las rectas.
 double angulo(const Recta2d &r1,const Recta2d &r2)
   { return r1.Angulo(r2.VDir()); }
 

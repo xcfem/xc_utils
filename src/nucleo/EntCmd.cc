@@ -41,7 +41,7 @@ ErrLogFiles EntCmd::err_log_files; //!< Streams para errores y avisos.
 EntCmd::EntCmd(EntCmd *owr)
   : EntProp(owr) {}
 
-//! @brief Devuelve un puntero al objeto propietario de ESTE.
+//! @brief Return un puntero al objeto propietario de ESTE.
 EntCmd *EntCmd::Owner(void)
   {
     EntCmd *retval= nullptr;
@@ -51,7 +51,7 @@ EntCmd *EntCmd::Owner(void)
     return retval;
   }
 
-//! @brief Devuelve un puntero al objeto propietario de ESTE.
+//! @brief Return un puntero al objeto propietario de ESTE.
 const EntCmd *EntCmd::Owner(void) const
   {
     const EntCmd *retval= nullptr;
@@ -91,7 +91,7 @@ void EntCmd::clearPyProps(void)
 bool EntCmd::hasPyProp(const std::string &str)
   { return (python_dict.find(str) != python_dict.end()); }
 
-//! @brief Devuelve el objeto de Python cuyo nombre se pasa como parámetro.
+//! @brief Return el objeto de Python cuyo nombre se pasa como parámetro.
 //Python checks the class attributes before it calls __getattr__ so we don't have to do anything special here.
 boost::python::object EntCmd::getPyProp(const std::string &str)
    {
@@ -113,7 +113,7 @@ void EntCmd::setPyProp(std::string str, boost::python::object val)
     python_dict[str] = val;
   }
 
-//! @brief Devuelve el objeto de Python que resulta de evaluar la expresión.
+//! @brief Return el objeto de Python que resulta de evaluar la expresión.
 boost::python::object EntCmd::evalPy(boost::python::object dict,const std::string &str)
    {
      boost::python::object main_module = boost::python::import("__main__");
@@ -122,7 +122,7 @@ boost::python::object EntCmd::evalPy(boost::python::object dict,const std::strin
    }
 
 
-//! @brief Devuelve el objeto de Python que resulta de evaluar el bloque de código.
+//! @brief Return el objeto de Python que resulta de evaluar el bloque de código.
 boost::python::object EntCmd::execPy(boost::python::object dict,const std::string &block)
    {
      boost::python::object main_module = boost::python::import("__main__");
@@ -130,7 +130,7 @@ boost::python::object EntCmd::execPy(boost::python::object dict,const std::strin
      return boost::python::exec(block.c_str(),main_namespace,dict);
    }
 
-//! @brief Devuelve el objeto de Python que resulta de evaluar el bloque de código.
+//! @brief Return el objeto de Python que resulta de evaluar el bloque de código.
 boost::python::object EntCmd::execFilePy(boost::python::object dict,const std::string &fName)
    {
      boost::python::object main_module = boost::python::import("__main__");

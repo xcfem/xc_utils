@@ -74,12 +74,12 @@ BOOST_PYTHON_MODULE(xc_base)
       .add_property("logFileName", make_function( &EntCmd::getLogFileName, return_internal_reference<>() ), &EntCmd::setLogFileName)
       .add_property("errFileName", make_function( &EntCmd::getErrFileName, return_internal_reference<>() ), &EntCmd::setErrFileName)
       .def("hasProp", &EntCmd::hasPyProp,"True if property exists.")
-      .def("getProp", &EntCmd::getPyProp,"Devuelve una propiedad definida por el usuario.")
+      .def("getProp", &EntCmd::getPyProp,"Return una propiedad definida por el usuario.")
       .def("setProp", &EntCmd::setPyProp,"Define (o asigna) una propiedad definida por el usuario.")
       .def("evalPy", &EntCmd_eval,"Evaluates expresion.")
       .def("execPy", &EntCmd_exec,"Executes code block.")
       .def("execFilePy", &EntCmd_exec_file,"Executes code block.")
-      .def("tipo", &EntCmd::getClassName,"DEPRECATED Devuelve el nombre de la clase.")
+      .def("tipo", &EntCmd::getClassName,"DEPRECATED Return el nombre de la clase.")
       .def("type", &EntCmd::getClassName,"Returns class name.")
   ;
 
@@ -89,8 +89,8 @@ BOOST_PYTHON_MODULE(xc_base)
       ;
 
     class_<ProtoMatriz, boost::noncopyable>("ProtoMatriz", no_init)
-      .add_property("nRow",&ProtoMatriz::getNumFilas,"returns number of rows.")
-      .add_property("nCol",&ProtoMatriz::getNumCols,"returns number of columns.")
+      .add_property("nRow",&ProtoMatriz::getNumberOfRows,"returns number of rows.")
+      .add_property("nCol",&ProtoMatriz::getNumberOfColumns,"returns number of columns.")
       ;
   }
 

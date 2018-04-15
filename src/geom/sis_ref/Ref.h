@@ -100,7 +100,7 @@ typename Ref<SC>::PGlobal Ref<SC>::GetPosGlobal(const PLocal &p) const
     return retval;
   }
 
-//! @brief Devuelve el vector v expresado en locales expresado en coordenadas globales.
+//! @brief Return el vector v expresado en locales expresado en coordenadas globales.
 template<class SC>
 typename Ref<SC>::VGlobal Ref<SC>::GetCooGlobales(const VLocal &v) const
   { return trf.GetCooGlobales(v); }
@@ -114,7 +114,7 @@ typename Ref<SC>::PLocal Ref<SC>::GetPosLocal(const PGlobal &p) const
     return PLocal(PLocal()+v);
   }
 
-//! @brief Devuelve el vector v expresado en globales expresado en coordenadas locales.
+//! @brief Return el vector v expresado en globales expresado en coordenadas locales.
 template<class SC>
 typename Ref<SC>::VLocal Ref<SC>::GetCooLocales(const VGlobal &v) const
   { return trf.GetCooLocales(v); }

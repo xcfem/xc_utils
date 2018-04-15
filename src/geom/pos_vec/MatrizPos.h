@@ -52,10 +52,10 @@ class MatrizPos: public MatrizT<POS,std::vector<POS> >
     MatrizPos(const MatrizPos &l1_points,const MatrizPos &l2_points,const MatrizPos &l3_points,const MatrizPos &l4_points);
     inline MatrizPos<POS> GetCaja(size_t f1, size_t c1, size_t f2, size_t c2) const
       { return MatrizPos(*this,f1,c1,f2,c2); }
-    inline MatrizPos<POS> GetFila(size_t fila) const
-      { return GetCaja(fila,1,fila,this->cls); }
-    inline MatrizPos<POS> GetCol(size_t col) const
-      { return GetCaja(1,col,this->fls,col); }
+    inline MatrizPos<POS> getRow(size_t iRow) const
+      { return GetCaja(iRow,1,iRow,this->n_columns); }
+    inline MatrizPos<POS> getColumn(size_t col) const
+      { return GetCaja(1,col,this->n_rows,col); }
   };
 
 //! Build the point matrix between p1 and p2 in such way that, the firs point
@@ -147,19 +147,19 @@ MatrizPos<POS>::MatrizPos(const POS &p0,const POS &p1,const POS &p2,const size_t
     const GEOM_FT dn2= double_to_FT(1.0/boost::lexical_cast<double>(ndiv2));
     const vector v01= (p1-p0)*dn1;
     const vector v02= (p2-p0)*dn2;
-    const size_t fls= this->getNumFilas();
-    const size_t cls= this->getNumCols();
-    for(size_t i=1;i<=fls;i++)
+    const size_t n_rows= this->getNumberOfRows();
+    const size_t n_columns= this->getNumberOfColumns();
+    for(size_t i=1;i<=n_rows;i++)
       {
         const vector vi= boost::lexical_cast<int>(i-1)*v02;
-        for(size_t j=1;j<=cls;j++)
+        for(size_t j=1;j<=n_columns;j++)
           (*this)(i,j)= p0+vi+boost::lexical_cast<int>(j-1)*v01;
       }
   }
 
 template <class POS>
 MatrizPos<POS>::MatrizPos(const MatrizPos &l1_points,const MatrizPos &l2_points,const MatrizPos &l3_points,const MatrizPos &l4_points)
-  : m_pos(l1_points.getNumFilas(),l2_points.getNumFilas())
+  : m_pos(l1_points.getNumberOfRows(),l2_points.getNumberOfRows())
 //The arguments are the points (X) in the following order (see rows).
 //                 l3_points
 //                  --->
@@ -183,14 +183,14 @@ MatrizPos<POS>::MatrizPos(const MatrizPos &l1_points,const MatrizPos &l2_points,
 //The rows are quasi-parallel to the lines l2 and l4
 //The columns are quasi-parallel to 11 y l3
   {
-    const size_t num_filas= l1_points.getNumFilas();
-    const size_t num_cols= l2_points.getNumFilas();
+    const size_t row_number= l1_points.getNumberOfRows();
+    const size_t num_cols= l2_points.getNumberOfRows();
     MatrizPos row_points= l4_points;
-    for(size_t i=1;i<=num_filas;i++)
+    for(size_t i=1;i<=row_number;i++)
       {
         if(i>1)
           {
-            if(i==num_filas)
+            if(i==row_number)
               row_points= l2_points;
             else
               row_points= MatrizPos(l1_points(i,1),l3_points(i,1),num_cols-1);
@@ -204,27 +204,27 @@ template <class POS,class SEG>
 POS get_centro(const MatrizPos<POS> &m,const SEG &sg)
   {
     POS retval;
-    const size_t nfilas= m.getNumFilas();
-    const size_t ncols= m.getNumCols();
-    const size_t fila= nfilas/2;
-    const size_t columna= ncols/2;
-    if(impar(nfilas) && impar(ncols))
-      retval= m(fila+1,columna+1);
+    const size_t n_rows= m.getNumberOfRows();
+    const size_t n_columns= m.getNumberOfColumns();
+    const size_t iRow= n_rows/2;
+    const size_t iColumn= n_columns/2;
+    if(impar(n_rows) && impar(n_columns))
+      retval= m(iRow+1,iColumn+1);
     else
-      if(par(nfilas) && par(ncols))
+      if(par(n_rows) && par(n_columns))
         {
-          SEG s(m(fila,columna),m(fila+1,columna+1));
+          SEG s(m(iRow,iColumn),m(iRow+1,iColumn+1));
           retval= s.Cdg();
         }
       else
-        if(impar(nfilas))
+        if(impar(n_rows))
           {
-            SEG s(m(fila,columna),m(fila,columna+1));
+            SEG s(m(iRow,iColumn),m(iRow,iColumn+1));
             retval= s.Cdg();
           }
         else
           {
-            SEG s(m(fila,columna),m(fila+1,columna));
+            SEG s(m(iRow,iColumn),m(iRow+1,iColumn));
             retval= s.Cdg();
           }
     return retval;
@@ -267,8 +267,8 @@ MatrizPos<POS> cuadrilatero(const POS &q1,const POS &q2,const POS &q3,const POS 
 template <class POS>
 MatrizPos<POS> generacion_frontal(const MatrizPos<POS> &l1_points,const MatrizPos<POS> &l2_points)
   {
-    const size_t nptos1= l1_points.getNumFilas();
-    const size_t nptos2= l2_points.getNumFilas();
+    const size_t nptos1= l1_points.getNumberOfRows();
+    const size_t nptos2= l2_points.getNumberOfRows();
     const size_t ntot= nptos1*nptos2;
     MatrizPos<POS> retval(nptos1,nptos2);
 

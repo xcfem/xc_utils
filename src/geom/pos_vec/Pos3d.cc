@@ -166,18 +166,18 @@ Pos2d Pos3d::YZ2DProjection(void) const
   }
 
 //! @brief Equivalente a la función de autocad @mod<arg con el giro en
-//! torno al eje x.
+//! torno al x axis.
 Pos3d Pos3d::getModArgX(const GEOM_FT &mod,const GEOM_FT &giroX) const
   { return Pos3d(x(),y()+mod*cos(giroX),z()+mod*sin(giroX)); }
 
 //! @brief Equivalente a la función de autocad @mod<arg con el giro en
-//! torno al eje y.
+//! torno al y axis.
 Pos3d Pos3d::getModArgY(const GEOM_FT &mod,const GEOM_FT &giroY) const
   { return Pos3d(x()+mod*cos(giroY),y(),z()-mod*sin(giroY)); }
 
 
 //! @brief Equivalente a la función de autocad @mod<arg con el giro en
-//! torno al eje z.
+//! torno al z axis.
 Pos3d Pos3d::getModArgZ(const GEOM_FT &mod,const GEOM_FT &giroZ) const
   { return Pos3d(x()+mod*cos(giroZ),y()+mod*sin(giroZ),z()); }
 
@@ -196,7 +196,7 @@ GEOM_FT Pos3d::dist(const Pos3d &p) const
 GEOM_FT Pos3d::dist2(const Pos3d &p) const
   { return squared_distance(cgpt,p.cgpt); }
 
-//! @brief Devuelve el cuadrado de la distance a la recta.
+//! @brief Return el cuadrado de la distance a la recta.
 GEOM_FT Pos3d::dist2(const Recta3d &r) const
   { return r.dist2(*this); }
   
@@ -204,7 +204,7 @@ GEOM_FT Pos3d::dist2(const Recta3d &r) const
 GEOM_FT Pos3d::dist(const Recta3d &r) const
   { return r.dist(*this); }
 
-//! @brief Devuelve el cuadrado de la distance a la semirrecta.
+//! @brief Return el cuadrado de la distance a la semirrecta.
 GEOM_FT Pos3d::dist2(const SemiRecta3d &sr) const
   { return sr.dist2(*this); }
 
@@ -212,7 +212,7 @@ GEOM_FT Pos3d::dist2(const SemiRecta3d &sr) const
 GEOM_FT Pos3d::dist(const SemiRecta3d &sr) const
   { return sr.dist(*this); }
 
-//! @brief Devuelve el cuadrado de la distance al segmento.
+//! @brief Return el cuadrado de la distance al segmento.
 GEOM_FT Pos3d::dist2(const Segmento3d &sg) const
   { return sg.dist2(*this); }
 
@@ -220,7 +220,7 @@ GEOM_FT Pos3d::dist2(const Segmento3d &sg) const
 GEOM_FT Pos3d::dist(const Segmento3d &sg) const
   { return sg.dist(*this); }
 
-//! @brief Devuelve el cuadrado de la distance al plano.
+//! @brief Return el cuadrado de la distance al plano.
 GEOM_FT Pos3d::dist2(const Plano3d &p) const
   { return p.dist2(*this); }
 
@@ -228,7 +228,7 @@ GEOM_FT Pos3d::dist2(const Plano3d &p) const
 GEOM_FT Pos3d::dist(const Plano3d &p) const
   { return p.dist(*this); }
 
-//! @brief Devuelve el cuadrado de la distance al semiespacio.
+//! @brief Return el cuadrado de la distance al semiespacio.
 GEOM_FT Pos3d::dist2(const SemiEspacio3d &se) const
   { return se.dist2(*this); }
 

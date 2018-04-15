@@ -27,7 +27,7 @@
 #include <cmath>
 #include "xc_basic/src/util/matem.h"
 
-//! @brief Devuelve el area de la Superficie2d.
+//! @brief Return el area de la Superficie2d.
 GEOM_FT Superficie2d::Area(void) const
   { return NAN; }
 

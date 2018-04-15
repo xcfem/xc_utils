@@ -37,7 +37,7 @@
 
 
 
-//! @brief Devuelve los vertices del polígono.
+//! @brief Return los vertices del polígono.
 GeomObj::list_Pos2d SupPoligonal2d::getVertices(void) const
   {
     unsigned int nv= GetNumVertices();
@@ -46,12 +46,12 @@ GeomObj::list_Pos2d SupPoligonal2d::getVertices(void) const
     return lv;
   }
 
-//! @brief Devuelve la normal al lado del polígono.
+//! @brief Return la normal al lado del polígono.
 Vector2d SupPoligonal2d::getLado0Normal(const size_t i) const
   { return Lado0(i).Normal(); }
 
 
-//! @brief Devuelve la normal en el vértice del polígono.
+//! @brief Return la normal en el vértice del polígono.
 Vector2d SupPoligonal2d::getVertex0Normal(const size_t i) const
   {
     const size_t nv= GetNumVertices();
@@ -63,7 +63,7 @@ Vector2d SupPoligonal2d::getVertex0Normal(const size_t i) const
     return (n1+n2)/2.0;
   }
 
-//! @brief Devuelve la polilinea cerrada con los vértices del polígono.
+//! @brief Return la polilinea cerrada con los vértices del polígono.
 Polilinea2d SupPoligonal2d::GetPolilinea(void) const
   {
     Polilinea2d retval;
@@ -86,7 +86,7 @@ Segmento2d SupPoligonal2d::Lado0(unsigned int i) const
 Segmento2d SupPoligonal2d::Lado(unsigned int i) const
   { return Lado0(i-1); }
 
-//! @brief Devuelve el perímetro de la superficie.
+//! @brief Return el perímetro de la superficie.
 GEOM_FT SupPoligonal2d::Longitud(void) const
   {
     unsigned int nl= GetNumLados();
@@ -99,7 +99,7 @@ GEOM_FT SupPoligonal2d::Longitud(void) const
 GEOM_FT SupPoligonal2d::Area(void) const
   { return ::Abs(AreaSigno()); }
 
-//! @brief Devuelve el valor maximo de la coordenada i.
+//! @brief Return el valor maximo de la coordenada i.
 GEOM_FT SupPoligonal2d::GetMax(unsigned short int i) const
   { 
     register GEOM_FT mx= Vertice(0)(i);
@@ -109,7 +109,7 @@ GEOM_FT SupPoligonal2d::GetMax(unsigned short int i) const
     return mx;
   }
 
-//! @brief Devuelve el valor minimo de la coordenada i.
+//! @brief Return el valor minimo de la coordenada i.
 GEOM_FT SupPoligonal2d::GetMin(unsigned short int i) const
   {
     register GEOM_FT mn= Vertice(0)(i);
@@ -119,7 +119,7 @@ GEOM_FT SupPoligonal2d::GetMin(unsigned short int i) const
     return mn;
   }
 
-//! @brief Devuelve el centro de gravedad.
+//! @brief Return el centro de gravedad.
 Pos2d SupPoligonal2d::Cdg(void) const
   {
      const GEOM_FT area= Area();
@@ -156,7 +156,7 @@ GEOM_FT SupPoligonal2d::Momento(const int &p,const int &q) const
   }
 
 //! @brief Calcula el momento de inercia respecto a un eje paralelo al
-//! eje x que pasa por el CDG de la sección.
+//! x axis que pasa por el CDG de la sección.
 //! Ix = Integral y^2 dA
 GEOM_FT SupPoligonal2d::Ix(void) const
   { 
@@ -165,7 +165,7 @@ GEOM_FT SupPoligonal2d::Ix(void) const
   }
 
 //! @brief Calcula el momento de inercia respecto a un eje paralelo al
-//! eje y que pasa por el CDG del polígono.
+//! y axis que pasa por el CDG del polígono.
 //! Iy = Integral x^2 dA
 GEOM_FT SupPoligonal2d::Iy(void) const
   { 
@@ -352,7 +352,7 @@ std::list<Segmento2d> empalma(const std::list<Segmento2d> &lista)
     return retval;
   }
 
-//! @brief Devuelve la intersección del polígono con la recta (if exists).
+//! @brief Return la intersección del polígono con la recta (if exists).
 Segmento2d SupPoligonal2d::Clip(const Recta2d &r) const
   {
     Segmento2d retval;
@@ -375,7 +375,7 @@ Segmento2d SupPoligonal2d::Clip(const Recta2d &r) const
     return retval;
   }
 
-//! @brief Devuelve la intersección del polígono con la semirecta (if exists).
+//! @brief Return la intersección del polígono con la semirecta (if exists).
 Segmento2d SupPoligonal2d::Clip(const SemiRecta2d &sr) const
   {
     Segmento2d retval;
@@ -390,7 +390,7 @@ Segmento2d SupPoligonal2d::Clip(const SemiRecta2d &sr) const
     return retval;
   }
 
-//! @brief Devuelve la intersección del polígono con el segmento (if exists).
+//! @brief Return la intersección del polígono con el segmento (if exists).
 Segmento2d SupPoligonal2d::Clip(const Segmento2d &sg) const
   {
     Segmento2d retval;
@@ -405,7 +405,7 @@ Segmento2d SupPoligonal2d::Clip(const Segmento2d &sg) const
     return retval;
   }
 
-//! @brief Devuelve la intersección del polígono con la recta.
+//! @brief Return la intersección del polígono con la recta.
 list<Segmento2d> interseccion(const SupPoligonal2d &pg,const Recta2d &r)
   {
     list<Segmento2d> retval;
@@ -431,11 +431,11 @@ list<Segmento2d> interseccion(const SupPoligonal2d &pg,const Recta2d &r)
     return retval;     
   }
 
-//! @brief Devuelve la intersección del polígono con la recta.
+//! @brief Return la intersección del polígono con la recta.
 list<Segmento2d> interseccion(const Recta2d &r,const SupPoligonal2d &pg)
   { return interseccion(pg,r); }
 
-//! @brief Devuelve la intersección del polígono con la semirecta.
+//! @brief Return la intersección del polígono con la semirecta.
 list<Segmento2d> interseccion(const SupPoligonal2d &pg,const SemiRecta2d &sr)
   {
     
@@ -463,11 +463,11 @@ list<Segmento2d> interseccion(const SupPoligonal2d &pg,const SemiRecta2d &sr)
     return retval;
   }
 
-//! @brief Devuelve la intersección del polígono con la semirecta.
+//! @brief Return la intersección del polígono con la semirecta.
 list<Segmento2d> interseccion(const SemiRecta2d &sr,const SupPoligonal2d &pg)
   { return interseccion(pg,sr); }
 
-//! @brief Devuelve la intersección del polígono con el segmento.
+//! @brief Return la intersección del polígono con el segmento.
 list<Segmento2d> interseccion(const SupPoligonal2d &pg,const Segmento2d &sg)
   {
     
@@ -498,6 +498,6 @@ list<Segmento2d> interseccion(const SupPoligonal2d &pg,const Segmento2d &sg)
     return retval;
   }
 
-//! @brief Devuelve la intersección del polígono con el segmento.
+//! @brief Return la intersección del polígono con el segmento.
 list<Segmento2d> interseccion(const Segmento2d &sg,const SupPoligonal2d &pg)
   { return interseccion(pg,sg); }

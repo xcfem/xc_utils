@@ -110,8 +110,8 @@ Trf3d::Trf3d(const CGAL::Scaling &sc,const GEOM_FT &factor_escala)
   : Trf(), cgtrf(sc,factor_escala) {}
 //  : Trf(), cgtrf(sc,factor_escala.numerator(),factor_escala.denominator()) {}
 
+//! @brief Return the transformation matrix en cartesianas.
 matriz_FT Trf3d::Cartesianas(void) const
-//Devuelve la matriz de transformación en cartesianas.
   {
     matriz_FT retval(4,4,0.0);
     retval(1,1)= Cartesianas(1,1); retval(1,2)= Cartesianas(1,2); retval(1,3)= Cartesianas(1,3);
@@ -120,8 +120,9 @@ matriz_FT Trf3d::Cartesianas(void) const
     retval(4,4)= Cartesianas(4,4);
     return retval;
   }
+
+//! @brief Return the transformation matrix en homogéneas.
 matriz_FT Trf3d::Homogeneas(void) const
-//Devuelve la matriz de transformación en homogéneas.
   {
     matriz_FT retval(4,4,0.0);
     retval(1,1)= Cartesianas(1,1); retval(1,2)= Cartesianas(1,2); retval(1,3)= Cartesianas(1,3); retval(1,4)= Cartesianas(1,4);
@@ -135,7 +136,7 @@ matriz_FT Trf3d::Homogeneas(void) const
 Pos3d Trf3d::Transforma(const Pos3d &p) const
   { return Pos3d(cgtrf.transform(p.ToCGAL())); }
 
-//! @brief Devuelve el transformado del vector que se pasa como parámetro.
+//! @brief Return el transformado del vector being passed as parameter.
 Vector3d Trf3d::Transforma(const Vector3d &v) const
   { return Vector3d(cgtrf.transform(v.ToCGAL())); }
 
@@ -158,12 +159,12 @@ const MatrizPos3d &Trf3d::Transforma(const MatrizPos3d &m) const
 //! @brief Transform the points of the argument.
 void Trf3d::Transforma(TritrizPos3d &m) const
   {
-    const size_t ncapas= m.GetCapas();
-    const size_t nfilas= m.getNumFilas();
-    const size_t ncols= m.getNumCols();
-    for(size_t k=1;k<=ncapas;k++) //Para cada capa.
-      for(size_t i=1;i<=nfilas;i++) //Para cada fila.
-        for(size_t j=1;j<=ncols;j++) //Para cada columna.
+    const size_t n_layers= m.getNumberOfLayers();
+    const size_t n_rows= m.getNumberOfRows();
+    const size_t n_columns= m.getNumberOfColumns();
+    for(size_t k=1;k<=n_layers;k++) //For each layer.
+      for(size_t i=1;i<=n_rows;i++) //For each row.
+        for(size_t j=1;j<=n_columns;j++) //For each column.
           m(i,j,k)= Transforma(m(i,j,k));
   }
 
@@ -179,10 +180,10 @@ const TritrizPos3d &Trf3d::Transforma(const TritrizPos3d &m) const
 //! @brief Transform the point.
 Pos3d Trf3d::operator()(const Pos3d &p) const
   { return Transforma(p); }
-//! @brief Transforma el vector que se pasa como parámetro.
+//! @brief Transforma el vector being passed as parameter.
 Vector3d Trf3d::operator()(const Vector3d &v) const
   { return Transforma(v); }
-//! @brief Transforma la matriz que se pasa como parámetro.
+//! @brief Transforma la matriz being passed as parameter.
 MatrizPos3d Trf3d::operator()(const MatrizPos3d &m) const
   { return Transforma(m); }
 

@@ -44,20 +44,20 @@ class FunctionFromPointsR2_T
     m_values valores; //< @brief Function values on each point.
   public:
     //! @brief Constructor.
-    FunctionFromPointsR2_T(const size_t &fls=1,const size_t &cls=1)
-      : dominio(fls,cls), valores(fls,cls) {}
+    FunctionFromPointsR2_T(const size_t &n_rows=1,const size_t &n_columns=1)
+      : dominio(n_rows,n_columns), valores(n_rows,n_columns) {}
     //! @brief Constructor.
     FunctionFromPointsR2_T(const MatrizPos2d &dom,const T &vdef)
-      : dominio(dom), valores(m_values(dom.getNumFilas(),dom.getNumCols(),vdef)) {}
+      : dominio(dom), valores(m_values(dom.getNumberOfRows(),dom.getNumberOfColumns(),vdef)) {}
     //! @brief Constructor.
     FunctionFromPointsR2_T(const MatrizPos2d &dom,const m_values &v);
     std::string getClassName(void) const;
-    //! @brief Devuelve el número de filas del dominio.
-    size_t GetNumFilas(void) const
-      { return dominio.getNumFilas(); }
-    //! @brief Devuelve el número de columnas del dominio.
-    size_t GetNumCols(void) const
-      { return dominio.getNumCols(); }
+    //! @brief Return el number of rows del dominio.
+    size_t getNumberOfRows(void) const
+      { return dominio.getNumberOfRows(); }
+    //! @brief Return el number of columns del dominio.
+    size_t getNumberOfColumns(void) const
+      { return dominio.getNumberOfColumns(); }
     //! @brief Return true if there are no points.
     size_t empty(void) const
       { return dominio.empty(); }
@@ -70,9 +70,9 @@ class FunctionFromPointsR2_T
 //! Constructor.
 template <class T>
 FunctionFromPointsR2_T<T>::FunctionFromPointsR2_T(const MatrizPos2d &dom,const m_values &v)
-  : dominio(dom), valores(m_values(dom.getNumFilas(),dom.getNumCols(),T()))
+  : dominio(dom), valores(m_values(dom.getNumberOfRows(),dom.getNumberOfColumns(),T()))
   {
-    if((v.getNumFilas()==dom.getNumFilas()) && (v.getNumCols()==dom.getNumCols()) )
+    if((v.getNumberOfRows()==dom.getNumberOfRows()) && (v.getNumberOfColumns()==dom.getNumberOfColumns()) )
       valores= v;
     else
       {
@@ -118,10 +118,10 @@ T &FunctionFromPointsR2_T<T>::Valor(const size_t &i,const size_t &j)
 template <class T>
 std::ostream &operator<<(std::ostream &os, const FunctionFromPointsR2_T<T> &m)
   {
-    const size_t fls= m.GetNumFilas();
-    const size_t cls= m.GetNumCols();
-    for(size_t i=1;i<=fls;i++)
-      for(size_t j=1;j<=cls;j++)
+    const size_t n_rows= m.getNumberOfRows();
+    const size_t n_columns= m.getNumberOfColumns();
+    for(size_t i=1;i<=n_rows;i++)
+      for(size_t j=1;j<=n_columns;j++)
         os << "posición: " << m.Posicion(i,j) << " valor: " << m.Valor(i,j) << std::endl;
     return os;
   }

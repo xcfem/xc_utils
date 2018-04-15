@@ -37,7 +37,7 @@ cmb_acc::ActionsFamily::ActionsFamily(const std::string &nmb,const GammaF &gf)
     acciones.set_owner(this);
   }
 
-//! @brief Devuelve un apuntador a los coeficientes que aplican para esta familia.
+//! @brief Return un apuntador a los coeficientes que aplican para esta familia.
 const cmb_acc::PsiCoeffsMap *cmb_acc::ActionsFamily::getPtrPsiCoeffs(void) const
   {
     const ActionContainer *tmp= dynamic_cast<const ActionContainer *>(Owner());

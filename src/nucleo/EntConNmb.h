@@ -49,7 +49,7 @@ class EntConNmb: public EntCmd
     //! @brief Set the  object name.
     void setName(const std::string &s)
       { name= s; }
-    //! @brief Devuelve una referencia al nombre del objeto.
+    //! @brief Return una referencia al nombre del objeto.
     std::string &Nombre(void)
       { return name; }
     //! @brief Compara el nombre del elemento con un nombre dado.

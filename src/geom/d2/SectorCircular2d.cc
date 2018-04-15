@@ -124,7 +124,7 @@ double SectorCircular2d::getLambda(const Pos2d &p) const
   { return Angulo(p)*Radio(); }
 
 
-//! @brief Devuelve el ángulo comprendido por el sector.
+//! @brief Return el ángulo comprendido por el sector.
 double SectorCircular2d::AnguloComprendido(void) const
   { return theta2-theta1; }
 
@@ -136,7 +136,7 @@ GEOM_FT SectorCircular2d::LongitudArco(void) const
 GEOM_FT SectorCircular2d::Longitud(void) const
   { return LongitudArco()+ Diametro(); }
 
-//! @brief Devuelve el área del sector circular.
+//! @brief Return el área del sector circular.
 GEOM_FT SectorCircular2d::Area(void) const
   { return double_to_FT(AnguloComprendido())*Radio2()/2; }
 
@@ -147,14 +147,14 @@ GEOM_FT SectorCircular2d::GetMax(unsigned short int i) const
     return 0;
   }
 
-//! @brief Devuelve el valor mínimo of the i coordinate of the object points.
+//! @brief Return el valor mínimo of the i coordinate of the object points.
 GEOM_FT SectorCircular2d::GetMin(unsigned short int i) const
   {
     std::cerr << "SectorCircular2d::GetMin() not implemented." << std::endl;
     return 0;
   }
 
-//! @brief Devuelve el momento de inercia del sector circular respecto al 
+//! @brief Return el momento de inercia del sector circular respecto al 
 //! eje paralelo al x que pasa por su centro.
 GEOM_FT SectorCircular2d::Ix(void) const
   {
@@ -162,7 +162,7 @@ GEOM_FT SectorCircular2d::Ix(void) const
     return 0;
   }
 
-//! @brief Devuelve el momento de inercia del sector circular respecto al 
+//! @brief Return el momento de inercia del sector circular respecto al 
 //! eje paralelo al y que pasa por su centro.
 GEOM_FT SectorCircular2d::Iy(void) const
   {
@@ -170,7 +170,7 @@ GEOM_FT SectorCircular2d::Iy(void) const
     return 0;
   }
 
-//! @brief Devuelve el momento de inercia del sector circular respecto al 
+//! @brief Return el momento de inercia del sector circular respecto al 
 //! eje paralelo al z que pasa por su centro.
 GEOM_FT SectorCircular2d::Iz(void) const
   {
@@ -178,7 +178,7 @@ GEOM_FT SectorCircular2d::Iz(void) const
     return 0;
   }
 
-//! @brief Devuelve el producto de inercia del sector circular respecto a
+//! @brief Return el producto de inercia del sector circular respecto a
 //! los ejes paralelos a x e y que pasan por su centro.
 GEOM_FT SectorCircular2d::Pxy(void) const
   {

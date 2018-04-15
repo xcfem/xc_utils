@@ -32,50 +32,50 @@
 //! @brief Rangos de variación de tres índices, se emplea en ConstRefCaja.
 class RangoTritriz
   {
-    RangoIndice rango_capas; //!< Rango de capas.
-    RangoIndice rango_filas; //!< Rango de filas.
-    RangoIndice rango_cols; //!< Rango de columnas.
+    RangoIndice layer_range; //!< layers range.
+    RangoIndice row_range; //!< row range.
+    RangoIndice column_range; //!< columns range.
   public:
     RangoTritriz(const RangoIndice &rcp= RangoIndice(),const RangoIndice &rf= RangoIndice(),const RangoIndice &rc= RangoIndice())
-      : rango_capas(rcp), rango_filas(rf),rango_cols(rc) {}
-    RangoTritriz(const size_t &capa,const RangoIndice &rf,const RangoIndice &rc)
-      : rango_capas(capa,capa), rango_filas(rf),rango_cols(rc) {}
-    RangoTritriz(const RangoIndice &rcp,const size_t &fila,const RangoIndice &rc)
-      : rango_capas(rcp), rango_filas(fila,fila),rango_cols(rc) {}
+      : layer_range(rcp), row_range(rf),column_range(rc) {}
+    RangoTritriz(const size_t &iLayer,const RangoIndice &rf,const RangoIndice &rc)
+      : layer_range(iLayer,iLayer), row_range(rf),column_range(rc) {}
+    RangoTritriz(const RangoIndice &rcp,const size_t &iRow,const RangoIndice &rc)
+      : layer_range(rcp), row_range(iRow, iRow),column_range(rc) {}
     RangoTritriz(const RangoIndice &rcp,const RangoIndice &rf,const size_t &col)
-      : rango_capas(rcp), rango_filas(rf),rango_cols(col,col) {}
+      : layer_range(rcp), row_range(rf),column_range(col,col) {}
     template <class TTZ>
     RangoTritriz(const TTZ &);
 
-    size_t NumCapas(void) const
-      { return rango_filas.Size(); }
-    size_t NumFilas(void) const
-      { return rango_filas.Size(); }
-    size_t NumCols(void) const
-      { return rango_cols.Size(); }
+    size_t getNumberOfLayers(void) const
+      { return row_range.Size(); }
+    size_t getNumberOfRows(void) const
+      { return row_range.Size(); }
+    size_t getNumberOfColumns(void) const
+      { return column_range.Size(); }
     size_t Size(void) const
-    { return NumCapas()*NumFilas()*NumCols(); }
+    { return getNumberOfLayers()*getNumberOfRows()*getNumberOfColumns(); }
     bool Vacio(void) const;
-    const RangoIndice &GetRangoCapas(void) const
-      { return rango_capas; }
-    RangoIndice &GetRangoCapas(void)
-      { return rango_capas; }
-    const RangoIndice &GetRangoFilas(void) const
-      { return rango_filas; }
-    RangoIndice &GetRangoFilas(void)
-      { return rango_filas; }
+    const RangoIndice &getLayerRange(void) const
+      { return layer_range; }
+    RangoIndice &getLayerRange(void)
+      { return layer_range; }
+    const RangoIndice &getRowRange(void) const
+      { return row_range; }
+    RangoIndice &getRowRange(void)
+      { return row_range; }
     const RangoIndice &GetRangoCols(void) const
-      { return rango_cols; }
+      { return column_range; }
     RangoIndice &GetRangoCols(void)
-      { return rango_cols; }
+      { return column_range; }
 
     size_t Dimension(void) const;
-    bool EsFilaI(void) const;
-    bool EsFilaJ(void) const;
-    bool EsFilaK(void) const;
-    bool EsCapaICte(void) const;
-    bool EsCapaJCte(void) const;
-    bool EsCapaKCte(void) const;
+    bool isIRow(void) const;
+    bool isJRow(void) const;
+    bool isKRow(void) const;
+    bool isConstantILayer(void) const;
+    bool isConstantJLayer(void) const;
+    bool isConstantKLayer(void) const;
 
     inline static const char &Separador(void)
       { return RangoIndice::Separador(); }
@@ -92,7 +92,7 @@ std::ostream &operator<<(std::ostream &os,const RangoTritriz &rango);
 //! @brief Constructor a partir de una tritriz.
 template <class TTZ>
 RangoTritriz::RangoTritriz(const TTZ &ttz)
-  : rango_capas(1,ttz.GetCapas()), rango_filas(1,ttz.getNumFilas()),rango_cols(1,ttz.getNumCols()) {}
+  : layer_range(1,ttz.getNumberOfLayers()), row_range(1,ttz.getNumberOfRows()),column_range(1,ttz.getNumberOfColumns()) {}
 
 //! @brief Recorte de los intervalos del rango a partir de una tritriz.
 template <class TTZ>

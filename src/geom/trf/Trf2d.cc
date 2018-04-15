@@ -93,7 +93,7 @@ Trf2d::Trf2d(const CGAL::Identity_transformation &i)
   : Trf(), cgtrf(i) {}
 
 matriz_FT Trf2d::Cartesianas(void) const
-//Devuelve la matriz de transformación en cartesianas.
+//Return la matriz de transformación en cartesianas.
   {
     matriz_FT retval(3,3,0.0);
     retval(1,1)= Cartesianas(1,1); retval(1,2)= Cartesianas(1,2); retval(1,3)= Cartesianas(1,3);
@@ -102,7 +102,7 @@ matriz_FT Trf2d::Cartesianas(void) const
     return retval;
   }
 matriz_FT Trf2d::Homogeneas(void) const
-//Devuelve la matriz de transformación en homogéneas.
+//Return la matriz de transformación en homogéneas.
   {
     matriz_FT retval(3,3,0.0);
     retval(1,1)= Homogeneas(1,1); retval(1,2)= Homogeneas(1,2); retval(1,3)= Homogeneas(1,3);

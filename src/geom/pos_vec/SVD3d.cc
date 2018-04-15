@@ -58,7 +58,7 @@ SVD3d::SVD3d(const VDesliz3d &v)
   : VDesliz3d(v), mom(0,0,0) {}
 
 //! @brief Campo de momentos del SVD3d.
-//! Devuelve el momento del SVD3d with respect to the point P.
+//! Return el momento del SVD3d with respect to the point P.
 VDesliz3d SVD3d::getMomento(const Pos3d &P) const
   {
     const VDesliz3d m2= VDesliz3d::getMomento(P);
@@ -101,7 +101,7 @@ void SVD3d::PrintLtx(std::ostream &os,const std::string &ud_long,const GEOM_FT &
 GEOM_FT SVD3d::getMomento(const Recta3d &e) const
   { return dot(SVD3d::getMomento(e.Point()),e.VDir().Normalizado()); }
 
-//! @brief Devuelve el vector momento expresado en el sistema
+//! @brief Return el vector momento expresado en el sistema
 //! de referencia que se pasa como parámetro.
 Vector3d SVD3d::getMomento(const Ref3d3d &ref) const
   {
@@ -109,7 +109,7 @@ Vector3d SVD3d::getMomento(const Ref3d3d &ref) const
     return ref.GetCooLocales(m);
   }
 
-//! @brief Devuelve el vector resultante expresado en el sistema
+//! @brief Return el vector resultante expresado en el sistema
 //! de referencia que se pasa como parámetro.
 Vector3d SVD3d::getResultante(const Ref3d3d &ref) const
   { return ref.GetCooLocales(getResultante()); } 
@@ -186,7 +186,7 @@ SVD3d &SVD3d::operator*=(const GEOM_FT &d)
     return *this;
   }
 
-//! @brief Devuelve the sum of the sliding vectors systems.
+//! @brief Return the sum of the sliding vectors systems.
 SVD3d operator+(const SVD3d &s1,const SVD3d &s2)
   {
     SVD3d retval(s1);
@@ -194,7 +194,7 @@ SVD3d operator+(const SVD3d &s1,const SVD3d &s2)
     return retval;
   }
 
-//! @brief Devuelve the difference of sliding vectors systems.
+//! @brief Return the difference of sliding vectors systems.
 SVD3d operator-(const SVD3d &s1,const SVD3d &s2)
   {
     SVD3d retval(s1);
@@ -202,13 +202,13 @@ SVD3d operator-(const SVD3d &s1,const SVD3d &s2)
     return retval;
   }
 
-//! @brief Devuelve the product of the sliding vectors system by a scalar.
+//! @brief Return the product of the sliding vectors system by a scalar.
 SVD3d operator*(const GEOM_FT &d, const SVD3d &s)
   {
     SVD3d retval(s);
     return retval*=d;
   }
-//! @brief Devuelve the product of the sliding vectors system by a scalar.
+//! @brief Return the product of the sliding vectors system by a scalar.
 SVD3d operator*(const SVD3d &s,const GEOM_FT &d)
   { return d*s; }
 
@@ -227,7 +227,7 @@ SVD3d operator+(const VDesliz3d &v1,const VDesliz3d &v2)
     return suma;
   }
 
-//! @brief Devuelve the sum of the sliding vector system
+//! @brief Return the sum of the sliding vector system
 //! with the vector being passed as parameter.
 SVD3d operator+(const SVD3d &s,const VDesliz3d &v)
   {
@@ -236,7 +236,7 @@ SVD3d operator+(const SVD3d &s,const VDesliz3d &v)
     return suma;
   }
 
-//! @brief Devuelve the sum of the sliding vector system
+//! @brief Return the sum of the sliding vector system
 //! with the vector being passed as parameter.
 SVD3d operator+(const VDesliz3d &v,const SVD3d &s)
   { return s+v; }

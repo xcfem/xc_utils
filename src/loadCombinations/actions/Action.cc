@@ -38,7 +38,7 @@ cmb_acc::Action::Action(const std::string &n, const std::string &descrip)
   : EntConNmb(n), descripcion(descrip),relaciones(), f_pond(1.0) {}
 
 //! \fn cmb_acc::Action::NULA(void)
-//! @brief Devuelve una acción nula.
+//! @brief Return una acción nula.
 cmb_acc::Action cmb_acc::Action::NULA(void)
   {
     Action retval;
@@ -46,11 +46,11 @@ cmb_acc::Action cmb_acc::Action::NULA(void)
     return retval;
   }
 
-//! @brief Devuelve verdadero si la acción no es combinación de otras.
+//! @brief Return verdadero si la acción no es combinación de otras.
 bool cmb_acc::Action::Simple(void) const
   { return (getName().find('+')==std::string::npos); }
 
-//! @brief Devuelve el nombre expandido aplicando la propiedad distributiva
+//! @brief Return el nombre expandido aplicando la propiedad distributiva
 //! del producto es decir si la combinación se llama '1.5*G1+1.35*(G2+F2)'
 //! devuelve '1.5*G1+1.35*G2+1.35*F2'.
 const std::string cmb_acc::Action::GetNombreExpandido(void) const
@@ -64,7 +64,7 @@ const std::string cmb_acc::Action::GetNombreExpandido(void) const
     return retval;
   }
 
-//! @brief Devuelve la descomposición cuando la acción es una combinación.
+//! @brief Return la descomposición cuando la acción es una combinación.
 cmb_acc::Action::map_descomp cmb_acc::Action::getDescomp(void) const
   {
     map_descomp descomp;
@@ -155,7 +155,7 @@ void cmb_acc::Action::suma(const Action &f)
       set_owner(const_cast<EntCmd *>(f.Owner()));
   }
 
-//! @brief Devuelve verdadero si la acción que se pasa como parámetro es incompatible con esta,
+//! @brief Return verdadero si la acción que se pasa como parámetro es incompatible con esta,
 //! es decir que ambas no pueden estar presentes en la misma hipótesis.
 //!
 //! La acción será incompatible cuando su nombre verifique alguna de las expresiones
@@ -170,7 +170,7 @@ bool cmb_acc::Action::incompatible(const Action &f) const
   }
 
 //! \fn cmb_acc::Action::Incompatible(const Action &f) const
-//! @brief Devuelve verdadero si la acción que se pasa como parámetro es incompatible con esta,
+//! @brief Return verdadero si la acción que se pasa como parámetro es incompatible con esta,
 //! es decir que ambas no pueden estar presentes en la misma hipótesis.
 //!
 //! @param f: Action cuya incompatibilidad con ésta se comprueba.
@@ -209,7 +209,7 @@ void cmb_acc::Action::Print(std::ostream &os) const
     relaciones.Print(os);
   }
 
-//! @brief Devuelve verdadero si las acciones de índices i y j son incompatibles.
+//! @brief Return verdadero si las acciones de índices i y j son incompatibles.
 bool cmb_acc::incompatibles(const Action &acc_i,const Action &acc_j)
   {
     bool retval= false;

@@ -42,7 +42,7 @@ typedef enum{FALLO,CONTINUA,COMPLETADO} resul_lectura;
 
 //! @ingroup NUCLEO
 //
-//! @brief Objeto capaz de procesar comandos.
+//! @brief Objet that can execute python scripts.
 class EntCmd: public EntProp
   {
   private:

@@ -32,7 +32,7 @@ SqLiteDatabase::SqLiteDatabase(const std::string &nmb)
   : SqLiteObject(), db(mutex,nmb,&log), defaultQuery(nullptr) 
   { defaultQuery= NuevaQuery("defaultQuery"); }
 
-//! @brief Devuelve verdadero si existe la tabla cuyo nombre se pasa como parámetro.
+//! @brief Return verdadero si existe la tabla cuyo nombre se pasa como parámetro.
 bool SqLiteDatabase::existeTabla(const std::string &nmbTabla) const
   {
     SqLiteQuery tmp(const_cast<Database &>(db));
@@ -52,7 +52,7 @@ bool SqLiteDatabase::borraTabla(const std::string &nmbTabla)
     return defaultQuery->execute("drop table if exists '" + nmbTabla + "';");
   }
 
-//! @brief Devuelve la consulta por defecto.
+//! @brief Return la consulta por defecto.
 SqLiteQuery *SqLiteDatabase::getDefaultQuery(void)
   { return defaultQuery; }
 
@@ -67,12 +67,15 @@ SqLiteQuery *SqLiteDatabase::NuevaQuery(const std::string &nmb)
         if(retval)
           insert_object(nmb,retval);
         else
-          std::cerr << "SqLiteObject::NuevaQuery; el puntero al objeto es nulo." << std::endl;
+          std::cerr << getClassName() << "::" << __FUNCTION__
+		    << "; null pointer to object." << std::endl;
       }
     else
       if(verbosity>1)
-        std::clog << "SqLiteObject::NuevaQuery; no se pudo crear la consulta de nombre: '"
-                  << nmb << "' ya existe un objeto con ese nombre." << std::endl;
+        std::clog << getClassName() << "::" << __FUNCTION__
+		  << "; cann't create the query with name: '"
+                  << nmb << "' object already exists."
+		  << std::endl;
     return retval;
   }
 

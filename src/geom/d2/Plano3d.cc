@@ -131,22 +131,22 @@ GeomObj *Plano3d::clon(void) const
 void Plano3d::ThreePoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   { operator=(Plano3d(p1,p2,p3)); }
 
-//! @brief Devuelve el vector normal al plano con sentido hacia el lado "positivo".
+//! @brief Return el vector normal al plano con sentido hacia el lado "positivo".
 Vector3d Plano3d::Normal(void) const
   { return Vector3d(cgp.orthogonal_vector()); }
-//! @brief Devuelve un vector ortogonal al devuelto por Normal().
+//! @brief Return un vector ortogonal al devuelto por Normal().
 Vector3d Plano3d::Base1(void) const
   { return Vector3d(cgp.base1()); }
-//! @brief Devuelve un vector ortogonal al devuelto por Normal() y al devuelto por Base1().
+//! @brief Return un vector ortogonal al devuelto por Normal() y al devuelto por Base1().
 Vector3d Plano3d::Base2(void) const
   { return Vector3d(cgp.base2()); }
 
-//! @brief Devuelve un sistema de coordenadas cuyo plano XY
+//! @brief Return un sistema de coordenadas cuyo plano XY
 //! coincide con éste.
 SisCooRect2d3d Plano3d::getSisCoo(void) const
   { return SisCooRect2d3d(Base1(),Base2()); }
 
-//! @brief Devuelve un sistema de referencia cuyo plano XY
+//! @brief Return un sistema de referencia cuyo plano XY
 //! coincide con éste.
 Ref2d3d Plano3d::getRef(const Pos3d &org) const
   { return Ref2d3d(org,Base1(),Base2()); }
@@ -298,7 +298,7 @@ bool Plano3d::Interseca(const Plano3d &p) const
 Recta3d Plano3d::Interseccion(const Plano3d &p) const
   { return recta_interseccion(*this,p); }
 
-// //! @brief Devuelve (if exists) la intersección con el plano que se pasa como parámetro.
+// //! @brief Return (if exists) la intersección con el plano que se pasa como parámetro.
 // Recta3d Plano3d::Interseccion(const Plano3d &p) const
 //   {
 //     const Recta3d retval= Interseccion(p);
@@ -308,11 +308,11 @@ Recta3d Plano3d::Interseccion(const Plano3d &p) const
 //     return retval;
 //   }
 
-//! @brief Devuelve verdadero if exists la intersección con la recta que se pasa como parámetro.
+//! @brief Return verdadero if exists la intersección con la recta que se pasa como parámetro.
 bool Plano3d::Interseca(const Recta3d &r) const
   { return do_intersect(ToCGAL(),r.ToCGAL()); }
 
-//! @brief Devuelve (if exists) la intersección con la recta que se pasa como parámetro.
+//! @brief Return (if exists) la intersección con la recta que se pasa como parámetro.
 Pos3d Plano3d::Interseccion(const Recta3d &r) const
   {
     Pos3d retval;
@@ -324,7 +324,7 @@ Pos3d Plano3d::Interseccion(const Recta3d &r) const
     return retval;
   }
 
-// //! @brief Devuelve (if exists) la intersección con la recta que se pasa como parámetro.
+// //! @brief Return (if exists) la intersección con la recta que se pasa como parámetro.
 // Pos3d Plano3d::Interseccion(const Recta3d &r) const
 //   {
 //     const Pos3d retval= Interseccion(r);
@@ -334,11 +334,11 @@ Pos3d Plano3d::Interseccion(const Recta3d &r) const
 //     return retval;
 //   }
 
-//! @brief Devuelve verdadero if exists la intersección con la recta que se pasa como parámetro.
+//! @brief Return verdadero if exists la intersección con la recta que se pasa como parámetro.
 bool Plano3d::Interseca(const SemiRecta3d &sr) const
   { return do_intersect(ToCGAL(),sr.ToCGAL()); }
 
-//! @brief Devuelve (if exists) la intersección con la semirrecta que se pasa como parámetro.
+//! @brief Return (if exists) la intersección con la semirrecta que se pasa como parámetro.
 Pos3d Plano3d::Interseccion(const SemiRecta3d &sr) const
   {
     Pos3d retval;
@@ -350,11 +350,11 @@ Pos3d Plano3d::Interseccion(const SemiRecta3d &sr) const
     return retval;
   }
 
-//! @brief Devuelve verdadero if exists la intersección con el segmento que se pasa como parámetro.
+//! @brief Return verdadero if exists la intersección con el segmento que se pasa como parámetro.
 bool Plano3d::Interseca(const Segmento3d &sg) const
   { return do_intersect(ToCGAL(),sg.ToCGAL()); }
 
-//! @brief Devuelve (if exists) la intersección con la semirrecta que se pasa como parámetro.
+//! @brief Return (if exists) la intersección con la semirrecta que se pasa como parámetro.
 Pos3d Plano3d::Interseccion(const Segmento3d &sg) const
   {
     Pos3d retval;
@@ -366,7 +366,7 @@ Pos3d Plano3d::Interseccion(const Segmento3d &sg) const
     return retval;
   }
 
-// //! @brief Devuelve (if exists) la intersección con la recta que se pasa como parámetro.
+// //! @brief Return (if exists) la intersección con la recta que se pasa como parámetro.
 // Pos3d Plano3d::Interseccion(const SemiRecta3d &sr) const
 //   {
 //     const Pos3d retval= Interseccion(sr);
@@ -430,11 +430,11 @@ Recta3d Plano3d::getMaximumSlopeLineYZ(void) const
     return retval;
   }
 
-//! @brief Devuelve el ángulo que forma con el plano que se pasa como parámetro.
+//! @brief Return el ángulo que forma con el plano que se pasa como parámetro.
 GEOM_FT Plano3d::Angulo(const Plano3d &p) const
   { return angulo(*this,p); }
 
-//! @brief Devuelve el ángulo que forma con el vector que se pasa como parámetro.
+//! @brief Return el ángulo que forma con el vector que se pasa como parámetro.
 GEOM_FT Plano3d::Angulo(const Vector3d &v) const
   { return angulo(*this,v); }
 

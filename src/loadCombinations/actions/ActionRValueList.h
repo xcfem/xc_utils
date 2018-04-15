@@ -44,7 +44,7 @@ class ActionRValueList: public std::deque<ActionRValue>, public EntCmd
 
     ActionRValue &push_back(const ActionRValue &a);
   public:
-    //! @brief Devuelve el valor de la acción de índice i
+    //! @brief Return el valor de la acción de índice i
     inline Action GetValor(const size_t &i,short int r) const
       { return (*this)[i].Valor(r); }
     ActionRValue &insert(const Action &,const std::string &);

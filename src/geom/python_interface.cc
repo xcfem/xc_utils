@@ -46,7 +46,7 @@ boost::python::list python_particiona(boost::python::list &l)
     return to_python_list(areas);
   }
 
-//! @brief Devuelve el resultado de recortar los 
+//! @brief Return el resultado de recortar los 
 //! polígonos de la lista mediante la técnica de Voronoi.
 boost::python::list python_recorta(boost::python::list &l, const Poligono2d &plg)
   {

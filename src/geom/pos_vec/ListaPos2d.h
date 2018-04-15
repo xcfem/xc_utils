@@ -76,7 +76,7 @@ class ListaPos2d: public GeomObj2d
     //! @brief Return the longitud de la ListaPos2d.
     virtual GEOM_FT Longitud(void) const
       { return 0.0; }
-    //! @brief Devuelve el área de la ListaPos2d.
+    //! @brief Return el área de la ListaPos2d.
     virtual GEOM_FT Area(void) const
       { return 0.0; }
     virtual GEOM_FT GetMax(unsigned short int i) const;

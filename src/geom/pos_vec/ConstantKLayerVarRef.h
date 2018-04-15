@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//VarRefCapaKCte.h 
+//ConstantKLayerVarRef.h 
 
-#ifndef VARREFCAPAKCTE_H
-#define VARREFCAPAKCTE_H
+#ifndef CONSTANTKLAYERVARREF_H
+#define CONSTANTKLAYERVARREF_H
 
 
 //! @ingroup GEOM
@@ -30,34 +30,34 @@
 //! @brief Reference to a layer de la tritriz which points
 //! have constant K index.
 template <class TRITRIZ>
-class VarRefCapaKCte: public VarRefCajaTritriz<TRITRIZ>
+class ConstantKLayerVarRef: public VarRefCajaTritriz<TRITRIZ>
   {
   public:
     typedef typename VarRefCajaTritriz<TRITRIZ>::const_reference const_reference;
     typedef typename VarRefCajaTritriz<TRITRIZ>::reference reference;
 
-    explicit VarRefCapaKCte(TRITRIZ &m,const size_t &c=1,const size_t &capa= 1,const size_t &f= 1);
-    VarRefCapaKCte(TRITRIZ &m,const size_t &,const size_t &,const size_t &,const size_t &,const size_t &);
-    VarRefCapaKCte(TRITRIZ &t,const RangoIndice &rango_cols,const RangoIndice &rango_filas,const size_t &c);
-    inline virtual ~VarRefCapaKCte(void) {}
+    explicit ConstantKLayerVarRef(TRITRIZ &m,const size_t &c=1,const size_t &iLayer= 1,const size_t &f= 1);
+    ConstantKLayerVarRef(TRITRIZ &m,const size_t &,const size_t &,const size_t &,const size_t &,const size_t &);
+    ConstantKLayerVarRef(TRITRIZ &t,const RangoIndice &column_range,const RangoIndice &row_range,const size_t &c);
+    inline virtual ~ConstantKLayerVarRef(void) {}
     size_t IndiceCol(void) const
       { return this->offset_c+1; }
-    virtual const_reference operator()(size_t capa=1,size_t fila=1) const
-      { return VarRefCajaTritriz<TRITRIZ>::operator()(capa,fila,1); }
-    virtual reference operator()(size_t capa=1,size_t fila=1)
-      { return VarRefCajaTritriz<TRITRIZ>::operator()(capa,fila,1); }
+    virtual const_reference operator()(size_t iLayer=1,size_t iRow=1) const
+      { return VarRefCajaTritriz<TRITRIZ>::operator()(iLayer,iRow,1); }
+    virtual reference operator()(size_t iLayer=1,size_t iRow=1)
+      { return VarRefCajaTritriz<TRITRIZ>::operator()(iLayer,iRow,1); }
   };
 
 template<class TRITRIZ>
-VarRefCapaKCte<TRITRIZ>::VarRefCapaKCte(TRITRIZ &t,const size_t &c,const size_t &capa,const size_t &f)
-  : VarRefCajaTritriz<TRITRIZ>(t,RangoTritriz(RangoIndice(capa,t.GetCapas()),RangoIndice(f,t.getNumFilas()),c)) {}
+ConstantKLayerVarRef<TRITRIZ>::ConstantKLayerVarRef(TRITRIZ &t,const size_t &c,const size_t &iLayer,const size_t &f)
+  : VarRefCajaTritriz<TRITRIZ>(t,RangoTritriz(RangoIndice(iLayer,t.getNumberOfLayers()),RangoIndice(f,t.getNumberOfRows()),c)) {}
 
 template<class TRITRIZ>
-VarRefCapaKCte<TRITRIZ>::VarRefCapaKCte(TRITRIZ &t,const size_t &c,const size_t &capa1,const size_t &f1,const size_t &capa2,const size_t &f2)
-  : VarRefCajaTritriz<TRITRIZ>(t,RangoTritriz(RangoIndice(capa1,capa2),RangoIndice(f1,f2),c)) {}
+ConstantKLayerVarRef<TRITRIZ>::ConstantKLayerVarRef(TRITRIZ &t,const size_t &c,const size_t &iLayer1,const size_t &f1,const size_t &iLayer2,const size_t &f2)
+  : VarRefCajaTritriz<TRITRIZ>(t,RangoTritriz(RangoIndice(iLayer1,iLayer2),RangoIndice(f1,f2),c)) {}
 
 template<class TRITRIZ>
-VarRefCapaKCte<TRITRIZ>::VarRefCapaKCte(TRITRIZ &t,const RangoIndice &rango_cols,const RangoIndice &rango_filas,const size_t &c)
-  : VarRefCajaTritriz<TRITRIZ>(t,rango_cols,rango_filas,c) {}
+ConstantKLayerVarRef<TRITRIZ>::ConstantKLayerVarRef(TRITRIZ &t,const RangoIndice &column_range,const RangoIndice &row_range,const size_t &c)
+  : VarRefCajaTritriz<TRITRIZ>(t,column_range,row_range,c) {}
 
 #endif

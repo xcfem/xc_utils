@@ -44,9 +44,9 @@ class GeomObj2d: public GeomObj
     GeomObj2d(void) {}
     virtual ~GeomObj2d(void) {}
     virtual GEOM_FT GetMax(unsigned short int i) const= 0;
-    //Devuelve el valor maximo de la coordenada i.
+    //Return el valor maximo de la coordenada i.
     virtual GEOM_FT GetMin(unsigned short int i) const= 0;
-    //Devuelve el valor minimo de la coordenada i.
+    //Return el valor minimo de la coordenada i.
     GEOM_FT GetXMax(void) const { return GetMax(1); }
     GEOM_FT GetYMax(void) const { return GetMax(2); }
     GEOM_FT GetXMin(void) const { return GetMin(1); }
@@ -57,7 +57,7 @@ class GeomObj2d: public GeomObj
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
     virtual bool Out(const Pos2d &p, const double &tol= 0.0) const;
     virtual GEOM_FT PesoCdg(void) const
-      //Devuelve el peso para el cálculo del CDG
+      //Return el peso para el cálculo del CDG
       //por defecto es 1
       { return 1.0; }
     virtual Pos2d Cdg(void) const= 0;
@@ -75,35 +75,35 @@ class GeomObj2d: public GeomObj
     //Momento de inercia polar respecto al CDG en ejes locales.
       { return Ix()+Iy(); }
     double Theta_p(void) const;
-    //Devuelve el ángulo que define un eje principal de inercia.
+    //Return el ángulo que define un eje principal de inercia.
     Dir2d DirEjeI_a(void) const;
-    //Devuelve la dirección de un eje principal de inercia (no sabemos si
+    //Return la dirección de un eje principal de inercia (no sabemos si
     //el mayor o el menor
     Dir2d DirEjeI_b(void) const;
-    //Devuelve la dirección del otro eje principal de inercia (no sabemos si
+    //Return la dirección del otro eje principal de inercia (no sabemos si
     //el mayor o el menor
     Recta2d EjeI_a(void) const;
-    //Devuelve un eje principal de inercia (no sabemos si
+    //Return un eje principal de inercia (no sabemos si
     //el mayor o el menor).
     Recta2d EjeI_b(void) const;
-    //Devuelve el otro eje principal de inercia (no sabemos si
+    //Return el otro eje principal de inercia (no sabemos si
     //el mayor o el menor).
     Ref2d2d PrincipalAxesOfInertia(void) const;
     GEOM_FT I1(void) const;
-    //Devuelve el momento de inercia principal mayor.
+    //Return el momento de inercia principal mayor.
     GEOM_FT I2(void) const;
-    //Devuelve el momento de inercia principal menor.
+    //Return el momento de inercia principal menor.
     inline PrincipalAxesOfInertia2D Inercia(void)
       { return PrincipalAxesOfInertia2D(Cdg(),Ix(),Iy(),Pxy()); }
     GEOM_FT I( const unsigned short int &i,
               const unsigned short int &j) const;
-    //! @brief Devuelve el area que se emplea para calcular el momento de inercia
+    //! @brief Return el area que se emplea para calcular el momento de inercia
     //! por defecto suponemos que es igual al area del objeto.
     virtual inline GEOM_FT IArea(void) const
       { return Area(); }
     GEOM_FT I(const Pos2d &O,const Vector2d &e) const;
     GEOM_FT I(const Recta2d &r) const;
-      //Devuelve el momento de inercia respecto a la recta que se pasa
+      //Return el momento de inercia respecto a la recta que se pasa
       //como parámetro.
     GEOM_FT I( const unsigned short int i,
               const unsigned short int j,
@@ -116,7 +116,7 @@ class GeomObj2d: public GeomObj
     virtual void Transforma(const Trf2d &trf2d)= 0;    
   };
 
-//! @brief Devuelve el objeto transformado.
+//! @brief Return el objeto transformado.
 template <class T>
 T getTransformado(const T &obj,const Trf2d &trf2d)
   {

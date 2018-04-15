@@ -28,7 +28,7 @@
 
         
 //! \fn bool cmb_acc::LoadCombinationVector::Nula(const double &tol) const
-//! @brief Devuelve verdadero si todas las combinaciones del vector son nulas.
+//! @brief Return verdadero si todas las combinaciones del vector son nulas.
 bool cmb_acc::LoadCombinationVector::Nula(const double &tol) const
   {
     for(size_t i=0;i<size();i++)
@@ -37,7 +37,7 @@ bool cmb_acc::LoadCombinationVector::Nula(const double &tol) const
   }
 
 //! \fn size_t cmb_acc::LoadCombinationVector::CuentaNulas(const double &tol) const
-//! @brief Devuelve el número de combinaciones nulas que aparecen en las combinaciones.
+//! @brief Return el número de combinaciones nulas que aparecen en las combinaciones.
 size_t cmb_acc::LoadCombinationVector::CuentaNulas(const double &tol) const
   {
     size_t retval=0;
@@ -48,7 +48,7 @@ size_t cmb_acc::LoadCombinationVector::CuentaNulas(const double &tol) const
 
         
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::LoadCombinationVector::GetNoNulas(const double &tol) const
-//! @brief Devuelve las combinaciones no nulas.
+//! @brief Return las combinaciones no nulas.
 const cmb_acc::LoadCombinationVector &cmb_acc::LoadCombinationVector::GetNoNulas(const double &tol) const
   {
     const size_t num_nulas= CuentaNulas(tol);
@@ -68,7 +68,7 @@ const cmb_acc::LoadCombinationVector &cmb_acc::LoadCombinationVector::GetNoNulas
 
         
 //! \fn bool cmb_acc::LoadCombinationVector::Existe(const Action &f) const
-//! @brief Devuelve verdadero si la combinación f se encuentra en ESTE vector.
+//! @brief Return verdadero si la combinación f se encuentra en ESTE vector.
 bool cmb_acc::LoadCombinationVector::Existe(const Action &f) const
   {
     bool retval= false;
@@ -82,7 +82,7 @@ bool cmb_acc::LoadCombinationVector::Existe(const Action &f) const
     return retval;
   }
         
-//! @brief Devuelve las combinaciones de ESTA filtrando las que estan repetidas.
+//! @brief Return las combinaciones de ESTA filtrando las que estan repetidas.
 const cmb_acc::LoadCombinationVector &cmb_acc::LoadCombinationVector::GetDistintas(void) const
   {
     static LoadCombinationVector retval;
@@ -119,7 +119,7 @@ size_t cmb_acc::LoadCombinationVector::CuentaDistintas(const LoadCombinationVect
   }
         
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::LoadCombinationVector::GetDistintas(const LoadCombinationVector &s2) const
-//! @brief Devuelve las combinaciones de s2 que no estan en ESTA.
+//! @brief Return las combinaciones de s2 que no estan en ESTA.
 const cmb_acc::LoadCombinationVector &cmb_acc::LoadCombinationVector::GetDistintas(const LoadCombinationVector &s2) const
   {
     const size_t num_distintas= CuentaDistintas(s2);
@@ -144,7 +144,7 @@ const cmb_acc::LoadCombinationVector &cmb_acc::LoadCombinationVector::GetDistint
 //! Por ejemplo si:
 //! LoadCombinations f1: f11,f12,f13
 //! LoadCombinations f2: f21,f22
-//! Devuelve: f11+f21,f12+f21,f13+f21,f11+f22,f12+f22,f13+f22
+//! Return: f11+f21,f12+f21,f13+f21,f11+f22,f12+f22,f13+f22
 cmb_acc::LoadCombinationVector cmb_acc::LoadCombinationVector::ProdCartesiano(const LoadCombinationVector &f1,const LoadCombinationVector &f2,const double &tol)
   //
   {
@@ -193,14 +193,14 @@ void cmb_acc::LoadCombinationVector::Numera(const std::string &prefijo)
       (*i).setName(prefijo + num2str(cont) + "= " + (*i).getName());
   }
 
-//! @brief Devuelve los coeficientes que corresponden a las acciones que se pasan como parámetro
+//! @brief Return los coeficientes que corresponden a las acciones que se pasan como parámetro
 //! en cada una de las combinaciones del vector.
 m_double cmb_acc::LoadCombinationVector::getCoeficientes(const std::vector<std::string> &base) const
   {
-    const size_t n_filas= size();
+    const size_t n_rows= size();
     const size_t n_cols= base.size();
-    m_double retval(n_filas,n_cols);
-    for(size_t i= 0;i<n_filas;i++)
+    m_double retval(n_rows,n_cols);
+    for(size_t i= 0;i<n_rows;i++)
       {
         const std::vector<double> coefs_i= (*this)[i].getCoeficientes(base);
         for(size_t j= 0;j<n_cols;j++)

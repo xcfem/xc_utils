@@ -35,7 +35,7 @@
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
 GEOM_FT GmGrupo2d::inercia(const Recta2d &e) const
-//Devuelve el momento de inercia respecto a la recta e
+//Return el momento de inercia respecto a la recta e
   {
     if(objetos.empty()) return 0.0;
     if(!igual_dimension())

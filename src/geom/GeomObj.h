@@ -47,13 +47,13 @@ class GeomObj: public ProtoGeom
     GeomObj(void);
     virtual ~GeomObj(void) {}
     virtual GeomObj *clon(void) const=0;
-    //! @brief Devuelve la dimensión del objeto 0, 1, 2 ó 3.
+    //! @brief Return la dimensión del objeto 0, 1, 2 ó 3.
     virtual unsigned short int Dimension(void) const= 0;
     virtual GEOM_FT Longitud(void) const= 0;
     virtual GEOM_FT Area(void) const= 0;
     virtual GEOM_FT Volumen(void) const= 0;
     inline virtual bool TieneCdg(void) const
-      //Devuelve verdadero si el objeto tiene centro de gravedad
+      //Return verdadero si el objeto tiene centro de gravedad
       //Una recta o un plano no lo tienen.
       { return false;}
     GEOM_FT AreaCdg(void) const;
@@ -65,7 +65,7 @@ class GeomObj: public ProtoGeom
 std::ostream &operator<<(std::ostream &, const GeomObj &);
 
 
-//! @brief Devuelve la suma de las areas.
+//! @brief Return la suma de las areas.
 template <class input_iterator>
 GEOM_FT area(input_iterator begin,input_iterator end)
   {
@@ -75,7 +75,7 @@ GEOM_FT area(input_iterator begin,input_iterator end)
     return retval;
   }
 
-//! @brief Devuelve la suma de los volumenes.
+//! @brief Return la suma de los volumenes.
 template <class input_iterator>
 GEOM_FT volumen(input_iterator begin,input_iterator end)
   {
@@ -85,7 +85,7 @@ GEOM_FT volumen(input_iterator begin,input_iterator end)
     return retval;
   }
 
-//! @brief Devuelve la suma de las longitudes.
+//! @brief Return la suma de las longitudes.
 template <class input_iterator>
 GEOM_FT longitud(input_iterator begin,input_iterator end)
   {

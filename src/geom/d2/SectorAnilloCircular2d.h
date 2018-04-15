@@ -59,7 +59,7 @@ class SectorAnilloCircular2d : public SectorCircular2d
     Pos2d PFinExt(void) const;
     Pos2d PMedInt(void) const;
     Pos2d PMedExt(void) const;
-    //! @brief Devuelve el radio interior.
+    //! @brief Return el radio interior.
     inline const double RadioExt(void) const
       { return Radio(); }
     inline double RadioExt(void)

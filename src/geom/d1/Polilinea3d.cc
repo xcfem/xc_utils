@@ -88,7 +88,7 @@ GeomObj3d::list_Pos3d Polilinea3d::getIntersection(const Plano3d &p) const
   }
 
 GEOM_FT Polilinea3d::GetMax(unsigned short int i) const
-//Devuelve el valor maximo de la coordenada i.
+//Return el valor maximo de la coordenada i.
   { 
     if(empty()) return 0.0;
     const list_Pos3d::const_iterator primero= begin();
@@ -98,7 +98,7 @@ GEOM_FT Polilinea3d::GetMax(unsigned short int i) const
     return mx;
   }
 GEOM_FT Polilinea3d::GetMin(unsigned short int i) const
-//Devuelve el valor minimo de la coordenada i.
+//Return el valor minimo de la coordenada i.
   {
     if(empty()) return 0.0;
     const list_Pos3d::const_iterator primero= begin();
@@ -108,7 +108,7 @@ GEOM_FT Polilinea3d::GetMin(unsigned short int i) const
     return mn;
   }
 Polilinea3d Polilinea3d::GetMayores(unsigned short int i,const GEOM_FT &d) const
-//Devuelve una Polilinea3d con los vertices cuya coordenada i
+//Return una Polilinea3d con los vertices cuya coordenada i
 //es mayor que d.
   {
     Polilinea3d retval;
@@ -117,7 +117,7 @@ Polilinea3d Polilinea3d::GetMayores(unsigned short int i,const GEOM_FT &d) const
     return retval;
   }
 Polilinea3d Polilinea3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
-//Devuelve una Polilinea3d con los vertices cuya coordenada i
+//Return una Polilinea3d con los vertices cuya coordenada i
 //es menor que d.
   {
     Polilinea3d retval;
@@ -126,7 +126,7 @@ Polilinea3d Polilinea3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
     return retval;
   }
 // Polilinea3d::list_Pos3d Polilinea3d::Int(unsigned short int i,const double &d) const
-// //Devuelve las intersecciones de la Polilinea3d con el plano
+// //Return las intersecciones de la Polilinea3d con el plano
 // //coord_i= d
 //   {
 //     list_Pos3d l_int; //Lista de intersecciones
@@ -142,7 +142,7 @@ Polilinea3d Polilinea3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 //      return l_int;
 //   }
 // Polilinea3d Polilinea3d::Corta(unsigned short int i,const double &d) const
-// //Devuelve la Polilinea3d con los vertices correspondientes a los
+// //Return la Polilinea3d con los vertices correspondientes a los
 // //cortes con el plano coord_i= d
 //   {
 //     Polilinea3d result; //Lista de intersecciones
@@ -178,7 +178,7 @@ GEOM_FT Polilinea3d::Iz(void) const
 
 Polilinea3d Polilinea3d::Separa(const Pos3d &p,const short int &sgn) const
 //Suponemos que p es vertice de la Polilinea3d
-//Devuelve el trozo de Polilinea3d:
+//Return el trozo de Polilinea3d:
 //hasta p si sgn < 0
 //desde p si sgn >= 0
   {

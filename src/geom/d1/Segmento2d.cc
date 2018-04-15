@@ -54,40 +54,40 @@ GeomObj *Segmento2d::clon(void) const
 Dir2d Segmento2d::GetDir(void) const
   { return Dir2d(cgseg.direction()); }
 
-//! @brief Devuelve el direction vector del segmento.
+//! @brief Return el direction vector del segmento.
 Vector2d Segmento2d::VDir(void) const
   { return GetDir().GetVector(); }
 
-//! @brief Devuelve el direction vector del segmento.
+//! @brief Return el direction vector del segmento.
 Vector2d Segmento2d::Normal(void) const
   { return VDir().Normal(); }
 
-//! @brief Devuelve el vector que une el origen con el extremo del segmento.
+//! @brief Return el vector que une el origen con el extremo del segmento.
 Vector2d Segmento2d::GetVector(void) const
   { return Destino()-Origen(); }
 
-//! @brief Devuelve el ángulo del segmento con el vector (0->2PI).
+//! @brief Return el ángulo del segmento con el vector (0->2PI).
 GEOM_FT Segmento2d::Angulo(const Vector2d &v) const
   { return angulo(VDir(),v); }
 
-//! @brief Devuelve el ángulo del segmento con el vector (-PI->0->PI).
+//! @brief Return el ángulo del segmento con el vector (-PI->0->PI).
 GEOM_FT Segmento2d::AnguloSigno(const Vector2d &v) const
   { return anguloSigno(VDir(),v); }
 
-//! @brief Devuelve el ángulo del segmento con el vector (0->2PI).
+//! @brief Return el ángulo del segmento con el vector (0->2PI).
 GEOM_FT Segmento2d::Angulo(const Segmento2d &s) const
   { return Angulo(s.VDir()); }
 
-//! @brief Devuelve el ángulo del segmento con el vector (-PI->0->PI).
+//! @brief Return el ángulo del segmento con el vector (-PI->0->PI).
 GEOM_FT Segmento2d::AnguloSigno(const Segmento2d &s) const
   { return AnguloSigno(s.VDir()); }
 
 
-//! @brief Devuelve el ángulo del segmento con el eje X.
+//! @brief Return el ángulo del segmento con el X axis.
 GEOM_FT Segmento2d::AnguloEjeX(void) const
   { return VDir().AnguloEjeX(); }
 
-//! @brief Devuelve el ángulo del segmento con el eje Y.
+//! @brief Return el ángulo del segmento con el Y axis.
 GEOM_FT Segmento2d::AnguloEjeY(void) const
   { return VDir().AnguloEjeY(); }
 
@@ -117,7 +117,7 @@ Recta2d Segmento2d::Perpendicular(const Pos2d &p) const
 Recta2d Segmento2d::Paralela(const Pos2d &p) const
   { return RectaSoporte().Paralela(p); }
 
-//! @brief Devuelve el segmento que resulta de aplicar a ésta el desplazamiento v.
+//! @brief Return el segmento que resulta de aplicar a ésta el desplazamiento v.
 Segmento2d Segmento2d::Offset(const Vector2d &v) const
   {
     const Pos2d p= Origen()+v;
@@ -125,7 +125,7 @@ Segmento2d Segmento2d::Offset(const Vector2d &v) const
     return Segmento2d(p,q);
   }
 
-//! @brief Devuelve un segmento paralelo a éste a la distancia
+//! @brief Return un segmento paralelo a éste a la distancia
 //! que se pasa como parámetro. Si la distance es positiva,
 //! el nuevo segmento quedará a la derecha de la anterior.
 Segmento2d Segmento2d::Offset(const GEOM_FT &d) const
@@ -170,7 +170,7 @@ bool Segmento2d::In(const Pos2d &p, const double &tol) const
   }
 
 
-//! @brief Devuelve el cuadrado de la distance from the point al segmento.
+//! @brief Return el cuadrado de la distance from the point al segmento.
 GEOM_FT Segmento2d::dist2(const Pos2d &p) const
   {
     const Recta2d r= RectaSoporte();
@@ -243,7 +243,7 @@ GeomObj2d::list_Pos2d Segmento2d::Interseccion(const Recta2d &r) const
         if(CGAL::assign(ptoi, result))
           retval.push_back(Pos2d(ptoi));
         else if(CGAL::assign(segi, result)) 
-          retval.push_back(Cdg()); //Devuelve el centro de ESTE.
+          retval.push_back(Cdg()); //Return el centro de ESTE.
         else
           {
             const GEOM_FT d1= r.dist2(Origen());

@@ -84,7 +84,7 @@ class ActionRelationships: public EntCmd
 
     inline void setContieneIncomp(bool b)
       { contiene_incomp= b; }
-    //! @brief Devuelve verdadero si esta combinación contiene acciones incompatibles entre sí.
+    //! @brief Return verdadero si esta combinación contiene acciones incompatibles entre sí.
     inline bool contieneIncomp(void) const
       { return contiene_incomp; }
 

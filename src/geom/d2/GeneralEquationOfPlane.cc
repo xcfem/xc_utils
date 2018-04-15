@@ -42,7 +42,7 @@ GeneralEquationOfPlane::GeneralEquationOfPlane(const GEOM_FT &fa,const GEOM_FT &
 GEOM_FT GeneralEquationOfPlane::Eval(const Pos3d &p) const
   { return a()*p.x()+b()*p.y()+c()*p.z()+d(); }
 
-//! @brief Devuelve la x coordinate del point of the plano
+//! @brief Return la x coordinate del point of the plano
 //! which y and z are those from the argument.
 GEOM_FT GeneralEquationOfPlane::x(const GEOM_FT &y,const GEOM_FT &z) const
       { return -(d()+b()*y+c()*z)/a(); }

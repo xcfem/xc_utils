@@ -41,7 +41,7 @@ Cilindro &Cilindro::operator=(const Cilindro &se)
 GeomObj *Cilindro::clon(void) const
   { return new Cilindro(*this); }
 
-//! @Devuelve la extension del objeto.
+//! @Return la extension del objeto.
 BND3d Cilindro::Bnd(void) const
   { return solid_extru_cil::Bnd(); }
 

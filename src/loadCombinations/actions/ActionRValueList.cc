@@ -65,7 +65,7 @@ cmb_acc::Action cmb_acc::ActionRValueList::FormaProdEscalar(const Variation &var
     return retval;
   }
 
-//! @brief Devuelve un puntero a la tabla de coeficientes de simultaneidad.
+//! @brief Return un puntero a la tabla de coeficientes de simultaneidad.
 const cmb_acc::PsiCoeffsMap *cmb_acc::ActionRValueList::getPtrPsiCoeffs(void) const
   {
     const ActionsFamily *tmp= dynamic_cast<const ActionsFamily *>(Owner());

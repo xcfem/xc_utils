@@ -42,10 +42,10 @@ class VectorPos: public MatrizPos<POS>
     VectorPos(const POS &p1,const POS &p2,const size_t &ndiv);
     inline VectorPos<POS> GetCaja(size_t f1, size_t f2) const
       { return VectorPos(*this,f1,1,f2,1); }
-    inline const POS &GetFila(size_t fila) const
-      { return m_pos::operator()(fila,1); }
-    inline VectorPos<POS> GetCol(size_t col) const
-      { return m_pos::GetCol(1); }
+    inline const POS &getRow(size_t iRow) const
+      { return m_pos::operator()(iRow,1); }
+    inline VectorPos<POS> getColumn(size_t col) const
+      { return m_pos::getColumn(1); }
   };
 
 template <class POS>

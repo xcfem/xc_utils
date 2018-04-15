@@ -58,31 +58,31 @@ Ref3d3d::~Ref3d3d(void)
   {}
 
 Vector3d Ref3d3d::GetI(void) const
-//Devuelve el vector unitario I en el sistema global.
+//Return el vector unitario I en el sistema global.
   { return GetVDirEje(1); }
 Vector3d Ref3d3d::GetJ(void) const
-//Devuelve el vector unitario J en el sistema global.
+//Return el vector unitario J en el sistema global.
   { return GetVDirEje(2); }
 Vector3d Ref3d3d::GetK(void) const
-//Devuelve el vector unitario K en el sistema global.
+//Return el vector unitario K en el sistema global.
   { return GetVDirEje(3); }
 
 Recta3d Ref3d3d::GetEjeX(void) const
-//Return the recta que define el eje x.
+//Return the recta que define el x axis.
   {
     const Pos3d dest(org+1000.0*GetI());
     return Recta3d(org,dest);
   }
 
 Recta3d Ref3d3d::GetEjeY(void) const
-//Return the recta que define el eje y.
+//Return the recta que define el y axis.
   {
     const Pos3d dest(org+1000.0*GetJ());
     return Recta3d(org,dest);
   }
 
 Recta3d Ref3d3d::GetEjeZ(void) const
-//Return the recta que define el eje z.
+//Return the recta que define el z axis.
   {
     const Pos3d dest(org+1000.0*GetK());
     return Recta3d(org,dest);
@@ -98,7 +98,7 @@ Plano3d Ref3d3d::GetPlanoYZ(void) const
 // GEOM_FT Ref3d3d::GetZLocal(const Pos3d &p) const
 // //Return the local Z of the point p expressed in local coordinates
 //   {
-//     m_double inv(trf.GetCol(3));
+//     m_double inv(trf.getColumn(3));
 //     inv.Trn();
 //     return dot(inv,(p - org));
 //   }

@@ -78,10 +78,10 @@ class PrismaRecto3d : public Prisma3d
     inline virtual GEOM_FT Iz(void) const
       { return extru.Iz(); }
     inline virtual GEOM_FT GetMax(unsigned short int i) const
-    //Devuelve el valor maximo de la coordenada i.
+    //Return el valor maximo de la coordenada i.
       { return extru.GetMax(i); }
     inline virtual GEOM_FT GetMin(unsigned short int i) const
-    //Devuelve el valor minimo de la coordenada i.
+    //Return el valor minimo de la coordenada i.
       { return extru.GetMin(i); }
     inline virtual unsigned int GetNumVertices(void) const
       { return extru.GetNumVertices(); }
@@ -96,7 +96,7 @@ class PrismaRecto3d : public Prisma3d
 /*     virtual v_ind_vertices IndVerticesArista(unsigned int arista) const */
 /*       { return extru.IndVerticesArista(arista); } */
     BND3d Bnd(void) const
-    //Devuelve la extension del objeto.
+    //Return la extension del objeto.
       { return extru.Bnd(); }
     inline matriz_FT I(void) const
       { return extru.I(); }

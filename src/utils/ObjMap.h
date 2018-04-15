@@ -105,7 +105,7 @@ void ObjMap<T>::clear(void)
     map_ptr::clear();
   }
 
-//! @brief Devuelve un puntero al objeto cuya clave se pasa como parámetro.
+//! @brief Return un puntero al objeto cuya clave se pasa como parámetro.
 template <class T>
 T *ObjMap<T>::Busca(const std::string &clave)
   {
@@ -116,7 +116,7 @@ T *ObjMap<T>::Busca(const std::string &clave)
       return nullptr;
   }
 
-//! @brief Devuelve un puntero al objeto cuya clave se pasa como parámetro.
+//! @brief Return un puntero al objeto cuya clave se pasa como parámetro.
 template <class T>
 const T *ObjMap<T>::Busca(const std::string &clave) const
   {

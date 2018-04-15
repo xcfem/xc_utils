@@ -51,14 +51,14 @@ class Ref2d3d : public Ref<SisCooRect2d3d>
     Ref2d3d(const Pos3d &o,const Vector3d &v);
     Ref2d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2);
     Vector3d GetI(void) const;
-    //Devuelve el vector unitario I en el sistema global.
+    //Return el vector unitario I en el sistema global.
     Vector3d GetJ(void) const;
-    //Devuelve el vector unitario J en el sistema global.
-    Recta3d GetEjeX(void) const; //Return the recta que define el eje x.
-    Recta3d GetEjeY(void) const; //Return the recta que define el eje y.
+    //Return el vector unitario J en el sistema global.
+    Recta3d GetEjeX(void) const; //Return the recta que define el x axis.
+    Recta3d GetEjeY(void) const; //Return the recta que define el y axis.
     //void PointVector(const Pos3d &o,const Vector3d &vX);
 
-    Plano3d GetPlanoXY(void) const; //Devuelve el plano XY.
+    Plano3d GetPlanoXY(void) const; //Return el plano XY.
 
   };
 

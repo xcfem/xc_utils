@@ -47,7 +47,7 @@ class FunctionFromPointsR_R: public FunctionFromPointsR_T<double>
     double AbcisaMax(void) const
       { return (*PosMax()).first; }
     FunctionFromPointsR_R::const_iterator PosMin(void) const;
-    //! @brief Devuelve el valor mínimo de las ordenadas definidas.
+    //! @brief Return el valor mínimo de las ordenadas definidas.
     double Min(void) const
       { return (*PosMin()).second; }
     //! @brief Return the abcisa correspondiente al valor mínimo de las ordenadas definidas.

@@ -86,7 +86,7 @@ class Vector2d: public ProtoGeom
     virtual GEOM_FT GetModulus(void) const;
     bool EsUnitario(const double &tol= mchne_eps_dbl) const;
 
-    //! @brief Devuelve el versor (vector de módulo unidad) correspondiente a éste vector.
+    //! @brief Return el versor (vector de módulo unidad) correspondiente a éste vector.
     inline Vector2d Normalizado(void) const
       { return (*this)/GetModulus(); }
     Vector2d Normal(void) const;
@@ -134,10 +134,10 @@ inline GEOM_FT Abs(const Vector2d &v)
 double anguloSigno(const Vector2d &v1,const Vector2d &v2);
 double angulo(const Vector2d &v1,const Vector2d &v2);
 
-//! @breif Devuelve el producto por un escalar.
+//! @breif Return el producto por un escalar.
 inline Vector2d operator*(const GEOM_FT &d,const Vector2d &v)
   { return v*d; }
-//! @brief Devuelve el versor (vector de módulo unidad) correspondiente a éste vector.
+//! @brief Return el versor (vector de módulo unidad) correspondiente a éste vector.
 inline Vector2d Normaliza(const Vector2d &v)
   { return v.Normalizado(); }
 

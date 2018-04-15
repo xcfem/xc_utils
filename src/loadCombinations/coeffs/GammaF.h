@@ -71,9 +71,9 @@ class GammaFELU: public GammaFELS
     //! @brief Lee el objeto desde archivo.
 
     friend class GammaF;
-    //! @brief Devuelve los coeficientes de ponderación correspondientes a situación persistente o transitoria.
+    //! @brief Return los coeficientes de ponderación correspondientes a situación persistente o transitoria.
     Variation CoefsPT(void) const;
-    //! @brief Devuelve los coeficientes de ponderación correspondientes a situación accidental o sísmica.
+    //! @brief Return los coeficientes de ponderación correspondientes a situación accidental o sísmica.
     Variation CoefsAcc(void) const;
   public:
     //! @brief Constructor por defecto. Supone control normal.
@@ -102,7 +102,7 @@ class GammaF: public EntCmd
       { return gammaf_elu; }
     inline const GammaFELS &getGammaFELS(void) const
       { return gammaf_els; }
-    //! @brief Devuelve los coeficientes de ponderación correspondientes a estado límite de servicio.
+    //! @brief Return los coeficientes de ponderación correspondientes a estado límite de servicio.
     Variations calcula_variations(const bool &elu,const bool &sit_accidental,const int &d,const ActionRValueList &) const;
   };
 

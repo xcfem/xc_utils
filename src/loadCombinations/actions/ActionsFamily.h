@@ -57,10 +57,10 @@ class ActionsFamily: public EntConNmb
     inline virtual ~ActionsFamily(void) {}
     ActionRValue &insert(const Action &,const std::string &nmb_coefs_psi="");
     Variations CalculaVariations(const bool &elu= true,const bool &sit_accidental= false,const int &d=-1) const;
-    //! @brief Devuelve el número de acciones de la familia.
+    //! @brief Return el número de acciones de la familia.
     inline size_t getNumActions(void) const
       { return acciones.size(); }
-    //! brief Devuelve verdadero si la familia esta vacía.
+    //! brief Return verdadero si la familia esta vacía.
     inline bool Vacia(void) const
       { return acciones.empty(); }
     inline void setGammaF(const GammaF &gf)

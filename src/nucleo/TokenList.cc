@@ -26,7 +26,7 @@
 
 
 
-//! Devuelve verdadero si se han encontrado errores léxicos
+//! Return verdadero si se han encontrado errores léxicos
 bool TokenList::TieneErroresLexicos(void) const
   {
     for(TokenList::const_iterator i= begin();i!=end();i++)
@@ -35,7 +35,7 @@ bool TokenList::TieneErroresLexicos(void) const
     return false;
   }
 
-//! Devuelve verdadero si se han encontrado errores con los paréntesis.
+//! Return verdadero si se han encontrado errores con los paréntesis.
 bool TokenList::TieneErroresParentesis(void) const
   {
     int cuenta= 0;
@@ -47,7 +47,7 @@ bool TokenList::TieneErroresParentesis(void) const
     return (cuenta != 0);
   }
 
-//! Devuelve verdadero si se han encontrado errores con los corchetes.
+//! Return verdadero si se han encontrado errores con los corchetes.
 bool TokenList::TieneErroresCorchetes(void) const
   {
     int cuenta= 0;
@@ -173,8 +173,8 @@ void TokenList::DetectaOpRcl2(void)
       }
   }
 
-//! @brief Detecta los casos en los que los valores entre corchetes "[...]" corresponden a índices,
-//! de un objeto capaz de gestionarlos (Lista, matriz,...).
+//! @brief Detect the cases when the values between brackets "[...]" correspond to indexes,
+//! of an object that can manage them (list, matrix,...).
 void TokenList::DetectaOpAt(void)
   {
     for(TokenList::iterator i= begin();i!=end();i++)
@@ -317,7 +317,7 @@ void TokenList::ProcesaSintaxis(void)
     DetectaOpAt();
   }
 
-//! Devuelve una lista con los signos que son erróneos.
+//! Return una lista con los signos que son erróneos.
 TokenList TokenList::Errores(void) const
   {
     TokenList retval;

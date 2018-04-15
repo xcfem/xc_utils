@@ -23,17 +23,17 @@
 
 #include "FunctionFromPointsR2_R.h"
 
-//! @brief Return the fila and columna del máximo.
-FunctionFromPointsR2_R::filacol FunctionFromPointsR2_R::PosMax(void) const
+//! @brief Return the row and column indexes of the maximum.
+FunctionFromPointsR2_R::row_column FunctionFromPointsR2_R::PosMax(void) const
   {
-    filacol retval;
+    row_column retval;
     retval.first= 1;
     retval.second= 1;
-    const size_t fls= GetNumFilas();
-    const size_t cls= GetNumCols();
+    const size_t n_rows= getNumberOfRows();
+    const size_t n_columns= getNumberOfColumns();
     register double max= Valor(1,1);
-    for(register size_t i=1;i<=fls;i++)
-      for(register size_t j=1;j<=cls;j++)
+    for(register size_t i=1;i<=n_rows;i++)
+      for(register size_t j=1;j<=n_columns;j++)
         {
           const double tmp= Valor(i,j);
           if(max < tmp)
@@ -48,26 +48,26 @@ FunctionFromPointsR2_R::filacol FunctionFromPointsR2_R::PosMax(void) const
 //! @brief Return the maximum value de los valores definidos.
 double FunctionFromPointsR2_R::Max(void) const
   {
-    const filacol fc= PosMax();
+    const row_column fc= PosMax();
     return Valor(fc.first,fc.second);
   }
 //! @brief Return the position that corresponds to the maximum.
 Pos2d FunctionFromPointsR2_R::getMaxPoint(void) const
   {
-    const filacol fc= PosMax();
+    const row_column fc= PosMax();
     return Posicion(fc.first,fc.second);
   }
-//! @brief Return the fila and columna del mínimo.
-FunctionFromPointsR2_R::filacol FunctionFromPointsR2_R::PosMin(void) const
+//! @brief Return the row and column del mínimo.
+FunctionFromPointsR2_R::row_column FunctionFromPointsR2_R::PosMin(void) const
   {
-    filacol retval;
+    row_column retval;
     retval.first= 1;
     retval.second= 1;
-    const size_t fls= GetNumFilas();
-    const size_t cls= GetNumCols();
+    const size_t n_rows= getNumberOfRows();
+    const size_t n_columns= getNumberOfColumns();
     register double min= Valor(1,1);
-    for(register size_t i=1;i<=fls;i++)
-      for(register size_t j=1;j<=cls;j++)
+    for(register size_t i=1;i<=n_rows;i++)
+      for(register size_t j=1;j<=n_columns;j++)
         {
           const double tmp= Valor(i,j);
           if(min > tmp)
@@ -79,15 +79,15 @@ FunctionFromPointsR2_R::filacol FunctionFromPointsR2_R::PosMin(void) const
         }
     return retval;
   }
-//! @brief Devuelve el valor mínimo de los valores definidos.
+//! @brief Return el valor mínimo de los valores definidos.
 double FunctionFromPointsR2_R::Min(void) const
   {
-    const filacol fc= PosMin();
+    const row_column fc= PosMin();
     return Valor(fc.first,fc.second);
   }
 //! @brief Return the posición del valor mínimo de los valores definidos.
 Pos2d FunctionFromPointsR2_R::getMinPoint(void) const
   {
-    const filacol fc= PosMin();
+    const row_column fc= PosMin();
     return Posicion(fc.first,fc.second);
   }

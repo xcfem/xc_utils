@@ -51,11 +51,11 @@ class Ref2d2d : public Ref<SisCooRect2d2d>
     Ref2d2d(const Pos2d &o,const Dir2d &dirX);
     Ref2d2d(const Pos2d &o,const Pos2d &p);
     Vector2d GetI(void) const;
-    //Devuelve el vector unitario I en el sistema global.
+    //Return el vector unitario I en el sistema global.
     Vector2d GetJ(void) const;
-    //Devuelve el vector unitario J en el sistema global.
-    Recta2d GetEjeX(void) const; //Devuelve la recta que define el eje x.
-    Recta2d GetEjeY(void) const; //Devuelve la recta que define el eje y.
+    //Return el vector unitario J en el sistema global.
+    Recta2d GetEjeX(void) const; //Return la recta que define el x axis.
+    Recta2d GetEjeY(void) const; //Return la recta que define el y axis.
 
     virtual ~Ref2d2d(void)
       {}

@@ -33,13 +33,13 @@
 SisCoo::SisCoo(const size_t &ne,const size_t &dim)
   : ProtoGeom(), rot(ne,dim) 
   { identidad(); }
-//! @brief Hace que las filas de la matriz sean vectores unitarios.
+//! @brief Row-normalize matrix.
 void SisCoo::normaliza(void)
   {
     if(!rot.Nulo())
-      NormalizaFilas(rot);
+      NormalizeRows(rot);
     else
-      std::cerr << "SisCoo::normaliza; la matriz de transformación: "
+      std::cerr << getClassName() << "::" << __FUNCTION__
                 << rot << " es nula." << std::endl;
   }
 //! @brief Hace que la base sea ortogonal
@@ -50,8 +50,8 @@ void SisCoo::ortogonaliza(void)
       return;
     else //2 o 3 dimensiones.
       {
-        const matriz_FT i= rot.GetFila(1);
-        const matriz_FT j= rot.GetFila(2);
+        const matriz_FT i= rot.getRow(1);
+        const matriz_FT j= rot.getRow(2);
         const GEOM_FT imod2= i.Abs2();
         if(imod2<geom_epsilon2)
           {
@@ -63,12 +63,12 @@ void SisCoo::ortogonaliza(void)
           {
             const GEOM_FT alpha= -(dot(j,i))/imod2;
             const matriz_FT nj= j+alpha*i;
-            PutFila(2,nj);
+            putRow(2,nj);
 	  }
         if(ne>2) //3 dimensiones.
           {
-            const matriz_FT nk= i ^ GetFila(2);
-            PutFila(3,nk);
+            const matriz_FT nk= i ^ getRow(2);
+            putRow(3,nk);
           }
       }
   }
@@ -86,52 +86,52 @@ void SisCoo::ortonormaliza(void)
 void SisCoo::identidad(void)
   {
     rot.Con(0);
-    for(size_t i=1;i<=rot.getNumFilas();i++)
+    for(size_t i=1;i<=rot.getNumberOfRows();i++)
       rot(i,i)= 1;
   }
 //! @brief Asigna un valor al elemento (i,j) de la matriz.
 void SisCoo::put(const size_t &i,const size_t &j,const GEOM_FT &rot_ij)
   { rot(i,j)= rot_ij; }
 
-//! @brief Devuelve la fila i de la matriz.
-matriz_FT SisCoo::GetFila(const size_t &i) const
+//! @brief Return la i row of the matrix.
+matriz_FT SisCoo::getRow(const size_t &i) const
   {
     assert(i<=NumEjes());
-    return rot.GetFila(i);
+    return rot.getRow(i);
   }
-//! @brief Devuelve verdadero si los vectores son unitarios.
+//! @brief Return verdadero si los vectores son unitarios.
 bool SisCoo::EsNormal(void) const
   {
     const size_t ne= NumEjes();
     for(size_t i=1;i<=ne;i++)
       {
-        const GEOM_FT imod= rot.GetFila(i).Abs2();
+        const GEOM_FT imod= rot.getRow(i).Abs2();
         if((imod-1)> geom_epsilon)
           return false;
       }
     return true;
   }
 
-//! @brief Devuelve verdadero si el sistema de coordenadas es dextrógiro.
+//! @brief Return verdadero si el sistema de coordenadas es dextrógiro.
 bool SisCoo::EsDextrogiro(void) const
   {
     if(NumEjes()<3)
       return true;
     else
       {
-        if(rot.getNumCols()<3)
+        if(rot.getNumberOfColumns()<3)
           return true;
         else
           {
-            const matriz_FT i= GetFila(1).GetTrn();
-            const matriz_FT j= GetFila(2).GetTrn();
+            const matriz_FT i= getRow(1).GetTrn();
+            const matriz_FT j= getRow(2).GetTrn();
             const matriz_FT ivectj= i^j;
-            return (dot(GetFila(3),ivectj)>0);
+            return (dot(getRow(3),ivectj)>0);
           }
       }
   }
 
-//! @brief Devuelve verdadero si los vectores son ortogonales.
+//! @brief Return verdadero si los vectores son ortogonales.
 bool SisCoo::EsOrtogonal(void) const
   {
     const size_t ne= NumEjes();
@@ -139,44 +139,44 @@ bool SisCoo::EsOrtogonal(void) const
       return true;
     else
       if(ne<3)
-        return (::Abs(dot(rot.GetFila(1),rot.GetFila(2).GetTrn()))<geom_epsilon);
+        return (::Abs(dot(rot.getRow(1),rot.getRow(2).GetTrn()))<geom_epsilon);
       else
         {
-          if(::Abs(dot(rot.GetFila(1),rot.GetFila(2).GetTrn()))>geom_epsilon)
+          if(::Abs(dot(rot.getRow(1),rot.getRow(2).GetTrn()))>geom_epsilon)
             return false;
-          if(::Abs(dot(rot.GetFila(1),rot.GetFila(3).GetTrn()))>geom_epsilon)
+          if(::Abs(dot(rot.getRow(1),rot.getRow(3).GetTrn()))>geom_epsilon)
             return false;
-          if(::Abs(dot(rot.GetFila(2),rot.GetFila(3).GetTrn()))>geom_epsilon)
+          if(::Abs(dot(rot.getRow(2),rot.getRow(3).GetTrn()))>geom_epsilon)
             return false;
         }
     return true;
   }
 
-//! @brief Devuelve verdadero si los vectores son unitarios y ortogonales.
+//! @brief Return verdadero si los vectores son unitarios y ortogonales.
 bool SisCoo::EsOrtonormal(void) const
   { return (EsOrtogonal() && EsNormal()); }
 
-//! @brief Asigna la fila i de la matriz.
-void SisCoo::PutFila(const size_t &eje,const matriz_FT &v)
-  { rot.PutFila(eje,v); }
-//! @brief Devuelve la matriz que transforma un vector expresado
+//! @brief Set the i row of the matrix.
+void SisCoo::putRow(const size_t &eje,const matriz_FT &v)
+  { rot.putRow(eje,v); }
+//! @brief Return the matrix que transforma un vector expresado
 //! en locales al mismo vector expresado en globales.
 matriz_FT SisCoo::TransAGlobal(void) const
   { return rot.GetTrn(); }
-//! @brief Devuelve la matriz que transforma un vector expresado
+//! @brief Return the matrix que transforma un vector expresado
 //! en globales al mismo vector expresado en locales.
 matriz_FT SisCoo::TransDeGlobal(void) const
   { return rot; }
-//! @brief Devuelve la matriz de transformación desde este sistema a dest.
+//! @brief Return the transformation matrix desde este sistema a dest.
 matriz_FT SisCoo::GetTransA(const SisCoo &dest) const
   { return (dest.rot*TransAGlobal()); }
 
-//! @brief Devuelve las componentes en coordenadas globales del vector v 
-//! que se pasa como parámetro expresado en coordenadas locales.
+//! @brief Return las componentes en coordenadas globales del vector v 
+//! being passed as parameter expresado en coordenadas locales.
 matriz_FT SisCoo::GetCooGlobales(const matriz_FT &v) const
   { return TransAGlobal()*v; }
-//! @brief Devuelve las componentes en coordenadas locales del vector v 
-//! que se pasa como parámetro expresado en coordenadas globales.
+//! @brief Return las componentes en coordenadas locales del vector v 
+//! being passed as parameter expresado en coordenadas globales.
 matriz_FT SisCoo::GetCooLocales(const matriz_FT &v) const
   { return TransDeGlobal()*v; }
 

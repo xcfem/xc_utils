@@ -26,7 +26,7 @@
 
 //! @ingroup GEOM
 //! 
-//! @brief Devuelve el centro de gravedad de los objetos.
+//! @brief Return el centro de gravedad de los objetos.
 template<class InputIter>
 const Pos2d cdg(InputIter begin, InputIter end)
   {

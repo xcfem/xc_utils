@@ -53,7 +53,7 @@ cmb_acc::Variation cmb_acc::Variation::concat(const cmb_acc::Variation &a,const 
   }
 
 
-//! @brief Devuelve verdadero si las acciones que contiene la variaciónes son compatibles
+//! @brief Return verdadero si las acciones que contiene la variaciónes son compatibles
 bool cmb_acc::Variation::compatible(const ActionRValueList &lvr)
   {
     const size_t sz= size();

@@ -39,8 +39,8 @@ Vector3d::Vector3d(const GEOM_FT &x,const GEOM_FT &y,const GEOM_FT &z)
 Vector3d::Vector3d(const matriz_FT &m)
   : cgvct(0,0,0)
   {
-    assert(m.getNumFilas()==3);
-    assert(m.getNumCols()==1); 
+    assert(m.getNumberOfRows()==3);
+    assert(m.getNumberOfColumns()==1); 
     cgvct= CGVector_3(m(1),m(2),m(3));
   }
 Vector3d::Vector3d(const Pos3d &p1,const Pos3d &p2)
@@ -49,7 +49,7 @@ Vector3d::Vector3d(const Pos3d &p1,const Pos3d &p2)
 bool Vector3d::Nulo(void) const
   { return ((*this)==VectorNulo3d); }
 matriz_FT Vector3d::GetMatriz(void) const
-  //Devuelve el vector columna.
+  //Return el column vector.
   {
     matriz_FT retval(3,1,0);
     retval(1)= x(); retval(2)= y(); retval(3)= z();
@@ -67,7 +67,7 @@ bool Vector3d::EsUnitario(const double &tol) const
       return true;
   }
 
-//! @brief Devuelve el vector normalizado.
+//! @brief Return el vector normalizado.
 Vector3d Vector3d::Normalizado(void) const
   {
     Vector3d retval(*this);
@@ -105,23 +105,23 @@ void Vector3d::Set(unsigned short int i,const GEOM_FT &v)
       }
   }
 
-//! @brief Devuelve el módulo del vector.
+//! @brief Return el módulo del vector.
 GEOM_FT Vector3d::GetModulus(void) const
   { return sqrt_FT(GetModulus2()); }
 
-//! @brief Devuelve el producto escalar.
+//! @brief Return el producto escalar.
 GEOM_FT Vector3d::GetDot(const Vector3d &v) const
   { return (x()*v.x()+y()*v.y()+z()*v.z()); }
 
-//! @brief Devuelve el producto por la matriz.
+//! @brief Return el producto por la matriz.
 GEOM_FT Vector3d::GetDot(const matriz_FT &m) const
   {
-    assert(m.getNumFilas()==3);
-    assert(m.getNumCols()==3);
+    assert(m.getNumberOfRows()==3);
+    assert(m.getNumberOfColumns()==3);
     return (x()*m(1)+y()*m(2)+z()*m(3));
   }
 
-//! @brief Devuelve el producto vectorial.
+//! @brief Return el producto vectorial.
 Vector3d Vector3d::getCross(const Vector3d &v) const
   { return Vector3d(cross_product(ToCGAL(),v.ToCGAL())); }
 
@@ -141,19 +141,19 @@ Vector3d &Vector3d::operator-=(const Vector3d &v)
     return *this;
   }
 
-//! @brief Devuelve la suma de los vectores.
+//! @brief Return la suma de los vectores.
 Vector3d Vector3d::operator+(const Vector3d &v) const
   {  return Vector3d(ToCGAL()+v.ToCGAL()); }
 
-//! @brief Devuelve la resta de los vectores.
+//! @brief Return la resta de los vectores.
 Vector3d Vector3d::operator-(const Vector3d &v) const
   { return Vector3d(ToCGAL()-v.ToCGAL()); }
 
-//! @brief Devuelve el producto del vector por el escalar.
+//! @brief Return el producto del vector por el escalar.
 Vector3d Vector3d::operator*(const GEOM_FT &d) const
   { return Vector3d(ToCGAL()*d); }
 
-//! @brief Devuelve el producto del vector por el inverso del escalar.
+//! @brief Return el producto del vector por el inverso del escalar.
 Vector3d Vector3d::operator/(const GEOM_FT &d) const
   { return Vector3d(ToCGAL()*(1/d)); }
 
@@ -185,7 +185,7 @@ Vector3d Vector3d::Perpendicular(const Vector3d &v) const
     return retval;
   }
 
-//! @brief Devuelve el ángulo que forma con el vector
+//! @brief Return el ángulo que forma con el vector
 //! que se pasa como parámetro.
 GEOM_FT Vector3d::Angulo(const Vector3d &v) const
   {
@@ -220,7 +220,7 @@ bool coplanarios(const Vector3d &v1,const Vector3d &v2,const Vector3d &v3)
   }
 
 GEOM_FT Abs(const Vector3d &v)
-//Devuelve el módulo del vector.
+//Return el módulo del vector.
   { return v.GetModulus(); }
 
 matriz_FT Traspuesta(const Vector3d &v)
@@ -236,7 +236,7 @@ std::ostream &operator<<(std::ostream &stream,const Vector3d &n)
     return stream;
   }
 
-//! @brief Devuelve el ángulo que forman los vecttores.
+//! @brief Return el ángulo que forman los vecttores.
 double angulo(const Vector3d &v1,const Vector3d &v2)
   { return v1.Angulo(v2); }
 

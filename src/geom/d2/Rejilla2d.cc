@@ -40,7 +40,7 @@ Rejilla2d::Rejilla2d(int numSubdivIJ, int numSubdivJK)
 Rejilla2d::~Rejilla2d(void)
   {}
 
-//! @brief Devuelve el área de la rejilla.
+//! @brief Return el área de la rejilla.
 GEOM_FT Rejilla2d::Area(void) const
   { return points.GetArea();  }
 
@@ -56,11 +56,11 @@ GEOM_FT Rejilla2d::Iy(void) const
 GEOM_FT Rejilla2d::Pxy(void) const
   { return points.Pxy(); }
 
-//! @brief Devuelve el centro de gravedad de la rejilla.
+//! @brief Return el centro de gravedad de la rejilla.
 Pos2d Rejilla2d::Cdg(void) const
   { return points.GetCdg(); }
 
-//! @brief Devuelve las coordenadas of point i,j.
+//! @brief Return las coordenadas of point i,j.
 const matriz_FT &Rejilla2d::GetVertCoords(const size_t &i,const size_t &j) const
   { return points.GetVertCoords(i,j); }
 
@@ -68,7 +68,7 @@ const matriz_FT &Rejilla2d::GetVertCoords(const size_t &i,const size_t &j) const
 Pos2d Rejilla2d::getPoint(const size_t &i,const size_t &j) const
   { return points.getPoint(i,j); }
 
-//! @brief Devuelve el cuadrilátero correspondiente a la celda i,j:
+//! @brief Return el cuadrilátero correspondiente a la celda i,j:
 Cuadrilatero2d Rejilla2d::GetQuad(const size_t &i,const size_t &j) const
   { return points.GetQuad(i,j); }
 

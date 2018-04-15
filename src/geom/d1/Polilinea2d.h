@@ -84,10 +84,10 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     virtual GEOM_FT GetMin(unsigned short int i) const;
     //Return the minimum value of the i coordinate.
     Polilinea2d GetMayores(unsigned short int i,const GEOM_FT &d) const;
-    //Devuelve una Polilinea2d con los vertices cuya coordenada i
+    //Return una Polilinea2d con los vertices cuya coordenada i
     //es mayor que d.
     Polilinea2d GetMenores(unsigned short int i,const GEOM_FT &d) const;
-    //Devuelve una Polilinea2d con los vertices cuya coordenada i
+    //Return una Polilinea2d con los vertices cuya coordenada i
     //es menor que d.
     const Pos2d &Vertice(const size_t &i) const;
     Segmento2d GetSegmento(const const_iterator &i) const;
@@ -99,7 +99,7 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
 /*       } */
     Polilinea2d Offset(const GEOM_FT &d) const;
     list_Pos2d Int(unsigned short int i,const GEOM_FT &d) const;
-    //Devuelve las intersecciones de la Polilinea2d con la recta
+    //Return las intersecciones de la Polilinea2d con la recta
     //coord_i= d
     list_Pos2d Interseccion(const Recta2d &r) const;
     list_Pos2d Interseccion(const SemiRecta2d &sr) const;
@@ -109,7 +109,7 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     //cortes con el plano coord_i= d
     Polilinea2d Separa(const Pos2d &p,const short int &sgn) const;
     //Suponemos que p es vertice de la Polilinea2d
-    //Devuelve el trozo de Polilinea2d:
+    //Return el trozo de Polilinea2d:
     //hasta p si sgn < 0
     //desde p si sgn >= 0
     Pos2d Cdg(void) const

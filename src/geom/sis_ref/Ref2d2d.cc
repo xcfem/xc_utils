@@ -34,21 +34,21 @@ Ref2d2d::Ref2d2d(const Pos2d &o,const Vector2d &vX): BaseRef(o,vX) {}
 Ref2d2d::Ref2d2d(const Pos2d &o,const Dir2d &dirX): BaseRef(o,dirX) {}
 Ref2d2d::Ref2d2d(const Pos2d &o,const Pos2d &p): BaseRef(o,p) {}
 
-//! @brief Devuelve el vector unitario I en el sistema global.
+//! @brief Return el vector unitario I en el sistema global.
 Vector2d Ref2d2d::GetI(void) const
   { return GetVDirEje(1); }
-//! @brief Devuelve el vector unitario J en el sistema global.
+//! @brief Return el vector unitario J en el sistema global.
 Vector2d Ref2d2d::GetJ(void) const
   { return GetVDirEje(2); }
 
-//! @brief Devuelve la recta que define el eje x.
+//! @brief Return la recta que define el x axis.
 Recta2d Ref2d2d::GetEjeX(void) const
   {
     const Pos2d dest(org+1000.0*GetI());
     return Recta2d(org,dest);
   }
 Recta2d Ref2d2d::GetEjeY(void) const
-//Devuelve la recta que define el eje y.
+//Return la recta que define el y axis.
   {
     const Pos2d dest(org+1000.0*GetJ());
     return Recta2d(org,dest);

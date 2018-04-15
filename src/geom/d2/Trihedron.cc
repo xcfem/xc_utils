@@ -151,7 +151,7 @@ GEOM_FT Trihedron::GetMin(short unsigned int i) const
 Pos3d Trihedron::Cdg() const
   { return GetPoliedro3d().Cdg(); }
 
-//! @brief Devuelve verdadero si alguno de los vertices del triángulo toca el cuadrante
+//! @brief Return verdadero si alguno de los vertices del triángulo toca el cuadrante
 //! que se pasa como parámetro.
 bool Trihedron::TocaCuadrante(const int &cuadrante) const
   {

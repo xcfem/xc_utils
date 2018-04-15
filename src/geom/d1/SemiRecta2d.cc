@@ -49,7 +49,7 @@ Dir2d SemiRecta2d::GetDir(void) const
 Vector2d SemiRecta2d::VDir(void) const
   { return GetDir().GetVector(); }
 
-//! @brief Devuelve el cuadrado de la distance 
+//! @brief Return el cuadrado de la distance 
 //! from the point a la semirrecta.
 GEOM_FT SemiRecta2d::dist2(const Pos2d &p) const
   {

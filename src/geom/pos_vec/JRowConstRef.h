@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//ConstRefFilaJ.h 
+//JRowConstRef.h 
 
-#ifndef CONSTREFFILAJ_H
-#define CONSTREFFILAJ_H
+#ifndef JROWCONSTREF_H
+#define JROWCONSTREF_H
 
 
 //! @ingroup GEOM
@@ -30,33 +30,33 @@
 //! @brief Reference to a layer de la tritriz which points have constant
 //! J and K indexes.
 template <class TRITRIZ>
-class ConstRefFilaJ: public ConstRefCajaTritriz<TRITRIZ>
+class JRowConstRef: public ConstRefCajaTritriz<TRITRIZ>
   {
   public:
     typedef typename ConstRefCajaTritriz<TRITRIZ>::const_reference const_reference;
 
-    explicit ConstRefFilaJ(const TRITRIZ &m,const size_t &capa= 1,const size_t &c= 1);
-    ConstRefFilaJ(const TRITRIZ &m,const size_t &,const size_t &,const size_t &,const size_t &);
-    ConstRefFilaJ(const TRITRIZ &t,const size_t &capa,const RangoIndice &rango_filas,const size_t &c);
-    inline virtual ~ConstRefFilaJ(void) {}
+    explicit JRowConstRef(const TRITRIZ &m,const size_t &iLayer= 1,const size_t &c= 1);
+    JRowConstRef(const TRITRIZ &m,const size_t &,const size_t &,const size_t &,const size_t &);
+    JRowConstRef(const TRITRIZ &t,const size_t &iLayer,const RangoIndice &row_range,const size_t &c);
+    inline virtual ~JRowConstRef(void) {}
     inline virtual const_reference operator()(size_t f=1) const
       { return ConstRefCajaTritriz<TRITRIZ>::operator()(1,f,1); }
-    inline virtual const_reference operator()(size_t capa,size_t fila,size_t col) const
-      { return ConstRefCajaTritriz<TRITRIZ>::operator()(capa,fila,col); }
+    inline virtual const_reference operator()(size_t iLayer,size_t iRow,size_t col) const
+      { return ConstRefCajaTritriz<TRITRIZ>::operator()(iLayer,iRow,col); }
   };
 
 //! @brief Constructor por defecto.
 template<class TRITRIZ>
-ConstRefFilaJ<TRITRIZ>::ConstRefFilaJ(const TRITRIZ &t,const size_t &capa,const size_t &c)
-  : ConstRefCajaTritriz<TRITRIZ>(t,capa,RangoIndice(1,t.getNumFilas()),c)
+JRowConstRef<TRITRIZ>::JRowConstRef(const TRITRIZ &t,const size_t &iLayer,const size_t &c)
+  : ConstRefCajaTritriz<TRITRIZ>(t,iLayer,RangoIndice(1,t.getNumberOfRows()),c)
   {}
 
 template<class TRITRIZ>
-ConstRefFilaJ<TRITRIZ>::ConstRefFilaJ(const TRITRIZ &t,const size_t &capa,const size_t &f1,const size_t &f2,const size_t &c)
-  : ConstRefCajaTritriz<TRITRIZ>(t,capa,RangoIndice(f1,f2),c) {}
+JRowConstRef<TRITRIZ>::JRowConstRef(const TRITRIZ &t,const size_t &iLayer,const size_t &f1,const size_t &f2,const size_t &c)
+  : ConstRefCajaTritriz<TRITRIZ>(t,iLayer,RangoIndice(f1,f2),c) {}
 
 template<class TRITRIZ>
-ConstRefFilaJ<TRITRIZ>::ConstRefFilaJ(const TRITRIZ &t,const size_t &capa,const RangoIndice &rango_filas,const size_t &c)
-  : ConstRefCajaTritriz<TRITRIZ>(t,capa,rango_filas,c) {}
+JRowConstRef<TRITRIZ>::JRowConstRef(const TRITRIZ &t,const size_t &iLayer,const RangoIndice &row_range,const size_t &c)
+  : ConstRefCajaTritriz<TRITRIZ>(t,iLayer,row_range,c) {}
 
 #endif

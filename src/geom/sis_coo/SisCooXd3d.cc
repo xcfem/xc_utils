@@ -28,14 +28,14 @@
 
 
 //! @brief Define un sistema de coordenadas de dimensión i
-//! el eje x tendrá la dirección y sentido del vector que
+//! el x axis tendrá la dirección y sentido del vector que
 //! se pasa como parámetro.
 SisCooXd3d::SisCooXd3d(const size_t &i,const VGlobal &v)
   : SisCoo(i,3)
   { VectorEjeX(v); }
 
 //! @brief Define un sistema de coordenadas de dimensión i
-//! el eje x tendrá la dirección y sentido del vector v1
+//! el x axis tendrá la dirección y sentido del vector v1
 //! se pasa como parámetro.
 SisCooXd3d::SisCooXd3d(const size_t &i,const VGlobal &v1,const VGlobal &v2)
   : SisCoo(i,3)
@@ -52,20 +52,21 @@ SisCooXd3d::SisCooXd3d(const size_t &i,const VGlobal &v1,const VGlobal &v2,const
   : SisCoo(i,3)
   { vectores_unitarios(v1,v2,v3); }
 
-void SisCooXd3d::PutFila(const size_t &eje,const VGlobal &v)
-  { SisCoo::PutFila(eje,traspuesta(v.GetMatriz())); }
+void SisCooXd3d::putRow(const size_t &eje,const VGlobal &v)
+  { SisCoo::putRow(eje,traspuesta(v.GetMatriz())); }
 
-//! @brief Return the dirección del eje que se pasa como parámetro.
+//! @brief Return the dirección del eje being passed as parameter.
 SisCooXd3d::DGlobal SisCooXd3d::GetDirEje(const size_t &eje) const
   { return DGlobal(GetVDirEje(1)); }
-//! @brief Devuelve el direction vector del eje que se pasa como parámetro.
+
+//! @brief Return the direction vector del eje being passed as parameter.
 SisCooXd3d::VGlobal SisCooXd3d::GetVDirEje(const size_t &eje) const
   { 
-    const matriz_FT fila= GetFila(eje);
-    return VGlobal(fila(1,1),fila(1,2),fila(1,3));
+    const matriz_FT row= getRow(eje);
+    return VGlobal(row(1,1),row(1,2),row(1,3));
   }
-//! Devuelve las componentes del vector v 
-//! que se pasa como parámetro expresado en coordenadas locales
+//! Return las componentes del vector v 
+//! being passed as parameter expresado en coordenadas locales
 //! expresado en global coordinates.
 SisCooXd3d::VGlobal SisCooXd3d::GetCooGlobales(const matriz_FT &v) const
   {
@@ -75,9 +76,9 @@ SisCooXd3d::VGlobal SisCooXd3d::GetCooGlobales(const matriz_FT &v) const
 matriz_FT SisCooXd3d::GetCooLocales(const SisCooXd3d::VGlobal &v) const
   { return SisCoo::GetCooLocales(v.GetMatriz()); }
 //! Hace que el sistema de coordenadas tenga por vectores unitarios:
-//! - El versor correspondiente al vector i_, que se pasa como parámetro.
-//! - El versor correspondiente al vector j_, que se pasa como parámetro.
-//! - El versor correspondiente al vector k_, que se pasa como parámetro.
+//! - El versor correspondiente al vector i_, being passed as parameter.
+//! - El versor correspondiente al vector j_, being passed as parameter.
+//! - El versor correspondiente al vector k_, being passed as parameter.
 //!
 //! Comprueba que los tres vectores no sean coplanarios ni paralelos 2 a 2.
 void SisCooXd3d::vectores_unitarios(const VGlobal &i_,const VGlobal &j_,const VGlobal &k_)
@@ -112,21 +113,21 @@ void SisCooXd3d::vectores_unitarios(const VGlobal &i_,const VGlobal &j_,const VG
       }
     const size_t ne= NumEjes();
     const VGlobal e1= Normaliza(i_);
-    PutFila(1,e1);
+    putRow(1,e1);
     if(ne>1)
       {
         const VGlobal e2= Normaliza(j_);
-        PutFila(2,e2);
+        putRow(2,e2);
       }
     if(ne>2)
       {
         const VGlobal e3= Normaliza(k_);
-        PutFila(3,e3);
+        putRow(3,e3);
       }
   }
 
 //! @brief Construye el sistema de coordenadas formado por los vectores:
-//! i_ el que se pasa como parámetro.
+//! i_ el being passed as parameter.
 //! j_ el horizontal perpendicular a i_ (si es único).
 //! k_ el producto vectorial de ambos.
 void SisCooXd3d::VectorEjeX(const VGlobal &i_)
@@ -144,11 +145,11 @@ void SisCooXd3d::VectorEjeX(const VGlobal &i_)
         const GEOM_FT imod= Abs2(i_); //Módulo de i.
         //const GEOM_FT tol= imod/1e8;
         VGlobal k_;
-        //if( (fabs(i_(1))<tol) && (fabs(i_(2))<tol) ) //Si i es casi paralelo al eje z global.
-        if(paralelos(i_,Vector3d(0,0,1))) //Si i es paralelo al eje z global.
-          k_= imod*J_3d; //k paralelo a eje y global.
+        //if( (fabs(i_(1))<tol) && (fabs(i_(2))<tol) ) //Si i es casi paralelo al z axis global.
+        if(paralelos(i_,Vector3d(0,0,1))) //Si i es paralelo al z axis global.
+          k_= imod*J_3d; //k paralelo a y axis global.
         else
-          k_= imod*K_3d; //k paralelo a eje z global.
+          k_= imod*K_3d; //k paralelo a z axis global.
         const VGlobal j_= k_ ^ i_;
         k_= i_ ^ j_;
         vectores_unitarios(i_,j_,k_); //Normalizamos.

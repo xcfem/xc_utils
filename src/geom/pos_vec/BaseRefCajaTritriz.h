@@ -35,32 +35,32 @@ class RangoTritriz;
 class BaseRefCajaTritriz
   {
   protected:
-    size_t ncapas; //!< Número de capas.
-    size_t nfls; //!< Número de filas.
-    size_t ncls; //!< Número de columnas.
-    size_t offset_cp; //!< Offset capa.
-    size_t offset_f; //!< Offset fila.
-    size_t offset_c; //!< Offset columna.
+    size_t n_layers; //!< number of layers.
+    size_t n_rows; //!< number of rows.
+    size_t n_columns; //!< number of columns.
+    size_t offset_cp; //!< Offset layer.
+    size_t offset_f; //!< Offset row.
+    size_t offset_c; //!< Offset column.
   public:
     BaseRefCajaTritriz(const size_t &,const size_t &,const size_t &,const size_t &,const size_t &,const size_t &);
     BaseRefCajaTritriz(const RangoTritriz &rango);
-    BaseRefCajaTritriz(const size_t &capa,const RangoIndice &rango_filas,const RangoIndice &rango_cols);
-    BaseRefCajaTritriz(const RangoIndice &rango_capas,const size_t &fila,const RangoIndice &rango_cols);
-    BaseRefCajaTritriz(const RangoIndice &rango_capas,const RangoIndice &rango_filas,const size_t &col);
-    BaseRefCajaTritriz(const size_t &capa,const size_t &fila,const RangoIndice &rango_cols);
-    BaseRefCajaTritriz(const size_t capa,const RangoIndice &rango_filas,const size_t &col);
-    BaseRefCajaTritriz(const RangoIndice &rango_capas,const size_t &fila,const size_t &col);
-    inline const size_t &GetCapas(void) const
-      { return ncapas; }
-    inline const size_t &getNumFilas(void) const
-      { return nfls; }
-    inline const size_t &getNumCols(void) const
-      { return ncls; }
+    BaseRefCajaTritriz(const size_t &iLayer,const RangoIndice &row_range,const RangoIndice &column_range);
+    BaseRefCajaTritriz(const RangoIndice &layer_range,const size_t &iRow,const RangoIndice &column_range);
+    BaseRefCajaTritriz(const RangoIndice &layer_range,const RangoIndice &row_range,const size_t &col);
+    BaseRefCajaTritriz(const size_t &iLayer,const size_t &iRow,const RangoIndice &column_range);
+    BaseRefCajaTritriz(const size_t iLayer,const RangoIndice &row_range,const size_t &col);
+    BaseRefCajaTritriz(const RangoIndice &layer_range,const size_t &iRow,const size_t &col);
+    inline const size_t &getNumberOfLayers(void) const
+      { return n_layers; }
+    inline const size_t &getNumberOfRows(void) const
+      { return n_rows; }
+    inline const size_t &getNumberOfColumns(void) const
+      { return n_columns; }
     inline const size_t Size(void) const
-      { return ncapas*nfls*ncls; }
+      { return n_layers*n_rows*n_columns; }
     bool Empty(void) const;
-    RangoIndice RangoCapas(void) const;
-    RangoIndice RangoFilas(void) const;
+    RangoIndice LayerRange(void) const;
+    RangoIndice RowRange(void) const;
     RangoIndice RangoCols(void) const;
   };
 
@@ -68,17 +68,17 @@ template <class TRITRIZ>
 inline void PrintTritriz(const TRITRIZ &t,std::ostream &os)
   {
     os << '[';
-    const size_t ncapas= t.GetCapas();
-    for(size_t i=1;i<=ncapas;i++)
+    const size_t n_layers= t.getNumberOfLayers();
+    for(size_t i=1;i<=n_layers;i++)
       {
         os << '[';
-        const size_t nfls= t.getNumFilas();
-        for(register size_t j= 1;j<=nfls;j++)
+        const size_t n_rows= t.getNumberOfRows();
+        for(register size_t j= 1;j<=n_rows;j++)
           {
             os << '[';
-            const size_t ncls= t.getNumCols();
-            if(ncls > 0) os << t(i,j,1);
-	    for(register size_t k= 2;k<=ncls;k++)
+            const size_t n_columns= t.getNumberOfColumns();
+            if(n_columns > 0) os << t(i,j,1);
+	    for(register size_t k= 2;k<=n_columns;k++)
 	      os << ',' << t(i,j,k);
             os << ']';
           }

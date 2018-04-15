@@ -39,23 +39,23 @@ class Trf: public EntCmd
   public:
     inline virtual ~Trf(void) {}
     virtual GEOM_FT Cartesianas(const size_t &i,const size_t &j) const= 0;
-    //Devuelve el elemento (i,j) de la matriz de transformación en cartesianas.
+    //Return el elemento (i,j) de la matriz de transformación en cartesianas.
     //       -              -
     //       | m11  m12 m13 |
     //       | m21  m22 m23 |
     //       |   0    0  1  |
     //       -              -
     virtual GEOM_FT Homogeneas(const size_t &i,const size_t &j) const= 0;
-    //Devuelve el elemento (i,j) de la matriz de transformación en homogéneas.
+    //Return el elemento (i,j) de la matriz de transformación en homogéneas.
     //       -              -
     //       | m11  m12 m13 |
     //       | m21  m22 m23 |
     //       |   0    0  hw |
     //       -              -
     virtual matriz_FT Cartesianas(void) const= 0;
-    //Devuelve la matriz de transformación en cartesianas.
+    //Return la matriz de transformación en cartesianas.
     virtual matriz_FT Homogeneas(void) const= 0;
-    //Devuelve la matriz de transformación en homogéneas.
+    //Return la matriz de transformación en homogéneas.
   };
 
 #endif

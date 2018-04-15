@@ -70,7 +70,7 @@ bool GeomObj3d::In(const Pos3d &p, const double &tol) const
     return (BND3d().In(p,tol));
   }
 
-//! @brief Devuelve true if the point lies outside the object.
+//! @brief Return true if the point lies outside the object.
 bool GeomObj3d::Out(const Pos3d &p, const double &tol) const
   { return !In(p,tol); }
 
@@ -101,7 +101,7 @@ GEOM_FT GeomObj3d::I( const unsigned short int &i, const unsigned short int &j) 
       }        
   }
 
-//! @brief Devuelve el momento de inercia respecto al eje que pasa por O
+//! @brief Return el momento de inercia respecto al eje que pasa por O
 //! con direcci'on la de e.
 GEOM_FT GeomObj3d::I(const Pos3d &O,const Vector3d &e) const
   {
@@ -109,12 +109,12 @@ GEOM_FT GeomObj3d::I(const Pos3d &O,const Vector3d &e) const
     return dot(e,Io*e.GetMatriz())/Abs2(e);
   }
 
-//! @brief Devuelve el momento de inercia respecto a la recta que se pasa
+//! @brief Return el momento de inercia respecto a la recta que se pasa
 //! como parámetro.
 GEOM_FT GeomObj3d::I(const Recta3d &r) const
   { return I(r.Point(),r.VDir()); }
 
-//! @brief Devuelve el momento de inercia (i,j) respecto eje paralelo al i
+//! @brief Return el momento de inercia (i,j) respecto eje paralelo al i
 //! que pasa por o.
 GEOM_FT GeomObj3d::I( const unsigned short int i,
                      const unsigned short int j,
@@ -134,7 +134,7 @@ GEOM_FT GeomObj3d::I( const unsigned short int i,
       }
   }
 
-//! @brief Devuelve el tensor de inercia respecto al centro de gravedad
+//! @brief Return el tensor de inercia respecto al centro de gravedad
 //! del objeto.
 matriz_FT GeomObj3d::I(void) const
   {
@@ -145,7 +145,7 @@ matriz_FT GeomObj3d::I(void) const
     return i;
   }
 
-//! @brief Devuelve el tensor de inercia with respect to the point o.
+//! @brief Return el tensor de inercia with respect to the point o.
 matriz_FT GeomObj3d::I(const Pos3d &o) const
   {
     matriz_FT Ig= I();
@@ -154,7 +154,7 @@ matriz_FT GeomObj3d::I(const Pos3d &o) const
     return Ig+m*(Abs2(og)*identidad(Ig)-(og & og));
   }
 
-//! @brief Devuelve el momento polar de inercia with respect to the point o.
+//! @brief Return el momento polar de inercia with respect to the point o.
 GEOM_FT GeomObj3d::IO(const Pos3d &o) const
   { return (I(1,1,o)+I(2,2,o)+I(3,3,o))/2; }
 

@@ -59,7 +59,7 @@ void VerticesCara::Swap(void)
 
 
 
-//! @brief Devuelve las posiciones de los vertices de la cara.
+//! @brief Return las posiciones de los vertices de la cara.
 ListaPos3d VerticesCara::getPosVertices(const std::vector<Pos3d> &vertices) const
   {
     ListaPos3d retval;
@@ -68,11 +68,11 @@ ListaPos3d VerticesCara::getPosVertices(const std::vector<Pos3d> &vertices) cons
     return retval;
   }
 
-//! @brief Devuelve el centroide de la cara.
+//! @brief Return el centroide de la cara.
 Pos3d VerticesCara::getCentroide(const std::vector<Pos3d> &vertices) const
   { return getPosVertices(vertices).Cdg();  }
 
-//! @brief Devuelve las aristas de la cara.
+//! @brief Return las aristas de la cara.
 std::list<VerticesArista> VerticesCara::getAristas(void) const
   {
     std::list<VerticesArista> retval;
@@ -131,7 +131,7 @@ bool VerticesCara::tieneAristaOrientada(const VerticesArista &arista) const
     return retval;
   }
 
-//! @brief Devuelve las caras que comparten una arista con ésta.
+//! @brief Return las caras que comparten una arista con ésta.
 std::deque<VerticesCara> VerticesCara::compartenArista(const std::deque<VerticesCara> &caras) const
   {
     std::deque<VerticesCara> retval;
@@ -205,15 +205,15 @@ VertexMap::VertexMap(const TripletMap<Pos3d> &vertexMap)
     makeConsistent();
   }
 
-//! @brief Devuelve los vértices.
+//! @brief Return los vértices.
 const std::vector<Pos3d> &VertexMap::getVertices(void) const
   { return vertices; }
 
-//! @brief Devuelve el número de vertices.
+//! @brief Return el número de vertices.
 size_t VertexMap::getNumVertices(void) const
   { return vertices.size(); }
 
-//! @brief Devuelve el número de caras.
+//! @brief Return el número de caras.
 size_t VertexMap::getNumCaras(void) const
   { return caras.size(); }
 
@@ -221,11 +221,11 @@ size_t VertexMap::getNumCaras(void) const
 const VerticesCara &VertexMap::getCara(const size_t &i) const
   { return caras[i]; }
 
-//! @brief Devuelve las caras.
+//! @brief Return las caras.
 const std::deque<VerticesCara > &VertexMap::getCaras(void) const
   { return caras; }
 
-//! @brief Devuelve el centroide.
+//! @brief Return el centroide.
 Pos3d VertexMap::getCentroide(void) const
   {
     const GEOM_FT sz= getNumVertices();

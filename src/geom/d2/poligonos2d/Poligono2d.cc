@@ -88,7 +88,7 @@ Poligono2d::Poligono2d(const std::list<Poligono2d> &lp)
 GeomObj *Poligono2d::clon(void) const
   { return new Poligono2d(*this); }
 
-//! @brief Devuelve un polígono paralelo a éste a distancia
+//! @brief Return un polígono paralelo a éste a distancia
 //! «d». Por el exterior si la distancia es positiva o por
 //! el interior en otro caso.
 Poligono2d Poligono2d::Offset(const GEOM_FT &d) const
@@ -118,11 +118,11 @@ bool Poligono2d::In(const Pos2d &p, const double &tol) const
     return false;
   }
 
-//! @brief Devuelve verdadero si la polilinea está contenida en el polígono.
+//! @brief Return verdadero si la polilinea está contenida en el polígono.
 bool Poligono2d::In(const Polilinea2d &p) const
   { return In(p.begin(),p.end()); }
 
-//! @brief Devuelve verdadero si el polígono está contenido en éste.
+//! @brief Return verdadero si el polígono está contenido en éste.
 bool Poligono2d::In(const Poligono2d &p) const
   { return In(p.vertices_begin(),p.vertices_end()); }
 
@@ -174,7 +174,7 @@ bool Poligono2d::Overlap(const Polilinea2d &p) const
     return retval;
   }
 
-//! @brief Devuelve verdadero si el polígono se superpone
+//! @brief Return verdadero si el polígono se superpone
 //! con el que se pasa como parámetro.
 bool Poligono2d::Overlap(const Poligono2d &p) const
   { 
@@ -204,7 +204,7 @@ bool Poligono2d::Overlap(const Poligono2d &p) const
     return retval;
   }
 
-//! @brief Devuelve verdadero si el polígono se superpone
+//! @brief Return verdadero si el polígono se superpone
 //! con alguno de los de la lista que se pasa como parámetro.
 bool Poligono2d::Overlap(const std::list<Poligono2d> &l) const
   {
@@ -219,7 +219,7 @@ bool Poligono2d::Overlap(const std::list<Poligono2d> &l) const
     return retval;
   }
 
-//! @brief Devuelve el valor maximo de la coordenada i.
+//! @brief Return el valor maximo de la coordenada i.
 GEOM_FT Poligono2d::GetMax(unsigned short int i) const
   {
     if (GetNumVertices() < 1) return 0.0;
@@ -232,7 +232,7 @@ GEOM_FT Poligono2d::GetMax(unsigned short int i) const
     return retval;
   }
 
-//! @brief Devuelve el valor minimo de la coordenada i.
+//! @brief Return el valor minimo de la coordenada i.
 GEOM_FT Poligono2d::GetMin(unsigned short int i) const
   {
     if (GetNumVertices() < 1) return 0.0;
@@ -258,7 +258,7 @@ GeomObj::list_Pos2d Poligono2d::ListaVertices(void) const
 void Poligono2d::Transforma(const Trf2d &trf2d)
   { trf2d.Transforma(cgpol.vertices_begin(),cgpol.vertices_end()); }
 
-//! Devuelve los polígonos que resultan de cortar por la recta
+//! Return los polígonos que resultan de cortar por la recta
 //! r, el polígono p, que se pasa como parámetro.
 std::list<Poligono2d> corta(const Poligono2d &p,const Recta2d &r)
   {
@@ -272,11 +272,11 @@ std::list<Poligono2d> corta(const Poligono2d &p,const Recta2d &r)
     return retval;
   }
 
-//! @brief Devuelve el área del polígono.
+//! @brief Return el área del polígono.
 GEOM_FT Poligono2d::Area(void) const
   { return ::Abs(AreaSigno()); }
 
-//! @brief Devuelve los poligonos que forman el área tributaria
+//! @brief Return los poligonos que forman el área tributaria
 //! de cada vértice.
 std::vector<Poligono2d> Poligono2d::getPoligonosTributarios(void) const
   {
@@ -305,7 +305,7 @@ std::vector<Poligono2d> Poligono2d::getPoligonosTributarios(void) const
     return retval;
   }
 
-//! @brief Devuelve las áreas de los polígonos tributarios (una por
+//! @brief Return las áreas de los polígonos tributarios (una por
 //! vértice).
 std::vector<double> Poligono2d::getAreasTributarias(void) const
   {
@@ -317,7 +317,7 @@ std::vector<double> Poligono2d::getAreasTributarias(void) const
     return retval;
   }
 
-//! @brief Devuelve los recubrimientos de las fibras que se pasan como parámetro.
+//! @brief Return los recubrimientos de las fibras que se pasan como parámetro.
 std::deque<GEOM_FT> &Poligono2d::GetRecubrimientos(const ListaPos2d &l) const
   { return l.GetRecubrimientos(*this); }
 
@@ -346,24 +346,24 @@ Poligono2d append_mid_points(const Poligono2d &plg)
     return retval;
   }
 
-//! @brief Devuelve la intesección del polígono con la recta.
+//! @brief Return la intesección del polígono con la recta.
 Segmento2d Poligono2d::Clip(const Recta2d &r) const
   { return SupPoligonal2d::Clip(r); }
 
-//! @brief Devuelve la intesección del polígono con la semirecta.
+//! @brief Return la intesección del polígono con la semirecta.
 Segmento2d Poligono2d::Clip(const SemiRecta2d &sr) const
   { return SupPoligonal2d::Clip(sr); }
 
-//! @brief Devuelve la intesección del polígono con el segmento.
+//! @brief Return la intesección del polígono con el segmento.
 Segmento2d Poligono2d::Clip(const Segmento2d &sg) const
   { return SupPoligonal2d::Clip(sg); }
 
-//! @brief Devuelve los polígonos que resultan de recortar éste por
+//! @brief Return los polígonos que resultan de recortar éste por
 //! por el BND que se pasa como parámetro.
 std::list<Poligono2d> Poligono2d::Clip(const BND2d &bnd) const
   { return Clip(bnd.GetPoligono()); }
 
-//! @brief Devuelve los polígonos que resultan de recortar éste por
+//! @brief Return los polígonos que resultan de recortar éste por
 //! por el que se pasa como parámetro.
 std::list<Poligono2d> Poligono2d::Clip(const Poligono2d &otro) const
   { return interseccion(*this,otro); }
@@ -372,12 +372,12 @@ std::list<Poligono2d> Poligono2d::Clip(const Poligono2d &otro) const
 void Poligono2d::clipBy(const Poligono2d &plg)
   { (*this)= Poligono2d(Clip(plg)); }
 
-//! @brief Devuelve la intersección de este polígono con el que
+//! @brief Return la intersección de este polígono con el que
 //! se pasa como parámetro.
 std::list<Poligono2d> Poligono2d::Interseccion(const Semiplano2d &sp) const
   { return interseccion(*this,sp); }
 
-//! @brief Devuelve la unión de este polígono con el que
+//! @brief Return la unión de este polígono con el que
 //! se pasa como parámetro.
 Poligono2d Poligono2d::getUnion(const Poligono2d &otro) const
   {
@@ -406,7 +406,7 @@ void Poligono2d::une(const std::list<Poligono2d> &l)
       }
   }
 
-// //! @brief Devuelve la lista de polígonos que resulta de interpretar la text string que se pasa como parámetro.
+// //! @brief Return la lista de polígonos que resulta de interpretar la text string que se pasa como parámetro.
 // std::list<Poligono2d> Poligono2d::crea_lista_poligono2d(const std::string &str) const
 //   {
 //     check_comillas(str);

@@ -71,13 +71,13 @@ Pos3d MatrizPos3d::pos_lagrangiana(const size_t &i,const size_t &j) const
     return Pos3d(x,y,z);
   }
 
-//! @brief Devuelve el máximo de las distancias entre los mesh points
+//! @brief Return el máximo de las distancias entre los mesh points
 //! y corresponding to the Lagrange interpolation (see page IX-19 of the SAP90 manual).
 GEOM_FT MatrizPos3d::dist_lagrange(void) const
   {
     GEOM_FT retval(0.0);
-    for(size_t i=2;i<fls;i++) //interior points.
-      for(size_t j=2;j<cls;j++)
+    for(size_t i=2;i<n_rows;i++) //interior points.
+      for(size_t j=2;j<n_columns;j++)
         retval= std::max(retval,dist((*this)(i,j),pos_lagrangiana(i,j)));
     return retval;
   }
@@ -87,8 +87,8 @@ GEOM_FT MatrizPos3d::dist_lagrange(void) const
 //! Return the distance máxima obtenida.
 GEOM_FT MatrizPos3d::ciclo_lagrange(void)
   {
-    for(size_t i=2;i<fls;i++) //interior points.
-      for(size_t j=2;j<cls;j++)
+    for(size_t i=2;i<n_rows;i++) //interior points.
+      for(size_t j=2;j<n_columns;j++)
         (*this)(i,j)= pos_lagrangiana(i,j);
     return dist_lagrange();
   }
@@ -113,7 +113,7 @@ GEOM_FT MatrizPos3d::Lagrange(const GEOM_FT &tol)
     return err;
   }
 
-//! @brief Aplica a la matriz la transformación que se pasa como parámetro.
+//! @brief Aplica a la matriz la transformación being passed as parameter.
 void MatrizPos3d::Transforma(const Trf3d &trf)
   { trf.Transforma(*this); }
 
@@ -126,7 +126,7 @@ MatrizPos3d cuadrilatero(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const P
   { return MatrizPos3d(p1,p2,p3,p4,ndiv1,ndiv2); }
 
 
-//! Devuelve el triángulo inscrito in the mesh cuyo vértice inferior izquierdo
+//! Return el triángulo inscrito in the mesh cuyo vértice inferior izquierdo
 //! es el de índices i,j y que queda bajo la diagonal que lo une con
 //! el vértice de índices i+1,j+1.
 //!                                                                              i+1,j +---+ i+1,j+1
@@ -137,7 +137,7 @@ MatrizPos3d cuadrilatero(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const P
 Triangulo3d MatrizPos3d::GetTriangulo1(const size_t &i,const size_t &j) const
   { return Triangulo3d((*this)(i,j),(*this)(i,j+1),(*this)(i+1,j+1)); }
 
-//! Devuelve el triángulo inscrito in the mesh cuyo vértice inferior izquierdo
+//! Return el triángulo inscrito in the mesh cuyo vértice inferior izquierdo
 //! es el de índices i,j y que queda bajo la diagonal que lo une con
 //! el vértice de índices i+1,j+1.
 //!                                                                              i+1,j +---+ i+1,j+1
@@ -157,30 +157,30 @@ Triangulo3d MatrizPos3d::GetTriangulo2(const size_t &i,const size_t &j) const
 //! Cada mesh cell se cubre con dos triángulos                                         i,j +---+ i,j+1
 GEOM_FT dist2(const MatrizPos3d &ptos,const Pos3d &pt)
   {
-    if(ptos.size()<1) return NAN; //El conjunto está vacío.
+    if(ptos.size()<1) return NAN; //El conjunto is empty.
     GEOM_FT d= dist2(ptos(1,1),pt);
     if(ptos.size()==1) return d; //Degenerated mesh (only a point)
     //Distancia a los triángulos.
-    const size_t fls= ptos.getNumFilas();
-    const size_t cls= ptos.getNumCols();
-    if(fls<2) //There is only a point row.
+    const size_t n_rows= ptos.getNumberOfRows();
+    const size_t n_columns= ptos.getNumberOfColumns();
+    if(n_rows<2) //There is only a point row.
       {
-        for(size_t j=1;j<cls;j++) //Hasta la penúltima columna.
+        for(size_t j=1;j<n_columns;j++) //To the last but one column.
           {
             Segmento3d s(ptos(1,j),ptos(1,j+1));
             d= std::min(d,s.dist2(pt));
           }
       }
-    if(cls<2) //There is only a point column.
+    if(n_columns<2) //There is only a point column.
       {
-        for(size_t i=1;i<fls;i++) //Hasta la penúltima fila.
+        for(size_t i=1;i<n_rows;i++) //To the last but one row.
           {
             Segmento3d s(ptos(i,1),ptos(i+1,1));
             d= std::min(d,s.dist2(pt));
           }
       }
-    for(size_t i=1;i<fls;i++) //Hasta la penúltima fila.
-      for(size_t j=1;j<cls;j++) //Hasta la penúltima columna.
+    for(size_t i=1;i<n_rows;i++) //To the last but one row.
+      for(size_t j=1;j<n_columns;j++) //To the last but one column.
         {
           Triangulo3d t1=ptos.GetTriangulo1(i,j); //Primer triángulo.
           d= std::min(d,t1.dist2(pt));
@@ -195,17 +195,17 @@ GEOM_FT dist2(const MatrizPos3d &ptos,const Pos3d &pt)
 bool dist_menor(const MatrizPos3d &ptos,const Pos3d &pt,const GEOM_FT &d_max)
   {
     const GEOM_FT d_max2(d_max*d_max);
-    if(ptos.size()<1) return false; //El conjunto está vacío.
+    if(ptos.size()<1) return false; //El conjunto is empty.
     GEOM_FT d= dist2(ptos(1,1),pt);
     if(ptos.size()==1) //Degenerated mesh (only a point).
       return (d<d_max2);
     if(d<d_max2) //It's already OK, the first point is near enough..
       return true;
-    const size_t fls= ptos.getNumFilas();
-    const size_t cls= ptos.getNumCols();
-    if(fls<2) //There is only a point row.
+    const size_t n_rows= ptos.getNumberOfRows();
+    const size_t n_columns= ptos.getNumberOfColumns();
+    if(n_rows<2) //There is only a point row.
       {
-        for(size_t j=1;j<cls;j++) //Hasta la penúltima columna.
+        for(size_t j=1;j<n_columns;j++) //To the last but one column.
           {
             Segmento3d s(ptos(1,j),ptos(1,j+1));
             d= std::min(d,s.dist2(pt));
@@ -213,9 +213,9 @@ bool dist_menor(const MatrizPos3d &ptos,const Pos3d &pt,const GEOM_FT &d_max)
               return true;
           }
       }
-    if(cls<2) //There is only a point column.
+    if(n_columns<2) //There is only a point column.
       {
-        for(size_t i=1;i<fls;i++) //Hasta la penúltima fila.
+        for(size_t i=1;i<n_rows;i++) //To the last but one row.
           {
             Segmento3d s(ptos(i,1),ptos(i+1,1));
             d= std::min(d,s.dist2(pt));
@@ -224,8 +224,8 @@ bool dist_menor(const MatrizPos3d &ptos,const Pos3d &pt,const GEOM_FT &d_max)
           }
       }
     //Distancia a los triángulos.
-    for(size_t i=1;i<fls;i++) //Hasta la penúltima fila.
-      for(size_t j=1;j<cls;j++) //Hasta la penúltima columna.
+    for(size_t i=1;i<n_rows;i++) //To the last but one row.
+      for(size_t j=1;j<n_columns;j++) //To the last but one column.
         {
           Triangulo3d t1=ptos.GetTriangulo1(i,j); //Primer triángulo.
           d= std::min(d,t1.dist2(pt));
@@ -252,31 +252,31 @@ GEOM_FT dist(const MatrizPos3d &ptos,const Pos3d &pt)
 //!                                                                                i,j +---+ i,j+1
 GEOM_FT pseudo_dist2(const MatrizPos3d &ptos,const Pos3d &pt)
   {
-    if(ptos.size()<1) return NAN; //El conjunto está vacío.
+    if(ptos.size()<1) return NAN; //El conjunto is empty.
     GEOM_FT d= dist2(ptos(1,1),pt);
     if(ptos.size()==1) return d; //Degenerated mesh.
     //Distancia a los triángulos.
-    const size_t fls= ptos.getNumFilas();
-    const size_t cls= ptos.getNumCols();
-    if(fls<2) //There is only a point row.
+    const size_t n_rows= ptos.getNumberOfRows();
+    const size_t n_columns= ptos.getNumberOfColumns();
+    if(n_rows<2) //There is only a point row.
       {
-        for(size_t j=1;j<cls;j++) //Hasta la penúltima columna.
+        for(size_t j=1;j<n_columns;j++) //To the last but one column.
           {
             Segmento3d s(ptos(1,j),ptos(1,j+1));
             d= std::max(d,s.dist2(pt));
           }
       }
-    if(cls<2) //There is only a point column.
+    if(n_columns<2) //There is only a point column.
       {
-        for(size_t i=1;i<fls;i++) //Hasta la penúltima fila.
+        for(size_t i=1;i<n_rows;i++) //To the last but one row.
           {
             Segmento3d s(ptos(i,1),ptos(i+1,1));
             d= std::max(d,s.dist2(pt));
           }
       }
     d= Plano3d(ptos.GetTriangulo1(1,1)).PseudoDist2(pt);
-    for(size_t i=1;i<fls;i++) //Hasta la penúltima fila.
-      for(size_t j=1;j<cls;j++) //Hasta la penúltima columna.
+    for(size_t i=1;i<n_rows;i++) //To the last but one row.
+      for(size_t j=1;j<n_columns;j++) //To the last but one column.
         {
           Plano3d p1(ptos.GetTriangulo1(i,j)); //Plano del primer triángulo.
           d= std::max(d,p1.PseudoDist2(pt));
@@ -308,11 +308,11 @@ BND3d get_bnd(const MatrizPos3d &ptos)
         return retval;
       }
     retval= BND3d(ptos.front(),ptos.back());
-    const size_t fls= ptos.getNumFilas();
-    const size_t cls= ptos.getNumCols();
+    const size_t n_rows= ptos.getNumberOfRows();
+    const size_t n_columns= ptos.getNumberOfColumns();
     retval+= ptos(1,1);
-    retval+= ptos(fls,1);
-    retval+= ptos(1,cls);
-    retval+= ptos(fls,cls);
+    retval+= ptos(n_rows,1);
+    retval+= ptos(1,n_columns);
+    retval+= ptos(n_rows,n_columns);
     return retval;
   }

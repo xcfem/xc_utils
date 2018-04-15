@@ -45,7 +45,7 @@ Pos2d GeomObj2d::GetPMin(void) const
   }
 
 
-//! @brief Devuelve el rectángulo envolvente del objeto.
+//! @brief Return el rectángulo envolvente del objeto.
 BND2d GeomObj2d::Bnd(void) const
   { return BND2d(GetPMin(),GetPMax()); }
 
@@ -62,7 +62,7 @@ bool GeomObj2d::Out(const Pos2d &p, const double &tol) const
   { return !In(p,tol); }
 
 
-//! @brief Devuelve el ángulo que define un eje principal de inercia.
+//! @brief Return el ángulo que define un eje principal de inercia.
 double GeomObj2d::Theta_p(void) const
   { return theta_inercia(Ix(),Iy(),Pxy()); }
 
@@ -76,25 +76,25 @@ Dir2d GeomObj2d::DirEjeI_a(void) const
 Dir2d GeomObj2d::DirEjeI_b(void) const
   { return DirEjeI_a().Perpendicular(); }
 
-//! @brief Devuelve un eje principal de inercia (no sabemos si
+//! @brief Return un eje principal de inercia (no sabemos si
 //! el mayor o el menor
 Recta2d GeomObj2d::EjeI_a(void) const
   { return Recta2d(Cdg(),DirEjeI_a()); }
 
-//! @brief Devuelve un eje principal de inercia (no sabemos si
+//! @brief Return un eje principal de inercia (no sabemos si
 //! el mayor o el menor
 Recta2d GeomObj2d::EjeI_b(void) const
   { return Recta2d(Cdg(),DirEjeI_b()); }
 
-//! @brief Devuelve los ejes principales de inercia.
+//! @brief Return los ejes principales de inercia.
 Ref2d2d GeomObj2d::PrincipalAxesOfInertia(void) const
   { return Ref2d2d(Cdg(),DirEjeI_a()); }
 
-//! @brief Devuelve el momento de inercia principal mayor.
+//! @brief Return el momento de inercia principal mayor.
 GEOM_FT GeomObj2d::I1(void) const
   { return I1_inercia(Ix(),Iy(),Pxy()); }
 
-//! @brief Devuelve el momento de inercia principal menor.
+//! @brief Return el momento de inercia principal menor.
 GEOM_FT GeomObj2d::I2(void) const
   { return I2_inercia(Ix(),Iy(),Pxy()); }
 
@@ -136,7 +136,7 @@ GEOM_FT GeomObj2d::I(const unsigned short int i,const unsigned short int j,const
       }
   }
 
-//! @brief Devuelve el tensor de inercia respecto al centro de gravedad del objeto.
+//! @brief Return el tensor de inercia respecto al centro de gravedad del objeto.
 matriz_FT GeomObj2d::I(void) const
   {
     matriz_FT i(2,2);
@@ -145,7 +145,7 @@ matriz_FT GeomObj2d::I(void) const
     return i;
   }
 
-//Devuelve el tensor de inercia with respect to the point o.
+//Return el tensor de inercia with respect to the point o.
 matriz_FT GeomObj2d::I(const Pos2d &o) const
   {
     matriz_FT Ig= I();
@@ -154,12 +154,12 @@ matriz_FT GeomObj2d::I(const Pos2d &o) const
     return Ig+m*(Abs2(og)*identidad(Ig)-(og & og));
   }
 GEOM_FT GeomObj2d::I(const Recta2d &r) const
-//Devuelve el momento de inercia respecto a la recta que se pasa
+//Return el momento de inercia respecto a la recta que se pasa
 //como parámetro.
   { return I(r.Point(),r.VDir()); }
 
 
-//! @brief Devuelve el momento de inercia respecto al eje que pasa por O
+//! @brief Return el momento de inercia respecto al eje que pasa por O
 //! con dirección la de e.
 GEOM_FT GeomObj2d::I(const Pos2d &O,const Vector2d &e) const
   {
@@ -167,7 +167,7 @@ GEOM_FT GeomObj2d::I(const Pos2d &O,const Vector2d &e) const
     return dot(e,Io*e)/Abs2(e);
   }
 
-//! @brief Devuelve el momento polar de inercia with respect to the point o.
+//! @brief Return el momento polar de inercia with respect to the point o.
 GEOM_FT GeomObj2d::IO(const Pos2d &o) const
   { return (I(1,1,o)+I(2,2,o)+I(3,3,o))/2; }
 

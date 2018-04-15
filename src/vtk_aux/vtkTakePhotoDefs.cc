@@ -22,7 +22,7 @@
 
 #include "vtkTakePhotoDefs.h"
 
-//! @brief Devuelve el formato del archivo a partir del entero que
+//! @brief Return el formato del archivo a partir del entero que
 //! se pasa como parámetro
 sepFileFormat int_to_file_format(int f)
   {
@@ -50,7 +50,7 @@ sepFileFormat int_to_file_format(int f)
     return retval;
   }
 
-//! @brief Devuelve el formato del archivo a partir del entero que
+//! @brief Return el formato del archivo a partir del entero que
 //! se pasa como parámetro
 sepFileFormat string_to_file_format(const std::string &fmt_name)
   {

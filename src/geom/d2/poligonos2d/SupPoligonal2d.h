@@ -55,9 +55,9 @@ class SupPoligonal2d: public Superficie2d
     inline bool empty(void) const
       { return (GetNumVertices()<1); }
     virtual Pos2d Vertice(unsigned int i) const= 0;
-    //Devuelve el vértice de indice i (i=1..GetNumVertices())
+    //Return el vértice de indice i (i=1..GetNumVertices())
     virtual Pos2d Vertice0(unsigned int j) const= 0;
-    //Devuelve el vértice de indice j (j=0..GetNumVertices()-1)
+    //Return el vértice de indice j (j=0..GetNumVertices()-1)
     inline const Pos2d operator()(const size_t &i) const //Offset 1.
       { return Vertice(i); }
     inline const Pos2d operator[](const size_t &j) const //Offset 0.

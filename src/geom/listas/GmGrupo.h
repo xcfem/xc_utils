@@ -41,7 +41,7 @@ class GmGrupo : public GO
     typedef pdeque<GO> pdeque_geom_obj;
     pdeque_geom_obj objetos; //Objetos del grupo
     bool igual_dimension(void) const;
-    //Devuelve verdadero si todos los objetos son de la misma dimensión.
+    //Return verdadero si todos los objetos son de la misma dimensión.
   private:
     void copia_objetos(const pdeque_geom_obj &objs);
   public:
@@ -83,7 +83,7 @@ void GmGrupo<GO>::copia_objetos(const pdeque_geom_obj &objs)
 
 template <typename GO>
 bool GmGrupo<GO>::igual_dimension(void) const
-//Devuelve verdadero si todos los objetos son de la misma dimensión.
+//Return verdadero si todos los objetos son de la misma dimensión.
   {
     if(objetos.empty()) return true;
     register const_iterator i(objetos.begin());
@@ -96,7 +96,7 @@ bool GmGrupo<GO>::igual_dimension(void) const
 
 template <typename GO>
 unsigned short int GmGrupo<GO>::Dimension(void) const
-//Devuelve la dimensión del objeto 0, 1, 2 ó 3.
+//Return la dimensión del objeto 0, 1, 2 ó 3.
   {
     if(objetos.empty()) return 0;
     register const_iterator i(objetos.begin());

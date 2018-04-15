@@ -31,7 +31,7 @@ class Poligono2d;
 
 //! @ingroup GEOM
 //
-//! @brief Devuelve el «convex hull» del conjunto de posiciones
+//! @brief Return el «convex hull» del conjunto de posiciones
 //! que se pasa como parámetro.
 Poligono2d get_convex_hull2d(const GeomObj::list_Pos2d &lp);
 

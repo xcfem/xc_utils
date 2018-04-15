@@ -43,7 +43,7 @@ class SisCooRect1d2d: public SisCooXd2d
     virtual SisCoo *Copia(void) const
       { return new SisCooRect1d2d(*this); }
 
-    VGlobal GetI(void) const; //Devuelve el vector unitario I en el sistema global.
+    VGlobal GetI(void) const; //Return el vector unitario I en el sistema global.
 
     VGlobal GetCooGlobales(const VLocal &v) const;
     VLocal GetCooLocales(const VGlobal &v) const;

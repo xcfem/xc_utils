@@ -96,7 +96,7 @@ class GTSSurface
     double Volume(void) const
       { return gts_surface_volume(s); }
     double Area(void) const
-    //Devuelve la suma de las áreas (con signo) de las caras.
+    //Return la suma de las áreas (con signo) de las caras.
       { return gts_surface_area(s); }
 
     TriangleMap GetTriangleMap(void) const;

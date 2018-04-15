@@ -52,9 +52,9 @@ class GeomObj3d: public GeomObj
     virtual ~GeomObj3d(void) {}
     virtual GeomObj *clon(void) const=0;
     virtual GEOM_FT GetMax(unsigned short int i) const= 0;
-    //Devuelve el valor maximo de la coordenada i.
+    //Return el valor maximo de la coordenada i.
     virtual GEOM_FT GetMin(unsigned short int i) const= 0;
-    //Devuelve el valor minimo de la coordenada i.
+    //Return el valor minimo de la coordenada i.
     GEOM_FT GetXMax(void) const { return GetMax(1); }
     GEOM_FT GetYMax(void) const { return GetMax(2); }
     GEOM_FT GetZMax(void) const { return GetMax(3); }
@@ -69,7 +69,7 @@ class GeomObj3d: public GeomObj
     BND3d Bnd(void) const;
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const;
     virtual bool Out(const Pos3d &p, const double &tol= 0.0) const;
-    //Devuelve el peso para el cálculo del CDG
+    //Return el peso para el cálculo del CDG
     //por defecto es 1
     virtual GEOM_FT PesoCdg(void) const
       { return 1.0; }
@@ -95,7 +95,7 @@ class GeomObj3d: public GeomObj
       { return Iy()+Iz()-Ix(); }
     inline GEOM_FT I( const unsigned short int &i,
                      const unsigned short int &j) const;
-    //Devuelve el area que se emplea para calcular el momento de inercia
+    //Return el area que se emplea para calcular el momento de inercia
     virtual inline GEOM_FT IArea(void) const
       { return 0.0; }
     GEOM_FT I(const Pos3d &O,const Vector3d &e) const;

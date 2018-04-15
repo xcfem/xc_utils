@@ -32,7 +32,7 @@ cmb_acc::GammaFELS::GammaFELS(const float &fav,const float &desfav)
   : gamma_f_fav(fav), gamma_f_desfav(desfav) {}
 
 
-//! @brief Devuelve los coeficientes de ponderación correspondientes a situaciones de servicio.
+//! @brief Return los coeficientes de ponderación correspondientes a situaciones de servicio.
 cmb_acc::Variation cmb_acc::GammaFELS::Coefs(void) const
   {
     if(gamma_f_fav == gamma_f_desfav) return Variation(1,gamma_f_fav); //Si son iguales devuelve solo uno.
@@ -45,12 +45,12 @@ cmb_acc::Variation cmb_acc::GammaFELS::Coefs(void) const
 cmb_acc::GammaFELU::GammaFELU(const float &fav,const float &desfav,const float &fav_acc,const float &desfav_acc)
   : GammaFELS(fav,desfav), gamma_f_fav_acc(fav_acc), gamma_f_desfav_acc(desfav_acc) {}
 
-//! @brief Devuelve los coeficientes de ponderación correspondientes 
+//! @brief Return los coeficientes de ponderación correspondientes 
 //! a situaciones persistentes o transitorias.
 cmb_acc::Variation cmb_acc::GammaFELU::CoefsPT(void) const
   { return GammaFELS::Coefs(); }
 
-//! @brief Devuelve los coeficientes de ponderación correspondientes 
+//! @brief Return los coeficientes de ponderación correspondientes 
 //! a situaciones accidentales o sísmicas.
 cmb_acc::Variation cmb_acc::GammaFELU::CoefsAcc(void) const
   {
@@ -65,7 +65,7 @@ cmb_acc::Variation cmb_acc::GammaFELU::CoefsAcc(void) const
 cmb_acc::GammaF::GammaF(const GammaFELU &gf_elu, const GammaFELS &gf_els)
   : EntCmd(), gammaf_elu(gf_elu), gammaf_els(gf_els) {}
 
-//! @brief Devuelve los coeficientes de ponderación correspondientes 
+//! @brief Return los coeficientes de ponderación correspondientes 
 //! a estados límite de servicio.
 cmb_acc::Variation cmb_acc::GammaF::CoefsEls(void) const
   { return gammaf_els.Coefs(); }

@@ -76,7 +76,7 @@ GEOM_FT PoligonoConAgujeros2d::Area(void) const
     return temp;    
   }
 
-//! @brief Devuelve el valor maximo de la coordenada i.
+//! @brief Return el valor maximo de la coordenada i.
 GEOM_FT PoligonoConAgujeros2d::GetMax(unsigned short int i) const
   { 
     GEOM_FT temp = 0;
@@ -96,7 +96,7 @@ GEOM_FT PoligonoConAgujeros2d::GetMax(unsigned short int i) const
     return temp;
   }
 
-//! @brief Devuelve el valor minimo de la coordenada i.
+//! @brief Return el valor minimo de la coordenada i.
 GEOM_FT PoligonoConAgujeros2d::GetMin(unsigned short int i) const
   {
     GEOM_FT temp = 0;
@@ -142,7 +142,7 @@ bool PoligonoConAgujeros2d::In(const Pos2d &p, const double &tol) const
 
   }
 
-//! @brief Devuelve el centro de gravedad.
+//! @brief Return el centro de gravedad.
 Pos2d PoligonoConAgujeros2d::Cdg(void) const
   {
     GEOM_FT areaTotal= Area();
@@ -167,7 +167,7 @@ Pos2d PoligonoConAgujeros2d::Cdg(void) const
 
 
 //! @brief Calcula el momento de inercia respecto a un eje paralelo al
-//! eje x que pasa por el CDG de la sección.
+//! x axis que pasa por el CDG de la sección.
 //! Ix = Integral y^2 dA
 GEOM_FT PoligonoConAgujeros2d::Ix(void) const
   { 
@@ -190,7 +190,7 @@ GEOM_FT PoligonoConAgujeros2d::Ix(void) const
   }
 
 //! @brief Calcula el momento de inercia respecto a un eje paralelo al
-//! eje y que pasa por el CDG del polígono.
+//! y axis que pasa por el CDG del polígono.
 //! Iy = Integral x^2 dA
 GEOM_FT PoligonoConAgujeros2d::Iy(void) const
   { 

@@ -85,13 +85,13 @@ GEOM_FT Tetraedro3d::GetMin(unsigned short int i) const
 GEOM_FT Tetraedro3d::Area(void) const
   { return getPoliedro3d().Area(); }
 
-//! @brief Devuelve el volumen con signo del tetraedro.
+//! @brief Return el volumen con signo del tetraedro.
 GEOM_FT Tetraedro3d::getVolumenSigno(void) const
   {
     return cgtetraedro.volume();
   }
 
-//! @brief Devuelve el volumen del tetraedro.
+//! @brief Return el volumen del tetraedro.
 GEOM_FT Tetraedro3d::Volumen(void) const
   { return std::abs(getVolumenSigno()); }
 

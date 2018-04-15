@@ -19,46 +19,46 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//ConstRefFilaK.h 
+//KRowConstRef.h 
 
-#ifndef CONSTREFFILAK_H
-#define CONSTREFFILAK_H
+#ifndef KROWCONSTREF_H
+#define KROWCONSTREF_H
 
 
 //! @ingroup GEOM
 //
-//! @brief Reference to a layer fila de la tritriz which points have
+//! @brief Reference to a layer row of the tritriz which points have
 //! constant J and K indices.
 template <class TRITRIZ>
-class ConstRefFilaK: public ConstRefCajaTritriz<TRITRIZ>
+class KRowConstRef: public ConstRefCajaTritriz<TRITRIZ>
   {
   public:
     typedef typename ConstRefCajaTritriz<TRITRIZ>::const_reference const_reference;
 
-    explicit ConstRefFilaK(const TRITRIZ &m,const size_t &capa= 1,const size_t &f= 1);
-    ConstRefFilaK(const TRITRIZ &m,const size_t &,const size_t &,const size_t &,const size_t &);
-    ConstRefFilaK(const TRITRIZ &t,const size_t &capa,const size_t &f,const RangoIndice &rango_col);
-    inline virtual ~ConstRefFilaK(void) {}
+    explicit KRowConstRef(const TRITRIZ &m,const size_t &iLayer= 1,const size_t &f= 1);
+    KRowConstRef(const TRITRIZ &m,const size_t &,const size_t &,const size_t &,const size_t &);
+    KRowConstRef(const TRITRIZ &t,const size_t &iLayer,const size_t &f,const RangoIndice &rango_col);
+    inline virtual ~KRowConstRef(void) {}
     inline virtual const_reference operator()(size_t c=1) const
       { return ConstRefCajaTritriz<TRITRIZ>::operator()(1,1,c); }
-    inline virtual const_reference operator()(size_t capa,size_t fila,size_t col) const
-      { return ConstRefCajaTritriz<TRITRIZ>::operator()(capa,fila,col); }
+    inline virtual const_reference operator()(size_t iLayer,size_t iRow,size_t col) const
+      { return ConstRefCajaTritriz<TRITRIZ>::operator()(iLayer,iRow,col); }
   };
 
 //! @brief Constructor por defecto.
 template<class TRITRIZ>
-ConstRefFilaK<TRITRIZ>::ConstRefFilaK(const TRITRIZ &t,const size_t &capa,const size_t &f)
-  : ConstRefCajaTritriz<TRITRIZ>(t,capa,f,RangoIndice(1,t.getNumCols()))
+KRowConstRef<TRITRIZ>::KRowConstRef(const TRITRIZ &t,const size_t &iLayer,const size_t &f)
+  : ConstRefCajaTritriz<TRITRIZ>(t,iLayer,f,RangoIndice(1,t.getNumberOfColumns()))
   {}
 
 template<class TRITRIZ>
-ConstRefFilaK<TRITRIZ>::ConstRefFilaK(const TRITRIZ &t,const size_t &capa,const size_t &f,const size_t &c1,const size_t &c2)
-  : ConstRefCajaTritriz<TRITRIZ>(t,capa,f,RangoIndice(c1,c2))
+KRowConstRef<TRITRIZ>::KRowConstRef(const TRITRIZ &t,const size_t &iLayer,const size_t &f,const size_t &c1,const size_t &c2)
+  : ConstRefCajaTritriz<TRITRIZ>(t,iLayer,f,RangoIndice(c1,c2))
   {}
 
 template<class TRITRIZ>
-ConstRefFilaK<TRITRIZ>::ConstRefFilaK(const TRITRIZ &t,const size_t &capa,const size_t &f,const RangoIndice &rango_col)
-  : ConstRefCajaTritriz<TRITRIZ>(t,capa,f,rango_col)
+KRowConstRef<TRITRIZ>::KRowConstRef(const TRITRIZ &t,const size_t &iLayer,const size_t &f,const RangoIndice &rango_col)
+  : ConstRefCajaTritriz<TRITRIZ>(t,iLayer,f,rango_col)
   {}
 
 #endif

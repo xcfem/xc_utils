@@ -43,19 +43,19 @@ SisCooXd2d::SisCooXd2d(const size_t &ne,const PGlobal &o,const PGlobal &p)
   : SisCoo(ne,2)
   { VectorEjeX(p-o); }
 
-void SisCooXd2d::PutFila(const size_t &eje,const VGlobal &v)
-  { SisCoo::PutFila(eje,traspuesta(v.GetMatriz())); }
+void SisCooXd2d::putRow(const size_t &eje,const VGlobal &v)
+  { SisCoo::putRow(eje,traspuesta(v.GetMatriz())); }
 SisCooXd2d::DGlobal SisCooXd2d::GetDirEje(const size_t &eje) const
   { return DGlobal(GetVDirEje(1)); }
-//! @brief Devuelve el vector dirección del eje que se pasa como parámetro.
+//! @brief Return el vector dirección del eje being passed as parameter.
 SisCooXd2d::VGlobal SisCooXd2d::GetVDirEje(const size_t &eje) const
   { 
-    const matriz_FT fila= GetFila(eje);
-    return VGlobal(fila(1,1),fila(1,2));
+    const matriz_FT row= getRow(eje);
+    return VGlobal(row(1,1),row(1,2));
   }
 SisCooXd2d::VGlobal SisCooXd2d::GetCooGlobales(const matriz_FT &v) const
-//Devuelve las componentes del vector v 
-//que se pasa como parámetro expresado en coordenadas locales
+//Return las componentes del vector v 
+//being passed as parameter expresado en coordenadas locales
 //expresado en coordenadas globales.
   {
     const matriz_FT tmp= SisCoo::GetCooGlobales(v);
@@ -65,7 +65,7 @@ matriz_FT SisCooXd2d::GetCooLocales(const SisCooXd2d::VGlobal &v) const
   { return SisCoo::GetCooLocales(v.GetMatriz()); }
 
 //! @brief Hace que el vector básico 1 tenga la dirección
-//! y sentido del que se pasa como parámetro. Si el sistema es
+//! y sentido del being passed as parameter. Si el sistema es
 //! de dimensión 2 el vector básico 2 es perpendicular al
 //! primero en sentido antihorario.
 void SisCooXd2d::VectorEjeX(const VGlobal &vX)
@@ -78,7 +78,7 @@ void SisCooXd2d::VectorEjeX(const VGlobal &vX)
         return;
       }
     const VGlobal i_= vX.Normalizado();
-    PutFila(1,i_);
+    putRow(1,i_);
     if(NumEjes()>1)
-      PutFila(2,i_.Perpendicular(CGAL::COUNTERCLOCKWISE));
+      putRow(2,i_.Perpendicular(CGAL::COUNTERCLOCKWISE));
   }

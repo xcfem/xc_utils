@@ -88,7 +88,7 @@ void SqLiteObject::insert_object(const std::string &nmb,SqLiteObject *ptr)
       SqLiteObjs[nmb]= ptr;
   }
 
-//! @brief Devuelve un puntero al objeto cuyo nombre se pasa como parámetro (si existe). 
+//! @brief Return un puntero al objeto cuyo nombre se pasa como parámetro (si existe). 
 SqLiteObject *SqLiteObject::busca_objeto(const std::string &nmb)
   {
     SqLiteObject *retval= nullptr;
@@ -139,7 +139,7 @@ std::string SqLiteObject::preprocesa_str_sql(const std::string &str) const
   }
 
 
-//! @brief Devuelve la base de datos cuyo nombre se pasa como parámetro. 
+//! @brief Return la base de datos cuyo nombre se pasa como parámetro. 
 SqLiteDatabase *SqLiteObject::getDatabase(const std::string &nmb)
   {
     SqLiteDatabase *retval= nullptr;
@@ -149,7 +149,7 @@ SqLiteDatabase *SqLiteObject::getDatabase(const std::string &nmb)
     return retval;
   }
 
-//! @brief Devuelve la consulta cuyo nombre se pasa como parámetro. 
+//! @brief Return la consulta cuyo nombre se pasa como parámetro. 
 SqLiteQuery *SqLiteObject::getQuery(const std::string &nmb)
   {
     SqLiteQuery *retval= nullptr;

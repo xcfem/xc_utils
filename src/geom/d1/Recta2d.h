@@ -93,8 +93,8 @@ class Recta2d : public Linea2d
     GEOM_RT b(void) const;
     GEOM_RT c(void) const;
     GEOM_FT getSlope(void) const;
-    GEOM_FT GetParamA(void) const; //Devuelve el parámetro a (y=a*x+b) de la recta.
-    GEOM_FT GetParamB(void) const; //Devuelve el parámetro b (y=a*x+b) de la recta.
+    GEOM_FT GetParamA(void) const; //Return el parámetro a (y=a*x+b) de la recta.
+    GEOM_FT GetParamB(void) const; //Return el parámetro b (y=a*x+b) de la recta.
 
     GEOM_FT GetY(const GEOM_FT &x) const;
     GEOM_FT Parametro(const Pos2d &p) const;

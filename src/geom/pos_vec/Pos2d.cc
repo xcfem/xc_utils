@@ -159,7 +159,7 @@ GEOM_FT Pos2d::dist2(const SemiRecta2d &sr) const
 GEOM_FT Pos2d::dist(const SemiRecta2d &sr) const
   { return sr.dist(*this); }
 
-//! @brief Devuelve el cuadrado de la distance al segmento.
+//! @brief Return el cuadrado de la distance al segmento.
 GEOM_FT Pos2d::dist2(const Segmento2d &sg) const
   { return sg.dist2(*this); }
 

@@ -39,15 +39,15 @@ void mueve(GeomObj::list_Pos3d &l,const Vector3d &v)
 void transforma(GeomObj::list_Pos3d &l,const Trf3d &t)
   { t.Transforma(l.begin(),l.end()); }
 
-//! @brief Devuelve la esquina superior derecha del rectángulo envolvente. 
+//! @brief Return la esquina superior derecha del rectángulo envolvente. 
 Pos3d getPMax(const GeomObj::list_Pos3d &l)
   { return Pos3d(l.GetMax(1),l.GetMax(2),l.GetMax(3)); }
 
-//! @brief Devuelve la esquina inferior izquierda del rectángulo envolvente. 
+//! @brief Return la esquina inferior izquierda del rectángulo envolvente. 
 Pos3d getPMin(const GeomObj::list_Pos3d &l)
   { return Pos3d(l.GetMin(1),l.GetMin(2),l.GetMin(3)); }
 
-//! @brief Devuelve el rectángulo envolvente. 
+//! @brief Return el rectángulo envolvente. 
 BND3d getBnd(const GeomObj::list_Pos3d &l)
   { return BND3d(getPMin(l),getPMax(l)); }
 

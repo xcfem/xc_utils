@@ -36,7 +36,7 @@ class MatrizPos2d;
 class TritrizPos2d: public TritrizPos<Pos2d>
   {
   public:
-    TritrizPos2d(const size_t capas= 1);
+    TritrizPos2d(const size_t iLayers= 1);
     Pos2d GetCentro(void) const;
   };
 

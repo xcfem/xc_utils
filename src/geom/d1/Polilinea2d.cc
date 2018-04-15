@@ -77,14 +77,14 @@ GEOM_FT Polilinea2d::GetMax(unsigned short int i) const
 GEOM_FT Polilinea2d::GetMin(unsigned short int i) const
   { return GeomObj::list_Pos2d::GetMin(i); }
 
-//! @brief Devuelve una Polilinea2d con los vertices cuya coordenada i
+//! @brief Return una Polilinea2d con los vertices cuya coordenada i
 //! es mayor que d.
 Polilinea2d Polilinea2d::GetMayores(unsigned short int i,const GEOM_FT &d) const
   {
     Polilinea2d retval(GeomObj::list_Pos2d::GetMayores(i,d));
     return retval;
   }
-//! @brief Devuelve una Polilinea2d con los vertices cuya coordenada i
+//! @brief Return una Polilinea2d con los vertices cuya coordenada i
 //! es menor que d.
 Polilinea2d Polilinea2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
   {
@@ -92,7 +92,7 @@ Polilinea2d Polilinea2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
     return retval;
   }
 // Polilinea2d::list_Pos2d Polilinea2d::Int(unsigned short int i,const double &d) const
-// //Devuelve las intersecciones de la Polilinea2d con el plano
+// //Return las intersecciones de la Polilinea2d con el plano
 // //coord_i= d
 //   {
 //     list_Pos2d l_int; //Lista de intersecciones
@@ -126,11 +126,11 @@ Polilinea2d Polilinea2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 //      return result;
 //   }
 
-//! @brief Devuelve el vértice i-ésimo (el primero es el 1).
+//! @brief Return el vértice i-ésimo (el primero es el 1).
 const Pos2d &Polilinea2d::Vertice(const size_t &i) const
   { return GeomObj::list_Pos2d::operator[](i-1); }
 
-//! @brief Devuelve una polilínea paralela a ésta a la distancia
+//! @brief Return una polilínea paralela a ésta a la distancia
 //! que se pasa como parámetro. Si la distance es positiva,
 //! la nueva polilínea quedará a la derecha de la anterior.
 Polilinea2d Polilinea2d::Offset(const GEOM_FT &d) const
@@ -140,7 +140,7 @@ Polilinea2d Polilinea2d::Offset(const GEOM_FT &d) const
     return retval;
   }
 
-//! @brief Devuelve el segmento a continuación del vértice *i
+//! @brief Return el segmento a continuación del vértice *i
 Segmento2d Polilinea2d::GetSegmento(const const_iterator &i) const
   {
     const_iterator j= i; j++;
@@ -153,7 +153,7 @@ Segmento2d Polilinea2d::GetSegmento(const const_iterator &i) const
     return Segmento2d(*i,*j);
   }
 
-//! @brief Devuelve el segmento i-ésimo (el primero es el 1).
+//! @brief Return el segmento i-ésimo (el primero es el 1).
 Segmento2d Polilinea2d::GetSegmento(const size_t &i) const
   {
     const size_t ns= GetNumSegmentos();
@@ -184,7 +184,7 @@ GEOM_FT Polilinea2d::Iz(void) const
 
 Polilinea2d Polilinea2d::Separa(const Pos2d &p,const short int &sgn) const
 //Suponemos que p es vertice de la Polilinea2d
-//Devuelve el trozo de Polilinea2d:
+//Return el trozo de Polilinea2d:
 //hasta p si sgn < 0
 //desde p si sgn >= 0
   {

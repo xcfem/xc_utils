@@ -29,11 +29,11 @@
 #include "ActionContainer.h"
 
 
-//! @brief Devuelve verdadero si la familia existe.
+//! @brief Return verdadero si la familia existe.
 bool cmb_acc::ActionsFamiliesMap::existe(const std::string &nmb) const
   { return (familias.find(nmb)!=familias.end()); }
 
-//! @brief Devuelve un puntero a la familia cuyo nombre se pasa como parámetro.
+//! @brief Return un puntero a la familia cuyo nombre se pasa como parámetro.
 cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::busca_familia_acc(const std::string &nmb)
   {
     if(existe(nmb))
@@ -42,7 +42,7 @@ cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::busca_familia_acc(const std
       return nullptr;
   }
 
-//! @brief Devuelve un puntero a la familia cuyo nombre se pasa como parámetro.
+//! @brief Return un puntero a la familia cuyo nombre se pasa como parámetro.
 const cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::busca_familia_acc(const std::string &nmb) const
   {
     const_iterator i= familias.find(nmb);
@@ -97,7 +97,7 @@ cmb_acc::ActionsFamiliesMap &cmb_acc::ActionsFamiliesMap::operator=(const Action
     return *this;
   }
 
-//! @brief Devuelve un puntero a la tabla de coeficientes de simultaneidad.
+//! @brief Return un puntero a la tabla de coeficientes de simultaneidad.
 const cmb_acc::PsiCoeffsMap *cmb_acc::ActionsFamiliesMap::getPtrPsiCoeffs(void) const
   {
     const ActionContainer *tmp= dynamic_cast<const ActionContainer *>(Owner());
@@ -127,7 +127,7 @@ cmb_acc::ActionsFamiliesMap::~ActionsFamiliesMap(void)
     clear();
   }
 
-//! @brief Devuelve el número de acciones de todas las familias.
+//! @brief Return el número de acciones de todas las familias.
 size_t cmb_acc::ActionsFamiliesMap::getNumActions(void) const
   { 
     size_t retval= 0;
@@ -141,7 +141,7 @@ size_t cmb_acc::ActionsFamiliesMap::getNumActions(void) const
     return retval;
   }
 
-//! brief Devuelve verdadero si las familias estan vacías.
+//! brief Return verdadero si las familias estan vacías.
 bool cmb_acc::ActionsFamiliesMap::Vacia(void) const
   {
     bool retval= true;
@@ -162,7 +162,7 @@ bool cmb_acc::ActionsFamiliesMap::Vacia(void) const
   }
 
 
-//! @brief Devuelve las combinaciones correspondientes a acciones permanentes de valor no constante.
+//! @brief Return las combinaciones correspondientes a acciones permanentes de valor no constante.
 //! @param elu: Verdadero si las combinaciones corresponden a estados límite últimos.
 //! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
 cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::GetLoadCombinations(const bool &elu,const bool &sit_accidental) const

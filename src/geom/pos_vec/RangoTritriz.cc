@@ -23,75 +23,75 @@
 
 #include "RangoTritriz.h"
 
-//! @brief Devuelve verdadero si el rango no contiene ningún índice.
+//! @brief Return verdadero si el rango no contiene ningún índice.
 bool RangoTritriz::Vacio(void) const
-  { return (rango_capas.Vacio() || rango_filas.Vacio() || rango_cols.Vacio()); }
+  { return (layer_range.Vacio() || row_range.Vacio() || column_range.Vacio()); }
 
-//! @brief Devuelve la dimensión del rango 80,1,2 ó 3).
+//! @brief Return la dimensión del rango 80,1,2 ó 3).
 size_t RangoTritriz::Dimension(void) const
   {
     size_t retval= 0;
-    if(rango_capas.Size()>1) retval++;
-    if(rango_filas.Size()>1) retval++;
-    if(rango_cols.Size()> 1) retval++;
+    if(layer_range.Size()>1) retval++;
+    if(row_range.Size()>1) retval++;
+    if(column_range.Size()> 1) retval++;
     return retval;
   }
 
-//! @brief Devuelve verdadero si el único índice que varía es el I.
-bool RangoTritriz::EsFilaI(void) const
+//! @brief Return verdadero si el único índice que varía es el I.
+bool RangoTritriz::isIRow(void) const
   {
-    if((rango_filas.Size()>1) || (rango_cols.Size()>1)) return false;
+    if((row_range.Size()>1) || (column_range.Size()>1)) return false;
     return true;
   }
 
-//! @brief Devuelve verdadero si el único índice que varía es el J.
-bool RangoTritriz::EsFilaJ(void) const
+//! @brief Return verdadero si el único índice que varía es el J.
+bool RangoTritriz::isJRow(void) const
   {
-    if((rango_capas.Size()>1) || (rango_cols.Size()>1)) return false;
+    if((layer_range.Size()>1) || (column_range.Size()>1)) return false;
     return true;
   }
 
-//! @brief Devuelve verdadero si el único índice que varía es el K.
-bool RangoTritriz::EsFilaK(void) const
+//! @brief Return verdadero si el único índice que varía es el K.
+bool RangoTritriz::isKRow(void) const
   {
-    if((rango_capas.Size()>1) || (rango_filas.Size()>1)) return false;
+    if((layer_range.Size()>1) || (row_range.Size()>1)) return false;
     return true;
   }
 
-//! @brief Devuelve verdadero si los indices que varían son los J y K.
-bool RangoTritriz::EsCapaICte(void) const
-  { return (rango_capas.Size()==1); }
+//! @brief Return verdadero si los indices que varían son los J y K.
+bool RangoTritriz::isConstantILayer(void) const
+  { return (layer_range.Size()==1); }
 
-//! @brief Devuelve verdadero si los indices que varían son los I y K.
-bool RangoTritriz::EsCapaJCte(void) const
-  { return (rango_filas.Size()==1); }
+//! @brief Return verdadero si los indices que varían son los I y K.
+bool RangoTritriz::isConstantJLayer(void) const
+  { return (row_range.Size()==1); }
 
-//! @brief Devuelve verdadero si los indices que varían son los I y J.
-bool RangoTritriz::EsCapaKCte(void) const
-  { return (rango_cols.Size()==1); }
+//! @brief Return verdadero si los indices que varían son los I y J.
+bool RangoTritriz::isConstantKLayer(void) const
+  { return (column_range.Size()==1); }
 
 //! @brief Imprime el rango.
 void RangoTritriz::Print(std::ostream &os) const
-  { os << rango_capas << ',' << rango_filas << ',' << rango_cols; }
+  { os << layer_range << ',' << row_range << ',' << column_range; }
 
 //! @brief Reduce los valores del rango de manera que ambos sean menores que
 //! los que se pasan como parámetro.
 void RangoTritriz::Recorta(const size_t &cpmax,const size_t &fmax,const size_t &cmax)
   {
-    rango_capas.Recorta(cpmax);
-    rango_filas.Recorta(fmax);
-    rango_cols.Recorta(cmax);
+    layer_range.Recorta(cpmax);
+    row_range.Recorta(fmax);
+    column_range.Recorta(cmax);
   }
 
 //! @brief Asigna a ESTE la intersección de ambos rangos.
 void RangoTritriz::Intersec(const RangoTritriz &otro)
   {
-    rango_capas.Intersec(otro.rango_capas);
-    rango_filas.Intersec(otro.rango_filas);
-    rango_cols.Intersec(otro.rango_cols);
+    layer_range.Intersec(otro.layer_range);
+    row_range.Intersec(otro.row_range);
+    column_range.Intersec(otro.column_range);
   }
 
-//! @brief Devuelve la intersección de ambos rangos.
+//! @brief Return la intersección de ambos rangos.
 RangoTritriz RangoTritriz::Intersec(const RangoTritriz &otro) const
   {
     RangoTritriz retval(*this);
@@ -112,6 +112,6 @@ RangoTritriz recorta(const RangoTritriz &r,const size_t &cpmax,const size_t &fma
     return retval;
   }
 
-//! @brief Devuelve la intersección de ambos rangos.
+//! @brief Return la intersección de ambos rangos.
 RangoTritriz intersec(const RangoTritriz &r1,const RangoTritriz &r2)
   { return r1.Intersec(r2); }

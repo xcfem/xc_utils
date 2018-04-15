@@ -52,7 +52,7 @@ const GEOM_FT &PrincipalAxesOfInertia2D::I1(void) const
 const GEOM_FT &PrincipalAxesOfInertia2D::I2(void) const
   { return i2; }
 
-//! @brief Devuelve el vector dirección del eje de
+//! @brief Return el vector dirección del eje de
 //! inercia principal menor.
 Vector2d PrincipalAxesOfInertia2D::getVDirEje2(void) const
   { return Vector2d(-eje1.y(),eje1.x()); }

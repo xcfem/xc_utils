@@ -117,7 +117,7 @@ void Poliedro3d::make_tetrahedron(const SemiEspacio3d &se1, const SemiEspacio3d 
 //                 << "se esperaban al menos cuatro semiespacios." << std::endl;
 //   }
 
-//! @brief Devuelve la suma de las áreas de las caras.
+//! @brief Return la suma de las áreas de las caras.
 GEOM_FT Poliedro3d::Area(void) const
   {
     GEOM_FT retval= 0.0;
@@ -168,7 +168,7 @@ Plano3d Poliedro3d::GetPlanoCara(const Facet_const_iterator &f) const
     return retval;
   }
 
-//! @brief Devuelve la cara correspondiente al iterador.
+//! @brief Return la cara correspondiente al iterador.
 Poligono3d Poliedro3d::GetCara(const Facet_const_iterator &f) const
   {
     const GeomObj::list_Pos3d vertices= getVertices();
@@ -176,7 +176,7 @@ Poligono3d Poliedro3d::GetCara(const Facet_const_iterator &f) const
     return retval;
   }
 
-//! @brief Devuelve las caras del poliedro.
+//! @brief Return las caras del poliedro.
 std::deque<Poligono3d> Poliedro3d::GetCaras(void) const
   {
     std::deque<Poligono3d> retval;
@@ -272,7 +272,7 @@ GEOM_FT Poliedro3d::PseudoDist(const Pos3d &p) const
     return retval;
   }
 
-//! @brief Devuelve verdadero si alguno de los vertices toca el cuadrante
+//! @brief Return verdadero si alguno de los vertices toca el cuadrante
 //! que se pasa como parámetro.
 bool Poliedro3d::TocaCuadrante(const int &cuadrante) const
   {

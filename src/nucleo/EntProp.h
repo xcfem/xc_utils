@@ -28,7 +28,7 @@
 
 //! @ingroup NUCLEO
 //
-//! @brief Objeto capaz de devolver propiedades.
+//! @brief Object that can return properties as Python objects.
 class EntProp
   {
   private:

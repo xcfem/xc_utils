@@ -37,7 +37,7 @@
 SisCooRect2d3d::SisCooRect2d3d(const VGlobal &v)
   : SisCooXd3d(2,v) {}
 //! @brief Define un sistema de coordenadas de dimensión i
-//! el eje x tendrá la dirección y sentido del vector v1
+//! el x axis tendrá la dirección y sentido del vector v1
 //! se pasa como parámetro.
 SisCooRect2d3d::SisCooRect2d3d(const VGlobal &v1,const VGlobal &v2)
   : SisCooXd3d(2,v1,v2) {}
@@ -46,20 +46,20 @@ SisCooRect2d3d::SisCooRect2d3d(const VGlobal &v1,const VGlobal &v2)
 SisCooRect2d3d::SisCooRect2d3d(const PGlobal &p1,const PGlobal &p2, const PGlobal &p3)
   : SisCooXd3d(2,p1,p2,p3) {}
 
-//! @brief Devuelve el vector unitario I en el sistema global.
+//! @brief Return el vector unitario I en el sistema global.
 SisCooRect2d3d::VGlobal SisCooRect2d3d::GetI(void) const
   { return GetVDirEje(1); }
-//! @brief Devuelve el vector unitario J en el sistema global.
+//! @brief Return el vector unitario J en el sistema global.
 SisCooRect2d3d::VGlobal SisCooRect2d3d::GetJ(void) const
   { return GetVDirEje(2); }
 
 SisCooRect2d3d::VGlobal SisCooRect2d3d::GetCooGlobales(const VLocal &v) const
-//Devuelve las componentes del vector v expresado en locales
+//Return las componentes del vector v expresado en locales
 //expresadas en coordenadas globales.
   { return SisCooXd3d::GetCooGlobales(v.GetMatriz()); }
 
 SisCooRect2d3d::VLocal SisCooRect2d3d::GetCooLocales(const VGlobal &v) const
-//Devuelve las componentes del vector v expresado en locales
+//Return las componentes del vector v expresado en locales
 //expresadas en coordenadas globales.
   {
     const matriz_FT tmp= SisCooXd3d::GetCooLocales(v);

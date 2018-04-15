@@ -57,7 +57,7 @@ class SolidExtruPlgno3d : public SolidExtru3d<PG>
 /*     virtual Poliedro::v_ind_vertices IndVerticesArista(unsigned int arista) const; */
 /*     virtual Poliedro::v_ind_vertices IndVerticesFaceta(unsigned int faceta) const; */
     inline BND3d Bnd(void) const
-    //Devuelve la extension del objeto.
+    //Return la extension del objeto.
       { return solid_extru_pg::Bnd(); }
     inline matriz_FT I(void) const
       { return solid_extru_pg::I(); }

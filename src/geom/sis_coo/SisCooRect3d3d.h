@@ -50,9 +50,9 @@ class SisCooRect3d3d: public SisCooXd3d
     virtual SisCooXd3d *CopiaXd3d(void) const
       { return new SisCooRect3d3d(*this); }
 
-    VGlobal GetI(void) const; //Devuelve el vector unitario I en el sistema global.
-    VGlobal GetJ(void) const; //Devuelve el vector unitario J en el sistema global.
-    VGlobal GetK(void) const; //Devuelve el vector unitario K en el sistema global.
+    VGlobal GetI(void) const; //Return el vector unitario I en el sistema global.
+    VGlobal GetJ(void) const; //Return el vector unitario J en el sistema global.
+    VGlobal GetK(void) const; //Return el vector unitario K en el sistema global.
 
     VGlobal GetCooGlobales(const VLocal &v) const;
     VLocal GetCooLocales(const VGlobal &v) const;

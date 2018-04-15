@@ -32,7 +32,7 @@ class VTK_GRAPHICS_EXPORT vtkArcSource : public vtkRegularPolygonSource
   protected:
     double InitAng;
     double FinalAng;
-    double Px[3]; //Vector unitario en la dirección del eje x.
+    double Px[3]; //Vector unitario en la dirección del x axis.
 
     void GetNormal(double v[3]);
     bool checkPx(void);

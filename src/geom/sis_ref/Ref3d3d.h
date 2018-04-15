@@ -53,17 +53,17 @@ class Ref3d3d : public Ref<SisCooRect3d3d>
     Ref3d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2,const Vector3d &v3);
     Ref3d3d(const Recta3d &r,const Pos3d &p);
     Vector3d GetI(void) const;
-    //Devuelve el vector unitario I en el sistema global.
+    //Return el vector unitario I en el sistema global.
     Vector3d GetJ(void) const;
-    //Devuelve el vector unitario J en el sistema global.
+    //Return el vector unitario J en el sistema global.
     Vector3d GetK(void) const;
-    //Devuelve el vector unitario K en el sistema global.
-    Recta3d GetEjeX(void) const; //Devuelve la recta que define el eje x.
-    Recta3d GetEjeY(void) const; //Devuelve la recta que define el eje y.
-    Recta3d GetEjeZ(void) const; //Devuelve la recta que define el eje z.
-    Plano3d GetPlanoXY(void) const; //Devuelve el plano XY.
-    Plano3d GetPlanoXZ(void) const; //Devuelve el plano XZ.
-    Plano3d GetPlanoYZ(void) const; //Devuelve el plano YZ.
+    //Return el vector unitario K en el sistema global.
+    Recta3d GetEjeX(void) const; //Return la recta que define el x axis.
+    Recta3d GetEjeY(void) const; //Return la recta que define el y axis.
+    Recta3d GetEjeZ(void) const; //Return la recta que define el z axis.
+    Plano3d GetPlanoXY(void) const; //Return el plano XY.
+    Plano3d GetPlanoXZ(void) const; //Return el plano XZ.
+    Plano3d GetPlanoYZ(void) const; //Return el plano YZ.
 /*     virtual void Mueve(double Ax,double Ay,double Az) */
 /*       { org.Mueve(Ax,Ay,Az); } */
 /*     inline virtual void GiraX(const double &ang_rad) */
@@ -77,7 +77,7 @@ class Ref3d3d : public Ref<SisCooRect3d3d>
     //Return the la Z of the point p expressed in local coordinates
     //expressed in local coordinates.
 
-    //Devuelve el vector v expresado en globales
+    //Return el vector v expresado en globales
     //expresado en coordenadas locales.
 /*     m_double Trf(const m_double &v) */
 /*       { */

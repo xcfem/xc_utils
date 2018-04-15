@@ -52,7 +52,7 @@ class SisCooXd3d: public SisCoo
     SisCooXd3d(const size_t &i,const VGlobal &v1,const VGlobal &v2,const VGlobal &v3);
 
 
-    void PutFila(const size_t &eje,const VGlobal &v);
+    void putRow(const size_t &eje,const VGlobal &v);
     void VectorEjeX(const VGlobal &v);
     void TwoPoints(const PGlobal &o,const PGlobal &p);
     void ThreePoints(const PGlobal &o,const PGlobal &p1,const PGlobal &p2);
@@ -61,7 +61,7 @@ class SisCooXd3d: public SisCoo
     //@ brief Constructor virtual.
     virtual SisCooXd3d *CopiaXd3d(void) const= 0;
     virtual VGlobal GetVDirEje(const size_t &eje) const;
-    //Devuelve el direction vector del eje que se pasa como parámetro.
+    //Return el direction vector del eje que se pasa como parámetro.
     virtual DGlobal GetDirEje(const size_t &eje) const;
 
     VGlobal GetCooGlobales(const matriz_FT &v) const;

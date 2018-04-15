@@ -29,11 +29,11 @@
 
 
 
-//! @brief Devuelve verdadero si la ponderacion existe.
+//! @brief Return verdadero si la ponderacion existe.
 bool cmb_acc::ActionWeightingMap::existe(const std::string &nmb) const
   { return (ponderaciones.find(nmb)!=ponderaciones.end()); }
 
-//! @brief Devuelve un puntero a la ponderacion cuyo nombre se pasa como parámetro.
+//! @brief Return un puntero a la ponderacion cuyo nombre se pasa como parámetro.
 cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::busca_ponderacion(const std::string &nmb)
   {
     if(existe(nmb))
@@ -42,7 +42,7 @@ cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::busca_ponderacion(const s
       return nullptr;
   }
 
-//! @brief Devuelve un puntero a la ponderacion cuyo nombre se pasa como parámetro.
+//! @brief Return un puntero a la ponderacion cuyo nombre se pasa como parámetro.
 const cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::busca_ponderacion(const std::string &nmb) const
   {
     const_iterator i= ponderaciones.find(nmb);
@@ -136,11 +136,11 @@ cmb_acc::ActionWeightingMap::~ActionWeightingMap(void)
     clear();
   }
 
-//! @brief Devuelve el número de ponderaciones de todas las ponderaciones.
+//! @brief Return el número de ponderaciones de todas las ponderaciones.
 size_t cmb_acc::ActionWeightingMap::size(void) const
   { return ponderaciones.size(); }
 
-//! brief Devuelve verdadero si las ponderaciones estan vacías.
+//! brief Return verdadero si las ponderaciones estan vacías.
 bool cmb_acc::ActionWeightingMap::Vacia(void) const
   { return ponderaciones.empty(); }
 
@@ -153,7 +153,7 @@ cmb_acc::ActionWeightingMap::iterator cmb_acc::ActionWeightingMap::end(void)
 cmb_acc::ActionWeightingMap::const_iterator cmb_acc::ActionWeightingMap::end(void) const
   { return ponderaciones.end(); }
 
-//! @bried Devuelve las combinaciones correspondientes a todas las ponderaciones.
+//! @bried Return las combinaciones correspondientes a todas las ponderaciones.
 cmb_acc::LoadCombinations cmb_acc::ActionWeightingMap::getLoadCombinations(void)
   {
     LoadCombinations retval;

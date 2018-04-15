@@ -51,22 +51,22 @@ Ref2d3d::Ref2d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2)
   : BaseRef(o,SisCooRect2d3d(v1,v2)) {}
 
 
-//! @brief Devuelve el vector unitario I en el sistema global.
+//! @brief Return el vector unitario I en el sistema global.
 Vector3d Ref2d3d::GetI(void) const
   { return GetVDirEje(1); }
 
-//! @brief Devuelve el vector unitario I en el sistema global.
+//! @brief Return el vector unitario I en el sistema global.
 Vector3d Ref2d3d::GetJ(void) const
   { return GetVDirEje(2); }
 
-//! @brief Devuelve la recta que define el eje x.
+//! @brief Return la recta que define el x axis.
 Recta3d Ref2d3d::GetEjeX(void) const
   {
     const Pos3d dest(org+1000.0*GetI());
     return Recta3d(org,dest);
   }
 
-//! @brief Devuelve la recta que define el eje x.
+//! @brief Return la recta que define el x axis.
 Recta3d Ref2d3d::GetEjeY(void) const
   {
     const Pos3d dest(org+1000.0*GetJ());

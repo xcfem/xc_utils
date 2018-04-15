@@ -27,11 +27,11 @@
 
 cmb_acc::PsiCoeffs cmb_acc::PsiCoeffsMap::coefs_por_defecto;
 
-//! @brief Devuelve verdadero si la familia existe.
+//! @brief Return verdadero si la familia existe.
 bool cmb_acc::PsiCoeffsMap::existe(const std::string &nmb) const
   { return (coefs.find(nmb)!=coefs.end()); }
 
-//! @brief Devuelve un apuntador a los coeficientes cuyo nombre se pasa como parámetro.
+//! @brief Return un apuntador a los coeficientes cuyo nombre se pasa como parámetro.
 cmb_acc::PsiCoeffs *cmb_acc::PsiCoeffsMap::getPtrCoefs(const std::string &nmb)
   {
     if(existe(nmb))
@@ -44,7 +44,7 @@ cmb_acc::PsiCoeffs *cmb_acc::PsiCoeffsMap::getPtrCoefs(const std::string &nmb)
       }
   }
 
-//! @brief Devuelve un apuntador a los coeficientes cuyo nombre se pasa como parámetro.
+//! @brief Return un apuntador a los coeficientes cuyo nombre se pasa como parámetro.
 const cmb_acc::PsiCoeffs &cmb_acc::PsiCoeffsMap::BuscaCoefs(const std::string &nmb) const
   {
     if(existe(nmb))
@@ -57,7 +57,7 @@ const cmb_acc::PsiCoeffs &cmb_acc::PsiCoeffsMap::BuscaCoefs(const std::string &n
       }
   }
 
-//! @brief Devuelve un apuntador a los coeficientes cuyo nombre se pasa como parámetro.
+//! @brief Return un apuntador a los coeficientes cuyo nombre se pasa como parámetro.
 const cmb_acc::PsiCoeffs *cmb_acc::PsiCoeffsMap::getPtrCoefs(const std::string &nmb) const
   {
     if(existe(nmb))
@@ -93,7 +93,7 @@ cmb_acc::PsiCoeffs *cmb_acc::PsiCoeffsMap::crea_coefs(const std::string &nmb)
 void cmb_acc::PsiCoeffsMap::insert(const std::string &nmb,const PsiCoeffs &c)
   { coefs[nmb]= c; }
 
-//! @brief Devuelve el número de coeficientes definidos.
+//! @brief Return el número de coeficientes definidos.
 size_t cmb_acc::PsiCoeffsMap::size(void) const
  { return coefs.size(); }
 

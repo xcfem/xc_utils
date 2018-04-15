@@ -174,7 +174,7 @@ std::list<Poligono2d> join(const Poligono2d &p1,const Poligono2d &p2)
     return retval;
   }
 
-//! @brief Devuelve la unión de los polígonos de la lista.
+//! @brief Return la unión de los polígonos de la lista.
 std::list<Poligono2d> join(const std::list<Poligono2d> &l)
   {
     std::list<Poligono2d> retval;
@@ -196,7 +196,7 @@ std::list<Poligono2d> join(const std::list<Poligono2d> &l)
     return retval;
   }
 
-//! @brief Devuelve la unión de los polígonos de la lista con el que se pasa
+//! @brief Return la unión de los polígonos de la lista con el que se pasa
 //! como parámetro.
 std::list<Poligono2d> join(const std::list<Poligono2d> &l,const Poligono2d &p)
   {
@@ -217,12 +217,12 @@ std::list<Poligono2d> join(const std::list<Poligono2d> &l,const Poligono2d &p)
     return retval;
   }
 
-//! @brief Devuelve verdadero si el polígono pl1 se superpone
+//! @brief Return verdadero si el polígono pl1 se superpone
 //! el p2.
 bool overlap(const Poligono2d &p1,const Poligono2d &p2)
   { return p1.Overlap(p2); }
 
-//! @brief Devuelve verdadero si alguno de los polígonos de l1 se superpone
+//! @brief Return verdadero si alguno de los polígonos de l1 se superpone
 //! con alguno de los de l2.
 bool overlap(const std::list<Poligono2d> &l1,const std::list<Poligono2d> &l2)
   {
@@ -270,7 +270,7 @@ Nef_polyhedron interseca(const Poligono2d &p,const Semiplano2d &sp)
     return retval;
   }
 
-//! @brief Devuelve los polígonos que resultan de recortar los de la lista
+//! @brief Return los polígonos que resultan de recortar los de la lista
 //! con el que se pasa como parámetro.
 std::list<Poligono2d> recorta(const std::list<Poligono2d> &l,const Poligono2d &p)
   {
@@ -295,15 +295,15 @@ std::list<Poligono2d> recorta(const std::list<Poligono2d> &l,const Poligono2d &p
     return retval;
   }
 
-//! @brief Devuelve la intersección de los dos polígonos.
+//! @brief Return la intersección de los dos polígonos.
 std::list<Poligono2d> interseccion(const Poligono2d &p1,const Poligono2d &p2)
   { return Nef_2_to_Poligono2d(interseca(p1,p2)); }
 
-//! @brief Devuelve la intersección del polígono con el semiplano.
+//! @brief Return la intersección del polígono con el semiplano.
 std::list<Poligono2d> interseccion(const Poligono2d &p,const Semiplano2d &sp)
   { return Nef_2_to_Poligono2d(interseca(p,sp)); }
 
-//! @brief Devuelve la intersección de los polígonos de la lista con el semiplano.
+//! @brief Return la intersección de los polígonos de la lista con el semiplano.
 std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l,const Semiplano2d &sp)
   {
     std::list<Poligono2d> retval;
@@ -321,7 +321,7 @@ std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l,const Semiplan
   }
 
 
-//! @brief Devuelve los polígonos que resultan de intersecar los de la lista
+//! @brief Return los polígonos que resultan de intersecar los de la lista
 //! con el que se pasa como parámetro.
 std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l,const Poligono2d &p)
   {
@@ -329,7 +329,7 @@ std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l,const Poligono
     return join(retval);
   }
 
-//! @brief Devuelve los polígonos que resultan de intersecar los de la lista
+//! @brief Return los polígonos que resultan de intersecar los de la lista
 //! l1 con cada uno de los de la lista l2.
 std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l1,const std::list<Poligono2d> &l2)
   {
@@ -347,7 +347,7 @@ std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l1,const std::li
     return join(retval);
   }
 
-//! @brief Devuelve el resultado de repartir el área común entre ambos polígonos mediante
+//! @brief Return el resultado de repartir el área común entre ambos polígonos mediante
 //! la técnica de Voronoi.
 void particiona(const Pos2d &c1,Poligono2d &p1,const Pos2d &c2,Poligono2d &p2)
   {
@@ -361,7 +361,7 @@ void particiona(const Pos2d &c1,Poligono2d &p1,const Pos2d &c2,Poligono2d &p2)
       }
   }
 
-//! @brief Devuelve el resultado de repartir el área común entre ambos polígonos mediante
+//! @brief Return el resultado de repartir el área común entre ambos polígonos mediante
 //! la técnica de Voronoi.
 void particiona(Poligono2d &p1,Poligono2d &p2)
   {
@@ -373,7 +373,7 @@ void particiona(Poligono2d &p1,Poligono2d &p2)
       }
   }
 
-//! @brief Devuelve el resultado de repartir el área común entre ambas listas de polígonos mediante
+//! @brief Return el resultado de repartir el área común entre ambas listas de polígonos mediante
 //! la técnica de Voronoi.
 void particiona(const Pos2d &c1,std::list<Poligono2d> &lp1,const Pos2d &c2,std::list<Poligono2d> &lp2)
   {
@@ -388,7 +388,7 @@ void particiona(const Pos2d &c1,std::list<Poligono2d> &lp1,const Pos2d &c2,std::
   }
 
 
-//! @brief Devuelve el resultado de repartir el área común entre los polígonos de la lista mediante
+//! @brief Return el resultado de repartir el área común entre los polígonos de la lista mediante
 //! la técnica de Voronoi.
 void particiona(const std::list<Pos2d> &centros,std::list<Poligono2d> &areas)
   {
@@ -413,7 +413,7 @@ void particiona(const std::list<Pos2d> &centros,std::list<Poligono2d> &areas)
   }
 
 
-//! @brief Devuelve el resultado de repartir el área común entre los 
+//! @brief Return el resultado de repartir el área común entre los 
 //! polígonos de la lista mediante la técnica de Voronoi.
 void particiona(std::list<Poligono2d> &areas)
   {

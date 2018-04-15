@@ -26,72 +26,74 @@
 #include "RangoTritriz.h"
 #include <iostream>
 
-BaseRefCajaTritriz::BaseRefCajaTritriz(const size_t &capa1,const size_t &f1,const size_t &c1,const size_t &capa2,const size_t &f2,const size_t &c2)
-  : ncapas(std::max(capa2-capa1+1,size_t(0))), nfls(std::max(f2-f1+1,size_t(0))), ncls(std::max(c2-c1+1,size_t(0))),
-    offset_cp(capa1-1),offset_f(f1-1),offset_c(c1-1) {}
+BaseRefCajaTritriz::BaseRefCajaTritriz(const size_t &iLayer1,const size_t &f1,const size_t &c1,const size_t &iLayer2,const size_t &f2,const size_t &c2)
+  : n_layers(std::max(iLayer2-iLayer1+1,size_t(0))), n_rows(std::max(f2-f1+1,size_t(0))), n_columns(std::max(c2-c1+1,size_t(0))),
+    offset_cp(iLayer1-1),offset_f(f1-1),offset_c(c1-1) {}
 
 BaseRefCajaTritriz::BaseRefCajaTritriz(const RangoTritriz &rango)
-  : ncapas(rango.GetRangoCapas().Size()), nfls(rango.GetRangoFilas().Size()), ncls(rango.GetRangoCols().Size()),
-    offset_cp(rango.GetRangoCapas().Offset()),offset_f(rango.GetRangoFilas().Offset()),offset_c(rango.GetRangoCols().Offset()) 
+  : n_layers(rango.getLayerRange().Size()), n_rows(rango.getRowRange().Size()), n_columns(rango.GetRangoCols().Size()),
+    offset_cp(rango.getLayerRange().Offset()),offset_f(rango.getRowRange().Offset()),offset_c(rango.GetRangoCols().Offset()) 
   {
     if(rango.Vacio())
-      std::cerr << "Error!. El rango: '" << rango << "', está vacío." << std::endl;
+      std::cerr << "Error!. El rango: '" << rango << "', is empty." << std::endl;
   }
 
-BaseRefCajaTritriz::BaseRefCajaTritriz(const size_t &capa,const RangoIndice &rango_filas,const RangoIndice &rango_cols)
-  : ncapas(1), nfls(rango_filas.Size()), ncls(rango_cols.Size()),
-    offset_cp(capa-1),offset_f(rango_filas.Offset()),offset_c(rango_cols.Offset()) 
+BaseRefCajaTritriz::BaseRefCajaTritriz(const size_t &iLayer,const RangoIndice &row_range,const RangoIndice &column_range)
+  : n_layers(1), n_rows(row_range.Size()), n_columns(column_range.Size()),
+    offset_cp(iLayer-1),offset_f(row_range.Offset()),offset_c(column_range.Offset()) 
   {
-    if(rango_filas.Vacio())
-      std::cerr << "Error!. El rango de las filas: '" << rango_filas << "', está vacío." << std::endl;
-    if(rango_cols.Vacio())
-      std::cerr << "Error!. El rango de las columnas: '" << rango_cols << "', está vacío." << std::endl;
+    if(row_range.Vacio())
+      std::cerr << "Error!. The row range: '" << row_range
+		<< "', is empty." << std::endl;
+    if(column_range.Vacio())
+      std::cerr << "Error!. The column range: '" << column_range
+		<< "', is empty." << std::endl;
   }
 
-BaseRefCajaTritriz::BaseRefCajaTritriz(const RangoIndice &rango_capas,const size_t &fila,const RangoIndice &rango_cols)
-  : ncapas(rango_capas.Size()), nfls(1), ncls(rango_cols.Size()),
-    offset_cp(rango_capas.Offset()),offset_f(fila-1),offset_c(rango_cols.Offset())
+BaseRefCajaTritriz::BaseRefCajaTritriz(const RangoIndice &layer_range,const size_t &row,const RangoIndice &column_range)
+  : n_layers(layer_range.Size()), n_rows(1), n_columns(column_range.Size()),
+    offset_cp(layer_range.Offset()),offset_f(row-1),offset_c(column_range.Offset())
   {
-    if(rango_capas.Vacio())
-      std::cerr << "Error!. El rango de las capas: '" << rango_capas << "', está vacío." << std::endl;
-    if(rango_cols.Vacio())
-      std::cerr << "Error!. El rango de las columnas: '" << rango_cols << "', está vacío." << std::endl;
+    if(layer_range.Vacio())
+      std::cerr << "Error!. the layer range: '" << layer_range << "', is empty." << std::endl;
+    if(column_range.Vacio())
+      std::cerr << "Error!. the column range: '" << column_range << "', is empty." << std::endl;
   }
 
-BaseRefCajaTritriz::BaseRefCajaTritriz(const RangoIndice &rango_capas,const RangoIndice &rango_filas,const size_t &col)
-  : ncapas(rango_capas.Size()), nfls(rango_filas.Size()), ncls(1),
-    offset_cp(rango_capas.Offset()),offset_f(rango_filas.Offset()),offset_c(col-1)
+BaseRefCajaTritriz::BaseRefCajaTritriz(const RangoIndice &layer_range,const RangoIndice &row_range,const size_t &col)
+  : n_layers(layer_range.Size()), n_rows(row_range.Size()), n_columns(1),
+    offset_cp(layer_range.Offset()),offset_f(row_range.Offset()),offset_c(col-1)
   {
-    if(rango_capas.Vacio())
-      std::cerr << "Error!. El rango de las capas: '" << rango_capas << "', está vacío." << std::endl;
-    if(rango_filas.Vacio())
-      std::cerr << "Error!. El rango de las filas: '" << rango_filas << "', está vacío." << std::endl;
+    if(layer_range.Vacio())
+      std::cerr << "Error!. the layer range: '" << layer_range << "', is empty." << std::endl;
+    if(row_range.Vacio())
+      std::cerr << "Error!. Row range: '" << row_range << "', is empty." << std::endl;
   }
 
-BaseRefCajaTritriz::BaseRefCajaTritriz(const size_t &capa,const size_t &fila,const RangoIndice &rango_cols)
-  : ncapas(1), nfls(1), ncls(rango_cols.Size()),
-    offset_cp(capa-1),offset_f(fila-1),offset_c(rango_cols.Offset()) {}
+BaseRefCajaTritriz::BaseRefCajaTritriz(const size_t &iLayer,const size_t &row,const RangoIndice &column_range)
+  : n_layers(1), n_rows(1), n_columns(column_range.Size()),
+    offset_cp(iLayer-1),offset_f(row-1),offset_c(column_range.Offset()) {}
 
-BaseRefCajaTritriz::BaseRefCajaTritriz(const size_t capa,const RangoIndice &rango_filas,const size_t &col)
-  : ncapas(1), nfls(rango_filas.Size()), ncls(1),
-    offset_cp(capa-1),offset_f(rango_filas.Offset()),offset_c(col-1) {}
+BaseRefCajaTritriz::BaseRefCajaTritriz(const size_t iLayer,const RangoIndice &row_range,const size_t &col)
+  : n_layers(1), n_rows(row_range.Size()), n_columns(1),
+    offset_cp(iLayer-1),offset_f(row_range.Offset()),offset_c(col-1) {}
 
-BaseRefCajaTritriz::BaseRefCajaTritriz(const RangoIndice &rango_capas,const size_t &fila,const size_t &col)
-  : ncapas(rango_capas.Size()), nfls(1), ncls(1),
-    offset_cp(rango_capas.Offset()),offset_f(fila-1),offset_c(col-1) {}
+BaseRefCajaTritriz::BaseRefCajaTritriz(const RangoIndice &layer_range,const size_t &row,const size_t &col)
+  : n_layers(layer_range.Size()), n_rows(1), n_columns(1),
+    offset_cp(layer_range.Offset()),offset_f(row-1),offset_c(col-1) {}
 
-//! @brief Devuelve el rango de capas.
-RangoIndice BaseRefCajaTritriz::RangoCapas(void) const
-  { return RangoIndice(offset_cp+1,offset_cp+GetCapas()); }
+//! @brief Return el rango de iLayers.
+RangoIndice BaseRefCajaTritriz::LayerRange(void) const
+  { return RangoIndice(offset_cp+1,offset_cp+getNumberOfLayers()); }
 
-//! @brief Devuelve el rango de filas.
-RangoIndice BaseRefCajaTritriz::RangoFilas(void) const
-  { return RangoIndice(offset_f+1,offset_f+getNumFilas()); }
+//! @brief Return the row range.
+RangoIndice BaseRefCajaTritriz::RowRange(void) const
+  { return RangoIndice(offset_f+1,offset_f+getNumberOfRows()); }
 
-//! @brief Devuelve el rango de columnas.
+//! @brief Return el column range.
 RangoIndice BaseRefCajaTritriz::RangoCols(void) const
-  { return RangoIndice(offset_c+1,offset_c+getNumCols()); }
+  { return RangoIndice(offset_c+1,offset_c+getNumberOfColumns()); }
 
-//! @brief Devuelve verdadero si está vacía
+//! @brief Return verdadero si está vacía
 bool  BaseRefCajaTritriz::Empty(void) const
   { return (Size() == 0); }

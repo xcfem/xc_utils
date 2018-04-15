@@ -42,11 +42,11 @@ class matriz_FT: public matrizZ<GEOM_FT>
     matriz_FT(const matriz_FT &orig,size_t f1, size_t c1, size_t f2, size_t c2);
   public:
     matriz_FT(void);
-    matriz_FT(size_type filas,size_type cols);
-    matriz_FT(size_type filas,size_type cols,GEOM_FT val);
+    matriz_FT(size_type rows,size_type cols);
+    matriz_FT(size_type rows,size_type cols,GEOM_FT val);
     matriz_FT GetCaja(size_t f1, size_t c1, size_t f2, size_t c2) const;
-    matriz_FT GetFila(size_t fila) const;
-    matriz_FT GetCol(size_t col) const;
+    matriz_FT getRow(size_t iRow) const;
+    matriz_FT getColumn(size_t col) const;
     matriz_FT GetTrn(void) const;
     friend matriz_FT operator+(const matriz_FT &a,const matriz_FT &b);
     friend matriz_FT operator-(const matriz_FT &a,const matriz_FT &b);
@@ -69,7 +69,7 @@ inline matriz_FT operator&(const matriz_FT &u,const matriz_FT &v)
   { return prod_tensor(u,v); }
 
 void Normaliza(matriz_FT &m);
-void NormalizaFilas(matriz_FT &m);
+void NormalizeRows(matriz_FT &m);
 matriz_FT Normaliza(const matriz_FT &m);
 
 matriz_FT operator-(const matriz_FT &m);

@@ -27,16 +27,16 @@
 #include "xc_utils/src/geom/d2/BND2d.h"
 
 
-TritrizPos2d::TritrizPos2d(const size_t capas)
-  : TritrizPos<Pos2d>(capas) {}
+TritrizPos2d::TritrizPos2d(const size_t iLayers)
+  : TritrizPos<Pos2d>(iLayers) {}
 
 Pos2d TritrizPos2d::GetCentro(void) const
   { return get_centro(*this,Segmento2d()); }
 
 TritrizPos2d create_uniform_grid(const BND2d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z)
   {
-    const size_t ncapas= ndiv_z+1;
-    TritrizPos2d retval(ncapas);
+    const size_t n_layers= ndiv_z+1;
+    TritrizPos2d retval(n_layers);
     Pos2d pmin= bnd.GetPMin();
     Pos2d pmax= bnd.GetPMax();
     GEOM_FT x= pmin.x();
@@ -45,14 +45,14 @@ TritrizPos2d create_uniform_grid(const BND2d &bnd,const size_t &ndiv_x,const siz
     const GEOM_FT Ly= pmax.y()-pmin.y();
     const GEOM_FT inc_x= (ndiv_x > 0 ? Lx/ndiv_x: 0);
     const GEOM_FT inc_y= (ndiv_y > 0 ? Ly/ndiv_y: 0);
-    const size_t nfilas= ndiv_x+1;
-    const size_t ncols= ndiv_y+1;
-    for(size_t k=1;k<=ncapas;k++) //Para cada capa.
+    const size_t n_rows= ndiv_x+1;
+    const size_t n_columns= ndiv_y+1;
+    for(size_t k=1;k<=n_layers;k++) //For each layer.
       {
-        retval[k-1]= MatrizPos2d(nfilas,ncols);
-        for(size_t i=1;i<=nfilas;i++) //Para cada fila.
+        retval[k-1]= MatrizPos2d(n_rows,n_columns);
+        for(size_t i=1;i<=n_rows;i++) //For each row.
           {
-            for(size_t j=1;j<=ncols;j++) //Para cada columna.
+            for(size_t j=1;j<=n_columns;j++) //For each column.
               {
                 retval(k,i,j)= Pos2d(x,y);
                 y+= inc_y;

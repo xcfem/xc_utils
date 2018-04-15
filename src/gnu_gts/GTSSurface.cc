@@ -104,7 +104,7 @@ GTSSurface GTSSurface::AutoInterseca(void) const
 bool GTSSurface::Vacia(void) const
   { return (s == nullptr); }
 bool GTSSurface::CheckSelfIntersection(bool verbose) const
-//Devuelve verdadero si la superficie interseca consigo misma.
+//Return verdadero si la superficie interseca consigo misma.
   {
     GTSSurface self_intersects= AutoInterseca();
     if(!self_intersects.Vacia())

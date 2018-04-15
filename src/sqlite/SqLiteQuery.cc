@@ -62,84 +62,84 @@ bool SqLiteQuery::fetch_row(void) const
 long SqLiteQuery::num_rows(void) const
   { return const_cast<Query *>(&q)->num_rows(); }
 
-//! @brief Devuelve el valor del campo denominado fieldName como BLOB.
+//! @brief Return el valor del campo denominado fieldName como BLOB.
 const void *SqLiteQuery::getBlob(const std::string &fieldName) const
   { return const_cast<Query *>(&q)->getblob(fieldName); }
 
-//! @brief Devuelve el valor del campo denominado fieldName como text string.
+//! @brief Return el valor del campo denominado fieldName como text string.
 std::string SqLiteQuery::getStr(const std::string &fieldName) const
   { return std::string(const_cast<Query *>(&q)->getstr(fieldName)); }
 
-//! @brief Devuelve el valor del campo denominado fieldName como entero.
+//! @brief Return el valor del campo denominado fieldName como entero.
 int SqLiteQuery::getInt(const std::string &fieldName) const
   { return static_cast<int>(getLongInt(fieldName)); }
 
-//! @brief Devuelve el valor del campo denominado fieldName como entero sin signo.
+//! @brief Return el valor del campo denominado fieldName como entero sin signo.
 size_t SqLiteQuery::getSizeT(const std::string &fieldName) const
   { return static_cast<size_t>(getLongInt(fieldName)); }
 
-//! @brief Devuelve el valor del campo denominado fieldName como entero largo.
+//! @brief Return el valor del campo denominado fieldName como entero largo.
 long int SqLiteQuery::getLongInt(const std::string &fieldName) const
   { return const_cast<Query *>(&q)->getval(fieldName); }
 
-//! @brief Devuelve el valor del campo denominado fieldName como entero largo sin signo.
+//! @brief Return el valor del campo denominado fieldName como entero largo sin signo.
 unsigned long int SqLiteQuery::getULongInt(const std::string &fieldName) const
   { return const_cast<Query *>(&q)->getuval(fieldName); }
 
-//! @brief Devuelve el valor del campo denominado fieldName como double.
+//! @brief Return el valor del campo denominado fieldName como double.
 double SqLiteQuery::getDouble(const std::string &fieldName) const
   { return const_cast<Query *>(&q)->getnum(fieldName); }
 
 
-//! @brief Devuelve el valor del campo de índice 'index' como BLOB.
+//! @brief Return el valor del campo de índice 'index' como BLOB.
 const void *SqLiteQuery::getBlob(const int &index) const
   { return const_cast<Query *>(&q)->getblob(index); }
 
-//! @brief Devuelve el valor del campo de índice 'index' como text string.
+//! @brief Return el valor del campo de índice 'index' como text string.
 std::string SqLiteQuery::getStr(const int &index) const
   { return std::string(const_cast<Query *>(&q)->getstr(index)); }
 
-//! @brief Devuelve el valor del campo de índice 'index' como entero.
+//! @brief Return el valor del campo de índice 'index' como entero.
 int SqLiteQuery::getInt(const int &index) const
   { return static_cast<int>(getLongInt(index)); }
 
-//! @brief Devuelve el valor del campo de índice 'index' como entero sin signo.
+//! @brief Return el valor del campo de índice 'index' como entero sin signo.
 size_t SqLiteQuery::getSizeT(const int &index) const
   { return static_cast<size_t>(getLongInt(index)); }
 
-//! @brief Devuelve el valor del campo de índice 'index' como entero largo.
+//! @brief Return el valor del campo de índice 'index' como entero largo.
 long int SqLiteQuery::getLongInt(const int &index) const
   { return const_cast<Query *>(&q)->getval(index); }
 
-//! @brief Devuelve el valor del campo de índice 'index' como entero largo sin signo.
+//! @brief Return el valor del campo de índice 'index' como entero largo sin signo.
 unsigned long int SqLiteQuery::getULongInt(const int &index) const
   { return const_cast<Query *>(&q)->getuval(index); }
 
-//! @brief Devuelve el valor del campo de índice 'index' como double.
+//! @brief Return el valor del campo de índice 'index' como double.
 double SqLiteQuery::getDouble(const int &index) const
   { return const_cast<Query *>(&q)->getnum(index); }
 
-//! @brief Devuelve el valor del siguiente campo como text string.
+//! @brief Return el valor del siguiente campo como text string.
 std::string SqLiteQuery::getStr(void) const
   { return std::string(const_cast<Query *>(&q)->getstr()); }
 
-//! @brief Devuelve el valor del siguiente campo como entero.
+//! @brief Return el valor del siguiente campo como entero.
 int SqLiteQuery::getInt(void) const
   { return static_cast<int>(getLongInt()); }
 
-//! @brief Devuelve el valor del siguiente campo como entero sin signo.
+//! @brief Return el valor del siguiente campo como entero sin signo.
 size_t SqLiteQuery::getSizeT(void) const
   { return static_cast<size_t>(getLongInt()); }
 
-//! @brief Devuelve el valor del siguiente campo como entero largo.
+//! @brief Return el valor del siguiente campo como entero largo.
 long int SqLiteQuery::getLongInt(void) const
   { return const_cast<Query *>(&q)->getval(); }
 
-//! @brief Devuelve el valor del siguiente campo como entero largo sin signo.
+//! @brief Return el valor del siguiente campo como entero largo sin signo.
 unsigned long int SqLiteQuery::getULongInt(void) const
   { return const_cast<Query *>(&q)->getuval(); }
 
-//! @brief Devuelve el valor del siguiente campo como double.
+//! @brief Return el valor del siguiente campo como double.
 double SqLiteQuery::getDouble(void) const
   { return const_cast<Query *>(&q)->getnum(); }
 

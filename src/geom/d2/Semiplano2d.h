@@ -50,15 +50,15 @@ class Semiplano2d : public Superficie2d
     inline void Swap(void);
     Semiplano2d GetSwap(void) const;
 
-    //! @brief Devuelve el valor de a que corresponde a la ecuación de la recta: a*x + b*y + c= 0
+    //! @brief Return el valor de a que corresponde a la ecuación de la recta: a*x + b*y + c= 0
     inline GEOM_RT a(void) const
       { return lim.a(); }
     inline GEOM_RT b(void) const
-    //Devuelve el valor de a que corresponde a la 
+    //Return el valor de a que corresponde a la 
     //ecuación de la recta: a*x + b*y + c= 0
       { return lim.b(); }
     inline GEOM_RT c(void) const
-    //Devuelve el valor de a que corresponde a la 
+    //Return el valor de a que corresponde a la 
     //ecuación de la recta: a*x + b*y + c= 0
       { return lim.c(); } 
     virtual GEOM_FT GetMax(unsigned short int) const

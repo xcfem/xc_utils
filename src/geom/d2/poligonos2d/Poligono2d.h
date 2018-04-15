@@ -145,10 +145,10 @@ class Poligono2d: public SupPoligonal2d
     bool Overlap(const Poligono2d &) const;
     bool Overlap(const std::list<Poligono2d> &) const;
     inline Pos2d Vertice(unsigned int i) const
-      //Devuelve la posición del vértice.
+      //Return la posición del vértice.
       { return Vertice0(i-1); }
     inline Pos2d Vertice0(unsigned int j) const
-      //Devuelve la posición del vértice de indice j (j=0..GetNumVertices()-1)
+      //Return la posición del vértice de indice j (j=0..GetNumVertices()-1)
       { return cgpol.vertex(j); }
     GeomObj::list_Pos2d ListaVertices(void) const;
 
@@ -182,7 +182,7 @@ std::list<Poligono2d> corta(const Poligono2d &p,const Recta2d &r);
 
 Pos2d cdg(const std::list<Poligono2d> &);
 
-//!@brief Devuelve verdadero si todos los objetos de la secuencia
+//!@brief Return verdadero si todos los objetos de la secuencia
 //! están contenidos en el polígono.
 template <class inputIterator>
 bool Poligono2d::In(inputIterator begin, inputIterator end) const
@@ -197,7 +197,7 @@ bool Poligono2d::In(inputIterator begin, inputIterator end) const
     return retval;
   }
 
-//!@brief Devuelve verdadero si alguno de los objetos de la secuencia
+//!@brief Return verdadero si alguno de los objetos de la secuencia
 //! está contenido total o parcialmente en el polígono.
 template <class inputIterator>
 bool Poligono2d::Overlap(inputIterator begin, inputIterator end) const

@@ -19,46 +19,47 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//ConstRefFilaI.h 
+//IRowConstRef.h 
 
-#ifndef CONSTREFFILAI_H
-#define CONSTREFFILAI_H
+#ifndef IROWCONSTREF_H
+#define IROWCONSTREF_H
 
 
 //! @ingroup GEOM
 //
-//! @brief Reference to a layer fila de la tritriz which points have los índices J y K constantes.
+//! @brief Reference to a layer row from the tritriz which points have
+//! constant J and K indices.
 template <class TRITRIZ>
-class ConstRefFilaI: public ConstRefCajaTritriz<TRITRIZ>
+class IRowConstRef: public ConstRefCajaTritriz<TRITRIZ>
   {
   public:
     typedef typename ConstRefCajaTritriz<TRITRIZ>::const_reference const_reference;
 
-    explicit ConstRefFilaI(const TRITRIZ &m,const size_t &f= 1,const size_t &c= 1);
-    ConstRefFilaI(const TRITRIZ &m,const size_t &,const size_t &,const size_t &,const size_t &);
-    ConstRefFilaI(const TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const size_t &c);
-    inline virtual ~ConstRefFilaI(void) {}
-    virtual const_reference operator()(size_t capa=1) const
-      { return ConstRefCajaTritriz<TRITRIZ>::operator()(capa,1,1); }
-    inline virtual const_reference operator()(size_t capa,size_t fila,size_t col) const
-      { return ConstRefCajaTritriz<TRITRIZ>::operator()(capa,fila,col); }
+    explicit IRowConstRef(const TRITRIZ &m,const size_t &f= 1,const size_t &c= 1);
+    IRowConstRef(const TRITRIZ &m,const size_t &,const size_t &,const size_t &,const size_t &);
+    IRowConstRef(const TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const size_t &c);
+    inline virtual ~IRowConstRef(void) {}
+    virtual const_reference operator()(size_t iLayer=1) const
+      { return ConstRefCajaTritriz<TRITRIZ>::operator()(iLayer,1,1); }
+    inline virtual const_reference operator()(size_t iLayer,size_t iRow,size_t col) const
+      { return ConstRefCajaTritriz<TRITRIZ>::operator()(iLayer,iRow,col); }
   };
 
 //! @brief Constructor por defecto.
 template<class TRITRIZ>
-ConstRefFilaI<TRITRIZ>::ConstRefFilaI(const TRITRIZ &t,const size_t &f,const size_t &c)
-  : ConstRefCajaTritriz<TRITRIZ>(t,RangoIndice(1,t.GetCapas()),f,c)
+IRowConstRef<TRITRIZ>::IRowConstRef(const TRITRIZ &t,const size_t &f,const size_t &c)
+  : ConstRefCajaTritriz<TRITRIZ>(t,RangoIndice(1,t.getNumberOfLayers()),f,c)
   {}
 
 //! @brief Constructor.
 template<class TRITRIZ>
-ConstRefFilaI<TRITRIZ>::ConstRefFilaI(const TRITRIZ &t,const size_t &capa1,const size_t &capa2,const size_t &f,const size_t &c)
-  : ConstRefCajaTritriz<TRITRIZ>(t,RangoIndice(capa1,capa2),f,c)
+IRowConstRef<TRITRIZ>::IRowConstRef(const TRITRIZ &t,const size_t &iLayer1,const size_t &iLayer2,const size_t &f,const size_t &c)
+  : ConstRefCajaTritriz<TRITRIZ>(t,RangoIndice(iLayer1,iLayer2),f,c)
   {}
 
 //! @brief Constructor.
 template<class TRITRIZ>
-ConstRefFilaI<TRITRIZ>::ConstRefFilaI(const TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const size_t &c)
+IRowConstRef<TRITRIZ>::IRowConstRef(const TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const size_t &c)
   : ConstRefCajaTritriz<TRITRIZ>(t,layer_range,f,c)
   {}
 

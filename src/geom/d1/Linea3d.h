@@ -43,16 +43,16 @@ class Linea3d : public GeomObj3d
       { return 0.0; }
     //@brief Return true if the points is on sobre la Linea.
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const= 0;
-    //Devuelve la intersección de la Linea con un plano coord_i=cte.
+    //Return la intersección de la Linea con un plano coord_i=cte.
 /*     virtual list_Pos3d Int(unsigned short int i, const double &d) const= 0; */
 /*     inline list_Pos3d intx(const double &x) */
-/*     //Devuelve la intersección de la Linea con un plano x=cte. */
+/*     //Return la intersección de la Linea con un plano x=cte. */
 /*       { return Int(1,x); } */
 /*     inline list_Pos3d inty(const double &y) */
-/*     //Devuelve la intersección de la Linea con un plano y=cte. */
+/*     //Return la intersección de la Linea con un plano y=cte. */
 /*       { return Int(2,y); } */
 /*     inline list_Pos3d intz(const double &z) */
-/*     //Devuelve la intersección de la Linea con un plano z=cte. */
+/*     //Return la intersección de la Linea con un plano z=cte. */
 /*       { return Int(3,z); } */
   };
 #endif

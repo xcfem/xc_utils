@@ -66,10 +66,10 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
     virtual GEOM_FT GetMin(unsigned short int i) const;
     //Return the minimum value of the i coordinate.
     Polilinea3d GetMayores(unsigned short int i,const GEOM_FT &d) const;
-    //Devuelve una Polilinea3d con los vertices cuya coordenada i
+    //Return una Polilinea3d con los vertices cuya coordenada i
     //es mayor que d.
     Polilinea3d GetMenores(unsigned short int i,const GEOM_FT &d) const;
-    //Devuelve una Polilinea3d con los vertices cuya coordenada i
+    //Return una Polilinea3d con los vertices cuya coordenada i
     //es menor que d.
     Segmento3d GetSegmento(const list_Pos3d::const_iterator &) const;
     Segmento3d GetSegmento(const size_t &) const;
@@ -79,7 +79,7 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
 /*         return list_Pos3d(); */
 /*       } */
     list_Pos3d Int(unsigned short int i,const GEOM_FT &d) const;
-    //Devuelve las intersecciones de la Polilinea3d con el plano
+    //Return las intersecciones de la Polilinea3d con el plano
     //coord_i= d
     list_Pos3d getIntersection(const Plano3d &) const;
     Polilinea3d Corta(unsigned short int i,const GEOM_FT &d) const;
@@ -87,7 +87,7 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
     //cortes con el plano coord_i= d
     Polilinea3d Separa(const Pos3d &p,const short int &sgn) const;
     //Suponemos que p es vertice de la Polilinea3d
-    //Devuelve el trozo de Polilinea3d:
+    //Return el trozo de Polilinea3d:
     //hasta p si sgn < 0
     //desde p si sgn >= 0
     Pos3d Cdg(void) const

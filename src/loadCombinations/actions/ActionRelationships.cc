@@ -38,7 +38,7 @@ std::string cmb_acc::ActionRelationships::limpia(const std::string &str)
     return retval;
   }
 
-//! @brief Devuelve los sumandos de la text string que se pasa como parámetro.
+//! @brief Return los sumandos de la text string que se pasa como parámetro.
 std::deque<std::string> cmb_acc::ActionRelationships::get_sumandos_combinacion(const std::string &str)
   {
     std::deque<std::string> retval;
@@ -53,7 +53,7 @@ std::deque<std::string> cmb_acc::ActionRelationships::get_sumandos_combinacion(c
     return retval;
   }
 
-//! @brief Devuelve los nombres de las acciones que participan en la combinación.
+//! @brief Return los nombres de las acciones que participan en la combinación.
 std::deque<std::string> cmb_acc::ActionRelationships::get_nmb_acciones_combinacion(const std::string &str)
   {
     std::deque<std::string> retval= get_sumandos_combinacion(str);
@@ -66,7 +66,7 @@ std::deque<std::string> cmb_acc::ActionRelationships::get_nmb_acciones_combinaci
 cmb_acc::ActionRelationships::ActionRelationships(void)
   : EntCmd(), incompatibles(0), maestras(0), nodet(false), contiene_incomp(false) {}
 
-//! @brief Devuelve una text string con los nombres de la lista que se pasa como parámetro separados por comas.
+//! @brief Return una text string con los nombres de la lista que se pasa como parámetro separados por comas.
 std::string cmb_acc::ActionRelationships::nombres(const dq_string &l) const
   {
     std::string retval;
@@ -94,7 +94,7 @@ void cmb_acc::ActionRelationships::concat_maestras(const dq_string &otra)
       AgregaMaestra(*i);
   }
 
-//! @brief Devuelve verdadero si alguna de las text strings de combActionsNames
+//! @brief Return verdadero si alguna de las text strings de combActionsNames
 //! verifican la expresión regular "exprReg".
 bool cmb_acc::ActionRelationships::match(const std::string &exprReg,const dq_string &combActionsNames) const
   {
@@ -109,7 +109,7 @@ bool cmb_acc::ActionRelationships::match(const std::string &exprReg,const dq_str
     return retval;
   }
 
-//! @brief Devuelve verdadero si alguna de las text strings que se pasan como parámetro
+//! @brief Return verdadero si alguna de las text strings que se pasan como parámetro
 //! verifica alguna de las expresiones del contenedor de expresiones regulares "exprReg".
 bool cmb_acc::ActionRelationships::match_any(const dq_string &exprReg,const dq_string &combActionsNames) const
   {
@@ -123,7 +123,7 @@ bool cmb_acc::ActionRelationships::match_any(const dq_string &exprReg,const dq_s
     return retval;
   }
 
-//! @brief Devuelve verdadero si para cada una de las expresiones regulares de "exprReg"
+//! @brief Return verdadero si para cada una de las expresiones regulares de "exprReg"
 //! existe alguna text string de combActionsNames que la verifica.
 bool cmb_acc::ActionRelationships::match_all(const dq_string &exprReg,const dq_string &combActionsNames) const
   {
@@ -137,12 +137,12 @@ bool cmb_acc::ActionRelationships::match_all(const dq_string &exprReg,const dq_s
     return retval;
   }
 
-//! @brief Devuelve verdadero si la text strings que se pasan como parámetro
+//! @brief Return verdadero si la text strings que se pasan como parámetro
 //! verifica alguna de las expresiones del contenedor "incompatibles".
 bool cmb_acc::ActionRelationships::matchIncompatibles(const dq_string &sumandos) const
   { return match_any(incompatibles,sumandos); }
 
-//! @brief Devuelve verdadero si la acción cuyo nombre se pasa como parámetro es incompatible con esta,
+//! @brief Return verdadero si la acción cuyo nombre se pasa como parámetro es incompatible con esta,
 //! es decir que ambas no pueden estar presentes en la misma hipótesis.
 bool cmb_acc::ActionRelationships::incompatible(const std::string &nmb) const
   {
@@ -152,7 +152,7 @@ bool cmb_acc::ActionRelationships::incompatible(const std::string &nmb) const
     return retval;
   }
 
-//! @brief Devuelve verdadero si la acción cuyo nombre se pasa como parámetro es maestra de esta,
+//! @brief Return verdadero si la acción cuyo nombre se pasa como parámetro es maestra de esta,
 //! es decir que ambas no pueden estar presentes en la misma hipótesis.
 bool cmb_acc::ActionRelationships::esclavaDe(const std::string &nmb) const
   { 
@@ -205,7 +205,7 @@ std::ostream &cmb_acc::operator<<(std::ostream &os,const ActionRelationships &a)
     return os;
   }
 
-//! @brief Devuelve las combinaciones filtrando las que contienen acciones incompatibles.
+//! @brief Return las combinaciones filtrando las que contienen acciones incompatibles.
 const cmb_acc::LoadCombinationVector &cmb_acc::getCompatibles(const LoadCombinationVector &comb)
   {
     static LoadCombinationVector retval;

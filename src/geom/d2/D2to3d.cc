@@ -79,11 +79,11 @@ Segmento3d D2to3d::to_3d(const Segmento2d &sg2d) const
 
 MatrizPos3d D2to3d::to_3d(const MatrizPos2d &p2d) const
   {
-    const size_t nfilas= p2d.getNumFilas();
-    const size_t ncols= p2d.getNumCols();
-    MatrizPos3d retval(nfilas,ncols);
-    for(size_t i=1;i<=nfilas;i++)
-      for(size_t j=1;j<=ncols;j++)
+    const size_t n_rows= p2d.getNumberOfRows();
+    const size_t n_columns= p2d.getNumberOfColumns();
+    MatrizPos3d retval(n_rows,n_columns);
+    for(size_t i=1;i<=n_rows;i++)
+      for(size_t j=1;j<=n_columns;j++)
         retval(i,j)= to_3d(p2d(i,j));
     return retval;
   }

@@ -58,7 +58,7 @@ double cmb_acc::ActionRValue::getPsi(short int r) const
   { return coefs_psi->getPsi(r); }
 
 //! \fn cmb_acc::Action cmb_acc::ActionRValue::Valor(short int r) const
-//! @brief Devuelve el valor representativo de la acción.
+//! @brief Return el valor representativo de la acción.
 cmb_acc::Action cmb_acc::ActionRValue::Valor(short int r) const
   {
     Action retval(*this);

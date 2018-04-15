@@ -53,7 +53,7 @@ MatrizPos3d Revolucion3d::Aplica0d(const Pos3d &p) const
 MatrizPos3d Revolucion3d::Aplica1d(const MatrizPos3d &m) const
   {
     const size_t nPoints= m.size();
-    if(m.EsColumna()) //Column matrix, put points by rows.
+    if(m.isColumn()) //Column matrix, put points by rows.
       {
         MatrizPos3d retval(nPoints,ndiv+1);
         for(size_t i=1;i<=nPoints;i++) //Points of the first column.
@@ -69,7 +69,7 @@ MatrizPos3d Revolucion3d::Aplica1d(const MatrizPos3d &m) const
           }
         return retval;
       }
-    else if(m.EsFila()) //Column matrix, put points by columns.
+    else if(m.isRow()) //Column matrix, put points by columns.
       {
         MatrizPos3d retval(ndiv+1,nPoints);
         for(size_t j=1;j<=nPoints;j++) //Points of the first row.
@@ -100,13 +100,13 @@ MatrizPos3d Revolucion3d::Aplica1d(const MatrizPos3d &m) const
 //! to the bi-dimensional matrix passed as argument.
 TritrizPos3d Revolucion3d::Aplica2d(const MatrizPos3d &m) const
   {
-    if(!m.EsFila() && !m.EsColumna()) //bi-dimensional matrix.
+    if(!m.isRow() && !m.isColumn()) //bi-dimensional matrix.
       {
-        const size_t ncapas= ndiv+1;
-	TritrizPos3d retval(ncapas,m);
+        const size_t n_layers= ndiv+1;
+	TritrizPos3d retval(n_layers,m);
         const GEOM_FT inc_angulo= theta/ndiv;
         GEOM_FT ang(inc_angulo);
-        for(size_t i=2;i<=ncapas;i++)
+        for(size_t i=2;i<=n_layers;i++)
           {
             const Rotation3d trf(eje,ang);
             retval(i)= trf(m);

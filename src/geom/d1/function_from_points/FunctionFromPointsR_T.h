@@ -74,7 +74,7 @@ class FunctionFromPointsR_T
       { points.clear(); }
   };
 
-//! @brief Devuelve el valor que corresponde a la abcisa z.
+//! @brief Return el valor que corresponde a la abcisa z.
 template <class T>
 T FunctionFromPointsR_T<T>::Valor(const double &z) const
   {
@@ -97,7 +97,7 @@ T FunctionFromPointsR_T<T>::Valor(const double &z) const
     return retval;
   }
 
-//! @brief Devuelve los valores que corresponden a las abcisas z.
+//! @brief Return los valores que corresponden a las abcisas z.
 template <class T>
 std::vector<T> FunctionFromPointsR_T<T>::Valores(const std::vector<double> &zs) const
   {

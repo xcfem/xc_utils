@@ -41,11 +41,11 @@ Pos2d SectorAnilloCircular2d::Cdg(void) const
     return Centro();
   }
 
-//! @brief Devuelve un sector circular con el mismo centro and ángulos and otro radio
+//! @brief Return un sector circular con el mismo centro and ángulos and otro radio
 SectorCircular2d SectorAnilloCircular2d::getSector(const double &R) const
   { return SectorCircular2d(Circulo2d(Centro(),R),Theta1(),Theta2()); }
 
-//! @brief Devuelve el sector circular interior a éste.
+//! @brief Return el sector circular interior a éste.
 SectorCircular2d SectorAnilloCircular2d::SectorInterior(void) const
   { return getSector(rint); }
 
@@ -87,7 +87,7 @@ GEOM_FT SectorAnilloCircular2d::LongitudArcoInt(void) const
 GEOM_FT SectorAnilloCircular2d::Longitud(void) const
   { return LongitudArcoExt()+LongitudArcoInt()+2*(RadioExt()-RadioInt()); }
 
-//! @brief Devuelve el área del sector circular.
+//! @brief Return el área del sector circular.
 GEOM_FT SectorAnilloCircular2d::Area(void) const
   { return SectorCircular2d::Area()-SectorInterior().Area(); }
 
@@ -97,14 +97,14 @@ GEOM_FT SectorAnilloCircular2d::GetMax(unsigned short int i) const
     std::cerr << "SectorAnilloCircular2d::GetMax() not implemented." << std::endl;
     return 0;
   }
-//! @brief Devuelve el valor mínimo of the i coordinate of the object points.
+//! @brief Return el valor mínimo of the i coordinate of the object points.
 GEOM_FT SectorAnilloCircular2d::GetMin(unsigned short int i) const
   {
     std::cerr << "SectorAnilloCircular2d::GetMin() not implemented." << std::endl;
     return 0;
   }
 
-//! @brief Devuelve el momento de inercia del sector circular respecto al 
+//! @brief Return el momento de inercia del sector circular respecto al 
 //! eje paralelo al x que pasa por su centro.
 GEOM_FT SectorAnilloCircular2d::Ix(void) const
   {
@@ -112,7 +112,7 @@ GEOM_FT SectorAnilloCircular2d::Ix(void) const
     return 0;
   }
 
-//! @brief Devuelve el momento de inercia del sector circular respecto al 
+//! @brief Return el momento de inercia del sector circular respecto al 
 //! eje paralelo al y que pasa por su centro.
 GEOM_FT SectorAnilloCircular2d::Iy(void) const
   {
@@ -120,7 +120,7 @@ GEOM_FT SectorAnilloCircular2d::Iy(void) const
     return 0;
   }
 
-//! @brief Devuelve el momento de inercia del sector circular respecto al 
+//! @brief Return el momento de inercia del sector circular respecto al 
 //! eje paralelo al z que pasa por su centro.
 GEOM_FT SectorAnilloCircular2d::Iz(void) const
   {
@@ -128,7 +128,7 @@ GEOM_FT SectorAnilloCircular2d::Iz(void) const
     return 0;
   }
 
-//! @brief Devuelve el producto de inercia del sector circular respecto a
+//! @brief Return el producto de inercia del sector circular respecto a
 //! los ejes paralelos a x e y que pasan por su centro.
 GEOM_FT SectorAnilloCircular2d::Pxy(void) const
   {

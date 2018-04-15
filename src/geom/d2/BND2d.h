@@ -55,7 +55,7 @@ class BND2d: public GeomObj2d
     virtual GeomObj *clon(void) const
       { return new BND2d(*this); }
     inline virtual unsigned short int Dimension(void) const
-    //Devuelve la dimensión del objeto 0, 1, 2 ó 3.
+    //Return la dimensión del objeto 0, 1, 2 ó 3.
       { return 2; }
     inline virtual GEOM_FT Anchura(void) const
       { return GetXMax()-GetXMin(); }
@@ -128,7 +128,7 @@ inline bool intersecan(const BND2d &bnd,const SemiRecta2d &sr)
 inline bool intersecan(const BND2d &bnd,const Segmento2d &sg)
   { return bnd.Interseca(sg); }
 
-//!@brief Devuelve verdadero si todos los objetos de la secuencia
+//!@brief Return verdadero si todos los objetos de la secuencia
 //! están contenidos en el BND.
 template <class inputIterator>
 bool BND2d::In(inputIterator begin, inputIterator end) const
@@ -143,7 +143,7 @@ bool BND2d::In(inputIterator begin, inputIterator end) const
     return retval;
   }
 
-//!@brief Devuelve verdadero si alguno de los objetos de la secuencia
+//!@brief Return verdadero si alguno de los objetos de la secuencia
 //! está contenido total o parcialmente en el polígono.
 template <class inputIterator>
 bool BND2d::Overlap(inputIterator begin, inputIterator end) const

@@ -28,7 +28,7 @@
 
 //! @ingroup GEOM
 //
-//! @brief Devuelve el valor máximo de la coordenada de indice i.
+//! @brief Return el valor máximo de la coordenada de indice i.
 template <class InputIterator>
 inline GEOM_FT get_max_i( short unsigned int i,
                                  InputIterator first,
@@ -48,7 +48,7 @@ inline GEOM_FT get_max_i( short unsigned int i,
 
 //! @ingroup GEOM
 //
-//! @brief Devuelve el valor mínimo de la coordenada de indice i.
+//! @brief Return el valor mínimo de la coordenada de indice i.
 template <class InputIterator>
 inline GEOM_FT get_min_i( short unsigned int i,
                                  InputIterator first,

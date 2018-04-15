@@ -152,7 +152,7 @@ ListaPos2d ListaPos2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
   }
 
 
-//! @brief Devuelve el vértice i-ésimo (el primero es el 1).
+//! @brief Return el vértice i-ésimo (el primero es el 1).
 const Pos2d &ListaPos2d::Point(const size_t &i) const
   { return lista_ptos[i-1]; }
 

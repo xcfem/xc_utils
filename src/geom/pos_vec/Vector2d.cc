@@ -39,8 +39,8 @@ Vector2d::Vector2d(const GEOM_FT &x,const GEOM_FT &y)
 Vector2d::Vector2d(const matriz_FT &m)
   : cgvct(0,0)
   {
-    assert(m.getNumFilas()==2);
-    assert(m.getNumCols()==1); 
+    assert(m.getNumberOfRows()==2);
+    assert(m.getNumberOfColumns()==1); 
     cgvct= CGVector_2(m(1),m(2));
   }
 Vector2d::Vector2d(const Pos2d &p1,const Pos2d &p2)
@@ -68,19 +68,19 @@ void Vector2d::Set(unsigned short int i,const GEOM_FT &v)
       }
   }
 
-//! @brief Devuelve la suma de los vectores.
+//! @brief Return la suma de los vectores.
 Vector2d Vector2d::operator+(const Vector2d &v) const
   {  return Vector2d(ToCGAL()+v.ToCGAL()); }
 
-//! @brief Devuelve la resta de los vectores.
+//! @brief Return la resta de los vectores.
 Vector2d Vector2d::operator-(const Vector2d &v) const
   { return Vector2d(ToCGAL()-v.ToCGAL()); }
 
-//! @brief Devuelve el producto del vector por el escalar.
+//! @brief Return el producto del vector por el escalar.
 Vector2d Vector2d::operator*(const GEOM_FT &d) const
   { return Vector2d(ToCGAL()*d); }
 
-//! @brief Devuelve el producto del vector por el inverso del escalar.
+//! @brief Return el producto del vector por el inverso del escalar.
 Vector2d Vector2d::operator/(const GEOM_FT &d) const
   { return Vector2d(ToCGAL()*(1/d)); }
 
@@ -91,19 +91,19 @@ matriz_FT Vector2d::GetMatriz(void) const
     return retval;
   }
 
-//! @brief Devuelve el vector normal a éste.
+//! @brief Return el vector normal a éste.
 Vector2d Vector2d::Normal(void) const
   { return Vector2d(y(),-x()); }
 
 Dir2d Vector2d::Direccion(void) const
   { return Dir2d(*this); }
 
-//! @brief Devuelve el ángulo que forma con el vector
+//! @brief Return el ángulo que forma con el vector
 //! que se pasa como parámetro.
 GEOM_FT Vector2d::AnguloSigno(const Vector2d &v) const
   { return anguloSigno(*this,v); }
 
-//! @brief Devuelve el ángulo que forma con el vector
+//! @brief Return el ángulo que forma con el vector
 //! que se pasa como parámetro (0->360).
 GEOM_FT Vector2d::Angulo(const Vector2d &v) const
   { return angulo(*this,v); }
@@ -129,7 +129,7 @@ bool Vector2d::EsUnitario(const double &tol) const
       return true;
   }
 
-//! @brief Devuelve el módulo del vector.
+//! @brief Return el módulo del vector.
 GEOM_FT Vector2d::GetModulus(void) const
   { return sqrt_FT(GetModulus2()); }
 
@@ -140,16 +140,16 @@ matriz_FT operator*(const matriz_FT &m,const Vector2d &v)
 //! @brief Producto escalar.
 GEOM_FT Vector2d::GetDot(const matriz_FT &m) const
   {
-    assert(m.getNumFilas()==2);
-    assert(m.getNumCols()==1);
+    assert(m.getNumberOfRows()==2);
+    assert(m.getNumberOfColumns()==1);
     return (x()*m(1)+y()*m(2));
   }
 
-//! @brief Devuelve el producto del vector por la matriz.
+//! @brief Return el producto del vector por la matriz.
 GEOM_FT dot(const Vector2d &v1, const matriz_FT &m)
   { return v1.GetDot(m); }
 
-//! @brief Devuelve el producto de la matriz por el vector.
+//! @brief Return el producto de la matriz por el vector.
 GEOM_FT dot(const matriz_FT &m, const Vector2d &v1)
   { return v1.GetDot(m); }
 

@@ -37,30 +37,30 @@ GEOM_FT Abs(const matriz_FT &m)
 
 matriz_FT::matriz_FT(void)
   : matrizZ<GEOM_FT>(1,1) {}
-matriz_FT::matriz_FT(size_type filas,size_type cols)
-  : matrizZ<GEOM_FT>(filas,cols) {}
-matriz_FT::matriz_FT(size_type filas,size_type cols,GEOM_FT val)
-  : matrizZ<GEOM_FT>(filas,cols,val) {}
+matriz_FT::matriz_FT(size_type rows,size_type cols)
+  : matrizZ<GEOM_FT>(rows,cols) {}
+matriz_FT::matriz_FT(size_type rows,size_type cols,GEOM_FT val)
+  : matrizZ<GEOM_FT>(rows,cols,val) {}
 matriz_FT::matriz_FT(const matriz_FT &orig,size_t f1, size_t c1, size_t f2, size_t c2)
   : matrizZ<GEOM_FT>(f2-f1+1,c2-c1+1)
   {
     orig.check_get_caja(f1,c1,f2,c2);
-    for(register size_t i=1;i<=fls;i++)
-      for(register size_t j=1;j<=cls;j++)
+    for(register size_t i=1;i<=n_rows;i++)
+      for(register size_t j=1;j<=n_columns;j++)
         (*this)(i,j)= orig(i+f1-1,j+c1-1);
   }
 
 matriz_FT matriz_FT::GetCaja(size_t f1, size_t c1, size_t f2, size_t c2) const
   { return matriz_FT(*this,f1,c1,f2,c2); }
-matriz_FT matriz_FT::GetFila(size_t fila) const
-  { return GetCaja(fila,1,fila,cls); }
-matriz_FT matriz_FT::GetCol(size_t col) const
-  { return GetCaja(1,col,fls,col); }
+matriz_FT matriz_FT::getRow(size_t iRow) const
+  { return GetCaja(iRow,1,iRow,n_columns); }
+matriz_FT matriz_FT::getColumn(size_t col) const
+  { return GetCaja(1,col,n_rows,col); }
 
 matriz_FT matriz_FT::GetTrn(void) const
   { return traspuesta(*this); }
 
-//! @brief Devuelve la matriz recíproca de la que se pasa como parámetro.
+//! @brief Return the matrix recíproca de la being passed as parameter.
 matriz_FT operator-(const matriz_FT &m)
   {
     matriz_FT neg(m);
@@ -107,7 +107,7 @@ matriz_FT operator^(const matriz_FT &v1,const matriz_FT &v2)
   { return prod_vectorial(v1,v2); }
 
 
-//! @brief Devuelve la matriz identidad de f filas y f columnas.
+//! @brief Return the matrix identidad de f rows y f columns.
 matriz_FT identidad(const size_t &f)
   {
     matriz_FT retval(f,f);
@@ -122,7 +122,7 @@ matriz_FT identidad(const matriz_FT &m)
     return retval;
   }
 
-//! @brief Devuelve la traspuesta de la que se pasa como parámetro.
+//! @brief Return la traspuesta de la being passed as parameter.
 matriz_FT traspuesta(const matriz_FT &m)
   { 
     matriz_FT retval(m);
@@ -131,8 +131,8 @@ matriz_FT traspuesta(const matriz_FT &m)
   }
 
 //! @brief Producto tensorial de dos tensores de primer orden.
-//! -u: vector fila.
-//! -v: vector columna.
+//! -u: row vector.
+//! -v: column vector.
 matriz_FT prod_tensor(const matriz_FT &u,const matriz_FT &v)
   {
     const size_t sz_u= u.size();
@@ -151,22 +151,24 @@ void Normaliza(matriz_FT &m)
     if(vabs>0) m*= 1/vabs;
   }
 
-//! @brief Divide los elementos cada fila de la matriz por el modulo de dicha fila.
-void NormalizaFilas(matriz_FT &m)
+//! @brief Divides the components of each row of the matrix by the norm
+//! of such row.
+void NormalizeRows(matriz_FT &m)
   {
-    const size_t fls= m.getNumFilas(),cls= m.getNumCols();
-    for(size_t i=1;i<=fls;i++)
+    const size_t n_rows= m.getNumberOfRows(),n_columns= m.getNumberOfColumns();
+    for(size_t i=1;i<=n_rows;i++)
       {
-        const GEOM_FT mod_fila= ::Abs(m.GetFila(i));
-        if(mod_fila>0)
-          for(size_t j=1;j<=cls;j++)
-	    m(i,j)/= mod_fila;
+        const GEOM_FT row_norm= ::Abs(m.getRow(i));
+        if(row_norm>0)
+          for(size_t j=1;j<=n_columns;j++)
+	    m(i,j)/= row_norm;
         else
-	  std::cerr << "NormalizaFilas; la fila: " << i << " tiene módulo nulo." << std::endl;
+	  std::cerr << "NormalizeRows; the row: " << i
+		    << " has zero norm." << std::endl;
       }
   }
 
-//! @brief Devuelve la matriz normalizada de la que se pasa como parámetro.
+//! @brief Return the matrix normalizada de la being passed as parameter.
 matriz_FT Normaliza(const matriz_FT &m)
   {
     matriz_FT retval(m);
@@ -174,30 +176,30 @@ matriz_FT Normaliza(const matriz_FT &m)
     return retval;
   }
 
-//! @brief Devuelve la matriz normalizada por filas de la que se pasa como parámetro.
-matriz_FT NormalizaFilas(const matriz_FT &m)
+//! @brief Return the row-normalized matrix de la being passed as parameter.
+matriz_FT NormalizeRows(const matriz_FT &m)
   {
     matriz_FT retval(m);
-    NormalizaFilas(retval);
+    NormalizeRows(retval);
     return retval;
   }
 
 matrizZ<double> to_double(const matriz_FT &m)
   {
-    const size_t fls= m.getNumFilas(),cls= m.getNumCols();
-    m_double retval(fls,cls);
-    for(register size_t i= 1;i<=fls;i++)
-      for(register size_t j= 1;j<=cls;j++)
+    const size_t n_rows= m.getNumberOfRows(),n_columns= m.getNumberOfColumns();
+    m_double retval(n_rows,n_columns);
+    for(register size_t i= 1;i<=n_rows;i++)
+      for(register size_t j= 1;j<=n_columns;j++)
 	retval(i,j)= m(i,j);
     return retval;
   }
 
 matriz_FT from_double(const matrizZ<double> &m)
   {
-    const size_t fls= m.getNumFilas(),cls= m.getNumCols();
-    matriz_FT retval(fls,cls);
-    for(register size_t i= 1;i<=fls;i++)
-      for(register size_t j= 1;j<=cls;j++)
+    const size_t n_rows= m.getNumberOfRows(),n_columns= m.getNumberOfColumns();
+    matriz_FT retval(n_rows,n_columns);
+    for(register size_t i= 1;i<=n_rows;i++)
+      for(register size_t j= 1;j<=n_columns;j++)
 	retval(i,j)= double_to_FT(m(i,j));
     return retval;
   }

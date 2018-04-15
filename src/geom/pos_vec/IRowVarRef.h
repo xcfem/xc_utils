@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//VarRefFilaI.h 
+//IRowVarRef.h 
 
-#ifndef VARREFFILAI_H
-#define VARREFFILAI_H
+#ifndef IROWVARREF_H
+#define IROWVARREF_H
 
 
 //! @ingroup GEOM
@@ -30,45 +30,45 @@
 //! @brief Reference to a row of the tritriz which points have
 //! constant J and K indices.
 template <class TRITRIZ>
-class VarRefFilaI: public VarRefCajaTritriz<TRITRIZ>
+class IRowVarRef: public VarRefCajaTritriz<TRITRIZ>
   {
   public:
     typedef typename VarRefCajaTritriz<TRITRIZ>::const_reference const_reference;
     typedef typename VarRefCajaTritriz<TRITRIZ>::reference reference;
 
-    explicit VarRefFilaI(TRITRIZ &m,const size_t &f= 1,const size_t &c= 1);
-    VarRefFilaI(TRITRIZ &m,const size_t &,const size_t &,const size_t &,const size_t &);
-    VarRefFilaI(TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const size_t &c);
-    inline virtual ~VarRefFilaI(void) {}
-    size_t IndiceFila(void) const
+    explicit IRowVarRef(TRITRIZ &m,const size_t &f= 1,const size_t &c= 1);
+    IRowVarRef(TRITRIZ &m,const size_t &,const size_t &,const size_t &,const size_t &);
+    IRowVarRef(TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const size_t &c);
+    inline virtual ~IRowVarRef(void) {}
+    size_t getRowIndex(void) const
       { return this->offset_f+1; }
     size_t IndiceCol(void) const
       { return this->offset_c+1; }
-    virtual const_reference operator()(size_t capa=1) const
-      { return VarRefCajaTritriz<TRITRIZ>::operator()(capa,1,1); }
-    virtual reference operator()(size_t capa=1)
-      { return VarRefCajaTritriz<TRITRIZ>::operator()(capa,1,1); }
-    inline virtual const_reference operator()(size_t capa,size_t fila,size_t col) const
-      { return VarRefCajaTritriz<TRITRIZ>::operator()(capa,fila,col); }
-    inline virtual reference operator()(size_t capa,size_t fila,size_t col)
-      { return VarRefCajaTritriz<TRITRIZ>::operator()(capa,fila,col); }
+    virtual const_reference operator()(size_t iLayer=1) const
+      { return VarRefCajaTritriz<TRITRIZ>::operator()(iLayer,1,1); }
+    virtual reference operator()(size_t iLayer=1)
+      { return VarRefCajaTritriz<TRITRIZ>::operator()(iLayer,1,1); }
+    inline virtual const_reference operator()(size_t iLayer,size_t iRow,size_t col) const
+      { return VarRefCajaTritriz<TRITRIZ>::operator()(iLayer,iRow,col); }
+    inline virtual reference operator()(size_t iLayer,size_t iRow,size_t col)
+      { return VarRefCajaTritriz<TRITRIZ>::operator()(iLayer,iRow,col); }
   };
 
 //! @brief Constructor por defecto.
 template<class TRITRIZ>
-VarRefFilaI<TRITRIZ>::VarRefFilaI(TRITRIZ &t,const size_t &f,const size_t &c)
-  : VarRefCajaTritriz<TRITRIZ>(t,RangoIndice(1,t.GetCapas()),f,c)
+IRowVarRef<TRITRIZ>::IRowVarRef(TRITRIZ &t,const size_t &f,const size_t &c)
+  : VarRefCajaTritriz<TRITRIZ>(t,RangoIndice(1,t.getNumberOfLayers()),f,c)
   {}
 
 //! @brief Constructor.
 template<class TRITRIZ>
-VarRefFilaI<TRITRIZ>::VarRefFilaI(TRITRIZ &t,const size_t &capa1,const size_t &capa2,const size_t &f,const size_t &c)
-  : VarRefCajaTritriz<TRITRIZ>(t,RangoIndice(capa1,capa2),f,c)
+IRowVarRef<TRITRIZ>::IRowVarRef(TRITRIZ &t,const size_t &iLayer1,const size_t &iLayer2,const size_t &f,const size_t &c)
+  : VarRefCajaTritriz<TRITRIZ>(t,RangoIndice(iLayer1,iLayer2),f,c)
   {}
 
 //! @brief Constructor.
 template<class TRITRIZ>
-VarRefFilaI<TRITRIZ>::VarRefFilaI(TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const size_t &c)
+IRowVarRef<TRITRIZ>::IRowVarRef(TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const size_t &c)
   : VarRefCajaTritriz<TRITRIZ>(t,layer_range,f,c)
   {}
 
