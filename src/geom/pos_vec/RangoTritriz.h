@@ -64,9 +64,9 @@ class RangoTritriz
       { return row_range; }
     RangoIndice &getRowRange(void)
       { return row_range; }
-    const RangoIndice &GetRangoCols(void) const
+    const RangoIndice &getColumnRange(void) const
       { return column_range; }
-    RangoIndice &GetRangoCols(void)
+    RangoIndice &getColumnRange(void)
       { return column_range; }
 
     size_t Dimension(void) const;

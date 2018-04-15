@@ -31,8 +31,8 @@ BaseRefCajaTritriz::BaseRefCajaTritriz(const size_t &iLayer1,const size_t &f1,co
     offset_cp(iLayer1-1),offset_f(f1-1),offset_c(c1-1) {}
 
 BaseRefCajaTritriz::BaseRefCajaTritriz(const RangoTritriz &rango)
-  : n_layers(rango.getLayerRange().Size()), n_rows(rango.getRowRange().Size()), n_columns(rango.GetRangoCols().Size()),
-    offset_cp(rango.getLayerRange().Offset()),offset_f(rango.getRowRange().Offset()),offset_c(rango.GetRangoCols().Offset()) 
+  : n_layers(rango.getLayerRange().Size()), n_rows(rango.getRowRange().Size()), n_columns(rango.getColumnRange().Size()),
+    offset_cp(rango.getLayerRange().Offset()),offset_f(rango.getRowRange().Offset()),offset_c(rango.getColumnRange().Offset()) 
   {
     if(rango.Vacio())
       std::cerr << "Error!. El rango: '" << rango << "', is empty." << std::endl;
