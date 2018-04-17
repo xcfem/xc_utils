@@ -467,7 +467,10 @@ Plano3d perpendicular(const Recta3d &r, const Pos3d &p)
 //! @brief Recta intersección de dos planos.
 Recta3d recta_interseccion(const Plano3d &p1, const Plano3d &p2)
   {
+    std::cout << __FUNCTION__ << " starts." << std::endl;
     Recta3d retval;
+    std::cout << "p1= " << p1 << std::endl;
+    std::cout << "p2= " << p2 << std::endl;
     GmGrupo3d tmp= interseccion(p1,p2);
     if(!tmp.empty())
       {
@@ -477,6 +480,7 @@ Recta3d recta_interseccion(const Plano3d &p1, const Plano3d &p2)
       }
     else
       retval.setExists(false);
+    std::cout << __FUNCTION__ << " returns:" << retval << std::endl;
     return retval;
   }
 
@@ -499,11 +503,16 @@ Pos3d intersection_point(const Plano3d &p1, const Plano3d &p2, const Plano3d &p3
 //! @brief Intersección de dos planos.
 GmGrupo3d interseccion(const Plano3d &p1, const Plano3d &p2)
   {
+    std::cout << __FUNCTION__ << " starts." << std::endl;
     GmGrupo3d retval;
-    if(do_intersect(p1.ToCGAL(),p2.ToCGAL()))
+    const auto p1_cg= p1.ToCGAL();
+    const auto p2_cg= p2.ToCGAL();
+    std::cout << "p1_cg= "<< p1_cg << std::endl;
+    std::cout << "p2_cg= "<< p2_cg << std::endl;
+    if(do_intersect(p1_cg,p2_cg))
       {
-        const CGAL::Object result = CGAL::intersection(p1.ToCGAL(),p2.ToCGAL());
-        if(const CGRecta_3 *ri= CGAL::object_cast<CGRecta_3 >(&result)) //(CGAL::assign(ri, result))
+        const CGAL::Object result = CGAL::intersection(p1_cg,p2_cg);
+        if(const CGRecta_3 *ri= CGAL::object_cast<CGRecta_3 >(&result))
           retval.push_back(Recta3d(*ri));
         else
           {
@@ -522,6 +531,8 @@ GmGrupo3d interseccion(const Plano3d &p1, const Plano3d &p2)
               }
 	  }
       }
+    std::cout << __FUNCTION__
+	      << " returns:" << retval << std::endl;
     return retval;
   }
 
