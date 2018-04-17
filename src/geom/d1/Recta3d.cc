@@ -77,6 +77,8 @@ void Recta3d::TwoPoints(const Pos3d &p1,const Pos3d &p2)
 
 Dir3d Recta3d::GetDir(void) const
   { return Dir3d(cgr.direction()); }
+
+//! @brief Return the direction vector.
 Vector3d Recta3d::VDir(void) const
   { return Vector3d(cgr.to_vector()); }
 
@@ -286,6 +288,10 @@ GeomObj3d::list_Pos3d Recta3d::Interseccion(const Recta3d &r2,const double &tol)
 //! @brief Return el cuadrado de la distance from the point a la recta.
 GEOM_FT Recta3d::dist(const Pos3d &p) const
   { return sqrt_FT(dist2(p)); }
+
+//! @brier Print stuff.
+void Recta3d::Print(std::ostream &os) const
+  { os << PtoParametricas(0.0) << " " << PtoParametricas(100.0); }
 
 //! @brief Return the distance from the point a la recta.
 GEOM_FT dist(const Pos3d &p,const Recta3d &r)

@@ -500,7 +500,7 @@ Pos3d intersection_point(const Plano3d &p1, const Plano3d &p2, const Plano3d &p3
     return retval;
   }
 
-//! @brief Intersección de dos planos.
+//! @brief Intersection of two planes.
 GmGrupo3d interseccion(const Plano3d &p1, const Plano3d &p2)
   {
     std::cout << __FUNCTION__ << " starts." << std::endl;
@@ -511,9 +511,15 @@ GmGrupo3d interseccion(const Plano3d &p1, const Plano3d &p2)
     std::cout << "p2_cg= "<< p2_cg << std::endl;
     if(do_intersect(p1_cg,p2_cg))
       {
-        const CGAL::Object result = CGAL::intersection(p1_cg,p2_cg);
+        const CGAL::Object result= CGAL::intersection(p1_cg,p2_cg);
         if(const CGRecta_3 *ri= CGAL::object_cast<CGRecta_3 >(&result))
-          retval.push_back(Recta3d(*ri));
+	  {
+	    std::cout << "ri= " << *ri << std::endl;
+	    const Recta3d r3d(*ri);
+	    std::cout << "r3d= " << r3d << std::endl;
+	    std::cout << "r3d.ToCGAL()= " << r3d.ToCGAL() << std::endl;	    
+            retval.push_back(r3d);
+	  }
         else
           {
             CGPlane_3 planoi;
@@ -536,7 +542,7 @@ GmGrupo3d interseccion(const Plano3d &p1, const Plano3d &p2)
     return retval;
   }
 
-//! @brief Return the intersección de la recta con el plano.
+//! @brief Intersection of the a plane with an straight line.
 GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const Recta3d &r)
   {
     GeomObj3d::list_Pos3d retval;
@@ -565,7 +571,7 @@ GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const Recta3d &r)
     return retval;
   }
 
-//! @brief Return the intersección de la recta con el plano.
+//! @brief Return the intersection of the plane with the ray.
 GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const SemiRecta3d &sr)
   {
     GeomObj3d::list_Pos3d retval;
@@ -592,15 +598,15 @@ GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const SemiRecta3d &sr)
             }
       }
     // else
-    //   std::cerr << "No intersecan." << std::endl;
+    //   std::cerr << "Doesn't itersect." << std::endl;
     return retval;    
   }
 
-//! @brief Return the intersección de la semirrecta con el plano.
+//! @brief Return the intersection of the ray with the plane.
 GeomObj3d::list_Pos3d interseccion(const SemiRecta3d &sr, const Plano3d &p)
   { return interseccion(p,sr); }
 
-//! @brief Return the intersección del segmento con el plano.
+//! @brief Return the intersection of the plane with the segment.
 GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const Segmento3d &sg)
   {
     GeomObj3d::list_Pos3d retval;
@@ -631,13 +637,15 @@ GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const Segmento3d &sg)
     return retval;    
   }
 
-//! @brief Return the intersección de la recta con el plano.
+//! @brief Return the intersection of the segment with the plane.
 GeomObj3d::list_Pos3d interseccion(const Segmento3d &sg, const Plano3d &p)
   { return interseccion(p,sg); }
 
+//! @brief Return the intersection(s) of the plane with the polyline.
 GeomObj3d::list_Pos3d interseccion(const Plano3d &p, const Polilinea3d &pl)
   { return pl.getIntersection(p); }
 
+//! @brief Return the intersection(s) of the polyline with the plane.
 GeomObj3d::list_Pos3d interseccion(const Polilinea3d &pl, const Plano3d &p)
   { return pl.getIntersection(p); }
 

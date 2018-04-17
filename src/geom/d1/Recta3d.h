@@ -148,8 +148,7 @@ class Recta3d : public Linea3d
     //Momento de inercia respecto al CDG en ejes locales.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
-    inline void Print(std::ostream &os) const
-      { os << PtoParametricas(0.0) << " " << PtoParametricas(100.0); }
+    void Print(std::ostream &os) const;
   };
 
 const Recta3d EjeX3d(Pos3d(0,0,0),Pos3d(1,0,0));
