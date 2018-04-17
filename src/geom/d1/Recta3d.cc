@@ -162,14 +162,16 @@ Recta2d Recta3d::YZ2DProjection(void) const
     return retval;
   }
 
-//! brief Return el ángulo con el plano XY.
+//! @brief Return the angle with respecto to XY plane.
 GEOM_FT Recta3d::getSlope(void) const
   { return angulo(*this,PlanoXY3d); }
 
+//! @brief Return true if the lines are parallel.
 bool Recta3d::Paralela(const Recta3d &r) const
   { return paralelas(GetDir(),r.GetDir()); }
+
+//! @brief Return the plane normal to r that passes through p.
 Plano3d Recta3d::Perpendicular(const Pos3d &p) const
-//Return el plano perpendicular a r que pasa por p.
   { return Plano3d(cgr.perpendicular_plane(p.ToCGAL())); }
 
 GEOM_FT coo_interseccion(const GeomObj2d::list_Pos2d &int_a, const GeomObj2d::list_Pos2d &int_b,const size_t &coo,const double &tol)
@@ -185,9 +187,12 @@ GEOM_FT coo_interseccion(const GeomObj2d::list_Pos2d &int_a, const GeomObj2d::li
           retval= (pint_a(coo)+pint_b(coo))/2;
         else
           {
-            std::cerr << "coo_interseccion(int_a,int_b): Error al promediar la coordenada " << coo 
-                 << " de la intersección. Los valores obtenidos: " << pint_a(coo) << " and " << pint_b(coo)
-                 << " son muy diferentes." << std::endl;
+            std::cerr << __FUNCTION__
+		      << "(int_a,int_b): error when promediar la coordenada "
+		      << coo 
+                      << " de la intersección. Los valores obtenidos: "
+		      << pint_a(coo) << " and " << pint_b(coo)
+                      << " son muy diferentes." << std::endl;
           }
       }
     else
@@ -278,8 +283,9 @@ GeomObj3d::list_Pos3d Recta3d::Interseccion(const Recta3d &r2,const double &tol)
     Pos3d pint(x,y,z);
     if((this->dist2(pint)>tol2) || (r2.dist2(pint))>tol2)
       {
-        std::cerr << "interseccion(Recta3d,Recta3d): Error al calcular la intersección."
-             << std::endl;
+        std::cerr << __FUNCTION__
+		  << "(Recta3d,Recta3d): error when computing intersection."
+                  << std::endl;
       }
     retval.push_back(pint);
     return retval;

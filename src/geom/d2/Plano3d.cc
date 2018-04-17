@@ -515,6 +515,7 @@ GmGrupo3d interseccion(const Plano3d &p1, const Plano3d &p2)
         if(const CGRecta_3 *ri= CGAL::object_cast<CGRecta_3 >(&result))
 	  {
 	    std::cout << "ri= " << *ri << std::endl;
+	    std::cout << "is degenerate: " << ri->is_degenerate() << std::endl;
 	    const Recta3d r3d(*ri);
 	    std::cout << "r3d= " << r3d << std::endl;
 	    std::cout << "r3d.ToCGAL()= " << r3d.ToCGAL() << std::endl;	    
