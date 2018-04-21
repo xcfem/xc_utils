@@ -57,6 +57,7 @@ python ./python_tests/geom/plane_test_01.py
 python ./python_tests/geom/plane_test_02.py
 python ./python_tests/geom/plane_test_03.py
 #python ./python_tests/geom/plane_test_04.py
+python ./python_tests/geom/plane_test_05.py
 python ./python_tests/geom/test3dPoly.py
 python ./python_tests/geom/prueba_vector2d_01.py
 python ./python_tests/geom/prueba_segmento2d_02.py

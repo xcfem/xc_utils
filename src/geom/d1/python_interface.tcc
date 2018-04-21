@@ -43,6 +43,7 @@ class_<Recta2d, bases<Linea2d> >("Recta2d")
   .def("getVector2dProj",Vector2dProj,"return the projection of a vector onto the line.")
   .def("getVDir",&Recta2d::VDir,"return the line direction vector.")
   .def("getSlope", &Recta2d::getSlope)
+  .def("distPto", &Recta2d::dist,"return the distance to the point.")
   ;
 
 class_<Linea3d, bases<GeomObj3d>, boost::noncopyable  >("Linea3d", no_init);
@@ -58,7 +59,7 @@ class_<Segmento3d, bases<Linea3d> >("LineSegment3d")
   .def("getOrigen", &Segmento3d::Origen)
   .def("getDestino", &Segmento3d::Destino)
   .def("getSlope", &Segmento3d::getSlope)
-  .def("distPto", &Segmento3d::dist)
+.def("distPto", &Segmento3d::dist,"return the distance to the point.")
   .def("getLongitud", &Segmento3d::Longitud)
   .def("getCdg", &Segmento3d::Cdg)
   .def("getPoint",&Segmento3d::PtoParametricas)
@@ -84,6 +85,7 @@ class_<Recta3d, bases<Linea3d> >("Recta3d")
   .def("getXY3DProjection",&Recta3d::XY3DProjection,"Return the projection of the line onto the XY plane as a 3D line.")
   .def("getXZ3DProjection",&Recta3d::XZ3DProjection,"Return the projection of the line onto the XZ plane as a 3D line.")
   .def("getYZ3DProjection",&Recta3d::YZ3DProjection,"Return the projection of the line onto the YZ plane as a 3D line.")
+  .def("distPto", &Recta3d::dist,"return the distance to the point.")
  ;
 
 GeomObj::list_Pos2d (Polilinea2d::*intersectionWithLine)(const Recta2d &) const= &Polilinea2d::Interseccion;
@@ -126,7 +128,7 @@ class_<Segmento2d, bases<Linea2d> >("Segmento2d")
   .def("getOrigen", &Segmento2d::Origen)
   .def("getDestino", &Segmento2d::Destino)
   .def("getSlope", &Segmento2d::getSlope)
-  .def("distPto", &Segmento2d::dist)
+  .def("distPto", &Segmento2d::dist,"return the distance to the point.")
   .def("getLongitud", &Segmento2d::Longitud)
   .def("getCdg", &Segmento2d::Cdg)
   .def("anguloVector",AnguloVector)
