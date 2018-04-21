@@ -262,7 +262,11 @@ bool operator==(const Plano3d &p1,const Plano3d &p2)
   { return (p1.cgp == p2.cgp); }
 
 void Plano3d::Print(std::ostream &os) const
-  { os << Normal() << std::endl; }
+  {
+    os << "point: " << Point()
+       << " normal: " << Normal()
+       << std::endl;
+  }
 
 //! @brief Return the x coordinate of the point of the plane
 //! such:
@@ -376,15 +380,15 @@ Pos3d Plano3d::Interseccion(const Segmento3d &sg) const
 //     return retval;
 //   }
 
-//! @brief Return the intersección del plano con el XY.
+//! @brief Return the trace on the XY plane.
 Recta3d Plano3d::XYTrace(void) const
   { return Interseccion(PlanoXY3d); }
 
-//! @brief Return the intersección del plano con el XZ.
+//! @brief Return the trace on the XZ plane.
 Recta3d Plano3d::XZTrace(void) const
   { return Interseccion(PlanoXZ3d); }
 
-//! @brief Return the intersección del plano con el YZ.
+//! @brief Return the trace on the YZ plane.
 Recta3d Plano3d::YZTrace(void) const
   { return Interseccion(PlanoYZ3d); }
 
@@ -430,11 +434,11 @@ Recta3d Plano3d::getMaximumSlopeLineYZ(void) const
     return retval;
   }
 
-//! @brief Return el ángulo que forma con el plano que se pasa como parámetro.
+//! @brief Return the angle between this plane and the argument.
 GEOM_FT Plano3d::Angulo(const Plano3d &p) const
   { return angulo(*this,p); }
 
-//! @brief Return el ángulo que forma con el vector que se pasa como parámetro.
+//! @brief Return the angle between this plane and the argument.
 GEOM_FT Plano3d::Angulo(const Vector3d &v) const
   { return angulo(*this,v); }
 
@@ -469,8 +473,8 @@ Recta3d recta_interseccion(const Plano3d &p1, const Plano3d &p2)
   {
     std::cout << __FUNCTION__ << " starts." << std::endl;
     Recta3d retval;
-    std::cout << "p1= " << p1 << std::endl;
-    std::cout << "p2= " << p2 << std::endl;
+    std::cout << "p1 plane: " << p1 << std::endl;
+    std::cout << "p2 plane: " << p2 << std::endl;
     GmGrupo3d tmp= interseccion(p1,p2);
     if(!tmp.empty())
       {
