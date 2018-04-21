@@ -128,9 +128,9 @@ class Plano3d : public Superficie3d
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
 
-    Recta3d TrazaXY(void) const;
-    Recta3d TrazaXZ(void) const;
-    Recta3d TrazaYZ(void) const;
+    Recta3d XYTrace(void) const;
+    Recta3d XZTrace(void) const;
+    Recta3d YZTrace(void) const;
     Recta3d getMaximumSlopeLineXY(void) const;
     Recta3d getMaximumSlopeLineXZ(void) const;
     Recta3d getMaximumSlopeLineYZ(void) const;

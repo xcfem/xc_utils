@@ -31,7 +31,6 @@ python ./python_tests/soil_mechanics/test_boussinesq.py
 
 #Test de combinaciones.
 echo "$BLEU" "Geometry tests." "$NORMAL"
-python ./python_tests/geom/prueba_plano3d_02.py
 python ./python_tests/geom/test_coosys_01.py
 python ./python_tests/geom/test_refsys3d3d_01.py
 python ./python_tests/geom/test_refsys2d3d_01.py
@@ -41,11 +40,9 @@ python ./python_tests/geom/test_polyline3d_01.py
 python ./python_tests/geom/pruebaPos3d01.py
 python ./python_tests/geom/prueba_recta2d_01.py
 python ./python_tests/geom/test_line2d_intersection.py
-#python ./python_tests/geom/prueba_plano3d_04.py
 python ./python_tests/geom/prueba_vdesliz3d_03.py
 python ./python_tests/geom/prueba_list_pos2d_01.py
 python ./python_tests/geom/prueba_segmento2d_01.py
-python ./python_tests/geom/prueba_plano3d_03.py
 python ./python_tests/geom/prueba_vector3d_01.py
 python ./python_tests/geom/prueba_vector2d_02.py
 #python ./python_tests/geom/prueba_semiespacio3d_02.py
@@ -56,7 +53,10 @@ python ./python_tests/geom/prueba_vdesliz3d_02.py
 python ./python_tests/geom/prueba_circulo2d_01.py
 #python ./python_tests/geom/prueba_semiespacio3d_01.py
 python ./python_tests/geom/prueba_vdesliz3d_01.py
-python ./python_tests/geom/prueba_plano3d_01.py
+python ./python_tests/geom/plane_test_01.py
+python ./python_tests/geom/plane_test_02.py
+python ./python_tests/geom/plane_test_03.py
+#python ./python_tests/geom/plane_test_04.py
 python ./python_tests/geom/test3dPoly.py
 python ./python_tests/geom/prueba_vector2d_01.py
 python ./python_tests/geom/prueba_segmento2d_02.py

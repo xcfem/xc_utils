@@ -28,11 +28,7 @@
 //! @brief Constructor
 GeomObj::GeomObj(void) 
   : ProtoGeom() {}
-// SoGroup *GeomObj::Traza(void) const 
-//   {
-//     cerr << "Método Traza() no implementado." << endl;
-//     return nullptr;
-//   }
+
 GEOM_FT GeomObj::AreaCdg(void) const
   {
     unsigned short int d= Dimension();

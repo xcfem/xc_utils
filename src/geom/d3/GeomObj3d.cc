@@ -158,9 +158,3 @@ matriz_FT GeomObj3d::I(const Pos3d &o) const
 GEOM_FT GeomObj3d::IO(const Pos3d &o) const
   { return (I(1,1,o)+I(2,2,o)+I(3,3,o))/2; }
 
-
-// SoGroup *GeomObj3d::Traza(void) const 
-//   {
-//     std::cerr << "Método Traza() not implemented." << std::endl;
-//     return nullptr;
-//   }

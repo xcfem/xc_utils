@@ -49,7 +49,7 @@ class_<BND2d, bases<GeomObj2d> >("BND2d")
   .def("getPxy", &BND2d::Pxy)
   .def("getCdg", &BND2d::Cdg)
   .def("getMax", &BND2d::GetMax,"returns maximum value of i coordinate.")
-  .def("getMin", &BND2d::GetMin,"returns minimum value of i coordinate.")
+  .def("getMin", &BND2d::GetMin,"return minimum value of i coordinate.")
   ;
 
 class_<Circulo2d, bases<Superficie2d> >("Circle2d")
@@ -88,7 +88,6 @@ Recta3d (Plano3d::*IntersPlano3d)(const Plano3d &p) const= &Plano3d::Interseccio
 Pos3d (Plano3d::*IntersRecta3d)(const Recta3d &p) const= &Plano3d::Interseccion;
 Pos3d (Plano3d::*IntersSemiRecta3d)(const SemiRecta3d &p) const= &Plano3d::Interseccion;
 Pos3d (Plano3d::*IntersSegmento3d)(const Segmento3d &p) const= &Plano3d::Interseccion;
-
 class_<Plano3d, bases<Superficie3d> >("Plane3d")
   .def(init<Pos3d,Pos3d,Pos3d>())
   .def(init<Pos3d,Vector3d>())
@@ -101,6 +100,9 @@ class_<Plano3d, bases<Superficie3d> >("Plane3d")
   .def("getPos3dProjection",Pos3dProjection)
   .def("getVector3dProjection",Vector3dProjection)
   .def("getRecta3dProjection",Recta3dProjection)
+  .def("getXYTrace",&Plano3d::XYTrace,"return the trace on the XY plane.")
+  .def("getXZTrace",&Plano3d::XZTrace,"return the trace on the XZ plane.")
+  .def("getYZTrace",&Plano3d::YZTrace,"return the trace on the YZ plane.")
   .def("getIntersPlano3d",IntersPlano3d)
   .def("getIntersRecta3d",IntersRecta3d)
   .def("getIntersSemiRecta3d",IntersSemiRecta3d)

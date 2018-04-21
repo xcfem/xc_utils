@@ -377,26 +377,26 @@ Pos3d Plano3d::Interseccion(const Segmento3d &sg) const
 //   }
 
 //! @brief Return the intersección del plano con el XY.
-Recta3d Plano3d::TrazaXY(void) const
+Recta3d Plano3d::XYTrace(void) const
   { return Interseccion(PlanoXY3d); }
 
 //! @brief Return the intersección del plano con el XZ.
-Recta3d Plano3d::TrazaXZ(void) const
+Recta3d Plano3d::XZTrace(void) const
   { return Interseccion(PlanoXZ3d); }
 
 //! @brief Return the intersección del plano con el YZ.
-Recta3d Plano3d::TrazaYZ(void) const
+Recta3d Plano3d::YZTrace(void) const
   { return Interseccion(PlanoYZ3d); }
 
 //! @brief Return the maximum slope line with respect to the XY plane.
 Recta3d Plano3d::getMaximumSlopeLineXY(void) const
   {
     Recta3d retval;
-    Recta3d traza= TrazaXY();
-    if(traza.exists())
+    Recta3d trace= XYTrace();
+    if(trace.exists())
       {
         Pos3d point(Point());
-        Plano3d p(perpendicular(traza,point));
+        Plano3d p(perpendicular(trace,point));
         retval= recta_interseccion(p,*this);
       }
     return retval;
@@ -406,11 +406,11 @@ Recta3d Plano3d::getMaximumSlopeLineXY(void) const
 Recta3d Plano3d::getMaximumSlopeLineXZ(void) const
   {
     Recta3d retval;
-    Recta3d traza= TrazaXZ();
-    if(traza.exists())
+    Recta3d trace= XZTrace();
+    if(trace.exists())
       {
         Pos3d point(Point());
-        Plano3d p(perpendicular(traza,point));
+        Plano3d p(perpendicular(trace,point));
         retval= recta_interseccion(p,*this);
       }
     return retval;
@@ -420,11 +420,11 @@ Recta3d Plano3d::getMaximumSlopeLineXZ(void) const
 Recta3d Plano3d::getMaximumSlopeLineYZ(void) const
   {
     Recta3d retval;
-    Recta3d traza= TrazaYZ();
-    if(traza.exists())
+    Recta3d trace= YZTrace();
+    if(trace.exists())
       {
         Pos3d point(Point());
-        Plano3d p(perpendicular(traza,point));
+        Plano3d p(perpendicular(trace,point));
         retval= recta_interseccion(p,*this);
       }
     return retval;
