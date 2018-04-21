@@ -4,7 +4,7 @@ if [ $(whoami) != "root" ]; then
 	echo "Use 'sudo sh instala_paquetes_debian.sh' e introduzca la contraseña cuando se le pida."
 	exit 1
 fi
-bboost-system1.46-dev
+
 echo "Algunos paquetes se encuentran en las áreas «contrib» y «non-free» de la distribución Debian por lo que deben incluirse estas áreas en el archivo «sources.list antes de ejecutar este guión."
 
 # Verificar que el usuario desea continuar
