@@ -56,14 +56,14 @@ class SisCoo: public ProtoGeom
       }
     virtual SisCoo *Copia(void) const= 0;
   public:
-    virtual size_t NumEjes(void) const
+    virtual size_t numberOfAxis(void) const
       { return rot.getNumberOfRows(); }
     bool EsNormal(void) const;
     bool EsOrtogonal(void) const;
     bool EsOrtonormal(void) const;
     bool EsDextrogiro(void) const;
     matriz_FT getRow(const size_t &i) const;
-    void putRow(const size_t &eje,const matriz_FT &v);
+    void putRow(const size_t &axis,const matriz_FT &v);
 
     virtual matriz_FT TransAGlobal(void) const;
       //Return the matrix que transforma un vector expresado

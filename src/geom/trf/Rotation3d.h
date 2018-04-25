@@ -37,7 +37,7 @@ class Rotation3d: public Trf3d
   {
   public:
     Rotation3d(void);
-    Rotation3d(const Recta3d &eje,const GEOM_FT &ang_rad);
+    Rotation3d(const Recta3d &,const GEOM_FT &);
   };
 
 #endif

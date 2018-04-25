@@ -6,15 +6,15 @@ P2= calcPlanoBuzamiento(alpha2,beta2,p)
 P3= 
 P3= calcPlanoBuzamiento(alpha3,beta3,p)
 
-# Eje del túnel
-vectorEjeTunel= [sin(betaEje),cos(betaEje),0]
-vectorITunel= cross([0,0,1],vectorEjeTunel)
-vectorJTunel= cross(vectorEjeTunel,vectorITunel)
-ejesTunel= 
-\ejesTunel
+# Tunnel axis
+tunnelAxisVector= [sin(axisBeta),cos(axisBeta),0]
+vectorITunel= cross([0,0,1],tunnelAxisVector)
+vectorJTunel= cross(tunnelAxisVector,vectorITunel)
+tunnelAxis= 
+\tunnelAxis
   {
     \setOrg{p}
-    \ejes{\setVectoresIJ{[vectorITunel,vectorJTunel]}}
+    \axis{\setVectoresIJ{[vectorITunel,vectorJTunel]}}
   }
 
 '''Define los semiespacios superiores e inferiores

@@ -37,7 +37,7 @@ class TritrizPos3d;
 //! @brief Revolución.
 class Revolucion3d: public Trf3d
   {
-    Recta3d eje; //Eje de revolución.
+    Recta3d axis; //Revolution axis.
     GEOM_FT theta; //!< Ángulo barrido por la revolución.
     size_t ndiv; //Número de divisiones.
   public:

@@ -139,21 +139,21 @@ class Recta3d : public Linea3d
       { return r.Angulo(v); }
     inline friend double angulo(const Recta3d &r1,const Recta3d &r2)
       { return r1.Angulo(r2.VDir()); }
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Momento de inercia respecto al CDG en local axis.
     inline virtual GEOM_FT Ix(void) const
       { return 0.0; }
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Momento de inercia respecto al CDG en local axis.
     inline virtual GEOM_FT Iy(void) const
       { return NAN; }
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Momento de inercia respecto al CDG en local axis.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
     void Print(std::ostream &os) const;
   };
 
-const Recta3d EjeX3d(Pos3d(0,0,0),Pos3d(1,0,0));
-const Recta3d EjeY3d(Pos3d(0,0,0),Pos3d(0,1,0));
-const Recta3d EjeZ3d(Pos3d(0,0,0),Pos3d(0,0,1));
+const Recta3d XAxis3d(Pos3d(0,0,0),Pos3d(1,0,0));
+const Recta3d YAxis3d(Pos3d(0,0,0),Pos3d(0,1,0));
+const Recta3d ZAxis3d(Pos3d(0,0,0),Pos3d(0,0,1));
 
 
 inline GEOM_FT dist2(const Pos3d &p,const Recta3d &r)

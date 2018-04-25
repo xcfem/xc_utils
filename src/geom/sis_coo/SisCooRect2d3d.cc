@@ -30,10 +30,10 @@
 
 
 
-//El vector v define tres angulos de giro
-//en torno a los ejes 3, 2 y 1
-//que aplicados secuencialmente alinean el sistema
-//global con éste.
+//! El vector v define tres angulos de giro
+//! around the axis 3, 2 and 1
+//! que aplicados secuencialmente alinean el sistema
+//! global con éste.
 SisCooRect2d3d::SisCooRect2d3d(const VGlobal &v)
   : SisCooXd3d(2,v) {}
 //! @brief Define un sistema de coordenadas de dimensión i
@@ -41,17 +41,18 @@ SisCooRect2d3d::SisCooRect2d3d(const VGlobal &v)
 //! se pasa como parámetro.
 SisCooRect2d3d::SisCooRect2d3d(const VGlobal &v1,const VGlobal &v2)
   : SisCooXd3d(2,v1,v2) {}
-//! @brief Construye el sistema de coordenadas 2d definido en un espacio 3d, tal que
-//! el eje 1 va desde p1 a p2 y p3 define el plano que contiene a los los ejes 1 y 2.
+//! @brief Build the 2D coordinate system defined in a 3D space, so 
+//! the axis 1 goes from p1 to p2 and p3 defines the plane that contains the
+//! axis 1 and 2.
 SisCooRect2d3d::SisCooRect2d3d(const PGlobal &p1,const PGlobal &p2, const PGlobal &p3)
   : SisCooXd3d(2,p1,p2,p3) {}
 
 //! @brief Return el vector unitario I en el sistema global.
 SisCooRect2d3d::VGlobal SisCooRect2d3d::GetI(void) const
-  { return GetVDirEje(1); }
+  { return getAxisVDir(1); }
 //! @brief Return el vector unitario J en el sistema global.
 SisCooRect2d3d::VGlobal SisCooRect2d3d::GetJ(void) const
-  { return GetVDirEje(2); }
+  { return getAxisVDir(2); }
 
 SisCooRect2d3d::VGlobal SisCooRect2d3d::GetCooGlobales(const VLocal &v) const
 //Return las componentes del vector v expresado en locales

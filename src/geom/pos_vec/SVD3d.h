@@ -53,7 +53,7 @@ class SVD3d: public VDesliz3d
     Vector3d getMomento(const Ref3d3d &ref) const;
     bool Nulo(void) const;
     void Neg(void);
-    Recta3d EjeCentral(void) const;
+    Recta3d centralAxis(void) const;
     bool ExisteRectaMomNulo(const double &tol= sqrt_mchne_eps_dbl) const;
     Recta3d RectaMomNulo(const double &tol= sqrt_mchne_eps_dbl) const;
     Pos3d PointOfApplication(const Plano3d &p) const;

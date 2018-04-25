@@ -31,7 +31,7 @@
 #include "xc_utils/src/geom/d1/Segmento3d.h"
 
 GEOM_FT GmGrupo3d::inercia(const Recta3d &e) const
-//Return el momento de inercia respecto a la recta e
+//Return el moment of inertia with respect to la recta e
   {
     if(objetos.empty()) return 0.0;
     if(!igual_dimension())
@@ -47,13 +47,13 @@ GEOM_FT GmGrupo3d::inercia(const Recta3d &e) const
   }
 
 GEOM_FT GmGrupo3d::Ix(void) const
-//Momento de inercia respecto al CDG en ejes locales.
+//Moment of inertia with respect to CDG in local coordinates.
 { return inercia(Recta3d(Cdg(),Dir3d(1.0,0.0,0.0))); }
 GEOM_FT GmGrupo3d::Iy(void) const
-//Momento de inercia respecto al CDG en ejes locales.
+//Moment of inertia with respect to CDG in local coordinates.
 { return inercia(Recta3d(Cdg(),Dir3d(0.0,1.0,0.0))); }
 GEOM_FT GmGrupo3d::Iz(void) const
-//Momento de inercia respecto al CDG en ejes locales.
+//Moment of inertia with respect to CDG in local coordinates.
 { return inercia(Recta3d(Cdg(),Dir3d(0.0,0.0,1.0))); }
 GEOM_FT GmGrupo3d::Pxy(void) const
   {

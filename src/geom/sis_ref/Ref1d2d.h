@@ -54,7 +54,7 @@ class Ref1d2d : public Ref<SisCooRect1d2d>
 
     Vector2d GetI(void) const;
     //Return el vector unitario I en el sistema global.
-    Recta2d GetEjeX(void) const; //Return la recta que define el x axis.
+    Recta2d getXAxis(void) const; //Return la recta que define el x axis.
 
     virtual ~Ref1d2d(void)
       {}

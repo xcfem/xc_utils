@@ -65,28 +65,28 @@ class GeomObj2d: public GeomObj
     virtual GEOM_FT Area(void) const= 0; //?? Por que se re-declara (está en GeomObj).
     inline virtual GEOM_FT Volumen(void) const
       { return 0.0; }
-    //! @briefMomento de inercia respecto al CDG en ejes locales.
+    //! @briefMomento de inercia respecto al CDG en local axis.
     virtual GEOM_FT Ix(void) const= 0;
-    //! @briefMomento de inercia respecto al CDG en ejes locales.
+    //! @briefMomento de inercia respecto al CDG en local axis.
     virtual GEOM_FT Iy(void) const= 0;
-    //! @brief Producto de inercia respecto al CDG en ejes locales.
+    //! @brief Producto de inercia respecto al CDG en local axis.
     virtual GEOM_FT Pxy(void) const= 0;
     inline virtual GEOM_FT Iz(void) const
-    //Momento de inercia polar respecto al CDG en ejes locales.
+    //Momento de inercia polar respecto al CDG en local axis.
       { return Ix()+Iy(); }
     double Theta_p(void) const;
-    //Return el ángulo que define un eje principal de inercia.
-    Dir2d DirEjeI_a(void) const;
-    //Return la dirección de un eje principal de inercia (no sabemos si
+    //Return el ángulo que define un principal axis of inertia.
+    Dir2d IAxisDir_a(void) const;
+    //Return la dirección de un principal axis of inertia (no sabemos si
     //el mayor o el menor
-    Dir2d DirEjeI_b(void) const;
-    //Return la dirección del otro eje principal de inercia (no sabemos si
+    Dir2d IAxisDir_b(void) const;
+    //Return la dirección del otro principal axis of inertia (no sabemos si
     //el mayor o el menor
-    Recta2d EjeI_a(void) const;
-    //Return un eje principal de inercia (no sabemos si
+    Recta2d IAxis_a(void) const;
+    //Return un principal axis of inertia (no sabemos si
     //el mayor o el menor).
-    Recta2d EjeI_b(void) const;
-    //Return el otro eje principal de inercia (no sabemos si
+    Recta2d IAxis_b(void) const;
+    //Return el otro principal axis of inertia (no sabemos si
     //el mayor o el menor).
     Ref2d2d PrincipalAxesOfInertia(void) const;
     GEOM_FT I1(void) const;

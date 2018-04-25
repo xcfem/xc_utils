@@ -113,16 +113,16 @@ class SemiRecta2d : public Linea2d
       { return angulo(VDir(),v); }
     inline friend GEOM_FT angulo(const SemiRecta2d &r,const Vector2d &v)
       { return r.Angulo(v); }
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Moment of inertia with respect to CDG in local coordinates.
     inline virtual GEOM_FT Ix(void) const
       { return 0.0; }
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Moment of inertia with respect to CDG in local coordinates.
     inline virtual GEOM_FT Iy(void) const
       { return NAN; }
-    //Producto de inercia.
+    //product of inertia.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Moment of inertia with respect to CDG in local coordinates.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
 

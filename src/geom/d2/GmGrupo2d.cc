@@ -35,7 +35,7 @@
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
 GEOM_FT GmGrupo2d::inercia(const Recta2d &e) const
-//Return el momento de inercia respecto a la recta e
+//Return el moment of inertia with respect to la recta e
   {
     if(objetos.empty()) return 0.0;
     if(!igual_dimension())
@@ -51,10 +51,10 @@ GEOM_FT GmGrupo2d::inercia(const Recta2d &e) const
   }
 
 GEOM_FT GmGrupo2d::Ix(void) const
-//Momento de inercia respecto al CDG en ejes locales.
+//Moment of inertia with respect to CDG in local coordinates.
   { return inercia(Recta2d(Cdg(),Dir2d(1.0,0.0))); }
 GEOM_FT GmGrupo2d::Iy(void) const
-//Momento de inercia respecto al CDG en ejes locales.
+//Moment of inertia with respect to CDG in local coordinates.
   { return inercia(Recta2d(Cdg(),Dir2d(0.0,1.0))); }
 GEOM_FT GmGrupo2d::Pxy(void) const
   {

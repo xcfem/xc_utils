@@ -36,10 +36,10 @@ Ref1d3d::Ref1d3d(const Pos3d &o,const Pos3d &p) : BaseRef(o,p) {}
 
 //! @brief Return the global coordinates of unit vector I.
 Vector3d Ref1d3d::GetI(void) const
-  { return GetVDirEje(1); }
+  { return getAxisVDir(1); }
 
 //! @brief Returns the line defined by X axis.
-Recta3d Ref1d3d::GetEjeX(void) const
+Recta3d Ref1d3d::getXAxis(void) const
   {
     const Pos3d dest(org+1000.0*GetI());
     return Recta3d(org,dest);

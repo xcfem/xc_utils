@@ -118,13 +118,13 @@ class Plano3d : public Superficie3d
 
     virtual Pos3d Cdg(void) const;
     Pos3d Point(void) const;
-    //! @brief Momento de inercia respecto al CDG en ejes locales.
+    //! @brief Moment of inertia with respect to CDG in local coordinates.
     inline virtual GEOM_FT Ix(void) const
       { return NAN; }
-    //! @brief Momento de inercia respecto al CDG en ejes locales.
+    //! @brief Moment of inertia with respect to CDG in local coordinates.
     inline virtual GEOM_FT Iy(void) const
       { return NAN; }
-    //! @brief Momento de inercia respecto al CDG en ejes locales.
+    //! @brief Moment of inertia with respect to CDG in local coordinates.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
 

@@ -21,15 +21,15 @@ def procesaAnguloPoliedrico(nmbAng,nmbTunel):
     if(not(JPvacio))
         \then
           {
-            if(contieneEjeTunel)
+            if(containsTunnelAxis)
                 \then
                   {
-                    print "  Contiene al eje del túnel= Si.\n"
+                    print "  Contains tunnel axis= Yes.\n"
                     print "\\end{alltt}\n"
                   }
                 else:
                   {
-                    print "  Contiene al eje del túnel= No.\n"
+                    print "  Contains tunnel axis= No.\n"
                     print "  Vectores externos:\n"
                     print "    I1= ",I1," I2= ",I2,"\n"
                     print "    angI1= ",rad2deg(angI1),"\n"

@@ -104,16 +104,16 @@ class Semiplano2d : public Superficie2d
       { return NAN; }
     inline virtual Pos2d Cdg(void) const
       { return lim.Cdg(); }
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Moment of inertia with respect to CDG in local coordinates.
     inline virtual GEOM_FT Ix(void) const
       { return NAN; }
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Moment of inertia with respect to CDG in local coordinates.
     inline virtual GEOM_FT Iy(void) const
       { return NAN; }
-    //Producto de inercia.
+    //product of inertia.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Moment of inertia with respect to CDG in local coordinates.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
 

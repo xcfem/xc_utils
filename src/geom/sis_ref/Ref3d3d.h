@@ -58,9 +58,9 @@ class Ref3d3d : public Ref<SisCooRect3d3d>
     //Return el vector unitario J en el sistema global.
     Vector3d GetK(void) const;
     //Return el vector unitario K en el sistema global.
-    Recta3d GetEjeX(void) const; //Return la recta que define el x axis.
-    Recta3d GetEjeY(void) const; //Return la recta que define el y axis.
-    Recta3d GetEjeZ(void) const; //Return la recta que define el z axis.
+    Recta3d getXAxis(void) const; //Return la recta que define el x axis.
+    Recta3d getYAxis(void) const; //Return la recta que define el y axis.
+    Recta3d getZAxis(void) const; //Return la recta que define el z axis.
     Plano3d GetPlanoXY(void) const; //Return el plano XY.
     Plano3d GetPlanoXZ(void) const; //Return el plano XZ.
     Plano3d GetPlanoYZ(void) const; //Return el plano YZ.

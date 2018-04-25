@@ -84,12 +84,12 @@ GEOM_FT Segmento2d::AnguloSigno(const Segmento2d &s) const
 
 
 //! @brief Return el ángulo del segmento con el X axis.
-GEOM_FT Segmento2d::AnguloEjeX(void) const
-  { return VDir().AnguloEjeX(); }
+GEOM_FT Segmento2d::XAxisAngle(void) const
+  { return VDir().XAxisAngle(); }
 
 //! @brief Return el ángulo del segmento con el Y axis.
-GEOM_FT Segmento2d::AnguloEjeY(void) const
-  { return VDir().AnguloEjeY(); }
+GEOM_FT Segmento2d::YAxisAngle(void) const
+  { return VDir().YAxisAngle(); }
 
 GEOM_FT angulo(const Segmento2d &r,const Vector2d &v)
   { return r.Angulo(v); }

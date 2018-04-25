@@ -52,7 +52,7 @@ class Ref1d3d : public Ref<SisCooRect1d3d>
     Ref1d3d(const Pos3d &o,const Pos3d &p);
 
     Vector3d GetI(void) const;
-    Recta3d GetEjeX(void) const;
+    Recta3d getXAxis(void) const;
 
     virtual ~Ref1d3d(void)
       {}

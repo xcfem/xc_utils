@@ -144,4 +144,4 @@ SET(CPACK_DEBIAN_PACKAGE_DESCRIPTION "Biblioteca de funciones para el intérpret
 
  
 INCLUDE(CPack)
-#ejecutar fakeroot make package
+#execute fakeroot make package

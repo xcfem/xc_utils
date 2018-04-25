@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 #Intersección de recta y plano.
-#Ejemplo 1.2 de la tesis «La teoría de bloque aplicada a la dinámica
+#Exemple 1.2 of the thesis «La teoría de bloque aplicada a la dinámica
 #de rocas» de Juan Carlos Ayes Zamudio
 
 import xc_base

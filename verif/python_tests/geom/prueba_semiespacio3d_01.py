@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 #Ángulo entre dos planos.
-#Ejemplo 1.7 de la tesis «La teoría de bloque aplicada a la dinámica
-#de rocas» de Juan Carlos Ayes Zamudio
+#Exemple 1.7 of the thesis «La teoría de bloque aplicada a la dinámica
+#de rocas» Juan Carlos Ayes Zamudio
 
 import xc_base
 import geom

@@ -21,7 +21,7 @@
 //----------------------------------------------------------------------------
 //python_interface.cxx
 class_<SisCoo, bases<ProtoGeom>, boost::noncopyable >("CooSys", no_init)
-  .add_property("NumEjes",&SisCoo::NumEjes)
+  .add_property("numberOfAxis",&SisCoo::numberOfAxis)
   .add_property("EsNormal",&SisCoo::EsNormal)
   .add_property("EsOrtogonal",&SisCoo::EsOrtogonal)
   .add_property("EsOrtonormal",&SisCoo::EsOrtonormal)
@@ -29,13 +29,13 @@ class_<SisCoo, bases<ProtoGeom>, boost::noncopyable >("CooSys", no_init)
   ;
 
 class_<SisCooXd2d, bases<SisCoo>, boost::noncopyable >("CooSysXd2d", no_init)
-  .def("getVDirEje",&SisCooXd2d::GetVDirEje)
-  .def("getDirEje",&SisCooXd2d::GetDirEje)
+  .def("getAxisVDir",&SisCooXd2d::getAxisVDir)
+  .def("getAxisDir",&SisCooXd2d::getAxisDir)
   ;
 
 class_<SisCooXd3d, bases<SisCoo>, boost::noncopyable >("CooSysXd3d", no_init)
-  .def("getVDirEje",&SisCooXd3d::GetVDirEje)
-  .def("getDirEje",&SisCooXd3d::GetDirEje)
+  .def("getAxisVDir",&SisCooXd3d::getAxisVDir)
+  .def("getAxisDir",&SisCooXd3d::getAxisDir)
   ;
 
 class_<SisCooRect1d2d, bases<SisCooXd2d>, boost::noncopyable >("CooSysRect1d2d", no_init)

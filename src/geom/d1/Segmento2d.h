@@ -122,21 +122,21 @@ class Segmento2d : public Linea2d
     GEOM_FT AnguloSigno(const Vector2d &v) const;
     GEOM_FT Angulo(const Segmento2d &v) const;
     GEOM_FT AnguloSigno(const Segmento2d &v) const;
-    GEOM_FT AnguloEjeX(void) const;
-    GEOM_FT AnguloEjeY(void) const;
+    GEOM_FT XAxisAngle(void) const;
+    GEOM_FT YAxisAngle(void) const;
     inline GEOM_FT Azimuth(void) const
       { return RectaSoporte().Azimuth(); }
 
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Momento de inercia respecto al CDG en local axis.
     inline virtual GEOM_FT Ix(void) const
       { return 0.0; }
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Momento de inercia respecto al CDG en local axis.
     inline virtual GEOM_FT Iy(void) const
       { return NAN; }
     //Producto de inercia.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Momento de inercia respecto al CDG en local axis.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
     VectorPos2d Divide(int num_partes) const;

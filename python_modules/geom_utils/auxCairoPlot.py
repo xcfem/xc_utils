@@ -142,7 +142,7 @@ class TransformParams(object):
       ctx.line_to(ptPlot.x,ptPlot.y)
     ptPlot= plg.getVertice(0)
     ctx.line_to(ptPlot.x,ptPlot.y)
-  def plotEjesYZ(self,ctx):
+  def plotYZAxis(self,ctx):
     '''Draws Y and Z axis.'''
     long= self.scale/5000
     xArrow= ArrowOpen([0,1,0])# Green color

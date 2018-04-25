@@ -141,7 +141,7 @@ const cmb_acc::LoadCombinationVector &cmb_acc::LoadCombinationVector::GetDistint
         
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::LoadCombinationVector::ProdCartesiano(const LoadCombinationVector &f1,const LoadCombinationVector &f2,const double &tol)
 //! @brief Forma el producto cartesiano de las combinaciones del vector f1 con las del vector f2
-//! Por ejemplo si:
+//! For example, if:
 //! LoadCombinations f1: f11,f12,f13
 //! LoadCombinations f2: f21,f22
 //! Return: f11+f21,f12+f21,f13+f21,f11+f22,f12+f22,f13+f22

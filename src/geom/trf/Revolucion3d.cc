@@ -28,7 +28,7 @@
 
 //! @brief Constructor.
 Revolucion3d::Revolucion3d(const Recta3d &e,const GEOM_FT &th,const size_t &nd)
-  : eje(e), theta(th), ndiv(nd)
+  : axis(e), theta(th), ndiv(nd)
   {}
 
 //! @brief Return the point row that results from apply the revolution
@@ -41,7 +41,7 @@ MatrizPos3d Revolucion3d::Aplica0d(const Pos3d &p) const
     GEOM_FT ang(inc_angulo);
     for(size_t i=2;i<=ndiv+1;i++)
       {
-        const Rotation3d trf(eje,ang);
+        const Rotation3d trf(axis,ang);
         retval(1,i)= trf(p);
         ang+= inc_angulo;
       }
@@ -62,7 +62,7 @@ MatrizPos3d Revolucion3d::Aplica1d(const MatrizPos3d &m) const
         GEOM_FT ang(inc_angulo);
         for(size_t i=2;i<=ndiv+1;i++)
           {
-            const Rotation3d trf(eje,ang);
+            const Rotation3d trf(axis,ang);
             for(size_t j=1;j<=nPoints;j++)
               retval(i,j)= trf(m(i,1));
             ang+= inc_angulo;
@@ -78,7 +78,7 @@ MatrizPos3d Revolucion3d::Aplica1d(const MatrizPos3d &m) const
         GEOM_FT ang(inc_angulo);
         for(size_t i=2;i<=ndiv+1;i++)
           {
-            const Rotation3d trf(eje,ang);
+            const Rotation3d trf(axis,ang);
             for(size_t j=1;j<=nPoints;j++)
               retval(i,j)= trf(m(1,i));
             ang+= inc_angulo;
@@ -108,7 +108,7 @@ TritrizPos3d Revolucion3d::Aplica2d(const MatrizPos3d &m) const
         GEOM_FT ang(inc_angulo);
         for(size_t i=2;i<=n_layers;i++)
           {
-            const Rotation3d trf(eje,ang);
+            const Rotation3d trf(axis,ang);
             retval(i)= trf(m);
             ang+= inc_angulo;
 	  }

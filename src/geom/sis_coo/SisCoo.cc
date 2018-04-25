@@ -45,7 +45,7 @@ void SisCoo::normaliza(void)
 //! @brief Hace que la base sea ortogonal
 void SisCoo::ortogonaliza(void)
   {
-    const size_t ne= NumEjes();
+    const size_t ne= numberOfAxis();
     if(ne==1)
       return;
     else //2 o 3 dimensiones.
@@ -80,8 +80,8 @@ void SisCoo::ortonormaliza(void)
   }
 //! @brief Hace coincidir el sistema de coordenadas con el correspondiente global.
 //! es decir:
-//! - Si es un sistema de coordenadas unidimensional lo hace coincidir con el eje 1 del sistema global.
-//! - Si es bidimensional, lo hace coincidir con el formado por los ejes 1 y 2 del sistema global.
+//! - Si es un sistema de coordenadas unidimensional lo hace coincidir con el axis 1 of the global system.
+//! - Si es bidimensional, lo hace coincidir con el formado by the axis 1 and 2 of the global system.
 //! - Si es tridimensional, lo hace coincidir con el sistema global.
 void SisCoo::identidad(void)
   {
@@ -96,13 +96,13 @@ void SisCoo::put(const size_t &i,const size_t &j,const GEOM_FT &rot_ij)
 //! @brief Return la i row of the matrix.
 matriz_FT SisCoo::getRow(const size_t &i) const
   {
-    assert(i<=NumEjes());
+    assert(i<=numberOfAxis());
     return rot.getRow(i);
   }
 //! @brief Return verdadero si los vectores son unitarios.
 bool SisCoo::EsNormal(void) const
   {
-    const size_t ne= NumEjes();
+    const size_t ne= numberOfAxis();
     for(size_t i=1;i<=ne;i++)
       {
         const GEOM_FT imod= rot.getRow(i).Abs2();
@@ -115,7 +115,7 @@ bool SisCoo::EsNormal(void) const
 //! @brief Return verdadero si el sistema de coordenadas es dextrógiro.
 bool SisCoo::EsDextrogiro(void) const
   {
-    if(NumEjes()<3)
+    if(numberOfAxis()<3)
       return true;
     else
       {
@@ -134,7 +134,7 @@ bool SisCoo::EsDextrogiro(void) const
 //! @brief Return verdadero si los vectores son ortogonales.
 bool SisCoo::EsOrtogonal(void) const
   {
-    const size_t ne= NumEjes();
+    const size_t ne= numberOfAxis();
     if(ne<2)
       return true;
     else
@@ -157,8 +157,8 @@ bool SisCoo::EsOrtonormal(void) const
   { return (EsOrtogonal() && EsNormal()); }
 
 //! @brief Set the i row of the matrix.
-void SisCoo::putRow(const size_t &eje,const matriz_FT &v)
-  { rot.putRow(eje,v); }
+void SisCoo::putRow(const size_t &axis,const matriz_FT &v)
+  { rot.putRow(axis,v); }
 //! @brief Return the matrix que transforma un vector expresado
 //! en locales al mismo vector expresado en globales.
 matriz_FT SisCoo::TransAGlobal(void) const

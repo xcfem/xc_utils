@@ -80,7 +80,7 @@ class Trihedron: public GeomObj3d
 
     const Triangulo3d &Base(void) const;
     const Pos3d &Cuspide(void) const;
-    Recta3d Eje(void) const;
+    Recta3d Axis(void) const;
     GEOM_FT GetAnguloConico(void) const;
 
     Poliedro3d GetPoliedro3d(void) const;

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Ángulo entre dos vectores. Ejemplo 1.6 de la tesis «La teoría de bloque aplicada a la dinámica de rocas» de Juan Carlos Ayes Zamudio
+# Ángulo entre dos vectores. Exemple 1.6 of the thesis «La teoría de bloque aplicada a la dinámica de rocas» de Juan Carlos Ayes Zamudio
 
 import xc_base
 import geom

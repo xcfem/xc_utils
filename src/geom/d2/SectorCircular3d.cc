@@ -59,8 +59,8 @@ SectorCircular3d::SectorCircular3d(const GEOM_FT &rad2,const Pos3d &centro,const
   : D2to3d(centro), sect_circ()
   { sect_circ= SectorCircular2d(Circulo2d(rad2,to_2d(centro)),th1,th2); }
 
-SectorCircular3d::SectorCircular3d(const Pos3d &c,const double &r,const Vector3d &n,const Vector3d &ejeX,const double &th1,const double &th2)
-  : D2to3d(c,n,ejeX), sect_circ()
+SectorCircular3d::SectorCircular3d(const Pos3d &c,const double &r,const Vector3d &n,const Vector3d &Xaxis,const double &th1,const double &th2)
+  : D2to3d(c,n,Xaxis), sect_circ()
   { sect_circ= SectorCircular2d(Circulo2d(to_2d(c),r),th1,th2); }
 
  
@@ -73,7 +73,7 @@ SectorCircular3d::SectorCircular3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &
     const Pos2d pC= to_2d(p3);
     const Circulo2d C(pA,pB,pC);
     const Pos2d po= C.Centro();
-    //Ajustamos el centro y los ejes del sistema de coordenadas.
+    //Adjust the center and the coordinate system axis.
     ThreePoints(to_3d(po),p1,p3);
     const Pos2d pa= to_2d(p1);
     const Pos2d pb= to_2d(p2);

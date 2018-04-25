@@ -28,7 +28,7 @@
 
 //! @brief Constructor.
 PrincipalAxesOfInertia2D::PrincipalAxesOfInertia2D(const Pos2d &cdg_,const GEOM_FT &Ix,const GEOM_FT &Iy,const GEOM_FT &Pxy)
-  : cdg(cdg_), eje1(1,0), i1(0.0), i2(0.0)
+  : cdg(cdg_), axis1(1,0), i1(0.0), i2(0.0)
   {
     double th1= theta_inercia(Ix,Iy,Pxy);
     const GEOM_FT media= (Ix+Iy)/2;
@@ -43,25 +43,25 @@ PrincipalAxesOfInertia2D::PrincipalAxesOfInertia2D(const Pos2d &cdg_,const GEOM_
 	std::swap(i1,i2);
         th1+= (M_PI/2.0);
       }
-    eje1= Vector2d(cos(th1),sin(th1));
+    axis1= Vector2d(cos(th1),sin(th1));
   }
-Ref2d2d PrincipalAxesOfInertia2D::GetEjes(void) const
-  { return Ref2d2d(cdg,eje1); }
+Ref2d2d PrincipalAxesOfInertia2D::getAxis(void) const
+  { return Ref2d2d(cdg,axis1); }
 const GEOM_FT &PrincipalAxesOfInertia2D::I1(void) const
   { return i1; }
 const GEOM_FT &PrincipalAxesOfInertia2D::I2(void) const
   { return i2; }
 
-//! @brief Return el vector dirección del eje de
-//! inercia principal menor.
-Vector2d PrincipalAxesOfInertia2D::getVDirEje2(void) const
-  { return Vector2d(-eje1.y(),eje1.x()); }
+//! @brief Return the direction vector of the minor
+//! principal axis of inertia.
+Vector2d PrincipalAxesOfInertia2D::getAxis2VDir(void) const
+  { return Vector2d(-axis1.y(),axis1.x()); }
 
-std::ostream &operator<<(std::ostream &os,const PrincipalAxesOfInertia2D &ejes)
+std::ostream &operator<<(std::ostream &os,const PrincipalAxesOfInertia2D &axis)
   {
-    os << "Ejes: " << ejes.GetEjes() << std::endl
-       << "I1= " << ejes.I1() << std::endl
-       << "I2= " << ejes.I2();
+    os << "Axis: " << axis.getAxis() << std::endl
+       << "I1= " << axis.I1() << std::endl
+       << "I2= " << axis.I2();
     return os;
   }
 

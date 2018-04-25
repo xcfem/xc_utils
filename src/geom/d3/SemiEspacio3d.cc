@@ -105,19 +105,19 @@ GEOM_FT SemiEspacio3d::Volumen(void) const
 Pos3d SemiEspacio3d::Cdg(void) const
   { return lim.Cdg(); }
 
-//! @brief Return el momento de inercia respecto al CDG en ejes locales.
+//! @brief Return el moment of inertia with respect to CDG in local coordinates.
 GEOM_FT SemiEspacio3d::Ix(void) const
   { return NAN; }
 
-//! @brief Return el momento de inercia respecto al CDG en ejes locales.
+//! @brief Return el moment of inertia with respect to CDG in local coordinates.
 GEOM_FT SemiEspacio3d::Iy(void) const
   { return NAN; }
 
-//! @brief Return el producto de inercia.
+//! @brief Return el product of inertia.
 GEOM_FT SemiEspacio3d::Pxy(void) const
   { return NAN; }
 
-//! @brief Return el momento de inercia respecto al CDG en ejes locales.
+//! @brief Return el moment of inertia with respect to CDG in local coordinates.
 GEOM_FT SemiEspacio3d::Iz(void) const
   { return NAN; }
 

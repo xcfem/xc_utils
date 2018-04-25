@@ -34,10 +34,10 @@
 SisCooRect2d2d::SisCooRect2d2d(void): SisCooXd2d(2) {}
 //! @brief Constructor.
 SisCooRect2d2d::SisCooRect2d2d(const Pos2d &p1,const Pos2d &p2)
-  : SisCooXd2d(2,p1,p2) {} //Eje 1 desde p1 a p2.
+  : SisCooXd2d(2,p1,p2) {} //Axis 1 desde p1 a p2.
 //! @brief Constructor.
 SisCooRect2d2d::SisCooRect2d2d(const VGlobal &vX)
-  : SisCooXd2d(2,vX) {} //Eje x paralelo a vX.
+  : SisCooXd2d(2,vX) {} //Axis x paralelo a vX.
 
 //! @brief Constructor virtual.
 SisCoo *SisCooRect2d2d::Copia(void) const
@@ -45,10 +45,10 @@ SisCoo *SisCooRect2d2d::Copia(void) const
 
 //! @brief Return el vector unitario I en el sistema global.
 SisCooRect2d2d::VGlobal SisCooRect2d2d::GetI(void) const
-  { return GetVDirEje(1); }
+  { return getAxisVDir(1); }
 //! @brief Return el vector unitario J en el sistema global.
 SisCooRect2d2d::VGlobal SisCooRect2d2d::GetJ(void) const
-  { return GetVDirEje(2); }
+  { return getAxisVDir(2); }
 //! @brief Asigna el vector unitario I.
 void SisCooRect2d2d::PutI(const VGlobal &i)
   {

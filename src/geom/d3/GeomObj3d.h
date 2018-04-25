@@ -81,21 +81,21 @@ class GeomObj3d: public GeomObj
     virtual GEOM_FT Iy(void) const= 0;
     virtual GEOM_FT Iz(void) const= 0;
 
-    //Producto de inercia respecto al CDG en ejes locales.
-    //Suponemos ejes ortonormales.
+    //product of inertia with respect to CDG in local coordinates.
+    //Suponemos orthonormal axis.
     inline virtual GEOM_FT Pxy(void) const
       { return Ix()+Iy()-Iz(); }
-    //Producto de inercia respecto al CDG en ejes locales.
-    //Suponemos ejes ortonormales.
+    //product of inertia with respect to CDG in local coordinates.
+    //Suponemos orthonormal axis.
     inline virtual GEOM_FT Pxz(void) const
       { return Ix()+Iz()-Iy(); }
-    //Producto de inercia respecto al CDG en ejes locales.
-    //Suponemos ejes ortonormales.
+    //product of inertia with respect to CDG in local coordinates.
+    //Suponemos orthonormal axis.
     inline virtual GEOM_FT Pyz(void) const
       { return Iy()+Iz()-Ix(); }
     inline GEOM_FT I( const unsigned short int &i,
                      const unsigned short int &j) const;
-    //Return el area que se emplea para calcular el momento de inercia
+    //Return el area que se emplea para calcular el moment of inertia
     virtual inline GEOM_FT IArea(void) const
       { return 0.0; }
     GEOM_FT I(const Pos3d &O,const Vector3d &e) const;

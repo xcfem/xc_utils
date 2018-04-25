@@ -225,13 +225,13 @@ GEOM_FT Segmento3d::Angulo(const Segmento3d &s) const
   { return Angulo(s.VDir()); }
 GEOM_FT angulo(const Segmento3d &r,const Vector3d &v)
   { return r.Angulo(v); }
-//Momento de inercia respecto al CDG en ejes locales.
+//Moment of inertia with respect to CDG in local coordinates.
 GEOM_FT Segmento3d::Ix(void) const
   { return 0.0; }
-//Momento de inercia respecto al CDG en ejes locales.
+//Moment of inertia with respect to CDG in local coordinates.
 GEOM_FT Segmento3d::Iy(void) const
   { return NAN; }
-//Momento de inercia respecto al CDG en ejes locales.
+//Moment of inertia with respect to CDG in local coordinates.
 GEOM_FT Segmento3d::Iz(void) const
   { return NAN; }
 bool operator==(const Segmento3d &r1,const Segmento3d &r2)

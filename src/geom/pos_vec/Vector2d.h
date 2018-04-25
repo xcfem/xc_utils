@@ -93,8 +93,8 @@ class Vector2d: public ProtoGeom
     Dir2d Direccion(void) const;
     GEOM_FT AnguloSigno(const Vector2d &v) const;
     GEOM_FT Angulo(const Vector2d &v) const;
-    GEOM_FT AnguloEjeX(void) const;
-    GEOM_FT AnguloEjeY(void) const;
+    GEOM_FT XAxisAngle(void) const;
+    GEOM_FT YAxisAngle(void) const;
 
     //Producto escalar.
     inline virtual GEOM_FT GetDot(const Vector2d &v) const

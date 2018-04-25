@@ -29,14 +29,14 @@
 
 
 SisCooRect1d3d::SisCooRect1d3d(const VGlobal &vX)
-  : SisCooXd3d(1,vX)  //Eje 1 paralelo a Vx.
+  : SisCooXd3d(1,vX)  //Axis 1 paralelo a Vx.
   {}
 SisCooRect1d3d::SisCooRect1d3d(const PGlobal &o,const PGlobal &p)
   : SisCooXd3d(1,o,p) {}
 
 SisCooRect1d3d::VGlobal SisCooRect1d3d::GetI(void) const
 //Return el vector unitario I en el sistema global.
-  { return GetVDirEje(1); }
+  { return getAxisVDir(1); }
 SisCooRect1d3d::VGlobal SisCooRect1d3d::GetCooGlobales(const VLocal &v) const
 { return SisCooXd3d::GetCooGlobales(matriz_FT(1,1,v)); }
 SisCooRect1d3d::VLocal SisCooRect1d3d::GetCooLocales(const SisCooRect1d3d::VGlobal &v) const

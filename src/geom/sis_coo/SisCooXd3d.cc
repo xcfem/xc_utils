@@ -32,7 +32,7 @@
 //! se pasa como parámetro.
 SisCooXd3d::SisCooXd3d(const size_t &i,const VGlobal &v)
   : SisCoo(i,3)
-  { VectorEjeX(v); }
+  { XAxisVector(v); }
 
 //! @brief Define un sistema de coordenadas de dimensión i
 //! el x axis tendrá la dirección y sentido del vector v1
@@ -52,17 +52,17 @@ SisCooXd3d::SisCooXd3d(const size_t &i,const VGlobal &v1,const VGlobal &v2,const
   : SisCoo(i,3)
   { vectores_unitarios(v1,v2,v3); }
 
-void SisCooXd3d::putRow(const size_t &eje,const VGlobal &v)
-  { SisCoo::putRow(eje,traspuesta(v.GetMatriz())); }
+void SisCooXd3d::putRow(const size_t &axis,const VGlobal &v)
+  { SisCoo::putRow(axis,traspuesta(v.GetMatriz())); }
 
-//! @brief Return the dirección del eje being passed as parameter.
-SisCooXd3d::DGlobal SisCooXd3d::GetDirEje(const size_t &eje) const
-  { return DGlobal(GetVDirEje(1)); }
+//! @brief Return the dirección of the axis being passed as parameter.
+SisCooXd3d::DGlobal SisCooXd3d::getAxisDir(const size_t &axis) const
+  { return DGlobal(getAxisVDir(1)); }
 
-//! @brief Return the direction vector del eje being passed as parameter.
-SisCooXd3d::VGlobal SisCooXd3d::GetVDirEje(const size_t &eje) const
+//! @brief Return the direction vector of the axis being passed as parameter.
+SisCooXd3d::VGlobal SisCooXd3d::getAxisVDir(const size_t &axis) const
   { 
-    const matriz_FT row= getRow(eje);
+    const matriz_FT row= getRow(axis);
     return VGlobal(row(1,1),row(1,2),row(1,3));
   }
 //! Return las componentes del vector v 
@@ -111,7 +111,7 @@ void SisCooXd3d::vectores_unitarios(const VGlobal &i_,const VGlobal &j_,const VG
                   << " son paralelos. No se hicieron cambios" << std::endl;
         return;
       }
-    const size_t ne= NumEjes();
+    const size_t ne= numberOfAxis();
     const VGlobal e1= Normaliza(i_);
     putRow(1,e1);
     if(ne>1)
@@ -130,7 +130,7 @@ void SisCooXd3d::vectores_unitarios(const VGlobal &i_,const VGlobal &j_,const VG
 //! i_ el being passed as parameter.
 //! j_ el horizontal perpendicular a i_ (si es único).
 //! k_ el producto vectorial de ambos.
-void SisCooXd3d::VectorEjeX(const VGlobal &i_)
+void SisCooXd3d::XAxisVector(const VGlobal &i_)
   {
     if(i_.Nulo())
       {
@@ -157,9 +157,9 @@ void SisCooXd3d::VectorEjeX(const VGlobal &i_)
   }
 
 //! @brief Construye el sistema de coordenadas formado por los vectores:
-//! i_ el vector op (ver VectorEjeX).
+//! i_ el vector op (ver XAxisVector).
 void SisCooXd3d::TwoPoints(const PGlobal &o,const PGlobal &p)
-  { VectorEjeX(p-o); }
+  { XAxisVector(p-o); }
 
 //! @brief Create the coordinate system with axis oriented as follows:
 //! x axis: from o to p1;

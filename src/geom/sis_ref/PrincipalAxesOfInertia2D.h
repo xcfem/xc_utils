@@ -21,8 +21,8 @@
 //----------------------------------------------------------------------------
 //PrincipalAxesOfInertia2D.h
 
-#ifndef EJESPRINCINERCIA2D_H
-#define EJESPRINCINERCIA2D_H
+#ifndef PRINCIPALAXESOFINERTIA2D_H
+#define PRINCIPALAXESOFINERTIA2D_H
 
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
 #include "xc_utils/src/geom/pos_vec/Vector2d.h"
@@ -35,20 +35,20 @@ class Ref2d2d;
 class PrincipalAxesOfInertia2D
   {
     Pos2d cdg; //! Centroid.
-    Vector2d eje1; //!< Direction of the first principal moment of inertia.
+    Vector2d axis1; //!< Direction of the first principal moment of inertia.
     GEOM_FT i1; //!< First principal moment of inertia.
     GEOM_FT i2; //!< Second principal moment of inertia.
   public:
     PrincipalAxesOfInertia2D(const Pos2d &cdg_,const GEOM_FT &Ix,const GEOM_FT &Iy,const GEOM_FT &Pxy);
-    Ref2d2d GetEjes(void) const;
+    Ref2d2d getAxis(void) const;
     const GEOM_FT &I1() const;
     const GEOM_FT &I2() const;
-    inline Vector2d getVDirEje1(void) const
-      { return eje1; }
-    Vector2d getVDirEje2(void) const;
+    inline Vector2d getAxis1VDir(void) const
+      { return axis1; }
+    Vector2d getAxis2VDir(void) const;
   };
 
-std::ostream &operator<<(std::ostream &os,const PrincipalAxesOfInertia2D &ejes);
+std::ostream &operator<<(std::ostream &os,const PrincipalAxesOfInertia2D &axis);
 
 
 #endif

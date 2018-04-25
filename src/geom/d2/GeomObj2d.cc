@@ -62,33 +62,33 @@ bool GeomObj2d::Out(const Pos2d &p, const double &tol) const
   { return !In(p,tol); }
 
 
-//! @brief Return el ángulo que define un eje principal de inercia.
+//! @brief Return el ángulo que define un principal axis of inertia.
 double GeomObj2d::Theta_p(void) const
   { return theta_inercia(Ix(),Iy(),Pxy()); }
 
-//! @brief Return the dirección de un eje principal de inercia (no sabemos si
+//! @brief Return the dirección de un principal axis of inertia (no sabemos si
 //! el mayor o el menor).
-Dir2d GeomObj2d::DirEjeI_a(void) const
+Dir2d GeomObj2d::IAxisDir_a(void) const
   { return Dir2d(Theta_p()); }
 
-//! @brief Return the dirección del otro eje principal de inercia (no sabemos si
+//! @brief Return the dirección del otro principal axis of inertia (no sabemos si
 //! el mayor o el menor).
-Dir2d GeomObj2d::DirEjeI_b(void) const
-  { return DirEjeI_a().Perpendicular(); }
+Dir2d GeomObj2d::IAxisDir_b(void) const
+  { return IAxisDir_a().Perpendicular(); }
 
-//! @brief Return un eje principal de inercia (no sabemos si
+//! @brief Return un principal axis of inertia (no sabemos si
 //! el mayor o el menor
-Recta2d GeomObj2d::EjeI_a(void) const
-  { return Recta2d(Cdg(),DirEjeI_a()); }
+Recta2d GeomObj2d::IAxis_a(void) const
+  { return Recta2d(Cdg(),IAxisDir_a()); }
 
-//! @brief Return un eje principal de inercia (no sabemos si
+//! @brief Return un principal axis of inertia (no sabemos si
 //! el mayor o el menor
-Recta2d GeomObj2d::EjeI_b(void) const
-  { return Recta2d(Cdg(),DirEjeI_b()); }
+Recta2d GeomObj2d::IAxis_b(void) const
+  { return Recta2d(Cdg(),IAxisDir_b()); }
 
-//! @brief Return los ejes principales de inercia.
+//! @brief Return los principal axis of inertia.
 Ref2d2d GeomObj2d::PrincipalAxesOfInertia(void) const
-  { return Ref2d2d(Cdg(),DirEjeI_a()); }
+  { return Ref2d2d(Cdg(),IAxisDir_a()); }
 
 //! @brief Return el momento de inercia principal mayor.
 GEOM_FT GeomObj2d::I1(void) const
@@ -125,8 +125,8 @@ GEOM_FT GeomObj2d::I(const unsigned short int i,const unsigned short int j,const
     const GEOM_FT Iij= I(i,j);
     if(TieneCdg())
       {
-        Ref2d2d ejes(Cdg()); //
-        Pos2d pos_local= ejes.GetPosLocal(o);
+        Ref2d2d axis(Cdg()); //
+        Pos2d pos_local= axis.GetPosLocal(o);
         return Iij + IArea() * pos_local(i) * pos_local(j);
       }
     else
@@ -159,8 +159,8 @@ GEOM_FT GeomObj2d::I(const Recta2d &r) const
   { return I(r.Point(),r.VDir()); }
 
 
-//! @brief Return el momento de inercia respecto al eje que pasa por O
-//! con dirección la de e.
+//! @brief Return the moment of inertia with respect to the axis that passes
+//! through O with the direction of e.
 GEOM_FT GeomObj2d::I(const Pos2d &O,const Vector2d &e) const
   {
     const matriz_FT Io= I(O);

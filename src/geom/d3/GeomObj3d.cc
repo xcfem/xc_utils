@@ -101,20 +101,20 @@ GEOM_FT GeomObj3d::I( const unsigned short int &i, const unsigned short int &j) 
       }        
   }
 
-//! @brief Return el momento de inercia respecto al eje que pasa por O
-//! con direcci'on la de e.
+//! @brief Return el moment of inertia with respect to the axis that passes
+//! through O with the direction of e.
 GEOM_FT GeomObj3d::I(const Pos3d &O,const Vector3d &e) const
   {
     matriz_FT Io= I(O);
     return dot(e,Io*e.GetMatriz())/Abs2(e);
   }
 
-//! @brief Return el momento de inercia respecto a la recta que se pasa
+//! @brief Return el moment of inertia with respect to la recta que se pasa
 //! como parámetro.
 GEOM_FT GeomObj3d::I(const Recta3d &r) const
   { return I(r.Point(),r.VDir()); }
 
-//! @brief Return el momento de inercia (i,j) respecto eje paralelo al i
+//! @brief Return el moment of inertia (i,j) respecto axis parallel to i
 //! que pasa por o.
 GEOM_FT GeomObj3d::I( const unsigned short int i,
                      const unsigned short int j,
@@ -123,8 +123,8 @@ GEOM_FT GeomObj3d::I( const unsigned short int i,
     const GEOM_FT Iij= I(i,j);
     if(TieneCdg())
       {
-        Ref3d3d ejes(Cdg()); //
-        Pos3d pos_local= ejes.GetPosLocal(o);
+        Ref3d3d axis(Cdg()); //
+        Pos3d pos_local= axis.GetPosLocal(o);
         return Iij + IArea() * pos_local(i) * pos_local(j);
       }
     else
@@ -134,7 +134,7 @@ GEOM_FT GeomObj3d::I( const unsigned short int i,
       }
   }
 
-//! @brief Return el tensor de inercia respecto al centro de gravedad
+//! @brief Return el tensor de inercia with respect to centro de gravedad
 //! del objeto.
 matriz_FT GeomObj3d::I(void) const
   {

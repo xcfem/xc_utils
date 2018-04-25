@@ -166,8 +166,8 @@ Pos2d PoligonoConAgujeros2d::Cdg(void) const
 
 
 
-//! @brief Calcula el momento de inercia respecto a un eje paralelo al
-//! x axis que pasa por el CDG de la sección.
+//! @brief Compute moment of inertia with respect to an axis parallel to the
+//! x axis that passes through the CDG of the section.
 //! Ix = Integral y^2 dA
 GEOM_FT PoligonoConAgujeros2d::Ix(void) const
   { 
@@ -189,8 +189,8 @@ GEOM_FT PoligonoConAgujeros2d::Ix(void) const
     return retval;
   }
 
-//! @brief Calcula el momento de inercia respecto a un eje paralelo al
-//! y axis que pasa por el CDG del polígono.
+//! @brief Calcula el moment of inertia with respect to an axis parallel to the
+//! y axis que pasa por el polygon centroid.
 //! Iy = Integral x^2 dA
 GEOM_FT PoligonoConAgujeros2d::Iy(void) const
   { 
@@ -212,8 +212,8 @@ GEOM_FT PoligonoConAgujeros2d::Iy(void) const
     return retval;
   }
 
-//! @brief Calcula el producto de inercia respecto a los ejes paralelos
-//! a los x e y que pasan por el CDG del polígono.
+//! @brief Calcula el product of inertia with respect to the axis parallel
+//! to the x and y that passes through the centroid of the polygon.
 //! Pxy = Integral x*y dA
 GEOM_FT PoligonoConAgujeros2d::Pxy(void) const
   {

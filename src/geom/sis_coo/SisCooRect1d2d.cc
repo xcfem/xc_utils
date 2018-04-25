@@ -31,13 +31,13 @@
 
 
 SisCooRect1d2d::SisCooRect1d2d(const VGlobal &vX)
-  : SisCooXd2d(1,vX) {} //Eje 1 paralelo a Vx.
+  : SisCooXd2d(1,vX) {} //Axis 1 paralelo a Vx.
 SisCooRect1d2d::SisCooRect1d2d(const PGlobal &p1,const PGlobal &p2)
-  : SisCooXd2d(1,p1,p2) {} //Eje 1 desde p1 a p2.
+  : SisCooXd2d(1,p1,p2) {} //Axis 1 desde p1 a p2.
 
 SisCooRect1d2d::VGlobal SisCooRect1d2d::GetI(void) const
 //Return el vector unitario I en el sistema global.
-  { return GetVDirEje(1); }
+  { return getAxisVDir(1); }
 SisCooRect1d2d::VGlobal SisCooRect1d2d::GetCooGlobales(const VLocal &v) const
 //Return las componentes del vector v 
 //que se pasa como parámetro expresado en locales

@@ -99,13 +99,13 @@ class SemiRecta3d : public Linea3d
     Vector3d VDir(void) const;
     inline double Angulo(const Vector3d &v) const
       { return angulo(VDir(),v); }
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Moment of inertia with respect to CDG in local coordinates.
     inline virtual GEOM_FT Ix(void) const
       { return 0.0; }
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Moment of inertia with respect to CDG in local coordinates.
     inline virtual GEOM_FT Iy(void) const
       { return NAN; }
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Moment of inertia with respect to CDG in local coordinates.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
     inline friend bool operator==(const SemiRecta3d &r1,const SemiRecta3d &r2)

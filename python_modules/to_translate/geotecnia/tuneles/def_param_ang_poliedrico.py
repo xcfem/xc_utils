@@ -3,13 +3,13 @@ JPvacio= Vacio
 if(not(JPvacio))
     \then
       {
-        contieneEjeTunel= or(esInterior(vectorEjeTunel),esInterior(-vectorEjeTunel))  
-        I1= getVectorExterno1(ejesTunel)
-        I2= getVectorExterno2(ejesTunel)
+        containsTunnelAxis= or(esInterior(tunnelAxisVector),esInterior(-tunnelAxisVector))  
+        I1= getVectorExterno1(tunnelAxis)
+        I2= getVectorExterno2(tunnelAxis)
         angI1= 
-        \I1{angI1= getAnguloEjeX}
+        \I1{angI1= getXAxisAngle}
         angI2= 
-        \I2{angI2= getAnguloEjeX}
+        \I2{angI2= getXAxisAngle}
         angI1I2= angI2-angI1
         ptsTang= 
         p1= 

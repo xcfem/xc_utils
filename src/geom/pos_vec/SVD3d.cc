@@ -129,7 +129,7 @@ void SVD3d::Neg(void)
   }
 
 //! @brief Return the central axis of the system (moment paraller to resultant).
-Recta3d SVD3d::EjeCentral(void) const
+Recta3d SVD3d::centralAxis(void) const
   { return sol_eq_prod_vect(getResultante(),mom); }
 
 //! @brief Return the line of the points with zero moment.

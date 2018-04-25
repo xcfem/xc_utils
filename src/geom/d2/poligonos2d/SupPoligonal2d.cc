@@ -155,7 +155,7 @@ GEOM_FT SupPoligonal2d::Momento(const int &p,const int &q) const
     return retval;
   }
 
-//! @brief Calcula el momento de inercia respecto a un eje paralelo al
+//! @brief Calcula el moment of inertia with respect to an axis parallel to the
 //! x axis que pasa por el CDG de la sección.
 //! Ix = Integral y^2 dA
 GEOM_FT SupPoligonal2d::Ix(void) const
@@ -164,8 +164,8 @@ GEOM_FT SupPoligonal2d::Ix(void) const
     return Ixo-Area()*sqr(Cdg().y()); //Teorema de Steiner.
   }
 
-//! @brief Calcula el momento de inercia respecto a un eje paralelo al
-//! y axis que pasa por el CDG del polígono.
+//! @brief Calcula el moment of inertia with respect to an axis parallel to the
+//! y axis that passes through the polygon centroid.
 //! Iy = Integral x^2 dA
 GEOM_FT SupPoligonal2d::Iy(void) const
   { 
@@ -173,8 +173,8 @@ GEOM_FT SupPoligonal2d::Iy(void) const
     return Iyo-Area()*sqr(Cdg().x()); //Teorema de Steiner.
   }
 
-//! @brief Calcula el producto de inercia respecto a los ejes paralelos
-//! a los x e y que pasan por el CDG del polígono.
+//! @brief Calcula el product of inertia with respect to the axis parallel
+//! to the axis x and y with origin in the polygon centroid.
 //! Pxy = Integral x*y dA
 GEOM_FT SupPoligonal2d::Pxy(void) const
   {
@@ -182,7 +182,7 @@ GEOM_FT SupPoligonal2d::Pxy(void) const
     const Pos2d cdg= Cdg();
     const GEOM_FT dx= cdg.x();
     const GEOM_FT dy= cdg.y();
-    return Ixy-Area()*dx*dy; //Teorema de los ejes paralelos.
+    return Ixy-Area()*dx*dy; //Theorem of parallel axis.
   }
 
 //! @brief Return the points for which the polygon is almost tangent

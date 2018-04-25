@@ -46,7 +46,7 @@ class Ref : public ProtoGeom
     
   protected:
     PGlobal org; //!< Origen of the sistema de coordenadas.
-    SC trf;  //!< Ejes of the sistem de coordenadas transformacion local --> global.
+    SC trf;  //!< local --> global coordinate system axis transformation.
 
   public:
     Ref(void): org(), trf() {}
@@ -70,8 +70,8 @@ class Ref : public ProtoGeom
       { return trf; }
     void setTrf(const SC &t)
       { trf= t; }
-    VGlobal GetVDirEje(const size_t &i) const
-      { return trf.GetVDirEje(i); }
+    VGlobal getAxisVDir(const size_t &i) const
+      { return trf.getAxisVDir(i); }
     PGlobal GetPosGlobal(const PLocal &p) const;
     VGlobal GetCooGlobales(const VLocal &v) const;
     PLocal GetPosLocal(const PGlobal &p) const;

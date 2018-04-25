@@ -8,15 +8,15 @@ P3= calcPlanoBuzamiento(alpha3,beta3,p)
 P4= 
 P4= calcPlanoBuzamiento(alpha4,beta4,p)
 
-# Eje del túnel
-vectorEjeTunel= [sin(betaEje),cos(betaEje),0]
-vectorITunel= cross([0,0,1],vectorEjeTunel)
-vectorJTunel= cross(vectorEjeTunel,vectorITunel)
-ejesTunel= 
-\ejesTunel
+# Tunnel axis
+tunnelAxisVector= [sin(axisBeta),cos(axisBeta),0]
+vectorITunel= cross([0,0,1],tunnelAxisVector)
+vectorJTunel= cross(tunnelAxisVector,vectorITunel)
+tunnelAxis= 
+\tunnelAxis
   {
     \setOrg{p}
-    \ejes{\setVectoresIJ{[vectorITunel,vectorJTunel]}}
+    \axis{\setVectoresIJ{[vectorITunel,vectorJTunel]}}
   }
 '''Define los semiespacios superiores e inferiores
    correspondientes a los planos P1,P2,P3 y P4'''

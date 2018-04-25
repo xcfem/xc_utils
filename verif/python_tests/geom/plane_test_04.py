@@ -2,7 +2,7 @@
 
 
 #Vector dirección de la intersección de dos planos.
-#Ejemplo 1.3 de la tesis «La teoría de bloque aplicada a la dinámica
+#Exemple 1.3 of the thesis «La teoría de bloque aplicada a la dinámica
 #de rocas» de Juan Carlos Ayes Zamudio
 
 import xc_base

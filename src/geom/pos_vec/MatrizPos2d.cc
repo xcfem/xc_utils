@@ -129,7 +129,7 @@ Pos2d MatrizPos2d::GetCdg(void) const
     return Pos2d(Qx,Qy);
   }
 
-//! @brief Return el momento de inercia respecto al paralelo al y por el origen
+//! @brief Return el moment of inertia with respect to paralelo al y por el origen
 GEOM_FT MatrizPos2d::GetIy(void) const
   {
     GEOM_FT retval= 0.0;
@@ -145,7 +145,7 @@ GEOM_FT MatrizPos2d::GetIy(void) const
     return retval;
   }
 
-//! @brief Return el momento de inercia respecto al eje paralelo al x por el origen
+//! @brief Return el moment of inertia with respect to axis parallel to x por el origen
 GEOM_FT MatrizPos2d::GetIx(void) const
   {
     GEOM_FT retval= 0.0;
@@ -161,7 +161,8 @@ GEOM_FT MatrizPos2d::GetIx(void) const
     return retval;
   }
 
-//! @brief Return el producto de inercia respecto a los ejes que pasan por el origen de coordenadas.
+//! @brief Return el product of inertia with respect to the axis that
+//! pass through the origin.
 GEOM_FT MatrizPos2d::GetPxy(void) const
   {
     GEOM_FT retval= 0.0;
@@ -186,15 +187,15 @@ GEOM_FT MatrizPos2d::GetArea(void) const
     return retval;
   }
 
-//! @brief Momento de inercia respecto al eje paralelo al x por el CDG.
+//! @brief Moment of inertia with respect to axis parallel to x por el CDG.
 GEOM_FT MatrizPos2d::Ix(void) const
   { return GetIx()-GetArea()*sqr(GetCdg().y()); }
 
-//! @brief Momento de inercia respecto al CDG en ejes locales.
+//! @brief Moment of inertia with respect to CDG in local coordinates.
 GEOM_FT MatrizPos2d::Iy(void) const
   { return GetIy()-GetArea()*sqr(GetCdg().x()); }
 
-//! @brief Producto de inercia respecto al CDG en ejes locales.
+//! @brief product of inertia with respect to CDG in local coordinates.
 GEOM_FT MatrizPos2d::Pxy(void) const
   {
     const GEOM_FT d2= GetCdg().x()*GetCdg().y();

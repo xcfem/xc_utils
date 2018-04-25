@@ -35,13 +35,13 @@ SisCooRect3d3d::SisCooRect3d3d(const VGlobal &v1,const VGlobal &v2,const VGlobal
   : SisCooXd3d(3,v1,v2,v3) {}
 SisCooRect3d3d::VGlobal SisCooRect3d3d::GetI(void) const
 //Return el vector unitario I en el sistema global.
-  { return GetVDirEje(1); }
+  { return getAxisVDir(1); }
 SisCooRect3d3d::VGlobal SisCooRect3d3d::GetJ(void) const
 //Return el vector unitario J en el sistema global.
-  { return GetVDirEje(2); }
+  { return getAxisVDir(2); }
 SisCooRect3d3d::VGlobal SisCooRect3d3d::GetK(void) const
 //Return el vector unitario K en el sistema global.
-  { return GetVDirEje(3); }
+  { return getAxisVDir(3); }
 SisCooRect3d3d::VGlobal SisCooRect3d3d::GetCooGlobales(const VLocal &v) const
 //Return las componentes del vector v expresado en locales
 //expresadas en coordenadas globales.

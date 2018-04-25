@@ -44,15 +44,15 @@ Rejilla2d::~Rejilla2d(void)
 GEOM_FT Rejilla2d::Area(void) const
   { return points.GetArea();  }
 
-//! @briefMomento de inercia respecto al CDG en ejes locales.
+//! @briefMoment of inertia with respect to CDG in local coordinates.
 GEOM_FT Rejilla2d::Ix(void) const
   { return points.Ix(); }
 
-//! @brief Momento de inercia respecto al CDG en ejes locales.
+//! @brief Moment of inertia with respect to CDG in local coordinates.
 GEOM_FT Rejilla2d::Iy(void) const
   { return points.Iy(); }
 
-//! @brief Producto de inercia respecto al CDG en ejes locales.
+//! @brief product of inertia with respect to CDG in local coordinates.
 GEOM_FT Rejilla2d::Pxy(void) const
   { return points.Pxy(); }
 

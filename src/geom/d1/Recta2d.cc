@@ -424,19 +424,19 @@ GEOM_FT Recta2d::dist2(const Pos2d &p) const
 GEOM_FT Recta2d::dist(const Pos2d &p) const
   { return sqrt(dist2(p)); }
 
-//Momento de inercia respecto al CDG en ejes locales.
+//Moment of inertia with respect to CDG in local coordinates.
 GEOM_FT Recta2d::Ix(void) const
   { return 0.0; }
 
-//Momento de inercia respecto al CDG en ejes locales.
+//Moment of inertia with respect to CDG in local coordinates.
 GEOM_FT Recta2d::Iy(void) const
   { return NAN; }
 
-//Producto de inercia.
+//product of inertia.
 GEOM_FT Recta2d::Pxy(void) const
   { return NAN; }
 
-//Momento de inercia respecto al CDG en ejes locales.
+//Moment of inertia with respect to CDG in local coordinates.
 GEOM_FT Recta2d::Iz(void) const
   { return NAN; }
 

@@ -58,17 +58,17 @@ const Pos3d &Trihedron::Cuspide(void) const
 
 
 //! @brief Return the straight line that passes through the trihedron apex.
-Recta3d Trihedron::Eje(void) const
+Recta3d Trihedron::Axis(void) const
   { return Recta3d(p0,tr.Cdg()); }
 
 //! @brief Return the angle of the cone that has the same apex
 //! and contains the trihedron.
 GEOM_FT Trihedron::GetAnguloConico(void) const
   {
-    const Recta3d eje= Eje();
-    GEOM_FT angConico= angulo(eje,Recta3d(p0,Vertice(1)));
-    angConico= std::max(angConico, angulo(eje,Recta3d(p0,Vertice(2))));
-    angConico= std::max(angConico, angulo(eje,Recta3d(p0,Vertice(3))));
+    const Recta3d axis= Axis();
+    GEOM_FT angConico= angulo(axis,Recta3d(p0,Vertice(1)));
+    angConico= std::max(angConico, angulo(axis,Recta3d(p0,Vertice(2))));
+    angConico= std::max(angConico, angulo(axis,Recta3d(p0,Vertice(3))));
     return angConico;
   }
 
@@ -102,18 +102,18 @@ GEOM_FT Trihedron::PseudoDist(const Pos3d &p) const
 //! @brief Return true if the point is inside the thriedron.
 bool Trihedron::In(const Pos3d &p,const double &tol) const
   {
-    const Recta3d eje= Eje();
-    GEOM_FT d= eje.dist(p);
-    GEOM_FT radioCilindro= eje.dist(Vertice(1));
-    radioCilindro= std::max(radioCilindro,eje.dist(Vertice(2)));
-    radioCilindro= std::max(radioCilindro,eje.dist(Vertice(3)));
+    const Recta3d axis= Axis();
+    GEOM_FT d= axis.dist(p);
+    GEOM_FT radioCilindro= axis.dist(Vertice(1));
+    radioCilindro= std::max(radioCilindro,axis.dist(Vertice(2)));
+    radioCilindro= std::max(radioCilindro,axis.dist(Vertice(3)));
     bool retval= true;
     if((d-radioCilindro)>tol)
       return false;
     else
       {
         const GEOM_FT angConico= fabs(GetAnguloConico());
-        const GEOM_FT ang= fabs(angulo(eje,Recta3d(p0,p)));
+        const GEOM_FT ang= fabs(angulo(axis,Recta3d(p0,p)));
         if(ang<1.1*angConico)
           {
             Poliedro3d tmp= GetPoliedro3d();

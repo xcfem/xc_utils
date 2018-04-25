@@ -47,14 +47,14 @@ class SisCooXd2d: public SisCoo
     SisCooXd2d(const size_t &,const VGlobal &);
     SisCooXd2d(const size_t &,const PGlobal &,const PGlobal &);
 
-    void putRow(const size_t &eje,const VGlobal &v);
-    void VectorEjeX(const VGlobal &vX);
+    void putRow(const size_t &axis,const VGlobal &v);
+    void XAxisVector(const VGlobal &vX);
 
   public:
-    virtual VGlobal GetVDirEje(const size_t &eje) const;
-    //Return el direction vector del eje que se pasa como parámetro.
-    virtual DGlobal GetDirEje(const size_t &eje) const;
-    //Return the dirección del eje que se pasa como parámetro.
+    virtual VGlobal getAxisVDir(const size_t &axis) const;
+    //Return el direction vector del axis que se pasa como parámetro.
+    virtual DGlobal getAxisDir(const size_t &axis) const;
+    //Return the dirección of the axis que se pasa como parámetro.
 
     VGlobal GetCooGlobales(const matriz_FT &v) const;
     matriz_FT GetCooLocales(const VGlobal &v) const;

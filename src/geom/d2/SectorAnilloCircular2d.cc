@@ -104,32 +104,32 @@ GEOM_FT SectorAnilloCircular2d::GetMin(unsigned short int i) const
     return 0;
   }
 
-//! @brief Return el momento de inercia del sector circular respecto al 
-//! eje paralelo al x que pasa por su centro.
+//! @brief Return el moment of inertia del sector circular with respect to 
+//! axis parallel to x que pasa por su centro.
 GEOM_FT SectorAnilloCircular2d::Ix(void) const
   {
     std::cerr << "SectorAnilloCircular2d::Ix() not implemented." << std::endl;
     return 0;
   }
 
-//! @brief Return el momento de inercia del sector circular respecto al 
-//! eje paralelo al y que pasa por su centro.
+//! @brief Return el moment of inertia del sector circular with respect to 
+//! axis parallel to y que pasa por su centro.
 GEOM_FT SectorAnilloCircular2d::Iy(void) const
   {
     std::cerr << "SectorAnilloCircular2d::Iy() not implemented." << std::endl;
     return 0;
   }
 
-//! @brief Return el momento de inercia del sector circular respecto al 
-//! eje paralelo al z que pasa por su centro.
+//! @brief Return el moment of inertia del sector circular with respect to 
+//! axis parallel to z que pasa por su centro.
 GEOM_FT SectorAnilloCircular2d::Iz(void) const
   {
     std::cerr << "SectorAnilloCircular2d::Iz() not implemented." << std::endl;
     return 0;
   }
 
-//! @brief Return el producto de inercia del sector circular respecto a
-//! los ejes paralelos a x e y que pasan por su centro.
+//! @brief Return el product of inertia del sector circular with respect to
+//! the axis parallel to x e y que pasan por su centro.
 GEOM_FT SectorAnilloCircular2d::Pxy(void) const
   {
     std::cerr << "SectorAnilloCircular2d::Pxy() not implemented." << std::endl;

@@ -133,8 +133,8 @@ GEOM_FT Circulo2d::GetMax(unsigned short int i) const
 //! @brief Return el valor mínimo of the i coordinate of the points of the circle.
 GEOM_FT Circulo2d::GetMin(unsigned short int i) const
   { return Centro()(i)-Radio(); }
-//! @brief Return el momento de inercia del círculo respecto al 
-//! eje paralelo al x que pasa por su centro.
+//! @brief Return el moment of inertia del círculo with respect to 
+//! axis parallel to x que pasa por su centro.
 GEOM_FT Circulo2d::Ix(void) const
   { return M_PI_FT/4*sqr(Radio2()); }
 

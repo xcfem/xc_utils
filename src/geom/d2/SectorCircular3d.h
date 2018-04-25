@@ -39,7 +39,7 @@ class SectorCircular3d : public D2to3d
     SectorCircular3d(void) : D2to3d(), sect_circ() {}
     SectorCircular3d(const Pos3d centro,const GEOM_FT &rad,const double &th1,const double &th2);
     SectorCircular3d(const GEOM_FT &rad2,const Pos3d &centro,const double &th1,const double &th2);
-    SectorCircular3d(const Pos3d &c,const double &r,const Vector3d &n,const Vector3d &ejeX,const double &angIni,const double &angFin);
+    SectorCircular3d(const Pos3d &c,const double &r,const Vector3d &n,const Vector3d &Xaxis,const double &angIni,const double &angFin);
     SectorCircular3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
     SectorCircular3d(const SectorCircular3d &otro);
     SectorCircular3d &operator=(const SectorCircular3d &p);

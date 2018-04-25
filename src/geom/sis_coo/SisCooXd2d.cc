@@ -29,28 +29,28 @@
 
 //! @brief Define un sistema de coordenadas de dimensión ne
 //! en un espacio de dimensión 2.
-//! Los ejes corresponden con los del sistema global.
+//! The axis are those of the global system.
 SisCooXd2d::SisCooXd2d(const size_t &ne)
   : SisCoo(ne,2) { identidad(); }
 //! @brief Define un sistema de coordenadas de dimensión ne
-//! en un espacio de dimensión 2. ver SisCooXd2d::VectorEjeX.
+//! en un espacio de dimensión 2. ver SisCooXd2d::XAxisVector.
 SisCooXd2d::SisCooXd2d(const size_t &ne,const VGlobal &vX)
-  : SisCoo(ne,2) //Eje 1 paralelo a Vx.
-  { VectorEjeX(vX); }
+  : SisCoo(ne,2) //Axis 1 paralelo a Vx.
+  { XAxisVector(vX); }
 //! @brief Define un sistema de coordenadas de dimensión ne
-//! en un espacio de dimensión 2. ver SisCooXd2d::VectorEjeX.
+//! en un espacio de dimensión 2. ver SisCooXd2d::XAxisVector.
 SisCooXd2d::SisCooXd2d(const size_t &ne,const PGlobal &o,const PGlobal &p)
   : SisCoo(ne,2)
-  { VectorEjeX(p-o); }
+  { XAxisVector(p-o); }
 
-void SisCooXd2d::putRow(const size_t &eje,const VGlobal &v)
-  { SisCoo::putRow(eje,traspuesta(v.GetMatriz())); }
-SisCooXd2d::DGlobal SisCooXd2d::GetDirEje(const size_t &eje) const
-  { return DGlobal(GetVDirEje(1)); }
-//! @brief Return el vector dirección del eje being passed as parameter.
-SisCooXd2d::VGlobal SisCooXd2d::GetVDirEje(const size_t &eje) const
+void SisCooXd2d::putRow(const size_t &axis,const VGlobal &v)
+  { SisCoo::putRow(axis,traspuesta(v.GetMatriz())); }
+SisCooXd2d::DGlobal SisCooXd2d::getAxisDir(const size_t &axis) const
+  { return DGlobal(getAxisVDir(1)); }
+//! @brief Return the direction vector of the axis being passed as parameter.
+SisCooXd2d::VGlobal SisCooXd2d::getAxisVDir(const size_t &axis) const
   { 
-    const matriz_FT row= getRow(eje);
+    const matriz_FT row= getRow(axis);
     return VGlobal(row(1,1),row(1,2));
   }
 SisCooXd2d::VGlobal SisCooXd2d::GetCooGlobales(const matriz_FT &v) const
@@ -68,17 +68,17 @@ matriz_FT SisCooXd2d::GetCooLocales(const SisCooXd2d::VGlobal &v) const
 //! y sentido del being passed as parameter. Si el sistema es
 //! de dimensión 2 el vector básico 2 es perpendicular al
 //! primero en sentido antihorario.
-void SisCooXd2d::VectorEjeX(const VGlobal &vX)
+void SisCooXd2d::XAxisVector(const VGlobal &vX)
   {
     if(vX.Nulo())
       {
-	std::cerr << "SisCooXd2d::VectorEjeX: El vector: " 
+	std::cerr << "SisCooXd2d::XAxisVector: El vector: " 
              << vX << " es nulo. No se hicieron cambios"
              << std::endl;
         return;
       }
     const VGlobal i_= vX.Normalizado();
     putRow(1,i_);
-    if(NumEjes()>1)
+    if(numberOfAxis()>1)
       putRow(2,i_.Perpendicular(CGAL::COUNTERCLOCKWISE));
   }

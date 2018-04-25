@@ -108,7 +108,7 @@ GEOM_FT Vector2d::AnguloSigno(const Vector2d &v) const
 GEOM_FT Vector2d::Angulo(const Vector2d &v) const
   { return angulo(*this,v); }
 
-GEOM_FT Vector2d::AnguloEjeX(void) const
+GEOM_FT Vector2d::XAxisAngle(void) const
   {
     double retval= atan2(y(),x());
     if(retval<0)
@@ -116,8 +116,8 @@ GEOM_FT Vector2d::AnguloEjeX(void) const
     return retval;
   }
 
-GEOM_FT Vector2d::AnguloEjeY(void) const
-  { return M_PI/2.0-AnguloEjeX(); }
+GEOM_FT Vector2d::YAxisAngle(void) const
+  { return M_PI/2.0-XAxisAngle(); }
 
 
 bool Vector2d::EsUnitario(const double &tol) const

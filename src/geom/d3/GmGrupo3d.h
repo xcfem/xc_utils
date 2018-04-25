@@ -52,13 +52,13 @@ class GmGrupo3d : public GmGrupo<GeomObj3d>
     virtual Pos3d Cdg(void) const;
 
     virtual GEOM_FT Ix(void) const;
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Moment of inertia with respect to CDG in local coordinates.
     virtual GEOM_FT Iy(void) const;
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Moment of inertia with respect to CDG in local coordinates.
     virtual GEOM_FT Iz(void) const;
-    //Momento de inercia respecto al CDG en ejes locales.
+    //Moment of inertia with respect to CDG in local coordinates.
     GEOM_FT Pxy(void) const;
-    //Producto de inercia respecto al CDG en ejes locales.
+    //product of inertia with respect to CDG in local coordinates.
 
     
   };

@@ -27,19 +27,19 @@
 
 //! Rotación en 3d según se describe en "Geometric tools for computer graphics"
 //! Philip J. Schneider Morgan Kaufmann Publishers, page 141
-matriz_FT matriz_rotation_3d(const Recta3d &eje,const double &theta)
+matriz_FT matriz_rotation_3d(const Recta3d &axis,const double &theta)
   {
     matriz_FT retval(4,4);
     const GEOM_FT cos_theta= double_to_FT(cos(theta));
     const GEOM_FT sin_theta= double_to_FT(sin(theta));
     const matriz_FT I= identidad(matriz_FT(3,3));
-    const Vector3d u= eje.VDir();
+    const Vector3d u= axis.VDir();
     const matriz_FT T_u_theta_1= cos_theta*I;
     const matriz_FT T_u_theta_2= (double_to_FT(1.0)-cos_theta)*prod_tensor(u,u);
     const matriz_FT T_u_theta_3= sin_theta*skew_symm_matrix_pre(u);
     const matriz_FT T_u_theta= traspuesta(T_u_theta_1+T_u_theta_2+T_u_theta_3);
     retval.PutCaja(1,1,T_u_theta);
-    const Pos3d Q= eje.Point();
+    const Pos3d Q= axis.Point();
     const Vector3d tmp= T_u_theta*Q.VectorPos();
     const Vector3d VQ= Q.VectorPos()-tmp;
     retval.PutCaja(1,4,VQ.GetMatriz());
@@ -56,9 +56,9 @@ Rotation3d::Rotation3d(void)
   }
 
 //! @brief Constructor.
-Rotation3d::Rotation3d(const Recta3d &eje,const GEOM_FT &theta)
+Rotation3d::Rotation3d(const Recta3d &axis,const GEOM_FT &theta)
   : Trf3d()
   {
-    matriz_FT rr=  matriz_rotation_3d(eje,theta);
+    matriz_FT rr=  matriz_rotation_3d(axis,theta);
     PutMatrizHomogeneas(rr);
   }
