@@ -37,16 +37,16 @@ class ActionsFamiliesMap;
 
 //! @ingroup CMBACC
 //
-//! @brief Familia de acciones (permanentes, variables, accidentales,...)
+//! @brief Family of actions (permanent, variable, accidental,...)
 //!
-//! Conjunto de acciones a las que se asignan unos mismos coeficientes de ponderación, p.ej. cada una de las siguientes:
+//! Set of actions that share the same set of partial safety factors, for example::
 //! -Permanent actions.
 //! -Variable actions.
 //! -Accidental actions.
 //! -Earthquake actions.
 class ActionsFamily: public EntConNmb
   {
-    GammaF gammaf; //!< Coeficientes de ponderación para toda la familia.
+    GammaF gammaf; //!< Partial safety factors para toda la familia.
     ActionRValueList acciones; //!< Contenedor de acciones de la familia.
 
   protected:

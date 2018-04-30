@@ -73,7 +73,7 @@ cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::crea_familia_acc(const std:
     ActionsFamily *tmp =nullptr;
     if(!existe(nmb)) //la familia es nuevo.
       {
-        tmp= new ActionsFamily(nmb,GammaF(GammaFELU(1.0,1.6,1.0,1.0),GammaFELS(0.9,1.1)));//Coeficientes de ponderación por defecto 
+        tmp= new ActionsFamily(nmb,GammaF(GammaFELU(1.0,1.6,1.0,1.0),GammaFELS(0.9,1.1)));//Partial safety factors por defecto 
                                                                                             //para acciones permanentes de valor no constante.
         familias[nmb]= tmp;
       }

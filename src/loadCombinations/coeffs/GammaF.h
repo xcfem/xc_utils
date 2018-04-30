@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //GammaF.h
-//Coeficientes de ponderación de acciones.
+//Partial safety factors de acciones.
 
 
 #ifndef GAMMAF_HXX
@@ -36,13 +36,13 @@ class ActionRValueList;
 
 //! @ingroup CMBACC
 //
-//! @brief Coeficientes de mayoración de una familia de acciones (permanentes, variables,...), en estados límite de servicio.
+//! @brief Partial safety factors de una familia de acciones (permanentes, variables,...), en serviceability limit states.
 class GammaFELS: public EntCmd
   {
   protected:
-    //Coeficientes de ponderación
-    float gamma_f_fav; //!< para efecto favorable.
-    float gamma_f_desfav; //!< para efecto desfavorable.
+    //Partial safety factors
+    float gamma_f_fav; //!< para favourable effect.
+    float gamma_f_desfav; //!< para unfavourable effect.
 
     //! @brief Lee el objeto desde archivo.
 
@@ -61,19 +61,19 @@ class GammaFELS: public EntCmd
       { gamma_f_desfav= f; }
   };
 
-//! @brief Coeficientes de mayoración de una familia de acciones (permanentes, variables,...), en estados límite últimos .
+//! @brief Partial safety factors de una familia de acciones (permanentes, variables,...), en estados límite últimos .
 class GammaFELU: public GammaFELS
   {
-    //Coeficientes de ponderación
-    float gamma_f_fav_acc; //!< para efecto favorable en situacion accidental o sísmica.
-    float gamma_f_desfav_acc; //!< para efecto desfavorable en situacion accidental o sísmica.
+    //Partial safety factors
+    float gamma_f_fav_acc; //!< para favourable effect en situacion accidental o sísmica.
+    float gamma_f_desfav_acc; //!< para unfavourable effect en situacion accidental o sísmica.
   protected:
     //! @brief Lee el objeto desde archivo.
 
     friend class GammaF;
-    //! @brief Return los coeficientes de ponderación correspondientes a situación persistente o transitoria.
+    //! @brief Return the partial safety factors correspondientes a situación persistente o transitoria.
     Variation CoefsPT(void) const;
-    //! @brief Return los coeficientes de ponderación correspondientes a situación accidental o sísmica.
+    //! @brief Return the partial safety factors correspondientes a situación accidental o sísmica.
     Variation CoefsAcc(void) const;
   public:
     //! @brief Constructor por defecto. Supone control normal.
@@ -88,11 +88,11 @@ class GammaFELU: public GammaFELS
       { gamma_f_desfav_acc= f; }
   };
 
-//! @brief Coeficientes de ponderación de una familia de acciones en ELS y ELU.
+//! @brief Partial safety factors de una familia de acciones en ELS y ELU.
 class GammaF: public EntCmd
   {
-    GammaFELU gammaf_elu; //!< Coeficientes de ponderación en estados límite últimos.
-    GammaFELS gammaf_els; //!< Coeficientes de ponderación en estados límite de servicio.
+    GammaFELU gammaf_elu; //!< Partial safety factors en estados límite últimos.
+    GammaFELS gammaf_els; //!< Partial safety factors en serviceability limit states.
   protected:
     Variation CoefsEls(void) const;
   public:
@@ -102,7 +102,7 @@ class GammaF: public EntCmd
       { return gammaf_elu; }
     inline const GammaFELS &getGammaFELS(void) const
       { return gammaf_els; }
-    //! @brief Return los coeficientes de ponderación correspondientes a estado límite de servicio.
+    //! @brief Return the partial safety factors correspondientes a estado límite de servicio.
     Variations calcula_variations(const bool &elu,const bool &sit_accidental,const int &d,const ActionRValueList &) const;
   };
 

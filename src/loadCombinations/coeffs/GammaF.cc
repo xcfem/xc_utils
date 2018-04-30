@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //GammaF.cc
-//Coeficientes de ponderación de acciones.
+//Partial safety factors de acciones.
 
 #include "GammaF.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/Variation.h"
@@ -32,11 +32,11 @@ cmb_acc::GammaFELS::GammaFELS(const float &fav,const float &desfav)
   : gamma_f_fav(fav), gamma_f_desfav(desfav) {}
 
 
-//! @brief Return los coeficientes de ponderación correspondientes a situaciones de servicio.
+//! @brief Return the partial safety factors for serviceability limit state.
 cmb_acc::Variation cmb_acc::GammaFELS::Coefs(void) const
   {
     if(gamma_f_fav == gamma_f_desfav) return Variation(1,gamma_f_fav); //Si son iguales devuelve solo uno.
-    Variation retval(2,0.0); //Coeficientes de ponderación.
+    Variation retval(2,0.0); //Partial safety factors.
     retval[0]= gamma_f_fav; //Favorable.
     retval[1]= gamma_f_desfav; //Desfavorable.
     return retval;
@@ -45,17 +45,17 @@ cmb_acc::Variation cmb_acc::GammaFELS::Coefs(void) const
 cmb_acc::GammaFELU::GammaFELU(const float &fav,const float &desfav,const float &fav_acc,const float &desfav_acc)
   : GammaFELS(fav,desfav), gamma_f_fav_acc(fav_acc), gamma_f_desfav_acc(desfav_acc) {}
 
-//! @brief Return los coeficientes de ponderación correspondientes 
+//! @brief Return the partial safety factors correspondientes 
 //! a situaciones persistentes o transitorias.
 cmb_acc::Variation cmb_acc::GammaFELU::CoefsPT(void) const
   { return GammaFELS::Coefs(); }
 
-//! @brief Return los coeficientes de ponderación correspondientes 
+//! @brief Return the partial safety factors correspondientes 
 //! a situaciones accidentales o sísmicas.
 cmb_acc::Variation cmb_acc::GammaFELU::CoefsAcc(void) const
   {
     if(gamma_f_fav_acc == gamma_f_desfav_acc) return Variation(1,gamma_f_fav_acc); //Si son iguales devuelve solo uno.
-    Variation retval(2,0.0); //Coeficientes de ponderación.
+    Variation retval(2,0.0); //Partial safety factors.
     retval[0]= gamma_f_fav_acc; //Favorable.
     retval[1]= gamma_f_desfav_acc; //Desfavorable.
     return retval;
@@ -65,8 +65,7 @@ cmb_acc::Variation cmb_acc::GammaFELU::CoefsAcc(void) const
 cmb_acc::GammaF::GammaF(const GammaFELU &gf_elu, const GammaFELS &gf_els)
   : EntCmd(), gammaf_elu(gf_elu), gammaf_els(gf_els) {}
 
-//! @brief Return los coeficientes de ponderación correspondientes 
-//! a estados límite de servicio.
+//! @brief Return the partial safety factors for serviceability limit states.
 cmb_acc::Variation cmb_acc::GammaF::CoefsEls(void) const
   { return gammaf_els.Coefs(); }
 
@@ -74,7 +73,7 @@ cmb_acc::Variation cmb_acc::GammaF::CoefsEls(void) const
 //! @brief Calcula las variations que pueden formarse con las acciones de la familia.
 //!
 //! @param n: Número de acciones de la familia.
-//! @param elu: Verdadero si se trata de un estado límite último.
+//! @param elu: Verdadero si se trata de un ultimate limit state.
 //! @param sit_accidental: Verdadero si se trata de una situación accidental o sísmica.
 //! @param d: Índice de la acción dominante (-1 si ninguna es dominante).
 cmb_acc::Variations cmb_acc::GammaF::calcula_variations(const bool &elu,const bool &sit_accidental,const int &d,const ActionRValueList &lvr) const

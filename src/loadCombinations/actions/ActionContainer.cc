@@ -28,7 +28,7 @@
 //! \fn cmb_acc::ActionContainer::ActionContainer(void)
 //! @brief Constructor por defecto.
 cmb_acc::ActionContainer::ActionContainer(const PsiCoeffsMap &coefs)
-  : G("Permanentes",GammaF(GammaFELU(1.0,1.5,1.0,1.0),GammaFELS(1.0,1.0))), //Coeficientes de ponderación por defecto 
+  : G("Permanentes",GammaF(GammaFELU(1.0,1.5,1.0,1.0),GammaFELS(1.0,1.0))), //Partial safety factors por defecto 
                                                                             //para acciones permanentes.
     G_aster("Permanentes val. no cte."), 
     Q("Variables",GammaF(GammaFELU(0.0,1.6,0.0,1.0),GammaFELS(0.0,1.0))),
@@ -320,7 +320,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCombELU(void) const
     return retval;
   }
 
-//Estados límite de servicio.
+//serviceability limit states.
 
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPocoFrecuentes(void) const
