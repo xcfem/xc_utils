@@ -43,9 +43,9 @@ class SVD3d: public VDesliz3d
   public:
     SVD3d(const Pos3d &O= Pos3d(),const Vector3d &R= Vector3d(),const Vector3d &Mo= Vector3d());
     explicit SVD3d(const VDesliz3d &v);
-    const Vector3d &getResultante(void) const
+    const Vector3d &getResultant(void) const
       { return getVector(); }
-    Vector3d getResultante(const Ref3d3d &ref) const;
+    Vector3d getResultant(const Ref3d3d &ref) const;
     const Vector3d &getMomento(void) const
       { return mom; }
     VDesliz3d getMomento(const Pos3d &P) const;

@@ -204,12 +204,12 @@ class_<VDesliz2d, bases<Vector2d> >("VDesliz2d")
 
 
 GEOM_FT (SVD2d::*getMomento2D)(void) const= &SVD2d::getMomento;
-Vector2d (SVD2d::*getResultante2D)(void) const= &SVD2d::getResultante;
+Vector2d (SVD2d::*getResultant2D)(void) const= &SVD2d::getResultant;
 
 class_<SVD2d, bases<VDesliz2d> >("SVD2d")
   .def(init<Pos2d,Vector2d,GEOM_FT>())
   .def(init<VDesliz2d>())
-  .def("getResultante",getResultante2D)
+  .def("getResultant",getResultant2D,"Return the resultant of the SVS.")
   .def("getMomento",getMomento2D)
   .def("reduceTo",&SVD2d::ReduceA,"Sets the reference point to express the moments with respect to.")
   .def("zeroMomentLine",&SVD2d::RectaMomNulo,"Return zero moment line (if it exists).")
@@ -251,12 +251,12 @@ class_<VDesliz3d, bases<Vector3d> >("VDesliz3d")
 
 
 const Vector3d &(SVD3d::*getMomento3D)(void) const= &SVD3d::getMomento;
-const Vector3d &(SVD3d::*getResultante3D)(void) const= &SVD3d::getResultante;
+const Vector3d &(SVD3d::*getResultant3D)(void) const= &SVD3d::getResultant;
 
 class_<SVD3d, bases<VDesliz3d> >("SVD3d")
   .def(init<Pos3d,Vector3d,Vector3d>())
   .def(init<VDesliz3d>())
-  .def("getResultante",getResultante3D,return_internal_reference<>())
+  .def("getResultant",getResultant3D,return_internal_reference<>(),"Return the resultant of the SVS.")
   .def("getMomento",getMomento3D,return_internal_reference<>())
   .def("zeroMomentLine",&SVD3d::RectaMomNulo,"Return zero moment line (if it exists).")
   //.def("getMomentoPos3d",getMomentoPos3d)

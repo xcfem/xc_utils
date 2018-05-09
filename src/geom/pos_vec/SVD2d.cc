@@ -40,7 +40,7 @@ GEOM_FT SVD2d::getMomento(const Pos2d &P) const
 
 void SVD2d::Print(std::ostream &os) const
   {
-    os << "Resultante R=" << resul
+    os << "Resultant R=" << resul
        << " , momento respecto a " << org << " Mo= " << mom; 
   }
 
@@ -51,7 +51,7 @@ void SVD2d::PrintLtx(std::ostream &os,const std::string &ud_long,const GEOM_FT &
        << "Resultant: " << resul*f_f << ud_f << "\\\\" << std::endl 
        << "Moment: " << mom*f_f << ud_f << ud_long << "\\\\" << std::endl;
   }
-Vector2d SVD2d::getResultante(const Ref2d2d &ref) const
+Vector2d SVD2d::getResultant(const Ref2d2d &ref) const
   { return ref.GetCooLocales(resul); } 
 
 SVD2d SVD2d::ReduceA(const Pos2d &Q)

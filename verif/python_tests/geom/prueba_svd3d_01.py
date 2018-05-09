@@ -16,10 +16,10 @@ ptoAplic=geom.Pos3d(1,-1,0)
 vec=geom.VDesliz3d(ptoAplic,vectorDir)
 svd1+=vec
 
-Res=svd1.getResultante()
+Res=svd1.getResultant()
 Mom=svd1.getMomento()
 
-#It seems there is a bug in svd.getResultante() it returns a SVD3d instead of a Vector3d.
+#It seems there is a bug in svd.getResultant() it returns a SVD3d instead of a Vector3d.
 #print 'type<Res>= ', type(Res)
 #print 'Res= ', Res
 

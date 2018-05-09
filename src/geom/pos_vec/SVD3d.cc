@@ -91,7 +91,7 @@ void SVD3d::PrintLtx(std::ostream &os,const std::string &ud_long,const GEOM_FT &
   {
     //Se asume que imprimimos en una tabla.
     os << "Point of application: " << org.VectorPos()*f_long << ud_long << "\\\\" << std::endl
-       << "Resultante: " << getResultante()*f_f << ud_f << "\\\\" << std::endl 
+       << "Resultant: " << getResultant()*f_f << ud_f << "\\\\" << std::endl 
        << "Momento: " << mom*f_f << ud_f << ud_long << "\\\\" << std::endl;
   }
 
@@ -109,10 +109,10 @@ Vector3d SVD3d::getMomento(const Ref3d3d &ref) const
     return ref.GetCooLocales(m);
   }
 
-//! @brief Return el vector resultante expresado en el sistema
-//! de referencia que se pasa como parámetro.
-Vector3d SVD3d::getResultante(const Ref3d3d &ref) const
-  { return ref.GetCooLocales(getResultante()); } 
+//! @brief Return the resultant vector expressed in the
+//! reference frame argument.
+Vector3d SVD3d::getResultant(const Ref3d3d &ref) const
+  { return ref.GetCooLocales(getResultant()); } 
 
 bool SVD3d::Nulo(void) const
   {
@@ -130,13 +130,13 @@ void SVD3d::Neg(void)
 
 //! @brief Return the central axis of the system (moment paraller to resultant).
 Recta3d SVD3d::centralAxis(void) const
-  { return sol_eq_prod_vect(getResultante(),mom); }
+  { return sol_eq_prod_vect(getResultant(),mom); }
 
 //! @brief Return the line of the points with zero moment.
 Recta3d SVD3d::RectaMomNulo(const double &tol) const
   {
     if(ExisteRectaMomNulo(tol))
-      return sol_eq_prod_vect(getResultante(),mom);
+      return sol_eq_prod_vect(getResultant(),mom);
     else
       return Recta3d(Pos3d(NAN,NAN,NAN),Pos3d(NAN,NAN,NAN));
   }
@@ -145,12 +145,12 @@ Recta3d SVD3d::RectaMomNulo(const double &tol) const
 bool SVD3d::ExisteRectaMomNulo(const double &tol) const
   {
     if((VDesliz3d::Nulo()) && !(mom.Nulo())) return false;
-    if(dot(getResultante(),mom)>0) return false;
+    if(dot(getResultant(),mom)>0) return false;
     return true;
   }
 
 SVD3d SVD3d::ReduceA(const Pos3d &Q) const
-  { return SVD3d(Q,getResultante(),getMomento(Q)); }
+  { return SVD3d(Q,getResultant(),getMomento(Q)); }
 
 SVD3d &SVD3d::operator+=(const VDesliz3d &v)
   {
@@ -215,7 +215,7 @@ SVD3d operator*(const SVD3d &s,const GEOM_FT &d)
 //! @brief Imprime el sliding vectors system.
 void SVD3d::Print(std::ostream &os) const
   {
-    os << "Resultante R=" << getResultante()
+    os << "Resultant R=" << getResultant()
        << " , momento respecto a " << org << " Mo= " << mom; 
   }
 

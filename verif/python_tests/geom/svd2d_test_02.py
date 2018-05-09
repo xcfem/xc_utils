@@ -16,7 +16,7 @@ vec=geom.VDesliz2d(ptoAplic,vectorDir)
 svd2+=vec
 
 R= 5.0*svd1-10.0*svd2
-result= R.getResultante()
+result= R.getResultant()
 mom= R.getMomento()
 ratio= result.getModulo()+ math.sqrt(mom**2)
 

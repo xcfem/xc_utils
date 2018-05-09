@@ -22,7 +22,7 @@ ptoAplic=geom.Pos3d(1,-1,0)
 vec=geom.VDesliz3d(ptoAplic,vectorDir)
 svd1+=vec
 
-Res=svd1.getResultante()
+Res=svd1.getResultant()
 Mom=svd1.getMomento()
 MomP=svd1.getMomentoPos3d(pto)
 MomR=svd1.getMomentoRecta3d(r1) #devuelve el valor con signo (en función del sentido de la recta), probablemente sea mejor ignorar el signo

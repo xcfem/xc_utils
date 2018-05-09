@@ -40,7 +40,7 @@ class Ref2d2d;
 class SVD2d: public ProtoGeom
   {
     Pos2d org; //Origin.
-    Vector2d resul; //Resultante.
+    Vector2d resul; //Resultant.
     GEOM_FT mom; //Momento respecto a org;
   public:
     SVD2d(const Pos2d &O= Pos2d(),const Vector2d &R= Vector2d(),const GEOM_FT &Mo= 0.0)
@@ -48,10 +48,10 @@ class SVD2d: public ProtoGeom
     SVD2d(const VDesliz2d &v);
     Pos2d GetOrg(void) const
       { return org; }
-    //Resultante y momento.
-    Vector2d getResultante(void) const
+    //Resultant and moment.
+    Vector2d getResultant(void) const
       { return resul; }
-    Vector2d getResultante(const Ref2d2d &ref) const;
+    Vector2d getResultant(const Ref2d2d &ref) const;
     GEOM_FT getMomento(void) const
       { return mom; }
     GEOM_FT getMomento(const Pos2d &P) const;
