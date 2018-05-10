@@ -27,10 +27,10 @@
 #include "xc_basic/src/util/matem.h"
 #include "../../tipos_cgal.h"
 
-//Funciones auxiliares para la obtención de los 
-//momentos arbitrarios (orden 0,1,2,3,...) de un polígono
-//según el algoritmo descrito por Carsten Steger
-//en el documento
+//Aux functions for computing moments of arbitrary order  
+//(0,1,2,3,...) of a polygon according to the algorithm
+//según el algoritmo described by Carsten Steger
+//in the document
 
 // On the calculation of arbitrary moments of polygons
 // Carsten Steger
@@ -39,7 +39,7 @@
 
 class SupPoligonal2d;
 
-GEOM_FT momento_p_q(const SupPoligonal2d &sp,const int &p, const int &q);
+GEOM_FT p_q_moment(const SupPoligonal2d &sp,const int &p, const int &q);
 
 
 #endif

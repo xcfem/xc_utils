@@ -74,5 +74,5 @@ double sumatorio_i_p_q(const SupPoligonal2d &sp,const int &p, const int &q)
   }
 inline long long divisor(const int &p, const int &q)
   { return (p+q+2)*(p+q+1)*coeficiente_binomial(p+q,q); }
-GEOM_FT momento_p_q(const SupPoligonal2d &sp,const int &p, const int &q)
+GEOM_FT p_q_moment(const SupPoligonal2d &sp,const int &p, const int &q)
   { return double_to_FT(sumatorio_i_p_q(sp,p,q)/divisor(p,q)); }

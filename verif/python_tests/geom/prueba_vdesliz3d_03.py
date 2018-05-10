@@ -16,7 +16,7 @@ vec1=geom.VDesliz3d(pto_aplic,vectorDir)
 pto=vec1.getOrg()
 brazo=pto.distRecta3d(r1)
 fuerza=vec1.y
-m=vec1.getMomentoRecta3d(r1)
+m=vec1.getMomentRecta3d(r1)
 
 mTeor=fuerza*brazo
 ratio1=(m-mTeor)/mTeor

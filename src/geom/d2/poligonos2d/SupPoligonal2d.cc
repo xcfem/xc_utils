@@ -123,7 +123,7 @@ GEOM_FT SupPoligonal2d::GetMin(unsigned short int i) const
 Pos2d SupPoligonal2d::Cdg(void) const
   {
      const GEOM_FT area= Area();
-     return Pos2d(Momento(1,0)/area,Momento(0,1)/area);
+     return Pos2d(getMoment(1,0)/area,getMoment(0,1)/area);
   }
 //! @brief Return the centroid (point interior to the polygon).
 //! Return the centroid (point interior to the polygon).
@@ -143,14 +143,15 @@ Pos2d SupPoligonal2d::Centroide(void) const
         retval= sg.Cdg();
       }
     else
-      cerr << "Error al calcular el centroide del polígono: " << *this << endl;
+      cerr << getClassName() << "::" << __FUNCTION__
+	   << "; error computing the polygon centroid: " << *this << endl;
     return retval;
   }
-GEOM_FT SupPoligonal2d::momento_signo(const int &p,const int &q) const
-  { return momento_p_q(*this,p,q); }
-GEOM_FT SupPoligonal2d::Momento(const int &p,const int &q) const
+GEOM_FT SupPoligonal2d::moment_sign(const int &p,const int &q) const
+  { return p_q_moment(*this,p,q); }
+GEOM_FT SupPoligonal2d::getMoment(const int &p,const int &q) const
   {
-    GEOM_FT retval= momento_signo(p,q); 
+    GEOM_FT retval= moment_sign(p,q); 
     if(AreaSigno()<0) retval*=-1;
     return retval;
   }
@@ -160,7 +161,7 @@ GEOM_FT SupPoligonal2d::Momento(const int &p,const int &q) const
 //! Ix = Integral y^2 dA
 GEOM_FT SupPoligonal2d::Ix(void) const
   { 
-    const GEOM_FT Ixo= Momento(0,2);
+    const GEOM_FT Ixo= getMoment(0,2);
     return Ixo-Area()*sqr(Cdg().y()); //Teorema de Steiner.
   }
 
@@ -169,7 +170,7 @@ GEOM_FT SupPoligonal2d::Ix(void) const
 //! Iy = Integral x^2 dA
 GEOM_FT SupPoligonal2d::Iy(void) const
   { 
-    const GEOM_FT Iyo= Momento(2,0);
+    const GEOM_FT Iyo= getMoment(2,0);
     return Iyo-Area()*sqr(Cdg().x()); //Teorema de Steiner.
   }
 
@@ -178,7 +179,7 @@ GEOM_FT SupPoligonal2d::Iy(void) const
 //! Pxy = Integral x*y dA
 GEOM_FT SupPoligonal2d::Pxy(void) const
   {
-    const GEOM_FT Ixy= Momento(1,1);
+    const GEOM_FT Ixy= getMoment(1,1);
     const Pos2d cdg= Cdg();
     const GEOM_FT dx= cdg.x();
     const GEOM_FT dy= cdg.y();

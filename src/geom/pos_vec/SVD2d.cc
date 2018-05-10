@@ -32,16 +32,16 @@ SVD2d::SVD2d(const VDesliz2d &v)
   : org(v.getOrg()), resul(v),mom(0.0) {}
 
 //! @brief Return the moment about P.
-GEOM_FT SVD2d::getMomento(const Pos2d &P) const
+GEOM_FT SVD2d::getMoment(const Pos2d &P) const
   {
     VDesliz2d R(org,resul);
-    return mom+R.Momento(P);
+    return mom+R.getMoment(P);
   }
 
 void SVD2d::Print(std::ostream &os) const
   {
     os << "Resultant R=" << resul
-       << " , momento respecto a " << org << " Mo= " << mom; 
+       << " , moment with respect to " << org << " Mo= " << mom; 
   }
 
 void SVD2d::PrintLtx(std::ostream &os,const std::string &ud_long,const GEOM_FT &f_long, const std::string &ud_f,const GEOM_FT &f_f) const
@@ -55,32 +55,32 @@ Vector2d SVD2d::getResultant(const Ref2d2d &ref) const
   { return ref.GetCooLocales(resul); } 
 
 SVD2d SVD2d::ReduceA(const Pos2d &Q)
-  { return SVD2d(Q,resul,getMomento(Q)); }
+  { return SVD2d(Q,resul,getMoment(Q)); }
 
 SVD2d &SVD2d::operator+=(const VDesliz2d &v)
   {
     resul= resul+v;
-    mom= mom + v.Momento(org);
+    mom= mom + v.getMoment(org);
     return *this;
   }
 SVD2d &SVD2d::operator-=(const VDesliz2d &v)
   {
     resul= resul - v;
-    mom= mom - v.Momento(org);
+    mom= mom - v.getMoment(org);
     return *this;
   }
 SVD2d &SVD2d::operator+=(const SVD2d &s)
   //The origin is preserved.
   {
     resul= resul + s.resul;
-    mom= mom + s.getMomento(org);
+    mom= mom + s.getMoment(org);
     return *this;
   }
 SVD2d &SVD2d::operator-=(const SVD2d &s)
   //The origin is preserved.
   {
     resul= resul - s.resul;
-    mom= mom - s.getMomento(org);
+    mom= mom - s.getMoment(org);
     return *this;
   }
 SVD2d &SVD2d::operator*=(const GEOM_FT &d)
@@ -125,7 +125,7 @@ Recta2d SVD2d::RectaMomNulo(void) const
       std::clog << getClassName() << "::" << __FUNCTION__
 	        << "; no point has zero moment." << std::endl;
     const Pos2d p= retval.Point();
-    const GEOM_FT m= getMomento(p);
+    const GEOM_FT m= getMoment(p);
     if(abs(m)>1E-6)
       std::cerr << getClassName() << "::" << __FUNCTION__
 	        << "ERROR in computing zero moment line; "

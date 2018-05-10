@@ -113,21 +113,21 @@ GEOM_FT BlockPyramid::Volumen(void) const
     return 0.0;
   }
 
-//! @brief Return el momento de inercia respecto al x axis.
+//! @brief Return the moment of inertia with respect to the x axis.
 GEOM_FT BlockPyramid::Ix(void) const
   {
     std::cerr << "BlockPyramid::Ix() not implemented." << std::endl;
     return 0.0;
   }
 
-//! @brief Return el momento de inercia respecto al y axis.
+//! @brief Return the moment of inertia with respect to the y axis.
 GEOM_FT BlockPyramid::Iy(void) const
   {
     std::cerr << "BlockPyramid::Iy() not implemented." << std::endl;
     return 0.0;
   }
 
-//! @brief Return el momento de inercia respecto al z axis.
+//! @brief Return the moment of inertia with respect to the z axis.
 GEOM_FT BlockPyramid::Iz(void) const
   {
     std::cerr << "BlockPyramid::Iy() not implemented." << std::endl;

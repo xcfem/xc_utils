@@ -65,14 +65,14 @@ class GeomObj2d: public GeomObj
     virtual GEOM_FT Area(void) const= 0; //?? Por que se re-declara (está en GeomObj).
     inline virtual GEOM_FT Volumen(void) const
       { return 0.0; }
-    //! @briefMomento de inercia respecto al CDG en local axis.
+    //! @brief Moment of inertia with respect to the CDG en local axis.
     virtual GEOM_FT Ix(void) const= 0;
-    //! @briefMomento de inercia respecto al CDG en local axis.
+    //! @brief Moment of inertia with respect to the CDG en local axis.
     virtual GEOM_FT Iy(void) const= 0;
-    //! @brief Producto de inercia respecto al CDG en local axis.
+    //! @brief Producto de inercia with respect to the CDG en local axis.
     virtual GEOM_FT Pxy(void) const= 0;
+    //! @brief Moment of inertia polar with respect to the CDG en local axis.
     inline virtual GEOM_FT Iz(void) const
-    //Momento de inercia polar respecto al CDG en local axis.
       { return Ix()+Iy(); }
     double Theta_p(void) const;
     //Return el ángulo que define un principal axis of inertia.
@@ -90,20 +90,20 @@ class GeomObj2d: public GeomObj
     //el mayor o el menor).
     Ref2d2d PrincipalAxesOfInertia(void) const;
     GEOM_FT I1(void) const;
-    //Return el momento de inercia principal mayor.
+    //Return the moment of inertia principal mayor.
     GEOM_FT I2(void) const;
-    //Return el momento de inercia principal menor.
+    //Return the moment of inertia principal menor.
     inline PrincipalAxesOfInertia2D Inercia(void)
       { return PrincipalAxesOfInertia2D(Cdg(),Ix(),Iy(),Pxy()); }
     GEOM_FT I( const unsigned short int &i,
               const unsigned short int &j) const;
-    //! @brief Return el area que se emplea para calcular el momento de inercia
+    //! @brief Return el area que se emplea para calcular the moment of inertia
     //! por defecto suponemos que es igual al area del objeto.
     virtual inline GEOM_FT IArea(void) const
       { return Area(); }
     GEOM_FT I(const Pos2d &O,const Vector2d &e) const;
     GEOM_FT I(const Recta2d &r) const;
-      //Return el momento de inercia respecto a la recta que se pasa
+      //Return the moment of inertia respecto a la recta que se pasa
       //como parámetro.
     GEOM_FT I( const unsigned short int i,
               const unsigned short int j,

@@ -23,9 +23,9 @@ vec=geom.VDesliz3d(ptoAplic,vectorDir)
 svd1+=vec
 
 Res=svd1.getResultant()
-Mom=svd1.getMomento()
-MomP=svd1.getMomentoPos3d(pto)
-MomR=svd1.getMomentoRecta3d(r1) #devuelve el valor con signo (en función del sentido de la recta), probablemente sea mejor ignorar el signo
+Mom=svd1.getMoment()
+MomP=svd1.getMomentPos3d(pto)
+MomR=svd1.getMomentRecta3d(r1) #devuelve el valor con signo (en función del sentido de la recta), probablemente sea mejor ignorar el signo
 
 ##print "Res.x =", Res.x
 ##print "Res.y =", Res.y

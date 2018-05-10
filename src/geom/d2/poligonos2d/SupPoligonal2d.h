@@ -41,7 +41,7 @@ class SupPoligonal2d: public Superficie2d
   private:
     inline GEOM_FT a_i(unsigned int i) const
       { return Vertice(i).x()*Vertice(i+1).y()-Vertice(i+1).x()*Vertice(i).y(); }
-    GEOM_FT momento_signo(const int &p,const int &q) const;
+    GEOM_FT moment_sign(const int &p,const int &q) const;
   protected:
     Segmento2d Lado0(unsigned int i, unsigned int j) const;
   public:
@@ -72,13 +72,13 @@ class SupPoligonal2d: public Superficie2d
     inline GEOM_FT Perimetro(void) const
       { return Longitud(); }
     inline GEOM_FT AreaSigno(void) const
-      { return momento_signo(0,0); }
+      { return moment_sign(0,0); }
     virtual GEOM_FT Area(void) const;
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
     virtual Pos2d Cdg(void) const;
     virtual Pos2d Centroide(void) const;
-    GEOM_FT Momento(const int &p,const int &q) const;
+    GEOM_FT getMoment(const int &p,const int &q) const;
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Pxy(void) const;

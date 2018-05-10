@@ -90,15 +90,16 @@ Recta2d GeomObj2d::IAxis_b(void) const
 Ref2d2d GeomObj2d::PrincipalAxesOfInertia(void) const
   { return Ref2d2d(Cdg(),IAxisDir_a()); }
 
-//! @brief Return el momento de inercia principal mayor.
+//! @brief Return the moment of inertia principal mayor.
 GEOM_FT GeomObj2d::I1(void) const
   { return I1_inercia(Ix(),Iy(),Pxy()); }
 
-//! @brief Return el momento de inercia principal menor.
+//! @brief Return the moment of inertia principal menor.
 GEOM_FT GeomObj2d::I2(void) const
   { return I2_inercia(Ix(),Iy(),Pxy()); }
 
-//! @brief Return the componente i,j del tensor de inercia calculado respecto al CDG.
+//! @brief Return the componente i,j of the inertia tensor computed
+//! with respect to the CDG.
 GEOM_FT GeomObj2d::I(const unsigned short int &i,const unsigned short int &j) const
   {
     unsigned short int k= i + (j-1)*2;
@@ -119,7 +120,7 @@ GEOM_FT GeomObj2d::I(const unsigned short int &i,const unsigned short int &j) co
     return retval;
   }
 
-//! @brief Return the componente i,j del tensor de inercia calculado with respect to the point "o".
+//! @brief Return the componente i,j of the inertia tensor calculado with respect to the point "o".
 GEOM_FT GeomObj2d::I(const unsigned short int i,const unsigned short int j,const Pos2d &o) const
   {
     const GEOM_FT Iij= I(i,j);
@@ -136,7 +137,7 @@ GEOM_FT GeomObj2d::I(const unsigned short int i,const unsigned short int j,const
       }
   }
 
-//! @brief Return el tensor de inercia respecto al centro de gravedad del objeto.
+//! @brief Return the inertia tensor with respect to the centro de gravedad del objeto.
 matriz_FT GeomObj2d::I(void) const
   {
     matriz_FT i(2,2);
@@ -145,7 +146,7 @@ matriz_FT GeomObj2d::I(void) const
     return i;
   }
 
-//Return el tensor de inercia with respect to the point o.
+//Return the inertia tensor with respect to the point o.
 matriz_FT GeomObj2d::I(const Pos2d &o) const
   {
     matriz_FT Ig= I();
@@ -154,7 +155,7 @@ matriz_FT GeomObj2d::I(const Pos2d &o) const
     return Ig+m*(Abs2(og)*identidad(Ig)-(og & og));
   }
 GEOM_FT GeomObj2d::I(const Recta2d &r) const
-//Return el momento de inercia respecto a la recta que se pasa
+//Return the moment of inertia respecto a la recta que se pasa
 //como parámetro.
   { return I(r.Point(),r.VDir()); }
 
@@ -167,7 +168,7 @@ GEOM_FT GeomObj2d::I(const Pos2d &O,const Vector2d &e) const
     return dot(e,Io*e)/Abs2(e);
   }
 
-//! @brief Return el momento polar de inercia with respect to the point o.
+//! @brief Return the polar moment of inertia with respect to the point o.
 GEOM_FT GeomObj2d::IO(const Pos2d &o) const
   { return (I(1,1,o)+I(2,2,o)+I(3,3,o))/2; }
 

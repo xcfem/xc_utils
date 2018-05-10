@@ -139,13 +139,13 @@ class Recta3d : public Linea3d
       { return r.Angulo(v); }
     inline friend double angulo(const Recta3d &r1,const Recta3d &r2)
       { return r1.Angulo(r2.VDir()); }
-    //Momento de inercia respecto al CDG en local axis.
+    //! @brief Moment of inertia with respect to the CDG en local axis.
     inline virtual GEOM_FT Ix(void) const
       { return 0.0; }
-    //Momento de inercia respecto al CDG en local axis.
+    //! @brief Moment of inertia with respect to the CDG en local axis.
     inline virtual GEOM_FT Iy(void) const
       { return NAN; }
-    //Momento de inercia respecto al CDG en local axis.
+    //! @brief Moment of inertia with respect to the CDG en local axis.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
     void Print(std::ostream &os) const;

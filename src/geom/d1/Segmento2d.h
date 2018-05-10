@@ -127,16 +127,16 @@ class Segmento2d : public Linea2d
     inline GEOM_FT Azimuth(void) const
       { return RectaSoporte().Azimuth(); }
 
-    //Momento de inercia respecto al CDG en local axis.
+    //! @brief Moment of inertia with respect to the CDG en local axis.
     inline virtual GEOM_FT Ix(void) const
       { return 0.0; }
-    //Momento de inercia respecto al CDG en local axis.
+    //! @brief Moment of inertia with respect to the CDG en local axis.
     inline virtual GEOM_FT Iy(void) const
       { return NAN; }
     //Producto de inercia.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
-    //Momento de inercia respecto al CDG en local axis.
+    //! @brief Moment of inertia with respect to the CDG en local axis.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
     VectorPos2d Divide(int num_partes) const;

@@ -39,9 +39,9 @@ class Ref2d2d;
 //! @brief Sliding vectors system.
 class SVD2d: public ProtoGeom
   {
-    Pos2d org; //Origin.
-    Vector2d resul; //Resultant.
-    GEOM_FT mom; //Momento respecto a org;
+    Pos2d org; //!< Origin.
+    Vector2d resul; //!< Resultant.
+    GEOM_FT mom; //!< Moment with respect to org;
   public:
     SVD2d(const Pos2d &O= Pos2d(),const Vector2d &R= Vector2d(),const GEOM_FT &Mo= 0.0)
       : org(O), resul(R), mom(Mo) {}
@@ -52,9 +52,9 @@ class SVD2d: public ProtoGeom
     Vector2d getResultant(void) const
       { return resul; }
     Vector2d getResultant(const Ref2d2d &ref) const;
-    GEOM_FT getMomento(void) const
+    GEOM_FT getMoment(void) const
       { return mom; }
-    GEOM_FT getMomento(const Pos2d &P) const;
+    GEOM_FT getMoment(const Pos2d &P) const;
     bool Nulo(void) const;
     void Neg(void)
       {

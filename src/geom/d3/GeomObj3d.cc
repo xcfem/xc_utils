@@ -129,12 +129,13 @@ GEOM_FT GeomObj3d::I( const unsigned short int i,
       }
     else
       {
-        std::cerr << "El objeto no tiene centro de gravedad." << std::endl;
+        std::cerr << getClassName() << "::" << __FUNCTION__
+		  << "The object has not a centroid." << std::endl;
         return Iij;
       }
   }
 
-//! @brief Return el tensor de inercia with respect to centro de gravedad
+//! @brief Return the inertia tensor with respect to centro de gravedad
 //! del objeto.
 matriz_FT GeomObj3d::I(void) const
   {
@@ -145,7 +146,7 @@ matriz_FT GeomObj3d::I(void) const
     return i;
   }
 
-//! @brief Return el tensor de inercia with respect to the point o.
+//! @brief Return the inertia tensor with respect to the point o.
 matriz_FT GeomObj3d::I(const Pos3d &o) const
   {
     matriz_FT Ig= I();
@@ -154,7 +155,7 @@ matriz_FT GeomObj3d::I(const Pos3d &o) const
     return Ig+m*(Abs2(og)*identidad(Ig)-(og & og));
   }
 
-//! @brief Return el momento polar de inercia with respect to the point o.
+//! @brief Return the polar moment of inertia with respect to the point o.
 GEOM_FT GeomObj3d::IO(const Pos3d &o) const
   { return (I(1,1,o)+I(2,2,o)+I(3,3,o))/2; }
 

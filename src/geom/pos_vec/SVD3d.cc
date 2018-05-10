@@ -57,11 +57,11 @@ SVD3d::SVD3d(const Pos3d &O,const Vector3d &R,const Vector3d &Mo)
 SVD3d::SVD3d(const VDesliz3d &v)
   : VDesliz3d(v), mom(0,0,0) {}
 
-//! @brief Campo de momentos del SVD3d.
-//! Return el momento del SVD3d with respect to the point P.
-VDesliz3d SVD3d::getMomento(const Pos3d &P) const
+//! @brief Moment field of the SVD3d.
+//! Return themoment of the SVD3d with respect to the point P.
+VDesliz3d SVD3d::getMoment(const Pos3d &P) const
   {
-    const VDesliz3d m2= VDesliz3d::getMomento(P);
+    const VDesliz3d m2= VDesliz3d::getMoment(P);
     return VDesliz3d(P,mom+m2);
   }
 
@@ -92,20 +92,20 @@ void SVD3d::PrintLtx(std::ostream &os,const std::string &ud_long,const GEOM_FT &
     //Se asume que imprimimos en una tabla.
     os << "Point of application: " << org.VectorPos()*f_long << ud_long << "\\\\" << std::endl
        << "Resultant: " << getResultant()*f_f << ud_f << "\\\\" << std::endl 
-       << "Momento: " << mom*f_f << ud_f << ud_long << "\\\\" << std::endl;
+       << "Moment: " << mom*f_f << ud_f << ud_long << "\\\\" << std::endl;
   }
 
 //! @brief Moment with respect to an axis.
 //! Is the moment with respect a point on the axis
 //! projected onto the axis.
-GEOM_FT SVD3d::getMomento(const Recta3d &e) const
-  { return dot(SVD3d::getMomento(e.Point()),e.VDir().Normalizado()); }
+GEOM_FT SVD3d::getMoment(const Recta3d &e) const
+  { return dot(SVD3d::getMoment(e.Point()),e.VDir().Normalizado()); }
 
-//! @brief Return el vector momento expresado en el sistema
-//! de referencia que se pasa como parámetro.
-Vector3d SVD3d::getMomento(const Ref3d3d &ref) const
+//! @brief Return el moment vector expressed in the reference
+//! frame being passed as parameter.
+Vector3d SVD3d::getMoment(const Ref3d3d &ref) const
   {
-    VDesliz3d m= getMomento(ref.Org());
+    VDesliz3d m= getMoment(ref.Org());
     return ref.GetCooLocales(m);
   }
 
@@ -150,25 +150,25 @@ bool SVD3d::ExisteRectaMomNulo(const double &tol) const
   }
 
 SVD3d SVD3d::ReduceA(const Pos3d &Q) const
-  { return SVD3d(Q,getResultant(),getMomento(Q)); }
+  { return SVD3d(Q,getResultant(),getMoment(Q)); }
 
 SVD3d &SVD3d::operator+=(const VDesliz3d &v)
   {
     Vector3d::operator+=(v);
-    mom= mom + v.getMomento(org);
+    mom= mom + v.getMoment(org);
     return *this;
   }
 SVD3d &SVD3d::operator-=(const VDesliz3d &v)
   {
     VDesliz3d::operator-=(v);
-    mom= mom - v.getMomento(org);
+    mom= mom - v.getMoment(org);
     return *this;
   }
 SVD3d &SVD3d::operator+=(const SVD3d &s)
   //The org point is preserved.
   {
     VDesliz3d::operator+=(s);
-    mom= mom + s.getMomento(org);
+    mom= mom + s.getMoment(org);
     return *this;
   }
 
@@ -176,7 +176,7 @@ SVD3d &SVD3d::operator-=(const SVD3d &s)
   //The org point is preserved.
   {
     VDesliz3d::operator-=(s);
-    mom= mom - s.getMomento(org);
+    mom= mom - s.getMoment(org);
     return *this;
   }
 SVD3d &SVD3d::operator*=(const GEOM_FT &d)
@@ -216,7 +216,7 @@ SVD3d operator*(const SVD3d &s,const GEOM_FT &d)
 void SVD3d::Print(std::ostream &os) const
   {
     os << "Resultant R=" << getResultant()
-       << " , momento respecto a " << org << " Mo= " << mom; 
+       << " , moment with respect to " << org << " Mo= " << mom; 
   }
 
 //! @brief Return the suma de los sliding vectors.

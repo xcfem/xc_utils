@@ -48,8 +48,7 @@ class VDesliz2d : public Vector2d
         org= otro.org;
         return *this;
       }
-    GEOM_FT Momento(const Pos2d &o) const;
-      //Momento de un sliding vector with respect to a point.
+    GEOM_FT getMoment(const Pos2d &o) const;
     const Pos2d &getOrg(void) const
       { return org; }
     const Pos2d getDest(void) const

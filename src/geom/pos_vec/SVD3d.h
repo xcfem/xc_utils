@@ -39,18 +39,18 @@ class Ref3d3d;
 //! @brief Sliding vectors system en un espacio tridimensional.
 class SVD3d: public VDesliz3d
   {
-    Vector3d mom; //Momento respecto a org;
+    Vector3d mom; //!< Moment with respect to org;
   public:
     SVD3d(const Pos3d &O= Pos3d(),const Vector3d &R= Vector3d(),const Vector3d &Mo= Vector3d());
     explicit SVD3d(const VDesliz3d &v);
     const Vector3d &getResultant(void) const
       { return getVector(); }
     Vector3d getResultant(const Ref3d3d &ref) const;
-    const Vector3d &getMomento(void) const
+    const Vector3d &getMoment(void) const
       { return mom; }
-    VDesliz3d getMomento(const Pos3d &P) const;
-    GEOM_FT getMomento(const Recta3d &e) const;
-    Vector3d getMomento(const Ref3d3d &ref) const;
+    VDesliz3d getMoment(const Pos3d &P) const;
+    GEOM_FT getMoment(const Recta3d &e) const;
+    Vector3d getMoment(const Ref3d3d &ref) const;
     bool Nulo(void) const;
     void Neg(void);
     Recta3d centralAxis(void) const;
