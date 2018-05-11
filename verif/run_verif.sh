@@ -88,3 +88,4 @@ echo "$BLEU" "Load combination tests." "$NORMAL"
 #python ./python_tests/loadCombinations/testLoadCombinations.py
 python ./python_tests/loadCombinations/test_esclavas_00.py
 python ./python_tests/loadCombinations/test_accidentales.py
+python ./python_tests/loadCombinations/test_iap11.py
