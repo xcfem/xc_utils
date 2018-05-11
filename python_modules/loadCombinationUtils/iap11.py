@@ -75,3 +75,12 @@ coefs_psi_IAP11.insert("emp_hidrodin",loadCombinations.PsiCoeffs(1.0,1.0,1.0))
 coefs_psi_IAP11.insert("sc_construc",loadCombinations.PsiCoeffs(1.0,0.0,1.0))
 
 coefs_psi_IAP11.insert("por_defecto",loadCombinations.PsiCoeffs(0.7,0.7,0.6))
+
+# Está apañado para un caso concreto . NECESITA REVISIÓN EN EL CASO GENERAL
+controlCombGenerator= loadCombinations.LoadCombGenerator()
+pond= controlCombGenerator.defPonderacion("IAP11",coefs_psi_IAP11)
+pond.permanentActions.gammaF= gammaf_permanentes_IAP11
+#pond.ncPermanentActions=gammaf_permanentes_nc_Terr_IAP11
+pond.variableActions.gammaF= gammaf_variables_SCuso_IAP11
+pond.accidentalActions.gammaF= gammaf_accidentales_IAP11
+#pond.seismicActions.gammaF= gammaf_sismicas_EHE_ctr_intenso

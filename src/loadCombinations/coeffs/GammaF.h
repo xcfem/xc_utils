@@ -79,7 +79,7 @@ class GammaFELU: public GammaFELS
     //! @brief Constructor por defecto. Supone control normal.
     GammaFELU(const float &fav=0.0,const float &desfav=1.8,const float &fav_acc=0.0,const float &desfav_acc=1.0);
     inline float getFavorableAccidental(void) const
-    { return gamma_f_fav_acc; }
+      { return gamma_f_fav_acc; }
     inline void setFavorableAccidental(const float &f)
       { gamma_f_fav_acc= f; }
     inline float getDesfavorableAccidental(void) const
