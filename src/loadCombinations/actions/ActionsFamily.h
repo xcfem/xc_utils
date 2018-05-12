@@ -46,8 +46,9 @@ class ActionsFamiliesMap;
 //! -Earthquake actions.
 class ActionsFamily: public EntConNmb
   {
+  private:
     GammaF gammaf; //!< Partial safety factors para toda la familia.
-    ActionRValueList acciones; //!< Contenedor de acciones de la familia.
+    ActionRValueList actions; //!< Family actions container.
 
   protected:
     friend class ActionsFamiliesMap;
@@ -56,18 +57,28 @@ class ActionsFamily: public EntConNmb
     ActionsFamily(const std::string &nmb="",const GammaF &gf=GammaF());
     inline virtual ~ActionsFamily(void) {}
     ActionRValue &insert(const Action &,const std::string &nmb_coefs_psi="");
-    Variations CalculaVariations(const bool &elu= true,const bool &sit_accidental= false,const int &d=-1) const;
-    //! @brief Return el número de acciones de la familia.
+
+    //! @brief Return the number of actions in the family.
     inline size_t getNumActions(void) const
-      { return acciones.size(); }
-    //! brief Return verdadero si la familia esta vacía.
-    inline bool Vacia(void) const
-      { return acciones.empty(); }
+      { return actions.size(); }
+    inline const ActionRValueList &getActions(void) const
+      { return actions; }
+    inline ActionRValueList &getActions(void)
+      { return actions; }
+    inline void setActions(const ActionRValueList &acc)
+      { actions= acc; }
+
+    //! brief Return true if no actions in the family.
+    inline bool empty(void) const
+      { return actions.empty(); }
+
     inline void setGammaF(const GammaF &gf)
       { gammaf= gf; }
     inline GammaF &getGammaF(void)
       { return gammaf; }
     const PsiCoeffsMap *getPtrPsiCoeffs(void) const;
+    
+    Variations computeVariations(const bool &elu= true,const bool &sit_accidental= false,const int &d=-1) const;
     LoadCombinationVector GetLoadCombinations(const bool &elu,const bool &sit_accidental,short int r,const int &d=-1,const short int &rr=-1) const;
   };
 } //fin namespace nmb_acc.

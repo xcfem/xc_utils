@@ -120,7 +120,7 @@ class Action: public EntConNmb
 
     std::string ListaStrIncompatibles(ActionRValueList *af) const;
     std::vector<double> getCoeficientes(const std::vector<std::string> &) const;
-    void Print(std::ostream &os) const;
+    virtual void Print(std::ostream &os) const;
   };
 
 std::ostream &operator<<(std::ostream &os,const Action &acc);

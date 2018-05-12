@@ -34,7 +34,7 @@ bool cmb_acc::ActionWeightingMap::existe(const std::string &nmb) const
   { return (ponderaciones.find(nmb)!=ponderaciones.end()); }
 
 //! @brief Return un puntero a la ponderacion cuyo nombre se pasa como parámetro.
-cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::busca_ponderacion(const std::string &nmb)
+cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::findByName(const std::string &nmb)
   {
     if(existe(nmb))
       return ponderaciones[nmb];
@@ -43,7 +43,7 @@ cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::busca_ponderacion(const s
   }
 
 //! @brief Return un puntero a la ponderacion cuyo nombre se pasa como parámetro.
-const cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::busca_ponderacion(const std::string &nmb) const
+const cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::findByName(const std::string &nmb) const
   {
     const_iterator i= ponderaciones.find(nmb);
     if(i!= ponderaciones.end())
@@ -62,7 +62,7 @@ cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::crea_ponderacion(const st
         ponderaciones[nmb]= tmp;
       }
     else //la ponderacion existe
-      tmp= busca_ponderacion(nmb);
+      tmp= findByName(nmb);
     return tmp;
   }
 
@@ -96,7 +96,7 @@ cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::defPonderacion(const std:
 //! @brief Insert the action being passed as parameter.
 cmb_acc::ActionRValue &cmb_acc::ActionWeightingMap::insert(const std::string &pond,const std::string &familia,const Action &acc,const std::string &nmb_coefs_psi,const std::string &subfamilia)
   {
-    ActionContainer *ponderacion_ptr= busca_ponderacion(pond);
+    ActionContainer *ponderacion_ptr= findByName(pond);
     if(!ponderacion_ptr)
       {
         std::cerr << getClassName() << "::" << __FUNCTION__
@@ -141,7 +141,7 @@ size_t cmb_acc::ActionWeightingMap::size(void) const
   { return ponderaciones.size(); }
 
 //! brief Return verdadero si las ponderaciones estan vacías.
-bool cmb_acc::ActionWeightingMap::Vacia(void) const
+bool cmb_acc::ActionWeightingMap::empty(void) const
   { return ponderaciones.empty(); }
 
 cmb_acc::ActionWeightingMap::iterator cmb_acc::ActionWeightingMap::begin(void)
@@ -153,6 +153,14 @@ cmb_acc::ActionWeightingMap::iterator cmb_acc::ActionWeightingMap::end(void)
 cmb_acc::ActionWeightingMap::const_iterator cmb_acc::ActionWeightingMap::end(void) const
   { return ponderaciones.end(); }
 
+//! @brief Return the names of the action weightings.
+boost::python::list cmb_acc::ActionWeightingMap::getKeys(void) const
+  {
+    boost::python::list retval;
+    for(const_iterator i=this->begin();i!=this->end();i++)
+      retval.append((*i).first);
+    return retval;    
+  }
 //! @bried Return las combinaciones correspondientes a todas las ponderaciones.
 cmb_acc::LoadCombinations cmb_acc::ActionWeightingMap::getLoadCombinations(void)
   {

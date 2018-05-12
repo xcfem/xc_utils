@@ -34,26 +34,40 @@
 cmb_acc::ActionsFamily::ActionsFamily(const std::string &nmb,const GammaF &gf)
   : EntConNmb(nmb),gammaf(gf) 
   {
-    acciones.set_owner(this);
+    actions.set_owner(this);
   }
 
 //! @brief Return un apuntador a los coeficientes que aplican para esta familia.
 const cmb_acc::PsiCoeffsMap *cmb_acc::ActionsFamily::getPtrPsiCoeffs(void) const
   {
-    const ActionContainer *tmp= dynamic_cast<const ActionContainer *>(Owner());
+    const cmb_acc::PsiCoeffsMap *retval= nullptr;
+    const EntCmd *owr= Owner();
+    const ActionContainer *tmp= dynamic_cast<const ActionContainer *>(owr);
     if(tmp)
       return tmp->getPtrPsiCoeffs();
     else
       {
-	std::cerr << "ActionsFamily::getPtrPsiCoeffs; no se encontró el objeto propietario de éste." << std::endl;
-        return nullptr;
+	const ActionsFamiliesMap *fMap= dynamic_cast<const ActionsFamiliesMap *>(owr);
+	if(fMap)
+	  {
+	    const ActionContainer *ac= dynamic_cast<const ActionContainer *>(fMap->Owner());
+	    if(ac)
+	      tmp= dynamic_cast<const ActionContainer *>(ac);
+	  }
       }
+    if(tmp)
+      retval= tmp->getPtrPsiCoeffs();
+    else
+      std::cerr << getClassName() << "::" << __FUNCTION__
+ 	        << "; family: '" << getName()
+		<< "' owner not found." << std::endl;
+    return retval;
   }
 
 //! @brief Insert the action argument and sets the "psi" load combination
 //! factors.
 cmb_acc::ActionRValue &cmb_acc::ActionsFamily::insert(const Action &a,const std::string &nmb_coefs_psi)
-  { return acciones.insert(a,nmb_coefs_psi); }
+  { return actions.insert(a,nmb_coefs_psi); }
 
 //! @brief ??
 //!
@@ -65,23 +79,23 @@ cmb_acc::ActionRValue &cmb_acc::ActionsFamily::insert(const Action &a,const std:
 //! @param rr: Valor representativo a emplear para la acción dominante.
 cmb_acc::LoadCombinationVector cmb_acc::ActionsFamily::GetLoadCombinations(const bool &elu,const bool &sit_accidental,short int r,const int &d,const short int &rr) const
   {
-    Variations var= CalculaVariations(elu,sit_accidental,d);
+    Variations var= computeVariations(elu,sit_accidental,d);
     const size_t num_variations= var.size();
     LoadCombinationVector retval(num_variations);
     ActionsFamily *this_no_const= const_cast<ActionsFamily *>(this);
     for(size_t i=0;i<num_variations;i++)
       {
         const Variation &v_i= var[i];
-        retval[i]= acciones.FormaProdEscalar(v_i,r,d,rr);
+        retval[i]= actions.FormaProdEscalar(v_i,r,d,rr);
         retval[i].set_owner(this_no_const);
       }
-    retval= getCompatibles(retval); //Filtramos las que contienen acciones incompatibles.
+    retval= getCompatibles(retval); //Filtramos las que contienen incompatible actions.
     retval= retval.GetDistintas(); //Eliminamos las repetidas.
     return retval;
   }
 
-//! \fn cmb_acc::ActionsFamily::CalculaVariations(const bool &elu,const bool &sit_accidental) const
+//! \fn cmb_acc::ActionsFamily::computeVariations(const bool &elu,const bool &sit_accidental) const
 //! @brief ??
-cmb_acc::Variations cmb_acc::ActionsFamily::CalculaVariations(const bool &elu,const bool &sit_accidental,const int &d) const
-  { return gammaf.calcula_variations(elu,sit_accidental,d,acciones); }
+cmb_acc::Variations cmb_acc::ActionsFamily::computeVariations(const bool &elu,const bool &sit_accidental,const int &d) const
+  { return gammaf.calcula_variations(elu,sit_accidental,d,actions); }
 

@@ -22,8 +22,8 @@
 //ActionWeightingMap.h
 //Contenedor de ponderaciones de acciones.
 
-#ifndef MAPPONDACCIONES_H
-#define MAPPONDACCIONES_H
+#ifndef ACTIONWEIGHTINGMAP_H
+#define ACTIONWEIGHTINGMAP_H
 
 #include "xc_utils/src/nucleo/EntCmd.h"
 #include "xc_utils/src/loadCombinations/coeffs/PsiCoeffsMap.h"
@@ -52,8 +52,6 @@ class ActionWeightingMap: public EntCmd
 
     bool existe(const std::string &nmb) const;
     ActionContainer *crea_ponderacion(const std::string &nmb,const PsiCoeffsMap &coefs= PsiCoeffsMap());
-    ActionContainer *busca_ponderacion(const std::string &nmb);
-    const ActionContainer *busca_ponderacion(const std::string &nmb) const;
     void clear(void);
     void copia(const map_ponderaciones &pond);
   protected:
@@ -65,14 +63,18 @@ class ActionWeightingMap: public EntCmd
     virtual ~ActionWeightingMap(void);
     cmb_acc::ActionContainer *defPonderacion(const std::string &,const PsiCoeffsMap &coefs= PsiCoeffsMap());
 
-    ActionRValue &insert(const std::string &pond,const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
+    ActionRValue &insert(const std::string &pond,const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "default");
 
     size_t size(void) const;
-    bool Vacia(void) const;
+    bool empty(void) const;
     iterator begin(void);
     const_iterator begin(void) const;
     iterator end(void);
     const_iterator end(void) const;
+    boost::python::list getKeys(void) const;    
+    ActionContainer *findByName(const std::string &nmb);
+    const ActionContainer *findByName(const std::string &nmb) const;
+
     LoadCombinations getLoadCombinations(void);
   };
 

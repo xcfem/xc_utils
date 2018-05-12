@@ -36,16 +36,16 @@ namespace cmb_acc{
 class ActionContainer: public EntCmd
   {
   private:
-    ActionsFamily G; //!< Permanent actions.
+    ActionsFamiliesMap G; //!< Permanent actions.
     ActionsFamiliesMap G_aster; //!< Non-constant permanent actions.
-    ActionsFamily Q; //!< Variable actions.
+    ActionsFamiliesMap Q; //!< Variable actions.
     ActionsFamily A; //!< Accidental actions.
     ActionsFamily AS; //!< Earthquake actions.
     PsiCoeffsMap coefs_psi; //!< Coeficientes de simultaneidad de las acciones.
 
     LoadCombinationVector GetLoadCombinationsG(const bool &elu,const bool &sit_accidental) const;
     LoadCombinationVector GetLoadCombinationsG_aster(const bool &elu,const bool &sit_accidental) const;
-    LoadCombinationVector GetLoadCombinationsQ(const bool &elu,const bool &sit_accidental,short int r,int d=-1,short int rr=-1) const;
+    LoadCombinationVector GetLoadCombinationsQ(const bool &elu,const bool &sit_accidental, short int r,int d=-1,short int rr=-1) const;
     LoadCombinationVector GetLoadCombinationsA(short int r,int d=-1,short int rr=-1) const;
     LoadCombinationVector GetLoadCombinationsAS(short int r,int d=-1,short int rr=-1) const;
     LoadCombinationVector GetPermanentes(const bool &elu,const bool &sit_accidental) const;
@@ -58,14 +58,14 @@ class ActionContainer: public EntCmd
     ActionContainer(const PsiCoeffsMap &coefs= PsiCoeffsMap());
     inline virtual ~ActionContainer(void) {}
 
-    ActionRValue &insert(const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "");
+    ActionRValue &insert(const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "default");
 
-    const ActionsFamily &getPermanentActions(void) const;
-    void setPermanentActions(const ActionsFamily &);
+    const ActionsFamiliesMap &getPermanentActions(void) const;
+    void setPermanentActions(const ActionsFamiliesMap &);
     const ActionsFamiliesMap &getPermanentActionsNC(void) const;
     void setPermanentActionsNC(const ActionsFamiliesMap &);
-    const ActionsFamily &getVariableActions(void) const;
-    void setVariableActions(const ActionsFamily &);
+    const ActionsFamiliesMap &getVariableActions(void) const;
+    void setVariableActions(const ActionsFamiliesMap &);
     const ActionsFamily &getAccidentalActions(void) const;
     void setAccidentalActions(const ActionsFamily &);
     const ActionsFamily &getSeismicActions(void) const;

@@ -35,16 +35,23 @@ namespace cmb_acc{
 class PsiCoeffs: public EntCmd
   {
   private:
-    double psi_0; //!< Coeficiente de simultaneidad para obtener el valor de combinación.
-    double psi_1; //!< Coeficiente de simultaneidad para obtener el valor frecuente.
-    double psi_2; //!< Coeficiente de sumultaneidad para obtener el valor cuasipermanente.
+    float psi_0; //!< Coeficiente de simultaneidad para obtener el valor de combinación.
+    float psi_1; //!< Coeficiente de simultaneidad para obtener el valor frecuente.
+    float psi_2; //!< Coeficiente de sumultaneidad para obtener el valor cuasipermanente.
   public:
     //! @brief Constructor por defecto.
-    PsiCoeffs(const double &p0= 1.0, const double &p1= 1.0, const double &p2= 1.0)
+    PsiCoeffs(const float &p0= 1.0, const float &p1= 1.0, const float &p2= 1.0)
       : EntCmd(),psi_0(p0), psi_1(p1), psi_2(p2) {}
     //! @brief Constructor de copia.
-    const double &getPsi(short int r) const;
+    const float &getPsi(short int r) const;
+    void Print(std::ostream &os) const;
   };
+
+ inline std::ostream &operator<<(std::ostream &os, const PsiCoeffs &cf)
+  {
+    cf.Print(os);
+    return os;
+  }
 
 } //fin namespace nmb_acc.
 

@@ -42,6 +42,9 @@ cmb_acc::Variation cmb_acc::GammaFELS::Coefs(void) const
     return retval;
   }
 
+void cmb_acc::GammaFELS::Print(std::ostream &os) const
+  { os << "favourable: " << gamma_f_fav << ", unfavourable: " << gamma_f_desfav; }
+
 cmb_acc::GammaFELU::GammaFELU(const float &fav,const float &desfav,const float &fav_acc,const float &desfav_acc)
   : GammaFELS(fav,desfav), gamma_f_fav_acc(fav_acc), gamma_f_desfav_acc(desfav_acc) {}
 
@@ -59,6 +62,14 @@ cmb_acc::Variation cmb_acc::GammaFELU::CoefsAcc(void) const
     retval[0]= gamma_f_fav_acc; //Favorable.
     retval[1]= gamma_f_desfav_acc; //Desfavorable.
     return retval;
+  }
+
+//! @brief Print stuff.
+void cmb_acc::GammaFELU::Print(std::ostream &os) const
+  {
+    GammaFELS::Print(os);
+    os << ", favourable (accidental): " << gamma_f_fav_acc
+       << ", unfavourable (accidental): " << gamma_f_desfav_acc;
   }
 
 //! @brief Constructor
@@ -89,4 +100,11 @@ cmb_acc::Variations cmb_acc::GammaF::calcula_variations(const bool &elu,const bo
     else
       retval= Variations::Calcula(gammaf_els.Coefs(),d,lvr);
     return retval;
+  }
+
+//! @brief Print stuff.
+void cmb_acc::GammaF::Print(std::ostream &os) const
+  {
+    os << " SLS: " << gammaf_els
+       << " ULS: " << gammaf_elu;
   }

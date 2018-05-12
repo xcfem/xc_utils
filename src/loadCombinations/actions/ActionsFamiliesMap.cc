@@ -30,22 +30,22 @@
 
 
 //! @brief Return verdadero si la familia existe.
-bool cmb_acc::ActionsFamiliesMap::existe(const std::string &nmb) const
-  { return (familias.find(nmb)!=familias.end()); }
+bool cmb_acc::ActionsFamiliesMap::existe(const std::string &actionsFamilyName) const
+  { return (familias.find(actionsFamilyName)!=familias.end()); }
 
 //! @brief Return un puntero a la familia cuyo nombre se pasa como parámetro.
-cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::busca_familia_acc(const std::string &nmb)
+cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::getActionsFamily(const std::string &actionsFamilyName)
   {
-    if(existe(nmb))
-      return familias[nmb];
+    if(existe(actionsFamilyName))
+      return familias[actionsFamilyName];
     else
       return nullptr;
   }
 
 //! @brief Return un puntero a la familia cuyo nombre se pasa como parámetro.
-const cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::busca_familia_acc(const std::string &nmb) const
+const cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::getActionsFamily(const std::string &actionsFamilyName) const
   {
-    const_iterator i= familias.find(nmb);
+    const_iterator i= familias.find(actionsFamilyName);
     if(i!= familias.end())
       return (*i).second;
     else
@@ -53,14 +53,16 @@ const cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::busca_familia_acc(con
   }
 
 //! @brief Insert the action in the family.
-cmb_acc::ActionRValue &cmb_acc::ActionsFamiliesMap::insert(const std::string &familia,const Action &acc,const std::string &nmb_coefs_psi)
+cmb_acc::ActionRValue &cmb_acc::ActionsFamiliesMap::insert(const std::string &familyName,const Action &acc,const std::string &nmb_coefs_psi)
   {
-    ActionsFamily *familia_ptr= busca_familia_acc(familia);
+    ActionsFamily *familia_ptr= getActionsFamily("default");
+    if(!familyName.empty())
+      familia_ptr= getActionsFamily(familyName);
     if(!familia_ptr)
       {
         std::cerr << getClassName() << "::" << __FUNCTION__
 		  << "; family: '"
-                  << familia << "' not found.\n";
+                  << familyName << "' not found.\n";
         const_iterator i= familias.begin();
         familia_ptr= (*i).second;
       }
@@ -68,27 +70,34 @@ cmb_acc::ActionRValue &cmb_acc::ActionsFamiliesMap::insert(const std::string &fa
   }
 
 //! @brief Crea una nueva familia con el nombre que se le pasa como parámetro.
-cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::crea_familia_acc(const std::string &nmb)
+cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::newActionsFamily(const std::string &actionsFamilyName,const GammaF &defaultGF)
   {
     ActionsFamily *tmp =nullptr;
-    if(!existe(nmb)) //la familia es nuevo.
+    if(!existe(actionsFamilyName)) //new family.
       {
-        tmp= new ActionsFamily(nmb,GammaF(GammaFELU(1.0,1.6,1.0,1.0),GammaFELS(0.9,1.1)));//Partial safety factors por defecto 
-                                                                                            //para acciones permanentes de valor no constante.
-        familias[nmb]= tmp;
+        tmp= new ActionsFamily(actionsFamilyName,defaultGF);//Default partial safety factors por defecto
+	tmp->set_owner(this);
+        familias[actionsFamilyName]= tmp;
       }
     else //la familia existe
-      tmp= busca_familia_acc(nmb);
+      tmp= getActionsFamily(actionsFamilyName);
     return tmp;
   }
 
 //! @brief Constructor por defecto.
-cmb_acc::ActionsFamiliesMap::ActionsFamiliesMap(const std::string &nmb)
-  : EntConNmb(nmb) {}
+cmb_acc::ActionsFamiliesMap::ActionsFamiliesMap(const std::string &name, const GammaF &defaultGF)
+  : EntConNmb(name)
+  {
+    newActionsFamily("default");
+  }
 
 //! @brief Constructor de copia (NO COPIA LAS FAMILIAS).
 cmb_acc::ActionsFamiliesMap::ActionsFamiliesMap(const ActionsFamiliesMap &otro)
-  : EntConNmb(otro){}
+  : EntConNmb(otro)
+  {
+    std::cerr << getClassName() << "::" << __FUNCTION__
+              << "; must not be called." << std::endl;
+  }
 
 //! @brief Operador asignación (NO COPIA LAS FAMILIAS).
 cmb_acc::ActionsFamiliesMap &cmb_acc::ActionsFamiliesMap::operator=(const ActionsFamiliesMap &otro)
@@ -105,7 +114,8 @@ const cmb_acc::PsiCoeffsMap *cmb_acc::ActionsFamiliesMap::getPtrPsiCoeffs(void) 
       return tmp->getPtrPsiCoeffs();
     else
       {
-	std::cerr << "ActionsFamiliesMap::getPtrPsiCoeffs; no se encontró el objeto propietario de éste." << std::endl;
+	std::cerr << getClassName() << "::" << __FUNCTION__
+		  << "; owner not found." << std::endl;
         return nullptr;
       }
   }
@@ -127,6 +137,15 @@ cmb_acc::ActionsFamiliesMap::~ActionsFamiliesMap(void)
     clear();
   }
 
+//! @brief Return the names of the action families.
+boost::python::list cmb_acc::ActionsFamiliesMap::getKeys(void) const
+  {
+    boost::python::list retval;
+    for(const_iterator i=this->begin();i!=this->end();i++)
+      retval.append((*i).first);
+    return retval;    
+  }
+
 //! @brief Return el número de acciones de todas las familias.
 size_t cmb_acc::ActionsFamiliesMap::getNumActions(void) const
   { 
@@ -142,7 +161,7 @@ size_t cmb_acc::ActionsFamiliesMap::getNumActions(void) const
   }
 
 //! brief Return verdadero si las familias estan vacías.
-bool cmb_acc::ActionsFamiliesMap::Vacia(void) const
+bool cmb_acc::ActionsFamiliesMap::empty(void) const
   {
     bool retval= true;
     if(!familias.empty())
@@ -151,7 +170,7 @@ bool cmb_acc::ActionsFamiliesMap::Vacia(void) const
           ActionsFamily *familia= (*i).second;
           if(familia)
             {
-              if(!familia->Vacia()) //La familia contiene acciones.
+              if(!familia->empty()) //La familia contiene acciones.
                 {
                   retval= false;
                   break;
@@ -162,7 +181,7 @@ bool cmb_acc::ActionsFamiliesMap::Vacia(void) const
   }
 
 
-//! @brief Return las combinaciones correspondientes a acciones permanentes de valor no constante.
+//! @brief Return the combinations for the non-constant permanent actions.
 //! @param elu: Verdadero si las combinaciones corresponden a estados límite últimos.
 //! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
 cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::GetLoadCombinations(const bool &elu,const bool &sit_accidental) const
@@ -172,10 +191,37 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::GetLoadCombinations(
       {
         ActionsFamily *familia= (*i).second;
         assert(familia);
-        if(!familia->Vacia()) //La familia contiene acciones.
+        if(!familia->empty()) //La familia contiene acciones.
           {
             LoadCombinationVector SG_aster= familia->GetLoadCombinations(elu,sit_accidental,-1);//Las permanentes siempre con characteristic value.
             retval= LoadCombinationVector::ProdCartesiano(retval,SG_aster,Action::zero);
+          }
+      }
+    retval= getCompatibles(retval); //Filtramos las que contienen acciones incompatibles.
+    return retval;
+  }
+
+//! @brief Return the combinations for the non permanent actions.
+//! @param elu: Verdadero si las combinaciones corresponden a estados límite últimos.
+//! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
+//! @param r: Valor representativo a emplear para el caso general.
+//! - r= -1 -> characteristic value.
+//! - r= 0 -> valor de combinación.
+//! - r= 1 -> valor frecuente.
+//! - r= 2 -> valor cuasipermanente.
+//! @param d: Índice de la acción determinante (si no hay acción determinante d=-1).
+//! @param rr: Valor representativo a emplear para la acción determinante.
+cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::GetLoadCombinations(const bool &elu,const bool &sit_accidental,short int r,const int &d,const short int &rr) const
+  {
+    LoadCombinationVector retval;
+    for(const_iterator i= familias.begin();i!=familias.end();i++)
+      {
+        ActionsFamily *familia= (*i).second;
+        assert(familia);
+        if(!familia->empty()) //La familia contiene acciones.
+          {
+            LoadCombinationVector tmp= familia->GetLoadCombinations(elu,sit_accidental,r,d,rr);
+            retval= LoadCombinationVector::ProdCartesiano(retval,tmp,Action::zero);
           }
       }
     retval= getCompatibles(retval); //Filtramos las que contienen acciones incompatibles.

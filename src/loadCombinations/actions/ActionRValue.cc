@@ -48,9 +48,14 @@ void cmb_acc::ActionRValue::setPsiCoeffs(const std::string &nmb_coefs)
         if(acc_familia)
           tmp= acc_familia->getPtrPsiCoeffs()->getPtrCoefs(nmb_coefs);
         else
-          std::cerr << "ActionRValue::setPsiCoeffs; el puntero a la familia de acciones no está asignado." << std::endl;
+          std::cerr << getClassName() << "::" << __FUNCTION__
+	            << "; pointer to actions family not set." << std::endl;
         if(tmp)
            coefs_psi= tmp;
+	else
+          std::cerr << getClassName() << "::" << __FUNCTION__
+	            << "; psi factors with name: '" << nmb_coefs
+	            << "' not found." << std::endl;	  
       }
   }
 
@@ -79,4 +84,12 @@ cmb_acc::Action cmb_acc::ActionRValue::Valor(short int r) const
         break;
       }
     return retval;
+  }
+
+//! @brief Print stuff.
+void cmb_acc::ActionRValue::Print(std::ostream &os) const
+  {
+    Action::Print(os);
+    if(coefs_psi)
+      os << "; " << *coefs_psi;
   }

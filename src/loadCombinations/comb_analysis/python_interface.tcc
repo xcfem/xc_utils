@@ -26,6 +26,16 @@ class_<v_accion >("v_accion")
   .def(vector_indexing_suite<v_accion >())
  ;
 
+const ActionContainer *(ActionWeightingMap::*findActionContainerByName)(const std::string &) const= &ActionWeightingMap::findByName;
+ActionWeightingMap::const_iterator (ActionWeightingMap::*awMapBegin)(void) const= &ActionWeightingMap::begin;
+ActionWeightingMap::const_iterator (ActionWeightingMap::*awMapEnd)(void) const= &ActionWeightingMap::end;
+class_<ActionWeightingMap, bases<EntConNmb>, boost::noncopyable >("ActionWeightingMap", no_init)
+  .def("getKeys", &ActionWeightingMap::getKeys,"Returns load case names")
+  .def("__len__",&ActionWeightingMap::size)
+  .def("__getitem__",findActionContainerByName, return_value_policy<reference_existing_object>())
+  .def("__iter__",range(awMapBegin, awMapEnd))
+  ;
+
 class_<LoadCombinationVector, bases<v_accion,EntCmd> >("LoadCombContainer")
   ;
 

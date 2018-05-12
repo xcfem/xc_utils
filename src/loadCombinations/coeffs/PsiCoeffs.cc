@@ -24,7 +24,7 @@
 #include "PsiCoeffs.h"
 
 //! @brief Return el coeficiente cuyo índice se pasa como parámetro.
-const double &cmb_acc::PsiCoeffs::getPsi(short int r) const
+const float &cmb_acc::PsiCoeffs::getPsi(short int r) const
   {
     switch(r)
       {
@@ -38,4 +38,11 @@ const double &cmb_acc::PsiCoeffs::getPsi(short int r) const
 	std::cerr << "cmb_acc::PsiCoeffs::getPsi índice: " << r << " fuera de rango (0..2)." << std::endl;
         return psi_0;
       }
+  }
+
+void cmb_acc::PsiCoeffs::Print(std::ostream &os) const
+  {
+    os << "psi_0= " << psi_0
+       << ", psi_1= " <<  psi_1
+       << ", psi_2= " << psi_2;
   }

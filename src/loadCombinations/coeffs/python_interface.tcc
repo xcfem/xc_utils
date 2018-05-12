@@ -24,7 +24,9 @@
 class_<cmb_acc::GammaFELS, bases<EntCmd> >("GammaFELS")
   .def(init<float, float>())
   .add_property("favorable", &cmb_acc::GammaFELS::getFavorable, &cmb_acc::GammaFELS::setFavorable)
-  .add_property("desfavorable", &cmb_acc::GammaFELS::getDesfavorable, &cmb_acc::GammaFELS::setDesfavorable);
+  .add_property("desfavorable", &cmb_acc::GammaFELS::getDesfavorable, &cmb_acc::GammaFELS::setDesfavorable)
+  .def(self_ns::str(self_ns::self))
+  ;
 
 class_<GammaFELU, bases<GammaFELS> >("GammaFELU")
   .def(init<float, float,float,float>())
@@ -34,7 +36,9 @@ class_<GammaFELU, bases<GammaFELS> >("GammaFELU")
 class_<GammaF, bases<EntCmd> >("GammaF")
   .def(init<GammaFELU, GammaFELS>())
   .add_property("getGammaFELU", make_function( &GammaF::getGammaFELU, return_internal_reference<>() ))
-  .add_property("getGammaFELS", make_function( &GammaF::getGammaFELS, return_internal_reference<>() ));
+  .add_property("getGammaFELS", make_function( &GammaF::getGammaFELS, return_internal_reference<>() ))
+  .def(self_ns::str(self_ns::self))
+  ;
 
 class_<PsiCoeffs, bases<EntCmd> >("PsiCoeffs")
   .def(init<double, double, double>())

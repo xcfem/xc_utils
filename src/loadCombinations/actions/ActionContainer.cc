@@ -24,16 +24,25 @@
 #include "ActionContainer.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
 
+//Default partial safety factors
+
+//for permanent actions
+cmb_acc::GammaF defaultG(cmb_acc::GammaFELU(1.0,1.5,1.0,1.0),cmb_acc::GammaFELS(1.0,1.0)); 
+//for variable actions
+cmb_acc::GammaF defaultQ(cmb_acc::GammaFELU(0.0,1.6,0.0,1.0),cmb_acc::GammaFELS(0.0,1.0));
+//for accidental actions
+cmb_acc::GammaF defaultA(cmb_acc::GammaFELU(0.0,0.0,1.0,1.0));
+//for seismic actions
+cmb_acc::GammaF defaultS(cmb_acc::GammaFELU(0.0,0.0,1.0,1.0));
 
 //! \fn cmb_acc::ActionContainer::ActionContainer(void)
 //! @brief Constructor por defecto.
 cmb_acc::ActionContainer::ActionContainer(const PsiCoeffsMap &coefs)
-  : G("Permanentes",GammaF(GammaFELU(1.0,1.5,1.0,1.0),GammaFELS(1.0,1.0))), //Partial safety factors por defecto 
-                                                                            //para acciones permanentes.
-    G_aster("Permanentes val. no cte."), 
-    Q("Variables",GammaF(GammaFELU(0.0,1.6,0.0,1.0),GammaFELS(0.0,1.0))),
-    A("Accidentales",GammaF(GammaFELU(0.0,0.0,1.0,1.0))),
-    AS("Sísmicas",GammaF(GammaFELU(0.0,0.0,1.0,1.0))),
+  : G("Permanentes",defaultG), 
+    G_aster("Permanentes val. no cte.",defaultG), 
+    Q("Variables",defaultQ),
+    A("Accidentales",defaultA),
+    AS("Sísmicas",defaultS),
     coefs_psi(coefs)
   {
     G.set_owner(this);
@@ -47,11 +56,11 @@ cmb_acc::ActionContainer::ActionContainer(const PsiCoeffsMap &coefs)
 cmb_acc::ActionRValue &cmb_acc::ActionContainer::insert(const std::string &familia,const Action &acc,const std::string &nmb_coefs_psi,const std::string &subfamilia)
   {
     if(familia=="permanentes")
-      return G.insert(acc,nmb_coefs_psi);
+      return G.insert(subfamilia,acc,nmb_coefs_psi);
     else if(familia=="permanentes_nc")
       return G_aster.insert(subfamilia,acc,nmb_coefs_psi);
     else if(familia=="variables")
-      return Q.insert(acc,nmb_coefs_psi);
+      return Q.insert(subfamilia,acc,nmb_coefs_psi);
     else if(familia=="accidentales")
       return A.insert(acc,nmb_coefs_psi);
     else if(familia=="sismicas")
@@ -61,16 +70,16 @@ cmb_acc::ActionRValue &cmb_acc::ActionContainer::insert(const std::string &famil
         std::cerr << getClassName() << "::" << __FUNCTION__
 	          << "; load family: '"
                   << familia << "' not found. Added to variable loads.\n";
-        return Q.insert(acc,nmb_coefs_psi);
+        return Q.insert(subfamilia,acc,nmb_coefs_psi);
       }
   }
 
 //! @brief Return el conjunto de acciones permanentes.
-const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getPermanentActions(void) const
+const cmb_acc::ActionsFamiliesMap &cmb_acc::ActionContainer::getPermanentActions(void) const
   { return G; }
 
 //! @brief Asigna el conjunto de acciones permanentes.
-void cmb_acc::ActionContainer::setPermanentActions(const ActionsFamily &g)
+void cmb_acc::ActionContainer::setPermanentActions(const ActionsFamiliesMap &g)
   { G= g; }
 
 //! @brief Return el conjunto de acciones permanentes de valor no constante.
@@ -82,11 +91,11 @@ void cmb_acc::ActionContainer::setPermanentActionsNC(const ActionsFamiliesMap &m
   { G_aster= mfa; }
 
 //! @brief Return el conjunto de acciones variables.
-const cmb_acc::ActionsFamily &cmb_acc::ActionContainer::getVariableActions(void) const
+const cmb_acc::ActionsFamiliesMap &cmb_acc::ActionContainer::getVariableActions(void) const
   { return Q; }
 
 //! @brief Return el conjunto de acciones variables.
-void cmb_acc::ActionContainer::setVariableActions(const ActionsFamily &fa)
+void cmb_acc::ActionContainer::setVariableActions(const ActionsFamiliesMap &fa)
   { Q= fa; }
 
 //! @brief Return el conjunto de acciones accidentales.
@@ -164,11 +173,11 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetLoadCombinationsAS(s
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPermanentes(const bool &elu,const bool &sit_accidental) const
   {
     LoadCombinationVector retval;
-    if(!G.Vacia()) //Hay acciones permanentes.
+    if(!G.empty()) //Hay acciones permanentes.
       {
         retval= GetLoadCombinationsG(elu,sit_accidental);
       }
-    if(!G_aster.Vacia()) //Hay acciones permanentes de valor no constante.
+    if(!G_aster.empty()) //Hay acciones permanentes de valor no constante.
       {
         const LoadCombinationVector SG_aster= GetLoadCombinationsG_aster(elu,sit_accidental);
         retval= LoadCombinationVector::ProdCartesiano(retval,SG_aster,Action::zero);
@@ -187,7 +196,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPermanentes(const bo
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetVariables(const LoadCombinationVector &permanentes,const bool &elu,const bool &sit_accidental,const short int &v) const
   {
     LoadCombinationVector retval; //Inicializa con acciones permanentes.
-    if(!Q.Vacia()) //Hay acciones variables.
+    if(!Q.empty()) //Hay acciones variables.
       {
         const size_t nq= Q.getNumActions();
         LoadCombinationVector SQ;
@@ -216,7 +225,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetVariables(const Load
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccSis(const LoadCombinationVector &previas,const ActionsFamily &Acc) const
   {
     LoadCombinationVector retval(previas);
-    if(!Acc.Vacia()) //Existen acciones accidentales o sísmicas.
+    if(!Acc.empty()) //Existen acciones accidentales o sísmicas.
       {
         const size_t na= Acc.getNumActions();
         LoadCombinationVector SA;
@@ -258,7 +267,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPersistentesOTransit
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccidentales(void) const
   {
     LoadCombinationVector retval;
-    if(A.Vacia()) return retval; //No hay acciones accidentales.
+    if(A.empty()) return retval; //No hay acciones accidentales.
     if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para ELU en situaciones accidentales..." << std::endl;
     if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
     retval= GetPermanentes(true,true); //ELU, situación accidental.
@@ -283,13 +292,13 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccidentales(void) c
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetSismicas(void) const
   {
     LoadCombinationVector retval;
-    if(AS.Vacia()) return retval; //No hay acciones sismicas.
+    if(AS.empty()) return retval; //No hay acciones sismicas.
     if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para ELU en situaciones sísmicas..." << std::endl;
     if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
     retval= GetPermanentes(true,true); //ELU, situación accidental.
     if(verbosity>1) std::clog << "hecho." << std::endl;
     if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
-    if(!Q.Vacia()) //Hay acciones variables.
+    if(!Q.empty()) //Hay acciones variables.
       {
         LoadCombinationVector SQ= GetLoadCombinationsQ(true,true,2); //ELU, todas con valor cuasipermanente.
         retval= LoadCombinationVector::ProdCartesiano(retval,SQ,Action::zero);

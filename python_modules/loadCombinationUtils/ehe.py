@@ -42,7 +42,7 @@ gammaf_accidentales_EHE_ctr_intenso= loadCombinations.GammaF(loadCombinations.Ga
 
 intenseControlCombGenerator= loadCombinations.LoadCombGenerator()
 pond= intenseControlCombGenerator.defPonderacion("EHEIntenso",coefs_psi_EHE)
-pond.permanentActions.gammaF= gammaf_permanentes_EHE_ctr_intenso
-pond.variableActions.gammaF= gammaf_variables_EHE_ctr_intenso
+pond.permanentActions['default'].gammaF= gammaf_permanentes_EHE_ctr_intenso
+pond.variableActions['default'].gammaF= gammaf_variables_EHE_ctr_intenso
 pond.accidentalActions.gammaF= gammaf_accidentales_EHE_ctr_intenso
 pond.seismicActions.gammaF= gammaf_sismicas_EHE_ctr_intenso

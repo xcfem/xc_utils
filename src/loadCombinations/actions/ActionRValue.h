@@ -52,6 +52,7 @@ class ActionRValue: public Action
   public:
     Action Valor(short int r) const;
     void setPsiCoeffs(const std::string &);
+    void Print(std::ostream &os) const;    
   };
 
 } //fin namespace nmb_acc.

@@ -27,6 +27,7 @@
 
 #include "xc_utils/src/nucleo/EntConNmb.h"
 #include <map>
+#include "xc_utils/src/loadCombinations/coeffs/GammaF.h"
 
 
 namespace cmb_acc {
@@ -51,22 +52,38 @@ class ActionsFamiliesMap: public EntConNmb
   private:
     map_familias familias; //!< Conjunto de familias.
 
-    bool existe(const std::string &nmb) const;
-    ActionsFamily *crea_familia_acc(const std::string &nmb);
-    ActionsFamily *busca_familia_acc(const std::string &nmb);
-    const ActionsFamily *busca_familia_acc(const std::string &nmb) const;
+    bool existe(const std::string &) const;
     void clear(void);
     ActionsFamiliesMap(const ActionsFamiliesMap &otro);
     ActionsFamiliesMap &operator=(const ActionsFamiliesMap &otro);
   protected:
     friend class ActionContainer;
   public:
-    ActionsFamiliesMap(const std::string &nmb);
+    ActionsFamiliesMap(const std::string &,const GammaF &defaultGF= GammaF());
     ActionRValue &insert(const std::string &,const Action &,const std::string &nmb_coefs_psi="");
+    
+    ActionsFamily *getActionsFamily(const std::string &);
+    const ActionsFamily *getActionsFamily(const std::string &)const;
+    ActionsFamily *newActionsFamily(const std::string &, const GammaF &defaultGF= GammaF());
+    boost::python::list getKeys(void) const;    
+
     LoadCombinationVector GetLoadCombinations(const bool &elu,const bool &sit_accidental) const;
+    LoadCombinationVector GetLoadCombinations(const bool &elu,const bool &sit_accidental,short int r,const int &d=-1,const short int &rr=-1) const;
     size_t getNumActions(void) const;
     const PsiCoeffsMap *getPtrPsiCoeffs(void) const;
-    bool Vacia(void) const;
+    
+    const_iterator begin(void) const
+      { return familias.begin(); }
+    const_iterator end(void) const
+      { return familias.end(); }
+    iterator begin(void)
+      { return familias.begin(); }
+    iterator end(void)
+      { return familias.end(); }
+    size_t size(void) const
+      { return familias.size(); }
+    bool empty(void) const;
+    
     virtual ~ActionsFamiliesMap(void);
   };
 } // fin namespace cmb_acc

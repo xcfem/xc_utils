@@ -202,10 +202,10 @@ std::string cmb_acc::Action::ListaStrIncompatibles(ActionRValueList *af) const
     return retval; 
   }
 
-
+//! @brief Print stuff.
 void cmb_acc::Action::Print(std::ostream &os) const
   {
-    os << getName();
+    os << getName() << "; '" << descripcion << "'; ";
     relaciones.Print(os);
   }
 

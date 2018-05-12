@@ -59,8 +59,15 @@ class GammaFELS: public EntCmd
       { return gamma_f_desfav; }
     inline void setDesfavorable(const float &f)
       { gamma_f_desfav= f; }
+    virtual void Print(std::ostream &os) const;
   };
-
+ 
+inline std::ostream &operator<<(std::ostream &os, const GammaFELS &g)
+  {
+    g.Print(os);
+    return os;
+  }
+ 
 //! @brief Partial safety factors de una familia de acciones (permanentes, variables,...), en estados límite últimos .
 class GammaFELU: public GammaFELS
   {
@@ -86,6 +93,7 @@ class GammaFELU: public GammaFELS
       { return gamma_f_desfav_acc; }
     inline void setDesfavorableAccidental(const float &f)
       { gamma_f_desfav_acc= f; }
+    virtual void Print(std::ostream &os) const;
   };
 
 //! @brief Partial safety factors de una familia de acciones en ELS y ELU.
@@ -104,7 +112,14 @@ class GammaF: public EntCmd
       { return gammaf_els; }
     //! @brief Return the partial safety factors correspondientes a estado límite de servicio.
     Variations calcula_variations(const bool &elu,const bool &sit_accidental,const int &d,const ActionRValueList &) const;
+    virtual void Print(std::ostream &os) const;
   };
+
+inline std::ostream &operator<<(std::ostream &os, const GammaF &g)
+  {
+    g.Print(os);
+    return os;
+  }
 
 } //fin namespace nmb_acc.
 

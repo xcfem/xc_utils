@@ -78,9 +78,12 @@ coefs_psi_IAP11.insert("por_defecto",loadCombinations.PsiCoeffs(0.7,0.7,0.6))
 
 # Está apañado para un caso concreto . NECESITA REVISIÓN EN EL CASO GENERAL
 controlCombGenerator= loadCombinations.LoadCombGenerator()
-pond= controlCombGenerator.defPonderacion("IAP11",coefs_psi_IAP11)
-pond.permanentActions.gammaF= gammaf_permanentes_IAP11
-#pond.ncPermanentActions=gammaf_permanentes_nc_Terr_IAP11
-pond.variableActions.gammaF= gammaf_variables_SCuso_IAP11
-pond.accidentalActions.gammaF= gammaf_accidentales_IAP11
-#pond.seismicActions.gammaF= gammaf_sismicas_EHE_ctr_intenso
+actionWeighting= controlCombGenerator.defPonderacion("IAP11",coefs_psi_IAP11)
+#No need to define a new family, we change the default gamma_f values for the 'default' family.
+actionWeighting.permanentActions['default'].gammaF= gammaf_permanentes_IAP11 #Partial safety factors for permanent actions.
+
+actionWeighting.ncPermanentActions.newActionsFamily('nc_Terr', gammaf_permanentes_nc_Terr_IAP11) #Partial safety factors for non-constant permanent actions.
+actionWeighting.variableActions.newActionsFamily('SCuso',gammaf_variables_SCuso_IAP11)
+actionWeighting.variableActions.newActionsFamily('climatica',gammaf_variables_climatica_IAP11)
+actionWeighting.accidentalActions.gammaF= gammaf_accidentales_IAP11
+#actionWeighting.seismicActions.gammaF= gammaf_sismicas_EHE_ctr_intenso
