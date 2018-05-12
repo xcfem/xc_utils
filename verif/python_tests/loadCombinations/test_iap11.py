@@ -10,7 +10,7 @@ lcg= iap11.controlCombGenerator
 
 G1= lcg.insert("IAP11","permanentes",loadCombinations.Action("G1", "Peso propio"),"permanente","default")
 G2= lcg.insert("IAP11","permanentes",loadCombinations.Action("G2", "Carga muerta"),"permanente","default")
-G3= lcg.insert("IAP11","permanentes",loadCombinations.Action("G3", "Retracc."),"permanente","")
+G3= lcg.insert("IAP11","permanentes",loadCombinations.Action("G3", "Retracc."),"permanente","default")
 Q1a_1= lcg.insert("IAP11","variables",loadCombinations.Action("Q1a_1", "Tren cargas pos. 1a_1"),"vehículos_pesados","SCuso")
 Q1a_2= lcg.insert("IAP11","variables",loadCombinations.Action("Q1a_2", "Tren cargas pos. 1a_2"),"vehículos_pesados","SCuso")
 
