@@ -19,30 +19,28 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//CombinationFactorsMap.h
+//PartialSafetyFactorsMap.h
 //Contenedor de coeficientes de simultaneidad de acciones.
 
-#ifndef COMBINATIONFACTORSMAP_H
-#define COMBINATIONFACTORSMAP_H
+#ifndef PARTIALSAFETYFACTORSMAP_H
+#define PARTIALSAFETYFACTORSMAP_H
 
 #include "xc_utils/src/nucleo/EntCmd.h"
-#include "CombinationFactors.h"
+#include "PartialSafetyFactors.h"
 #include "FactorsMap.h"
 
 
 namespace cmb_acc {
 
-class LoadCombinationVector;
-
 //! @ingroup CMBACC
 //
 //! @brief Contenedor de coeficientes de simultaneidad de acciones.
-class CombinationFactorsMap: public FactorsMap<CombinationFactors>
+class PartialSafetyFactorsMap: public FactorsMap<PartialSafetyFactors>
   {
   private:
     friend class ActionContainer;
   public:
-    CombinationFactorsMap(void);
+    PartialSafetyFactorsMap(void);
   };
 } // fin namespace cmb_acc
 

@@ -4,15 +4,15 @@ import xc_base
 import loadCombinations
 
 #Coeficientes de ponderación para acciones permanentes.
-gammaf_permanentes_EAE= loadCombinations.GammaF(loadCombinations.GammaFULS(1,1.35,1,1),loadCombinations.GammaFSLS(1,1))
+partial_safety_factors_permanentes_EAE= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(1,1.35,1,1),loadCombinations.SLSPartialSafetyFactors(1,1))
 #Coeficientes de ponderación para acciones permanentes de valor no constante.
-gammaf_permanentes_nc_EAE= loadCombinations.GammaF(loadCombinations.GammaFULS(1,1.5,1,1),loadCombinations.GammaFSLS(1,1))
+partial_safety_factors_permanentes_nc_EAE= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(1,1.5,1,1),loadCombinations.SLSPartialSafetyFactors(1,1))
 #Coeficientes de ponderación para acciones variables.
-gammaf_variables_EAE= loadCombinations.GammaF(loadCombinations.GammaFULS(0,1.5,0,1),loadCombinations.GammaFSLS(0,1))
+partial_safety_factors_variables_EAE= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0,1.5,0,1),loadCombinations.SLSPartialSafetyFactors(0,1))
 #Coeficientes de ponderación para acciones sísmicas.
-gammaf_sismicas_EAE= loadCombinations.GammaF(loadCombinations.GammaFULS(0,1,1,1),loadCombinations.GammaFSLS(0,0))
+partial_safety_factors_sismicas_EAE= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0,1,1,1),loadCombinations.SLSPartialSafetyFactors(0,0))
 #Coeficientes de ponderación para acciones accidentales.
-gammaf_accidentales_EAE= loadCombinations.GammaF(loadCombinations.GammaFULS(0,0,1,1),loadCombinations.GammaFSLS(0,0))
+partial_safety_factors_accidentales_EAE= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0,0,1,1),loadCombinations.SLSPartialSafetyFactors(0,0))
 
 combination_factors_EAE= loadCombinations.CombinationFactorsDict()
 

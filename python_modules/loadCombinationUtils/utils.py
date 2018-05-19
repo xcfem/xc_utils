@@ -8,13 +8,13 @@ def listActionGroup(actionGroup):
     for familyName in actionGroup.getKeys():
         print '    actions family: ', familyName
         actionFamily= actionGroup[familyName]
-        print '      partial safety factors: ', actionFamily.gammaF
+        print '      partial safety factors: ', actionFamily.partial_safety_factors
         for a in actionFamily.actions:
           print '     ', a
 
 def listActionFamily(actionFamily):
     '''List the defined actions in a family.'''
-    print '    partial safety factors: ', actionFamily.gammaF
+    print '    partial safety factors: ', actionFamily.partial_safety_factors
     actions= actionFamily.actions
     for a in actions:
         print '     ', a

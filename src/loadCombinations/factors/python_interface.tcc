@@ -21,24 +21,29 @@
 //----------------------------------------------------------------------------
 //python_interface.tcc
 
-class_<cmb_acc::GammaFSLS, bases<EntCmd> >("GammaFSLS")
+class_<cmb_acc::SLSPartialSafetyFactors, bases<EntCmd> >("SLSPartialSafetyFactors")
   .def(init<float, float>())
-  .add_property("favorable", &cmb_acc::GammaFSLS::getFavorable, &cmb_acc::GammaFSLS::setFavorable)
-  .add_property("desfavorable", &cmb_acc::GammaFSLS::getDesfavorable, &cmb_acc::GammaFSLS::setDesfavorable)
+  .add_property("favorable", &cmb_acc::SLSPartialSafetyFactors::getFavorable, &cmb_acc::SLSPartialSafetyFactors::setFavorable)
+  .add_property("desfavorable", &cmb_acc::SLSPartialSafetyFactors::getDesfavorable, &cmb_acc::SLSPartialSafetyFactors::setDesfavorable)
   .def(self_ns::str(self_ns::self))
   ;
 
-class_<GammaFULS, bases<GammaFSLS> >("GammaFULS")
+class_<ULSPartialSafetyFactors, bases<SLSPartialSafetyFactors> >("ULSPartialSafetyFactors")
   .def(init<float, float,float,float>())
-  .add_property("favorableAccidental", &GammaFULS::getFavorableAccidental, &GammaFULS::setFavorableAccidental)
-  .add_property("desfavorableAccidental", &GammaFULS::getDesfavorableAccidental, &GammaFULS::setDesfavorableAccidental);
+  .add_property("favorableAccidental", &ULSPartialSafetyFactors::getFavorableAccidental, &ULSPartialSafetyFactors::setFavorableAccidental)
+  .add_property("desfavorableAccidental", &ULSPartialSafetyFactors::getDesfavorableAccidental, &ULSPartialSafetyFactors::setDesfavorableAccidental);
 
-class_<GammaF, bases<EntCmd> >("GammaF")
-  .def(init<GammaFULS, GammaFSLS>())
-  .add_property("getGammaFULS", make_function( &GammaF::getGammaFULS, return_internal_reference<>() ))
-  .add_property("getGammaFSLS", make_function( &GammaF::getGammaFSLS, return_internal_reference<>() ))
+class_<PartialSafetyFactors, bases<EntCmd> >("PartialSafetyFactors")
+  .def(init<ULSPartialSafetyFactors, SLSPartialSafetyFactors>())
+  .add_property("getULSPartialSafetyFactors", make_function( &PartialSafetyFactors::getULSPartialSafetyFactors, return_internal_reference<>() ))
+  .add_property("getSLSPartialSafetyFactors", make_function( &PartialSafetyFactors::getSLSPartialSafetyFactors, return_internal_reference<>() ))
   .def(self_ns::str(self_ns::self))
   ;
+
+class_<PartialSafetyFactorsMap, bases<EntCmd> >("PartialSafetyFactorsDict")
+  .def("get", &PartialSafetyFactorsMap::BuscaCoefs, return_value_policy<copy_const_reference>())
+  .def("insert", &PartialSafetyFactorsMap::insert);
+
 
 class_<CombinationFactors, bases<EntCmd> >("CombinationFactors")
   .def(init<double, double, double>())

@@ -27,7 +27,7 @@
 
 #include "xc_utils/src/nucleo/EntConNmb.h"
 #include <map>
-#include "xc_utils/src/loadCombinations/factors/GammaF.h"
+#include "xc_utils/src/loadCombinations/factors/PartialSafetyFactors.h"
 
 
 namespace cmb_acc {
@@ -60,12 +60,12 @@ class ActionsFamiliesMap: public EntConNmb
   protected:
     friend class ActionContainer;
   public:
-    ActionsFamiliesMap(const std::string &,const GammaF &defaultGF= GammaF());
+    ActionsFamiliesMap(const std::string &,const PartialSafetyFactors &defaultGF= PartialSafetyFactors());
     ActionRValue &insert(const std::string &,const Action &,const std::string &combination_factors_name="");
     
     ActionsFamily *getActionsFamily(const std::string &);
     const ActionsFamily *getActionsFamily(const std::string &)const;
-    ActionsFamily *newActionsFamily(const std::string &, const GammaF &defaultGF= GammaF());
+    ActionsFamily *newActionsFamily(const std::string &, const PartialSafetyFactors &defaultGF= PartialSafetyFactors());
     boost::python::list getKeys(void) const;    
 
     LoadCombinationVector getLoadCombinations(const bool &uls,const bool &sit_accidental) const;

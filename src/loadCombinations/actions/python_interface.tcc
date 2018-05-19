@@ -54,8 +54,8 @@ class_<ActionRValueList, bases<dq_action_r_value,EntCmd> >("ActionRValueLists")
 
 const ActionRValueList &(ActionsFamily::*getFamilyActions)(void) const= &ActionsFamily::getActions;
 class_<ActionsFamily, bases<EntConNmb> >("ActionsFamily")
-  .def(init<std::string, GammaF>())
-  .add_property("gammaF", make_function( &ActionsFamily::getGammaF, return_internal_reference<>() ), &ActionsFamily::setGammaF)
+  .def(init<std::string, PartialSafetyFactors>())
+  .add_property("partial_safety_factors", make_function( &ActionsFamily::getPartialSafetyFactors, return_internal_reference<>() ), &ActionsFamily::setPartialSafetyFactors)
   .def("getNumActions", &ActionsFamily::getNumActions)
   .add_property("actions", make_function( getFamilyActions, return_internal_reference<>() ), &ActionsFamily::setActions)
   .def("insert", make_function(&ActionsFamily::insert,return_internal_reference<>()))
@@ -66,7 +66,7 @@ ActionsFamiliesMap::const_iterator (ActionsFamiliesMap::*cBegin)(void) const= &A
 ActionsFamiliesMap::const_iterator (ActionsFamiliesMap::*cEnd)(void) const= &ActionsFamiliesMap::end;
 class_<ActionsFamiliesMap, bases<EntConNmb>, boost::noncopyable >("ActionsFamiliesMap", no_init)
   .def("getKeys", &ActionsFamiliesMap::getKeys,"Returns families names")
-  .def("newActionsFamily", make_function( &ActionsFamiliesMap::newActionsFamily, return_internal_reference<>() ), "newActionsFamily(familyName,gammaF): creates a new family of actions.")
+  .def("newActionsFamily", make_function( &ActionsFamiliesMap::newActionsFamily, return_internal_reference<>() ), "newActionsFamily(familyName,partial_safety_factors): creates a new family of actions.")
   .def("getNumActions", &ActionsFamiliesMap::getNumActions)
   .def("__len__",&ActionsFamiliesMap::getNumActions)
   .def("__getitem__",findByName, return_value_policy<reference_existing_object>())

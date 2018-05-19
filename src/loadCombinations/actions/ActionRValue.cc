@@ -23,7 +23,7 @@
 
 #include "xc_utils/src/loadCombinations/actions/ActionRValue.h"
 #include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
-#include "xc_utils/src/loadCombinations/factors/GammaF.h"
+#include "xc_utils/src/loadCombinations/factors/PartialSafetyFactors.h"
 #include "xc_utils/src/loadCombinations/factors/CombinationFactorsMap.h"
 
 

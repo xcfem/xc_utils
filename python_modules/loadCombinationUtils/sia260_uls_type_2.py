@@ -4,17 +4,17 @@ import xc_base
 import loadCombinations
 
 #SIA 260 Tableau 1 (chiffre 4.4.3)
-gammaf_permanentes= loadCombinations.GammaF(loadCombinations.GammaFULS(0.8,1.35,1,1),loadCombinations.GammaFELS(1,1))
+partial_safety_factors_permanentes= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0.8,1.35,1,1),loadCombinations.PartialSafetyFactorsELS(1,1))
 #Poussée des terres.
-gammaf_terres= loadCombinations.GammaF(loadCombinations.GammaFULS(0.7,1.35,1,1),loadCombinations.GammaFELS(1,1))
+partial_safety_factors_terres= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0.7,1.35,1,1),loadCombinations.PartialSafetyFactorsELS(1,1))
 #Coeficientes de ponderación para acciones variables
-gammaf_variables= loadCombinations.GammaF(loadCombinations.GammaFULS(0,1.5,0,1),loadCombinations.GammaFELS(0,1))
-gammaf_trafic_ferroviaire= loadCombinations.GammaF(loadCombinations.GammaFULS(0,1.45,0,1),loadCombinations.GammaFELS(0,1))
-gammaf_trafic_ferroviaire_model_3= loadCombinations.GammaF(loadCombinations.GammaFULS(0,1.20,0,1),loadCombinations.GammaFELS(0,1))
+partial_safety_factors_variables= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0,1.5,0,1),loadCombinations.PartialSafetyFactorsELS(0,1))
+partial_safety_factors_trafic_ferroviaire= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0,1.45,0,1),loadCombinations.PartialSafetyFactorsELS(0,1))
+partial_safety_factors_trafic_ferroviaire_model_3= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0,1.20,0,1),loadCombinations.PartialSafetyFactorsELS(0,1))
 #Coeficientes de ponderación para acciones sísmicas
-gammaf_sismicas= loadCombinations.GammaF(loadCombinations.GammaFULS(0,1,1,1),loadCombinations.GammaFELS(0,0))
+partial_safety_factors_sismicas= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0,1,1,1),loadCombinations.PartialSafetyFactorsELS(0,0))
 #Coeficientes de ponderación para acciones accidentales
-gammaf_accidentales= loadCombinations.GammaF(loadCombinations.GammaFULS(0,0,1,1),loadCombinations.GammaFELS(0,0))
+partial_safety_factors_accidentales= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0,0,1,1),loadCombinations.PartialSafetyFactorsELS(0,0))
 
 
 combination_factors_SIA260_ponts_ferroviaires_voie_normale= loadCombinations.CombinationFactorsDict()
@@ -31,10 +31,10 @@ combination_factors_SIA260_ponts_ferroviaires_voie_normale.insert("pression_hydr
 
 combGeneratorPontFerroviaireVoieNormale= loadCombinations.LoadCombGenerator()
 pond= combGeneratorPontFerroviaireVoieNormale.defPonderacion("SIA260ULSType2",combination_factors_SIA260_ponts_ferroviaires_voie_normale)
-pond.permanentActions.gammaF= gammaf_permanentes
-pond.variableActions.gammaF= gammaf_variables
-pond.accidentalActions.gammaF= gammaf_accidentales
-pond.seismicActions.gammaF= gammaf_sismicas
+pond.permanentActions.partial_safety_factors= partial_safety_factors_permanentes
+pond.variableActions.partial_safety_factors= partial_safety_factors_variables
+pond.accidentalActions.partial_safety_factors= partial_safety_factors_accidentales
+pond.seismicActions.partial_safety_factors= partial_safety_factors_sismicas
 
 combination_factors_SIA260_ponts_ferroviaires_voie_etroite= loadCombinations.CombinationFactorsDict()
 
@@ -53,10 +53,10 @@ combination_factors_SIA260_ponts_ferroviaires_voie_etroite.insert("pression_hydr
 
 combGeneratorPontFerroviaireVoieEtroite= loadCombinations.LoadCombGenerator()
 pond= combGeneratorPontFerroviaireVoieEtroite.defPonderacion("SIA260ULSType2",combination_factors_SIA260_ponts_ferroviaires_voie_etroite)
-pond.permanentActions.gammaF= gammaf_permanentes
-pond.variableActions.gammaF= gammaf_variables
-pond.accidentalActions.gammaF= gammaf_accidentales
-pond.seismicActions.gammaF= gammaf_sismicas
+pond.permanentActions.partial_safety_factors= partial_safety_factors_permanentes
+pond.variableActions.partial_safety_factors= partial_safety_factors_variables
+pond.accidentalActions.partial_safety_factors= partial_safety_factors_accidentales
+pond.seismicActions.partial_safety_factors= partial_safety_factors_sismicas
 
 combination_factors_SIA260_ponts_routes= loadCombinations.CombinationFactorsDict()
 
@@ -72,9 +72,9 @@ combination_factors_SIA260_ponts_routes.insert("pression_hydraulique",loadCombin
 
 combGeneratorPontRoutier= loadCombinations.LoadCombGenerator()
 pond= combGeneratorPontRoutier.defPonderacion("SIA260ULSType2",combination_factors_SIA260_ponts_routes)
-pond.permanentActions.gammaF= gammaf_permanentes
-pond.variableActions.gammaF= gammaf_variables
-pond.accidentalActions.gammaF= gammaf_accidentales
-pond.seismicActions.gammaF= gammaf_sismicas
+pond.permanentActions.partial_safety_factors= partial_safety_factors_permanentes
+pond.variableActions.partial_safety_factors= partial_safety_factors_variables
+pond.accidentalActions.partial_safety_factors= partial_safety_factors_accidentales
+pond.seismicActions.partial_safety_factors= partial_safety_factors_sismicas
 
 

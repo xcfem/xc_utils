@@ -111,7 +111,7 @@ SET(NUCLEO nucleo/EntProp nucleo/EntCmd nucleo/Signos nucleo/TokenList nucleo/En
 
 #SET(VtkAux vtk_aux/vtkShStrArray vtk_aux/vtkLabeledShStrMapper vtk_aux/vtkTakePhotoDefs vtk_aux/vtkTakePhoto vtk_aux/vtkXOpenGLOffScreenRenderWindow vtk_aux/vtkDoubleHeadedArrowSource vtk_aux/vtkArcSource)
 
-SET(ca_factors loadCombinations/factors/GammaF loadCombinations/factors/CombinationFactors loadCombinations/factors/CombinationFactorsMap)
+SET(ca_factors loadCombinations/factors/PartialSafetyFactors loadCombinations/factors/PartialSafetyFactorsMap loadCombinations/factors/CombinationFactors loadCombinations/factors/CombinationFactorsMap)
 
 SET(ca_acciones loadCombinations/actions/LeadingActionInfo loadCombinations/actions/Action loadCombinations/actions/ActionRelationships loadCombinations/actions/ActionRValue loadCombinations/actions/ActionRValueList loadCombinations/actions/ActionsFamily loadCombinations/actions/ActionsFamiliesMap loadCombinations/actions/ActionContainer)
 

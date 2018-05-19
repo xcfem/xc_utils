@@ -32,8 +32,8 @@
 
 
 //! @brief Constructor por defecto.
-cmb_acc::ActionsFamily::ActionsFamily(const std::string &nmb,const GammaF &gf)
-  : EntConNmb(nmb),gammaf(gf) 
+cmb_acc::ActionsFamily::ActionsFamily(const std::string &nmb,const PartialSafetyFactors &gf)
+  : EntConNmb(nmb),partial_safety_factors(gf) 
   {
     actions.set_owner(this);
   }
@@ -95,5 +95,5 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionsFamily::getLoadCombinations(const
 //! \fn cmb_acc::ActionsFamily::computeVariations(const bool &uls,const bool &sit_accidental) const
 //! @brief ??
 cmb_acc::Variations cmb_acc::ActionsFamily::computeVariations(const bool &uls,const bool &sit_accidental,const int &d) const
-  { return gammaf.calcula_variations(uls,sit_accidental,d,actions); }
+  { return partial_safety_factors.calcula_variations(uls,sit_accidental,d,actions); }
 

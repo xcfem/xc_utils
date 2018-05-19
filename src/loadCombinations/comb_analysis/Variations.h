@@ -21,7 +21,7 @@
 //----------------------------------------------------------------------------
 //Variations.hxx
 //Conjunto de las posibles variations de dos elementos
-//(gamma_f_fav y gamma_f_desfav) tomados de n en n.
+//(partial_safety_factors_fav y partial_safety_factors_desfav) tomados de n en n.
 
 #ifndef VARIATIONS_HXX
 #define VARIATIONS_HXX
@@ -34,7 +34,7 @@ class ActionRValueList;
 
 //! @ingroup CMBACC
 //
-//! @brief Conjunto de las posibles variations de dos elementos (gamma_f_fav y gamma_f_desfav) tomados de n en n.
+//! @brief Conjunto de las posibles variations de dos elementos (partial_safety_factors_fav y partial_safety_factors_desfav) tomados de n en n.
 class Variations: public std::vector<Variation>
   {
     void print(std::ostream &os) const;

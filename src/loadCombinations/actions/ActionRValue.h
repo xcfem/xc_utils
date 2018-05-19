@@ -29,7 +29,7 @@
 
 namespace cmb_acc{
 
-class GammaF;
+class PartialSafetyFactors;
 class CombinationFactors;
 
 //! @ingroup CMBACC
@@ -39,7 +39,7 @@ class ActionRValue: public Action
   {
   private:
     ActionRValueList *acc_familia; //!< Container for the actions of the family.
-    const GammaF *gammaf; //!< Partial safety factors for this action.
+    const PartialSafetyFactors *partial_safety_factors; //!< Partial safety factors for this action.
     const CombinationFactors *combination_factors; //!< Combination factors.
 
     inline double getCombinationFactor(short int r) const;

@@ -71,7 +71,7 @@ cmb_acc::ActionRValue &cmb_acc::ActionsFamiliesMap::insert(const std::string &fa
   }
 
 //! @brief Crea una nueva familia con el nombre que se le pasa como parámetro.
-cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::newActionsFamily(const std::string &actionsFamilyName,const GammaF &defaultGF)
+cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::newActionsFamily(const std::string &actionsFamilyName,const PartialSafetyFactors &defaultGF)
   {
     ActionsFamily *tmp =nullptr;
     if(!existe(actionsFamilyName)) //new family.
@@ -86,7 +86,7 @@ cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::newActionsFamily(const std:
   }
 
 //! @brief Constructor por defecto.
-cmb_acc::ActionsFamiliesMap::ActionsFamiliesMap(const std::string &name, const GammaF &defaultGF)
+cmb_acc::ActionsFamiliesMap::ActionsFamiliesMap(const std::string &name, const PartialSafetyFactors &defaultGF)
   : EntConNmb(name)
   {
     newActionsFamily("default");

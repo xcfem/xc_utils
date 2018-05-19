@@ -18,31 +18,31 @@ combination_factors_EHE.insert("salones_hotel",loadCombinations.CombinationFacto
 combination_factors_EHE.insert("aulas_escuela",loadCombinations.CombinationFactors(0.7,0.7,0.6))
 combination_factors_EHE.insert("pasillos_escaleras_escuela",loadCombinations.CombinationFactors(0.7,0.7,0.6))
 #Coeficientes de ponderación para acciones permanentes, control de ejecución normal.
-gammaf_permanentes_EHE_ctr_normal= loadCombinations.GammaF(loadCombinations.GammaFULS(1,1.35,1,1),loadCombinations.GammaFSLS(1,1))
+partial_safety_factors_permanentes_EHE_ctr_normal= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(1,1.35,1,1),loadCombinations.SLSPartialSafetyFactors(1,1))
 
 #Coeficientes de ponderación para acciones permanentes de valor no constante, control de ejecución normal.
-gammaf_permanentes_nc_EHE_ctr_normal= loadCombinations.GammaF(loadCombinations.GammaFULS(1,1.5,1,1),loadCombinations.GammaFSLS(1,1))
+partial_safety_factors_permanentes_nc_EHE_ctr_normal= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(1,1.5,1,1),loadCombinations.SLSPartialSafetyFactors(1,1))
 #Coeficientes de ponderación para acciones variables, control de ejecución normal.
-gammaf_variables_EHE_ctr_normal= loadCombinations.GammaF(loadCombinations.GammaFULS(0,1.5,0,1),loadCombinations.GammaFSLS(0,1))
+partial_safety_factors_variables_EHE_ctr_normal= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0,1.5,0,1),loadCombinations.SLSPartialSafetyFactors(0,1))
 #Coeficientes de ponderación para acciones sísmicas, control de ejecución normal.
-gammaf_sismicas_EHE_ctr_normal= loadCombinations.GammaF(loadCombinations.GammaFULS(0,1,1,1),loadCombinations.GammaFSLS(0,0))
+partial_safety_factors_sismicas_EHE_ctr_normal= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0,1,1,1),loadCombinations.SLSPartialSafetyFactors(0,0))
 #Coeficientes de ponderación para acciones accidentales, control de ejecución normal.
-gammaf_accidentales_EHE_ctr_normal= loadCombinations.GammaF(loadCombinations.GammaFULS(0,0,1,1),loadCombinations.GammaFSLS(0,0))
+partial_safety_factors_accidentales_EHE_ctr_normal= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0,0,1,1),loadCombinations.SLSPartialSafetyFactors(0,0))
 #Coeficientes de ponderación para acciones permanentes, control de ejecución intenso.
-gammaf_permanentes_EHE_ctr_intenso= loadCombinations.GammaF(loadCombinations.GammaFULS(1,1.35,1,1),loadCombinations.GammaFSLS(1,1))
+partial_safety_factors_permanentes_EHE_ctr_intenso= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(1,1.35,1,1),loadCombinations.SLSPartialSafetyFactors(1,1))
 
 #Coeficientes de ponderación para acciones permanentes de valor no constante, control de ejecución intenso.
-gammaf_permanentes_nc_EHE_ctr_intenso= loadCombinations.GammaF(loadCombinations.GammaFULS(1,1.5,1,1),loadCombinations.GammaFSLS(1,1))
+partial_safety_factors_permanentes_nc_EHE_ctr_intenso= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(1,1.5,1,1),loadCombinations.SLSPartialSafetyFactors(1,1))
 #Coeficientes de ponderación para acciones variables, control de ejecución intenso.
-gammaf_variables_EHE_ctr_intenso= loadCombinations.GammaF(loadCombinations.GammaFULS(0,1.5,0,1),loadCombinations.GammaFSLS(0,1))
+partial_safety_factors_variables_EHE_ctr_intenso= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0,1.5,0,1),loadCombinations.SLSPartialSafetyFactors(0,1))
 #Coeficientes de ponderación para acciones sísmicas, control de ejecución intenso.
-gammaf_sismicas_EHE_ctr_intenso= loadCombinations.GammaF(loadCombinations.GammaFULS(0,1,1,1),loadCombinations.GammaFSLS(0,0))
+partial_safety_factors_sismicas_EHE_ctr_intenso= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0,1,1,1),loadCombinations.SLSPartialSafetyFactors(0,0))
 #Coeficientes de ponderación para acciones accidentales, control de ejecución intenso.
-gammaf_accidentales_EHE_ctr_intenso= loadCombinations.GammaF(loadCombinations.GammaFULS(0,0,1,1),loadCombinations.GammaFSLS(0,0))
+partial_safety_factors_accidentales_EHE_ctr_intenso= loadCombinations.PartialSafetyFactors(loadCombinations.ULSPartialSafetyFactors(0,0,1,1),loadCombinations.SLSPartialSafetyFactors(0,0))
 
 intenseControlCombGenerator= loadCombinations.LoadCombGenerator()
 pond= intenseControlCombGenerator.defPonderacion("EHEIntenso",combination_factors_EHE)
-pond.permanentActions['default'].gammaF= gammaf_permanentes_EHE_ctr_intenso
-pond.variableActions['default'].gammaF= gammaf_variables_EHE_ctr_intenso
-pond.accidentalActions.gammaF= gammaf_accidentales_EHE_ctr_intenso
-pond.seismicActions.gammaF= gammaf_sismicas_EHE_ctr_intenso
+pond.permanentActions['default'].partial_safety_factors= partial_safety_factors_permanentes_EHE_ctr_intenso
+pond.variableActions['default'].partial_safety_factors= partial_safety_factors_variables_EHE_ctr_intenso
+pond.accidentalActions.partial_safety_factors= partial_safety_factors_accidentales_EHE_ctr_intenso
+pond.seismicActions.partial_safety_factors= partial_safety_factors_sismicas_EHE_ctr_intenso

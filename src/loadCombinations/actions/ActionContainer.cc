@@ -28,13 +28,13 @@
 //Default partial safety factors
 
 //for permanent actions
-cmb_acc::GammaF defaultG(cmb_acc::GammaFULS(1.0,1.5,1.0,1.0),cmb_acc::GammaFSLS(1.0,1.0)); 
+cmb_acc::PartialSafetyFactors defaultG(cmb_acc::ULSPartialSafetyFactors(1.0,1.5,1.0,1.0),cmb_acc::SLSPartialSafetyFactors(1.0,1.0)); 
 //for variable actions
-cmb_acc::GammaF defaultQ(cmb_acc::GammaFULS(0.0,1.6,0.0,1.0),cmb_acc::GammaFSLS(0.0,1.0));
+cmb_acc::PartialSafetyFactors defaultQ(cmb_acc::ULSPartialSafetyFactors(0.0,1.6,0.0,1.0),cmb_acc::SLSPartialSafetyFactors(0.0,1.0));
 //for accidental actions
-cmb_acc::GammaF defaultA(cmb_acc::GammaFULS(0.0,0.0,1.0,1.0));
+cmb_acc::PartialSafetyFactors defaultA(cmb_acc::ULSPartialSafetyFactors(0.0,0.0,1.0,1.0));
 //for seismic actions
-cmb_acc::GammaF defaultS(cmb_acc::GammaFULS(0.0,0.0,1.0,1.0));
+cmb_acc::PartialSafetyFactors defaultS(cmb_acc::ULSPartialSafetyFactors(0.0,0.0,1.0,1.0));
 
 //! \fn cmb_acc::ActionContainer::ActionContainer(void)
 //! @brief Constructor por defecto.

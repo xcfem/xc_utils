@@ -19,12 +19,12 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//GammaF.h
-//Partial safety factors de acciones.
+//PartialSafetyFactors.h
+//Partial safety factors for actions.
 
 
-#ifndef GAMMAF_HXX
-#define GAMMAF_HXX
+#ifndef PARTIALSAFETYFACTORS_HXX
+#define PARTIALSAFETYFACTORS_HXX
 
 #include "xc_utils/src/nucleo/EntCmd.h"
 
@@ -36,86 +36,86 @@ class ActionRValueList;
 
 //! @ingroup CMBACC
 //
-//! @brief Partial safety factors de una familia de acciones (permanentes, variables,...), en serviceability limit states.
-class GammaFSLS: public EntCmd
+//! @brief Serviceability limit states partial safety factors.
+class SLSPartialSafetyFactors: public EntCmd
   {
   protected:
     //Partial safety factors
-    float gamma_f_fav; //!< para favourable effect.
-    float gamma_f_desfav; //!< para unfavourable effect.
+    float partial_safety_factors_fav; //!< favourable effect.
+    float partial_safety_factors_unfav; //!< unfavourable effect.
 
     //! @brief Lee el objeto desde archivo.
 
-    friend class GammaF;
+    friend class PartialSafetyFactors;
     Variation Coefs(void) const;
   public:
     //! @brief Constructor por defecto. Supone control normal.
-    GammaFSLS(const float &fav=0.0,const float &desfav=1.0);
+    SLSPartialSafetyFactors(const float &fav=0.0,const float &desfav=1.0);
     inline float getFavorable(void) const
-      { return gamma_f_fav; }
+      { return partial_safety_factors_fav; }
     inline void setFavorable(const float &f)
-      { gamma_f_fav= f; }
+      { partial_safety_factors_fav= f; }
     inline float getDesfavorable(void) const
-      { return gamma_f_desfav; }
+      { return partial_safety_factors_unfav; }
     inline void setDesfavorable(const float &f)
-      { gamma_f_desfav= f; }
+      { partial_safety_factors_unfav= f; }
     virtual void Print(std::ostream &os) const;
   };
  
-inline std::ostream &operator<<(std::ostream &os, const GammaFSLS &g)
+inline std::ostream &operator<<(std::ostream &os, const SLSPartialSafetyFactors &g)
   {
     g.Print(os);
     return os;
   }
  
 //! @brief Partial safety factors de una familia de acciones (permanentes, variables,...), en estados límite últimos .
-class GammaFULS: public GammaFSLS
+class ULSPartialSafetyFactors: public SLSPartialSafetyFactors
   {
     //Partial safety factors
-    float gamma_f_fav_acc; //!< para favourable effect en situacion accidental o sísmica.
-    float gamma_f_desfav_acc; //!< para unfavourable effect en situacion accidental o sísmica.
+    float partial_safety_factors_fav_acc; //!< para favourable effect en situacion accidental o sísmica.
+    float partial_safety_factors_unfav_acc; //!< para unfavourable effect en situacion accidental o sísmica.
   protected:
     //! @brief Lee el objeto desde archivo.
 
-    friend class GammaF;
+    friend class PartialSafetyFactors;
     //! @brief Return the partial safety factors correspondientes a situación persistente o transitoria.
     Variation CoefsPT(void) const;
     //! @brief Return the partial safety factors correspondientes a situación accidental o sísmica.
     Variation CoefsAcc(void) const;
   public:
     //! @brief Constructor por defecto. Supone control normal.
-    GammaFULS(const float &fav=0.0,const float &desfav=1.8,const float &fav_acc=0.0,const float &desfav_acc=1.0);
+    ULSPartialSafetyFactors(const float &fav=0.0,const float &desfav=1.8,const float &fav_acc=0.0,const float &desfav_acc=1.0);
     inline float getFavorableAccidental(void) const
-      { return gamma_f_fav_acc; }
+      { return partial_safety_factors_fav_acc; }
     inline void setFavorableAccidental(const float &f)
-      { gamma_f_fav_acc= f; }
+      { partial_safety_factors_fav_acc= f; }
     inline float getDesfavorableAccidental(void) const
-      { return gamma_f_desfav_acc; }
+      { return partial_safety_factors_unfav_acc; }
     inline void setDesfavorableAccidental(const float &f)
-      { gamma_f_desfav_acc= f; }
+      { partial_safety_factors_unfav_acc= f; }
     virtual void Print(std::ostream &os) const;
   };
 
 //! @brief Partial safety factors de una familia de acciones en SLS y ULS.
-class GammaF: public EntCmd
+class PartialSafetyFactors: public EntCmd
   {
-    GammaFULS gammaf_uls; //!< Partial safety factors en estados límite últimos.
-    GammaFSLS gammaf_els; //!< Partial safety factors en serviceability limit states.
+    ULSPartialSafetyFactors uls_partial_safety_factors; //!< Partial safety factors en estados límite últimos.
+    SLSPartialSafetyFactors sls_partial_safety_factors; //!< Partial safety factors en serviceability limit states.
   protected:
     Variation CoefsEls(void) const;
   public:
-    GammaF(const GammaFULS &gf_uls=GammaFULS(), const GammaFSLS &gf_els=GammaFSLS());
+    PartialSafetyFactors(const ULSPartialSafetyFactors &gf_uls=ULSPartialSafetyFactors(), const SLSPartialSafetyFactors &gf_els=SLSPartialSafetyFactors());
 
-    inline const GammaFULS &getGammaFULS(void) const
-      { return gammaf_uls; }
-    inline const GammaFSLS &getGammaFSLS(void) const
-      { return gammaf_els; }
+    inline const ULSPartialSafetyFactors &getULSPartialSafetyFactors(void) const
+      { return uls_partial_safety_factors; }
+    inline const SLSPartialSafetyFactors &getSLSPartialSafetyFactors(void) const
+      { return sls_partial_safety_factors; }
     //! @brief Return the partial safety factors correspondientes a estado límite de servicio.
     Variations calcula_variations(const bool &uls,const bool &sit_accidental,const int &d,const ActionRValueList &) const;
     virtual void Print(std::ostream &os) const;
   };
 
-inline std::ostream &operator<<(std::ostream &os, const GammaF &g)
+inline std::ostream &operator<<(std::ostream &os, const PartialSafetyFactors &g)
   {
     g.Print(os);
     return os;

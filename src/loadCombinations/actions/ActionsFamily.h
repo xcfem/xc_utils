@@ -25,7 +25,7 @@
 #ifndef FAMILIAACCIONES_H
 #define FAMILIAACCIONES_H
 
-#include "xc_utils/src/loadCombinations/factors/GammaF.h"
+#include "xc_utils/src/loadCombinations/factors/PartialSafetyFactors.h"
 #include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
 
 namespace cmb_acc{
@@ -48,14 +48,14 @@ class LeadingActionInfo;
 class ActionsFamily: public EntConNmb
   {
   private:
-    GammaF gammaf; //!< Partial safety factors para toda la familia.
+    PartialSafetyFactors partial_safety_factors; //!< Partial safety factors para toda la familia.
     ActionRValueList actions; //!< Family actions container.
 
   protected:
     friend class ActionsFamiliesMap;
     friend class ActionContainer;
   public:
-    ActionsFamily(const std::string &nmb="",const GammaF &gf=GammaF());
+    ActionsFamily(const std::string &nmb="",const PartialSafetyFactors &gf=PartialSafetyFactors());
     inline virtual ~ActionsFamily(void) {}
     ActionRValue &insert(const Action &,const std::string &combination_factors_name="");
 
@@ -73,10 +73,10 @@ class ActionsFamily: public EntConNmb
     inline bool empty(void) const
       { return actions.empty(); }
 
-    inline void setGammaF(const GammaF &gf)
-      { gammaf= gf; }
-    inline GammaF &getGammaF(void)
-      { return gammaf; }
+    inline void setPartialSafetyFactors(const PartialSafetyFactors &gf)
+      { partial_safety_factors= gf; }
+    inline PartialSafetyFactors &getPartialSafetyFactors(void)
+      { return partial_safety_factors; }
     const CombinationFactorsMap *getPtrCombinationFactors(void) const;
     
     Variations computeVariations(const bool &uls= true,const bool &sit_accidental= false,const int &d=-1) const;
