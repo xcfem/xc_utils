@@ -21,9 +21,10 @@
 //----------------------------------------------------------------------------
 //ActionRValueList.cxx
 
-#include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
-#include "xc_utils/src/loadCombinations/actions/ActionsFamily.h"
+#include "ActionRValueList.h"
+#include "ActionsFamily.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/Variation.h"
+#include "LeadingActionInfo.h"
 
 cmb_acc::ActionRValue &cmb_acc::ActionRValueList::push_back(const ActionRValue &a)
   {
@@ -33,47 +34,49 @@ cmb_acc::ActionRValue &cmb_acc::ActionRValueList::push_back(const ActionRValue &
   }
 
 //! @brief Insert the action being passed as parameter.
-cmb_acc::ActionRValue &cmb_acc::ActionRValueList::insert(const Action &a,const std::string &nmb_coefs_psi)
+cmb_acc::ActionRValue &cmb_acc::ActionRValueList::insert(const Action &a,const std::string &combination_factors_name)
   {
-    ActionRValue acc(a,this,nmb_coefs_psi);
+    ActionRValue acc(a,this,combination_factors_name);
     acc.set_owner(this);
     return push_back(acc);
+  }
+
+//! @brief Return the representative value of the j-th action.
+cmb_acc::Action cmb_acc::ActionRValueList::getRepresentativeValue(const LeadingActionInfo &lai,const size_t &j) const
+  {
+    Action retval= getValue(j,lai.getGeneralRepresentativeValueIndex());
+    if(lai.leadingActionExists())
+      if(lai.isLeadingActionIndex(j)) //j is the leading action index.
+	{
+	  retval= getValue(j,lai.getLeadingRepresentativeValueIndex()); //Representative value for the leading action.
+	}
+    return retval;
   }
 
 //! \fn cmb_acc::ActionRValueList::FormaProdEscalar(const Variation &v,short int r,const int &d,const short int &rr) const
 //! @brief Forma producto escalar.
 //!
 //! @param v: Variation a sumar.
-//! @param r: Valor representativo para el caso general (r= -1 -> characteristic value,r= 0 -> valor de combinación
-//! r= 1 -> valor frecuente, r= 2 -> valor cuasipermanente).
-//! @param d: Índice de la acción determinante (si no hay acción determinante d=-1).
-//! @param rr: Valor representativo a emplear para la acción determinante.
-cmb_acc::Action cmb_acc::ActionRValueList::FormaProdEscalar(const Variation &var,short int r,const int &d,const short int &rr) const
+//! @param leadingActioInfo: Information about the leading action.
+cmb_acc::Action cmb_acc::ActionRValueList::FormaProdEscalar(const Variation &var,const LeadingActionInfo &lai) const//short int r,const int &d,const short int &rr) const
   {
     const size_t num_acciones= size();
-    Action retval=Action::NULA(); //Inicializar a cero.
+    Action retval=Action::NULA(); //Initialize to zero.
     for(size_t j=0;j<num_acciones;j++)
-      {
-        Action tmp= GetValor(j,r);
-        if(d>-1) //Existe acción determinante
-          if(j==size_t(d)) //Corresponde con el índice j.
-            {
-              tmp= GetValor(j,rr); //Acción determinante.
-            }
-        retval+=var[j]*tmp;
-      }
+      retval+=var[j]*getRepresentativeValue(lai,j);
     return retval;
   }
 
-//! @brief Return un puntero a la tabla de coeficientes de simultaneidad.
-const cmb_acc::PsiCoeffsMap *cmb_acc::ActionRValueList::getPtrPsiCoeffs(void) const
+//! @brief Return a pointer to the table of coeficientes de simultaneidad.
+const cmb_acc::CombinationFactorsMap *cmb_acc::ActionRValueList::getPtrCombinationFactors(void) const
   {
     const ActionsFamily *tmp= dynamic_cast<const ActionsFamily *>(Owner());
     if(tmp)
-      return tmp->getPtrPsiCoeffs();
+      return tmp->getPtrCombinationFactors();
     else
       {
-	std::cerr << "ActionRValueList::getPtrPsiCoeffs; no se encontró el objeto propietario de éste." << std::endl;
+	std::cerr << getClassName() << "::" << __FUNCTION__
+		  << "; owner not found." << std::endl;
         return nullptr;
       }
   }

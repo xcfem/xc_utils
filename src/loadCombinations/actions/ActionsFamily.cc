@@ -27,6 +27,7 @@
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
 #include "ActionsFamiliesMap.h"
 #include "Action.h"
+#include "LeadingActionInfo.h"
 
 
 
@@ -38,13 +39,13 @@ cmb_acc::ActionsFamily::ActionsFamily(const std::string &nmb,const GammaF &gf)
   }
 
 //! @brief Return un apuntador a los coeficientes que aplican para esta familia.
-const cmb_acc::PsiCoeffsMap *cmb_acc::ActionsFamily::getPtrPsiCoeffs(void) const
+const cmb_acc::CombinationFactorsMap *cmb_acc::ActionsFamily::getPtrCombinationFactors(void) const
   {
-    const cmb_acc::PsiCoeffsMap *retval= nullptr;
+    const cmb_acc::CombinationFactorsMap *retval= nullptr;
     const EntCmd *owr= Owner();
     const ActionContainer *tmp= dynamic_cast<const ActionContainer *>(owr);
     if(tmp)
-      return tmp->getPtrPsiCoeffs();
+      return tmp->getPtrCombinationFactors();
     else
       {
 	const ActionsFamiliesMap *fMap= dynamic_cast<const ActionsFamiliesMap *>(owr);
@@ -56,7 +57,7 @@ const cmb_acc::PsiCoeffsMap *cmb_acc::ActionsFamily::getPtrPsiCoeffs(void) const
 	  }
       }
     if(tmp)
-      retval= tmp->getPtrPsiCoeffs();
+      retval= tmp->getPtrCombinationFactors();
     else
       std::cerr << getClassName() << "::" << __FUNCTION__
  	        << "; family: '" << getName()
@@ -66,27 +67,24 @@ const cmb_acc::PsiCoeffsMap *cmb_acc::ActionsFamily::getPtrPsiCoeffs(void) const
 
 //! @brief Insert the action argument and sets the "psi" load combination
 //! factors.
-cmb_acc::ActionRValue &cmb_acc::ActionsFamily::insert(const Action &a,const std::string &nmb_coefs_psi)
-  { return actions.insert(a,nmb_coefs_psi); }
+cmb_acc::ActionRValue &cmb_acc::ActionsFamily::insert(const Action &a,const std::string &combination_factors_name)
+  { return actions.insert(a,combination_factors_name); }
 
 //! @brief ??
 //!
-//! @param elu: Verdadero si se trata de un estado límite último.
+//! @param uls: Verdadero si se trata de un estado límite último.
 //! @param sit_accidental: Verdadero si estamos en situación accidental.
-//! @param r: Valor representativo para el caso general (r= -1 -> characteristic value,r= 0 -> valor de combinación
-//! r= 1 -> valor frecuente, r= 2 -> valor cuasipermanente).
-//! @param d: Índice de la acción dominante (si no hay acción dominante d=-1).
-//! @param rr: Valor representativo a emplear para la acción dominante.
-cmb_acc::LoadCombinationVector cmb_acc::ActionsFamily::GetLoadCombinations(const bool &elu,const bool &sit_accidental,short int r,const int &d,const short int &rr) const
+//! @param leadingActioInfo: Information about the leading action.
+cmb_acc::LoadCombinationVector cmb_acc::ActionsFamily::getLoadCombinations(const bool &uls,const bool &sit_accidental, const LeadingActionInfo &leadingActionInfo) const //,short int r,const int &d,const short int &rr) const
   {
-    Variations var= computeVariations(elu,sit_accidental,d);
+    Variations var= computeVariations(uls,sit_accidental,leadingActionInfo.getLeadingActionIndex());
     const size_t num_variations= var.size();
     LoadCombinationVector retval(num_variations);
     ActionsFamily *this_no_const= const_cast<ActionsFamily *>(this);
     for(size_t i=0;i<num_variations;i++)
       {
         const Variation &v_i= var[i];
-        retval[i]= actions.FormaProdEscalar(v_i,r,d,rr);
+        retval[i]= actions.FormaProdEscalar(v_i,leadingActionInfo);
         retval[i].set_owner(this_no_const);
       }
     retval= getCompatibles(retval); //Filtramos las que contienen incompatible actions.
@@ -94,8 +92,8 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionsFamily::GetLoadCombinations(const
     return retval;
   }
 
-//! \fn cmb_acc::ActionsFamily::computeVariations(const bool &elu,const bool &sit_accidental) const
+//! \fn cmb_acc::ActionsFamily::computeVariations(const bool &uls,const bool &sit_accidental) const
 //! @brief ??
-cmb_acc::Variations cmb_acc::ActionsFamily::computeVariations(const bool &elu,const bool &sit_accidental,const int &d) const
-  { return gammaf.calcula_variations(elu,sit_accidental,d,actions); }
+cmb_acc::Variations cmb_acc::ActionsFamily::computeVariations(const bool &uls,const bool &sit_accidental,const int &d) const
+  { return gammaf.calcula_variations(uls,sit_accidental,d,actions); }
 

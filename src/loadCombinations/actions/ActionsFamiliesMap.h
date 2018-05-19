@@ -27,17 +27,18 @@
 
 #include "xc_utils/src/nucleo/EntConNmb.h"
 #include <map>
-#include "xc_utils/src/loadCombinations/coeffs/GammaF.h"
+#include "xc_utils/src/loadCombinations/factors/GammaF.h"
 
 
 namespace cmb_acc {
 
 class ActionsFamily;
 class LoadCombinationVector;
-class PsiCoeffsMap;
+class CombinationFactorsMap;
 class Action;
 class ActionRValue;
 class ActionContainer;
+class LeadingActionInfo;
 
 //! @ingroup CMBACC
 //
@@ -60,17 +61,17 @@ class ActionsFamiliesMap: public EntConNmb
     friend class ActionContainer;
   public:
     ActionsFamiliesMap(const std::string &,const GammaF &defaultGF= GammaF());
-    ActionRValue &insert(const std::string &,const Action &,const std::string &nmb_coefs_psi="");
+    ActionRValue &insert(const std::string &,const Action &,const std::string &combination_factors_name="");
     
     ActionsFamily *getActionsFamily(const std::string &);
     const ActionsFamily *getActionsFamily(const std::string &)const;
     ActionsFamily *newActionsFamily(const std::string &, const GammaF &defaultGF= GammaF());
     boost::python::list getKeys(void) const;    
 
-    LoadCombinationVector GetLoadCombinations(const bool &elu,const bool &sit_accidental) const;
-    LoadCombinationVector GetLoadCombinations(const bool &elu,const bool &sit_accidental,short int r,const int &d=-1,const short int &rr=-1) const;
+    LoadCombinationVector getLoadCombinations(const bool &uls,const bool &sit_accidental) const;
+    LoadCombinationVector getLoadCombinations(const bool &uls,const bool &sit_accidental,const LeadingActionInfo &) const;
     size_t getNumActions(void) const;
-    const PsiCoeffsMap *getPtrPsiCoeffs(void) const;
+    const CombinationFactorsMap *getPtrCombinationFactors(void) const;
     
     const_iterator begin(void) const
       { return familias.begin(); }

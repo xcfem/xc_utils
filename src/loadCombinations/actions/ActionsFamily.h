@@ -25,15 +25,16 @@
 #ifndef FAMILIAACCIONES_H
 #define FAMILIAACCIONES_H
 
-#include "xc_utils/src/loadCombinations/coeffs/GammaF.h"
+#include "xc_utils/src/loadCombinations/factors/GammaF.h"
 #include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
 
 namespace cmb_acc{
 class Variations;
 class LoadCombinationVector;
-class PsiCoeffsMap;
+class CombinationFactorsMap;
 class ActionContainer;
 class ActionsFamiliesMap;
+class LeadingActionInfo;
 
 //! @ingroup CMBACC
 //
@@ -56,7 +57,7 @@ class ActionsFamily: public EntConNmb
   public:
     ActionsFamily(const std::string &nmb="",const GammaF &gf=GammaF());
     inline virtual ~ActionsFamily(void) {}
-    ActionRValue &insert(const Action &,const std::string &nmb_coefs_psi="");
+    ActionRValue &insert(const Action &,const std::string &combination_factors_name="");
 
     //! @brief Return the number of actions in the family.
     inline size_t getNumActions(void) const
@@ -76,10 +77,10 @@ class ActionsFamily: public EntConNmb
       { gammaf= gf; }
     inline GammaF &getGammaF(void)
       { return gammaf; }
-    const PsiCoeffsMap *getPtrPsiCoeffs(void) const;
+    const CombinationFactorsMap *getPtrCombinationFactors(void) const;
     
-    Variations computeVariations(const bool &elu= true,const bool &sit_accidental= false,const int &d=-1) const;
-    LoadCombinationVector GetLoadCombinations(const bool &elu,const bool &sit_accidental,short int r,const int &d=-1,const short int &rr=-1) const;
+    Variations computeVariations(const bool &uls= true,const bool &sit_accidental= false,const int &d=-1) const;
+    LoadCombinationVector getLoadCombinations(const bool &uls,const bool &sit_accidental,const LeadingActionInfo &) const;
   };
 } //fin namespace nmb_acc.
 

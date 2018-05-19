@@ -27,6 +27,7 @@
 
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
 #include "ActionContainer.h"
+#include "LeadingActionInfo.h"
 
 
 //! @brief Return verdadero si la familia existe.
@@ -53,7 +54,7 @@ const cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::getActionsFamily(cons
   }
 
 //! @brief Insert the action in the family.
-cmb_acc::ActionRValue &cmb_acc::ActionsFamiliesMap::insert(const std::string &familyName,const Action &acc,const std::string &nmb_coefs_psi)
+cmb_acc::ActionRValue &cmb_acc::ActionsFamiliesMap::insert(const std::string &familyName,const Action &acc,const std::string &combination_factors_name)
   {
     ActionsFamily *familia_ptr= getActionsFamily("default");
     if(!familyName.empty())
@@ -66,7 +67,7 @@ cmb_acc::ActionRValue &cmb_acc::ActionsFamiliesMap::insert(const std::string &fa
         const_iterator i= familias.begin();
         familia_ptr= (*i).second;
       }
-    return familia_ptr->insert(acc,nmb_coefs_psi);
+    return familia_ptr->insert(acc,combination_factors_name);
   }
 
 //! @brief Crea una nueva familia con el nombre que se le pasa como parámetro.
@@ -107,11 +108,11 @@ cmb_acc::ActionsFamiliesMap &cmb_acc::ActionsFamiliesMap::operator=(const Action
   }
 
 //! @brief Return un puntero a la tabla de coeficientes de simultaneidad.
-const cmb_acc::PsiCoeffsMap *cmb_acc::ActionsFamiliesMap::getPtrPsiCoeffs(void) const
+const cmb_acc::CombinationFactorsMap *cmb_acc::ActionsFamiliesMap::getPtrCombinationFactors(void) const
   {
     const ActionContainer *tmp= dynamic_cast<const ActionContainer *>(Owner());
     if(tmp)
-      return tmp->getPtrPsiCoeffs();
+      return tmp->getPtrCombinationFactors();
     else
       {
 	std::cerr << getClassName() << "::" << __FUNCTION__
@@ -182,9 +183,9 @@ bool cmb_acc::ActionsFamiliesMap::empty(void) const
 
 
 //! @brief Return the combinations for the non-constant permanent actions.
-//! @param elu: Verdadero si las combinaciones corresponden a estados límite últimos.
+//! @param uls: Verdadero si las combinaciones corresponden a estados límite últimos.
 //! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
-cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::GetLoadCombinations(const bool &elu,const bool &sit_accidental) const
+cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::getLoadCombinations(const bool &uls,const bool &sit_accidental) const
   {
     LoadCombinationVector retval;
     for(const_iterator i= familias.begin();i!=familias.end();i++)
@@ -193,7 +194,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::GetLoadCombinations(
         assert(familia);
         if(!familia->empty()) //La familia contiene acciones.
           {
-            LoadCombinationVector SG_aster= familia->GetLoadCombinations(elu,sit_accidental,-1);//Las permanentes siempre con characteristic value.
+            LoadCombinationVector SG_aster= familia->getLoadCombinations(uls,sit_accidental,-1);//Las permanentes siempre con characteristic value.
             retval= LoadCombinationVector::ProdCartesiano(retval,SG_aster,Action::zero);
           }
       }
@@ -202,16 +203,10 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::GetLoadCombinations(
   }
 
 //! @brief Return the combinations for the non permanent actions.
-//! @param elu: Verdadero si las combinaciones corresponden a estados límite últimos.
+//! @param uls: Verdadero si las combinaciones corresponden a estados límite últimos.
 //! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
-//! @param r: Valor representativo a emplear para el caso general.
-//! - r= -1 -> characteristic value.
-//! - r= 0 -> valor de combinación.
-//! - r= 1 -> valor frecuente.
-//! - r= 2 -> valor cuasipermanente.
-//! @param d: Índice de la acción determinante (si no hay acción determinante d=-1).
-//! @param rr: Valor representativo a emplear para la acción determinante.
-cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::GetLoadCombinations(const bool &elu,const bool &sit_accidental,short int r,const int &d,const short int &rr) const
+//! @param leadingActionInfo: Information about the leading action.
+cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::getLoadCombinations(const bool &uls,const bool &sit_accidental, const LeadingActionInfo &leadingActionInfo) const
   {
     LoadCombinationVector retval;
     for(const_iterator i= familias.begin();i!=familias.end();i++)
@@ -220,7 +215,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::GetLoadCombinations(
         assert(familia);
         if(!familia->empty()) //La familia contiene acciones.
           {
-            LoadCombinationVector tmp= familia->GetLoadCombinations(elu,sit_accidental,r,d,rr);
+            LoadCombinationVector tmp= familia->getLoadCombinations(uls,sit_accidental,leadingActionInfo);
             retval= LoadCombinationVector::ProdCartesiano(retval,tmp,Action::zero);
           }
       }

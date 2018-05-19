@@ -31,8 +31,9 @@
 
 namespace cmb_acc{
 class Variation;
-class PsiCoeffsMap;
+class CombinationFactorsMap;
 class ActionsFamily;
+class LeadingActionInfo;
 
 //! @ingroup CMBACC
 //
@@ -45,11 +46,12 @@ class ActionRValueList: public std::deque<ActionRValue>, public EntCmd
     ActionRValue &push_back(const ActionRValue &a);
   public:
     //! @brief Return el valor de la acción de índice i
-    inline Action GetValor(const size_t &i,short int r) const
+    inline Action getValue(const size_t &i,short int r) const
       { return (*this)[i].Valor(r); }
+    Action getRepresentativeValue(const LeadingActionInfo &, const size_t &) const;
     ActionRValue &insert(const Action &,const std::string &);
-    Action FormaProdEscalar(const Variation &v,short int r,const int &d=-1,const short int &rr=-1) const;
-    const PsiCoeffsMap *getPtrPsiCoeffs(void) const;
+    Action FormaProdEscalar(const Variation &v,const LeadingActionInfo &) const;
+    const CombinationFactorsMap *getPtrCombinationFactors(void) const;
     void Print(std::ostream &os) const;
   };
 
