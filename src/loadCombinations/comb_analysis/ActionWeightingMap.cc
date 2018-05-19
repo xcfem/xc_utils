@@ -53,7 +53,7 @@ const cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::findByName(const st
   }
 
 //! @brief Crea una nueva ponderacion con el nombre que se le pasa como parámetro.
-cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::crea_ponderacion(const std::string &nmb,const PsiCoeffsMap &coefs)
+cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::crea_ponderacion(const std::string &nmb,const CombinationFactorsMap &coefs)
   {
     ActionContainer *tmp =nullptr;
     if(!existe(nmb)) //la ponderacion es nuevo.
@@ -86,7 +86,7 @@ cmb_acc::ActionWeightingMap &cmb_acc::ActionWeightingMap::operator=(const Action
   }
 
 //! @brief Define una ponderación de acciones.
-cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::defPonderacion(const std::string &nmb_ponderacion,const PsiCoeffsMap &coefs)
+cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::defPonderacion(const std::string &nmb_ponderacion,const CombinationFactorsMap &coefs)
   {
     ActionContainer *retval= crea_ponderacion(nmb_ponderacion,coefs);
     if(retval) retval->set_owner(this);
@@ -94,7 +94,7 @@ cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::defPonderacion(const std:
   }
 
 //! @brief Insert the action being passed as parameter.
-cmb_acc::ActionRValue &cmb_acc::ActionWeightingMap::insert(const std::string &pond,const std::string &familia,const Action &acc,const std::string &nmb_coefs_psi,const std::string &subfamilia)
+cmb_acc::ActionRValue &cmb_acc::ActionWeightingMap::insert(const std::string &pond,const std::string &familia,const Action &acc,const std::string &combination_factors_name,const std::string &subfamilia)
   {
     ActionContainer *ponderacion_ptr= findByName(pond);
     if(!ponderacion_ptr)
@@ -103,7 +103,7 @@ cmb_acc::ActionRValue &cmb_acc::ActionWeightingMap::insert(const std::string &po
 	          << "; weighting: '"
                   << pond << "' not found.\n";
       }
-    return ponderacion_ptr->insert(familia,acc,nmb_coefs_psi,subfamilia);
+    return ponderacion_ptr->insert(familia,acc,combination_factors_name,subfamilia);
   }
 
 //! @brief Borra todas las ponderaciones definidos.

@@ -19,49 +19,40 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PsiCoeffsMap.h
-//Contenedor de coeficientes de simultaneidad de acciones.
+//CombinationFactors.hxx
+//Valores representativos de una acción.
 
-#ifndef PSICOEFFSMAP_H
-#define PSICOEFFSMAP_H
+#ifndef PSICOEFFS_H
+#define PSICOEFFS_H
 
 #include "xc_utils/src/nucleo/EntCmd.h"
-#include "PsiCoeffs.h"
-#include <map>
 
-
-namespace cmb_acc {
-
-class LoadCombinationVector;
+namespace cmb_acc{
 
 //! @ingroup CMBACC
 //
-//! @brief Contenedor de coeficientes de simultaneidad de acciones.
-class PsiCoeffsMap: public EntCmd
+//! @brief Coeficientes de simultaneidad de una acción.
+class CombinationFactors: public EntCmd
   {
-  public:
-    typedef std::map<std::string,PsiCoeffs> map_coefs;
-    typedef map_coefs::iterator iterator;
-    typedef map_coefs::const_iterator const_iterator;
-
   private:
-    static PsiCoeffs coefs_por_defecto; //!< Coeficientes por defecto (todos =1.0).
-    map_coefs coefs; //!< Conjunto de coefs.
-
-    bool existe(const std::string &nmb) const;
-    PsiCoeffs *getPtrCoefs(const std::string &nmb);
-    PsiCoeffs *crea_coefs(const std::string &nmb);
-  protected:
-    friend class ActionContainer;
+    float psi_0; //!< Coeficiente de simultaneidad para obtener el valor de combinación.
+    float psi_1; //!< Coeficiente de simultaneidad para obtener el valor frecuente.
+    float psi_2; //!< Coeficiente de sumultaneidad para obtener el valor cuasipermanente.
   public:
-    PsiCoeffsMap(void);
-    size_t size(void) const;
-    static inline const PsiCoeffs &getCoefsPorDefecto(void)
-      { return coefs_por_defecto; }
-    const PsiCoeffs *getPtrCoefs(const std::string &nmb) const;
-    const PsiCoeffs &BuscaCoefs(const std::string &nmb) const;
-    void insert(const std::string &,const PsiCoeffs &);
+    //! @brief Constructor por defecto.
+    CombinationFactors(const float &p0= 1.0, const float &p1= 1.0, const float &p2= 1.0)
+      : EntCmd(),psi_0(p0), psi_1(p1), psi_2(p2) {}
+    //! @brief Constructor de copia.
+    const float &getCombinationFactor(short int r) const;
+    void Print(std::ostream &os) const;
   };
-} // fin namespace cmb_acc
+
+ inline std::ostream &operator<<(std::ostream &os, const CombinationFactors &cf)
+  {
+    cf.Print(os);
+    return os;
+  }
+
+} //fin namespace nmb_acc.
 
 #endif

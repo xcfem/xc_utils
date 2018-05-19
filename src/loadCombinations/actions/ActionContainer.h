@@ -27,7 +27,7 @@
 
 #include "ActionsFamily.h"
 #include "ActionsFamiliesMap.h"
-#include "xc_utils/src/loadCombinations/coeffs/PsiCoeffsMap.h"
+#include "xc_utils/src/loadCombinations/factors/CombinationFactorsMap.h"
 
 namespace cmb_acc{
 //! @ingroup CMBACC
@@ -41,24 +41,19 @@ class ActionContainer: public EntCmd
     ActionsFamiliesMap Q; //!< Variable actions.
     ActionsFamily A; //!< Accidental actions.
     ActionsFamily AS; //!< Earthquake actions.
-    PsiCoeffsMap coefs_psi; //!< Coeficientes de simultaneidad de las acciones.
+    CombinationFactorsMap combination_factors; //!< Coeficientes de simultaneidad de las acciones.
 
-    LoadCombinationVector GetLoadCombinationsG(const bool &elu,const bool &sit_accidental) const;
-    LoadCombinationVector GetLoadCombinationsG_aster(const bool &elu,const bool &sit_accidental) const;
-    LoadCombinationVector GetLoadCombinationsQ(const bool &elu,const bool &sit_accidental, short int r,int d=-1,short int rr=-1) const;
-    LoadCombinationVector GetLoadCombinationsA(short int r,int d=-1,short int rr=-1) const;
-    LoadCombinationVector GetLoadCombinationsAS(short int r,int d=-1,short int rr=-1) const;
-    LoadCombinationVector GetPermanentes(const bool &elu,const bool &sit_accidental) const;
-    LoadCombinationVector GetVariables(const LoadCombinationVector &permanentes,const bool &elu,const bool &sit_accidental,const short int &v) const;
+    LoadCombinationVector GetPermanentes(const bool &uls,const bool &sit_accidental) const;
+    LoadCombinationVector GetVariables(const LoadCombinationVector &permanentes,const bool &uls,const bool &sit_accidental,const short int &v) const;
     LoadCombinationVector GetAccSis(const LoadCombinationVector &previas,const ActionsFamily &Acc) const;
 
   protected:
     friend class ActionWeightingMap;
   public:
-    ActionContainer(const PsiCoeffsMap &coefs= PsiCoeffsMap());
+    ActionContainer(const CombinationFactorsMap &coefs= CombinationFactorsMap());
     inline virtual ~ActionContainer(void) {}
 
-    ActionRValue &insert(const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "default");
+    ActionRValue &insert(const std::string &,const Action &,const std::string &combination_factors_name="",const std::string &subfamilia= "default");
 
     const ActionsFamiliesMap &getPermanentActions(void) const;
     void setPermanentActions(const ActionsFamiliesMap &);
@@ -75,17 +70,17 @@ class ActionContainer: public EntCmd
     LoadCombinationVector GetPersistentesOTransit(void) const;
     LoadCombinationVector GetAccidentales(void) const;
     LoadCombinationVector GetSismicas(void) const;
-    LoadCombinationVector GetCombELU(void) const;
+    LoadCombinationVector GetCombULS(void) const;
     //Estados límite de servicio.
     LoadCombinationVector GetPocoFrecuentes(void) const;
     LoadCombinationVector GetFrecuentes(void) const;
     LoadCombinationVector GetCuasiPermanentes(void) const;
-    LoadCombinationVector GetCombELS(void) const;
+    LoadCombinationVector GetCombSLS(void) const;
 
-    const PsiCoeffsMap *getPtrPsiCoeffs(void) const
-      { return &coefs_psi; }
-    const PsiCoeffsMap &getPsiCoeffs(void) const
-      { return coefs_psi; }
+    const CombinationFactorsMap *getPtrCombinationFactors(void) const
+      { return &combination_factors; }
+    const CombinationFactorsMap &getCombinationFactors(void) const
+      { return combination_factors; }
   };
 } //fin namespace nmb_acc.
 

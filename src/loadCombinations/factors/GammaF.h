@@ -37,7 +37,7 @@ class ActionRValueList;
 //! @ingroup CMBACC
 //
 //! @brief Partial safety factors de una familia de acciones (permanentes, variables,...), en serviceability limit states.
-class GammaFELS: public EntCmd
+class GammaFSLS: public EntCmd
   {
   protected:
     //Partial safety factors
@@ -50,7 +50,7 @@ class GammaFELS: public EntCmd
     Variation Coefs(void) const;
   public:
     //! @brief Constructor por defecto. Supone control normal.
-    GammaFELS(const float &fav=0.0,const float &desfav=1.0);
+    GammaFSLS(const float &fav=0.0,const float &desfav=1.0);
     inline float getFavorable(void) const
       { return gamma_f_fav; }
     inline void setFavorable(const float &f)
@@ -62,14 +62,14 @@ class GammaFELS: public EntCmd
     virtual void Print(std::ostream &os) const;
   };
  
-inline std::ostream &operator<<(std::ostream &os, const GammaFELS &g)
+inline std::ostream &operator<<(std::ostream &os, const GammaFSLS &g)
   {
     g.Print(os);
     return os;
   }
  
 //! @brief Partial safety factors de una familia de acciones (permanentes, variables,...), en estados límite últimos .
-class GammaFELU: public GammaFELS
+class GammaFULS: public GammaFSLS
   {
     //Partial safety factors
     float gamma_f_fav_acc; //!< para favourable effect en situacion accidental o sísmica.
@@ -84,7 +84,7 @@ class GammaFELU: public GammaFELS
     Variation CoefsAcc(void) const;
   public:
     //! @brief Constructor por defecto. Supone control normal.
-    GammaFELU(const float &fav=0.0,const float &desfav=1.8,const float &fav_acc=0.0,const float &desfav_acc=1.0);
+    GammaFULS(const float &fav=0.0,const float &desfav=1.8,const float &fav_acc=0.0,const float &desfav_acc=1.0);
     inline float getFavorableAccidental(void) const
       { return gamma_f_fav_acc; }
     inline void setFavorableAccidental(const float &f)
@@ -96,22 +96,22 @@ class GammaFELU: public GammaFELS
     virtual void Print(std::ostream &os) const;
   };
 
-//! @brief Partial safety factors de una familia de acciones en ELS y ELU.
+//! @brief Partial safety factors de una familia de acciones en SLS y ULS.
 class GammaF: public EntCmd
   {
-    GammaFELU gammaf_elu; //!< Partial safety factors en estados límite últimos.
-    GammaFELS gammaf_els; //!< Partial safety factors en serviceability limit states.
+    GammaFULS gammaf_uls; //!< Partial safety factors en estados límite últimos.
+    GammaFSLS gammaf_els; //!< Partial safety factors en serviceability limit states.
   protected:
     Variation CoefsEls(void) const;
   public:
-    GammaF(const GammaFELU &gf_elu=GammaFELU(), const GammaFELS &gf_els=GammaFELS());
+    GammaF(const GammaFULS &gf_uls=GammaFULS(), const GammaFSLS &gf_els=GammaFSLS());
 
-    inline const GammaFELU &getGammaFELU(void) const
-      { return gammaf_elu; }
-    inline const GammaFELS &getGammaFELS(void) const
+    inline const GammaFULS &getGammaFULS(void) const
+      { return gammaf_uls; }
+    inline const GammaFSLS &getGammaFSLS(void) const
       { return gammaf_els; }
     //! @brief Return the partial safety factors correspondientes a estado límite de servicio.
-    Variations calcula_variations(const bool &elu,const bool &sit_accidental,const int &d,const ActionRValueList &) const;
+    Variations calcula_variations(const bool &uls,const bool &sit_accidental,const int &d,const ActionRValueList &) const;
     virtual void Print(std::ostream &os) const;
   };
 

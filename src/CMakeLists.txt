@@ -111,13 +111,13 @@ SET(NUCLEO nucleo/EntProp nucleo/EntCmd nucleo/Signos nucleo/TokenList nucleo/En
 
 #SET(VtkAux vtk_aux/vtkShStrArray vtk_aux/vtkLabeledShStrMapper vtk_aux/vtkTakePhotoDefs vtk_aux/vtkTakePhoto vtk_aux/vtkXOpenGLOffScreenRenderWindow vtk_aux/vtkDoubleHeadedArrowSource vtk_aux/vtkArcSource)
 
-SET(ca_coefs loadCombinations/coeffs/GammaF loadCombinations/coeffs/PsiCoeffs loadCombinations/coeffs/PsiCoeffsMap)
+SET(ca_factors loadCombinations/factors/GammaF loadCombinations/factors/CombinationFactors loadCombinations/factors/CombinationFactorsMap)
 
-SET(ca_acciones loadCombinations/actions/Action loadCombinations/actions/ActionRelationships loadCombinations/actions/ActionRValue loadCombinations/actions/ActionRValueList loadCombinations/actions/ActionsFamily loadCombinations/actions/ActionsFamiliesMap loadCombinations/actions/ActionContainer)
+SET(ca_acciones loadCombinations/actions/LeadingActionInfo loadCombinations/actions/Action loadCombinations/actions/ActionRelationships loadCombinations/actions/ActionRValue loadCombinations/actions/ActionRValueList loadCombinations/actions/ActionsFamily loadCombinations/actions/ActionsFamiliesMap loadCombinations/actions/ActionContainer)
 
 SET(ca_combinaciones loadCombinations/comb_analysis/Variation loadCombinations/comb_analysis/Variations loadCombinations/comb_analysis/LoadCombinationVector loadCombinations/comb_analysis/LoadCombinations loadCombinations/comb_analysis/ActionWeightingMap loadCombinations/comb_analysis/LoadCombinationGenerator)
 
-ADD_LIBRARY(xc_utils SHARED ${MYSQL} ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${NUCLEO}  ${VtkAux} ${ca_coefs} ${ca_acciones} ${ca_combinaciones})
+ADD_LIBRARY(xc_utils SHARED ${MYSQL} ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${NUCLEO}  ${VtkAux} ${ca_factors} ${ca_acciones} ${ca_combinaciones})
 
 #Interfaz Python
 LINK_LIBRARIES(xc_utils xc_basic ${VTK_BIB} ${CGAL_LIBRARIES} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${MySQLpp_LIBRARIES} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} boost_python ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})

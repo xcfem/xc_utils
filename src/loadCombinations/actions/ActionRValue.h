@@ -30,7 +30,7 @@
 namespace cmb_acc{
 
 class GammaF;
-class PsiCoeffs;
+class CombinationFactors;
 
 //! @ingroup CMBACC
 //
@@ -38,11 +38,11 @@ class PsiCoeffs;
 class ActionRValue: public Action
   {
   private:
-    ActionRValueList *acc_familia; //!< Contenedor de la familia de acciones de la que ésta forma parte.
-    const PsiCoeffs *coefs_psi; //!< Coeficientes de simultaneidad para valor de combinación.
+    ActionRValueList *acc_familia; //!< Container for the actions of the family.
+    const GammaF *gammaf; //!< Partial safety factors for this action.
+    const CombinationFactors *combination_factors; //!< Combination factors.
 
-    //! @brief Return el coeficiente de combinación cuyo índice se pasa como parámetro.
-    inline double getPsi(short int r) const;
+    inline double getCombinationFactor(short int r) const;
 
   protected:
     friend class ActionRValueList;
@@ -51,7 +51,7 @@ class ActionRValue: public Action
     ActionRValue(const Action &a,ActionRValueList *fam= nullptr,const std::string &nmb_coefs= "");
   public:
     Action Valor(short int r) const;
-    void setPsiCoeffs(const std::string &);
+    void setCombinationFactors(const std::string &);
     void Print(std::ostream &os) const;    
   };
 

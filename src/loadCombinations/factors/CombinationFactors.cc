@@ -19,40 +19,33 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PsiCoeffs.hxx
-//Valores representativos de una acción.
+//CombinationFactors.cxx
 
-#ifndef PSICOEFFS_H
-#define PSICOEFFS_H
+#include "CombinationFactors.h"
 
-#include "xc_utils/src/nucleo/EntCmd.h"
-
-namespace cmb_acc{
-
-//! @ingroup CMBACC
-//
-//! @brief Coeficientes de simultaneidad de una acción.
-class PsiCoeffs: public EntCmd
+//! @brief Return the r-th combination factor.
+const float &cmb_acc::CombinationFactors::getCombinationFactor(short int r) const
   {
-  private:
-    float psi_0; //!< Coeficiente de simultaneidad para obtener el valor de combinación.
-    float psi_1; //!< Coeficiente de simultaneidad para obtener el valor frecuente.
-    float psi_2; //!< Coeficiente de sumultaneidad para obtener el valor cuasipermanente.
-  public:
-    //! @brief Constructor por defecto.
-    PsiCoeffs(const float &p0= 1.0, const float &p1= 1.0, const float &p2= 1.0)
-      : EntCmd(),psi_0(p0), psi_1(p1), psi_2(p2) {}
-    //! @brief Constructor de copia.
-    const float &getPsi(short int r) const;
-    void Print(std::ostream &os) const;
-  };
-
- inline std::ostream &operator<<(std::ostream &os, const PsiCoeffs &cf)
-  {
-    cf.Print(os);
-    return os;
+    switch(r)
+      {
+      case(0):
+        return psi_0;
+      case(1):
+        return psi_1;
+      case(2):
+        return psi_2;
+      default:
+	std::cerr << getClassName() << "::" << __FUNCTION__
+	          << " índex: " << r
+		  << " out of range (0..2)." << std::endl;
+        return psi_0;
+      }
   }
 
-} //fin namespace nmb_acc.
-
-#endif
+//! @brief Print stuff.
+void cmb_acc::CombinationFactors::Print(std::ostream &os) const
+  {
+    os << "psi_0= " << psi_0
+       << ", psi_1= " <<  psi_1
+       << ", psi_2= " << psi_2;
+  }

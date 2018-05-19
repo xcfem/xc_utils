@@ -44,7 +44,7 @@ def SQLTtablaCombs(nmbDBase,nmbTabla,nmbCombinaciones,offset):
 
 
 # Define una tabla de combinaciones del tipo que se pasa como parámetro
-def SQLTtablaCombsELU(nmbDBase,nmbTabla,offset):
+def SQLTtablaCombsULS(nmbDBase,nmbTabla,offset):
   {
     
     cont= offset
@@ -80,7 +80,7 @@ def SQLTtablaCombsELU(nmbDBase,nmbTabla,offset):
   }
 
 # Crea una tabla de combinaciones en estado límite de servicio en situaciones poco frecuentes.
-def SQLTtablaCombsELSPF(nmbDBase,nmbTabla,offset):
+def SQLTtablaCombsSLSPF(nmbDBase,nmbTabla,offset):
   {
     
     cont= offset
@@ -100,7 +100,7 @@ def SQLTtablaCombsELSPF(nmbDBase,nmbTabla,offset):
   }
 
 # Crea una tabla de combinaciones en estado límite de servicio en situaciones frecuentes.
-def SQLTtablaCombsELSF(nmbDBase,nmbTabla,offset):
+def SQLTtablaCombsSLSF(nmbDBase,nmbTabla,offset):
   {
     
     cont= offset
@@ -120,7 +120,7 @@ def SQLTtablaCombsELSF(nmbDBase,nmbTabla,offset):
   }
 
 # Crea una tabla de combinaciones en estado límite de servicio en situaciones cuasi_permanentes.
-def SQLTtablaCombsELSCP(nmbDBase,nmbTabla,offset):
+def SQLTtablaCombsSLSCP(nmbDBase,nmbTabla,offset):
   {
     
     cont= offset

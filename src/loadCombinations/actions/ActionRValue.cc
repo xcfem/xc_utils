@@ -23,47 +23,47 @@
 
 #include "xc_utils/src/loadCombinations/actions/ActionRValue.h"
 #include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
-#include "xc_utils/src/loadCombinations/coeffs/GammaF.h"
-#include "xc_utils/src/loadCombinations/coeffs/PsiCoeffsMap.h"
+#include "xc_utils/src/loadCombinations/factors/GammaF.h"
+#include "xc_utils/src/loadCombinations/factors/CombinationFactorsMap.h"
 
 
 
 //! @brief Constructor por defecto.
 cmb_acc::ActionRValue::ActionRValue(const std::string &n, const std::string &descrip,ActionRValueList *fam)
-  : Action(n,descrip), acc_familia(fam), coefs_psi(&PsiCoeffsMap::getCoefsPorDefecto()) {}
+  : Action(n,descrip), acc_familia(fam), combination_factors(&CombinationFactorsMap::getCoefsPorDefecto()) {}
 
 //! @brief Constructor por defecto.
-cmb_acc::ActionRValue::ActionRValue(const Action &a,ActionRValueList *fam,const std::string &nmb_coefs)
-  : Action(a), acc_familia(fam), coefs_psi(&PsiCoeffsMap::getCoefsPorDefecto()) 
+cmb_acc::ActionRValue::ActionRValue(const Action &a,ActionRValueList *fam,const std::string &nmb_factors)
+  : Action(a), acc_familia(fam), combination_factors(&CombinationFactorsMap::getCoefsPorDefecto()) 
   {
-    setPsiCoeffs(nmb_coefs);
+    setCombinationFactors(nmb_factors);
   }
 
 //! @brief Asigna los coeficientes de simultaneidad de la acción.
-void cmb_acc::ActionRValue::setPsiCoeffs(const std::string &nmb_coefs)
+void cmb_acc::ActionRValue::setCombinationFactors(const std::string &nmb_factors)
   {
-    if(!nmb_coefs.empty())
+    if(!nmb_factors.empty())
       {
-        const PsiCoeffs *tmp=nullptr;
+        const CombinationFactors *tmp=nullptr;
         if(acc_familia)
-          tmp= acc_familia->getPtrPsiCoeffs()->getPtrCoefs(nmb_coefs);
+          tmp= acc_familia->getPtrCombinationFactors()->getPtrCoefs(nmb_factors);
         else
           std::cerr << getClassName() << "::" << __FUNCTION__
 	            << "; pointer to actions family not set." << std::endl;
         if(tmp)
-           coefs_psi= tmp;
+           combination_factors= tmp;
 	else
           std::cerr << getClassName() << "::" << __FUNCTION__
-	            << "; psi factors with name: '" << nmb_coefs
+	            << "; combination factors with name: '" << nmb_factors
 	            << "' not found." << std::endl;	  
       }
   }
 
-double cmb_acc::ActionRValue::getPsi(short int r) const
-  { return coefs_psi->getPsi(r); }
+//! @brief Return the r-th combination factor.
+double cmb_acc::ActionRValue::getCombinationFactor(short int r) const
+  { return combination_factors->getCombinationFactor(r); }
 
-//! \fn cmb_acc::Action cmb_acc::ActionRValue::Valor(short int r) const
-//! @brief Return el valor representativo de la acción.
+//! @brief Return the representative value of the action.
 cmb_acc::Action cmb_acc::ActionRValue::Valor(short int r) const
   {
     Action retval(*this);
@@ -72,13 +72,13 @@ cmb_acc::Action cmb_acc::ActionRValue::Valor(short int r) const
       case(-1):
         break; //characteristic value.
       case(0):
-        retval*=getPsi(0); //Valor de combinación.
+        retval*=getCombinationFactor(0); //Valor de combinación.
         break;
       case(1):
-        retval*=getPsi(1); //Valor frecuente.
+        retval*=getCombinationFactor(1); //Valor frecuente.
         break;
       case(2):
-        retval*=getPsi(2); //Valor cuasipermanente.
+        retval*=getCombinationFactor(2); //Valor cuasipermanente.
         break;
       default:
         break;
@@ -90,6 +90,6 @@ cmb_acc::Action cmb_acc::ActionRValue::Valor(short int r) const
 void cmb_acc::ActionRValue::Print(std::ostream &os) const
   {
     Action::Print(os);
-    if(coefs_psi)
-      os << "; " << *coefs_psi;
+    if(combination_factors)
+      os << "; " << *combination_factors;
   }

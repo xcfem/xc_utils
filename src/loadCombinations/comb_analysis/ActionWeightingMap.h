@@ -26,7 +26,7 @@
 #define ACTIONWEIGHTINGMAP_H
 
 #include "xc_utils/src/nucleo/EntCmd.h"
-#include "xc_utils/src/loadCombinations/coeffs/PsiCoeffsMap.h"
+#include "xc_utils/src/loadCombinations/factors/CombinationFactorsMap.h"
 #include <map>
 
 
@@ -51,7 +51,7 @@ class ActionWeightingMap: public EntCmd
     map_ponderaciones ponderaciones; //!< Conjunto de ponderaciones.
 
     bool existe(const std::string &nmb) const;
-    ActionContainer *crea_ponderacion(const std::string &nmb,const PsiCoeffsMap &coefs= PsiCoeffsMap());
+    ActionContainer *crea_ponderacion(const std::string &nmb,const CombinationFactorsMap &coefs= CombinationFactorsMap());
     void clear(void);
     void copia(const map_ponderaciones &pond);
   protected:
@@ -61,9 +61,9 @@ class ActionWeightingMap: public EntCmd
     ActionWeightingMap(const ActionWeightingMap &otro);
     ActionWeightingMap &operator=(const ActionWeightingMap &otro);
     virtual ~ActionWeightingMap(void);
-    cmb_acc::ActionContainer *defPonderacion(const std::string &,const PsiCoeffsMap &coefs= PsiCoeffsMap());
+    cmb_acc::ActionContainer *defPonderacion(const std::string &,const CombinationFactorsMap &coefs= CombinationFactorsMap());
 
-    ActionRValue &insert(const std::string &pond,const std::string &,const Action &,const std::string &nmb_coefs_psi="",const std::string &subfamilia= "default");
+    ActionRValue &insert(const std::string &pond,const std::string &,const Action &,const std::string &combination_factors_name="",const std::string &subfamilia= "default");
 
     size_t size(void) const;
     bool empty(void) const;

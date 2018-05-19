@@ -209,6 +209,7 @@ m_double cmb_acc::LoadCombinationVector::getCoeficientes(const std::vector<std::
     return retval;
   }
 
+//! @brief Print stuff.
 void cmb_acc::LoadCombinationVector::Print(std::ostream &os) const
   {
     for(const_iterator i= begin(); i!=end();i++)

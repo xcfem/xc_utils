@@ -48,7 +48,7 @@ class_<dq_action_r_value >("dq_action_r_values")
   ;
 
 class_<ActionRValueList, bases<dq_action_r_value,EntCmd> >("ActionRValueLists")
-  .def("getValue",&ActionRValueList::GetValor,"Returns action's i value.")
+  .def("getValue",&ActionRValueList::getValue,"Returns action's i value.")
   .def(self_ns::str(self_ns::self))
   ;
 
@@ -74,12 +74,12 @@ class_<ActionsFamiliesMap, bases<EntConNmb>, boost::noncopyable >("ActionsFamili
   ;
 
 class_<ActionContainer, bases<EntCmd> >("ActionContainer")
-  .def(init<PsiCoeffsMap>())
+  .def(init<CombinationFactorsMap>())
   .add_property("permanentActions", make_function( &ActionContainer::getPermanentActions, return_internal_reference<>() ), &ActionContainer::setPermanentActions)
   .add_property("ncPermanentActions", make_function( &ActionContainer::getPermanentActionsNC, return_internal_reference<>() ), &ActionContainer::setPermanentActionsNC,"return a reference to the families of non-constant permanent actions container.")
   .add_property("variableActions", make_function( &ActionContainer::getVariableActions, return_internal_reference<>() ), &ActionContainer::setVariableActions,"return a reference to the families of variable actions container.")
   .add_property("accidentalActions", make_function( &ActionContainer::getAccidentalActions, return_internal_reference<>() ), &ActionContainer::setAccidentalActions)
   .add_property("seismicActions", make_function( &ActionContainer::getSeismicActions, return_internal_reference<>() ), &ActionContainer::setSeismicActions)
-  .def("getPsiCoeffs", &ActionContainer::getPsiCoeffs, return_value_policy<copy_const_reference>())
+  .def("getCombinationFactors", &ActionContainer::getCombinationFactors, return_value_policy<copy_const_reference>())
   .def("insert", make_function(&ActionContainer::insert,return_internal_reference<>()))
   ;

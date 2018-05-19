@@ -26,8 +26,8 @@
 #include <boost/python/class.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/docstring_options.hpp>
-#include "xc_utils/src/loadCombinations/coeffs/GammaF.h"
-#include "xc_utils/src/loadCombinations/coeffs/PsiCoeffs.h"
+#include "xc_utils/src/loadCombinations/factors/GammaF.h"
+#include "xc_utils/src/loadCombinations/factors/CombinationFactors.h"
 #include "xc_utils/src/loadCombinations/actions/Action.h"
 #include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
 #include "xc_utils/src/loadCombinations/actions/ActionsFamily.h"
@@ -46,7 +46,7 @@ BOOST_PYTHON_MODULE(loadCombinations)
     class_<std::vector<double> >("StdVectorDouble")
         .def(vector_indexing_suite<std::vector<double> >() );
 
-#include "coeffs/python_interface.tcc"
+#include "factors/python_interface.tcc"
 #include "actions/python_interface.tcc"
 #include "comb_analysis/python_interface.tcc"
   }

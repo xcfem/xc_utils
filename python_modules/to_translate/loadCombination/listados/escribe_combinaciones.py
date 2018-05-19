@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-def escribeCombinacionesELU(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
+def escribeCombinacionesULS(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
   {
     def_hip_elu.open(nmbArchivoDef,"w")
     \combinaciones
@@ -50,7 +50,7 @@ def escribeCombinacionesELU(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
     hip_elu_tex.close()
   }
 
-def escribeCombinacionesELSFrecuentes(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
+def escribeCombinacionesSLSFrecuentes(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
   {
     def_hip_els.open(nmbArchivoDef,"w")
     \combinaciones

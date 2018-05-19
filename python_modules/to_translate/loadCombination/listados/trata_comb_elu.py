@@ -10,10 +10,10 @@ hip_elu_tex.open("./hipotesis_elu.tex","w")
         \expr{conta= 1}
         \for_each
           {
-            def_hip_elu.write("\combinacion[\"",format(int(conta),"ELU%03u"),"\"]{ \descomp{\"",getNombre,"\"}}\n")
-            calc_hip_elu.write("\\resuelveCombEstatLin(\"",format(int(conta),"ELU%03u"),"\"){}","\n")
-            calc_hip_elu.write("\\trataResultsComb(\"",format(int(conta),"ELU%03u"),"\"){}","\n")
-            hip_elu_tex.write(format(int(conta),"ELU%03u")," & ",getNombre,"\\\\\n")
+            def_hip_elu.write("\combinacion[\"",format(int(conta),"ULS%03u"),"\"]{ \descomp{\"",getNombre,"\"}}\n")
+            calc_hip_elu.write("\\resuelveCombEstatLin(\"",format(int(conta),"ULS%03u"),"\"){}","\n")
+            calc_hip_elu.write("\\trataResultsComb(\"",format(int(conta),"ULS%03u"),"\"){}","\n")
+            hip_elu_tex.write(format(int(conta),"ULS%03u")," & ",getNombre,"\\\\\n")
             \expr{conta= tonum(conta+1)}
           }
       }

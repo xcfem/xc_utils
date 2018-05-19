@@ -21,29 +21,29 @@
 //----------------------------------------------------------------------------
 //python_interface.tcc
 
-class_<cmb_acc::GammaFELS, bases<EntCmd> >("GammaFELS")
+class_<cmb_acc::GammaFSLS, bases<EntCmd> >("GammaFSLS")
   .def(init<float, float>())
-  .add_property("favorable", &cmb_acc::GammaFELS::getFavorable, &cmb_acc::GammaFELS::setFavorable)
-  .add_property("desfavorable", &cmb_acc::GammaFELS::getDesfavorable, &cmb_acc::GammaFELS::setDesfavorable)
+  .add_property("favorable", &cmb_acc::GammaFSLS::getFavorable, &cmb_acc::GammaFSLS::setFavorable)
+  .add_property("desfavorable", &cmb_acc::GammaFSLS::getDesfavorable, &cmb_acc::GammaFSLS::setDesfavorable)
   .def(self_ns::str(self_ns::self))
   ;
 
-class_<GammaFELU, bases<GammaFELS> >("GammaFELU")
+class_<GammaFULS, bases<GammaFSLS> >("GammaFULS")
   .def(init<float, float,float,float>())
-  .add_property("favorableAccidental", &GammaFELU::getFavorableAccidental, &GammaFELU::setFavorableAccidental)
-  .add_property("desfavorableAccidental", &GammaFELU::getDesfavorableAccidental, &GammaFELU::setDesfavorableAccidental);
+  .add_property("favorableAccidental", &GammaFULS::getFavorableAccidental, &GammaFULS::setFavorableAccidental)
+  .add_property("desfavorableAccidental", &GammaFULS::getDesfavorableAccidental, &GammaFULS::setDesfavorableAccidental);
 
 class_<GammaF, bases<EntCmd> >("GammaF")
-  .def(init<GammaFELU, GammaFELS>())
-  .add_property("getGammaFELU", make_function( &GammaF::getGammaFELU, return_internal_reference<>() ))
-  .add_property("getGammaFELS", make_function( &GammaF::getGammaFELS, return_internal_reference<>() ))
+  .def(init<GammaFULS, GammaFSLS>())
+  .add_property("getGammaFULS", make_function( &GammaF::getGammaFULS, return_internal_reference<>() ))
+  .add_property("getGammaFSLS", make_function( &GammaF::getGammaFSLS, return_internal_reference<>() ))
   .def(self_ns::str(self_ns::self))
   ;
 
-class_<PsiCoeffs, bases<EntCmd> >("PsiCoeffs")
+class_<CombinationFactors, bases<EntCmd> >("CombinationFactors")
   .def(init<double, double, double>())
-  .def("getPsi", &PsiCoeffs::getPsi, return_value_policy<copy_const_reference>());
+.def("getCombinationFactor", &CombinationFactors::getCombinationFactor, return_value_policy<copy_const_reference>(),"Return the r-th combination factor.");
 
-class_<PsiCoeffsMap, bases<EntCmd> >("PsiCoeffsDict")
-  .def("get", &PsiCoeffsMap::BuscaCoefs, return_value_policy<copy_const_reference>())
-  .def("insert", &PsiCoeffsMap::insert);
+class_<CombinationFactorsMap, bases<EntCmd> >("CombinationFactorsDict")
+  .def("get", &CombinationFactorsMap::BuscaCoefs, return_value_policy<copy_const_reference>())
+  .def("insert", &CombinationFactorsMap::insert);
