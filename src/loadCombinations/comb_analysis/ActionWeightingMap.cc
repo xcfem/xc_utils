@@ -22,47 +22,47 @@
 //ActionWeightingMap.cc
 
 #include "ActionWeightingMap.h"
-#include "xc_utils/src/loadCombinations/actions/ActionContainer.h"
+#include "xc_utils/src/loadCombinations/actions/ActionsAndFactors.h"
 
 
 #include "LoadCombinations.h"
 
 
 
-//! @brief Return verdadero si la ponderacion existe.
-bool cmb_acc::ActionWeightingMap::existe(const std::string &nmb) const
-  { return (ponderaciones.find(nmb)!=ponderaciones.end()); }
+//! @brief Return true if the object is found.
+bool cmb_acc::ActionWeightingMap::exists(const std::string &nmb) const
+  { return (actions_and_factors.find(nmb)!=actions_and_factors.end()); }
 
-//! @brief Return un puntero a la ponderacion cuyo nombre se pasa como parámetro.
-cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::findByName(const std::string &nmb)
+//! @brief Return a pointer to the object with argument name.
+cmb_acc::ActionsAndFactors *cmb_acc::ActionWeightingMap::findByName(const std::string &name)
   {
-    if(existe(nmb))
-      return ponderaciones[nmb];
+    if(exists(name))
+      return actions_and_factors[name];
     else
       return nullptr;
   }
 
-//! @brief Return un puntero a la ponderacion cuyo nombre se pasa como parámetro.
-const cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::findByName(const std::string &nmb) const
+//! @brief Return a pointer to the object with that name.
+const cmb_acc::ActionsAndFactors *cmb_acc::ActionWeightingMap::findByName(const std::string &name) const
   {
-    const_iterator i= ponderaciones.find(nmb);
-    if(i!= ponderaciones.end())
+    const_iterator i= actions_and_factors.find(name);
+    if(i!= actions_and_factors.end())
       return (*i).second;
     else
       return nullptr;
   }
 
-//! @brief Crea una nueva ponderacion con el nombre que se le pasa como parámetro.
-cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::crea_ponderacion(const std::string &nmb,const CombinationFactorsMap &coefs)
+//! @brief Creates a new object with the argument name.
+cmb_acc::ActionsAndFactors *cmb_acc::ActionWeightingMap::findOrCreate(const std::string &name,const Factors &factors)
   {
-    ActionContainer *tmp =nullptr;
-    if(!existe(nmb)) //la ponderacion es nuevo.
+    ActionsAndFactors *tmp =nullptr;
+    if(!exists(name)) //new object.
       {
-        tmp= new ActionContainer(coefs);
-        ponderaciones[nmb]= tmp;
+        tmp= new ActionsAndFactors(factors);
+        actions_and_factors[name]= tmp;
       }
-    else //la ponderacion existe
-      tmp= findByName(nmb);
+    else //already exists
+      tmp= findByName(name);
     return tmp;
   }
 
@@ -70,25 +70,25 @@ cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::crea_ponderacion(const st
 cmb_acc::ActionWeightingMap::ActionWeightingMap(void)
   : EntCmd() {}
 
-//! @brief Constructor de copia (NO COPIA LAS PONDERACIONES).
+//! @brief Constructor de copia (NO COPIA LAS ACTIONS_AND_FACTORS).
 cmb_acc::ActionWeightingMap::ActionWeightingMap(const ActionWeightingMap &otro)
   : EntCmd(otro)
   {
-    copia(otro.ponderaciones);
+    copy(otro.actions_and_factors);
   }
 
-//! @brief Operador asignación (NO COPIA LAS PONDERACIONES).
+//! @brief Operador asignación (NO COPIA LAS ACTIONS_AND_FACTORS).
 cmb_acc::ActionWeightingMap &cmb_acc::ActionWeightingMap::operator=(const ActionWeightingMap &otro)
   {
     EntCmd::operator=(otro);
-    copia(otro.ponderaciones);
+    copy(otro.actions_and_factors);
     return *this;
   }
 
 //! @brief Define una ponderación de acciones.
-cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::defPonderacion(const std::string &nmb_ponderacion,const CombinationFactorsMap &coefs)
+cmb_acc::ActionsAndFactors *cmb_acc::ActionWeightingMap::create(const std::string &nmb_ponderacion,const Factors &factors)
   {
-    ActionContainer *retval= crea_ponderacion(nmb_ponderacion,coefs);
+    ActionsAndFactors *retval= findOrCreate(nmb_ponderacion,factors);
     if(retval) retval->set_owner(this);
     return retval;
   }
@@ -96,7 +96,7 @@ cmb_acc::ActionContainer *cmb_acc::ActionWeightingMap::defPonderacion(const std:
 //! @brief Insert the action being passed as parameter.
 cmb_acc::ActionRValue &cmb_acc::ActionWeightingMap::insert(const std::string &pond,const std::string &familia,const Action &acc,const std::string &combination_factors_name,const std::string &subfamilia)
   {
-    ActionContainer *ponderacion_ptr= findByName(pond);
+    ActionsAndFactors *ponderacion_ptr= findByName(pond);
     if(!ponderacion_ptr)
       {
         std::cerr << getClassName() << "::" << __FUNCTION__
@@ -106,52 +106,52 @@ cmb_acc::ActionRValue &cmb_acc::ActionWeightingMap::insert(const std::string &po
     return ponderacion_ptr->insert(familia,acc,combination_factors_name,subfamilia);
   }
 
-//! @brief Borra todas las ponderaciones definidos.
+//! @brief Borra todas las actions_and_factors definidos.
 void cmb_acc::ActionWeightingMap::clear(void)
   {
-    for(iterator i= ponderaciones.begin();i!=ponderaciones.end();i++)
+    for(iterator i= actions_and_factors.begin();i!=actions_and_factors.end();i++)
       {
         delete (*i).second;
         (*i).second= nullptr;
       }
-    ponderaciones.clear();
+    actions_and_factors.clear();
   }
 
-//! @brief Copia las ponderaciones que se pasan comp parámetro.
-void cmb_acc::ActionWeightingMap::copia(const map_ponderaciones &pond)
+//! @brief Copy the objects from the argument.
+void cmb_acc::ActionWeightingMap::copy(const map_actions_and_factors &a_and_f)
   {
     clear();
-    for(const_iterator i= pond.begin();i!=pond.end();i++)
+    for(const_iterator i= a_and_f.begin();i!=a_and_f.end();i++)
       {
-        const std::string nmb= (*i).first;
-        const ActionContainer *a= (*i).second;
+        const std::string name= (*i).first;
+        const ActionsAndFactors *a= (*i).second;
         assert(a);
-        ponderaciones[nmb]= new ActionContainer(*a);
+        actions_and_factors[name]= new ActionsAndFactors(*a);
       }
   }
 
 cmb_acc::ActionWeightingMap::~ActionWeightingMap(void)
   {
-    //ponderaciones.clear();
+    //actions_and_factors.clear();
     clear();
   }
 
-//! @brief Return el número de ponderaciones de todas las ponderaciones.
+//! @brief Return el número de actions_and_factors de todas las actions_and_factors.
 size_t cmb_acc::ActionWeightingMap::size(void) const
-  { return ponderaciones.size(); }
+  { return actions_and_factors.size(); }
 
-//! brief Return verdadero si las ponderaciones estan vacías.
+//! brief Return verdadero si las actions_and_factors estan vacías.
 bool cmb_acc::ActionWeightingMap::empty(void) const
-  { return ponderaciones.empty(); }
+  { return actions_and_factors.empty(); }
 
 cmb_acc::ActionWeightingMap::iterator cmb_acc::ActionWeightingMap::begin(void)
-  { return ponderaciones.begin(); }
+  { return actions_and_factors.begin(); }
 cmb_acc::ActionWeightingMap::const_iterator cmb_acc::ActionWeightingMap::begin(void) const
-  { return ponderaciones.begin(); }
+  { return actions_and_factors.begin(); }
 cmb_acc::ActionWeightingMap::iterator cmb_acc::ActionWeightingMap::end(void)
-  { return ponderaciones.end(); }
+  { return actions_and_factors.end(); }
 cmb_acc::ActionWeightingMap::const_iterator cmb_acc::ActionWeightingMap::end(void) const
-  { return ponderaciones.end(); }
+  { return actions_and_factors.end(); }
 
 //! @brief Return the names of the action weightings.
 boost::python::list cmb_acc::ActionWeightingMap::getKeys(void) const
@@ -161,11 +161,11 @@ boost::python::list cmb_acc::ActionWeightingMap::getKeys(void) const
       retval.append((*i).first);
     return retval;    
   }
-//! @bried Return las combinaciones correspondientes a todas las ponderaciones.
+//! @bried Return las combinaciones correspondientes a todas las actions_and_factors.
 cmb_acc::LoadCombinations cmb_acc::ActionWeightingMap::getLoadCombinations(void)
   {
     LoadCombinations retval;
-    for(const_iterator i= ponderaciones.begin();i!=ponderaciones.end();i++)
+    for(const_iterator i= actions_and_factors.begin();i!=actions_and_factors.end();i++)
       retval.Concat(LoadCombinations(*(*i).second));
     return retval;
   }

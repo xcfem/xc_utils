@@ -19,29 +19,37 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PartialSafetyFactorsMap.h
-//Contenedor de coeficientes de simultaneidad de acciones.
+//Factors.h
+//Container for the partial safety factors and the combination factors.
 
-#ifndef PARTIALSAFETYFACTORSMAP_H
-#define PARTIALSAFETYFACTORSMAP_H
+#ifndef FACTORS_H
+#define FACTORS_H
 
-#include "xc_utils/src/nucleo/EntCmd.h"
-#include "PartialSafetyFactors.h"
-#include "FactorsMap.h"
+#include "CombinationFactorsMap.h"
+#include "PartialSafetyFactorsMap.h"
 
-
-namespace cmb_acc {
-
+namespace cmb_acc{
 //! @ingroup CMBACC
 //
-//! @brief Partial safety factors container.
-class PartialSafetyFactorsMap: public FactorsMap<PartialSafetyFactors>
+//! @brief Almacena todas las familias de acciones.
+class Factors: public EntCmd
   {
   private:
-    friend class ActionsAndFactors;
+    PartialSafetyFactorsMap partial_safety_factors; //!< Partial safety factors.
+    CombinationFactorsMap combination_factors; //!< Combination factors.
+
   public:
-    PartialSafetyFactorsMap(void);
+    Factors(const PartialSafetyFactorsMap &psf= PartialSafetyFactorsMap(), const CombinationFactorsMap &cf= CombinationFactorsMap());
+
+    const CombinationFactorsMap *getPtrCombinationFactors(void) const
+      { return &combination_factors; }
+    const CombinationFactorsMap &getCombinationFactors(void) const
+      { return combination_factors; }
+    const PartialSafetyFactorsMap *getPtrPartialSafetyFactors(void) const
+      { return &partial_safety_factors; }
+    const PartialSafetyFactorsMap &getPartialSafetyFactors(void) const
+      { return partial_safety_factors; }
   };
-} // fin namespace cmb_acc
+} //fin namespace nmb_acc.
 
 #endif

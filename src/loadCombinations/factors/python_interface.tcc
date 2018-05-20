@@ -40,15 +40,38 @@ class_<PartialSafetyFactors, bases<EntCmd> >("PartialSafetyFactors")
   .def(self_ns::str(self_ns::self))
   ;
 
-class_<PartialSafetyFactorsMap, bases<EntCmd> >("PartialSafetyFactorsDict")
+typedef std::map<std::string,PartialSafetyFactors> map_partial_safety_factors;
+class_<map_partial_safety_factors >("map_partial_safety_factorss")
+  .def(map_indexing_suite<map_partial_safety_factors>())
+  ;
+
+typedef FactorsMap<PartialSafetyFactors> factors_map_partial_safety_factors;
+class_<factors_map_partial_safety_factors, bases<EntCmd,map_partial_safety_factors> >("factors_map_partial_safety_factors")
+  ;
+
+class_<PartialSafetyFactorsMap, bases<factors_map_partial_safety_factors> >("PartialSafetyFactorsDict")
   .def("get", &PartialSafetyFactorsMap::BuscaCoefs, return_value_policy<copy_const_reference>())
   .def("insert", &PartialSafetyFactorsMap::insert);
-
 
 class_<CombinationFactors, bases<EntCmd> >("CombinationFactors")
   .def(init<double, double, double>())
 .def("getCombinationFactor", &CombinationFactors::getCombinationFactor, return_value_policy<copy_const_reference>(),"Return the r-th combination factor.");
 
-class_<CombinationFactorsMap, bases<EntCmd> >("CombinationFactorsDict")
+typedef std::map<std::string,CombinationFactors> map_combination_factors;
+class_<map_combination_factors >("map_combination_factors")
+  .def(map_indexing_suite<map_combination_factors>())
+  ;
+
+typedef FactorsMap<CombinationFactors> factors_map_combination_factors;
+class_<factors_map_combination_factors, bases<EntCmd,map_combination_factors> >("factors_map_combination_factors")
+  ;
+
+class_<CombinationFactorsMap, bases<factors_map_combination_factors> >("CombinationFactorsDict")
   .def("get", &CombinationFactorsMap::BuscaCoefs, return_value_policy<copy_const_reference>())
   .def("insert", &CombinationFactorsMap::insert);
+
+
+class_<Factors, bases<EntCmd> >("Factors")
+  .def("getPartialSafetyFactors", &Factors::getPartialSafetyFactors, return_internal_reference<>())
+  .def("getCombinationFactors", &Factors::getCombinationFactors, return_internal_reference<>())
+  ;

@@ -63,8 +63,19 @@ void cmb_acc::ActionRValue::setCombinationFactors(const std::string &nmb_factors
 double cmb_acc::ActionRValue::getCombinationFactor(short int r) const
   { return combination_factors->getCombinationFactor(r); }
 
+//! @brief Return the r-th combination factor.
+const cmb_acc::PartialSafetyFactors *cmb_acc::ActionRValue::getPartialSafetyFactors(void) const
+  {
+    if(!partial_safety_factors)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; action: " << getName()
+	        << ": partial safety factors not set."
+	        << std::endl;
+    return partial_safety_factors;
+  }
+
 //! @brief Return the representative value of the action.
-cmb_acc::Action cmb_acc::ActionRValue::Valor(short int r) const
+cmb_acc::Action cmb_acc::ActionRValue::getValue(short int r) const
   {
     Action retval(*this);
     switch(r)
@@ -72,13 +83,13 @@ cmb_acc::Action cmb_acc::ActionRValue::Valor(short int r) const
       case(-1):
         break; //characteristic value.
       case(0):
-        retval*=getCombinationFactor(0); //Valor de combinación.
+        retval*=getCombinationFactor(0); //combination value.
         break;
       case(1):
-        retval*=getCombinationFactor(1); //Valor frecuente.
+        retval*=getCombinationFactor(1); //frequent value.
         break;
       case(2):
-        retval*=getCombinationFactor(2); //Valor cuasipermanente.
+        retval*=getCombinationFactor(2); //quasi-permanent value.
         break;
       default:
         break;

@@ -32,7 +32,7 @@ namespace cmb_acc{
 class Variations;
 class LoadCombinationVector;
 class CombinationFactorsMap;
-class ActionContainer;
+class ActionsAndFactors;
 class ActionsFamiliesMap;
 class LeadingActionInfo;
 
@@ -53,7 +53,7 @@ class ActionsFamily: public EntConNmb
 
   protected:
     friend class ActionsFamiliesMap;
-    friend class ActionContainer;
+    friend class ActionsAndFactors;
   public:
     ActionsFamily(const std::string &nmb="",const PartialSafetyFactors &gf=PartialSafetyFactors());
     inline virtual ~ActionsFamily(void) {}
@@ -77,6 +77,8 @@ class ActionsFamily: public EntConNmb
       { partial_safety_factors= gf; }
     inline PartialSafetyFactors &getPartialSafetyFactors(void)
       { return partial_safety_factors; }
+    
+    const ActionsAndFactors *getActionsAndFactors(void) const;
     const CombinationFactorsMap *getPtrCombinationFactors(void) const;
     
     Variations computeVariations(const bool &uls= true,const bool &sit_accidental= false,const int &d=-1) const;

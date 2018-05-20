@@ -19,29 +19,32 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PartialSafetyFactorsMap.h
-//Contenedor de coeficientes de simultaneidad de acciones.
+//ActionsAndFactors.h
+//Almacena todas las familias de acciones para la estructura o el elemento estructural.
 
-#ifndef PARTIALSAFETYFACTORSMAP_H
-#define PARTIALSAFETYFACTORSMAP_H
+#ifndef ACTIONSANDFACTORS_H
+#define ACTIONSANDFACTORS_H
 
-#include "xc_utils/src/nucleo/EntCmd.h"
-#include "PartialSafetyFactors.h"
-#include "FactorsMap.h"
+#include "ActionContainer.h"
+#include "xc_utils/src/loadCombinations/factors/Factors.h"
 
-
-namespace cmb_acc {
-
+namespace cmb_acc{
 //! @ingroup CMBACC
 //
-//! @brief Partial safety factors container.
-class PartialSafetyFactorsMap: public FactorsMap<PartialSafetyFactors>
+//! @brief Almacena todas las familias de acciones.
+class ActionsAndFactors: public ActionContainer
   {
   private:
-    friend class ActionsAndFactors;
+    Factors factors; //!< Factors to use to build combinations.
+
+  protected:
+    friend class ActionWeightingMap;
   public:
-    PartialSafetyFactorsMap(void);
+    ActionsAndFactors(const Factors &factors= Factors());
+
+    const Factors &getFactors(void) const
+      { return factors; }
   };
-} // fin namespace cmb_acc
+} //fin namespace nmb_acc.
 
 #endif

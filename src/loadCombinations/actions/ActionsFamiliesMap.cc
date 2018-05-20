@@ -26,18 +26,18 @@
 
 
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
-#include "ActionContainer.h"
+#include "ActionsAndFactors.h"
 #include "LeadingActionInfo.h"
 
 
 //! @brief Return verdadero si la familia existe.
-bool cmb_acc::ActionsFamiliesMap::existe(const std::string &actionsFamilyName) const
+bool cmb_acc::ActionsFamiliesMap::exists(const std::string &actionsFamilyName) const
   { return (familias.find(actionsFamilyName)!=familias.end()); }
 
 //! @brief Return un puntero a la familia cuyo nombre se pasa como parámetro.
 cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::getActionsFamily(const std::string &actionsFamilyName)
   {
-    if(existe(actionsFamilyName))
+    if(exists(actionsFamilyName))
       return familias[actionsFamilyName];
     else
       return nullptr;
@@ -74,7 +74,7 @@ cmb_acc::ActionRValue &cmb_acc::ActionsFamiliesMap::insert(const std::string &fa
 cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::newActionsFamily(const std::string &actionsFamilyName,const PartialSafetyFactors &defaultGF)
   {
     ActionsFamily *tmp =nullptr;
-    if(!existe(actionsFamilyName)) //new family.
+    if(!exists(actionsFamilyName)) //new family.
       {
         tmp= new ActionsFamily(actionsFamilyName,defaultGF);//Default partial safety factors por defecto
 	tmp->set_owner(this);
@@ -110,9 +110,9 @@ cmb_acc::ActionsFamiliesMap &cmb_acc::ActionsFamiliesMap::operator=(const Action
 //! @brief Return un puntero a la tabla de coeficientes de simultaneidad.
 const cmb_acc::CombinationFactorsMap *cmb_acc::ActionsFamiliesMap::getPtrCombinationFactors(void) const
   {
-    const ActionContainer *tmp= dynamic_cast<const ActionContainer *>(Owner());
+    const ActionsAndFactors *tmp= dynamic_cast<const ActionsAndFactors *>(Owner());
     if(tmp)
-      return tmp->getPtrCombinationFactors();
+      return tmp->getFactors().getPtrCombinationFactors();
     else
       {
 	std::cerr << getClassName() << "::" << __FUNCTION__

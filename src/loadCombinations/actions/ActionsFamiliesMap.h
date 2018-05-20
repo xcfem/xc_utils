@@ -37,7 +37,7 @@ class LoadCombinationVector;
 class CombinationFactorsMap;
 class Action;
 class ActionRValue;
-class ActionContainer;
+class ActionsAndFactors;
 class LeadingActionInfo;
 
 //! @ingroup CMBACC
@@ -53,7 +53,7 @@ class ActionsFamiliesMap: public EntConNmb
   private:
     map_familias familias; //!< Conjunto de familias.
 
-    bool existe(const std::string &) const;
+    bool exists(const std::string &) const;
     void clear(void);
     ActionsFamiliesMap(const ActionsFamiliesMap &otro);
     ActionsFamiliesMap &operator=(const ActionsFamiliesMap &otro);

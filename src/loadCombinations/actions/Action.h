@@ -52,7 +52,7 @@ class Action: public EntConNmb
     void multiplica(const double &d);
     void suma(const Action &f);
   public:
-    static const double zero; //!< Valor por debajo del cual the action is taken as zero.
+    static const double zero; //!< Treshold to consider the action as zero.
     Action(const std::string &n="", const std::string &descrip="");
 
     static Action NULA(void);

@@ -8,7 +8,7 @@ dbName= "/tmp/test_accidentales.db"
 tbName= "combinaciones"
 
 lcg= loadCombinations.LoadCombGenerator()
-lcg.defPonderacion("EHEIntenso",ehe.combination_factors_EHE)
+actionsAndFactors= lcg.actionWeighting.create("EHEIntenso",ehe.factors)
 lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A1","Hipot. 1"),"","")
 lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A2","Hipot. 2"),"","")
 lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A3","Hipot. 3"),"","")

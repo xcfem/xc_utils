@@ -20,13 +20,13 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //ActionWeightingMap.h
-//Contenedor de ponderaciones de acciones.
+//Container for actions and corresponding factors.
 
 #ifndef ACTIONWEIGHTINGMAP_H
 #define ACTIONWEIGHTINGMAP_H
 
 #include "xc_utils/src/nucleo/EntCmd.h"
-#include "xc_utils/src/loadCombinations/factors/CombinationFactorsMap.h"
+#include "xc_utils/src/loadCombinations/factors/Factors.h"
 #include <map>
 
 
@@ -34,34 +34,34 @@ namespace cmb_acc {
 
 class Action;
 class ActionRValue;
-class ActionContainer;
+class ActionsAndFactors;
 class LoadCombinations;
 
 //! @ingroup CMBACC
 //
-//! @brief Contenedor de ponderaciones de acciones.
+//! @brief Container for ActionAndFactors objects.
 class ActionWeightingMap: public EntCmd
   {
   public:
-    typedef std::map<std::string,ActionContainer *> map_ponderaciones;
-    typedef map_ponderaciones::iterator iterator;
-    typedef map_ponderaciones::const_iterator const_iterator;
+    typedef std::map<std::string,ActionsAndFactors *> map_actions_and_factors;
+    typedef map_actions_and_factors::iterator iterator;
+    typedef map_actions_and_factors::const_iterator const_iterator;
 
   private:
-    map_ponderaciones ponderaciones; //!< Conjunto de ponderaciones.
+    map_actions_and_factors actions_and_factors; //!< actions with its factors.
 
-    bool existe(const std::string &nmb) const;
-    ActionContainer *crea_ponderacion(const std::string &nmb,const CombinationFactorsMap &coefs= CombinationFactorsMap());
+    bool exists(const std::string &nmb) const;
+    ActionsAndFactors *findOrCreate(const std::string &nmb,const Factors &coefs= Factors());
     void clear(void);
-    void copia(const map_ponderaciones &pond);
+    void copy(const map_actions_and_factors &pond);
   protected:
-    friend class ActionContainer;
+    friend class ActionsAndFactors;
   public:
     ActionWeightingMap(void);
     ActionWeightingMap(const ActionWeightingMap &otro);
     ActionWeightingMap &operator=(const ActionWeightingMap &otro);
     virtual ~ActionWeightingMap(void);
-    cmb_acc::ActionContainer *defPonderacion(const std::string &,const CombinationFactorsMap &coefs= CombinationFactorsMap());
+    cmb_acc::ActionsAndFactors *create(const std::string &,const Factors &coefs= Factors());
 
     ActionRValue &insert(const std::string &pond,const std::string &,const Action &,const std::string &combination_factors_name="",const std::string &subfamilia= "default");
 
@@ -72,8 +72,8 @@ class ActionWeightingMap: public EntCmd
     iterator end(void);
     const_iterator end(void) const;
     boost::python::list getKeys(void) const;    
-    ActionContainer *findByName(const std::string &nmb);
-    const ActionContainer *findByName(const std::string &nmb) const;
+    ActionsAndFactors *findByName(const std::string &nmb);
+    const ActionsAndFactors *findByName(const std::string &nmb) const;
 
     LoadCombinations getLoadCombinations(void);
   };

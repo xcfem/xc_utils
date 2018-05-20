@@ -41,7 +41,6 @@ class LoadCombinationGenerator: public EntCmd
   public:
     LoadCombinationGenerator(EntCmd *owr= nullptr);
 
-    ActionContainer *defPonderacion(const std::string &,const CombinationFactorsMap &coefs= CombinationFactorsMap());
     ActionRValue &insert(const std::string &pond,const std::string &,const Action &,const std::string &combination_factors_name="",const std::string &subfamilia= "default");
     void genera(void);
     inline ActionWeightingMap &getActionWeighting(void)

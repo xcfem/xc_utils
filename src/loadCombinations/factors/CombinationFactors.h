@@ -20,10 +20,10 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //CombinationFactors.hxx
-//Valores representativos de una acción.
+//Combination factors for an action.
 
-#ifndef PSICOEFFS_H
-#define PSICOEFFS_H
+#ifndef COMBINATIONFACTORS_H
+#define COMBINATIONFACTORS_H
 
 #include "xc_utils/src/nucleo/EntCmd.h"
 
@@ -35,9 +35,9 @@ namespace cmb_acc{
 class CombinationFactors: public EntCmd
   {
   private:
-    float psi_0; //!< Coeficiente de simultaneidad para obtener el valor de combinación.
-    float psi_1; //!< Coeficiente de simultaneidad para obtener el valor frecuente.
-    float psi_2; //!< Coeficiente de sumultaneidad para obtener el valor cuasipermanente.
+    float psi_0; //!< To compute the combination value.
+    float psi_1; //!< To compute the frequent value.
+    float psi_2; //!< To compute the quasi-permanent value.
   public:
     //! @brief Constructor por defecto.
     CombinationFactors(const float &p0= 1.0, const float &p1= 1.0, const float &p2= 1.0)

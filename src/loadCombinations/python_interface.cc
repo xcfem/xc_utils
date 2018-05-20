@@ -25,6 +25,7 @@
 #include <boost/python/def.hpp>
 #include <boost/python/class.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
+#include <boost/python/suite/indexing/map_indexing_suite.hpp>
 #include <boost/python/docstring_options.hpp>
 #include "xc_utils/src/loadCombinations/factors/PartialSafetyFactors.h"
 #include "xc_utils/src/loadCombinations/factors/PartialSafetyFactorsMap.h"
@@ -33,6 +34,7 @@
 #include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
 #include "xc_utils/src/loadCombinations/actions/ActionsFamily.h"
 #include "xc_utils/src/loadCombinations/actions/ActionContainer.h"
+#include "xc_utils/src/loadCombinations/actions/ActionsAndFactors.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinations.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationGenerator.h"

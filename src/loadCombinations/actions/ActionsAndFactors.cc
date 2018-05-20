@@ -19,29 +19,13 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PartialSafetyFactorsMap.h
-//Contenedor de coeficientes de simultaneidad de acciones.
+//ActionsAndFactors.cxx
 
-#ifndef PARTIALSAFETYFACTORSMAP_H
-#define PARTIALSAFETYFACTORSMAP_H
+#include "ActionsAndFactors.h"
 
-#include "xc_utils/src/nucleo/EntCmd.h"
-#include "PartialSafetyFactors.h"
-#include "FactorsMap.h"
+//! @brief Constructor por defecto.
+cmb_acc::ActionsAndFactors::ActionsAndFactors(const Factors &fs)
+  : ActionContainer(), factors(fs)
+  {}
 
 
-namespace cmb_acc {
-
-//! @ingroup CMBACC
-//
-//! @brief Partial safety factors container.
-class PartialSafetyFactorsMap: public FactorsMap<PartialSafetyFactors>
-  {
-  private:
-    friend class ActionsAndFactors;
-  public:
-    PartialSafetyFactorsMap(void);
-  };
-} // fin namespace cmb_acc
-
-#endif

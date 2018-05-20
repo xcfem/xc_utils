@@ -22,12 +22,11 @@
 //ActionContainer.h
 //Almacena todas las familias de acciones para la estructura o el elemento estructural.
 
-#ifndef ACCIONESCLASIFICADAS_H
-#define ACCIONESCLASIFICADAS_H
+#ifndef ACTIONCONTAINER_H
+#define ACTIONCONTAINER_H
 
 #include "ActionsFamily.h"
 #include "ActionsFamiliesMap.h"
-#include "xc_utils/src/loadCombinations/factors/CombinationFactorsMap.h"
 
 namespace cmb_acc{
 //! @ingroup CMBACC
@@ -35,13 +34,12 @@ namespace cmb_acc{
 //! @brief Almacena todas las familias de acciones.
 class ActionContainer: public EntCmd
   {
-  private:
+  protected:
     ActionsFamiliesMap G; //!< Permanent actions.
     ActionsFamiliesMap G_aster; //!< Non-constant permanent actions.
     ActionsFamiliesMap Q; //!< Variable actions.
     ActionsFamily A; //!< Accidental actions.
     ActionsFamily AS; //!< Earthquake actions.
-    CombinationFactorsMap combination_factors; //!< Coeficientes de simultaneidad de las acciones.
 
     LoadCombinationVector GetPermanentes(const bool &uls,const bool &sit_accidental) const;
     LoadCombinationVector GetVariables(const LoadCombinationVector &permanentes,const bool &uls,const bool &sit_accidental,const short int &v) const;
@@ -50,7 +48,7 @@ class ActionContainer: public EntCmd
   protected:
     friend class ActionWeightingMap;
   public:
-    ActionContainer(const CombinationFactorsMap &coefs= CombinationFactorsMap());
+    ActionContainer(void);
     inline virtual ~ActionContainer(void) {}
 
     ActionRValue &insert(const std::string &,const Action &,const std::string &combination_factors_name="",const std::string &subfamilia= "default");
@@ -65,7 +63,7 @@ class ActionContainer: public EntCmd
     void setAccidentalActions(const ActionsFamily &);
     const ActionsFamily &getSeismicActions(void) const;
     void setSeismicActions(const ActionsFamily &);
-
+    
     //Estados límite últimos.
     LoadCombinationVector GetPersistentesOTransit(void) const;
     LoadCombinationVector GetAccidentales(void) const;
@@ -77,10 +75,6 @@ class ActionContainer: public EntCmd
     LoadCombinationVector GetCuasiPermanentes(void) const;
     LoadCombinationVector GetCombSLS(void) const;
 
-    const CombinationFactorsMap *getPtrCombinationFactors(void) const
-      { return &combination_factors; }
-    const CombinationFactorsMap &getCombinationFactors(void) const
-      { return combination_factors; }
   };
 } //fin namespace nmb_acc.
 

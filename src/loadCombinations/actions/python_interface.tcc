@@ -74,12 +74,15 @@ class_<ActionsFamiliesMap, bases<EntConNmb>, boost::noncopyable >("ActionsFamili
   ;
 
 class_<ActionContainer, bases<EntCmd> >("ActionContainer")
-  .def(init<CombinationFactorsMap>())
   .add_property("permanentActions", make_function( &ActionContainer::getPermanentActions, return_internal_reference<>() ), &ActionContainer::setPermanentActions)
   .add_property("ncPermanentActions", make_function( &ActionContainer::getPermanentActionsNC, return_internal_reference<>() ), &ActionContainer::setPermanentActionsNC,"return a reference to the families of non-constant permanent actions container.")
   .add_property("variableActions", make_function( &ActionContainer::getVariableActions, return_internal_reference<>() ), &ActionContainer::setVariableActions,"return a reference to the families of variable actions container.")
   .add_property("accidentalActions", make_function( &ActionContainer::getAccidentalActions, return_internal_reference<>() ), &ActionContainer::setAccidentalActions)
   .add_property("seismicActions", make_function( &ActionContainer::getSeismicActions, return_internal_reference<>() ), &ActionContainer::setSeismicActions)
-  .def("getCombinationFactors", &ActionContainer::getCombinationFactors, return_value_policy<copy_const_reference>())
   .def("insert", make_function(&ActionContainer::insert,return_internal_reference<>()))
+  ;
+
+class_<ActionsAndFactors, bases<ActionContainer> >("ActionsAndFactors")
+  .def(init<Factors>())
+  .def("getFactors", &ActionsAndFactors::getFactors, return_internal_reference<>())
   ;

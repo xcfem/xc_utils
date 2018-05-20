@@ -45,9 +45,9 @@ class ActionRValueList: public std::deque<ActionRValue>, public EntCmd
 
     ActionRValue &push_back(const ActionRValue &a);
   public:
-    //! @brief Return el valor de la acción de índice i
+    //! @brief Return the value of the i-th action.
     inline Action getValue(const size_t &i,short int r) const
-      { return (*this)[i].Valor(r); }
+      { return (*this)[i].getValue(r); }
     Action getRepresentativeValue(const LeadingActionInfo &, const size_t &) const;
     ActionRValue &insert(const Action &,const std::string &);
     Action FormaProdEscalar(const Variation &v,const LeadingActionInfo &) const;

@@ -22,7 +22,7 @@
 //ActionsFamily.cxx
 
 #include "ActionsFamily.h"
-#include "ActionContainer.h"
+#include "ActionsAndFactors.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/Variations.h"
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"
 #include "ActionsFamiliesMap.h"
@@ -38,30 +38,31 @@ cmb_acc::ActionsFamily::ActionsFamily(const std::string &nmb,const PartialSafety
     actions.set_owner(this);
   }
 
+//! @brief Return the container that contains this object.
+const  cmb_acc::ActionsAndFactors *cmb_acc::ActionsFamily::getActionsAndFactors(void) const
+  {
+    const EntCmd *owr= Owner();
+    const ActionsAndFactors *retval= dynamic_cast<const ActionsAndFactors *>(owr);
+    if(!retval)
+      {
+	const ActionsFamiliesMap *fMap= dynamic_cast<const ActionsFamiliesMap *>(owr);
+	if(fMap)
+	  retval= dynamic_cast<const ActionsAndFactors *>(fMap->Owner());
+      }
+    if(!retval)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+ 	        << "; family: '" << getName()
+		<< "' owner not found." << std::endl;
+    return retval;
+  }
+
 //! @brief Return un apuntador a los coeficientes que aplican para esta familia.
 const cmb_acc::CombinationFactorsMap *cmb_acc::ActionsFamily::getPtrCombinationFactors(void) const
   {
     const cmb_acc::CombinationFactorsMap *retval= nullptr;
-    const EntCmd *owr= Owner();
-    const ActionContainer *tmp= dynamic_cast<const ActionContainer *>(owr);
+    const ActionsAndFactors *tmp= getActionsAndFactors();
     if(tmp)
-      return tmp->getPtrCombinationFactors();
-    else
-      {
-	const ActionsFamiliesMap *fMap= dynamic_cast<const ActionsFamiliesMap *>(owr);
-	if(fMap)
-	  {
-	    const ActionContainer *ac= dynamic_cast<const ActionContainer *>(fMap->Owner());
-	    if(ac)
-	      tmp= dynamic_cast<const ActionContainer *>(ac);
-	  }
-      }
-    if(tmp)
-      retval= tmp->getPtrCombinationFactors();
-    else
-      std::cerr << getClassName() << "::" << __FUNCTION__
- 	        << "; family: '" << getName()
-		<< "' owner not found." << std::endl;
+      retval= tmp->getFactors().getPtrCombinationFactors();
     return retval;
   }
 

@@ -20,10 +20,10 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //ActionRValue.hxx
-//Valores representativos de una acción.
+//Representative values of an action.
 
-#ifndef VRACCION_H
-#define VRACCION_H
+#ifndef ACTIONRVALUE_H
+#define ACTIONRVALUE_H
 
 #include "Action.h"
 
@@ -34,7 +34,7 @@ class CombinationFactors;
 
 //! @ingroup CMBACC
 //
-//! @brief Valores representativos de una acción.
+//! @brief Representative values of an action.
 class ActionRValue: public Action
   {
   private:
@@ -50,8 +50,9 @@ class ActionRValue: public Action
     ActionRValue(const std::string &n="", const std::string &descrip="",ActionRValueList *fam= nullptr);
     ActionRValue(const Action &a,ActionRValueList *fam= nullptr,const std::string &nmb_coefs= "");
   public:
-    Action Valor(short int r) const;
+    Action getValue(short int r) const;
     void setCombinationFactors(const std::string &);
+    const PartialSafetyFactors *getPartialSafetyFactors(void) const;
     void Print(std::ostream &os) const;    
   };
 

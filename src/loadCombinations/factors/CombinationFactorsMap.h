@@ -40,7 +40,7 @@ class LoadCombinationVector;
 class CombinationFactorsMap: public FactorsMap<CombinationFactors>
   {
   private:
-    friend class ActionContainer;
+    friend class ActionsAndFactors;
   public:
     CombinationFactorsMap(void);
   };
