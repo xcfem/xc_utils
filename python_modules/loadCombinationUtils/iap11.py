@@ -96,4 +96,4 @@ actionsAndFactors.variableActions.newActionsFamily('Climat',partial_safety_facto
 
 
 actionsAndFactors.accidentalActions.partial_safety_factors= partial_safety_factors["accidentales"]
-#actionsAndFactors.seismicActions.partial_safety_factors= partial_safety_factors_sismicas_EHE_ctr_intenso
+#actionsAndFactors.seismicActions.partial_safety_factors= partial_safety_factors["sismicas_EHE_ctr_intenso"]
