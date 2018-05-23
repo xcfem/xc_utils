@@ -10,8 +10,8 @@ s1=geom.Segmento2d(ptoOrigen,ptoDestino)
 s2=s1.offsetDouble(2)
 s3=s1.offsetDouble(-2)
 
-p1=s2.getCdg()
-p2=s3.getCdg()
+p1=s2.getCenterOfMass()
+p2=s3.getCenterOfMass()
 
 ratio1=math.fabs(p1.distPos2d(p2)-4)
 
