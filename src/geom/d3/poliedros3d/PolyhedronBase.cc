@@ -49,8 +49,8 @@ GEOM_FT PolyhedronBase::Iz(void) const
     std::cerr << "PolyhedronBase::Iy() no implementado." << std::endl;
     return 0.0;
   }
-Pos3d PolyhedronBase::Cdg(void) const
+Pos3d PolyhedronBase::getCenterOfMass(void) const
   {
-    std::cerr << "PolyhedronBase::Cdg() no implementado." << std::endl;
+    std::cerr << "PolyhedronBase::getCenterOfMass() no implementado." << std::endl;
     return Pos3d();
   }

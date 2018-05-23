@@ -69,11 +69,11 @@ class GeomObj3d: public GeomObj
     BND3d Bnd(void) const;
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const;
     virtual bool Out(const Pos3d &p, const double &tol= 0.0) const;
-    //Return el peso para el cálculo del CDG
-    //por defecto es 1
-    virtual GEOM_FT PesoCdg(void) const
+    //! @brief Return the factor used for the computation
+    //! of the center of mass (1.0 by default).
+    virtual GEOM_FT getCenterOfMassFactor(void) const
       { return 1.0; }
-    virtual Pos3d Cdg(void) const= 0;
+    virtual Pos3d getCenterOfMass(void) const= 0;
     virtual GEOM_FT Longitud(void) const= 0;
     virtual GEOM_FT Area(void) const= 0;
     virtual GEOM_FT Volumen(void) const= 0;
@@ -81,15 +81,15 @@ class GeomObj3d: public GeomObj
     virtual GEOM_FT Iy(void) const= 0;
     virtual GEOM_FT Iz(void) const= 0;
 
-    //product of inertia with respect to CDG in local coordinates.
+    //product of inertia with respect to the center of mass in local coordinates.
     //Suponemos orthonormal axis.
     inline virtual GEOM_FT Pxy(void) const
       { return Ix()+Iy()-Iz(); }
-    //product of inertia with respect to CDG in local coordinates.
+    //product of inertia with respect to the center of mass in local coordinates.
     //Suponemos orthonormal axis.
     inline virtual GEOM_FT Pxz(void) const
       { return Ix()+Iz()-Iy(); }
-    //product of inertia with respect to CDG in local coordinates.
+    //product of inertia with respect to the center of mass in local coordinates.
     //Suponemos orthonormal axis.
     inline virtual GEOM_FT Pyz(void) const
       { return Iy()+Iz()-Ix(); }

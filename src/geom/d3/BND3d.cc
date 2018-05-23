@@ -101,10 +101,10 @@ Pos3d BND3d::GetPMin(void) const
 
 Vector3d BND3d::Diagonal(void) const
   { return GetPMax() - GetPMin(); }
-Pos3d BND3d::Cdg(void) const
+Pos3d BND3d::getCenterOfMass(void) const
   {
-    Pos3d cdg= GetPMin() + Diagonal()/2;
-    return cdg;
+    Pos3d center_of_mass= GetPMin() + Diagonal()/2;
+    return center_of_mass;
   }
 bool BND3d::ClipLine(const Pos3d &p1,const Pos3d &p2) const
   { return LBClipLine(p1,p2); }

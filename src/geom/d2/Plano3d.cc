@@ -246,7 +246,7 @@ GeneralEquationOfPlane Plano3d::getGeneralEquation(void) const
 
 //! @brief Return the position of the centroid.
 //! Any point in the plane can be its centroid.
-Pos3d Plano3d::Cdg(void) const
+Pos3d Plano3d::getCenterOfMass(void) const
   { return Point(); }
 
 Plano3d::clasif_poligono Plano3d::ClasificaPoligono(const Poligono3d &pol) const

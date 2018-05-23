@@ -102,18 +102,18 @@ class Semiplano2d : public Superficie2d
 
     inline virtual GEOM_FT Longitud(void) const
       { return NAN; }
-    inline virtual Pos2d Cdg(void) const
-      { return lim.Cdg(); }
-    //Moment of inertia with respect to CDG in local coordinates.
+    inline virtual Pos2d getCenterOfMass(void) const
+      { return lim.getCenterOfMass(); }
+    //Moment of inertia with respect to the center of mass in local coordinates.
     inline virtual GEOM_FT Ix(void) const
       { return NAN; }
-    //Moment of inertia with respect to CDG in local coordinates.
+    //Moment of inertia with respect to the center of mass in local coordinates.
     inline virtual GEOM_FT Iy(void) const
       { return NAN; }
     //product of inertia.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
-    //Moment of inertia with respect to CDG in local coordinates.
+    //Moment of inertia with respect to the center of mass in local coordinates.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
 

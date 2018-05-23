@@ -50,34 +50,38 @@ GEOM_FT GmGrupo2d::inercia(const Recta2d &e) const
     return retval;
   }
 
+//! @brief Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT GmGrupo2d::Ix(void) const
-//Moment of inertia with respect to CDG in local coordinates.
-  { return inercia(Recta2d(Cdg(),Dir2d(1.0,0.0))); }
+  { return inercia(Recta2d(getCenterOfMass(),Dir2d(1.0,0.0))); }
+//! @brief Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT GmGrupo2d::Iy(void) const
-//Moment of inertia with respect to CDG in local coordinates.
-  { return inercia(Recta2d(Cdg(),Dir2d(0.0,1.0))); }
+  { return inercia(Recta2d(getCenterOfMass(),Dir2d(0.0,1.0))); }
 GEOM_FT GmGrupo2d::Pxy(void) const
   {
-    cerr << "GmGrupo2d::Pxy not implemented, 0 is returned." << endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	 << "; not implemented, 0 is returned." << endl;
     return 0.0;
   }
 
-Pos2d GmGrupo2d::Cdg(void) const
+//! @brief Return the center of mass.
+Pos2d GmGrupo2d::getCenterOfMass(void) const
   {
     if(objetos.empty()) return Pos2d();
     if(!igual_dimension())
       {
-        cerr << "¡Ojo!, GmGrupo2d::Cdg: los objetos del grupo tienen distintas dimensiones." << endl;
+        cerr << getClassName() << "::" << __FUNCTION__
+	     << "; Warning!, the objects in the group"
+	     << " have different dimensions." << endl;
       }
     register pdeque_geom_obj::const_iterator i(objetos.begin());
-    GEOM_FT area_i= (*i)->AreaCdg();
-    Vector2d num= (*i)->Cdg().VectorPos()*area_i;
+    GEOM_FT area_i= (*i)->getCenterOfMassArea();
+    Vector2d num= (*i)->getCenterOfMass().VectorPos()*area_i;
     GEOM_FT denom(area_i);
     i++;
     for(;i!=objetos.end();i++)
       {
-        area_i= (*i)->AreaCdg();
-        num= num + (*i)->Cdg().VectorPos()*area_i;
+        area_i= (*i)->getCenterOfMassArea();
+        num= num + (*i)->getCenterOfMass().VectorPos()*area_i;
         denom+= area_i;
       }
     num= num*(1/denom);

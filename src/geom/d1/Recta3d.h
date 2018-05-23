@@ -129,7 +129,7 @@ class Recta3d : public Linea3d
 
     inline virtual GEOM_FT Longitud(void) const
       { return NAN; }
-    inline virtual Pos3d Cdg(void) const
+    inline virtual Pos3d getCenterOfMass(void) const
       { return Pos3d(NAN,NAN,NAN); }
     Dir3d GetDir(void) const;
     Vector3d VDir(void) const;
@@ -139,13 +139,13 @@ class Recta3d : public Linea3d
       { return r.Angulo(v); }
     inline friend double angulo(const Recta3d &r1,const Recta3d &r2)
       { return r1.Angulo(r2.VDir()); }
-    //! @brief Moment of inertia with respect to the CDG en local axis.
+    //! @brief Moment of inertia with respect to the center of mass en local axis.
     inline virtual GEOM_FT Ix(void) const
       { return 0.0; }
-    //! @brief Moment of inertia with respect to the CDG en local axis.
+    //! @brief Moment of inertia with respect to the center of mass en local axis.
     inline virtual GEOM_FT Iy(void) const
       { return NAN; }
-    //! @brief Moment of inertia with respect to the CDG en local axis.
+    //! @brief Moment of inertia with respect to the center of mass en local axis.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
     void Print(std::ostream &os) const;

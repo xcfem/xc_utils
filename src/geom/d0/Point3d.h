@@ -56,7 +56,7 @@ class Point3d : public GeomObj3d
       { return org; }
     virtual GeomObj3d *clon(void) const
       { return new Point3d(*this); }
-    virtual Pos3d Cdg(void) const
+    virtual Pos3d getCenterOfMass(void) const
       { return org; }
     inline virtual unsigned short int Dimension(void) const
       { return 0; }

@@ -79,16 +79,16 @@ Dir2d GeomObj2d::IAxisDir_b(void) const
 //! @brief Return un principal axis of inertia (no sabemos si
 //! el mayor o el menor
 Recta2d GeomObj2d::IAxis_a(void) const
-  { return Recta2d(Cdg(),IAxisDir_a()); }
+  { return Recta2d(getCenterOfMass(),IAxisDir_a()); }
 
 //! @brief Return un principal axis of inertia (no sabemos si
 //! el mayor o el menor
 Recta2d GeomObj2d::IAxis_b(void) const
-  { return Recta2d(Cdg(),IAxisDir_b()); }
+  { return Recta2d(getCenterOfMass(),IAxisDir_b()); }
 
 //! @brief Return los principal axis of inertia.
 Ref2d2d GeomObj2d::PrincipalAxesOfInertia(void) const
-  { return Ref2d2d(Cdg(),IAxisDir_a()); }
+  { return Ref2d2d(getCenterOfMass(),IAxisDir_a()); }
 
 //! @brief Return the moment of inertia principal mayor.
 GEOM_FT GeomObj2d::I1(void) const
@@ -99,7 +99,7 @@ GEOM_FT GeomObj2d::I2(void) const
   { return I2_inercia(Ix(),Iy(),Pxy()); }
 
 //! @brief Return the componente i,j of the inertia tensor computed
-//! with respect to the CDG.
+//! with respect to the center of mass.
 GEOM_FT GeomObj2d::I(const unsigned short int &i,const unsigned short int &j) const
   {
     unsigned short int k= i + (j-1)*2;
@@ -124,9 +124,9 @@ GEOM_FT GeomObj2d::I(const unsigned short int &i,const unsigned short int &j) co
 GEOM_FT GeomObj2d::I(const unsigned short int i,const unsigned short int j,const Pos2d &o) const
   {
     const GEOM_FT Iij= I(i,j);
-    if(TieneCdg())
+    if(hasCenterOfMass())
       {
-        Ref2d2d axis(Cdg()); //
+        Ref2d2d axis(getCenterOfMass()); //
         Pos2d pos_local= axis.GetPosLocal(o);
         return Iij + IArea() * pos_local(i) * pos_local(j);
       }
@@ -150,7 +150,7 @@ matriz_FT GeomObj2d::I(void) const
 matriz_FT GeomObj2d::I(const Pos2d &o) const
   {
     matriz_FT Ig= I();
-    Vector2d og= Cdg() - o;
+    Vector2d og=getCenterOfMass() - o;
     GEOM_FT m= IArea();
     return Ig+m*(Abs2(og)*identidad(Ig)-(og & og));
   }

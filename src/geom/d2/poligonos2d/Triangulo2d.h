@@ -63,7 +63,7 @@ class Triangulo2d : public SupPoligonal2d
       { return Pos2d(cgtriang.vertex(j)); }
     Segmento2d Base(const size_t &i) const; //Return la base opuesta al vertice i.
     Segmento2d Altura(const size_t &i) const; //Return la altura del vertice i.
-    virtual Pos2d Cdg(void) const;
+    virtual Pos2d getCenterOfMass(void) const;
     virtual GEOM_FT Longitud(void) const;
     virtual GEOM_FT Area(void) const
       { return cgtriang.area(); }

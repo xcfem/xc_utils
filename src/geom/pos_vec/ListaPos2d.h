@@ -84,8 +84,8 @@ class ListaPos2d: public GeomObj2d
     ListaPos2d GetMayores(unsigned short int i,const GEOM_FT &d) const;
     ListaPos2d GetMenores(unsigned short int i,const GEOM_FT &d) const;
     const Pos2d &Point(const size_t &i) const;
-    Pos2d Cdg(void) const
-      { return lista_ptos.Cdg(); }
+    Pos2d getCenterOfMass(void) const
+      { return lista_ptos.getCenterOfMass(); }
 
     void Transforma(const Trf2d &trf2d);
     ListaPos2d Offset(const GEOM_FT &d) const;

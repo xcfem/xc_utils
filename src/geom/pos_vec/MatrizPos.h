@@ -214,18 +214,18 @@ POS get_centro(const MatrizPos<POS> &m,const SEG &sg)
       if(par(n_rows) && par(n_columns))
         {
           SEG s(m(iRow,iColumn),m(iRow+1,iColumn+1));
-          retval= s.Cdg();
+          retval= s.getCenterOfMass();
         }
       else
         if(impar(n_rows))
           {
             SEG s(m(iRow,iColumn),m(iRow,iColumn+1));
-            retval= s.Cdg();
+            retval= s.getCenterOfMass();
           }
         else
           {
             SEG s(m(iRow,iColumn),m(iRow+1,iColumn));
-            retval= s.Cdg();
+            retval= s.getCenterOfMass();
           }
     return retval;
   }

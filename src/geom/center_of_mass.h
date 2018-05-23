@@ -19,37 +19,34 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Cilindro.h
-//Sólido de extrusión generado por un polígono.
+//center_of_mass.h
 
-#ifndef SOLIDEXTRUPLGNO3D_H
-#define SOLIDEXTRUPLGNO3D_H
-
-#include "SolidExtru3d.h"
-#include "xc_utils/src/geom/d2/Circulo3d.h"
-
+#ifndef CENTER_OF_MASS_H
+#define CENTER_OF_MASS_H
 
 //! @ingroup GEOM
-//
-//! @brief Cilindro.
-class Cilindro : public SolidExtru3d<Circulo3d>
+//! 
+//! @brief Return the center of mass of the objects.
+template<class InputIter>
+const Pos2d center_of_mass(InputIter begin, InputIter end)
   {
-  public:
-    typedef SolidExtru3d<Circulo3d> solid_extru_cil;
-  public:
-    Cilindro(void);
-    Cilindro(const Circulo3d &secc,const GEOM_FT &lng);
-    Cilindro &operator=(const Cilindro &se);
-    virtual GeomObj *clon(void) const;
-
-    BND3d Bnd(void) const;
-    matriz_FT I(void) const;
-    Pos3d getCenterOfMass(void) const;
-  };
-
-
-
-
+    Pos2d retval;
+    if(begin!=end)
+      {
+        InputIter i=begin;
+        GEOM_FT area= (*i).Area();
+        Vector2d vpos= (*i).getCenterOfMass().VectorPos()*(*i).Area();
+        i++;
+        for(;i!=end;i++)
+          {
+            area+= (*i).Area();
+            vpos= vpos + (*i).getCenterOfMass().VectorPos()*(*i).Area();
+          }
+        vpos= vpos/area;
+        retval= Pos2d(vpos[0],vpos[1]);
+      }
+    return retval;
+  }
 
 
 #endif

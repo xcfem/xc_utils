@@ -108,7 +108,7 @@ Pos2d MatrizPos2d::GetCentro(void) const
   { return get_centro(*this,Segmento2d()); }
 
 //! @brief Return el centro de gravedad.
-Pos2d MatrizPos2d::GetCdg(void) const
+Pos2d MatrizPos2d::getCenterOfMass(void) const
   {
     GEOM_FT areaQuad= 0.0;
     GEOM_FT Atot= 0.0;
@@ -187,18 +187,18 @@ GEOM_FT MatrizPos2d::GetArea(void) const
     return retval;
   }
 
-//! @brief Moment of inertia with respect to axis parallel to x por el CDG.
+//! @brief Moment of inertia with respect to axis parallel to x through the center of mass.
 GEOM_FT MatrizPos2d::Ix(void) const
-  { return GetIx()-GetArea()*sqr(GetCdg().y()); }
+  { return GetIx()-GetArea()*sqr(getCenterOfMass().y()); }
 
-//! @brief Moment of inertia with respect to CDG in local coordinates.
+//! @brief Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT MatrizPos2d::Iy(void) const
-  { return GetIy()-GetArea()*sqr(GetCdg().x()); }
+  { return GetIy()-GetArea()*sqr(getCenterOfMass().x()); }
 
-//! @brief product of inertia with respect to CDG in local coordinates.
+//! @brief product of inertia with respect to the center of mass in local coordinates.
 GEOM_FT MatrizPos2d::Pxy(void) const
   {
-    const GEOM_FT d2= GetCdg().x()*GetCdg().y();
+    const GEOM_FT d2= getCenterOfMass().x()*getCenterOfMass().y();
     return GetPxy()-GetArea()*d2;
   }
 

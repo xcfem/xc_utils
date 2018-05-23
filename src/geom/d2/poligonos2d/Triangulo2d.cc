@@ -50,7 +50,7 @@ GEOM_FT Triangulo2d::Longitud(void) const
     retval+= Lado(3).Longitud();
     return retval;
   }
-Pos2d Triangulo2d::Cdg(void) const
+Pos2d Triangulo2d::getCenterOfMass(void) const
   {
     Vector2d v= Vertice(1).VectorPos();
     v= v+Vertice(2).VectorPos();

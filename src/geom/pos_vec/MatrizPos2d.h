@@ -62,7 +62,7 @@ class MatrizPos2d: public MatrizPos<Pos2d>
     GEOM_FT Iy(void) const;
     GEOM_FT Pxy(void) const;
     Pos2d GetCentro(void) const;
-    Pos2d GetCdg(void) const;
+    Pos2d getCenterOfMass(void) const;
     GEOM_FT GetArea(void) const;
     Triangulo2d GetTriangulo1(const size_t &i,const size_t &j) const;
     Triangulo2d GetTriangulo2(const size_t &i,const size_t &j) const;

@@ -76,7 +76,7 @@ class Segmento3d : public Linea3d
     GeomObj3d::list_Pos3d Interseccion(const Segmento3d &sg) const;
 
     virtual GEOM_FT Longitud(void) const;
-    virtual Pos3d Cdg(void) const;
+    virtual Pos3d getCenterOfMass(void) const;
     Dir3d GetDir(void) const;
     Vector3d VDir(void) const;
     GEOM_FT Angulo(const Vector3d &v) const;

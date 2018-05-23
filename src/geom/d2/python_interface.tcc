@@ -47,7 +47,7 @@ class_<BND2d, bases<GeomObj2d> >("BND2d")
   .def("getIx", &BND2d::Ix)
   .def("getIy", &BND2d::Iy)
   .def("getPxy", &BND2d::Pxy)
-  .def("getCdg", &BND2d::Cdg)
+  .def("getCenterOfMass", &BND2d::getCenterOfMass)
   .def("getMax", &BND2d::GetMax,"returns maximum value of i coordinate.")
   .def("getMin", &BND2d::GetMin,"return minimum value of i coordinate.")
   ;
@@ -65,7 +65,7 @@ class_<Circulo2d, bases<Superficie2d> >("Circle2d")
   .def("getIx", &Circulo2d::Ix)
   .def("getIy", &Circulo2d::Iy)
   .def("getPxy", &Circulo2d::Pxy)
-  .def("getCdg", &Circulo2d::Cdg);
+  .def("getCenterOfMass", &Circulo2d::getCenterOfMass);
 
 #include "poligonos2d/python_interface.tcc"
 
@@ -127,7 +127,7 @@ class_<Rejilla2d, bases<Superficie2d> >("Grid2d")
   .def("Ix",&Rejilla2d::Ix)
   .def("Iy",&Rejilla2d::Iy)
   .def("Pxy",&Rejilla2d::Pxy)
-  .def("Cdg",&Rejilla2d::Cdg)
+  .def("getCenterOfMass",&Rejilla2d::getCenterOfMass)
   .def("getPoint",&Rejilla2d::getPoint)
   .def("getQuad",&Rejilla2d::GetQuad)
   .def("In",&Rejilla2d::In)

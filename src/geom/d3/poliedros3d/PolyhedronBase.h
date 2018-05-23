@@ -43,7 +43,7 @@ class PolyhedronBase: public GeomObj3d
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Iz(void) const;
-    virtual Pos3d Cdg(void) const;
+    virtual Pos3d getCenterOfMass(void) const;
   };
 
 

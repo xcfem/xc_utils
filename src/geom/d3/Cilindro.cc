@@ -48,5 +48,5 @@ BND3d Cilindro::Bnd(void) const
 matriz_FT Cilindro::I(void) const
   { return solid_extru_cil::I(); }
 
-Pos3d Cilindro::Cdg(void) const
-  { return solid_extru_cil::Cdg(); }
+Pos3d Cilindro::getCenterOfMass(void) const
+  { return solid_extru_cil::getCenterOfMass(); }

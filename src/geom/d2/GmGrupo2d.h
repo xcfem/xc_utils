@@ -50,14 +50,14 @@ class GmGrupo2d : public GmGrupo<GeomObj2d>
 
     inline virtual GEOM_FT Volumen(void) const
       { return 0.0; }
-    virtual Pos2d Cdg(void) const;
+    virtual Pos2d getCenterOfMass(void) const;
 
     virtual GEOM_FT Ix(void) const;
-    //Moment of inertia with respect to CDG in local coordinates.
+    //Moment of inertia with respect to the center of mass in local coordinates.
     virtual GEOM_FT Iy(void) const;
-    //Moment of inertia with respect to CDG in local coordinates.
+    //Moment of inertia with respect to the center of mass in local coordinates.
     GEOM_FT Pxy(void) const;
-    //product of inertia with respect to CDG in local coordinates.
+    //product of inertia with respect to the center of mass in local coordinates.
 
     void Print(std::ostream &stream) const;
     void Plot(Plotter &) const;

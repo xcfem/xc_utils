@@ -44,21 +44,21 @@ Rejilla2d::~Rejilla2d(void)
 GEOM_FT Rejilla2d::Area(void) const
   { return points.GetArea();  }
 
-//! @briefMoment of inertia with respect to CDG in local coordinates.
+//! @briefMoment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Rejilla2d::Ix(void) const
   { return points.Ix(); }
 
-//! @brief Moment of inertia with respect to CDG in local coordinates.
+//! @brief Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Rejilla2d::Iy(void) const
   { return points.Iy(); }
 
-//! @brief product of inertia with respect to CDG in local coordinates.
+//! @brief product of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Rejilla2d::Pxy(void) const
   { return points.Pxy(); }
 
 //! @brief Return el centro de gravedad de la rejilla.
-Pos2d Rejilla2d::Cdg(void) const
-  { return points.GetCdg(); }
+Pos2d Rejilla2d::getCenterOfMass(void) const
+  { return points.getCenterOfMass(); }
 
 //! @brief Return las coordenadas of point i,j.
 const matriz_FT &Rejilla2d::GetVertCoords(const size_t &i,const size_t &j) const

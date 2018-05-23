@@ -47,35 +47,37 @@ GEOM_FT GmGrupo3d::inercia(const Recta3d &e) const
   }
 
 GEOM_FT GmGrupo3d::Ix(void) const
-//Moment of inertia with respect to CDG in local coordinates.
-{ return inercia(Recta3d(Cdg(),Dir3d(1.0,0.0,0.0))); }
+//Moment of inertia with respect to the center of mass in local coordinates.
+{ return inercia(Recta3d(getCenterOfMass(),Dir3d(1.0,0.0,0.0))); }
 GEOM_FT GmGrupo3d::Iy(void) const
-//Moment of inertia with respect to CDG in local coordinates.
-{ return inercia(Recta3d(Cdg(),Dir3d(0.0,1.0,0.0))); }
+//Moment of inertia with respect to the center of mass in local coordinates.
+{ return inercia(Recta3d(getCenterOfMass(),Dir3d(0.0,1.0,0.0))); }
 GEOM_FT GmGrupo3d::Iz(void) const
-//Moment of inertia with respect to CDG in local coordinates.
-{ return inercia(Recta3d(Cdg(),Dir3d(0.0,0.0,1.0))); }
+//Moment of inertia with respect to the center of mass in local coordinates.
+{ return inercia(Recta3d(getCenterOfMass(),Dir3d(0.0,0.0,1.0))); }
 GEOM_FT GmGrupo3d::Pxy(void) const
   {
     std::cerr << "GmGrupo3d::Pxy not implemented, 0 is returned." << std::endl;
     return 0.0;
   }
 
-Pos3d GmGrupo3d::Cdg(void) const
+Pos3d GmGrupo3d::getCenterOfMass(void) const
   {
     if(objetos.empty()) return Pos3d();
     if(!igual_dimension())
       {
-        std::cerr << "¡Ojo!, GmGrupo3d::Cdg: los objetos del grupo tienen distintas dimensiones." << std::endl;
+        std::cerr << getClassName() << "::" << __FUNCTION__
+	          << "; Warning!, the objects of this group"
+	          << " have different dimensions." << std::endl;
       }    register pdeque_geom_obj::const_iterator i(objetos.begin());
-    GEOM_FT area_i= (*i)->AreaCdg();
-    Vector3d num= (*i)->Cdg().VectorPos()*area_i;
+    GEOM_FT area_i= (*i)->getCenterOfMassArea();
+    Vector3d num= (*i)->getCenterOfMass().VectorPos()*area_i;
     GEOM_FT denom(area_i);
     i++;
     for(;i!=objetos.end();i++)
       {
-        area_i= (*i)->AreaCdg();
-        num= num + (*i)->Cdg().VectorPos()*area_i;
+        area_i= (*i)->getCenterOfMassArea();
+        num= num + (*i)->getCenterOfMass().VectorPos()*area_i;
         denom+= area_i;
       }
     num= num*(1/denom);

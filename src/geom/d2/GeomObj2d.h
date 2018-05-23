@@ -56,22 +56,22 @@ class GeomObj2d: public GeomObj
     BND2d Bnd(void) const;
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
     virtual bool Out(const Pos2d &p, const double &tol= 0.0) const;
-    virtual GEOM_FT PesoCdg(void) const
-      //Return el peso para el cálculo del CDG
-      //por defecto es 1
+    //! @brief Return the factor used for the computation
+    //! of the center of mass (1.0 by default).
+    virtual GEOM_FT getCenterOfMassFactor(void) const
       { return 1.0; }
-    virtual Pos2d Cdg(void) const= 0;
+    virtual Pos2d getCenterOfMass(void) const= 0;
     virtual GEOM_FT Longitud(void) const= 0; //?? Por que se re-declara (está en GeomObj).
     virtual GEOM_FT Area(void) const= 0; //?? Por que se re-declara (está en GeomObj).
     inline virtual GEOM_FT Volumen(void) const
       { return 0.0; }
-    //! @brief Moment of inertia with respect to the CDG en local axis.
+    //! @brief Moment of inertia with respect to the center of mass en local axis.
     virtual GEOM_FT Ix(void) const= 0;
-    //! @brief Moment of inertia with respect to the CDG en local axis.
+    //! @brief Moment of inertia with respect to the center of mass en local axis.
     virtual GEOM_FT Iy(void) const= 0;
-    //! @brief Producto de inercia with respect to the CDG en local axis.
+    //! @brief Producto de inercia with respect to the center of mass en local axis.
     virtual GEOM_FT Pxy(void) const= 0;
-    //! @brief Moment of inertia polar with respect to the CDG en local axis.
+    //! @brief Moment of inertia polar with respect to the center of mass en local axis.
     inline virtual GEOM_FT Iz(void) const
       { return Ix()+Iy(); }
     double Theta_p(void) const;
@@ -94,7 +94,7 @@ class GeomObj2d: public GeomObj
     GEOM_FT I2(void) const;
     //Return the moment of inertia principal menor.
     inline PrincipalAxesOfInertia2D Inercia(void)
-      { return PrincipalAxesOfInertia2D(Cdg(),Ix(),Iy(),Pxy()); }
+      { return PrincipalAxesOfInertia2D(getCenterOfMass(),Ix(),Iy(),Pxy()); }
     GEOM_FT I( const unsigned short int &i,
               const unsigned short int &j) const;
     //! @brief Return el area que se emplea para calcular the moment of inertia

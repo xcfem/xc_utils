@@ -45,7 +45,7 @@ class Point2d : public GeomObj2d
       { return org; }
     virtual GeomObj2d *clon(void) const
       { return new Point2d(*this); }
-    virtual Pos2d Cdg(void) const
+    virtual Pos2d getCenterOfMass(void) const
       { return org; }
     inline virtual unsigned short int Dimension(void) const
       { return 0; }

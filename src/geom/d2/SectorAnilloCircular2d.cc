@@ -35,9 +35,9 @@ SectorAnilloCircular2d::SectorAnilloCircular2d(const SectorCircular2d &c,const d
   : SectorCircular2d(c), rint(r) {}
 
 //! @brief Return the posición del centro de gravedad del sector circular.
-Pos2d SectorAnilloCircular2d::Cdg(void) const
+Pos2d SectorAnilloCircular2d::getCenterOfMass(void) const
   {
-    std::cerr << "SectorAnilloCircular2d::Cdg() not implemented." << std::endl;
+    std::cerr << "SectorAnilloCircular2d::getCenterOfMass() not implemented." << std::endl;
     return Centro();
   }
 

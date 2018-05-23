@@ -83,10 +83,10 @@ GEOM_FT BND2d::Area(void) const
   { return cgrectg.area(); }
 Vector2d BND2d::Diagonal(void) const
   { return GetPMax() - GetPMin(); }
-Pos2d BND2d::Cdg(void) const
+Pos2d BND2d::getCenterOfMass(void) const
   {
-    Pos2d cdg= GetPMin() + Diagonal()/2;
-    return cdg;
+    Pos2d center_of_mass= GetPMin() + Diagonal()/2;
+    return center_of_mass;
   }
 GEOM_FT BND2d::Ix(void) const
   { return (Anchura()*Altura()*Altura()*Altura())/12; }

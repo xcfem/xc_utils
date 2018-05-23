@@ -55,7 +55,7 @@ class_<BND3d, bases<GeomObj3d> >("BND3d")
   .def("getIx", &BND3d::Ix)
   .def("getIy", &BND3d::Iy)
   .def("getPxy", &BND3d::Pxy)
-  .def("getCdg", &BND3d::Cdg)
+  .def("getCenterOfMass", &BND3d::getCenterOfMass)
   .def("getMax", &BND3d::GetMax,"returns maximum value of i coordinate.")
   .def("getMin", &BND3d::GetMin,"returns minimum value of i coordinate.")
   ;

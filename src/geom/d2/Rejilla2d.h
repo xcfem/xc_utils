@@ -55,7 +55,7 @@ class Rejilla2d: public Superficie2d
     GEOM_FT Ix(void) const;
     GEOM_FT Iy(void) const;
     GEOM_FT Pxy(void) const;
-    Pos2d Cdg(void) const;
+    Pos2d getCenterOfMass(void) const;
     const matriz_FT &GetVertCoords(const size_t &,const size_t &) const;
     Pos2d getPoint(const size_t &,const size_t &) const;
     Cuadrilatero2d GetQuad(const size_t &i,const size_t &j) const;

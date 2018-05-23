@@ -27,8 +27,8 @@
 
 
 //! @brief Constructor.
-PrincipalAxesOfInertia2D::PrincipalAxesOfInertia2D(const Pos2d &cdg_,const GEOM_FT &Ix,const GEOM_FT &Iy,const GEOM_FT &Pxy)
-  : cdg(cdg_), axis1(1,0), i1(0.0), i2(0.0)
+PrincipalAxesOfInertia2D::PrincipalAxesOfInertia2D(const Pos2d &center_of_mass_,const GEOM_FT &Ix,const GEOM_FT &Iy,const GEOM_FT &Pxy)
+  : center_of_mass(center_of_mass_), axis1(1,0), i1(0.0), i2(0.0)
   {
     double th1= theta_inercia(Ix,Iy,Pxy);
     const GEOM_FT media= (Ix+Iy)/2;
@@ -46,7 +46,7 @@ PrincipalAxesOfInertia2D::PrincipalAxesOfInertia2D(const Pos2d &cdg_,const GEOM_
     axis1= Vector2d(cos(th1),sin(th1));
   }
 Ref2d2d PrincipalAxesOfInertia2D::getAxis(void) const
-  { return Ref2d2d(cdg,axis1); }
+  { return Ref2d2d(center_of_mass,axis1); }
 const GEOM_FT &PrincipalAxesOfInertia2D::I1(void) const
   { return i1; }
 const GEOM_FT &PrincipalAxesOfInertia2D::I2(void) const

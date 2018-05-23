@@ -113,7 +113,7 @@ class Segmento2d : public Linea2d
       { return paralelas(RectaSoporte(),r.RectaSoporte()); }
 
     virtual GEOM_FT Longitud(void) const;
-    virtual Pos2d Cdg(void) const;
+    virtual Pos2d getCenterOfMass(void) const;
     Dir2d GetDir(void) const;
     Vector2d VDir(void) const;
     Vector2d Normal(void) const;
@@ -127,16 +127,16 @@ class Segmento2d : public Linea2d
     inline GEOM_FT Azimuth(void) const
       { return RectaSoporte().Azimuth(); }
 
-    //! @brief Moment of inertia with respect to the CDG en local axis.
+    //! @brief Moment of inertia with respect to the center of mass en local axis.
     inline virtual GEOM_FT Ix(void) const
       { return 0.0; }
-    //! @brief Moment of inertia with respect to the CDG en local axis.
+    //! @brief Moment of inertia with respect to the center of mass en local axis.
     inline virtual GEOM_FT Iy(void) const
       { return NAN; }
     //Producto de inercia.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
-    //! @brief Moment of inertia with respect to the CDG en local axis.
+    //! @brief Moment of inertia with respect to the center of mass en local axis.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
     VectorPos2d Divide(int num_partes) const;

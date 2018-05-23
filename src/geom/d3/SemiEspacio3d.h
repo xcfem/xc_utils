@@ -79,7 +79,7 @@ class SemiEspacio3d : public GeomObj3d
     virtual GEOM_FT Longitud(void) const;
     virtual GEOM_FT Area(void) const;
     virtual GEOM_FT Volumen(void) const;
-    virtual Pos3d Cdg(void) const;
+    virtual Pos3d getCenterOfMass(void) const;
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Pxy(void) const;

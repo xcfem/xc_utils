@@ -49,16 +49,16 @@ class GmGrupo3d : public GmGrupo<GeomObj3d>
     virtual GeomObj3d *clon(void) const
       { return new GmGrupo3d(*this); }
 
-    virtual Pos3d Cdg(void) const;
+    virtual Pos3d getCenterOfMass(void) const;
 
     virtual GEOM_FT Ix(void) const;
-    //Moment of inertia with respect to CDG in local coordinates.
+    //Moment of inertia with respect to the center of mass in local coordinates.
     virtual GEOM_FT Iy(void) const;
-    //Moment of inertia with respect to CDG in local coordinates.
+    //Moment of inertia with respect to the center of mass in local coordinates.
     virtual GEOM_FT Iz(void) const;
-    //Moment of inertia with respect to CDG in local coordinates.
+    //Moment of inertia with respect to the center of mass in local coordinates.
     GEOM_FT Pxy(void) const;
-    //product of inertia with respect to CDG in local coordinates.
+    //product of inertia with respect to the center of mass in local coordinates.
 
     
   };

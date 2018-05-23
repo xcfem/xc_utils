@@ -143,14 +143,14 @@ bool PoligonoConAgujeros2d::In(const Pos2d &p, const double &tol) const
   }
 
 //! @brief Return el centro de gravedad.
-Pos2d PoligonoConAgujeros2d::Cdg(void) const
+Pos2d PoligonoConAgujeros2d::getCenterOfMass(void) const
   {
     GEOM_FT areaTotal= Area();
     Vector2d vPos;
     if(!cgpol.is_unbounded())
       {
         const Poligono2d p(cgpol.outer_boundary());
-        vPos= p.Cdg().VectorPos()*p.Area();
+        vPos= p.getCenterOfMass().VectorPos()*p.Area();
       }
     else
       std::cerr << "PoligonoConAgujeros2d::GetMin; exterior contour doesn't exists." << std::endl;
@@ -158,7 +158,7 @@ Pos2d PoligonoConAgujeros2d::Cdg(void) const
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
         const Poligono2d p(*j);
-        vPos= vPos-p.Cdg().VectorPos()*p.Area();
+        vPos= vPos-p.getCenterOfMass().VectorPos()*p.Area();
       }
     vPos= vPos*(1.0/areaTotal);
     return Pos2d(vPos.x(),vPos.y());
@@ -167,16 +167,16 @@ Pos2d PoligonoConAgujeros2d::Cdg(void) const
 
 
 //! @brief Compute moment of inertia with respect to an axis parallel to the
-//! x axis that passes through the CDG of the section.
+//! x axis that passes through thecenter of mass of the surface.
 //! Ix = Integral y^2 dA
 GEOM_FT PoligonoConAgujeros2d::Ix(void) const
   { 
-    Pos2d cdg= Cdg();
+    Pos2d center_of_mass=getCenterOfMass();
     GEOM_FT retval= 0.0;
     if(!cgpol.is_unbounded())
       {
         const Poligono2d p(cgpol.outer_boundary());
-        retval+= p.Ix()+p.Area()*sqr(p.Cdg().y()-cdg.y());
+        retval+= p.Ix()+p.Area()*sqr(p.getCenterOfMass().y()-center_of_mass.y());
       }
     else
       std::cerr << "PoligonoConAgujeros2d::GetMin; exterior contour doesn't exists." << std::endl;
@@ -184,7 +184,7 @@ GEOM_FT PoligonoConAgujeros2d::Ix(void) const
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
         const Poligono2d p(*j);
-        retval-= p.Ix()+p.Area()*sqr(p.Cdg().y()-cdg.y());
+        retval-= p.Ix()+p.Area()*sqr(p.getCenterOfMass().y()-center_of_mass.y());
       }
     return retval;
   }
@@ -194,12 +194,12 @@ GEOM_FT PoligonoConAgujeros2d::Ix(void) const
 //! Iy = Integral x^2 dA
 GEOM_FT PoligonoConAgujeros2d::Iy(void) const
   { 
-    Pos2d cdg= Cdg();
+    Pos2d center_of_mass=getCenterOfMass();
     GEOM_FT retval= 0.0;
     if(!cgpol.is_unbounded())
       {
         const Poligono2d p(cgpol.outer_boundary());
-        retval+= p.Iy()+p.Area()*sqr(p.Cdg().x()-cdg.x());
+        retval+= p.Iy()+p.Area()*sqr(p.getCenterOfMass().x()-center_of_mass.x());
       }
     else
       std::cerr << "PoligonoConAgujeros2d::GetMin; exterior contour doesn't exists." << std::endl;
@@ -207,7 +207,7 @@ GEOM_FT PoligonoConAgujeros2d::Iy(void) const
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
         const Poligono2d p(*j);
-        retval-= p.Iy()+p.Area()*sqr(p.Cdg().x()-cdg.x());
+        retval-= p.Iy()+p.Area()*sqr(p.getCenterOfMass().x()-center_of_mass.x());
       }
     return retval;
   }
@@ -217,13 +217,13 @@ GEOM_FT PoligonoConAgujeros2d::Iy(void) const
 //! Pxy = Integral x*y dA
 GEOM_FT PoligonoConAgujeros2d::Pxy(void) const
   {
-    Pos2d cdg= Cdg();
+    Pos2d center_of_mass=getCenterOfMass();
     GEOM_FT retval= 0.0;
     if(!cgpol.is_unbounded())
       {
         const Poligono2d p(cgpol.outer_boundary());
-        const GEOM_FT dx= p.Cdg().x()-cdg.x();
-        const GEOM_FT dy= p.Cdg().y()-cdg.y();
+        const GEOM_FT dx= p.getCenterOfMass().x()-center_of_mass.x();
+        const GEOM_FT dy= p.getCenterOfMass().y()-center_of_mass.y();
         retval+= p.Pxy()+p.Area()*dx*dy;
       }
     else
@@ -232,8 +232,8 @@ GEOM_FT PoligonoConAgujeros2d::Pxy(void) const
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
         const Poligono2d p(*j);
-        const GEOM_FT dx= p.Cdg().x()-cdg.x();
-        const GEOM_FT dy= p.Cdg().y()-cdg.y();
+        const GEOM_FT dx= p.getCenterOfMass().x()-center_of_mass.x();
+        const GEOM_FT dy= p.getCenterOfMass().y()-center_of_mass.y();
         retval-= p.Iy()+p.Area()*dx*dy;
       }
     return retval;

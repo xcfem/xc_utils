@@ -135,9 +135,9 @@ GEOM_FT BlockPyramid::Iz(void) const
   }
 
 //! @brief Return the posición del centro de gravedad.
-Pos3d BlockPyramid::Cdg(void) const
+Pos3d BlockPyramid::getCenterOfMass(void) const
   {
-    std::cerr << "BlockPyramid::Cdg() not implemented." << std::endl;
+    std::cerr << "BlockPyramid::getCenterOfMass() not implemented." << std::endl;
     return Pos3d();
   }
 

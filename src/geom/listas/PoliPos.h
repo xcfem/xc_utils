@@ -72,8 +72,8 @@ class PoliPos : public std::deque<pos>
     GEOM_FT GetMin(unsigned short i) const;
     PoliPos GetMayores(unsigned short int i,const GEOM_FT &d) const;
     PoliPos GetMenores(unsigned short int i,const GEOM_FT &d) const;
-    pos Cdg(void) const;
-    pos CdgPonderado(const std::deque<GEOM_FT> &) const;
+    pos getCenterOfMass(void) const;
+    pos getWeightedCenterOfMass(const std::deque<GEOM_FT> &) const;
     PoliPos<pos> GetSwap(void) const;
     void Swap(void)
       { *this= this->GetSwap(); }
@@ -169,22 +169,22 @@ GEOM_FT PoliPos<pos>::GetMin(unsigned short j) const
 
 template <class pos>
 //! @brief Return el centro de gravedad del polígono.
-pos PoliPos<pos>::Cdg(void) const
+pos PoliPos<pos>::getCenterOfMass(void) const
   {
     if(this->size()<1) return pos();
     if(this->size()<2) return *(this->begin());
     const_iterator i= this->begin();
-    vector vpos_cdg((*i).VectorPos());
+    vector vpos_center_of_mass((*i).VectorPos());
     i++;
     for(; i != this->end(); i++) 
-      vpos_cdg= vpos_cdg + (*i).VectorPos();
-    vpos_cdg= vpos_cdg * (1.0/this->size());
-    return pos()+ vpos_cdg;
+      vpos_center_of_mass= vpos_center_of_mass + (*i).VectorPos();
+    vpos_center_of_mass= vpos_center_of_mass * (1.0/this->size());
+    return pos()+ vpos_center_of_mass;
   }
 
 template <class pos>
 //! @brief Return el centro de gravedad del polígono.
-pos PoliPos<pos>::CdgPonderado(const std::deque<GEOM_FT> &areas) const
+pos PoliPos<pos>::getWeightedCenterOfMass(const std::deque<GEOM_FT> &areas) const
   {
     pos retval;
     const size_t sz= this->size();
@@ -198,18 +198,18 @@ pos PoliPos<pos>::CdgPonderado(const std::deque<GEOM_FT> &areas) const
             std::deque<GEOM_FT>::const_iterator iArea= areas.begin();
             GEOM_FT areaTot(0.0);
             const_iterator i= this->begin();
-            vector vpos_cdg((*i).VectorPos()*(*iArea));
+            vector vpos_center_of_mass((*i).VectorPos()*(*iArea));
             areaTot+= *iArea;
             i++; iArea++;
             for(; i != this->end(); i++)
               {
-                vpos_cdg= vpos_cdg + (*i).VectorPos()*(*iArea);
+                vpos_center_of_mass= vpos_center_of_mass + (*i).VectorPos()*(*iArea);
                 areaTot+= *iArea;
               }
             if(areaTot!=0.0)
               {
-                vpos_cdg= vpos_cdg * (1.0/areaTot);
-                retval= pos()+vpos_cdg;
+                vpos_center_of_mass= vpos_center_of_mass * (1.0/areaTot);
+                retval= pos()+vpos_center_of_mass;
               }
           }
       }

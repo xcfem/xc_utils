@@ -112,8 +112,8 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     //Return el trozo de Polilinea2d:
     //hasta p si sgn < 0
     //desde p si sgn >= 0
-    Pos2d Cdg(void) const
-      { return GeomObj::list_Pos2d::Cdg(); }
+    Pos2d getCenterOfMass(void) const
+      { return GeomObj::list_Pos2d::getCenterOfMass(); }
 
     iterator getFarthestPointFromSegment(iterator it1, iterator it2, GEOM_FT &pMaxDist);
 

@@ -116,15 +116,15 @@ class Plano3d : public Superficie3d
     GEOM_FT y(const Pos2d &p) const;
     GEOM_FT z(const Pos2d &p) const;
 
-    virtual Pos3d Cdg(void) const;
+    virtual Pos3d getCenterOfMass(void) const;
     Pos3d Point(void) const;
-    //! @brief Moment of inertia with respect to CDG in local coordinates.
+    //! @brief Moment of inertia with respect to the center of mass in local coordinates.
     inline virtual GEOM_FT Ix(void) const
       { return NAN; }
-    //! @brief Moment of inertia with respect to CDG in local coordinates.
+    //! @brief Moment of inertia with respect to the center of mass in local coordinates.
     inline virtual GEOM_FT Iy(void) const
       { return NAN; }
-    //! @brief Moment of inertia with respect to CDG in local coordinates.
+    //! @brief Moment of inertia with respect to the center of mass in local coordinates.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
 

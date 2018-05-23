@@ -90,8 +90,8 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
     //Return el trozo de Polilinea3d:
     //hasta p si sgn < 0
     //desde p si sgn >= 0
-    Pos3d Cdg(void) const
-      { return GeomObj::list_Pos3d::Cdg(); }
+    Pos3d getCenterOfMass(void) const
+      { return GeomObj::list_Pos3d::getCenterOfMass(); }
 
     iterator getFarthestPointFromSegment(iterator it1, iterator it2, GEOM_FT &pMaxDist);
 

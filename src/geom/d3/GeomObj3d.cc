@@ -74,8 +74,6 @@ bool GeomObj3d::In(const Pos3d &p, const double &tol) const
 bool GeomObj3d::Out(const Pos3d &p, const double &tol) const
   { return !In(p,tol); }
 
-// Pos3d GeomObj3d::BrazoCdg(void) const
-//   { return PesoCdg()*Cdg(); }
 GEOM_FT GeomObj3d::I( const unsigned short int &i, const unsigned short int &j) const
   {
     unsigned short int k= i + (j-1)*3;
@@ -121,9 +119,9 @@ GEOM_FT GeomObj3d::I( const unsigned short int i,
                      const Pos3d &o) const
   {
     const GEOM_FT Iij= I(i,j);
-    if(TieneCdg())
+    if(hasCenterOfMass())
       {
-        Ref3d3d axis(Cdg()); //
+        Ref3d3d axis(getCenterOfMass()); //
         Pos3d pos_local= axis.GetPosLocal(o);
         return Iij + IArea() * pos_local(i) * pos_local(j);
       }
@@ -150,7 +148,7 @@ matriz_FT GeomObj3d::I(void) const
 matriz_FT GeomObj3d::I(const Pos3d &o) const
   {
     matriz_FT Ig= I();
-    Vector3d og= Cdg() - o;
+    Vector3d og=getCenterOfMass() - o;
     GEOM_FT m= IArea();
     return Ig+m*(Abs2(og)*identidad(Ig)-(og & og));
   }

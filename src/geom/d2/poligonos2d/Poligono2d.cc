@@ -33,7 +33,7 @@
 #include <CGAL/Boolean_set_operations_2.h>
 #include <boost/any.hpp>
 
-#include "xc_utils/src/geom/cdg.h"
+#include "xc_utils/src/geom/center_of_mass.h"
 #include "xc_utils/src/geom/trf/Translation2d.h"
 #include "xc_utils/src/geom/listas/utils_list_pos2d.h"
 #include "xc_utils/src/geom/pos_vec/ListaPos2d.h"
@@ -281,7 +281,7 @@ GEOM_FT Poligono2d::Area(void) const
 std::vector<Poligono2d> Poligono2d::getPoligonosTributarios(void) const
   {
     const size_t nv= GetNumVertices();
-    const Pos2d cdg= Cdg();
+    const Pos2d center_of_mass=getCenterOfMass();
     const Poligono2d pMed= append_mid_points(*this);
     const size_t nvPMed= pMed.GetNumVertices();
     std::vector<Poligono2d> retval(nv);
@@ -298,7 +298,7 @@ std::vector<Poligono2d> Poligono2d::getPoligonosTributarios(void) const
         Poligono2d tmp;
         tmp.push_back(v1);
         tmp.push_back(v2);
-        tmp.push_back(cdg);
+        tmp.push_back(center_of_mass);
         tmp.push_back(v3);
         retval[i]= tmp;
       }
@@ -335,13 +335,13 @@ Poligono2d append_mid_points(const Poligono2d &plg)
         for(register size_t i=2;i<=num_vertices;i++)
           {
             p2= plg.Vertice(i);
-            pmed= Segmento2d(p1,p2).Cdg();
+            pmed= Segmento2d(p1,p2).getCenterOfMass();
             retval.push_back(pmed);
             retval.push_back(p2);
             p1= p2;
           }
         p2= plg.Vertice(1);
-        retval.push_back(Segmento2d(p1,p2).Cdg());
+        retval.push_back(Segmento2d(p1,p2).getCenterOfMass());
       }
     return retval;
   }
@@ -418,7 +418,7 @@ void Poligono2d::une(const std::list<Poligono2d> &l)
 //     return retval;
 //   }
 
-Pos2d cdg(const std::list<Poligono2d> &l)
-  { return cdg(l.begin(),l.end()); }
+Pos2d center_of_mass(const std::list<Poligono2d> &l)
+  { return center_of_mass(l.begin(),l.end()); }
 
 

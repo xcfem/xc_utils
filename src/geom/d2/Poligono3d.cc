@@ -79,8 +79,8 @@ bool Poligono3d::In(const Pos3d &p,const double &tol)
   }
 
 //! @brief Return el centro de gravedad del polígono.
-Pos3d Poligono3d::Cdg(void) const
-  { return to_3d(plg2d.Cdg()); }
+Pos3d Poligono3d::getCenterOfMass(void) const
+  { return to_3d(plg2d.getCenterOfMass()); }
 
 std::vector<Poligono3d> Poligono3d::getPoligonosTributarios(void) const
   {

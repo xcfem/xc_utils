@@ -85,7 +85,7 @@ class BND2d: public GeomObj2d
     inline GEOM_FT GetMin(unsigned short int i) const
       { return cgrectg.min_coord(i-1); }
 
-    Pos2d Cdg(void) const;
+    Pos2d getCenterOfMass(void) const;
 
     bool In(const Pos2d &) const;
     template <class inputIterator>

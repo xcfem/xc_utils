@@ -180,7 +180,7 @@ std::list<Poligono2d> interseccion(const Poligono2d &p1,const Poligono2d &p2);
 std::list<Poligono2d> interseccion(const Poligono2d &p,const Semiplano2d &r);
 std::list<Poligono2d> corta(const Poligono2d &p,const Recta2d &r);
 
-Pos2d cdg(const std::list<Poligono2d> &);
+Pos2d center_of_mass(const std::list<Poligono2d> &);
 
 //!@brief Return verdadero si todos los objetos de la secuencia
 //! están contenidos en el polígono.

@@ -101,7 +101,7 @@ GEOM_FT Segmento2d::Longitud(void) const
   { return Origen().dist(Destino()); }
 
 //! @brief Return the posición del centro de gravedad del segmento.
-Pos2d Segmento2d::Cdg(void) const
+Pos2d Segmento2d::getCenterOfMass(void) const
   {
     Pos2d retval= Origen();
     const Vector2d v= (Destino()-retval)/2;
@@ -138,7 +138,7 @@ Segmento2d Segmento2d::Offset(const GEOM_FT &d) const
 //! @brief Return the mediatriz del segmento.
 Recta2d Segmento2d::Mediatriz(void) const
   {
-    const Pos2d p= Cdg();
+    const Pos2d p=getCenterOfMass();
     const Vector2d v= VDir().Perpendicular(CGAL::COUNTERCLOCKWISE);
     const Pos2d p2= p+100.0*v;
     return Recta2d(p,p2);
@@ -243,7 +243,7 @@ GeomObj2d::list_Pos2d Segmento2d::Interseccion(const Recta2d &r) const
         if(CGAL::assign(ptoi, result))
           retval.push_back(Pos2d(ptoi));
         else if(CGAL::assign(segi, result)) 
-          retval.push_back(Cdg()); //Return el centro de ESTE.
+          retval.push_back(getCenterOfMass()); //Return el centro de ESTE.
         else
           {
             const GEOM_FT d1= r.dist2(Origen());

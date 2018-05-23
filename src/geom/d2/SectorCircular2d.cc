@@ -83,7 +83,7 @@ Superficie2d *SectorCircular2d::clon(void) const
 
 
 //! @brief Return the posición del centro de gravedad del sector circular.
-Pos2d SectorCircular2d::Cdg(void) const
+Pos2d SectorCircular2d::getCenterOfMass(void) const
   {
     const GEOM_FT theta= AnguloComprendido()/2.0;
     const GEOM_FT lambda= 2.0/3.0*sin(theta)/theta;

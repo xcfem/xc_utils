@@ -120,7 +120,7 @@ GEOM_FT SupPoligonal2d::GetMin(unsigned short int i) const
   }
 
 //! @brief Return el centro de gravedad.
-Pos2d SupPoligonal2d::Cdg(void) const
+Pos2d SupPoligonal2d::getCenterOfMass(void) const
   {
      const GEOM_FT area= Area();
      return Pos2d(getMoment(1,0)/area,getMoment(0,1)/area);
@@ -131,16 +131,17 @@ Pos2d SupPoligonal2d::Cdg(void) const
 //! Joaquín Bosque Sendra (Ed. Rialp ).
 Pos2d SupPoligonal2d::Centroide(void) const
   {
-    Pos2d retval= Cdg();
-    if(In(retval)) return retval; //Si el CDG está dentro, lo preferimos.
+    Pos2d retval=getCenterOfMass();
+    if(In(retval)) return retval; //If the center of mass is inside, 
+                                  //we prefer it.
     const BND2d bnd= Bnd();
-    const Pos2d c= bnd.Cdg();
+    const Pos2d c= bnd.getCenterOfMass();
     const Recta2d r(c,c+Vector2d(0,100));
     list<Segmento2d> intersec= interseccion(*this,r);
     if(!intersec.empty())
       {
         Segmento2d sg= *intersec.begin();
-        retval= sg.Cdg();
+        retval= sg.getCenterOfMass();
       }
     else
       cerr << getClassName() << "::" << __FUNCTION__
@@ -157,12 +158,12 @@ GEOM_FT SupPoligonal2d::getMoment(const int &p,const int &q) const
   }
 
 //! @brief Calcula el moment of inertia with respect to an axis parallel to the
-//! x axis que pasa por el CDG de la sección.
+//! x axis que pasa por el center of mass of the surface.
 //! Ix = Integral y^2 dA
 GEOM_FT SupPoligonal2d::Ix(void) const
   { 
     const GEOM_FT Ixo= getMoment(0,2);
-    return Ixo-Area()*sqr(Cdg().y()); //Teorema de Steiner.
+    return Ixo-Area()*sqr(getCenterOfMass().y()); //Teorema de Steiner.
   }
 
 //! @brief Calcula el moment of inertia with respect to an axis parallel to the
@@ -171,7 +172,7 @@ GEOM_FT SupPoligonal2d::Ix(void) const
 GEOM_FT SupPoligonal2d::Iy(void) const
   { 
     const GEOM_FT Iyo= getMoment(2,0);
-    return Iyo-Area()*sqr(Cdg().x()); //Teorema de Steiner.
+    return Iyo-Area()*sqr(getCenterOfMass().x()); //Teorema de Steiner.
   }
 
 //! @brief Calcula el product of inertia with respect to the axis parallel
@@ -180,9 +181,9 @@ GEOM_FT SupPoligonal2d::Iy(void) const
 GEOM_FT SupPoligonal2d::Pxy(void) const
   {
     const GEOM_FT Ixy= getMoment(1,1);
-    const Pos2d cdg= Cdg();
-    const GEOM_FT dx= cdg.x();
-    const GEOM_FT dy= cdg.y();
+    const Pos2d center_of_mass=getCenterOfMass();
+    const GEOM_FT dx= center_of_mass.x();
+    const GEOM_FT dy= center_of_mass.y();
     return Ixy-Area()*dx*dy; //Theorem of parallel axis.
   }
 
@@ -424,7 +425,7 @@ list<Segmento2d> interseccion(const SupPoligonal2d &pg,const Recta2d &r)
             for(size_t i= 1;i<=ns;i++)
               {
                 const Segmento2d s= tmp.GetSegmento(i);
-                if(pg.In(s.Cdg()))
+                if(pg.In(s.getCenterOfMass()))
                   retval.push_back(s);
               }
           }
@@ -458,7 +459,7 @@ list<Segmento2d> interseccion(const SupPoligonal2d &pg,const SemiRecta2d &sr)
     for(size_t i= 1;i<=ns;i++)
       {
         const Segmento2d s= tmp.GetSegmento(i);
-        if(pg.In(s.Cdg()))
+        if(pg.In(s.getCenterOfMass()))
           retval.push_back(s);
       }
     return retval;
@@ -493,7 +494,7 @@ list<Segmento2d> interseccion(const SupPoligonal2d &pg,const Segmento2d &sg)
     for(size_t i= 1;i<=ns;i++)
       {
         const Segmento2d s= tmp.GetSegmento(i);
-        if(pg.In(s.Cdg()))
+        if(pg.In(s.getCenterOfMass()))
           retval.push_back(s);
       }
     return retval;

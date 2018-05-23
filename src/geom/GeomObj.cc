@@ -29,14 +29,33 @@
 GeomObj::GeomObj(void) 
   : ProtoGeom() {}
 
-GEOM_FT GeomObj::AreaCdg(void) const
+//! Return the dimension used to compute the center of mass, as follows:
+//! - dimension == 0 => return 1.0
+//! - dimension == 1 => return Longitud()
+//! - dimension == 2 => return Area()
+//! - dimension == 3 => return Volumen()
+GEOM_FT GeomObj::getCenterOfMassArea(void) const
   {
     unsigned short int d= Dimension();
-    if(d==0) return 1.0;
-    if(d==1) return Longitud();
-    if(d==2) return Area();
-    if(d==3) return Volumen();
-    return 1.0;
+    GEOM_FT retval= 1.0;
+    switch(d)
+      {
+      case 0:
+	retval= 1.0;
+	break;
+      case 1:
+	retval= Longitud();
+	break;
+      case 2:
+	retval= Area();
+	break;
+      case 3:
+	retval= Volumen();
+	break;
+      default:
+	retval= 1.0;
+      }
+    return retval;
   }
 
 std::ostream &operator<<(std::ostream &os, const GeomObj &go)

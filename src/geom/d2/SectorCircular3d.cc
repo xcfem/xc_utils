@@ -97,7 +97,7 @@ Pos3d SectorCircular3d::PFin(void) const
 Pos3d SectorCircular3d::PMed(void) const
   { return to_3d(sect_circ.PMed()); }
 
-Pos3d SectorCircular3d::Cdg(void) const
+Pos3d SectorCircular3d::getCenterOfMass(void) const
   { return Centro(); }
 
 //! @brief Return the position of the arc centroid.

@@ -88,7 +88,7 @@ class Poligono3d: public D2to3d
     Plano3d GetPlanoLado0(unsigned int i) const;
     Plano3d GetPlanoLado(unsigned int i) const;
 
-    Pos3d Cdg(void) const;
+    Pos3d getCenterOfMass(void) const;
     GEOM_FT Ix(void) const;
     GEOM_FT Iy(void) const;
     GEOM_FT Iz(void) const;

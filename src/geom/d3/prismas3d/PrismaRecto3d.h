@@ -100,14 +100,14 @@ class PrismaRecto3d : public Prisma3d
       { return extru.Bnd(); }
     inline matriz_FT I(void) const
       { return extru.I(); }
-    inline Pos3d Cdg(void) const
-      { return extru.Cdg(); }
-    inline Pos3d GetCdgTop(void) const
-      { return extru.GetCdgTop(); }
-    inline Pos3d GetCdgBottom(void) const
-      { return extru.GetCdgBottom(); }
-    inline Pos3d GetCdgFaceta(unsigned int faceta) const
-      { return this->Faceta(faceta).Cdg(); }
+    inline Pos3d getCenterOfMass(void) const
+      { return extru.getCenterOfMass(); }
+    inline Pos3d getCenterOfMassOfTop(void) const
+      { return extru.getCenterOfMassOfTop(); }
+    inline Pos3d getCenterOfMassOfBottom(void) const
+      { return extru.getCenterOfMassOfBottom(); }
+    inline Pos3d getCenterOfMassOfFacet(unsigned int faceta) const
+      { return this->Faceta(faceta).getCenterOfMass(); }
     
   };
 

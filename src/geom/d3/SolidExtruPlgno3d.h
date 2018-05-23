@@ -61,8 +61,8 @@ class SolidExtruPlgno3d : public SolidExtru3d<PG>
       { return solid_extru_pg::Bnd(); }
     inline matriz_FT I(void) const
       { return solid_extru_pg::I(); }
-    inline Pos3d Cdg(void) const
-      { return solid_extru_pg::Cdg(); }
+    inline Pos3d getCenterOfMass(void) const
+      { return solid_extru_pg::getCenterOfMass(); }
     
   };
 

@@ -94,7 +94,7 @@ Pos2d Circulo2d::Centro(void) const
   { return Pos2d(cgcirc.center()); }
 
 //! @brief Return the posición del centro de gravedad del círculo.
-Pos2d Circulo2d::Cdg(void) const
+Pos2d Circulo2d::getCenterOfMass(void) const
   { return Centro(); }
 
 //! @brief Return the point del círculo correspondiente al ángulo que se pasa como parámetro.
@@ -201,7 +201,7 @@ Poligono2d Circulo2d::getPoligonoInscrito(const size_t &n,const double &theta_in
 //! pasa como parámetro.
 void Circulo2d::Transforma(const Trf2d &trf2d)
   {
-    const Pos2d pA= trf2d.Transforma(Cdg());
+    const Pos2d pA= trf2d.Transforma(getCenterOfMass());
     (*this)= Circulo2d(pA,Radio());
   }
 

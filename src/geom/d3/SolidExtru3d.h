@@ -86,7 +86,7 @@ class SolidExtru3d : public Solido3d
       { return scc.Iy()*l + scc.Area()*l*l*l/12; }
     inline virtual GEOM_FT Iz(void) const
       { return (scc.Ix()+scc.Iy())*l; }
-/*     inline Pos3d GetCdgBase(unsigned short int i) const */
+/*     inline Pos3d getCenterOfMassOfBase(unsigned short int i) const */
 /*     //Return el centro de gravedad de una de las bases. */
 /*     //0 la base inferior (z=-l/2) y 1 la */
 /*     //base superior (z=+l/2). */
@@ -96,15 +96,15 @@ class SolidExtru3d : public Solido3d
 /*         else */
 /*           return scc.GetPosGlobal(Pos3d(0,0,-l/2.0)); */
 /*       } */
-/*     inline Pos3d GetCdgTop(void) const */
-/*       { return GetCdgBase(1); } */
-/*     inline Pos3d GetCdgBottom(void) const */
-/*       { return GetCdgBase(0); } */
+/*     inline Pos3d getCenterOfMassOfTop(void) const */
+/*       { return getCenterOfMassOfBase(1); } */
+/*     inline Pos3d getCenterOfMassOfBottom(void) const */
+/*       { return getCenterOfMassOfBase(0); } */
 /*     inline S GetBase(unsigned short int i) const */
 /*     //0 la base inferior (z=-l/2) y 1 la */
 /*     //base superior (z=+l/2). */
 /*       {  */
-/*         Pos3d p= GetCdgBase(i); */
+/*         Pos3d p= getCenterOfMassOfBase(i); */
 /*         S secc= scc; */
 /*         secc.setOrg(p); */
 /*         return secc; */
@@ -128,8 +128,8 @@ class SolidExtru3d : public Solido3d
       { return GeomObj3d::Bnd(); }
     matriz_FT I(void) const
       { return GeomObj3d::I(); }
-    Pos3d Cdg(void) const
-      { return scc.Cdg(); }
+    Pos3d getCenterOfMass(void) const
+      { return scc.getCenterOfMass(); }
   };
 
 #endif

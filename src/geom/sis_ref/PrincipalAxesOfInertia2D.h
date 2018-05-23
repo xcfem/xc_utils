@@ -34,12 +34,12 @@ class Ref2d2d;
 //! @brief Principals axes of inertia in planar geometry.
 class PrincipalAxesOfInertia2D
   {
-    Pos2d cdg; //! Centroid.
+    Pos2d center_of_mass; //! Centroid.
     Vector2d axis1; //!< Direction of the first principal moment of inertia.
     GEOM_FT i1; //!< First principal moment of inertia.
     GEOM_FT i2; //!< Second principal moment of inertia.
   public:
-    PrincipalAxesOfInertia2D(const Pos2d &cdg_,const GEOM_FT &Ix,const GEOM_FT &Iy,const GEOM_FT &Pxy);
+    PrincipalAxesOfInertia2D(const Pos2d &,const GEOM_FT &,const GEOM_FT &,const GEOM_FT &);
     Ref2d2d getAxis(void) const;
     const GEOM_FT &I1() const;
     const GEOM_FT &I2() const;

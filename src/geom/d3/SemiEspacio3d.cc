@@ -102,14 +102,14 @@ GEOM_FT SemiEspacio3d::Area(void) const
   { return NAN; }
 GEOM_FT SemiEspacio3d::Volumen(void) const
   { return NAN; }
-Pos3d SemiEspacio3d::Cdg(void) const
-  { return lim.Cdg(); }
+Pos3d SemiEspacio3d::getCenterOfMass(void) const
+  { return lim.getCenterOfMass(); }
 
-//! @brief Return el moment of inertia with respect to CDG in local coordinates.
+//! @brief Return el moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT SemiEspacio3d::Ix(void) const
   { return NAN; }
 
-//! @brief Return el moment of inertia with respect to CDG in local coordinates.
+//! @brief Return el moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT SemiEspacio3d::Iy(void) const
   { return NAN; }
 
@@ -117,7 +117,7 @@ GEOM_FT SemiEspacio3d::Iy(void) const
 GEOM_FT SemiEspacio3d::Pxy(void) const
   { return NAN; }
 
-//! @brief Return el moment of inertia with respect to CDG in local coordinates.
+//! @brief Return el moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT SemiEspacio3d::Iz(void) const
   { return NAN; }
 

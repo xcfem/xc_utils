@@ -146,7 +146,7 @@ bool Segmento3d::Paralelo(const Segmento3d &r) const
 GEOM_FT Segmento3d::Longitud(void) const
   { return Origen().dist(Destino()); }
 
-Pos3d Segmento3d::Cdg(void) const
+Pos3d Segmento3d::getCenterOfMass(void) const
   {
     Pos3d retval= Origen();
     const Vector3d v= (Destino()-retval)/2;
@@ -225,13 +225,13 @@ GEOM_FT Segmento3d::Angulo(const Segmento3d &s) const
   { return Angulo(s.VDir()); }
 GEOM_FT angulo(const Segmento3d &r,const Vector3d &v)
   { return r.Angulo(v); }
-//Moment of inertia with respect to CDG in local coordinates.
+//Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Segmento3d::Ix(void) const
   { return 0.0; }
-//Moment of inertia with respect to CDG in local coordinates.
+//Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Segmento3d::Iy(void) const
   { return NAN; }
-//Moment of inertia with respect to CDG in local coordinates.
+//Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Segmento3d::Iz(void) const
   { return NAN; }
 bool operator==(const Segmento3d &r1,const Segmento3d &r2)

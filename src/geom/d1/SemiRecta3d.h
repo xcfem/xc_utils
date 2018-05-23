@@ -93,19 +93,19 @@ class SemiRecta3d : public Linea3d
     //intersección devuelve la lista vacía.
     inline virtual GEOM_FT Longitud(void) const
       { return NAN; }
-    inline virtual Pos3d Cdg(void) const
+    inline virtual Pos3d getCenterOfMass(void) const
       { return Pos3d(NAN,NAN,NAN); }
     Dir3d GetDir(void) const;
     Vector3d VDir(void) const;
     inline double Angulo(const Vector3d &v) const
       { return angulo(VDir(),v); }
-    //Moment of inertia with respect to CDG in local coordinates.
+    //Moment of inertia with respect to the center of mass in local coordinates.
     inline virtual GEOM_FT Ix(void) const
       { return 0.0; }
-    //Moment of inertia with respect to CDG in local coordinates.
+    //Moment of inertia with respect to the center of mass in local coordinates.
     inline virtual GEOM_FT Iy(void) const
       { return NAN; }
-    //Moment of inertia with respect to CDG in local coordinates.
+    //Moment of inertia with respect to the center of mass in local coordinates.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
     inline friend bool operator==(const SemiRecta3d &r1,const SemiRecta3d &r2)

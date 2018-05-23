@@ -57,7 +57,7 @@ class Circulo2d : public Superficie2d
     virtual Superficie2d *clon(void) const
       { return new Circulo2d(*this); }
     Pos2d Centro(void) const;
-    virtual Pos2d Cdg(void) const;
+    virtual Pos2d getCenterOfMass(void) const;
     Pos2d Point(const double &ang) const;
     inline GEOM_FT Radio2(void) const
       { return cgcirc.squared_radius(); }

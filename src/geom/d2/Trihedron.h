@@ -75,7 +75,7 @@ class Trihedron: public GeomObj3d
       { return 3; }
     GEOM_FT GetMax(short unsigned int) const;
     GEOM_FT GetMin(short unsigned int) const;
-    Pos3d Cdg() const;
+    Pos3d getCenterOfMass() const;
     bool TocaCuadrante(const int &) const;
 
     const Triangulo3d &Base(void) const;

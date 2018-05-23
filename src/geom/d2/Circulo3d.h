@@ -51,7 +51,7 @@ class Circulo3d : public D2to3d
     virtual D2to3d *clon(void) const
       { return new Circulo3d(*this); }
     Pos3d Centro(void) const;
-    virtual Pos3d Cdg(void) const;
+    virtual Pos3d getCenterOfMass(void) const;
     GEOM_FT Radio2(void) const;
     GEOM_FT Radio(void) const;
     GEOM_FT Diametro(void) const;

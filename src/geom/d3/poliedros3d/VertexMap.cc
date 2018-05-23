@@ -70,7 +70,7 @@ ListaPos3d VerticesCara::getPosVertices(const std::vector<Pos3d> &vertices) cons
 
 //! @brief Return el centroide de la cara.
 Pos3d VerticesCara::getCentroide(const std::vector<Pos3d> &vertices) const
-  { return getPosVertices(vertices).Cdg();  }
+  { return getPosVertices(vertices).getCenterOfMass();  }
 
 //! @brief Return las aristas de la cara.
 std::list<VerticesArista> VerticesCara::getAristas(void) const

@@ -89,8 +89,8 @@ class ListaPos3d: public GeomObj3d
     ListaPos3d GetMayores(unsigned short int i,const GEOM_FT &d) const;
     ListaPos3d GetMenores(unsigned short int i,const GEOM_FT &d) const;
     const Pos3d &Point(const size_t &i) const;
-    Pos3d Cdg(void) const
-      { return lista_ptos.Cdg(); }
+    Pos3d getCenterOfMass(void) const
+      { return lista_ptos.getCenterOfMass(); }
 
     void Transforma(const Trf3d &trf3d);
 

@@ -52,7 +52,7 @@ class SectorAnilloCircular2d : public SectorCircular2d
       }
     virtual Superficie2d *clon(void) const
       { return new SectorAnilloCircular2d(*this); }
-    virtual Pos2d Cdg(void) const;
+    virtual Pos2d getCenterOfMass(void) const;
     Pos2d PInicInt(void) const;
     Pos2d PInicExt(void) const;
     Pos2d PFinInt(void) const;

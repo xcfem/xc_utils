@@ -220,7 +220,7 @@ POS get_centro(const TritrizPos<POS> t,const SEG &sg)
     const typename TritrizPos<POS>::m_pos &base= t(1);
     const typename TritrizPos<POS>::m_pos &tapa= t(t.getNumberOfLayers());
     SEG s(get_centro(base,SEG()),get_centro(tapa,SEG()));
-    retval= s.Cdg();
+    retval= s.getCenterOfMass();
     return retval;
   }
 

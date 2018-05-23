@@ -52,11 +52,11 @@ class GeomObj: public ProtoGeom
     virtual GEOM_FT Longitud(void) const= 0;
     virtual GEOM_FT Area(void) const= 0;
     virtual GEOM_FT Volumen(void) const= 0;
-    inline virtual bool TieneCdg(void) const
+    inline virtual bool hasCenterOfMass(void) const
       //Return verdadero si el objeto tiene centro de gravedad
       //Una recta o un plano no lo tienen.
       { return false;}
-    GEOM_FT AreaCdg(void) const;
+    GEOM_FT getCenterOfMassArea(void) const;
 
     virtual void Print(std::ostream &os) const= 0;
     virtual void Plot(Plotter &) const {}

@@ -46,7 +46,7 @@ Circulo3d::Circulo3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   { circ= Circulo2d(to_2d(p1),to_2d(p2),to_2d(p3)); }
 Pos3d Circulo3d::Centro(void) const
   { return to_3d(circ.Centro()); }
-Pos3d Circulo3d::Cdg(void) const
+Pos3d Circulo3d::getCenterOfMass(void) const
   { return Centro(); }
 GEOM_FT Circulo3d::Radio2(void) const
   { return circ.Radio2(); }

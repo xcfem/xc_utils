@@ -53,7 +53,7 @@ class PoligonoConAgujeros2d: public Superficie2d
     GEOM_FT Area(void) const;
     GEOM_FT GetMax(unsigned short int i) const;
     GEOM_FT GetMin(unsigned short int i) const;
-    Pos2d Cdg(void) const;
+    Pos2d getCenterOfMass(void) const;
     GEOM_FT Ix(void) const;
     GEOM_FT Iy(void) const;
     GEOM_FT Pxy(void) const;

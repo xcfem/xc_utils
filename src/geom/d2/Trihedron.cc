@@ -59,7 +59,7 @@ const Pos3d &Trihedron::Cuspide(void) const
 
 //! @brief Return the straight line that passes through the trihedron apex.
 Recta3d Trihedron::Axis(void) const
-  { return Recta3d(p0,tr.Cdg()); }
+  { return Recta3d(p0,tr.getCenterOfMass()); }
 
 //! @brief Return the angle of the cone that has the same apex
 //! and contains the trihedron.
@@ -148,8 +148,8 @@ GEOM_FT Trihedron::GetMax(short unsigned int i) const
   { return GetPoliedro3d().GetMax(i); }
 GEOM_FT Trihedron::GetMin(short unsigned int i) const
   { return GetPoliedro3d().GetMin(i); }
-Pos3d Trihedron::Cdg() const
-  { return GetPoliedro3d().Cdg(); }
+Pos3d Trihedron::getCenterOfMass() const
+  { return GetPoliedro3d().getCenterOfMass(); }
 
 //! @brief Return verdadero si alguno de los vertices del triángulo toca el cuadrante
 //! que se pasa como parámetro.

@@ -76,7 +76,7 @@ class SupPoligonal2d: public Superficie2d
     virtual GEOM_FT Area(void) const;
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
-    virtual Pos2d Cdg(void) const;
+    virtual Pos2d getCenterOfMass(void) const;
     virtual Pos2d Centroide(void) const;
     GEOM_FT getMoment(const int &p,const int &q) const;
     virtual GEOM_FT Ix(void) const;

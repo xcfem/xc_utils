@@ -86,7 +86,7 @@ class BND3d: public GeomObj3d
     int GetNumCaras(void) const
       { return 6; }
     CGBbox_3 GetCGALBbox_3(void) const;
-    Pos3d Cdg(void) const;
+    Pos3d getCenterOfMass(void) const;
     Pos3d Vertice(unsigned int i) const;
     unsigned short int RegionCode(const Pos3d &,const double &tol= 0.0) const;
     bool In(const Pos3d &p,const double &tol= 0.0) const;

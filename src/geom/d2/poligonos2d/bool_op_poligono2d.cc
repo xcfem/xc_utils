@@ -367,8 +367,8 @@ void particiona(Poligono2d &p1,Poligono2d &p2)
   {
     if(overlap(p1,p2))
       {
-        const Pos2d c1= p1.Cdg();
-        const Pos2d c2= p2.Cdg();
+        const Pos2d c1= p1.getCenterOfMass();
+        const Pos2d c2= p2.getCenterOfMass();
         particiona(c1,p1,c2,p2);
       }
   }
@@ -421,7 +421,7 @@ void particiona(std::list<Poligono2d> &areas)
       {
         std::list<Pos2d> centros;
         for(std::list<Poligono2d>::iterator i= areas.begin();i!=areas.end();i++)
-          centros.push_back((*i).Cdg());
+          centros.push_back((*i).getCenterOfMass());
         particiona(centros,areas);
       }
   }

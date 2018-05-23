@@ -102,7 +102,7 @@ GEOM_FT Recta2d::Longitud(void) const
   { return NAN; }
 
 //! @brief Return el centro de gravedad de la recta.
-Pos2d Recta2d::Cdg(void) const
+Pos2d Recta2d::getCenterOfMass(void) const
   { return Pos2d(NAN,NAN); }
 
 Dir2d Recta2d::GetDir(void) const
@@ -424,11 +424,11 @@ GEOM_FT Recta2d::dist2(const Pos2d &p) const
 GEOM_FT Recta2d::dist(const Pos2d &p) const
   { return sqrt(dist2(p)); }
 
-//Moment of inertia with respect to CDG in local coordinates.
+//Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Recta2d::Ix(void) const
   { return 0.0; }
 
-//Moment of inertia with respect to CDG in local coordinates.
+//Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Recta2d::Iy(void) const
   { return NAN; }
 
@@ -436,7 +436,7 @@ GEOM_FT Recta2d::Iy(void) const
 GEOM_FT Recta2d::Pxy(void) const
   { return NAN; }
 
-//Moment of inertia with respect to CDG in local coordinates.
+//Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Recta2d::Iz(void) const
   { return NAN; }
 

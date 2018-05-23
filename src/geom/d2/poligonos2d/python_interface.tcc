@@ -25,7 +25,7 @@
 Segmento2d (SupPoligonal2d::*getSegmentoLado0)(unsigned int i) const= &SupPoligonal2d::Lado0;
 class_<SupPoligonal2d, bases<Superficie2d>, boost::noncopyable >("SupPoligonal2d", no_init)
   .def("getPerimetro",&SupPoligonal2d::Perimetro)
-  .def("getCdg",&SupPoligonal2d::Cdg)
+  .def("getCenterOfMass",&SupPoligonal2d::getCenterOfMass)
   .def("getIx",&SupPoligonal2d::Ix)
   .def("getIy",&SupPoligonal2d::Iy)
   .def("getPxy",&SupPoligonal2d::Pxy)

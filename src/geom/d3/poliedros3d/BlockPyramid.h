@@ -56,7 +56,7 @@ class BlockPyramid: public GeomObj3d
     GEOM_FT Ix(void) const;
     GEOM_FT Iy(void) const;
     GEOM_FT Iz(void) const;
-    Pos3d Cdg(void) const;
+    Pos3d getCenterOfMass(void) const;
     GEOM_FT GetMax(unsigned short int i) const;
     GEOM_FT GetMin(unsigned short int i) const;
     m_double getVectoresBorde(void) const;
