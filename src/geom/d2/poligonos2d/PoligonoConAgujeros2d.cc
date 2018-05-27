@@ -42,18 +42,19 @@ GeomObj *PoligonoConAgujeros2d::clon(void) const
 void PoligonoConAgujeros2d::contour(const Poligono2d &plg)
   { cgpol= CGPoligonoConAgujeros_2(plg.ToCGAL()); }
 
-GEOM_FT PoligonoConAgujeros2d::Longitud(void) const
+//! @brief Return object length.
+GEOM_FT PoligonoConAgujeros2d::getLength(void) const
   {
     GEOM_FT temp = 0;
     for(Hole_const_iterator i= cgpol.holes_begin();i!=cgpol.holes_end();i++)
       {
         const Poligono2d p(*i);
-        temp += p.Longitud();
+        temp += p.getLength();
       }
     if(!cgpol.is_unbounded())
       {
         const Poligono2d p(cgpol.outer_boundary());
-        temp += p.Longitud();
+        temp += p.getLength();
       }      
     return temp;
   }

@@ -76,9 +76,9 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     //Producto de inercia.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
-    virtual GEOM_FT Longitud(void) const
-    //Return the longitud de la Polilinea2d.
-      { return GeomObj::list_Pos2d::Longitud(); }
+    //! @brief Return the length of the object.
+    virtual GEOM_FT getLength(void) const
+      { return GeomObj::list_Pos2d::getLength(); }
     virtual GEOM_FT GetMax(unsigned short int i) const;
     //Return the maximum value of the i coordinate.
     virtual GEOM_FT GetMin(unsigned short int i) const;

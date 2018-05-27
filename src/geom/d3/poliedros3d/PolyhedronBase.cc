@@ -24,9 +24,10 @@
 #include "PolyhedronBase.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 
-GEOM_FT PolyhedronBase::Longitud(void) const
+GEOM_FT PolyhedronBase::getLength(void) const
   {
-    std::cerr << "PolyhedronBase::Longitud() no implementada." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
     return 0.0;
   }
 GEOM_FT PolyhedronBase::Volumen(void) const

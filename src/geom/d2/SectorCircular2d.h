@@ -58,8 +58,8 @@ class SectorCircular2d : public Circulo2d
     double Angulo(const Pos2d &p) const;
     double getLambda(const Pos2d &) const;
     double AnguloComprendido(void) const;
-    virtual GEOM_FT LongitudArco(void) const;
-    virtual GEOM_FT Longitud(void) const;
+    virtual GEOM_FT getArcLength(void) const;
+    virtual GEOM_FT getLength(void) const;
     virtual GEOM_FT Area(void) const;
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;

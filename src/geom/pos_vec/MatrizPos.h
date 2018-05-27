@@ -100,7 +100,7 @@ MatrizPos<POS>::MatrizPos(const POS &p1,const POS &p2,const size_t &ndiv)
 
 //! Build the point matrix between p1 and p2 in such way that, the firs point
 //! is p1 the last one is p2, the number of points is longs.size()+1 and the
-//! lenghts of interior segments are proportional to those in longs.
+//! lengths of interior segments are proportional to those in longs.
 //!
 //!       l[0]     l[1]     l[2]     l[3]     l[4]
 //!    *-------+----------+-----+-----------+-----+
@@ -114,7 +114,8 @@ MatrizPos<POS>::MatrizPos(const POS &p1,const POS &p2,const std::vector<GEOM_FT>
     const size_t num= sz+1;
     if(num<1)
       {
-	std::cerr << "MatrizPos<POS>::MatrizPos; la lista de longitudes está vacía." << std::endl;
+	std::cerr << "MatrizPos::" << __FUNCTION__
+		  << "; list of lengths is empty." << std::endl;
         return;
       }
     else

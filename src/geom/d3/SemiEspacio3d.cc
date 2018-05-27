@@ -93,10 +93,12 @@ Recta3d SemiEspacio3d::getLima(const SemiEspacio3d &se) const
      return retval;
   }
 
-//!brief Return la dimensión del objeto 0, 1, 2 ó 3.
+//!brief Return the dimension of the object 0, 1, 2 or 3.
 unsigned short int SemiEspacio3d::Dimension(void) const
   { return 3; }
-GEOM_FT SemiEspacio3d::Longitud(void) const
+
+//! @brief Return object length.
+GEOM_FT SemiEspacio3d::getLength(void) const
   { return NAN; }
 GEOM_FT SemiEspacio3d::Area(void) const
   { return NAN; }

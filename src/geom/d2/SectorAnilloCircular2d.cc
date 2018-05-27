@@ -75,17 +75,17 @@ Pos2d SectorAnilloCircular2d::PMedExt(void) const
 Pos2d SectorAnilloCircular2d::PMedInt(void) const
   { return SectorInterior().PMed(); }
 
-//! @brief Return the longitud del arco exterior del sector de anillo circular.
-GEOM_FT SectorAnilloCircular2d::LongitudArcoExt(void) const
+//! @brief Return the length of the arco exterior del sector de anillo circular.
+GEOM_FT SectorAnilloCircular2d::getExteriorArcLength(void) const
   { return double_to_FT(AnguloComprendido())*RadioExt(); }
 
-//! @brief Return the longitud del arco interior del sector de anillo circular.
-GEOM_FT SectorAnilloCircular2d::LongitudArcoInt(void) const
+//! @brief Return the length of the arco interior del sector de anillo circular.
+GEOM_FT SectorAnilloCircular2d::getInteriorArcLength(void) const
   { return double_to_FT(AnguloComprendido())*RadioInt(); }
 
-//! @brief Return the longitud del sector circular.
-GEOM_FT SectorAnilloCircular2d::Longitud(void) const
-  { return LongitudArcoExt()+LongitudArcoInt()+2*(RadioExt()-RadioInt()); }
+//! @brief Return the length of the object.
+GEOM_FT SectorAnilloCircular2d::getLength(void) const
+  { return getExteriorArcLength()+getInteriorArcLength()+2*(RadioExt()-RadioInt()); }
 
 //! @brief Return el área del sector circular.
 GEOM_FT SectorAnilloCircular2d::Area(void) const

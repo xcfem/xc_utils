@@ -103,7 +103,8 @@ class SemiRecta2d : public Linea2d
     bool Paralela(const SemiRecta2d &sr) const
       { return Paralela(sr.RectaSoporte()); }
 
-    inline virtual GEOM_FT Longitud(void) const
+    //! @brief Return the length of the object.
+    inline virtual GEOM_FT getLength(void) const
       { return NAN; }
     inline virtual Pos2d getCenterOfMass(void) const
       { return Pos2d(NAN,NAN); }

@@ -61,7 +61,7 @@ class GeomObj2d: public GeomObj
     virtual GEOM_FT getCenterOfMassFactor(void) const
       { return 1.0; }
     virtual Pos2d getCenterOfMass(void) const= 0;
-    virtual GEOM_FT Longitud(void) const= 0; //?? Por que se re-declara (está en GeomObj).
+    virtual GEOM_FT getLength(void) const= 0; //?? Por que se re-declara (está en GeomObj).
     virtual GEOM_FT Area(void) const= 0; //?? Por que se re-declara (está en GeomObj).
     inline virtual GEOM_FT Volumen(void) const
       { return 0.0; }

@@ -59,7 +59,8 @@ class Trihedron: public GeomObj3d
       { return 3; }
     inline virtual unsigned int GetNumFacetas(void) const
       { return 3; }
-    inline virtual GEOM_FT Longitud(void) const
+    //! @brief Return the length of the object.
+    inline virtual GEOM_FT getLength(void) const
       { return 0.0; }
     virtual GEOM_FT Area(void) const
       { return NAN; }

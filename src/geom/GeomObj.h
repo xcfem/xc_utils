@@ -47,9 +47,9 @@ class GeomObj: public ProtoGeom
     GeomObj(void);
     virtual ~GeomObj(void) {}
     virtual GeomObj *clon(void) const=0;
-    //! @brief Return la dimensión del objeto 0, 1, 2 ó 3.
+    //! @brief Return the dimension of the object 0, 1, 2 or 3.
     virtual unsigned short int Dimension(void) const= 0;
-    virtual GEOM_FT Longitud(void) const= 0;
+    virtual GEOM_FT getLength(void) const= 0;
     virtual GEOM_FT Area(void) const= 0;
     virtual GEOM_FT Volumen(void) const= 0;
     inline virtual bool hasCenterOfMass(void) const
@@ -85,13 +85,13 @@ GEOM_FT volumen(input_iterator begin,input_iterator end)
     return retval;
   }
 
-//! @brief Return la suma de las longitudes.
+//! @brief Return the sum of the lengths.
 template <class input_iterator>
-GEOM_FT longitud(input_iterator begin,input_iterator end)
+GEOM_FT length(input_iterator begin,input_iterator end)
   {
     GEOM_FT retval= 0.0;
     for(input_iterator i=begin;i!=end;i++)
-      retval+= i->Longitud();
+      retval+= i->getLength();
     return retval;
   }
 

@@ -76,7 +76,7 @@ class SemiEspacio3d : public GeomObj3d
     Recta3d getLima(const SemiEspacio3d &) const;
 
     virtual unsigned short int Dimension(void) const;
-    virtual GEOM_FT Longitud(void) const;
+    virtual GEOM_FT getLength(void) const;
     virtual GEOM_FT Area(void) const;
     virtual GEOM_FT Volumen(void) const;
     virtual Pos3d getCenterOfMass(void) const;

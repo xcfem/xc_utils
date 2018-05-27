@@ -142,8 +142,8 @@ bool Segmento3d::Paralelo(const SemiRecta3d &sr) const
 bool Segmento3d::Paralelo(const Segmento3d &r) const
   { return paralelas(RectaSoporte(),r.RectaSoporte()); }
 
-//! @brief Return the longitud del segmento.
-GEOM_FT Segmento3d::Longitud(void) const
+//! @brief Return the length of the segment.
+GEOM_FT Segmento3d::getLength(void) const
   { return Origen().dist(Destino()); }
 
 Pos3d Segmento3d::getCenterOfMass(void) const
@@ -192,7 +192,7 @@ GeomObj3d::list_Pos3d Segmento3d::Interseccion(unsigned short int i, const doubl
       {
         const Vector3d i_= VDir();
         const double l= RectaSoporte().getLambda(i,d,i_);
-        if( (l<0.0) || (l>Longitud()) )
+        if( (l<0.0) || (l>getLength()) )
           lp.erase(lp.begin(),lp.end());
       }
     return lp;

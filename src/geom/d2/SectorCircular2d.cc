@@ -128,13 +128,13 @@ double SectorCircular2d::getLambda(const Pos2d &p) const
 double SectorCircular2d::AnguloComprendido(void) const
   { return theta2-theta1; }
 
-//! @brief Return the longitud del arco del sector circular.
-GEOM_FT SectorCircular2d::LongitudArco(void) const
+//! @brief Return the length of the arc.
+GEOM_FT SectorCircular2d::getArcLength(void) const
   { return double_to_FT(AnguloComprendido())*Radio(); }
 
-//! @brief Return the longitud del sector circular.
-GEOM_FT SectorCircular2d::Longitud(void) const
-  { return LongitudArco()+ Diametro(); }
+//! @brief Return the length of the circular sector.
+GEOM_FT SectorCircular2d::getLength(void) const
+  { return getArcLength()+ Diametro(); }
 
 //! @brief Return el área del sector circular.
 GEOM_FT SectorCircular2d::Area(void) const

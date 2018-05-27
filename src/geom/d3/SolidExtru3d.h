@@ -39,8 +39,8 @@ template<class S>
 class SolidExtru3d : public Solido3d
   {
   protected:
-    S scc; //Superficie que genera el sólido de extrusión.
-    GEOM_FT l; //Longitud del sólido de extrusión (negativa si es indefinido).
+    S scc; //!< Surface that create the solid.
+    GEOM_FT l; //!< Lentgh of the extruded solid (negative if undefined).
   public:
     SolidExtru3d(void): Solido3d(), scc(),l(1.0) {}
     SolidExtru3d(const S &secc,const GEOM_FT &lng): scc(secc), l(lng) {}
@@ -73,10 +73,11 @@ class SolidExtru3d : public Solido3d
     inline GEOM_FT Area(void) const
       {
         GEOM_FT area= 2*scc.Area();
-        area+= scc.Longitud()*l;
+        area+= scc.getLength()*l;
         return area;
       }
-    inline GEOM_FT Longitud(void) const
+    //! @brief Return object length.
+    inline GEOM_FT getLength(void) const
       { return l; }
     inline GEOM_FT Volumen(void) const
       { return scc.Area() * l; }

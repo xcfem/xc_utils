@@ -54,10 +54,11 @@ class BND3d: public GeomObj3d
       }
     virtual GeomObj *clon(void) const
       { return new BND3d(*this); }
+    //! @brief Return the dimension of the object 0, 1, 2 or 3.
     inline virtual unsigned short int Dimension(void) const
-    //Return la dimensión del objeto 0, 1, 2 ó 3.
       { return 3; }
-    inline virtual GEOM_FT Longitud(void) const
+    //! @brief Return object length.
+    inline virtual GEOM_FT getLength(void) const
       { return GetXMax()-GetXMin(); }
     inline GEOM_FT Anchura(void) const
       { return GetYMax()-GetYMin(); }

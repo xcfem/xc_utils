@@ -68,7 +68,7 @@ class GmGrupo : public GO
       { return objetos.size(); }
     void push_back(const GO &obj)
       { objetos.push_back(downcast(obj.clon())); }
-    virtual GEOM_FT Longitud(void) const;
+    virtual GEOM_FT getLength(void) const;
     virtual GEOM_FT Area(void) const;
     virtual GEOM_FT Volumen(void) const;
     void Print(std::ostream &os) const;
@@ -96,7 +96,7 @@ bool GmGrupo<GO>::igual_dimension(void) const
 
 template <typename GO>
 unsigned short int GmGrupo<GO>::Dimension(void) const
-//Return la dimensión del objeto 0, 1, 2 ó 3.
+//Return the dimension of the object 0, 1, 2 or 3.
   {
     if(objetos.empty()) return 0;
     register const_iterator i(objetos.begin());
@@ -130,15 +130,16 @@ GEOM_FT GmGrupo<GO>::GetMin(unsigned short int i) const
     return mn;
   }
 
+//! @brief Return the length of the object.
 template <typename GO>
-GEOM_FT GmGrupo<GO>::Longitud(void) const
+GEOM_FT GmGrupo<GO>::getLength(void) const
   {
     if(objetos.empty()) return 0.0;
 	register const_iterator i(objetos.begin());
-    register GEOM_FT retval((*i)->Longitud());
+    register GEOM_FT retval((*i)->getLength());
     i++;
     for(;i!=objetos.end();i++)
-      retval+= (*i)->Longitud();
+      retval+= (*i)->getLength();
     return retval;
   }
 template <typename GO>

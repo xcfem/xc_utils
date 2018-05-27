@@ -73,8 +73,8 @@ class ListaPos2d: public GeomObj2d
     //Producto de inercia.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
-    //! @brief Return the longitud de la ListaPos2d.
-    virtual GEOM_FT Longitud(void) const
+    //! @brief Return the length of the ListaPos2d.
+    virtual GEOM_FT getLength(void) const
       { return 0.0; }
     //! @brief Return el área de la ListaPos2d.
     virtual GEOM_FT Area(void) const

@@ -100,7 +100,8 @@ class Semiplano2d : public Superficie2d
     GmGrupo2d Interseccion(const SemiRecta2d &sr) const;
     GmGrupo2d Interseccion(const Segmento2d &sg) const;
 
-    inline virtual GEOM_FT Longitud(void) const
+    //! @brief Return the length of the object.
+    inline virtual GEOM_FT getLength(void) const
       { return NAN; }
     inline virtual Pos2d getCenterOfMass(void) const
       { return lim.getCenterOfMass(); }

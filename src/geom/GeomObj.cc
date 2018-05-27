@@ -31,7 +31,7 @@ GeomObj::GeomObj(void)
 
 //! Return the dimension used to compute the center of mass, as follows:
 //! - dimension == 0 => return 1.0
-//! - dimension == 1 => return Longitud()
+//! - dimension == 1 => return getLength()
 //! - dimension == 2 => return Area()
 //! - dimension == 3 => return Volumen()
 GEOM_FT GeomObj::getCenterOfMassArea(void) const
@@ -44,7 +44,7 @@ GEOM_FT GeomObj::getCenterOfMassArea(void) const
 	retval= 1.0;
 	break;
       case 1:
-	retval= Longitud();
+	retval= getLength();
 	break;
       case 2:
 	retval= Area();

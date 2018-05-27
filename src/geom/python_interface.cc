@@ -19,7 +19,7 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//python_interface.cxx
+//python_interface.cxx!
 
 #include "python_interface.h"
 
@@ -71,7 +71,7 @@ BOOST_PYTHON_MODULE(geom)
     class_<ProtoGeom, bases<EntCmd> >("ProtoGeom");
 
     class_<GeomObj, bases<ProtoGeom>, boost::noncopyable >("GeomObj", no_init)
-      .def("getLongitud", pure_virtual(&GeomObj::Longitud))
+      .def("getLenght", pure_virtual(&GeomObj::getLength))
       .def("getArea", pure_virtual(&GeomObj::Area))
       .def("getVolumen", pure_virtual(&GeomObj::Volumen))
       .def("getDimension", pure_virtual(&GeomObj::Dimension))
@@ -80,10 +80,10 @@ BOOST_PYTHON_MODULE(geom)
     class_<GeomObj2d, bases<GeomObj>, boost::noncopyable >("GeomObj2d", no_init)
       .def("getMax",&GeomObj2d::GetMax)
       .def("getMin",&GeomObj2d::GetMin)
-      .add_property("getXMax",&GeomObj2d::GetXMax, "Returns maximum value for x coordinate.")
-      .add_property("getYMax",&GeomObj2d::GetYMax, "Returns maximum value for y coordinate.")
-      .add_property("getXMin",&GeomObj2d::GetXMin, "Returns minimum value for x coordinate.")
-      .add_property("getYMin",&GeomObj2d::GetYMin, "Returns minimum value for y coordinate.")
+      .add_property("getXMax",&GeomObj2d::GetXMax, "Return maximum value for x coordinate.")
+      .add_property("getYMax",&GeomObj2d::GetYMax, "Return maximum value for y coordinate.")
+      .add_property("getXMin",&GeomObj2d::GetXMin, "Return minimum value for x coordinate.")
+      .add_property("getYMin",&GeomObj2d::GetYMin, "Return minimum value for y coordinate.")
       .def("getIx", pure_virtual(&GeomObj2d::Ix))
       .def("getIy", pure_virtual(&GeomObj2d::Iy))
       .def("getIz", &GeomObj2d::Iz)

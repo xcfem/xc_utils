@@ -49,7 +49,8 @@ class Point2d : public GeomObj2d
       { return org; }
     inline virtual unsigned short int Dimension(void) const
       { return 0; }
-    virtual GEOM_FT Longitud(void) const
+    //! @brief Return object length (zero in this case).
+    virtual GEOM_FT getLength(void) const
       { return 0.0; }
     virtual GEOM_FT Area(void) const
       { return 0.0; }

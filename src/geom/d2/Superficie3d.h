@@ -39,12 +39,13 @@ class Superficie3d : public GeomObj3d
     Superficie3d(void): GeomObj3d(){}
 
     inline virtual unsigned short int Dimension(void) const
-    //Return la dimensión del objeto 0, 1, 2 ó 3.
+    //Return the dimension of the object 0, 1, 2 or 3.
       { return 2; }
-    virtual GEOM_FT Longitud(void) const
+    //! @brief Return the length of the object.
+    virtual GEOM_FT getLength(void) const
       { return 0.0; }
     GEOM_FT Perimetro(void) const
-      { return Longitud(); }
+      { return getLength(); }
     virtual GEOM_FT Area(void) const;
     virtual GEOM_FT Volumen(void) const
       { return 0.0; }

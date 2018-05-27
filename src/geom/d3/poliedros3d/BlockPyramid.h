@@ -50,7 +50,7 @@ class BlockPyramid: public GeomObj3d
       { return new BlockPyramid(*this); }
     inline unsigned short int Dimension(void) const
       { return 3; }
-    GEOM_FT Longitud(void) const;
+    GEOM_FT getLength(void) const;
     GEOM_FT Area(void) const;
     GEOM_FT Volumen(void) const;
     GEOM_FT Ix(void) const;

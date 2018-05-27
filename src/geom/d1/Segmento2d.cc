@@ -97,7 +97,8 @@ GEOM_FT angulo(const Segmento2d &r,const Vector2d &v)
 GEOM_FT angulo(const Vector2d &v, const Segmento2d &r)
   { return v.Angulo(r.VDir()); }
 
-GEOM_FT Segmento2d::Longitud(void) const
+//! @brief Return object length.
+GEOM_FT Segmento2d::getLength(void) const
   { return Origen().dist(Destino()); }
 
 //! @brief Return the posición del centro de gravedad del segmento.
@@ -152,7 +153,7 @@ bool Segmento2d::In(const Pos2d &p, const double &tol) const
       {
         const Pos2d &O= Origen();
         const Pos2d &D= Origen();
-        const double L= Longitud();
+        const double L= getLength();
         if(L>=tol)
           {
             const double x1= O.x();
@@ -223,7 +224,7 @@ GeomObj2d::list_Pos2d Segmento2d::Interseccion(unsigned short int i, const doubl
       {
         const Vector2d i_= VDir();
         const double l= RectaSoporte().getLambda(i,d,i_);
-        if( (l<0.0) || (l>Longitud()) )
+        if( (l<0.0) || (l>getLength()) )
           lp.erase(lp.begin(),lp.end());
       }
     return lp;
@@ -248,7 +249,7 @@ GeomObj2d::list_Pos2d Segmento2d::Interseccion(const Recta2d &r) const
           {
             const GEOM_FT d1= r.dist2(Origen());
             const GEOM_FT d2= r.dist2(Destino());
-            const GEOM_FT tol= Longitud()/1e4;
+            const GEOM_FT tol= getLength()/1e4;
             if(d1<tol)
               retval.push_back(Origen());
             else if(d2<tol)

@@ -63,8 +63,9 @@ class Poligono3d: public D2to3d
       { return plg2d.GetNumVertices(); }
     inline virtual unsigned int GetNumLados(void) const
       { return plg2d.GetNumLados(); }
-    inline GEOM_FT Longitud(void) const
-      { return plg2d.Longitud(); }
+    //! @brief Return the length of the object.
+    inline GEOM_FT getLength(void) const
+      { return plg2d.getLength(); }
     inline GEOM_FT Area(void) const
       { return plg2d.Area(); }
     std::vector<Poligono3d> getPoligonosTributarios(void) const;

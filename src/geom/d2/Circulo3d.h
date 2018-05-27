@@ -56,10 +56,11 @@ class Circulo3d : public D2to3d
     GEOM_FT Radio(void) const;
     GEOM_FT Diametro(void) const;
     double Angulo(const Pos3d &p) const;
-    virtual GEOM_FT Longitud(void) const
-      { return circ.Longitud(); }
+    //! @brief Return the length of the object.
+    virtual GEOM_FT getLength(void) const
+      { return circ.getLength(); }
     inline GEOM_FT Perimetro(void) const
-      { return Longitud(); }
+      { return getLength(); }
     virtual GEOM_FT Area(void) const
       { return circ.Area(); }
     virtual GEOM_FT Volumen(void) const

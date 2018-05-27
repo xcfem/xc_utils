@@ -112,7 +112,7 @@ class Segmento2d : public Linea2d
     bool Paralelo(const Segmento2d &r) const
       { return paralelas(RectaSoporte(),r.RectaSoporte()); }
 
-    virtual GEOM_FT Longitud(void) const;
+    virtual GEOM_FT getLength(void) const;
     virtual Pos2d getCenterOfMass(void) const;
     Dir2d GetDir(void) const;
     Vector2d VDir(void) const;

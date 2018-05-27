@@ -121,8 +121,8 @@ double Circulo2d::Angulo(const Pos2d &p) const
     return retval;
   }
 
-//! @brief Return the longitud del círculo.
-GEOM_FT Circulo2d::Longitud(void) const
+//! @brief Return the length of the círcle.
+GEOM_FT Circulo2d::getLength(void) const
   { return M_PI_FT*Diametro(); }
 //! @brief Return el área del círculo.
 GEOM_FT Circulo2d::Area(void) const

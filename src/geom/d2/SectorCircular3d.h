@@ -57,12 +57,12 @@ class SectorCircular3d : public D2to3d
       { return sect_circ.AnguloComprendido(); }
     double Angulo(const Pos3d &) const;
     double getLambda(const Pos3d &) const;
-    virtual GEOM_FT Longitud(void) const
-      { return sect_circ.Longitud(); }
-    virtual GEOM_FT LongitudArco(void) const
-      { return sect_circ.LongitudArco(); }
+    virtual GEOM_FT getLength(void) const
+      { return sect_circ.getLength(); }
+    virtual GEOM_FT getArcLength(void) const
+      { return sect_circ.getArcLength(); }
     inline GEOM_FT Perimetro(void) const
-      { return Longitud(); }
+      { return getLength(); }
     virtual GEOM_FT Area(void) const
       { return sect_circ.Area(); }
     virtual GEOM_FT Volumen(void) const

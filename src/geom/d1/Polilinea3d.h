@@ -58,9 +58,9 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Iz(void) const;
 
-    virtual GEOM_FT Longitud(void) const
-      //Return the longitud de la Polilinea3d.
-      { return GeomObj::list_Pos3d::Longitud(); }
+    //! @brief Return the length of the object.
+    virtual GEOM_FT getLength(void) const
+      { return GeomObj::list_Pos3d::getLength(); }
     virtual GEOM_FT GetMax(unsigned short int i) const;
     //Return the maximum value of the i coordinate.
     virtual GEOM_FT GetMin(unsigned short int i) const;

@@ -74,7 +74,7 @@ class GeomObj3d: public GeomObj
     virtual GEOM_FT getCenterOfMassFactor(void) const
       { return 1.0; }
     virtual Pos3d getCenterOfMass(void) const= 0;
-    virtual GEOM_FT Longitud(void) const= 0;
+    virtual GEOM_FT getLength(void) const= 0;
     virtual GEOM_FT Area(void) const= 0;
     virtual GEOM_FT Volumen(void) const= 0;
     virtual GEOM_FT Ix(void) const= 0;

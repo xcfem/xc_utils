@@ -68,9 +68,9 @@ class SectorAnilloCircular2d : public SectorCircular2d
       { return rint; }
     inline double &RadioInt(void)
       { return rint; }
-    virtual GEOM_FT LongitudArcoInt(void) const;
-    virtual GEOM_FT LongitudArcoExt(void) const;
-    virtual GEOM_FT Longitud(void) const;
+    virtual GEOM_FT getInteriorArcLength(void) const;
+    virtual GEOM_FT getExteriorArcLength(void) const;
+    virtual GEOM_FT getLength(void) const;
     virtual GEOM_FT Area(void) const;
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;

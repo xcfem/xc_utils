@@ -68,9 +68,9 @@ class SupPoligonal2d: public Superficie2d
     Vector2d getLado0Normal(const size_t i) const;
     Vector2d getVertex0Normal(const size_t i) const;
     Polilinea2d GetPolilinea(void) const;
-    virtual GEOM_FT Longitud(void) const;
+    virtual GEOM_FT getLength(void) const;
     inline GEOM_FT Perimetro(void) const
-      { return Longitud(); }
+      { return getLength(); }
     inline GEOM_FT AreaSigno(void) const
       { return moment_sign(0,0); }
     virtual GEOM_FT Area(void) const;

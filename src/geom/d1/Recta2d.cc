@@ -97,8 +97,8 @@ void Recta2d::Swap(void)
 void Recta2d::TwoPoints(const Pos2d &p1,const Pos2d &p2)
   { (*this)= Recta2d(p1,p2); }
 
-//! @brief Return the longitud de la recta.
-GEOM_FT Recta2d::Longitud(void) const
+//! @brief Return object length.
+GEOM_FT Recta2d::getLength(void) const
   { return NAN; }
 
 //! @brief Return el centro de gravedad de la recta.

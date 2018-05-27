@@ -43,11 +43,12 @@ Segmento2d Triangulo2d::Altura(const size_t &i) const
     const Pos2d pint= *interseccion(rbase,perp).begin();
     return Segmento2d(Vertice(i),pint);
   }
-GEOM_FT Triangulo2d::Longitud(void) const
+//! @brief Return object length.
+GEOM_FT Triangulo2d::getLength(void) const
   {
-    GEOM_FT retval= Lado(1).Longitud();
-    retval+= Lado(2).Longitud();
-    retval+= Lado(3).Longitud();
+    GEOM_FT retval= Lado(1).getLength();
+    retval+= Lado(2).getLength();
+    retval+= Lado(3).getLength();
     return retval;
   }
 Pos2d Triangulo2d::getCenterOfMass(void) const

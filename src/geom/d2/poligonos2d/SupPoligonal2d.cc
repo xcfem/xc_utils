@@ -86,13 +86,13 @@ Segmento2d SupPoligonal2d::Lado0(unsigned int i) const
 Segmento2d SupPoligonal2d::Lado(unsigned int i) const
   { return Lado0(i-1); }
 
-//! @brief Return el perímetro de la superficie.
-GEOM_FT SupPoligonal2d::Longitud(void) const
+//! @brief Return the perimeter of the surface.
+GEOM_FT SupPoligonal2d::getLength(void) const
   {
     unsigned int nl= GetNumLados();
     register GEOM_FT temp = 0;
     for(register unsigned int i= 1; i<=nl;i++)
-      temp += Lado(i).Longitud();
+      temp += Lado(i).getLength();
     return temp;
   }
 
@@ -220,12 +220,12 @@ GeomObj::list_Pos2d SupPoligonal2d::getPosTangAprox(const Vector2d &v) const
           {
             anguloI-=dosPi;
             anguloJ-=dosPi;
-            const double s= li.Longitud()*(-anguloI)/(anguloJ-anguloI);
+            const double s= li.getLength()*(-anguloI)/(anguloJ-anguloI);
             retval.AgregaSiNuevo(li.PtoParametricas(s));
           }
         else if(anguloI*anguloJ<=0)
           {
-            const double s= li.Longitud()*(-anguloI)/(anguloJ-anguloI);
+            const double s= li.getLength()*(-anguloI)/(anguloJ-anguloI);
             retval.AgregaSiNuevo(li.PtoParametricas(s));
           }
       }

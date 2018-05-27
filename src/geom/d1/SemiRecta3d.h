@@ -86,12 +86,12 @@ class SemiRecta3d : public Linea3d
     bool Paralela(const Recta3d &r) const;
 
     GeomObj3d::list_Pos3d Interseccion(unsigned short int, const double &) const;
+    //Return the point intersección de ambas rectas, si no existe la
+    //intersección devuelve la lista vacía.
     GeomObj3d::list_Pos3d Interseccion(const Recta3d &r) const;
     GeomObj3d::list_Pos3d Interseccion(const SemiRecta3d &sr) const;
 
-    //Return the point intersección de ambas rectas, si no existe la
-    //intersección devuelve la lista vacía.
-    inline virtual GEOM_FT Longitud(void) const
+    inline virtual GEOM_FT getLength(void) const
       { return NAN; }
     inline virtual Pos3d getCenterOfMass(void) const
       { return Pos3d(NAN,NAN,NAN); }

@@ -127,7 +127,8 @@ class Recta3d : public Linea3d
     GeomObj3d::list_Pos3d Interseccion(unsigned short int, const double &) const;
     GeomObj3d::list_Pos3d Interseccion(const Recta3d &r2, const double &tol= sqrt_mchne_eps_dbl) const;
 
-    inline virtual GEOM_FT Longitud(void) const
+    //! @brief Return the length of the object.
+   inline virtual GEOM_FT getLength(void) const
       { return NAN; }
     inline virtual Pos3d getCenterOfMass(void) const
       { return Pos3d(NAN,NAN,NAN); }

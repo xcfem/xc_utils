@@ -75,8 +75,8 @@ class ListaPos3d: public GeomObj3d
     //Producto de inercia.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
-    //! @brief Return the longitud de la ListaPos3d.
-    virtual GEOM_FT Longitud(void) const
+    //! @brief Return the length of the ListaPos3d.
+    virtual GEOM_FT getLength(void) const
       { return 0.0; }
     //! @brief Return el área de la ListaPos3d.
     virtual GEOM_FT Area(void) const

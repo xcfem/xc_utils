@@ -92,63 +92,72 @@ BlockPyramid::BlockPyramid(void)
 BlockPyramid::BlockPyramid(const std::deque<SemiEspacio3d> &se)
   : GeomObj3d(), semiespacios(se) {}
 
-//! @brief Return the longitud del objeto.
-GEOM_FT BlockPyramid::Longitud(void) const
+//! @brief Return the object length.
+GEOM_FT BlockPyramid::getLength(void) const
   {
-    std::cerr << "BlockPyramid::Longitud() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+              << "; not implemented." << std::endl;
     return 0.0;
   }
 
 //! @brief Return el área del objeto.
 GEOM_FT BlockPyramid::Area(void) const
   {
-    std::cerr << "BlockPyramid::Area() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
     return 0.0;
   }
 
 //! @brief Return el volumen del objeto.
 GEOM_FT BlockPyramid::Volumen(void) const
   {
-    std::cerr << "BlockPyramid::Volumen() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
     return 0.0;
   }
 
 //! @brief Return the moment of inertia with respect to the x axis.
 GEOM_FT BlockPyramid::Ix(void) const
   {
-    std::cerr << "BlockPyramid::Ix() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
     return 0.0;
   }
 
 //! @brief Return the moment of inertia with respect to the y axis.
 GEOM_FT BlockPyramid::Iy(void) const
   {
-    std::cerr << "BlockPyramid::Iy() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
     return 0.0;
   }
 
 //! @brief Return the moment of inertia with respect to the z axis.
 GEOM_FT BlockPyramid::Iz(void) const
   {
-    std::cerr << "BlockPyramid::Iy() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
     return 0.0;
   }
 
 //! @brief Return the posición del centro de gravedad.
 Pos3d BlockPyramid::getCenterOfMass(void) const
   {
-    std::cerr << "BlockPyramid::getCenterOfMass() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
     return Pos3d();
   }
 
 GEOM_FT BlockPyramid::GetMax(unsigned short int i) const
   {
-    std::cerr << "BlockPyramid::GetMax() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
     return 0.0;
   }
 GEOM_FT BlockPyramid::GetMin(unsigned short int i) const
   {
-    std::cerr << "BlockPyramid::GetMin() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
     return 0.0;
   }
 
@@ -189,7 +198,7 @@ Vector2d BlockPyramid::getVectorExterno1(const Ref2d3d &projPlane) const
           }
       }
     else
-      std::cerr << "BlockPyramid::getVectorExterno1 "
+      std::cerr << getClassName() << "::" << __FUNCTION__
                 << " no hay vectores externos." << std::endl;
     return retval;
   }
@@ -216,7 +225,7 @@ Vector2d BlockPyramid::getVectorExterno2(const Ref2d3d &projPlane) const
           }
       }
     else
-      std::cerr << "BlockPyramid::getVectorExterno2 "
+      std::cerr << getClassName() << "::" << __FUNCTION__
                 << " no hay vectores externos." << std::endl;
     return retval;
   }
@@ -231,8 +240,9 @@ std::deque<Vector2d> BlockPyramid::getVectoresExternos(const Ref2d3d &a) const
     retval.push_back(getVectorExterno2(a));
     if(retval.size()>1)
       if(retval[0]==retval[1])
-        std::cerr << "BlockPyramid::getVectoresExternos "
-                << " sólo se encontró un vector de borde." << std::endl;
+        std::cerr << getClassName() << "::" << __FUNCTION__
+                  << "; sólo se encontró un vector de borde."
+		  << std::endl;
     return retval;
   }
 
@@ -243,7 +253,7 @@ bool BlockPyramid::Vacio(void) const
     return haz.empty();
   }
 
-//! @brief Imprime el objeto.
+//! @brief Print stuff.
 void BlockPyramid::Print(std::ostream &os) const
   {}
 

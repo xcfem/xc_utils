@@ -55,7 +55,7 @@ class BND2d: public GeomObj2d
     virtual GeomObj *clon(void) const
       { return new BND2d(*this); }
     inline virtual unsigned short int Dimension(void) const
-    //Return la dimensión del objeto 0, 1, 2 ó 3.
+    //Return the dimension of the object 0, 1, 2 or 3.
       { return 2; }
     inline virtual GEOM_FT Anchura(void) const
       { return GetXMax()-GetXMin(); }
@@ -63,7 +63,8 @@ class BND2d: public GeomObj2d
       { return GetYMax()-GetYMin(); }
 
     Poligono2d GetPoligono(void) const;
-    inline virtual GEOM_FT Longitud(void) const
+    //! @brief Return the object length.
+    inline virtual GEOM_FT getLength(void) const
       { return 2*Anchura()+2*Altura(); }
     Vector2d Diagonal(void) const;
     virtual GEOM_FT Area(void) const;

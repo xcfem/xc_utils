@@ -67,7 +67,7 @@ class PoliPos : public std::deque<pos>
       { return std::find(this->begin(),this->end(),p); }
     bool In(const pos &p) const;
     bool isClosed(const GEOM_FT &tol= 1e-6) const;
-    GEOM_FT Longitud(void) const;
+    GEOM_FT getLength(void) const;
     GEOM_FT GetMax(unsigned short i) const;
     GEOM_FT GetMin(unsigned short i) const;
     PoliPos GetMayores(unsigned short int i,const GEOM_FT &d) const;
@@ -114,7 +114,7 @@ template <class pos>
 bool PoliPos<pos>::isClosed(const GEOM_FT &tol) const
   {
     bool retval= false;
-    const GEOM_FT treshold= tol*Longitud();
+    const GEOM_FT treshold= tol*getLength();
     const pos &first= this->front();
     const pos &last= this->back();
     if(dist(first,last)<treshold)
@@ -122,9 +122,9 @@ bool PoliPos<pos>::isClosed(const GEOM_FT &tol) const
     return retval;
   }
 
-//! @brief Return la longitud de la PoliPos.
+//! @brief Return the length of the PoliPos.
 template <class pos>
-GEOM_FT PoliPos<pos>::Longitud(void) const
+GEOM_FT PoliPos<pos>::getLength(void) const
   {
     if(this->size()<2) return 0.0;
     GEOM_FT temp = 0;
