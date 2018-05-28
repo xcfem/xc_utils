@@ -106,12 +106,13 @@ class PartialSafetyFactors: public EntCmd
   public:
     PartialSafetyFactors(const ULSPartialSafetyFactors &gf_uls=ULSPartialSafetyFactors(), const SLSPartialSafetyFactors &gf_els=SLSPartialSafetyFactors());
 
+    //! @brief Return the partial safety factors for ultimate limit states.
     inline const ULSPartialSafetyFactors &getULSPartialSafetyFactors(void) const
       { return uls_partial_safety_factors; }
+    //! @brief Return the partial safety factors for serviceability limit states.
     inline const SLSPartialSafetyFactors &getSLSPartialSafetyFactors(void) const
       { return sls_partial_safety_factors; }
-    //! @brief Return the partial safety factors correspondientes a estado límite de servicio.
-    Variations calcula_variations(const bool &uls,const bool &sit_accidental,const int &d,const ActionRValueList &) const;
+    Variation getVariation(const bool &uls,const bool &sit_accidental) const;
     virtual void Print(std::ostream &os) const;
   };
 

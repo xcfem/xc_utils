@@ -206,7 +206,7 @@ std::ostream &cmb_acc::operator<<(std::ostream &os,const ActionRelationships &a)
   }
 
 //! @brief Return las combinaciones filtrando las que contienen acciones incompatibles.
-const cmb_acc::LoadCombinationVector &cmb_acc::getCompatibles(const LoadCombinationVector &comb)
+const cmb_acc::LoadCombinationVector &cmb_acc::get_compatibles(const LoadCombinationVector &comb)
   {
     static LoadCombinationVector retval;
     const size_t sz= comb.size();

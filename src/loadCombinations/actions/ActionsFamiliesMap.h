@@ -61,11 +61,11 @@ class ActionsFamiliesMap: public EntConNmb
     friend class ActionContainer;
   public:
     ActionsFamiliesMap(const std::string &,const PartialSafetyFactors &defaultGF= PartialSafetyFactors());
-    ActionRValue &insert(const std::string &,const Action &,const std::string &combination_factors_name="");
+    ActionRValue &insert(const std::string &,const Action &,const std::string &combination_factors_name,const std::string &partial_safety_factors_name);
     
     ActionsFamily *getActionsFamily(const std::string &);
     const ActionsFamily *getActionsFamily(const std::string &)const;
-    ActionsFamily *newActionsFamily(const std::string &, const PartialSafetyFactors &defaultGF= PartialSafetyFactors());
+    ActionsFamily *newActionsFamily(const std::string &);
     boost::python::list getKeys(void) const;    
 
     LoadCombinationVector getLoadCombinations(const bool &uls,const bool &sit_accidental) const;

@@ -38,12 +38,11 @@ class ActionRValueList;
 class Variations: public std::vector<Variation>
   {
     void print(std::ostream &os) const;
-    static Variations primera_combinacion(const Variation &v);
-    static Variations prod_cartesiano(const Variations &a,const Variations &b,const ActionRValueList &lvr);
-    static Variations n_esima_combinacion(const Variation &v,const int &d,const ActionRValueList &lvr);
   public:
+    static Variations first_combination(const Variation &v);
+    static Variations prod_cartesiano(const Variations &a,const Variations &b);
+
     Variations(const size_t &sz=0,const Variation &v=Variation());
-    static Variations Calcula(const Variation &v,const int &d,const ActionRValueList &lvr);
     friend std::ostream &operator<<(std::ostream &os,const Variations &vs);
   };
 

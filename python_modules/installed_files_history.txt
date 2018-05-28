@@ -109,6 +109,8 @@
 /usr/local/lib/python2.7/dist-packages/geotecnia/cimientos/__init__.pyc
 /usr/local/lib/python2.7/dist-packages/geotecnia/cimientos/long_elastica_pilote.py
 /usr/local/lib/python2.7/dist-packages/geotecnia/cimientos/long_elastica_pilote.pyc
+/usr/local/lib/python2.7/dist-packages/geotecnia/cimientos/pile_elasctic_length.py
+/usr/local/lib/python2.7/dist-packages/geotecnia/cimientos/pile_elasctic_length.pyc
 /usr/local/lib/python2.7/dist-packages/geotecnia/cimientos/roz_cimiento_terreno.py
 /usr/local/lib/python2.7/dist-packages/geotecnia/cimientos/roz_cimiento_terreno.pyc
 /usr/local/lib/python2.7/dist-packages/geotecnia/earth_pressure.py

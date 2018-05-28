@@ -26,7 +26,6 @@
 #define ACTIONCONTAINER_H
 
 #include "ActionsFamily.h"
-#include "ActionsFamiliesMap.h"
 
 namespace cmb_acc{
 //! @ingroup CMBACC
@@ -35,9 +34,9 @@ namespace cmb_acc{
 class ActionContainer: public EntCmd
   {
   protected:
-    ActionsFamiliesMap G; //!< Permanent actions.
-    ActionsFamiliesMap G_aster; //!< Non-constant permanent actions.
-    ActionsFamiliesMap Q; //!< Variable actions.
+    ActionsFamily G; //!< Permanent actions.
+    ActionsFamily G_aster; //!< Non-constant permanent actions.
+    ActionsFamily Q; //!< Variable actions.
     ActionsFamily A; //!< Accidental actions.
     ActionsFamily AS; //!< Earthquake actions.
 
@@ -51,14 +50,14 @@ class ActionContainer: public EntCmd
     ActionContainer(void);
     inline virtual ~ActionContainer(void) {}
 
-    ActionRValue &insert(const std::string &,const Action &,const std::string &combination_factors_name="",const std::string &subfamilia= "default");
+    ActionRValue &insert(const std::string &,const Action &,const std::string &combination_factors_name="",const std::string &partial_safety_factors_name="");
 
-    const ActionsFamiliesMap &getPermanentActions(void) const;
-    void setPermanentActions(const ActionsFamiliesMap &);
-    const ActionsFamiliesMap &getPermanentActionsNC(void) const;
-    void setPermanentActionsNC(const ActionsFamiliesMap &);
-    const ActionsFamiliesMap &getVariableActions(void) const;
-    void setVariableActions(const ActionsFamiliesMap &);
+    const ActionsFamily &getPermanentActions(void) const;
+    void setPermanentActions(const ActionsFamily &);
+    const ActionsFamily &getPermanentActionsNC(void) const;
+    void setPermanentActionsNC(const ActionsFamily &);
+    const ActionsFamily &getVariableActions(void) const;
+    void setVariableActions(const ActionsFamily &);
     const ActionsFamily &getAccidentalActions(void) const;
     void setAccidentalActions(const ActionsFamily &);
     const ActionsFamily &getSeismicActions(void) const;

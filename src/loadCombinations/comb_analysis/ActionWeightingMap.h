@@ -63,7 +63,7 @@ class ActionWeightingMap: public EntCmd
     virtual ~ActionWeightingMap(void);
     cmb_acc::ActionsAndFactors *create(const std::string &,const Factors &coefs= Factors());
 
-    ActionRValue &insert(const std::string &pond,const std::string &,const Action &,const std::string &combination_factors_name="",const std::string &subfamilia= "default");
+    ActionRValue &insert(const std::string &pond,const std::string &,const Action &,const std::string &combination_factors_name="",const std::string &partial_safety_factors_name="");
 
     size_t size(void) const;
     bool empty(void) const;

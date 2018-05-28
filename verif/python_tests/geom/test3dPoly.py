@@ -12,7 +12,7 @@ pol1.agregaVertice(geom.Pos3d(1,0,0))
 pol1.agregaVertice(geom.Pos3d(1,1,0))
 pol1.agregaVertice(geom.Pos3d(0,1,0))
 
-longPol1=pol1.getLongitud()
+longPol1=pol1.getLength()
 
 o=geom.Pos3d(0.5,0,0)
 p1=geom.Pos3d(0.5,1,0)

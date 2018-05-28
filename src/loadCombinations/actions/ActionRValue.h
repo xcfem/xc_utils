@@ -31,6 +31,8 @@ namespace cmb_acc{
 
 class PartialSafetyFactors;
 class CombinationFactors;
+class Variations;
+class LeadingActionInfo;
 
 //! @ingroup CMBACC
 //
@@ -48,11 +50,16 @@ class ActionRValue: public Action
     friend class ActionRValueList;
     //! @brief Constructor por defecto.
     ActionRValue(const std::string &n="", const std::string &descrip="",ActionRValueList *fam= nullptr);
-    ActionRValue(const Action &a,ActionRValueList *fam= nullptr,const std::string &nmb_coefs= "");
+    ActionRValue(const Action &a,ActionRValueList *fam= nullptr,const std::string &nmb_comb_factors= "",const std::string &nmb_partial_safety_factors= "");
   public:
     Action getValue(short int r) const;
     void setCombinationFactors(const std::string &);
     const PartialSafetyFactors *getPartialSafetyFactors(void) const;
+    void setPartialSafetyFactors(const std::string &);
+    int getIndex(void) const; 
+    Variations getVariations(const bool &,const bool &) const;
+    Action getRepresentativeValue(const LeadingActionInfo &) const;    
+    Action getCombinationValue(const LeadingActionInfo &, const double &) const;    
     void Print(std::ostream &os) const;    
   };
 

@@ -25,22 +25,19 @@
 #ifndef FAMILIAACCIONES_H
 #define FAMILIAACCIONES_H
 
-#include "xc_utils/src/loadCombinations/factors/PartialSafetyFactors.h"
 #include "xc_utils/src/loadCombinations/actions/ActionRValueList.h"
 
 namespace cmb_acc{
-class Variations;
 class LoadCombinationVector;
 class CombinationFactorsMap;
 class ActionsAndFactors;
-class ActionsFamiliesMap;
 class LeadingActionInfo;
 
 //! @ingroup CMBACC
 //
 //! @brief Family of actions (permanent, variable, accidental,...)
 //!
-//! Set of actions that share the same set of partial safety factors, for example::
+//! Set of actions that share its variation in time, for example::
 //! -Permanent actions.
 //! -Variable actions.
 //! -Accidental actions.
@@ -48,24 +45,22 @@ class LeadingActionInfo;
 class ActionsFamily: public EntConNmb
   {
   private:
-    PartialSafetyFactors partial_safety_factors; //!< Partial safety factors para toda la familia.
     ActionRValueList actions; //!< Family actions container.
 
   protected:
-    friend class ActionsFamiliesMap;
     friend class ActionsAndFactors;
   public:
-    ActionsFamily(const std::string &nmb="",const PartialSafetyFactors &gf=PartialSafetyFactors());
+    ActionsFamily(const std::string &nmb="");
     inline virtual ~ActionsFamily(void) {}
-    ActionRValue &insert(const Action &,const std::string &combination_factors_name="");
+    ActionRValue &insert(const Action &,const std::string &combination_factors_name,const std::string &partial_safety_factors_name);
 
-    //! @brief Return the number of actions in the family.
-    inline size_t getNumActions(void) const
-      { return actions.size(); }
+    //! @brief Return the actions in the family.
     inline const ActionRValueList &getActions(void) const
       { return actions; }
+    //! @brief Return the actions in the family.
     inline ActionRValueList &getActions(void)
       { return actions; }
+    //! @brief Set the actions in the family.
     inline void setActions(const ActionRValueList &acc)
       { actions= acc; }
 
@@ -73,16 +68,9 @@ class ActionsFamily: public EntConNmb
     inline bool empty(void) const
       { return actions.empty(); }
 
-    inline void setPartialSafetyFactors(const PartialSafetyFactors &gf)
-      { partial_safety_factors= gf; }
-    inline PartialSafetyFactors &getPartialSafetyFactors(void)
-      { return partial_safety_factors; }
-    
     const ActionsAndFactors *getActionsAndFactors(void) const;
     const CombinationFactorsMap *getPtrCombinationFactors(void) const;
-    
-    Variations computeVariations(const bool &uls= true,const bool &sit_accidental= false,const int &d=-1) const;
-    LoadCombinationVector getLoadCombinations(const bool &uls,const bool &sit_accidental,const LeadingActionInfo &) const;
+    const PartialSafetyFactorsMap *getPtrPartialSafetyFactors(void) const;
   };
 } //fin namespace nmb_acc.
 

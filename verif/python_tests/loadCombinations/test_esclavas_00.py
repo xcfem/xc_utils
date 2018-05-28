@@ -5,17 +5,18 @@ import loadCombinations
 from loadCombinationUtils import ehe
 
 lcg= ehe.intenseControlCombGenerator
-PP1= lcg.insert("EHEIntenso","permanentes",loadCombinations.Action("PP1","Peso propio"),"permanent","default")
+PP1= lcg.insert("EHEIntenso","permanentes",loadCombinations.Action("PP1","Peso propio"),"permanents","permanentes_ctr_intenso")
 
-SC1= lcg.insert("EHEIntenso","variables",loadCombinations.Action("SC1","Puente grúa"),"azotea_solo_conserv","default")
+SC1= lcg.insert("EHEIntenso","variables",loadCombinations.Action("SC1","Puente grúa"),"azotea_solo_conserv","variables_ctr_intenso")
 SC1.getRelaciones.agregaIncompatible("SC.*")
 
-SC2= lcg.insert("EHEIntenso","variables",loadCombinations.Action("SC2","Sobrecarga de uso cubierta"),"azotea_solo_conserv","default")
+SC2= lcg.insert("EHEIntenso","variables",loadCombinations.Action("SC2","Sobrecarga de uso cubierta"),"azotea_solo_conserv","variables_ctr_intenso")
 SC2.getRelaciones.agregaIncompatible("SC.*")
 
-F1= lcg.insert("EHEIntenso","variables",loadCombinations.Action("F1","Frenado puente grúa"),"azotea_solo_conserv","")
+F1= lcg.insert("EHEIntenso","variables",loadCombinations.Action("F1","Frenado puente grúa"),"azotea_solo_conserv","variables_ctr_intenso")
 F1.getRelaciones.agregaMaestra("SC1.*")
 
+#lcg.setVerbosityLevel(3)
 lcg.genera()
 
 coeficientesRef_elu_persistentes= [[1,0,0,0],[1.35,0,0,0],[1,1.5,0,0],[1,1.5,0,1.05],[1,0,1.5,0],[1,1.05,0,1.5],[1.35,1.5,0,0],[1.35,1.5,0,1.05],[1.35,0,1.5,0],[1.35,1.05,0,1.5]]

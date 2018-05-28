@@ -40,6 +40,8 @@ class_<Action, bases<EntConNmb> >("Action")
   ;
 
 class_<ActionRValue, bases<Action>, boost::noncopyable >("ActionRValue", no_init)
+  .def("getPartialSafetyFactors", make_function( &ActionRValue::getPartialSafetyFactors, return_internal_reference<>() ), "Return the partial safety factors for this action.")
+  .def("setPartialSafetyFactors", &ActionRValue::setPartialSafetyFactors, "Set the partial safety factors for this action.")
   ;
 
 typedef std::deque<ActionRValue> dq_action_r_value;
@@ -48,30 +50,27 @@ class_<dq_action_r_value >("dq_action_r_values")
   ;
 
 class_<ActionRValueList, bases<dq_action_r_value,EntCmd> >("ActionRValueLists")
-  .def("getValue",&ActionRValueList::getValue,"Returns action's i value.")
   .def(self_ns::str(self_ns::self))
   ;
 
 const ActionRValueList &(ActionsFamily::*getFamilyActions)(void) const= &ActionsFamily::getActions;
 class_<ActionsFamily, bases<EntConNmb> >("ActionsFamily")
-  .def(init<std::string, PartialSafetyFactors>())
-  .add_property("partial_safety_factors", make_function( &ActionsFamily::getPartialSafetyFactors, return_internal_reference<>() ), &ActionsFamily::setPartialSafetyFactors)
-  .def("getNumActions", &ActionsFamily::getNumActions)
+  .def(init<std::string>())
   .add_property("actions", make_function( getFamilyActions, return_internal_reference<>() ), &ActionsFamily::setActions)
   .def("insert", make_function(&ActionsFamily::insert,return_internal_reference<>()))
   ;
 
-const ActionsFamily *(ActionsFamiliesMap::*findByName)(const std::string &) const= &ActionsFamiliesMap::getActionsFamily;
-ActionsFamiliesMap::const_iterator (ActionsFamiliesMap::*cBegin)(void) const= &ActionsFamiliesMap::begin;
-ActionsFamiliesMap::const_iterator (ActionsFamiliesMap::*cEnd)(void) const= &ActionsFamiliesMap::end;
-class_<ActionsFamiliesMap, bases<EntConNmb>, boost::noncopyable >("ActionsFamiliesMap", no_init)
-  .def("getKeys", &ActionsFamiliesMap::getKeys,"Returns families names")
-  .def("newActionsFamily", make_function( &ActionsFamiliesMap::newActionsFamily, return_internal_reference<>() ), "newActionsFamily(familyName,partial_safety_factors): creates a new family of actions.")
-  .def("getNumActions", &ActionsFamiliesMap::getNumActions)
-  .def("__len__",&ActionsFamiliesMap::getNumActions)
-  .def("__getitem__",findByName, return_value_policy<reference_existing_object>())
-  .def("__iter__",range(cBegin, cEnd))
-  ;
+// const ActionsFamily *(ActionsFamiliesMap::*findByName)(const std::string &) const= &ActionsFamiliesMap::getActionsFamily;
+// ActionsFamiliesMap::const_iterator (ActionsFamiliesMap::*cBegin)(void) const= &ActionsFamiliesMap::begin;
+// ActionsFamiliesMap::const_iterator (ActionsFamiliesMap::*cEnd)(void) const= &ActionsFamiliesMap::end;
+// class_<ActionsFamiliesMap, bases<EntConNmb>, boost::noncopyable >("ActionsFamiliesMap", no_init)
+//   .def("getKeys", &ActionsFamiliesMap::getKeys,"Returns families names")
+//   .def("newActionsFamily", make_function( &ActionsFamiliesMap::newActionsFamily, return_internal_reference<>() ), "newActionsFamily(familyName,partial_safety_factors): creates a new family of actions.")
+//   .def("getNumActions", &ActionsFamiliesMap::getNumActions)
+//   .def("__len__",&ActionsFamiliesMap::getNumActions)
+//   .def("__getitem__",findByName, return_value_policy<reference_existing_object>())
+//   .def("__iter__",range(cBegin, cEnd))
+//   ;
 
 class_<ActionContainer, bases<EntCmd> >("ActionContainer")
   .add_property("permanentActions", make_function( &ActionContainer::getPermanentActions, return_internal_reference<>() ), &ActionContainer::setPermanentActions)

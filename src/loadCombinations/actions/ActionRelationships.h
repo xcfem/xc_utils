@@ -97,7 +97,7 @@ class ActionRelationships: public EntCmd
 
 std::ostream &operator<<(std::ostream &os,const ActionRelationships &acc);
 
-const LoadCombinationVector &getCompatibles(const LoadCombinationVector &);
+const LoadCombinationVector &get_compatibles(const LoadCombinationVector &);
 const LoadCombinationVector &filtraCombsEsclavasHuerfanas(const LoadCombinationVector &);
 
 } //fin namespace nmb_acc.

@@ -41,7 +41,7 @@ class LoadCombinationGenerator: public EntCmd
   public:
     LoadCombinationGenerator(EntCmd *owr= nullptr);
 
-    ActionRValue &insert(const std::string &pond,const std::string &,const Action &,const std::string &combination_factors_name="",const std::string &subfamilia= "default");
+    ActionRValue &insert(const std::string &pond,const std::string &,const Action &,const std::string &combination_factors_name="",const std::string &partial_safety_factors_name="");
     void genera(void);
     inline ActionWeightingMap &getActionWeighting(void)
       { return action_weighting; }

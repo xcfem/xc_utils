@@ -9,12 +9,13 @@ tbName= "combinaciones"
 
 lcg= loadCombinations.LoadCombGenerator()
 actionsAndFactors= lcg.actionWeighting.create("EHEIntenso",ehe.factors)
-lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A1","Hipot. 1"),"","")
-lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A2","Hipot. 2"),"","")
-lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A3","Hipot. 3"),"","")
-lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A4","Hipot. 4"),"","")
-lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A5","Hipot. 5"),"","")
-lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A6","Hipot. 6"),"","")
+#G= lcg.insert("EHEIntenso","permanentes",loadCombinations.Action("G","Self weight"),"permanents","permanentes_ctr_intenso")
+lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A1","Hipot. 1"),"accidental","accidentales_ctr_intenso")
+lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A2","Hipot. 2"),"accidental","accidentales_ctr_intenso")
+lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A3","Hipot. 3"),"accidental","accidentales_ctr_intenso")
+lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A4","Hipot. 4"),"accidental","accidentales_ctr_intenso")
+lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A5","Hipot. 5"),"accidental","accidentales_ctr_intenso")
+lcg.insert("EHEIntenso","accidentales",loadCombinations.Action("A6","Hipot. 6"),"accidental","accidentales_ctr_intenso")
 
 import os
 os.system("rm -f "+dbName)
@@ -31,14 +32,15 @@ combAcc= lcg.getLoadCombinations.getULSAccidentalCombinations
 cont= len(combAcc)
     
     
-ratio1= abs(cont-7)/7
+ratio1= abs(cont-6.0)/6.0
 
 '''    
-print "ratio1= ", ratio1
 for comb in combAcc:
   print comb.nombre
+print "cont= ", cont
+print "ratio1= ", ratio1
 '''   
- 
+
 fname= os.path.basename(__file__)
 if (abs(ratio1)<1e-15):
   print "test ",fname,": ok."

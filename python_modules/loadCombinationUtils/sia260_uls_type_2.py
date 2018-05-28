@@ -56,7 +56,3 @@ combination_factors.insert("ponts_routes_pression_hydraulique",loadCombinations.
 
 combGeneratorPontFerroviaireVoieNormale= loadCombinations.LoadCombGenerator()
 actionsAndFactors= combGeneratorPontFerroviaireVoieNormale.actionWeighting.create("SIA260ULSType2",factors)
-actionsAndFactors.permanentActions.partial_safety_factors= partial_safety_factors["permanentes"]
-actionsAndFactors.variableActions.partial_safety_factors= partial_safety_factors["variables"]
-actionsAndFactors.accidentalActions.partial_safety_factors= partial_safety_factors["accidentales"]
-actionsAndFactors.seismicActions.partial_safety_factors= partial_safety_factors["sismicas"]

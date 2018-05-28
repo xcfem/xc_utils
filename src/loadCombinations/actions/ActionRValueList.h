@@ -31,9 +31,10 @@
 
 namespace cmb_acc{
 class Variation;
+class Variations;
 class CombinationFactorsMap;
+class PartialSafetyFactorsMap;
 class ActionsFamily;
-class LeadingActionInfo;
 
 //! @ingroup CMBACC
 //
@@ -45,13 +46,14 @@ class ActionRValueList: public std::deque<ActionRValue>, public EntCmd
 
     ActionRValue &push_back(const ActionRValue &a);
   public:
-    //! @brief Return the value of the i-th action.
-    inline Action getValue(const size_t &i,short int r) const
-      { return (*this)[i].getValue(r); }
-    Action getRepresentativeValue(const LeadingActionInfo &, const size_t &) const;
-    ActionRValue &insert(const Action &,const std::string &);
-    Action FormaProdEscalar(const Variation &v,const LeadingActionInfo &) const;
+    int getIndex(const ActionRValue *) const;
+    ActionRValue &insert(const Action &,const std::string &,const std::string &);
+    Action buildCombination(const Variation &v,const LeadingActionInfo &) const;
     const CombinationFactorsMap *getPtrCombinationFactors(void) const;
+    const PartialSafetyFactorsMap *getPtrPartialSafetyFactors(void) const;
+    Variations computeVariations(const bool &,const bool &,const int &) const;
+    LoadCombinationVector getCombinations(const bool &,const bool &,const LeadingActionInfo &) const;
+    LoadCombinationVector getCombinationsWhenLeading(const bool &,const bool &,const short int &v) const;
     void Print(std::ostream &os) const;
   };
 

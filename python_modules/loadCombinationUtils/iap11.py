@@ -57,7 +57,7 @@ partial_safety_factors["accidentales"]= loadCombinations.PartialSafetyFactors(lo
 combination_factors= factors.getCombinationFactors()
 # SC uso
 #cargas verticales
-combination_factors.insert("permanente",loadCombinations.CombinationFactors(1,1,1))
+combination_factors.insert("permanentes",loadCombinations.CombinationFactors(1,1,1))
 combination_factors.insert("vehículos_pesados",loadCombinations.CombinationFactors(0.75,0.75,0))
 combination_factors.insert("sobrecarga_uniforme",loadCombinations.CombinationFactors(0.4,0.4,0))
 combination_factors.insert("carga_en_aceras",loadCombinations.CombinationFactors(0.4,0.4,0))
@@ -86,14 +86,4 @@ combination_factors.insert("por_defecto",loadCombinations.CombinationFactors(0.7
 
 controlCombGenerator= loadCombinations.LoadCombGenerator()
 actionsAndFactors= controlCombGenerator.actionWeighting.create("IAP11",factors)
-#No need to define a new family, we change the default partial safety factors values for the 'default' family.
-actionsAndFactors.permanentActions['default'].partial_safety_factors= partial_safety_factors["permanentes"] #Partial safety factors for permanent actions.
 
-actionsAndFactors.ncPermanentActions.newActionsFamily('nc_Terr', partial_safety_factors["permanentes_nc_Terr"]) 
-actionsAndFactors.ncPermanentActions.newActionsFamily('nc_Reologic', partial_safety_factors["permanentes_nc_Reol"]) 
-actionsAndFactors.variableActions.newActionsFamily('SCuso',partial_safety_factors["variables_SCuso"])
-actionsAndFactors.variableActions.newActionsFamily('Climat',partial_safety_factors["variables_climatica"])
-
-
-actionsAndFactors.accidentalActions.partial_safety_factors= partial_safety_factors["accidentales"]
-#actionsAndFactors.seismicActions.partial_safety_factors= partial_safety_factors["sismicas_EHE_ctr_intenso"]

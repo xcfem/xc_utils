@@ -12,9 +12,9 @@ pol1.agregaVertice(geom.Pos2d(1,0))
 pol1.agregaVertice(geom.Pos2d(1,1))
 pol1.agregaVertice(geom.Pos2d(0,1))
 
-longPol1=pol1.getLongitud()
+longPol1=pol1.getLength()
 pol2=pol1.offset(-0.25)
-longPol2=pol2.getLongitud()
+longPol2=pol2.getLength()
 
 ratio1=(longPol1-3)/3.
 ratio2=(longPol2-2)/2.

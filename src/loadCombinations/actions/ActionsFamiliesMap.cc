@@ -54,7 +54,7 @@ const cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::getActionsFamily(cons
   }
 
 //! @brief Insert the action in the family.
-cmb_acc::ActionRValue &cmb_acc::ActionsFamiliesMap::insert(const std::string &familyName,const Action &acc,const std::string &combination_factors_name)
+cmb_acc::ActionRValue &cmb_acc::ActionsFamiliesMap::insert(const std::string &familyName,const Action &acc,const std::string &combination_factors_name,const std::string &partial_safety_factors_name)
   {
     ActionsFamily *familia_ptr= getActionsFamily("default");
     if(!familyName.empty())
@@ -67,16 +67,16 @@ cmb_acc::ActionRValue &cmb_acc::ActionsFamiliesMap::insert(const std::string &fa
         const_iterator i= familias.begin();
         familia_ptr= (*i).second;
       }
-    return familia_ptr->insert(acc,combination_factors_name);
+    return familia_ptr->insert(acc,combination_factors_name,partial_safety_factors_name);
   }
 
 //! @brief Crea una nueva familia con el nombre que se le pasa como parámetro.
-cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::newActionsFamily(const std::string &actionsFamilyName,const PartialSafetyFactors &defaultGF)
+cmb_acc::ActionsFamily *cmb_acc::ActionsFamiliesMap::newActionsFamily(const std::string &actionsFamilyName)
   {
     ActionsFamily *tmp =nullptr;
     if(!exists(actionsFamilyName)) //new family.
       {
-        tmp= new ActionsFamily(actionsFamilyName,defaultGF);//Default partial safety factors por defecto
+        tmp= new ActionsFamily(actionsFamilyName);
 	tmp->set_owner(this);
         familias[actionsFamilyName]= tmp;
       }
@@ -198,7 +198,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::getLoadCombinations(
             retval= LoadCombinationVector::ProdCartesiano(retval,SG_aster,Action::zero);
           }
       }
-    retval= getCompatibles(retval); //Filtramos las que contienen acciones incompatibles.
+    retval= get_compatibles(retval); //Filtramos las que contienen acciones incompatibles.
     return retval;
   }
 
@@ -219,6 +219,6 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionsFamiliesMap::getLoadCombinations(
             retval= LoadCombinationVector::ProdCartesiano(retval,tmp,Action::zero);
           }
       }
-    retval= getCompatibles(retval); //Filtramos las que contienen acciones incompatibles.
+    retval= get_compatibles(retval); //Filtramos las que contienen acciones incompatibles.
     return retval;
   }

@@ -28,11 +28,12 @@ partial_safety_factors["accidentales_ctr_intenso"]= loadCombinations.PartialSafe
 
 combination_factors= factors.getCombinationFactors()
 
-combination_factors.insert("permanent",loadCombinations.CombinationFactors(1,1,1))
+combination_factors.insert("permanents",loadCombinations.CombinationFactors(1,1,1))
 combination_factors.insert("snow",loadCombinations.CombinationFactors(0.6,0.2,0.0))
 combination_factors.insert("wind",loadCombinations.CombinationFactors(0.6,0.5,0.0))
 combination_factors.insert("thermal",loadCombinations.CombinationFactors(0.6,0.5,0.0))
 combination_factors.insert("sismo",loadCombinations.CombinationFactors(0,0,0))
+combination_factors.insert("accidental",loadCombinations.CombinationFactors(0,0,0))
 combination_factors.insert("azotea_solo_conserv",loadCombinations.CombinationFactors(0.7,0.5,0.3))
 combination_factors.insert("vivienda",loadCombinations.CombinationFactors(0.7,0.5,0.3))
 combination_factors.insert("dormitorios_hotel",loadCombinations.CombinationFactors(0.7,0.5,0.3))
@@ -46,7 +47,3 @@ partial_safety_factors["permanentes_ctr_normal"]= loadCombinations.PartialSafety
 
 intenseControlCombGenerator= loadCombinations.LoadCombGenerator()
 actionsAndFactors= intenseControlCombGenerator.actionWeighting.create("EHEIntenso",factors)
-actionsAndFactors.permanentActions['default'].partial_safety_factors= partial_safety_factors["permanentes_ctr_intenso"]
-actionsAndFactors.variableActions['default'].partial_safety_factors= partial_safety_factors["variables_ctr_intenso"]
-actionsAndFactors.accidentalActions.partial_safety_factors= partial_safety_factors["accidentales_ctr_intenso"]
-actionsAndFactors.seismicActions.partial_safety_factors= partial_safety_factors["sismicas_ctr_intenso"]

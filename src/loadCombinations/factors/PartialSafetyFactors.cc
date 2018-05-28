@@ -80,25 +80,22 @@ cmb_acc::PartialSafetyFactors::PartialSafetyFactors(const ULSPartialSafetyFactor
 cmb_acc::Variation cmb_acc::PartialSafetyFactors::CoefsEls(void) const
   { return sls_partial_safety_factors.Coefs(); }
 
-//! \fn cmb_acc::PartialSafetyFactors::calcula_variations(const bool &uls,const bool &sit_accidental) const
-//! @brief Calcula las variations que pueden formarse con las acciones de la familia.
+//! @brief Return the variation that correspond to the arguments.
 //!
-//! @param n: Número de acciones de la familia.
 //! @param uls: Verdadero si se trata de un ultimate limit state.
 //! @param sit_accidental: Verdadero si se trata de una situación accidental o sísmica.
-//! @param d: Índice de la acción dominante (-1 si ninguna es dominante).
-cmb_acc::Variations cmb_acc::PartialSafetyFactors::calcula_variations(const bool &uls,const bool &sit_accidental,const int &d,const ActionRValueList &lvr) const
+cmb_acc::Variation cmb_acc::PartialSafetyFactors::getVariation(const bool &uls,const bool &sit_accidental) const
   {
-    const size_t n= lvr.size();
-    Variations retval;
-    if(n<1) return retval;
+    Variation retval;
     if(uls)
-      if(sit_accidental)
-        retval= Variations::Calcula(uls_partial_safety_factors.CoefsAcc(),d,lvr);
-      else
-        retval= Variations::Calcula(uls_partial_safety_factors.CoefsPT(),d,lvr);
+      {
+	if(sit_accidental)
+	  retval= uls_partial_safety_factors.CoefsAcc();
+	else
+	  retval= uls_partial_safety_factors.CoefsPT();
+      }
     else
-      retval= Variations::Calcula(sls_partial_safety_factors.Coefs(),d,lvr);
+      retval= sls_partial_safety_factors.Coefs();
     return retval;
   }
 
