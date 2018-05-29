@@ -52,7 +52,7 @@ class BlockPyramid: public GeomObj3d
       { return 3; }
     GEOM_FT getLength(void) const;
     GEOM_FT Area(void) const;
-    GEOM_FT Volumen(void) const;
+    GEOM_FT getVolume(void) const;
     GEOM_FT Ix(void) const;
     GEOM_FT Iy(void) const;
     GEOM_FT Iz(void) const;

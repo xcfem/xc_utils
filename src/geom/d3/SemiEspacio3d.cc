@@ -97,12 +97,13 @@ Recta3d SemiEspacio3d::getLima(const SemiEspacio3d &se) const
 unsigned short int SemiEspacio3d::Dimension(void) const
   { return 3; }
 
-//! @brief Return object length.
+//! @brief Return the lenght of the object.
 GEOM_FT SemiEspacio3d::getLength(void) const
   { return NAN; }
 GEOM_FT SemiEspacio3d::Area(void) const
   { return NAN; }
-GEOM_FT SemiEspacio3d::Volumen(void) const
+    //! @brief Return the object volume
+GEOM_FT SemiEspacio3d::getVolume(void) const
   { return NAN; }
 Pos3d SemiEspacio3d::getCenterOfMass(void) const
   { return lim.getCenterOfMass(); }

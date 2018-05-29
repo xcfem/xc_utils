@@ -37,7 +37,7 @@ class_<BND2d, bases<GeomObj2d> >("BND2d")
   .add_property("length", &BND2d::getLength, "returns object's length.")
   .add_property("diagonal", &BND2d::Diagonal, "returns a vector from PMin to PMax.")
   .add_property("area", &BND2d::Area, "returns object's area.")
-  .add_property("volume", &BND2d::Volumen, "returns object's volume.")
+  .add_property("volume", &BND2d::getVolume, "returns object's volume.")
 
 
   .def("update", &BND2d::Update)

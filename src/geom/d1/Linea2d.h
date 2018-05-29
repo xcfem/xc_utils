@@ -47,7 +47,8 @@ class Linea2d : public GeomObj2d
       { return 1; }
     virtual GEOM_FT Area(void) const
       { return 0.0; }
-    virtual GEOM_FT Volumen(void) const
+    //! @brief Return the volume of the object.
+    virtual GEOM_FT getVolume(void) const
       { return 0.0; }
     //@brief Return true if the points is on sobre la Linea.
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const= 0;

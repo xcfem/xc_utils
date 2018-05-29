@@ -65,7 +65,8 @@ class Point3d : public GeomObj3d
       { return 0.0; }
     virtual GEOM_FT Area(void) const
       { return 0.0; }
-    virtual GEOM_FT Volumen(void) const
+    //! @brief Return the object volume.
+    virtual GEOM_FT getVolume(void) const
       { return 0.0; }
     virtual GEOM_FT Ix(void) const
       { return 0.0; }

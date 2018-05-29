@@ -81,8 +81,8 @@ class ListaPos3d: public GeomObj3d
     //! @brief Return el área de la ListaPos3d.
     virtual GEOM_FT Area(void) const
       { return 0.0; }
-    //! @brief Return el volumen de la ListaPos3d.
-    virtual GEOM_FT Volumen(void) const
+    //! @brief Return the volume of the object.
+    virtual GEOM_FT getVolume(void) const
       { return 0.0; }
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;

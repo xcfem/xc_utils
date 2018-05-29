@@ -108,8 +108,8 @@ GEOM_FT BlockPyramid::Area(void) const
     return 0.0;
   }
 
-//! @brief Return el volumen del objeto.
-GEOM_FT BlockPyramid::Volumen(void) const
+//! @brief Return the volume of the object.
+GEOM_FT BlockPyramid::getVolume(void) const
   {
     std::cerr << getClassName() << "::" << __FUNCTION__
 	      << "; not implemented." << std::endl;

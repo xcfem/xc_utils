@@ -90,14 +90,14 @@ TritrizPos3d create_uniform_grid(const BND3d &bnd,const size_t &ndiv_x,const siz
     return retval;
   }
 
-//! @brief Return el volumen de revolución que se obtiene al aplicar
-//! a la matriz la transformación la revolución cuya definición se pasa como parámetro.
+//! @brief Return the revolution solid obtained by applying
+//! to the matrix the transformation argument.
 TritrizPos3d crea_vol_revolucion(const Revolucion3d &r,const MatrizPos3d &m)
   {
     if(m.isRow() || m.isColumn()) //Unidimensional.
       {
-	std::cerr << "Se llamó a la función crea_vol_revolucion con una matriz unidimensional"
-                  << " se devolverá un volumen degenerado." << std::endl;
+	std::cerr << __FUNCTION__ << "called with an one-dimensional matrix "
+                  << " a degenerated volume will be returned." << std::endl;
       }
     return r.Aplica2d(m);
   }

@@ -35,15 +35,16 @@ class Superficie2d : public GeomObj2d
   {
   public:
     Superficie2d(void): GeomObj2d(){}
+    //! @brief Return the dimension of the object 0, 1, 2 or 3.
     inline virtual unsigned short int Dimension(void) const
-    //Return the dimension of the object 0, 1, 2 or 3.
       { return 2; }
     virtual GEOM_FT getLength(void) const
       { return 0.0; }
     GEOM_FT Perimetro(void) const
       { return getLength(); }
     virtual GEOM_FT Area(void) const;
-    virtual GEOM_FT Volumen(void) const
+    //! @brief Return the object volume
+    virtual GEOM_FT getVolume(void) const
       { return 0.0; }
     virtual inline GEOM_FT IArea(void) const
       { return Area(); }

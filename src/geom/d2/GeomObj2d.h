@@ -63,7 +63,8 @@ class GeomObj2d: public GeomObj
     virtual Pos2d getCenterOfMass(void) const= 0;
     virtual GEOM_FT getLength(void) const= 0; //?? Por que se re-declara (está en GeomObj).
     virtual GEOM_FT Area(void) const= 0; //?? Por que se re-declara (está en GeomObj).
-    inline virtual GEOM_FT Volumen(void) const
+    //! @brief Return the object volume
+    inline virtual GEOM_FT getVolume(void) const
       { return 0.0; }
     //! @brief Moment of inertia with respect to the center of mass en local axis.
     virtual GEOM_FT Ix(void) const= 0;

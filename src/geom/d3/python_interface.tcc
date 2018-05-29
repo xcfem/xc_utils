@@ -45,7 +45,7 @@ class_<BND3d, bases<GeomObj3d> >("BND3d")
   .add_property("length", &BND3d::getLength, "returns object's length.")
   .add_property("diagonal", &BND3d::Diagonal, "returns a vector from PMin to PMax.")
   .add_property("area", &BND3d::Area, "returns object's area.")
-  .add_property("volume", &BND3d::Volumen, "returns object's volume.")
+  .add_property("volume", &BND3d::getVolume, "returns object's volume.")
 
 
   .def("update", &BND3d::Update)

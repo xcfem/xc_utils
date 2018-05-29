@@ -69,8 +69,9 @@ class PrismaRecto3d : public Prisma3d
       { return extru.getLength(); }
     inline GEOM_FT Area(void) const
       { return extru.Area(); }
-    inline GEOM_FT Volumen(void) const
-      { return extru.Volumen(); }
+    //! @brief Return the object volume.
+    inline GEOM_FT getVolume(void) const
+      { return extru.getVolume(); }
     inline virtual GEOM_FT Ix(void) const
       { return extru.Ix(); }
     inline virtual GEOM_FT Iy(void) const

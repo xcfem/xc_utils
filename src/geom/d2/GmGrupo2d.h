@@ -48,7 +48,8 @@ class GmGrupo2d : public GmGrupo<GeomObj2d>
     virtual GeomObj2d *clon(void) const
       { return new GmGrupo2d(*this); }
 
-    inline virtual GEOM_FT Volumen(void) const
+    //! @brief Return the volume of the object.
+    inline virtual GEOM_FT getVolume(void) const
       { return 0.0; }
     virtual Pos2d getCenterOfMass(void) const;
 

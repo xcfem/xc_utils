@@ -71,7 +71,8 @@ class Circulo2d : public Superficie2d
       { return getLength(); }
     virtual double AnguloComprendido(void) const;
     virtual GEOM_FT Area(void) const;
-    virtual GEOM_FT Volumen(void) const
+    //! @brief Return the volume of the object.
+    virtual GEOM_FT getVolume(void) const
       { return 0.0; }
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const

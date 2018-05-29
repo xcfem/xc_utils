@@ -79,7 +79,8 @@ class SolidExtru3d : public Solido3d
     //! @brief Return object length.
     inline GEOM_FT getLength(void) const
       { return l; }
-    inline GEOM_FT Volumen(void) const
+    //! @brief Return the object volume
+    inline GEOM_FT getVolume(void) const
       { return scc.Area() * l; }
     inline virtual GEOM_FT Ix(void) const
       { return scc.Ix()*l + scc.Area()*l*l*l/12; }

@@ -65,7 +65,8 @@ class SectorCircular3d : public D2to3d
       { return getLength(); }
     virtual GEOM_FT Area(void) const
       { return sect_circ.Area(); }
-    virtual GEOM_FT Volumen(void) const
+    //! @brief Return the volume of the object.
+    virtual GEOM_FT getVolume(void) const
       { return 0; }
     inline const double &Theta1(void) const
       { return sect_circ.Theta1(); }

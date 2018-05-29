@@ -47,7 +47,8 @@ class Superficie3d : public GeomObj3d
     GEOM_FT Perimetro(void) const
       { return getLength(); }
     virtual GEOM_FT Area(void) const;
-    virtual GEOM_FT Volumen(void) const
+    //! @brief Return the volume of the object.
+    virtual GEOM_FT getVolume(void) const
       { return 0.0; }
     virtual inline GEOM_FT IArea(void) const
       { return Area(); }

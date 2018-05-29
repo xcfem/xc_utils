@@ -64,7 +64,8 @@ class Trihedron: public GeomObj3d
       { return 0.0; }
     virtual GEOM_FT Area(void) const
       { return NAN; }
-    virtual GEOM_FT Volumen(void) const
+    //! @brief Return the volume of the object.
+    virtual GEOM_FT getVolume(void) const
       { return NAN; }
     virtual GEOM_FT Ix(void) const
       { return NAN; }

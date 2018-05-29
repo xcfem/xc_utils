@@ -69,7 +69,8 @@ class BND3d: public GeomObj3d
     GEOM_FT AreaXZ(void) const; //Area de la cara paralela al plano XZ
     GEOM_FT AreaYZ(void) const; //Area de la cara paralela al plano YZ
     virtual GEOM_FT Area(void) const;
-    inline virtual GEOM_FT Volumen(void) const
+    //! @brief Return the object volume
+    inline virtual GEOM_FT getVolume(void) const
       { return cgisocub.volume(); }
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;

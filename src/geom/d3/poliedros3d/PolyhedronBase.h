@@ -39,7 +39,7 @@ class PolyhedronBase: public GeomObj3d
     inline virtual unsigned short int Dimension(void) const
       { return 3; }
     virtual GEOM_FT getLength(void) const;
-    virtual GEOM_FT Volumen(void) const;
+    virtual GEOM_FT getVolume(void) const;
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Iz(void) const;

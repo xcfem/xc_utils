@@ -33,7 +33,7 @@ GeomObj::GeomObj(void)
 //! - dimension == 0 => return 1.0
 //! - dimension == 1 => return getLength()
 //! - dimension == 2 => return Area()
-//! - dimension == 3 => return Volumen()
+//! - dimension == 3 => return getVolume()
 GEOM_FT GeomObj::getCenterOfMassArea(void) const
   {
     unsigned short int d= Dimension();
@@ -50,7 +50,7 @@ GEOM_FT GeomObj::getCenterOfMassArea(void) const
 	retval= Area();
 	break;
       case 3:
-	retval= Volumen();
+	retval= getVolume();
 	break;
       default:
 	retval= 1.0;

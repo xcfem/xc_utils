@@ -68,7 +68,8 @@ class BND2d: public GeomObj2d
       { return 2*Anchura()+2*Altura(); }
     Vector2d Diagonal(void) const;
     virtual GEOM_FT Area(void) const;
-    inline virtual GEOM_FT Volumen(void) const
+    //! @brief Return the volume of the object.
+    inline virtual GEOM_FT getVolume(void) const
       { return 0.0; }
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;

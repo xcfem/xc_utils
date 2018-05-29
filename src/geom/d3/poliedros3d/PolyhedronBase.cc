@@ -24,34 +24,41 @@
 #include "PolyhedronBase.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 
+//! @brief Return the object length.
 GEOM_FT PolyhedronBase::getLength(void) const
   {
     std::cerr << getClassName() << "::" << __FUNCTION__
 	      << "; not implemented." << std::endl;
     return 0.0;
   }
-GEOM_FT PolyhedronBase::Volumen(void) const
+//! @brief Return the object volume.
+GEOM_FT PolyhedronBase::getVolume(void) const
   {
-    std::cerr << "PolyhedronBase::Volumen() no implementada." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+              << "; not implemented." << std::endl;
     return 0.0;
   }
 GEOM_FT PolyhedronBase::Ix(void) const
   {
-    std::cerr << "PolyhedronBase::Ix() no implementado." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+              << "; not implemented." << std::endl;
     return 0.0;
   }
 GEOM_FT PolyhedronBase::Iy(void) const
   {
-    std::cerr << "PolyhedronBase::Iy() no implementado." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+              << "; not implemented." << std::endl;
     return 0.0;
   }
 GEOM_FT PolyhedronBase::Iz(void) const
   {
-    std::cerr << "PolyhedronBase::Iy() no implementado." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+              << "; not implemented." << std::endl;
     return 0.0;
   }
 Pos3d PolyhedronBase::getCenterOfMass(void) const
   {
-    std::cerr << "PolyhedronBase::getCenterOfMass() no implementado." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+              << "; not implemented." << std::endl;
     return Pos3d();
   }

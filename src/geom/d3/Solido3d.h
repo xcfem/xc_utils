@@ -35,7 +35,7 @@ class Solido3d : public GeomObj3d
     Solido3d(void);
     virtual GEOM_FT dist(const Pos3d &p) const;
     virtual inline GEOM_FT IArea(void) const
-      { return Volumen(); }
+      { return getVolume(); }
     virtual unsigned short int Dimension(void) const
       { return 3; }
     virtual void Print(std::ostream &os) const;

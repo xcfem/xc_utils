@@ -70,7 +70,7 @@ class GmGrupo : public GO
       { objetos.push_back(downcast(obj.clon())); }
     virtual GEOM_FT getLength(void) const;
     virtual GEOM_FT Area(void) const;
-    virtual GEOM_FT Volumen(void) const;
+    virtual GEOM_FT getVolume(void) const;
     void Print(std::ostream &os) const;
   };
 
@@ -153,15 +153,17 @@ GEOM_FT GmGrupo<GO>::Area(void) const
       retval+= (*i)->Area();
     return retval;
   }
+
+//! @brief Return the volume of the object.
 template <typename GO>
-GEOM_FT GmGrupo<GO>::Volumen(void) const
+GEOM_FT GmGrupo<GO>::getVolume(void) const
   {
     if(objetos.empty()) return 0.0;
 	register const_iterator i(objetos.begin());
-    register GEOM_FT retval((*i)->Volumen());
+    register GEOM_FT retval((*i)->getVolume());
     i++;
     for(;i!=objetos.end();i++)
-      retval+= (*i)->Volumen();
+      retval+= (*i)->getVolume();
     return retval;
   }
 
