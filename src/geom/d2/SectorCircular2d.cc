@@ -136,8 +136,8 @@ GEOM_FT SectorCircular2d::getArcLength(void) const
 GEOM_FT SectorCircular2d::getLength(void) const
   { return getArcLength()+ Diametro(); }
 
-//! @brief Return el área del sector circular.
-GEOM_FT SectorCircular2d::Area(void) const
+//! @brief Return the area of the circular sector.
+GEOM_FT SectorCircular2d::getArea(void) const
   { return double_to_FT(AnguloComprendido())*Radio2()/2; }
 
 //! @brief Return the maximum value of the i coordinate of the object points.

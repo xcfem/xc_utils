@@ -82,8 +82,9 @@ GEOM_FT Tetraedro3d::GetMin(unsigned short int i) const
     return retval;
   }
 
-GEOM_FT Tetraedro3d::Area(void) const
-  { return getPoliedro3d().Area(); }
+//! @brief Return the object area.
+GEOM_FT Tetraedro3d::getArea(void) const
+  { return getPoliedro3d().getArea(); }
 
 //! @brief Return the volume of the body with sign.
 GEOM_FT Tetraedro3d::getVolumeWithSign(void) const

@@ -71,7 +71,7 @@ class SectorAnilloCircular2d : public SectorCircular2d
     virtual GEOM_FT getInteriorArcLength(void) const;
     virtual GEOM_FT getExteriorArcLength(void) const;
     virtual GEOM_FT getLength(void) const;
-    virtual GEOM_FT Area(void) const;
+    virtual GEOM_FT getArea(void) const;
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Pxy(void) const;

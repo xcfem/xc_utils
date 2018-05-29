@@ -65,7 +65,8 @@ class Triangulo2d : public SupPoligonal2d
     Segmento2d Altura(const size_t &i) const; //Return la altura del vertice i.
     virtual Pos2d getCenterOfMass(void) const;
     virtual GEOM_FT getLength(void) const;
-    virtual GEOM_FT Area(void) const
+    //! @brief Return the area of the object.
+    virtual GEOM_FT getArea(void) const
       { return cgtriang.area(); }
     //! @brief Return the volume of the object.
     virtual GEOM_FT getVolume(void) const

@@ -49,12 +49,14 @@ class GeomObj: public ProtoGeom
     virtual GeomObj *clon(void) const=0;
     //! @brief Return the dimension of the object 0, 1, 2 or 3.
     virtual unsigned short int Dimension(void) const= 0;
+    //! @brief Return the length of the object.
     virtual GEOM_FT getLength(void) const= 0;
-    virtual GEOM_FT Area(void) const= 0;
+    //! @brief Return the area of the object.
+    virtual GEOM_FT getArea(void) const= 0;
+    //! @brief Return the volume of the object.
     virtual GEOM_FT getVolume(void) const= 0;
+    //! @brief Return true if the object has a center of mass.
     inline virtual bool hasCenterOfMass(void) const
-      //Return verdadero si el objeto tiene centro de gravedad
-      //Una recta o un plano no lo tienen.
       { return false;}
     GEOM_FT getCenterOfMassArea(void) const;
 
@@ -71,7 +73,7 @@ GEOM_FT area(input_iterator begin,input_iterator end)
   {
     GEOM_FT retval= 0.0;
     for(input_iterator i=begin;i!=end;i++)
-      retval+= i->Area();
+      retval+= i->getArea();
     return retval;
   }
 

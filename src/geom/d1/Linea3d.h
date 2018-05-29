@@ -37,7 +37,8 @@ class Linea3d : public GeomObj3d
     ~Linea3d(void) {}
     inline virtual unsigned short int Dimension(void) const
       { return 1; }
-    virtual GEOM_FT Area(void) const
+    //! @brief Return the object area.
+    virtual GEOM_FT getArea(void) const
       { return 0.0; }
     //! @brief Return the volume of the object.
     virtual GEOM_FT getVolume(void) const

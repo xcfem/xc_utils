@@ -157,8 +157,8 @@ double FunctionFromPointsR_R::lastY(void) const
   }
 
 
-//! @brief Return el área bajo la función.
-double FunctionFromPointsR_R::Area(void) const
+//! @brief Return the area enclosed by the function.
+double FunctionFromPointsR_R::getArea(void) const
   {
     double retval= 0.0;
     const_iterator i= begin();

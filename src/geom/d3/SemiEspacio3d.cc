@@ -100,9 +100,10 @@ unsigned short int SemiEspacio3d::Dimension(void) const
 //! @brief Return the lenght of the object.
 GEOM_FT SemiEspacio3d::getLength(void) const
   { return NAN; }
-GEOM_FT SemiEspacio3d::Area(void) const
+//! @brief Return the object area.
+GEOM_FT SemiEspacio3d::getArea(void) const
   { return NAN; }
-    //! @brief Return the object volume
+//! @brief Return the object volume
 GEOM_FT SemiEspacio3d::getVolume(void) const
   { return NAN; }
 Pos3d SemiEspacio3d::getCenterOfMass(void) const

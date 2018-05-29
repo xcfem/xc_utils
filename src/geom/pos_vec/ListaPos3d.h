@@ -78,8 +78,8 @@ class ListaPos3d: public GeomObj3d
     //! @brief Return the length of the ListaPos3d.
     virtual GEOM_FT getLength(void) const
       { return 0.0; }
-    //! @brief Return el área de la ListaPos3d.
-    virtual GEOM_FT Area(void) const
+    //! @brief Return the area of the ListaPos3d.
+    virtual GEOM_FT getArea(void) const
       { return 0.0; }
     //! @brief Return the volume of the object.
     virtual GEOM_FT getVolume(void) const

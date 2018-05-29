@@ -140,7 +140,7 @@ GEOM_FT MatrizPos2d::GetIy(void) const
         {
           q= GetQuad(i,j);
           c= q.Centroide();
-          retval+= q.Iy()+q.Area()*sqr(c.x());
+          retval+= q.Iy()+q.getArea()*sqr(c.x());
         }
     return retval;
   }
@@ -156,7 +156,7 @@ GEOM_FT MatrizPos2d::GetIx(void) const
         {
           q= GetQuad(i,j);
           c= q.Centroide();
-          retval+= q.Ix()+q.Area()*sqr(c.y());
+          retval+= q.Ix()+q.getArea()*sqr(c.y());
         }
     return retval;
   }
@@ -173,7 +173,7 @@ GEOM_FT MatrizPos2d::GetPxy(void) const
         {
           q= GetQuad(i,j);
           c= q.Centroide();
-          retval+= q.Pxy()+q.Area()*c.x()*c.y();
+          retval+= q.Pxy()+q.getArea()*c.x()*c.y();
         }
     return retval;
   }
@@ -271,16 +271,16 @@ bool MatrizPos2d::In(const Pos2d &p, const double &tol) const
     return retval;
   }
 
-//! @brief Return el área del cuadrilátero i,j:
+//! @brief Return the area of the quad at i,j:
 //                                                                             i+1,j +---+ i+1,j+1
 //                                                                                   |   |
 //                                                                                   |   |
 //                                                                                   |   |
 //                                                                               i,j +---+ i,j+1
 GEOM_FT MatrizPos2d::GetAreaQuad(const size_t &i,const size_t &j) const
-  { return GetQuad(i,j).Area(); }
+  { return GetQuad(i,j).getArea(); }
 
-//! @brief Return el centroide del cuadrilátero i,j:
+//! @brief Return the centroid of the quad at i,j:
 //                                                                             i+1,j +---+ i+1,j+1
 //                                                                                   |   |
 //                                                                                   |   |

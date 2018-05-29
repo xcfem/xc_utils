@@ -44,7 +44,7 @@ class Tetraedro3d: public PolyhedronBase
     GeomObj *clon(void) const
       { return new Tetraedro3d(*this); }
     Poliedro3d getPoliedro3d(void) const;
-    GEOM_FT Area(void) const;
+    GEOM_FT getArea(void) const;
     GEOM_FT getVolumeWithSign(void) const;
     GEOM_FT getVolume(void) const;
     double GetMax(short unsigned int i) const;

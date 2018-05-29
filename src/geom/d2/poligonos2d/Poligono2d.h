@@ -126,9 +126,9 @@ class Poligono2d: public SupPoligonal2d
 
     inline GEOM_FT AreaSigno(void) const
       { return cgpol.area(); }
-    virtual GEOM_FT Area(void) const;
+    virtual GEOM_FT getArea(void) const;
     std::vector<Poligono2d> getPoligonosTributarios(void) const;
-    std::vector<double> getAreasTributarias(void) const;
+    std::vector<double> getTributaryAreas(void) const;
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const;

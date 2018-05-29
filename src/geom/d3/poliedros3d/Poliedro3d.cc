@@ -117,12 +117,12 @@ void Poliedro3d::make_tetrahedron(const SemiEspacio3d &se1, const SemiEspacio3d 
 //                 << "se esperaban al menos cuatro semiespacios." << std::endl;
 //   }
 
-//! @brief Return la suma de las áreas de las caras.
-GEOM_FT Poliedro3d::Area(void) const
+//! @brief Return the sum of the areas of the faces.
+GEOM_FT Poliedro3d::getArea(void) const
   {
     GEOM_FT retval= 0.0;
     for(Poliedro3d::Facet_const_iterator i= facets_begin();i!=facets_end();i++)
-      retval+= GetCara(i).Area();
+      retval+= GetCara(i).getArea();
     return retval;
   }
 

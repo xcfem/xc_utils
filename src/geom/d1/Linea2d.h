@@ -45,7 +45,8 @@ class Linea2d : public GeomObj2d
     virtual GeomObj *clon(void) const= 0;
     inline virtual unsigned short int Dimension(void) const
       { return 1; }
-    virtual GEOM_FT Area(void) const
+    //! @brief Return the area of the object.
+    virtual GEOM_FT getArea(void) const
       { return 0.0; }
     //! @brief Return the volume of the object.
     virtual GEOM_FT getVolume(void) const

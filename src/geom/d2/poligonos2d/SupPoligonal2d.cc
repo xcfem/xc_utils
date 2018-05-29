@@ -96,7 +96,8 @@ GEOM_FT SupPoligonal2d::getLength(void) const
     return temp;
   }
 
-GEOM_FT SupPoligonal2d::Area(void) const
+//! @brief Return the object area.
+GEOM_FT SupPoligonal2d::getArea(void) const
   { return ::Abs(AreaSigno()); }
 
 //! @brief Return el valor maximo de la coordenada i.
@@ -122,7 +123,7 @@ GEOM_FT SupPoligonal2d::GetMin(unsigned short int i) const
 //! @brief Return el centro de gravedad.
 Pos2d SupPoligonal2d::getCenterOfMass(void) const
   {
-     const GEOM_FT area= Area();
+     const GEOM_FT area= getArea();
      return Pos2d(getMoment(1,0)/area,getMoment(0,1)/area);
   }
 //! @brief Return the centroid (point interior to the polygon).
@@ -163,7 +164,7 @@ GEOM_FT SupPoligonal2d::getMoment(const int &p,const int &q) const
 GEOM_FT SupPoligonal2d::Ix(void) const
   { 
     const GEOM_FT Ixo= getMoment(0,2);
-    return Ixo-Area()*sqr(getCenterOfMass().y()); //Teorema de Steiner.
+    return Ixo-getArea()*sqr(getCenterOfMass().y()); //Teorema de Steiner.
   }
 
 //! @brief Calcula el moment of inertia with respect to an axis parallel to the
@@ -172,7 +173,7 @@ GEOM_FT SupPoligonal2d::Ix(void) const
 GEOM_FT SupPoligonal2d::Iy(void) const
   { 
     const GEOM_FT Iyo= getMoment(2,0);
-    return Iyo-Area()*sqr(getCenterOfMass().x()); //Teorema de Steiner.
+    return Iyo-getArea()*sqr(getCenterOfMass().x()); //Teorema de Steiner.
   }
 
 //! @brief Calcula el product of inertia with respect to the axis parallel
@@ -184,7 +185,7 @@ GEOM_FT SupPoligonal2d::Pxy(void) const
     const Pos2d center_of_mass=getCenterOfMass();
     const GEOM_FT dx= center_of_mass.x();
     const GEOM_FT dy= center_of_mass.y();
-    return Ixy-Area()*dx*dy; //Theorem of parallel axis.
+    return Ixy-getArea()*dx*dy; //Theorem of parallel axis.
   }
 
 //! @brief Return the points for which the polygon is almost tangent

@@ -100,8 +100,8 @@ GEOM_FT BlockPyramid::getLength(void) const
     return 0.0;
   }
 
-//! @brief Return el área del objeto.
-GEOM_FT BlockPyramid::Area(void) const
+//! @brief Return the area of the object surface.
+GEOM_FT BlockPyramid::getArea(void) const
   {
     std::cerr << getClassName() << "::" << __FUNCTION__
 	      << "; not implemented." << std::endl;

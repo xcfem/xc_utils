@@ -53,7 +53,7 @@ class FunctionFromPointsR_R: public FunctionFromPointsR_T<double>
     //! @brief Return the abcisa correspondiente al valor mínimo de las ordenadas definidas.
     double AbcisaMin(void) const
       { return (*PosMin()).first; }
-    double Area(void) const;
+    double getArea(void) const;
     double firstX(void) const;
     double firstY(void) const;
     double lastX(void) const;

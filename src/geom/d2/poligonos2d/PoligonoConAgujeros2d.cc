@@ -59,21 +59,23 @@ GEOM_FT PoligonoConAgujeros2d::getLength(void) const
     return temp;
   }
 
-GEOM_FT PoligonoConAgujeros2d::Area(void) const
+//! @brief Return the object area.
+GEOM_FT PoligonoConAgujeros2d::getArea(void) const
   {
     GEOM_FT temp = 0;
     for(Hole_const_iterator i= cgpol.holes_begin();i!=cgpol.holes_end();i++)
       {
         const Poligono2d p(*i);
-        temp-= p.Area();
+        temp-= p.getArea();
       }
     if(!cgpol.is_unbounded())
       {
         const Poligono2d p(cgpol.outer_boundary());
-        temp+= p.Area();
+        temp+= p.getArea();
       }
     else
-      std::cerr << "PoligonoConAgujeros2d::Area; exterior contour doesn't exists." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; exterior contour doesn't exists." << std::endl;
     return temp;    
   }
 
@@ -146,12 +148,12 @@ bool PoligonoConAgujeros2d::In(const Pos2d &p, const double &tol) const
 //! @brief Return el centro de gravedad.
 Pos2d PoligonoConAgujeros2d::getCenterOfMass(void) const
   {
-    GEOM_FT areaTotal= Area();
+    GEOM_FT areaTotal= getArea();
     Vector2d vPos;
     if(!cgpol.is_unbounded())
       {
         const Poligono2d p(cgpol.outer_boundary());
-        vPos= p.getCenterOfMass().VectorPos()*p.Area();
+        vPos= p.getCenterOfMass().VectorPos()*p.getArea();
       }
     else
       std::cerr << "PoligonoConAgujeros2d::GetMin; exterior contour doesn't exists." << std::endl;
@@ -159,7 +161,7 @@ Pos2d PoligonoConAgujeros2d::getCenterOfMass(void) const
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
         const Poligono2d p(*j);
-        vPos= vPos-p.getCenterOfMass().VectorPos()*p.Area();
+        vPos= vPos-p.getCenterOfMass().VectorPos()*p.getArea();
       }
     vPos= vPos*(1.0/areaTotal);
     return Pos2d(vPos.x(),vPos.y());
@@ -177,7 +179,7 @@ GEOM_FT PoligonoConAgujeros2d::Ix(void) const
     if(!cgpol.is_unbounded())
       {
         const Poligono2d p(cgpol.outer_boundary());
-        retval+= p.Ix()+p.Area()*sqr(p.getCenterOfMass().y()-center_of_mass.y());
+        retval+= p.Ix()+p.getArea()*sqr(p.getCenterOfMass().y()-center_of_mass.y());
       }
     else
       std::cerr << "PoligonoConAgujeros2d::GetMin; exterior contour doesn't exists." << std::endl;
@@ -185,7 +187,7 @@ GEOM_FT PoligonoConAgujeros2d::Ix(void) const
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
         const Poligono2d p(*j);
-        retval-= p.Ix()+p.Area()*sqr(p.getCenterOfMass().y()-center_of_mass.y());
+        retval-= p.Ix()+p.getArea()*sqr(p.getCenterOfMass().y()-center_of_mass.y());
       }
     return retval;
   }
@@ -200,7 +202,7 @@ GEOM_FT PoligonoConAgujeros2d::Iy(void) const
     if(!cgpol.is_unbounded())
       {
         const Poligono2d p(cgpol.outer_boundary());
-        retval+= p.Iy()+p.Area()*sqr(p.getCenterOfMass().x()-center_of_mass.x());
+        retval+= p.Iy()+p.getArea()*sqr(p.getCenterOfMass().x()-center_of_mass.x());
       }
     else
       std::cerr << "PoligonoConAgujeros2d::GetMin; exterior contour doesn't exists." << std::endl;
@@ -208,7 +210,7 @@ GEOM_FT PoligonoConAgujeros2d::Iy(void) const
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
         const Poligono2d p(*j);
-        retval-= p.Iy()+p.Area()*sqr(p.getCenterOfMass().x()-center_of_mass.x());
+        retval-= p.Iy()+p.getArea()*sqr(p.getCenterOfMass().x()-center_of_mass.x());
       }
     return retval;
   }
@@ -225,7 +227,7 @@ GEOM_FT PoligonoConAgujeros2d::Pxy(void) const
         const Poligono2d p(cgpol.outer_boundary());
         const GEOM_FT dx= p.getCenterOfMass().x()-center_of_mass.x();
         const GEOM_FT dy= p.getCenterOfMass().y()-center_of_mass.y();
-        retval+= p.Pxy()+p.Area()*dx*dy;
+        retval+= p.Pxy()+p.getArea()*dx*dy;
       }
     else
       std::cerr << "PoligonoConAgujeros2d::GetMin; exterior contour doesn't exists." << std::endl;
@@ -235,7 +237,7 @@ GEOM_FT PoligonoConAgujeros2d::Pxy(void) const
         const Poligono2d p(*j);
         const GEOM_FT dx= p.getCenterOfMass().x()-center_of_mass.x();
         const GEOM_FT dy= p.getCenterOfMass().y()-center_of_mass.y();
-        retval-= p.Iy()+p.Area()*dx*dy;
+        retval-= p.Iy()+p.getArea()*dx*dy;
       }
     return retval;
   }

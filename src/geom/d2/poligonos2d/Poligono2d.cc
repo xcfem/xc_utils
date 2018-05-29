@@ -272,12 +272,11 @@ std::list<Poligono2d> corta(const Poligono2d &p,const Recta2d &r)
     return retval;
   }
 
-//! @brief Return el área del polígono.
-GEOM_FT Poligono2d::Area(void) const
+//! @brief Return the polygon area.
+GEOM_FT Poligono2d::getArea(void) const
   { return ::Abs(AreaSigno()); }
 
-//! @brief Return los poligonos que forman el área tributaria
-//! de cada vértice.
+//! @brief Return the polygons that form the tributary area of each vertex.
 std::vector<Poligono2d> Poligono2d::getPoligonosTributarios(void) const
   {
     const size_t nv= GetNumVertices();
@@ -305,19 +304,18 @@ std::vector<Poligono2d> Poligono2d::getPoligonosTributarios(void) const
     return retval;
   }
 
-//! @brief Return las áreas de los polígonos tributarios (una por
-//! vértice).
-std::vector<double> Poligono2d::getAreasTributarias(void) const
+//! @brief Return the areas of the tributary polygons (one for each vertex).
+std::vector<double> Poligono2d::getTributaryAreas(void) const
   {
     const size_t nv= GetNumVertices();
     std::vector<double> retval(nv,0.0);
     std::vector<Poligono2d> plgs= getPoligonosTributarios();
     for(size_t i=0;i<nv;i++)
-      retval[i]= plgs[i].Area();
+      retval[i]= plgs[i].getArea();
     return retval;
   }
 
-//! @brief Return los recubrimientos de las fibras que se pasan como parámetro.
+//! @brief Return the cover of the positions in the argument.
 std::deque<GEOM_FT> &Poligono2d::GetRecubrimientos(const ListaPos2d &l) const
   { return l.GetRecubrimientos(*this); }
 

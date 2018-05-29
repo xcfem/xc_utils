@@ -62,7 +62,8 @@ class Trihedron: public GeomObj3d
     //! @brief Return the length of the object.
     inline virtual GEOM_FT getLength(void) const
       { return 0.0; }
-    virtual GEOM_FT Area(void) const
+    //! @brief Return the object area.
+    virtual GEOM_FT getArea(void) const
       { return NAN; }
     //! @brief Return the volume of the object.
     virtual GEOM_FT getVolume(void) const

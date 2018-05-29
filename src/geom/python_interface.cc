@@ -71,8 +71,8 @@ BOOST_PYTHON_MODULE(geom)
     class_<ProtoGeom, bases<EntCmd> >("ProtoGeom");
 
     class_<GeomObj, bases<ProtoGeom>, boost::noncopyable >("GeomObj", no_init)
-      .def("getLenght", pure_virtual(&GeomObj::getLength))
-      .def("getArea", pure_virtual(&GeomObj::Area))
+      .def("getLength", pure_virtual(&GeomObj::getLength))
+      .def("getArea", pure_virtual(&GeomObj::getArea), "return the object area.")
       .def("getVolume", pure_virtual(&GeomObj::getVolume))
       .def("getDimension", pure_virtual(&GeomObj::Dimension))
       .def(self_ns::str(self_ns::self));

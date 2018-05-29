@@ -70,7 +70,7 @@ class Circulo2d : public Superficie2d
     inline GEOM_FT Perimetro(void) const
       { return getLength(); }
     virtual double AnguloComprendido(void) const;
-    virtual GEOM_FT Area(void) const;
+    virtual GEOM_FT getArea(void) const;
     //! @brief Return the volume of the object.
     virtual GEOM_FT getVolume(void) const
       { return 0.0; }

@@ -65,10 +65,12 @@ class PrismaRecto3d : public Prisma3d
       { return extru.Seccion(); }
     PG &Seccion(void)
       { return extru.Seccion(); }
+    //! @brief Return the object length.
     inline GEOM_FT getLength(void) const
       { return extru.getLength(); }
-    inline GEOM_FT Area(void) const
-      { return extru.Area(); }
+    //! @brief Return the object area.
+    inline GEOM_FT getArea(void) const
+      { return extru.getArea(); }
     //! @brief Return the object volume.
     inline GEOM_FT getVolume(void) const
       { return extru.getVolume(); }

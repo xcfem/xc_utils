@@ -7,7 +7,7 @@ pol1.agregaVertice(geom.Pos2d(4.,0.))
 pol1.agregaVertice(geom.Pos2d(4.,1.))
 pol1.agregaVertice(geom.Pos2d(0.,1.))
 
-areasTrib=pol1.getAreasTributarias()
+areasTrib=pol1.getTributaryAreas()
 
 ratio1= areasTrib[0]-1
 ratio2= areasTrib[1]-1

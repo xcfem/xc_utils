@@ -70,9 +70,10 @@ class SolidExtru3d : public Solido3d
       { return scc; }
     S &Seccion(void)
       { return scc; }
-    inline GEOM_FT Area(void) const
+    //! @brief Return the object area.
+    inline GEOM_FT getArea(void) const
       {
-        GEOM_FT area= 2*scc.Area();
+        GEOM_FT area= 2*scc.getArea();
         area+= scc.getLength()*l;
         return area;
       }
@@ -81,11 +82,11 @@ class SolidExtru3d : public Solido3d
       { return l; }
     //! @brief Return the object volume
     inline GEOM_FT getVolume(void) const
-      { return scc.Area() * l; }
+      { return scc.getArea() * l; }
     inline virtual GEOM_FT Ix(void) const
-      { return scc.Ix()*l + scc.Area()*l*l*l/12; }
+      { return scc.Ix()*l + scc.getArea()*l*l*l/12; }
     inline virtual GEOM_FT Iy(void) const
-      { return scc.Iy()*l + scc.Area()*l*l*l/12; }
+      { return scc.Iy()*l + scc.getArea()*l*l*l/12; }
     inline virtual GEOM_FT Iz(void) const
       { return (scc.Ix()+scc.Iy())*l; }
 /*     inline Pos3d getCenterOfMassOfBase(unsigned short int i) const */

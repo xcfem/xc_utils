@@ -123,7 +123,7 @@ class Poliedro3d: public PolyhedronBase
 
     GeomObj::list_Pos3d getVertices(void) const;
 
-    virtual GEOM_FT Area(void) const;
+    virtual GEOM_FT getArea(void) const;
 
     bool TocaCuadrante(const int &) const;
 

@@ -66,11 +66,12 @@ class Poligono3d: public D2to3d
     //! @brief Return the length of the object.
     inline GEOM_FT getLength(void) const
       { return plg2d.getLength(); }
-    inline GEOM_FT Area(void) const
-      { return plg2d.Area(); }
+    //! @brief Return the area of the object.
+    inline GEOM_FT getArea(void) const
+      { return plg2d.getArea(); }
     std::vector<Poligono3d> getPoligonosTributarios(void) const;
-    inline std::vector<double> getAreasTributarias(void) const
-      { return plg2d.getAreasTributarias(); }
+    inline std::vector<double> getTributaryAreas(void) const
+      { return plg2d.getTributaryAreas(); }
     inline Pos3d Vertice(unsigned int i) const
       //Return the posición del vértice.
       { return to_3d(plg2d.Vertice(i)); }

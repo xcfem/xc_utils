@@ -65,10 +65,10 @@ class BND3d: public GeomObj3d
     inline GEOM_FT Altura(void) const
       { return GetZMax()-GetZMin(); }
     Vector3d Diagonal(void) const;
-    GEOM_FT AreaXY(void) const; //Area de la cara paralela al plano XY
-    GEOM_FT AreaXZ(void) const; //Area de la cara paralela al plano XZ
-    GEOM_FT AreaYZ(void) const; //Area de la cara paralela al plano YZ
-    virtual GEOM_FT Area(void) const;
+    GEOM_FT getAreaXYFace(void) const;
+    GEOM_FT getAreaXZFace(void) const;
+    GEOM_FT getAreaYZFace(void) const;
+    virtual GEOM_FT getArea(void) const;
     //! @brief Return the object volume
     inline virtual GEOM_FT getVolume(void) const
       { return cgisocub.volume(); }

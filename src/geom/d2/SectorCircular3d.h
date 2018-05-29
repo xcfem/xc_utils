@@ -61,10 +61,12 @@ class SectorCircular3d : public D2to3d
       { return sect_circ.getLength(); }
     virtual GEOM_FT getArcLength(void) const
       { return sect_circ.getArcLength(); }
+    //! @brief Return the perimeter of the object.
     inline GEOM_FT Perimetro(void) const
       { return getLength(); }
-    virtual GEOM_FT Area(void) const
-      { return sect_circ.Area(); }
+    //! @brief Return the area of the object.
+    virtual GEOM_FT getArea(void) const
+      { return sect_circ.getArea(); }
     //! @brief Return the volume of the object.
     virtual GEOM_FT getVolume(void) const
       { return 0; }

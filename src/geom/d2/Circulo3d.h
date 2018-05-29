@@ -59,10 +59,12 @@ class Circulo3d : public D2to3d
     //! @brief Return the length of the object.
     virtual GEOM_FT getLength(void) const
       { return circ.getLength(); }
+    //! @brief Return the perimeter of the object.
     inline GEOM_FT Perimetro(void) const
       { return getLength(); }
-    virtual GEOM_FT Area(void) const
-      { return circ.Area(); }
+    //! @brief Return the area of the object.
+    virtual GEOM_FT getArea(void) const
+      { return circ.getArea(); }
     //! @brief Return the volume of the object.
     virtual GEOM_FT getVolume(void) const
       { return 0; }

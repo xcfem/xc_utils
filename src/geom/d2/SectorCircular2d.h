@@ -60,7 +60,7 @@ class SectorCircular2d : public Circulo2d
     double AnguloComprendido(void) const;
     virtual GEOM_FT getArcLength(void) const;
     virtual GEOM_FT getLength(void) const;
-    virtual GEOM_FT Area(void) const;
+    virtual GEOM_FT getArea(void) const;
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Pxy(void) const;

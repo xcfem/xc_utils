@@ -124,8 +124,8 @@ double Circulo2d::Angulo(const Pos2d &p) const
 //! @brief Return the length of the círcle.
 GEOM_FT Circulo2d::getLength(void) const
   { return M_PI_FT*Diametro(); }
-//! @brief Return el área del círculo.
-GEOM_FT Circulo2d::Area(void) const
+//! @brief Return the area of the circle.
+GEOM_FT Circulo2d::getArea(void) const
   { return M_PI_FT*Radio2(); }
 //! @brief Return the maximum value of the i coordinate of the points of the circle.
 GEOM_FT Circulo2d::GetMax(unsigned short int i) const

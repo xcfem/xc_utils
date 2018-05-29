@@ -52,7 +52,8 @@ class Point2d : public GeomObj2d
     //! @brief Return object length (zero in this case).
     virtual GEOM_FT getLength(void) const
       { return 0.0; }
-    virtual GEOM_FT Area(void) const
+    //! @brief Return the object area.
+    virtual GEOM_FT getArea(void) const
       { return 0.0; }
     //! @brief Return the object volume.
     virtual GEOM_FT getVolume(void) const

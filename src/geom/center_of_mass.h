@@ -34,13 +34,13 @@ const Pos2d center_of_mass(InputIter begin, InputIter end)
     if(begin!=end)
       {
         InputIter i=begin;
-        GEOM_FT area= (*i).Area();
-        Vector2d vpos= (*i).getCenterOfMass().VectorPos()*(*i).Area();
+        GEOM_FT area= (*i).getArea();
+        Vector2d vpos= (*i).getCenterOfMass().VectorPos()*(*i).getArea();
         i++;
         for(;i!=end;i++)
           {
-            area+= (*i).Area();
-            vpos= vpos + (*i).getCenterOfMass().VectorPos()*(*i).Area();
+            area+= (*i).getArea();
+            vpos= vpos + (*i).getCenterOfMass().VectorPos()*(*i).getArea();
           }
         vpos= vpos/area;
         retval= Pos2d(vpos[0],vpos[1]);

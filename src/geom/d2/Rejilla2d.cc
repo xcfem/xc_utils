@@ -40,8 +40,8 @@ Rejilla2d::Rejilla2d(int numSubdivIJ, int numSubdivJK)
 Rejilla2d::~Rejilla2d(void)
   {}
 
-//! @brief Return el área de la rejilla.
-GEOM_FT Rejilla2d::Area(void) const
+//! @brief Return the area of the grid.
+GEOM_FT Rejilla2d::getArea(void) const
   { return points.GetArea();  }
 
 //! @briefMoment of inertia with respect to the center of mass in local coordinates.

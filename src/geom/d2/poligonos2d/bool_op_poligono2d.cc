@@ -275,7 +275,7 @@ Nef_polyhedron interseca(const Poligono2d &p,const Semiplano2d &sp)
 std::list<Poligono2d> recorta(const std::list<Poligono2d> &l,const Poligono2d &p)
   {
     std::list<Poligono2d> retval;
-    if(!p.empty() && (p.Area()>areaMin))
+    if(!p.empty() && (p.getArea()>areaMin))
       {
         Nef_polyhedron tmp=Poligono2d_to_Nef_2(p);
         if(!l.empty())
@@ -283,7 +283,7 @@ std::list<Poligono2d> recorta(const std::list<Poligono2d> &l,const Poligono2d &p
             std::list<Poligono2d> tmpLst;
             for(std::list<Poligono2d>::const_iterator i= l.begin();i!=l.end();i++)
               {
-                if((*i).Area()>areaMin)
+                if((*i).getArea()>areaMin)
                   {
                     tmpLst= Nef_2_to_Poligono2d(interseca(*i,tmp));
                     if(!tmpLst.empty())
@@ -347,8 +347,8 @@ std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l1,const std::li
     return join(retval);
   }
 
-//! @brief Return el resultado de repartir el área común entre ambos polígonos mediante
-//! la técnica de Voronoi.
+//! @brief Return the partition of the common area of both polygons
+//! using the Voronoi algorithm.
 void particiona(const Pos2d &c1,Poligono2d &p1,const Pos2d &c2,Poligono2d &p2)
   {
     if(overlap(p1,p2))
@@ -361,8 +361,8 @@ void particiona(const Pos2d &c1,Poligono2d &p1,const Pos2d &c2,Poligono2d &p2)
       }
   }
 
-//! @brief Return el resultado de repartir el área común entre ambos polígonos mediante
-//! la técnica de Voronoi.
+//! @brief Return the partition of the common area of both polygons
+//! using the Voronoi algorithm.
 void particiona(Poligono2d &p1,Poligono2d &p2)
   {
     if(overlap(p1,p2))
@@ -373,8 +373,8 @@ void particiona(Poligono2d &p1,Poligono2d &p2)
       }
   }
 
-//! @brief Return el resultado de repartir el área común entre ambas listas de polígonos mediante
-//! la técnica de Voronoi.
+//! @brief Return the partition of the common area of both polygons lists
+//! using the Voronoi algorithm.
 void particiona(const Pos2d &c1,std::list<Poligono2d> &lp1,const Pos2d &c2,std::list<Poligono2d> &lp2)
   {
     if(overlap(lp1,lp2))
@@ -388,8 +388,7 @@ void particiona(const Pos2d &c1,std::list<Poligono2d> &lp1,const Pos2d &c2,std::
   }
 
 
-//! @brief Return el resultado de repartir el área común entre los polígonos de la lista mediante
-//! la técnica de Voronoi.
+//! @brief Return the partition using the Voronoi algorithm.
 void particiona(const std::list<Pos2d> &centros,std::list<Poligono2d> &areas)
   {
     const size_t sz= areas.size();
@@ -413,8 +412,7 @@ void particiona(const std::list<Pos2d> &centros,std::list<Poligono2d> &areas)
   }
 
 
-//! @brief Return el resultado de repartir el área común entre los 
-//! polígonos de la lista mediante la técnica de Voronoi.
+//! @brief Return the partition using the Voronoi algorithm.
 void particiona(std::list<Poligono2d> &areas)
   {
     if(areas.size()>1)

@@ -73,7 +73,7 @@ class SupPoligonal2d: public Superficie2d
       { return getLength(); }
     inline GEOM_FT AreaSigno(void) const
       { return moment_sign(0,0); }
-    virtual GEOM_FT Area(void) const;
+    virtual GEOM_FT getArea(void) const;
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
     virtual Pos2d getCenterOfMass(void) const;

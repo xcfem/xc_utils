@@ -87,9 +87,9 @@ GEOM_FT SectorAnilloCircular2d::getInteriorArcLength(void) const
 GEOM_FT SectorAnilloCircular2d::getLength(void) const
   { return getExteriorArcLength()+getInteriorArcLength()+2*(RadioExt()-RadioInt()); }
 
-//! @brief Return el área del sector circular.
-GEOM_FT SectorAnilloCircular2d::Area(void) const
-  { return SectorCircular2d::Area()-SectorInterior().Area(); }
+//! @brief Return the area of the object.
+GEOM_FT SectorAnilloCircular2d::getArea(void) const
+  { return SectorCircular2d::getArea()-SectorInterior().getArea(); }
 
 //! @brief Return the maximum value of the i coordinate of the object points.
 GEOM_FT SectorAnilloCircular2d::GetMax(unsigned short int i) const

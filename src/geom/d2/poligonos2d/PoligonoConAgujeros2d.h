@@ -50,7 +50,7 @@ class PoligonoConAgujeros2d: public Superficie2d
     GEOM_FT getLength(void) const;
     inline GEOM_FT Perimetro(void) const
       { return getLength(); }
-    GEOM_FT Area(void) const;
+    GEOM_FT getArea(void) const;
     GEOM_FT GetMax(unsigned short int i) const;
     GEOM_FT GetMin(unsigned short int i) const;
     Pos2d getCenterOfMass(void) const;

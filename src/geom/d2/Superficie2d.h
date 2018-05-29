@@ -38,16 +38,19 @@ class Superficie2d : public GeomObj2d
     //! @brief Return the dimension of the object 0, 1, 2 or 3.
     inline virtual unsigned short int Dimension(void) const
       { return 2; }
+    //! @brief Return the object length.
     virtual GEOM_FT getLength(void) const
       { return 0.0; }
+    //! @brief Return the object perimeter.
     GEOM_FT Perimetro(void) const
       { return getLength(); }
-    virtual GEOM_FT Area(void) const;
+    //! @brief Return the object area.
+    virtual GEOM_FT getArea(void) const;
     //! @brief Return the object volume
     virtual GEOM_FT getVolume(void) const
       { return 0.0; }
     virtual inline GEOM_FT IArea(void) const
-      { return Area(); }
+      { return getArea(); }
     //@brief Return true if the points is on sobre la Superficie.
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const= 0;
   };

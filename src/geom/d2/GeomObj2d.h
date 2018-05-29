@@ -62,7 +62,7 @@ class GeomObj2d: public GeomObj
       { return 1.0; }
     virtual Pos2d getCenterOfMass(void) const= 0;
     virtual GEOM_FT getLength(void) const= 0; //?? Por que se re-declara (está en GeomObj).
-    virtual GEOM_FT Area(void) const= 0; //?? Por que se re-declara (está en GeomObj).
+    virtual GEOM_FT getArea(void) const= 0; //?? Por que se re-declara (está en GeomObj).
     //! @brief Return the object volume
     inline virtual GEOM_FT getVolume(void) const
       { return 0.0; }
@@ -101,7 +101,7 @@ class GeomObj2d: public GeomObj
     //! @brief Return el area que se emplea para calcular the moment of inertia
     //! por defecto suponemos que es igual al area del objeto.
     virtual inline GEOM_FT IArea(void) const
-      { return Area(); }
+      { return getArea(); }
     GEOM_FT I(const Pos2d &O,const Vector2d &e) const;
     GEOM_FT I(const Recta2d &r) const;
       //Return the moment of inertia respecto a la recta que se pasa

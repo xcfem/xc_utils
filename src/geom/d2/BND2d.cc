@@ -79,7 +79,8 @@ Poligono2d BND2d::GetPoligono(void) const
     return retval;
   }
 
-GEOM_FT BND2d::Area(void) const
+//! @brief Return the object area.
+GEOM_FT BND2d::getArea(void) const
   { return cgrectg.area(); }
 Vector2d BND2d::Diagonal(void) const
   { return GetPMax() - GetPMin(); }

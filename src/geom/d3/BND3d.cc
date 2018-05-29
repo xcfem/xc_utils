@@ -28,20 +28,20 @@
 
 BND3d::BND3d(const Pos3d &p_min,const Pos3d &p_max)
   : GeomObj3d(), cgisocub(p_min.ToCGAL(),p_max.ToCGAL()) {}
-GEOM_FT BND3d::AreaXY(void) const
-  //Area de la cara paralela al plano XY
+//! @brief Area of the face parallel to XY plane.
+GEOM_FT BND3d::getAreaXYFace(void) const
   { return getLength()*Anchura(); }
-GEOM_FT BND3d::AreaXZ(void) const
-  //Area de la cara paralela al plano XZ
+//! @brief Area of the face parallel to XZ plane.
+GEOM_FT BND3d::getAreaXZFace(void) const
   { return getLength()*Altura(); }
-GEOM_FT BND3d::AreaYZ(void) const
-  //Area de la cara paralela al plano YZ
+//! @brief Area of the face parallel to YZ plane.
+GEOM_FT BND3d::getAreaYZFace(void) const
   { return Anchura()*Altura(); }
-GEOM_FT BND3d::Area(void) const
+GEOM_FT BND3d::getArea(void) const
   {
-    GEOM_FT A= 2*AreaXY();
-    A+= 2*AreaXZ();
-    A+= 2*AreaYZ();
+    GEOM_FT A= 2*getAreaXYFace();
+    A+= 2*getAreaXZFace();
+    A+= 2*getAreaYZFace();
     return A;
   }
 GEOM_FT BND3d::Ix(void) const

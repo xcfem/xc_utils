@@ -98,8 +98,7 @@ typedef PoliPos<Pos3d> poliPos3d;
 std::list<Poligono2d> from_python_list(boost::python::list &);
 boost::python::list to_python_list(const std::list<Poligono2d> &);
 
-//! @brief Return el resultado de repartir el área común entre los 
-//! polígonos de la lista mediante la técnica de Voronoi.
+//! @brief Return the Voronoi partition of the polygons in the list.
 boost::python::list python_particiona(boost::python::list &);
 boost::python::list python_recorta(boost::python::list &, const Poligono2d &);
 
