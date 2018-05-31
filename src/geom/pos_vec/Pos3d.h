@@ -35,7 +35,7 @@ class Pos2d;
 class Recta3d;
 class SemiRecta3d;
 class Segmento3d;
-class Plano3d;
+class Plane;
 class SemiEspacio3d;
 class Solido3d;
 
@@ -110,8 +110,8 @@ class Pos3d : public ProtoGeom
     GEOM_FT dist(const SemiRecta3d &) const;
     GEOM_FT dist2(const Segmento3d &) const;
     GEOM_FT dist(const Segmento3d &) const;
-    GEOM_FT dist2(const Plano3d &) const;
-    GEOM_FT dist(const Plano3d &) const;
+    GEOM_FT dist2(const Plane &) const;
+    GEOM_FT dist(const Plane &) const;
     GEOM_FT dist2(const SemiEspacio3d &) const;
     GEOM_FT dist(const SemiEspacio3d &) const;
     GEOM_FT dist(const Solido3d &) const;

@@ -23,7 +23,7 @@
 
 #include "Poligono3d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
-#include "xc_utils/src/geom/d2/Plano3d.h"
+#include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include "xc_utils/src/geom/d1/Segmento2d.h"
 #include "xc_utils/src/geom/d1/Segmento3d.h"
@@ -61,14 +61,14 @@ Segmento3d Poligono3d::Lado0(unsigned int i) const
     return to_3d(sg2d);
   }
 
-Plano3d Poligono3d::GetPlanoLado(unsigned int i) const
+Plane Poligono3d::GetPlanoLado(unsigned int i) const
   {
     Segmento3d lado= Lado(i);
     Vector3d v= GetPlano().Normal();
-    return Plano3d(lado,v);
+    return Plane(lado,v);
   }
 
-Plano3d Poligono3d::GetPlanoLado0(unsigned int i) const
+Plane Poligono3d::GetPlanoLado0(unsigned int i) const
   { return GetPlanoLado(i+1); }
 
 bool Poligono3d::In(const Pos3d &p,const double &tol)
@@ -185,12 +185,12 @@ GEOM_FT Poligono3d::dist(const Pos3d &p) const
     return (retval >= 0 ? retval : 0);
   }
 
-std::list<Poligono3d> Poligono3d::Corta(const Plano3d &pl) const
+std::list<Poligono3d> Poligono3d::Corta(const Plane &pl) const
 //Return los polígonos que resultan de cortar por el plano
 //pl, el polígono p, que se pasa como parámetro.
   {
     std::list<Poligono3d> retval;
-    const Plano3d pl_polig= GetPlano();
+    const Plane pl_polig= GetPlano();
     if(pl_polig==pl) return retval;
     if(paralelos(pl_polig,pl)) return retval;
 

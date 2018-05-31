@@ -24,7 +24,7 @@
 #include "Recta3d.h"
 #include "Recta2d.h"
 #include "../pos_vec/Dir3d.h"
-#include "../d2/Plano3d.h"
+#include "../d2/Plane.h"
 
 
 
@@ -57,7 +57,7 @@ Recta3d::Recta3d(const Pos3d &p1,const Pos3d &p2)
 Recta3d::Recta3d(const Pos3d &p,const Dir3d &dir)
   : Linea3d(), cgr(p.ToCGAL(),dir.ToCGAL()) {}
 
-Recta3d::Recta3d(const Plano3d &p1,const Plano3d &p2)
+Recta3d::Recta3d(const Plane &p1,const Plane &p2)
   : Linea3d(), cgr()
   {
     const Recta3d tmp= recta_interseccion(p1,p2);
@@ -171,8 +171,8 @@ bool Recta3d::Paralela(const Recta3d &r) const
   { return paralelas(GetDir(),r.GetDir()); }
 
 //! @brief Return the plane normal to r that passes through p.
-Plano3d Recta3d::Perpendicular(const Pos3d &p) const
-  { return Plano3d(cgr.perpendicular_plane(p.ToCGAL())); }
+Plane Recta3d::Perpendicular(const Pos3d &p) const
+  { return Plane(cgr.perpendicular_plane(p.ToCGAL())); }
 
 GEOM_FT coo_interseccion(const GeomObj2d::list_Pos2d &int_a, const GeomObj2d::list_Pos2d &int_b,const size_t &coo,const double &tol)
   {

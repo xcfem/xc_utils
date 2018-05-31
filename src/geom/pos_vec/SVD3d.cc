@@ -23,7 +23,7 @@
 
 #include "SVD3d.h"
 #include "VDesliz3d.h"
-#include "xc_utils/src/geom/d2/Plano3d.h"
+#include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/sis_ref/Ref3d3d.h"
 
@@ -69,7 +69,7 @@ VDesliz3d SVD3d::getMoment(const Pos3d &P) const
 //! with the plane.
 //! It's used, for example, to compunte the point of application of
 //! the compression block in a reinforced concrete section.
-Pos3d SVD3d::PointOfApplication(const Plano3d &p) const
+Pos3d SVD3d::PointOfApplication(const Plane &p) const
   {
     Pos3d retval(NAN,NAN,NAN);
     if(ExisteRectaMomNulo())

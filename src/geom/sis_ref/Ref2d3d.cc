@@ -24,7 +24,7 @@
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
 #include "xc_utils/src/geom/pos_vec/Dir3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
-#include "xc_utils/src/geom/d2/Plano3d.h"
+#include "xc_utils/src/geom/d2/Plane.h"
 
 //! @brief Constructor.
 Ref2d3d::Ref2d3d(void)
@@ -73,6 +73,6 @@ Recta3d Ref2d3d::getYAxis(void) const
     return Recta3d(org,dest);
   }
 
-Plano3d Ref2d3d::GetPlanoXY(void) const
-  { return Plano3d(org,1000.0*GetI(),1000.0*GetJ()); }
+Plane Ref2d3d::GetPlanoXY(void) const
+  { return Plane(org,1000.0*GetI(),1000.0*GetJ()); }
 

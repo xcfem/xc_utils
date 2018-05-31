@@ -25,7 +25,7 @@
 #define SEMIESPACIO3D_H
 
 
-#include "xc_utils/src/geom/d2/Plano3d.h"
+#include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_basic/src/stl/TripletMap.h"
 
 
@@ -38,11 +38,11 @@
 //! dan un valor menor o igual que cero.
 class SemiEspacio3d : public GeomObj3d
   {
-    Plano3d lim; 
+    Plane lim; 
   public:
-    SemiEspacio3d(const Plano3d &p= Plano3d());
-    const Plano3d &getPlanoLimite(void) const;
-    void setPlanoLimite(const Plano3d &);
+    SemiEspacio3d(const Plane &p= Plane());
+    const Plane &getPlanoLimite(void) const;
+    void setPlanoLimite(const Plane &);
     
     virtual GeomObj *clon(void) const
       { return new SemiEspacio3d(*this); }
@@ -60,7 +60,7 @@ class SemiEspacio3d : public GeomObj3d
       { return NAN; }
     Vector3d NormalExterior(void) const;
     Vector3d NormalInterior(void) const;
-    inline const Plano3d &getPlano(void) const
+    inline const Plane &getPlano(void) const
       { return lim; }
 
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const;
@@ -70,7 +70,7 @@ class SemiEspacio3d : public GeomObj3d
     virtual GEOM_FT dist2(const Pos3d &p) const;
 
     GEOM_FT getAngulo(const SemiEspacio3d &) const;
-    GEOM_FT getAngulo(const Plano3d &) const;
+    GEOM_FT getAngulo(const Plane &) const;
     GEOM_FT getAngulo(const Vector3d &) const;
 
     Recta3d getLima(const SemiEspacio3d &) const;

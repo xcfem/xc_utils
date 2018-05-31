@@ -22,14 +22,14 @@
 //python_interface.cxx
 
 double (SemiEspacio3d::*AnguloConSemiEspacio3d)(const SemiEspacio3d &) const= &SemiEspacio3d::getAngulo;
-double (SemiEspacio3d::*AnguloConPlano3d)(const Plano3d &) const= &SemiEspacio3d::getAngulo;
+double (SemiEspacio3d::*AnguloConPlane)(const Plane &) const= &SemiEspacio3d::getAngulo;
 double (SemiEspacio3d::*AnguloConVector3d)(const Vector3d &) const= &SemiEspacio3d::getAngulo;
 
 class_<SemiEspacio3d, bases<GeomObj3d> >("SemiSpace3d")
-  .def(init<Plano3d>())
+  .def(init<Plane>())
   .def(init<SemiEspacio3d>())
   .def("anguloConSemiEspacio3d", AnguloConSemiEspacio3d)
-  .def("anguloConPlano3d", AnguloConPlano3d)
+  .def("anguloConPlane", AnguloConPlane)
   .def("anguloConVector3d", AnguloConVector3d)
   .def("getLima", &SemiEspacio3d::getLima)
   .def("getNormalExterior", &SemiEspacio3d::NormalExterior)

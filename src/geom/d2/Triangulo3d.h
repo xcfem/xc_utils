@@ -26,7 +26,7 @@
 
 #include "xc_utils/src/geom/d2/Poligono3d.h"
 
-class Plano3d;
+class Plane;
 class Triangulo2d;
 
 //! @ingroup GEOM

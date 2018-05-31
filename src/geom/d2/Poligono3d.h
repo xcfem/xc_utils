@@ -87,8 +87,8 @@ class Poligono3d: public D2to3d
     inline bool Antihorario(void) const
       { return plg2d.Antihorario(); }
 
-    Plano3d GetPlanoLado0(unsigned int i) const;
-    Plano3d GetPlanoLado(unsigned int i) const;
+    Plane GetPlanoLado0(unsigned int i) const;
+    Plane GetPlanoLado(unsigned int i) const;
 
     Pos3d getCenterOfMass(void) const;
     GEOM_FT Ix(void) const;
@@ -105,7 +105,7 @@ class Poligono3d: public D2to3d
     GEOM_FT distSigno2(const Pos3d &p,const bool &sentido_horario= false) const;
     GEOM_FT dist2(const Pos3d &p) const;
 
-    std::list<Poligono3d> Corta(const Plano3d &p) const;
+    std::list<Poligono3d> Corta(const Plane &p) const;
 
     void Print(std::ostream &os) const;
   };
@@ -126,7 +126,7 @@ Poligono3d::Poligono3d(InputIterator first,InputIterator last)
       push_back(*i);
   }
 
-inline std::list<Poligono3d> corta(const Poligono3d &pol,const Plano3d &pl)
+inline std::list<Poligono3d> corta(const Poligono3d &pol,const Plane &pl)
   { return pol.Corta(pl); }
 
 #endif

@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Semiplano2d.cc
+//HalfPlane2d.cc
 
-#include "Semiplano2d.h"
+#include "HalfPlane2d.h"
 #include "GmGrupo2d.h"
 #include "xc_utils/src/geom/d1/SemiRecta2d.h"
 #include "xc_utils/src/geom/d1/Segmento2d.h"
@@ -29,48 +29,48 @@
 #include "../pos_vec/Dir2d.h"
 #include "../pos_vec/Vector2d.h"
 
-Semiplano2d::Semiplano2d(void)
+HalfPlane2d::HalfPlane2d(void)
   : Superficie2d(), lim() {}
 
-Semiplano2d::Semiplano2d(const Recta2d &r)
+HalfPlane2d::HalfPlane2d(const Recta2d &r)
   : Superficie2d(), lim(r) {}
 
-Semiplano2d::Semiplano2d(const Recta2d &r, const Pos2d &p)
+HalfPlane2d::HalfPlane2d(const Recta2d &r, const Pos2d &p)
   : Superficie2d(), lim(r)
   {
     if(!In(p))
       Swap();
   }
 
-Semiplano2d::Semiplano2d(const Pos2d &p1,const Pos2d &p2)
+HalfPlane2d::HalfPlane2d(const Pos2d &p1,const Pos2d &p2)
   : Superficie2d(), lim(p1,p2) {}
-Semiplano2d::Semiplano2d(const Semiplano2d &sp)
+HalfPlane2d::HalfPlane2d(const HalfPlane2d &sp)
   : Superficie2d(sp),lim(sp.lim) {}
-Semiplano2d &Semiplano2d::operator=(const Semiplano2d &sp)
+HalfPlane2d &HalfPlane2d::operator=(const HalfPlane2d &sp)
   {
     Superficie2d::operator=(sp);
     lim= sp.lim;
     return *this;
   }
 
-GeomObj *Semiplano2d::clon(void) const
-  { return new Semiplano2d(*this); }
-void Semiplano2d::Swap(void)
+GeomObj *HalfPlane2d::clon(void) const
+  { return new HalfPlane2d(*this); }
+void HalfPlane2d::Swap(void)
   { lim.Swap(); }
 
-bool Semiplano2d::Interseca(const SemiRecta2d &sr) const
+bool HalfPlane2d::Interseca(const SemiRecta2d &sr) const
   { return sr.Interseca(lim); }
-bool Semiplano2d::Interseca(const Segmento2d &sg) const
+bool HalfPlane2d::Interseca(const Segmento2d &sg) const
   { return sg.Interseca(lim); }
 
-Semiplano2d Semiplano2d::GetSwap(void) const
+HalfPlane2d HalfPlane2d::GetSwap(void) const
   {
-    Semiplano2d retval(*this);
+    HalfPlane2d retval(*this);
     retval.Swap();
     return retval;
   }
 
-GmGrupo2d Semiplano2d::Interseccion(const Recta2d &r) const
+GmGrupo2d HalfPlane2d::Interseccion(const Recta2d &r) const
   {
     GmGrupo2d retval;
     if(!Interseca(r)) return retval;
@@ -85,7 +85,7 @@ GmGrupo2d Semiplano2d::Interseccion(const Recta2d &r) const
     return retval;
   }
 
-GmGrupo2d Semiplano2d::Interseccion(const SemiRecta2d &sr) const
+GmGrupo2d HalfPlane2d::Interseccion(const SemiRecta2d &sr) const
   {
     GmGrupo2d retval;
     if(!Interseca(sr)) return retval;
@@ -98,7 +98,7 @@ GmGrupo2d Semiplano2d::Interseccion(const SemiRecta2d &sr) const
     return retval;
   }
 
-GmGrupo2d Semiplano2d::Interseccion(const Segmento2d &sg) const
+GmGrupo2d HalfPlane2d::Interseccion(const Segmento2d &sg) const
   {
     GmGrupo2d retval;
     if(!Interseca(sg)) return retval;
@@ -113,23 +113,23 @@ GmGrupo2d Semiplano2d::Interseccion(const Segmento2d &sg) const
     return retval;
   }
 
-GmGrupo2d interseccion(const Semiplano2d &sp,const Recta2d &r)
+GmGrupo2d interseccion(const HalfPlane2d &sp,const Recta2d &r)
   { return sp.Interseccion(r); }
-GmGrupo2d interseccion(const Semiplano2d &sp,const SemiRecta2d &sr)
+GmGrupo2d interseccion(const HalfPlane2d &sp,const SemiRecta2d &sr)
   { return sp.Interseccion(sr); }
-GmGrupo2d interseccion(const Semiplano2d &sp,const Segmento2d &sg)
+GmGrupo2d interseccion(const HalfPlane2d &sp,const Segmento2d &sg)
   { return sp.Interseccion(sg); }
-GmGrupo2d interseccion(const Recta2d &r,const Semiplano2d &sp)
+GmGrupo2d interseccion(const Recta2d &r,const HalfPlane2d &sp)
   { return interseccion(sp,r); }
-GmGrupo2d interseccion(const SemiRecta2d &sr,const Semiplano2d &sp)
+GmGrupo2d interseccion(const SemiRecta2d &sr,const HalfPlane2d &sp)
   { return interseccion(sp,sr); }
-GmGrupo2d interseccion(const Segmento2d &sg,const Semiplano2d &sp)
+GmGrupo2d interseccion(const Segmento2d &sg,const HalfPlane2d &sp)
   { return interseccion(sp,sg); }
 
-Semiplano2d Semiplano2d::getNormalizado(void) const
-  { return Semiplano2d(lim.getNormalizada()); }
+HalfPlane2d HalfPlane2d::getNormalizado(void) const
+  { return HalfPlane2d(lim.getNormalizada()); }
 
 //! @brief Aplica al objeto la transformación que se
 //! pasa como parámetro.
-void Semiplano2d::Transforma(const Trf2d &trf2d)
+void HalfPlane2d::Transforma(const Trf2d &trf2d)
   { lim.Transforma(trf2d); }

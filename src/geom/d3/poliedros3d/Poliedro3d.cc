@@ -24,7 +24,7 @@
 #include "Poliedro3d.h"
 #include "../../d2/Triang3dMesh.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
-#include "xc_utils/src/geom/d2/Plano3d.h"
+#include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d2/Poligono3d.h"
 #include "xc_utils/src/geom/d3/SemiEspacio3d.h"
 #include "xc_utils/src/geom/d1/Segmento3d.h"
@@ -161,10 +161,10 @@ GeomObj::list_Pos3d Poliedro3d::getVertices(void) const
     return retval;
   }
 
-Plano3d Poliedro3d::GetPlanoCara(const Facet_const_iterator &f) const
+Plane Poliedro3d::GetPlanoCara(const Facet_const_iterator &f) const
   {
     Facet::Halfedge_const_handle h= f->halfedge();
-    Plano3d retval(h->vertex()->point(),h->next()->vertex()->point(),h->next()->next()->vertex()->point());
+    Plane retval(h->vertex()->point(),h->next()->vertex()->point(),h->next()->next()->vertex()->point());
     return retval;
   }
 
@@ -261,11 +261,11 @@ GEOM_FT Poliedro3d::PseudoDist(const Pos3d &p) const
     Poliedro3d::Vertex_const_iterator pVertex1= pVertex0; pVertex1++;
     if(nv==2) return p.dist(Segmento3d(pVertex0->point(),pVertex1->point()));
     Poliedro3d::Facet_const_iterator i= facets_begin();
-    const Plano3d pl(GetPlanoCara(i));
+    const Plane pl(GetPlanoCara(i));
     GEOM_FT retval= pl.PseudoDist(p);
     for(;i!=facets_end();i++)
       {
-        const Plano3d plano(GetPlanoCara(i));
+        const Plane plano(GetPlanoCara(i));
         const GEOM_FT d1= plano.PseudoDist(p);
         retval= std::max(retval,d1);
       }

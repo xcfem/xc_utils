@@ -24,7 +24,7 @@
 #ifndef BSPTREE3D_H
 #define BSPTREE3D_H
 
-#include "xc_utils/src/geom/d2/Plano3d.h"
+#include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d2/Poligono3d.h"
 #include <list>
 
@@ -38,7 +38,7 @@ class BspTree3d
     friend void Build_BSP_Tree(BspTree3d *tree,const lista_poligonos &poligonos);
 
   private:
-    Plano3d particion;         //Plano de partición.
+    Plane particion;         //Plano de partición.
     lista_poligonos poligonos; //Lista de poligonos coincidentes 
                                //con el plano de partición.
     BspTree3d *front,*back; //Punteros a hijos.

@@ -81,7 +81,7 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
     list_Pos3d Int(unsigned short int i,const GEOM_FT &d) const;
     //Return las intersecciones de la Polilinea3d con el plano
     //coord_i= d
-    list_Pos3d getIntersection(const Plano3d &) const;
+    list_Pos3d getIntersection(const Plane &) const;
     Polilinea3d Corta(unsigned short int i,const GEOM_FT &d) const;
     //Return the Polilinea3d con los vertices correspondientes a los
     //cortes con el plano coord_i= d

@@ -22,7 +22,7 @@
 //Polilinea3d.cc
 
 #include "Polilinea3d.h"
-#include "xc_utils/src/geom/d2/Plano3d.h"
+#include "xc_utils/src/geom/d2/Plane.h"
 
 const Pos3d *Polilinea3d::AgregaVertice(const Pos3d &p)
   {
@@ -72,7 +72,7 @@ bool Polilinea3d::In(const Pos3d &p, const double &tol) const
     return false;
   }
 
-GeomObj3d::list_Pos3d Polilinea3d::getIntersection(const Plano3d &p) const
+GeomObj3d::list_Pos3d Polilinea3d::getIntersection(const Plane &p) const
   {
     list_Pos3d retval;
     list_Pos3d::iterator i= retval.end();

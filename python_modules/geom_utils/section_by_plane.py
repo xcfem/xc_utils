@@ -6,7 +6,7 @@ import geom
 class SectionByPlane(object):
   '''Intersection of a polyline or a list of polylines by a plane.'''
   name= "-"
-  plane= geom.Plano3d(geom.Pos3d(1,0,0), geom.Pos3d(0,1,0), geom.Pos3d(0,0,1))
+  plane= geom.Plane(geom.Pos3d(1,0,0), geom.Pos3d(0,1,0), geom.Pos3d(0,0,1))
 
   def __init__(self,nm,p):
     self.name= nm

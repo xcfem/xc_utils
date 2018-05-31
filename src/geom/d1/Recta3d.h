@@ -54,7 +54,7 @@ class RectaParametricas3d
   };
 
 class Recta2d;
-class Plano3d;
+class Plane;
 class Dir3d;
 
 
@@ -71,7 +71,7 @@ class Recta3d : public Linea3d
     explicit Recta3d(const CGRecta_3 &r);
     Recta3d(const Pos3d &p1,const Pos3d &p2);
     Recta3d(const Pos3d &p,const Dir3d &dir);
-    Recta3d(const Plano3d &p1,const Plano3d &p2);
+    Recta3d(const Plane &p1,const Plane &p2);
     Recta3d(const RectaParametricas3d &param);
     virtual GeomObj *clon(void) const
       { return new Recta3d(*this); }
@@ -117,7 +117,7 @@ class Recta3d : public Linea3d
       { return p.dist2(Projection(p)); }
     virtual GEOM_FT dist(const Pos3d &p) const;
 
-    Plano3d Perpendicular(const Pos3d &p) const;
+    Plane Perpendicular(const Pos3d &p) const;
     //! @brief Set the points that define the line.
     void Put(const Pos3d &p1,const Pos3d &p2)
       { TwoPoints(p1,p2); }

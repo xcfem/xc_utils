@@ -22,7 +22,7 @@
 //D2to3d.cc
 
 #include "D2to3d.h"
-#include "xc_utils/src/geom/d2/Plano3d.h"
+#include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include "xc_utils/src/geom/d1/Segmento2d.h"
 #include "xc_utils/src/geom/d1/Segmento3d.h"
@@ -95,7 +95,7 @@ void D2to3d::ThreePoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   {
     ref= Ref2d3d(p1,p2,p3);
   }
-Plano3d D2to3d::GetPlano(void) const
+Plane D2to3d::GetPlano(void) const
   { return ref.GetPlanoXY(); }
 
 bool operator ==(const D2to3d &a,const D2to3d &b)

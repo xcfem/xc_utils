@@ -23,7 +23,7 @@
 
 class_<Superficie2d, bases<GeomObj2d>, boost::noncopyable  >("Surface2d", no_init);
 
-class_<Semiplano2d, bases<Superficie2d> >("HalfPlane2d")
+class_<HalfPlane2d, bases<Superficie2d> >("HalfPlane2d")
   .def(init<>())
   .def(init<Recta2d>())
   ;
@@ -79,37 +79,37 @@ class_<D2to3d, bases<Superficie3d>, boost::noncopyable  >("D2to3d", no_init)
 class_<GeneralEquationOfPlane, boost::noncopyable>("GeneralEquationOfPlane", no_init)
   .def(init<double,double,double,double>());
 
-double (Plano3d::*AnguloPlano3d)(const Plano3d &p) const= &Plano3d::Angulo;
-double (Plano3d::*AnguloVector3d)(const Vector3d &) const= &Plano3d::Angulo;
-Pos3d (Plano3d::*Pos3dProjection)(const Pos3d &) const= &Plano3d::Projection;
-Vector3d (Plano3d::*Vector3dProjection)(const Vector3d &) const= &Plano3d::Projection;
-Recta3d (Plano3d::*Recta3dProjection)(const Recta3d &) const= &Plano3d::Projection;
-Recta3d (Plano3d::*IntersPlano3d)(const Plano3d &p) const= &Plano3d::Interseccion;
-Pos3d (Plano3d::*IntersRecta3d)(const Recta3d &p) const= &Plano3d::Interseccion;
-Pos3d (Plano3d::*IntersSemiRecta3d)(const SemiRecta3d &p) const= &Plano3d::Interseccion;
-Pos3d (Plano3d::*IntersSegmento3d)(const Segmento3d &p) const= &Plano3d::Interseccion;
-class_<Plano3d, bases<Superficie3d> >("Plane3d")
+double (Plane::*PlaneAngle)(const Plane &p) const= &Plane::Angulo;
+double (Plane::*AnguloVector3d)(const Vector3d &) const= &Plane::Angulo;
+Pos3d (Plane::*Pos3dProjection)(const Pos3d &) const= &Plane::Projection;
+Vector3d (Plane::*Vector3dProjection)(const Vector3d &) const= &Plane::Projection;
+Recta3d (Plane::*Recta3dProjection)(const Recta3d &) const= &Plane::Projection;
+Recta3d (Plane::*IntersPlane)(const Plane &p) const= &Plane::Interseccion;
+Pos3d (Plane::*IntersRecta3d)(const Recta3d &p) const= &Plane::Interseccion;
+Pos3d (Plane::*IntersSemiRecta3d)(const SemiRecta3d &p) const= &Plane::Interseccion;
+Pos3d (Plane::*IntersSegmento3d)(const Segmento3d &p) const= &Plane::Interseccion;
+class_<Plane, bases<Superficie3d> >("Plane3d")
   .def(init<Pos3d,Pos3d,Pos3d>())
   .def(init<Pos3d,Vector3d>())
   .def(init<Pos3d,Vector3d,Vector3d>())
   .def(init<Recta3d,Pos3d>()) 
   .def(init<GeneralEquationOfPlane>()) 
-  .def(init<Plano3d>())
-  .def("getAnguloPlano3d",AnguloPlano3d)
+  .def(init<Plane>())
+  .def("getPlaneAngle",PlaneAngle)
   .def("getAnguloVector3d",AnguloVector3d)
   .def("getPos3dProjection",Pos3dProjection)
   .def("getVector3dProjection",Vector3dProjection)
   .def("getRecta3dProjection",Recta3dProjection)
-  .def("getXYTrace",&Plano3d::XYTrace,"return the trace on the XY plane.")
-  .def("getXZTrace",&Plano3d::XZTrace,"return the trace on the XZ plane.")
-  .def("getYZTrace",&Plano3d::YZTrace,"return the trace on the YZ plane.")
-  .def("getIntersPlano3d",IntersPlano3d)
+  .def("getXYTrace",&Plane::XYTrace,"return the trace on the XY plane.")
+  .def("getXZTrace",&Plane::XZTrace,"return the trace on the XZ plane.")
+  .def("getYZTrace",&Plane::YZTrace,"return the trace on the YZ plane.")
+  .def("getIntersPlane",IntersPlane)
   .def("getIntersRecta3d",IntersRecta3d)
   .def("getIntersSemiRecta3d",IntersSemiRecta3d)
   .def("getIntersSegmento3d",IntersSegmento3d)
-  .def("getNormal", &Plano3d::Normal)
-  .def("getBase1", &Plano3d::Base1)
-  .def("getBase2", &Plano3d::Base2);
+  .def("getNormal", &Plane::Normal)
+  .def("getBase1", &Plane::Base1)
+  .def("getBase2", &Plane::Base2);
 
 class_<Poligono3d, bases<D2to3d> >("Polygon3d");
 

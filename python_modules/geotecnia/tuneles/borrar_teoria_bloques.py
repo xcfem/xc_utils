@@ -17,7 +17,7 @@ def calcPlanoBuzamiento(alpha,beta,p):
     C=math.cos(alpha)
     D=-(A*p.x+B*p.y+C*p.z)
 
-    retval=geom.Plano3d(geom.GeneralEquationOfPlane(A,B,C,D))
+    retval=geom.Plane(geom.GeneralEquationOfPlane(A,B,C,D))
     return retval
 
 #este módulo no está terminado

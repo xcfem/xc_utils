@@ -25,14 +25,14 @@
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 
 
-void Split_Polygon(const BspTree3d::poligono &pg,const Plano3d &particion,
+void Split_Polygon(const BspTree3d::poligono &pg,const Plane &particion,
                    BspTree3d::lista_poligonos &front_pieces,BspTree3d::lista_poligonos &back_pieces)
   {
     BspTree3d::lista_poligonos inter= corta(pg,particion);
 
     for(BspTree3d::lista_poligonos::const_iterator i= inter.begin();i!=inter.end();i++)
       {
-        if(particion.ClasificaPoligono(*i) == Plano3d::DELANTE)
+        if(particion.ClasificaPoligono(*i) == Plane::DELANTE)
           front_pieces.push_back(*i);
         else
           back_pieces.push_back(*i);
@@ -51,19 +51,19 @@ void Build_BSP_Tree(BspTree3d *tree,const BspTree3d::BspTree3d::lista_poligonos 
 
     for(;pol_iter!=poligonos.end();pol_iter++)
       {
-	Plano3d::clasif_poligono result= tree->particion.ClasificaPoligono(*pol_iter);
+	Plane::clasif_poligono result= tree->particion.ClasificaPoligono(*pol_iter);
         switch (result)
           {
-	   case Plano3d::DENTRO:
+	   case Plane::DENTRO:
               tree->poligonos.push_back(*pol_iter);
               break;
-           case Plano3d::DETRAS:
+           case Plane::DETRAS:
               backlist.push_back(*pol_iter);
               break;
-           case Plano3d::DELANTE:
+           case Plane::DELANTE:
               frontlist.push_back(*pol_iter);
               break;
-           case Plano3d::CRUZA:
+           case Plane::CRUZA:
               BspTree3d::lista_poligonos front_pieces,back_pieces;
               Split_Polygon(*pol_iter,tree->particion,front_pieces,back_pieces);
               backlist.insert(backlist.end(),back_pieces.begin(),back_pieces.end());

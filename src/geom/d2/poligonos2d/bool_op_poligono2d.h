@@ -28,7 +28,7 @@
 #include <list>
 
 class Poligono2d;
-class Semiplano2d;
+class HalfPlane2d;
 class Recta2d;
 
 Poligono2d prueba_conversion(const Poligono2d &p);
@@ -43,8 +43,8 @@ bool overlap(const std::list<Poligono2d> &,const std::list<Poligono2d> &);
 std::list<Poligono2d> recorta(const std::list<Poligono2d> &,const Poligono2d &);
 
 std::list<Poligono2d> interseccion(const Poligono2d &p1,const Poligono2d &p2);
-std::list<Poligono2d> interseccion(const Poligono2d &p,const Semiplano2d &r);
-std::list<Poligono2d> interseccion(const std::list<Poligono2d> &,const Semiplano2d &);
+std::list<Poligono2d> interseccion(const Poligono2d &p,const HalfPlane2d &r);
+std::list<Poligono2d> interseccion(const std::list<Poligono2d> &,const HalfPlane2d &);
 std::list<Poligono2d> interseccion(const std::list<Poligono2d> &,const Poligono2d &);
 std::list<Poligono2d> interseccion(const std::list<Poligono2d> &,const std::list<Poligono2d> &);
 

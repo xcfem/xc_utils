@@ -25,7 +25,7 @@
 #include "xc_basic/src/util/matem.h"
 #include "xc_utils/src/geom/d1/Segmento3d.h"
 #include "xc_utils/src/geom/d2/Triangulo3d.h"
-#include "xc_utils/src/geom/d2/Plano3d.h"
+#include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d3/BND3d.h"
 
 #include "xc_utils/src/geom/trf/Trf3d.h"
@@ -274,13 +274,13 @@ GEOM_FT pseudo_dist2(const MatrizPos3d &ptos,const Pos3d &pt)
             d= std::max(d,s.dist2(pt));
           }
       }
-    d= Plano3d(ptos.GetTriangulo1(1,1)).PseudoDist2(pt);
+    d= Plane(ptos.GetTriangulo1(1,1)).PseudoDist2(pt);
     for(size_t i=1;i<n_rows;i++) //To the last but one row.
       for(size_t j=1;j<n_columns;j++) //To the last but one column.
         {
-          Plano3d p1(ptos.GetTriangulo1(i,j)); //Plano del primer triángulo.
+          Plane p1(ptos.GetTriangulo1(i,j)); //Plano del primer triángulo.
           d= std::max(d,p1.PseudoDist2(pt));
-          Plano3d p2(ptos.GetTriangulo2(i,j)); //Plano del segundo triángulo.
+          Plane p2(ptos.GetTriangulo2(i,j)); //Plano del segundo triángulo.
           d= std::max(d,p2.PseudoDist2(pt));
         }
     return d;

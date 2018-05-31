@@ -22,7 +22,7 @@
 //Trihedron.cc
 
 #include "Trihedron.h"
-#include "xc_utils/src/geom/d2/Plano3d.h"
+#include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d3/poliedros3d/Poliedro3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 
@@ -39,7 +39,7 @@ Poliedro3d Trihedron::GetPoliedro3d(void) const
     return retval;
   }
 
-Plano3d Trihedron::get_plano(const size_t &i) const
+Plane Trihedron::get_plano(const size_t &i) const
   {
     Poliedro3d tmp(GetPoliedro3d());
     Poliedro3d::Facet_const_iterator j= tmp.facets_begin();
@@ -88,7 +88,7 @@ GEOM_FT Trihedron::PseudoDist(const Pos3d &p) const
   {
     Poliedro3d tmp= GetPoliedro3d();
     Poliedro3d::Facet_const_iterator j= tmp.facets_begin();
-    Plano3d plano= tmp.GetPlanoCara(j);
+    Plane plano= tmp.GetPlanoCara(j);
     GEOM_FT dmax= -plano.PseudoDist(p);
     j++;
     for(;j!=tmp.facets_end();j++)
@@ -117,7 +117,7 @@ bool Trihedron::In(const Pos3d &p,const double &tol) const
         if(ang<1.1*angConico)
           {
             Poliedro3d tmp= GetPoliedro3d();
-            Plano3d plano;
+            Plane plano;
             for(Poliedro3d::Facet_const_iterator j= tmp.facets_begin();j!=tmp.facets_end();j++)
               {
                 plano= tmp.GetPlanoCara(j);

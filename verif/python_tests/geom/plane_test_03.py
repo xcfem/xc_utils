@@ -21,7 +21,7 @@ vDir=geom.Dir3d(2,-2,3)
 r=geom.Recta3d(pto,vDir)
 dr=ITeor.distRecta3d(r)
 I=P.getIntersRecta3d(r)
-d=I.distPlano3d(P)
+d=I.distPlane(P)
 
 ratio1=ITeor.distPos3d(I)
 ratio2=math.fabs(dr)

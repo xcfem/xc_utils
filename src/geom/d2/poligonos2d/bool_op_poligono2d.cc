@@ -26,7 +26,7 @@
 #include "Poligono2d.h"
 #include "../../d1/Segmento2d.h"
 #include "../../d1/Polilinea2d.h"
-#include "xc_utils/src/geom/d2/Semiplano2d.h"
+#include "xc_utils/src/geom/d2/HalfPlane2d.h"
 #include <CGAL/Gmpz.h>
 #include <CGAL/Gmpq.h>
 #include <CGAL/Filtered_extended_homogeneous.h>
@@ -78,7 +78,7 @@ Nef_polyhedron Poligono2d_to_Nef_2(const Poligono2d &poly)
     return Nef_polyhedron(l_of_p.begin(),l_of_p.end(),Nef_polyhedron::INCLUDED);
   }
 
-Nef_polyhedron Semiplano2d_to_Nef_2(const Semiplano2d &sp)
+Nef_polyhedron HalfPlane2d_to_Nef_2(const HalfPlane2d &sp)
   {
     Nef_polyhedron N(Line(double2intdouble(sp.a()),double2intdouble(sp.b()),double2intdouble(sp.c())),Nef_polyhedron::EXCLUDED);
     return N.complement();
@@ -262,9 +262,9 @@ Nef_polyhedron interseca(const Poligono2d &p1,const Poligono2d &p2)
 // , the function crashes when computing the intersection. The problem was
 // fixed defining the line with points that were nearer between them
 // (100 units apart).
-Nef_polyhedron interseca(const Poligono2d &p,const Semiplano2d &sp)
+Nef_polyhedron interseca(const Poligono2d &p,const HalfPlane2d &sp)
   {
-    Nef_polyhedron n2=Semiplano2d_to_Nef_2(sp);
+    Nef_polyhedron n2=HalfPlane2d_to_Nef_2(sp);
     Nef_polyhedron n1=Poligono2d_to_Nef_2(p);
     Nef_polyhedron retval= n1.intersection(n2);
     return retval;
@@ -300,11 +300,11 @@ std::list<Poligono2d> interseccion(const Poligono2d &p1,const Poligono2d &p2)
   { return Nef_2_to_Poligono2d(interseca(p1,p2)); }
 
 //! @brief Return la intersección del polígono con el semiplano.
-std::list<Poligono2d> interseccion(const Poligono2d &p,const Semiplano2d &sp)
+std::list<Poligono2d> interseccion(const Poligono2d &p,const HalfPlane2d &sp)
   { return Nef_2_to_Poligono2d(interseca(p,sp)); }
 
 //! @brief Return la intersección de los polígonos de la lista con el semiplano.
-std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l,const Semiplano2d &sp)
+std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l,const HalfPlane2d &sp)
   {
     std::list<Poligono2d> retval;
     if(!l.empty())
@@ -354,8 +354,8 @@ void particiona(const Pos2d &c1,Poligono2d &p1,const Pos2d &c2,Poligono2d &p2)
     if(overlap(p1,p2))
       {
         const Recta2d m= mediatriz(c1,c2);
-        const Semiplano2d sp1(m,c1);
-        const Semiplano2d sp2(m,c2);
+        const HalfPlane2d sp1(m,c1);
+        const HalfPlane2d sp2(m,c2);
         p1= Poligono2d(interseccion(p1,sp1));
         p2= Poligono2d(interseccion(p2,sp2));
       }
@@ -380,8 +380,8 @@ void particiona(const Pos2d &c1,std::list<Poligono2d> &lp1,const Pos2d &c2,std::
     if(overlap(lp1,lp2))
       {
         const Recta2d m= mediatriz(c1,c2);
-        const Semiplano2d sp1(m,c1);
-        const Semiplano2d sp2(m,c2);
+        const HalfPlane2d sp1(m,c1);
+        const HalfPlane2d sp2(m,c2);
         lp1= interseccion(lp1,sp1);
         lp2= interseccion(lp2,sp2);
       }

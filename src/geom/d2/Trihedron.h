@@ -28,7 +28,7 @@
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include "xc_utils/src/geom/d2/Triangulo3d.h"
 
-class Plano3d;
+class Plane;
 class Poliedro3d;
 
 //! @ingroup GEOM
@@ -40,7 +40,7 @@ class Trihedron: public GeomObj3d
     Pos3d p0;
     Triangulo3d tr;
   protected:
-    Plano3d get_plano(const size_t &i) const;
+    Plane get_plano(const size_t &i) const;
   public:
     Trihedron(void);
     Trihedron(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);

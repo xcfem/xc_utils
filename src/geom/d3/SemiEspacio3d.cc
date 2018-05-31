@@ -30,14 +30,14 @@
 
 
 //! @brief Constructor por defecto.
-SemiEspacio3d::SemiEspacio3d(const Plano3d &p)
+SemiEspacio3d::SemiEspacio3d(const Plane &p)
   : GeomObj3d(), lim(p) {}
 
 //! @brief Return el plano que limita el semiespacio.
-const Plano3d &SemiEspacio3d::getPlanoLimite(void) const
+const Plane &SemiEspacio3d::getPlanoLimite(void) const
   { return lim; }
 
-void SemiEspacio3d::setPlanoLimite(const Plano3d &p)
+void SemiEspacio3d::setPlanoLimite(const Plane &p)
   { lim= p; }
 
 //! @brief Return true if the point is inside the half-plane.
@@ -75,7 +75,7 @@ GEOM_FT SemiEspacio3d::getAngulo(const SemiEspacio3d &se) const
 
 //! @brief Return el ángulo que forma con el plano que
 //! se pasa como parámetro.
-GEOM_FT SemiEspacio3d::getAngulo(const Plano3d &p) const
+GEOM_FT SemiEspacio3d::getAngulo(const Plane &p) const
   { return angulo(lim,p); }
 
 //! @brief Return el ángulo que forma con el vector que

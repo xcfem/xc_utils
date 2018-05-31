@@ -25,7 +25,7 @@
 #include "xc_utils/src/geom/matriz_FT.h"
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
-#include "xc_utils/src/geom/d2/Plano3d.h"
+#include "xc_utils/src/geom/d2/Plane.h"
 
 
 //! Reflexión en 3d según se describe en "Geometric tools for computer graphics"
@@ -60,7 +60,7 @@ Reflection3d::Reflection3d(const Pos3d &Q,const Vector3d &d)
   }
 
 //! @brief Constructor.
-Reflection3d::Reflection3d(const Plano3d &p)
+Reflection3d::Reflection3d(const Plane &p)
   : Trf3d()
   {
     matriz_FT rf=  matriz_reflection3d(p.Point(),p.Normal());

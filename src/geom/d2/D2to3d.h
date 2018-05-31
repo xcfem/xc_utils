@@ -28,7 +28,7 @@
 #include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
 #include "../tipos_cgal.h"
 
-class Plano3d;
+class Plane;
 class Segmento2d;
 class Segmento3d;
 class MatrizPos3d;
@@ -66,7 +66,7 @@ class D2to3d: public Superficie3d
     //Return the dimensión del objeto 0, 1, 2 ó 3.
       { return 2; }
 
-    Plano3d GetPlano(void) const;
+    Plane GetPlano(void) const;
 
     friend bool operator ==(const D2to3d &a,const D2to3d &b);
     void Print(std::ostream &os) const;

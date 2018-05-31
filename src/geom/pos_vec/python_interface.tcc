@@ -146,11 +146,11 @@ GEOM_FT (Pos3d::*dist2SemiRecta3d)(const SemiRecta3d &) const= &Pos3d::dist2;
 GEOM_FT (Pos3d::*dist2Segmento3d)(const Segmento3d &) const= &Pos3d::dist2;
 GEOM_FT (Pos3d::*getItemPos3d)(const size_t &) const= &Pos3d::at0;
 GEOM_FT (Pos3d::*distPos3d)(const Pos3d &) const= &Pos3d::dist;
-GEOM_FT (Pos3d::*distPlano3d)(const Plano3d &) const= &Pos3d::dist;
+GEOM_FT (Pos3d::*distPlane)(const Plane &) const= &Pos3d::dist;
 GEOM_FT (Pos3d::*distSemiEspacio3d)(const SemiEspacio3d &) const= &Pos3d::dist;
 //GEOM_FT (Pos3d::*distSolido3d)(const Pos3d &) const= &Pos3d::dist;
 GEOM_FT (Pos3d::*dist2Pos3d)(const Pos3d &) const= &Pos3d::dist2;
-GEOM_FT (Pos3d::*dist2Plano3d)(const Plano3d &) const= &Pos3d::dist2;
+GEOM_FT (Pos3d::*dist2Plane)(const Plane &) const= &Pos3d::dist2;
 GEOM_FT (Pos3d::*dist2SemiEspacio3d)(const SemiEspacio3d &) const= &Pos3d::dist2;
 class_<Pos3d, bases<ProtoGeom> >("Pos3d")
   .def(init<double, double, double>())
@@ -164,14 +164,14 @@ class_<Pos3d, bases<ProtoGeom> >("Pos3d")
   .def("distRecta3d",distRecta3d)
   .def("distSemiRecta3d",distSemiRecta3d)
   .def("distSegmento3d",distSegmento3d)
-  .def("distPlano3d",distPlano3d)
+  .def("distPlane",distPlane)
   .def("distSemiEspacio3d",distSemiEspacio3d)
   //.def("distSolido3d",distSolido3d)
   .def("dist2Pos3d",dist2Pos3d)
   .def("dist2Recta3d",dist2Recta3d)
   .def("dist2SemiRecta3d",dist2SemiRecta3d)
   .def("dist2Segmento3d",dist2Segmento3d)
-  .def("dist2Plano3d",dist2Plano3d)
+  .def("dist2Plane",dist2Plane)
   .def("dist2SemiEspacio3d",dist2SemiEspacio3d)
   .def("getDimension", &Pos3d::dimension)
   .def(self + Vector3d())

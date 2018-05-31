@@ -24,7 +24,7 @@
 #include "SupPoligonal2d.h"
 #include "xc_utils/src/geom/d1/Segmento2d.h"
 #include "xc_utils/src/geom/d1/Polilinea2d.h"
-#include "xc_utils/src/geom/d2/Semiplano2d.h"
+#include "xc_utils/src/geom/d2/HalfPlane2d.h"
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
 #include "carsten_steger.h"
 #include "xc_basic/src/util/matem.h"
@@ -252,7 +252,7 @@ GEOM_FT SupPoligonal2d::DistSigno(const Pos2d &p,const bool &sentido_horario) co
            retval= dist(Vertice(1),p);
          else if(nv==2)
            {
-             Semiplano2d semiplano(Vertice(1),Vertice(2));
+             HalfPlane2d semiplano(Vertice(1),Vertice(2));
              retval= signo*semiplano.DistSigno(p);
            }
          else
@@ -260,20 +260,20 @@ GEOM_FT SupPoligonal2d::DistSigno(const Pos2d &p,const bool &sentido_horario) co
              //Distancia al primer lado
              Pos2d p1= Vertice(1);
              Pos2d p2= Vertice(2);
-             Semiplano2d semiplano(p1,p2);
+             HalfPlane2d semiplano(p1,p2);
              retval= signo*semiplano.DistSigno(p);
              for(register unsigned int i=2; i<nv; i++)
                {
                  p1= Vertice(i);
                  p2= Vertice(i+1);
-                 semiplano= Semiplano2d(p1,p2);
+                 semiplano= HalfPlane2d(p1,p2);
                  const GEOM_FT d_i= signo*semiplano.DistSigno(p);
                  retval= max(retval,d_i);
                }
              //Distancia al último lado.
              p1= Vertice(nv);
              p2= Vertice(1);
-             semiplano= Semiplano2d(p1,p2);
+             semiplano= HalfPlane2d(p1,p2);
              const GEOM_FT d_i= signo*semiplano.DistSigno(p);
              retval= max(retval,d_i);
            }

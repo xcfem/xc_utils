@@ -27,7 +27,7 @@
 
 #include "Trf3d.h"
 
-class Plano3d;
+class Plane;
 
 
 //! @ingroup GEOM
@@ -41,7 +41,7 @@ class Reflection3d: public Trf3d
   public:
     Reflection3d(void);
     Reflection3d(const Pos3d &Q,const Vector3d &d);
-    Reflection3d(const Plano3d &M);
+    Reflection3d(const Plane &M);
   };
 
 #endif

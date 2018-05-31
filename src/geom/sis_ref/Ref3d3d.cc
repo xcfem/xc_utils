@@ -23,7 +23,7 @@
 #include "Ref3d3d.h"
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
-#include "xc_utils/src/geom/d2/Plano3d.h"
+#include "xc_utils/src/geom/d2/Plane.h"
 
 //! @brief Constructor.
 Ref3d3d::Ref3d3d(void): BaseRef() {}
@@ -88,12 +88,12 @@ Recta3d Ref3d3d::getZAxis(void) const
     return Recta3d(org,dest);
   }
 
-Plano3d Ref3d3d::GetPlanoXY(void) const
-  { return Plano3d(org,1000.0*GetI(),1000.0*GetJ()); }
-Plano3d Ref3d3d::GetPlanoXZ(void) const
-  { return Plano3d(org,1000.0*GetI(),1000.0*GetK()); }
-Plano3d Ref3d3d::GetPlanoYZ(void) const
-  { return Plano3d(org,1000.0*GetJ(),1000.0*GetK()); }
+Plane Ref3d3d::GetPlanoXY(void) const
+  { return Plane(org,1000.0*GetI(),1000.0*GetJ()); }
+Plane Ref3d3d::GetPlanoXZ(void) const
+  { return Plane(org,1000.0*GetI(),1000.0*GetK()); }
+Plane Ref3d3d::GetPlanoYZ(void) const
+  { return Plane(org,1000.0*GetJ(),1000.0*GetK()); }
 
 // GEOM_FT Ref3d3d::GetZLocal(const Pos3d &p) const
 // //Return the local Z of the point p expressed in local coordinates

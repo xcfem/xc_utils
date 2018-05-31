@@ -23,7 +23,7 @@
 
 #include "Circulo3d.h"
 #include "../tipos_cgal.h"
-#include "xc_utils/src/geom/d2/Plano3d.h"
+#include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_basic/src/util/matem.h"
 #include <plotter.h>
 

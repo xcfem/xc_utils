@@ -27,7 +27,7 @@
 #include "xc_utils/src/geom/trf/Trf2d.h"
 #include "xc_utils/src/geom/d1/Segmento2d.h"
 #include "xc_utils/src/geom/d1/Polilinea2d.h"
-#include "xc_utils/src/geom/d2/Semiplano2d.h"
+#include "xc_utils/src/geom/d2/HalfPlane2d.h"
 #include "xc_utils/src/geom/d2/BND2d.h"
 
 #include <CGAL/Boolean_set_operations_2.h>
@@ -264,8 +264,8 @@ std::list<Poligono2d> corta(const Poligono2d &p,const Recta2d &r)
   {
     std::list<Poligono2d> retval;
     if(!intersecan(p.Bnd(),r)) return retval;
-    Semiplano2d sp1(r);
-    Semiplano2d sp2= sp1.GetSwap();
+    HalfPlane2d sp1(r);
+    HalfPlane2d sp2= sp1.GetSwap();
     retval= interseccion(p,sp1);
     const std::list<Poligono2d> inter2= interseccion(p,sp2);
     retval.insert(retval.end(),inter2.begin(),inter2.end());
@@ -372,7 +372,7 @@ void Poligono2d::clipBy(const Poligono2d &plg)
 
 //! @brief Return la intersección de este polígono con el que
 //! se pasa como parámetro.
-std::list<Poligono2d> Poligono2d::Interseccion(const Semiplano2d &sp) const
+std::list<Poligono2d> Poligono2d::Interseccion(const HalfPlane2d &sp) const
   { return interseccion(*this,sp); }
 
 //! @brief Return la unión de este polígono con el que

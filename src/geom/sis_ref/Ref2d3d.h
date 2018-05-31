@@ -31,7 +31,7 @@
 
 class Recta3d;
 class Dir3d;
-class Plano3d;
+class Plane;
 class Vector3d;
 
 //! @ingroup SisRef
@@ -58,7 +58,7 @@ class Ref2d3d : public Ref<SisCooRect2d3d>
     Recta3d getYAxis(void) const; //Return the recta que define el y axis.
     //void PointVector(const Pos3d &o,const Vector3d &vX);
 
-    Plano3d GetPlanoXY(void) const; //Return el plano XY.
+    Plane GetPlanoXY(void) const; //Return el plano XY.
 
   };
 

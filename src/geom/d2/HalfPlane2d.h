@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Semiplano2d.h
+//HalfPlane2d.h
 
-#ifndef SEMIPLANO2D_H
-#define SEMIPLANO2D_H
+#ifndef HALFPLANE2D_H
+#define HALFPLANE2D_H
 
 
 #include "xc_utils/src/geom/d1/Recta2d.h"
@@ -36,19 +36,19 @@ class Segmento2d;
 //! @ingroup GEOM
 //
 //! @brief Semiplano en dos dimensiones.
-class Semiplano2d : public Superficie2d
+class HalfPlane2d : public Superficie2d
   {
     Recta2d lim; //The points of the half-plane are those we lie to the right of the line.
   public:
-    Semiplano2d(void);
-    explicit Semiplano2d(const Recta2d &r);
-    Semiplano2d(const Recta2d &r, const Pos2d &p);
-    Semiplano2d(const Pos2d &p1,const Pos2d &p2);
-    Semiplano2d(const Semiplano2d &sp);
-    Semiplano2d &operator=(const Semiplano2d &sp);
+    HalfPlane2d(void);
+    explicit HalfPlane2d(const Recta2d &r);
+    HalfPlane2d(const Recta2d &r, const Pos2d &p);
+    HalfPlane2d(const Pos2d &p1,const Pos2d &p2);
+    HalfPlane2d(const HalfPlane2d &sp);
+    HalfPlane2d &operator=(const HalfPlane2d &sp);
     virtual GeomObj *clon(void) const;
     inline void Swap(void);
-    Semiplano2d GetSwap(void) const;
+    HalfPlane2d GetSwap(void) const;
 
     //! @brief Return el valor de a que corresponde a la ecuación de la recta: a*x + b*y + c= 0
     inline GEOM_RT a(void) const
@@ -88,9 +88,9 @@ class Semiplano2d : public Superficie2d
     inline virtual GEOM_FT Dist(const Pos2d &p) const
       { return fabs(DistSigno(p)); }
 
-    Semiplano2d getNormalizado(void) const;
+    HalfPlane2d getNormalizado(void) const;
 
-    inline bool Interseca(const Semiplano2d &r2) const
+    inline bool Interseca(const HalfPlane2d &r2) const
       { return lim.Interseca(r2.lim); }
     inline bool Interseca(const Recta2d &r) const
       { return lim.Interseca(r); }
@@ -120,7 +120,7 @@ class Semiplano2d : public Superficie2d
 
     void Transforma(const Trf2d &trf2d);
 
-    inline friend bool operator==(const Semiplano2d &r1,const Semiplano2d &r2)
+    inline friend bool operator==(const HalfPlane2d &r1,const HalfPlane2d &r2)
       {
         if(&r1.lim==&r2.lim) return true;
         else
@@ -130,33 +130,33 @@ class Semiplano2d : public Superficie2d
       { os << lim; }
   };
 
-inline GEOM_FT dist(const Pos2d &p,const Semiplano2d &r)
+inline GEOM_FT dist(const Pos2d &p,const HalfPlane2d &r)
   { return r.Dist(p); }
-inline GEOM_FT dist(const Semiplano2d &r,const Pos2d &p)
+inline GEOM_FT dist(const HalfPlane2d &r,const Pos2d &p)
   { return dist(p,r); }
-inline bool operator!=(const Semiplano2d &r1,const Semiplano2d &r2)
+inline bool operator!=(const HalfPlane2d &r1,const HalfPlane2d &r2)
   { return !(r1==r2); }
 
-inline bool intersecan(const Semiplano2d &sp1,const Semiplano2d &sp2)
+inline bool intersecan(const HalfPlane2d &sp1,const HalfPlane2d &sp2)
   { return sp1.Interseca(sp2); }
-inline bool intersecan(const Semiplano2d &sp,const Recta2d &r)
+inline bool intersecan(const HalfPlane2d &sp,const Recta2d &r)
   { return sp.Interseca(r); }
-inline bool intersecan(const Semiplano2d &sp,const SemiRecta2d &sr)
+inline bool intersecan(const HalfPlane2d &sp,const SemiRecta2d &sr)
   { return sp.Interseca(sr); }
-inline bool intersecan(const Semiplano2d &sp,const Segmento2d &sg)
+inline bool intersecan(const HalfPlane2d &sp,const Segmento2d &sg)
   { return sp.Interseca(sg); }
-inline bool intersecan(const Recta2d &r,const Semiplano2d &sp)
+inline bool intersecan(const Recta2d &r,const HalfPlane2d &sp)
   { return sp.Interseca(r); }
-inline bool intersecan(const SemiRecta2d &sr,const Semiplano2d &sp)
+inline bool intersecan(const SemiRecta2d &sr,const HalfPlane2d &sp)
   { return sp.Interseca(sr); }
-inline bool intersecan(const Segmento2d &sg,const Semiplano2d &sp)
+inline bool intersecan(const Segmento2d &sg,const HalfPlane2d &sp)
   { return sp.Interseca(sg); }
 
-GmGrupo2d interseccion(const Semiplano2d &sp,const Recta2d &r);
-GmGrupo2d interseccion(const Semiplano2d &sp,const SemiRecta2d &sr);
-GmGrupo2d interseccion(const Semiplano2d &sp,const Segmento2d &sg);
-GmGrupo2d interseccion(const Recta2d &r,const Semiplano2d &sp);
-GmGrupo2d interseccion(const SemiRecta2d &sr,const Semiplano2d &sp);
-GmGrupo2d interseccion(const Segmento2d &sg,const Semiplano2d &sp);
+GmGrupo2d interseccion(const HalfPlane2d &sp,const Recta2d &r);
+GmGrupo2d interseccion(const HalfPlane2d &sp,const SemiRecta2d &sr);
+GmGrupo2d interseccion(const HalfPlane2d &sp,const Segmento2d &sg);
+GmGrupo2d interseccion(const Recta2d &r,const HalfPlane2d &sp);
+GmGrupo2d interseccion(const SemiRecta2d &sr,const HalfPlane2d &sp);
+GmGrupo2d interseccion(const Segmento2d &sg,const HalfPlane2d &sp);
 
 #endif
