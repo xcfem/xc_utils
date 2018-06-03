@@ -45,7 +45,7 @@ void Build_BSP_Tree(BspTree3d *tree,const BspTree3d::BspTree3d::lista_poligonos 
 
     const_pol_iterator pol_iter= poligonos.begin();
     const_pol_iterator root = pol_iter; pol_iter++;
-    tree->particion = root->GetPlano();
+    tree->particion = root->getPlane();
     tree->poligonos.push_back(*root);
     BspTree3d::BspTree3d::lista_poligonos frontlist,backlist;
 

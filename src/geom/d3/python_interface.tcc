@@ -34,7 +34,7 @@ class_<SemiEspacio3d, bases<GeomObj3d> >("SemiSpace3d")
   .def("getLima", &SemiEspacio3d::getLima)
   .def("getNormalExterior", &SemiEspacio3d::NormalExterior)
   .def("getNormalInterior", &SemiEspacio3d::NormalInterior)
-  .def("getPlanoLimite", &SemiEspacio3d::getPlanoLimite,return_internal_reference<>() );
+  .def("getBoundaryPlane", &SemiEspacio3d::getBoundaryPlane,return_internal_reference<>() );
 
 class_<BND3d, bases<GeomObj3d> >("BND3d")
   .def(init<>())

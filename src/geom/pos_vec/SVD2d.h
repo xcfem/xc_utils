@@ -31,7 +31,6 @@
 
 class VDesliz2d;
 class Recta2d;
-class Plano2d;
 class Ref2d2d;
 
 //! @ingroup GEOM

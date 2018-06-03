@@ -79,7 +79,7 @@ GEOM_FT Circulo3d::GetMin(unsigned short int i) const
 //! @brief Return true if the points is inside the circle.
 bool Circulo3d::In(const Pos3d &p, const double &tol) const
   {
-    if(GetPlano().In(p,tol))
+    if(getPlane().In(p,tol))
       return circ.In(to_2d(p),tol);
     else
       return false;

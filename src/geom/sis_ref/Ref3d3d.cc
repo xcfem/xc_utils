@@ -88,11 +88,11 @@ Recta3d Ref3d3d::getZAxis(void) const
     return Recta3d(org,dest);
   }
 
-Plane Ref3d3d::GetPlanoXY(void) const
+Plane Ref3d3d::getXYPlane(void) const
   { return Plane(org,1000.0*GetI(),1000.0*GetJ()); }
-Plane Ref3d3d::GetPlanoXZ(void) const
+Plane Ref3d3d::getXZPlane(void) const
   { return Plane(org,1000.0*GetI(),1000.0*GetK()); }
-Plane Ref3d3d::GetPlanoYZ(void) const
+Plane Ref3d3d::getYZPlane(void) const
   { return Plane(org,1000.0*GetJ(),1000.0*GetK()); }
 
 // GEOM_FT Ref3d3d::GetZLocal(const Pos3d &p) const

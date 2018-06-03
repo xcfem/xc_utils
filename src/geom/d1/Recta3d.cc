@@ -98,15 +98,15 @@ Vector3d Recta3d::Projection(const Vector3d &v) const
 
 //! @brief Return the projection onto the XY plane.
 Recta3d Recta3d::XY3DProjection(void) const
-  { return PlanoXY3d.Projection(*this); }
+  { return XYPlane3d.Projection(*this); }
 
 //! @brief Return the projection onto the XZ plane.
 Recta3d Recta3d::XZ3DProjection(void) const
-  { return PlanoXZ3d.Projection(*this); }
+  { return XZPlane3d.Projection(*this); }
 
 //! @brief Return the projection onto the YZ plane.
 Recta3d Recta3d::YZ3DProjection(void) const
-  { return PlanoYZ3d.Projection(*this); }
+  { return YZPlane3d.Projection(*this); }
 
 //! @brief Return the projection onto the XY plane.
 Recta2d Recta3d::XY2DProjection(void) const
@@ -164,7 +164,7 @@ Recta2d Recta3d::YZ2DProjection(void) const
 
 //! @brief Return the angle with respecto to XY plane.
 GEOM_FT Recta3d::getSlope(void) const
-  { return angulo(*this,PlanoXY3d); }
+  { return angulo(*this,XYPlane3d); }
 
 //! @brief Return true if the lines are parallel.
 bool Recta3d::Paralela(const Recta3d &r) const

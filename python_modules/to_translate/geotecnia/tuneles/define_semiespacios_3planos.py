@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 P1= 
-P1= calcPlanoBuzamiento(alpha1,beta1,p)
+P1= computeDipPlane(alpha1,beta1,p)
 P2= 
-P2= calcPlanoBuzamiento(alpha2,beta2,p)
+P2= computeDipPlane(alpha2,beta2,p)
 P3= 
-P3= calcPlanoBuzamiento(alpha3,beta3,p)
+P3= computeDipPlane(alpha3,beta3,p)
 
 # Tunnel axis
 tunnelAxisVector= [sin(axisBeta),cos(axisBeta),0]
@@ -20,16 +20,16 @@ tunnelAxis=
 '''Define los semiespacios superiores e inferiores
    correspondientes a los planos P1,P2 y P3'''
 P1L= 
-\P1L{\setPlano{P1}}
+\P1L{\setPlane{P1}}
 P1U= 
-\P1U{\setPlano{P1} \swap{}}
+\P1U{\setPlane{P1} \swap{}}
 
 P2L= 
-\P2L{\setPlano{P2}}
+\P2L{\setPlane{P2}}
 P2U= 
-\P2U{\setPlano{P2} \swap{}}
+\P2U{\setPlane{P2} \swap{}}
 
 P3L= 
-\P3L{\setPlano{P3}}
+\P3L{\setPlane{P3}}
 P3U= 
-\P3U{\setPlano{P3} \swap{}}
+\P3U{\setPlane{P3} \swap{}}

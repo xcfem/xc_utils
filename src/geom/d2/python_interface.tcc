@@ -73,7 +73,7 @@ class_<Circulo2d, bases<Superficie2d> >("Circle2d")
 class_<Superficie3d, bases<GeomObj3d>, boost::noncopyable  >("Surface3d", no_init);
 
 class_<D2to3d, bases<Superficie3d>, boost::noncopyable  >("D2to3d", no_init)
-  .def("getPlane",&D2to3d::GetPlano)
+  .def("getPlane",&D2to3d::getPlane)
   ;
 
 class_<GeneralEquationOfPlane, boost::noncopyable>("GeneralEquationOfPlane", no_init)

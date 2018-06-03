@@ -87,8 +87,8 @@ class Poligono3d: public D2to3d
     inline bool Antihorario(void) const
       { return plg2d.Antihorario(); }
 
-    Plane GetPlanoLado0(unsigned int i) const;
-    Plane GetPlanoLado(unsigned int i) const;
+    Plane getPlaneFromSide0(unsigned int i) const;
+    Plane getPlaneFromSide(unsigned int i) const;
 
     Pos3d getCenterOfMass(void) const;
     GEOM_FT Ix(void) const;

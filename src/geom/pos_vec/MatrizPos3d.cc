@@ -278,9 +278,9 @@ GEOM_FT pseudo_dist2(const MatrizPos3d &ptos,const Pos3d &pt)
     for(size_t i=1;i<n_rows;i++) //To the last but one row.
       for(size_t j=1;j<n_columns;j++) //To the last but one column.
         {
-          Plane p1(ptos.GetTriangulo1(i,j)); //Plano del primer triángulo.
+          Plane p1(ptos.GetTriangulo1(i,j)); //Plane from first triangle.
           d= std::max(d,p1.PseudoDist2(pt));
-          Plane p2(ptos.GetTriangulo2(i,j)); //Plano del segundo triángulo.
+          Plane p2(ptos.GetTriangulo2(i,j)); //Plane from second triangle.
           d= std::max(d,p2.PseudoDist2(pt));
         }
     return d;

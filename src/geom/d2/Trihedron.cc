@@ -45,7 +45,7 @@ Plane Trihedron::get_plano(const size_t &i) const
     Poliedro3d::Facet_const_iterator j= tmp.facets_begin();
     for(size_t k=0;k<i;k++)
       j++;
-    return tmp.GetPlanoCara(j);
+    return tmp.getPlaneFromFace(j);
   }
 
 //! @brief Return the triangle that is the trihedron base.
@@ -88,12 +88,12 @@ GEOM_FT Trihedron::PseudoDist(const Pos3d &p) const
   {
     Poliedro3d tmp= GetPoliedro3d();
     Poliedro3d::Facet_const_iterator j= tmp.facets_begin();
-    Plane plano= tmp.GetPlanoCara(j);
+    Plane plano= tmp.getPlaneFromFace(j);
     GEOM_FT dmax= -plano.PseudoDist(p);
     j++;
     for(;j!=tmp.facets_end();j++)
       {
-        plano= tmp.GetPlanoCara(j);
+        plano= tmp.getPlaneFromFace(j);
         dmax= std::max(dmax,-plano.PseudoDist(p));
       }
     return dmax;
@@ -120,7 +120,7 @@ bool Trihedron::In(const Pos3d &p,const double &tol) const
             Plane plano;
             for(Poliedro3d::Facet_const_iterator j= tmp.facets_begin();j!=tmp.facets_end();j++)
               {
-                plano= tmp.GetPlanoCara(j);
+                plano= tmp.getPlaneFromFace(j);
                 d= -plano.PseudoDist(p);
                 if(d>=tol)
                   {

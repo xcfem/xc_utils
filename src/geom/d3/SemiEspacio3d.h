@@ -41,8 +41,8 @@ class SemiEspacio3d : public GeomObj3d
     Plane lim; 
   public:
     SemiEspacio3d(const Plane &p= Plane());
-    const Plane &getPlanoLimite(void) const;
-    void setPlanoLimite(const Plane &);
+    const Plane &getBoundaryPlane(void) const;
+    void setBoundaryPlane(const Plane &);
     
     virtual GeomObj *clon(void) const
       { return new SemiEspacio3d(*this); }
@@ -60,7 +60,7 @@ class SemiEspacio3d : public GeomObj3d
       { return NAN; }
     Vector3d NormalExterior(void) const;
     Vector3d NormalInterior(void) const;
-    inline const Plane &getPlano(void) const
+    inline const Plane &getPlane(void) const
       { return lim; }
 
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const;

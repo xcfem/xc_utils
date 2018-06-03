@@ -50,7 +50,7 @@ std::deque<Vector3d> BlockPyramid::haz_vectores(void) const
 //! dentro del semiespacio.
 bool BlockPyramid::es_interior(const SemiEspacio3d &se,const Vector3d &v)
   {
-    const Pos3d p= se.getPlano().Point()+1e4*v;
+    const Pos3d p= se.getPlane().Point()+1e4*v;
     const bool retval= se.In(p,1e-4);
     return retval;
   }

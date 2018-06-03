@@ -111,7 +111,7 @@ Plane::Plane(const GeomObj3d::list_Pos3d &lp): Superficie3d(), cgp()
   }
 Plane::Plane(const Poligono3d &pg3d)
   : Superficie3d(), cgp()
-  { *this= pg3d.GetPlano(); }
+  { *this= pg3d.getPlane(); }
 Plane::Plane(const GeneralEquationOfPlane &eg)
   : Superficie3d(), cgp(eg.a(),eg.b(),eg.c(),eg.d()) {}
 
@@ -382,15 +382,15 @@ Pos3d Plane::Interseccion(const Segmento3d &sg) const
 
 //! @brief Return the trace on the XY plane.
 Recta3d Plane::XYTrace(void) const
-  { return Interseccion(PlanoXY3d); }
+  { return Interseccion(XYPlane3d); }
 
 //! @brief Return the trace on the XZ plane.
 Recta3d Plane::XZTrace(void) const
-  { return Interseccion(PlanoXZ3d); }
+  { return Interseccion(XZPlane3d); }
 
 //! @brief Return the trace on the YZ plane.
 Recta3d Plane::YZTrace(void) const
-  { return Interseccion(PlanoYZ3d); }
+  { return Interseccion(YZPlane3d); }
 
 //! @brief Return the maximum slope line with respect to the XY plane.
 Recta3d Plane::getMaximumSlopeLineXY(void) const
@@ -444,15 +444,15 @@ GEOM_FT Plane::Angulo(const Vector3d &v) const
 
 //! @brief Returns the slope angle with respect to the XY plane
 GEOM_FT Plane::getSlopeAngleXY(void) const
-  { return angulo(*this,PlanoXY3d); }
+  { return angulo(*this,XYPlane3d); }
 
 //! @brief Returns the slope angle with respect to the XZ plane
 GEOM_FT Plane::getSlopeAngleXZ(void) const
-  { return angulo(*this,PlanoXZ3d); }
+  { return angulo(*this,XZPlane3d); }
 
 //! @brief Returns the slope angle with respect to the YZ plane
 GEOM_FT Plane::getSlopeAngleYZ(void) const
-  { return angulo(*this,PlanoYZ3d); }
+  { return angulo(*this,YZPlane3d); }
 
 //! @brief Compute the plane that best suits the point cloud.
 GEOM_FT Plane::AjusteMinimosCuadrados(const GeomObj3d::list_Pos3d &lp)

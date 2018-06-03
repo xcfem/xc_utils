@@ -16,10 +16,10 @@ beta2=math.radians(160)
 
 p=geom.Pos3d(0,0,0)
 
-plBuz1=teoria_bloques.calcPlanoBuzamiento(alpha1,beta1,p)
+plBuz1=teoria_bloques.computeDipPlane(alpha1,beta1,p)
 P1=geom.SemiEspacio3d(plBuz1)
 
-plBuz2=teoria_bloques.calcPlanoBuzamiento(alpha2,beta2,p)
+plBuz2=teoria_bloques.computeDipPlane(alpha2,beta2,p)
 P2=geom.SemiEspacio3d(plBuz2)
 
 delta=P1.anguloConSemiEspacio3d(P2)

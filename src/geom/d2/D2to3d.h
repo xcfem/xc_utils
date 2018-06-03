@@ -66,7 +66,7 @@ class D2to3d: public Superficie3d
     //Return the dimensión del objeto 0, 1, 2 ó 3.
       { return 2; }
 
-    Plane GetPlano(void) const;
+    Plane getPlane(void) const;
 
     friend bool operator ==(const D2to3d &a,const D2to3d &b);
     void Print(std::ostream &os) const;

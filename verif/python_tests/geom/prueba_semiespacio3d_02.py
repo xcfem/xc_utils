@@ -13,7 +13,7 @@ alpha1=math.radians(30)
 beta1=math.radians(320)
 p=geom.Pos3d(0,0,0)
 
-plBuz1=teoria_bloques.calcPlanoBuzamiento(alpha1,beta1,p)
+plBuz1=teoria_bloques.computeDipPlane(alpha1,beta1,p)
 P1=geom.SemiEspacio3d(plBuz1)
 v=geom.Vector3d(1,2,1)
 

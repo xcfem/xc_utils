@@ -61,19 +61,19 @@ Segmento3d Poligono3d::Lado0(unsigned int i) const
     return to_3d(sg2d);
   }
 
-Plane Poligono3d::GetPlanoLado(unsigned int i) const
+Plane Poligono3d::getPlaneFromSide(unsigned int i) const
   {
     Segmento3d lado= Lado(i);
-    Vector3d v= GetPlano().Normal();
+    Vector3d v= getPlane().Normal();
     return Plane(lado,v);
   }
 
-Plane Poligono3d::GetPlanoLado0(unsigned int i) const
-  { return GetPlanoLado(i+1); }
+Plane Poligono3d::getPlaneFromSide0(unsigned int i) const
+  { return getPlaneFromSide(i+1); }
 
 bool Poligono3d::In(const Pos3d &p,const double &tol)
   {
-    if(!GetPlano().In(p,tol)) return false;
+    if(!getPlane().In(p,tol)) return false;
     const Pos2d p2d(to_2d(p));
     return plg2d.In(p2d,tol);
   }
@@ -148,11 +148,11 @@ GEOM_FT Poligono3d::distSigno2(const Pos3d &p,const bool &sentido_horario) const
     if(nv==1) return p.dist2(Vertice(1));
      
     //Distancia al plano que contiene al poligono
-    register GEOM_FT d= GetPlano().dist2(p);
+    register GEOM_FT d= getPlane().dist2(p);
     //Distancia a los semiespacios definidos por los lados.
     for(register unsigned int i=1; i<=nl; i++)
       {
-        SemiEspacio3d se3d(GetPlanoLado(i));
+        SemiEspacio3d se3d(getPlaneFromSide(i));
         const GEOM_FT d_i= signo*se3d.distSigno2(p);
         d= std::max(d,d_i);
       }
@@ -190,7 +190,7 @@ std::list<Poligono3d> Poligono3d::Corta(const Plane &pl) const
 //pl, el polígono p, que se pasa como parámetro.
   {
     std::list<Poligono3d> retval;
-    const Plane pl_polig= GetPlano();
+    const Plane pl_polig= getPlane();
     if(pl_polig==pl) return retval;
     if(paralelos(pl_polig,pl)) return retval;
 

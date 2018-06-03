@@ -160,9 +160,9 @@ class Plane : public Superficie3d
 Plane FromCGAL(const CGPlane_3 &p);
 bool operator==(const Plane &p1,const Plane &p2);
 
-const Plane PlanoXY3d(Pos3d(0,0,0),Pos3d(1,0,0),Pos3d(0,1,0));
-const Plane PlanoXZ3d(Pos3d(0,0,0),Pos3d(1,0,0),Pos3d(0,0,1));
-const Plane PlanoYZ3d(Pos3d(0,0,0),Pos3d(0,1,0),Pos3d(0,0,1));
+const Plane XYPlane3d(Pos3d(0,0,0),Pos3d(1,0,0),Pos3d(0,1,0));
+const Plane XZPlane3d(Pos3d(0,0,0),Pos3d(1,0,0),Pos3d(0,0,1));
+const Plane YZPlane3d(Pos3d(0,0,0),Pos3d(0,1,0),Pos3d(0,0,1));
 
 GEOM_FT angulo(const Recta3d &r,const Plane &p);
 GEOM_FT angulo(const Plane &p,const Recta3d &r);

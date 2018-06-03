@@ -141,7 +141,7 @@ GEOM_FT SectorCircular3d::GetMin(unsigned short int i) const
 //! @brief Return true if the point is in the plane.
 bool SectorCircular3d::In(const Pos3d &p, const double &tol) const
   {
-    if(GetPlano().In(p,tol))
+    if(getPlane().In(p,tol))
       return sect_circ.In(to_2d(p),tol);
     else
       return false;

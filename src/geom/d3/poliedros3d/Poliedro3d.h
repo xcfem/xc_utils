@@ -117,7 +117,7 @@ class Poliedro3d: public PolyhedronBase
       { cgpoliedro.clear(); }
 
     GeomObj::list_Pos3d GetVerticesCara(const Facet_const_iterator &f) const;
-    Plane GetPlanoCara(const Facet_const_iterator &fi) const;
+    Plane getPlaneFromFace(const Facet_const_iterator &fi) const;
     Poligono3d GetCara(const Facet_const_iterator &f) const;
     std::deque<Poligono3d> GetCaras(void) const;
 

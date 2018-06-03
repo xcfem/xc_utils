@@ -137,13 +137,13 @@ int Pos3d::Cuadrante(void) const
 
 //! @brief Return the projection onto XY plane.
 Pos3d Pos3d::XY3DProjection(void) const
-  { return PlanoXY3d.Projection(*this); }
+  { return XYPlane3d.Projection(*this); }
 //! @brief Return the projection onto XZ plane.
 Pos3d Pos3d::XZ3DProjection(void) const
-  { return PlanoXZ3d.Projection(*this); }
+  { return XZPlane3d.Projection(*this); }
 //! @brief Return the projection onto YZ plane.
 Pos3d Pos3d::YZ3DProjection(void) const
-  { return PlanoYZ3d.Projection(*this); }
+  { return YZPlane3d.Projection(*this); }
 
 //! @brief Return the projection onto XY plane.
 Pos2d Pos3d::XY2DProjection(void) const

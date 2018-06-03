@@ -34,10 +34,10 @@ SemiEspacio3d::SemiEspacio3d(const Plane &p)
   : GeomObj3d(), lim(p) {}
 
 //! @brief Return el plano que limita el semiespacio.
-const Plane &SemiEspacio3d::getPlanoLimite(void) const
+const Plane &SemiEspacio3d::getBoundaryPlane(void) const
   { return lim; }
 
-void SemiEspacio3d::setPlanoLimite(const Plane &p)
+void SemiEspacio3d::setBoundaryPlane(const Plane &p)
   { lim= p; }
 
 //! @brief Return true if the point is inside the half-plane.
@@ -71,7 +71,7 @@ GEOM_FT SemiEspacio3d::dist2(const Pos3d &p) const
 //! @brief Return el ángulo que forma con el half-space que
 //! se pasa como parámetro.
 GEOM_FT SemiEspacio3d::getAngulo(const SemiEspacio3d &se) const
-  { return angulo(lim,se.getPlano()); }
+  { return angulo(lim,se.getPlane()); }
 
 //! @brief Return el ángulo que forma con el plano que
 //! se pasa como parámetro.
@@ -157,7 +157,7 @@ TripletMap<Pos3d> intersection_points(const std::deque<SemiEspacio3d> &se)
       for(size_t j=i+1;j<sz;j++)
         for(size_t k=j+1;k<sz;k++)
 	  {
-            const Pos3d p= intersection_point(se[i].getPlano(),se[j].getPlano(),se[k].getPlano());
+            const Pos3d p= intersection_point(se[i].getPlane(),se[j].getPlane(),se[k].getPlane());
             if(p.exists())
               retval[Triplete(i,j,k)]= p;
           }
@@ -207,7 +207,7 @@ std::deque<Recta3d> rectas_interseccion(const std::deque<SemiEspacio3d> &se)
     for(size_t i=0;i<sz;i++)
       for(size_t j=i+1;j<sz;j++)
         {
-          const Recta3d r= recta_interseccion(se[i].getPlano(),se[j].getPlano());
+          const Recta3d r= recta_interseccion(se[i].getPlane(),se[j].getPlane());
           if(r.exists())
             retval.push_back(r);
         }

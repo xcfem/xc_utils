@@ -5,7 +5,7 @@
 import geom
 import math
 
-def calcPlanoBuzamiento(alpha,beta,p):
+def computeDipPlane(alpha,beta,p):
     '''
     Devuelve el plano de buzamiento definido por:
     alpha: Ángulo de buzamiento.

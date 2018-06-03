@@ -61,9 +61,9 @@ class Ref3d3d : public Ref<SisCooRect3d3d>
     Recta3d getXAxis(void) const; //Return la recta que define el x axis.
     Recta3d getYAxis(void) const; //Return la recta que define el y axis.
     Recta3d getZAxis(void) const; //Return la recta que define el z axis.
-    Plane GetPlanoXY(void) const; //Return el plano XY.
-    Plane GetPlanoXZ(void) const; //Return el plano XZ.
-    Plane GetPlanoYZ(void) const; //Return el plano YZ.
+    Plane getXYPlane(void) const; //Return el plano XY.
+    Plane getXZPlane(void) const; //Return el plano XZ.
+    Plane getYZPlane(void) const; //Return el plano YZ.
 /*     virtual void Mueve(double Ax,double Ay,double Az) */
 /*       { org.Mueve(Ax,Ay,Az); } */
 /*     inline virtual void GiraX(const double &ang_rad) */

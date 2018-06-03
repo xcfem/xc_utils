@@ -17,8 +17,8 @@ beta2=math.radians(150)
 
 O=geom.Pos3d(0,0,0)
 
-P1=teoria_bloques.calcPlanoBuzamiento(alpha1,beta1,O)
-P2=teoria_bloques.calcPlanoBuzamiento(alpha2,beta2,O)
+P1=teoria_bloques.computeDipPlane(alpha1,beta1,O)
+P2=teoria_bloques.computeDipPlane(alpha2,beta2,O)
 
 n1=P1.getNormal()
 n2=P2.getNormal()

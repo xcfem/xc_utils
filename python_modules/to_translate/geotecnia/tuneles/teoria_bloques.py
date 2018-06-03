@@ -5,7 +5,7 @@
    alpha: Ángulo de buzamiento.
    beta: Dirección del buzamiento.
    p: point for which the plane passes through.'''
-def calcPlanoBuzamiento(alpha,beta,pos3d p):
+def computeDipPlane(alpha,beta,pos3d p):
   A= math.sin(alpha)*sin(beta)
   B= math.sin(alpha)*cos(beta)
   C= math.cos(alpha)

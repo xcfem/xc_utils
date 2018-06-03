@@ -73,6 +73,6 @@ Recta3d Ref2d3d::getYAxis(void) const
     return Recta3d(org,dest);
   }
 
-Plane Ref2d3d::GetPlanoXY(void) const
+Plane Ref2d3d::getXYPlane(void) const
   { return Plane(org,1000.0*GetI(),1000.0*GetJ()); }
 

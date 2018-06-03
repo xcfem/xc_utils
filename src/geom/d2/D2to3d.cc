@@ -95,8 +95,8 @@ void D2to3d::ThreePoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   {
     ref= Ref2d3d(p1,p2,p3);
   }
-Plane D2to3d::GetPlano(void) const
-  { return ref.GetPlanoXY(); }
+Plane D2to3d::getPlane(void) const
+  { return ref.getXYPlane(); }
 
 bool operator ==(const D2to3d &a,const D2to3d &b)
   { return ( a.ref == b.ref ); }

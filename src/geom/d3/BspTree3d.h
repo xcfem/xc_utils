@@ -38,7 +38,7 @@ class BspTree3d
     friend void Build_BSP_Tree(BspTree3d *tree,const lista_poligonos &poligonos);
 
   private:
-    Plane particion;         //Plano de partición.
+    Plane particion;         //Partition plane.
     lista_poligonos poligonos; //Lista de poligonos coincidentes 
                                //con el plano de partición.
     BspTree3d *front,*back; //Punteros a hijos.
