@@ -174,18 +174,18 @@ VertexMap::VertexMap(const TripletMap<Pos3d> &vertexMap)
         vertices[conta]= (*i).second;
       }
 
-    std::set<size_t> planos;
-    //Obtenemos los planos que contienen las caras.
+    std::set<size_t> planes;
+    //Get the planes that contain the faces.
     for(TripletMap<Pos3d>::const_iterator i=vertexMap.begin();i!=vertexMap.end();i++)
       {
         Triplete t= (*i).first;
-        planos.insert(t.get<0>());
-        planos.insert(t.get<1>());
-        planos.insert(t.get<2>());
+        planes.insert(t.get<0>());
+        planes.insert(t.get<1>());
+        planes.insert(t.get<2>());
       }
 
-    //Obtenemos las caras contenidas en cada plano.
-    for(std::set<size_t>::const_iterator i=planos.begin();i!=planos.end();i++)
+    //Get the faces for each plane.
+    for(std::set<size_t>::const_iterator i=planes.begin();i!=planes.end();i++)
       {
         const size_t indice= *i;
         VerticesCara indicesCara;

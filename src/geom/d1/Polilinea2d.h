@@ -104,14 +104,8 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     list_Pos2d Interseccion(const Recta2d &r) const;
     list_Pos2d Interseccion(const SemiRecta2d &sr) const;
     list_Pos2d Interseccion(const Segmento2d &sr) const;
-    Polilinea2d Corta(unsigned short int i,const GEOM_FT &d) const;
-    //Return the Polilinea2d con los vertices correspondientes a los
-    //cortes con el plano coord_i= d
+    //Polilinea2d Corta(unsigned short int i,const GEOM_FT &d) const;
     Polilinea2d Separa(const Pos2d &p,const short int &sgn) const;
-    //Suponemos que p es vertice de la Polilinea2d
-    //Return el trozo de Polilinea2d:
-    //hasta p si sgn < 0
-    //desde p si sgn >= 0
     Pos2d getCenterOfMass(void) const
       { return GeomObj::list_Pos2d::getCenterOfMass(); }
 

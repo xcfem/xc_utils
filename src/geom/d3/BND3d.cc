@@ -156,9 +156,9 @@ bool BND3d::LBClipTest(const GEOM_FT &p,const GEOM_FT &q,GEOM_FT &u1,GEOM_FT &u2
             if(r<u2) u2= r;
         }
       else
-        //p= 0, luego la linea es paralela a este plano l'imite.
+        //p= 0, so the line is parallel to this boundary plane.
         if(q<0)
-          retval= false; //la l'inea est'a fuera del l'imite.
+          retval= false; //the line is outside the boundary.
     return retval;
   }
 

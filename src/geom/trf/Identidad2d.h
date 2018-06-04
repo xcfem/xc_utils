@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Identidad2d.h
-//Rotación en el plano.
+//Identity transformation.
 
 #ifndef IDENTIDAD2D_H
 #define IDENTIDAD2D_H

@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Rotation3d.h
-//Rotación en el plano.
+//Rotation in a three-dimensional space.
 
 #ifndef ROTATION3D_H
 #define ROTATION3D_H

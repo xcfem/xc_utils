@@ -18,9 +18,9 @@ o=geom.Pos3d(0.5,0,0)
 p1=geom.Pos3d(0.5,1,0)
 p2=geom.Pos3d(0.5,0,1)
 
-plano=geom.Plane3d(o,p1,p2)
+plane=geom.Plane3d(o,p1,p2)
 
-lp= pol1.getIntersection(plano)
+lp= pol1.getIntersection(plane)
 ptInt= lp[0]
 
 ratio1=(longPol1-3)/3.

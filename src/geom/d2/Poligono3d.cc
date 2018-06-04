@@ -132,7 +132,7 @@ void Poligono3d::Print(std::ostream &os) const
 //!
 //! The distance is computed as the maximum of:
 //!  -The distance from the point to the plane that contains the polygon.
-//!  -The signed distances from the point to each of the half-spaces
+//!  -The signed distances from the point to each of the half spaces
 //!  defined by the plane that contains the polygon.
 //!
 // If the vertices are in couterclockwise order, positive distances
@@ -147,7 +147,7 @@ GEOM_FT Poligono3d::distSigno2(const Pos3d &p,const bool &sentido_horario) const
     if(nv==0) return NAN;
     if(nv==1) return p.dist2(Vertice(1));
      
-    //Distancia al plano que contiene al poligono
+    //Distance to the plane that contains the polygon.
     register GEOM_FT d= getPlane().dist2(p);
     //Distancia a los semiespacios definidos por los lados.
     for(register unsigned int i=1; i<=nl; i++)
@@ -185,9 +185,9 @@ GEOM_FT Poligono3d::dist(const Pos3d &p) const
     return (retval >= 0 ? retval : 0);
   }
 
+//! @brief Return the polygons that result form cutting the polygon
+//! with the argument plane.
 std::list<Poligono3d> Poligono3d::Corta(const Plane &pl) const
-//Return los polígonos que resultan de cortar por el plano
-//pl, el polígono p, que se pasa como parámetro.
   {
     std::list<Poligono3d> retval;
     const Plane pl_polig= getPlane();

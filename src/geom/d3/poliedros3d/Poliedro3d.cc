@@ -265,8 +265,8 @@ GEOM_FT Poliedro3d::PseudoDist(const Pos3d &p) const
     GEOM_FT retval= pl.PseudoDist(p);
     for(;i!=facets_end();i++)
       {
-        const Plane plano(getPlaneFromFace(i));
-        const GEOM_FT d1= plano.PseudoDist(p);
+        const Plane plane(getPlaneFromFace(i));
+        const GEOM_FT d1= plane.PseudoDist(p);
         retval= std::max(retval,d1);
       }
     return retval;

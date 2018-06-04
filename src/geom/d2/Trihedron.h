@@ -40,7 +40,7 @@ class Trihedron: public GeomObj3d
     Pos3d p0;
     Triangulo3d tr;
   protected:
-    Plane get_plano(const size_t &i) const;
+    Plane get_plane(const size_t &i) const;
   public:
     Trihedron(void);
     Trihedron(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);

@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Translation3d.h
-//Traslación en el plano.
+//Translation in a three-dimensional space.
 
 #ifndef TRANSLATION3D_H
 #define TRANSLATION3D_H

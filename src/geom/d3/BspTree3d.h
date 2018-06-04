@@ -39,9 +39,9 @@ class BspTree3d
 
   private:
     Plane particion;         //Partition plane.
-    lista_poligonos poligonos; //Lista de poligonos coincidentes 
-                               //con el plano de partición.
-    BspTree3d *front,*back; //Punteros a hijos.
+    lista_poligonos poligonos; //List of the polygons that lie 
+                               //in the partition plane.
+    BspTree3d *front,*back; //Pointer to the children.
   public:
     BspTree3d(void)
       : particion(), poligonos(), front(nullptr), back(nullptr) {}

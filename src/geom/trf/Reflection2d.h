@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Reflection2d.h
-//Rotación en el plano.
+//Reflection in a two-dimensional space.
 
 #ifndef REFLECTION2D_H
 #define REFLECTION2D_H
@@ -32,7 +32,7 @@ class Recta2d;
 
 //! @ingroup GEOM
 //
-//! @brief Reflexión en dos dimensiones.
+//! @brief Reflection in a two-dimensional space.
 class Reflection2d: public Trf2d
   {
   private:

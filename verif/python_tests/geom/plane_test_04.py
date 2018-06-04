@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-#Vector dirección de la intersección de dos planos.
+#Direction vector of the intersection of two planes.
 #Exemple 1.3 of the thesis «La teoría de bloque aplicada a la dinámica
 #de rocas» de Juan Carlos Ayes Zamudio
 

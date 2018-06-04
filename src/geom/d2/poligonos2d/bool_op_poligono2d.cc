@@ -295,15 +295,16 @@ std::list<Poligono2d> recorta(const std::list<Poligono2d> &l,const Poligono2d &p
     return retval;
   }
 
-//! @brief Return la intersección de los dos polígonos.
+//! @brief Return the intersection de los dos polígonos.
 std::list<Poligono2d> interseccion(const Poligono2d &p1,const Poligono2d &p2)
   { return Nef_2_to_Poligono2d(interseca(p1,p2)); }
 
-//! @brief Return la intersección del polígono con el semiplano.
+//! @brief Return la intersection of the polygon and the half plane.
 std::list<Poligono2d> interseccion(const Poligono2d &p,const HalfPlane2d &sp)
   { return Nef_2_to_Poligono2d(interseca(p,sp)); }
 
-//! @brief Return la intersección de los polígonos de la lista con el semiplano.
+//! @brief Return the intersection of the polygons in the list with the
+//! half plane.
 std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l,const HalfPlane2d &sp)
   {
     std::list<Poligono2d> retval;

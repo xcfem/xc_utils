@@ -73,23 +73,10 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
     //es menor que d.
     Segmento3d GetSegmento(const list_Pos3d::const_iterator &) const;
     Segmento3d GetSegmento(const size_t &) const;
-/*     virtual list_Pos3d Int(unsigned short int i, const double d) const */
-/*       { */
-/*         std::cerr << "Polilinea3d Int(i,d) not implemented" << endl; */
-/*         return list_Pos3d(); */
-/*       } */
-    list_Pos3d Int(unsigned short int i,const GEOM_FT &d) const;
-    //Return las intersecciones de la Polilinea3d con el plano
-    //coord_i= d
+    //list_Pos3d Int(unsigned short int i,const GEOM_FT &d) const;
     list_Pos3d getIntersection(const Plane &) const;
-    Polilinea3d Corta(unsigned short int i,const GEOM_FT &d) const;
-    //Return the Polilinea3d con los vertices correspondientes a los
-    //cortes con el plano coord_i= d
+    //Polilinea3d Corta(unsigned short int i,const GEOM_FT &d) const;
     Polilinea3d Separa(const Pos3d &p,const short int &sgn) const;
-    //Suponemos que p es vertice de la Polilinea3d
-    //Return el trozo de Polilinea3d:
-    //hasta p si sgn < 0
-    //desde p si sgn >= 0
     Pos3d getCenterOfMass(void) const
       { return GeomObj::list_Pos3d::getCenterOfMass(); }
 

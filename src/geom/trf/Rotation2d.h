@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Rotation2d.h
-//Rotación en el plano.
+//Rotation in a two-dimensional space.
 
 #ifndef ROTATION2D_H
 #define ROTATION2D_H

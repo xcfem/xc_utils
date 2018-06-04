@@ -35,7 +35,7 @@ class Segmento2d;
 
 //! @ingroup GEOM
 //
-//! @brief Semiplano en dos dimensiones.
+//! @brief Half plane in a two-dimensional space.
 class HalfPlane2d : public Superficie2d
   {
     Recta2d lim; //The points of the half-plane are those we lie to the right of the line.

@@ -91,9 +91,9 @@ Polilinea2d Polilinea2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
     Polilinea2d retval(GeomObj::list_Pos2d::GetMenores(i,d));
     return retval;
   }
+// //Return the intersection of the polyline with the plane defined by
+// // the equation coord_i= d
 // Polilinea2d::list_Pos2d Polilinea2d::Int(unsigned short int i,const double &d) const
-// //Return las intersecciones de la Polilinea2d con el plano
-// //coord_i= d
 //   {
 //     list_Pos2d l_int; //Lista de intersecciones
 // 	const_iterator ultimo= end();
@@ -107,9 +107,10 @@ Polilinea2d Polilinea2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 // 	//l_int.unique();
 //      return l_int;
 //   }
+// //Return the 2D polyline defined by the vertex obtained from cutting
+// // this polyline with the plane defined by
+// // the equation coord_i= d
 // Polilinea2d Polilinea2d::Corta(unsigned short int i,const double &d) const
-// //Return the Polilinea2d con los vertices correspondientes a los
-// //cortes con el plano coord_i= d
 //   {
 //     Polilinea2d result; //Lista de intersecciones
 // 	const_iterator ultimo= end();
@@ -182,11 +183,11 @@ GEOM_FT Polilinea2d::Iz(void) const
     return 0.0;
   }
 
+//! @brief Suponemos que p es vertice de la Polilinea2d
+//! Return el trozo de Polilinea2d:
+//! hasta p si sgn < 0
+//! desde p si sgn >= 0
 Polilinea2d Polilinea2d::Separa(const Pos2d &p,const short int &sgn) const
-//Suponemos que p es vertice de la Polilinea2d
-//Return el trozo de Polilinea2d:
-//hasta p si sgn < 0
-//desde p si sgn >= 0
   {
     Polilinea2d result;
     const_iterator i= find(p);

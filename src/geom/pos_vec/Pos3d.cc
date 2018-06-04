@@ -220,11 +220,11 @@ GEOM_FT Pos3d::dist2(const Segmento3d &sg) const
 GEOM_FT Pos3d::dist(const Segmento3d &sg) const
   { return sg.dist(*this); }
 
-//! @brief Return el cuadrado de la distance al plano.
+//! @brief Return the squared distance to the plane.
 GEOM_FT Pos3d::dist2(const Plane &p) const
   { return p.dist2(*this); }
 
-//! @brief Return the distance al plano.
+//! @brief Return the distance to the plane.
 GEOM_FT Pos3d::dist(const Plane &p) const
   { return p.dist(*this); }
 

@@ -32,10 +32,14 @@
 
 //! @ingroup GEOM
 //
-//! @brief The points of the half-space son los que están a la
-//! "espalda" del plano, entendiendo por tales aquellos
-//! tales que al evaluar la ecuación general del plano
-//! dan un valor menor o igual que cero.
+//! @brief The points of the half space are those that line
+//! at the back of the plane, this being understood as those that
+//! return a zero or negative value when evaluating on them the
+//! general equation of the plane, i. e.:
+//!
+//! A*x_i+B*y_i+C*z_i+D <= 0
+//!
+//! with the point coordinates: (x_i,y_i,z_i).
 class SemiEspacio3d : public GeomObj3d
   {
     Plane lim; 

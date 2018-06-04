@@ -125,9 +125,10 @@ Polilinea3d Polilinea3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
       if ((*j)(i) < d) retval.push_back(*j);
     return retval;
   }
+
+// //! @brief Return the intersections of the 3D polyline with the plane
+// //! given by the equation coord_i= d
 // Polilinea3d::list_Pos3d Polilinea3d::Int(unsigned short int i,const double &d) const
-// //Return las intersecciones de la Polilinea3d con el plano
-// //coord_i= d
 //   {
 //     list_Pos3d l_int; //Lista de intersecciones
 // 	list_Pos3d::const_iterator ultimo= end();
@@ -141,9 +142,11 @@ Polilinea3d Polilinea3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 // 	//l_int.unique();
 //      return l_int;
 //   }
+
+//    //Return a 3D polyline formed with the vertex obtainde from
+//    //cutting this polyline with the plane definde by the
+//    //equation coord_i= d
 // Polilinea3d Polilinea3d::Corta(unsigned short int i,const double &d) const
-// //Return la Polilinea3d con los vertices correspondientes a los
-// //cortes con el plano coord_i= d
 //   {
 //     Polilinea3d result; //Lista de intersecciones
 // 	list_Pos3d::const_iterator ultimo= end();
@@ -176,11 +179,11 @@ GEOM_FT Polilinea3d::Iz(void) const
     return 0.0;
   }
 
+//! @brief Suponemos que p es vertice de la Polilinea3d
+//! Return el trozo de Polilinea3d:
+//! hasta p si sgn < 0
+//! desde p si sgn >= 0
 Polilinea3d Polilinea3d::Separa(const Pos3d &p,const short int &sgn) const
-//Suponemos que p es vertice de la Polilinea3d
-//Return el trozo de Polilinea3d:
-//hasta p si sgn < 0
-//desde p si sgn >= 0
   {
     Polilinea3d result;
     GeomObj::list_Pos3d::const_iterator i= find(p);

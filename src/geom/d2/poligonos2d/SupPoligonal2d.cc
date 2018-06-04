@@ -252,29 +252,29 @@ GEOM_FT SupPoligonal2d::DistSigno(const Pos2d &p,const bool &sentido_horario) co
            retval= dist(Vertice(1),p);
          else if(nv==2)
            {
-             HalfPlane2d semiplano(Vertice(1),Vertice(2));
-             retval= signo*semiplano.DistSigno(p);
+             HalfPlane2d half_plane(Vertice(1),Vertice(2));
+             retval= signo*half_plane.DistSigno(p);
            }
          else
            {
              //Distancia al primer lado
              Pos2d p1= Vertice(1);
              Pos2d p2= Vertice(2);
-             HalfPlane2d semiplano(p1,p2);
-             retval= signo*semiplano.DistSigno(p);
+             HalfPlane2d half_plane(p1,p2);
+             retval= signo*half_plane.DistSigno(p);
              for(register unsigned int i=2; i<nv; i++)
                {
                  p1= Vertice(i);
                  p2= Vertice(i+1);
-                 semiplano= HalfPlane2d(p1,p2);
-                 const GEOM_FT d_i= signo*semiplano.DistSigno(p);
+                 half_plane= HalfPlane2d(p1,p2);
+                 const GEOM_FT d_i= signo*half_plane.DistSigno(p);
                  retval= max(retval,d_i);
                }
              //Distancia al último lado.
              p1= Vertice(nv);
              p2= Vertice(1);
-             semiplano= HalfPlane2d(p1,p2);
-             const GEOM_FT d_i= signo*semiplano.DistSigno(p);
+             half_plane= HalfPlane2d(p1,p2);
+             const GEOM_FT d_i= signo*half_plane.DistSigno(p);
              retval= max(retval,d_i);
            }
        }
@@ -355,7 +355,7 @@ std::list<Segmento2d> empalma(const std::list<Segmento2d> &lista)
     return retval;
   }
 
-//! @brief Return la intersección del polígono con la recta (if exists).
+//! @brief Return the intersection del polígono con la recta (if exists).
 Segmento2d SupPoligonal2d::Clip(const Recta2d &r) const
   {
     Segmento2d retval;
@@ -378,7 +378,7 @@ Segmento2d SupPoligonal2d::Clip(const Recta2d &r) const
     return retval;
   }
 
-//! @brief Return la intersección del polígono con la semirecta (if exists).
+//! @brief Return the intersection del polígono con la semirecta (if exists).
 Segmento2d SupPoligonal2d::Clip(const SemiRecta2d &sr) const
   {
     Segmento2d retval;
@@ -393,7 +393,7 @@ Segmento2d SupPoligonal2d::Clip(const SemiRecta2d &sr) const
     return retval;
   }
 
-//! @brief Return la intersección del polígono con el segmento (if exists).
+//! @brief Return the intersection del polígono con el segmento (if exists).
 Segmento2d SupPoligonal2d::Clip(const Segmento2d &sg) const
   {
     Segmento2d retval;
@@ -408,7 +408,7 @@ Segmento2d SupPoligonal2d::Clip(const Segmento2d &sg) const
     return retval;
   }
 
-//! @brief Return la intersección del polígono con la recta.
+//! @brief Return the intersection del polígono con la recta.
 list<Segmento2d> interseccion(const SupPoligonal2d &pg,const Recta2d &r)
   {
     list<Segmento2d> retval;
@@ -434,11 +434,11 @@ list<Segmento2d> interseccion(const SupPoligonal2d &pg,const Recta2d &r)
     return retval;     
   }
 
-//! @brief Return la intersección del polígono con la recta.
+//! @brief Return the intersection del polígono con la recta.
 list<Segmento2d> interseccion(const Recta2d &r,const SupPoligonal2d &pg)
   { return interseccion(pg,r); }
 
-//! @brief Return la intersección del polígono con la semirecta.
+//! @brief Return the intersection del polígono con la semirecta.
 list<Segmento2d> interseccion(const SupPoligonal2d &pg,const SemiRecta2d &sr)
   {
     
@@ -466,11 +466,11 @@ list<Segmento2d> interseccion(const SupPoligonal2d &pg,const SemiRecta2d &sr)
     return retval;
   }
 
-//! @brief Return la intersección del polígono con la semirecta.
+//! @brief Return the intersection del polígono con la semirecta.
 list<Segmento2d> interseccion(const SemiRecta2d &sr,const SupPoligonal2d &pg)
   { return interseccion(pg,sr); }
 
-//! @brief Return la intersección del polígono con el segmento.
+//! @brief Return the intersection del polígono con el segmento.
 list<Segmento2d> interseccion(const SupPoligonal2d &pg,const Segmento2d &sg)
   {
     
@@ -501,6 +501,6 @@ list<Segmento2d> interseccion(const SupPoligonal2d &pg,const Segmento2d &sg)
     return retval;
   }
 
-//! @brief Return la intersección del polígono con el segmento.
+//! @brief Return the intersection del polígono con el segmento.
 list<Segmento2d> interseccion(const Segmento2d &sg,const SupPoligonal2d &pg)
   { return interseccion(pg,sg); }

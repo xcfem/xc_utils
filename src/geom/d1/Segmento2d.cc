@@ -215,7 +215,8 @@ bool Segmento2d::Interseca(const Recta2d &r) const
 bool Segmento2d::Interseca(const SemiRecta2d &sr) const
   { return do_intersect(sr.cgsr,cgseg); }
 
-//! @brief Return the intersección de la Linea con un plano coord_i=cte.
+//! @brief Return the intersection of the line with a plane defined
+//! by the equation coord_i=cte.
 GeomObj2d::list_Pos2d Segmento2d::Interseccion(unsigned short int i, const double &d) const
   {
     GeomObj2d::list_Pos2d lp;
@@ -230,8 +231,8 @@ GeomObj2d::list_Pos2d Segmento2d::Interseccion(unsigned short int i, const doubl
     return lp;
   }
 
-//! @brief Return the point intersección de recta and segmento, if not exists la
-//! intersección devuelve la lista vacía.
+//! @brief Return the point intersection de recta and segmento, if not exists la
+//! intersection devuelve la lista vacía.
 GeomObj2d::list_Pos2d Segmento2d::Interseccion(const Recta2d &r) const
   {
     GeomObj2d::list_Pos2d retval;
@@ -265,8 +266,8 @@ GeomObj2d::list_Pos2d Segmento2d::Interseccion(const Recta2d &r) const
       }
     return retval;
   }
-//! @brief Return the point intersección de semirrecta and segmento, if not exists la
-//! intersección devuelve la lista vacía.
+//! @brief Return the point intersection de semirrecta and segmento, if not exists la
+//! intersection devuelve la lista vacía.
 GeomObj2d::list_Pos2d Segmento2d::Interseccion(const SemiRecta2d &sr) const
   {
     GeomObj2d::list_Pos2d retval;
@@ -287,8 +288,8 @@ GeomObj2d::list_Pos2d Segmento2d::Interseccion(const SemiRecta2d &sr) const
     return retval;
   }
 
-//! @brief Return the point intersección de ambos segmentos, if not exists la
-//! intersección devuelve la lista vacía.
+//! @brief Return the point intersection de ambos segmentos, if not exists la
+//! intersection devuelve la lista vacía.
 GeomObj2d::list_Pos2d Segmento2d::Interseccion(const Segmento2d &r2) const
   {
     GeomObj2d::list_Pos2d retval;
@@ -345,7 +346,7 @@ void Segmento2d::Plot(Plotter &plotter) const
     plotter.fline(p1.x(),p1.y(),p2.x(),p2.y());
   }
 
-//! Return the point de intersección del segmento con la recta, if exists.
+//! Return the point de intersection del segmento con la recta, if exists.
 Pos2d intersection_point(const Segmento2d &s, const Recta2d &r)
   {
     Pos2d retval;
@@ -357,11 +358,11 @@ Pos2d intersection_point(const Segmento2d &s, const Recta2d &r)
      return retval;
   }
 
-//! Return the point de intersección del segmento con la recta, if exists.
+//! Return the point de intersection del segmento con la recta, if exists.
 Pos2d intersection_point(const Recta2d &r, const Segmento2d &s)
   { return intersection_point(s,r); }
 
-//! Return the point de intersección de los segmentos, if exists.
+//! Return the point de intersection de los segmentos, if exists.
 Pos2d intersection_point(const Segmento2d &s1, const Segmento2d &s2)
   {
     Pos2d retval;

@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Identidad3d.h
-//Rotación en el plano.
+//Identity transformation.
 
 #ifndef IDENTIDAD3D_H
 #define IDENTIDAD3D_H

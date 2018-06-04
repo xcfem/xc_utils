@@ -69,7 +69,8 @@ GEOM_FT SemiRecta2d::dist(const Pos2d &p) const
 bool SemiRecta2d::Interseca(const Recta2d &r) const
   { return do_intersect(r.cgr,cgsr); }
 
-//! @brief Return the intersección de la semirrecta con un plano coord_i=cte.
+//! @brief Return the intersection de la semirrecta with the plane
+//! defined by the equation coord_i= d.
 GeomObj2d::list_Pos2d SemiRecta2d::Interseccion(unsigned short int i, const double &d) const
   {
     GeomObj2d::list_Pos2d lp;
@@ -84,8 +85,8 @@ GeomObj2d::list_Pos2d SemiRecta2d::Interseccion(unsigned short int i, const doub
     return lp;
   }
 
-//! @brief Return the point intersección de recta and semirrecta, si doesn't exists la
-//! intersección devuelve la lista vacía.
+//! @brief Return the point intersection de recta and semirrecta, si doesn't exists la
+//! intersection devuelve la lista vacía.
 GeomObj2d::list_Pos2d SemiRecta2d::Interseccion(const Recta2d &r) const
   {
     GeomObj2d::list_Pos2d retval;
@@ -106,8 +107,8 @@ GeomObj2d::list_Pos2d SemiRecta2d::Interseccion(const Recta2d &r) const
     return retval;
   }
 
-//Return the point intersección de ambas rectas, if doesn't exists la
-//intersección devuelve la lista vacía.
+//Return the point intersection de ambas rectas, if doesn't exists la
+//intersection devuelve la lista vacía.
 GeomObj2d::list_Pos2d SemiRecta2d::Interseccion(const SemiRecta2d &r2) const
   {
     GeomObj2d::list_Pos2d retval;

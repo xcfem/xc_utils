@@ -154,14 +154,15 @@ def eql_coulomb(x,H,z,ql):
 def eqp_coulomb(x,H,z,qp):
     '''
     eqp_coulomb(x,H,z,qp):
-    Devuelve el empuje unitario producido por una sobrecarga puntual qp, vertical, que actúa
-    sobre la superficie del terreno y está contenida en el plano vertical de la sección del muro
-    sobre la que se calcula el empuje, from:
-    x:  Distance from the top of the trasdós to the point of application 
+    Return the earth pressure resulting from a vertical point load qp
+    acting behind a retaining wall and is contained in the same vertical
+    plane of the wall section.
+
+    :param x:  Distance from the top of the trasdós to the point of application 
         of the load.
-    H:  Profundidad del extremo inferior del trasdós.
-    z:  depth of the point for which the pressure is computed.
-    qp: carga puntual
+    :param H:  Profundidad del extremo inferior del trasdós.
+    :param z:  depth of the point for which the pressure is computed.
+    :param qp: carga puntual
     '''
     m=x/float(H)
     nz/float(H)

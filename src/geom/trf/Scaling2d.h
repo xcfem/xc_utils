@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Scaling2d.h
-//Rotación en el plano.
+//2D scaling.
 
 #ifndef SCALING2D_H
 #define SCALING2D_H
@@ -30,7 +30,7 @@
 
 //! @ingroup GEOM
 //
-//! @brief Scaling en dos dimensiones.
+//! @brief Scaling in a two-dimensional space.
 class Scaling2d: public Trf2d
   {
   public:

@@ -131,7 +131,7 @@ GeomObj *Plane::clon(void) const
 void Plane::ThreePoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   { operator=(Plane(p1,p2,p3)); }
 
-//! @brief Return el vector normal al plano con sentido hacia el lado "positivo".
+//! @brief Return el normal vector oriented to the "positive" side.
 Vector3d Plane::Normal(void) const
   { return Vector3d(cgp.orthogonal_vector()); }
 //! @brief Return un vector ortogonal al devuelto por Normal().
@@ -141,13 +141,13 @@ Vector3d Plane::Base1(void) const
 Vector3d Plane::Base2(void) const
   { return Vector3d(cgp.base2()); }
 
-//! @brief Return un sistema de coordenadas cuyo plano XY
-//! coincide con éste.
+//! @brief Return a coordinate system whose XY plane corresponds to
+//! this one.
 SisCooRect2d3d Plane::getSisCoo(void) const
   { return SisCooRect2d3d(Base1(),Base2()); }
 
-//! @brief Return un sistema de referencia cuyo plano XY
-//! coincide con éste.
+//! @brief Return a reference frame whose XY plane corresponds to
+//! this one.
 Ref2d3d Plane::getRef(const Pos3d &org) const
   { return Ref2d3d(org,Base1(),Base2()); }
 
@@ -298,11 +298,11 @@ void Plane::GeneralEquation(const GeneralEquationOfPlane &eq)
 bool Plane::Interseca(const Plane &p) const
   { return do_intersect(ToCGAL(),p.ToCGAL()); }
 
-//! @brief Returns (if exists) la intersección con el plano que se pasa como parámetro.
+//! @brief Returns (if exists) the intersection with the plane argument.
 Recta3d Plane::Interseccion(const Plane &p) const
   { return recta_interseccion(*this,p); }
 
-// //! @brief Return (if exists) la intersección con el plano que se pasa como parámetro.
+// //! @brief Return (if exists) teh intersection with the plane argument.
 // Recta3d Plane::Interseccion(const Plane &p) const
 //   {
 //     const Recta3d retval= Interseccion(p);
@@ -312,11 +312,11 @@ Recta3d Plane::Interseccion(const Plane &p) const
 //     return retval;
 //   }
 
-//! @brief Return verdadero if exists la intersección con la recta que se pasa como parámetro.
+//! @brief Return verdadero if exists the intersection con la recta que se pasa como parámetro.
 bool Plane::Interseca(const Recta3d &r) const
   { return do_intersect(ToCGAL(),r.ToCGAL()); }
 
-//! @brief Return (if exists) la intersección con la recta que se pasa como parámetro.
+//! @brief Return (if exists) the intersection con la recta que se pasa como parámetro.
 Pos3d Plane::Interseccion(const Recta3d &r) const
   {
     Pos3d retval;
@@ -328,7 +328,7 @@ Pos3d Plane::Interseccion(const Recta3d &r) const
     return retval;
   }
 
-// //! @brief Return (if exists) la intersección con la recta que se pasa como parámetro.
+// //! @brief Return (if exists) the intersection con la recta que se pasa como parámetro.
 // Pos3d Plane::Interseccion(const Recta3d &r) const
 //   {
 //     const Pos3d retval= Interseccion(r);
@@ -338,11 +338,11 @@ Pos3d Plane::Interseccion(const Recta3d &r) const
 //     return retval;
 //   }
 
-//! @brief Return verdadero if exists la intersección con la recta que se pasa como parámetro.
+//! @brief Return verdadero if exists the intersection con la recta que se pasa como parámetro.
 bool Plane::Interseca(const SemiRecta3d &sr) const
   { return do_intersect(ToCGAL(),sr.ToCGAL()); }
 
-//! @brief Return (if exists) la intersección con la semirrecta que se pasa como parámetro.
+//! @brief Return (if exists) the intersection con la semirrecta que se pasa como parámetro.
 Pos3d Plane::Interseccion(const SemiRecta3d &sr) const
   {
     Pos3d retval;
@@ -354,11 +354,11 @@ Pos3d Plane::Interseccion(const SemiRecta3d &sr) const
     return retval;
   }
 
-//! @brief Return verdadero if exists la intersección con el segmento que se pasa como parámetro.
+//! @brief Return verdadero if exists the intersection con el segmento que se pasa como parámetro.
 bool Plane::Interseca(const Segmento3d &sg) const
   { return do_intersect(ToCGAL(),sg.ToCGAL()); }
 
-//! @brief Return (if exists) la intersección con la semirrecta que se pasa como parámetro.
+//! @brief Return (if exists) the intersection con la semirrecta que se pasa como parámetro.
 Pos3d Plane::Interseccion(const Segmento3d &sg) const
   {
     Pos3d retval;
@@ -370,7 +370,7 @@ Pos3d Plane::Interseccion(const Segmento3d &sg) const
     return retval;
   }
 
-// //! @brief Return (if exists) la intersección con la recta que se pasa como parámetro.
+// //! @brief Return (if exists) the intersection con la recta que se pasa como parámetro.
 // Pos3d Plane::Interseccion(const SemiRecta3d &sr) const
 //   {
 //     const Pos3d retval= Interseccion(sr);
@@ -468,7 +468,7 @@ GEOM_FT Plane::AjusteMinimosCuadrados(const GeomObj3d::list_Pos3d &lp)
 Plane perpendicular(const Recta3d &r, const Pos3d &p)
   { return r.Perpendicular(p); }
 
-//! @brief Recta intersección de dos planos.
+//! @brief Return the intersection of both planes.
 Recta3d recta_interseccion(const Plane &p1, const Plane &p2)
   {
     Recta3d retval;
@@ -484,7 +484,7 @@ Recta3d recta_interseccion(const Plane &p1, const Plane &p2)
     return retval;
   }
 
-//! @brief Intersección de tres planos.
+//! @brief Returnt the intersection of the three planes.
 Pos3d intersection_point(const Plane &p1, const Plane &p2, const Plane &p3)
   {
     Pos3d retval;
@@ -516,8 +516,8 @@ GmGrupo3d interseccion(const Plane &p1, const Plane &p2)
 	  }
         else
           {
-            CGPlane_3 planoi;
-            if(CGAL::assign(planoi, result))
+            CGPlane_3 i_plane;
+            if(CGAL::assign(i_plane, result))
               {
                 std::cerr << __FUNCTION__
 		          << "; the planes are the same." 
@@ -717,26 +717,26 @@ GeomObj3d::list_Pos3d interseccion(const Recta3d &r, const Plane &p)
   { return interseccion(p,r); }
 
 //! @brief Return the points of intersection between the planes.
-GeomObj3d::list_Pos3d intersection_points(const std::deque<Plane> &planos)
+GeomObj3d::list_Pos3d intersection_points(const std::deque<Plane> &planes)
   {
     GeomObj3d::list_Pos3d retval;
-    const size_t sz= planos.size();
+    const size_t sz= planes.size();
     for(size_t i=0;i<sz;i++)
       for(size_t j=i+1;j<sz;j++)
         for(size_t k=j+1;k<sz;k++)
 	  {
-            const Pos3d p= intersection_point(planos[i],planos[j],planos[k]);
+            const Pos3d p= intersection_point(planes[i],planes[j],planes[k]);
             if(p.exists())
               retval.push_back(p);
           }
     return retval;
   }
 
-//! @brief Return true if la recta es paralela al plano.
+//! @brief Return true if the line is parallel to the plane.
 bool paralelos(const Plane &p, const Recta3d &r)
   { return(!do_intersect(p.ToCGAL(),r.ToCGAL())); }
 
-//! @brief Return true if los planos son paralelos.
+//! @brief Return true if the planes are parallel.
 bool paralelos(const Plane &p1, const Plane &p2)
   { return(!do_intersect(p1.ToCGAL(),p2.ToCGAL())); }
 

@@ -39,7 +39,7 @@ Poliedro3d Trihedron::GetPoliedro3d(void) const
     return retval;
   }
 
-Plane Trihedron::get_plano(const size_t &i) const
+Plane Trihedron::get_plane(const size_t &i) const
   {
     Poliedro3d tmp(GetPoliedro3d());
     Poliedro3d::Facet_const_iterator j= tmp.facets_begin();
@@ -88,13 +88,13 @@ GEOM_FT Trihedron::PseudoDist(const Pos3d &p) const
   {
     Poliedro3d tmp= GetPoliedro3d();
     Poliedro3d::Facet_const_iterator j= tmp.facets_begin();
-    Plane plano= tmp.getPlaneFromFace(j);
-    GEOM_FT dmax= -plano.PseudoDist(p);
+    Plane plane= tmp.getPlaneFromFace(j);
+    GEOM_FT dmax= -plane.PseudoDist(p);
     j++;
     for(;j!=tmp.facets_end();j++)
       {
-        plano= tmp.getPlaneFromFace(j);
-        dmax= std::max(dmax,-plano.PseudoDist(p));
+        plane= tmp.getPlaneFromFace(j);
+        dmax= std::max(dmax,-plane.PseudoDist(p));
       }
     return dmax;
   }
@@ -117,11 +117,11 @@ bool Trihedron::In(const Pos3d &p,const double &tol) const
         if(ang<1.1*angConico)
           {
             Poliedro3d tmp= GetPoliedro3d();
-            Plane plano;
+            Plane plane;
             for(Poliedro3d::Facet_const_iterator j= tmp.facets_begin();j!=tmp.facets_end();j++)
               {
-                plano= tmp.getPlaneFromFace(j);
-                d= -plano.PseudoDist(p);
+                plane= tmp.getPlaneFromFace(j);
+                d= -plane.PseudoDist(p);
                 if(d>=tol)
                   {
                     retval= false;

@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Revolucion3d.h
-//Rotación en el plano.
+//Revolution in a three-dimensional space.
 
 #ifndef REVOLUCION3D_H
 #define REVOLUCION3D_H

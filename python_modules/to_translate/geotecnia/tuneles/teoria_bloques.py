@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Macros that are useful in block theory calculations (see Goodman & Shi, Block theory and its application to rock engineering 1985)
 
-'''Devuelve el plano de buzamiento definido por:
+'''Return the dip plane defined by:
    alpha: Ángulo de buzamiento.
    beta: Dirección del buzamiento.
    p: point for which the plane passes through.'''

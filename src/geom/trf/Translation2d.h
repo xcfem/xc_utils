@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Translation2d.h
-//Traslación en el plano.
+//Traslation in a two-dimensional space.
 
 #ifndef TRANSLATION2D_H
 #define TRANSLATION2D_H

@@ -69,8 +69,8 @@ bool SemiRecta3d::Paralela(const SemiRecta3d &r) const
 bool SemiRecta3d::Paralela(const Recta3d &r) const
   { return (GetDir()== r.GetDir()); }
 
-//! @brief Return the point intersección de recta and semirrecta, if doesn't exists la
-//! intersección devuelve la lista vacía.
+//! @brief Return the point intersection de recta and semirrecta, if doesn't exists la
+//! intersection devuelve la lista vacía.
 GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(const Recta3d &r) const
   {
     const Recta3d sop= RectaSoporte();
@@ -84,7 +84,8 @@ GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(const Recta3d &r) const
     return retval;
   }
 
-//! @brief Return the intersección de la semirrecta con un plano coord_i=cte.
+//! @brief Return the intersection de la semirrecta with the plane
+//! defined by the equation coord_i= d.
 GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(unsigned short int i, const double &d) const
   {
     GeomObj3d::list_Pos3d lp;
@@ -99,8 +100,8 @@ GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(unsigned short int i, const doub
     return lp;
   }
 
-//! @brief Return the point intersección de ambas semirectas, if doesn't exists
-//! intersección devuelve la lista vacía.
+//! @brief Return the point intersection de ambas semirectas, if doesn't exists
+//! intersection devuelve la lista vacía.
 GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(const SemiRecta3d &sr) const
   {
     const Recta3d sop1= RectaSoporte();

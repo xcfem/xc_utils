@@ -7,8 +7,8 @@ import math
 
 def computeDipPlane(alpha,beta,p):
     '''
-    Devuelve el plano de buzamiento definido por:
-    alpha: Ángulo de buzamiento.
+    Return the dip plane defined by:
+    alpha: angle of dip.
     beta: Dirección del buzamiento.
     p: point for which the plane passes through.
     '''

@@ -33,7 +33,7 @@
 SemiEspacio3d::SemiEspacio3d(const Plane &p)
   : GeomObj3d(), lim(p) {}
 
-//! @brief Return el plano que limita el semiespacio.
+//! @brief Return the plane that defined de half space boudary.
 const Plane &SemiEspacio3d::getBoundaryPlane(void) const
   { return lim; }
 
@@ -68,13 +68,12 @@ GEOM_FT SemiEspacio3d::dist(const Pos3d &p) const
 GEOM_FT SemiEspacio3d::dist2(const Pos3d &p) const
   { return fabs(distSigno2(p)); }
 
-//! @brief Return el ángulo que forma con el half-space que
+//! @brief Return el ángulo que forma con el half space que
 //! se pasa como parámetro.
 GEOM_FT SemiEspacio3d::getAngulo(const SemiEspacio3d &se) const
   { return angulo(lim,se.getPlane()); }
 
-//! @brief Return el ángulo que forma con el plano que
-//! se pasa como parámetro.
+//! @brief Return the angle with respect to the plane argument.
 GEOM_FT SemiEspacio3d::getAngulo(const Plane &p) const
   { return angulo(lim,p); }
 
@@ -83,12 +82,13 @@ GEOM_FT SemiEspacio3d::getAngulo(const Plane &p) const
 GEOM_FT SemiEspacio3d::getAngulo(const Vector3d &v) const
   { return angulo(v,lim); }
 
-//! @brief Return la arista de la intersección entre semiespacios.
+//! @brief Return la arista de the intersection entre semiespacios.
 Recta3d SemiEspacio3d::getLima(const SemiEspacio3d &se) const
   {
      const Recta3d retval= lim.Interseccion(se.lim);
      if(!retval.exists())
-       std::cerr << "getLima: los planos que limitan los semiespacios no se cortan."
+       std::cerr << getClassName() << "::" << __FUNCTION__
+	         << "; the half space boundaries doesn't intersect."
                  << std::endl;
      return retval;
   }
@@ -134,13 +134,13 @@ bool operator==(const SemiEspacio3d &r1,const SemiEspacio3d &r2)
       return (r1.lim==r2.lim); 
   }
 
-//! @brief Return un vector normal al plano que limita
-//! el half-space dirigido hacia el exterior del mismo.
+//! @brief Return a vector normal to the boundary plane
+//! oriented inside-out.
 Vector3d SemiEspacio3d::NormalExterior(void) const
   { return lim.Normal(); }
 
-//! @brief Return un vector normal al plano que limita
-//! el half-space dirigido hacia el exterior del mismo.
+//! @brief Return a vector normal to the boundary plane
+//! oriented outside-in.
 Vector3d SemiEspacio3d::NormalInterior(void) const
   { return -NormalExterior(); }
 
@@ -148,7 +148,7 @@ Vector3d SemiEspacio3d::NormalInterior(void) const
 void SemiEspacio3d::Print(std::ostream &os) const
       { os << lim; }
 
-//! @brief Return de points of intersection between half-spaces.
+//! @brief Return de points of intersection between half spaces.
 TripletMap<Pos3d> intersection_points(const std::deque<SemiEspacio3d> &se)
   {
     TripletMap<Pos3d> retval;
@@ -164,7 +164,7 @@ TripletMap<Pos3d> intersection_points(const std::deque<SemiEspacio3d> &se)
     return retval;
   }
 
-//! @brief Return los vertices del poliedro intersección de los semiespacios.
+//! @brief Return los vertices del poliedro intersection de los semiespacios.
 TripletMap<Pos3d> vertices_poliedro(const std::deque<SemiEspacio3d> &se, const double &tol)
   {
     TripletMap<Pos3d> tmp= intersection_points(se);
@@ -199,7 +199,7 @@ TripletMap<Pos3d> vertices_poliedro(const std::deque<SemiEspacio3d> &se, const d
     return retval;
   }
 
-//! @brief Return las rectas de intersección entre los semiespacios.
+//! @brief Return las rectas de intersection entre los semiespacios.
 std::deque<Recta3d> rectas_interseccion(const std::deque<SemiEspacio3d> &se)
   {
     std::deque<Recta3d> retval;
@@ -228,10 +228,10 @@ std::deque<Vector3d> vectores_normales(const std::deque<SemiEspacio3d> &se)
 GEOM_FT angulo(const SemiEspacio3d &se1,const SemiEspacio3d &se2)
   { return se1.getAngulo(se2); }
 
-//! @brief Return el ángulo entre el half-space y el vector.
+//! @brief Return el ángulo entre el half space y el vector.
 GEOM_FT angulo(const Vector3d &v,const SemiEspacio3d &se)
   { return se.getAngulo(v); }
 
-//! @brief Return el ángulo entre el half-space y el vector.
+//! @brief Return el ángulo entre el half space y el vector.
 GEOM_FT angulo(const SemiEspacio3d &se,const Vector3d &v)
   { return se.getAngulo(v); }

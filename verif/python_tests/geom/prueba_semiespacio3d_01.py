@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-#Ángulo entre dos planos.
+#Angle between two planes.
 #Exemple 1.7 of the thesis «La teoría de bloque aplicada a la dinámica
 #de rocas» Juan Carlos Ayes Zamudio
 

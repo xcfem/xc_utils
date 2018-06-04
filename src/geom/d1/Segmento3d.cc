@@ -155,8 +155,8 @@ Pos3d Segmento3d::getCenterOfMass(void) const
   }
 
 GeomObj3d::list_Pos3d Segmento3d::Interseccion(const Recta3d &r) const
-//Return the point intersección de recta and segmento, if doesn't exists la
-//intersección devuelve la lista vacía.
+//Return the point intersection de recta and segmento, if doesn't exists la
+//intersection devuelve la lista vacía.
   {
     const Recta3d sop= RectaSoporte();
     GeomObj3d::list_Pos3d retval= sop.Interseccion(r);
@@ -168,9 +168,9 @@ GeomObj3d::list_Pos3d Segmento3d::Interseccion(const Recta3d &r) const
       }
     return retval;
   }
+//! @brief Return the point intersection de semirrecta and segmento, if
+//! the intersection doesn't exists returns an empty list.
 GeomObj3d::list_Pos3d Segmento3d::Interseccion(const SemiRecta3d &sr) const
-//Return the point intersección de semirrecta and segmento, if doesn't exists la
-//intersección devuelve la lista vacía.
   {
     const Recta3d sop= RectaSoporte();
     GeomObj3d::list_Pos3d retval= sr.Interseccion(sop);
@@ -183,7 +183,8 @@ GeomObj3d::list_Pos3d Segmento3d::Interseccion(const SemiRecta3d &sr) const
     return retval;
   }
 
-//! @brief Return the intersección de la Linea con un plano coord_i=cte.
+//! @brief Return the intersection of the line with the plane defined
+//! by the equation coord_i=cte.
 GeomObj3d::list_Pos3d Segmento3d::Interseccion(unsigned short int i, const double &d) const
   {
     GeomObj3d::list_Pos3d lp;
@@ -199,8 +200,8 @@ GeomObj3d::list_Pos3d Segmento3d::Interseccion(unsigned short int i, const doubl
   }
 
 GeomObj3d::list_Pos3d Segmento3d::Interseccion(const Segmento3d &sg2) const
-//Return the point intersección entre segmentos, if doesn't exists la
-//intersección devuelve la lista vacía.
+//Return the point intersection entre segmentos, if doesn't exists la
+//intersection devuelve la lista vacía.
   {
     const Recta3d sop= RectaSoporte();
     GeomObj3d::list_Pos3d retval= sg2.Interseccion(sop);

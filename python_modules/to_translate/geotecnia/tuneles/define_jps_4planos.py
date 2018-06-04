@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Define lso «Joint Pyramids» correspondientes a cuatro planos  P1,P2,P3 y P4
+# Define the «Joint Pyramids» corresponding to the four planes: P1,P2,P3 y P4
 JP0000= 
 \JP0000{\semiespacios{P1U,P2U,P3U,P4U} }
 JP0001= 

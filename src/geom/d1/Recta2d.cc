@@ -284,7 +284,8 @@ void Recta2d::Put(const Pos2d &p1,const Pos2d &p2)
 bool Recta2d::Interseca(const Recta2d &r2) const
   { return do_intersect(cgr,r2.cgr); }
 
-//! @brief Return the intersección de la Linea con un plano coord_i=cte.
+//! @brief Return the intersection of the line with the plane
+//! defined by the equation coord_i= d.
 GeomObj2d::list_Pos2d Recta2d::Interseccion(unsigned short int i, const double &d) const
   {
     GeomObj::list_Pos2d lp;
@@ -302,8 +303,8 @@ GeomObj2d::list_Pos2d Recta2d::Interseccion(unsigned short int i, const double &
     return lp;
   }
 
-//! @brief Return the point intersección de ambas rectas, if doesn't exists la
-//! intersección devuelve la lista vacía.
+//! @brief Return the point intersection de ambas rectas, if doesn't exists la
+//! intersection devuelve la lista vacía.
 GeomObj2d::list_Pos2d Recta2d::Interseccion(const Recta2d &r2) const
   {
     GeomObj2d::list_Pos2d retval;
@@ -466,11 +467,11 @@ bool colineales(const Recta2d &r1,const Recta2d &r2)
 bool intersecan(const Recta2d &r1,const Recta2d &r2)
   { return r1.Interseca(r2); }
 
-//! @brief Return the intersección.
+//! @brief Return the intersection.
 GeomObj2d::list_Pos2d interseccion(const Recta2d &r1,const Recta2d &r2)
   { return r1.Interseccion(r2); }
 
-//! @brief Return the point de intersección (if exists).
+//! @brief Return the point de intersection (if exists).
 Pos2d intersection_point(const Recta2d &r1, const Recta2d &r2)
   {
     Pos2d retval;

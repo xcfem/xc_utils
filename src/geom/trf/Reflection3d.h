@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Reflection3d.h
-//Rotación en el plano.
+//Reflection in three-dimensional space.
 
 #ifndef REFLECTION3D_H
 #define REFLECTION3D_H

@@ -17,8 +17,8 @@ tunnelAxis=
     \axis{\setVectoresIJ{[vectorITunel,vectorJTunel]}}
   }
 
-'''Define los semiespacios superiores e inferiores
-   correspondientes a los planos P1,P2 y P3'''
+'''Define the up and down half spaces that correspond to
+   the planes P1,P2 and P3'''
 P1L= 
 \P1L{\setPlane{P1}}
 P1U= 

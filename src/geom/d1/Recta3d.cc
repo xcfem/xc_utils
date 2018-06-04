@@ -190,7 +190,7 @@ GEOM_FT coo_interseccion(const GeomObj2d::list_Pos2d &int_a, const GeomObj2d::li
             std::cerr << __FUNCTION__
 		      << "(int_a,int_b): error when promediar la coordenada "
 		      << coo 
-                      << " de la intersección. Los valores obtenidos: "
+                      << " of the intersection. Los valores obtenidos: "
 		      << pint_a(coo) << " and " << pint_b(coo)
                       << " son muy diferentes." << std::endl;
           }
@@ -221,7 +221,8 @@ bool Recta3d::Interseca(const Recta3d &r2) const
       return true;
   }
 
-//! @brief Return the intersección de la Linea con un plano coord_i=cte.
+//! @brief Return the intersection of the line with the plane
+//! defined by the equation coord_i= d.
 GeomObj3d::list_Pos3d Recta3d::Interseccion(unsigned short int i, const double &d) const
   {
     GeomObj::list_Pos3d lp;
@@ -242,8 +243,8 @@ GeomObj3d::list_Pos3d Recta3d::Interseccion(unsigned short int i, const double &
     return lp;
   }
 
-//Return the point intersección con la recta r2, if not exists la
-//intersección devuelve la lista vacía.
+//Return the point intersection con la recta r2, if not exists la
+//intersection devuelve la lista vacía.
 GeomObj3d::list_Pos3d Recta3d::Interseccion(const Recta3d &r2,const double &tol) const
   {
     GeomObj3d::list_Pos3d retval;
