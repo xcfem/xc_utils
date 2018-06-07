@@ -23,7 +23,7 @@
 
 #include "TritrizPos3d.h"
 #include "MatrizPos3d.h"
-#include "xc_utils/src/geom/d1/Segmento3d.h"
+#include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d3/BND3d.h"
 #include "xc_utils/src/geom/trf/Trf3d.h"
 #include "xc_utils/src/geom/trf/Revolucion3d.h"
@@ -42,7 +42,7 @@ TritrizPos3d::TritrizPos3d(const MatrizPos3d &l1_points,const MatrizPos3d &l2_po
   : TritrizPos<Pos3d>(l1_points,l2_points,l3_points,l4_points,ndiv_12,ndiv_13) {}
 
 Pos3d TritrizPos3d::GetCentro(void) const
-  { return get_centro(*this,Segmento3d()); }
+  { return get_centro(*this,Segment3d()); }
 
 void TritrizPos3d::Transforma(const Trf3d &trf)
   { trf.Transforma(*this); }

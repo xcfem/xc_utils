@@ -22,7 +22,7 @@
 //Polilinea2d.cc
 
 #include "Polilinea2d.h"
-#include "Segmento2d.h"
+#include "Segment2d.h"
 #include <plotter.h>
 
 #include "xc_utils/src/geom/listas/utils_list_pos2d.h"
@@ -49,7 +49,7 @@ const Pos2d *Polilinea2d::AgregaVertice(const Pos2d &p)
     return &(*GeomObj::list_Pos2d::rbegin());
   }
 
-size_t Polilinea2d::GetNumSegmentos(void) const
+size_t Polilinea2d::getNumSegments(void) const
   {
     size_t retval= GetNumVertices();
     if(retval>0)
@@ -65,7 +65,7 @@ void Polilinea2d::Transforma(const Trf2d &trf2d)
 bool Polilinea2d::In(const Pos2d &p, const double &tol) const
   {
     for(register const_iterator j=begin();j != end();j++)
-      if(GetSegmento(j).In(p,tol)) return true;
+      if(getSegment(j).In(p,tol)) return true;
     return false;
   }
 
@@ -100,7 +100,7 @@ Polilinea2d Polilinea2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 //     ultimo--;
 //     for(register const_iterator j=begin();j != ultimo;j++)
 //       {
-//         Segmento2d s= GetSegmento(j);
+//         Segment2d s= getSegment(j);
 //         list_Pos2d l_temp= s.Int(i,d);
 //         copy(l_temp.begin(),l_temp.end(), back_inserter(l_int)); 
 //       }
@@ -117,7 +117,7 @@ Polilinea2d Polilinea2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 //     ultimo--;
 //     for(register const_iterator j=begin();j != ultimo;j++)
 //       {
-//         Segmento2d s= GetSegmento(j);
+//         Segment2d s= getSegment(j);
 //         list_Pos2d l_temp= s.Int(i,d);
 //         result.push_back(*j);
 //         if (!l_temp.empty()) result.push_back(*l_temp.begin());
@@ -141,45 +141,49 @@ Polilinea2d Polilinea2d::Offset(const GEOM_FT &d) const
     return retval;
   }
 
-//! @brief Return el segmento a continuación del vértice *i
-Segmento2d Polilinea2d::GetSegmento(const const_iterator &i) const
+//! @brief Return the segment that follows the *i vertex.
+Segment2d Polilinea2d::getSegment(const const_iterator &i) const
   {
     const_iterator j= i; j++;
     if(j==end())
       {
-        std::cerr << "Polilinea2d::GetSegmento: el vértice es el último"
-             << " de la polilinea." << std::endl;
-        return Segmento2d();
+        std::cerr << getClassName() << "::" << __FUNCTION__
+		  << ": the vertex is the last one "
+		  << " of the polyline." << std::endl;
+        return Segment2d();
       }
-    return Segmento2d(*i,*j);
+    return Segment2d(*i,*j);
   }
 
-//! @brief Return el segmento i-ésimo (el primero es el 1).
-Segmento2d Polilinea2d::GetSegmento(const size_t &i) const
+//! @brief Return i-th segment (the first one is the 1).
+Segment2d Polilinea2d::getSegment(const size_t &i) const
   {
-    const size_t ns= GetNumSegmentos();
+    const size_t ns= getNumSegments();
     if(i>ns)
       std::cerr << getClassName() << "::" << __FUNCTION__
 	        << "; you asked for the " << i
 	        << "-th and " << ns
                 << "-th is the last one." << std::endl;
-    Segmento2d s(Vertice(i),Vertice(i+1));
+    Segment2d s(Vertice(i),Vertice(i+1));
     return s;
   }
 
 GEOM_FT Polilinea2d::Ix(void) const
   {
-    std::cerr << "Polilinea2d Ix() not implemented" << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented" << std::endl;
     return 0.0;
   }
 GEOM_FT Polilinea2d::Iy(void) const
   {
-    std::cerr << "Polilinea2d Iy() not implemented" << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented" << std::endl;
     return 0.0;
   }
 GEOM_FT Polilinea2d::Iz(void) const
   {
-    std::cerr << "Polilinea2d Iz() not implemented" << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented" << std::endl;
     return 0.0;
   }
 
@@ -208,7 +212,7 @@ GeomObj::list_Pos2d Polilinea2d::Interseccion(const Recta2d &r) const
     register const_iterator k= j;k++;
     for(;k != end();j++,k++)
       {
-        Segmento2d s(*j,*k);
+        Segment2d s(*j,*k);
         list_Pos2d tmp= interseccion(r,s);
         if(!tmp.empty())
           retval.Agrega(tmp);
@@ -225,7 +229,7 @@ GeomObj::list_Pos2d Polilinea2d::Interseccion(const SemiRecta2d &sr) const
     register const_iterator k= j;k++;
     for(;k != end();j++,k++)
       {
-        Segmento2d s(*j,*k);
+        Segment2d s(*j,*k);
         list_Pos2d tmp= interseccion(sr,s);
         if(!tmp.empty())
           retval.Agrega(tmp);
@@ -235,14 +239,14 @@ GeomObj::list_Pos2d Polilinea2d::Interseccion(const SemiRecta2d &sr) const
 
 //! @brief Return the points of intersection of the polyline with
 //! the argument.
-GeomObj::list_Pos2d Polilinea2d::Interseccion(const Segmento2d &sg) const
+GeomObj::list_Pos2d Polilinea2d::Interseccion(const Segment2d &sg) const
   {
     list_Pos2d retval;
     register const_iterator j=begin();
     register const_iterator k= j;k++;
     for(;k != end();j++,k++)
       {
-        Segmento2d s(*j,*k);
+        Segment2d s(*j,*k);
         list_Pos2d tmp= interseccion(sg,s);
         if(!tmp.empty())
           retval.Agrega(tmp);
@@ -261,14 +265,14 @@ Polilinea2d::iterator Polilinea2d::getFarthestPointFromSegment(iterator it1, ite
     // Keep track of the point with the maximum distance.
     iterator maxIt = it1;
     maxIt++;
-    Segmento2d s= Segmento2d(*it1,*it2);
+    Segment2d s= Segment2d(*it1,*it2);
     GEOM_FT maxDist= s.dist(*maxIt);
 
     iterator it = it1;
     it++;
     while(it != it2)
       {
-        Segmento2d s= Segmento2d(*it1,*it2);
+        Segment2d s= Segment2d(*it1,*it2);
         GEOM_FT dist= s.dist(*it);
         if(dist > maxDist)
 	  {
@@ -309,11 +313,11 @@ GeomObj::list_Pos2d interseccion(const Polilinea2d &p,const Recta2d &r)
   { return p.Interseccion(r); }
 GeomObj::list_Pos2d interseccion(const Polilinea2d &p,const SemiRecta2d &sr)
   { return p.Interseccion(sr); }
-GeomObj::list_Pos2d interseccion(const Polilinea2d &p,const Segmento2d &sg)
+GeomObj::list_Pos2d interseccion(const Polilinea2d &p,const Segment2d &sg)
   { return p.Interseccion(sg); }
 GeomObj::list_Pos2d interseccion(const Recta2d &r,const Polilinea2d &p)
   { return p.Interseccion(r); }
 GeomObj::list_Pos2d interseccion(const SemiRecta2d &sr,const Polilinea2d &p)
   { return p.Interseccion(sr); }
-GeomObj::list_Pos2d interseccion(const Segmento2d &sg,const Polilinea2d &p)
+GeomObj::list_Pos2d interseccion(const Segment2d &sg,const Polilinea2d &p)
   { return p.Interseccion(sg); }

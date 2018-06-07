@@ -79,8 +79,8 @@ class Poligono3d: public D2to3d
       //Return the posición del vértice de indice j (j=0..GetNumVertices()-1)
       { return to_3d(plg2d.Vertice0(j)); }
     GeomObj::list_Pos3d ListaVertices(void) const;
-    Segmento3d Lado0(unsigned int i) const;
-    Segmento3d Lado(unsigned int i) const;
+    Segment3d Lado0(unsigned int i) const;
+    Segment3d Lado(unsigned int i) const;
 
     inline bool Horario(void) const
       { return plg2d.Horario(); }

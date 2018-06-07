@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Segmento2d.cc
+//Segment2d.cc
 
-#include "Segmento2d.h"
+#include "Segment2d.h"
 #include <plotter.h>
 
 #include "../pos_vec/Dir2d.h"
@@ -34,7 +34,7 @@
 
 
 //! @brief Constructor.
-Segmento2d::Segmento2d(const Pos2d &p1,const Pos2d &p2)
+Segment2d::Segment2d(const Pos2d &p1,const Pos2d &p2)
   : Linea2d(), cgseg(p1.ToCGAL(),p2.ToCGAL())
   {
     if(verbosity>2 && EsDegenerada())
@@ -44,65 +44,65 @@ Segmento2d::Segmento2d(const Pos2d &p1,const Pos2d &p2)
              << p1 << " and " << p2 << " are the same." << endl;
       }
   }
-void Segmento2d::TwoPoints(const Pos2d &p1,const Pos2d &p2)
-  { (*this)= Segmento2d(p1,p2); }
+void Segment2d::TwoPoints(const Pos2d &p1,const Pos2d &p2)
+  { (*this)= Segment2d(p1,p2); }
 
-GeomObj *Segmento2d::clon(void) const
-  { return new Segmento2d(*this); }
+GeomObj *Segment2d::clon(void) const
+  { return new Segment2d(*this); }
 
-//! @brief Return the dirección del segmento.
-Dir2d Segmento2d::GetDir(void) const
+//! @brief Return the direction of the segment.
+Dir2d Segment2d::GetDir(void) const
   { return Dir2d(cgseg.direction()); }
 
-//! @brief Return el direction vector del segmento.
-Vector2d Segmento2d::VDir(void) const
+//! @brief Return el direction vector of the segment.
+Vector2d Segment2d::VDir(void) const
   { return GetDir().GetVector(); }
 
-//! @brief Return el direction vector del segmento.
-Vector2d Segmento2d::Normal(void) const
+//! @brief Return el direction vector of the segment.
+Vector2d Segment2d::Normal(void) const
   { return VDir().Normal(); }
 
-//! @brief Return el vector que une el origen con el extremo del segmento.
-Vector2d Segmento2d::GetVector(void) const
+//! @brief Return el vector que une el origen con el extremo of the segment.
+Vector2d Segment2d::GetVector(void) const
   { return Destino()-Origen(); }
 
-//! @brief Return el ángulo del segmento con el vector (0->2PI).
-GEOM_FT Segmento2d::Angulo(const Vector2d &v) const
+//! @brief Return the angle of the segment con el vector (0->2PI).
+GEOM_FT Segment2d::Angulo(const Vector2d &v) const
   { return angulo(VDir(),v); }
 
-//! @brief Return el ángulo del segmento con el vector (-PI->0->PI).
-GEOM_FT Segmento2d::AnguloSigno(const Vector2d &v) const
+//! @brief Return the angle of the segment con el vector (-PI->0->PI).
+GEOM_FT Segment2d::AnguloSigno(const Vector2d &v) const
   { return anguloSigno(VDir(),v); }
 
-//! @brief Return el ángulo del segmento con el vector (0->2PI).
-GEOM_FT Segmento2d::Angulo(const Segmento2d &s) const
+//! @brief Return the angle of the segment con el vector (0->2PI).
+GEOM_FT Segment2d::Angulo(const Segment2d &s) const
   { return Angulo(s.VDir()); }
 
-//! @brief Return el ángulo del segmento con el vector (-PI->0->PI).
-GEOM_FT Segmento2d::AnguloSigno(const Segmento2d &s) const
+//! @brief Return the angle of the segment con el vector (-PI->0->PI).
+GEOM_FT Segment2d::AnguloSigno(const Segment2d &s) const
   { return AnguloSigno(s.VDir()); }
 
 
-//! @brief Return el ángulo del segmento con el X axis.
-GEOM_FT Segmento2d::XAxisAngle(void) const
+//! @brief Return the angle of the segment con el X axis.
+GEOM_FT Segment2d::XAxisAngle(void) const
   { return VDir().XAxisAngle(); }
 
-//! @brief Return el ángulo del segmento con el Y axis.
-GEOM_FT Segmento2d::YAxisAngle(void) const
+//! @brief Return the angle of the segment con el Y axis.
+GEOM_FT Segment2d::YAxisAngle(void) const
   { return VDir().YAxisAngle(); }
 
-GEOM_FT angulo(const Segmento2d &r,const Vector2d &v)
+GEOM_FT angulo(const Segment2d &r,const Vector2d &v)
   { return r.Angulo(v); }
 
-GEOM_FT angulo(const Vector2d &v, const Segmento2d &r)
+GEOM_FT angulo(const Vector2d &v, const Segment2d &r)
   { return v.Angulo(r.VDir()); }
 
 //! @brief Return object length.
-GEOM_FT Segmento2d::getLength(void) const
+GEOM_FT Segment2d::getLength(void) const
   { return Origen().dist(Destino()); }
 
-//! @brief Return the posición del centro de gravedad del segmento.
-Pos2d Segmento2d::getCenterOfMass(void) const
+//! @brief Return the posición of the center of mass of the segment.
+Pos2d Segment2d::getCenterOfMass(void) const
   {
     Pos2d retval= Origen();
     const Vector2d v= (Destino()-retval)/2;
@@ -111,33 +111,34 @@ Pos2d Segmento2d::getCenterOfMass(void) const
   }
 
 //! @brief Return the recta perpendicular a r que pasa por p.
-Recta2d Segmento2d::Perpendicular(const Pos2d &p) const
+Recta2d Segment2d::Perpendicular(const Pos2d &p) const
   { return RectaSoporte().Perpendicular(p); }
 
 //! @brief Return the recta paralela a ésta que pasa por p.
-Recta2d Segmento2d::Paralela(const Pos2d &p) const
+Recta2d Segment2d::Paralela(const Pos2d &p) const
   { return RectaSoporte().Paralela(p); }
 
-//! @brief Return el segmento que resulta de aplicar a ésta el desplazamiento v.
-Segmento2d Segmento2d::Offset(const Vector2d &v) const
+//! @brief Return the a copy of the segment translatec along
+//! the vector argument.
+Segment2d Segment2d::Offset(const Vector2d &v) const
   {
     const Pos2d p= Origen()+v;
     const Pos2d q= Destino()+v;
-    return Segmento2d(p,q);
+    return Segment2d(p,q);
   }
 
-//! @brief Return un segmento paralelo a éste a la distancia
-//! que se pasa como parámetro. Si la distance es positiva,
-//! el nuevo segmento quedará a la derecha de la anterior.
-Segmento2d Segmento2d::Offset(const GEOM_FT &d) const
+//! @brief Return a segment parallel to this one at the distance
+//! argument. If the distance is poisitive the new segment will
+//! be on the right from this one.
+Segment2d Segment2d::Offset(const GEOM_FT &d) const
   {
     const Vector2d v= d*RectaSoporte().VersorDir();
     const Vector2d n(v.y(),-v.x());
     return Offset(n);
   }
 
-//! @brief Return the mediatriz del segmento.
-Recta2d Segmento2d::Mediatriz(void) const
+//! @brief Return the mediatriz of the segment.
+Recta2d Segment2d::Mediatriz(void) const
   {
     const Pos2d p=getCenterOfMass();
     const Vector2d v= VDir().Perpendicular(CGAL::COUNTERCLOCKWISE);
@@ -146,7 +147,7 @@ Recta2d Segmento2d::Mediatriz(void) const
   }
 
 //! Return true if the point is on the segment.
-bool Segmento2d::In(const Pos2d &p, const double &tol) const
+bool Segment2d::In(const Pos2d &p, const double &tol) const
   {
     bool retval= cgseg.has_on(p.ToCGAL());
     if(!retval)
@@ -171,8 +172,8 @@ bool Segmento2d::In(const Pos2d &p, const double &tol) const
   }
 
 
-//! @brief Return el cuadrado de la distance from the point al segmento.
-GEOM_FT Segmento2d::dist2(const Pos2d &p) const
+//! @brief Return the squared distance to the segment.
+GEOM_FT Segment2d::dist2(const Pos2d &p) const
   {
     const Recta2d r= RectaSoporte();
     const Pos2d proj= r.Projection(p);
@@ -192,32 +193,32 @@ GEOM_FT Segmento2d::dist2(const Pos2d &p) const
 
   }
 
-//! @brief Return the distance from the point al segmento.
-GEOM_FT Segmento2d::dist(const Pos2d &p) const
+//! @brief Return the distance from the point to the segment.
+GEOM_FT Segment2d::dist(const Pos2d &p) const
   { return sqrt(dist2(p)); }
 
 //! @brief Return a point of the segment at a distance lambda from its origin.
-Pos2d Segmento2d::PtoParametricas(const GEOM_FT &lambda) const
+Pos2d Segment2d::PtoParametricas(const GEOM_FT &lambda) const
   { return Origen()+lambda*VDir().Normalizado(); }
 
 //! @brief Return the coordenada paramétrica que corresponde
 //! a la coordenada natural se pasa como parámetro.
-double Segmento2d::getParamCooNatural(const GEOM_FT &chi) const
+double Segment2d::getParamCooNatural(const GEOM_FT &chi) const
   { return (chi+1.0)/2.0; }
 
-//! @brief Return the point del segmento cuyas coordenada
+//! @brief Return the point of the segment cuyas coordenada
 //! natural se pasa como parámetro.
-Pos2d Segmento2d::PtoCooNatural(const GEOM_FT &chi) const
+Pos2d Segment2d::PtoCooNatural(const GEOM_FT &chi) const
   { return PtoParametricas(getParamCooNatural(chi)); }
 
-bool Segmento2d::Interseca(const Recta2d &r) const
+bool Segment2d::Interseca(const Recta2d &r) const
   { return CGAL::do_intersect(r.cgr,cgseg); }
-bool Segmento2d::Interseca(const SemiRecta2d &sr) const
+bool Segment2d::Interseca(const SemiRecta2d &sr) const
   { return do_intersect(sr.cgsr,cgseg); }
 
 //! @brief Return the intersection of the line with a plane defined
 //! by the equation coord_i=cte.
-GeomObj2d::list_Pos2d Segmento2d::Interseccion(unsigned short int i, const double &d) const
+GeomObj2d::list_Pos2d Segment2d::Interseccion(unsigned short int i, const double &d) const
   {
     GeomObj2d::list_Pos2d lp;
     lp= RectaSoporte().Interseccion(i,d);
@@ -231,16 +232,16 @@ GeomObj2d::list_Pos2d Segmento2d::Interseccion(unsigned short int i, const doubl
     return lp;
   }
 
-//! @brief Return the point intersection de recta and segmento, if not exists la
-//! intersection devuelve la lista vacía.
-GeomObj2d::list_Pos2d Segmento2d::Interseccion(const Recta2d &r) const
+//! @brief Return the intersection point of the line and the segment, if
+//! the intersection doesn't exists returns an empty list.
+GeomObj2d::list_Pos2d Segment2d::Interseccion(const Recta2d &r) const
   {
     GeomObj2d::list_Pos2d retval;
     if(Interseca(r))
       {
         CGAL::Object result;
         CGPoint_2 ptoi;
-        CGSegmento_2 segi;
+        CGSegment_2 segi;
         result = CGAL::intersection(cgseg,r.cgr);
         if(CGAL::assign(ptoi, result))
           retval.push_back(Pos2d(ptoi));
@@ -256,7 +257,7 @@ GeomObj2d::list_Pos2d Segmento2d::Interseccion(const Recta2d &r) const
             else if(d2<tol)
               retval.push_back(Destino());
             else
-              cerr << "Segmento2d::Interseccion(Recta2d): unknown error." << endl
+              cerr << "Segment2d::Interseccion(Recta2d): unknown error." << endl
                    << "sg: " << *this << endl
                    << "r: " << r << endl
                    << "tol: " << tol << endl
@@ -266,9 +267,10 @@ GeomObj2d::list_Pos2d Segmento2d::Interseccion(const Recta2d &r) const
       }
     return retval;
   }
-//! @brief Return the point intersection de semirrecta and segmento, if not exists la
-//! intersection devuelve la lista vacía.
-GeomObj2d::list_Pos2d Segmento2d::Interseccion(const SemiRecta2d &sr) const
+
+//! @brief Return the intersection of the segment and the ray,
+//! if it doesn't exists return an empty list.
+GeomObj2d::list_Pos2d Segment2d::Interseccion(const SemiRecta2d &sr) const
   {
     GeomObj2d::list_Pos2d retval;
     if(Interseca(sr))
@@ -280,7 +282,7 @@ GeomObj2d::list_Pos2d Segmento2d::Interseccion(const SemiRecta2d &sr) const
           retval.push_back(Pos2d(ptoi));
         else
           {
-            cerr << "Segmento2d::Interseccion(SemiRecta2d): unknown error." << endl
+            cerr << "Segment2d::Interseccion(SemiRecta2d): unknown error." << endl
                  << "sg: " << *this << endl
                  << "sr: " << sr << endl;
           }
@@ -288,9 +290,9 @@ GeomObj2d::list_Pos2d Segmento2d::Interseccion(const SemiRecta2d &sr) const
     return retval;
   }
 
-//! @brief Return the point intersection de ambos segmentos, if not exists la
-//! intersection devuelve la lista vacía.
-GeomObj2d::list_Pos2d Segmento2d::Interseccion(const Segmento2d &r2) const
+//! @brief Return the intersection of the segments, if
+//! the intersection doesn't exists returns an empty list.
+GeomObj2d::list_Pos2d Segment2d::Interseccion(const Segment2d &r2) const
   {
     GeomObj2d::list_Pos2d retval;
     if(*this == r2)
@@ -320,34 +322,34 @@ GeomObj2d::list_Pos2d Segmento2d::Interseccion(const Segmento2d &r2) const
     return retval;
   }
 
-GEOM_FT dist(const Pos2d &p,const Segmento2d &r)
+GEOM_FT dist(const Pos2d &p,const Segment2d &r)
   { return sqrt_FT(r.dist2(p)); }
 
 //! @brief Return the points that results from the segment division.
 //! @param num_partes: number of segments.
-VectorPos2d Segmento2d::Divide(int num_partes) const
+VectorPos2d Segment2d::Divide(int num_partes) const
   { return VectorPos2d(Origen(),Destino(),num_partes); }
 
 //! @brief Aplica a la recta la transformación que se
 //! pasa como parámetro.
-void Segmento2d::Transforma(const Trf2d &trf2d)
+void Segment2d::Transforma(const Trf2d &trf2d)
   {
     const Pos2d p1= trf2d.Transforma(Origen());
     const Pos2d p2= trf2d.Transforma(Destino());
-    (*this)= Segmento2d(p1,p2);
+    (*this)= Segment2d(p1,p2);
   }
 
-void Segmento2d::Print(std::ostream &os) const
+void Segment2d::Print(std::ostream &os) const
   { os << Origen() << " " << Destino(); }
-void Segmento2d::Plot(Plotter &plotter) const
+void Segment2d::Plot(Plotter &plotter) const
   {
     const Pos2d p1= Origen();
     const Pos2d p2= Destino();
     plotter.fline(p1.x(),p1.y(),p2.x(),p2.y());
   }
 
-//! Return the point de intersection del segmento con la recta, if exists.
-Pos2d intersection_point(const Segmento2d &s, const Recta2d &r)
+//! Return the point de intersection of the segment con la recta, if exists.
+Pos2d intersection_point(const Segment2d &s, const Recta2d &r)
   {
     Pos2d retval;
     GeomObj2d::list_Pos2d tmp= interseccion(s,r);
@@ -358,12 +360,12 @@ Pos2d intersection_point(const Segmento2d &s, const Recta2d &r)
      return retval;
   }
 
-//! Return the point de intersection del segmento con la recta, if exists.
-Pos2d intersection_point(const Recta2d &r, const Segmento2d &s)
+//! Return the point de intersection of the segment con la recta, if exists.
+Pos2d intersection_point(const Recta2d &r, const Segment2d &s)
   { return intersection_point(s,r); }
 
-//! Return the point de intersection de los segmentos, if exists.
-Pos2d intersection_point(const Segmento2d &s1, const Segmento2d &s2)
+//! Return the intersection of the segments if exists.
+Pos2d intersection_point(const Segment2d &s1, const Segment2d &s2)
   {
     Pos2d retval;
     GeomObj2d::list_Pos2d tmp= interseccion(s1,s2);
@@ -374,10 +376,10 @@ Pos2d intersection_point(const Segmento2d &s1, const Segmento2d &s2)
     return retval;
   }
 
-std::list<Segmento2d> sin_degenerados(const std::list<Segmento2d> &lista)
+std::list<Segment2d> sin_degenerados(const std::list<Segment2d> &lista)
   {
-    std::list<Segmento2d> retval;
-    for(list<Segmento2d>::const_iterator i=lista.begin();i!=lista.end();i++)
+    std::list<Segment2d> retval;
+    for(list<Segment2d>::const_iterator i=lista.begin();i!=lista.end();i++)
       if(!(*i).EsDegenerada())
         retval.push_back(*i);
     return retval;

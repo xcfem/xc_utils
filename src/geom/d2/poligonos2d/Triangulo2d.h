@@ -29,7 +29,7 @@
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
 #include "xc_basic/src/util/matem.h"
 
-class Segmento2d;
+class Segment2d;
 class Poligono2d;
 
 
@@ -61,8 +61,8 @@ class Triangulo2d : public SupPoligonal2d
       { return Vertice0(i-1); }
     Pos2d Vertice0(unsigned int j) const
       { return Pos2d(cgtriang.vertex(j)); }
-    Segmento2d Base(const size_t &i) const; //Return la base opuesta al vertice i.
-    Segmento2d Altura(const size_t &i) const; //Return la altura del vertice i.
+    Segment2d Base(const size_t &i) const; //Return la base opuesta al vertice i.
+    Segment2d Altura(const size_t &i) const; //Return la altura del vertice i.
     virtual Pos2d getCenterOfMass(void) const;
     virtual GEOM_FT getLength(void) const;
     //! @brief Return the area of the object.

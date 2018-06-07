@@ -37,7 +37,7 @@ class SemiRecta2d : public Linea2d
   {
     CGSemiRecta_2 cgsr;
 
-    friend class Segmento2d;
+    friend class Segment2d;
   public:
     SemiRecta2d(void): Linea2d(),cgsr(CGPoint_2(0,0),CGPoint_2(1,0)) {}
     SemiRecta2d(const CGSemiRecta_2 &r)

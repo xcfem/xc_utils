@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Segmento3d.h
+//Segment3d.h
 
-#ifndef SEGMENTO3D_H
-#define SEGMENTO3D_H
+#ifndef SEGMENT3D_H
+#define SEGMENT3D_H
 
 #include "Linea3d.h"
 #include "Recta3d.h"
@@ -34,18 +34,18 @@ class Dir3d;
 
 //! @ingroup GEOM
 //
-//! @brief Segmento en tres dimensiones.
-class Segmento3d : public Linea3d
+//! @brief Segment en tres dimensiones.
+class Segment3d : public Linea3d
   {
-    CGSegmento_3 cgseg;
+    CGSegment_3 cgseg;
   public:
-    Segmento3d(void);
-    Segmento3d(const CGSegmento_3 &r);
-    Segmento3d(const Pos3d &p1,const Pos3d &p2);
-    Segmento3d(const Segmento3d &r);
-    Segmento3d &operator=(const Segmento3d &r);
+    Segment3d(void);
+    Segment3d(const CGSegment_3 &r);
+    Segment3d(const Pos3d &p1,const Pos3d &p2);
+    Segment3d(const Segment3d &r);
+    Segment3d &operator=(const Segment3d &r);
 
-    const CGSegmento_3 &ToCGAL(void) const
+    const CGSegment_3 &ToCGAL(void) const
       { return cgseg; }
     virtual GeomObj *clon(void) const;
     void TwoPoints(const Pos3d &p1,const Pos3d &p2);
@@ -68,67 +68,67 @@ class Segmento3d : public Linea3d
 
     bool Paralelo(const Recta3d &r) const;
     bool Paralelo(const SemiRecta3d &sr) const;
-    bool Paralelo(const Segmento3d &r) const;
+    bool Paralelo(const Segment3d &r) const;
 
     GeomObj3d::list_Pos3d Interseccion(unsigned short int, const double &) const;
     GeomObj3d::list_Pos3d Interseccion(const Recta3d &r) const;
     GeomObj3d::list_Pos3d Interseccion(const SemiRecta3d &sr) const;
-    GeomObj3d::list_Pos3d Interseccion(const Segmento3d &sg) const;
+    GeomObj3d::list_Pos3d Interseccion(const Segment3d &sg) const;
 
     virtual GEOM_FT getLength(void) const;
     virtual Pos3d getCenterOfMass(void) const;
     Dir3d GetDir(void) const;
     Vector3d VDir(void) const;
     GEOM_FT Angulo(const Vector3d &v) const;
-    GEOM_FT Angulo(const Segmento3d &v) const;
-    friend GEOM_FT angulo(const Segmento3d &r,const Vector3d &v);
+    GEOM_FT Angulo(const Segment3d &v) const;
+    friend GEOM_FT angulo(const Segment3d &r,const Vector3d &v);
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Iz(void) const;
-    friend bool operator==(const Segmento3d &r1,const Segmento3d &r2);
+    friend bool operator==(const Segment3d &r1,const Segment3d &r2);
     void Print(std::ostream &os) const;
     
   };
 
-inline GEOM_FT dist2(const Pos3d &p,const Segmento3d &r)
+inline GEOM_FT dist2(const Pos3d &p,const Segment3d &r)
   { return r.dist2(p); }
-inline GEOM_FT dist2(const Segmento3d &r,const Pos3d &p)
+inline GEOM_FT dist2(const Segment3d &r,const Pos3d &p)
   { return dist2(p,r); }
-GEOM_FT dist(const Pos3d &p,const Segmento3d &r);
-inline GEOM_FT dist(const Segmento3d &r,const Pos3d &p)
+GEOM_FT dist(const Pos3d &p,const Segment3d &r);
+inline GEOM_FT dist(const Segment3d &r,const Pos3d &p)
   { return dist(p,r); }
 
-inline bool paralelas(const Segmento3d &sg,const Recta3d &r)
+inline bool paralelas(const Segment3d &sg,const Recta3d &r)
   { return sg.Paralelo(r); }
-inline bool paralelas(const Recta3d &r, const Segmento3d &sg)
+inline bool paralelas(const Recta3d &r, const Segment3d &sg)
   { return paralelas(sg,r); }
-inline bool paralelas(const Segmento3d &sg,const SemiRecta3d &sr)
+inline bool paralelas(const Segment3d &sg,const SemiRecta3d &sr)
   { return sg.Paralelo(sr); }
-inline bool paralelas(const SemiRecta3d &sr, const Segmento3d &sg)
+inline bool paralelas(const SemiRecta3d &sr, const Segment3d &sg)
   { return paralelas(sg,sr); }
-inline bool paralelas(const Segmento3d &r1,const Segmento3d &r2)
+inline bool paralelas(const Segment3d &r1,const Segment3d &r2)
   { return r1.Paralelo(r2); }
 
-inline bool colineales(const Segmento3d &sg,const Recta3d &r)
+inline bool colineales(const Segment3d &sg,const Recta3d &r)
   { return colineales(sg.RectaSoporte(),r); }
-inline bool colineales(const Recta3d &r,const Segmento3d &sg)
+inline bool colineales(const Recta3d &r,const Segment3d &sg)
   { return colineales(sg,r); }
-inline bool colineales(const Segmento3d &sg,const SemiRecta3d &sr)
+inline bool colineales(const Segment3d &sg,const SemiRecta3d &sr)
   { return colineales(sg.RectaSoporte(),sr); }
-inline bool colineales(const SemiRecta3d &sr,const Segmento3d &sg)
+inline bool colineales(const SemiRecta3d &sr,const Segment3d &sg)
   { return colineales(sg,sr); }
-inline bool colineales(const Segmento3d &sg1,const Segmento3d &sg2)
+inline bool colineales(const Segment3d &sg1,const Segment3d &sg2)
   { return colineales(sg1,sg2.RectaSoporte()); }
 
-inline GeomObj3d::list_Pos3d interseccion(const Segmento3d &sg,const Recta3d &r)
+inline GeomObj3d::list_Pos3d interseccion(const Segment3d &sg,const Recta3d &r)
   { return sg.Interseccion(r); }
-inline GeomObj3d::list_Pos3d interseccion(const Recta3d &r, const Segmento3d &sg)
+inline GeomObj3d::list_Pos3d interseccion(const Recta3d &r, const Segment3d &sg)
   { return sg.Interseccion(r); }
-inline GeomObj3d::list_Pos3d interseccion(const Segmento3d &sg,const SemiRecta3d &sr)
+inline GeomObj3d::list_Pos3d interseccion(const Segment3d &sg,const SemiRecta3d &sr)
   { return sg.Interseccion(sr); }
-inline GeomObj3d::list_Pos3d interseccion(const SemiRecta3d &sr, const Segmento3d &sg)
+inline GeomObj3d::list_Pos3d interseccion(const SemiRecta3d &sr, const Segment3d &sg)
   { return sg.Interseccion(sr); } 
-inline GeomObj3d::list_Pos3d interseccion(const Segmento3d &sg1,const Segmento3d &sg2)
+inline GeomObj3d::list_Pos3d interseccion(const Segment3d &sg1,const Segment3d &sg2)
   { return sg1.Interseccion(sg2); }
 
 

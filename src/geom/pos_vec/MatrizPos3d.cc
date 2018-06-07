@@ -23,7 +23,7 @@
 
 #include "MatrizPos3d.h"
 #include "xc_basic/src/util/matem.h"
-#include "xc_utils/src/geom/d1/Segmento3d.h"
+#include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d2/Triangulo3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d3/BND3d.h"
@@ -60,7 +60,7 @@ MatrizPos3d::MatrizPos3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const P
 
 
 Pos3d MatrizPos3d::GetCentro(void) const
-  { return get_centro(*this,Segmento3d()); }
+  { return get_centro(*this,Segment3d()); }
 
 Pos3d MatrizPos3d::pos_lagrangiana(const size_t &i,const size_t &j) const
   {
@@ -167,7 +167,7 @@ GEOM_FT dist2(const MatrizPos3d &ptos,const Pos3d &pt)
       {
         for(size_t j=1;j<n_columns;j++) //To the last but one column.
           {
-            Segmento3d s(ptos(1,j),ptos(1,j+1));
+            Segment3d s(ptos(1,j),ptos(1,j+1));
             d= std::min(d,s.dist2(pt));
           }
       }
@@ -175,7 +175,7 @@ GEOM_FT dist2(const MatrizPos3d &ptos,const Pos3d &pt)
       {
         for(size_t i=1;i<n_rows;i++) //To the last but one row.
           {
-            Segmento3d s(ptos(i,1),ptos(i+1,1));
+            Segment3d s(ptos(i,1),ptos(i+1,1));
             d= std::min(d,s.dist2(pt));
           }
       }
@@ -207,7 +207,7 @@ bool dist_menor(const MatrizPos3d &ptos,const Pos3d &pt,const GEOM_FT &d_max)
       {
         for(size_t j=1;j<n_columns;j++) //To the last but one column.
           {
-            Segmento3d s(ptos(1,j),ptos(1,j+1));
+            Segment3d s(ptos(1,j),ptos(1,j+1));
             d= std::min(d,s.dist2(pt));
             if(d<d_max2)
               return true;
@@ -217,7 +217,7 @@ bool dist_menor(const MatrizPos3d &ptos,const Pos3d &pt,const GEOM_FT &d_max)
       {
         for(size_t i=1;i<n_rows;i++) //To the last but one row.
           {
-            Segmento3d s(ptos(i,1),ptos(i+1,1));
+            Segment3d s(ptos(i,1),ptos(i+1,1));
             d= std::min(d,s.dist2(pt));
             if(d<d_max2)
               return true;
@@ -262,7 +262,7 @@ GEOM_FT pseudo_dist2(const MatrizPos3d &ptos,const Pos3d &pt)
       {
         for(size_t j=1;j<n_columns;j++) //To the last but one column.
           {
-            Segmento3d s(ptos(1,j),ptos(1,j+1));
+            Segment3d s(ptos(1,j),ptos(1,j+1));
             d= std::max(d,s.dist2(pt));
           }
       }
@@ -270,7 +270,7 @@ GEOM_FT pseudo_dist2(const MatrizPos3d &ptos,const Pos3d &pt)
       {
         for(size_t i=1;i<n_rows;i++) //To the last but one row.
           {
-            Segmento3d s(ptos(i,1),ptos(i+1,1));
+            Segment3d s(ptos(i,1),ptos(i+1,1));
             d= std::max(d,s.dist2(pt));
           }
       }

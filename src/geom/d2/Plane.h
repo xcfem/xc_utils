@@ -34,7 +34,7 @@
 
 class Recta3d;
 class SemiRecta3d;
-class Segmento3d;
+class Segment3d;
 class Polilinea3d;
 class Poligono3d;
 class GmGrupo3d;
@@ -62,7 +62,7 @@ class Plane : public Superficie3d
     Plane(const Pos3d &o,const Vector3d &v);
     Plane(const Pos3d &p,const Vector3d &v1,const Vector3d &v2);
     Plane(const Recta3d &r,const Pos3d &p);
-    Plane(const Segmento3d &s,const Vector3d &v);
+    Plane(const Segment3d &s,const Vector3d &v);
     Plane(const Poligono3d &trg);
     Plane(const Plane &otro);
     Plane(const GeneralEquationOfPlane &eg);
@@ -141,8 +141,8 @@ class Plane : public Superficie3d
     Pos3d Interseccion(const Recta3d &p) const;
     bool Interseca(const SemiRecta3d &p) const;
     Pos3d Interseccion(const SemiRecta3d &p) const;
-    bool Interseca(const Segmento3d &p) const;
-    Pos3d Interseccion(const Segmento3d &p) const;
+    bool Interseca(const Segment3d &p) const;
+    Pos3d Interseccion(const Segment3d &p) const;
 
     GEOM_FT Angulo(const Plane &p) const;
     GEOM_FT Angulo(const Vector3d &) const;
@@ -184,16 +184,16 @@ GeomObj3d::list_Pos3d interseccion(const Plane &p, const Recta3d &r);
 GeomObj3d::list_Pos3d interseccion(const Recta3d &r, const Plane &p);
 GeomObj3d::list_Pos3d interseccion(const Plane &p, const SemiRecta3d &r);
 GeomObj3d::list_Pos3d interseccion(const SemiRecta3d &r, const Plane &p);
-GeomObj3d::list_Pos3d interseccion(const Plane &p, const Segmento3d &);
-GeomObj3d::list_Pos3d interseccion(const Segmento3d &, const Plane &p);
+GeomObj3d::list_Pos3d interseccion(const Plane &p, const Segment3d &);
+GeomObj3d::list_Pos3d interseccion(const Segment3d &, const Plane &p);
 GeomObj3d::list_Pos3d interseccion(const Plane &p, const Polilinea3d &r);
 GeomObj3d::list_Pos3d interseccion(const Polilinea3d &r, const Plane &p);
 Pos3d intersection_point(const Plane &p, const Recta3d &r);
 Pos3d intersection_point(const Recta3d &r, const Plane &p);
 Pos3d intersection_point(const Plane &p, const SemiRecta3d &r);
 Pos3d intersection_point(const SemiRecta3d &r, const Plane &p);
-Pos3d intersection_point(const Plane &p, const Segmento3d &r);
-Pos3d intersection_point(const Segmento3d &r, const Plane &p);
+Pos3d intersection_point(const Plane &p, const Segment3d &r);
+Pos3d intersection_point(const Segment3d &r, const Plane &p);
 
 GeomObj3d::list_Pos3d intersection_points(const std::deque<Plane> &);
 

@@ -29,7 +29,7 @@
 class Trf2d;
 class HalfPlane2d;
 class Recta2d;
-class Segmento2d;
+class Segment2d;
 class ListaPos2d;
 
 
@@ -139,7 +139,7 @@ class Poligono2d: public SupPoligonal2d
     bool Overlap(const Pos2d &) const;
     bool Overlap(const Recta2d &r) const;
     bool Overlap(const SemiRecta2d &sr) const;
-    bool Overlap(const Segmento2d &sg) const;
+    bool Overlap(const Segment2d &sg) const;
     bool Overlap(const BND2d &) const;
     bool Overlap(const Polilinea2d &) const;
     bool Overlap(const Poligono2d &) const;
@@ -160,9 +160,9 @@ class Poligono2d: public SupPoligonal2d
     void une(const Poligono2d &otro);
     void une(const std::list<Poligono2d> &l);
     void clipBy(const Poligono2d &otro);
-    Segmento2d Clip(const Recta2d &) const;
-    Segmento2d Clip(const SemiRecta2d &) const;
-    Segmento2d Clip(const Segmento2d &) const;
+    Segment2d Clip(const Recta2d &) const;
+    Segment2d Clip(const SemiRecta2d &) const;
+    Segment2d Clip(const Segment2d &) const;
     std::list<Poligono2d> Clip(const BND2d &bnd) const;
     std::list<Poligono2d> Clip(const Poligono2d &) const;
 

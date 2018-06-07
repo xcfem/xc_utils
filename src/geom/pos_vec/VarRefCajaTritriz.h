@@ -59,11 +59,11 @@ VarRefCajaTritriz<TRITRIZ>::VarRefCajaTritriz(TRITRIZ &t,const size_t &iLayer,co
 
 template<class TRITRIZ>
 VarRefCajaTritriz<TRITRIZ>::VarRefCajaTritriz(TRITRIZ &t,const RangoTritriz &rango)
-  : BaseRefCajaTritriz(recorta(rango,t)),ttz(t) {}
+  : BaseRefCajaTritriz(clip(rango,t)),ttz(t) {}
 
 template<class TRITRIZ>
 VarRefCajaTritriz<TRITRIZ>::VarRefCajaTritriz(TRITRIZ &t,const size_t &iLayer,const RangoIndice &row_range,const RangoIndice &column_range)
-  : BaseRefCajaTritriz(iLayer,recorta(row_range,t.getNumberOfRows()),recorta(column_range,t.getNumberOfColumns())),ttz(t) 
+  : BaseRefCajaTritriz(iLayer,clip(row_range,t.getNumberOfRows()),clip(column_range,t.getNumberOfColumns())),ttz(t) 
   {
     if(iLayer>ttz.getNumberOfLayers())
       std::clog << "Aviso; layer index: " << iLayer << " out of range en tritriz de rangos: " << RangoTritriz(ttz) << std::endl;
@@ -71,7 +71,7 @@ VarRefCajaTritriz<TRITRIZ>::VarRefCajaTritriz(TRITRIZ &t,const size_t &iLayer,co
 
 template<class TRITRIZ>
 VarRefCajaTritriz<TRITRIZ>::VarRefCajaTritriz(TRITRIZ &t,const RangoIndice &layer_range,const size_t &iRow,const RangoIndice &column_range)
-  : BaseRefCajaTritriz(recorta(layer_range,t.getNumberOfLayers()),iRow,recorta(column_range,t.getNumberOfColumns())),ttz(t)
+  : BaseRefCajaTritriz(clip(layer_range,t.getNumberOfLayers()),iRow,clip(column_range,t.getNumberOfColumns())),ttz(t)
   {
     if(iRow>ttz.getNumberOfRows())
       std::clog << "Aviso; row index: " << iRow
@@ -81,7 +81,7 @@ VarRefCajaTritriz<TRITRIZ>::VarRefCajaTritriz(TRITRIZ &t,const RangoIndice &laye
 
 template<class TRITRIZ>
 VarRefCajaTritriz<TRITRIZ>::VarRefCajaTritriz(TRITRIZ &t,const RangoIndice &layer_range,const RangoIndice &row_range,const size_t &col)
-  : BaseRefCajaTritriz(recorta(layer_range,t.getNumberOfLayers()),recorta(row_range,t.getNumberOfRows()),col),ttz(t)
+  : BaseRefCajaTritriz(clip(layer_range,t.getNumberOfLayers()),clip(row_range,t.getNumberOfRows()),col),ttz(t)
   {
     if(col>ttz.getNumberOfColumns())
       std::clog << "Aviso; column index: " << col
@@ -91,7 +91,7 @@ VarRefCajaTritriz<TRITRIZ>::VarRefCajaTritriz(TRITRIZ &t,const RangoIndice &laye
 
 template<class TRITRIZ>
 VarRefCajaTritriz<TRITRIZ>::VarRefCajaTritriz(TRITRIZ &t,const size_t &iLayer,const size_t &iRow,const RangoIndice &column_range)
-  : BaseRefCajaTritriz(iLayer,iRow,recorta(column_range,t.getNumberOfColumns())),ttz(t)
+  : BaseRefCajaTritriz(iLayer,iRow,clip(column_range,t.getNumberOfColumns())),ttz(t)
   {
     if(iLayer>ttz.getNumberOfLayers())
       std::clog << "Aviso; layer index: " << iLayer
@@ -105,7 +105,7 @@ VarRefCajaTritriz<TRITRIZ>::VarRefCajaTritriz(TRITRIZ &t,const size_t &iLayer,co
 
 template<class TRITRIZ>
 VarRefCajaTritriz<TRITRIZ>::VarRefCajaTritriz(TRITRIZ &t,const size_t iLayer,const RangoIndice &row_range,const size_t &col)
-  : BaseRefCajaTritriz(iLayer,recorta(row_range,t.getNumberOfRows()),col),ttz(t)
+  : BaseRefCajaTritriz(iLayer,clip(row_range,t.getNumberOfRows()),col),ttz(t)
   {
     if(iLayer>ttz.getNumberOfLayers())
       std::clog << "Aviso; layer index: " << iLayer
@@ -119,7 +119,7 @@ VarRefCajaTritriz<TRITRIZ>::VarRefCajaTritriz(TRITRIZ &t,const size_t iLayer,con
 
 template<class TRITRIZ>
 VarRefCajaTritriz<TRITRIZ>::VarRefCajaTritriz(TRITRIZ &t,const RangoIndice &layer_range,const size_t &iRow,const size_t &col)
-  : BaseRefCajaTritriz(recorta(layer_range,t.getNumberOfLayers()),iRow,col),ttz(t)
+  : BaseRefCajaTritriz(clip(layer_range,t.getNumberOfLayers()),iRow,col),ttz(t)
   {
     if(iRow>ttz.getNumberOfRows())
       std::clog << "Aviso; row index: " << iRow

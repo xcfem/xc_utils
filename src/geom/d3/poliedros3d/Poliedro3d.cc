@@ -27,7 +27,7 @@
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d2/Poligono3d.h"
 #include "xc_utils/src/geom/d3/SemiEspacio3d.h"
-#include "xc_utils/src/geom/d1/Segmento3d.h"
+#include "xc_utils/src/geom/d1/Segment3d.h"
 #include <CGAL/Polyhedron_incremental_builder_3.h>
 #include <CGAL/IO/Polyhedron_geomview_ostream.h>
 #include <CGAL/IO/Polyhedron_iostream.h>
@@ -259,7 +259,7 @@ GEOM_FT Poliedro3d::PseudoDist(const Pos3d &p) const
     Poliedro3d::Vertex_const_iterator pVertex0= vertices_begin();
     if(nv==1) return p.dist(pVertex0->point());
     Poliedro3d::Vertex_const_iterator pVertex1= pVertex0; pVertex1++;
-    if(nv==2) return p.dist(Segmento3d(pVertex0->point(),pVertex1->point()));
+    if(nv==2) return p.dist(Segment3d(pVertex0->point(),pVertex1->point()));
     Poliedro3d::Facet_const_iterator i= facets_begin();
     const Plane pl(getPlaneFromFace(i));
     GEOM_FT retval= pl.PseudoDist(p);

@@ -11,7 +11,7 @@ pol2=geom.Poligono2d(pol1)
 pol2.mueve(geom.Vector2d(1,1))
 
 pol3=geom.Poligono2d(pol1)
-pol3.recortaPorPoligono(pol2)
+pol3.clipPorPoligono(pol2)
 
 
 areaPol=pol3.getArea()

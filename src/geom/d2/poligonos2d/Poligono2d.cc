@@ -25,7 +25,7 @@
 #include "bool_op_poligono2d.h"
 #include<CGAL/create_offset_polygons_2.h>
 #include "xc_utils/src/geom/trf/Trf2d.h"
-#include "xc_utils/src/geom/d1/Segmento2d.h"
+#include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d1/Polilinea2d.h"
 #include "xc_utils/src/geom/d2/HalfPlane2d.h"
 #include "xc_utils/src/geom/d2/BND2d.h"
@@ -141,7 +141,7 @@ bool Poligono2d::Overlap(const SemiRecta2d &sr) const
   { return SupPoligonal2d::Overlap(sr); }
 
 //! @brief Return true if the segment and the polygon overlap.
-bool Poligono2d::Overlap(const Segmento2d &sg) const
+bool Poligono2d::Overlap(const Segment2d &sg) const
   {
     bool retval= false;
     if(In(sg.Origen()))
@@ -166,7 +166,7 @@ bool Poligono2d::Overlap(const Polilinea2d &p) const
     bool retval= Overlap(p.begin(),p.end());
     if(!retval)
       for(Polilinea2d::const_iterator j=p.begin();j!=p.end();j++)
-        if(Overlap(p.GetSegmento(j)))
+        if(Overlap(p.getSegment(j)))
           {
             retval= true;
             break;
@@ -333,40 +333,40 @@ Poligono2d append_mid_points(const Poligono2d &plg)
         for(register size_t i=2;i<=num_vertices;i++)
           {
             p2= plg.Vertice(i);
-            pmed= Segmento2d(p1,p2).getCenterOfMass();
+            pmed= Segment2d(p1,p2).getCenterOfMass();
             retval.push_back(pmed);
             retval.push_back(p2);
             p1= p2;
           }
         p2= plg.Vertice(1);
-        retval.push_back(Segmento2d(p1,p2).getCenterOfMass());
+        retval.push_back(Segment2d(p1,p2).getCenterOfMass());
       }
     return retval;
   }
 
-//! @brief Return la intesección del polígono con la recta.
-Segmento2d Poligono2d::Clip(const Recta2d &r) const
+//! @brief Return the intersection of the polygon with the line.
+Segment2d Poligono2d::Clip(const Recta2d &r) const
   { return SupPoligonal2d::Clip(r); }
 
-//! @brief Return la intesección del polígono con la semirecta.
-Segmento2d Poligono2d::Clip(const SemiRecta2d &sr) const
+//! @brief Return the intersection of the polygon and the ray.
+Segment2d Poligono2d::Clip(const SemiRecta2d &sr) const
   { return SupPoligonal2d::Clip(sr); }
 
-//! @brief Return la intesección del polígono con el segmento.
-Segmento2d Poligono2d::Clip(const Segmento2d &sg) const
+//! @brief Return the intersection of the polygon and the segment.
+Segment2d Poligono2d::Clip(const Segment2d &sg) const
   { return SupPoligonal2d::Clip(sg); }
 
-//! @brief Return los polígonos que resultan de recortar éste por
-//! por el BND que se pasa como parámetro.
+//! @brief Return the polygons that result from clipping this one
+//! with the BND argument.
 std::list<Poligono2d> Poligono2d::Clip(const BND2d &bnd) const
   { return Clip(bnd.GetPoligono()); }
 
-//! @brief Return los polígonos que resultan de recortar éste por
-//! por el que se pasa como parámetro.
+//! @brief Return the polygons that result from clipping this one
+//! with the polygon argument.
 std::list<Poligono2d> Poligono2d::Clip(const Poligono2d &otro) const
   { return interseccion(*this,otro); }
 
-//! @brief Recorta este polígono con el que se pasa como parámetro
+//! @brief Clip this polygont with the polygon argument.
 void Poligono2d::clipBy(const Poligono2d &plg)
   { (*this)= Poligono2d(Clip(plg)); }
 

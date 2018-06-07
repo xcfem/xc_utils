@@ -34,7 +34,7 @@ class XYFoldingPlanes(object):
     p1= segment3d.getDestino()
     P0proj= geom.Pos2d(p0.x,p0.y)
     P1proj= geom.Pos2d(p1.x,p1.y)
-    segment2d= geom.Segmento2d(P0proj,P1proj)
+    segment2d= geom.Segment2d(P0proj,P1proj)
     proj= self.xyPline.getIntersectionWithSegment(segment2d)
     for p in proj:
       lmb= p.distPos2d(P0proj)/P1proj.distPos2d(P0proj)

@@ -23,10 +23,10 @@
 
 GEOM_FT (Pos2d::*distRecta2d)(const Recta2d &) const= &Pos2d::dist;
 GEOM_FT (Pos2d::*distSemiRecta2d)(const SemiRecta2d &) const= &Pos2d::dist;
-GEOM_FT (Pos2d::*distSegmento2d)(const Segmento2d &) const= &Pos2d::dist;
+GEOM_FT (Pos2d::*distSegment2d)(const Segment2d &) const= &Pos2d::dist;
 GEOM_FT (Pos2d::*dist2Recta2d)(const Recta2d &) const= &Pos2d::dist2;
 GEOM_FT (Pos2d::*dist2SemiRecta2d)(const SemiRecta2d &) const= &Pos2d::dist2;
-GEOM_FT (Pos2d::*dist2Segmento2d)(const Segmento2d &) const= &Pos2d::dist2;
+GEOM_FT (Pos2d::*dist2Segment2d)(const Segment2d &) const= &Pos2d::dist2;
 GEOM_FT (Pos2d::*distPos2d)(const Pos2d &) const= &Pos2d::dist;
 GEOM_FT (Pos2d::*dist2Pos2d)(const Pos2d &) const= &Pos2d::dist2;
 GEOM_FT (Pos2d::*getItemPos2d)(const size_t &) const= &Pos2d::at0;
@@ -41,11 +41,11 @@ class_<Pos2d, bases<ProtoGeom> >("Pos2d")
   .def("distPos2d",distPos2d,"distance to a point.")
   .def("distRecta2d",distRecta2d,"distance to a straight line.")
   .def("distSemiRecta2d",distSemiRecta2d,"distance to a ray.")
-  .def("distSegmento2d",distSegmento2d,"distance to a segment.")
+  .def("distSegment2d",distSegment2d,"distance to a segment.")
   .def("dist2Pos2d",dist2Pos2d,"squared distance to a point.")
   .def("dist2Recta2d",dist2Recta2d,"squared distance to a straight line.")
   .def("dist2SemiRecta2d",dist2SemiRecta2d,"squared distance to a ray.")
-  .def("dist2Segmento2d",dist2Segmento2d,"squared distance to a segment.")
+  .def("dist2Segment2d",dist2Segment2d,"squared distance to a segment.")
   .def(self + Vector2d())
   .def(self - Vector2d())
   .def(self - Pos2d())
@@ -96,7 +96,7 @@ class_<Vector2d, bases<ProtoGeom> >("Vector2d")
   .add_property("x", &Vector2d::x, &Vector2d::SetX)
   .add_property("y", &Vector2d::y, &Vector2d::SetY)
   .def("normalizado", &Vector2d::Normalizado, "Return the normalized vector (vector with normo 1).")
-  .def("angulo", &Vector2d::Angulo, "Return el ángulo que forma el vector con aquel que se pasa como parámetro (el orden de éstos importa)")
+  .def("angulo", &Vector2d::Angulo, "Return the angle que forma el vector con aquel que se pasa como parámetro (el orden de éstos importa)")
   .def("getXAxisAngle", &Vector2d::XAxisAngle)
   .def("getYAxisAngle", &Vector2d::YAxisAngle)
   .def("dot", dotVector2d,"Returns scalar product.")
@@ -125,7 +125,7 @@ class_<Vector3d, bases<ProtoGeom> >("Vector3d")
   .add_property("z", &Vector3d::z, &Vector3d::SetZ)
   // .def("normaliza", &Vector3d::Normaliza)
   .def("normalizado", &Vector3d::Normalizado, "Return the normalized vector (vector with normo 1).")
-  .def("angulo", &Vector3d::Angulo, "Return el ángulo que forma el vector con aquel que se pasa como parámetro (el orden de éstos importa)")
+  .def("angulo", &Vector3d::Angulo, "Return the angle que forma el vector con aquel que se pasa como parámetro (el orden de éstos importa)")
   .def("perpendicular", &Vector3d::Perpendicular)
   .def("cross", &Vector3d::getCross)
   .def("dot", dotVector3d,"Returns scalar product.")
@@ -140,10 +140,10 @@ class_<Vector3d, bases<ProtoGeom> >("Vector3d")
 
 GEOM_FT (Pos3d::*distRecta3d)(const Recta3d &) const= &Pos3d::dist;
 GEOM_FT (Pos3d::*distSemiRecta3d)(const SemiRecta3d &) const= &Pos3d::dist;
-GEOM_FT (Pos3d::*distSegmento3d)(const Segmento3d &) const= &Pos3d::dist;
+GEOM_FT (Pos3d::*distSegment3d)(const Segment3d &) const= &Pos3d::dist;
 GEOM_FT (Pos3d::*dist2Recta3d)(const Recta3d &) const= &Pos3d::dist2;
 GEOM_FT (Pos3d::*dist2SemiRecta3d)(const SemiRecta3d &) const= &Pos3d::dist2;
-GEOM_FT (Pos3d::*dist2Segmento3d)(const Segmento3d &) const= &Pos3d::dist2;
+GEOM_FT (Pos3d::*dist2Segment3d)(const Segment3d &) const= &Pos3d::dist2;
 GEOM_FT (Pos3d::*getItemPos3d)(const size_t &) const= &Pos3d::at0;
 GEOM_FT (Pos3d::*distPos3d)(const Pos3d &) const= &Pos3d::dist;
 GEOM_FT (Pos3d::*distPlane)(const Plane &) const= &Pos3d::dist;
@@ -163,14 +163,14 @@ class_<Pos3d, bases<ProtoGeom> >("Pos3d")
   .def("distPos3d",distPos3d)
   .def("distRecta3d",distRecta3d)
   .def("distSemiRecta3d",distSemiRecta3d)
-  .def("distSegmento3d",distSegmento3d)
+  .def("distSegment3d",distSegment3d)
   .def("distPlane",distPlane)
   .def("distSemiEspacio3d",distSemiEspacio3d)
   //.def("distSolido3d",distSolido3d)
   .def("dist2Pos3d",dist2Pos3d)
   .def("dist2Recta3d",dist2Recta3d)
   .def("dist2SemiRecta3d",dist2SemiRecta3d)
-  .def("dist2Segmento3d",dist2Segmento3d)
+  .def("dist2Segment3d",dist2Segment3d)
   .def("dist2Plane",dist2Plane)
   .def("dist2SemiEspacio3d",dist2SemiEspacio3d)
   .def("getDimension", &Pos3d::dimension)

@@ -30,7 +30,7 @@ const Pos3d *Polilinea3d::AgregaVertice(const Pos3d &p)
     return &(*rbegin());
   }
 
-size_t Polilinea3d::GetNumSegmentos(void) const
+size_t Polilinea3d::getNumSegments(void) const
   {
     size_t retval= GetNumVertices();
     if(retval>0)
@@ -39,23 +39,23 @@ size_t Polilinea3d::GetNumSegmentos(void) const
   }
 
 //! @brief Return the segment pointed by the iterator.
-Segmento3d Polilinea3d::GetSegmento(const list_Pos3d::const_iterator &i) const
+Segment3d Polilinea3d::getSegment(const list_Pos3d::const_iterator &i) const
   {
     list_Pos3d::const_iterator j= i; j++;
-    Segmento3d s(*i,*j);
+    Segment3d s(*i,*j);
     return s;
   }
 
 //! @brief Return the i-th segment (firt on has index 1).
-Segmento3d Polilinea3d::GetSegmento(const size_t &i) const
+Segment3d Polilinea3d::getSegment(const size_t &i) const
   {
-    const size_t ns= GetNumSegmentos();
+    const size_t ns= getNumSegments();
     if(i>ns)
       std::cerr << getClassName() << "::" << __FUNCTION__
 	        << "; you asked for the " << i
 	        << "-th and " << ns
                 << "-th is the last one." << std::endl;
-    return Segmento3d((*this)[i-1],(*this)[i]);
+    return Segment3d((*this)[i-1],(*this)[i]);
   }
 
 
@@ -68,7 +68,7 @@ void Polilinea3d::Mueve(const Vector3d &v)
 bool Polilinea3d::In(const Pos3d &p, const double &tol) const
   {
     for(register list_Pos3d::const_iterator j=begin();j != end();j++)
-      if(GetSegmento(j).In(p,tol)) return true;
+      if(getSegment(j).In(p,tol)) return true;
     return false;
   }
 
@@ -76,10 +76,10 @@ GeomObj3d::list_Pos3d Polilinea3d::getIntersection(const Plane &p) const
   {
     list_Pos3d retval;
     list_Pos3d::iterator i= retval.end();
-    Segmento3d s;
+    Segment3d s;
     for(register list_Pos3d::const_iterator j=begin();j != end();j++)
       {
-        s= GetSegmento(j);
+        s= getSegment(j);
         list_Pos3d lp= interseccion(p,s);
         retval.insert(i,lp.begin(),lp.end());
         i= retval.end();
@@ -135,7 +135,7 @@ Polilinea3d Polilinea3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 //     ultimo--;
 //     for(register list_Pos3d::const_iterator j= begin();j != ultimo;j++)
 //       {
-//         Segmento3d s= GetSegmento(j);
+//         Segment3d s= getSegment(j);
 //         list_Pos3d l_temp= s.Int(i,d);
 //         copy(l_temp.begin(),l_temp.end(), back_inserter(l_int)); 
 //       }
@@ -153,7 +153,7 @@ Polilinea3d Polilinea3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 //     ultimo--;
 //     for(register list_Pos3d::const_iterator j=begin();j != ultimo;j++)
 //       {
-//         Segmento3d s= GetSegmento(j);
+//         Segment3d s= getSegment(j);
 //         list_Pos3d l_temp= s.Int(i,d);
 //         result.push_back(*j);
 //         if (!l_temp.empty()) result.push_back(*l_temp.begin());
@@ -207,14 +207,14 @@ Polilinea3d::iterator Polilinea3d::getFarthestPointFromSegment(iterator it1, ite
     // Keep track of the point with the maximum distance.
     iterator maxIt = it1;
     maxIt++;
-    Segmento3d s= Segmento3d(*it1,*it2);
+    Segment3d s= Segment3d(*it1,*it2);
     GEOM_FT maxDist= s.dist(*maxIt);
 
     iterator it = it1;
     it++;
     while(it != it2)
       {
-        Segmento3d s= Segmento3d(*it1,*it2);
+        Segment3d s= Segment3d(*it1,*it2);
         GEOM_FT dist= s.dist(*it);
         if(dist > maxDist)
 	  {

@@ -28,7 +28,7 @@
 
 class Recta2d;
 class SemiRecta2d;
-class Segmento2d;
+class Segment2d;
 class Poligono2d;
 class Polilinea2d;
 
@@ -43,7 +43,7 @@ class SupPoligonal2d: public Superficie2d
       { return Vertice(i).x()*Vertice(i+1).y()-Vertice(i+1).x()*Vertice(i).y(); }
     GEOM_FT moment_sign(const int &p,const int &q) const;
   protected:
-    Segmento2d Lado0(unsigned int i, unsigned int j) const;
+    Segment2d Lado0(unsigned int i, unsigned int j) const;
   public:
     SupPoligonal2d(void): Superficie2d(){}
 
@@ -62,8 +62,8 @@ class SupPoligonal2d: public Superficie2d
       { return Vertice(i); }
     inline const Pos2d operator[](const size_t &j) const //Offset 0.
       { return Vertice0(j); }
-    Segmento2d Lado(unsigned int i) const;
-    Segmento2d Lado0(unsigned int i) const;
+    Segment2d Lado(unsigned int i) const;
+    Segment2d Lado0(unsigned int i) const;
     GeomObj::list_Pos2d getVertices(void) const;
     Vector2d getLado0Normal(const size_t i) const;
     Vector2d getVertex0Normal(const size_t i) const;
@@ -93,9 +93,9 @@ class SupPoligonal2d: public Superficie2d
     bool Overlap(const Recta2d &r) const;
     bool Overlap(const SemiRecta2d &sr) const;
 
-    Segmento2d Clip(const Recta2d &) const;
-    Segmento2d Clip(const SemiRecta2d &) const;
-    Segmento2d Clip(const Segmento2d &) const;
+    Segment2d Clip(const Recta2d &) const;
+    Segment2d Clip(const SemiRecta2d &) const;
+    Segment2d Clip(const Segment2d &) const;
 
     
     void Print(std::ostream &os) const;
@@ -103,14 +103,14 @@ class SupPoligonal2d: public Superficie2d
   };
 
 
-std::list<Segmento2d> interseccion(const SupPoligonal2d &p,const Recta2d &r);
-std::list<Segmento2d> interseccion(const Recta2d &r,const SupPoligonal2d &p);
+std::list<Segment2d> interseccion(const SupPoligonal2d &p,const Recta2d &r);
+std::list<Segment2d> interseccion(const Recta2d &r,const SupPoligonal2d &p);
 
-std::list<Segmento2d> interseccion(const SupPoligonal2d &p,const SemiRecta2d &sr);
-std::list<Segmento2d> interseccion(const SemiRecta2d &sr,const SupPoligonal2d &p);
+std::list<Segment2d> interseccion(const SupPoligonal2d &p,const SemiRecta2d &sr);
+std::list<Segment2d> interseccion(const SemiRecta2d &sr,const SupPoligonal2d &p);
 
-std::list<Segmento2d> interseccion(const SupPoligonal2d &p,const Segmento2d &sg);
-std::list<Segmento2d> interseccion(const Segmento2d &sg,const SupPoligonal2d &p);
+std::list<Segment2d> interseccion(const SupPoligonal2d &p,const Segment2d &sg);
+std::list<Segment2d> interseccion(const Segment2d &sg,const SupPoligonal2d &p);
 
 #endif
 

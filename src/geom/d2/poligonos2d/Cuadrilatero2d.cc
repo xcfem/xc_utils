@@ -24,7 +24,7 @@
 #include "Cuadrilatero2d.h"
 #include "Triangulo2d.h"
 #include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
-#include "xc_utils/src/geom/d1/Segmento2d.h"
+#include "xc_utils/src/geom/d1/Segment2d.h"
 #include <vector>
 
 Cuadrilatero2d::Cuadrilatero2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3,const Pos2d &p4): Poligono2d()

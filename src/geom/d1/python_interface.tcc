@@ -51,21 +51,21 @@ class_<Linea3d, bases<GeomObj3d>, boost::noncopyable  >("Linea3d", no_init);
 class_<SemiRecta3d, bases<Linea3d> >("Ray3d")
   .def(init<SemiRecta3d>());
 
-GEOM_FT (Segmento3d::*AnguloVector3D)(const Vector3d &v) const= &Segmento3d::Angulo;
-GEOM_FT (Segmento3d::*AnguloSegmento3D)(const Segmento3d &v) const= &Segmento3d::Angulo;
-class_<Segmento3d, bases<Linea3d> >("LineSegment3d")
+GEOM_FT (Segment3d::*AngleVector3D)(const Vector3d &v) const= &Segment3d::Angulo;
+GEOM_FT (Segment3d::*AngleSegment3D)(const Segment3d &v) const= &Segment3d::Angulo;
+class_<Segment3d, bases<Linea3d> >("LineSegment3d")
   .def(init<>())
   .def(init<Pos3d,Pos3d>())
-  .def("getOrigen", &Segmento3d::Origen)
-  .def("getDestino", &Segmento3d::Destino)
-  .def("getSlope", &Segmento3d::getSlope)
-  .def("distPto", &Segmento3d::dist,"return the distance to the point.")
-  .def("getLength", &Segmento3d::getLength,"Return the length of the segment.")
-  .def("getCenterOfMass", &Segmento3d::getCenterOfMass)
-  .def("getPoint",&Segmento3d::PtoParametricas)
-  .def("getAngleWithVector",AnguloVector3D,"Returns the angle between the line segment and the vector.")
-  .def("getAngleWithLineSegment",AnguloSegmento3D,"Returns the angle between both line segments.")
-  .def("getVDir",&Segmento3d::VDir,"return the direction vector of the segment.")
+  .def("getOrigen", &Segment3d::Origen)
+  .def("getDestino", &Segment3d::Destino)
+  .def("getSlope", &Segment3d::getSlope)
+  .def("distPto", &Segment3d::dist,"return the distance to the point.")
+  .def("getLength", &Segment3d::getLength,"Return the length of the segment.")
+  .def("getCenterOfMass", &Segment3d::getCenterOfMass)
+  .def("getPoint",&Segment3d::PtoParametricas)
+  .def("getAngleWithVector",AngleVector3D,"Returns the angle between the line segment and the vector.")
+  .def("getAngleWithLineSegment",AngleSegment3D,"Returns the angle between both line segments.")
+  .def("getVDir",&Segment3d::VDir,"return the direction vector of the segment.")
   ;
 
 Pos3d (Recta3d::*Pos3dProj)(const Pos3d &) const= &Recta3d::Projection;
@@ -90,16 +90,16 @@ class_<Recta3d, bases<Linea3d> >("Recta3d")
 
 GeomObj::list_Pos2d (Polilinea2d::*intersectionWithLine)(const Recta2d &) const= &Polilinea2d::Interseccion;
 GeomObj::list_Pos2d (Polilinea2d::*intersectionWithRay)(const SemiRecta2d &) const= &Polilinea2d::Interseccion;
-GeomObj::list_Pos2d (Polilinea2d::*intersectionWithSegment)(const Segmento2d &) const= &Polilinea2d::Interseccion;
+GeomObj::list_Pos2d (Polilinea2d::*intersectionWithSegment)(const Segment2d &) const= &Polilinea2d::Interseccion;
 void (Polilinea2d::*simplify2DPoly)(GEOM_FT epsilon)= &Polilinea2d::simplify;
-Segmento2d (Polilinea2d::*get2DSegment)(const size_t &) const= &Polilinea2d::GetSegmento;
+Segment2d (Polilinea2d::*get2DSegment)(const size_t &) const= &Polilinea2d::getSegment;
 class_<Polilinea2d, bases<Linea2d, poliPos2d> >("Polilinea2d")
   .def(init<>())
   .def(init<ListaPos2d>())
   .def(init<Polilinea2d>())
   .def("agregaVertice", &Polilinea2d::AgregaVertice,return_internal_reference<>() )
   .def("getNumVertices", &Polilinea2d::GetNumVertices)
-  .def("getNumSegmentos", &Polilinea2d::GetNumSegmentos)
+  .def("getNumSegments", &Polilinea2d::getNumSegments)
   .def("getIx", &Polilinea2d::Ix)
   .def("getIy", &Polilinea2d::Iy)
   .def("getIz", &Polilinea2d::Iz)
@@ -115,36 +115,36 @@ class_<Polilinea2d, bases<Linea2d, poliPos2d> >("Polilinea2d")
   ;
 
 
-GEOM_FT (Segmento2d::*AnguloVector)(const Vector2d &v) const= &Segmento2d::Angulo;
-GEOM_FT (Segmento2d::*AnguloSegmento)(const Segmento2d &v) const= &Segmento2d::Angulo;
+GEOM_FT (Segment2d::*AngleVector)(const Vector2d &v) const= &Segment2d::Angulo;
+GEOM_FT (Segment2d::*AngleSegment)(const Segment2d &v) const= &Segment2d::Angulo;
 
-Segmento2d (Segmento2d::*OffsetSegmentoVector)(const Vector2d &v) const= &Segmento2d::Offset;
-Segmento2d (Segmento2d::*OffsetSegmentoDouble)(const GEOM_FT &d) const= &Segmento2d::Offset;
+Segment2d (Segment2d::*OffsetSegmentVector)(const Vector2d &v) const= &Segment2d::Offset;
+Segment2d (Segment2d::*OffsetSegmentDouble)(const GEOM_FT &d) const= &Segment2d::Offset;
 
-class_<Segmento2d, bases<Linea2d> >("Segmento2d")
+class_<Segment2d, bases<Linea2d> >("Segment2d")
   .def(init<>())
   .def(init<Pos2d,Pos2d>())
-  .def(init<Segmento2d>())
-  .def("getOrigen", &Segmento2d::Origen)
-  .def("getDestino", &Segmento2d::Destino)
-  .def("getSlope", &Segmento2d::getSlope)
-  .def("distPto", &Segmento2d::dist,"return the distance to the point.")
-  .def("getLength", &Segmento2d::getLength,"Return the length of the segment.")
-  .def("getCenterOfMass", &Segmento2d::getCenterOfMass)
-  .def("anguloVector",AnguloVector)
-  .def("anguloSegmento",AnguloSegmento)
-  .def("offsetVector",OffsetSegmentoVector)
-  .def("offsetDouble",OffsetSegmentoDouble);
+  .def(init<Segment2d>())
+  .def("getOrigen", &Segment2d::Origen)
+  .def("getDestino", &Segment2d::Destino)
+  .def("getSlope", &Segment2d::getSlope)
+  .def("distPto", &Segment2d::dist,"return the distance to the point.")
+  .def("getLength", &Segment2d::getLength,"Return the length of the segment.")
+  .def("getCenterOfMass", &Segment2d::getCenterOfMass)
+  .def("angleVector",AngleVector)
+  .def("angleSegment",AngleSegment)
+  .def("offsetVector",OffsetSegmentVector)
+  .def("offsetDouble",OffsetSegmentDouble);
 
 void (Polilinea3d::*simplify3DPoly)(GEOM_FT epsilon)= &Polilinea3d::simplify;
-Segmento3d (Polilinea3d::*get3DSegment)(const size_t &) const= &Polilinea3d::GetSegmento;
+Segment3d (Polilinea3d::*get3DSegment)(const size_t &) const= &Polilinea3d::getSegment;
 class_<Polilinea3d, bases<Linea3d, poliPos3d> >("Polilinea3d")
   .def(init<>())
 //.def(init<ListaPos3d>())
   .def(init<Polilinea3d>())
   .def("agregaVertice", &Polilinea3d::AgregaVertice,return_internal_reference<>() )
   .def("getNumVertices", &Polilinea3d::GetNumVertices)
-  .def("getNumSegmentos", &Polilinea3d::GetNumSegmentos)
+  .def("getNumSegments", &Polilinea3d::getNumSegments)
   .def("getLength", &Polilinea3d::getLength,"Return the length of the polyline.")
   .def("getIntersection", &Polilinea3d::getIntersection)
   .def("isClosed",&Polilinea3d::isClosed,"returns true if the last vertex is coincident with the first one -dist(first,last)<tol*length-.")

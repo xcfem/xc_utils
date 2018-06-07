@@ -19,23 +19,23 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Segmento3d.cc
+//Segment3d.cc
 
-#include "Segmento3d.h"
+#include "Segment3d.h"
 
 #include "../pos_vec/Dir3d.h"
 #include "../pos_vec/Vector3d.h"
 #include "../pos_vec/Pos3d.h"
 
 //! @brief Constructor.
-Segmento3d::Segmento3d(void): Linea3d(),cgseg(CGPoint_3(0,0,0),CGPoint_3(1,0,0)) {}
+Segment3d::Segment3d(void): Linea3d(),cgseg(CGPoint_3(0,0,0),CGPoint_3(1,0,0)) {}
 
 //! @brief Constructor.
-Segmento3d::Segmento3d(const CGSegmento_3 &r)
+Segment3d::Segment3d(const CGSegment_3 &r)
   : Linea3d(), cgseg(r) {}
 
 //! @brief Constructor.
-Segmento3d::Segmento3d(const Pos3d &p1,const Pos3d &p2)
+Segment3d::Segment3d(const Pos3d &p1,const Pos3d &p2)
   : Linea3d(), cgseg(p1.ToCGAL(),p2.ToCGAL())
   {
     if(EsDegenerada())
@@ -47,72 +47,72 @@ Segmento3d::Segmento3d(const Pos3d &p1,const Pos3d &p2)
   }
 
 //! @brief Constructor.
-Segmento3d::Segmento3d(const Segmento3d &r)
+Segment3d::Segment3d(const Segment3d &r)
   : Linea3d(),cgseg(r.cgseg) {}
 
 //! @brief Operador asignación.
-Segmento3d &Segmento3d::operator=(const Segmento3d &r)
+Segment3d &Segment3d::operator=(const Segment3d &r)
   {
     Linea3d::operator=(r);
     cgseg= r.cgseg;
     return *this;
   }
 
-GeomObj *Segmento3d::clon(void) const
-  { return new Segmento3d(*this); }
-GEOM_FT Segmento3d::GetMax(unsigned short int i) const
+GeomObj *Segment3d::clon(void) const
+  { return new Segment3d(*this); }
+GEOM_FT Segment3d::GetMax(unsigned short int i) const
   { return std::max(Origen()(i),Destino()(i)); }
-GEOM_FT Segmento3d::GetMin(unsigned short int i) const
+GEOM_FT Segment3d::GetMin(unsigned short int i) const
   { return std::min(Origen()(i),Destino()(i)); }
-Recta3d Segmento3d::RectaSoporte(void) const
+Recta3d Segment3d::RectaSoporte(void) const
   { return Recta3d(cgseg.supporting_line()); }
-Pos3d Segmento3d::Origen(void) const
+Pos3d Segment3d::Origen(void) const
   { return Pos3d(cgseg.source()); }
-Pos3d Segmento3d::Destino(void) const
+Pos3d Segment3d::Destino(void) const
   { return Pos3d(cgseg.target()); }
-GEOM_FT Segmento3d::getSlope(void) const
+GEOM_FT Segment3d::getSlope(void) const
   { return RectaSoporte().getSlope(); }
-const Pos3d Segmento3d::Point(const int &i) const
+const Pos3d Segment3d::Point(const int &i) const
   { return Pos3d(cgseg.point(i)); }
 
 //! @brief Return a point of the line at a distance lambda from its origin.
-Pos3d Segmento3d::PtoParametricas(const GEOM_FT &lambda) const
+Pos3d Segment3d::PtoParametricas(const GEOM_FT &lambda) const
   { return Point(0)+lambda*VDir(); }
 
 //! @brief Return the coordenada paramétrica que corresponde
 //! a la coordenada natural se pasa como parámetro.
-double Segmento3d::getParamCooNatural(const GEOM_FT &chi) const
+double Segment3d::getParamCooNatural(const GEOM_FT &chi) const
   { return (chi+1.0)/2.0; }
 
-//! @brief Return the point del segmento cuyas coordenada
+//! @brief Return the point of the segment cuyas coordenada
 //! natural se pasa como parámetro.
-Pos3d Segmento3d::PtoCooNatural(const GEOM_FT &chi) const
+Pos3d Segment3d::PtoCooNatural(const GEOM_FT &chi) const
   { return PtoParametricas(getParamCooNatural(chi)); }
 
-inline bool Segmento3d::EsDegenerada(void) const
+inline bool Segment3d::EsDegenerada(void) const
   { return cgseg.is_degenerate(); }
 //! @brief Return true if the point is in the segment.
-bool Segmento3d::In(const Pos3d &p, const double &tol) const
+bool Segment3d::In(const Pos3d &p, const double &tol) const
   { return cgseg.has_on(p.ToCGAL()); }
 
-void Segmento3d::TwoPoints(const Pos3d &p1,const Pos3d &p2)
-  { (*this)= Segmento3d(p1,p2); }
+void Segment3d::TwoPoints(const Pos3d &p1,const Pos3d &p2)
+  { (*this)= Segment3d(p1,p2); }
 
-Dir3d Segmento3d::GetDir(void) const
+Dir3d Segment3d::GetDir(void) const
   { return Dir3d(cgseg.direction()); }
-Vector3d Segmento3d::VDir(void) const
+Vector3d Segment3d::VDir(void) const
   { return GetDir().GetVector(); }
 
 //! @brief Return el parámetro «lambda» tal que p= Origen()+lambda*VDir()
-GEOM_FT Segmento3d::getLambda(const Pos3d &p) const
+GEOM_FT Segment3d::getLambda(const Pos3d &p) const
   {
     const Vector3d v(Origen(),p);
     const Vector3d dir(Normaliza(VDir()));
     return dot(v,dir);
   }
 
-//! @brief Return el cuadrado de la distance from the point al segmento.
-GEOM_FT Segmento3d::dist2(const Pos3d &p) const
+//! @brief Return el cuadrado de la distance from the point to the segment.
+GEOM_FT Segment3d::dist2(const Pos3d &p) const
   {
     const Recta3d r= RectaSoporte();
     const Pos3d proj= r.Projection(p);
@@ -131,22 +131,22 @@ GEOM_FT Segmento3d::dist2(const Pos3d &p) const
     return retval;
   }
 
-//! @brief Return the distance from the point al segmento.
-GEOM_FT Segmento3d::dist(const Pos3d &p) const
+//! @brief Return the distance from the point to the segment.
+GEOM_FT Segment3d::dist(const Pos3d &p) const
   { return sqrt(dist2(p)); }
 
-bool Segmento3d::Paralelo(const Recta3d &r) const
+bool Segment3d::Paralelo(const Recta3d &r) const
   { return paralelas(RectaSoporte(),r); }
-bool Segmento3d::Paralelo(const SemiRecta3d &sr) const
+bool Segment3d::Paralelo(const SemiRecta3d &sr) const
   { return paralelas(RectaSoporte(),sr); }
-bool Segmento3d::Paralelo(const Segmento3d &r) const
+bool Segment3d::Paralelo(const Segment3d &r) const
   { return paralelas(RectaSoporte(),r.RectaSoporte()); }
 
 //! @brief Return the length of the segment.
-GEOM_FT Segmento3d::getLength(void) const
+GEOM_FT Segment3d::getLength(void) const
   { return Origen().dist(Destino()); }
 
-Pos3d Segmento3d::getCenterOfMass(void) const
+Pos3d Segment3d::getCenterOfMass(void) const
   {
     Pos3d retval= Origen();
     const Vector3d v= (Destino()-retval)/2;
@@ -154,9 +154,9 @@ Pos3d Segmento3d::getCenterOfMass(void) const
     return retval;
   }
 
-GeomObj3d::list_Pos3d Segmento3d::Interseccion(const Recta3d &r) const
-//Return the point intersection de recta and segmento, if doesn't exists la
-//intersection devuelve la lista vacía.
+//! @brief Return the intersection of the segment and the line,
+//! if it doesn't exists return an empty list.
+GeomObj3d::list_Pos3d Segment3d::Interseccion(const Recta3d &r) const
   {
     const Recta3d sop= RectaSoporte();
     GeomObj3d::list_Pos3d retval= sop.Interseccion(r);
@@ -168,9 +168,10 @@ GeomObj3d::list_Pos3d Segmento3d::Interseccion(const Recta3d &r) const
       }
     return retval;
   }
-//! @brief Return the point intersection de semirrecta and segmento, if
+
+//! @brief Return the intersection of the ray and the segment, if
 //! the intersection doesn't exists returns an empty list.
-GeomObj3d::list_Pos3d Segmento3d::Interseccion(const SemiRecta3d &sr) const
+GeomObj3d::list_Pos3d Segment3d::Interseccion(const SemiRecta3d &sr) const
   {
     const Recta3d sop= RectaSoporte();
     GeomObj3d::list_Pos3d retval= sr.Interseccion(sop);
@@ -185,7 +186,7 @@ GeomObj3d::list_Pos3d Segmento3d::Interseccion(const SemiRecta3d &sr) const
 
 //! @brief Return the intersection of the line with the plane defined
 //! by the equation coord_i=cte.
-GeomObj3d::list_Pos3d Segmento3d::Interseccion(unsigned short int i, const double &d) const
+GeomObj3d::list_Pos3d Segment3d::Interseccion(unsigned short int i, const double &d) const
   {
     GeomObj3d::list_Pos3d lp;
     lp= RectaSoporte().Interseccion(i,d);
@@ -199,9 +200,10 @@ GeomObj3d::list_Pos3d Segmento3d::Interseccion(unsigned short int i, const doubl
     return lp;
   }
 
-GeomObj3d::list_Pos3d Segmento3d::Interseccion(const Segmento3d &sg2) const
-//Return the point intersection entre segmentos, if doesn't exists la
-//intersection devuelve la lista vacía.
+
+//! @brief Return the intersection of the segments, if
+//! the intersection doesn't exists returns an empty list.
+GeomObj3d::list_Pos3d Segment3d::Interseccion(const Segment3d &sg2) const
   {
     const Recta3d sop= RectaSoporte();
     GeomObj3d::list_Pos3d retval= sg2.Interseccion(sop);
@@ -215,28 +217,28 @@ GeomObj3d::list_Pos3d Segmento3d::Interseccion(const Segmento3d &sg2) const
     return retval;
   }
 
-GEOM_FT dist(const Pos3d &p,const Segmento3d &r)
+GEOM_FT dist(const Pos3d &p,const Segment3d &r)
   { return sqrt_FT(dist2(r,p)); }
 
 //! @brief Returns angle with vector.
-GEOM_FT Segmento3d::Angulo(const Vector3d &v) const
+GEOM_FT Segment3d::Angulo(const Vector3d &v) const
   { return angulo(VDir(),v); }
 //! @brief Returns angle with another line segment.
-GEOM_FT Segmento3d::Angulo(const Segmento3d &s) const
+GEOM_FT Segment3d::Angulo(const Segment3d &s) const
   { return Angulo(s.VDir()); }
-GEOM_FT angulo(const Segmento3d &r,const Vector3d &v)
+GEOM_FT angulo(const Segment3d &r,const Vector3d &v)
   { return r.Angulo(v); }
 //Moment of inertia with respect to the center of mass in local coordinates.
-GEOM_FT Segmento3d::Ix(void) const
+GEOM_FT Segment3d::Ix(void) const
   { return 0.0; }
 //Moment of inertia with respect to the center of mass in local coordinates.
-GEOM_FT Segmento3d::Iy(void) const
+GEOM_FT Segment3d::Iy(void) const
   { return NAN; }
 //Moment of inertia with respect to the center of mass in local coordinates.
-GEOM_FT Segmento3d::Iz(void) const
+GEOM_FT Segment3d::Iz(void) const
   { return NAN; }
-bool operator==(const Segmento3d &r1,const Segmento3d &r2)
+bool operator==(const Segment3d &r1,const Segment3d &r2)
   { return (r1.cgseg==r2.cgseg); }
-void Segmento3d::Print(std::ostream &os) const
+void Segment3d::Print(std::ostream &os) const
   { os << Origen() << " " << Destino(); }
 

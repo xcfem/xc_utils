@@ -46,12 +46,12 @@ boost::python::list python_particiona(boost::python::list &l)
     return to_python_list(areas);
   }
 
-//! @brief Return el resultado de recortar los 
-//! polígonos de la lista mediante la técnica de Voronoi.
-boost::python::list python_recorta(boost::python::list &l, const Poligono2d &plg)
+//! @brief Return the result from clipping the polygons on the list 
+//! using the Voronoi algorithm.
+boost::python::list python_clip(boost::python::list &l, const Poligono2d &plg)
   {
     std::list<Poligono2d> areas= from_python_list(l);
-    areas= recorta(areas,plg);
+    areas= clip(areas,plg);
     return to_python_list(areas);
   }
 

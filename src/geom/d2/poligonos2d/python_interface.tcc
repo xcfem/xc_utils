@@ -22,7 +22,7 @@
 //python_interface.cxx
 
 
-Segmento2d (SupPoligonal2d::*getSegmentoLado0)(unsigned int i) const= &SupPoligonal2d::Lado0;
+Segment2d (SupPoligonal2d::*getSide0Segment)(unsigned int i) const= &SupPoligonal2d::Lado0;
 class_<SupPoligonal2d, bases<Superficie2d>, boost::noncopyable >("SupPoligonal2d", no_init)
   .def("getPerimetro",&SupPoligonal2d::Perimetro)
   .def("getCenterOfMass",&SupPoligonal2d::getCenterOfMass)
@@ -30,7 +30,7 @@ class_<SupPoligonal2d, bases<Superficie2d>, boost::noncopyable >("SupPoligonal2d
   .def("getIy",&SupPoligonal2d::Iy)
   .def("getPxy",&SupPoligonal2d::Pxy)
   .def("getVertice",&SupPoligonal2d::Vertice0)
-  .def("getLado",getSegmentoLado0)
+  .def("getLado",getSide0Segment)
   .def("getNormalLado",&SupPoligonal2d::getLado0Normal)
   .def("getNormalVertice",&SupPoligonal2d::getVertex0Normal)
   .def("getPolilinea",&SupPoligonal2d::GetPolilinea);
@@ -45,9 +45,9 @@ class_<polygon_2D_list >("polygon_2D_list")
   ;
 
 void (Poligono2d::*unePoligono2d)(const Poligono2d &) =&Poligono2d::une;
-Segmento2d (Poligono2d::*recortaRecta)(const Recta2d &) const=&Poligono2d::Clip;
-Segmento2d (Poligono2d::*recortaSemiRecta)(const SemiRecta2d &) const=&Poligono2d::Clip;
-Segmento2d (Poligono2d::*recortaSegmento)(const Segmento2d &) const=&Poligono2d::Clip;
+Segment2d (Poligono2d::*clipRecta)(const Recta2d &) const=&Poligono2d::Clip;
+Segment2d (Poligono2d::*clipSemiRecta)(const SemiRecta2d &) const=&Poligono2d::Clip;
+Segment2d (Poligono2d::*clipSegment)(const Segment2d &) const=&Poligono2d::Clip;
 class_<Poligono2d, Poligono2d *, bases<SupPoligonal2d> >("Poligono2d")
   .def(init<>())
   .def(init<Polilinea2d>())
@@ -63,10 +63,10 @@ class_<Poligono2d, Poligono2d *, bases<SupPoligonal2d> >("Poligono2d")
   .def("getArea",&Poligono2d::getArea,"Return the polygon area.")
   .def("getRecubrimiento",&Poligono2d::GetRecubrimiento)
   .def("unePoligono2d",unePoligono2d)
-  .def("recortaRecta",recortaRecta)
-  .def("recortaSemiRecta",recortaSemiRecta)
-  .def("recortaSegmento",recortaSegmento)
-  .def("recortaPorPoligono",&Poligono2d::clipBy);
+  .def("clipRecta",clipRecta)
+  .def("clipSemiRecta",clipSemiRecta)
+  .def("clipSegment",clipSegment)
+  .def("clipPorPoligono",&Poligono2d::clipBy);
 
 class_<Cuadrilatero2d, bases<Poligono2d> >("Cuadrilatero2d")
   .def(init<>())
@@ -90,5 +90,5 @@ class_<PoligonoConAgujeros2d, bases<Superficie2d> >("PoligonoConAgujeros2d")
   ;
 
 def("particiona",python_particiona);
-def("recorta",python_recorta);
+def("clip",python_clip);
 

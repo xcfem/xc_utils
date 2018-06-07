@@ -22,7 +22,7 @@ pol3.agregaVertice(geom.Pos2d(0.,2.))
 
 list1=[pol1,pol2]
 list1=geom.particiona(list1)
-list1=geom.recorta(list1,pol3)
+list1=geom.clip(list1,pol3)
 
 p1=list1[0]
 ratio1=(p1.getPerimetro()-perimetroTeorico)/perimetroTeorico

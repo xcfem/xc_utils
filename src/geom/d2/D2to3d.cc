@@ -24,8 +24,8 @@
 #include "D2to3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d1/Recta2d.h"
-#include "xc_utils/src/geom/d1/Segmento2d.h"
-#include "xc_utils/src/geom/d1/Segmento3d.h"
+#include "xc_utils/src/geom/d1/Segment2d.h"
+#include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/d3/GmGrupo3d.h"
 #include "xc_utils/src/geom/d3/SemiEspacio3d.h"
@@ -74,8 +74,8 @@ D2to3d &D2to3d::operator=(const D2to3d &otro)
 Pos3d D2to3d::to_3d(const Pos2d &p2d) const
   { return ref.GetPosGlobal(p2d); }
 
-Segmento3d D2to3d::to_3d(const Segmento2d &sg2d) const
-  { return Segmento3d(to_3d(sg2d.Origen()),to_3d(sg2d.Destino())); }
+Segment3d D2to3d::to_3d(const Segment2d &sg2d) const
+  { return Segment3d(to_3d(sg2d.Origen()),to_3d(sg2d.Destino())); }
 
 MatrizPos3d D2to3d::to_3d(const MatrizPos2d &p2d) const
   {

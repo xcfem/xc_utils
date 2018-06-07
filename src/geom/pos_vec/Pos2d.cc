@@ -30,7 +30,7 @@
 
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include "xc_utils/src/geom/d1/SemiRecta2d.h"
-#include "xc_utils/src/geom/d1/Segmento2d.h"
+#include "xc_utils/src/geom/d1/Segment2d.h"
 
 //! @brief Constructor por defecto.
 Pos2d::Pos2d(void)
@@ -159,12 +159,12 @@ GEOM_FT Pos2d::dist2(const SemiRecta2d &sr) const
 GEOM_FT Pos2d::dist(const SemiRecta2d &sr) const
   { return sr.dist(*this); }
 
-//! @brief Return el cuadrado de la distance al segmento.
-GEOM_FT Pos2d::dist2(const Segmento2d &sg) const
+//! @brief Return the squared distance to the segment.
+GEOM_FT Pos2d::dist2(const Segment2d &sg) const
   { return sg.dist2(*this); }
 
-//! @brief Return the distance al segmento.
-GEOM_FT Pos2d::dist(const Segmento2d &sg) const
+//! @brief Return the distance to the segment.
+GEOM_FT Pos2d::dist(const Segment2d &sg) const
   { return sg.dist(*this); }
 
 void Pos2d::Plot(Plotter &plotter) const

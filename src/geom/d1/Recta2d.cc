@@ -30,7 +30,7 @@
 #include "../pos_vec/Pos3d.h"
 
 
-#include "Segmento2d.h"
+#include "Segment2d.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
 
@@ -101,7 +101,7 @@ void Recta2d::TwoPoints(const Pos2d &p1,const Pos2d &p2)
 GEOM_FT Recta2d::getLength(void) const
   { return NAN; }
 
-//! @brief Return el centro de gravedad de la recta.
+//! @brief Return the center of mass de la recta.
 Pos2d Recta2d::getCenterOfMass(void) const
   { return Pos2d(NAN,NAN); }
 
@@ -367,19 +367,19 @@ GEOM_FT dist2(const Recta2d &r1,const Recta2d &r2)
     return retval;
   }
 
-//! @brief Return el ángulo con el vector que se pasa como parámetro.
+//! @brief Return the angle con el vector que se pasa como parámetro.
 double Recta2d::Angulo(const Vector2d &v) const
   { return angulo(VDir(),v); }
 
-//! @brief Return el ángulo con el Y axis.
+//! @brief Return the angle con el Y axis.
 double Recta2d::Azimuth(void) const
   { return angulo(VDir(),Vector2d(0,1)); }
 
-//! @brief Return el ángulo de la recta con el vector.
+//! @brief Return the angle de la recta con el vector.
 double angulo(const Recta2d &r,const Vector2d &v)
   { return r.Angulo(v); }
 
-//! @brief Return el ángulo entre las rectas.
+//! @brief Return the angle entre las rectas.
 double angulo(const Recta2d &r1,const Recta2d &r2)
   { return r1.Angulo(r2.VDir()); }
 
@@ -494,13 +494,14 @@ void Recta2d::Transforma(const Trf2d &trf2d)
 
 void Recta2d::Print(std::ostream &os) const
   { os << PtoParametricas(0.0) << " " << PtoParametricas(100.0); }
+
 void Recta2d::Plot(Plotter &psos) const
-//La recta no se dibuja, primero hay que recortarla.
   {
+    //Line is not drawn, it must be clipped first.
   }
 
 Recta2d mediatriz(const Pos2d &p1,const Pos2d &p2)
   { 
-    const Segmento2d sg(p1,p2);
+    const Segment2d sg(p1,p2);
     return sg.Mediatriz();
   }

@@ -6,7 +6,7 @@ import math
 
 ptoOrigen=geom.Pos2d(0,0)
 ptoDestino=geom.Pos2d(10,0)
-s1=geom.Segmento2d(ptoOrigen,ptoDestino)
+s1=geom.Segment2d(ptoOrigen,ptoDestino)
 s2=s1.offsetDouble(2)
 s3=s1.offsetDouble(-2)
 

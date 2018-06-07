@@ -29,8 +29,8 @@
 #include "../tipos_cgal.h"
 
 class Plane;
-class Segmento2d;
-class Segmento3d;
+class Segment2d;
+class Segment3d;
 class MatrizPos3d;
 class MatrizPos2d;
 
@@ -44,7 +44,7 @@ class D2to3d: public Superficie3d
 
   protected:
     Pos3d to_3d(const Pos2d &p2d) const;
-    Segmento3d to_3d(const Segmento2d &sg2d) const;
+    Segment3d to_3d(const Segment2d &sg2d) const;
     MatrizPos3d to_3d(const MatrizPos2d &p2d) const;
     Pos2d to_2d(const Pos3d &p3d) const;
 

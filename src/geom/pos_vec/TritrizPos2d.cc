@@ -23,7 +23,7 @@
 
 #include "TritrizPos2d.h"
 #include "MatrizPos2d.h"
-#include "xc_utils/src/geom/d1/Segmento2d.h"
+#include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d2/BND2d.h"
 
 
@@ -31,7 +31,7 @@ TritrizPos2d::TritrizPos2d(const size_t iLayers)
   : TritrizPos<Pos2d>(iLayers) {}
 
 Pos2d TritrizPos2d::GetCentro(void) const
-  { return get_centro(*this,Segmento2d()); }
+  { return get_centro(*this,Segment2d()); }
 
 TritrizPos2d create_uniform_grid(const BND2d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z)
   {

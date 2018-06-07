@@ -79,13 +79,13 @@ class RangoTritriz
 
     inline static const char &Separador(void)
       { return RangoIndice::Separador(); }
-    void Recorta(const size_t &cpmax,const size_t &fmax,const size_t &cmax);
+    void Clip(const size_t &cpmax,const size_t &fmax,const size_t &cmax);
     void Intersec(const RangoTritriz &otro);
     RangoTritriz Intersec(const RangoTritriz &otro) const;
     void Print(std::ostream &os) const;
   };
 
-RangoTritriz recorta(const RangoTritriz &r,const size_t &cpmax,const size_t &fmax,const size_t &cmax);
+RangoTritriz clip(const RangoTritriz &r,const size_t &cpmax,const size_t &fmax,const size_t &cmax);
 RangoTritriz intersec(const RangoTritriz &,const RangoTritriz &);
 std::ostream &operator<<(std::ostream &os,const RangoTritriz &rango);
 
@@ -94,9 +94,9 @@ template <class TTZ>
 RangoTritriz::RangoTritriz(const TTZ &ttz)
   : layer_range(1,ttz.getNumberOfLayers()), row_range(1,ttz.getNumberOfRows()),column_range(1,ttz.getNumberOfColumns()) {}
 
-//! @brief Recorte de los intervalos del rango a partir de una tritriz.
+//! @brief Clip the range intervals from the tritriz argument.
 template <class TTZ>
-RangoTritriz recorta(const RangoTritriz &rttz,const TTZ &ttz)
+RangoTritriz clip(const RangoTritriz &rttz,const TTZ &ttz)
   { return rttz.Intersec(RangoTritriz(ttz)); }
 
 #endif

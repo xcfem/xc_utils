@@ -27,7 +27,7 @@
 #include "../pos_vec/Pos3d.h"
 #include "../listas/PoliPos.h"
 #include "Linea3d.h"
-#include "Segmento3d.h"
+#include "Segment3d.h"
 
 //! @ingroup GEOM
 //
@@ -43,7 +43,7 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
       { return *this; }
     inline size_t GetNumVertices(void) const
       { return GeomObj::list_Pos3d::size(); }
-    size_t GetNumSegmentos(void) const;
+    size_t getNumSegments(void) const;
 
 /*     inline virtual void GiraX(double ang) */
 /*       { Ref3d::GiraX(ang); TrfPoints(); } */
@@ -71,8 +71,8 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
     Polilinea3d GetMenores(unsigned short int i,const GEOM_FT &d) const;
     //Return una Polilinea3d con los vertices cuya coordenada i
     //es menor que d.
-    Segmento3d GetSegmento(const list_Pos3d::const_iterator &) const;
-    Segmento3d GetSegmento(const size_t &) const;
+    Segment3d getSegment(const list_Pos3d::const_iterator &) const;
+    Segment3d getSegment(const size_t &) const;
     //list_Pos3d Int(unsigned short int i,const GEOM_FT &d) const;
     list_Pos3d getIntersection(const Plane &) const;
     //Polilinea3d Corta(unsigned short int i,const GEOM_FT &d) const;

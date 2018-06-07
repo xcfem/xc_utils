@@ -128,7 +128,7 @@ GeomObj2d::list_Pos2d SemiRecta2d::Interseccion(const SemiRecta2d &r2) const
           retval.push_back(Pos2d(ptoi));
         else
           {
-            cerr << "interseccion(SemiRecta2d,SemiRecta2d): unknown error." 
+            cerr << "intersection(SemiRecta2d,SemiRecta2d): unknown error." 
                  << endl;
           }
       }
@@ -148,6 +148,7 @@ void SemiRecta2d::Transforma(const Trf2d &trf2d)
 void SemiRecta2d::Print(std::ostream &os) const
   { os << PtoParametricas(0.0) << " " << PtoParametricas(100.0); }
 void SemiRecta2d::Plot(Plotter &psos) const
-//La semirecta no se dibuja, primero hay que recortarla.
-  {}
+  {
+    //Ray is not drawn, it must be clipped first.
+  }
 

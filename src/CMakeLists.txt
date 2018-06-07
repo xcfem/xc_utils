@@ -95,7 +95,7 @@ SET(geomSisCooRef geom/sis_coo/SisCoo geom/sis_coo/SisCooRect1d3d geom/sis_coo/S
 
 SET(geomD0 geom/d0/Point3d geom/d0/Point2d)
 
-SET(geomD1 geom/d1/Recta3d geom/d1/Recta2d geom/d1/SemiRecta3d geom/d1/Segmento2d geom/d1/SemiRecta2d geom/d1/Segmento3d geom/d1/Polilinea2d geom/d1/Polilinea3d)
+SET(geomD1 geom/d1/Recta3d geom/d1/Recta2d geom/d1/SemiRecta3d geom/d1/Segment2d geom/d1/SemiRecta2d geom/d1/Segment3d geom/d1/Polilinea2d geom/d1/Polilinea3d)
 
 SET(geomD2 geom/d2/GmGrupo2d geom/d2/Superficie2d geom/d2/Superficie3d geom/d2/Plane geom/d2/BND2d geom/d2/Circulo2d geom/d2/SectorCircular2d geom/d2/SectorCircular3d geom/d2/SectorAnilloCircular2d geom/d2/GeomObj2d geom/d2/Poligono3d geom/d2/poligonos2d/Poligono2d geom/d2/poligonos2d/PoligonoConAgujeros2d geom/d2/poligonos2d/SupPoligonal2d geom/d2/poligonos2d/Triangulo2d geom/d2/poligonos2d/carsten_steger geom/d2/poligonos2d/bool_op_poligono2d geom/d2/poligonos2d/Cuadrilatero2d geom/d2/poligonos2d/Rectangulo2d geom/d2/poligonos2d/Cuadrado2d geom/d2/HalfPlane2d geom/d2/Triangulo3d geom/d2/Circulo3d geom/d2/D2to3d geom/d2/Trihedron geom/d2/Triang3dMesh geom/d2/ConvexHull2d geom/d2/GeneralEquationOfPlane geom/d2/Rejilla2d)
 

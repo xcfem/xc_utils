@@ -25,7 +25,7 @@
 
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include "xc_utils/src/geom/d1/SemiRecta2d.h"
-#include "xc_utils/src/geom/d1/Segmento2d.h"
+#include "xc_utils/src/geom/d1/Segment2d.h"
 
 
 Cuadrado2d::Cuadrado2d(const Pos2d &o,const GEOM_FT &l)

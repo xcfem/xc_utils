@@ -23,7 +23,7 @@
 
 #include "MatrizPos2d.h"
 #include "xc_basic/src/util/matem.h"
-#include "xc_utils/src/geom/d1/Segmento2d.h"
+#include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Triangulo2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Cuadrilatero2d.h"
 #include "xc_utils/src/geom/matriz_FT.h"
@@ -96,18 +96,20 @@ GEOM_FT MatrizPos2d::Lagrange(const GEOM_FT &tol)
           err= ciclo_lagrange();
         else
           {
-	    std::cerr << "MatrizPos2d::Lagrange; no se alcanzó la convergencia tras: "
-                      << conta << " iteraciones." << std::endl;
+	    std::cerr << "MatrizPos2d::" << __FUNCTION__
+	              << "; convergence not reached after: "
+                      << conta << " iterations." << std::endl;
             break;
           }
       }
     return err;
   }
 
+//! @brief Return the position of the midpoint.
 Pos2d MatrizPos2d::GetCentro(void) const
-  { return get_centro(*this,Segmento2d()); }
+  { return get_centro(*this,Segment2d()); }
 
-//! @brief Return el centro de gravedad.
+//! @brief Return the center of mass.
 Pos2d MatrizPos2d::getCenterOfMass(void) const
   {
     GEOM_FT areaQuad= 0.0;

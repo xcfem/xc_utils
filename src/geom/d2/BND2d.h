@@ -27,7 +27,7 @@
 #include "GeomObj2d.h"
 #include "../tipos_cgal.h"
 
-class Segmento2d;
+class Segment2d;
 class SemiRecta2d;
 class Poligono2d;
 class Polilinea2d;
@@ -97,14 +97,14 @@ class BND2d: public GeomObj2d
     bool Overlap(const Pos2d &) const;
     bool Overlap(const Recta2d &r) const;
     bool Overlap(const SemiRecta2d &sr) const;
-    bool Overlap(const Segmento2d &sg) const;
+    bool Overlap(const Segment2d &sg) const;
     bool Overlap(const BND2d &) const;
     bool Overlap(const Polilinea2d &) const;
     bool Overlap(const Poligono2d &) const;
     bool Overlap(const std::list<Poligono2d> &) const;
     bool Interseca(const Recta2d &r) const;
     bool Interseca(const SemiRecta2d &sr) const;
-    bool Interseca(const Segmento2d &sg) const;
+    bool Interseca(const Segment2d &sg) const;
     bool Interseca(const BND2d &) const;
 
     void Transforma(const Trf2d &trf2d);
@@ -121,13 +121,13 @@ inline bool intersecan(const Recta2d &r,const BND2d &bnd)
   { return bnd.Interseca(r); }
 inline bool intersecan(const SemiRecta2d &sr,const BND2d &bnd)
   { return bnd.Interseca(sr); }
-inline bool intersecan(const Segmento2d &sg,const BND2d &bnd)
+inline bool intersecan(const Segment2d &sg,const BND2d &bnd)
   { return bnd.Interseca(sg); }
 inline bool intersecan(const BND2d &bnd,const Recta2d &r)
   { return bnd.Interseca(r); }
 inline bool intersecan(const BND2d &bnd,const SemiRecta2d &sr)
   { return bnd.Interseca(sr); }
-inline bool intersecan(const BND2d &bnd,const Segmento2d &sg)
+inline bool intersecan(const BND2d &bnd,const Segment2d &sg)
   { return bnd.Interseca(sg); }
 
 //!@brief Return verdadero si todos los objetos de la secuencia

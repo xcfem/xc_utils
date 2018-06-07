@@ -26,7 +26,7 @@
 #include "../pos_vec/Vector2d.h"
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include "xc_utils/src/geom/d1/SemiRecta2d.h"
-#include "xc_utils/src/geom/d1/Segmento2d.h"
+#include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d1/Polilinea2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
 #include <iostream>
@@ -135,7 +135,7 @@ bool BND2d::Overlap(const SemiRecta2d &sr) const
   { return Interseca(sr); }
 
 //! @brief Return true if the segment and the boundary overlap.
-bool BND2d::Overlap(const Segmento2d &sg) const
+bool BND2d::Overlap(const Segment2d &sg) const
   { return Interseca(sg); }
 
 //! @brief Return true if boundary overlap.
@@ -148,7 +148,7 @@ bool BND2d::Overlap(const Polilinea2d &p) const
     bool retval= Overlap(p.begin(),p.end());
     if(!retval)
       for(Polilinea2d::const_iterator j=p.begin();j!=p.end();j++)
-        if(Overlap(p.GetSegmento(j)))
+        if(Overlap(p.getSegment(j)))
           {
             retval= true;
             break;
@@ -192,7 +192,7 @@ bool BND2d::Interseca(const Recta2d &r) const
   { return do_intersect(cgrectg,r.ToCGAL()); }
 bool BND2d::Interseca(const SemiRecta2d &sr) const
   { return do_intersect(cgrectg,sr.ToCGAL()); }
-bool BND2d::Interseca(const Segmento2d &sg) const
+bool BND2d::Interseca(const Segment2d &sg) const
   { return do_intersect(cgrectg,sg.ToCGAL()); }
 bool BND2d::Interseca(const BND2d &bnd) const
   { return do_intersect(cgrectg,bnd.cgrectg); }

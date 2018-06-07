@@ -30,7 +30,7 @@
 
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/d1/SemiRecta3d.h"
-#include "xc_utils/src/geom/d1/Segmento3d.h"
+#include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d3/SemiEspacio3d.h"
 #include "xc_utils/src/geom/d3/Solido3d.h"
@@ -212,12 +212,12 @@ GEOM_FT Pos3d::dist2(const SemiRecta3d &sr) const
 GEOM_FT Pos3d::dist(const SemiRecta3d &sr) const
   { return sr.dist(*this); }
 
-//! @brief Return el cuadrado de la distance al segmento.
-GEOM_FT Pos3d::dist2(const Segmento3d &sg) const
+//! @brief Return the squared distance to the segment.
+GEOM_FT Pos3d::dist2(const Segment3d &sg) const
   { return sg.dist2(*this); }
 
-//! @brief Return the distance al segmento.
-GEOM_FT Pos3d::dist(const Segmento3d &sg) const
+//! @brief Return the distance to the segment.
+GEOM_FT Pos3d::dist(const Segment3d &sg) const
   { return sg.dist(*this); }
 
 //! @brief Return the squared distance to the plane.

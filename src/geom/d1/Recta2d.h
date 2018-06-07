@@ -53,7 +53,7 @@ class RectaParametricas2d
 
 class Dir2d;
 class SemiRecta2d;
-class Segmento2d;
+class Segment2d;
 
 
 //! @ingroup GEOM
@@ -64,7 +64,7 @@ class Recta2d : public Linea2d
     CGRecta_2 cgr;
 
     friend class SemiRecta2d;
-    friend class Segmento2d;
+    friend class Segment2d;
   public:
     Recta2d(void);
     explicit Recta2d(const CGRecta_2 &r);

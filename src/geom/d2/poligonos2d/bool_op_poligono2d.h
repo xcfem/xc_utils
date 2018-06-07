@@ -40,7 +40,7 @@ std::list<Poligono2d> join(const std::list<Poligono2d> &,const Poligono2d &);
 bool overlap(const Poligono2d &p1,const Poligono2d &p2);
 bool overlap(const std::list<Poligono2d> &,const std::list<Poligono2d> &);
 
-std::list<Poligono2d> recorta(const std::list<Poligono2d> &,const Poligono2d &);
+std::list<Poligono2d> clip(const std::list<Poligono2d> &,const Poligono2d &);
 
 std::list<Poligono2d> interseccion(const Poligono2d &p1,const Poligono2d &p2);
 std::list<Poligono2d> interseccion(const Poligono2d &p,const HalfPlane2d &r);

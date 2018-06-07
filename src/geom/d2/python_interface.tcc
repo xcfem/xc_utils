@@ -87,7 +87,7 @@ Recta3d (Plane::*Recta3dProjection)(const Recta3d &) const= &Plane::Projection;
 Recta3d (Plane::*IntersPlane)(const Plane &p) const= &Plane::Interseccion;
 Pos3d (Plane::*IntersRecta3d)(const Recta3d &p) const= &Plane::Interseccion;
 Pos3d (Plane::*IntersSemiRecta3d)(const SemiRecta3d &p) const= &Plane::Interseccion;
-Pos3d (Plane::*IntersSegmento3d)(const Segmento3d &p) const= &Plane::Interseccion;
+Pos3d (Plane::*IntersSegment3d)(const Segment3d &p) const= &Plane::Interseccion;
 class_<Plane, bases<Superficie3d> >("Plane3d")
   .def(init<Pos3d,Pos3d,Pos3d>())
   .def(init<Pos3d,Vector3d>())
@@ -106,7 +106,7 @@ class_<Plane, bases<Superficie3d> >("Plane3d")
   .def("getIntersPlane",IntersPlane)
   .def("getIntersRecta3d",IntersRecta3d)
   .def("getIntersSemiRecta3d",IntersSemiRecta3d)
-  .def("getIntersSegmento3d",IntersSegmento3d)
+  .def("getIntersSegment3d",IntersSegment3d)
   .def("getNormal", &Plane::Normal)
   .def("getBase1", &Plane::Base1)
   .def("getBase2", &Plane::Base2);

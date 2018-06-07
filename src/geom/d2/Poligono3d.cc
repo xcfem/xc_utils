@@ -25,8 +25,8 @@
 #include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d1/Recta2d.h"
-#include "xc_utils/src/geom/d1/Segmento2d.h"
-#include "xc_utils/src/geom/d1/Segmento3d.h"
+#include "xc_utils/src/geom/d1/Segment2d.h"
+#include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/d3/GmGrupo3d.h"
 #include "xc_utils/src/geom/d3/SemiEspacio3d.h"
@@ -49,21 +49,21 @@ GeomObj::list_Pos3d Poligono3d::ListaVertices(void) const
       retval.push_back(to_3d(*i));
     return retval;
   }
-Segmento3d Poligono3d::Lado(unsigned int i) const
+Segment3d Poligono3d::Lado(unsigned int i) const
   {
-    Segmento2d sg2d= plg2d.Lado(i);
+    Segment2d sg2d= plg2d.Lado(i);
     return to_3d(sg2d);
   }
 
-Segmento3d Poligono3d::Lado0(unsigned int i) const
+Segment3d Poligono3d::Lado0(unsigned int i) const
   {
-    Segmento2d sg2d= plg2d.Lado0(i);
+    Segment2d sg2d= plg2d.Lado0(i);
     return to_3d(sg2d);
   }
 
 Plane Poligono3d::getPlaneFromSide(unsigned int i) const
   {
-    Segmento3d lado= Lado(i);
+    Segment3d lado= Lado(i);
     Vector3d v= getPlane().Normal();
     return Plane(lado,v);
   }
@@ -78,7 +78,7 @@ bool Poligono3d::In(const Pos3d &p,const double &tol)
     return plg2d.In(p2d,tol);
   }
 
-//! @brief Return el centro de gravedad del polígono.
+//! @brief Return the center of mass of the polygon.
 Pos3d Poligono3d::getCenterOfMass(void) const
   { return to_3d(plg2d.getCenterOfMass()); }
 

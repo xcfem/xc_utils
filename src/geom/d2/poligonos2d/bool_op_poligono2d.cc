@@ -24,7 +24,7 @@
 
 #include "bool_op_poligono2d.h"
 #include "Poligono2d.h"
-#include "../../d1/Segmento2d.h"
+#include "../../d1/Segment2d.h"
 #include "../../d1/Polilinea2d.h"
 #include "xc_utils/src/geom/d2/HalfPlane2d.h"
 #include <CGAL/Gmpz.h>
@@ -270,9 +270,9 @@ Nef_polyhedron interseca(const Poligono2d &p,const HalfPlane2d &sp)
     return retval;
   }
 
-//! @brief Return los polígonos que resultan de recortar los de la lista
-//! con el que se pasa como parámetro.
-std::list<Poligono2d> recorta(const std::list<Poligono2d> &l,const Poligono2d &p)
+//! @brief Return the polygons that result from clipping the polygons on the
+//! list with the polygon argument.
+std::list<Poligono2d> clip(const std::list<Poligono2d> &l,const Poligono2d &p)
   {
     std::list<Poligono2d> retval;
     if(!p.empty() && (p.getArea()>areaMin))
@@ -326,7 +326,7 @@ std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l,const HalfPlan
 //! con el que se pasa como parámetro.
 std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l,const Poligono2d &p)
   {
-    const std::list<Poligono2d> retval= recorta(l,p);
+    const std::list<Poligono2d> retval= clip(l,p);
     return join(retval);
   }
 

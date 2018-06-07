@@ -27,7 +27,7 @@
 #include "../pos_vec/Pos2d.h"
 #include "Linea2d.h"
 
-class Segmento2d;
+class Segment2d;
 class SemiRecta2d;
 class Recta2d;
 class ListaPos2d;
@@ -48,7 +48,7 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
       { return *this; }
     inline size_t GetNumVertices(void) const
       { return GeomObj::list_Pos2d::size(); }
-    size_t GetNumSegmentos(void) const;
+    size_t getNumSegments(void) const;
     inline const_iterator vertices_begin(void) const
       { return GeomObj::list_Pos2d::begin(); }
     const const_iterator vertices_end(void) const
@@ -90,8 +90,8 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     //Return una Polilinea2d con los vertices cuya coordenada i
     //es menor que d.
     const Pos2d &Vertice(const size_t &i) const;
-    Segmento2d GetSegmento(const const_iterator &i) const;
-    Segmento2d GetSegmento(const size_t &i) const;
+    Segment2d getSegment(const const_iterator &i) const;
+    Segment2d getSegment(const size_t &i) const;
 /*     virtual list_Pos2d Int(unsigned short int i, const double d) const */
 /*       { */
 /*         cerr << "Polilinea2d Int(i,d) not implemented" << endl; */
@@ -103,7 +103,7 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     //coord_i= d
     list_Pos2d Interseccion(const Recta2d &r) const;
     list_Pos2d Interseccion(const SemiRecta2d &sr) const;
-    list_Pos2d Interseccion(const Segmento2d &sr) const;
+    list_Pos2d Interseccion(const Segment2d &sr) const;
     //Polilinea2d Corta(unsigned short int i,const GEOM_FT &d) const;
     Polilinea2d Separa(const Pos2d &p,const short int &sgn) const;
     Pos2d getCenterOfMass(void) const
@@ -117,10 +117,10 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
 
 GeomObj::list_Pos2d interseccion(const Polilinea2d &p,const Recta2d &r);
 GeomObj::list_Pos2d interseccion(const Polilinea2d &p,const SemiRecta2d &);
-GeomObj::list_Pos2d interseccion(const Polilinea2d &p,const Segmento2d &);
+GeomObj::list_Pos2d interseccion(const Polilinea2d &p,const Segment2d &);
 GeomObj::list_Pos2d interseccion(const Recta2d &,const Polilinea2d &);
 GeomObj::list_Pos2d interseccion(const SemiRecta2d &,const Polilinea2d &p);
-GeomObj::list_Pos2d interseccion(const Segmento2d &,const Polilinea2d &p);
+GeomObj::list_Pos2d interseccion(const Segment2d &,const Polilinea2d &p);
 
 #endif
 

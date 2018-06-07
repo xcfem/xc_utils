@@ -33,7 +33,7 @@ class Vector2d;
 class Plotter;
 class Recta2d;
 class SemiRecta2d;
-class Segmento2d;
+class Segment2d;
 
 //! @ingroup GEOM
 //
@@ -88,8 +88,8 @@ class Pos2d: public ProtoGeom
     GEOM_FT dist(const Recta2d &) const;
     GEOM_FT dist2(const SemiRecta2d &) const;
     GEOM_FT dist(const SemiRecta2d &) const;
-    GEOM_FT dist2(const Segmento2d &) const;
-    GEOM_FT dist(const Segmento2d &) const;
+    GEOM_FT dist2(const Segment2d &) const;
+    GEOM_FT dist(const Segment2d &) const;
 
     inline friend bool operator==(const Pos2d &a,const Pos2d &b)
       { return (a.cgpt==b.cgpt); }

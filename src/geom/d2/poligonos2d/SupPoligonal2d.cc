@@ -22,7 +22,7 @@
 //SupPoligonal2d.cc
 
 #include "SupPoligonal2d.h"
-#include "xc_utils/src/geom/d1/Segmento2d.h"
+#include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d1/Polilinea2d.h"
 #include "xc_utils/src/geom/d2/HalfPlane2d.h"
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
@@ -37,7 +37,7 @@
 
 
 
-//! @brief Return los vertices del polígono.
+//! @brief Return los vertices of the polygon.
 GeomObj::list_Pos2d SupPoligonal2d::getVertices(void) const
   {
     unsigned int nv= GetNumVertices();
@@ -46,12 +46,12 @@ GeomObj::list_Pos2d SupPoligonal2d::getVertices(void) const
     return lv;
   }
 
-//! @brief Return la normal al lado del polígono.
+//! @brief Return la normal al lado of the polygon.
 Vector2d SupPoligonal2d::getLado0Normal(const size_t i) const
   { return Lado0(i).Normal(); }
 
 
-//! @brief Return la normal en el vértice del polígono.
+//! @brief Return la normal en el vértice of the polygon.
 Vector2d SupPoligonal2d::getVertex0Normal(const size_t i) const
   {
     const size_t nv= GetNumVertices();
@@ -63,7 +63,7 @@ Vector2d SupPoligonal2d::getVertex0Normal(const size_t i) const
     return (n1+n2)/2.0;
   }
 
-//! @brief Return la polilinea cerrada con los vértices del polígono.
+//! @brief Return la polilinea cerrada con los vértices of the polygon.
 Polilinea2d SupPoligonal2d::GetPolilinea(void) const
   {
     Polilinea2d retval;
@@ -74,16 +74,16 @@ Polilinea2d SupPoligonal2d::GetPolilinea(void) const
   }
 
 
-Segmento2d SupPoligonal2d::Lado0(unsigned int i, unsigned int j) const
-  { return Segmento2d(Vertice0(i),Vertice0(j)); }
-Segmento2d SupPoligonal2d::Lado0(unsigned int i) const
+Segment2d SupPoligonal2d::Lado0(unsigned int i, unsigned int j) const
+  { return Segment2d(Vertice0(i),Vertice0(j)); }
+Segment2d SupPoligonal2d::Lado0(unsigned int i) const
   {
     const size_t nl= GetNumLados();
     unsigned int i1= i%nl;
     unsigned int i2= (i+1)%nl;
     return Lado0(i1,i2);
   }
-Segmento2d SupPoligonal2d::Lado(unsigned int i) const
+Segment2d SupPoligonal2d::Lado(unsigned int i) const
   { return Lado0(i-1); }
 
 //! @brief Return the perimeter of the surface.
@@ -120,7 +120,7 @@ GEOM_FT SupPoligonal2d::GetMin(unsigned short int i) const
     return mn;
   }
 
-//! @brief Return el centro de gravedad.
+//! @brief Return the center of mass.
 Pos2d SupPoligonal2d::getCenterOfMass(void) const
   {
      const GEOM_FT area= getArea();
@@ -138,10 +138,10 @@ Pos2d SupPoligonal2d::Centroide(void) const
     const BND2d bnd= Bnd();
     const Pos2d c= bnd.getCenterOfMass();
     const Recta2d r(c,c+Vector2d(0,100));
-    list<Segmento2d> intersec= interseccion(*this,r);
+    list<Segment2d> intersec= interseccion(*this,r);
     if(!intersec.empty())
       {
-        Segmento2d sg= *intersec.begin();
+        Segment2d sg= *intersec.begin();
         retval= sg.getCenterOfMass();
       }
     else
@@ -159,7 +159,7 @@ GEOM_FT SupPoligonal2d::getMoment(const int &p,const int &q) const
   }
 
 //! @brief Calcula el moment of inertia with respect to an axis parallel to the
-//! x axis que pasa por el center of mass of the surface.
+//! x axis que pasa por the center of mass of the surface.
 //! Ix = Integral y^2 dA
 GEOM_FT SupPoligonal2d::Ix(void) const
   { 
@@ -195,8 +195,8 @@ GeomObj::list_Pos2d SupPoligonal2d::getPosTangAprox(const Vector2d &v) const
   {
     const size_t sz= GetNumLados();
     std::vector<double> tangsEnVertices(sz+1);
-    Segmento2d li= Lado0(sz-1);
-    Segmento2d lj= Lado0(0);
+    Segment2d li= Lado0(sz-1);
+    Segment2d lj= Lado0(0);
     GEOM_FT anguloI= li.AnguloSigno(v),anguloJ= 0;
     const GEOM_FT dosPi= 2*M_PI;
     if(anguloI>=dosPi)
@@ -330,18 +330,18 @@ bool SupPoligonal2d::Overlap(const SemiRecta2d &sr) const
   }
 
 // SOLO debe llamarse desde Clip(recta)
-std::list<Segmento2d> empalma(const std::list<Segmento2d> &lista)
+std::list<Segment2d> empalma(const std::list<Segment2d> &lista)
   {
-    std::list<Segmento2d> retval;
+    std::list<Segment2d> retval;
     if(lista.size()>1)
       {
-        list<Segmento2d>::const_iterator i=lista.begin();
-        Segmento2d s1= *i; i++;
+        list<Segment2d>::const_iterator i=lista.begin();
+        Segment2d s1= *i; i++;
         for(;i!=lista.end();i++)
           {
-            const Segmento2d &s2= *i;
+            const Segment2d &s2= *i;
             if(dist2(s1.Destino(),s2.Origen())<sqrt_mchne_eps_dbl)
-              s1= Segmento2d(s1.Origen(),s2.Destino());
+              s1= Segment2d(s1.Origen(),s2.Destino());
             else
               {
                 retval.push_back(s1);
@@ -355,11 +355,11 @@ std::list<Segmento2d> empalma(const std::list<Segmento2d> &lista)
     return retval;
   }
 
-//! @brief Return the intersection del polígono con la recta (if exists).
-Segmento2d SupPoligonal2d::Clip(const Recta2d &r) const
+//! @brief Return the intersection of the polygon con la recta (if exists).
+Segment2d SupPoligonal2d::Clip(const Recta2d &r) const
   {
-    Segmento2d retval;
-    list<Segmento2d> lista= sin_degenerados(interseccion(*this,r));
+    Segment2d retval;
+    list<Segment2d> lista= sin_degenerados(interseccion(*this,r));
     if(lista.size()>1)
       lista= empalma(lista);
     if(!lista.empty())
@@ -378,11 +378,11 @@ Segmento2d SupPoligonal2d::Clip(const Recta2d &r) const
     return retval;
   }
 
-//! @brief Return the intersection del polígono con la semirecta (if exists).
-Segmento2d SupPoligonal2d::Clip(const SemiRecta2d &sr) const
+//! @brief Return the intersection of the polygon con la semirecta (if exists).
+Segment2d SupPoligonal2d::Clip(const SemiRecta2d &sr) const
   {
-    Segmento2d retval;
-    list<Segmento2d> lista= sin_degenerados(interseccion(*this,sr));
+    Segment2d retval;
+    list<Segment2d> lista= sin_degenerados(interseccion(*this,sr));
     if(!lista.empty())
       {
         retval= *lista.begin();
@@ -393,25 +393,27 @@ Segmento2d SupPoligonal2d::Clip(const SemiRecta2d &sr) const
     return retval;
   }
 
-//! @brief Return the intersection del polígono con el segmento (if exists).
-Segmento2d SupPoligonal2d::Clip(const Segmento2d &sg) const
+//! @brief Return the intersection of the polygon with the segment
+//! argument (if exists).
+Segment2d SupPoligonal2d::Clip(const Segment2d &sg) const
   {
-    Segmento2d retval;
-    list<Segmento2d> lista= sin_degenerados(interseccion(*this,sg));
+    Segment2d retval;
+    list<Segment2d> lista= sin_degenerados(interseccion(*this,sg));
     if(!lista.empty())
       {
         retval= *lista.begin();
         if(lista.size()>1)
-          std::cerr << "SupPoligonal2d::Clip, el polígono corta al segmento en "
-                    << lista.size() << " tramos." << std::endl;
+          std::cerr << getClassName() << "::" << __FUNCTION__
+	            << "; the polygon clips the segment on "
+                    << lista.size() << " parts." << std::endl;
       }
     return retval;
   }
 
-//! @brief Return the intersection del polígono con la recta.
-list<Segmento2d> interseccion(const SupPoligonal2d &pg,const Recta2d &r)
+//! @brief Return the intersection of the polygon con la recta.
+list<Segment2d> interseccion(const SupPoligonal2d &pg,const Recta2d &r)
   {
-    list<Segmento2d> retval;
+    list<Segment2d> retval;
     if(pg.GetNumVertices()>0)
       {
         Polilinea2d pl= pg.GetPolilinea();
@@ -422,10 +424,10 @@ list<Segmento2d> interseccion(const SupPoligonal2d &pg,const Recta2d &r)
 
             Polilinea2d tmp;
             tmp.assign(ordenados.begin(),ordenados.end());
-            const size_t ns= tmp.GetNumSegmentos();
+            const size_t ns= tmp.getNumSegments();
             for(size_t i= 1;i<=ns;i++)
               {
-                const Segmento2d s= tmp.GetSegmento(i);
+                const Segment2d s= tmp.getSegment(i);
                 if(pg.In(s.getCenterOfMass()))
                   retval.push_back(s);
               }
@@ -434,15 +436,15 @@ list<Segmento2d> interseccion(const SupPoligonal2d &pg,const Recta2d &r)
     return retval;     
   }
 
-//! @brief Return the intersection del polígono con la recta.
-list<Segmento2d> interseccion(const Recta2d &r,const SupPoligonal2d &pg)
+//! @brief Return the intersection of the polygon con la recta.
+list<Segment2d> interseccion(const Recta2d &r,const SupPoligonal2d &pg)
   { return interseccion(pg,r); }
 
-//! @brief Return the intersection del polígono con la semirecta.
-list<Segmento2d> interseccion(const SupPoligonal2d &pg,const SemiRecta2d &sr)
+//! @brief Return the intersection of the polygon con la semirecta.
+list<Segment2d> interseccion(const SupPoligonal2d &pg,const SemiRecta2d &sr)
   {
     
-    list<Segmento2d> retval;
+    list<Segment2d> retval;
     if(!pg.GetNumVertices()) return retval;
 
     Polilinea2d pl= pg.GetPolilinea();
@@ -456,25 +458,25 @@ list<Segmento2d> interseccion(const SupPoligonal2d &pg,const SemiRecta2d &sr)
 
     Polilinea2d tmp;
     tmp.assign(ordenados.begin(),ordenados.end());
-    const size_t ns= tmp.GetNumSegmentos();
+    const size_t ns= tmp.getNumSegments();
     for(size_t i= 1;i<=ns;i++)
       {
-        const Segmento2d s= tmp.GetSegmento(i);
+        const Segment2d s= tmp.getSegment(i);
         if(pg.In(s.getCenterOfMass()))
           retval.push_back(s);
       }
     return retval;
   }
 
-//! @brief Return the intersection del polígono con la semirecta.
-list<Segmento2d> interseccion(const SemiRecta2d &sr,const SupPoligonal2d &pg)
+//! @brief Return the intersection of the polygon con la semirecta.
+list<Segment2d> interseccion(const SemiRecta2d &sr,const SupPoligonal2d &pg)
   { return interseccion(pg,sr); }
 
-//! @brief Return the intersection del polígono con el segmento.
-list<Segmento2d> interseccion(const SupPoligonal2d &pg,const Segmento2d &sg)
+//! @brief Return the intersection of the polygon with the segment.
+list<Segment2d> interseccion(const SupPoligonal2d &pg,const Segment2d &sg)
   {
     
-    list<Segmento2d> retval;
+    list<Segment2d> retval;
     if(!pg.GetNumVertices()) return retval;
 
     Polilinea2d pl= pg.GetPolilinea();
@@ -491,16 +493,16 @@ list<Segmento2d> interseccion(const SupPoligonal2d &pg,const Segmento2d &sg)
 
     Polilinea2d tmp;
     tmp.assign(ordenados.begin(),ordenados.end());
-    const size_t ns= tmp.GetNumSegmentos();
+    const size_t ns= tmp.getNumSegments();
     for(size_t i= 1;i<=ns;i++)
       {
-        const Segmento2d s= tmp.GetSegmento(i);
+        const Segment2d s= tmp.getSegment(i);
         if(pg.In(s.getCenterOfMass()))
           retval.push_back(s);
       }
     return retval;
   }
 
-//! @brief Return the intersection del polígono con el segmento.
-list<Segmento2d> interseccion(const Segmento2d &sg,const SupPoligonal2d &pg)
+//! @brief Return the intersection of the polygon with the segment.
+list<Segment2d> interseccion(const Segment2d &sg,const SupPoligonal2d &pg)
   { return interseccion(pg,sg); }

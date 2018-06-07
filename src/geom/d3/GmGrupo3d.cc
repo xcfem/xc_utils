@@ -28,7 +28,7 @@
 #include "xc_utils/src/geom/d0/Point3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/d1/SemiRecta3d.h"
-#include "xc_utils/src/geom/d1/Segmento3d.h"
+#include "xc_utils/src/geom/d1/Segment3d.h"
 
 GEOM_FT GmGrupo3d::inercia(const Recta3d &e) const
 //Return el moment of inertia with respect to la recta e

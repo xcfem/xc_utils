@@ -30,7 +30,7 @@
 
 class GmGrupo2d;
 class SemiRecta2d;
-class Segmento2d;
+class Segment2d;
 
 
 //! @ingroup GEOM
@@ -95,10 +95,10 @@ class HalfPlane2d : public Superficie2d
     inline bool Interseca(const Recta2d &r) const
       { return lim.Interseca(r); }
     bool Interseca(const SemiRecta2d &sr) const;
-    bool Interseca(const Segmento2d &sg) const;
+    bool Interseca(const Segment2d &sg) const;
     GmGrupo2d Interseccion(const Recta2d &r) const;
     GmGrupo2d Interseccion(const SemiRecta2d &sr) const;
-    GmGrupo2d Interseccion(const Segmento2d &sg) const;
+    GmGrupo2d Interseccion(const Segment2d &sg) const;
 
     //! @brief Return the length of the object.
     inline virtual GEOM_FT getLength(void) const
@@ -143,20 +143,20 @@ inline bool intersecan(const HalfPlane2d &sp,const Recta2d &r)
   { return sp.Interseca(r); }
 inline bool intersecan(const HalfPlane2d &sp,const SemiRecta2d &sr)
   { return sp.Interseca(sr); }
-inline bool intersecan(const HalfPlane2d &sp,const Segmento2d &sg)
+inline bool intersecan(const HalfPlane2d &sp,const Segment2d &sg)
   { return sp.Interseca(sg); }
 inline bool intersecan(const Recta2d &r,const HalfPlane2d &sp)
   { return sp.Interseca(r); }
 inline bool intersecan(const SemiRecta2d &sr,const HalfPlane2d &sp)
   { return sp.Interseca(sr); }
-inline bool intersecan(const Segmento2d &sg,const HalfPlane2d &sp)
+inline bool intersecan(const Segment2d &sg,const HalfPlane2d &sp)
   { return sp.Interseca(sg); }
 
 GmGrupo2d interseccion(const HalfPlane2d &sp,const Recta2d &r);
 GmGrupo2d interseccion(const HalfPlane2d &sp,const SemiRecta2d &sr);
-GmGrupo2d interseccion(const HalfPlane2d &sp,const Segmento2d &sg);
+GmGrupo2d interseccion(const HalfPlane2d &sp,const Segment2d &sg);
 GmGrupo2d interseccion(const Recta2d &r,const HalfPlane2d &sp);
 GmGrupo2d interseccion(const SemiRecta2d &sr,const HalfPlane2d &sp);
-GmGrupo2d interseccion(const Segmento2d &sg,const HalfPlane2d &sp);
+GmGrupo2d interseccion(const Segment2d &sg,const HalfPlane2d &sp);
 
 #endif

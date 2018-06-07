@@ -52,12 +52,12 @@
 #include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/PoligonoConAgujeros2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/bool_op_poligono2d.h"
-#include "xc_utils/src/geom/d1/Segmento2d.h"
+#include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/pos_vec/VDesliz2d.h"
 #include "xc_utils/src/geom/pos_vec/VDesliz3d.h"
 #include "xc_utils/src/geom/d1/SemiRecta2d.h"
 #include "xc_utils/src/geom/d1/SemiRecta3d.h"
-#include "xc_utils/src/geom/d1/Segmento3d.h"
+#include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d3/BND3d.h"
 #include "xc_utils/src/geom/d3/SemiEspacio3d.h"
 #include "xc_utils/src/geom/pos_vec/ListaPos3d.h"
@@ -100,6 +100,6 @@ boost::python::list to_python_list(const std::list<Poligono2d> &);
 
 //! @brief Return the Voronoi partition of the polygons in the list.
 boost::python::list python_particiona(boost::python::list &);
-boost::python::list python_recorta(boost::python::list &, const Poligono2d &);
+boost::python::list python_clip(boost::python::list &, const Poligono2d &);
 
 #endif

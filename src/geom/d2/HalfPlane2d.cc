@@ -24,7 +24,7 @@
 #include "HalfPlane2d.h"
 #include "GmGrupo2d.h"
 #include "xc_utils/src/geom/d1/SemiRecta2d.h"
-#include "xc_utils/src/geom/d1/Segmento2d.h"
+#include "xc_utils/src/geom/d1/Segment2d.h"
 
 #include "../pos_vec/Dir2d.h"
 #include "../pos_vec/Vector2d.h"
@@ -60,7 +60,7 @@ void HalfPlane2d::Swap(void)
 
 bool HalfPlane2d::Interseca(const SemiRecta2d &sr) const
   { return sr.Interseca(lim); }
-bool HalfPlane2d::Interseca(const Segmento2d &sg) const
+bool HalfPlane2d::Interseca(const Segment2d &sg) const
   { return sg.Interseca(lim); }
 
 HalfPlane2d HalfPlane2d::GetSwap(void) const
@@ -98,7 +98,7 @@ GmGrupo2d HalfPlane2d::Interseccion(const SemiRecta2d &sr) const
     return retval;
   }
 
-GmGrupo2d HalfPlane2d::Interseccion(const Segmento2d &sg) const
+GmGrupo2d HalfPlane2d::Interseccion(const Segment2d &sg) const
   {
     GmGrupo2d retval;
     if(!Interseca(sg)) return retval;
@@ -107,9 +107,9 @@ GmGrupo2d HalfPlane2d::Interseccion(const Segmento2d &sg) const
     const Pos2d p1= sg.Destino();
     const Pos2d p2= sg.Origen();
     if(In(p1))
-      retval.push_back(Segmento2d(pint,p1));
+      retval.push_back(Segment2d(pint,p1));
     else
-      retval.push_back(Segmento2d(pint,p2));
+      retval.push_back(Segment2d(pint,p2));
     return retval;
   }
 
@@ -117,13 +117,13 @@ GmGrupo2d interseccion(const HalfPlane2d &sp,const Recta2d &r)
   { return sp.Interseccion(r); }
 GmGrupo2d interseccion(const HalfPlane2d &sp,const SemiRecta2d &sr)
   { return sp.Interseccion(sr); }
-GmGrupo2d interseccion(const HalfPlane2d &sp,const Segmento2d &sg)
+GmGrupo2d interseccion(const HalfPlane2d &sp,const Segment2d &sg)
   { return sp.Interseccion(sg); }
 GmGrupo2d interseccion(const Recta2d &r,const HalfPlane2d &sp)
   { return interseccion(sp,r); }
 GmGrupo2d interseccion(const SemiRecta2d &sr,const HalfPlane2d &sp)
   { return interseccion(sp,sr); }
-GmGrupo2d interseccion(const Segmento2d &sg,const HalfPlane2d &sp)
+GmGrupo2d interseccion(const Segment2d &sg,const HalfPlane2d &sp)
   { return interseccion(sp,sg); }
 
 HalfPlane2d HalfPlane2d::getNormalizado(void) const

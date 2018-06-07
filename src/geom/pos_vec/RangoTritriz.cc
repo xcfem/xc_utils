@@ -76,11 +76,11 @@ void RangoTritriz::Print(std::ostream &os) const
 
 //! @brief Reduce los valores del rango de manera que ambos sean menores que
 //! los que se pasan como parámetro.
-void RangoTritriz::Recorta(const size_t &cpmax,const size_t &fmax,const size_t &cmax)
+void RangoTritriz::Clip(const size_t &cpmax,const size_t &fmax,const size_t &cmax)
   {
-    layer_range.Recorta(cpmax);
-    row_range.Recorta(fmax);
-    column_range.Recorta(cmax);
+    layer_range.Clip(cpmax);
+    row_range.Clip(fmax);
+    column_range.Clip(cmax);
   }
 
 //! @brief Asigna a ESTE la intersección de ambos rangos.
@@ -105,10 +105,10 @@ std::ostream &operator<<(std::ostream &os,const RangoTritriz &rango)
     return os;
   }
 
-RangoTritriz recorta(const RangoTritriz &r,const size_t &cpmax,const size_t &fmax,const size_t &cmax)
+RangoTritriz clip(const RangoTritriz &r,const size_t &cpmax,const size_t &fmax,const size_t &cmax)
   {
     RangoTritriz retval(r);
-    retval.Recorta(cpmax,fmax,cmax);
+    retval.Clip(cpmax,fmax,cmax);
     return retval;
   }
 

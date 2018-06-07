@@ -28,7 +28,7 @@
 
 class Recta2d;
 class SemiRecta2d;
-class Segmento2d;
+class Segment2d;
 class Poligono2d;
 class Polilinea2d;
 

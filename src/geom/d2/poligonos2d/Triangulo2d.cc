@@ -23,16 +23,16 @@
 
 #include "Triangulo2d.h"
 #include "Poligono2d.h"
-#include "xc_utils/src/geom/d1/Segmento2d.h"
+#include "xc_utils/src/geom/d1/Segment2d.h"
 
 #include <plotter.h>
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
 //! @brief Return la base opuesta al vértice i.
-Segmento2d Triangulo2d::Base(const size_t &i) const
+Segment2d Triangulo2d::Base(const size_t &i) const
   { return Lado(i%3+1); }
 //! @brief Return la altura correspondiente al vértice i.
-Segmento2d Triangulo2d::Altura(const size_t &i) const
+Segment2d Triangulo2d::Altura(const size_t &i) const
   {
     if(Degenerado())
       {
@@ -41,7 +41,7 @@ Segmento2d Triangulo2d::Altura(const size_t &i) const
     const Recta2d rbase= Base(i).RectaSoporte();
     const Recta2d perp= rbase.Perpendicular(Vertice(i));
     const Pos2d pint= *interseccion(rbase,perp).begin();
-    return Segmento2d(Vertice(i),pint);
+    return Segment2d(Vertice(i),pint);
   }
 //! @brief Return object length.
 GEOM_FT Triangulo2d::getLength(void) const
