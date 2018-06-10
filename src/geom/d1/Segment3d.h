@@ -79,9 +79,9 @@ class Segment3d : public Linea3d
     virtual Pos3d getCenterOfMass(void) const;
     Dir3d GetDir(void) const;
     Vector3d VDir(void) const;
-    GEOM_FT Angulo(const Vector3d &v) const;
-    GEOM_FT Angulo(const Segment3d &v) const;
-    friend GEOM_FT angulo(const Segment3d &r,const Vector3d &v);
+    GEOM_FT getAngle(const Vector3d &v) const;
+    GEOM_FT getAngle(const Segment3d &v) const;
+    friend GEOM_FT angle(const Segment3d &r,const Vector3d &v);
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Iz(void) const;

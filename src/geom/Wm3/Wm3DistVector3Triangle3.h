@@ -12,7 +12,7 @@
 #define WM3DISTVECTOR3TRIANGLE3_H
 
 #include "Wm3Distance.h"
-#include "../d2/Triangulo3d.h"
+#include "../d2/Triangle3d.h"
 
 namespace Wm3
 {
@@ -22,11 +22,11 @@ class DistVector3Triangle3: public Distance<Real,Vector3d >
   {
   public:
     DistVector3Triangle3 (const Vector3d& rkVector,
-        const Triangulo3d& rkTriangle);
+        const Triangle3d& rkTriangle);
 
     // object access
     const Vector3d& GetVector () const;
-    const Triangulo3d& GetTriangle () const;
+    const Triangle3d& GetTriangle () const;
 
     // static distance queries
     virtual Real Get ();
@@ -43,7 +43,7 @@ class DistVector3Triangle3: public Distance<Real,Vector3d >
     using Distance<Real,Vector3d >::m_kClosestPoint1;
 
     const Vector3d& m_rkVector;
-    const Triangulo3d& m_rkTriangle;
+    const Triangle3d& m_rkTriangle;
   };
 
 typedef DistVector3Triangle3<GEOM_FT> DistVector3Triangle3ft;

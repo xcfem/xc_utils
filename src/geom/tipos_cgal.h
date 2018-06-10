@@ -65,7 +65,7 @@ typedef CGAL::Line_2<GEOMKernel> CGRecta_2;
 typedef CGAL::Ray_2<GEOMKernel> CGSemiRecta_2;
 typedef CGAL::Segment_2<GEOMKernel> CGSegment_2;
 typedef CGAL::Circle_2<GEOMKernel> CGCirculo_2;
-typedef CGAL::Triangle_2<GEOMKernel> CGTriangulo_2;
+typedef CGAL::Triangle_2<GEOMKernel> CGTriangle_2;
 typedef CGAL::Iso_rectangle_2<GEOMKernel> CGIsoRectangle_2;
 typedef CGAL::Polygon_2<GEOMKernel> CGPoligono_2;
 typedef CGAL::Polygon_with_holes_2<GEOMKernel> CGPoligonoConAgujeros_2;

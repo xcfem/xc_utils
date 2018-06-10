@@ -134,12 +134,12 @@ class Recta3d : public Linea3d
       { return Pos3d(NAN,NAN,NAN); }
     Dir3d GetDir(void) const;
     Vector3d VDir(void) const;
-    inline double Angulo(const Vector3d &v) const
-      { return angulo(VDir(),v); }
-    inline friend double angulo(const Recta3d &r,const Vector3d &v)
-      { return r.Angulo(v); }
-    inline friend double angulo(const Recta3d &r1,const Recta3d &r2)
-      { return r1.Angulo(r2.VDir()); }
+    inline double getAngle(const Vector3d &v) const
+      { return angle(VDir(),v); }
+    inline friend double angle(const Recta3d &r,const Vector3d &v)
+      { return r.getAngle(v); }
+    inline friend double angle(const Recta3d &r1,const Recta3d &r2)
+      { return r1.getAngle(r2.VDir()); }
     //! @brief Moment of inertia with respect to the center of mass en local axis.
     inline virtual GEOM_FT Ix(void) const
       { return 0.0; }

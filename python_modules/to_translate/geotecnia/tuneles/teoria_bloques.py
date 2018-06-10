@@ -2,8 +2,8 @@
 # Macros that are useful in block theory calculations (see Goodman & Shi, Block theory and its application to rock engineering 1985)
 
 '''Return the dip plane defined by:
-   alpha: Ángulo de buzamiento.
-   beta: Dirección del buzamiento.
+   alpha: dip angle.
+   beta: dip direction.
    p: point for which the plane passes through.'''
 def computeDipPlane(alpha,beta,pos3d p):
   A= math.sin(alpha)*sin(beta)
@@ -14,9 +14,9 @@ def computeDipPlane(alpha,beta,pos3d p):
   retval= ecuacion_general([A,B,C,D])
   return retval
 
-def procesaAnguloPoliedrico(nmbAng,nmbTunel):
+def processPolyhedralAngle(nmbAng,nmbTunel):
   {
-    print "\n\\subsection{Ángulo poliédrico: ",nmbAng,"}\n"
+    print "\n\\subsection{Polyhedral angle: ",nmbAng,"}\n"
     print "\n\\begin{alltt}\n"
     if(not(JPvacio))
         \then

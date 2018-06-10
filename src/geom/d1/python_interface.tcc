@@ -51,8 +51,8 @@ class_<Linea3d, bases<GeomObj3d>, boost::noncopyable  >("Linea3d", no_init);
 class_<SemiRecta3d, bases<Linea3d> >("Ray3d")
   .def(init<SemiRecta3d>());
 
-GEOM_FT (Segment3d::*AngleVector3D)(const Vector3d &v) const= &Segment3d::Angulo;
-GEOM_FT (Segment3d::*AngleSegment3D)(const Segment3d &v) const= &Segment3d::Angulo;
+GEOM_FT (Segment3d::*AngleVector3D)(const Vector3d &v) const= &Segment3d::getAngle;
+GEOM_FT (Segment3d::*AngleSegment3D)(const Segment3d &v) const= &Segment3d::getAngle;
 class_<Segment3d, bases<Linea3d> >("LineSegment3d")
   .def(init<>())
   .def(init<Pos3d,Pos3d>())
@@ -115,8 +115,8 @@ class_<Polilinea2d, bases<Linea2d, poliPos2d> >("Polilinea2d")
   ;
 
 
-GEOM_FT (Segment2d::*AngleVector)(const Vector2d &v) const= &Segment2d::Angulo;
-GEOM_FT (Segment2d::*AngleSegment)(const Segment2d &v) const= &Segment2d::Angulo;
+GEOM_FT (Segment2d::*AngleVector)(const Vector2d &v) const= &Segment2d::getAngle;
+GEOM_FT (Segment2d::*AngleSegment)(const Segment2d &v) const= &Segment2d::getAngle;
 
 Segment2d (Segment2d::*OffsetSegmentVector)(const Vector2d &v) const= &Segment2d::Offset;
 Segment2d (Segment2d::*OffsetSegmentDouble)(const GEOM_FT &d) const= &Segment2d::Offset;

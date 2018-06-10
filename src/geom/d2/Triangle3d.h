@@ -19,37 +19,37 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Triangulo3d.cc
+//Triangle3d.h
 
-#include "Triangulo3d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/Triangulo2d.h"
-#include "../Wm3/Wm3DistVector3Triangle3.h"
+#ifndef TRIANGLE3D_H
+#define TRIANGLE3D_H
 
+#include "xc_utils/src/geom/d2/Poligono3d.h"
 
-Triangulo3d::Triangulo3d(const Ref2d3d &rf,const Triangulo2d &t)
-  : Poligono3d(rf,t.GetPoligono()) {}
-Triangulo3d::Triangulo3d(void): Poligono3d() {}
-Triangulo3d::Triangulo3d(const Triangulo3d &otro)
-  : Poligono3d(otro) {}
-Triangulo3d::Triangulo3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
-  : Poligono3d(p1,p2,p3) {}
+class Plane;
+class Triangle2d;
 
-Triangulo3d &Triangulo3d::operator =(const Triangulo3d &otro) 
+//! @ingroup GEOM
+//
+//! @brief Triangle in a three-dimensional space.
+class Triangle3d: public Poligono3d
   {
-    Poligono3d::operator=(otro);
-    return *this;
-  }
+    Triangle3d(const Ref2d3d &rf,const Triangle2d &p);
 
-//! @brief Return the squared distance from the point to the triángulo.
-GEOM_FT Triangulo3d::dist2(const Pos3d &p) const
-  {
-    Wm3::DistVector3Triangle3ft d(p.VectorPos(),*this);
-    return d.GetSquared();
-  }
+    inline void push_back(const Pos3d &p)
+      { Poligono3d::push_back(p); }
+  public:
+    Triangle3d(void);
+    Triangle3d(const Triangle3d &otro);
+    Triangle3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
+    Triangle3d &operator =(const Triangle3d &otro) ;
+    virtual GeomObj *clon(void) const
+      { return new Triangle3d(*this); }
 
-//! @brief Return the distance from the point to the triángulo.
-GEOM_FT Triangulo3d::dist(const Pos3d &p) const
-  {
-    Wm3::DistVector3Triangle3ft d(p.VectorPos(),*this);
-    return d.Get();
-  }
+    inline virtual unsigned int GetNumVertices(void) const
+      { return 3; }
+    GEOM_FT dist(const Pos3d &p) const;
+    GEOM_FT dist2(const Pos3d &p) const;
+  };
+
+#endif

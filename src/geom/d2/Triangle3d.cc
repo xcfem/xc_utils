@@ -19,37 +19,37 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Triangulo3d.h
+//Triangle3d.cc
 
-#ifndef TRIANGULO3D_H
-#define TRIANGULO3D_H
+#include "Triangle3d.h"
+#include "xc_utils/src/geom/d2/poligonos2d/Triangle2d.h"
+#include "../Wm3/Wm3DistVector3Triangle3.h"
 
-#include "xc_utils/src/geom/d2/Poligono3d.h"
 
-class Plane;
-class Triangulo2d;
+Triangle3d::Triangle3d(const Ref2d3d &rf,const Triangle2d &t)
+  : Poligono3d(rf,t.GetPoligono()) {}
+Triangle3d::Triangle3d(void): Poligono3d() {}
+Triangle3d::Triangle3d(const Triangle3d &otro)
+  : Poligono3d(otro) {}
+Triangle3d::Triangle3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
+  : Poligono3d(p1,p2,p3) {}
 
-//! @ingroup GEOM
-//
-//! @brief Triangulo en tres dimensiones.
-class Triangulo3d: public Poligono3d
+Triangle3d &Triangle3d::operator =(const Triangle3d &otro) 
   {
-    Triangulo3d(const Ref2d3d &rf,const Triangulo2d &p);
+    Poligono3d::operator=(otro);
+    return *this;
+  }
 
-    inline void push_back(const Pos3d &p)
-      { Poligono3d::push_back(p); }
-  public:
-    Triangulo3d(void);
-    Triangulo3d(const Triangulo3d &otro);
-    Triangulo3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
-    Triangulo3d &operator =(const Triangulo3d &otro) ;
-    virtual GeomObj *clon(void) const
-      { return new Triangulo3d(*this); }
+//! @brief Return the squared distance from the point to the triangle.
+GEOM_FT Triangle3d::dist2(const Pos3d &p) const
+  {
+    Wm3::DistVector3Triangle3ft d(p.VectorPos(),*this);
+    return d.GetSquared();
+  }
 
-    inline virtual unsigned int GetNumVertices(void) const
-      { return 3; }
-    GEOM_FT dist(const Pos3d &p) const;
-    GEOM_FT dist2(const Pos3d &p) const;
-  };
-
-#endif
+//! @brief Return the distance from the point to the triangle.
+GEOM_FT Triangle3d::dist(const Pos3d &p) const
+  {
+    Wm3::DistVector3Triangle3ft d(p.VectorPos(),*this);
+    return d.Get();
+  }

@@ -19,8 +19,8 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Rectangulo2d.cc
+//Rectangle2d.cc
 
-#include "Rectangulo2d.h"
+#include "Rectangle2d.h"
 
 

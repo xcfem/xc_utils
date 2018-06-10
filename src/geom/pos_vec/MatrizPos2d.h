@@ -27,7 +27,7 @@
 #include "Pos2d.h"
 #include "MatrizPos.h"
 
-class Triangulo2d;
+class Triangle2d;
 class Cuadrilatero2d;
 class matriz_FT;
 class Trf2d;
@@ -64,8 +64,8 @@ class MatrizPos2d: public MatrizPos<Pos2d>
     Pos2d GetCentro(void) const;
     Pos2d getCenterOfMass(void) const;
     GEOM_FT GetArea(void) const;
-    Triangulo2d GetTriangulo1(const size_t &i,const size_t &j) const;
-    Triangulo2d GetTriangulo2(const size_t &i,const size_t &j) const;
+    Triangle2d getTriangle1(const size_t &i,const size_t &j) const;
+    Triangle2d getTriangle2(const size_t &i,const size_t &j) const;
     GEOM_FT GetX(const size_t &,const size_t &) const;
     GEOM_FT GetY(const size_t &,const size_t &) const;
     const matriz_FT &GetVertCoords(const size_t &,const size_t &) const;

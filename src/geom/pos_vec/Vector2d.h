@@ -91,8 +91,8 @@ class Vector2d: public ProtoGeom
       { return (*this)/GetModulus(); }
     Vector2d Normal(void) const;
     Dir2d Direccion(void) const;
-    GEOM_FT AnguloSigno(const Vector2d &v) const;
-    GEOM_FT Angulo(const Vector2d &v) const;
+    GEOM_FT getSignedAngle(const Vector2d &v) const;
+    GEOM_FT getAngle(const Vector2d &v) const;
     GEOM_FT XAxisAngle(void) const;
     GEOM_FT YAxisAngle(void) const;
 
@@ -131,8 +131,8 @@ inline GEOM_FT Abs2(const Vector2d &v)
   { return v.GetModulus2(); }
 inline GEOM_FT Abs(const Vector2d &v)
   { return v.GetModulus(); }
-double anguloSigno(const Vector2d &v1,const Vector2d &v2);
-double angulo(const Vector2d &v1,const Vector2d &v2);
+double signedAngle(const Vector2d &v1,const Vector2d &v2);
+double angle(const Vector2d &v1,const Vector2d &v2);
 
 //! @breif Return el producto por un escalar.
 inline Vector2d operator*(const GEOM_FT &d,const Vector2d &v)

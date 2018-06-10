@@ -84,7 +84,7 @@ class Vector3d: public ProtoGeom
     virtual GEOM_FT GetDot(const Vector3d &v) const;
     virtual GEOM_FT GetDot(const matriz_FT &m) const;
     Vector3d getCross(const Vector3d &v) const;
-    GEOM_FT Angulo(const Vector3d &v) const;
+    GEOM_FT getAngle(const Vector3d &v) const;
 
 
     inline friend GEOM_FT dot(const Vector3d &v1, const Vector3d &v2)
@@ -122,7 +122,7 @@ inline GEOM_FT Abs2(const Vector3d &v)
 
 GEOM_FT Abs(const Vector3d &v); //Return el módulo del vector.
 
-GEOM_FT angulo(const Vector3d &v1,const Vector3d &v2);
+GEOM_FT angle(const Vector3d &v1,const Vector3d &v2);
 
 //Producto tensorial.
 matriz_FT prod_tensor(const Vector3d &u,const Vector3d &v);

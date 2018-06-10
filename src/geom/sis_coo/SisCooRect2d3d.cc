@@ -30,10 +30,10 @@
 
 
 
-//! El vector v define tres angulos de giro
-//! around the axis 3, 2 and 1
-//! que aplicados secuencialmente alinean el sistema
-//! global con éste.
+//! @brief Constructor.
+//!
+//! @param v: rotation angles about the axis 3, 2 and 1 that
+//! applied sequentially align the global system with this one.
 SisCooRect2d3d::SisCooRect2d3d(const VGlobal &v)
   : SisCooXd3d(2,v) {}
 //! @brief Define un sistema de coordenadas de dimensión i

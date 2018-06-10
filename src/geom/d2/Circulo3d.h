@@ -55,7 +55,7 @@ class Circulo3d : public D2to3d
     GEOM_FT Radio2(void) const;
     GEOM_FT Radio(void) const;
     GEOM_FT Diametro(void) const;
-    double Angulo(const Pos3d &p) const;
+    double getAngle(const Pos3d &p) const;
     //! @brief Return the length of the object.
     virtual GEOM_FT getLength(void) const
       { return circ.getLength(); }

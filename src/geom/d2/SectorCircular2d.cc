@@ -35,12 +35,12 @@
 SectorCircular2d SectorCircular2dThreepoints(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3)
   {
     const Circulo2d tmp= Circulo2d(p1,p2,p3);
-    const double th1= tmp.Angulo(p1);
-    const double th3= tmp.Angulo(p3);
+    const double th1= tmp.getAngle(p1);
+    const double th3= tmp.getAngle(p3);
     SectorCircular2d retval(tmp,th1,th3);
     const double alpha1= 0;
-    const double alpha2= retval.Angulo(p2);
-    const double alpha3= retval.Angulo(p3);
+    const double alpha2= retval.getAngle(p2);
+    const double alpha3= retval.getAngle(p3);
     if((alpha1>=alpha2) || (alpha3<=alpha2))
       {
 	std::cerr << "Error al definir el sector circular: " << std::endl
@@ -85,7 +85,7 @@ Superficie2d *SectorCircular2d::clon(void) const
 //! @brief Return the posición del centro de gravedad del sector circular.
 Pos2d SectorCircular2d::getCenterOfMass(void) const
   {
-    const GEOM_FT theta= AnguloComprendido()/2.0;
+    const GEOM_FT theta= getIncludedAngle()/2.0;
     const GEOM_FT lambda= 2.0/3.0*sin(theta)/theta;
     const Vector2d v= lambda*(PMed()-Centro());
     return Centro()+v;
@@ -94,7 +94,7 @@ Pos2d SectorCircular2d::getCenterOfMass(void) const
 //! @brief Return the position of the arc centroid.
 Pos2d SectorCircular2d::ArcCentroid(void) const
   {
-    const GEOM_FT theta= AnguloComprendido()/2.0;
+    const GEOM_FT theta= getIncludedAngle()/2.0;
     const GEOM_FT lambda= sin(theta)/theta;
     const Vector2d v= lambda*(PMed()-Centro());
     return Centro()+v;
@@ -116,21 +116,21 @@ Pos2d SectorCircular2d::PMed(void) const
 //! @brief Return the angle between the line from the center of the circle
 //! to the point p and the line from the center of the circle to the sector
 //! start point.
-double SectorCircular2d::Angulo(const Pos2d &p) const
-  { return Circulo2d::Angulo(p)-theta1; }
+double SectorCircular2d::getAngle(const Pos2d &p) const
+  { return Circulo2d::getAngle(p)-theta1; }
 
 //! @brief Returns the parameter of the point in the arc (distance to the arc's first point measured over the arc)
 double SectorCircular2d::getLambda(const Pos2d &p) const
-  { return Angulo(p)*Radio(); }
+  { return getAngle(p)*Radio(); }
 
 
-//! @brief Return el ángulo comprendido por el sector.
-double SectorCircular2d::AnguloComprendido(void) const
+//! @brief Return the included angle.
+double SectorCircular2d::getIncludedAngle(void) const
   { return theta2-theta1; }
 
 //! @brief Return the length of the arc.
 GEOM_FT SectorCircular2d::getArcLength(void) const
-  { return double_to_FT(AnguloComprendido())*Radio(); }
+  { return double_to_FT(getIncludedAngle())*Radio(); }
 
 //! @brief Return the length of the circular sector.
 GEOM_FT SectorCircular2d::getLength(void) const
@@ -138,7 +138,7 @@ GEOM_FT SectorCircular2d::getLength(void) const
 
 //! @brief Return the area of the circular sector.
 GEOM_FT SectorCircular2d::getArea(void) const
-  { return double_to_FT(AnguloComprendido())*Radio2()/2; }
+  { return double_to_FT(getIncludedAngle())*Radio2()/2; }
 
 //! @brief Return the maximum value of the i coordinate of the object points.
 GEOM_FT SectorCircular2d::GetMax(unsigned short int i) const
@@ -191,7 +191,7 @@ bool SectorCircular2d::In(const Pos2d &p, const double &tol) const
   {
     if(Circulo2d::In(p,tol))
       {
-        const double th= Angulo(p);
+        const double th= getAngle(p);
         return ((th>=theta1) && (th<=theta2));
       }
     else 
@@ -212,7 +212,7 @@ MatrizPos2d SectorCircular2d::getArcPoints(const size_t &n) const
           }
         else
           {
-            const double delta_theta= AnguloComprendido()/(n-1);
+            const double delta_theta= getIncludedAngle()/(n-1);
             arc_points(theta1,delta_theta,retval);
           }
       }

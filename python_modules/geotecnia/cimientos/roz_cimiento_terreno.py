@@ -6,10 +6,10 @@ import math
 mapAngRozCimTerrIGP2011= { 'RocaSana':math.atan(0.7), 'Grava':math.atan(0.6), 'Arena':math.atan(0.6), 'RecaDescomp':math.atan(0.4), 'SueloArcilloso':math.atan(0.3), 'SueloLimoso':math.atan(0.4)}
 
 
-'''Devuelve el ángulo de rozamiento del cimiento de hormigón
-con el terreno según la versión 2011 del IGP de Adif.
-Ver IGP-5.2 Bases de cálculo para estructuras de ferrocarril
-página 5'''
+'''Return the friction angle between the concrete foundation and the soil
+according to the 2011 version of the IGP from Adif.
+See IGP-5.2 Bases de cálculo para estructuras de ferrocarril
+page 5'''
 def angRozCimTerrIGP2011(tipoTerr):
   angRzCimTrrTmp= 0.4
   angRzCimTrrTmp= mapAngRozCimTerrIGP2011[tipoTerr]

@@ -73,9 +73,9 @@ class SemiEspacio3d : public GeomObj3d
     virtual GEOM_FT dist(const Pos3d &p) const;
     virtual GEOM_FT dist2(const Pos3d &p) const;
 
-    GEOM_FT getAngulo(const SemiEspacio3d &) const;
-    GEOM_FT getAngulo(const Plane &) const;
-    GEOM_FT getAngulo(const Vector3d &) const;
+    GEOM_FT getAngle(const SemiEspacio3d &) const;
+    GEOM_FT getAngle(const Plane &) const;
+    GEOM_FT getAngle(const Vector3d &) const;
 
     Recta3d getLima(const SemiEspacio3d &) const;
 
@@ -106,8 +106,8 @@ TripletMap<Pos3d> vertices_poliedro(const std::deque<SemiEspacio3d> &, const dou
 std::deque<Recta3d> rectas_interseccion(const std::deque<SemiEspacio3d> &);
 std::deque<Vector3d> vectores_normales(const std::deque<SemiEspacio3d> &);
 
-GEOM_FT angulo(const SemiEspacio3d &,const SemiEspacio3d &);
-GEOM_FT angulo(const Vector3d &,const SemiEspacio3d &);
-GEOM_FT angulo(const SemiEspacio3d &,const Vector3d &);
+GEOM_FT angle(const SemiEspacio3d &,const SemiEspacio3d &);
+GEOM_FT angle(const Vector3d &,const SemiEspacio3d &);
+GEOM_FT angle(const SemiEspacio3d &,const Vector3d &);
 
 #endif

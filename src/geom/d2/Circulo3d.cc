@@ -54,8 +54,8 @@ GEOM_FT Circulo3d::Radio(void) const
   { return circ.Radio(); }
 GEOM_FT Circulo3d::Diametro(void) const
   { return circ.Diametro(); }
-double Circulo3d::Angulo(const Pos3d &p) const
-  { return circ.Angulo(to_2d(p)); }
+double Circulo3d::getAngle(const Pos3d &p) const
+  { return circ.getAngle(to_2d(p)); }
 GEOM_FT Circulo3d::Ix(void) const
   { return circ.Ix(); }
 GEOM_FT Circulo3d::Iy(void) const

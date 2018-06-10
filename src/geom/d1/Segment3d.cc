@@ -221,13 +221,13 @@ GEOM_FT dist(const Pos3d &p,const Segment3d &r)
   { return sqrt_FT(dist2(r,p)); }
 
 //! @brief Returns angle with vector.
-GEOM_FT Segment3d::Angulo(const Vector3d &v) const
-  { return angulo(VDir(),v); }
+GEOM_FT Segment3d::getAngle(const Vector3d &v) const
+  { return angle(VDir(),v); }
 //! @brief Returns angle with another line segment.
-GEOM_FT Segment3d::Angulo(const Segment3d &s) const
-  { return Angulo(s.VDir()); }
-GEOM_FT angulo(const Segment3d &r,const Vector3d &v)
-  { return r.Angulo(v); }
+GEOM_FT Segment3d::getAngle(const Segment3d &s) const
+  { return getAngle(s.VDir()); }
+GEOM_FT angle(const Segment3d &r,const Vector3d &v)
+  { return r.getAngle(v); }
 //Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Segment3d::Ix(void) const
   { return 0.0; }

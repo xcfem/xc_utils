@@ -30,7 +30,7 @@ Trihedron::Trihedron(void)
   : GeomObj3d(), p0(Pos3d(0,0,0)), tr(Pos3d(1,0,0),Pos3d(0,1,0),Pos3d(0,0,1)) {}
 Trihedron::Trihedron( const Pos3d &P0, const Pos3d &p1, const Pos3d &p2, const Pos3d &p3)
   : GeomObj3d(), p0(P0), tr(p1,p2,p3) {}
-Trihedron::Trihedron(const Pos3d &P0, const Triangulo3d &TR)
+Trihedron::Trihedron(const Pos3d &P0, const Triangle3d &TR)
   : GeomObj3d(), p0(P0), tr(TR){}
 
 Poliedro3d Trihedron::GetPoliedro3d(void) const
@@ -49,7 +49,7 @@ Plane Trihedron::get_plane(const size_t &i) const
   }
 
 //! @brief Return the triangle that is the trihedron base.
-const Triangulo3d &Trihedron::Base(void) const
+const Triangle3d &Trihedron::Base(void) const
   { return tr; }
 
 //! @brief Return the trihedron apex.
@@ -63,12 +63,12 @@ Recta3d Trihedron::Axis(void) const
 
 //! @brief Return the angle of the cone that has the same apex
 //! and contains the trihedron.
-GEOM_FT Trihedron::GetAnguloConico(void) const
+GEOM_FT Trihedron::getConeHalfAngle(void) const
   {
     const Recta3d axis= Axis();
-    GEOM_FT angConico= angulo(axis,Recta3d(p0,Vertice(1)));
-    angConico= std::max(angConico, angulo(axis,Recta3d(p0,Vertice(2))));
-    angConico= std::max(angConico, angulo(axis,Recta3d(p0,Vertice(3))));
+    GEOM_FT angConico= angle(axis,Recta3d(p0,Vertice(1)));
+    angConico= std::max(angConico, angle(axis,Recta3d(p0,Vertice(2))));
+    angConico= std::max(angConico, angle(axis,Recta3d(p0,Vertice(3))));
     return angConico;
   }
 
@@ -112,8 +112,8 @@ bool Trihedron::In(const Pos3d &p,const double &tol) const
       return false;
     else
       {
-        const GEOM_FT angConico= fabs(GetAnguloConico());
-        const GEOM_FT ang= fabs(angulo(axis,Recta3d(p0,p)));
+        const GEOM_FT angConico= fabs(getConeHalfAngle());
+        const GEOM_FT ang= fabs(angle(axis,Recta3d(p0,p)));
         if(ang<1.1*angConico)
           {
             Poliedro3d tmp= GetPoliedro3d();
@@ -136,9 +136,9 @@ bool Trihedron::In(const Pos3d &p,const double &tol) const
   }
 
 void Trihedron::Put( const Pos3d &P0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3)
-  { Put(P0,Triangulo3d(p1,p2,p3)); }
+  { Put(P0,Triangle3d(p1,p2,p3)); }
 
-void Trihedron::Put(const Pos3d &P0,const Triangulo3d &TR)
+void Trihedron::Put(const Pos3d &P0,const Triangle3d &TR)
   {
     p0= P0;
     tr= TR;
@@ -151,8 +151,7 @@ GEOM_FT Trihedron::GetMin(short unsigned int i) const
 Pos3d Trihedron::getCenterOfMass() const
   { return GetPoliedro3d().getCenterOfMass(); }
 
-//! @brief Return verdadero si alguno de los vertices del triángulo toca el cuadrante
-//! que se pasa como parámetro.
+//! @brief Return true if any vertex touches the quadrant argument.
 bool Trihedron::TocaCuadrante(const int &cuadrante) const
   {
     return tr.TocaCuadrante(cuadrante); 

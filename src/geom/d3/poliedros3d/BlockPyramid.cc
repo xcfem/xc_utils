@@ -184,16 +184,16 @@ Vector2d BlockPyramid::getVectorExterno1(const Ref2d3d &projPlane) const
       {
         std::deque<Vector3d>::const_iterator i= haz.begin();
         retval= projPlane.GetCooLocales(*i);
-        double angulo= retval.XAxisAngle();
+        double angle= retval.XAxisAngle();
         i++;
         for(;i!=haz.end();i++)
           {
             const Vector2d tmpV= projPlane.GetCooLocales(*i);
             const double tmpAng= tmpV.XAxisAngle();
-            if(tmpAng<angulo)
+            if(tmpAng<angle)
               {
                 retval= tmpV;
-                angulo= tmpAng;
+                angle= tmpAng;
               }
           }
       }
@@ -211,16 +211,16 @@ Vector2d BlockPyramid::getVectorExterno2(const Ref2d3d &projPlane) const
       {
         std::deque<Vector3d>::const_iterator i= haz.begin();
         retval= projPlane.GetCooLocales(*i);
-        double angulo= retval.XAxisAngle();
+        double angle= retval.XAxisAngle();
         i++;
         for(;i!=haz.end();i++)
           {
             const Vector2d tmpV= projPlane.GetCooLocales(*i);
             const double tmpAng= tmpV.XAxisAngle();
-            if(tmpAng>angulo)
+            if(tmpAng>angle)
               {
                 retval= tmpV;
-                angulo= tmpAng;
+                angle= tmpAng;
               }
           }
       }

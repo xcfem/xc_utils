@@ -118,10 +118,10 @@ class Segment2d : public Linea2d
     Vector2d VDir(void) const;
     Vector2d Normal(void) const;
     Vector2d GetVector(void) const;
-    GEOM_FT Angulo(const Vector2d &v) const;
-    GEOM_FT AnguloSigno(const Vector2d &v) const;
-    GEOM_FT Angulo(const Segment2d &v) const;
-    GEOM_FT AnguloSigno(const Segment2d &v) const;
+    GEOM_FT getAngle(const Vector2d &v) const;
+    GEOM_FT getSignedAngle(const Vector2d &v) const;
+    GEOM_FT getAngle(const Segment2d &v) const;
+    GEOM_FT getSignedAngle(const Segment2d &v) const;
     GEOM_FT XAxisAngle(void) const;
     GEOM_FT YAxisAngle(void) const;
     inline GEOM_FT Azimuth(void) const
@@ -157,8 +157,8 @@ GEOM_FT dist(const Pos2d &p,const Segment2d &r);
 inline GEOM_FT dist(const Segment2d &r,const Pos2d &p)
   { return dist(p,r); }
 
-GEOM_FT angulo(const Segment2d &,const Vector2d &);
-GEOM_FT angulo(const Vector2d &,const Segment2d &);
+GEOM_FT angle(const Segment2d &,const Vector2d &);
+GEOM_FT angle(const Vector2d &,const Segment2d &);
 
 inline bool paralelas(const Segment2d &sg,const Recta2d &r)
   { return sg.Paralelo(r); }

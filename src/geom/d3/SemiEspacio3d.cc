@@ -68,19 +68,17 @@ GEOM_FT SemiEspacio3d::dist(const Pos3d &p) const
 GEOM_FT SemiEspacio3d::dist2(const Pos3d &p) const
   { return fabs(distSigno2(p)); }
 
-//! @brief Return el ángulo que forma con el half space que
-//! se pasa como parámetro.
-GEOM_FT SemiEspacio3d::getAngulo(const SemiEspacio3d &se) const
-  { return angulo(lim,se.getPlane()); }
+//! @brief Return el the angle with the half space argument.
+GEOM_FT SemiEspacio3d::getAngle(const SemiEspacio3d &se) const
+  { return angle(lim,se.getPlane()); }
 
 //! @brief Return the angle with respect to the plane argument.
-GEOM_FT SemiEspacio3d::getAngulo(const Plane &p) const
-  { return angulo(lim,p); }
+GEOM_FT SemiEspacio3d::getAngle(const Plane &p) const
+  { return angle(lim,p); }
 
-//! @brief Return el ángulo que forma con el vector que
-//! se pasa como parámetro.
-GEOM_FT SemiEspacio3d::getAngulo(const Vector3d &v) const
-  { return angulo(v,lim); }
+//! @brief Return the angle with the vector argument.
+GEOM_FT SemiEspacio3d::getAngle(const Vector3d &v) const
+  { return angle(v,lim); }
 
 //! @brief Return la arista de the intersection entre semiespacios.
 Recta3d SemiEspacio3d::getLima(const SemiEspacio3d &se) const
@@ -224,14 +222,14 @@ std::deque<Vector3d> vectores_normales(const std::deque<SemiEspacio3d> &se)
     return retval;
   }
 
-//! @brief Return el ángulo entre los semiespacios.
-GEOM_FT angulo(const SemiEspacio3d &se1,const SemiEspacio3d &se2)
-  { return se1.getAngulo(se2); }
+//! @brief Return the angle between half spaces.
+GEOM_FT angle(const SemiEspacio3d &se1,const SemiEspacio3d &se2)
+  { return se1.getAngle(se2); }
 
-//! @brief Return el ángulo entre el half space y el vector.
-GEOM_FT angulo(const Vector3d &v,const SemiEspacio3d &se)
-  { return se.getAngulo(v); }
+//! @brief Return the angle between the half space and the vector.
+GEOM_FT angle(const Vector3d &v,const SemiEspacio3d &se)
+  { return se.getAngle(v); }
 
-//! @brief Return el ángulo entre el half space y el vector.
-GEOM_FT angulo(const SemiEspacio3d &se,const Vector3d &v)
-  { return se.getAngulo(v); }
+//! @brief Return the angle between the half space and the vector.
+GEOM_FT angle(const SemiEspacio3d &se,const Vector3d &v)
+  { return se.getAngle(v); }

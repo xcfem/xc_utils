@@ -26,7 +26,7 @@
 
 #include "../d3/poliedros3d/Poliedro3d.h"
 
-class Triangulo3d;
+class Triangle3d;
 class SoGroup;
 class GTSSurface;
 class Pos3d;
@@ -77,7 +77,7 @@ class Triang3dMesh: public Poliedro3d
     virtual GeomObj *clon(void) const
       { return new Triang3dMesh(*this); }
 
-    Triangulo3d GetTrianguloCara(const Facet_const_iterator &f) const;
+    Triangle3d getFaceTriangle(const Facet_const_iterator &f) const;
 
     Facet_const_iterator findTrihedron(const Pos3d &org,const Pos3d &p,const double &tol) const;
 

@@ -38,8 +38,8 @@ class TritrizPos3d;
 class Revolucion3d: public Trf3d
   {
     Recta3d axis; //Revolution axis.
-    GEOM_FT theta; //!< Ángulo barrido por la revolución.
-    size_t ndiv; //Número de divisiones.
+    GEOM_FT theta; //!< Swept angle.
+    size_t ndiv; //number of divisions.
   public:
     Revolucion3d(const Recta3d &e,const GEOM_FT &th= 0.0,const size_t &nd= 1);
     MatrizPos3d Aplica0d(const Pos3d &p) const;

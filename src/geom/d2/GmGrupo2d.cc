@@ -31,7 +31,7 @@
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include "xc_utils/src/geom/d1/SemiRecta2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/Triangulo2d.h"
+#include "xc_utils/src/geom/d2/poligonos2d/Triangle2d.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
 GEOM_FT GmGrupo2d::inercia(const Recta2d &e) const

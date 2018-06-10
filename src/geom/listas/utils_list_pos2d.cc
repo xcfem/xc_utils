@@ -46,15 +46,15 @@ void mueve(GeomObj::list_Pos2d &l,const Vector2d &v)
 void transforma(GeomObj::list_Pos2d &l,const Trf2d &t)
   { t.Transforma(l.begin(),l.end()); }
 
-//! @brief Return la esquina superior derecha del rectángulo envolvente. 
+//! @brief Return the upper right corner of the bounding rectangle. 
 Pos2d getPMax(const GeomObj::list_Pos2d &l)
   { return Pos2d(l.GetMax(1),l.GetMax(2)); }
 
-//! @brief Return la esquina inferior izquierda del rectángulo envolvente. 
+//! @brief Return the lower left corner of the bounding rectangle. 
 Pos2d getPMin(const GeomObj::list_Pos2d &l)
   { return Pos2d(l.GetMin(1),l.GetMin(2)); }
 
-//! @brief Return el rectángulo envolvente. 
+//! @brief Return the bounding rectangle. 
 BND2d getBnd(const GeomObj::list_Pos2d &l)
   { return BND2d(getPMin(l),getPMax(l)); }
 

@@ -144,8 +144,8 @@ class Plane : public Superficie3d
     bool Interseca(const Segment3d &p) const;
     Pos3d Interseccion(const Segment3d &p) const;
 
-    GEOM_FT Angulo(const Plane &p) const;
-    GEOM_FT Angulo(const Vector3d &) const;
+    GEOM_FT getAngle(const Plane &p) const;
+    GEOM_FT getAngle(const Vector3d &) const;
     GEOM_FT getSlopeAngleXY(void) const;
     GEOM_FT getSlopeAngleXZ(void) const;
     GEOM_FT getSlopeAngleYZ(void) const;
@@ -164,11 +164,11 @@ const Plane XYPlane3d(Pos3d(0,0,0),Pos3d(1,0,0),Pos3d(0,1,0));
 const Plane XZPlane3d(Pos3d(0,0,0),Pos3d(1,0,0),Pos3d(0,0,1));
 const Plane YZPlane3d(Pos3d(0,0,0),Pos3d(0,1,0),Pos3d(0,0,1));
 
-GEOM_FT angulo(const Recta3d &r,const Plane &p);
-GEOM_FT angulo(const Plane &p,const Recta3d &r);
-GEOM_FT angulo(const Vector3d &,const Plane &);
-GEOM_FT angulo(const Plane &,const Vector3d &);
-GEOM_FT angulo(const Plane &,const Plane &);
+GEOM_FT angle(const Recta3d &r,const Plane &p);
+GEOM_FT angle(const Plane &p,const Recta3d &r);
+GEOM_FT angle(const Vector3d &,const Plane &);
+GEOM_FT angle(const Plane &,const Vector3d &);
+GEOM_FT angle(const Plane &,const Plane &);
 
 
 Plane perpendicular(const Recta3d &r, const Pos3d &p);

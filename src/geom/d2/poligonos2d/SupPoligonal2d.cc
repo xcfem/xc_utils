@@ -197,16 +197,16 @@ GeomObj::list_Pos2d SupPoligonal2d::getPosTangAprox(const Vector2d &v) const
     std::vector<double> tangsEnVertices(sz+1);
     Segment2d li= Lado0(sz-1);
     Segment2d lj= Lado0(0);
-    GEOM_FT anguloI= li.AnguloSigno(v),anguloJ= 0;
+    GEOM_FT angleI= li.getSignedAngle(v),angleJ= 0;
     const GEOM_FT dosPi= 2*M_PI;
-    if(anguloI>=dosPi)
-      anguloI-=dosPi;
+    if(angleI>=dosPi)
+      angleI-=dosPi;
     for(size_t i=0;i<sz;i++)
       {
-        anguloJ= anguloI+lj.AnguloSigno(li);
-        tangsEnVertices[i]= (anguloI+anguloJ)/2.0; 
+        angleJ= angleI+lj.getSignedAngle(li);
+        tangsEnVertices[i]= (angleI+angleJ)/2.0; 
         li= lj;
-        anguloI= anguloJ;
+        angleI= angleJ;
         lj= Lado0(i+1);
       }
     tangsEnVertices[sz]= tangsEnVertices[0]+dosPi;
@@ -215,18 +215,18 @@ GeomObj::list_Pos2d SupPoligonal2d::getPosTangAprox(const Vector2d &v) const
     for(size_t i=0;i<sz;i++)
       {
         li= Lado0(i);
-        anguloI= tangsEnVertices[i];
-        anguloJ= tangsEnVertices[i+1];
-        if((anguloI<dosPi) && (anguloJ>=dosPi))
+        angleI= tangsEnVertices[i];
+        angleJ= tangsEnVertices[i+1];
+        if((angleI<dosPi) && (angleJ>=dosPi))
           {
-            anguloI-=dosPi;
-            anguloJ-=dosPi;
-            const double s= li.getLength()*(-anguloI)/(anguloJ-anguloI);
+            angleI-=dosPi;
+            angleJ-=dosPi;
+            const double s= li.getLength()*(-angleI)/(angleJ-angleI);
             retval.AgregaSiNuevo(li.PtoParametricas(s));
           }
-        else if(anguloI*anguloJ<=0)
+        else if(angleI*angleJ<=0)
           {
-            const double s= li.getLength()*(-anguloI)/(anguloJ-anguloI);
+            const double s= li.getLength()*(-angleI)/(angleJ-angleI);
             retval.AgregaSiNuevo(li.PtoParametricas(s));
           }
       }

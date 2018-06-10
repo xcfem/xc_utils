@@ -17,7 +17,7 @@ plBuz1=teoria_bloques.computeDipPlane(alpha1,beta1,p)
 P1=geom.SemiEspacio3d(plBuz1)
 v=geom.Vector3d(1,2,1)
 
-delta=P1.anguloConVector3d(v)
+delta=P1.getAngleWithVector3d(v)
 deltaTeor=math.radians(32.349)
 
 ratio1=math.fabs(deltaTeor-delta)/deltaTeor

@@ -79,8 +79,8 @@ class_<D2to3d, bases<Superficie3d>, boost::noncopyable  >("D2to3d", no_init)
 class_<GeneralEquationOfPlane, boost::noncopyable>("GeneralEquationOfPlane", no_init)
   .def(init<double,double,double,double>());
 
-double (Plane::*PlaneAngle)(const Plane &p) const= &Plane::Angulo;
-double (Plane::*AnguloVector3d)(const Vector3d &) const= &Plane::Angulo;
+double (Plane::*PlaneAngle)(const Plane &p) const= &Plane::getAngle;
+double (Plane::*getAngleWithVector3d)(const Vector3d &) const= &Plane::getAngle;
 Pos3d (Plane::*Pos3dProjection)(const Pos3d &) const= &Plane::Projection;
 Vector3d (Plane::*Vector3dProjection)(const Vector3d &) const= &Plane::Projection;
 Recta3d (Plane::*Recta3dProjection)(const Recta3d &) const= &Plane::Projection;
@@ -96,7 +96,7 @@ class_<Plane, bases<Superficie3d> >("Plane3d")
   .def(init<GeneralEquationOfPlane>()) 
   .def(init<Plane>())
   .def("getPlaneAngle",PlaneAngle)
-  .def("getAnguloVector3d",AnguloVector3d)
+  .def("getAngleWithVector3d",getAngleWithVector3d)
   .def("getPos3dProjection",Pos3dProjection)
   .def("getVector3dProjection",Vector3dProjection)
   .def("getRecta3dProjection",Recta3dProjection)
@@ -113,9 +113,9 @@ class_<Plane, bases<Superficie3d> >("Plane3d")
 
 class_<Poligono3d, bases<D2to3d> >("Polygon3d");
 
-class_<Triangulo3d, bases<Poligono3d>  >("Triangle3d")
+class_<Triangle3d, bases<Poligono3d>  >("Triangle3d")
   .def(init<Pos3d,Pos3d,Pos3d>())
-  .def(init<Triangulo3d>())
+  .def(init<Triangle3d>())
   ;
 
 

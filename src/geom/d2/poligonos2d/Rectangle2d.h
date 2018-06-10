@@ -19,50 +19,50 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Rectangulo2d.h
+//Rectangle2d.h
 
-#ifndef RECTANGULO2D_H
-#define RECTANGULO2D_H
+#ifndef RECTANGLE2D_H
+#define RECTANGLE2D_H
 
 #include "Cuadrilatero2d.h"
 
 //! @ingroup GEOM
 //
-//! @brief Rectángulo en dos dimensiones.
-class Rectangulo2d: public Cuadrilatero2d
+//! @brief Rectangle in a two dimensional space.
+class Rectangle2d: public Cuadrilatero2d
   {
   public:
-    Rectangulo2d(const double &b=1.0,const double &h=1.0): Cuadrilatero2d()
+    Rectangle2d(const double &b=1.0,const double &h=1.0): Cuadrilatero2d()
       {
         push_back(Pos2d(0,0));
         push_back(Pos2d(b,0));
         push_back(Pos2d(b,h));
         push_back(Pos2d(0,h));
       }
-    Rectangulo2d(const Pos2d &o,const double &b=1.0,const double &h=1.0): Cuadrilatero2d()
+    Rectangle2d(const Pos2d &o,const double &b=1.0,const double &h=1.0): Cuadrilatero2d()
       {
         push_back(o+Vector2d(0,0));
         push_back(o+Vector2d(b,0));
         push_back(o+Vector2d(b,h));
         push_back(o+Vector2d(0,h));
       }
-      //Rectangulo2d(const Ref2d &ref, const double &b=1.0,const double &h=1.0) : Cuadrilatero2d(ref,b),altura(h) {}
-    Rectangulo2d(const Rectangulo2d &r): Cuadrilatero2d(r) {}
-    Rectangulo2d &operator=(const Rectangulo2d &r)
+      //Rectangle2d(const Ref2d &ref, const double &b=1.0,const double &h=1.0) : Cuadrilatero2d(ref,b),altura(h) {}
+    Rectangle2d(const Rectangle2d &r): Cuadrilatero2d(r) {}
+    Rectangle2d &operator=(const Rectangle2d &r)
       {
 	Cuadrilatero2d::operator=(r);
         return *this;
       }
     virtual GeomObj *clon(void) const
-      { return new Rectangulo2d(*this); }
+      { return new Rectangle2d(*this); }
 /*     void Offset(const double &offset) */
 /*       { */
 /* 	Cuadrilatero2d::Offset(offset); */
 /*         altura+=2.0*offset; */
 /*       } */
-/*     Rectangulo2d GetOffset(const double &offset) const */
+/*     Rectangle2d GetOffset(const double &offset) const */
 /*       { */
-/*         Rectangulo2d retval(*this); */
+/*         Rectangle2d retval(*this); */
 /*         retval.Offset(offset); */
 /*         return retval; */
 /*       } */

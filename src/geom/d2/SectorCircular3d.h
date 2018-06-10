@@ -53,9 +53,9 @@ class SectorCircular3d : public D2to3d
     GEOM_FT Radio2(void) const;
     GEOM_FT Radio(void) const;
     GEOM_FT Diametro(void) const;
-    inline double AnguloComprendido(void) const
-      { return sect_circ.AnguloComprendido(); }
-    double Angulo(const Pos3d &) const;
+    inline double getIncludedAngle(void) const
+      { return sect_circ.getIncludedAngle(); }
+    double getAngle(const Pos3d &) const;
     double getLambda(const Pos3d &) const;
     virtual GEOM_FT getLength(void) const
       { return sect_circ.getLength(); }

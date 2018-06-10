@@ -24,7 +24,7 @@
 #include "MatrizPos2d.h"
 #include "xc_basic/src/util/matem.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/Triangulo2d.h"
+#include "xc_utils/src/geom/d2/poligonos2d/Triangle2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Cuadrilatero2d.h"
 #include "xc_utils/src/geom/matriz_FT.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
@@ -204,27 +204,29 @@ GEOM_FT MatrizPos2d::Pxy(void) const
     return GetPxy()-GetArea()*d2;
   }
 
-//! Return el triángulo inscrito in the mesh cuyo vértice inferior izquierdo
-//! es el de índices i,j y que queda bajo la diagonal que lo une con
-//! el vértice de índices i+1,j+1.
-//                                                                             i+1,j +---+ i+1,j+1
-//                                                                                   |2 /|
-//                                                                                   | / |
-//                                                                                   |/ 1|
-//                                                                               i,j +---+ i,j+1
-Triangulo2d MatrizPos2d::GetTriangulo1(const size_t &i,const size_t &j) const
-  { return Triangulo2d((*this)(i,j),(*this)(i,j+1),(*this)(i+1,j+1)); }
+//! @brief Return the triangle inscribed in the cell of the mesh the has
+//! the (i,j) vertex as lower left corner and remains under the diagonal
+//! between the (i,j) and the (i+1,j+1) vertices.
+//
+//         i+1,j +---+ i+1,j+1
+//               |2 /|
+//               | / |
+//               |/ 1|
+//           i,j +---+ i,j+1
+Triangle2d MatrizPos2d::getTriangle1(const size_t &i,const size_t &j) const
+  { return Triangle2d((*this)(i,j),(*this)(i,j+1),(*this)(i+1,j+1)); }
 
-//! Return el triángulo inscrito in the mesh cuyo vértice inferior izquierdo
-//! es el de índices i,j y que queda bajo la diagonal que lo une con
-//! el vértice de índices i+1,j+1.
-//                                                                             i+1,j +---+ i+1,j+1
-//                                                                                   |2 /|
-//                                                                                   | / |
-//                                                                                   |/ 1|
-//                                                                               i,j +---+ i,j+1
-Triangulo2d MatrizPos2d::GetTriangulo2(const size_t &i,const size_t &j) const
-  { return Triangulo2d((*this)(i,j),(*this)(i+1,j+1),(*this)(i+1,j)); }
+//! @brief Return the triangle inscribed in the cell of the mesh the has
+//! the (i,j) vertex as lower left corner and remains over the diagonal
+//! between the (i,j) and the (i+1,j+1) vertices.
+//
+//         i+1,j +---+ i+1,j+1
+//               |2 /|
+//               | / |
+//               |/ 1|
+//           i,j +---+ i,j+1
+Triangle2d MatrizPos2d::getTriangle2(const size_t &i,const size_t &j) const
+  { return Triangle2d((*this)(i,j),(*this)(i+1,j+1),(*this)(i+1,j)); }
 
 
 //! @brief Return the x coordinate of point i,j.

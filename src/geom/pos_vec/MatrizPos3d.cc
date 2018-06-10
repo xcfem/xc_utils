@@ -24,7 +24,7 @@
 #include "MatrizPos3d.h"
 #include "xc_basic/src/util/matem.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
-#include "xc_utils/src/geom/d2/Triangulo3d.h"
+#include "xc_utils/src/geom/d2/Triangle3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d3/BND3d.h"
 
@@ -126,41 +126,46 @@ MatrizPos3d cuadrilatero(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const P
   { return MatrizPos3d(p1,p2,p3,p4,ndiv1,ndiv2); }
 
 
-//! Return el triángulo inscrito in the mesh cuyo vértice inferior izquierdo
-//! es el de índices i,j y que queda bajo la diagonal que lo une con
-//! el vértice de índices i+1,j+1.
-//!                                                                              i+1,j +---+ i+1,j+1
-//!                                                                                    |2 /|
-//!                                                                                    | / |
-//!                                                                                    |/ 1|
-//!                                                                                i,j +---+ i,j+1
-Triangulo3d MatrizPos3d::GetTriangulo1(const size_t &i,const size_t &j) const
-  { return Triangulo3d((*this)(i,j),(*this)(i,j+1),(*this)(i+1,j+1)); }
+//! @brief Return the triangle inscribed in the cell of the mesh the has
+//! the (i,j) vertex as lower left corner and remains under the diagonal
+//! between the (i,j) and the (i+1,j+1) vertices.
+//
+//         i+1,j +---+ i+1,j+1
+//               |2 /|
+//               | / |
+//               |/ 1|
+//           i,j +---+ i,j+1
+Triangle3d MatrizPos3d::getTriangle1(const size_t &i,const size_t &j) const
+  { return Triangle3d((*this)(i,j),(*this)(i,j+1),(*this)(i+1,j+1)); }
 
-//! Return el triángulo inscrito in the mesh cuyo vértice inferior izquierdo
-//! es el de índices i,j y que queda bajo la diagonal que lo une con
-//! el vértice de índices i+1,j+1.
-//!                                                                              i+1,j +---+ i+1,j+1
-//!                                                                                    |2 /|
-//!                                                                                    | / |
-//!                                                                                    |/ 1|
-//!                                                                                i,j +---+ i,j+1
-Triangulo3d MatrizPos3d::GetTriangulo2(const size_t &i,const size_t &j) const
-  { return Triangulo3d((*this)(i,j),(*this)(i+1,j+1),(*this)(i+1,j)); }
+//! @brief Return the triangle inscribed in the cell of the mesh the has
+//! the (i,j) vertex as lower left corner and remains over the diagonal
+//! between the (i,j) and the (i+1,j+1) vertices.
+//
+//         i+1,j +---+ i+1,j+1
+//               |2 /|
+//               | / |
+//               |/ 1|
+//           i,j +---+ i,j+1
+Triangle3d MatrizPos3d::getTriangle2(const size_t &i,const size_t &j) const
+  { return Triangle3d((*this)(i,j),(*this)(i+1,j+1),(*this)(i+1,j)); }
 
 
-//! @brief Distance from the point to the surface defined by the matrix of
-//! points i+1,j +---+ i+1,j+1
-//! Como el objeto esta formado "aproximadamente" por la unión de triángulos           |2 /|
-//! la distance se calcula como el mínimo de las distancias                           | / |
-//! a cada uno de los triángulos.                                                      |/ 1|
-//! Cada mesh cell se cubre con dos triángulos                                         i,j +---+ i,j+1
+//! @brief Distance from the point to the surface defined by the
+//! inscribed triangles.
+//!
+//  Each mesh cell is filled with two triangles:
+//         i+1,j +---+ i+1,j+1
+//               |2 /|
+//               | / |
+//               |/ 1|
+//           i,j +---+ i,j+1
 GEOM_FT dist2(const MatrizPos3d &ptos,const Pos3d &pt)
   {
-    if(ptos.size()<1) return NAN; //El conjunto is empty.
+    if(ptos.size()<1) return NAN; //Set is empty.
     GEOM_FT d= dist2(ptos(1,1),pt);
     if(ptos.size()==1) return d; //Degenerated mesh (only a point)
-    //Distancia a los triángulos.
+    //Distance to the triangles.
     const size_t n_rows= ptos.getNumberOfRows();
     const size_t n_columns= ptos.getNumberOfColumns();
     if(n_rows<2) //There is only a point row.
@@ -182,9 +187,9 @@ GEOM_FT dist2(const MatrizPos3d &ptos,const Pos3d &pt)
     for(size_t i=1;i<n_rows;i++) //To the last but one row.
       for(size_t j=1;j<n_columns;j++) //To the last but one column.
         {
-          Triangulo3d t1=ptos.GetTriangulo1(i,j); //Primer triángulo.
+          Triangle3d t1=ptos.getTriangle1(i,j); //First triangle.
           d= std::min(d,t1.dist2(pt));
-          Triangulo3d t2=ptos.GetTriangulo2(i,j); //Segundo triángulo.
+          Triangle3d t2=ptos.getTriangle2(i,j); //Second triangle.
           d= std::min(d,t2.dist2(pt));
         }
     return d;
@@ -223,15 +228,15 @@ bool dist_menor(const MatrizPos3d &ptos,const Pos3d &pt,const GEOM_FT &d_max)
               return true;
           }
       }
-    //Distancia a los triángulos.
+    //Distance to the triangles.
     for(size_t i=1;i<n_rows;i++) //To the last but one row.
       for(size_t j=1;j<n_columns;j++) //To the last but one column.
         {
-          Triangulo3d t1=ptos.GetTriangulo1(i,j); //Primer triángulo.
+          Triangle3d t1=ptos.getTriangle1(i,j); //first triangle.
           d= std::min(d,t1.dist2(pt));
           if(d<d_max2)
             return true;
-          Triangulo3d t2=ptos.GetTriangulo2(i,j); //Segundo triángulo.
+          Triangle3d t2=ptos.getTriangle2(i,j); //Second triangle.
           d= std::min(d,t2.dist2(pt));
           if(d<d_max2)
             return true;
@@ -255,7 +260,7 @@ GEOM_FT pseudo_dist2(const MatrizPos3d &ptos,const Pos3d &pt)
     if(ptos.size()<1) return NAN; //El conjunto is empty.
     GEOM_FT d= dist2(ptos(1,1),pt);
     if(ptos.size()==1) return d; //Degenerated mesh.
-    //Distancia a los triángulos.
+    //Distance to the triangles.
     const size_t n_rows= ptos.getNumberOfRows();
     const size_t n_columns= ptos.getNumberOfColumns();
     if(n_rows<2) //There is only a point row.
@@ -274,13 +279,13 @@ GEOM_FT pseudo_dist2(const MatrizPos3d &ptos,const Pos3d &pt)
             d= std::max(d,s.dist2(pt));
           }
       }
-    d= Plane(ptos.GetTriangulo1(1,1)).PseudoDist2(pt);
+    d= Plane(ptos.getTriangle1(1,1)).PseudoDist2(pt);
     for(size_t i=1;i<n_rows;i++) //To the last but one row.
       for(size_t j=1;j<n_columns;j++) //To the last but one column.
         {
-          Plane p1(ptos.GetTriangulo1(i,j)); //Plane from first triangle.
+          Plane p1(ptos.getTriangle1(i,j)); //Plane from first triangle.
           d= std::max(d,p1.PseudoDist2(pt));
-          Plane p2(ptos.GetTriangulo2(i,j)); //Plane from second triangle.
+          Plane p2(ptos.getTriangle2(i,j)); //Plane from second triangle.
           d= std::max(d,p2.PseudoDist2(pt));
         }
     return d;

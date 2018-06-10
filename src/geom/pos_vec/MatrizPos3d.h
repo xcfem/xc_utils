@@ -27,7 +27,7 @@
 #include "Pos3d.h"
 #include "MatrizPos.h"
 
-class Triangulo3d;
+class Triangle3d;
 class BND3d;
 class Trf3d;
 class Revolucion3d;
@@ -51,8 +51,8 @@ class MatrizPos3d: public MatrizPos<Pos3d>
     MatrizPos3d(const MatrizPos3d &l1_points,const MatrizPos3d &l2_points,const MatrizPos3d &l3_points,const MatrizPos3d &l4_points);
     MatrizPos3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2);
     Pos3d GetCentro(void) const;
-    Triangulo3d GetTriangulo1(const size_t &i,const size_t &j) const;
-    Triangulo3d GetTriangulo2(const size_t &i,const size_t &j) const;
+    Triangle3d getTriangle1(const size_t &i,const size_t &j) const;
+    Triangle3d getTriangle2(const size_t &i,const size_t &j) const;
     GEOM_FT Lagrange(const GEOM_FT &tol);
     void Transforma(const Trf3d &trf);
   };

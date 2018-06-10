@@ -97,8 +97,8 @@ class SemiRecta3d : public Linea3d
       { return Pos3d(NAN,NAN,NAN); }
     Dir3d GetDir(void) const;
     Vector3d VDir(void) const;
-    inline double Angulo(const Vector3d &v) const
-      { return angulo(VDir(),v); }
+    inline double getAngle(const Vector3d &v) const
+      { return angle(VDir(),v); }
     //Moment of inertia with respect to the center of mass in local coordinates.
     inline virtual GEOM_FT Ix(void) const
       { return 0.0; }
@@ -114,12 +114,12 @@ class SemiRecta3d : public Linea3d
       { os << PtoParametricas(0.0) << " " << PtoParametricas(100.0); }
   };
 
-inline GEOM_FT angulo(const SemiRecta3d &r,const Vector3d &v)
-  { return r.Angulo(v); }
-inline GEOM_FT angulo(const SemiRecta3d &sr,const Recta3d &r)
-  { return r.Angulo(sr.VDir()); }
-inline GEOM_FT angulo(const Recta3d &r,const SemiRecta3d &sr)
-  { return r.Angulo(sr.VDir()); }
+inline GEOM_FT angle(const SemiRecta3d &r,const Vector3d &v)
+  { return r.getAngle(v); }
+inline GEOM_FT angle(const SemiRecta3d &sr,const Recta3d &r)
+  { return r.getAngle(sr.VDir()); }
+inline GEOM_FT angle(const Recta3d &r,const SemiRecta3d &sr)
+  { return r.getAngle(sr.VDir()); }
 
 inline GEOM_FT dist2(const Pos3d &p,const SemiRecta3d &r)
   { return r.dist2(p); }

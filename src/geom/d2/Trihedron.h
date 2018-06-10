@@ -26,7 +26,7 @@
 
 #include "../d3/GeomObj3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
-#include "xc_utils/src/geom/d2/Triangulo3d.h"
+#include "xc_utils/src/geom/d2/Triangle3d.h"
 
 class Plane;
 class Poliedro3d;
@@ -38,19 +38,19 @@ class Poliedro3d;
 class Trihedron: public GeomObj3d
   {
     Pos3d p0;
-    Triangulo3d tr;
+    Triangle3d tr;
   protected:
     Plane get_plane(const size_t &i) const;
   public:
     Trihedron(void);
     Trihedron(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);
-    Trihedron(const Pos3d &p0, const Triangulo3d &tr);
+    Trihedron(const Pos3d &p0, const Triangle3d &tr);
     virtual GeomObj *clon(void) const
       { return new Trihedron(*this); }
     ~Trihedron(void) {}
     void Put( const Pos3d &p0, const Pos3d &p1,
               const Pos3d &p2, const Pos3d &p3);
-    void Put(const Pos3d &p0, const Triangulo3d &tr);
+    void Put(const Pos3d &p0, const Triangle3d &tr);
     inline virtual unsigned int GetNumVertices(void) const
       { return 4; }
     inline virtual unsigned int GetNumVerticesFaceta(unsigned int faceta) const
@@ -81,10 +81,10 @@ class Trihedron: public GeomObj3d
     Pos3d getCenterOfMass() const;
     bool TocaCuadrante(const int &) const;
 
-    const Triangulo3d &Base(void) const;
+    const Triangle3d &Base(void) const;
     const Pos3d &Cuspide(void) const;
     Recta3d Axis(void) const;
-    GEOM_FT GetAnguloConico(void) const;
+    GEOM_FT getConeHalfAngle(void) const;
 
     Poliedro3d GetPoliedro3d(void) const;
     Pos3d Vertice(const size_t &i) const;

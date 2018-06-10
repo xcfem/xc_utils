@@ -41,7 +41,8 @@ Pos2d SectorAnilloCircular2d::getCenterOfMass(void) const
     return Centro();
   }
 
-//! @brief Return un sector circular con el mismo centro and ángulos and otro radio
+//! @brief Return a circular sector with the same center and angles and
+//! a different radius.
 SectorCircular2d SectorAnilloCircular2d::getSector(const double &R) const
   { return SectorCircular2d(Circulo2d(Centro(),R),Theta1(),Theta2()); }
 
@@ -77,11 +78,11 @@ Pos2d SectorAnilloCircular2d::PMedInt(void) const
 
 //! @brief Return the length of the arco exterior del sector de anillo circular.
 GEOM_FT SectorAnilloCircular2d::getExteriorArcLength(void) const
-  { return double_to_FT(AnguloComprendido())*RadioExt(); }
+  { return double_to_FT(getIncludedAngle())*RadioExt(); }
 
 //! @brief Return the length of the arco interior del sector de anillo circular.
 GEOM_FT SectorAnilloCircular2d::getInteriorArcLength(void) const
-  { return double_to_FT(AnguloComprendido())*RadioInt(); }
+  { return double_to_FT(getIncludedAngle())*RadioInt(); }
 
 //! @brief Return the length of the object.
 GEOM_FT SectorAnilloCircular2d::getLength(void) const

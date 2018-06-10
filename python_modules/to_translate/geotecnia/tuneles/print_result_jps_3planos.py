@@ -13,11 +13,11 @@ print "\\multicolumn{3}{|l|}{Tunnel axis: ",tunnelAxisVector,"}\\\\\n"
 print "\\hline\n"
 print "\\end{tabular}\n"
 print "\\end{center}\n"
-\JP000{ \procesaAnguloPoliedrico("JP000",nmbTun){} }
-\JP001{ \procesaAnguloPoliedrico("JP001",nmbTun){} }
-\JP010{ \procesaAnguloPoliedrico("JP010",nmbTun){} }
-\JP011{ \procesaAnguloPoliedrico("JP011",nmbTun){} }
-\JP100{ \procesaAnguloPoliedrico("JP100",nmbTun){} }
-\JP101{ \procesaAnguloPoliedrico("JP101",nmbTun){} }
-\JP110{ \procesaAnguloPoliedrico("JP110",nmbTun){} }
-\JP111{ \procesaAnguloPoliedrico("JP111",nmbTun){} }
+\JP000{ \processPolyhedralAngle("JP000",nmbTun){} }
+\JP001{ \processPolyhedralAngle("JP001",nmbTun){} }
+\JP010{ \processPolyhedralAngle("JP010",nmbTun){} }
+\JP011{ \processPolyhedralAngle("JP011",nmbTun){} }
+\JP100{ \processPolyhedralAngle("JP100",nmbTun){} }
+\JP101{ \processPolyhedralAngle("JP101",nmbTun){} }
+\JP110{ \processPolyhedralAngle("JP110",nmbTun){} }
+\JP111{ \processPolyhedralAngle("JP111",nmbTun){} }

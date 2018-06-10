@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Triangulo2d.cc
+//Triangle2d.cc
 
-#include "Triangulo2d.h"
+#include "Triangle2d.h"
 #include "Poligono2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 
@@ -29,14 +29,15 @@
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
 //! @brief Return la base opuesta al vértice i.
-Segment2d Triangulo2d::Base(const size_t &i) const
+Segment2d Triangle2d::Base(const size_t &i) const
   { return Lado(i%3+1); }
 //! @brief Return la altura correspondiente al vértice i.
-Segment2d Triangulo2d::Altura(const size_t &i) const
+Segment2d Triangle2d::Altura(const size_t &i) const
   {
     if(Degenerado())
       {
-        cerr << "¡Ojo!, se pide la altura de un triángulo degenerado." << endl;
+        cerr << getClassName() << "::" << __FUNCTION__
+	     << "; warning!, is a degenerated triangle." << endl;
       }
     const Recta2d rbase= Base(i).RectaSoporte();
     const Recta2d perp= rbase.Perpendicular(Vertice(i));
@@ -44,14 +45,14 @@ Segment2d Triangulo2d::Altura(const size_t &i) const
     return Segment2d(Vertice(i),pint);
   }
 //! @brief Return object length.
-GEOM_FT Triangulo2d::getLength(void) const
+GEOM_FT Triangle2d::getLength(void) const
   {
     GEOM_FT retval= Lado(1).getLength();
     retval+= Lado(2).getLength();
     retval+= Lado(3).getLength();
     return retval;
   }
-Pos2d Triangulo2d::getCenterOfMass(void) const
+Pos2d Triangle2d::getCenterOfMass(void) const
   {
     Vector2d v= Vertice(1).VectorPos();
     v= v+Vertice(2).VectorPos();
@@ -59,14 +60,14 @@ Pos2d Triangulo2d::getCenterOfMass(void) const
     return Origen2d+v/3.0;
   }
 
-GEOM_FT Triangulo2d::GetMax(unsigned short int i) const
+GEOM_FT Triangle2d::GetMax(unsigned short int i) const
   {
     GEOM_FT retval= Vertice(1)(i);
     retval= max(retval,Vertice(2)(i));
     retval=max(retval,Vertice(3)(i));
     return retval;
   }
-GEOM_FT Triangulo2d::GetMin(unsigned short int i) const
+GEOM_FT Triangle2d::GetMin(unsigned short int i) const
   {
     GEOM_FT retval= Vertice(1)(i);
     retval= min(retval,Vertice(2)(i));
@@ -74,7 +75,7 @@ GEOM_FT Triangulo2d::GetMin(unsigned short int i) const
     return retval;
   }
 
-Poligono2d Triangulo2d::GetPoligono(void) const
+Poligono2d Triangle2d::GetPoligono(void) const
   {
     Poligono2d retval;
     retval.push_back(Vertice(1));
@@ -84,9 +85,9 @@ Poligono2d Triangulo2d::GetPoligono(void) const
   }
 
 
-void Triangulo2d::Print(std::ostream &os) const
+void Triangle2d::Print(std::ostream &os) const
   { os << cgtriang; }
-void Triangulo2d::Plot(Plotter &plotter) const
+void Triangle2d::Plot(Plotter &plotter) const
   {
     const Pos2d p1= Vertice(1);
     const Pos2d p2= Vertice(2);
@@ -98,10 +99,10 @@ void Triangulo2d::Plot(Plotter &plotter) const
 
 //! @brief Aplica a la recta la transformación que se
 //! pasa como parámetro.
-void Triangulo2d::Transforma(const Trf2d &trf2d)
+void Triangle2d::Transforma(const Trf2d &trf2d)
   {
     const Pos2d pA= trf2d.Transforma(Vertice(1));
     const Pos2d pB= trf2d.Transforma(Vertice(2));
     const Pos2d pC= trf2d.Transforma(Vertice(3));
-    (*this)= Triangulo2d(pA,pB,pC);
+    (*this)= Triangle2d(pA,pB,pC);
   }

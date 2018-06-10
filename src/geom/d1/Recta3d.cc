@@ -164,7 +164,7 @@ Recta2d Recta3d::YZ2DProjection(void) const
 
 //! @brief Return the angle with respecto to XY plane.
 GEOM_FT Recta3d::getSlope(void) const
-  { return angulo(*this,XYPlane3d); }
+  { return angle(*this,XYPlane3d); }
 
 //! @brief Return true if the lines are parallel.
 bool Recta3d::Paralela(const Recta3d &r) const

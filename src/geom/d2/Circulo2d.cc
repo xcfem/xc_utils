@@ -52,7 +52,7 @@ Circulo2d Circulo2dRTT(const GEOM_FT &radio,const Recta2d &p,const Recta2d &l,co
         const Pos2d &o= *points_int.begin();
         const Recta2d bisect= bisectriz(p,l);
         Ref2d2d ref(o,bisect.GetDir()); //Origen en la intersección, x axis según la recta bisectriz.
-        const double theta= angulo(bisect,p); //Angulo entre la bisectriz y la recta p.
+        const double theta= angle(bisect,p); //Angle between the bisecting line and the p line.
         const GEOM_FT sintheta= double_to_FT(sin(theta));
         const GEOM_FT costheta= double_to_FT(cos(theta));
 	GEOM_FT h= 0,k= 0;
@@ -97,7 +97,8 @@ Pos2d Circulo2d::Centro(void) const
 Pos2d Circulo2d::getCenterOfMass(void) const
   { return Centro(); }
 
-//! @brief Return the point del círculo correspondiente al ángulo que se pasa como parámetro.
+//! @brief Return the point of the circle that corresponds to
+//! the parameter angle.
 Pos2d Circulo2d::Point(const double &ang) const
   {
     const Pos2d o= Centro();
@@ -113,11 +114,11 @@ GEOM_FT Circulo2d::Radio(void) const
 
 //! @brief Return the angle between the line that passes through the center
 //! and the p point and the x axis.
-double Circulo2d::Angulo(const Pos2d &p) const
+double Circulo2d::getAngle(const Pos2d &p) const
   {
     static const Vector2d horiz(1,0);
     Vector2d v1(Centro(),p);
-    double retval= angulo(v1,horiz);
+    double retval= angle(v1,horiz);
     return retval;
   }
 
@@ -144,8 +145,8 @@ bool Circulo2d::In(const Pos2d &p, const double &tol) const
   { return (cgcirc.has_on_positive_side(p.ToCGAL()) || cgcirc.has_on_boundary(p.ToCGAL())); }
 
 
-//! @brief Return el ángulo comprendido por círculo (2*pi).
-double Circulo2d::AnguloComprendido(void) const
+//! @brief Return the angle included by the circle (2*pi).
+double Circulo2d::getIncludedAngle(void) const
   { return 2*M_PI; }
 
 //! @brief Return n points equally espaces over the circle perimenter.

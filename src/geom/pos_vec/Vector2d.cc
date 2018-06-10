@@ -98,15 +98,13 @@ Vector2d Vector2d::Normal(void) const
 Dir2d Vector2d::Direccion(void) const
   { return Dir2d(*this); }
 
-//! @brief Return el ángulo que forma con el vector
-//! que se pasa como parámetro.
-GEOM_FT Vector2d::AnguloSigno(const Vector2d &v) const
-  { return anguloSigno(*this,v); }
+//! @brief Return the angle with the vector argument.
+GEOM_FT Vector2d::getSignedAngle(const Vector2d &v) const
+  { return signedAngle(*this,v); }
 
-//! @brief Return el ángulo que forma con el vector
-//! que se pasa como parámetro (0->360).
-GEOM_FT Vector2d::Angulo(const Vector2d &v) const
-  { return angulo(*this,v); }
+//! @brief Return the angle with the argument vector.
+GEOM_FT Vector2d::getAngle(const Vector2d &v) const
+  { return angle(*this,v); }
 
 GEOM_FT Vector2d::XAxisAngle(void) const
   {
@@ -205,7 +203,7 @@ void Vector2d::Print(std::ostream &stream) const
 void Vector2d::Plot(Plotter &plotter) const
   {
     plotter.fline(0,0,x(),y()); //Dibuja una línea.
-    plotter.fmarker(x(),y(),7,4.0); //Con un triángulo en el extremo.
+    plotter.fmarker(x(),y(),7,4.0); //With a triangle at its end.
   }
 std::ostream &operator<<(std::ostream &stream,const Vector2d &n)
   {
@@ -221,12 +219,14 @@ bool colineales(const Vector2d &v1,const Vector2d &v2)
 bool paralelos(const Vector2d &v1,const Vector2d &v2)
   { return paralelas(v1.Direccion(),v2.Direccion()); } 
 
-double anguloSigno(const Vector2d &v1,const Vector2d &v2)
+double signedAngle(const Vector2d &v1,const Vector2d &v2)
   {
     if( v1.Nulo() || v2.Nulo() )
       {
-	std::clog << "angulo(Vector2d,Vector2d) Uno de los vectores: v1= "
-                  << v1 << " o v2= " << v2 << " es nulo. Se devuelve ángulo cero." << std::endl;
+	std::clog << __FUNCTION__
+		  << "(Vector2d,Vector2d) one of the vectors: v1= "
+                  << v1 << " or v2= " << v2
+		  << " is null. Zero returned." << std::endl;
         return 0.0;
       }
     const GEOM_FT prod_mod= sqrt_FT(v1.GetModulus2()*v2.GetModulus2());
@@ -236,9 +236,9 @@ double anguloSigno(const Vector2d &v1,const Vector2d &v2)
     return atan2(seno,coseno);
   }
 
-double angulo(const Vector2d &v1,const Vector2d &v2)
+double angle(const Vector2d &v1,const Vector2d &v2)
   {
-    double retval= anguloSigno(v1,v2);
+    double retval= signedAngle(v1,v2);
     if(retval<0)
       retval+= 2*M_PI;
     return retval;

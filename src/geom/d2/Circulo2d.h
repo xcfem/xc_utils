@@ -64,12 +64,12 @@ class Circulo2d : public Superficie2d
     GEOM_FT Radio(void) const;
     inline GEOM_FT Diametro(void) const
       { return 2*Radio(); }
-    double Angulo(const Pos2d &p) const;
+    double getAngle(const Pos2d &p) const;
     virtual GEOM_FT getLength(void) const;
     //! @brief Return the perimeter of the object.
     inline GEOM_FT Perimetro(void) const
       { return getLength(); }
-    virtual double AnguloComprendido(void) const;
+    virtual double getIncludedAngle(void) const;
     virtual GEOM_FT getArea(void) const;
     //! @brief Return the volume of the object.
     virtual GEOM_FT getVolume(void) const

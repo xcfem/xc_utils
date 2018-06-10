@@ -368,20 +368,20 @@ GEOM_FT dist2(const Recta2d &r1,const Recta2d &r2)
   }
 
 //! @brief Return the angle con el vector que se pasa como parámetro.
-double Recta2d::Angulo(const Vector2d &v) const
-  { return angulo(VDir(),v); }
+double Recta2d::getAngle(const Vector2d &v) const
+  { return angle(VDir(),v); }
 
 //! @brief Return the angle con el Y axis.
 double Recta2d::Azimuth(void) const
-  { return angulo(VDir(),Vector2d(0,1)); }
+  { return angle(VDir(),Vector2d(0,1)); }
 
 //! @brief Return the angle de la recta con el vector.
-double angulo(const Recta2d &r,const Vector2d &v)
-  { return r.Angulo(v); }
+double angle(const Recta2d &r,const Vector2d &v)
+  { return r.getAngle(v); }
 
 //! @brief Return the angle entre las rectas.
-double angulo(const Recta2d &r1,const Recta2d &r2)
-  { return r1.Angulo(r2.VDir()); }
+double angle(const Recta2d &r1,const Recta2d &r2)
+  { return r1.getAngle(r2.VDir()); }
 
 bool Recta2d::Paralela(const Recta2d &r) const
   { return (paralelas(GetDir(),r.GetDir())); }

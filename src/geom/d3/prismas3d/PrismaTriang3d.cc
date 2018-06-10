@@ -25,8 +25,8 @@
 
 
 
-PrismaTriang3d::PrismaTriang3d(const Triangulo3d &tr,const double &h)
-  : prisma_triang(Triangulo3d(tr),h) {}
+PrismaTriang3d::PrismaTriang3d(const Triangle3d &tr,const double &h)
+  : prisma_triang(Triangle3d(tr),h) {}
 PrismaTriang3d::PrismaTriang3d(const PrismaTriang3d &c)
   : prisma_triang(c) {}
 PrismaTriang3d &PrismaTriang3d::operator=(const PrismaTriang3d &c)

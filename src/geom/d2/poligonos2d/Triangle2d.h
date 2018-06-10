@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Triangulo2d.h
+//Triangle2d.h
 
-#ifndef TRIANGULO2D_H
-#define TRIANGULO2D_H
+#ifndef TRIANGLE2D_H
+#define TRIANGLE2D_H
 
 #include "SupPoligonal2d.h"
 #include "xc_utils/src/geom/tipos_cgal.h"
@@ -35,24 +35,24 @@ class Poligono2d;
 
 //! @ingroup GEOM
 //
-//! @brief Triángulo en dos dimensiones.
-class Triangulo2d : public SupPoligonal2d
+//! @brief Triangle in a two-dimensional space.
+class Triangle2d : public SupPoligonal2d
   {
-    CGTriangulo_2 cgtriang;
+    CGTriangle_2 cgtriang;
   public:
-    Triangulo2d(void) : SupPoligonal2d(), cgtriang() {}
-    Triangulo2d(const Pos2d p1,const Pos2d &p2,const Pos2d &p3)
+    Triangle2d(void) : SupPoligonal2d(), cgtriang() {}
+    Triangle2d(const Pos2d p1,const Pos2d &p2,const Pos2d &p3)
      : SupPoligonal2d(), cgtriang(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL())
       {}
-    Triangulo2d(const Triangulo2d &otro) : SupPoligonal2d(otro), cgtriang(otro.cgtriang) {}
-    Triangulo2d &operator=(const Triangulo2d &p)
+    Triangle2d(const Triangle2d &otro) : SupPoligonal2d(otro), cgtriang(otro.cgtriang) {}
+    Triangle2d &operator=(const Triangle2d &p)
       {
 	SupPoligonal2d::operator=(p);
         cgtriang= p.cgtriang;
         return *this;
       }
     virtual SupPoligonal2d *clon(void) const
-      { return new Triangulo2d(*this); }
+      { return new Triangle2d(*this); }
     inline virtual unsigned int GetNumVertices(void) const
       { return 3; }
     bool Degenerado(void) const
@@ -81,9 +81,9 @@ class Triangulo2d : public SupPoligonal2d
 
     void Transforma(const Trf2d &trf2d);
 
-    friend int operator ==(const Triangulo2d &a,const Triangulo2d &b)
+    friend int operator ==(const Triangle2d &a,const Triangle2d &b)
       { return ( a.cgtriang == b.cgtriang ); };
-    inline friend bool intersecan(const Triangulo2d &tr1,const Triangulo2d &tr2)
+    inline friend bool intersecan(const Triangle2d &tr1,const Triangle2d &tr2)
       { return do_intersect(tr1.cgtriang,tr2.cgtriang); }
     
     void Print(std::ostream &os) const;

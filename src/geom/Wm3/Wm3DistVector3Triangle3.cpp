@@ -17,7 +17,7 @@ namespace Wm3
 //----------------------------------------------------------------------------
 template <class Real>
 DistVector3Triangle3<Real>::DistVector3Triangle3 (
-    const Vector3d& rkVector, const Triangulo3d& rkTriangle)
+    const Vector3d& rkVector, const Triangle3d& rkTriangle)
     :
     m_rkVector(rkVector),
     m_rkTriangle(rkTriangle)
@@ -31,7 +31,7 @@ const Vector3d& DistVector3Triangle3<Real>::GetVector () const
 }
 //----------------------------------------------------------------------------
 template <class Real>
-const Triangulo3d& DistVector3Triangle3<Real>::GetTriangle () const
+const Triangle3d& DistVector3Triangle3<Real>::GetTriangle () const
 {
     return m_rkTriangle;
 }
@@ -284,7 +284,7 @@ Real DistVector3Triangle3<Real>::Get (Real fT,
     Vector3d kMV0 = m_rkTriangle.Vertice0(0).VectorPos() + fT*rkVelocity1;
     Vector3d kMV1 = m_rkTriangle.Vertice0(1).VectorPos() + fT*rkVelocity1;
     Vector3d kMV2 = m_rkTriangle.Vertice0(2).VectorPos() + fT*rkVelocity1;
-    Triangulo3d kMTriangle(Pos3d()+kMV0,Pos3d()+kMV1,Pos3d()+kMV2);
+    Triangle3d kMTriangle(Pos3d()+kMV0,Pos3d()+kMV1,Pos3d()+kMV2);
     return DistVector3Triangle3<Real>(kMVector,kMTriangle).Get();
 }
 //----------------------------------------------------------------------------
@@ -296,7 +296,7 @@ Real DistVector3Triangle3<Real>::GetSquared (Real fT,
     Vector3d kMV0 = m_rkTriangle.Vertice0(0).VectorPos() + fT*rkVelocity1;
     Vector3d kMV1 = m_rkTriangle.Vertice0(1).VectorPos() + fT*rkVelocity1;
     Vector3d kMV2 = m_rkTriangle.Vertice0(2).VectorPos() + fT*rkVelocity1;
-    Triangulo3d kMTriangle(Pos3d()+kMV0,Pos3d()+kMV1,Pos3d()+kMV2);
+    Triangle3d kMTriangle(Pos3d()+kMV0,Pos3d()+kMV1,Pos3d()+kMV2);
     return DistVector3Triangle3<Real>(kMVector,kMTriangle).GetSquared();
 }
 //----------------------------------------------------------------------------

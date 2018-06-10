@@ -67,20 +67,20 @@ Vector2d Segment2d::GetVector(void) const
   { return Destino()-Origen(); }
 
 //! @brief Return the angle of the segment con el vector (0->2PI).
-GEOM_FT Segment2d::Angulo(const Vector2d &v) const
-  { return angulo(VDir(),v); }
+GEOM_FT Segment2d::getAngle(const Vector2d &v) const
+  { return angle(VDir(),v); }
 
 //! @brief Return the angle of the segment con el vector (-PI->0->PI).
-GEOM_FT Segment2d::AnguloSigno(const Vector2d &v) const
-  { return anguloSigno(VDir(),v); }
+GEOM_FT Segment2d::getSignedAngle(const Vector2d &v) const
+  { return signedAngle(VDir(),v); }
 
 //! @brief Return the angle of the segment con el vector (0->2PI).
-GEOM_FT Segment2d::Angulo(const Segment2d &s) const
-  { return Angulo(s.VDir()); }
+GEOM_FT Segment2d::getAngle(const Segment2d &s) const
+  { return getAngle(s.VDir()); }
 
 //! @brief Return the angle of the segment con el vector (-PI->0->PI).
-GEOM_FT Segment2d::AnguloSigno(const Segment2d &s) const
-  { return AnguloSigno(s.VDir()); }
+GEOM_FT Segment2d::getSignedAngle(const Segment2d &s) const
+  { return getSignedAngle(s.VDir()); }
 
 
 //! @brief Return the angle of the segment con el X axis.
@@ -91,11 +91,11 @@ GEOM_FT Segment2d::XAxisAngle(void) const
 GEOM_FT Segment2d::YAxisAngle(void) const
   { return VDir().YAxisAngle(); }
 
-GEOM_FT angulo(const Segment2d &r,const Vector2d &v)
-  { return r.Angulo(v); }
+GEOM_FT angle(const Segment2d &r,const Vector2d &v)
+  { return r.getAngle(v); }
 
-GEOM_FT angulo(const Vector2d &v, const Segment2d &r)
-  { return v.Angulo(r.VDir()); }
+GEOM_FT angle(const Vector2d &v, const Segment2d &r)
+  { return v.getAngle(r.VDir()); }
 
 //! @brief Return object length.
 GEOM_FT Segment2d::getLength(void) const

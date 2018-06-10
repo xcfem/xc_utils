@@ -21,16 +21,16 @@
 //----------------------------------------------------------------------------
 //python_interface.cxx
 
-double (SemiEspacio3d::*AnguloConSemiEspacio3d)(const SemiEspacio3d &) const= &SemiEspacio3d::getAngulo;
-double (SemiEspacio3d::*AnguloConPlane)(const Plane &) const= &SemiEspacio3d::getAngulo;
-double (SemiEspacio3d::*AnguloConVector3d)(const Vector3d &) const= &SemiEspacio3d::getAngulo;
+double (SemiEspacio3d::*getAngleWithSemiEspacio3d)(const SemiEspacio3d &) const= &SemiEspacio3d::getAngle;
+double (SemiEspacio3d::*getAngleWithPlane)(const Plane &) const= &SemiEspacio3d::getAngle;
+double (SemiEspacio3d::*getAngleWithVector3d)(const Vector3d &) const= &SemiEspacio3d::getAngle;
 
 class_<SemiEspacio3d, bases<GeomObj3d> >("SemiSpace3d")
   .def(init<Plane>())
   .def(init<SemiEspacio3d>())
-  .def("anguloConSemiEspacio3d", AnguloConSemiEspacio3d)
-  .def("anguloConPlane", AnguloConPlane)
-  .def("anguloConVector3d", AnguloConVector3d)
+  .def("getAngleWithSemiEspacio3d", getAngleWithSemiEspacio3d)
+  .def("getAngleWithPlane", getAngleWithPlane)
+  .def("getAngleWithVector3d", getAngleWithVector3d)
   .def("getLima", &SemiEspacio3d::getLima)
   .def("getNormalExterior", &SemiEspacio3d::NormalExterior)
   .def("getNormalInterior", &SemiEspacio3d::NormalInterior)

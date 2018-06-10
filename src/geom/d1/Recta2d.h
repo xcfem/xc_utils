@@ -135,10 +135,10 @@ class Recta2d : public Linea2d
     Recta2d Bisectriz(const Recta2d &r) const;
     Recta2d getNormalizada(void) const;
 
-    double Angulo(const Vector2d &v) const;
+    double getAngle(const Vector2d &v) const;
     double Azimuth(void) const;
-    friend double angulo(const Recta2d &r,const Vector2d &v);
-    friend double angulo(const Recta2d &r1,const Recta2d &r2);
+    friend double angle(const Recta2d &r,const Vector2d &v);
+    friend double angle(const Recta2d &r1,const Recta2d &r2);
 
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;
@@ -154,8 +154,8 @@ class Recta2d : public Linea2d
     
   };
 
-double angulo(const Recta2d &r,const Vector2d &v);
-double angulo(const Recta2d &r1,const Recta2d &r2);
+double angle(const Recta2d &r,const Vector2d &v);
+double angle(const Recta2d &r1,const Recta2d &r2);
 
 bool operator==(const Recta2d &r1,const Recta2d &r2);
 

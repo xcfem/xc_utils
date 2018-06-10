@@ -185,18 +185,18 @@ Vector3d Vector3d::Perpendicular(const Vector3d &v) const
     return retval;
   }
 
-//! @brief Return el ángulo que forma con el vector
-//! que se pasa como parámetro.
-GEOM_FT Vector3d::Angulo(const Vector3d &v) const
+//! @brief Return the angle between this vector and the argument.
+GEOM_FT Vector3d::getAngle(const Vector3d &v) const
   {
     GEOM_FT retval= 0;
-    //XXX Modificar separando en Angulo y AnguloSigno
+    //XXX Modify by splitting in "getAngle" and "getSignedAngle"
     //como en Vector2d.
     if( Nulo() || v.Nulo() )
       {
-	std::clog << "Angulo(Vector3d) Uno de los vectores: este= "
-                  << *this << " o v= " << v 
-                  << " es nulo. Se devuelve ángulo cero." << std::endl;
+	std::clog << getClassName() << "::" << __FUNCTION__
+	          << "; one of the vector: this= "
+                  << *this << " or v= " << v 
+                  << " is null. Zero returned." << std::endl;
         retval= 0.0;
       }
     else
@@ -236,9 +236,9 @@ std::ostream &operator<<(std::ostream &stream,const Vector3d &n)
     return stream;
   }
 
-//! @brief Return el ángulo que forman los vecttores.
-double angulo(const Vector3d &v1,const Vector3d &v2)
-  { return v1.Angulo(v2); }
+//! @brief Return el angle between vectors.
+double angle(const Vector3d &v1,const Vector3d &v2)
+  { return v1.getAngle(v2); }
 
 
 matriz_FT prod_tensor(const Vector3d &u,const Vector3d &v)

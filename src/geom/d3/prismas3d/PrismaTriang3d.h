@@ -25,18 +25,18 @@
 #define PRISMATRIANG3D_H
 
 #include "PrismaRecto3d.h"
-#include "xc_utils/src/geom/d2/Triangulo3d.h"
+#include "xc_utils/src/geom/d2/Triangle3d.h"
 
 
 //! @ingroup GEOM
 //
 //! @brief Prisma recto de base triangular.
-class PrismaTriang3d : public PrismaRecto3d<Triangulo3d>
+class PrismaTriang3d : public PrismaRecto3d<Triangle3d>
   {
   public:
-    typedef PrismaRecto3d<Triangulo3d> prisma_triang;
+    typedef PrismaRecto3d<Triangle3d> prisma_triang;
   public:
-    PrismaTriang3d(const Triangulo3d &tr= Triangulo3d(),const double &h=1.0);
+    PrismaTriang3d(const Triangle3d &tr= Triangle3d(),const double &h=1.0);
     PrismaTriang3d(const PrismaTriang3d &otro);
     PrismaTriang3d &operator=(const PrismaTriang3d &c);
     virtual GeomObj *clon(void) const;

@@ -110,10 +110,10 @@ class SemiRecta2d : public Linea2d
       { return Pos2d(NAN,NAN); }
     Dir2d GetDir(void) const;
     Vector2d VDir(void) const;
-    inline GEOM_FT Angulo(const Vector2d &v) const
-      { return angulo(VDir(),v); }
-    inline friend GEOM_FT angulo(const SemiRecta2d &r,const Vector2d &v)
-      { return r.Angulo(v); }
+    inline GEOM_FT getAngle(const Vector2d &v) const
+      { return angle(VDir(),v); }
+    inline friend GEOM_FT angle(const SemiRecta2d &r,const Vector2d &v)
+      { return r.getAngle(v); }
     //Moment of inertia with respect to the center of mass in local coordinates.
     inline virtual GEOM_FT Ix(void) const
       { return 0.0; }

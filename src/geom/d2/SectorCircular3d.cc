@@ -111,8 +111,8 @@ GEOM_FT SectorCircular3d::Radio(void) const
 GEOM_FT SectorCircular3d::Diametro(void) const
   { return sect_circ.Diametro(); }
 
-double SectorCircular3d::Angulo(const Pos3d &p) const
-  { return sect_circ.Angulo(to_2d(p)); }
+double SectorCircular3d::getAngle(const Pos3d &p) const
+  { return sect_circ.getAngle(to_2d(p)); }
 
 //! @brief Returns the parameter of the point in the arc (distance to the arc's first point measured over the arc)
 double SectorCircular3d::getLambda(const Pos3d &p) const

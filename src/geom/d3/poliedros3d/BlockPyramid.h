@@ -33,11 +33,11 @@
 
 //! @ingroup GEOM
 //
-//! @brief Ángulo poliedrico (XXX cambiarle el nombre).
+//! @brief Polyhedral angle.
 class BlockPyramid: public GeomObj3d
   {
   protected:
-    std::deque<SemiEspacio3d> semiespacios; //! Semiespacios que definen el BP.
+    std::deque<SemiEspacio3d> semiespacios; //!< Half spaces that define the object.
 
     std::deque<Vector3d> haz_vectores(void) const;
     static bool es_interior(const SemiEspacio3d &,const Vector3d &);

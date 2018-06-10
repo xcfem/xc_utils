@@ -13,19 +13,19 @@ print "\\multicolumn{3}{|l|}{Tunnel axis: ",tunnelAxisVector,"}\\\\\n"
 print "\\hline\n"
 print "\\end{tabular}\n"
 print "\\end{center}\n"
-\JP0000{ \procesaAnguloPoliedrico("JP0000",nmbTun){} }
-\JP0001{ \procesaAnguloPoliedrico("JP0001",nmbTun){} }
-\JP0010{ \procesaAnguloPoliedrico("JP0010",nmbTun){} }
-\JP0011{ \procesaAnguloPoliedrico("JP0011",nmbTun){} }
-\JP0100{ \procesaAnguloPoliedrico("JP0100",nmbTun){} }
-\JP0101{ \procesaAnguloPoliedrico("JP0101",nmbTun){} }
-\JP0110{ \procesaAnguloPoliedrico("JP0110",nmbTun){} }
-\JP0111{ \procesaAnguloPoliedrico("JP0111",nmbTun){} }
-\JP1000{ \procesaAnguloPoliedrico("JP1000",nmbTun){} }
-\JP1001{ \procesaAnguloPoliedrico("JP1001",nmbTun){} }
-\JP1010{ \procesaAnguloPoliedrico("JP1010",nmbTun){} }
-\JP1011{ \procesaAnguloPoliedrico("JP1011",nmbTun){} }
-\JP1100{ \procesaAnguloPoliedrico("JP1100",nmbTun){} }
-\JP1101{ \procesaAnguloPoliedrico("JP1101",nmbTun){} }
-\JP1110{ \procesaAnguloPoliedrico("JP1110",nmbTun){} }
-\JP1111{ \procesaAnguloPoliedrico("JP1111",nmbTun){} }
+\JP0000{ \processPolyhedralAngle("JP0000",nmbTun){} }
+\JP0001{ \processPolyhedralAngle("JP0001",nmbTun){} }
+\JP0010{ \processPolyhedralAngle("JP0010",nmbTun){} }
+\JP0011{ \processPolyhedralAngle("JP0011",nmbTun){} }
+\JP0100{ \processPolyhedralAngle("JP0100",nmbTun){} }
+\JP0101{ \processPolyhedralAngle("JP0101",nmbTun){} }
+\JP0110{ \processPolyhedralAngle("JP0110",nmbTun){} }
+\JP0111{ \processPolyhedralAngle("JP0111",nmbTun){} }
+\JP1000{ \processPolyhedralAngle("JP1000",nmbTun){} }
+\JP1001{ \processPolyhedralAngle("JP1001",nmbTun){} }
+\JP1010{ \processPolyhedralAngle("JP1010",nmbTun){} }
+\JP1011{ \processPolyhedralAngle("JP1011",nmbTun){} }
+\JP1100{ \processPolyhedralAngle("JP1100",nmbTun){} }
+\JP1101{ \processPolyhedralAngle("JP1101",nmbTun){} }
+\JP1110{ \processPolyhedralAngle("JP1110",nmbTun){} }
+\JP1111{ \processPolyhedralAngle("JP1111",nmbTun){} }

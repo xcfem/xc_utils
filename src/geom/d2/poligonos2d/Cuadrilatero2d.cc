@@ -22,7 +22,7 @@
 //Cuadrilatero2d.cc
 
 #include "Cuadrilatero2d.h"
-#include "Triangulo2d.h"
+#include "Triangle2d.h"
 #include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include <vector>
@@ -35,10 +35,10 @@ Cuadrilatero2d::Cuadrilatero2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3,c
     push_back(p4);
   }
 
-Triangulo2d Cuadrilatero2d::PrimerTriangulo(void) const
-  { return Triangulo2d(Vertice(1),Vertice(2),Vertice(3)); }
-Triangulo2d Cuadrilatero2d::SegundoTriangulo(void) const
-  { return Triangulo2d(Vertice(1),Vertice(3),Vertice(4)); }
+Triangle2d Cuadrilatero2d::getFirstTriangle(void) const
+  { return Triangle2d(Vertice(1),Vertice(2),Vertice(3)); }
+Triangle2d Cuadrilatero2d::getSecondTriangle(void) const
+  { return Triangle2d(Vertice(1),Vertice(3),Vertice(4)); }
 
 
 MatrizPos2d Cuadrilatero2d::genMesh(int n1,int n2) const

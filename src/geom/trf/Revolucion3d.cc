@@ -37,13 +37,13 @@ MatrizPos3d Revolucion3d::Aplica0d(const Pos3d &p) const
   {
     MatrizPos3d retval(1,ndiv+1);
     retval(1,1)= p;
-    const GEOM_FT inc_angulo= theta/ndiv;
-    GEOM_FT ang(inc_angulo);
+    const GEOM_FT angle_inc= theta/ndiv;
+    GEOM_FT ang(angle_inc);
     for(size_t i=2;i<=ndiv+1;i++)
       {
         const Rotation3d trf(axis,ang);
         retval(1,i)= trf(p);
-        ang+= inc_angulo;
+        ang+= angle_inc;
       }
     return retval;
   }
@@ -58,14 +58,14 @@ MatrizPos3d Revolucion3d::Aplica1d(const MatrizPos3d &m) const
         MatrizPos3d retval(nPoints,ndiv+1);
         for(size_t i=1;i<=nPoints;i++) //Points of the first column.
           retval(i,1)= m(i,1);
-        const GEOM_FT inc_angulo= theta/ndiv;
-        GEOM_FT ang(inc_angulo);
+        const GEOM_FT angle_inc= theta/ndiv;
+        GEOM_FT ang(angle_inc);
         for(size_t i=2;i<=ndiv+1;i++)
           {
             const Rotation3d trf(axis,ang);
             for(size_t j=1;j<=nPoints;j++)
               retval(i,j)= trf(m(i,1));
-            ang+= inc_angulo;
+            ang+= angle_inc;
           }
         return retval;
       }
@@ -74,14 +74,14 @@ MatrizPos3d Revolucion3d::Aplica1d(const MatrizPos3d &m) const
         MatrizPos3d retval(ndiv+1,nPoints);
         for(size_t j=1;j<=nPoints;j++) //Points of the first row.
           retval(1,j)= m(1,j);
-        const GEOM_FT inc_angulo= theta/ndiv;
-        GEOM_FT ang(inc_angulo);
+        const GEOM_FT angle_inc= theta/ndiv;
+        GEOM_FT ang(angle_inc);
         for(size_t i=2;i<=ndiv+1;i++)
           {
             const Rotation3d trf(axis,ang);
             for(size_t j=1;j<=nPoints;j++)
               retval(i,j)= trf(m(1,i));
-            ang+= inc_angulo;
+            ang+= angle_inc;
           }
         return retval;
       }
@@ -104,13 +104,13 @@ TritrizPos3d Revolucion3d::Aplica2d(const MatrizPos3d &m) const
       {
         const size_t n_layers= ndiv+1;
 	TritrizPos3d retval(n_layers,m);
-        const GEOM_FT inc_angulo= theta/ndiv;
-        GEOM_FT ang(inc_angulo);
+        const GEOM_FT angle_inc= theta/ndiv;
+        GEOM_FT ang(angle_inc);
         for(size_t i=2;i<=n_layers;i++)
           {
             const Rotation3d trf(axis,ang);
             retval(i)= trf(m);
-            ang+= inc_angulo;
+            ang+= angle_inc;
 	  }
         return retval;
       }

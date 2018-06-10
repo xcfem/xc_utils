@@ -29,7 +29,7 @@
 #include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d1/Polilinea3d.h"
 #include "xc_utils/src/geom/d2/Poligono3d.h"
-#include "xc_utils/src/geom/d2/Triangulo3d.h"
+#include "xc_utils/src/geom/d2/Triangle3d.h"
 #include "xc_utils/src/geom/d3/GmGrupo3d.h"
 #include "xc_basic/src/util/mchne_eps.h"
 
@@ -436,24 +436,24 @@ Recta3d Plane::getMaximumSlopeLineYZ(void) const
   }
 
 //! @brief Return the angle between this plane and the argument.
-GEOM_FT Plane::Angulo(const Plane &p) const
-  { return angulo(*this,p); }
+GEOM_FT Plane::getAngle(const Plane &p) const
+  { return angle(*this,p); }
 
 //! @brief Return the angle between this plane and the argument.
-GEOM_FT Plane::Angulo(const Vector3d &v) const
-  { return angulo(*this,v); }
+GEOM_FT Plane::getAngle(const Vector3d &v) const
+  { return angle(*this,v); }
 
 //! @brief Returns the slope angle with respect to the XY plane
 GEOM_FT Plane::getSlopeAngleXY(void) const
-  { return angulo(*this,XYPlane3d); }
+  { return angle(*this,XYPlane3d); }
 
 //! @brief Returns the slope angle with respect to the XZ plane
 GEOM_FT Plane::getSlopeAngleXZ(void) const
-  { return angulo(*this,XZPlane3d); }
+  { return angle(*this,XZPlane3d); }
 
 //! @brief Returns the slope angle with respect to the YZ plane
 GEOM_FT Plane::getSlopeAngleYZ(void) const
-  { return angulo(*this,YZPlane3d); }
+  { return angle(*this,YZPlane3d); }
 
 //! @brief Compute the plane that best suits the point cloud.
 GEOM_FT Plane::AjusteMinimosCuadrados(const GeomObj3d::list_Pos3d &lp)
@@ -683,12 +683,12 @@ Pos3d intersection_point(const Plane &p, const Segment3d &sg)
 Pos3d intersection_point(const Segment3d &sg, const Plane &p)
   { return intersection_point(p,sg); }
 
-GEOM_FT angulo(const Recta3d &r,const Plane &p)
+GEOM_FT angle(const Recta3d &r,const Plane &p)
   {
     GEOM_FT retval;
     const Recta3d rProj= p.Projection(r);
     if(rProj.exists())
-      retval= angulo(r,rProj);
+      retval= angle(r,rProj);
     else
       {
         retval= NAN;
@@ -698,18 +698,18 @@ GEOM_FT angulo(const Recta3d &r,const Plane &p)
     return retval;
   }
 
-GEOM_FT angulo(const Plane &p,const Recta3d &r)
-  { return angulo(r,p); }
+GEOM_FT angle(const Plane &p,const Recta3d &r)
+  { return angle(r,p); }
 
-GEOM_FT angulo(const Vector3d &v,const Plane &p)
-  { return M_PI/2 - angulo(p.Normal(),v); }
+GEOM_FT angle(const Vector3d &v,const Plane &p)
+  { return M_PI/2 - angle(p.Normal(),v); }
 
-GEOM_FT angulo(const Plane &p,const Vector3d &v)
-  { return angulo(v,p); }
+GEOM_FT angle(const Plane &p,const Vector3d &v)
+  { return angle(v,p); }
 
-GEOM_FT angulo(const Plane &p1,const Plane &p2)
+GEOM_FT angle(const Plane &p1,const Plane &p2)
   {
-    GEOM_FT retval= angulo(p1.Normal(),p2.Normal());
+    GEOM_FT retval= angle(p1.Normal(),p2.Normal());
     return retval;
   }
 

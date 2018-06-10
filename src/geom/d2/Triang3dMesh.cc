@@ -22,7 +22,7 @@
 //Triang3dMesh.cc
 
 #include "Triang3dMesh.h"
-#include "xc_utils/src/geom/d2/Triangulo3d.h"
+#include "xc_utils/src/geom/d2/Triangle3d.h"
 #include "Trihedron.h"
 #include "xc_utils/src/gnu_gts/GTSSurface.h"
 #include "xc_utils/src/gnu_gts/GTSEdge.h"
@@ -125,10 +125,10 @@ GTSSurface Triang3dMesh::get_gts_surface(void) const
     return retval;
   }
 
-Triangulo3d Triang3dMesh::GetTrianguloCara(const Facet_const_iterator &f) const
+Triangle3d Triang3dMesh::getFaceTriangle(const Facet_const_iterator &f) const
   {
     Facet::Halfedge_const_handle h = f->halfedge();
-    return Triangulo3d(Pos3d(h->vertex()->point()),
+    return Triangle3d(Pos3d(h->vertex()->point()),
                        Pos3d(h->next()->vertex()->point()),
                        Pos3d(h->next()->next()->vertex()->point()));
   }
@@ -142,7 +142,7 @@ Triang3dMesh::Facet_const_iterator Triang3dMesh::find_trihedron(const Pos3d &org
     if(nf<4) return retval;
     for(Facet_const_iterator i= facets_begin();i!=facets_end();i++)
       {
-        Triangulo3d tf(GetTrianguloCara(i));
+        Triangle3d tf(getFaceTriangle(i));
         Trihedron trihedron(org,tf.Vertice(1),tf.Vertice(2),tf.Vertice(3));
         if(trihedron.In(p,tol))
           {

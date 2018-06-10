@@ -45,7 +45,7 @@ Pos2d GeomObj2d::GetPMin(void) const
   }
 
 
-//! @brief Return el rectángulo envolvente del objeto.
+//! @brief Return el bounding rectangle.
 BND2d GeomObj2d::Bnd(void) const
   { return BND2d(GetPMin(),GetPMax()); }
 
@@ -62,17 +62,17 @@ bool GeomObj2d::Out(const Pos2d &p, const double &tol) const
   { return !In(p,tol); }
 
 
-//! @brief Return el ángulo que define un principal axis of inertia.
+//! @brief Return the angle of one of the principal axis of inertia.
 double GeomObj2d::Theta_p(void) const
   { return theta_inercia(Ix(),Iy(),Pxy()); }
 
-//! @brief Return the dirección de un principal axis of inertia (no sabemos si
-//! el mayor o el menor).
+//! @brief Return the dirección de un principal axis of inertia (we don't know
+//! if it's the major or the minor yet).
 Dir2d GeomObj2d::IAxisDir_a(void) const
   { return Dir2d(Theta_p()); }
 
-//! @brief Return the dirección del otro principal axis of inertia (no sabemos si
-//! el mayor o el menor).
+//! @brief Return the dirección del otro principal axis of inertia (we don't know
+//! if it's the major or the minor yet).
 Dir2d GeomObj2d::IAxisDir_b(void) const
   { return IAxisDir_a().Perpendicular(); }
 
@@ -146,7 +146,7 @@ matriz_FT GeomObj2d::I(void) const
     return i;
   }
 
-//Return the inertia tensor with respect to the point o.
+//! @brief Return the inertia tensor with respect to the point o.
 matriz_FT GeomObj2d::I(const Pos2d &o) const
   {
     matriz_FT Ig= I();
@@ -154,9 +154,10 @@ matriz_FT GeomObj2d::I(const Pos2d &o) const
     GEOM_FT m= IArea();
     return Ig+m*(Abs2(og)*identidad(Ig)-(og & og));
   }
+
+//! @brief Return the moment of inertia respecto a la recta que se pasa
+//! como parámetro.
 GEOM_FT GeomObj2d::I(const Recta2d &r) const
-//Return the moment of inertia respecto a la recta que se pasa
-//como parámetro.
   { return I(r.Point(),r.VDir()); }
 
 
