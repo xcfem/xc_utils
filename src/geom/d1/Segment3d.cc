@@ -123,9 +123,9 @@ GEOM_FT Segment3d::dist2(const Pos3d &p) const
     if(denom!=0)
       {
         const GEOM_FT u= ( (p.x()-A.x())*(B.x()-A.x()) + (p.y()-A.y())*(B.y()-A.y()) + (p.z()-A.z())*(B.z()-A.z()) )/denom;
-        if(u<0.0) //Distancia al origen.
+        if(u<0.0) //Distance to the origin.
 	  retval= p.dist2(A);
-	else if(u>1.0) //Distancia al destino.
+	else if(u>1.0) //Distance to the destination.
           retval= p.dist2(B);
       }
     return retval;

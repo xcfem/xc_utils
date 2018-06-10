@@ -257,7 +257,7 @@ GEOM_FT SupPoligonal2d::DistSigno(const Pos2d &p,const bool &sentido_horario) co
            }
          else
            {
-             //Distancia al primer lado
+             //Distance to the first side
              Pos2d p1= Vertice(1);
              Pos2d p2= Vertice(2);
              HalfPlane2d half_plane(p1,p2);
@@ -270,7 +270,7 @@ GEOM_FT SupPoligonal2d::DistSigno(const Pos2d &p,const bool &sentido_horario) co
                  const GEOM_FT d_i= signo*half_plane.DistSigno(p);
                  retval= max(retval,d_i);
                }
-             //Distancia al último lado.
+             //Distance to the last side
              p1= Vertice(nv);
              p2= Vertice(1);
              half_plane= HalfPlane2d(p1,p2);

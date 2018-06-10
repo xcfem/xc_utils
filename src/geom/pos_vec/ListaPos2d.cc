@@ -55,10 +55,10 @@ void ListaPos2d::appendPointPy(const Pos2d &p)
 void ListaPos2d::Transforma(const Trf2d &trf2d)
   { trf2d.Transforma(lista_ptos.begin(),lista_ptos.end()); }
 
-//! @brief Return the lista de vértices de una polilínea paralela
-//! a la formada con los vértices de ésta a la distancia
-//! que se pasa como parámetro. Si la distance es positiva,
-//! la nueva polilínea quedará a la derecha de la anterior.
+//! @brief Return the vertex list of a polyline parallel to
+//! the polyline builded with the vertex of this line at the
+//! distance being passed as parameter. Si the distance is
+//! positive the new polyline is builded on the right.
 ListaPos2d ListaPos2d::Offset(const GEOM_FT &d) const
   {
     ListaPos2d retval;

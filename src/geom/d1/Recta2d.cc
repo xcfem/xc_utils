@@ -250,7 +250,9 @@ GeomObj::list_Pos2d Recta2d::Project(const GeomObj::list_Pos2d &ptos) const
 Recta2d Recta2d::Perpendicular(const Pos2d &p) const
   { return Recta2d(cgr.perpendicular(p.ToCGAL())); }
 
-//! @brief Return the recta que resulta de aplicar a ésta el desplazamiento v.
+//! @brief Return the line that result from displacing this
+//! one by the vector argument.
+//! @param v: displacement vector.
 Recta2d Recta2d::Offset(const Vector2d &v) const
   {
     const Pos2d p= Point()+v;
@@ -264,9 +266,9 @@ Recta2d Recta2d::Paralela(const Pos2d &p) const
     return Offset(v);
   }
 
-//! @brief Return una recta paralela a ésta a la distancia
-//! que se pasa como parámetro. Si la distance es positiva,
-//! la nueva recta quedará a la derecha de la anterior.
+//! @brief Return a line parallel to this one at the distance
+//! being passed as parameter. It the distance is positive the
+//! new line is placed on the right.
 Recta2d Recta2d::Offset(const GEOM_FT &d) const
   {
     const Vector2d v= d*VersorDir();

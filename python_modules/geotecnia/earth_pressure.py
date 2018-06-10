@@ -133,14 +133,14 @@ def ep_coulomb(a,b,fi,d,p):
 
 def eql_coulomb(x,H,z,ql):
     '''
-    Devuelve el empuje unitario producido por una sobrecarga lineal ql que actúa
-    sobre una recta paralela a la coronación del muro sobre la superficie del terreno contenido.
+    Return the earth pressure due to a linear load ql acting on a line
+    parallel to the top of the wall on the surface of the retained backfill.
     from:
-    x:  Distancia entre la coronación del trasdós y la línea de aplicación de
-              la carga.
-    H:  Profundidad del extremo inferior del trasdós.
+
+    x:  Distance from the top of the back and the linea where the load is applied.
+    H:  Depth of the bottom end of the wall back.
     z:  depth of the point for which the pressure is computed.
-    ql: Valor de la sobrecarga lineal.
+    ql: value of the linear load.
     '''
     m=x/float(H)
     n=z/float(H)

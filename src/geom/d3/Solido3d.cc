@@ -31,12 +31,15 @@ Solido3d::Solido3d(void)
 //! @brief Return the distance to the argument.
 GEOM_FT Solido3d::dist(const Pos3d &p) const
   {
-    std::cerr << "Solido3d::dist; la función distancia no está definida."
+    std::cerr << getClassName() << "::" << __FUNCTION__
+              << "; not implemented."
               << std::endl;
     return std::numeric_limits<double>::quiet_NaN( );
   }
 
 void Solido3d::Print(std::ostream &os) const
   {
-    std::cerr << "Solido3d::Print no implementada" << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+              << "; not implemented."
+              << std::endl;
   }

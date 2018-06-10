@@ -71,8 +71,9 @@ Pos3d MatrizPos3d::pos_lagrangiana(const size_t &i,const size_t &j) const
     return Pos3d(x,y,z);
   }
 
-//! @brief Return el máximo de las distancias entre los mesh points
-//! y corresponding to the Lagrange interpolation (see page IX-19 of the SAP90 manual).
+//! @brief Return the maximum of the distances between the mesh points
+//! y corresponding to the Lagrange interpolation (see page IX-19 of
+//1 the SAP90 manual).
 GEOM_FT MatrizPos3d::dist_lagrange(void) const
   {
     GEOM_FT retval(0.0);

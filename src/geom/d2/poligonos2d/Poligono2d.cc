@@ -88,9 +88,9 @@ Poligono2d::Poligono2d(const std::list<Poligono2d> &lp)
 GeomObj *Poligono2d::clon(void) const
   { return new Poligono2d(*this); }
 
-//! @brief Return un polígono paralelo a éste a distancia
-//! «d». Por el exterior si la distancia es positiva o por
-//! el interior en otro caso.
+//! @brief Return a polygon parallel to this one at the distance
+//! being passed as parameter. The new polygon will be exterior
+//! if the distance is positive.
 Poligono2d Poligono2d::Offset(const GEOM_FT &d) const
   {
     Poligono2d retval;

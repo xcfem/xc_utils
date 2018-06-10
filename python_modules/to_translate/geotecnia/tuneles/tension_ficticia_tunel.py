@@ -53,7 +53,8 @@ ptosRadioPlastificacion=
     geom.Pos2d(3,2.15)
   }
 
-''' Devuelve el redio de plastificación a partir de los valores de:
+''' Return the plastification radius from the values of:
+
     r: Radio de la excavación.
     N: Número de estabilidad.'''
 def calcRadioPlastificacion(r,N):
@@ -65,20 +66,25 @@ def calcRadioPlastificacion(r,N):
 def calcLambda0(r,rp):
   return ptosLambda0.valor(calcNumeroEstabFromRp(r,rp))
 
-''' Devuelve el valor de m (parámetro cuyo valor depende del efecto de la distancia al frente y del radio de plastificación) a partir del número de estabilidad.
-    x: Distancia al frente de excavación.
-    r: Radio de la excavación.
-    rp: Radio de plastificación.'''
+''' Return the value of m (parameter that depends on the effect of the 
+    distance to the front and of the radius of plastification) from the 
+    number of stability.
+
+    x: distance to the excavation front.
+    r: radius of the excavation.
+    rp: radius of plastification.'''
 def calcM(x,r,rp):
   mNeq1= 1-exp(-x/0.7*r)
   mNeq3= 1-pow(1+x/0.84/rp,-2)
   return interpolaRecta(1,mNeq1,3,mNeq3,calcNumeroEstabFromRp(r,rp))
 
-''' Devuelve el valor de lambda (variación de la presión con la distancia al frente) a partir de:
+''' Return the value of lambda (variation of the pressure with the distance to 
+    the front) from:
+
     lambda0: Parámetro que introduce el efecto del grado de plastificación del frente.
-    x: Distancia al frente de excavación.
-    r: Radio de la excavación.
-    rp: Radio de plastificación.'''
+    x: distance to the excavation front.
+    r: radius of the excavation.
+    rp: radius of plastification.'''
 def calcLambda(x,r,rp):
   lambda0= calcLambda0(r,rp)
   return lambda0+(1-lambda0)*calcM(x,r,rp)
@@ -86,9 +92,9 @@ def calcLambda(x,r,rp):
 ''' Devuelve el módulo de la presión radial ficticia
     a partir de:
     sigma0: Tensión inicial geostática.
-    x: Distancia al frente de excavación.
-    r: Radio de la excavación.
-    rp: Radio de plastificación.'''
+    x: distance to the excavation front.
+    r: radius of the excavation.
+    rp: radius of plastification.'''
 def sigmaRPanetGuenot(sigma0,x,r,rp):
   return (1-calcLambda(x,r,rp))*sigma0
 

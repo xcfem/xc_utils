@@ -149,7 +149,7 @@ GEOM_FT Poligono3d::distSigno2(const Pos3d &p,const bool &sentido_horario) const
      
     //Distance to the plane that contains the polygon.
     register GEOM_FT d= getPlane().dist2(p);
-    //Distancia a los semiespacios definidos por los lados.
+    // Distance to the half spaces defined by the sides.
     for(register unsigned int i=1; i<=nl; i++)
       {
         SemiEspacio3d se3d(getPlaneFromSide(i));

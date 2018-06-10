@@ -131,9 +131,9 @@ Polilinea2d Polilinea2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 const Pos2d &Polilinea2d::Vertice(const size_t &i) const
   { return GeomObj::list_Pos2d::operator[](i-1); }
 
-//! @brief Return una polilínea paralela a ésta a la distancia
-//! que se pasa como parámetro. Si la distance es positiva,
-//! la nueva polilínea quedará a la derecha de la anterior.
+//! @brief Return a polyline parallel to this one at the distance
+//! being passed as parameter. If the distance is positive the new
+//! polyline will be placed on the right.
 Polilinea2d Polilinea2d::Offset(const GEOM_FT &d) const
   {
     ListaPos2d tmp(*this);

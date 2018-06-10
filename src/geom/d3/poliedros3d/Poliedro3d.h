@@ -133,9 +133,9 @@ class Poliedro3d: public PolyhedronBase
     Triang3dMesh Triangula(void) const;
 
     GEOM_FT PseudoDist(const Pos3d &p) const;
+    //! @brief Return the distance to the point
+    //! (negative if the point is inside the solid).
     inline virtual GEOM_FT dist(const Pos3d &p) const
-      //Puesto que es un sólido consideramos que
-      //tienen sentido las distancias negativas.
       { return PseudoDist(p); }
 
     friend Poliedro3d Union(const Poliedro3d &a,const Poliedro3d &b);
