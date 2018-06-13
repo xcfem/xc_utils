@@ -39,9 +39,9 @@ class LeadingActionInfo: public EntCmd
     short int index; //!< Index of leading variable action (-1 if none).
 
 // representative_value_index= -1 -> characteristic value.
-// representative_value_index= 0 -> valor de combinación.
-// representative_value_index= 1 -> valor frecuente.
-// representative_value_index= 2 -> valor cuasipermanente.
+// representative_value_index= 0 -> combination value.
+// representative_value_index= 1 -> frequent value.
+// representative_value_index= 2 -> quasi-permanent value.
 
     short int leading_representative_value_index; //!< Index of the representative value for the leading action.
     short int general_representative_value_index; //!< Index of the representative value for the non leading actions.

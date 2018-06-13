@@ -32,7 +32,8 @@
 namespace cmb_acc{
 //! @ingroup CMBACC
 //
-//! @brief Cada elemento del vector es una combinación de acciones.
+//! @brief Combination container. Each component of the vector is a
+//! combination of actions.
 class LoadCombinationVector: public std::vector<Action>, public EntCmd
   {
   private:

@@ -39,7 +39,7 @@ std::string cmb_acc::ActionRelationships::limpia(const std::string &str)
   }
 
 //! @brief Return los sumandos de la text string que se pasa como parámetro.
-std::deque<std::string> cmb_acc::ActionRelationships::get_sumandos_combinacion(const std::string &str)
+std::deque<std::string> cmb_acc::ActionRelationships::get_combination_addends(const std::string &str)
   {
     std::deque<std::string> retval;
     if((has_char(str,'(')) || (has_char(str,')'))) //Tiene paréntesis
@@ -53,10 +53,10 @@ std::deque<std::string> cmb_acc::ActionRelationships::get_sumandos_combinacion(c
     return retval;
   }
 
-//! @brief Return los nombres de las acciones que participan en la combinación.
-std::deque<std::string> cmb_acc::ActionRelationships::get_nmb_acciones_combinacion(const std::string &str)
+//! @brief Return the names of the actions of the combinations.
+std::deque<std::string> cmb_acc::ActionRelationships::get_combination_actions_names(const std::string &str)
   {
-    std::deque<std::string> retval= get_sumandos_combinacion(str);
+    std::deque<std::string> retval= get_combination_addends(str);
     for(std::deque<std::string>::iterator i= retval.begin();i!=retval.end();i++)
       (*i)= q_blancos(limpia(*i)); 
     return retval;
@@ -147,7 +147,7 @@ bool cmb_acc::ActionRelationships::matchIncompatibles(const dq_string &sumandos)
 bool cmb_acc::ActionRelationships::incompatible(const std::string &nmb) const
   {
     bool retval= false;
-    const std::deque<std::string> sumandos= get_nmb_acciones_combinacion(nmb);
+    const std::deque<std::string> sumandos= get_combination_actions_names(nmb);
     retval= matchIncompatibles(sumandos);
     return retval;
   }
@@ -172,7 +172,7 @@ void cmb_acc::ActionRelationships::updateMaestras(const std::string &nmb)
   {
     if(!maestras.empty())
       {
-        const dq_string combActionsNames= get_nmb_acciones_combinacion(nmb); //Nombres de las acciones de esta combinacion.
+        const dq_string combActionsNames= get_combination_actions_names(nmb); //Names of the actions in this combination.
         dq_string nuevas;
         for(const_iterator i= maestras.begin();i!=maestras.end();i++)
           if(!match(*i,combActionsNames)) //No se encontró la maestra.
@@ -205,7 +205,8 @@ std::ostream &cmb_acc::operator<<(std::ostream &os,const ActionRelationships &a)
     return os;
   }
 
-//! @brief Return las combinaciones filtrando las que contienen acciones incompatibles.
+//! @brief Return the combinations filtering those that contain incompatible
+//! actions.
 const cmb_acc::LoadCombinationVector &cmb_acc::get_compatibles(const LoadCombinationVector &comb)
   {
     static LoadCombinationVector retval;
@@ -229,7 +230,8 @@ const cmb_acc::LoadCombinationVector &cmb_acc::get_compatibles(const LoadCombina
     return retval;
   }
 
-//! @brief Filtra las combinaciones casos en las que las acciones esclavas aparecen sin su maestra.
+//! @brief Filters the combinations where an slave actions appears without
+//! its master.
 const cmb_acc::LoadCombinationVector &cmb_acc::filtraCombsEsclavasHuerfanas(const cmb_acc::LoadCombinationVector &comb)
   {
     static LoadCombinationVector retval;

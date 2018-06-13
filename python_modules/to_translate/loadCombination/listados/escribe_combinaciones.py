@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-def escribeCombinacionesULS(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
+def writeULSCombinations(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
   {
     def_hip_elu.open(nmbArchivoDef,"w")
-    \combinaciones
+    \combinations
       {
         \comb_elu_persistentes
           {
             \expr{conta= 1}
             \for_each
               {
-                def_hip_elu.write("\combinacion[\"",format(int(conta),nmbFormat),"\"]{ \descomp{\"",getNombre,"\"}}\n")
+                def_hip_elu.write("\combination[\"",format(int(conta),nmbFormat),"\"]{ \descomp{\"",getNombre,"\"}}\n")
                 \expr{conta= tonum(conta+1)}
               }
           }
@@ -17,7 +17,7 @@ def escribeCombinacionesULS(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
           {
             \for_each
               {
-                def_hip_elu.write("\combinacion[\"",format(int(conta),nmbFormat),"\"]{ \descomp{\"",getNombre,"\"}}\n")
+                def_hip_elu.write("\combination[\"",format(int(conta),nmbFormat),"\"]{ \descomp{\"",getNombre,"\"}}\n")
                 \expr{conta= tonum(conta+1)}
               }
           }
@@ -25,7 +25,7 @@ def escribeCombinacionesULS(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
     def_hip_elu.close()
     hip_elu_tex.open(nmbArchivoLatex,"w")
     \printCabeceraListaHipotesis("hip_elu_tex"){}
-    \combinaciones
+    \combinations
       {
         \comb_elu_persistentes
           {
@@ -50,17 +50,17 @@ def escribeCombinacionesULS(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
     hip_elu_tex.close()
   }
 
-def escribeCombinacionesSLSFrecuentes(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
+def writeFrequentSLSCombinations(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
   {
     def_hip_els.open(nmbArchivoDef,"w")
-    \combinaciones
+    \combinations
       {
         \comb_els_frecuentes
           {
             \expr{conta= 1}
             \for_each
               {
-                def_hip_els.write("\combinacion[\"",format(int(conta),nmbFormat),"\"]{ \descomp{\"",getNombre,"\"}}\n")
+                def_hip_els.write("\combination[\"",format(int(conta),nmbFormat),"\"]{ \descomp{\"",getNombre,"\"}}\n")
                 \expr{conta= tonum(conta+1)}
               }
           }
@@ -68,7 +68,7 @@ def escribeCombinacionesSLSFrecuentes(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
     def_hip_els.close()
     hip_els_tex.open(nmbArchivoLatex,"w")
     \printCabeceraListaHipotesis("hip_els_tex"){}
-    \combinaciones
+    \combinations
       {
         \comb_els_frecuentes
           {

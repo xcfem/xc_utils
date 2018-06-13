@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
-# Combinaciones frecuentes
+# Frequent combinations
 def_hip_elsf.open("./def_hip_elsf.xci","w")
 calc_hip_elsf.open("./calc_hip_elsf.xci","w")
 hip_elsf_tex.open("./hipotesis_elsf.tex","w")
 \printCabeceraListaHipotesis("hip_elsf_tex"){}
-\combinaciones
+\combinations
   {
     \comb_els_frecuentes
       {
         \expr{conta= 1}
         \for_each
           {
-            def_hip_elsf.write("\combinacion[\"",format(int(conta),"ELSF%03u"),"\"]{ \descomp{\"",getNombre,"\"}}\n")
+            def_hip_elsf.write("\combination[\"",format(int(conta),"ELSF%03u"),"\"]{ \descomp{\"",getNombre,"\"}}\n")
             calc_hip_elsf.write("\\resuelveCombEstatLin(\"",format(int(conta),"ELSF%03u"),"\"){}","\n")
             calc_hip_elsf.write("\\trataResultsComb(\"",format(int(conta),"ELSF%03u"),"\"){}","\n")
             hip_elsf_tex.write(format(int(conta),"ELSF%03u")," & ",getNombre,"\\\\\n")

@@ -6,13 +6,13 @@ def printComb(pathArchSalida):
     arch_salida_ltx.write("\\begin{small}\n")
     arch_salida_ltx.write("\\begin{longtable}{|c|l|}\n")
     arch_salida_ltx.write("\\hline\n")
-    arch_salida_ltx.write("Combinación & Descomposición \\\\\n")
+    arch_salida_ltx.write("Combination & Decomposition \\\\\n")
     arch_salida_ltx.write("\\hline\n")
     arch_salida_ltx.write("\\endfirsthead\n")
     arch_salida_ltx.write("\\hline\n")
     arch_salida_ltx.write("\\multicolumn{2}{|l|}{../..}\\\\\n")
     arch_salida_ltx.write("\\hline\n")
-    arch_salida_ltx.write("Combinación & Descomposición \\\\\n")
+    arch_salida_ltx.write("Combination & Decomposition \\\\\n")
     arch_salida_ltx.write("\\hline\n")
     arch_salida_ltx.write("\\endhead\n")
     arch_salida_ltx.write("\\hline\n")
@@ -33,43 +33,44 @@ def printComb(pathArchSalida):
     arch_salida_ltx.close()
   }
 
-'''Imprime las combinaciones correspondientes a estados límite últimos
- en situaciones permanentes o transitorias.'''
 def printCombEluSitPersistentes(pathArchSalida):
+  '''Write the combinations that correspond to ultimate limit states in
+   persistent or transient situations.'''
   {
-    \combinaciones{ \comb_elu_persistentes{ \printComb(pathArchSalida){} } }
+    \combinations{ \comb_elu_persistentes{ \printComb(pathArchSalida){} } }
   }
 
-'''Imprime las combinaciones correspondientes a estados límite últimos
- en situaciones accidentales.'''
 def printCombEluSitAccidentales(pathArchSalida):
+  '''Write the combinations that correspond to ultimate limit states in
+   accidental situations.'''
   {
-    \combinaciones{ \comb_elu_accidentales{ \printComb(pathArchSalida){} } }
+    \combinations{ \comb_elu_accidentales{ \printComb(pathArchSalida){} } }
   }
 
-'''Imprime las combinaciones correspondientes a estados límite últimos
- en situaciones sismicas.'''
 def printCombEluSitSismicas(pathArchSalida):
+  '''Write the combinations that correspond to ultimate limit states in
+   seismic situations.'''
   {
-    \combinaciones{ \comb_elu_sismicas{ \printComb(pathArchSalida){} } }
+    \combinations{ \comb_elu_sismicas{ \printComb(pathArchSalida){} } }
   }
 
-'''Imprime las combinaciones correspondientes a estados límite de servicio
- en situaciones poco frecuentes.'''
 def printCombElsSitPocoFrecuentes(pathArchSalida):
+  '''Write the combinations that correspond to serviceability limit states in
+   rare situations.'''
   {
-    \combinaciones{ \comb_els_poco_frecuentes{ \printComb(pathArchSalida){} } }
+    \combinations{ \comb_els_poco_frecuentes{ \printComb(pathArchSalida){} } }
   }
 
-'''Imprime las combinaciones correspondientes a estados límite de servicio
- en situaciones frecuentes.'''
 def printCombElsSitFrecuentes(pathArchSalida):
+  '''Write the combinations that correspond to serviceability limit states in
+   frequent situations.'''
   {
-    \combinaciones{ \comb_els_frecuentes{ \printComb(pathArchSalida){} } }
+    \combinations{ \comb_els_frecuentes{ \printComb(pathArchSalida){} } }
   }
 
-#Imprime las combinaciones correspondientes a estados límite de servicio en situaciones cuasi permanentes.
 def printCombElsSitCuasiPermanentes(pathArchSalida):
+  '''Write the combinations that correspond to serviceability limit states in
+   quasi-permanent situations.'''
   {
-    \combinaciones{ \comb_els_cuasi_permanentes{ \printComb(pathArchSalida){} } }
+    \combinations{ \comb_els_cuasi_permanentes{ \printComb(pathArchSalida){} } }
   }

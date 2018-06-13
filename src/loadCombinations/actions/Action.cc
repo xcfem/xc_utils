@@ -46,13 +46,13 @@ cmb_acc::Action cmb_acc::Action::NULA(void)
     return retval;
   }
 
-//! @brief Return verdadero si la acción no es combinación de otras.
+//! @brief Return true if the action is not a combination of simpler ones.
 bool cmb_acc::Action::Simple(void) const
   { return (getName().find('+')==std::string::npos); }
 
-//! @brief Return el nombre expandido aplicando la propiedad distributiva
-//! del producto es decir si la combinación se llama '1.5*G1+1.35*(G2+F2)'
-//! devuelve '1.5*G1+1.35*G2+1.35*F2'.
+//! @brief Return the expandend name by applying the distributive property
+//! of the multiplication so, if the combination name is '1.5*G1+1.35*(G2+F2)'
+//! it returns '1.5*G1+1.35*G2+1.35*F2'.
 const std::string cmb_acc::Action::GetNombreExpandido(void) const
   {
     std::string retval= getName();
@@ -64,12 +64,12 @@ const std::string cmb_acc::Action::GetNombreExpandido(void) const
     return retval;
   }
 
-//! @brief Return la descomposición cuando la acción es una combinación.
+//! @brief Return la decomposition when the action is a combination.
 cmb_acc::Action::map_descomp cmb_acc::Action::getDescomp(void) const
   {
     map_descomp descomp;
     typedef std::deque<std::string> dq_string;
-    dq_string str_sumandos= ActionRelationships::get_sumandos_combinacion(getName());
+    dq_string str_sumandos= ActionRelationships::get_combination_addends(getName());
     for(dq_string::iterator i= str_sumandos.begin();i!=str_sumandos.end();i++)
       {
         const std::string &str_sum_i= *i;
@@ -87,8 +87,8 @@ cmb_acc::Action::map_descomp cmb_acc::Action::getDescomp(void) const
     return descomp;
   }
 
-//! @brief Cuando se trata de una combinación, devuelve los coeficientes que
-//! multiplican a cada una de las acciones que se pasa como parámetro.
+//! @brief When it's a combination, it returns the factors that multiply
+//! each of the actions in the argument.
 std::vector<double> cmb_acc::Action::getCoeficientes(const std::vector<std::string> &base) const
   {
     const size_t sz= base.size();
@@ -129,7 +129,7 @@ void cmb_acc::Action::suma(const Action &f)
   {
     if(f.Nula(zero)) return;
 
-    //Marcamos las combinaciones incompatibles.
+    //Mark the incompatible combinations.
     if((Incompatible(f))) 
       relaciones.setContieneIncomp(true);
     if(f.relaciones.contieneIncomp())

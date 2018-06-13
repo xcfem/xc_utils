@@ -115,9 +115,9 @@ SET(ca_factors loadCombinations/factors/PartialSafetyFactors loadCombinations/fa
 
 SET(ca_acciones loadCombinations/actions/LeadingActionInfo loadCombinations/actions/Action loadCombinations/actions/ActionRelationships loadCombinations/actions/ActionRValue loadCombinations/actions/ActionRValueList loadCombinations/actions/ActionsFamily loadCombinations/actions/ActionContainer loadCombinations/actions/ActionsAndFactors)
 
-SET(ca_combinaciones loadCombinations/comb_analysis/Variation loadCombinations/comb_analysis/Variations loadCombinations/comb_analysis/LoadCombinationVector loadCombinations/comb_analysis/LoadCombinations loadCombinations/comb_analysis/ActionWeightingMap loadCombinations/comb_analysis/LoadCombinationGenerator)
+SET(ca_combinations loadCombinations/comb_analysis/Variation loadCombinations/comb_analysis/Variations loadCombinations/comb_analysis/LoadCombinationVector loadCombinations/comb_analysis/LoadCombinations loadCombinations/comb_analysis/ActionWeightingMap loadCombinations/comb_analysis/LoadCombinationGenerator)
 
-ADD_LIBRARY(xc_utils SHARED ${MYSQL} ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${NUCLEO}  ${VtkAux} ${ca_factors} ${ca_acciones} ${ca_combinaciones})
+ADD_LIBRARY(xc_utils SHARED ${MYSQL} ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${NUCLEO}  ${VtkAux} ${ca_factors} ${ca_acciones} ${ca_combinations})
 
 #Interfaz Python
 LINK_LIBRARIES(xc_utils xc_basic ${VTK_BIB} ${CGAL_LIBRARIES} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${MySQLpp_LIBRARIES} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} boost_python ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})

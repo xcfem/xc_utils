@@ -170,7 +170,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionRValueList::getCombinationsWhenLea
       {
 	if(verbosity>1)
 	  std::clog << std::endl
-		    << "    Obteniendo combinaciones de acciones variables con acción determinante: "
+		    << "    Computing combinations of variable actions with leading action: "
 		    << i << " ...";
 	LeadingActionInfo lci(i,v-1,v); //Leading action with representative value v
 					//rest of actions with representative value v-1.

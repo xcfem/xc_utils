@@ -32,12 +32,12 @@ class LoadCombinations;
 
 //! @ingroup CMBACC
 //
-//! @brief Objeto encargado de generar y gestionar las combinaciones.
+//! @brief Objeto that generates and manages the combinations.
 class LoadCombinationGenerator: public EntCmd
   {
   private:
     ActionWeightingMap action_weighting;
-    LoadCombinations *combinaciones;
+    LoadCombinations *combinations;
   public:
     LoadCombinationGenerator(EntCmd *owr= nullptr);
 
@@ -48,7 +48,7 @@ class LoadCombinationGenerator: public EntCmd
     inline void setActionWeighting(const ActionWeightingMap &pa)
       { action_weighting= pa; }
     inline LoadCombinations *getLoadCombinations(void)
-      { return combinaciones; }
+      { return combinations; }
   };
 } //fin namespace nmb_acc.
 

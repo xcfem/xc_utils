@@ -40,7 +40,7 @@ class ActionRValueList;
 //
 //! @ingroup CMBACC
 //
-//! @brief Los objetos de esta clase representan una acción o una combinación de acciones.
+//! @brief Action or linear combination of actions.
 class Action: public EntConNmb
   {
     std::string descripcion; //!< Descripcion de la acción p. ej. "Viento derecho".

@@ -1,5 +1,5 @@
-# Carga las combinaciones en una tabla de MySql
 def cargaCombTabla(nmbDataBase,nmbTabla,nmbGrupo,nmbSubGrupo):
+  '''Put the combinations in a MySQL table.'''
   {
     conex= 1
     \conex

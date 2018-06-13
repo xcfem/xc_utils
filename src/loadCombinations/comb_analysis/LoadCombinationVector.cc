@@ -27,8 +27,7 @@
 
 
         
-//! \fn bool cmb_acc::LoadCombinationVector::Nula(const double &tol) const
-//! @brief Return verdadero si todas las combinaciones del vector son nulas.
+//! @brief Return true if all the combinations in the vector are null.
 bool cmb_acc::LoadCombinationVector::Nula(const double &tol) const
   {
     for(size_t i=0;i<size();i++)
@@ -36,8 +35,7 @@ bool cmb_acc::LoadCombinationVector::Nula(const double &tol) const
     return true;
   }
 
-//! \fn size_t cmb_acc::LoadCombinationVector::CuentaNulas(const double &tol) const
-//! @brief Return el número de combinaciones nulas que aparecen en las combinaciones.
+//! @brief Return el number of non-zero combinations in the container.
 size_t cmb_acc::LoadCombinationVector::CuentaNulas(const double &tol) const
   {
     size_t retval=0;
@@ -47,8 +45,7 @@ size_t cmb_acc::LoadCombinationVector::CuentaNulas(const double &tol) const
   }
 
         
-//! \fn cmb_acc::LoadCombinationVector cmb_acc::LoadCombinationVector::GetNoNulas(const double &tol) const
-//! @brief Return las combinaciones no nulas.
+//! @brief Return the non-zero combinations.
 const cmb_acc::LoadCombinationVector &cmb_acc::LoadCombinationVector::GetNoNulas(const double &tol) const
   {
     const size_t num_nulas= CuentaNulas(tol);
@@ -66,9 +63,7 @@ const cmb_acc::LoadCombinationVector &cmb_acc::LoadCombinationVector::GetNoNulas
     return retval;
   }
 
-        
-//! \fn bool cmb_acc::LoadCombinationVector::Existe(const Action &f) const
-//! @brief Return verdadero si la combinación f se encuentra en ESTE vector.
+//! @brief Return true if the combination argument is found on this container.
 bool cmb_acc::LoadCombinationVector::Existe(const Action &f) const
   {
     bool retval= false;
@@ -82,7 +77,7 @@ bool cmb_acc::LoadCombinationVector::Existe(const Action &f) const
     return retval;
   }
         
-//! @brief Return las combinaciones de ESTA filtrando las que estan repetidas.
+//! @brief Return the combinations filtering the repeated ones.
 const cmb_acc::LoadCombinationVector &cmb_acc::LoadCombinationVector::GetDistintas(void) const
   {
     static LoadCombinationVector retval;
@@ -107,8 +102,7 @@ const cmb_acc::LoadCombinationVector &cmb_acc::LoadCombinationVector::GetDistint
     return retval;
   }
         
-//! \fn size_t cmb_acc::LoadCombinationVector::CuentaDistintas(const LoadCombinationVector &s2) const
-//! @brief Cuenta las combinaciones de s2 que no estan en ESTA.
+//! @brief Counts the combinations from s2 that are not in this container.
 size_t cmb_acc::LoadCombinationVector::CuentaDistintas(const LoadCombinationVector &s2) const
   {
     const size_t sz_s2= s2.size();
@@ -118,8 +112,7 @@ size_t cmb_acc::LoadCombinationVector::CuentaDistintas(const LoadCombinationVect
     return retval;
   }
         
-//! \fn cmb_acc::LoadCombinationVector cmb_acc::LoadCombinationVector::GetDistintas(const LoadCombinationVector &s2) const
-//! @brief Return las combinaciones de s2 que no estan en ESTA.
+//! @brief Return the combinations from s2 that are not in this container.
 const cmb_acc::LoadCombinationVector &cmb_acc::LoadCombinationVector::GetDistintas(const LoadCombinationVector &s2) const
   {
     const size_t num_distintas= CuentaDistintas(s2);
@@ -140,7 +133,9 @@ const cmb_acc::LoadCombinationVector &cmb_acc::LoadCombinationVector::GetDistint
 
         
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::LoadCombinationVector::ProdCartesiano(const LoadCombinationVector &f1,const LoadCombinationVector &f2,const double &tol)
-//! @brief Forma el producto cartesiano de las combinaciones del vector f1 con las del vector f2
+//! @brief Builds the cartesian product of the combinations from both
+//! vectors.
+//!
 //! For example, if:
 //! LoadCombinations f1: f11,f12,f13
 //! LoadCombinations f2: f21,f22
@@ -165,7 +160,7 @@ cmb_acc::LoadCombinationVector cmb_acc::LoadCombinationVector::ProdCartesiano(co
     return retval;
   }
 
-//! @brief Concatena las combinaciones de los vectores que se pasan como parámetro
+//! @brief Concatenate the combination of the vector arguments.
 cmb_acc::LoadCombinationVector cmb_acc::LoadCombinationVector::Concat(const LoadCombinationVector &f1,const LoadCombinationVector &f2,const double &tol)
   {
     const LoadCombinationVector &ann= f1;
@@ -193,8 +188,8 @@ void cmb_acc::LoadCombinationVector::Numera(const std::string &prefijo)
       (*i).setName(prefijo + num2str(cont) + "= " + (*i).getName());
   }
 
-//! @brief Return los coeficientes que corresponden a las acciones que se pasan como parámetro
-//! en cada una de las combinaciones del vector.
+//! @brief Return the factors that correspond to the actions in the argument
+//! in each of the combinations of this vector.
 m_double cmb_acc::LoadCombinationVector::getCoeficientes(const std::vector<std::string> &base) const
   {
     const size_t n_rows= size();

@@ -27,14 +27,14 @@
 #include "xc_utils/src/nucleo/EntCmd.h"
 
 //! \namespace<cmb_acc>
-//! Rutinas para generar combinaciones de acciones.
+//! Routines that generate combinations of actions.
 namespace cmb_acc{
 
 class LoadCombinationVector;
 
 //! @ingroup CMBACC
 //
-//! @brief Relaciones de una acción con el resto.
+//! @brief Relationship of an action with the other ones.
 class ActionRelationships: public EntCmd
   {
   public:
@@ -43,13 +43,13 @@ class ActionRelationships: public EntCmd
     typedef dq_string::const_iterator const_iterator;
 
     static std::string limpia(const std::string &str);
-    static std::deque<std::string> get_sumandos_combinacion(const std::string &str);
-    static std::deque<std::string> get_nmb_acciones_combinacion(const std::string &str);
+    static std::deque<std::string> get_combination_addends(const std::string &str);
+    static std::deque<std::string> get_combination_actions_names(const std::string &str);
   private:
     dq_string incompatibles; //!< Expresiones regulares verdaderas para acciones incompatibles con ésta.
     dq_string maestras; //!< Expresiones regulares verdaderas para acciones de las que ésta es esclava.
     bool nodet; //!< Verdadero si la acción no puede ser determinante.
-    bool contiene_incomp; //!< Verdadero si la combinación contiene acciones incompatibles.
+    bool contiene_incomp; //!< True if the combination contains incompatible actions.
 
     std::string nombres(const dq_string &) const;
     void concat_incompatibles(const dq_string &);
@@ -84,7 +84,8 @@ class ActionRelationships: public EntCmd
 
     inline void setContieneIncomp(bool b)
       { contiene_incomp= b; }
-    //! @brief Return verdadero si esta combinación contiene acciones incompatibles entre sí.
+    //! @brief Return true if this combination contains incompatible
+    //! actions.
     inline bool contieneIncomp(void) const
       { return contiene_incomp; }
 

@@ -33,7 +33,7 @@ class ActionRValueList;
 
 //! @ingroup CMBACC
 //
-//! @brief Vector que almacena los coeficientes de la combinación lineal de acciones.
+//! @brief Vector that stores the factors of the linear combination of actions.
 class Variation: public std::vector<double>
   {
     void print(std::ostream &os) const;

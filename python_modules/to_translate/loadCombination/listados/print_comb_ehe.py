@@ -1,46 +1,46 @@
 # -*- coding: utf-8 -*-
-\combinaciones
+\combinations
   {
     \comb_elu_persistentes
       {
-        print "Obtenidas: ",num_combinaciones," combinaciones en situaciones persistentes o transitorias.\n"
+        print "Computed: ",number_of_combinations," combinations in persistent or transient situations\n"
         arch_salida_ltx.open("./examples/output/comb_ehe_elu_pt.tex","w")
-        execfile("print_combinaciones.acc")
+        execfile("print_combinations.acc")
         arch_salida_ltx.close()
       }
     \comb_elu_accidentales
       {
-        print "Obtenidas: ",num_combinaciones," combinaciones en situaciones accidentales.\n"
+        print "Computed: ",number_of_combinations," combinations in accidental situations.\n"
         arch_salida_ltx.open("./examples/output/comb_ehe_elu_acc.tex","w")
-        execfile("print_combinaciones.acc")
+        execfile("print_combinations.acc")
         arch_salida_ltx.close()
       }
     \comb_elu_sismicas
       {
-        print "Obtenidas: ",num_combinaciones," combinaciones en situaciones sísmicas.\n"
+        print "Computed: ",number_of_combinations," combinations in seismic situations.\n"
         arch_salida_ltx.open("./examples/output/comb_ehe_elu_sism.tex","w")
-        execfile("print_combinaciones.acc")
+        execfile("print_combinations.acc")
         arch_salida_ltx.close()
       }
     \comb_els_poco_frecuentes
       {
-        print "Obtenidas: ",num_combinaciones," combinaciones en situaciones poco frecuentes.\n"
+        print "Computed: ",number_of_combinations," combinations in rare situations.\n"
         arch_salida_ltx.open("./examples/output/comb_ehe_els_pf.tex","w")
-        execfile("print_combinaciones.acc")
+        execfile("print_combinations.acc")
         arch_salida_ltx.close()
       }
     \comb_els_frecuentes
       {
-        print "Obtenidas: ",num_combinaciones," combinaciones en situaciones frecuentes.\n"
+        print "Computed: ",number_of_combinations," combinations in frequent situations.\n"
         arch_salida_ltx.open("./examples/output/comb_ehe_els_f.tex","w")
-        execfile("print_combinaciones.acc")
+        execfile("print_combinations.acc")
         arch_salida_ltx.close()
       }
     \comb_els_cuasi_permanentes
       {
-        print "Obtenidas: ",num_combinaciones," combinaciones en situaciones cuasi permanentes.\n"
+        print "Computed: ",number_of_combinations," combinations in quasi-permanent situations.\n"
         arch_salida_ltx.open("./examples/output/comb_ehe_els_cp.tex","w")
-        execfile("print_combinaciones.acc")
+        execfile("print_combinations.acc")
         arch_salida_ltx.close()
       }
   }

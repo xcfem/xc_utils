@@ -5,7 +5,7 @@ import loadCombinations
 from loadCombinationUtils import ehe
 
 dbName= "/tmp/test_accidentales.db"
-tbName= "combinaciones"
+tbName= "combinations"
 
 lcg= loadCombinations.LoadCombGenerator()
 actionsAndFactors= lcg.actionWeighting.create("EHEIntenso",ehe.factors)

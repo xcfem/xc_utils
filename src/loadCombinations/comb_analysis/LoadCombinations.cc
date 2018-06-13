@@ -37,7 +37,7 @@ cmb_acc::LoadCombinations::LoadCombinations(const ActionContainer &acc)
   {}
 
 
-//! @brief Concatena las combinaciones de ambos objetos.
+//! @brief Concatenate the combinations from both objects.
 void cmb_acc::LoadCombinations::Concat(const LoadCombinations &otras)
   {
     comb_uls_transient= LoadCombinationVector::Concat(comb_uls_transient,otras.comb_uls_transient,0.0);

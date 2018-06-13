@@ -41,7 +41,7 @@ void cmb_acc::Variations::print(std::ostream &os) const
     os << ']';
   }
 
-//! @brief Return la primera combinación.
+//! @brief Return the first combination.
 cmb_acc::Variations cmb_acc::Variations::first_combination(const Variation &v)
   {
     const size_t sz= v.size();

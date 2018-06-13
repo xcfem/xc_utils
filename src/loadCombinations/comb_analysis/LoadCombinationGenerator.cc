@@ -27,20 +27,20 @@
 
 //! @brief Constructor.
 cmb_acc::LoadCombinationGenerator::LoadCombinationGenerator(EntCmd *owr)
-  : EntCmd(owr), combinaciones(nullptr) {}
+  : EntCmd(owr), combinations(nullptr) {}
 
 //! @brief Insert the action being passed as parameter.
 cmb_acc::ActionRValue &cmb_acc::LoadCombinationGenerator::insert(const std::string &pond,const std::string &familia,const Action &acc,const std::string &combination_factors_name, const std::string &partial_safety_factors_name)
   { return action_weighting.insert(pond,familia,acc,combination_factors_name,partial_safety_factors_name); }
 
-//! @brief Generación de combinaciones
+//! @brief Generation of combinations
 void cmb_acc::LoadCombinationGenerator::genera(void)
   {
-    if(combinaciones) //Ya se generaron anteriormente.
+    if(combinations) //Already generated.
       {
-        delete combinaciones;
-        combinaciones= nullptr;
+        delete combinations;
+        combinations= nullptr;
       }
     else
-      combinaciones= new LoadCombinations(action_weighting.getLoadCombinations());
+      combinations= new LoadCombinations(action_weighting.getLoadCombinations());
   }

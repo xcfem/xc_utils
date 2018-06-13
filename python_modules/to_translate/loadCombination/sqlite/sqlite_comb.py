@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# Crea una tabla con la descomposición de las combinaciones.
 def SQLTcreaTablaComb(nmbDBase,nmbTabla):
+  '''Creates a table to show the decomposition of the combinations.'''
   {
     nmbAccs= ""
     \pond_acciones
@@ -22,13 +22,13 @@ def SQLTinsertCombs(nmbDBase,nmbTabla):
       }
   }
 
-# Define una tabla de combinaciones del tipo que se pasa como parámetro
-def SQLTtablaCombs(nmbDBase,nmbTabla,nmbCombinaciones,offset):
+def SQLTtablaCombs(nmbDBase,nmbTabla,combinationsName,offset):
+  '''Defines a table of combinations of the type being passed as parameter.'''
   cont= offset
   SQLTcreaTabla(nmbDBase,nmbTablaComb,"(idComb INT, descomp STRING)"){}
-    \combinaciones
+    \combinations
       {
-        \nmbCombinaciones
+        \combinationsName
           {
             sqlQuery= 
             \for_each
@@ -43,13 +43,13 @@ def SQLTtablaCombs(nmbDBase,nmbTabla,nmbCombinaciones,offset):
   }
 
 
-# Define una tabla de combinaciones del tipo que se pasa como parámetro
 def SQLTtablaCombsULS(nmbDBase,nmbTabla,offset):
+  '''Defines a table of combinations of the type being passed as parameter.'''
   {
     
     cont= offset
     SQLTcreaTabla(nmbDBase,nmbTabla,"(idComb INT, descomp STRING)"){}
-    \combinaciones
+    \combinations
       {
         \comb_elu_persistentes
           {
@@ -79,13 +79,14 @@ def SQLTtablaCombsULS(nmbDBase,nmbTabla,offset):
     return cont
   }
 
-# Crea una tabla de combinaciones en estado límite de servicio en situaciones poco frecuentes.
+
 def SQLTtablaCombsSLSPF(nmbDBase,nmbTabla,offset):
+  '''Creates a table to show the combinations for serviceability limit state in rare situations.'''
   {
     
     cont= offset
     SQLTcreaTabla(nmbDBase,nmbTabla,"(idComb INT, descomp STRING)"){}
-    \combinaciones
+    \combinations
       {
         \comb_els_poco_frecuentes
           {
@@ -99,13 +100,13 @@ def SQLTtablaCombsSLSPF(nmbDBase,nmbTabla,offset):
     return cont
   }
 
-# Crea una tabla de combinaciones en estado límite de servicio en situaciones frecuentes.
 def SQLTtablaCombsSLSF(nmbDBase,nmbTabla,offset):
+  '''Creates a table to show the combinations for serviceability limit states in frequent situations.'''
   {
     
     cont= offset
     SQLTcreaTabla(nmbDBase,nmbTabla,"(idComb INT, descomp STRING)"){}
-    \combinaciones
+    \combinations
       {
         \comb_els_frecuentes
           {
@@ -119,13 +120,13 @@ def SQLTtablaCombsSLSF(nmbDBase,nmbTabla,offset):
     return cont
   }
 
-# Crea una tabla de combinaciones en estado límite de servicio en situaciones cuasi_permanentes.
 def SQLTtablaCombsSLSCP(nmbDBase,nmbTabla,offset):
+  '''Creates a table to show the combinations for serviceability limit states in quasi-permanent situations.'''
   {
     
     cont= offset
     SQLTcreaTabla(nmbDBase,nmbTabla,"(idComb INT, descomp STRING)"){}
-    \combinaciones
+    \combinations
       {
         \comb_els_cuasi_permanentes
           {

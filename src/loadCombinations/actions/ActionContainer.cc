@@ -105,8 +105,8 @@ void cmb_acc::ActionContainer::setSeismicActions(const ActionsFamily &fa)
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPermanentes(const bool &uls,const bool &sit_accidental) const
 //! @brief Return the combinations obtained from permanent and non-constant permanent actions.
-//! @param uls: Verdadero si las combinaciones corresponden a estados límite últimos.
-//! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
+//! @param uls: True if the combinations correspond to ultimate limit states.
+//! @param sit_accidental: True if the combinations correspond to accidental situations.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPermanentes(const bool &uls,const bool &sit_accidental) const
   {
     LoadCombinationVector retval;
@@ -125,10 +125,10 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPermanentes(const bo
   }
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetVariables(const LoadCombinationVector &permanentes,const bool &uls,const bool &sit_accidental,const short int &v) const
-//! @brief Return las combinaciones que corresponden a acciones permanentes (incluso no constantes) y variables.
+//! @brief Return the combinations that correspond to permanent (constant or not) and variable actions.
 //! @param permanentes: LoadCombinations de las acciones permanentes obtenidas mediante cmb_acc::ActionContainer::GetPermanentes.
-//! @param uls: Verdadero si las combinaciones corresponden a estados límite últimos.
-//! @param sit_accidental: Verdadero si las combinaciones corresponden a situación accidental.
+//! @param uls: True if the combinations correspond to ultimate limit states.
+//! @param sit_accidental: True if the combinations correspond to accidental situations.
 //! @param v: representative value to consider for the leading action.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetVariables(const LoadCombinationVector &permanentes,const bool &uls,const bool &sit_accidental,const short int &v) const
   {
@@ -141,13 +141,14 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetVariables(const Load
       }
     else //No hay acciones variables.
       retval= permanentes;
-    retval= get_compatibles(retval); //Filtramos las combinaciones que contienen acciones incompatibles
-                                                                   // o esclavas huérfanas.
+    retval= get_compatibles(retval); //Filter the combinations that contain
+                                     //incombpatible actions or slave actions
+                                     //without its master.
     return retval;
   }
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccSis(const LoadCombinationVector &previas,const ActionsFamily &Acc) const
-//! @brief Return las combinaciones correspondientes en situaciones accidentales o sísmicas.
+//! @brief Return the combinations that correspond to accidental or seismic situations.
 //! @param previas: LoadCombinations de las acciones permanentes y variables obtenidas mediante cmb_acc::ActionContainer::GetVariables.
 //! @param Acc: Familia de acciones accidentales o sísmicas.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccSis(const LoadCombinationVector &previas,const ActionsFamily &Acc) const
@@ -173,18 +174,18 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccSis(const LoadCom
 
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPersistentesOTransit(void) const
-//! @brief Return las combinaciones correspondientes a estados límite últimos en situaciones persistentes o transitorias.
+//! @brief Return the combinations that correspond to ultimate limit states in persisten or transient situations.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPersistentesOTransit(void) const
   {
-    if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para ULS en situaciones persistentes o transitorias..." << std::endl; 
-    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
+    if(verbosity>1) std::clog << "Computing combinations for ULS in persistent or transient situations..." << std::endl; 
+    if(verbosity>1) std::clog << "  Computing combinatios of permanent actions...";
     LoadCombinationVector retval= GetPermanentes(true,false); //ULS, situación no accidental.
     if(verbosity>1) std::clog << "done." << std::endl;
-    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
+    if(verbosity>1) std::clog << "  Computing combinations of variable actions...";
     retval= GetVariables(retval,true,false,0);//ULS, leading action with characteristic value
                                               //rest of actions with combination value.
-    if(verbosity>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
-    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filtramos las que contienen acciones incompatibles.
+    if(verbosity>1) std::clog << "  Filtering combinations of incompatible actions...";
+    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filter incompatible actions.
     if(verbosity>1) std::clog << "done." << std::endl;
     if(verbosity>1) std::clog << "done." << std::endl;
     if(verbosity>1) std::clog << "done." << std::endl;
@@ -192,23 +193,23 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPersistentesOTransit
   }
 
 //! \fn cmb_acc::ActionContainer::GetAccidentales(void) const
-//! @brief Return las combinaciones correspondientes a  estados límite últimos en situaciones accidentales.
+//! @brief Return the combinations that correspond to ultimate limit states in accidental situations.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccidentales(void) const
   {
     LoadCombinationVector retval;
     if(A.empty()) return retval; //No hay acciones accidentales.
-    if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para ULS en situaciones accidentales..." << std::endl;
-    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
-    retval= GetPermanentes(true,true); //ULS, situación accidental.
+    if(verbosity>1) std::clog << "Computing combinations for ULS in accidental situations..." << std::endl;
+    if(verbosity>1) std::clog << "  Computing combinations of permanent actions...";
+    retval= GetPermanentes(true,true); //ULS, accidental situations.
     if(verbosity>1) std::clog << "done." << std::endl;
-    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
+    if(verbosity>1) std::clog << "  Computing combinations of variable actions...";
     retval= GetVariables(retval,true,true,2); //ULS, leading action with characteristic value
                                               //rest of actions with cuasi-permanent value.
     if(verbosity>1) std::clog << "  done." << std::endl;
-    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones accidentales...";
+    if(verbosity>1) std::clog << "  Computing combinations of accidental actions...";
     retval= GetAccSis(retval,A);
-    if(verbosity>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
-    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filtramos las que contienen acciones incompatibles.
+    if(verbosity>1) std::clog << "  Filtering combinations of incompatible actions...";
+    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filter incompatible actions.
     if(verbosity>1) std::clog << "done." << std::endl;
     if(verbosity>1) std::clog << "done." << std::endl;
     if(verbosity>1) std::clog << "done." << std::endl;
@@ -217,26 +218,26 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetAccidentales(void) c
 
 
 //! \fn cmb_acc::ActionContainer::GetSismicas(void) const
-//! @brief Return las combinaciones correspondientes a  estados límite últimos en situaciones sísmicas.
+//! @brief Return the combinations that correspond to ultimate limit states in seismic situations.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetSismicas(void) const
   {
     LoadCombinationVector retval;
     if(AS.empty()) return retval; //No hay acciones sismicas.
-    if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para ULS en situaciones sísmicas..." << std::endl;
-    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
+    if(verbosity>1) std::clog << "Computing combinations for ULS in seismic situations..." << std::endl;
+    if(verbosity>1) std::clog << "  Computing combinations of permanent actions...";
     retval= GetPermanentes(true,true); //ULS, situación accidental.
     if(verbosity>1) std::clog << "done." << std::endl;
-    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
+    if(verbosity>1) std::clog << "  Computing combinations of variable actions...";
     if(!Q.empty()) //Hay acciones variables.
       {
         LoadCombinationVector SQ= Q.getActions().getCombinations(true,true,2); //ULS, all actions with quasi-permanent value.
         retval= LoadCombinationVector::ProdCartesiano(retval,SQ,Action::zero);
       }
     if(verbosity>1) std::clog << "  done." << std::endl;
-    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones sísmicas...";
+    if(verbosity>1) std::clog << "  Computing combinations of seismic actions...";
     retval= GetAccSis(retval,AS);
-    if(verbosity>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
-    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filtramos las que contienen acciones incompatibles.
+    if(verbosity>1) std::clog << "  Filtering combinations of incompatible actions...";
+    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filter incompatible actions.
     if(verbosity>1) std::clog << "done." << std::endl;
     if(verbosity>1) std::clog << "done." << std::endl;
     if(verbosity>1) std::clog << "done." << std::endl;
@@ -244,7 +245,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetSismicas(void) const
   }
 
 //! \fn cmb_acc::ActionContainer::GetCombULS(void) const
-//! @brief Return las combinaciones correspondientes a todas las situaciones de ESTADO LIMITE ÚLTIMO.
+//! @brief Return the combinations that correspond to all ultimate limit states.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCombULS(void) const
   {
     LoadCombinationVector retval= GetPersistentesOTransit(); //Situaciones persistentes o transitorias.
@@ -252,8 +253,8 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCombULS(void) const
     retval= LoadCombinationVector::Concat(retval,accidentales,0.0);
     LoadCombinationVector sismicas= GetSismicas();
     retval= LoadCombinationVector::Concat(retval,sismicas,0.0);
-    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filtramos las que contienen acciones incompatibles.
-    if(verbosity>1) std::clog << "  Calculadas " << retval.size() << " combinaciones ULS." << std::endl;
+    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filter incompatible actions.
+    if(verbosity>1) std::clog << "  Calculadas " << retval.size() << " ULS combinations." << std::endl;
     retval.Numera("H-ULS-");
     return retval;
   }
@@ -262,18 +263,18 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCombULS(void) const
 
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPocoFrecuentes(void) const
-//! @brief Return las combinaciones correspondientes a situaciones poco frecuentes en ESTADO LIMITE DE SERVICIO.
+//! @brief Return the combinations that correspond to rare situations.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPocoFrecuentes(void) const
   {
-    if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para SLS en situaciones persistentes o transitorias..." << std::endl; 
-    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
+    if(verbosity>1) std::clog << "Computing combinations for SLS in rare situations..." << std::endl; 
+    if(verbosity>1) std::clog << "  Computing combinations of permanent actions...";
     LoadCombinationVector retval= GetPermanentes(false,false); //SLS, situación no accidental (obviamente).
     if(verbosity>1) std::clog << "done." << std::endl;
-    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
+    if(verbosity>1) std::clog << "  Computing combinations of variable actions...";
     retval= GetVariables(retval,false,false,0);//SLS, leading action with characteristic value
                                               //rest of actions with combination value.
-    if(verbosity>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
-    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filtramos las que contienen acciones incompatibles.
+    if(verbosity>1) std::clog << "  Filtering combinations of incompatible actions...";
+    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filter incompatible actions.
     if(verbosity>1) std::clog << "done." << std::endl;
     if(verbosity>1) std::clog << "done." << std::endl;
     if(verbosity>1) std::clog << "done." << std::endl;
@@ -281,18 +282,18 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetPocoFrecuentes(void)
   }
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetFrecuentes(void) const
-//! @brief Return las combinaciones correspondientes a situaciones persistentes o transitorias.
+//! @brief Return the combinations that correspond to frequent situations.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetFrecuentes(void) const
   {
-    if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para SLS en situaciones persistentes o transitorias..." << std::endl; 
-    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
+    if(verbosity>1) std::clog << "Computing combinations for SLS in frequent situations..." << std::endl; 
+    if(verbosity>1) std::clog << "  Computing combinations of permanent actions...";
     LoadCombinationVector retval= GetPermanentes(false,false); //SLS, situación no accidental (obviamente).
     if(verbosity>1) std::clog << "done." << std::endl;
-    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
+    if(verbosity>1) std::clog << "  Computing combinations of variable actions...";
     retval= GetVariables(retval,false,false,1);//SLS, leading action with characteristic value
                                               //rest of actions with quasi-permanent value.
-    if(verbosity>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
-    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filtramos las que contienen acciones incompatibles.
+    if(verbosity>1) std::clog << "  Filtering combinations of incompatible actions...";
+    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filter incompatible actions.
     if(verbosity>1) std::clog << "done." << std::endl;
     if(verbosity>1) std::clog << "done." << std::endl;
     if(verbosity>1) std::clog << "done." << std::endl;
@@ -300,17 +301,17 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetFrecuentes(void) con
   }
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCuasiPermanentes(void) const
-//! @brief Return las combinaciones correspondientes a situaciones persistentes o transitorias.
+//! @brief Return the combinations that correspond to quasi-permanent situations.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCuasiPermanentes(void) const
   {
-    if(verbosity>1) std::clog << "Obteniendo combinaciones de acciones para SLS en situaciones persistentes o transitorias..." << std::endl; 
-    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones permanentes...";
+    if(verbosity>1) std::clog << "Computing combinations for SLS in quasi-permanent situations..." << std::endl; 
+    if(verbosity>1) std::clog << "  Computing combinations of permanent actions...";
     LoadCombinationVector retval= GetPermanentes(false,false); //SLS, situación no accidental.
     if(verbosity>1) std::clog << "done." << std::endl;
-    if(verbosity>1) std::clog << "  Obteniendo combinaciones de acciones variables...";
+    if(verbosity>1) std::clog << "  Computing combinations of variable actions...";
     retval= GetVariables(retval,false,false,2);//SLS, all actions with quasi-permanent value.
-    if(verbosity>1) std::clog << "  Filtrando combinaciones con acciones incompatibles...";
-    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filtramos las que contienen acciones incompatibles.
+    if(verbosity>1) std::clog << "  Filtering combinations of incompatible actions...";
+    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filter incompatible actions.
     if(verbosity>1) std::clog << "done." << std::endl;
     if(verbosity>1) std::clog << "done." << std::endl;
     if(verbosity>1) std::clog << "done." << std::endl;
@@ -318,7 +319,7 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCuasiPermanentes(voi
   }
 
 //! \fn cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCombSLS(void) const
-//! @brief Return las combinaciones correspondientes a todas las situaciones de ESTADO LIMITE DE SERVICIO.
+//! @brief Return the combinations that correspond to all serviceability limit states.
 cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCombSLS(void) const
   {
     LoadCombinationVector retval= GetPocoFrecuentes(); //LoadCombinations poco frecuentes.
@@ -326,8 +327,8 @@ cmb_acc::LoadCombinationVector cmb_acc::ActionContainer::GetCombSLS(void) const
     retval= LoadCombinationVector::Concat(retval,frecuente,0.0);
     LoadCombinationVector cp= GetCuasiPermanentes();
     retval= LoadCombinationVector::Concat(retval,cp,0.0);
-    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filtramos las que contienen acciones incompatibles.
-    if(verbosity>1) std::clog << "  Calculadas " << retval.size() << " combinaciones SLS." << std::endl;
+    retval= filtraCombsEsclavasHuerfanas(get_compatibles(retval)); //Filter incompatible actions.
+    if(verbosity>1) std::clog << "  Calculadas " << retval.size() << " SLS combinations." << std::endl;
     retval.Numera("H-SLS-");
     return retval;
   }
