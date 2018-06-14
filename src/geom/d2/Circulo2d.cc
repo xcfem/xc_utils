@@ -34,17 +34,19 @@
 
 
 
-//! @brief Circulo definido por el radio y tangente a dos rectas.
+//! @brief Circle defined by two tangents and the radius.
 //!
 //! Basado en Mathematical elements for computer graphics
 //! (Rogers and Adams) page 234 y siguientes.
-Circulo2d Circulo2dRTT(const GEOM_FT &radio,const Recta2d &p,const Recta2d &l,const bool &left,const bool &far)
+Circulo2d Circulo2dRTT(const GEOM_FT &radius,const Recta2d &p,const Recta2d &l,const bool &left,const bool &far)
   {
-    std::cerr << "Circulo2dRTT no está probada." << std::endl;
+    std::cerr << __FUNCTION__
+	      << "; no está probada." << std::endl;
     const GeomObj2d::list_Pos2d points_int= p.Interseccion(l);
     if(points_int.size()<1)
       {
-        std::cerr << "Circulo2dRTT, error; las rectas son paralelas." << std::endl;
+        std::cerr << __FUNCTION__
+		  << "; error; parallel lines." << std::endl;
         return Circulo2d();
       }
     else
@@ -59,27 +61,27 @@ Circulo2d Circulo2dRTT(const GEOM_FT &radio,const Recta2d &p,const Recta2d &l,co
         if(left) //Círculos C2 o C3 de la figura.
           {
             if(far) //Círculo C2 de la figura.
-              k= radio/costheta; //Coordenada y del centro expresada en locales.
+              k= radius/costheta; //Coordenada y del centro expresada en locales.
             else //Círculo C3 de la figura.
-              h= -radio/sintheta; //Coordenada x del centro expresada en locales.
+              h= -radius/sintheta; //Coordenada x del centro expresada en locales.
           }
         else //Círculos C1 o C4 de la figura.
           {
             if(far) //Círculo C1 de la figura.
-              h= -radio/sintheta; //Coordenada x del centro expresada en locales.
+              h= -radius/sintheta; //Coordenada x del centro expresada en locales.
             else //Círculo C4 de la figura.
-              k= -radio/costheta; //Coordenada y del centro expresada en locales.
+              k= -radius/costheta; //Coordenada y del centro expresada en locales.
           }
         const Pos2d centro= ref.GetPosGlobal(Pos2d(h,k)); //Centro del círculo.
-        return Circulo2d(centro,radio);
+        return Circulo2d(centro,radius);
       }
   }
 
-//! @brief Construye el círculo a partir del centro y el radio.
+//! @brief Build the circle from its center and its radius.
 Circulo2d::Circulo2d(const Pos2d &centro,const GEOM_FT &rad)
   : Superficie2d(), cgcirc(centro.ToCGAL(),rad*rad) {}
 
-//! @brief Construye el círculo a partir del centro y el cuadrado del radio.
+//! @brief Build the circle from its center and its squared radius.
 Circulo2d::Circulo2d(const GEOM_FT &rad2,const Pos2d &centro)
   : Superficie2d(), cgcirc(centro.ToCGAL(),rad2) {}
 
@@ -102,15 +104,15 @@ Pos2d Circulo2d::getCenterOfMass(void) const
 Pos2d Circulo2d::Point(const double &ang) const
   {
     const Pos2d o= Centro();
-    const GEOM_FT r= Radio();
+    const GEOM_FT r= getRadius();
     const GEOM_FT x= o.x()+r*double_to_FT(cos(ang));
     const GEOM_FT y= o.y()+r*double_to_FT(sin(ang));
     return Pos2d(x,y);
   }
 
-//! @brief Return el radio del círculo.
-GEOM_FT Circulo2d::Radio(void) const
-  { return sqrt_FT(Radio2()); }
+//! @brief Return the radius of the circle.
+GEOM_FT Circulo2d::getRadius(void) const
+  { return sqrt_FT(getSquaredRadius()); }
 
 //! @brief Return the angle between the line that passes through the center
 //! and the p point and the x axis.
@@ -127,17 +129,17 @@ GEOM_FT Circulo2d::getLength(void) const
   { return M_PI_FT*Diametro(); }
 //! @brief Return the area of the circle.
 GEOM_FT Circulo2d::getArea(void) const
-  { return M_PI_FT*Radio2(); }
+  { return M_PI_FT*getSquaredRadius(); }
 //! @brief Return the maximum value of the i coordinate of the points of the circle.
 GEOM_FT Circulo2d::GetMax(unsigned short int i) const
-  { return Centro()(i)+Radio(); }
+  { return Centro()(i)+getRadius(); }
 //! @brief Return el valor mínimo of the i coordinate of the points of the circle.
 GEOM_FT Circulo2d::GetMin(unsigned short int i) const
-  { return Centro()(i)-Radio(); }
+  { return Centro()(i)-getRadius(); }
 //! @brief Return el moment of inertia del círculo with respect to 
 //! axis parallel to x que pasa por su centro.
 GEOM_FT Circulo2d::Ix(void) const
-  { return M_PI_FT/4*sqr(Radio2()); }
+  { return M_PI_FT/4*sqr(getSquaredRadius()); }
 
 
 //! @brief Return true if the point is on the circle.
@@ -152,7 +154,7 @@ double Circulo2d::getIncludedAngle(void) const
 //! @brief Return n points equally espaces over the circle perimenter.
 void Circulo2d::arc_points(const double &theta_inic,const double &delta_theta,MatrizPos2d &ptos) const
   {
-    const GEOM_FT r= Radio();
+    const GEOM_FT r= getRadius();
     GEOM_FT x= r*double_to_FT(cos(theta_inic));
     GEOM_FT y= r*double_to_FT(sin(theta_inic));
     const size_t &n= ptos.size();
@@ -203,17 +205,17 @@ Poligono2d Circulo2d::getPoligonoInscrito(const size_t &n,const double &theta_in
 void Circulo2d::Transforma(const Trf2d &trf2d)
   {
     const Pos2d pA= trf2d.Transforma(getCenterOfMass());
-    (*this)= Circulo2d(pA,Radio());
+    (*this)= Circulo2d(pA,getRadius());
   }
 
 void Circulo2d::Print(std::ostream &os) const
   {
     os << "x centro: " << Centro().x() 
        << " y centro: " << Centro().y()
-       << " radio: " << Radio();
+       << " radius: " << getRadius();
   }
 void Circulo2d::Plot(Plotter &plotter) const
   {
     const Pos2d c= Centro();
-    plotter.fcircle(c.x(),c.y(),Radio());
+    plotter.fcircle(c.x(),c.y(),getRadius());
   }

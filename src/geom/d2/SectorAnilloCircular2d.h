@@ -35,19 +35,19 @@ class Poligono2d;
 //! @brief Sector de un anillo circular en dos dimensiones.
 class SectorAnilloCircular2d : public SectorCircular2d
   {
-    double rint; //!< Radio interior del anillo.
+    double inner_radius; //!< inner radius.
   protected:
     SectorCircular2d getSector(const double &R) const;
     SectorCircular2d SectorInterior(void) const;
   public:
-    SectorAnilloCircular2d(void) : SectorCircular2d(), rint(0.0) {}
-    SectorAnilloCircular2d(const SectorCircular2d &c,const double &rint);
+    SectorAnilloCircular2d(void) : SectorCircular2d(), inner_radius(0.0) {}
+    SectorAnilloCircular2d(const SectorCircular2d &c,const double &inner_radius);
     SectorAnilloCircular2d(const SectorAnilloCircular2d &otro)
-      : SectorCircular2d(otro), rint(otro.rint) {}
+      : SectorCircular2d(otro), inner_radius(otro.inner_radius) {}
     SectorAnilloCircular2d &operator=(const SectorAnilloCircular2d &p)
       {
 	SectorCircular2d::operator=(p);
-        rint= p.rint;
+        inner_radius= p.inner_radius;
         return *this;
       }
     virtual Superficie2d *clon(void) const
@@ -59,15 +59,13 @@ class SectorAnilloCircular2d : public SectorCircular2d
     Pos2d PFinExt(void) const;
     Pos2d PMedInt(void) const;
     Pos2d PMedExt(void) const;
-    //! @brief Return el radio interior.
-    inline const double RadioExt(void) const
-      { return Radio(); }
-    inline double RadioExt(void)
-      { return Radio(); }
-    inline const double &RadioInt(void) const
-      { return rint; }
-    inline double &RadioInt(void)
-      { return rint; }
+    //! @brief Return the outer radius.
+    inline double outerRadius(void) const
+      { return getRadius(); }
+    inline const double &innerRadius(void) const
+      { return inner_radius; }
+    inline double &innerRadius(void)
+      { return inner_radius; }
     virtual GEOM_FT getInteriorArcLength(void) const;
     virtual GEOM_FT getExteriorArcLength(void) const;
     virtual GEOM_FT getLength(void) const;

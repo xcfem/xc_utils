@@ -52,8 +52,8 @@ class Circulo3d : public D2to3d
       { return new Circulo3d(*this); }
     Pos3d Centro(void) const;
     virtual Pos3d getCenterOfMass(void) const;
-    GEOM_FT Radio2(void) const;
-    GEOM_FT Radio(void) const;
+    GEOM_FT getSquaredRadius(void) const;
+    GEOM_FT getRadius(void) const;
     GEOM_FT Diametro(void) const;
     double getAngle(const Pos3d &p) const;
     //! @brief Return the length of the object.

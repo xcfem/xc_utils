@@ -55,8 +55,7 @@ SectorCircular2d SectorCircular2dThreepoints(const Pos2d &p1,const Pos2d &p2,con
 SectorCircular2d::SectorCircular2d(void)
   : Circulo2d(), theta1(0), theta2(M_PI/2) {}
 
-//! @brief Constructor de copia.
-//! @brief Construye el círculo a partir del centro y el radio.
+//! @brief Build the circle from its center and its radius.
 SectorCircular2d::SectorCircular2d(const Circulo2d &c,const double &th1,const double &th2)
   : Circulo2d(c), theta1(th1), theta2(th2) 
   {
@@ -121,7 +120,7 @@ double SectorCircular2d::getAngle(const Pos2d &p) const
 
 //! @brief Returns the parameter of the point in the arc (distance to the arc's first point measured over the arc)
 double SectorCircular2d::getLambda(const Pos2d &p) const
-  { return getAngle(p)*Radio(); }
+  { return getAngle(p)*getRadius(); }
 
 
 //! @brief Return the included angle.
@@ -130,7 +129,7 @@ double SectorCircular2d::getIncludedAngle(void) const
 
 //! @brief Return the length of the arc.
 GEOM_FT SectorCircular2d::getArcLength(void) const
-  { return double_to_FT(getIncludedAngle())*Radio(); }
+  { return double_to_FT(getIncludedAngle())*getRadius(); }
 
 //! @brief Return the length of the circular sector.
 GEOM_FT SectorCircular2d::getLength(void) const
@@ -138,7 +137,7 @@ GEOM_FT SectorCircular2d::getLength(void) const
 
 //! @brief Return the area of the circular sector.
 GEOM_FT SectorCircular2d::getArea(void) const
-  { return double_to_FT(getIncludedAngle())*Radio2()/2; }
+  { return double_to_FT(getIncludedAngle())*getSquaredRadius()/2; }
 
 //! @brief Return the maximum value of the i coordinate of the object points.
 GEOM_FT SectorCircular2d::GetMax(unsigned short int i) const
@@ -231,7 +230,8 @@ void SectorCircular2d::Print(std::ostream &os) const
   }
 void SectorCircular2d::Plot(Plotter &plotter) const
   {
-    std::cerr << "SectorCircular2d::Plot(plotter) not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+              << "; not implemented." << std::endl;
     return;
   }
 

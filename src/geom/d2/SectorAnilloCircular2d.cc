@@ -30,9 +30,9 @@
 #include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
 
 
-//! @brief Construye el círculo a partir del centro and el radio.
+//! @brief Builds the object from its center and its radius.
 SectorAnilloCircular2d::SectorAnilloCircular2d(const SectorCircular2d &c,const double &r)
-  : SectorCircular2d(c), rint(r) {}
+  : SectorCircular2d(c), inner_radius(r) {}
 
 //! @brief Return the posición del centro de gravedad del sector circular.
 Pos2d SectorAnilloCircular2d::getCenterOfMass(void) const
@@ -48,7 +48,7 @@ SectorCircular2d SectorAnilloCircular2d::getSector(const double &R) const
 
 //! @brief Return el sector circular interior a éste.
 SectorCircular2d SectorAnilloCircular2d::SectorInterior(void) const
-  { return getSector(rint); }
+  { return getSector(inner_radius); }
 
 
 //! @brief Return the point inicial del arco exterior.
@@ -78,15 +78,15 @@ Pos2d SectorAnilloCircular2d::PMedInt(void) const
 
 //! @brief Return the length of the arco exterior del sector de anillo circular.
 GEOM_FT SectorAnilloCircular2d::getExteriorArcLength(void) const
-  { return double_to_FT(getIncludedAngle())*RadioExt(); }
+  { return double_to_FT(getIncludedAngle())*outerRadius(); }
 
 //! @brief Return the length of the arco interior del sector de anillo circular.
 GEOM_FT SectorAnilloCircular2d::getInteriorArcLength(void) const
-  { return double_to_FT(getIncludedAngle())*RadioInt(); }
+  { return double_to_FT(getIncludedAngle())*innerRadius(); }
 
 //! @brief Return the length of the object.
 GEOM_FT SectorAnilloCircular2d::getLength(void) const
-  { return getExteriorArcLength()+getInteriorArcLength()+2*(RadioExt()-RadioInt()); }
+  { return getExteriorArcLength()+getInteriorArcLength()+2*(outerRadius()-innerRadius()); }
 
 //! @brief Return the area of the object.
 GEOM_FT SectorAnilloCircular2d::getArea(void) const
@@ -95,7 +95,8 @@ GEOM_FT SectorAnilloCircular2d::getArea(void) const
 //! @brief Return the maximum value of the i coordinate of the object points.
 GEOM_FT SectorAnilloCircular2d::GetMax(unsigned short int i) const
   {
-    std::cerr << "SectorAnilloCircular2d::GetMax() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
     return 0;
   }
 //! @brief Return el valor mínimo of the i coordinate of the object points.
@@ -109,7 +110,8 @@ GEOM_FT SectorAnilloCircular2d::GetMin(unsigned short int i) const
 //! axis parallel to x que pasa por su centro.
 GEOM_FT SectorAnilloCircular2d::Ix(void) const
   {
-    std::cerr << "SectorAnilloCircular2d::Ix() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
     return 0;
   }
 
@@ -117,7 +119,8 @@ GEOM_FT SectorAnilloCircular2d::Ix(void) const
 //! axis parallel to y que pasa por su centro.
 GEOM_FT SectorAnilloCircular2d::Iy(void) const
   {
-    std::cerr << "SectorAnilloCircular2d::Iy() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
     return 0;
   }
 
@@ -125,7 +128,8 @@ GEOM_FT SectorAnilloCircular2d::Iy(void) const
 //! axis parallel to z que pasa por su centro.
 GEOM_FT SectorAnilloCircular2d::Iz(void) const
   {
-    std::cerr << "SectorAnilloCircular2d::Iz() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
     return 0;
   }
 
@@ -133,7 +137,8 @@ GEOM_FT SectorAnilloCircular2d::Iz(void) const
 //! the axis parallel to x e y que pasan por su centro.
 GEOM_FT SectorAnilloCircular2d::Pxy(void) const
   {
-    std::cerr << "SectorAnilloCircular2d::Pxy() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
     return 0;
   }
 
@@ -186,9 +191,9 @@ MatrizPos2d SectorAnilloCircular2d::genMesh(const size_t &nDivRad,const size_t &
     MatrizPos2d retval(nDivCirc+1,nDivRad+1);
     if(nDivRad>0  && nDivCirc>0)
       {
-        const double deltaRad= (RadioExt() - RadioInt())/nDivRad;
+        const double deltaRad= (outerRadius() - innerRadius())/nDivRad;
 
-        double rad_j= RadioInt();
+        double rad_j= innerRadius();
         for(size_t j= 0;j<nDivRad+1;j++)
           {
             MatrizPos2d tmp= getSector(rad_j).getArcPoints(nDivCirc+1);
@@ -213,7 +218,7 @@ Poligono2d SectorAnilloCircular2d::getPoligono2d(const size_t &n) const
 void SectorAnilloCircular2d::Print(std::ostream &os) const
   {
     SectorCircular2d::Print(os);
-    os << " rint= " << rint;
+    os << " inner_radius= " << inner_radius;
   }
 
 bool operator==(const SectorAnilloCircular2d &a,const SectorAnilloCircular2d &b)

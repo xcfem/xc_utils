@@ -36,15 +36,16 @@ ptosNumeroEstab=
   }
 
 ''' Devuelve el valor del número de estabilidad a partir de los valores de:
-    r: Radio de la excavación.
-    rp: Radio de plastificación.'''
+
+    r: radius of the excavation.
+    rp: plastification radius.'''
 def calcNumeroEstabFromRp(r,rp):
   return ptosNumeroEstab.valor(rp/r)
 
 '''Points that define the ratio between the excavation radius and the
    plastification radius from the number of stability.'''
-ptosRadioPlastificacion= 
-\ptosRadioPlastificacion
+ptosPlastificationRadius= 
+\ptosPlastificationRadius
   {
     geom.Pos2d(1,1)
     geom.Pos2d(1.5,1.125)
@@ -53,17 +54,17 @@ ptosRadioPlastificacion=
     geom.Pos2d(3,2.15)
   }
 
-''' Return the plastification radius from the values of:
+def calcPlastificationRadius(r,N):
+  ''' Return the plastification radius from the values of:
 
-    r: Radio de la excavación.
-    N: Número de estabilidad.'''
-def calcRadioPlastificacion(r,N):
-  return ptosRadioPlastificacion.valor(N)*r
+      r: radius of the excavation
+      N: Número de estabilidad.'''
+  return ptosPlastificationRadius.valor(N)*r
 
-''' Devuelve el valor de lambda0 (parámetro que introduce el efecto del grado de plastificación del frente) a partir de:
-    r: Radio de la excavación.
-    rp: Radio de plastificación.'''
 def calcLambda0(r,rp):
+  ''' Devuelve el valor de lambda0 (parámetro que introduce el efecto del grado de plastificación del frente) a partir de:
+    r: radius of the excavation
+    rp: plastification radius.'''
   return ptosLambda0.valor(calcNumeroEstabFromRp(r,rp))
 
 ''' Return the value of m (parameter that depends on the effect of the 

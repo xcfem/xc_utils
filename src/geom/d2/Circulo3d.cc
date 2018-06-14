@@ -48,10 +48,10 @@ Pos3d Circulo3d::Centro(void) const
   { return to_3d(circ.Centro()); }
 Pos3d Circulo3d::getCenterOfMass(void) const
   { return Centro(); }
-GEOM_FT Circulo3d::Radio2(void) const
-  { return circ.Radio2(); }
-GEOM_FT Circulo3d::Radio(void) const
-  { return circ.Radio(); }
+GEOM_FT Circulo3d::getSquaredRadius(void) const
+  { return circ.getSquaredRadius(); }
+GEOM_FT Circulo3d::getRadius(void) const
+  { return circ.getRadius(); }
 GEOM_FT Circulo3d::Diametro(void) const
   { return circ.Diametro(); }
 double Circulo3d::getAngle(const Pos3d &p) const

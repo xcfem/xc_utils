@@ -59,11 +59,11 @@ class Circulo2d : public Superficie2d
     Pos2d Centro(void) const;
     virtual Pos2d getCenterOfMass(void) const;
     Pos2d Point(const double &ang) const;
-    inline GEOM_FT Radio2(void) const
+    inline GEOM_FT getSquaredRadius(void) const
       { return cgcirc.squared_radius(); }
-    GEOM_FT Radio(void) const;
+    GEOM_FT getRadius(void) const;
     inline GEOM_FT Diametro(void) const
-      { return 2*Radio(); }
+      { return 2*getRadius(); }
     double getAngle(const Pos2d &p) const;
     virtual GEOM_FT getLength(void) const;
     //! @brief Return the perimeter of the object.

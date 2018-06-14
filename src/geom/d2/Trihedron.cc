@@ -104,11 +104,11 @@ bool Trihedron::In(const Pos3d &p,const double &tol) const
   {
     const Recta3d axis= Axis();
     GEOM_FT d= axis.dist(p);
-    GEOM_FT radioCilindro= axis.dist(Vertice(1));
-    radioCilindro= std::max(radioCilindro,axis.dist(Vertice(2)));
-    radioCilindro= std::max(radioCilindro,axis.dist(Vertice(3)));
+    GEOM_FT cylinderRadius= axis.dist(Vertice(1));
+    cylinderRadius= std::max(cylinderRadius,axis.dist(Vertice(2)));
+    cylinderRadius= std::max(cylinderRadius,axis.dist(Vertice(3)));
     bool retval= true;
-    if((d-radioCilindro)>tol)
+    if((d-cylinderRadius)>tol)
       return false;
     else
       {

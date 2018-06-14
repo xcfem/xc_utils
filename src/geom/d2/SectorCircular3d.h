@@ -50,8 +50,8 @@ class SectorCircular3d : public D2to3d
     Pos3d PMed(void) const;
     virtual Pos3d getCenterOfMass(void) const;
     virtual Pos3d ArcCentroid(void) const;
-    GEOM_FT Radio2(void) const;
-    GEOM_FT Radio(void) const;
+    GEOM_FT getSquaredRadius(void) const;
+    GEOM_FT getRadius(void) const;
     GEOM_FT Diametro(void) const;
     inline double getIncludedAngle(void) const
       { return sect_circ.getIncludedAngle(); }

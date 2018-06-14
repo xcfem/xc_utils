@@ -104,10 +104,10 @@ Pos3d SectorCircular3d::getCenterOfMass(void) const
 Pos3d SectorCircular3d::ArcCentroid(void) const
   { return to_3d(sect_circ.ArcCentroid()); }
 
-GEOM_FT SectorCircular3d::Radio2(void) const
-  { return sect_circ.Radio2(); }
-GEOM_FT SectorCircular3d::Radio(void) const
-  { return sect_circ.Radio(); }
+GEOM_FT SectorCircular3d::getSquaredRadius(void) const
+  { return sect_circ.getSquaredRadius(); }
+GEOM_FT SectorCircular3d::getRadius(void) const
+  { return sect_circ.getRadius(); }
 GEOM_FT SectorCircular3d::Diametro(void) const
   { return sect_circ.Diametro(); }
 
