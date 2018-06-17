@@ -6,8 +6,8 @@
     \incluye{"sqlite/macros_sqlite.lcmm"}
     \incluye{"comb_acciones/sqlite/sqlite_comb.cmbm"}
     
-    \def_prop["dbName","string"]{"/tmp/test05.db"}
-    \def_prop["tbName","string"]{"combinaciones"}
+    def_prop["dbName","string"]{"/tmp/test05.db"}
+    def_prop["tbName","string"]{"combinaciones"}
     \incluye{"comb_acciones/ehe/gammaf_ehe_ctrl_intenso.cmbm"}
     \pond_acciones
       {
@@ -104,14 +104,14 @@
       }
     
     
-    \def_prop["sumG1","double"]{0.0}
-    \def_prop["g1","double"]{0.0}
-    \def_prop["sumET","double"]{0.0}
-    \def_prop["eT","double"]{0.0}
-    \def_prop["sumGP1","double"]{0.0}
-    \def_prop["gP1","double"]{0.0}
-    \def_prop["sumV","double"]{0.0}
-    \def_prop["v","double"]{0.0}
+    sumG1= 0.0
+    g1= 0.0
+    sumET= 0.0
+    eT= 0.0
+    sumGP1= 0.0
+    gP1= 0.0
+    sumV= 0.0
+    v= 0.0
     \sqlite
       {
         \@dbName
@@ -124,14 +124,14 @@
                     \cond{@fetch_row}
                     \bucle
                       {
-                        \set{g1=@getDouble("G1")}
-                        \set{eT=@getDouble("ET")}
-                        \set{gP1=@getDouble("GP1")}
-                        \set{v=@getDouble("V")}
-                        \set{sumG1= @sumG1+@g1}
-                        \set{sumET= @sumET+@eT}
-                        \set{sumGP1= @sumGP1+@gP1}
-                        \set{sumV= @sumV+@v}
+                        g1=@getDouble("G1")
+                        eT=@getDouble("ET")
+                        gP1=@getDouble("GP1")
+                        v=@getDouble("V")
+                        sumG1= @sumG1+@g1
+                        sumET= @sumET+@eT
+                        sumGP1= @sumGP1+@gP1
+                        sumV= @sumV+@v
                       }
                   }
                 \free_result{}
@@ -139,28 +139,28 @@
           }
       }
     
-    \expr{sumG1Teor= @tonum(6*(1+1.35))}
-    \expr{sumETTeor= @tonum(6*(0.9+1.05))}
-    \expr{sumGP1Teor= @tonum(4*1.05)}
-    \expr{sumVTeor= @tonum(4*1.5)}
+    sumG1Teor= 6*(1+1.35)
+    sumETTeor= 6*(0.9+1.05)
+    sumGP1Teor= 4*1.05
+    sumVTeor= 4*1.5
     
-    \expr{ratio1=  @tonum(@abs(@sumG1-sumG1Teor)/sumG1Teor)}
-    \expr{ratio2= @tonum(@abs(@sumET-sumETTeor)/sumETTeor)}
-    \expr{ratio3= @tonum(@abs(@sumGP1-sumGP1Teor)/sumGP1Teor)}
-    \expr{ratio4= @tonum(@abs(@sumV-sumVTeor)/sumVTeor)}
+    ratio1=  @abs(@sumG1-sumG1Teor)/sumG1Teor
+    ratio2= @abs(@sumET-sumETTeor)/sumETTeor
+    ratio3= @abs(@sumGP1-sumGP1Teor)/sumGP1Teor
+    ratio4= @abs(@sumV-sumVTeor)/sumVTeor
     
     \c{
-    \print{"ratio1= ",ratio1,"\n"}
-    \print{"ratio2= ",ratio2,"\n"}
-    \print{"ratio3= ",ratio3,"\n"}
-    \print{"ratio4= ",ratio4,"\n"}
+    print "ratio1= ",ratio1,"\n"
+    print "ratio2= ",ratio2,"\n"
+    print "ratio3= ",ratio3,"\n"
+    print "ratio4= ",ratio4,"\n"
       }
     
     \borra_archivo_si_existe{@dbName}
     \if
       {
         \cond{(@abs(ratio1)<1e-7) & (@abs(ratio2)<1e-7) & (@abs(ratio3)<1e-7) & (@abs(ratio4)<1e-10)}
-        \then{\print{"test 05: ok.\n"}}
-        \else{\print{"test 05: ERROR.\n"}}
+        \then{print "test 05: ok.\n"}
+        \else{print "test 05: ERROR.\n"}
       }
   }

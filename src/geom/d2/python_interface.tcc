@@ -52,20 +52,21 @@ class_<BND2d, bases<GeomObj2d> >("BND2d")
   .def("getMin", &BND2d::GetMin,"return minimum value of i coordinate.")
   ;
 
-class_<Circulo2d, bases<Superficie2d> >("Circle2d")
+class_<Circle2d, bases<Superficie2d> >("Circle2d")
   .def(init<>())
   .def(init<Pos2d, Pos2d, Pos2d>())
   .def(init<Pos2d,double>())
-  .def(init<Circulo2d>())
-  .def("getCentro",&Circulo2d::Centro)
-  .def("getRadius",&Circulo2d::getRadius,"Return the object radius.")
-  .def("getDiametro",&Circulo2d::Diametro)
-  .def("getPerimetro",&Circulo2d::Perimetro)
-  .def("getArea", &Circulo2d::getArea, "Return the object area.")
-  .def("getIx", &Circulo2d::Ix)
-  .def("getIy", &Circulo2d::Iy)
-  .def("getPxy", &Circulo2d::Pxy)
-  .def("getCenterOfMass", &Circulo2d::getCenterOfMass);
+  .def(init<Circle2d>())
+  .def("getCentro",&Circle2d::Centro)
+  .def("getRadius",&Circle2d::getRadius,"Return the object radius.")
+  .def("getDiametro",&Circle2d::Diametro)
+  .def("getPerimetro",&Circle2d::Perimetro)
+  .def("getInscribedPolygon",&Circle2d::getPoligonoInscrito,"getInscribedPolygon(n,theta_inic) return an inscribed regular polygon with n sides starting in the angle argument")
+  .def("getArea", &Circle2d::getArea, "Return the object area.")
+  .def("getIx", &Circle2d::Ix)
+  .def("getIy", &Circle2d::Iy)
+  .def("getPxy", &Circle2d::Pxy)
+  .def("getCenterOfMass", &Circle2d::getCenterOfMass);
 
 #include "poligonos2d/python_interface.tcc"
 

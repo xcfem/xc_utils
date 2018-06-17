@@ -56,7 +56,7 @@ GEOM_FT Rejilla2d::Iy(void) const
 GEOM_FT Rejilla2d::Pxy(void) const
   { return points.Pxy(); }
 
-//! @brief Return el centro de gravedad de la rejilla.
+//! @brief Return the center of mass de la rejilla.
 Pos2d Rejilla2d::getCenterOfMass(void) const
   { return points.getCenterOfMass(); }
 

@@ -124,29 +124,29 @@
       }
     \genera_combinaciones{}
     
-    \def_prop["nmbDBase","string"]{"iapf.db"}
-    \def_prop["nmbTablaCombELU","string"]{"comb_elu"}
-    \def_prop["nmbTablaCombELSCP","string"]{"comb_els_cuasi_permanentes"}
+    def_prop["nmbDBase","string"]{"iapf.db"}
+    def_prop["nmbTablaCombELU","string"]{"comb_elu"}
+    def_prop["nmbTablaCombELSCP","string"]{"comb_els_cuasi_permanentes"}
     \c{
     \SQLTcreaDBase(@nmbDatabase){}
-    \def_prop["cont","double"]{@SQLTtablaCombsELU(@nmbDBase,@nmbTablaCombELU,1)}
-    \def_prop["cont","double"]{@SQLTtablaCombsELSCP(@nmbDBase,@nmbTablaCombELSCP,1)}
+    cont= @SQLTtablaCombsELU(@nmbDBase,@nmbTablaCombELU,1)
+    cont= @SQLTtablaCombsELSCP(@nmbDBase,@nmbTablaCombELSCP,1)
       }
-    \expr{nELU= @combinaciones.getNumCombELU}
-    \expr{nELS= @combinaciones.getNumCombELS}
+    nELU= @combinaciones.getNumCombELU
+    nELS= @combinaciones.getNumCombELS
     
-    \expr{ratio1= nELU-260}
-    \expr{ratio2= nELS-24}
+    ratio1= nELU-260
+    ratio2= nELS-24
     
     \c{
-    \print{"nELU= ",nELU,"\n"}
-    \print{"nELS= ",nELS,"\n"}
+    print "nELU= ",nELU,"\n"
+    print "nELS= ",nELS,"\n"
       }
     
     \if
       {
         \cond{(ratio1 < 1e-12) & (ratio2 < 1e-12)}
-        \then{\print{"test_dos_ponderaciones: ok.\n"}}
-        \else{\print{"test_dos_ponderaciones: ERROR.\n"}}
+        \then{print "test_dos_ponderaciones: ok.\n"}
+        \else{print "test_dos_ponderaciones: ERROR.\n"}
       }
   }

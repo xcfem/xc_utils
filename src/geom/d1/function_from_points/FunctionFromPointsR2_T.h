@@ -122,7 +122,7 @@ std::ostream &operator<<(std::ostream &os, const FunctionFromPointsR2_T<T> &m)
     const size_t n_columns= m.getNumberOfColumns();
     for(size_t i=1;i<=n_rows;i++)
       for(size_t j=1;j<=n_columns;j++)
-        os << "posición: " << m.Posicion(i,j) << " valor: " << m.Valor(i,j) << std::endl;
+        os << "position: " << m.Posicion(i,j) << " valor: " << m.Valor(i,j) << std::endl;
     return os;
   }
 

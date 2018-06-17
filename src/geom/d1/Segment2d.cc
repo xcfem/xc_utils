@@ -101,7 +101,7 @@ GEOM_FT angle(const Vector2d &v, const Segment2d &r)
 GEOM_FT Segment2d::getLength(void) const
   { return Origen().dist(Destino()); }
 
-//! @brief Return the posición of the center of mass of the segment.
+//! @brief Return the position of the center of mass of the segment.
 Pos2d Segment2d::getCenterOfMass(void) const
   {
     Pos2d retval= Origen();

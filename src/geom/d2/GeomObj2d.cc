@@ -120,7 +120,8 @@ GEOM_FT GeomObj2d::I(const unsigned short int &i,const unsigned short int &j) co
     return retval;
   }
 
-//! @brief Return the componente i,j of the inertia tensor calculado with respect to the point "o".
+//! @brief Return the component i,j of the inertia tensor computed
+//! with respect to the point "o".
 GEOM_FT GeomObj2d::I(const unsigned short int i,const unsigned short int j,const Pos2d &o) const
   {
     const GEOM_FT Iij= I(i,j);
@@ -132,12 +133,13 @@ GEOM_FT GeomObj2d::I(const unsigned short int i,const unsigned short int j,const
       }
     else
       {
-	std::cerr << "El objeto no tiene centro de gravedad." << std::endl;
+	std::cerr << getClassName() << "::" << __FUNCTION__
+		  << "; object has not a center of mass." << std::endl;
         return Iij;
       }
   }
 
-//! @brief Return the inertia tensor with respect to the centro de gravedad del objeto.
+//! @brief Return the inertia tensor with respect to the center of mass of the object.
 matriz_FT GeomObj2d::I(void) const
   {
     matriz_FT i(2,2);

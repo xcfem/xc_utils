@@ -140,7 +140,7 @@ GEOM_FT BlockPyramid::Iz(void) const
     return 0.0;
   }
 
-//! @brief Return the posición del centro de gravedad.
+//! @brief Return the position of the center of mass.
 Pos3d BlockPyramid::getCenterOfMass(void) const
   {
     std::cerr << getClassName() << "::" << __FUNCTION__

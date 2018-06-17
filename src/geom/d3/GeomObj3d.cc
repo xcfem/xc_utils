@@ -133,8 +133,8 @@ GEOM_FT GeomObj3d::I( const unsigned short int i,
       }
   }
 
-//! @brief Return the inertia tensor with respect to centro de gravedad
-//! del objeto.
+//! @brief Return the inertia tensor with respect to the center of mass
+//! of the object.
 matriz_FT GeomObj3d::I(void) const
   {
     matriz_FT i(3,3);

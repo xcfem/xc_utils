@@ -50,7 +50,8 @@ python ./python_tests/geom/pruebaPos2d01.py
 python ./python_tests/geom/prueba_recta3d_01.py
 python ./python_tests/geom/prueba_vdesliz3d_02.py
 #python ./python_tests/geom/prueba_semiespacio3d_04.py
-python ./python_tests/geom/prueba_circulo2d_01.py
+python ./python_tests/geom/circle2d_test_01.py
+python ./python_tests/geom/circle2d_test_02.py
 #python ./python_tests/geom/prueba_semiespacio3d_01.py
 python ./python_tests/geom/prueba_vdesliz3d_01.py
 python ./python_tests/geom/plane_test_01.py

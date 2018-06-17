@@ -33,7 +33,9 @@ class_<SupPoligonal2d, bases<Superficie2d>, boost::noncopyable >("SupPoligonal2d
   .def("getLado",getSide0Segment)
   .def("getNormalLado",&SupPoligonal2d::getLado0Normal)
   .def("getNormalVertice",&SupPoligonal2d::getVertex0Normal)
-  .def("getPolilinea",&SupPoligonal2d::GetPolilinea);
+  .def("getPolilinea",&SupPoligonal2d::GetPolilinea)
+  .def("getApproxTangentPositions",&SupPoligonal2d::getApproxTangentPositions,"Return the points for which the polygon is almost tangent to the direction argument.")
+  ;
 
 typedef std::list<Poligono2d> polygon_2D_list;
 class_<polygon_2D_list >("polygon_2D_list")

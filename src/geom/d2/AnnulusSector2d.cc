@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SectorAnilloCircular2d.cc
+//AnnulusSector2d.cc
 
-#include "SectorAnilloCircular2d.h"
+#include "AnnulusSector2d.h"
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
 #include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
@@ -31,111 +31,113 @@
 
 
 //! @brief Builds the object from its center and its radius.
-SectorAnilloCircular2d::SectorAnilloCircular2d(const SectorCircular2d &c,const double &r)
-  : SectorCircular2d(c), inner_radius(r) {}
+AnnulusSector2d::AnnulusSector2d(const CircularSector2d &c,const double &r)
+  : CircularSector2d(c), inner_radius(r) {}
 
-//! @brief Return the posición del centro de gravedad del sector circular.
-Pos2d SectorAnilloCircular2d::getCenterOfMass(void) const
+//! @brief Return the position of the center of mass.
+Pos2d AnnulusSector2d::getCenterOfMass(void) const
   {
-    std::cerr << "SectorAnilloCircular2d::getCenterOfMass() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+              << "; not implemented." << std::endl;
     return Centro();
   }
 
 //! @brief Return a circular sector with the same center and angles and
 //! a different radius.
-SectorCircular2d SectorAnilloCircular2d::getSector(const double &R) const
-  { return SectorCircular2d(Circulo2d(Centro(),R),Theta1(),Theta2()); }
+CircularSector2d AnnulusSector2d::getSector(const double &R) const
+  { return CircularSector2d(Circle2d(Centro(),R),Theta1(),Theta2()); }
 
-//! @brief Return el sector circular interior a éste.
-SectorCircular2d SectorAnilloCircular2d::SectorInterior(void) const
+//! @brief Return the circular sector interior to the annulus.
+CircularSector2d AnnulusSector2d::SectorInterior(void) const
   { return getSector(inner_radius); }
 
 
 //! @brief Return the point inicial del arco exterior.
-Pos2d SectorAnilloCircular2d::PInicExt(void) const
-  { return SectorCircular2d::PInic(); }
+Pos2d AnnulusSector2d::PInicExt(void) const
+  { return CircularSector2d::PInic(); }
 
 //! @brief Return the point final del arco exterior.
-Pos2d SectorAnilloCircular2d::PFinExt(void) const
-  { return SectorCircular2d::PFin(); }
+Pos2d AnnulusSector2d::PFinExt(void) const
+  { return CircularSector2d::PFin(); }
 
 //! @brief Return the point inicial del arco interior.
-Pos2d SectorAnilloCircular2d::PInicInt(void) const
+Pos2d AnnulusSector2d::PInicInt(void) const
   { return SectorInterior().PInic(); }
 
 //! @brief Return the point final del arco interior.
-Pos2d SectorAnilloCircular2d::PFinInt(void) const
+Pos2d AnnulusSector2d::PFinInt(void) const
   { return SectorInterior().PFin(); }
 
 
 //! @brief Return the point medio del arco exterior.
-Pos2d SectorAnilloCircular2d::PMedExt(void) const
-  { return SectorCircular2d::PMed(); }
+Pos2d AnnulusSector2d::PMedExt(void) const
+  { return CircularSector2d::PMed(); }
 
 //! @brief Return the point medio del arco interior.
-Pos2d SectorAnilloCircular2d::PMedInt(void) const
+Pos2d AnnulusSector2d::PMedInt(void) const
   { return SectorInterior().PMed(); }
 
 //! @brief Return the length of the arco exterior del sector de anillo circular.
-GEOM_FT SectorAnilloCircular2d::getExteriorArcLength(void) const
+GEOM_FT AnnulusSector2d::getExteriorArcLength(void) const
   { return double_to_FT(getIncludedAngle())*outerRadius(); }
 
 //! @brief Return the length of the arco interior del sector de anillo circular.
-GEOM_FT SectorAnilloCircular2d::getInteriorArcLength(void) const
+GEOM_FT AnnulusSector2d::getInteriorArcLength(void) const
   { return double_to_FT(getIncludedAngle())*innerRadius(); }
 
 //! @brief Return the length of the object.
-GEOM_FT SectorAnilloCircular2d::getLength(void) const
+GEOM_FT AnnulusSector2d::getLength(void) const
   { return getExteriorArcLength()+getInteriorArcLength()+2*(outerRadius()-innerRadius()); }
 
 //! @brief Return the area of the object.
-GEOM_FT SectorAnilloCircular2d::getArea(void) const
-  { return SectorCircular2d::getArea()-SectorInterior().getArea(); }
+GEOM_FT AnnulusSector2d::getArea(void) const
+  { return CircularSector2d::getArea()-SectorInterior().getArea(); }
 
 //! @brief Return the maximum value of the i coordinate of the object points.
-GEOM_FT SectorAnilloCircular2d::GetMax(unsigned short int i) const
+GEOM_FT AnnulusSector2d::GetMax(unsigned short int i) const
   {
     std::cerr << getClassName() << "::" << __FUNCTION__
 	      << "; not implemented." << std::endl;
     return 0;
   }
 //! @brief Return el valor mínimo of the i coordinate of the object points.
-GEOM_FT SectorAnilloCircular2d::GetMin(unsigned short int i) const
+GEOM_FT AnnulusSector2d::GetMin(unsigned short int i) const
   {
-    std::cerr << "SectorAnilloCircular2d::GetMin() not implemented." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented." << std::endl;
     return 0;
   }
 
-//! @brief Return el moment of inertia del sector circular with respect to 
+//! @brief Return el moment of inertia of the circular sector with respect to 
 //! axis parallel to x que pasa por su centro.
-GEOM_FT SectorAnilloCircular2d::Ix(void) const
+GEOM_FT AnnulusSector2d::Ix(void) const
   {
     std::cerr << getClassName() << "::" << __FUNCTION__
 	      << "; not implemented." << std::endl;
     return 0;
   }
 
-//! @brief Return el moment of inertia del sector circular with respect to 
+//! @brief Return el moment of inertia of the circular sector with respect to 
 //! axis parallel to y que pasa por su centro.
-GEOM_FT SectorAnilloCircular2d::Iy(void) const
+GEOM_FT AnnulusSector2d::Iy(void) const
   {
     std::cerr << getClassName() << "::" << __FUNCTION__
 	      << "; not implemented." << std::endl;
     return 0;
   }
 
-//! @brief Return el moment of inertia del sector circular with respect to 
+//! @brief Return el moment of inertia of the circular sector with respect to 
 //! axis parallel to z que pasa por su centro.
-GEOM_FT SectorAnilloCircular2d::Iz(void) const
+GEOM_FT AnnulusSector2d::Iz(void) const
   {
     std::cerr << getClassName() << "::" << __FUNCTION__
 	      << "; not implemented." << std::endl;
     return 0;
   }
 
-//! @brief Return el product of inertia del sector circular with respect to
+//! @brief Return el product of inertia of the circular sector with respect to
 //! the axis parallel to x e y que pasan por su centro.
-GEOM_FT SectorAnilloCircular2d::Pxy(void) const
+GEOM_FT AnnulusSector2d::Pxy(void) const
   {
     std::cerr << getClassName() << "::" << __FUNCTION__
 	      << "; not implemented." << std::endl;
@@ -143,9 +145,9 @@ GEOM_FT SectorAnilloCircular2d::Pxy(void) const
   }
 
 //! @brief Return true if the point is inside the object.
-bool SectorAnilloCircular2d::In(const Pos2d &p, const double &tol) const
+bool AnnulusSector2d::In(const Pos2d &p, const double &tol) const
   {
-    if(SectorCircular2d::In(p,tol))
+    if(CircularSector2d::In(p,tol))
       {
         return !(SectorInterior().In(p,tol)); //XXX ¿tol?
       }
@@ -153,14 +155,14 @@ bool SectorAnilloCircular2d::In(const Pos2d &p, const double &tol) const
       return false;
   }
 
-MatrizPos2d SectorAnilloCircular2d::getExtArcPoints(const size_t &n) const
-  { return SectorCircular2d::getArcPoints(n); }
+MatrizPos2d AnnulusSector2d::getExtArcPoints(const size_t &n) const
+  { return CircularSector2d::getArcPoints(n); }
 
-MatrizPos2d SectorAnilloCircular2d::getIntArcPoints(const size_t &n) const
+MatrizPos2d AnnulusSector2d::getIntArcPoints(const size_t &n) const
   { return SectorInterior().getArcPoints(n); }
 
 //! @brief Return n points equally spaced over the object perimeter.
-MatrizPos2d SectorAnilloCircular2d::getPointsOnPerimeter(const size_t &n) const
+MatrizPos2d AnnulusSector2d::getPointsOnPerimeter(const size_t &n) const
   {
     MatrizPos2d retval;
     if(n>3)
@@ -186,7 +188,7 @@ MatrizPos2d SectorAnilloCircular2d::getPointsOnPerimeter(const size_t &n) const
     return retval;
   }
 //! @brief Returns a point mesh equiespaciados sobre el sector del anillo circular.
-MatrizPos2d SectorAnilloCircular2d::genMesh(const size_t &nDivRad,const size_t &nDivCirc) const
+MatrizPos2d AnnulusSector2d::genMesh(const size_t &nDivRad,const size_t &nDivCirc) const
   {
     MatrizPos2d retval(nDivCirc+1,nDivRad+1);
     if(nDivRad>0  && nDivCirc>0)
@@ -204,7 +206,7 @@ MatrizPos2d SectorAnilloCircular2d::genMesh(const size_t &nDivRad,const size_t &
     return retval;
   }
 
-Poligono2d SectorAnilloCircular2d::getPoligono2d(const size_t &n) const
+Poligono2d AnnulusSector2d::getPoligono2d(const size_t &n) const
   {
     Poligono2d retval;
     MatrizPos2d ptos= getPointsOnPerimeter(n);
@@ -215,15 +217,15 @@ Poligono2d SectorAnilloCircular2d::getPoligono2d(const size_t &n) const
     return retval;
   }
 
-void SectorAnilloCircular2d::Print(std::ostream &os) const
+void AnnulusSector2d::Print(std::ostream &os) const
   {
-    SectorCircular2d::Print(os);
+    CircularSector2d::Print(os);
     os << " inner_radius= " << inner_radius;
   }
 
-bool operator==(const SectorAnilloCircular2d &a,const SectorAnilloCircular2d &b)
+bool operator==(const AnnulusSector2d &a,const AnnulusSector2d &b)
   {
-    if((const SectorCircular2d &)(a) == (const SectorCircular2d &)(b))
+    if((const CircularSector2d &)(a) == (const CircularSector2d &)(b))
       return ( (a.Theta1() == b.Theta1()) && (a.Theta2() == b.Theta2()));
    else
      return false;

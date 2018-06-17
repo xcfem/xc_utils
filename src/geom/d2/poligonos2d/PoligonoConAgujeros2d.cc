@@ -89,7 +89,8 @@ GEOM_FT PoligonoConAgujeros2d::GetMax(unsigned short int i) const
         temp= p.GetMax(i);
       }
     else
-      std::cerr << "PoligonoConAgujeros2d::GetMax; exterior contour doesn't exists." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+		<< "; exterior contour doesn't exists." << std::endl;
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
@@ -109,7 +110,8 @@ GEOM_FT PoligonoConAgujeros2d::GetMin(unsigned short int i) const
         temp= p.GetMin(i);
       }
     else
-      std::cerr << "PoligonoConAgujeros2d::GetMin; exterior contour doesn't exists." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+		<< "; exterior contour doesn't exists." << std::endl;
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
@@ -129,7 +131,8 @@ bool PoligonoConAgujeros2d::In(const Pos2d &p, const double &tol) const
         retval= pol.In(p,tol);
       }
     else
-      std::cerr << "PoligonoConAgujeros2d::GetMin; exterior contour doesn't exists." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+		<< "; exterior contour doesn't exists." << std::endl;
 
     if(retval)
       for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
@@ -145,7 +148,7 @@ bool PoligonoConAgujeros2d::In(const Pos2d &p, const double &tol) const
 
   }
 
-//! @brief Return el centro de gravedad.
+//! @brief Return the center of mass.
 Pos2d PoligonoConAgujeros2d::getCenterOfMass(void) const
   {
     GEOM_FT areaTotal= getArea();
@@ -156,7 +159,8 @@ Pos2d PoligonoConAgujeros2d::getCenterOfMass(void) const
         vPos= p.getCenterOfMass().VectorPos()*p.getArea();
       }
     else
-      std::cerr << "PoligonoConAgujeros2d::GetMin; exterior contour doesn't exists." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+		<< "; exterior contour doesn't exists." << std::endl;
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
@@ -182,7 +186,8 @@ GEOM_FT PoligonoConAgujeros2d::Ix(void) const
         retval+= p.Ix()+p.getArea()*sqr(p.getCenterOfMass().y()-center_of_mass.y());
       }
     else
-      std::cerr << "PoligonoConAgujeros2d::GetMin; exterior contour doesn't exists." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+		<< "; exterior contour doesn't exists." << std::endl;
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
@@ -205,7 +210,8 @@ GEOM_FT PoligonoConAgujeros2d::Iy(void) const
         retval+= p.Iy()+p.getArea()*sqr(p.getCenterOfMass().x()-center_of_mass.x());
       }
     else
-      std::cerr << "PoligonoConAgujeros2d::GetMin; exterior contour doesn't exists." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+		<< "; exterior contour doesn't exists." << std::endl;
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
@@ -230,7 +236,8 @@ GEOM_FT PoligonoConAgujeros2d::Pxy(void) const
         retval+= p.Pxy()+p.getArea()*dx*dy;
       }
     else
-      std::cerr << "PoligonoConAgujeros2d::GetMin; exterior contour doesn't exists." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+		<< "; exterior contour doesn't exists." << std::endl;
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
@@ -258,7 +265,8 @@ PoligonoConAgujeros2d PoligonoConAgujeros2d::getTransformado(const Trf2d &trf2d)
         retval.cgpol= CGPoligonoConAgujeros_2(p.ToCGAL());
       }
     else
-      std::cerr << "PoligonoConAgujeros2d::GetMin; exterior contour doesn't exists." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+		<< "; exterior contour doesn't exists." << std::endl;
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
@@ -284,7 +292,8 @@ void PoligonoConAgujeros2d::Print(std::ostream &os) const
 	os << "contorno: " << p << std::endl;
       }
     else
-      std::cerr << "PoligonoConAgujeros2d::GetMin; exterior contour doesn't exists." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+		<< "; exterior contour doesn't exists." << std::endl;
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {

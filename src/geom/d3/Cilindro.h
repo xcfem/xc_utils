@@ -26,19 +26,19 @@
 #define SOLIDEXTRUPLGNO3D_H
 
 #include "SolidExtru3d.h"
-#include "xc_utils/src/geom/d2/Circulo3d.h"
+#include "xc_utils/src/geom/d2/Circle3d.h"
 
 
 //! @ingroup GEOM
 //
 //! @brief Cilindro.
-class Cilindro : public SolidExtru3d<Circulo3d>
+class Cilindro : public SolidExtru3d<Circle3d>
   {
   public:
-    typedef SolidExtru3d<Circulo3d> solid_extru_cil;
+    typedef SolidExtru3d<Circle3d> solid_extru_cil;
   public:
     Cilindro(void);
-    Cilindro(const Circulo3d &secc,const GEOM_FT &lng);
+    Cilindro(const Circle3d &secc,const GEOM_FT &lng);
     Cilindro &operator=(const Cilindro &se);
     virtual GeomObj *clon(void) const;
 

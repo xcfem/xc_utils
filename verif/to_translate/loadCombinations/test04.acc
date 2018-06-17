@@ -85,29 +85,29 @@
     \genera_combinaciones{}
     \nverborrea{0}
     
-    \def_prop["coeficientes","m_double"]{}
-    \def_prop["coeficientesRef","m_double"]{[[1.00,0.90,0,0],[1,0.90,1.05,0],[1,1.05,0,0],[1.00,1.05,1.05,0],[1.35,0.90,0,0],[1.35,0.90,1.05,0],[1.35,1.05,0,0],[1.35,1.05,1.05,0],[1.00,0.90,0,1.50],[1,1.05,0,1.50],[1.35,0.90,0,1.50],[1.35,1.05,0,1.50]]}
-    \def_prop["resta","m_double"]{}
-    \def_prop["ratio","double"]{}
+    def_prop["coeficientes","m_double"]{}
+    def_prop["coeficientesRef","m_double"]{[[1.00,0.90,0,0],[1,0.90,1.05,0],[1,1.05,0,0],[1.00,1.05,1.05,0],[1.35,0.90,0,0],[1.35,0.90,1.05,0],[1.35,1.05,0,0],[1.35,1.05,1.05,0],[1.00,0.90,0,1.50],[1,1.05,0,1.50],[1.35,0.90,0,1.50],[1.35,1.05,0,1.50]]}
+    def_prop["resta","m_double"]{}
+    ratio= 
     \combinaciones
       {
         \comb_elu_persistentes
           {
-            \set{coeficientes= @getCoeficientes(["G1","ET","GP1","V"])}
-            \set{resta= @coeficientes-@coeficientesRef}
-            \set{ratio= @abs(@resta)}
+            coeficientes= @getCoeficientes(["G1","ET","GP1","V"])
+            resta= @coeficientes-@coeficientesRef
+            ratio= @abs(@resta)
           }
       }
 \c{
-    \print{"coeficientes= ",@coeficientes,"\n"}
-    \print{"resta= ",@resta,"\n"}
-    \print{"ratio= ",@ratio,"\n"}
+    print "coeficientes= ",@coeficientes,"\n"
+    print "resta= ",@resta,"\n"
+    print "ratio= ",@ratio,"\n"
   }
     
     \if(@ratio<1e-6)
       {
-        \then{\print{"test 04: ok.\n"}}
-        \else{\print{"test 04: ERROR.\n"}}
+        \then{print "test 04: ok.\n"}
+        \else{print "test 04: ERROR.\n"}
       }
     
   }

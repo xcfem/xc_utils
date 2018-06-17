@@ -27,8 +27,8 @@
 Cilindro::Cilindro(void) {}
 
 //! @brief Constructor.
-Cilindro::Cilindro(const Circulo3d &secc,const GEOM_FT &lng)
-  : SolidExtru3d<Circulo3d>(secc,lng) {}
+Cilindro::Cilindro(const Circle3d &secc,const GEOM_FT &lng)
+  : SolidExtru3d<Circle3d>(secc,lng) {}
 
 //! @brief Operador asignación.
 Cilindro &Cilindro::operator=(const Cilindro &se)

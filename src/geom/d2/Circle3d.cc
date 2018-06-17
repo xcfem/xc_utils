@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Circulo3d.cc
+//Circle3d.cc
 
-#include "Circulo3d.h"
+#include "Circle3d.h"
 #include "../tipos_cgal.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_basic/src/util/matem.h"
@@ -31,53 +31,53 @@
 #include "xc_utils/src/geom/pos_vec/MatrizPos3d.h"
 
 
-//! @brief Circulo defined by three points.
-Circulo3d Circulo3dThreepoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
-  { return Circulo3d(p1,p2,p3); }
+//! @brief Circle defined by three points.
+Circle3d Circle3dThreepoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
+  { return Circle3d(p1,p2,p3); }
 
-Circulo3d::Circulo3d(const Pos3d &centro,const GEOM_FT &rad)
+Circle3d::Circle3d(const Pos3d &centro,const GEOM_FT &rad)
  : D2to3d(), circ()
-  { circ= Circulo2d(to_2d(centro),rad); }
-Circulo3d::Circulo3d(const GEOM_FT &rad2,const Pos3d &centro)
+  { circ= Circle2d(to_2d(centro),rad); }
+Circle3d::Circle3d(const GEOM_FT &rad2,const Pos3d &centro)
  : D2to3d(), circ()
-  { circ= Circulo2d(rad2,to_2d(centro)); }
-Circulo3d::Circulo3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
+  { circ= Circle2d(rad2,to_2d(centro)); }
+Circle3d::Circle3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   : D2to3d(p1,p2,p3), circ()
-  { circ= Circulo2d(to_2d(p1),to_2d(p2),to_2d(p3)); }
-Pos3d Circulo3d::Centro(void) const
+  { circ= Circle2d(to_2d(p1),to_2d(p2),to_2d(p3)); }
+Pos3d Circle3d::Centro(void) const
   { return to_3d(circ.Centro()); }
-Pos3d Circulo3d::getCenterOfMass(void) const
+Pos3d Circle3d::getCenterOfMass(void) const
   { return Centro(); }
-GEOM_FT Circulo3d::getSquaredRadius(void) const
+GEOM_FT Circle3d::getSquaredRadius(void) const
   { return circ.getSquaredRadius(); }
-GEOM_FT Circulo3d::getRadius(void) const
+GEOM_FT Circle3d::getRadius(void) const
   { return circ.getRadius(); }
-GEOM_FT Circulo3d::Diametro(void) const
+GEOM_FT Circle3d::Diametro(void) const
   { return circ.Diametro(); }
-double Circulo3d::getAngle(const Pos3d &p) const
+double Circle3d::getAngle(const Pos3d &p) const
   { return circ.getAngle(to_2d(p)); }
-GEOM_FT Circulo3d::Ix(void) const
+GEOM_FT Circle3d::Ix(void) const
   { return circ.Ix(); }
-GEOM_FT Circulo3d::Iy(void) const
+GEOM_FT Circle3d::Iy(void) const
   { return circ.Iy(); }
-GEOM_FT Circulo3d::Pxy(void) const
+GEOM_FT Circle3d::Pxy(void) const
   { return circ.Pxy(); }
-GEOM_FT Circulo3d::Iz(void) const
+GEOM_FT Circle3d::Iz(void) const
   { return circ.Iz(); }
 
-GEOM_FT Circulo3d::GetMax(unsigned short int i) const
+GEOM_FT Circle3d::GetMax(unsigned short int i) const
   {
-    cerr << "Circulo3d::GetMax(i), not implemented." << endl;
+    cerr << "Circle3d::GetMax(i), not implemented." << endl;
     return 1;
   }
-GEOM_FT Circulo3d::GetMin(unsigned short int i) const
+GEOM_FT Circle3d::GetMin(unsigned short int i) const
   {
-    cerr << "Circulo3d::GetMin(i), not implemented." << endl;
+    cerr << "Circle3d::GetMin(i), not implemented." << endl;
     return -1;
   }
 
 //! @brief Return true if the points is inside the circle.
-bool Circulo3d::In(const Pos3d &p, const double &tol) const
+bool Circle3d::In(const Pos3d &p, const double &tol) const
   {
     if(getPlane().In(p,tol))
       return circ.In(to_2d(p),tol);
@@ -86,16 +86,16 @@ bool Circulo3d::In(const Pos3d &p, const double &tol) const
   }
 
 //! @brief Return n points equally spaced on the object perimeter.
-const MatrizPos3d &Circulo3d::getPointsOnPerimeter(const size_t &n,const double &theta_inic) const
+const MatrizPos3d &Circle3d::getPointsOnPerimeter(const size_t &n,const double &theta_inic) const
   {
     static MatrizPos3d retval= to_3d(circ.getPointsOnPerimeter(n,theta_inic));
     return retval;
   }
 
-void Circulo3d::Print(std::ostream &os) const
+void Circle3d::Print(std::ostream &os) const
   { os << circ; }
 
-bool operator ==(const Circulo3d &a,const Circulo3d &b)
+bool operator ==(const Circle3d &a,const Circle3d &b)
   {
     if((const D2to3d &) a ==(const D2to3d &) b)  
       return ( a.circ == b.circ );

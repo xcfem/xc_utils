@@ -168,7 +168,7 @@ GEOM_FT PoliPos<pos>::GetMin(unsigned short j) const
   }
 
 template <class pos>
-//! @brief Return el centro de gravedad del polígono.
+//! @brief Return the center of mass del polígono.
 pos PoliPos<pos>::getCenterOfMass(void) const
   {
     if(this->size()<1) return pos();
@@ -183,7 +183,7 @@ pos PoliPos<pos>::getCenterOfMass(void) const
   }
 
 template <class pos>
-//! @brief Return el centro de gravedad del polígono.
+//! @brief Return the center of mass del polígono.
 pos PoliPos<pos>::getWeightedCenterOfMass(const std::deque<GEOM_FT> &areas) const
   {
     pos retval;
@@ -320,7 +320,8 @@ typename PoliPos<pos>::iterator PoliPos<pos>::getFarthestPoint(const pos &p)
 template <class pos>
 typename PoliPos<pos>::iterator PoliPos<pos>::getFarthestPointFromSegment(iterator , iterator , GEOM_FT &)
   {
-    std::cerr << "getFarthestPointFromSegment must be redefined in derived classes." << std::endl;
+    std::cerr << "PolyPos<>::" << __FUNCTION__
+	      << ";must be redefined in derived classes." << std::endl;
     return this->begin();
   }
 

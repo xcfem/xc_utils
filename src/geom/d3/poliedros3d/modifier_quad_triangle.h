@@ -369,12 +369,12 @@ void CModifierQuadTriangle<HDS,Polyhedron,kernel>::smooth_trata_vertice_interior
     kern_FT gamma = alpha/4; // corners of incident quads
     kern_FT eta = correcting_factor(nb_edges,nb_quads);
 
-    //nueva posición
+    //new position
     pPos[3*index]   = alpha * pVertex->point().x();
     pPos[3*index+1] = alpha * pVertex->point().y();
     pPos[3*index+2] = alpha * pVertex->point().z();
 
-    // rotate around vertex to compute nueva posición
+    // rotate around vertex to compute new position
     pHalfEdge = pVertex->vertex_begin();
     end = pHalfEdge;
     CGAL_For_all(pHalfEdge,end)
@@ -438,7 +438,7 @@ void CModifierQuadTriangle<HDS,Polyhedron,kernel>::smooth(Polyhedron *pMesh,bool
     typename kernel::FT *pPos = new typename kernel::FT[3*nb_vertices];
     CGAL_assertion(pPos != nullptr);
 
-    // compute nueva posición
+    // compute new position
     unsigned int index = 0;
     typename Polyhedron::Vertex_iterator pVertex;
     for(pVertex = pMesh->vertices_begin();
@@ -452,7 +452,7 @@ void CModifierQuadTriangle<HDS,Polyhedron,kernel>::smooth(Polyhedron *pMesh,bool
           smooth_trata_vertice_interior(index,pMesh,pVertex,pPos);
         index++;
       }
-    // asigna nueva posición
+    // asigna new position
     smooth_set_new_positions(pMesh,pPos);
     // cleanup
     delete[] pPos;

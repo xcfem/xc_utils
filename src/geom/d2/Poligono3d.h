@@ -72,11 +72,12 @@ class Poligono3d: public D2to3d
     std::vector<Poligono3d> getPoligonosTributarios(void) const;
     inline std::vector<double> getTributaryAreas(void) const
       { return plg2d.getTributaryAreas(); }
+    //! @brief Return the position of the i-th vertex.
     inline Pos3d Vertice(unsigned int i) const
-      //Return the posición del vértice.
       { return to_3d(plg2d.Vertice(i)); }
+    //! @brief Return the position of the i-th vertex
+    //! (0 based: j=0..GetNumVertices()-1)
     inline Pos3d Vertice0(unsigned int j) const
-      //Return the posición del vértice de indice j (j=0..GetNumVertices()-1)
       { return to_3d(plg2d.Vertice0(j)); }
     GeomObj::list_Pos3d ListaVertices(void) const;
     Segment3d Lado0(unsigned int i) const;

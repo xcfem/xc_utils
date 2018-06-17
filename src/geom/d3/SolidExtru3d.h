@@ -90,9 +90,9 @@ class SolidExtru3d : public Solido3d
     inline virtual GEOM_FT Iz(void) const
       { return (scc.Ix()+scc.Iy())*l; }
 /*     inline Pos3d getCenterOfMassOfBase(unsigned short int i) const */
-/*     //Return el centro de gravedad de una de las bases. */
-/*     //0 la base inferior (z=-l/2) y 1 la */
-/*     //base superior (z=+l/2). */
+/*     //Return the center of mass of one of the bases. */
+/*     //0 bottom base (z=-l/2) and 1 top */
+/*     //base (z=+l/2). */
 /*       {  */
 /*         if(i) */
 /*           return scc.GetPosGlobal(Pos3d(0,0,l/2.0)); */
@@ -127,7 +127,7 @@ class SolidExtru3d : public Solido3d
         return 0.0;
       }
     BND3d Bnd(void) const
-    //Return la extension del objeto.
+    //Return la extension of the object.
       { return GeomObj3d::Bnd(); }
     matriz_FT I(void) const
       { return GeomObj3d::I(); }

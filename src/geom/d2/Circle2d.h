@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Circulo2d.h
+//Circle2d.h
 
-#ifndef CIRCULO2D_H
-#define CIRCULO2D_H
+#ifndef CIRCLE2D_H
+#define CIRCLE2D_H
 
 #include "Superficie2d.h"
 #include "../tipos_cgal.h"
@@ -35,27 +35,27 @@ class Poligono2d;
 //! @ingroup GEOM
 //
 //! @brief Círculo en dos dimensiones.
-class Circulo2d : public Superficie2d
+class Circle2d : public Superficie2d
   {
-    CGCirculo_2 cgcirc;
+    CGCircle_2 cgcirc;
 
   protected:
     void arc_points(const double &theta_inic,const double &delta_theta,MatrizPos2d &ptos) const;
   public:
-    Circulo2d(void) : Superficie2d(), cgcirc() {}
-    Circulo2d(const Pos2d &centro,const GEOM_FT &rad);
-    Circulo2d(const GEOM_FT &rad2,const Pos2d &centro);
-    Circulo2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3);
-    Circulo2d(const Circulo2d &otro)
+    Circle2d(void) : Superficie2d(), cgcirc() {}
+    Circle2d(const Pos2d &centro,const GEOM_FT &rad);
+    Circle2d(const GEOM_FT &rad2,const Pos2d &centro);
+    Circle2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3);
+    Circle2d(const Circle2d &otro)
      : Superficie2d(otro), cgcirc(otro.cgcirc) {}
-    Circulo2d &operator=(const Circulo2d &p)
+    Circle2d &operator=(const Circle2d &p)
       {
 	Superficie2d::operator=(p);
         cgcirc= p.cgcirc;
         return *this;
       }
     virtual Superficie2d *clon(void) const
-      { return new Circulo2d(*this); }
+      { return new Circle2d(*this); }
     Pos2d Centro(void) const;
     virtual Pos2d getCenterOfMass(void) const;
     Pos2d Point(const double &ang) const;
@@ -89,14 +89,14 @@ class Circulo2d : public Superficie2d
 
     void Transforma(const Trf2d &trf2d);
 
-    friend int operator ==(const Circulo2d &a,const Circulo2d &b)
+    friend int operator ==(const Circle2d &a,const Circle2d &b)
       { return ( a.cgcirc == b.cgcirc ); };
     
     void Print(std::ostream &os) const;
     void Plot(Plotter &) const;
   };
 
-Circulo2d Circulo2dRTT(const GEOM_FT &,const Recta2d &,const Recta2d &,const bool &left,const bool &far);
+Circle2d Circle2dRTT(const GEOM_FT &,const Recta2d &,const Recta2d &,const bool &left,const bool &far);
 
 #endif
 

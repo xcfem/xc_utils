@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Circulo2d.cc
+//Circle2d.cc
 
-#include "Circulo2d.h"
+#include "Circle2d.h"
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
 #include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
@@ -38,7 +38,7 @@
 //!
 //! Basado en Mathematical elements for computer graphics
 //! (Rogers and Adams) page 234 y siguientes.
-Circulo2d Circulo2dRTT(const GEOM_FT &radius,const Recta2d &p,const Recta2d &l,const bool &left,const bool &far)
+Circle2d Circle2dRTT(const GEOM_FT &radius,const Recta2d &p,const Recta2d &l,const bool &left,const bool &far)
   {
     std::cerr << __FUNCTION__
 	      << "; no está probada." << std::endl;
@@ -47,7 +47,7 @@ Circulo2d Circulo2dRTT(const GEOM_FT &radius,const Recta2d &p,const Recta2d &l,c
       {
         std::cerr << __FUNCTION__
 		  << "; error; parallel lines." << std::endl;
-        return Circulo2d();
+        return Circle2d();
       }
     else
       {
@@ -73,35 +73,35 @@ Circulo2d Circulo2dRTT(const GEOM_FT &radius,const Recta2d &p,const Recta2d &l,c
               k= -radius/costheta; //Coordenada y del centro expresada en locales.
           }
         const Pos2d centro= ref.GetPosGlobal(Pos2d(h,k)); //Centro del círculo.
-        return Circulo2d(centro,radius);
+        return Circle2d(centro,radius);
       }
   }
 
 //! @brief Build the circle from its center and its radius.
-Circulo2d::Circulo2d(const Pos2d &centro,const GEOM_FT &rad)
+Circle2d::Circle2d(const Pos2d &centro,const GEOM_FT &rad)
   : Superficie2d(), cgcirc(centro.ToCGAL(),rad*rad) {}
 
 //! @brief Build the circle from its center and its squared radius.
-Circulo2d::Circulo2d(const GEOM_FT &rad2,const Pos2d &centro)
+Circle2d::Circle2d(const GEOM_FT &rad2,const Pos2d &centro)
   : Superficie2d(), cgcirc(centro.ToCGAL(),rad2) {}
 
 //! @brief Build the circle from three points.
 //!
 //! Basado en Mathematical elements for computer graphics
 //! (Rogers and Adams) page 233.
-Circulo2d::Circulo2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3)
+Circle2d::Circle2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3)
   : Superficie2d(), cgcirc(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL())
   {}
-Pos2d Circulo2d::Centro(void) const
+Pos2d Circle2d::Centro(void) const
   { return Pos2d(cgcirc.center()); }
 
-//! @brief Return the posición del centro de gravedad del círculo.
-Pos2d Circulo2d::getCenterOfMass(void) const
+//! @brief Return the position of the center of mass.
+Pos2d Circle2d::getCenterOfMass(void) const
   { return Centro(); }
 
 //! @brief Return the point of the circle that corresponds to
 //! the parameter angle.
-Pos2d Circulo2d::Point(const double &ang) const
+Pos2d Circle2d::Point(const double &ang) const
   {
     const Pos2d o= Centro();
     const GEOM_FT r= getRadius();
@@ -111,12 +111,12 @@ Pos2d Circulo2d::Point(const double &ang) const
   }
 
 //! @brief Return the radius of the circle.
-GEOM_FT Circulo2d::getRadius(void) const
+GEOM_FT Circle2d::getRadius(void) const
   { return sqrt_FT(getSquaredRadius()); }
 
 //! @brief Return the angle between the line that passes through the center
 //! and the p point and the x axis.
-double Circulo2d::getAngle(const Pos2d &p) const
+double Circle2d::getAngle(const Pos2d &p) const
   {
     static const Vector2d horiz(1,0);
     Vector2d v1(Centro(),p);
@@ -125,34 +125,34 @@ double Circulo2d::getAngle(const Pos2d &p) const
   }
 
 //! @brief Return the length of the círcle.
-GEOM_FT Circulo2d::getLength(void) const
+GEOM_FT Circle2d::getLength(void) const
   { return M_PI_FT*Diametro(); }
 //! @brief Return the area of the circle.
-GEOM_FT Circulo2d::getArea(void) const
+GEOM_FT Circle2d::getArea(void) const
   { return M_PI_FT*getSquaredRadius(); }
 //! @brief Return the maximum value of the i coordinate of the points of the circle.
-GEOM_FT Circulo2d::GetMax(unsigned short int i) const
+GEOM_FT Circle2d::GetMax(unsigned short int i) const
   { return Centro()(i)+getRadius(); }
 //! @brief Return el valor mínimo of the i coordinate of the points of the circle.
-GEOM_FT Circulo2d::GetMin(unsigned short int i) const
+GEOM_FT Circle2d::GetMin(unsigned short int i) const
   { return Centro()(i)-getRadius(); }
 //! @brief Return el moment of inertia del círculo with respect to 
 //! axis parallel to x que pasa por su centro.
-GEOM_FT Circulo2d::Ix(void) const
+GEOM_FT Circle2d::Ix(void) const
   { return M_PI_FT/4*sqr(getSquaredRadius()); }
 
 
 //! @brief Return true if the point is on the circle.
-bool Circulo2d::In(const Pos2d &p, const double &tol) const
+bool Circle2d::In(const Pos2d &p, const double &tol) const
   { return (cgcirc.has_on_positive_side(p.ToCGAL()) || cgcirc.has_on_boundary(p.ToCGAL())); }
 
 
 //! @brief Return the angle included by the circle (2*pi).
-double Circulo2d::getIncludedAngle(void) const
+double Circle2d::getIncludedAngle(void) const
   { return 2*M_PI; }
 
 //! @brief Return n points equally espaces over the circle perimenter.
-void Circulo2d::arc_points(const double &theta_inic,const double &delta_theta,MatrizPos2d &ptos) const
+void Circle2d::arc_points(const double &theta_inic,const double &delta_theta,MatrizPos2d &ptos) const
   {
     const GEOM_FT r= getRadius();
     GEOM_FT x= r*double_to_FT(cos(theta_inic));
@@ -174,7 +174,7 @@ void Circulo2d::arc_points(const double &theta_inic,const double &delta_theta,Ma
   }
 
 //! @brief Return n points equally spaced over the cicumference.
-MatrizPos2d Circulo2d::getPointsOnPerimeter(const size_t &n,const double &theta_inic) const
+MatrizPos2d Circle2d::getPointsOnPerimeter(const size_t &n,const double &theta_inic) const
   {
     MatrizPos2d retval;
     if(n>0)
@@ -191,7 +191,7 @@ MatrizPos2d Circulo2d::getPointsOnPerimeter(const size_t &n,const double &theta_
   }
 
 //! @brief Return el polígono de n lados inscrito en la circunferencia que forma el perímetro.
-Poligono2d Circulo2d::getPoligonoInscrito(const size_t &n,const double &theta_inic) const
+Poligono2d Circle2d::getPoligonoInscrito(const size_t &n,const double &theta_inic) const
   {
     Poligono2d retval;
     const MatrizPos2d points= getPointsOnPerimeter(n,theta_inic);
@@ -202,19 +202,19 @@ Poligono2d Circulo2d::getPoligonoInscrito(const size_t &n,const double &theta_in
 
 //! @brief Aplica al objeto la transformación que se
 //! pasa como parámetro.
-void Circulo2d::Transforma(const Trf2d &trf2d)
+void Circle2d::Transforma(const Trf2d &trf2d)
   {
     const Pos2d pA= trf2d.Transforma(getCenterOfMass());
-    (*this)= Circulo2d(pA,getRadius());
+    (*this)= Circle2d(pA,getRadius());
   }
 
-void Circulo2d::Print(std::ostream &os) const
+void Circle2d::Print(std::ostream &os) const
   {
     os << "x centro: " << Centro().x() 
        << " y centro: " << Centro().y()
        << " radius: " << getRadius();
   }
-void Circulo2d::Plot(Plotter &plotter) const
+void Circle2d::Plot(Plotter &plotter) const
   {
     const Pos2d c= Centro();
     plotter.fcircle(c.x(),c.y(),getRadius());

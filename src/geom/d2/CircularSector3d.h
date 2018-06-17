@@ -19,30 +19,30 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SectorCircular2d.h
+//CircularSector2d.h
 
 #ifndef SECTORCIRCULAR3D_H
 #define SECTORCIRCULAR3D_H
 
 #include "D2to3d.h"
-#include "SectorCircular2d.h"
+#include "CircularSector2d.h"
 
 class Pos3d;
 
 //! @ingroup GEOM
 //
 //! @brief Sector de círculo en tres dimensiones.
-class SectorCircular3d : public D2to3d
+class CircularSector3d : public D2to3d
   {
-    SectorCircular2d sect_circ;
+    CircularSector2d sect_circ;
   public:
-    SectorCircular3d(void) : D2to3d(), sect_circ() {}
-    SectorCircular3d(const Pos3d centro,const GEOM_FT &rad,const double &th1,const double &th2);
-    SectorCircular3d(const GEOM_FT &rad2,const Pos3d &centro,const double &th1,const double &th2);
-    SectorCircular3d(const Pos3d &c,const double &r,const Vector3d &n,const Vector3d &Xaxis,const double &angIni,const double &angFin);
-    SectorCircular3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
-    SectorCircular3d(const SectorCircular3d &otro);
-    SectorCircular3d &operator=(const SectorCircular3d &p);
+    CircularSector3d(void) : D2to3d(), sect_circ() {}
+    CircularSector3d(const Pos3d centro,const GEOM_FT &rad,const double &th1,const double &th2);
+    CircularSector3d(const GEOM_FT &rad2,const Pos3d &centro,const double &th1,const double &th2);
+    CircularSector3d(const Pos3d &c,const double &r,const Vector3d &n,const Vector3d &Xaxis,const double &angIni,const double &angFin);
+    CircularSector3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
+    CircularSector3d(const CircularSector3d &otro);
+    CircularSector3d &operator=(const CircularSector3d &p);
     virtual D2to3d *clon(void) const;
     Pos3d Centro(void) const;
     Pos3d PInic(void) const;
@@ -89,7 +89,7 @@ class SectorCircular3d : public D2to3d
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const;
     MatrizPos3d getArcPoints(const size_t &n) const;
 
-    friend bool operator ==(const SectorCircular3d &a,const SectorCircular3d &b);
+    friend bool operator ==(const CircularSector3d &a,const CircularSector3d &b);
 
     
     void Print(std::ostream &os) const;

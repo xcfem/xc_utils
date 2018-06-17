@@ -19,12 +19,12 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SectorAnilloCircular2d.h
+//AnnulusSector2d.h
 
 #ifndef SECTORANILLOCIRCULAR2D_H
 #define SECTORANILLOCIRCULAR2D_H
 
-#include "SectorCircular2d.h"
+#include "CircularSector2d.h"
 
 class Pos2d;
 class MatrizPos2d;
@@ -33,25 +33,25 @@ class Poligono2d;
 //! @ingroup GEOM
 //
 //! @brief Sector de un anillo circular en dos dimensiones.
-class SectorAnilloCircular2d : public SectorCircular2d
+class AnnulusSector2d : public CircularSector2d
   {
     double inner_radius; //!< inner radius.
   protected:
-    SectorCircular2d getSector(const double &R) const;
-    SectorCircular2d SectorInterior(void) const;
+    CircularSector2d getSector(const double &R) const;
+    CircularSector2d SectorInterior(void) const;
   public:
-    SectorAnilloCircular2d(void) : SectorCircular2d(), inner_radius(0.0) {}
-    SectorAnilloCircular2d(const SectorCircular2d &c,const double &inner_radius);
-    SectorAnilloCircular2d(const SectorAnilloCircular2d &otro)
-      : SectorCircular2d(otro), inner_radius(otro.inner_radius) {}
-    SectorAnilloCircular2d &operator=(const SectorAnilloCircular2d &p)
+    AnnulusSector2d(void) : CircularSector2d(), inner_radius(0.0) {}
+    AnnulusSector2d(const CircularSector2d &c,const double &inner_radius);
+    AnnulusSector2d(const AnnulusSector2d &otro)
+      : CircularSector2d(otro), inner_radius(otro.inner_radius) {}
+    AnnulusSector2d &operator=(const AnnulusSector2d &p)
       {
-	SectorCircular2d::operator=(p);
+	CircularSector2d::operator=(p);
         inner_radius= p.inner_radius;
         return *this;
       }
     virtual Superficie2d *clon(void) const
-      { return new SectorAnilloCircular2d(*this); }
+      { return new AnnulusSector2d(*this); }
     virtual Pos2d getCenterOfMass(void) const;
     Pos2d PInicInt(void) const;
     Pos2d PInicExt(void) const;
@@ -86,7 +86,7 @@ class SectorAnilloCircular2d : public SectorCircular2d
     void Print(std::ostream &os) const;
   };
 
-bool operator==(const SectorAnilloCircular2d &a,const SectorAnilloCircular2d &b);
+bool operator==(const AnnulusSector2d &a,const AnnulusSector2d &b);
 
 #endif
 

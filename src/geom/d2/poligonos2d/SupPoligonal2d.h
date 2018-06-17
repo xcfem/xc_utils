@@ -83,7 +83,7 @@ class SupPoligonal2d: public Superficie2d
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Pxy(void) const;
 
-    GeomObj::list_Pos2d getPosTangAprox(const Vector2d &) const;
+    GeomObj::list_Pos2d getApproxTangentPositions(const Vector2d &) const;
 
     GEOM_FT DistSigno(const Pos2d &p,const bool &sentido_horario= false) const;
     GEOM_FT Dist(const Pos2d &p) const;

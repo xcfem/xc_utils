@@ -72,10 +72,10 @@ class Poligono2d: public SupPoligonal2d
                        InputIterator first,
                        InputIterator last)
       { cgpol.insert(i,first,last); }
-    void set(vertex_iterator pos,const Pos2d &p)
-      //Modifica la posición del vértice al que se refiere pos
-      //haciéndola igual a p.
-      { cgpol.set(pos,p.ToCGAL()); }
+    //! @brief Modifies the position of the i-th vertex
+    //! making it equal to the argument.
+    void set(vertex_iterator i,const Pos2d &p)
+      { cgpol.set(i,p.ToCGAL()); }
     void erase(vertex_iterator i)
     //Elimina el vértice al que se refiere i.
       { cgpol.erase(i); }
@@ -144,11 +144,12 @@ class Poligono2d: public SupPoligonal2d
     bool Overlap(const Polilinea2d &) const;
     bool Overlap(const Poligono2d &) const;
     bool Overlap(const std::list<Poligono2d> &) const;
+    //! @brief Return the position of the i-th vertex.
     inline Pos2d Vertice(unsigned int i) const
-      //Return la posición del vértice.
       { return Vertice0(i-1); }
+    //! @brief Return the position of the i-th vertex
+    //! (0 based: j=0..GetNumVertices()-1).
     inline Pos2d Vertice0(unsigned int j) const
-      //Return la posición del vértice de indice j (j=0..GetNumVertices()-1)
       { return cgpol.vertex(j); }
     GeomObj::list_Pos2d ListaVertices(void) const;
 

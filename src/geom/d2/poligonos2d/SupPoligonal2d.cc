@@ -191,7 +191,7 @@ GEOM_FT SupPoligonal2d::Pxy(void) const
 //! @brief Return the points for which the polygon is almost tangent
 //! to the direction argument.
 // XXX Posiblemente falle con polígonos no convexos.
-GeomObj::list_Pos2d SupPoligonal2d::getPosTangAprox(const Vector2d &v) const
+GeomObj::list_Pos2d SupPoligonal2d::getApproxTangentPositions(const Vector2d &v) const
   {
     const size_t sz= GetNumLados();
     std::vector<double> tangsEnVertices(sz+1);
@@ -237,7 +237,7 @@ GeomObj::list_Pos2d SupPoligonal2d::getPosTangAprox(const Vector2d &v) const
 //! The distance is computed as the maximum of:
 //! -The signed distances from the point to each of the half-planes
 //!  that contain a side.
-// If the vertices are in couterclockwise order, positive distances
+// If the vertices are in conterclockwise order, positive distances
 // correspond to point AT THE SAME SIDE OF THE POLYGON with respect
 // to the segment, otherwise the sign of the computed distance must
 // be changed.

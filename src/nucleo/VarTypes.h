@@ -55,7 +55,7 @@
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
-#include "xc_utils/src/geom/d2/Circulo2d.h"
+#include "xc_utils/src/geom/d2/Circle2d.h"
 #include "xc_utils/src/geom/d3/SemiEspacio3d.h"
 #include "xc_utils/src/geom/d3/poliedros3d/Poliedro3d.h"
 #include "xc_utils/src/geom/d3/poliedros3d/Tetraedro3d.h"

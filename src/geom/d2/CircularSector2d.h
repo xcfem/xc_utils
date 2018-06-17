@@ -19,12 +19,12 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SectorCircular2d.h
+//CircularSector2d.h
 
 #ifndef SECTORCIRCULAR2D_H
 #define SECTORCIRCULAR2D_H
 
-#include "Circulo2d.h"
+#include "Circle2d.h"
 
 class Pos2d;
 class MatrizPos2d;
@@ -32,15 +32,15 @@ class MatrizPos2d;
 //! @ingroup GEOM
 //
 //! @brief 2D circular sector.
-class SectorCircular2d : public Circulo2d
+class CircularSector2d : public Circle2d
   {
     double theta1; //!< Angle that defines the start point of the arc.
     double theta2; //!< Angle that defines the end point of the arc.
   public:
-    SectorCircular2d(void);
-    SectorCircular2d(const Circulo2d &c,const double &th1,const double &th2);
-    SectorCircular2d(const SectorCircular2d &otro);
-    SectorCircular2d &operator=(const SectorCircular2d &p);
+    CircularSector2d(void);
+    CircularSector2d(const Circle2d &c,const double &th1,const double &th2);
+    CircularSector2d(const CircularSector2d &otro);
+    CircularSector2d &operator=(const CircularSector2d &p);
     virtual Superficie2d *clon(void) const;
     virtual Pos2d getCenterOfMass(void) const;
     virtual Pos2d ArcCentroid(void) const;
@@ -74,8 +74,8 @@ class SectorCircular2d : public Circulo2d
     void Plot(Plotter &) const;
   };
 
-bool operator==(const SectorCircular2d &a,const SectorCircular2d &b);
-SectorCircular2d SectorCircular2dThreepoints(const Pos2d &,const Pos2d &,const Pos2d &);
+bool operator==(const CircularSector2d &a,const CircularSector2d &b);
+CircularSector2d CircularSector2dThreepoints(const Pos2d &,const Pos2d &,const Pos2d &);
 
 
 #endif

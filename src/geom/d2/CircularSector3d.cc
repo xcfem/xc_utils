@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SectorCircular3d.cc
+//CircularSector3d.cc
 
-#include "SectorCircular3d.h"
+#include "CircularSector3d.h"
 #include "../tipos_cgal.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_basic/src/util/matem.h"
@@ -34,11 +34,11 @@
 
 
 //! @brief Constructor de copia
-SectorCircular3d::SectorCircular3d(const SectorCircular3d &otro)
+CircularSector3d::CircularSector3d(const CircularSector3d &otro)
   : D2to3d(otro), sect_circ(otro.sect_circ) {}
 
 //! @brief Operador asignación.
-SectorCircular3d &SectorCircular3d::operator=(const SectorCircular3d &p)
+CircularSector3d &CircularSector3d::operator=(const CircularSector3d &p)
   {
     D2to3d::operator=(p);
     sect_circ= p.sect_circ;
@@ -46,100 +46,100 @@ SectorCircular3d &SectorCircular3d::operator=(const SectorCircular3d &p)
   }
 
 //! @brief Constructor virtual.
-D2to3d *SectorCircular3d::clon(void) const
-  { return new SectorCircular3d(*this); }
+D2to3d *CircularSector3d::clon(void) const
+  { return new CircularSector3d(*this); }
 
 //! @brief Constructor.
-SectorCircular3d::SectorCircular3d(const Pos3d centro,const GEOM_FT &rad,const double &th1,const double &th2)
+CircularSector3d::CircularSector3d(const Pos3d centro,const GEOM_FT &rad,const double &th1,const double &th2)
   : D2to3d(centro), sect_circ()
-  { sect_circ= SectorCircular2d(Circulo2d(to_2d(centro),rad),th1,th2); }
+  { sect_circ= CircularSector2d(Circle2d(to_2d(centro),rad),th1,th2); }
 
 //! @brief Constructor.
-SectorCircular3d::SectorCircular3d(const GEOM_FT &rad2,const Pos3d &centro,const double &th1,const double &th2)
+CircularSector3d::CircularSector3d(const GEOM_FT &rad2,const Pos3d &centro,const double &th1,const double &th2)
   : D2to3d(centro), sect_circ()
-  { sect_circ= SectorCircular2d(Circulo2d(rad2,to_2d(centro)),th1,th2); }
+  { sect_circ= CircularSector2d(Circle2d(rad2,to_2d(centro)),th1,th2); }
 
-SectorCircular3d::SectorCircular3d(const Pos3d &c,const double &r,const Vector3d &n,const Vector3d &Xaxis,const double &th1,const double &th2)
+CircularSector3d::CircularSector3d(const Pos3d &c,const double &r,const Vector3d &n,const Vector3d &Xaxis,const double &th1,const double &th2)
   : D2to3d(c,n,Xaxis), sect_circ()
-  { sect_circ= SectorCircular2d(Circulo2d(to_2d(c),r),th1,th2); }
+  { sect_circ= CircularSector2d(Circle2d(to_2d(c),r),th1,th2); }
 
  
-//! @brief Constructor; sector circular defined by three points p1->p2->p3.
-SectorCircular3d::SectorCircular3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
+//! @brief Constructor; circular sector defined by three points p1->p2->p3.
+CircularSector3d::CircularSector3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   : D2to3d(p1,p2,p3), sect_circ()
   {
     const Pos2d pA= to_2d(p1);
     const Pos2d pB= to_2d(p2);
     const Pos2d pC= to_2d(p3);
-    const Circulo2d C(pA,pB,pC);
+    const Circle2d C(pA,pB,pC);
     const Pos2d po= C.Centro();
     //Adjust the center and the coordinate system axis.
     ThreePoints(to_3d(po),p1,p3);
     const Pos2d pa= to_2d(p1);
     const Pos2d pb= to_2d(p2);
     const Pos2d pc= to_2d(p3);
-    sect_circ= SectorCircular2dThreepoints(pa,pb,pc);
+    sect_circ= CircularSector2dThreepoints(pa,pb,pc);
   }
 
 //! @brief Return el centro del círculo.
-Pos3d SectorCircular3d::Centro(void) const
+Pos3d CircularSector3d::Centro(void) const
   { return to_3d(sect_circ.Centro()); }
 
 //! @brief Return the point inicial del arco.
-Pos3d SectorCircular3d::PInic(void) const
+Pos3d CircularSector3d::PInic(void) const
   { return to_3d(sect_circ.PInic()); }
 
 //! @brief Return the point final del arco.
-Pos3d SectorCircular3d::PFin(void) const
+Pos3d CircularSector3d::PFin(void) const
   { return to_3d(sect_circ.PFin()); }
 
 //! @brief Return the point medio del arco.
-Pos3d SectorCircular3d::PMed(void) const
+Pos3d CircularSector3d::PMed(void) const
   { return to_3d(sect_circ.PMed()); }
 
-Pos3d SectorCircular3d::getCenterOfMass(void) const
+Pos3d CircularSector3d::getCenterOfMass(void) const
   { return Centro(); }
 
 //! @brief Return the position of the arc centroid.
-Pos3d SectorCircular3d::ArcCentroid(void) const
+Pos3d CircularSector3d::ArcCentroid(void) const
   { return to_3d(sect_circ.ArcCentroid()); }
 
-GEOM_FT SectorCircular3d::getSquaredRadius(void) const
+GEOM_FT CircularSector3d::getSquaredRadius(void) const
   { return sect_circ.getSquaredRadius(); }
-GEOM_FT SectorCircular3d::getRadius(void) const
+GEOM_FT CircularSector3d::getRadius(void) const
   { return sect_circ.getRadius(); }
-GEOM_FT SectorCircular3d::Diametro(void) const
+GEOM_FT CircularSector3d::Diametro(void) const
   { return sect_circ.Diametro(); }
 
-double SectorCircular3d::getAngle(const Pos3d &p) const
+double CircularSector3d::getAngle(const Pos3d &p) const
   { return sect_circ.getAngle(to_2d(p)); }
 
 //! @brief Returns the parameter of the point in the arc (distance to the arc's first point measured over the arc)
-double SectorCircular3d::getLambda(const Pos3d &p) const
+double CircularSector3d::getLambda(const Pos3d &p) const
   { return sect_circ.getLambda(to_2d(p)); }
 
-GEOM_FT SectorCircular3d::Ix(void) const
+GEOM_FT CircularSector3d::Ix(void) const
   { return sect_circ.Ix(); }
-GEOM_FT SectorCircular3d::Iy(void) const
+GEOM_FT CircularSector3d::Iy(void) const
   { return sect_circ.Iy(); }
-GEOM_FT SectorCircular3d::Pxy(void) const
+GEOM_FT CircularSector3d::Pxy(void) const
   { return sect_circ.Pxy(); }
-GEOM_FT SectorCircular3d::Iz(void) const
+GEOM_FT CircularSector3d::Iz(void) const
   { return sect_circ.Iz(); }
 
-GEOM_FT SectorCircular3d::GetMax(unsigned short int i) const
+GEOM_FT CircularSector3d::GetMax(unsigned short int i) const
   {
-    std::cerr << "SectorCircular3d::GetMax(i), not implemented." << std::endl;
+    std::cerr << "CircularSector3d::GetMax(i), not implemented." << std::endl;
     return 1;
   }
-GEOM_FT SectorCircular3d::GetMin(unsigned short int i) const
+GEOM_FT CircularSector3d::GetMin(unsigned short int i) const
   {
-    std::cerr << "SectorCircular3d::GetMin(i), not implemented." << std::endl;
+    std::cerr << "CircularSector3d::GetMin(i), not implemented." << std::endl;
     return -1;
   }
 
 //! @brief Return true if the point is in the plane.
-bool SectorCircular3d::In(const Pos3d &p, const double &tol) const
+bool CircularSector3d::In(const Pos3d &p, const double &tol) const
   {
     if(getPlane().In(p,tol))
       return sect_circ.In(to_2d(p),tol);
@@ -148,16 +148,16 @@ bool SectorCircular3d::In(const Pos3d &p, const double &tol) const
   }
 
 //! @brief Return n points equally spaced over the circle arc.
-MatrizPos3d SectorCircular3d::getArcPoints(const size_t &n) const
+MatrizPos3d CircularSector3d::getArcPoints(const size_t &n) const
   {
     MatrizPos3d retval= to_3d(sect_circ.getArcPoints(n));
     return retval;
   }
 
-void SectorCircular3d::Print(std::ostream &os) const
+void CircularSector3d::Print(std::ostream &os) const
   { os << sect_circ; }
 
-bool operator ==(const SectorCircular3d &a,const SectorCircular3d &b)
+bool operator ==(const CircularSector3d &a,const CircularSector3d &b)
   {
     if((const D2to3d &) a ==(const D2to3d &) b)  
       return ( a.sect_circ == b.sect_circ );

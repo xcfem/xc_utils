@@ -43,7 +43,7 @@
 #include "xc_utils/src/geom/d2/BND2d.h"
 #include "xc_utils/src/geom/d2/Superficie2d.h"
 #include "xc_utils/src/geom/d2/HalfPlane2d.h"
-#include "xc_utils/src/geom/d2/Circulo2d.h"
+#include "xc_utils/src/geom/d2/Circle2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/SupPoligonal2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Triangle2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Cuadrado2d.h"

@@ -85,7 +85,7 @@ double FunctionFromPointsR2_R::Min(void) const
     const row_column fc= PosMin();
     return Valor(fc.first,fc.second);
   }
-//! @brief Return the posición del valor mínimo de los valores definidos.
+//! @brief Return the position of the minimum value from the points.
 Pos2d FunctionFromPointsR2_R::getMinPoint(void) const
   {
     const row_column fc= PosMin();

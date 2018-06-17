@@ -38,7 +38,7 @@ FunctionFromPointsR_R &FunctionFromPointsR_R::operator=(const double &c)
     return *this;
   }
 
-//! @brief Return the posición del máximo.
+//! @brief Return the position of the maximum.
 FunctionFromPointsR_R::const_iterator FunctionFromPointsR_R::PosMax(void) const
   {
     const_iterator i= begin();
@@ -52,7 +52,7 @@ FunctionFromPointsR_R::const_iterator FunctionFromPointsR_R::PosMax(void) const
         }
     return retval;
   }
-//! @brief Return the posición del mínimo.
+//! @brief Return the position of the minimum.
 FunctionFromPointsR_R::const_iterator FunctionFromPointsR_R::PosMin(void) const
   {
     const_iterator i= begin();

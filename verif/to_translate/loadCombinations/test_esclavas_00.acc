@@ -47,30 +47,30 @@
 
     \genera_combinaciones{}
 
-    \def_prop["coeficientes_elu_persistentes","m_double"]{}
-    \def_prop["coeficientesRef_elu_persistentes","m_double"]{[[1,0,0,0],[1.35,0,0,0],[1,1.5,0,0],[1,1.5,0,1.05],[1,0,1.5,0],[1,1.05,0,1.5],[1.35,1.5,0,0],[1.35,1.5,0,1.05],[1.35,0,1.5,0],[1.35,1.05,0,1.5]]}
-    \def_prop["resta_elu_persistentes","m_double"]{}
-    \def_prop["ratio_elu_persistentes","double"]{}
+    def_prop["coeficientes_elu_persistentes","m_double"]{}
+    def_prop["coeficientesRef_elu_persistentes","m_double"]{[[1,0,0,0],[1.35,0,0,0],[1,1.5,0,0],[1,1.5,0,1.05],[1,0,1.5,0],[1,1.05,0,1.5],[1.35,1.5,0,0],[1.35,1.5,0,1.05],[1.35,0,1.5,0],[1.35,1.05,0,1.5]]}
+    def_prop["resta_elu_persistentes","m_double"]{}
+    ratio_elu_persistentes= 
     \combinaciones
       {
         \comb_elu_persistentes
           {
-            \set{coeficientes_elu_persistentes= @getCoeficientes(["PP1","SC1","SC2","F1"])}
-            \set{resta_elu_persistentes= @coeficientes_elu_persistentes-@coeficientesRef_elu_persistentes}
-            \set{ratio_elu_persistentes= @abs(@resta_elu_persistentes)}
+            coeficientes_elu_persistentes= @getCoeficientes(["PP1","SC1","SC2","F1"])
+            resta_elu_persistentes= @coeficientes_elu_persistentes-@coeficientesRef_elu_persistentes
+            ratio_elu_persistentes= @abs(@resta_elu_persistentes)
           }
       }
 \c{
-    \print{"coeficientes_elu_persistentes= ",@coeficientes_elu_persistentes,"\n"}
-    \print{"coeficientesRef_elu_persistentes= ",@coeficientesRef_elu_persistentes,"\n"}
-    \print{"resta_elu_persistentes= ",@resta_elu_persistentes,"\n"}
-    \print{"ratio_elu_persistentes= ",@ratio_elu_persistentes,"\n"}
+    print "coeficientes_elu_persistentes= ",@coeficientes_elu_persistentes,"\n"
+    print "coeficientesRef_elu_persistentes= ",@coeficientesRef_elu_persistentes,"\n"
+    print "resta_elu_persistentes= ",@resta_elu_persistentes,"\n"
+    print "ratio_elu_persistentes= ",@ratio_elu_persistentes,"\n"
   }
 
     \if(@ratio_elu_persistentes<1e-6)
       {
-        \then{\print{"test esclavas 00: ok.\n"}}
-        \else{\print{"test esclavas 00: ERROR.\n"}}
+        \then{print "test esclavas 00: ok.\n"}
+        \else{print "test esclavas 00: ERROR.\n"}
       }
     
   }
