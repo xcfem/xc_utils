@@ -78,10 +78,12 @@ Poligono2d::Poligono2d(const std::list<Poligono2d> &lp)
       {
         (*this)= *lp.begin();
         if(lp.size()>1)
-	  std::cerr << "Poligono2d::Poligono2d; la lista contiene más de un polígono." << std::endl;
+	  std::cerr << getClassName() << "::" << __FUNCTION__
+		    << "; list contains more than a polygon." << std::endl;
       }
     else
-      std::cerr << "Poligono2d::Poligono2d; la lista está vacía." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+		<< "; empty list argument." << std::endl;
   }
 
 //! @brief Constructor virtual.
@@ -104,7 +106,8 @@ Poligono2d Poligono2d::Offset(const GEOM_FT &d) const
     if(!offset_polygons.empty())
       {
         if(offset_polygons.size()!=1)
-          std::cerr << "Poligono2d::Offset; se obtuvo más de un polígono" << std::endl;
+          std::cerr << getClassName() << "::" << __FUNCTION__
+		    << "; we get more than a polygon." << std::endl;
         retval.cgpol= *offset_polygons[0];
       }
     return retval;
@@ -383,7 +386,8 @@ Poligono2d Poligono2d::getUnion(const Poligono2d &otro) const
     if(!polUnion.empty())
       retval= Poligono2d(polUnion);
     else
-      std::cerr << "Error en unión de polígonos." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; unknown error." << std::endl;
     return retval;
   }
 
@@ -392,12 +396,13 @@ void Poligono2d::une(const Poligono2d &otro)
 
 void Poligono2d::une(const std::list<Poligono2d> &l)
   {
-    const std::string str_error= "Poligono2d::une; error en unión de polígono con lista.";
+    const std::string str_error= "; error en unión de polígono con lista.";
     if(!l.empty())
       {
         const std::list<Poligono2d> tmp= join(l,*this);
         if(tmp.empty())
-          std::cerr << str_error << " La unión está vacía." << std::endl;
+          std::cerr << getClassName() << "::" << __FUNCTION__
+		    << str_error << " Union is empty." << std::endl;
         else
           (*this)= Poligono2d(tmp);
       }
