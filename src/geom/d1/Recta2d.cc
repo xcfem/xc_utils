@@ -259,7 +259,7 @@ Recta2d Recta2d::Offset(const Vector2d &v) const
     return Recta2d(p,VDir());
   }
 
-//! @brief Return the recta paralela a ésta que pasa por p.
+//! @brief Return a parallel line passing through p.
 Recta2d Recta2d::Paralela(const Pos2d &p) const
   {
     const Vector2d v= p-Point();
