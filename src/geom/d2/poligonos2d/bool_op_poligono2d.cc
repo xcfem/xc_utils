@@ -296,16 +296,16 @@ std::list<Poligono2d> clip(const std::list<Poligono2d> &l,const Poligono2d &p)
   }
 
 //! @brief Return the intersection de los dos polígonos.
-std::list<Poligono2d> interseccion(const Poligono2d &p1,const Poligono2d &p2)
+std::list<Poligono2d> intersection(const Poligono2d &p1,const Poligono2d &p2)
   { return Nef_2_to_Poligono2d(interseca(p1,p2)); }
 
 //! @brief Return la intersection of the polygon and the half plane.
-std::list<Poligono2d> interseccion(const Poligono2d &p,const HalfPlane2d &sp)
+std::list<Poligono2d> intersection(const Poligono2d &p,const HalfPlane2d &sp)
   { return Nef_2_to_Poligono2d(interseca(p,sp)); }
 
 //! @brief Return the intersection of the polygons in the list with the
 //! half plane.
-std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l,const HalfPlane2d &sp)
+std::list<Poligono2d> intersection(const std::list<Poligono2d> &l,const HalfPlane2d &sp)
   {
     std::list<Poligono2d> retval;
     if(!l.empty())
@@ -313,7 +313,7 @@ std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l,const HalfPlan
         std::list<Poligono2d> tmpLst;
         for(std::list<Poligono2d>::const_iterator i= l.begin();i!=l.end();i++)
           {
-            tmpLst= interseccion(*i,sp);
+            tmpLst= intersection(*i,sp);
             if(!tmpLst.empty())
               retval.insert(retval.end(),tmpLst.begin(),tmpLst.end());
           }
@@ -324,7 +324,7 @@ std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l,const HalfPlan
 
 //! @brief Return los polígonos que resultan de intersecar los de la lista
 //! con el que se pasa como parámetro.
-std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l,const Poligono2d &p)
+std::list<Poligono2d> intersection(const std::list<Poligono2d> &l,const Poligono2d &p)
   {
     const std::list<Poligono2d> retval= clip(l,p);
     return join(retval);
@@ -332,7 +332,7 @@ std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l,const Poligono
 
 //! @brief Return los polígonos que resultan de intersecar los de la lista
 //! l1 con cada uno de los de la lista l2.
-std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l1,const std::list<Poligono2d> &l2)
+std::list<Poligono2d> intersection(const std::list<Poligono2d> &l1,const std::list<Poligono2d> &l2)
   {
     std::list<Poligono2d> retval;
     if(!l2.empty())
@@ -340,7 +340,7 @@ std::list<Poligono2d> interseccion(const std::list<Poligono2d> &l1,const std::li
         std::list<Poligono2d> tmpLst;
         for(std::list<Poligono2d>::const_iterator i= l2.begin();i!=l2.end();i++)
           {
-            tmpLst= interseccion(l1,*i);
+            tmpLst= intersection(l1,*i);
             if(!tmpLst.empty())
               retval.insert(retval.end(),tmpLst.begin(),tmpLst.end());
           }
@@ -357,8 +357,8 @@ void particiona(const Pos2d &c1,Poligono2d &p1,const Pos2d &c2,Poligono2d &p2)
         const Recta2d m= mediatriz(c1,c2);
         const HalfPlane2d sp1(m,c1);
         const HalfPlane2d sp2(m,c2);
-        p1= Poligono2d(interseccion(p1,sp1));
-        p2= Poligono2d(interseccion(p2,sp2));
+        p1= Poligono2d(intersection(p1,sp1));
+        p2= Poligono2d(intersection(p2,sp2));
       }
   }
 
@@ -383,8 +383,8 @@ void particiona(const Pos2d &c1,std::list<Poligono2d> &lp1,const Pos2d &c2,std::
         const Recta2d m= mediatriz(c1,c2);
         const HalfPlane2d sp1(m,c1);
         const HalfPlane2d sp2(m,c2);
-        lp1= interseccion(lp1,sp1);
-        lp2= interseccion(lp2,sp2);
+        lp1= intersection(lp1,sp1);
+        lp2= intersection(lp2,sp2);
       }
   }
 

@@ -168,7 +168,9 @@ GTSSurface BoolOp(const GTSSurfaceIntersection &si,GTSSurface &s1, GTSSurface &s
     g_assert(si.Check(closed));
     if(!closed)
       {
-        cerr << "BoolOp: la intersección de s1 y s2 no es una curva cerrada" << endl;
+        cerr << __FUNCTION__
+	     << "; the intersection of s1 and s2 is not a closed curve."
+	     << endl;
         return retval;
       }
     retval= si.bool_op(str_op,s2);

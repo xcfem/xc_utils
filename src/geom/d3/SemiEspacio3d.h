@@ -103,7 +103,7 @@ inline bool operator!=(const SemiEspacio3d &r1,const SemiEspacio3d &r2)
 
 TripletMap<Pos3d> intersection_points(const std::deque<SemiEspacio3d> &);
 TripletMap<Pos3d> vertices_poliedro(const std::deque<SemiEspacio3d> &, const double &tol= 1e-10);
-std::deque<Recta3d> rectas_interseccion(const std::deque<SemiEspacio3d> &);
+std::deque<Recta3d> rectas_intersection(const std::deque<SemiEspacio3d> &);
 std::deque<Vector3d> vectores_normales(const std::deque<SemiEspacio3d> &);
 
 GEOM_FT angle(const SemiEspacio3d &,const SemiEspacio3d &);

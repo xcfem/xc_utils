@@ -80,7 +80,7 @@ GeomObj3d::list_Pos3d Polilinea3d::getIntersection(const Plane &p) const
     for(register list_Pos3d::const_iterator j=begin();j != end();j++)
       {
         s= getSegment(j);
-        list_Pos3d lp= interseccion(p,s);
+        list_Pos3d lp= intersection(p,s);
         retval.insert(i,lp.begin(),lp.end());
         i= retval.end();
       }
@@ -130,7 +130,7 @@ Polilinea3d Polilinea3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 // //! given by the equation coord_i= d
 // Polilinea3d::list_Pos3d Polilinea3d::Int(unsigned short int i,const double &d) const
 //   {
-//     list_Pos3d l_int; //Lista de intersecciones
+//     list_Pos3d l_int; //List of intersections
 // 	list_Pos3d::const_iterator ultimo= end();
 //     ultimo--;
 //     for(register list_Pos3d::const_iterator j= begin();j != ultimo;j++)
@@ -148,7 +148,7 @@ Polilinea3d Polilinea3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 //    //equation coord_i= d
 // Polilinea3d Polilinea3d::Corta(unsigned short int i,const double &d) const
 //   {
-//     Polilinea3d result; //Lista de intersecciones
+//     Polilinea3d result; //List of intersections
 // 	list_Pos3d::const_iterator ultimo= end();
 //     ultimo--;
 //     for(register list_Pos3d::const_iterator j=begin();j != ultimo;j++)

@@ -99,14 +99,14 @@ bool GTSSurface::IsOpen(void) const
   { return !IsClosed();}
 bool GTSSurface::IsOrientable(void) const
   { return gts_surface_is_orientable(s); }
-GTSSurface GTSSurface::AutoInterseca(void) const
+GTSSurface GTSSurface::selfIntersecting(void) const
   { return GTSSurface(gts_surface_is_self_intersecting(s)); }
 bool GTSSurface::Vacia(void) const
   { return (s == nullptr); }
 bool GTSSurface::CheckSelfIntersection(bool verbose) const
 //Return verdadero si la superficie interseca consigo misma.
   {
-    GTSSurface self_intersects= AutoInterseca();
+    GTSSurface self_intersects= selfIntersecting();
     if(!self_intersects.Vacia())
       {
 	std::cerr << "CheckSelfIntersection: la superficie interseca con sí misma." << std::endl;
@@ -176,7 +176,7 @@ GTSSurface Union(const GTSSurface &a,const GTSSurface &b,bool check_self_interse
     GTSSurfaceIntersection si(gts_surface_inter_class(),s1, s2);
     return BoolOp(si,s1,s2,"union",check_self_intersection,verbose);
   }
-GTSSurface Interseccion(const GTSSurface &a,const GTSSurface &b,bool check_self_intersection,bool verbose)
+GTSSurface intersection(const GTSSurface &a,const GTSSurface &b,bool check_self_intersection,bool verbose)
   {
     GTSSurface s1(a), s2(b);
     GTSSurfaceIntersection si(gts_surface_inter_class(),s1, s2);

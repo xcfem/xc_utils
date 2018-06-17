@@ -79,9 +79,11 @@ ListaPos2d ListaPos2d::Offset(const GEOM_FT &d) const
             Pos2d ptIntersection= intersection_point(r1,r2);
             retval.appendPoint(ptIntersection);
             if(!ptIntersection.exists())
-	      std::cerr << "ListaPos2d::Offset; no se encontró la intersección"
-                        << " entre las rectas r1: "
-                        << r1 << " y r2: " << r2 << std::endl;
+	      std::cerr << getClassName() << "::" << __FUNCTION__
+		        << "; itersection of lines"
+                        << " r1: "
+                        << r1 << " andr2: " << r2
+			<< " not found." << std::endl;
             r1= r2;
           }
         retval.appendPoint(s2.Destino());

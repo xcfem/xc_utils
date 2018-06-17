@@ -85,10 +85,10 @@ double (Plane::*getAngleWithVector3d)(const Vector3d &) const= &Plane::getAngle;
 Pos3d (Plane::*Pos3dProjection)(const Pos3d &) const= &Plane::Projection;
 Vector3d (Plane::*Vector3dProjection)(const Vector3d &) const= &Plane::Projection;
 Recta3d (Plane::*Recta3dProjection)(const Recta3d &) const= &Plane::Projection;
-Recta3d (Plane::*IntersPlane)(const Plane &p) const= &Plane::Interseccion;
-Pos3d (Plane::*IntersRecta3d)(const Recta3d &p) const= &Plane::Interseccion;
-Pos3d (Plane::*IntersSemiRecta3d)(const SemiRecta3d &p) const= &Plane::Interseccion;
-Pos3d (Plane::*IntersSegment3d)(const Segment3d &p) const= &Plane::Interseccion;
+Recta3d (Plane::*IntersPlane)(const Plane &p) const= &Plane::getIntersection;
+Pos3d (Plane::*IntersRecta3d)(const Recta3d &p) const= &Plane::getIntersection;
+Pos3d (Plane::*IntersSemiRecta3d)(const SemiRecta3d &p) const= &Plane::getIntersection;
+Pos3d (Plane::*IntersSegment3d)(const Segment3d &p) const= &Plane::getIntersection;
 class_<Plane, bases<Superficie3d> >("Plane3d")
   .def(init<Pos3d,Pos3d,Pos3d>())
   .def(init<Pos3d,Vector3d>())

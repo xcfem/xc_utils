@@ -83,7 +83,7 @@ GEOM_FT SemiEspacio3d::getAngle(const Vector3d &v) const
 //! @brief Return la arista de the intersection entre semiespacios.
 Recta3d SemiEspacio3d::getLima(const SemiEspacio3d &se) const
   {
-     const Recta3d retval= lim.Interseccion(se.lim);
+     const Recta3d retval= lim.getIntersection(se.lim);
      if(!retval.exists())
        std::cerr << getClassName() << "::" << __FUNCTION__
 	         << "; the half space boundaries doesn't intersect."
@@ -198,14 +198,14 @@ TripletMap<Pos3d> vertices_poliedro(const std::deque<SemiEspacio3d> &se, const d
   }
 
 //! @brief Return las rectas de intersection entre los semiespacios.
-std::deque<Recta3d> rectas_interseccion(const std::deque<SemiEspacio3d> &se)
+std::deque<Recta3d> rectas_intersection(const std::deque<SemiEspacio3d> &se)
   {
     std::deque<Recta3d> retval;
     const size_t sz= se.size();
     for(size_t i=0;i<sz;i++)
       for(size_t j=i+1;j<sz;j++)
         {
-          const Recta3d r= recta_interseccion(se[i].getPlane(),se[j].getPlane());
+          const Recta3d r= intersection_line(se[i].getPlane(),se[j].getPlane());
           if(r.exists())
             retval.push_back(r);
         }

@@ -75,7 +75,7 @@ Pos3d SVD3d::PointOfApplication(const Plane &p) const
     if(ExisteRectaMomNulo())
       {
         Recta3d r= RectaMomNulo();
-        GeomObj::list_Pos3d ptos= interseccion(p,r);
+        GeomObj::list_Pos3d ptos= intersection(p,r);
         if(ptos.size()>0)
           retval= (*ptos.begin());
         else

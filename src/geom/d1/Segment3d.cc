@@ -156,10 +156,10 @@ Pos3d Segment3d::getCenterOfMass(void) const
 
 //! @brief Return the intersection of the segment and the line,
 //! if it doesn't exists return an empty list.
-GeomObj3d::list_Pos3d Segment3d::Interseccion(const Recta3d &r) const
+GeomObj3d::list_Pos3d Segment3d::getIntersection(const Recta3d &r) const
   {
     const Recta3d sop= RectaSoporte();
-    GeomObj3d::list_Pos3d retval= sop.Interseccion(r);
+    GeomObj3d::list_Pos3d retval= sop.getIntersection(r);
     if(!retval.empty()) //Intersection exists.
       {
         const Pos3d &pint= *retval.begin();
@@ -171,10 +171,10 @@ GeomObj3d::list_Pos3d Segment3d::Interseccion(const Recta3d &r) const
 
 //! @brief Return the intersection of the ray and the segment, if
 //! the intersection doesn't exists returns an empty list.
-GeomObj3d::list_Pos3d Segment3d::Interseccion(const SemiRecta3d &sr) const
+GeomObj3d::list_Pos3d Segment3d::getIntersection(const SemiRecta3d &sr) const
   {
     const Recta3d sop= RectaSoporte();
-    GeomObj3d::list_Pos3d retval= sr.Interseccion(sop);
+    GeomObj3d::list_Pos3d retval= sr.getIntersection(sop);
     if(!retval.empty()) //Intersection exists.
       {
         const Pos3d &pint= *retval.begin();
@@ -186,10 +186,10 @@ GeomObj3d::list_Pos3d Segment3d::Interseccion(const SemiRecta3d &sr) const
 
 //! @brief Return the intersection of the line with the plane defined
 //! by the equation coord_i=cte.
-GeomObj3d::list_Pos3d Segment3d::Interseccion(unsigned short int i, const double &d) const
+GeomObj3d::list_Pos3d Segment3d::getIntersection(unsigned short int i, const double &d) const
   {
     GeomObj3d::list_Pos3d lp;
-    lp= RectaSoporte().Interseccion(i,d);
+    lp= RectaSoporte().getIntersection(i,d);
     if(!lp.empty())
       {
         const Vector3d i_= VDir();
@@ -203,10 +203,10 @@ GeomObj3d::list_Pos3d Segment3d::Interseccion(unsigned short int i, const double
 
 //! @brief Return the intersection of the segments, if
 //! the intersection doesn't exists returns an empty list.
-GeomObj3d::list_Pos3d Segment3d::Interseccion(const Segment3d &sg2) const
+GeomObj3d::list_Pos3d Segment3d::getIntersection(const Segment3d &sg2) const
   {
     const Recta3d sop= RectaSoporte();
-    GeomObj3d::list_Pos3d retval= sg2.Interseccion(sop);
+    GeomObj3d::list_Pos3d retval= sg2.getIntersection(sop);
     if(!retval.empty()) //Intersection exists
       {
         const Pos3d &pint= *retval.begin(); //This point is on sg2 and on

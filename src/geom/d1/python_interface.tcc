@@ -28,7 +28,7 @@ class_<SemiRecta2d, bases<Linea2d> >("SemiRecta2d")
 
 Recta2d (Recta2d::*OffsetVector)(const Vector2d &v) const= &Recta2d::Offset;
 Recta2d (Recta2d::*OffsetDouble)(const GEOM_FT &) const= &Recta2d::Offset;
-GeomObj::list_Pos2d (Recta2d::*intersectionWithR2D)(const Recta2d &) const= &Recta2d::Interseccion;
+GeomObj::list_Pos2d (Recta2d::*intersectionWithR2D)(const Recta2d &) const= &Recta2d::getIntersection;
 Pos2d (Recta2d::*Pos2dProj)(const Pos2d &) const= &Recta2d::Projection;
 Vector2d (Recta2d::*Vector2dProj)(const Vector2d &) const= &Recta2d::Projection;
 class_<Recta2d, bases<Linea2d> >("Recta2d")
@@ -88,9 +88,9 @@ class_<Recta3d, bases<Linea3d> >("Recta3d")
   .def("distPto", &Recta3d::dist,"return the distance to the point.")
  ;
 
-GeomObj::list_Pos2d (Polilinea2d::*intersectionWithLine)(const Recta2d &) const= &Polilinea2d::Interseccion;
-GeomObj::list_Pos2d (Polilinea2d::*intersectionWithRay)(const SemiRecta2d &) const= &Polilinea2d::Interseccion;
-GeomObj::list_Pos2d (Polilinea2d::*intersectionWithSegment)(const Segment2d &) const= &Polilinea2d::Interseccion;
+GeomObj::list_Pos2d (Polilinea2d::*intersectionWithLine)(const Recta2d &) const= &Polilinea2d::getIntersection;
+GeomObj::list_Pos2d (Polilinea2d::*intersectionWithRay)(const SemiRecta2d &) const= &Polilinea2d::getIntersection;
+GeomObj::list_Pos2d (Polilinea2d::*intersectionWithSegment)(const Segment2d &) const= &Polilinea2d::getIntersection;
 void (Polilinea2d::*simplify2DPoly)(GEOM_FT epsilon)= &Polilinea2d::simplify;
 Segment2d (Polilinea2d::*get2DSegment)(const size_t &) const= &Polilinea2d::getSegment;
 class_<Polilinea2d, bases<Linea2d, poliPos2d> >("Polilinea2d")

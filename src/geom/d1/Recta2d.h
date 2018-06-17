@@ -121,9 +121,9 @@ class Recta2d : public Linea2d
     Recta2d Offset(const GEOM_FT &d) const;
     void Put(const Pos2d &p1,const Pos2d &p2);
 
-    bool Interseca(const Recta2d &r2) const;
-    GeomObj2d::list_Pos2d Interseccion(unsigned short int i, const double &d) const;
-    GeomObj2d::list_Pos2d Interseccion(const Recta2d &r2) const;
+    bool intersects(const Recta2d &r2) const;
+    GeomObj2d::list_Pos2d getIntersection(unsigned short int i, const double &d) const;
+    GeomObj2d::list_Pos2d getIntersection(const Recta2d &r2) const;
 
     bool Paralela(const Recta2d &r) const;
 
@@ -174,7 +174,7 @@ inline bool paralelas(const Recta2d &r1,const Recta2d &r2)
   { return r1.Paralela(r2); }
 
 bool intersecan(const Recta2d &r1,const Recta2d &r2);
-GeomObj2d::list_Pos2d interseccion(const Recta2d &r1,const Recta2d &r2);
+GeomObj2d::list_Pos2d intersection(const Recta2d &r1,const Recta2d &r2);
 Pos2d intersection_point(const Recta2d &, const Recta2d &);
 
 bool colineales(const Recta2d &r1,const Recta2d &r2);

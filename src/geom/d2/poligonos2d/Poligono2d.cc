@@ -150,7 +150,7 @@ bool Poligono2d::Overlap(const Segment2d &sg) const
       retval= true;
     else
       {
-        GeomObj::list_Pos2d tmp= GetPolilinea().Interseccion(sg);
+        GeomObj::list_Pos2d tmp= GetPolilinea().getIntersection(sg);
         retval= !tmp.empty();
       }
     return retval;
@@ -266,8 +266,8 @@ std::list<Poligono2d> corta(const Poligono2d &p,const Recta2d &r)
     if(!intersecan(p.Bnd(),r)) return retval;
     HalfPlane2d sp1(r);
     HalfPlane2d sp2= sp1.GetSwap();
-    retval= interseccion(p,sp1);
-    const std::list<Poligono2d> inter2= interseccion(p,sp2);
+    retval= intersection(p,sp1);
+    const std::list<Poligono2d> inter2= intersection(p,sp2);
     retval.insert(retval.end(),inter2.begin(),inter2.end());
     return retval;
   }
@@ -364,16 +364,15 @@ std::list<Poligono2d> Poligono2d::Clip(const BND2d &bnd) const
 //! @brief Return the polygons that result from clipping this one
 //! with the polygon argument.
 std::list<Poligono2d> Poligono2d::Clip(const Poligono2d &otro) const
-  { return interseccion(*this,otro); }
+  { return intersection(*this,otro); }
 
 //! @brief Clip this polygont with the polygon argument.
 void Poligono2d::clipBy(const Poligono2d &plg)
   { (*this)= Poligono2d(Clip(plg)); }
 
-//! @brief Return la intersección de este polígono con el que
-//! se pasa como parámetro.
-std::list<Poligono2d> Poligono2d::Interseccion(const HalfPlane2d &sp) const
-  { return interseccion(*this,sp); }
+//! @brief Return the intersection with the polygon parameter.
+std::list<Poligono2d> Poligono2d::getIntersection(const HalfPlane2d &sp) const
+  { return intersection(*this,sp); }
 
 //! @brief Return la unión de este polígono con el que
 //! se pasa como parámetro.

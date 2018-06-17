@@ -69,12 +69,12 @@ bool SemiRecta3d::Paralela(const SemiRecta3d &r) const
 bool SemiRecta3d::Paralela(const Recta3d &r) const
   { return (GetDir()== r.GetDir()); }
 
-//! @brief Return the point intersection de recta and semirrecta, if doesn't exists la
-//! intersection devuelve la lista vacía.
-GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(const Recta3d &r) const
+//! @brief Return the intersection point with the argument line
+//! if it doesn't exist return an empty list.
+GeomObj3d::list_Pos3d SemiRecta3d::getIntersection(const Recta3d &r) const
   {
     const Recta3d sop= RectaSoporte();
-    GeomObj3d::list_Pos3d retval= sop.Interseccion(r);
+    GeomObj3d::list_Pos3d retval= sop.getIntersection(r);
     if(!retval.empty()) //Intersection exists.
       {
         const Pos3d &pint= *retval.begin();
@@ -86,10 +86,10 @@ GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(const Recta3d &r) const
 
 //! @brief Return the intersection de la semirrecta with the plane
 //! defined by the equation coord_i= d.
-GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(unsigned short int i, const double &d) const
+GeomObj3d::list_Pos3d SemiRecta3d::getIntersection(unsigned short int i, const double &d) const
   {
     GeomObj3d::list_Pos3d lp;
-    lp= RectaSoporte().Interseccion(i,d);
+    lp= RectaSoporte().getIntersection(i,d);
     if(!lp.empty())
       {
         const Vector3d i_= VDir();
@@ -102,10 +102,10 @@ GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(unsigned short int i, const doub
 
 //! @brief Return the point intersection de ambas semirectas, if doesn't exists
 //! intersection devuelve la lista vacía.
-GeomObj3d::list_Pos3d SemiRecta3d::Interseccion(const SemiRecta3d &sr) const
+GeomObj3d::list_Pos3d SemiRecta3d::getIntersection(const SemiRecta3d &sr) const
   {
     const Recta3d sop1= RectaSoporte();
-    GeomObj3d::list_Pos3d retval= sr.Interseccion(sop1);
+    GeomObj3d::list_Pos3d retval= sr.getIntersection(sop1);
     if(!retval.empty()) //Intersection exists.
       {
         const Pos3d &pint= *retval.begin();

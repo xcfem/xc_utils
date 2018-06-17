@@ -90,15 +90,15 @@ class HalfPlane2d : public Superficie2d
 
     HalfPlane2d getNormalizado(void) const;
 
-    inline bool Interseca(const HalfPlane2d &r2) const
-      { return lim.Interseca(r2.lim); }
-    inline bool Interseca(const Recta2d &r) const
-      { return lim.Interseca(r); }
-    bool Interseca(const SemiRecta2d &sr) const;
-    bool Interseca(const Segment2d &sg) const;
-    GmGrupo2d Interseccion(const Recta2d &r) const;
-    GmGrupo2d Interseccion(const SemiRecta2d &sr) const;
-    GmGrupo2d Interseccion(const Segment2d &sg) const;
+    inline bool intersects(const HalfPlane2d &r2) const
+      { return lim.intersects(r2.lim); }
+    inline bool intersects(const Recta2d &r) const
+      { return lim.intersects(r); }
+    bool intersects(const SemiRecta2d &sr) const;
+    bool intersects(const Segment2d &sg) const;
+    GmGrupo2d getIntersection(const Recta2d &r) const;
+    GmGrupo2d getIntersection(const SemiRecta2d &sr) const;
+    GmGrupo2d getIntersection(const Segment2d &sg) const;
 
     //! @brief Return the length of the object.
     inline virtual GEOM_FT getLength(void) const
@@ -138,25 +138,25 @@ inline bool operator!=(const HalfPlane2d &r1,const HalfPlane2d &r2)
   { return !(r1==r2); }
 
 inline bool intersecan(const HalfPlane2d &sp1,const HalfPlane2d &sp2)
-  { return sp1.Interseca(sp2); }
+  { return sp1.intersects(sp2); }
 inline bool intersecan(const HalfPlane2d &sp,const Recta2d &r)
-  { return sp.Interseca(r); }
+  { return sp.intersects(r); }
 inline bool intersecan(const HalfPlane2d &sp,const SemiRecta2d &sr)
-  { return sp.Interseca(sr); }
+  { return sp.intersects(sr); }
 inline bool intersecan(const HalfPlane2d &sp,const Segment2d &sg)
-  { return sp.Interseca(sg); }
+  { return sp.intersects(sg); }
 inline bool intersecan(const Recta2d &r,const HalfPlane2d &sp)
-  { return sp.Interseca(r); }
+  { return sp.intersects(r); }
 inline bool intersecan(const SemiRecta2d &sr,const HalfPlane2d &sp)
-  { return sp.Interseca(sr); }
+  { return sp.intersects(sr); }
 inline bool intersecan(const Segment2d &sg,const HalfPlane2d &sp)
-  { return sp.Interseca(sg); }
+  { return sp.intersects(sg); }
 
-GmGrupo2d interseccion(const HalfPlane2d &sp,const Recta2d &r);
-GmGrupo2d interseccion(const HalfPlane2d &sp,const SemiRecta2d &sr);
-GmGrupo2d interseccion(const HalfPlane2d &sp,const Segment2d &sg);
-GmGrupo2d interseccion(const Recta2d &r,const HalfPlane2d &sp);
-GmGrupo2d interseccion(const SemiRecta2d &sr,const HalfPlane2d &sp);
-GmGrupo2d interseccion(const Segment2d &sg,const HalfPlane2d &sp);
+GmGrupo2d intersection(const HalfPlane2d &sp,const Recta2d &r);
+GmGrupo2d intersection(const HalfPlane2d &sp,const SemiRecta2d &sr);
+GmGrupo2d intersection(const HalfPlane2d &sp,const Segment2d &sg);
+GmGrupo2d intersection(const Recta2d &r,const HalfPlane2d &sp);
+GmGrupo2d intersection(const SemiRecta2d &sr,const HalfPlane2d &sp);
+GmGrupo2d intersection(const Segment2d &sg,const HalfPlane2d &sp);
 
 #endif

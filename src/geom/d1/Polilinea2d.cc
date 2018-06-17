@@ -95,7 +95,7 @@ Polilinea2d Polilinea2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 // // the equation coord_i= d
 // Polilinea2d::list_Pos2d Polilinea2d::Int(unsigned short int i,const double &d) const
 //   {
-//     list_Pos2d l_int; //Lista de intersecciones
+//     list_Pos2d l_int; //List of intersections
 // 	const_iterator ultimo= end();
 //     ultimo--;
 //     for(register const_iterator j=begin();j != ultimo;j++)
@@ -112,7 +112,7 @@ Polilinea2d Polilinea2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 // // the equation coord_i= d
 // Polilinea2d Polilinea2d::Corta(unsigned short int i,const double &d) const
 //   {
-//     Polilinea2d result; //Lista de intersecciones
+//     Polilinea2d result; //Lista of intersections
 // 	const_iterator ultimo= end();
 //     ultimo--;
 //     for(register const_iterator j=begin();j != ultimo;j++)
@@ -205,7 +205,7 @@ Polilinea2d Polilinea2d::Separa(const Pos2d &p,const short int &sgn) const
 
 //! @brief Return the points of intersection of the polyline with
 //! the argument.
-GeomObj::list_Pos2d Polilinea2d::Interseccion(const Recta2d &r) const
+GeomObj::list_Pos2d Polilinea2d::getIntersection(const Recta2d &r) const
   {
     list_Pos2d retval;
     register const_iterator j=begin();
@@ -213,7 +213,7 @@ GeomObj::list_Pos2d Polilinea2d::Interseccion(const Recta2d &r) const
     for(;k != end();j++,k++)
       {
         Segment2d s(*j,*k);
-        list_Pos2d tmp= interseccion(r,s);
+        list_Pos2d tmp= intersection(r,s);
         if(!tmp.empty())
           retval.Agrega(tmp);
       }
@@ -222,7 +222,7 @@ GeomObj::list_Pos2d Polilinea2d::Interseccion(const Recta2d &r) const
 
 //! @brief Return the points of intersection of the polyline with
 //! the argument.
-GeomObj::list_Pos2d Polilinea2d::Interseccion(const SemiRecta2d &sr) const
+GeomObj::list_Pos2d Polilinea2d::getIntersection(const SemiRecta2d &sr) const
   {
     list_Pos2d retval;
     register const_iterator j=begin();
@@ -230,7 +230,7 @@ GeomObj::list_Pos2d Polilinea2d::Interseccion(const SemiRecta2d &sr) const
     for(;k != end();j++,k++)
       {
         Segment2d s(*j,*k);
-        list_Pos2d tmp= interseccion(sr,s);
+        list_Pos2d tmp= intersection(sr,s);
         if(!tmp.empty())
           retval.Agrega(tmp);
       }
@@ -239,7 +239,7 @@ GeomObj::list_Pos2d Polilinea2d::Interseccion(const SemiRecta2d &sr) const
 
 //! @brief Return the points of intersection of the polyline with
 //! the argument.
-GeomObj::list_Pos2d Polilinea2d::Interseccion(const Segment2d &sg) const
+GeomObj::list_Pos2d Polilinea2d::getIntersection(const Segment2d &sg) const
   {
     list_Pos2d retval;
     register const_iterator j=begin();
@@ -247,7 +247,7 @@ GeomObj::list_Pos2d Polilinea2d::Interseccion(const Segment2d &sg) const
     for(;k != end();j++,k++)
       {
         Segment2d s(*j,*k);
-        list_Pos2d tmp= interseccion(sg,s);
+        list_Pos2d tmp= intersection(sg,s);
         if(!tmp.empty())
           retval.Agrega(tmp);
       }
@@ -309,15 +309,15 @@ void Polilinea2d::Plot(Plotter &plotter) const
       }
   }
 
-GeomObj::list_Pos2d interseccion(const Polilinea2d &p,const Recta2d &r)
-  { return p.Interseccion(r); }
-GeomObj::list_Pos2d interseccion(const Polilinea2d &p,const SemiRecta2d &sr)
-  { return p.Interseccion(sr); }
-GeomObj::list_Pos2d interseccion(const Polilinea2d &p,const Segment2d &sg)
-  { return p.Interseccion(sg); }
-GeomObj::list_Pos2d interseccion(const Recta2d &r,const Polilinea2d &p)
-  { return p.Interseccion(r); }
-GeomObj::list_Pos2d interseccion(const SemiRecta2d &sr,const Polilinea2d &p)
-  { return p.Interseccion(sr); }
-GeomObj::list_Pos2d interseccion(const Segment2d &sg,const Polilinea2d &p)
-  { return p.Interseccion(sg); }
+GeomObj::list_Pos2d intersection(const Polilinea2d &p,const Recta2d &r)
+  { return p.getIntersection(r); }
+GeomObj::list_Pos2d intersection(const Polilinea2d &p,const SemiRecta2d &sr)
+  { return p.getIntersection(sr); }
+GeomObj::list_Pos2d intersection(const Polilinea2d &p,const Segment2d &sg)
+  { return p.getIntersection(sg); }
+GeomObj::list_Pos2d intersection(const Recta2d &r,const Polilinea2d &p)
+  { return p.getIntersection(r); }
+GeomObj::list_Pos2d intersection(const SemiRecta2d &sr,const Polilinea2d &p)
+  { return p.getIntersection(sr); }
+GeomObj::list_Pos2d intersection(const Segment2d &sg,const Polilinea2d &p)
+  { return p.getIntersection(sg); }

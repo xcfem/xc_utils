@@ -103,14 +103,14 @@ class SupPoligonal2d: public Superficie2d
   };
 
 
-std::list<Segment2d> interseccion(const SupPoligonal2d &p,const Recta2d &r);
-std::list<Segment2d> interseccion(const Recta2d &r,const SupPoligonal2d &p);
+std::list<Segment2d> intersection(const SupPoligonal2d &p,const Recta2d &r);
+std::list<Segment2d> intersection(const Recta2d &r,const SupPoligonal2d &p);
 
-std::list<Segment2d> interseccion(const SupPoligonal2d &p,const SemiRecta2d &sr);
-std::list<Segment2d> interseccion(const SemiRecta2d &sr,const SupPoligonal2d &p);
+std::list<Segment2d> intersection(const SupPoligonal2d &p,const SemiRecta2d &sr);
+std::list<Segment2d> intersection(const SemiRecta2d &sr,const SupPoligonal2d &p);
 
-std::list<Segment2d> interseccion(const SupPoligonal2d &p,const Segment2d &sg);
-std::list<Segment2d> interseccion(const Segment2d &sg,const SupPoligonal2d &p);
+std::list<Segment2d> intersection(const SupPoligonal2d &p,const Segment2d &sg);
+std::list<Segment2d> intersection(const Segment2d &sg,const SupPoligonal2d &p);
 
 #endif
 

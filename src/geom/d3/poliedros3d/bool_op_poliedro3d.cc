@@ -113,7 +113,7 @@ Poliedro3d Union(const Poliedro3d &a,const Poliedro3d &b)
     Nef_pol3 nfu= nfa+nfb;
     return Poliedro3d(Nef_3_to_Poliedro3d(nfu));
   }
-Poliedro3d Interseccion(const Poliedro3d &a,const Poliedro3d &b)
+Poliedro3d intersection(const Poliedro3d &a,const Poliedro3d &b)
   {
     Nef_pol3 nfa= Poliedro3d_to_Nef_3(a.cgpoliedro);
     Nef_pol3 nfb= Poliedro3d_to_Nef_3(b.cgpoliedro);

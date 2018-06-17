@@ -60,7 +60,7 @@ Recta3d::Recta3d(const Pos3d &p,const Dir3d &dir)
 Recta3d::Recta3d(const Plane &p1,const Plane &p2)
   : Linea3d(), cgr()
   {
-    const Recta3d tmp= recta_interseccion(p1,p2);
+    const Recta3d tmp= intersection_line(p1,p2);
     if(tmp.exists())
       cgr= tmp.ToCGAL();
     else
@@ -174,7 +174,7 @@ bool Recta3d::Paralela(const Recta3d &r) const
 Plane Recta3d::Perpendicular(const Pos3d &p) const
   { return Plane(cgr.perpendicular_plane(p.ToCGAL())); }
 
-GEOM_FT coo_interseccion(const GeomObj2d::list_Pos2d &int_a, const GeomObj2d::list_Pos2d &int_b,const size_t &coo,const double &tol)
+GEOM_FT coo_intersection(const GeomObj2d::list_Pos2d &int_a, const GeomObj2d::list_Pos2d &int_b,const size_t &coo,const double &tol)
   {
     Pos3d pint_a,pint_b;
     if(!int_a.empty()) pint_a= To3d(*int_a.begin(),coo+1);
@@ -210,8 +210,9 @@ GEOM_FT coo_interseccion(const GeomObj2d::list_Pos2d &int_a, const GeomObj2d::li
           }
     return retval;
   }
+
 //Return true if las rectas intersecan.
-bool Recta3d::Interseca(const Recta3d &r2) const
+bool Recta3d::intersects(const Recta3d &r2) const
   {
     if(!coplanarias(*this,r2)) return false; //No son coplanarias.
     if(colineales(*this,r2)) return true; //Son la misma.
@@ -223,7 +224,7 @@ bool Recta3d::Interseca(const Recta3d &r2) const
 
 //! @brief Return the intersection of the line with the plane
 //! defined by the equation coord_i= d.
-GeomObj3d::list_Pos3d Recta3d::Interseccion(unsigned short int i, const double &d) const
+GeomObj3d::list_Pos3d Recta3d::getIntersection(unsigned short int i, const double &d) const
   {
     GeomObj::list_Pos3d lp;
     unsigned short int j=i;
@@ -245,7 +246,7 @@ GeomObj3d::list_Pos3d Recta3d::Interseccion(unsigned short int i, const double &
 
 //Return the point intersection con la recta r2, if not exists la
 //intersection devuelve la lista vacía.
-GeomObj3d::list_Pos3d Recta3d::Interseccion(const Recta3d &r2,const double &tol) const
+GeomObj3d::list_Pos3d Recta3d::getIntersection(const Recta3d &r2,const double &tol) const
   {
     GeomObj3d::list_Pos3d retval;
     if(!intersecan(*this,r2)) return retval;
@@ -273,13 +274,13 @@ GeomObj3d::list_Pos3d Recta3d::Interseccion(const Recta3d &r2,const double &tol)
 	        << "; error when computing projections." 
                 << std::endl;
 
-    const GeomObj2d::list_Pos2d int_xy= interseccion(r1_xy,r2_xy);
-    const GeomObj2d::list_Pos2d int_xz= interseccion(r1_xz,r2_xz);
-    const GeomObj2d::list_Pos2d int_yz= interseccion(r1_yz,r2_yz);
+    const GeomObj2d::list_Pos2d int_xy= intersection(r1_xy,r2_xy);
+    const GeomObj2d::list_Pos2d int_xz= intersection(r1_xz,r2_xz);
+    const GeomObj2d::list_Pos2d int_yz= intersection(r1_yz,r2_yz);
 
-    const GEOM_FT x= coo_interseccion(int_xy,int_xz,1,tol);
-    const GEOM_FT y= coo_interseccion(int_xy,int_yz,2,tol);
-    const GEOM_FT z= coo_interseccion(int_xz,int_yz,3,tol);
+    const GEOM_FT x= coo_intersection(int_xy,int_xz,1,tol);
+    const GEOM_FT y= coo_intersection(int_xy,int_yz,2,tol);
+    const GEOM_FT z= coo_intersection(int_xz,int_yz,3,tol);
 
     Pos3d pint(x,y,z);
     if((this->dist2(pint)>tol2) || (r2.dist2(pint))>tol2)

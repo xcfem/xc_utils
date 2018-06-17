@@ -58,10 +58,10 @@ GeomObj *HalfPlane2d::clon(void) const
 void HalfPlane2d::Swap(void)
   { lim.Swap(); }
 
-bool HalfPlane2d::Interseca(const SemiRecta2d &sr) const
-  { return sr.Interseca(lim); }
-bool HalfPlane2d::Interseca(const Segment2d &sg) const
-  { return sg.Interseca(lim); }
+bool HalfPlane2d::intersects(const SemiRecta2d &sr) const
+  { return sr.intersects(lim); }
+bool HalfPlane2d::intersects(const Segment2d &sg) const
+  { return sg.intersects(lim); }
 
 HalfPlane2d HalfPlane2d::GetSwap(void) const
   {
@@ -70,11 +70,11 @@ HalfPlane2d HalfPlane2d::GetSwap(void) const
     return retval;
   }
 
-GmGrupo2d HalfPlane2d::Interseccion(const Recta2d &r) const
+GmGrupo2d HalfPlane2d::getIntersection(const Recta2d &r) const
   {
     GmGrupo2d retval;
-    if(!Interseca(r)) return retval;
-    GeomObj::list_Pos2d lista= interseccion(lim,r);
+    if(!intersects(r)) return retval;
+    GeomObj::list_Pos2d lista= intersection(lim,r);
     const Pos2d pint= *lista.begin();
     const Vector2d vd= r.VDir();
     const Pos2d p1= pint+vd;
@@ -85,11 +85,11 @@ GmGrupo2d HalfPlane2d::Interseccion(const Recta2d &r) const
     return retval;
   }
 
-GmGrupo2d HalfPlane2d::Interseccion(const SemiRecta2d &sr) const
+GmGrupo2d HalfPlane2d::getIntersection(const SemiRecta2d &sr) const
   {
     GmGrupo2d retval;
-    if(!Interseca(sr)) return retval;
-    GeomObj::list_Pos2d lista= interseccion(lim,sr);
+    if(!intersects(sr)) return retval;
+    GeomObj::list_Pos2d lista= intersection(lim,sr);
     const Pos2d pint= *lista.begin();
     const Vector2d vd= sr.VDir();
     const Pos2d p1= pint+vd;
@@ -98,11 +98,11 @@ GmGrupo2d HalfPlane2d::Interseccion(const SemiRecta2d &sr) const
     return retval;
   }
 
-GmGrupo2d HalfPlane2d::Interseccion(const Segment2d &sg) const
+GmGrupo2d HalfPlane2d::getIntersection(const Segment2d &sg) const
   {
     GmGrupo2d retval;
-    if(!Interseca(sg)) return retval;
-    GeomObj::list_Pos2d lista= interseccion(lim,sg);
+    if(!intersects(sg)) return retval;
+    GeomObj::list_Pos2d lista= intersection(lim,sg);
     const Pos2d pint= *lista.begin();
     const Pos2d p1= sg.Destino();
     const Pos2d p2= sg.Origen();
@@ -113,18 +113,18 @@ GmGrupo2d HalfPlane2d::Interseccion(const Segment2d &sg) const
     return retval;
   }
 
-GmGrupo2d interseccion(const HalfPlane2d &sp,const Recta2d &r)
-  { return sp.Interseccion(r); }
-GmGrupo2d interseccion(const HalfPlane2d &sp,const SemiRecta2d &sr)
-  { return sp.Interseccion(sr); }
-GmGrupo2d interseccion(const HalfPlane2d &sp,const Segment2d &sg)
-  { return sp.Interseccion(sg); }
-GmGrupo2d interseccion(const Recta2d &r,const HalfPlane2d &sp)
-  { return interseccion(sp,r); }
-GmGrupo2d interseccion(const SemiRecta2d &sr,const HalfPlane2d &sp)
-  { return interseccion(sp,sr); }
-GmGrupo2d interseccion(const Segment2d &sg,const HalfPlane2d &sp)
-  { return interseccion(sp,sg); }
+GmGrupo2d intersection(const HalfPlane2d &sp,const Recta2d &r)
+  { return sp.getIntersection(r); }
+GmGrupo2d intersection(const HalfPlane2d &sp,const SemiRecta2d &sr)
+  { return sp.getIntersection(sr); }
+GmGrupo2d intersection(const HalfPlane2d &sp,const Segment2d &sg)
+  { return sp.getIntersection(sg); }
+GmGrupo2d intersection(const Recta2d &r,const HalfPlane2d &sp)
+  { return intersection(sp,r); }
+GmGrupo2d intersection(const SemiRecta2d &sr,const HalfPlane2d &sp)
+  { return intersection(sp,sr); }
+GmGrupo2d intersection(const Segment2d &sg,const HalfPlane2d &sp)
+  { return intersection(sp,sg); }
 
 HalfPlane2d HalfPlane2d::getNormalizado(void) const
   { return HalfPlane2d(lim.getNormalizada()); }

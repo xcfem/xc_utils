@@ -42,11 +42,11 @@ bool overlap(const std::list<Poligono2d> &,const std::list<Poligono2d> &);
 
 std::list<Poligono2d> clip(const std::list<Poligono2d> &,const Poligono2d &);
 
-std::list<Poligono2d> interseccion(const Poligono2d &p1,const Poligono2d &p2);
-std::list<Poligono2d> interseccion(const Poligono2d &p,const HalfPlane2d &r);
-std::list<Poligono2d> interseccion(const std::list<Poligono2d> &,const HalfPlane2d &);
-std::list<Poligono2d> interseccion(const std::list<Poligono2d> &,const Poligono2d &);
-std::list<Poligono2d> interseccion(const std::list<Poligono2d> &,const std::list<Poligono2d> &);
+std::list<Poligono2d> intersection(const Poligono2d &p1,const Poligono2d &p2);
+std::list<Poligono2d> intersection(const Poligono2d &p,const HalfPlane2d &r);
+std::list<Poligono2d> intersection(const std::list<Poligono2d> &,const HalfPlane2d &);
+std::list<Poligono2d> intersection(const std::list<Poligono2d> &,const Poligono2d &);
+std::list<Poligono2d> intersection(const std::list<Poligono2d> &,const std::list<Poligono2d> &);
 
 void particiona(const Pos2d &c1,Poligono2d &p1,const Pos2d &c2,Poligono2d &p2);
 void particiona(Poligono2d &p1,Poligono2d &p2);

@@ -41,7 +41,7 @@ Segment2d Triangle2d::Altura(const size_t &i) const
       }
     const Recta2d rbase= Base(i).RectaSoporte();
     const Recta2d perp= rbase.Perpendicular(Vertice(i));
-    const Pos2d pint= *interseccion(rbase,perp).begin();
+    const Pos2d pint= *intersection(rbase,perp).begin();
     return Segment2d(Vertice(i),pint);
   }
 //! @brief Return object length.

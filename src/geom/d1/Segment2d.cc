@@ -211,17 +211,17 @@ double Segment2d::getParamCooNatural(const GEOM_FT &chi) const
 Pos2d Segment2d::PtoCooNatural(const GEOM_FT &chi) const
   { return PtoParametricas(getParamCooNatural(chi)); }
 
-bool Segment2d::Interseca(const Recta2d &r) const
+bool Segment2d::intersects(const Recta2d &r) const
   { return CGAL::do_intersect(r.cgr,cgseg); }
-bool Segment2d::Interseca(const SemiRecta2d &sr) const
+bool Segment2d::intersects(const SemiRecta2d &sr) const
   { return do_intersect(sr.cgsr,cgseg); }
 
 //! @brief Return the intersection of the line with a plane defined
 //! by the equation coord_i=cte.
-GeomObj2d::list_Pos2d Segment2d::Interseccion(unsigned short int i, const double &d) const
+GeomObj2d::list_Pos2d Segment2d::getIntersection(unsigned short int i, const double &d) const
   {
     GeomObj2d::list_Pos2d lp;
-    lp= RectaSoporte().Interseccion(i,d);
+    lp= RectaSoporte().getIntersection(i,d);
     if(!lp.empty())
       {
         const Vector2d i_= VDir();
@@ -234,10 +234,10 @@ GeomObj2d::list_Pos2d Segment2d::Interseccion(unsigned short int i, const double
 
 //! @brief Return the intersection point of the line and the segment, if
 //! the intersection doesn't exists returns an empty list.
-GeomObj2d::list_Pos2d Segment2d::Interseccion(const Recta2d &r) const
+GeomObj2d::list_Pos2d Segment2d::getIntersection(const Recta2d &r) const
   {
     GeomObj2d::list_Pos2d retval;
-    if(Interseca(r))
+    if(intersects(r))
       {
         CGAL::Object result;
         CGPoint_2 ptoi;
@@ -257,7 +257,7 @@ GeomObj2d::list_Pos2d Segment2d::Interseccion(const Recta2d &r) const
             else if(d2<tol)
               retval.push_back(Destino());
             else
-              cerr << "Segment2d::Interseccion(Recta2d): unknown error." << endl
+              cerr << "Segment2d::getIntersection(Recta2d): unknown error." << endl
                    << "sg: " << *this << endl
                    << "r: " << r << endl
                    << "tol: " << tol << endl
@@ -270,10 +270,10 @@ GeomObj2d::list_Pos2d Segment2d::Interseccion(const Recta2d &r) const
 
 //! @brief Return the intersection of the segment and the ray,
 //! if it doesn't exists return an empty list.
-GeomObj2d::list_Pos2d Segment2d::Interseccion(const SemiRecta2d &sr) const
+GeomObj2d::list_Pos2d Segment2d::getIntersection(const SemiRecta2d &sr) const
   {
     GeomObj2d::list_Pos2d retval;
-    if(Interseca(sr))
+    if(intersects(sr))
       {
         CGAL::Object result;
         CGPoint_2 ptoi;
@@ -282,7 +282,7 @@ GeomObj2d::list_Pos2d Segment2d::Interseccion(const SemiRecta2d &sr) const
           retval.push_back(Pos2d(ptoi));
         else
           {
-            cerr << "Segment2d::Interseccion(SemiRecta2d): unknown error." << endl
+            cerr << "Segment2d::getIntersection(SemiRecta2d): unknown error." << endl
                  << "sg: " << *this << endl
                  << "sr: " << sr << endl;
           }
@@ -292,7 +292,7 @@ GeomObj2d::list_Pos2d Segment2d::Interseccion(const SemiRecta2d &sr) const
 
 //! @brief Return the intersection of the segments, if
 //! the intersection doesn't exists returns an empty list.
-GeomObj2d::list_Pos2d Segment2d::Interseccion(const Segment2d &r2) const
+GeomObj2d::list_Pos2d Segment2d::getIntersection(const Segment2d &r2) const
   {
     GeomObj2d::list_Pos2d retval;
     if(*this == r2)
@@ -304,7 +304,7 @@ GeomObj2d::list_Pos2d Segment2d::Interseccion(const Segment2d &r2) const
         retval.push_back(Destino());
         return retval;
       }
-    if(Interseca(r2))
+    if(intersects(r2))
       {
         CGAL::Object result;
         CGPoint_2 ptoi;
@@ -352,7 +352,7 @@ void Segment2d::Plot(Plotter &plotter) const
 Pos2d intersection_point(const Segment2d &s, const Recta2d &r)
   {
     Pos2d retval;
-    GeomObj2d::list_Pos2d tmp= interseccion(s,r);
+    GeomObj2d::list_Pos2d tmp= intersection(s,r);
     if(tmp.empty())
       retval.setExists(false);
     else
@@ -368,7 +368,7 @@ Pos2d intersection_point(const Recta2d &r, const Segment2d &s)
 Pos2d intersection_point(const Segment2d &s1, const Segment2d &s2)
   {
     Pos2d retval;
-    GeomObj2d::list_Pos2d tmp= interseccion(s1,s2);
+    GeomObj2d::list_Pos2d tmp= intersection(s1,s2);
     if(tmp.empty())
       retval.setExists(false);
     else

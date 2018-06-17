@@ -167,7 +167,7 @@ class Poligono2d: public SupPoligonal2d
     std::list<Poligono2d> Clip(const BND2d &bnd) const;
     std::list<Poligono2d> Clip(const Poligono2d &) const;
 
-    std::list<Poligono2d> Interseccion(const HalfPlane2d &sp) const;
+    std::list<Poligono2d> getIntersection(const HalfPlane2d &sp) const;
 
     //std::list<Poligono2d> crea_lista_poligono2d(const std::string &str) const;
   };
@@ -177,8 +177,8 @@ inline Poligono2d transforma(const Trf2d &trf2d,const Poligono2d &pol2d)
 
 Poligono2d append_mid_points(const Poligono2d &);
 
-std::list<Poligono2d> interseccion(const Poligono2d &p1,const Poligono2d &p2);
-std::list<Poligono2d> interseccion(const Poligono2d &p,const HalfPlane2d &r);
+std::list<Poligono2d> intersection(const Poligono2d &p1,const Poligono2d &p2);
+std::list<Poligono2d> intersection(const Poligono2d &p,const HalfPlane2d &r);
 std::list<Poligono2d> corta(const Poligono2d &p,const Recta2d &r);
 
 Pos2d center_of_mass(const std::list<Poligono2d> &);

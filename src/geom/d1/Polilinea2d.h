@@ -98,12 +98,12 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
 /*         return list_Pos2d(); */
 /*       } */
     Polilinea2d Offset(const GEOM_FT &d) const;
-    list_Pos2d Int(unsigned short int i,const GEOM_FT &d) const;
-    //Return las intersecciones de la Polilinea2d con la recta
-    //coord_i= d
-    list_Pos2d Interseccion(const Recta2d &r) const;
-    list_Pos2d Interseccion(const SemiRecta2d &sr) const;
-    list_Pos2d Interseccion(const Segment2d &sr) const;
+    //! @brief Return the intersections of the polyline with
+    //! the line coord_i= d
+    // list_Pos2d Int(unsigned short int i,const GEOM_FT &d) const;
+    list_Pos2d getIntersection(const Recta2d &r) const;
+    list_Pos2d getIntersection(const SemiRecta2d &sr) const;
+    list_Pos2d getIntersection(const Segment2d &sr) const;
     //Polilinea2d Corta(unsigned short int i,const GEOM_FT &d) const;
     Polilinea2d Separa(const Pos2d &p,const short int &sgn) const;
     Pos2d getCenterOfMass(void) const
@@ -115,12 +115,12 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     void Plot(Plotter &) const;
   };
 
-GeomObj::list_Pos2d interseccion(const Polilinea2d &p,const Recta2d &r);
-GeomObj::list_Pos2d interseccion(const Polilinea2d &p,const SemiRecta2d &);
-GeomObj::list_Pos2d interseccion(const Polilinea2d &p,const Segment2d &);
-GeomObj::list_Pos2d interseccion(const Recta2d &,const Polilinea2d &);
-GeomObj::list_Pos2d interseccion(const SemiRecta2d &,const Polilinea2d &p);
-GeomObj::list_Pos2d interseccion(const Segment2d &,const Polilinea2d &p);
+GeomObj::list_Pos2d intersection(const Polilinea2d &p,const Recta2d &r);
+GeomObj::list_Pos2d intersection(const Polilinea2d &p,const SemiRecta2d &);
+GeomObj::list_Pos2d intersection(const Polilinea2d &p,const Segment2d &);
+GeomObj::list_Pos2d intersection(const Recta2d &,const Polilinea2d &);
+GeomObj::list_Pos2d intersection(const SemiRecta2d &,const Polilinea2d &p);
+GeomObj::list_Pos2d intersection(const Segment2d &,const Polilinea2d &p);
 
 #endif
 

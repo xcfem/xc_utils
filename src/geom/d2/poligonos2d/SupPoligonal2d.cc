@@ -138,7 +138,7 @@ Pos2d SupPoligonal2d::Centroide(void) const
     const BND2d bnd= Bnd();
     const Pos2d c= bnd.getCenterOfMass();
     const Recta2d r(c,c+Vector2d(0,100));
-    list<Segment2d> intersec= interseccion(*this,r);
+    list<Segment2d> intersec= intersection(*this,r);
     if(!intersec.empty())
       {
         Segment2d sg= *intersec.begin();
@@ -318,14 +318,14 @@ void SupPoligonal2d::Plot(Plotter &plotter) const
 //! @brief Return true if the line and the polygonal surface overlap.
 bool SupPoligonal2d::Overlap(const Recta2d &r) const
   {
-    GeomObj::list_Pos2d tmp= GetPolilinea().Interseccion(r);
+    GeomObj::list_Pos2d tmp= GetPolilinea().getIntersection(r);
     return !tmp.empty();
   }
   
 //! @brief Return true if the ray and the polygonal surface overlap.
 bool SupPoligonal2d::Overlap(const SemiRecta2d &sr) const
   {
-    GeomObj::list_Pos2d tmp= GetPolilinea().Interseccion(sr);
+    GeomObj::list_Pos2d tmp= GetPolilinea().getIntersection(sr);
     return !tmp.empty();
   }
 
@@ -359,7 +359,7 @@ std::list<Segment2d> empalma(const std::list<Segment2d> &lista)
 Segment2d SupPoligonal2d::Clip(const Recta2d &r) const
   {
     Segment2d retval;
-    list<Segment2d> lista= sin_degenerados(interseccion(*this,r));
+    list<Segment2d> lista= sin_degenerados(intersection(*this,r));
     if(lista.size()>1)
       lista= empalma(lista);
     if(!lista.empty())
@@ -382,7 +382,7 @@ Segment2d SupPoligonal2d::Clip(const Recta2d &r) const
 Segment2d SupPoligonal2d::Clip(const SemiRecta2d &sr) const
   {
     Segment2d retval;
-    list<Segment2d> lista= sin_degenerados(interseccion(*this,sr));
+    list<Segment2d> lista= sin_degenerados(intersection(*this,sr));
     if(!lista.empty())
       {
         retval= *lista.begin();
@@ -398,7 +398,7 @@ Segment2d SupPoligonal2d::Clip(const SemiRecta2d &sr) const
 Segment2d SupPoligonal2d::Clip(const Segment2d &sg) const
   {
     Segment2d retval;
-    list<Segment2d> lista= sin_degenerados(interseccion(*this,sg));
+    list<Segment2d> lista= sin_degenerados(intersection(*this,sg));
     if(!lista.empty())
       {
         retval= *lista.begin();
@@ -411,13 +411,13 @@ Segment2d SupPoligonal2d::Clip(const Segment2d &sg) const
   }
 
 //! @brief Return the intersection of the polygon con la recta.
-list<Segment2d> interseccion(const SupPoligonal2d &pg,const Recta2d &r)
+list<Segment2d> intersection(const SupPoligonal2d &pg,const Recta2d &r)
   {
     list<Segment2d> retval;
     if(pg.GetNumVertices()>0)
       {
         Polilinea2d pl= pg.GetPolilinea();
-        GeomObj::list_Pos2d ptos= interseccion(r,pl);
+        GeomObj::list_Pos2d ptos= intersection(r,pl);
         if(!ptos.empty())
           {
             GeomObj::list_Pos2d ordenados= r.Ordena(ptos);
@@ -437,11 +437,11 @@ list<Segment2d> interseccion(const SupPoligonal2d &pg,const Recta2d &r)
   }
 
 //! @brief Return the intersection of the polygon con la recta.
-list<Segment2d> interseccion(const Recta2d &r,const SupPoligonal2d &pg)
-  { return interseccion(pg,r); }
+list<Segment2d> intersection(const Recta2d &r,const SupPoligonal2d &pg)
+  { return intersection(pg,r); }
 
 //! @brief Return the intersection of the polygon con la semirecta.
-list<Segment2d> interseccion(const SupPoligonal2d &pg,const SemiRecta2d &sr)
+list<Segment2d> intersection(const SupPoligonal2d &pg,const SemiRecta2d &sr)
   {
     
     list<Segment2d> retval;
@@ -449,7 +449,7 @@ list<Segment2d> interseccion(const SupPoligonal2d &pg,const SemiRecta2d &sr)
 
     Polilinea2d pl= pg.GetPolilinea();
     
-    GeomObj::list_Pos2d ptos= interseccion(sr,pl);
+    GeomObj::list_Pos2d ptos= intersection(sr,pl);
     const Pos2d org= sr.Origen();
     if(pg.In(org))
       ptos.push_front(org);
@@ -469,11 +469,11 @@ list<Segment2d> interseccion(const SupPoligonal2d &pg,const SemiRecta2d &sr)
   }
 
 //! @brief Return the intersection of the polygon con la semirecta.
-list<Segment2d> interseccion(const SemiRecta2d &sr,const SupPoligonal2d &pg)
-  { return interseccion(pg,sr); }
+list<Segment2d> intersection(const SemiRecta2d &sr,const SupPoligonal2d &pg)
+  { return intersection(pg,sr); }
 
 //! @brief Return the intersection of the polygon with the segment.
-list<Segment2d> interseccion(const SupPoligonal2d &pg,const Segment2d &sg)
+list<Segment2d> intersection(const SupPoligonal2d &pg,const Segment2d &sg)
   {
     
     list<Segment2d> retval;
@@ -481,7 +481,7 @@ list<Segment2d> interseccion(const SupPoligonal2d &pg,const Segment2d &sg)
 
     Polilinea2d pl= pg.GetPolilinea();
     
-    GeomObj::list_Pos2d ptos= interseccion(sg,pl);
+    GeomObj::list_Pos2d ptos= intersection(sg,pl);
     const Pos2d org= sg.Origen();
     if(pg.In(org))
       ptos.push_front(org);
@@ -504,5 +504,5 @@ list<Segment2d> interseccion(const SupPoligonal2d &pg,const Segment2d &sg)
   }
 
 //! @brief Return the intersection of the polygon with the segment.
-list<Segment2d> interseccion(const Segment2d &sg,const SupPoligonal2d &pg)
-  { return interseccion(pg,sg); }
+list<Segment2d> intersection(const Segment2d &sg,const SupPoligonal2d &pg)
+  { return intersection(pg,sg); }

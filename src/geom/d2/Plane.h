@@ -135,14 +135,14 @@ class Plane : public Superficie3d
     Recta3d getMaximumSlopeLineXZ(void) const;
     Recta3d getMaximumSlopeLineYZ(void) const;
 
-    bool Interseca(const Plane &p) const;
-    Recta3d Interseccion(const Plane &p) const;
-    bool Interseca(const Recta3d &p) const;
-    Pos3d Interseccion(const Recta3d &p) const;
-    bool Interseca(const SemiRecta3d &p) const;
-    Pos3d Interseccion(const SemiRecta3d &p) const;
-    bool Interseca(const Segment3d &p) const;
-    Pos3d Interseccion(const Segment3d &p) const;
+    bool intersects(const Plane &p) const;
+    Recta3d getIntersection(const Plane &p) const;
+    bool intersects(const Recta3d &p) const;
+    Pos3d getIntersection(const Recta3d &p) const;
+    bool intersects(const SemiRecta3d &p) const;
+    Pos3d getIntersection(const SemiRecta3d &p) const;
+    bool intersects(const Segment3d &p) const;
+    Pos3d getIntersection(const Segment3d &p) const;
 
     GEOM_FT getAngle(const Plane &p) const;
     GEOM_FT getAngle(const Vector3d &) const;
@@ -177,17 +177,17 @@ bool paralelos(const Plane &p, const Recta3d &r);
 bool paralelos(const Plane &p1, const Plane &p2);
 
 
-Recta3d recta_interseccion(const Plane &, const Plane &);
+Recta3d intersection_line(const Plane &, const Plane &);
 Pos3d intersection_point(const Plane &, const Plane &,const Plane &);
-GmGrupo3d interseccion(const Plane &p1, const Plane &p2);
-GeomObj3d::list_Pos3d interseccion(const Plane &p, const Recta3d &r);
-GeomObj3d::list_Pos3d interseccion(const Recta3d &r, const Plane &p);
-GeomObj3d::list_Pos3d interseccion(const Plane &p, const SemiRecta3d &r);
-GeomObj3d::list_Pos3d interseccion(const SemiRecta3d &r, const Plane &p);
-GeomObj3d::list_Pos3d interseccion(const Plane &p, const Segment3d &);
-GeomObj3d::list_Pos3d interseccion(const Segment3d &, const Plane &p);
-GeomObj3d::list_Pos3d interseccion(const Plane &p, const Polilinea3d &r);
-GeomObj3d::list_Pos3d interseccion(const Polilinea3d &r, const Plane &p);
+GmGrupo3d intersection(const Plane &p1, const Plane &p2);
+GeomObj3d::list_Pos3d intersection(const Plane &p, const Recta3d &r);
+GeomObj3d::list_Pos3d intersection(const Recta3d &r, const Plane &p);
+GeomObj3d::list_Pos3d intersection(const Plane &p, const SemiRecta3d &r);
+GeomObj3d::list_Pos3d intersection(const SemiRecta3d &r, const Plane &p);
+GeomObj3d::list_Pos3d intersection(const Plane &p, const Segment3d &);
+GeomObj3d::list_Pos3d intersection(const Segment3d &, const Plane &p);
+GeomObj3d::list_Pos3d intersection(const Plane &p, const Polilinea3d &r);
+GeomObj3d::list_Pos3d intersection(const Polilinea3d &r, const Plane &p);
 Pos3d intersection_point(const Plane &p, const Recta3d &r);
 Pos3d intersection_point(const Recta3d &r, const Plane &p);
 Pos3d intersection_point(const Plane &p, const SemiRecta3d &r);
@@ -230,9 +230,9 @@ Plane::clasif_poligono Plane::ClassifyPoints(InputIterator first,InputIterator l
 
 /* class SemiRecta; */
 
-/* GeomObj3d::list_Pos3d interseccion(const Plane &p, const SemiRecta3d &sr); */
-/* inline GeomObj3d::list_Pos3d interseccion(const SemiRecta3d &sr, const Plane &p) */
-/*   { return interseccion(p,sr); }  */
+/* GeomObj3d::list_Pos3d intersection(const Plane &p, const SemiRecta3d &sr); */
+/* inline GeomObj3d::list_Pos3d intersection(const SemiRecta3d &sr, const Plane &p) */
+/*   { return intersection(p,sr); }  */
 
 
 #endif

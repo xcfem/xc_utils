@@ -91,12 +91,12 @@ class SemiRecta2d : public Linea2d
     GeomObj::list_Pos2d Ordena(const GeomObj::list_Pos2d &ptos) const
       { return RectaSoporte().Ordena(ptos); }
 
-    bool Interseca(const SemiRecta2d &sr2) const
+    bool intersects(const SemiRecta2d &sr2) const
       { return do_intersect(cgsr,sr2.cgsr); }
-    bool Interseca(const Recta2d &sr) const;
-    GeomObj2d::list_Pos2d Interseccion(unsigned short int, const double &) const;
-    GeomObj2d::list_Pos2d Interseccion(const Recta2d &r) const;
-    GeomObj2d::list_Pos2d Interseccion(const SemiRecta2d &sr) const;
+    bool intersects(const Recta2d &sr) const;
+    GeomObj2d::list_Pos2d getIntersection(unsigned short int, const double &) const;
+    GeomObj2d::list_Pos2d getIntersection(const Recta2d &r) const;
+    GeomObj2d::list_Pos2d getIntersection(const SemiRecta2d &sr) const;
 
     bool Paralela(const Recta2d &r) const
       { return paralelas(RectaSoporte(),r); }
@@ -152,19 +152,20 @@ inline bool paralelas(const SemiRecta2d &r1,const SemiRecta2d &r2)
   { return r1.Paralela(r2); }
 
 inline bool intersecan(const SemiRecta2d &sr1,const SemiRecta2d &sr2)
-  { return sr1.Interseca(sr2); }
+  { return sr1.intersects(sr2); }
 inline bool intersecan(const SemiRecta2d &sr,const Recta2d &r)
-  { return sr.Interseca(r); }
+  { return sr.intersects(r); }
 inline bool intersecan(const Recta2d &r,const SemiRecta2d &sr)
-  { return sr.Interseca(r); }
-inline GeomObj2d::list_Pos2d interseccion(const SemiRecta2d &sr,const Recta2d &r)
-  { return sr.Interseccion(r); }
-inline GeomObj2d::list_Pos2d interseccion(const Recta2d &r, const SemiRecta2d &sr)
-  { return sr.Interseccion(r); }
-inline GeomObj2d::list_Pos2d interseccion(const SemiRecta2d &sr1,const SemiRecta2d &sr2)
-//Return the point intersección de ambas rectas, si no existe la
-//intersección devuelve la lista vacía.
-  { return sr1.Interseccion(sr2); }
+  { return sr.intersects(r); }
+inline GeomObj2d::list_Pos2d intersection(const SemiRecta2d &sr,const Recta2d &r)
+  { return sr.getIntersection(r); }
+inline GeomObj2d::list_Pos2d intersection(const Recta2d &r, const SemiRecta2d &sr)
+  { return sr.getIntersection(r); }
+
+//! @brief Return the intersection point of both lines, if it does not exists
+//! return an empty list.
+inline GeomObj2d::list_Pos2d intersection(const SemiRecta2d &sr1,const SemiRecta2d &sr2)
+  { return sr1.getIntersection(sr2); }
 
 
 inline bool colineales(const SemiRecta2d &sr,const Recta2d &r)

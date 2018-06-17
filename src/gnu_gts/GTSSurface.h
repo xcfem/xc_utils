@@ -69,7 +69,7 @@ class GTSSurface
     bool IsClosed(void) const;
     bool IsOpen(void) const;
     bool IsOrientable(void) const;
-    GTSSurface AutoInterseca(void) const;
+    GTSSurface selfIntersecting(void) const;
     bool Vacia(void) const;
     bool CheckSelfIntersection(bool verbose) const;
 
@@ -106,7 +106,7 @@ class GTSSurface
 
 
 GTSSurface Union(const GTSSurface &a,const GTSSurface &b,bool check_self_intersection=false,bool verbose=false);
-GTSSurface Interseccion(const GTSSurface &a,const GTSSurface &b,bool check_self_intersection=false,bool verbose=false);
+GTSSurface intersection(const GTSSurface &a,const GTSSurface &b,bool check_self_intersection=false,bool verbose=false);
 GTSSurface Diferencia(const GTSSurface &a,const GTSSurface &b,bool check_self_intersection=false,bool verbose=false);
 
 

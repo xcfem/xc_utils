@@ -85,11 +85,9 @@ class SemiRecta3d : public Linea3d
     bool Paralela(const SemiRecta3d &r) const;
     bool Paralela(const Recta3d &r) const;
 
-    GeomObj3d::list_Pos3d Interseccion(unsigned short int, const double &) const;
-    //Return the point intersección de ambas rectas, si no existe la
-    //intersección devuelve la lista vacía.
-    GeomObj3d::list_Pos3d Interseccion(const Recta3d &r) const;
-    GeomObj3d::list_Pos3d Interseccion(const SemiRecta3d &sr) const;
+    GeomObj3d::list_Pos3d getIntersection(unsigned short int, const double &) const;
+    GeomObj3d::list_Pos3d getIntersection(const Recta3d &r) const;
+    GeomObj3d::list_Pos3d getIntersection(const SemiRecta3d &sr) const;
 
     inline virtual GEOM_FT getLength(void) const
       { return NAN; }
@@ -137,12 +135,12 @@ inline bool paralelas(const Recta3d &r1,const SemiRecta3d &r2)
 inline bool paralelas(const SemiRecta3d &r1,const SemiRecta3d &r2)
   { return r1.Paralela(r2); }
 
-inline GeomObj3d::list_Pos3d interseccion(const Recta3d &r1,const SemiRecta3d &r2)
-  { return r2.Interseccion(r1); }
-inline GeomObj3d::list_Pos3d interseccion(const SemiRecta3d &r1,const Recta3d &r2)
-  { return r1.Interseccion(r2); }
-inline GeomObj3d::list_Pos3d interseccion(const SemiRecta3d &r1,const SemiRecta3d &r2)
-  { return r1.Interseccion(r2); }
+inline GeomObj3d::list_Pos3d intersection(const Recta3d &r1,const SemiRecta3d &r2)
+  { return r2.getIntersection(r1); }
+inline GeomObj3d::list_Pos3d intersection(const SemiRecta3d &r1,const Recta3d &r2)
+  { return r1.getIntersection(r2); }
+inline GeomObj3d::list_Pos3d intersection(const SemiRecta3d &r1,const SemiRecta3d &r2)
+  { return r1.getIntersection(r2); }
 
 
 inline bool colineales(const SemiRecta3d &sr,const Recta3d &r)

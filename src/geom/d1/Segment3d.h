@@ -70,10 +70,10 @@ class Segment3d : public Linea3d
     bool Paralelo(const SemiRecta3d &sr) const;
     bool Paralelo(const Segment3d &r) const;
 
-    GeomObj3d::list_Pos3d Interseccion(unsigned short int, const double &) const;
-    GeomObj3d::list_Pos3d Interseccion(const Recta3d &r) const;
-    GeomObj3d::list_Pos3d Interseccion(const SemiRecta3d &sr) const;
-    GeomObj3d::list_Pos3d Interseccion(const Segment3d &sg) const;
+    GeomObj3d::list_Pos3d getIntersection(unsigned short int, const double &) const;
+    GeomObj3d::list_Pos3d getIntersection(const Recta3d &r) const;
+    GeomObj3d::list_Pos3d getIntersection(const SemiRecta3d &sr) const;
+    GeomObj3d::list_Pos3d getIntersection(const Segment3d &sg) const;
 
     virtual GEOM_FT getLength(void) const;
     virtual Pos3d getCenterOfMass(void) const;
@@ -120,16 +120,16 @@ inline bool colineales(const SemiRecta3d &sr,const Segment3d &sg)
 inline bool colineales(const Segment3d &sg1,const Segment3d &sg2)
   { return colineales(sg1,sg2.RectaSoporte()); }
 
-inline GeomObj3d::list_Pos3d interseccion(const Segment3d &sg,const Recta3d &r)
-  { return sg.Interseccion(r); }
-inline GeomObj3d::list_Pos3d interseccion(const Recta3d &r, const Segment3d &sg)
-  { return sg.Interseccion(r); }
-inline GeomObj3d::list_Pos3d interseccion(const Segment3d &sg,const SemiRecta3d &sr)
-  { return sg.Interseccion(sr); }
-inline GeomObj3d::list_Pos3d interseccion(const SemiRecta3d &sr, const Segment3d &sg)
-  { return sg.Interseccion(sr); } 
-inline GeomObj3d::list_Pos3d interseccion(const Segment3d &sg1,const Segment3d &sg2)
-  { return sg1.Interseccion(sg2); }
+inline GeomObj3d::list_Pos3d intersection(const Segment3d &sg,const Recta3d &r)
+  { return sg.getIntersection(r); }
+inline GeomObj3d::list_Pos3d intersection(const Recta3d &r, const Segment3d &sg)
+  { return sg.getIntersection(r); }
+inline GeomObj3d::list_Pos3d intersection(const Segment3d &sg,const SemiRecta3d &sr)
+  { return sg.getIntersection(sr); }
+inline GeomObj3d::list_Pos3d intersection(const SemiRecta3d &sr, const Segment3d &sg)
+  { return sg.getIntersection(sr); } 
+inline GeomObj3d::list_Pos3d intersection(const Segment3d &sg1,const Segment3d &sg2)
+  { return sg1.getIntersection(sg2); }
 
 
 

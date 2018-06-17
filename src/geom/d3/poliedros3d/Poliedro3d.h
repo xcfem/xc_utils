@@ -139,7 +139,7 @@ class Poliedro3d: public PolyhedronBase
       { return PseudoDist(p); }
 
     friend Poliedro3d Union(const Poliedro3d &a,const Poliedro3d &b);
-    friend Poliedro3d Interseccion(const Poliedro3d &a,const Poliedro3d &b);
+    friend Poliedro3d intersection(const Poliedro3d &a,const Poliedro3d &b);
     friend Poliedro3d Diferencia(const Poliedro3d &a,const Poliedro3d &b);
     friend Poliedro3d subdivide_quad_triangle(const Poliedro3d &pol,bool smooth_boundary);
     template <class InputIterator>

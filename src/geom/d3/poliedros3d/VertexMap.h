@@ -29,8 +29,8 @@
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include "Poliedro3d.h"
 
-//Clases de conveniencia para generar poliedros a partir
-//de la intersección de semiespacios.
+//Convenience classes to generate polyhedrons from
+//half-space intersections.
 
 class ListaPos3d;
 

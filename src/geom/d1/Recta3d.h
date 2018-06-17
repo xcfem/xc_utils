@@ -123,9 +123,9 @@ class Recta3d : public Linea3d
       { TwoPoints(p1,p2); }
     bool Paralela(const Recta3d &r) const;
 
-    bool Interseca(const Recta3d &r2) const;
-    GeomObj3d::list_Pos3d Interseccion(unsigned short int, const double &) const;
-    GeomObj3d::list_Pos3d Interseccion(const Recta3d &r2, const double &tol= sqrt_mchne_eps_dbl) const;
+    bool intersects(const Recta3d &r2) const;
+    GeomObj3d::list_Pos3d getIntersection(unsigned short int, const double &) const;
+    GeomObj3d::list_Pos3d getIntersection(const Recta3d &r2, const double &tol= sqrt_mchne_eps_dbl) const;
 
     //! @brief Return the length of the object.
    inline virtual GEOM_FT getLength(void) const
@@ -171,9 +171,9 @@ bool colineales(const Recta3d &r1,const Recta3d &r2);
 bool coplanarias(const Recta3d &r1,const Recta3d &r2);
 
 inline bool intersecan(const Recta3d &r1,const Recta3d &r2)
-  { return r1.Interseca(r2); }
-inline GeomObj3d::list_Pos3d interseccion(const Recta3d &r1,const Recta3d &r2)
-  { return r1.Interseccion(r2); }
+  { return r1.intersects(r2); }
+inline GeomObj3d::list_Pos3d intersection(const Recta3d &r1,const Recta3d &r2)
+  { return r1.getIntersection(r2); }
 
 
 #endif

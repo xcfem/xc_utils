@@ -42,7 +42,7 @@ Circle2d Circle2dRTT(const GEOM_FT &radius,const Recta2d &p,const Recta2d &l,con
   {
     std::cerr << __FUNCTION__
 	      << "; no está probada." << std::endl;
-    const GeomObj2d::list_Pos2d points_int= p.Interseccion(l);
+    const GeomObj2d::list_Pos2d points_int= p.getIntersection(l);
     if(points_int.size()<1)
       {
         std::cerr << __FUNCTION__
@@ -53,7 +53,7 @@ Circle2d Circle2dRTT(const GEOM_FT &radius,const Recta2d &p,const Recta2d &l,con
       {
         const Pos2d &o= *points_int.begin();
         const Recta2d bisect= bisectriz(p,l);
-        Ref2d2d ref(o,bisect.GetDir()); //Origen en la intersección, x axis según la recta bisectriz.
+        Ref2d2d ref(o,bisect.GetDir()); //Origen on intersection, x axis aligned with the bisecting line.
         const double theta= angle(bisect,p); //Angle between the bisecting line and the p line.
         const GEOM_FT sintheta= double_to_FT(sin(theta));
         const GEOM_FT costheta= double_to_FT(cos(theta));

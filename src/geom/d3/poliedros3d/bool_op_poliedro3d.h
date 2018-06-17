@@ -32,8 +32,8 @@ class Poliedro3d;
 //
 //! @brief Unión de los poliedros que se pasan como parámetro.
 Poliedro3d Union(const Poliedro3d &a,const Poliedro3d &b);
-//! @brief Intersección de los poliedros que se pasan como parámetro.
-Poliedro3d Interseccion(const Poliedro3d &a,const Poliedro3d &b);
+//! @brief Intersection of the polyhedrons.
+Poliedro3d intersection(const Poliedro3d &a,const Poliedro3d &b);
 //! @brief Diferencia de los poliedros que se pasan como parámetro.
 Poliedro3d Diferencia(const Poliedro3d &a,const Poliedro3d &b);
 
