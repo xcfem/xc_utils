@@ -58,7 +58,7 @@ class Action: public EntConNmb
     static Action NULA(void);
     //! @brief Sets the name to the action.
     inline void setName(const std::string &nmb)
-      { EntConNmb::Nombre()= nmb; }
+      { EntConNmb::Name()= nmb; }
     const std::string GetNombreExpandido(void) const;
     //! @brief Return la descripción de la acción.
     inline const std::string &GetDescripcion(void) const

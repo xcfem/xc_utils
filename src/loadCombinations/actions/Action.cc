@@ -108,7 +108,7 @@ std::vector<double> cmb_acc::Action::getCoeficientes(const std::vector<std::stri
 //! @brief ??
 void cmb_acc::Action::limpia_nombres(void)
   {
-    EntConNmb::Nombre()= ActionRelationships::limpia(getName());
+    EntConNmb::Name()= ActionRelationships::limpia(getName());
     descripcion= ActionRelationships::limpia(descripcion);
   }
 
@@ -119,7 +119,7 @@ void cmb_acc::Action::multiplica(const double &d)
     f_pond*= d;
     limpia_nombres();
     const std::string strnum= num2str(f_pond,2);
-    EntConNmb::Nombre()= strnum + "*" + getName();
+    EntConNmb::Name()= strnum + "*" + getName();
     descripcion= strnum + "*" + descripcion;
   }
 
@@ -137,12 +137,12 @@ void cmb_acc::Action::suma(const Action &f)
 
     if(getName().size()>0)
       {
-        EntConNmb::Nombre()+= " + " + f.getName();
+        EntConNmb::Name()+= " + " + f.getName();
         descripcion+= " + " + f.descripcion;
       }
     else
       {
-	EntConNmb::Nombre()= f.getName();
+	EntConNmb::Name()= f.getName();
         descripcion= f.descripcion;
       }
     relaciones.concat(f.relaciones);
