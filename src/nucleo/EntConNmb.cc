@@ -44,7 +44,7 @@ EntConNmb &EntConNmb::operator*=(const EntConNmb &otro)
     return *this;
   }
 
-//! @brief Return the union of both objects.
+//! @brief Return the object named as: '(a.name+b.name)'
 EntConNmb operator+(const EntConNmb &a,const EntConNmb &b)
   {
     EntConNmb retval(a);
@@ -52,7 +52,7 @@ EntConNmb operator+(const EntConNmb &a,const EntConNmb &b)
     return retval;
   }
 
-//! @brief Return the labels in a that are not in b.
+//! @brief Return the object named as: '(a.name-b.name)'
 EntConNmb operator-(const EntConNmb &a,const EntConNmb &b)
   {
     EntConNmb retval(a);
@@ -60,7 +60,7 @@ EntConNmb operator-(const EntConNmb &a,const EntConNmb &b)
     return retval;
   }
 
-//! @brief Return the labels in a that are also in b.
+//! @brief Return the object named as: '(a.name*b.name)'
 EntConNmb operator*(const EntConNmb &a,const EntConNmb &b)
   {
     EntConNmb retval(a);
