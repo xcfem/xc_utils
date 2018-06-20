@@ -49,8 +49,8 @@ class EntConNmb: public EntCmd
     //! @brief Set the  object name.
     void setName(const std::string &s)
       { name= s; }
-    //! @brief Return una referencia al nombre del objeto.
-    std::string &Nombre(void)
+    //! @brief Return a reference to the object name.
+    std::string &Name(void)
       { return name; }
     //! @brief Compara el nombre del elemento con un nombre dado.
     int operator==(const EntConNmb &otro) const
@@ -58,6 +58,13 @@ class EntConNmb: public EntCmd
     //! @brief Operador menor.
     int operator<(const EntConNmb &otro) const
       { return (name<otro.name); }
+    EntConNmb &operator+=(const EntConNmb &);
+    EntConNmb &operator-=(const EntConNmb &);
+    EntConNmb &operator*=(const EntConNmb &);
   };
+
+EntConNmb operator+(const EntConNmb &,const EntConNmb &);
+EntConNmb operator-(const EntConNmb &,const EntConNmb &);
+EntConNmb operator*(const EntConNmb &,const EntConNmb &);
 
 #endif

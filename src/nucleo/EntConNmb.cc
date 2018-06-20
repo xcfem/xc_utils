@@ -22,3 +22,48 @@
 //EntConNmb.cc
 
 #include "EntConNmb.h"
+
+//! @brief += operator.
+EntConNmb &EntConNmb::operator+=(const EntConNmb &otro)
+  {
+    name= '('+ name + '+' + otro.getName()+')';
+    return *this;
+  }
+
+//! @brief -= operator.
+EntConNmb &EntConNmb::operator-=(const EntConNmb &otro)
+  {
+    name= '('+ name + '-' + otro.getName()+')';
+    return *this;
+  }
+
+//! @brief *= operator.
+EntConNmb &EntConNmb::operator*=(const EntConNmb &otro)
+  {
+    name= '('+ name + '*' + otro.getName()+')';
+    return *this;
+  }
+
+//! @brief Return the union of both objects.
+EntConNmb operator+(const EntConNmb &a,const EntConNmb &b)
+  {
+    EntConNmb retval(a);
+    retval+=b;
+    return retval;
+  }
+
+//! @brief Return the labels in a that are not in b.
+EntConNmb operator-(const EntConNmb &a,const EntConNmb &b)
+  {
+    EntConNmb retval(a);
+    retval-= b;
+    return retval;
+  }
+
+//! @brief Return the labels in a that are also in b.
+EntConNmb operator*(const EntConNmb &a,const EntConNmb &b)
+  {
+    EntConNmb retval(a);
+    retval*= b;
+    return retval;    
+  }
