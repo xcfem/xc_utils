@@ -45,7 +45,7 @@ class IRowConstRef: public ConstRefCajaTritriz<TRITRIZ>
       { return ConstRefCajaTritriz<TRITRIZ>::operator()(iLayer,iRow,col); }
   };
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 template<class TRITRIZ>
 IRowConstRef<TRITRIZ>::IRowConstRef(const TRITRIZ &t,const size_t &f,const size_t &c)
   : ConstRefCajaTritriz<TRITRIZ>(t,RangoIndice(1,t.getNumberOfLayers()),f,c)

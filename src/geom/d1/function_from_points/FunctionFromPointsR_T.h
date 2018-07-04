@@ -79,7 +79,7 @@ template <class T>
 T FunctionFromPointsR_T<T>::Valor(const double &z) const
   {
     T retval= T();
-    if(points.empty()) return retval; //Si esta vacío devolvemos el valor por defecto.
+    if(points.empty()) return retval; //If empty return default value.
     const_iterator j= points.upper_bound(z);
     if(j==begin()) //Abscissae z is smaller that all the rest.
       j++;//retval= (*j).second/(*j).first*z;
@@ -103,7 +103,7 @@ std::vector<T> FunctionFromPointsR_T<T>::Valores(const std::vector<double> &zs) 
   {
     const size_t sz= zs.size();
     std::vector<T> retval(sz);
-    if(points.empty()) return retval; //Si esta vacío devolvemos el valor por defecto.
+    if(points.empty()) return retval; //If empty return default value.
     for(size_t i= 0;i<sz;i++)
       retval[i]= Valor(zs[i]);
     return retval;

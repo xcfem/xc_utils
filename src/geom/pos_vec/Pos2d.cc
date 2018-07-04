@@ -32,7 +32,7 @@
 #include "xc_utils/src/geom/d1/SemiRecta2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 Pos2d::Pos2d(void)
   : ProtoGeom(), cgpt(CGAL::ORIGIN) {}
 
@@ -48,11 +48,11 @@ Pos2d::Pos2d(const GEOM_FT &Ax,const GEOM_FT &Ay)
 Pos2d::Pos2d(const GEOM_RT &x,const GEOM_RT &y,const GEOM_RT &h)
   : ProtoGeom(), cgpt(x,y,h) {}
 
-//! @brief Constructor de copia.
+//! @brief Copy constructor
 Pos2d::Pos2d(const Pos2d &other)
   : ProtoGeom(other), cgpt(other.cgpt) {}
 
-//! @brief Operador asignación.
+//! @brief Assignment operator.
 Pos2d &Pos2d::operator=(const Pos2d &other)
   {
     ProtoGeom::operator=(other);

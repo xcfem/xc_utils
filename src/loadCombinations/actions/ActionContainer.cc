@@ -26,7 +26,7 @@
 #include "LeadingActionInfo.h"
 
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 cmb_acc::ActionContainer::ActionContainer(void)
   : G("Permanentes"), 
     G_aster("Permanentes val. no cte."), 

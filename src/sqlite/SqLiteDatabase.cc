@@ -52,7 +52,7 @@ bool SqLiteDatabase::borraTabla(const std::string &nmbTabla)
     return defaultQuery->execute("drop table if exists '" + nmbTabla + "';");
   }
 
-//! @brief Return la consulta por defecto.
+//! @brief Return the default query.
 SqLiteQuery *SqLiteDatabase::getDefaultQuery(void)
   { return defaultQuery; }
 

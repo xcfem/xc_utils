@@ -43,7 +43,7 @@ GEOM_FT RectaParametricas2d::Parametro(const Pos2d &p) const
     return dot(v,dir)/Abs(dir);
   }
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 Recta2d::Recta2d(void): Linea2d(),cgr(CGPoint_2(0,0),CGPoint_2(1,0))
   {}
 Recta2d::Recta2d(const Pos2d &p1,const Pos2d &p2)
@@ -75,7 +75,7 @@ Recta2d::Recta2d(const Recta2d &r)
 Recta2d::Recta2d(const RectaParametricas2d &param): Linea2d(),cgr(CGPoint_2(0,0),CGPoint_2(1,0))
   { Parametricas(param); }
 
-//! @brief Operador asignación.
+//! @brief Assignment operator.
 Recta2d &Recta2d::operator=(const Recta2d &r)
   {
     Linea2d::operator=(r);

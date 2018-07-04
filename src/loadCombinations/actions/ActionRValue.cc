@@ -31,14 +31,14 @@
 
 
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 cmb_acc::ActionRValue::ActionRValue(const std::string &n, const std::string &descrip,ActionRValueList *fam)
   : Action(n,descrip), acc_familia(fam),
     partial_safety_factors(&PartialSafetyFactorsMap::getCoefsPorDefecto()),
     combination_factors(&CombinationFactorsMap::getCoefsPorDefecto())
    {}
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 cmb_acc::ActionRValue::ActionRValue(const Action &a,ActionRValueList *fam,const std::string &nmb_combination_factors, const std::string &nmb_partial_safety_factors)
   : Action(a), acc_familia(fam),
     partial_safety_factors(&PartialSafetyFactorsMap::getCoefsPorDefecto()),

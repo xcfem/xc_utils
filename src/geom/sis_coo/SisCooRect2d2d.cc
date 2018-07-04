@@ -30,7 +30,7 @@
 
 
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 SisCooRect2d2d::SisCooRect2d2d(void): SisCooXd2d(2) {}
 //! @brief Constructor.
 SisCooRect2d2d::SisCooRect2d2d(const Pos2d &p1,const Pos2d &p2)

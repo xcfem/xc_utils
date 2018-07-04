@@ -48,7 +48,7 @@ class ActionRValue: public Action
 
   protected:
     friend class ActionRValueList;
-    //! @brief Constructor por defecto.
+    //! @brief Default constructor.
     ActionRValue(const std::string &n="", const std::string &descrip="",ActionRValueList *fam= nullptr);
     ActionRValue(const Action &a,ActionRValueList *fam= nullptr,const std::string &nmb_comb_factors= "",const std::string &nmb_partial_safety_factors= "");
   public:

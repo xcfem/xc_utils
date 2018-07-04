@@ -47,7 +47,7 @@ matriz_FT matriz_rotation_3d(const Recta3d &axis,const double &theta)
     return retval;
   }
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 Rotation3d::Rotation3d(void)
   : Trf3d()
   {

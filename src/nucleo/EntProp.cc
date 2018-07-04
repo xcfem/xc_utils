@@ -37,25 +37,25 @@
 //Variables estáticas de EntProp.
 int EntProp::verbosity= 1;
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 EntProp::EntProp(EntProp *owr)
   : owner(owr)
   {
     if(this == owner)
-      std::cerr << "EntProp constructor por defecto; ¡ojo!, objeto de clase: '" 
-                << getClassName() << "', propietario de sí mismo." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+                << "; ¡ojo!, object is owner of itself." << std::endl;
   }
 
-//! @brief Constructor de copia.
+//! @brief Copy constructor
 EntProp::EntProp(const EntProp &other)
   : owner(other.owner)
   {
     if(this == owner)
-      std::cerr << "EntProp constructor de copia; ¡ojo!, objeto de clase: '"
-                << getClassName() << "', propietario de sí mismo." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+                << "; ¡ojo!, object is owner of itself." << std::endl;
   }
 
-//! @brief Operador asignación.
+//! @brief Assignment operator.
 EntProp &EntProp::operator=(const EntProp &other)
   {
     owner= other.owner;

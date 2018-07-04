@@ -25,7 +25,7 @@
 #include "xc_utils/src/loadCombinations/actions/ActionContainer.h"
 
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 cmb_acc::LoadCombinations::LoadCombinations(void)
  {}
 

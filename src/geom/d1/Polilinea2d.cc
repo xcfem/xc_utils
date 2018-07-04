@@ -31,7 +31,7 @@
 
 #include "xc_utils/src/geom/pos_vec/ListaPos2d.h"
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 Polilinea2d::Polilinea2d(void)
   : Linea2d(), GeomObj::list_Pos2d() {}
 

@@ -62,7 +62,7 @@ std::deque<std::string> cmb_acc::ActionRelationships::get_combination_actions_na
     return retval;
   }
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 cmb_acc::ActionRelationships::ActionRelationships(void)
   : EntCmd(), incompatibles(0), maestras(0), nodet(false), contiene_incomp(false) {}
 

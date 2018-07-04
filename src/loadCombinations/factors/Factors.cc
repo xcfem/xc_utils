@@ -24,7 +24,7 @@
 #include "Factors.h"
 
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 cmb_acc::Factors::Factors(const PartialSafetyFactorsMap &psf, const CombinationFactorsMap &cf)
   : partial_safety_factors(psf),
     combination_factors(cf)

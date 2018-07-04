@@ -106,7 +106,7 @@ const Factors *FactorsMap<Factors>::getPtrCoefs(const std::string &nmb) const
       }
   }
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 template <class Factors>
 FactorsMap<Factors>::FactorsMap(void)
   : EntCmd() {}

@@ -54,7 +54,7 @@ class KRowVarRef: public VarRefCajaTritriz<TRITRIZ>
       { return VarRefCajaTritriz<TRITRIZ>::operator()(iLayer,iRow,col); }
   };
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 template<class TRITRIZ>
 KRowVarRef<TRITRIZ>::KRowVarRef(TRITRIZ &t,const size_t &iLayer,const size_t &f)
   : VarRefCajaTritriz<TRITRIZ>(t,iLayer,f,RangoIndice(1,t.getNumberOfColumns())) {}

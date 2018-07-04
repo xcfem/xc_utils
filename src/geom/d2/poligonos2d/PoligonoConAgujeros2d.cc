@@ -27,11 +27,11 @@
 
 
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 PoligonoConAgujeros2d::PoligonoConAgujeros2d(void)
   : Superficie2d(){}
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 PoligonoConAgujeros2d::PoligonoConAgujeros2d(const Poligono2d &p)
   : Superficie2d(), cgpol(p.ToCGAL()) {}
 

@@ -23,7 +23,7 @@
 
 #include "ActionsAndFactors.h"
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 cmb_acc::ActionsAndFactors::ActionsAndFactors(const Factors &fs)
   : ActionContainer(), factors(fs)
   {}

@@ -29,7 +29,7 @@
 #include "xc_utils/src/geom/d1/Recta3d.h"
 
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 SemiEspacio3d::SemiEspacio3d(const Plane &p)
   : GeomObj3d(), lim(p) {}
 

@@ -55,7 +55,7 @@ CircularSector2d CircularSector2dThreepoints(const Pos2d &p1,const Pos2d &p2,con
     return retval;
   }
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 CircularSector2d::CircularSector2d(void)
   : Circle2d(), theta1(0), theta2(M_PI/2) {}
 
@@ -67,7 +67,7 @@ CircularSector2d::CircularSector2d(const Circle2d &c,const double &th1,const dou
       theta1-= 2*M_PI;
   }
 
-//! @brief Constructor de copia.
+//! @brief Copy constructor
 CircularSector2d::CircularSector2d(const CircularSector2d &other)
   : Circle2d(other), theta1(other.theta1), theta2(other.theta2) {}
 

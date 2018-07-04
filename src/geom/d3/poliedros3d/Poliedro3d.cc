@@ -41,7 +41,7 @@
 
 
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 Poliedro3d::Poliedro3d(void): cgpoliedro() {}
 
 //! @brief Constructor.
@@ -63,11 +63,11 @@ Poliedro3d::Poliedro3d(const SemiEspacio3d &se1, const SemiEspacio3d &se2,const 
 Poliedro3d::Poliedro3d(const EPoliedro &e)
   : cgpoliedro(empobrece(e)) {}
 
-//! @brief Constructor de copia.
+//! @brief Copy constructor
 Poliedro3d::Poliedro3d(const Poliedro3d &other) 
   : PolyhedronBase(other), cgpoliedro(other.cgpoliedro) {}
 
-//! @brief Operador asignación.
+//! @brief Assignment operator.
 Poliedro3d &Poliedro3d::operator=(const Poliedro3d &other)
   {
     PolyhedronBase::operator=(other);

@@ -33,7 +33,7 @@
 
 const double cmb_acc::Action::zero= 1e-6;
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 cmb_acc::Action::Action(const std::string &n, const std::string &descrip)
   : EntConNmb(n), descripcion(descrip),relaciones(), f_pond(1.0) {}
 

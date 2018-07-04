@@ -54,7 +54,7 @@ class JRowVarRef: public VarRefCajaTritriz<TRITRIZ>
       { return VarRefCajaTritriz<TRITRIZ>::operator()(iLayer,iRow,col); }
   };
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 template<class TRITRIZ>
 JRowVarRef<TRITRIZ>::JRowVarRef(TRITRIZ &t,const size_t &iLayer,const size_t &c)
   : VarRefCajaTritriz<TRITRIZ>(t,iLayer,RangoIndice(1,t.getNumberOfRows()),c) {}

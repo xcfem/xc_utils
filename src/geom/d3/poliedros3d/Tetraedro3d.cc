@@ -36,7 +36,7 @@ const Pos3d v2PorDefecto(0.0,1.0,0.0);
 const Pos3d v3PorDefecto(0.0,0.0,1.0);
 const Pos3d v4PorDefecto(0.0,0.0,0.0);
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 Tetraedro3d::Tetraedro3d(void)
   : cgtetraedro(v1PorDefecto.ToCGAL(),v2PorDefecto.ToCGAL(),v3PorDefecto.ToCGAL(),v4PorDefecto.ToCGAL()) {}
 

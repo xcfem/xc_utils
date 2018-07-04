@@ -84,7 +84,7 @@ std::deque<Vector3d> BlockPyramid::haz_vectores_interiores(void) const
     return retval;
   }
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 BlockPyramid::BlockPyramid(void)
   : GeomObj3d() {}
 

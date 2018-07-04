@@ -66,18 +66,18 @@ cmb_acc::ActionsAndFactors *cmb_acc::ActionWeightingMap::findOrCreate(const std:
     return tmp;
   }
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 cmb_acc::ActionWeightingMap::ActionWeightingMap(void)
   : EntCmd() {}
 
-//! @brief Constructor de copia (NO COPIA LAS ACTIONS_AND_FACTORS).
+//! @brief Copy constructor(NO COPIA LAS ACTIONS_AND_FACTORS).
 cmb_acc::ActionWeightingMap::ActionWeightingMap(const ActionWeightingMap &other)
   : EntCmd(other)
   {
     copy(other.actions_and_factors);
   }
 
-//! @brief Operador asignación (NO COPIA LAS ACTIONS_AND_FACTORS).
+//! @brief Assignment operator (NO COPIA LAS ACTIONS_AND_FACTORS).
 cmb_acc::ActionWeightingMap &cmb_acc::ActionWeightingMap::operator=(const ActionWeightingMap &other)
   {
     EntCmd::operator=(other);

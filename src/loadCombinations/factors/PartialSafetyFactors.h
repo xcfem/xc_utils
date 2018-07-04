@@ -49,7 +49,7 @@ class SLSPartialSafetyFactors: public EntCmd
     friend class PartialSafetyFactors;
     Variation Coefs(void) const;
   public:
-    //! @brief Constructor por defecto. Supone control normal.
+    //! @brief Default constructor. Supone control normal.
     SLSPartialSafetyFactors(const float &fav=0.0,const float &desfav=1.0);
     inline float getFavorable(void) const
       { return partial_safety_factors_fav; }
@@ -83,7 +83,7 @@ class ULSPartialSafetyFactors: public SLSPartialSafetyFactors
     //! @brief Return the partial safety factors correspondientes a situación accidental o sísmica.
     Variation CoefsAcc(void) const;
   public:
-    //! @brief Constructor por defecto. Supone control normal.
+    //! @brief Default constructor. Supone control normal.
     ULSPartialSafetyFactors(const float &fav=0.0,const float &desfav=1.8,const float &fav_acc=0.0,const float &desfav_acc=1.0);
     inline float getFavorableAccidental(void) const
       { return partial_safety_factors_fav_acc; }

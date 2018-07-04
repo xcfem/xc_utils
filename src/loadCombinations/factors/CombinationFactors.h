@@ -39,10 +39,10 @@ class CombinationFactors: public EntCmd
     float psi_1; //!< To compute the frequent value.
     float psi_2; //!< To compute the quasi-permanent value.
   public:
-    //! @brief Constructor por defecto.
+    //! @brief Default constructor.
     CombinationFactors(const float &p0= 1.0, const float &p1= 1.0, const float &p2= 1.0)
       : EntCmd(),psi_0(p0), psi_1(p1), psi_2(p2) {}
-    //! @brief Constructor de copia.
+    //! @brief Copy constructor
     const float &getCombinationFactor(short int r) const;
     void Print(std::ostream &os) const;
   };

@@ -29,7 +29,7 @@
 
 vtkStandardNewMacro(vtkTakePhoto)
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 vtkTakePhoto::vtkTakePhoto(void)
   : name("vtkFileSnapshot"),renWin(nullptr),
    w2if(nullptr),format(POSTSCRIPT)

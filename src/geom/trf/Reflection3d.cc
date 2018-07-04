@@ -43,7 +43,7 @@ matriz_FT Reflection3d::matriz_reflection3d(const  Pos3d &Q,const Vector3d &n)
     return retval;
   }
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 Reflection3d::Reflection3d(void)
   : Trf3d()
   {

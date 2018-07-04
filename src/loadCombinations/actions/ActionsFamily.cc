@@ -30,7 +30,7 @@
 
 
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 cmb_acc::ActionsFamily::ActionsFamily(const std::string &nmb)
   : EntConNmb(nmb)
   {

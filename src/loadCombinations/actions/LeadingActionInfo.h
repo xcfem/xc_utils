@@ -46,7 +46,7 @@ class LeadingActionInfo: public EntCmd
     short int leading_representative_value_index; //!< Index of the representative value for the leading action.
     short int general_representative_value_index; //!< Index of the representative value for the non leading actions.
   public:
-    //! @brief Constructor por defecto.
+    //! @brief Default constructor.
     LeadingActionInfo(const short int &i= -1, const short int &lrv= -1, const short int &grv= 0);
 
     //! @brief Return true if there is a leading action.

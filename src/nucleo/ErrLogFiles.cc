@@ -55,7 +55,8 @@ void ErrLogFiles::setErrFileName(const std::string &filename)
     if(salida_err_file)
       std::cerr.rdbuf(salida_err_file->rdbuf());
     else
-      std::cerr << "Error en la redirección del stream de error por defecto.";
+      std::cerr << "ErrLogFiles::" << __FUNCTION__
+		<< "; error redirecting default error stream.";
   }
 
 std::ostream &ErrLogFiles::getLogFile(void)
@@ -85,5 +86,6 @@ void ErrLogFiles::setLogFileName(const std::string &filename)
     if(salida_log_file)
       std::clog.rdbuf(salida_log_file->rdbuf());
     else
-      std::cerr << "Error en la redirección del stream 'clog' por defecto.";
+      std::cerr << "ErrLogFiles::" << __FUNCTION__
+		<< "; error redirecting default 'log' stream.";
   }

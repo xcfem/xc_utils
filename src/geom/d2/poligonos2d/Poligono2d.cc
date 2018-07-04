@@ -39,7 +39,7 @@
 #include "xc_utils/src/geom/pos_vec/ListaPos2d.h"
 
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 Poligono2d::Poligono2d(void)
   : SupPoligonal2d(), cgpol() {}
 

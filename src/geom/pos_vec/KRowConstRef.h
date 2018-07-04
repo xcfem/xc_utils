@@ -45,7 +45,7 @@ class KRowConstRef: public ConstRefCajaTritriz<TRITRIZ>
       { return ConstRefCajaTritriz<TRITRIZ>::operator()(iLayer,iRow,col); }
   };
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 template<class TRITRIZ>
 KRowConstRef<TRITRIZ>::KRowConstRef(const TRITRIZ &t,const size_t &iLayer,const size_t &f)
   : ConstRefCajaTritriz<TRITRIZ>(t,iLayer,f,RangoIndice(1,t.getNumberOfColumns()))

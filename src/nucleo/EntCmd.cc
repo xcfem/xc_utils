@@ -37,7 +37,7 @@
 //Variables estáticas de EntCmd.
 ErrLogFiles EntCmd::err_log_files; //!< Streams para errores y avisos.
 
-//! @brief Constructor por defecto.
+//! @brief Default constructor.
 EntCmd::EntCmd(EntCmd *owr)
   : EntProp(owr) {}
 
