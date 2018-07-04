@@ -41,8 +41,8 @@ class GTSGraph
   public:
 
     GTSGraph(const GTSSurface &s);
-    GTSGraph(const GTSGraph &otro);
-    GTSGraph &operator=(const GTSGraph &otro);
+    GTSGraph(const GTSGraph &);
+    GTSGraph &operator=(const GTSGraph &);
 
     void PrintStats(FILE* fp) const;
 

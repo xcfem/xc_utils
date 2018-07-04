@@ -39,8 +39,8 @@ class SisCooRect3d3d: public SisCooXd3d
     typedef Pos3d PLocal; //Dimensión del vector en locales.
   public:
     SisCooRect3d3d(void): SisCooXd3d(3) {}
-    SisCooRect3d3d(const SisCooRect3d3d &otro)
-      : SisCooXd3d(otro) {}
+    SisCooRect3d3d(const SisCooRect3d3d &other)
+      : SisCooXd3d(other) {}
     SisCooRect3d3d(const PGlobal &o,const PGlobal &p);
     SisCooRect3d3d(const PGlobal &p1,const PGlobal &p2, const PGlobal &p3);
     SisCooRect3d3d(const VGlobal &v1,const VGlobal &v2,const VGlobal &v3);

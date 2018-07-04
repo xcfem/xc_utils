@@ -24,23 +24,23 @@
 #include "EntConNmb.h"
 
 //! @brief += operator.
-EntConNmb &EntConNmb::operator+=(const EntConNmb &otro)
+EntConNmb &EntConNmb::operator+=(const EntConNmb &other)
   {
-    name= '('+ name + '+' + otro.getName()+')';
+    name= '('+ name + '+' + other.getName()+')';
     return *this;
   }
 
 //! @brief -= operator.
-EntConNmb &EntConNmb::operator-=(const EntConNmb &otro)
+EntConNmb &EntConNmb::operator-=(const EntConNmb &other)
   {
-    name= '('+ name + '-' + otro.getName()+')';
+    name= '('+ name + '-' + other.getName()+')';
     return *this;
   }
 
 //! @brief *= operator.
-EntConNmb &EntConNmb::operator*=(const EntConNmb &otro)
+EntConNmb &EntConNmb::operator*=(const EntConNmb &other)
   {
-    name= '('+ name + '*' + otro.getName()+')';
+    name= '('+ name + '*' + other.getName()+')';
     return *this;
   }
 

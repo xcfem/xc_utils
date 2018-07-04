@@ -115,13 +115,13 @@ Plane::Plane(const Poligono3d &pg3d)
 Plane::Plane(const GeneralEquationOfPlane &eg)
   : Superficie3d(), cgp(eg.a(),eg.b(),eg.c(),eg.d()) {}
 
-Plane::Plane(const Plane &otro)
-  : Superficie3d(), cgp(otro.cgp) {}
+Plane::Plane(const Plane &other)
+  : Superficie3d(), cgp(other.cgp) {}
 
-Plane &Plane::operator=(const Plane &otro)
+Plane &Plane::operator=(const Plane &other)
   {
-    cgp=(otro.cgp);
-    Superficie3d::operator=(otro);
+    cgp=(other.cgp);
+    Superficie3d::operator=(other);
     return *this;
   }
 

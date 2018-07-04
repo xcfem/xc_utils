@@ -43,8 +43,8 @@ void GTSSplit::borra(void)
 GTSSplit::GTSSplit(const GTSVertex &v,const GTSVertex &v1,const GTSVertex &v2)
   : spt(nullptr), borrar(false)
   { crea(v,v1,v2); }
-GTSSplit::GTSSplit(const GTSSplit &otro)
-  : spt(otro.spt), borrar(false)
+GTSSplit::GTSSplit(const GTSSplit &other)
+  : spt(other.spt), borrar(false)
   {}
 GTSSplit &GTSSplit::operator=(const GTSSplit &otra)
   {

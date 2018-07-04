@@ -34,8 +34,8 @@
 
 
 //! @brief Constructor de copia
-CircularSector3d::CircularSector3d(const CircularSector3d &otro)
-  : D2to3d(otro), sect_circ(otro.sect_circ) {}
+CircularSector3d::CircularSector3d(const CircularSector3d &other)
+  : D2to3d(other), sect_circ(other.sect_circ) {}
 
 //! @brief Operador asignación.
 CircularSector3d &CircularSector3d::operator=(const CircularSector3d &p)

@@ -59,8 +59,8 @@ class GmGrupo : public GO
       { return objetos.empty(); }
 
     GmGrupo(void) : GO(), objetos() {}
-    GmGrupo(const GmGrupo &otro) : GO(otro)
-      { copia_objetos(otro.objetos); }
+    GmGrupo(const GmGrupo &other) : GO(other)
+      { copia_objetos(other.objetos); }
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
     virtual unsigned short int Dimension(void) const;

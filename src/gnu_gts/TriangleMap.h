@@ -114,8 +114,8 @@ class TriangleVerticesIndexes
       { return v2; }
     inline size_t &V3(void)
       { return v3; }
-    inline bool operator==(const TriangleVerticesIndexes &otro) const
-      { return (v1==otro.v1) && (v2==otro.v2) && (v3==otro.v3); }
+    inline bool operator==(const TriangleVerticesIndexes &other) const
+      { return (v1==other.v1) && (v2==other.v2) && (v3==other.v3); }
     void Print(std::ostream &os) const;
   };
 

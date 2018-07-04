@@ -149,7 +149,7 @@ void cmb_acc::Action::suma(const Action &f)
     relaciones.updateMaestras(getName());
     if(Nula(zero) && f.Nula(zero)) //Si ambas son nulas la suma es nula.
       f_pond= 0.0;
-    else //En otro caso no lo sabemos.
+    else //Otherwise we don't know.
       f_pond= 1.0;
     if(!Owner())
       set_owner(const_cast<EntCmd *>(f.Owner()));

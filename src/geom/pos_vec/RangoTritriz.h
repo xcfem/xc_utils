@@ -80,8 +80,8 @@ class RangoTritriz
     inline static const char &Separador(void)
       { return RangoIndice::Separador(); }
     void Clip(const size_t &cpmax,const size_t &fmax,const size_t &cmax);
-    void Intersec(const RangoTritriz &otro);
-    RangoTritriz Intersec(const RangoTritriz &otro) const;
+    void Intersec(const RangoTritriz &);
+    RangoTritriz Intersec(const RangoTritriz &other) const;
     void Print(std::ostream &os) const;
   };
 

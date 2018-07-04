@@ -54,8 +54,8 @@ class vtkTakePhoto: public vtkObject
     vtkWindowToImageFilter *w2if;
     sepFileFormat format;
 
-    vtkTakePhoto(const vtkTakePhoto &otro); //Not implemented.
-    vtkTakePhoto &operator=(const vtkTakePhoto &otro); //Not implemented.
+    vtkTakePhoto(const vtkTakePhoto &); //Not implemented.
+    vtkTakePhoto &operator=(const vtkTakePhoto &); //Not implemented.
   public :
     vtkTakePhoto(void);
     static vtkTakePhoto* New();

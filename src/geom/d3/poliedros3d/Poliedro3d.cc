@@ -64,14 +64,14 @@ Poliedro3d::Poliedro3d(const EPoliedro &e)
   : cgpoliedro(empobrece(e)) {}
 
 //! @brief Constructor de copia.
-Poliedro3d::Poliedro3d(const Poliedro3d &otro) 
-  : PolyhedronBase(otro), cgpoliedro(otro.cgpoliedro) {}
+Poliedro3d::Poliedro3d(const Poliedro3d &other) 
+  : PolyhedronBase(other), cgpoliedro(other.cgpoliedro) {}
 
 //! @brief Operador asignación.
-Poliedro3d &Poliedro3d::operator=(const Poliedro3d &otro)
+Poliedro3d &Poliedro3d::operator=(const Poliedro3d &other)
   {
-    PolyhedronBase::operator=(otro);
-    cgpoliedro= otro.cgpoliedro;
+    PolyhedronBase::operator=(other);
+    cgpoliedro= other.cgpoliedro;
     return *this;
   }
 

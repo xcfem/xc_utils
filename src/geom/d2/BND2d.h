@@ -44,12 +44,12 @@ class BND2d: public GeomObj2d
   public:
     BND2d(void): GeomObj2d(),cgrectg() {}
     BND2d(const Pos2d &p_min,const Pos2d &p_max);
-    BND2d(const BND2d &otro) 
-      :  GeomObj2d(otro),cgrectg(otro.cgrectg) {}
-    BND2d &operator =(const BND2d &otro) 
+    BND2d(const BND2d &other) 
+      :  GeomObj2d(other),cgrectg(other.cgrectg) {}
+    BND2d &operator =(const BND2d &other) 
       {
-	GeomObj2d::operator=(otro);
-        cgrectg=otro.cgrectg;
+	GeomObj2d::operator=(other);
+        cgrectg=other.cgrectg;
         return *this;
       }
     virtual GeomObj *clon(void) const

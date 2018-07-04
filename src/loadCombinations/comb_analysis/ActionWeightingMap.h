@@ -58,8 +58,8 @@ class ActionWeightingMap: public EntCmd
     friend class ActionsAndFactors;
   public:
     ActionWeightingMap(void);
-    ActionWeightingMap(const ActionWeightingMap &otro);
-    ActionWeightingMap &operator=(const ActionWeightingMap &otro);
+    ActionWeightingMap(const ActionWeightingMap &);
+    ActionWeightingMap &operator=(const ActionWeightingMap &);
     virtual ~ActionWeightingMap(void);
     cmb_acc::ActionsAndFactors *create(const std::string &,const Factors &coefs= Factors());
 

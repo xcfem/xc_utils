@@ -84,18 +84,18 @@ void RangoTritriz::Clip(const size_t &cpmax,const size_t &fmax,const size_t &cma
   }
 
 //! @brief Assigns to this one the intersection of both ranges.
-void RangoTritriz::Intersec(const RangoTritriz &otro)
+void RangoTritriz::Intersec(const RangoTritriz &other)
   {
-    layer_range.Intersec(otro.layer_range);
-    row_range.Intersec(otro.row_range);
-    column_range.Intersec(otro.column_range);
+    layer_range.Intersec(other.layer_range);
+    row_range.Intersec(other.row_range);
+    column_range.Intersec(other.column_range);
   }
 
 //! @brief Return the intersection of both ranges.
-RangoTritriz RangoTritriz::Intersec(const RangoTritriz &otro) const
+RangoTritriz RangoTritriz::Intersec(const RangoTritriz &other) const
   {
     RangoTritriz retval(*this);
-    retval.Intersec(otro);
+    retval.Intersec(other);
     return retval;
   }
 

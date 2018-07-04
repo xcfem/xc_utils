@@ -46,12 +46,12 @@ class SisCoo: public ProtoGeom
     void ortogonaliza(void);
     void ortonormaliza(void);
     SisCoo(const size_t &,const size_t &);
-    SisCoo(const SisCoo &otro)
-      : ProtoGeom(otro), rot(otro.rot) {}
-    SisCoo &operator=(const SisCoo &otro)
+    SisCoo(const SisCoo &other)
+      : ProtoGeom(other), rot(other.rot) {}
+    SisCoo &operator=(const SisCoo &other)
       {
-	ProtoGeom::operator=(otro);
-        rot= otro.rot;
+	ProtoGeom::operator=(other);
+        rot= other.rot;
         return *this;
       }
     virtual SisCoo *Copia(void) const= 0;

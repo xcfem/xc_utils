@@ -48,8 +48,8 @@ class Pos2d: public ProtoGeom
     Pos2d(const CGPoint_2 &p);
     Pos2d(const GEOM_FT &Ax,const GEOM_FT &Ay);
     Pos2d(const GEOM_RT &x,const GEOM_RT &y,const GEOM_RT &h);
-    Pos2d(const Pos2d &otro);
-    Pos2d &operator=(const Pos2d &otro);
+    Pos2d(const Pos2d &);
+    Pos2d &operator=(const Pos2d &);
     Pos2d &operator+=(const Vector2d &v);
     Pos2d &operator-=(const Vector2d &v);
     Vector2d operator-(const Pos2d &) const;

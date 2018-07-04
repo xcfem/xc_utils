@@ -247,12 +247,10 @@ matriz_FT prod_tensor(const Vector3d &u,const Vector3d &v)
 matriz_FT operator&(const Vector3d &u,const Vector3d &v)
   { return prod_tensor(u,v); }
 
-//! @brief Dado el vector v que se pasa como parámetro
-//! esta función devuelve la matriz que POSTmultiplicada
-//! por un vector u devuelve otro vector igual al producto
-//! vectorial (u x v)
+//! @brief For the vector argument v, return the matrix that
+//! post-multiplied by any vector u returns the cross product: (u x v)
 //!
-//! ver "Geometric tools for computer graphics"
+//! see "Geometric tools for computer graphics"
 //! Philip J. Schneider Morgan Kaufmann Publishers, páginas 119 y 120.
 matriz_FT skew_symm_matrix_post(const Vector3d &v)
   {
@@ -266,12 +264,10 @@ matriz_FT skew_symm_matrix_post(const Vector3d &v)
     return retval;
   }
 
-//! @brief Dado el vector v que se pasa como parámetro
-//! esta función devuelve la matriz que PREmultiplicada
-//! por un vector u devuelve otro vector igual al producto
-//! vectorial (v x u)
+//! @brief For the vector argument v, return the matrix that
+//! pre-multiplied by any vector u returns the cross product: (v x u)
 //!
-//! ver "Geometric tools for computer graphics"
+//! see "Geometric tools for computer graphics"
 //! Philip J. Schneider Morgan Kaufmann Publishers, páginas 119 y 120.
 matriz_FT skew_symm_matrix_pre(const Vector3d &v)
   { return -skew_symm_matrix_post(v); }

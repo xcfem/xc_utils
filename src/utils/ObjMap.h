@@ -64,19 +64,19 @@ ObjMap<T>::ObjMap(void)
 
 //! @brief Constructor de copia.
 template <class T>
-ObjMap<T>::ObjMap(const ObjMap &otro)
+ObjMap<T>::ObjMap(const ObjMap &other)
   : map_ptr()
   {
-    for(const_iterator i=otro.begin();i!=otro.end();i++)
+    for(const_iterator i=other.begin();i!=other.end();i++)
       insert(i->first,*(i->second));
   }
 
 //! @brief Operador de asignación.
 template <class T>
-const ObjMap<T> &ObjMap<T>::operator=(const ObjMap &otro)
+const ObjMap<T> &ObjMap<T>::operator=(const ObjMap &other)
   {
     clear();
-    for(const_iterator i=otro.begin();i!=otro.end();i++)
+    for(const_iterator i=other.begin();i!=other.end();i++)
       insert(i->first,*(i->second));
     return *this;
   }

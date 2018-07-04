@@ -44,7 +44,7 @@ class Triangle2d : public SupPoligonal2d
     Triangle2d(const Pos2d p1,const Pos2d &p2,const Pos2d &p3)
      : SupPoligonal2d(), cgtriang(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL())
       {}
-    Triangle2d(const Triangle2d &otro) : SupPoligonal2d(otro), cgtriang(otro.cgtriang) {}
+    Triangle2d(const Triangle2d &other) : SupPoligonal2d(other), cgtriang(other.cgtriang) {}
     Triangle2d &operator=(const Triangle2d &p)
       {
 	SupPoligonal2d::operator=(p);

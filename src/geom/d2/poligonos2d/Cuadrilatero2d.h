@@ -51,12 +51,12 @@ class Cuadrilatero2d: public Poligono2d
         push_back(Pos2d(1,1));
         push_back(Pos2d(0,1));
       }
-    Cuadrilatero2d(const Cuadrilatero2d &otro): Poligono2d(otro)
+    Cuadrilatero2d(const Cuadrilatero2d &other): Poligono2d(other)
       {}
     Cuadrilatero2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3,const Pos2d &p4);
-    Cuadrilatero2d &operator=(const Cuadrilatero2d &otro)
+    Cuadrilatero2d &operator=(const Cuadrilatero2d &other)
       {
-	Poligono2d::operator=(otro);
+	Poligono2d::operator=(other);
         return *this;
       }
     virtual GeomObj *clon(void) const

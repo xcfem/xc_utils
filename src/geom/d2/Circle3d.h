@@ -40,8 +40,8 @@ class Circle3d : public D2to3d
     Circle3d(const Pos3d &centro,const GEOM_FT &rad);
     Circle3d(const GEOM_FT &rad2,const Pos3d &centro);
     Circle3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
-    Circle3d(const Circle3d &otro)
-      : D2to3d(otro), circ(otro.circ) {}
+    Circle3d(const Circle3d &other)
+      : D2to3d(other), circ(other.circ) {}
     Circle3d &operator=(const Circle3d &p)
       {
 	D2to3d::operator=(p);

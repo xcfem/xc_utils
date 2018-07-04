@@ -39,7 +39,7 @@ class CircularSector2d : public Circle2d
   public:
     CircularSector2d(void);
     CircularSector2d(const Circle2d &c,const double &th1,const double &th2);
-    CircularSector2d(const CircularSector2d &otro);
+    CircularSector2d(const CircularSector2d &);
     CircularSector2d &operator=(const CircularSector2d &p);
     virtual Superficie2d *clon(void) const;
     virtual Pos2d getCenterOfMass(void) const;

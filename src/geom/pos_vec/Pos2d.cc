@@ -49,14 +49,14 @@ Pos2d::Pos2d(const GEOM_RT &x,const GEOM_RT &y,const GEOM_RT &h)
   : ProtoGeom(), cgpt(x,y,h) {}
 
 //! @brief Constructor de copia.
-Pos2d::Pos2d(const Pos2d &otro)
-  : ProtoGeom(otro), cgpt(otro.cgpt) {}
+Pos2d::Pos2d(const Pos2d &other)
+  : ProtoGeom(other), cgpt(other.cgpt) {}
 
 //! @brief Operador asignación.
-Pos2d &Pos2d::operator=(const Pos2d &otro)
+Pos2d &Pos2d::operator=(const Pos2d &other)
   {
-    ProtoGeom::operator=(otro);
-    cgpt= otro.cgpt;
+    ProtoGeom::operator=(other);
+    cgpt= other.cgpt;
     return *this;
   }
 

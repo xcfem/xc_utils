@@ -43,7 +43,7 @@ class GTSEdge
   public:
 
     GTSEdge(GTSVertex &v1,GTSVertex &v2);
-    GTSEdge(const GTSEdge &otro);
+    GTSEdge(const GTSEdge &);
     GTSEdge &operator=(const GTSEdge &otra);
 
     GTSVertex V1(void) const;

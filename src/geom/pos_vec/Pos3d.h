@@ -57,11 +57,11 @@ class Pos3d : public ProtoGeom
       : ProtoGeom(), cgpt(Ax,Ay,Az) {}
 /*     Pos3d(const double &Ax,const double &Ay,const double &Az) */
 /*       : ProtoGeom(), cgpt(Point_3_from_doubles(Ax,Ay,Az)) {} */
-    Pos3d(const Pos3d &otro): ProtoGeom(otro), cgpt(otro.cgpt){}
-    Pos3d &operator=(const Pos3d &otro)
+    Pos3d(const Pos3d &other): ProtoGeom(other), cgpt(other.cgpt){}
+    Pos3d &operator=(const Pos3d &other)
       {
-	ProtoGeom::operator=(otro);
-        cgpt=(otro.cgpt);
+	ProtoGeom::operator=(other);
+        cgpt=(other.cgpt);
         return *this;
       }
     Pos3d &operator+=(const Vector3d &);

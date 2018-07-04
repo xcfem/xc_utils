@@ -157,10 +157,10 @@ class Poligono2d: public SupPoligonal2d
 
     std::deque<GEOM_FT> &GetRecubrimientos(const ListaPos2d &) const;
 
-    Poligono2d getUnion(const Poligono2d &otro) const;
-    void une(const Poligono2d &otro);
+    Poligono2d getUnion(const Poligono2d &other) const;
+    void une(const Poligono2d &);
     void une(const std::list<Poligono2d> &l);
-    void clipBy(const Poligono2d &otro);
+    void clipBy(const Poligono2d &);
     Segment2d Clip(const Recta2d &) const;
     Segment2d Clip(const SemiRecta2d &) const;
     Segment2d Clip(const Segment2d &) const;

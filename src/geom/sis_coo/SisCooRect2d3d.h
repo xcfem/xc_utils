@@ -46,11 +46,11 @@ class SisCooRect2d3d: public SisCooXd3d
     SisCooRect2d3d(const VGlobal &v);
     SisCooRect2d3d(const VGlobal &v1,const VGlobal &v2);
     SisCooRect2d3d(const PGlobal &p1,const PGlobal &p2, const PGlobal &p3);
-    SisCooRect2d3d(const SisCooRect2d3d &otro)
-      : SisCooXd3d(otro) {}
-    SisCooRect2d3d &operator=(const SisCooRect2d3d &otro)
+    SisCooRect2d3d(const SisCooRect2d3d &other)
+      : SisCooXd3d(other) {}
+    SisCooRect2d3d &operator=(const SisCooRect2d3d &other)
       {
-	SisCooXd3d::operator=(otro);
+	SisCooXd3d::operator=(other);
         return *this;
       }
     virtual SisCoo *Copia(void) const

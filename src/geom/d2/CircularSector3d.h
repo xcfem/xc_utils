@@ -41,7 +41,7 @@ class CircularSector3d : public D2to3d
     CircularSector3d(const GEOM_FT &rad2,const Pos3d &centro,const double &th1,const double &th2);
     CircularSector3d(const Pos3d &c,const double &r,const Vector3d &n,const Vector3d &Xaxis,const double &angIni,const double &angFin);
     CircularSector3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
-    CircularSector3d(const CircularSector3d &otro);
+    CircularSector3d(const CircularSector3d &);
     CircularSector3d &operator=(const CircularSector3d &p);
     virtual D2to3d *clon(void) const;
     Pos3d Centro(void) const;

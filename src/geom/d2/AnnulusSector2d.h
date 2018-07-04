@@ -42,8 +42,8 @@ class AnnulusSector2d : public CircularSector2d
   public:
     AnnulusSector2d(void) : CircularSector2d(), inner_radius(0.0) {}
     AnnulusSector2d(const CircularSector2d &c,const double &inner_radius);
-    AnnulusSector2d(const AnnulusSector2d &otro)
-      : CircularSector2d(otro), inner_radius(otro.inner_radius) {}
+    AnnulusSector2d(const AnnulusSector2d &other)
+      : CircularSector2d(other), inner_radius(other.inner_radius) {}
     AnnulusSector2d &operator=(const AnnulusSector2d &p)
       {
 	CircularSector2d::operator=(p);

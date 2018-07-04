@@ -59,8 +59,8 @@ GTSVertex::GTSVertex(const Pos3d &p)
   { crea(p.x(),p.y(),p.z()); }
 
 //! @brief Copy constructor.
-GTSVertex::GTSVertex(const GTSVertex &otro)
-  : vt(otro.vt), borrar(false)
+GTSVertex::GTSVertex(const GTSVertex &other)
+  : vt(other.vt), borrar(false)
   {}
 
 //! @brief Assignment operator.

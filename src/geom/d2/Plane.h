@@ -64,10 +64,10 @@ class Plane : public Superficie3d
     Plane(const Recta3d &r,const Pos3d &p);
     Plane(const Segment3d &s,const Vector3d &v);
     Plane(const Poligono3d &trg);
-    Plane(const Plane &otro);
+    Plane(const Plane &);
     Plane(const GeneralEquationOfPlane &eg);
     Plane(const GeomObj3d::list_Pos3d &lp);
-    Plane &operator=(const Plane &otro);
+    Plane &operator=(const Plane &);
 
     virtual GeomObj *clon(void) const;
     const CGPlane_3 &ToCGAL(void) const

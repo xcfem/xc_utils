@@ -42,15 +42,15 @@ class Poligono3d: public D2to3d
 
   public:
     Poligono3d(void): D2to3d(),plg2d() {}
-    Poligono3d(const Poligono3d &otro)
-      :  D2to3d(otro),plg2d(otro.plg2d) {}
+    Poligono3d(const Poligono3d &other)
+      :  D2to3d(other),plg2d(other.plg2d) {}
     template <typename InputIterator>
     Poligono3d(InputIterator first,InputIterator last);
     Poligono3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
-    Poligono3d &operator =(const Poligono3d &otro) 
+    Poligono3d &operator =(const Poligono3d &other) 
       {
-	D2to3d::operator=(otro);
-        plg2d=otro.plg2d;
+	D2to3d::operator=(other);
+        plg2d=other.plg2d;
         return *this;
       }
     virtual GeomObj *clon(void) const

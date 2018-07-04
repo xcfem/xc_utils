@@ -76,7 +76,7 @@ class Poliedro3d: public PolyhedronBase
     Poliedro3d(const std::deque<SemiEspacio3d> &);
     Poliedro3d(const Poliedro3d &);
     Poliedro3d(const EPoliedro &e);
-    Poliedro3d &operator=(const Poliedro3d &otro);
+    Poliedro3d &operator=(const Poliedro3d &);
     virtual GeomObj *clon(void) const;
 
     Point_iterator points_begin(void)

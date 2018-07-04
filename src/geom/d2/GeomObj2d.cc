@@ -71,7 +71,7 @@ double GeomObj2d::Theta_p(void) const
 Dir2d GeomObj2d::IAxisDir_a(void) const
   { return Dir2d(Theta_p()); }
 
-//! @brief Return the dirección del otro principal axis of inertia (we don't know
+//! @brief Return the direction of the other principal axis of inertia (we don't know
 //! if it's the major or the minor yet).
 Dir2d GeomObj2d::IAxisDir_b(void) const
   { return IAxisDir_a().Perpendicular(); }

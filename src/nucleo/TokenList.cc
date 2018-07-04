@@ -122,8 +122,8 @@ void TokenList::DetectaOpRcl(void)
 		std::deque<std::string> campos= split_at_first(lexema,'.');
                 push_back(Token(campos[0],Token::BASERCL));
                 push_back(Token(".",Token::OP_RCL));
-		push_back(Token("_@"+campos[1],tmp.Tipo())); //El guión bajo indica que es
-                                                             //una propiedad de otro objeto (ver InterpreteRPN::OperaIdent).
+		push_back(Token("_@"+campos[1],tmp.Tipo())); //Underscore indicates that 
+                                                             //it is a property from another object (see InterpreteRPN::OperaIdent).
               }
             else
               push_back(tmp);
@@ -136,7 +136,7 @@ void TokenList::DetectaOpRcl(void)
 		std::deque<std::string> campos= split_at_first(lexema,'.');
                 push_back(Token(campos[0],Token::BASERCL));
                 push_back(Token(".",Token::OP_RCL));
-		push_back(Token("_@"+campos[1],tmp.Tipo())); //El guión bajo indica que es una propiedad de otro objeto (ver InterpreteRPN::OperaIdent).
+		push_back(Token("_@"+campos[1],tmp.Tipo())); //Underscore indicates that it is a property from another object (see InterpreteRPN::OperaIdent).
               }                                              
             else
               push_back(tmp);
@@ -163,8 +163,7 @@ void TokenList::DetectaOpRcl2(void)
                 if(j!=end())
                   {
                     if(((*j).Tipo() == Token::IDENT)) //Va seguido de un identificador
-                      (*j).Lexema()= "_@"+(*j).Lexema();//El guión bajo indica que es
-                                                        //una propiedad de otro objeto (ver InterpreteRPN::OperaIdent).
+                      (*j).Lexema()= "_@"+(*j).Lexema();//Underscore indicates that it is a property from another object (see InterpreteRPN::OperaIdent).
                     else
 		      std::cerr << "TokenList::DetectaOpRcl2; se esperaba un identificador." << std::endl;
                   }

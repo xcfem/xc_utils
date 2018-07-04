@@ -35,10 +35,10 @@ struct PsoGss2D: public PsoGss1D
      : PsoGss1D(gpw), y(gpw.y) {}
     PsoGss2D(double X, double Y, double W)
      : PsoGss1D(X,W), y(Y) {}
-    PsoGss2D &operator=(const PsoGss2D &otro)
+    PsoGss2D &operator=(const PsoGss2D &other)
       {
-        PsoGss1D::operator=(otro);
-        y= otro.y;
+        PsoGss1D::operator=(other);
+        y= other.y;
         return *this;
       }
   };

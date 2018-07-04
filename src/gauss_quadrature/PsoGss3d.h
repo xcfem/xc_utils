@@ -34,10 +34,10 @@ struct PsoGss3D: public PsoGss2D
       : PsoGss2D(ggw), z(ggw.z) {}
     PsoGss3D(const double &X, const double &Y, const double &Z, const double &W)
       : PsoGss2D(X,Y,W), z(Z) {}
-    PsoGss3D &operator=(const PsoGss3D &otro)
+    PsoGss3D &operator=(const PsoGss3D &other)
       {
-        PsoGss2D::operator=(otro);
-        z= otro.z;
+        PsoGss2D::operator=(other);
+        z= other.z;
         return *this;
       }
   };

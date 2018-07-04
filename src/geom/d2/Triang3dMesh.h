@@ -67,11 +67,11 @@ class Triang3dMesh: public Poliedro3d
     explicit Triang3dMesh(const Poliedro3d &p)
       : Poliedro3d(p) {}
     Triang3dMesh(const GTSSurface &gts_surf);
-    Triang3dMesh(const Triang3dMesh &otro) 
-      : Poliedro3d(otro) {}
-    Triang3dMesh &operator=(const Triang3dMesh &otro)
+    Triang3dMesh(const Triang3dMesh &other) 
+      : Poliedro3d(other) {}
+    Triang3dMesh &operator=(const Triang3dMesh &other)
       {
-	Poliedro3d::operator=(otro);
+	Poliedro3d::operator=(other);
         return *this;
       }
     virtual GeomObj *clon(void) const

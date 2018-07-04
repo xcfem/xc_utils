@@ -44,12 +44,12 @@ class BND3d: public GeomObj3d
   public:
     BND3d(void): GeomObj3d(), cgisocub() {}
     BND3d(const Pos3d &p_min,const Pos3d &p_max);
-    BND3d(const BND3d &otro) 
-      : GeomObj3d(), cgisocub(otro.cgisocub) {}
-    BND3d &operator =(const BND3d &otro)
+    BND3d(const BND3d &other) 
+      : GeomObj3d(), cgisocub(other.cgisocub) {}
+    BND3d &operator =(const BND3d &other)
       {
-	GeomObj3d::operator=(otro);
-        cgisocub= otro.cgisocub;
+	GeomObj3d::operator=(other);
+        cgisocub= other.cgisocub;
         return *this;
       }
     virtual GeomObj *clon(void) const

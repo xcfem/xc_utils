@@ -71,17 +71,17 @@ cmb_acc::ActionWeightingMap::ActionWeightingMap(void)
   : EntCmd() {}
 
 //! @brief Constructor de copia (NO COPIA LAS ACTIONS_AND_FACTORS).
-cmb_acc::ActionWeightingMap::ActionWeightingMap(const ActionWeightingMap &otro)
-  : EntCmd(otro)
+cmb_acc::ActionWeightingMap::ActionWeightingMap(const ActionWeightingMap &other)
+  : EntCmd(other)
   {
-    copy(otro.actions_and_factors);
+    copy(other.actions_and_factors);
   }
 
 //! @brief Operador asignación (NO COPIA LAS ACTIONS_AND_FACTORS).
-cmb_acc::ActionWeightingMap &cmb_acc::ActionWeightingMap::operator=(const ActionWeightingMap &otro)
+cmb_acc::ActionWeightingMap &cmb_acc::ActionWeightingMap::operator=(const ActionWeightingMap &other)
   {
-    EntCmd::operator=(otro);
-    copy(otro.actions_and_factors);
+    EntCmd::operator=(other);
+    copy(other.actions_and_factors);
     return *this;
   }
 

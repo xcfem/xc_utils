@@ -58,8 +58,8 @@ class D2to3d: public Superficie3d
       { return ref; }
   public:
     D2to3d(void);
-    D2to3d(const D2to3d &otro);
-    D2to3d &operator =(const D2to3d &otro);
+    D2to3d(const D2to3d &);
+    D2to3d &operator =(const D2to3d &);
     void ThreePoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
 
     inline virtual unsigned short int Dimension(void) const

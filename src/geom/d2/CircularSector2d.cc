@@ -68,8 +68,8 @@ CircularSector2d::CircularSector2d(const Circle2d &c,const double &th1,const dou
   }
 
 //! @brief Constructor de copia.
-CircularSector2d::CircularSector2d(const CircularSector2d &otro)
-  : Circle2d(otro), theta1(otro.theta1), theta2(otro.theta2) {}
+CircularSector2d::CircularSector2d(const CircularSector2d &other)
+  : Circle2d(other), theta1(other.theta1), theta2(other.theta2) {}
 
 //! @brief Operador asignacion.
 CircularSector2d &CircularSector2d::operator=(const CircularSector2d &p)

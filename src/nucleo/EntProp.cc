@@ -47,8 +47,8 @@ EntProp::EntProp(EntProp *owr)
   }
 
 //! @brief Constructor de copia.
-EntProp::EntProp(const EntProp &otro)
-  : owner(otro.owner)
+EntProp::EntProp(const EntProp &other)
+  : owner(other.owner)
   {
     if(this == owner)
       std::cerr << "EntProp constructor de copia; ¡ojo!, objeto de clase: '"
@@ -56,9 +56,9 @@ EntProp::EntProp(const EntProp &otro)
   }
 
 //! @brief Operador asignación.
-EntProp &EntProp::operator=(const EntProp &otro)
+EntProp &EntProp::operator=(const EntProp &other)
   {
-    owner= otro.owner;
+    owner= other.owner;
     if(this == owner)
       {
         std::cerr << "EntProp operador asignación; ¡ojo!, objeto de clase: '"

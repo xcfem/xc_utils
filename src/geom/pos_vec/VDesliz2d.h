@@ -40,12 +40,12 @@ class VDesliz2d : public Vector2d
     VDesliz2d(const Pos2d &o= Pos2d(),const Vector2d &v= Vector2d())
       : Vector2d(v), org(o) {}
     VDesliz2d(const Pos2d &o,const Pos2d &p);
-    VDesliz2d(const VDesliz2d &otro)
-      : Vector2d(otro), org(otro.org) {}
-    VDesliz2d &operator=(const VDesliz2d &otro)
+    VDesliz2d(const VDesliz2d &other)
+      : Vector2d(other), org(other.org) {}
+    VDesliz2d &operator=(const VDesliz2d &other)
       {
-        Vector2d::operator=(otro);
-        org= otro.org;
+        Vector2d::operator=(other);
+        org= other.org;
         return *this;
       }
     GEOM_FT getMoment(const Pos2d &o) const;

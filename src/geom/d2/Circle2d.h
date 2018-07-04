@@ -46,8 +46,8 @@ class Circle2d : public Superficie2d
     Circle2d(const Pos2d &centro,const GEOM_FT &rad);
     Circle2d(const GEOM_FT &rad2,const Pos2d &centro);
     Circle2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3);
-    Circle2d(const Circle2d &otro)
-     : Superficie2d(otro), cgcirc(otro.cgcirc) {}
+    Circle2d(const Circle2d &other)
+     : Superficie2d(other), cgcirc(other.cgcirc) {}
     Circle2d &operator=(const Circle2d &p)
       {
 	Superficie2d::operator=(p);

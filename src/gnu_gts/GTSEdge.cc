@@ -45,8 +45,8 @@ void GTSEdge::borra(void)
 GTSEdge::GTSEdge(GTSVertex &v1,GTSVertex &v2)
   : edg(nullptr), borrar(false)
 { crea(v1,v2); }
-GTSEdge::GTSEdge(const GTSEdge &otro)
-  : edg(otro.edg), borrar(false)
+GTSEdge::GTSEdge(const GTSEdge &other)
+  : edg(other.edg), borrar(false)
   {}
 GTSEdge &GTSEdge::operator=(const GTSEdge &otra)
   {

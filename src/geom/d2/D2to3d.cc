@@ -59,14 +59,14 @@ D2to3d::D2to3d(const Pos3d &o)
   {}
 
 //! @brief Constructor.
-D2to3d::D2to3d(const D2to3d &otro)
-  : Superficie3d(otro), ref(otro.ref) {}
+D2to3d::D2to3d(const D2to3d &other)
+  : Superficie3d(other), ref(other.ref) {}
 
 //! @brief Operador asignación.
-D2to3d &D2to3d::operator=(const D2to3d &otro) 
+D2to3d &D2to3d::operator=(const D2to3d &other) 
   {
-    Superficie3d::operator=(otro);
-    ref= otro.ref;
+    Superficie3d::operator=(other);
+    ref= other.ref;
     return *this;
   }
 

@@ -44,7 +44,7 @@ class GTSSplit
 
     GTSSplit(const GTSVertex &v,const GTSVertex &v1,const GTSVertex &v2);
     GTSSplit(const GtsSplit *pspt);
-    GTSSplit(const GTSSplit &otro);
+    GTSSplit(const GTSSplit &);
     GTSSplit &operator=(const GTSSplit &otra);
 
     void Collapse(void);

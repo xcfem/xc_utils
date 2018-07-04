@@ -366,8 +366,8 @@ std::list<Poligono2d> Poligono2d::Clip(const BND2d &bnd) const
 
 //! @brief Return the polygons that result from clipping this one
 //! with the polygon argument.
-std::list<Poligono2d> Poligono2d::Clip(const Poligono2d &otro) const
-  { return intersection(*this,otro); }
+std::list<Poligono2d> Poligono2d::Clip(const Poligono2d &other) const
+  { return intersection(*this,other); }
 
 //! @brief Clip this polygont with the polygon argument.
 void Poligono2d::clipBy(const Poligono2d &plg)
@@ -379,10 +379,10 @@ std::list<Poligono2d> Poligono2d::getIntersection(const HalfPlane2d &sp) const
 
 //! @brief Return la unión de este polígono con el que
 //! se pasa como parámetro.
-Poligono2d Poligono2d::getUnion(const Poligono2d &otro) const
+Poligono2d Poligono2d::getUnion(const Poligono2d &other) const
   {
     Poligono2d retval;
-    std::list<Poligono2d> polUnion= join(*this,otro);
+    std::list<Poligono2d> polUnion= join(*this,other);
     if(!polUnion.empty())
       retval= Poligono2d(polUnion);
     else
@@ -391,8 +391,8 @@ Poligono2d Poligono2d::getUnion(const Poligono2d &otro) const
     return retval;
   }
 
-void Poligono2d::une(const Poligono2d &otro)
-  { (*this)= getUnion(otro); }
+void Poligono2d::une(const Poligono2d &other)
+  { (*this)= getUnion(other); }
 
 void Poligono2d::une(const std::list<Poligono2d> &l)
   {

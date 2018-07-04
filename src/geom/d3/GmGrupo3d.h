@@ -44,7 +44,7 @@ class GmGrupo3d : public GmGrupo<GeomObj3d>
 
 
     GmGrupo3d(void) : GmGrupo<GeomObj3d>() {}
-    GmGrupo3d(const GmGrupo3d &otro) : GmGrupo<GeomObj3d>(otro) {}
+    GmGrupo3d(const GmGrupo3d &other) : GmGrupo<GeomObj3d>(other) {}
 
     virtual GeomObj3d *clon(void) const
       { return new GmGrupo3d(*this); }

@@ -51,11 +51,11 @@ class Vector2d: public ProtoGeom
 /*     Vector2d(const double &x,const double &y); */
     Vector2d(const matriz_FT &m);
     Vector2d(const Pos2d &p1,const Pos2d &p2);
-    Vector2d(const Vector2d &otro): cgvct(otro.cgvct){}
-    Vector2d &operator=(const Vector2d &otro)
+    Vector2d(const Vector2d &other): cgvct(other.cgvct){}
+    Vector2d &operator=(const Vector2d &other)
       {
-	ProtoGeom::operator=(otro);
-        cgvct=otro.cgvct;
+	ProtoGeom::operator=(other);
+        cgvct=other.cgvct;
         return *this;
       }
     const CGVector_2 &ToCGAL(void) const

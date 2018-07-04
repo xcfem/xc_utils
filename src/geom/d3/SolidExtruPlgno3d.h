@@ -110,7 +110,7 @@ Pos3d SolidExtruPlgno3d<PG>::Vertice(unsigned int i) const
 /*         if(va[1]>=2*num_vert_plgno) va[1]= num_vert_plgno; //Cierra con el primer vértice de la tapa. */
 /*         return va; */
 /*       } */
-/* 	//En otro caso, es una arista lateral. */
+/* 	//En other caso, es una arista lateral. */
 /*     va[1]= indice; */
 /*     va[0]= indice - num_vert_plgno; */
 /*     return va; */

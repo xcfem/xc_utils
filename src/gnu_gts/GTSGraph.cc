@@ -43,8 +43,8 @@ void GTSGraph::borra(void)
 GTSGraph::GTSGraph(const GTSSurface &s)
   : gph(nullptr), borrar(false)
   { crea(s); }
-GTSGraph::GTSGraph(const GTSGraph &otro)
-  : gph(otro.gph), borrar(false)
+GTSGraph::GTSGraph(const GTSGraph &other)
+  : gph(other.gph), borrar(false)
   {}
 GTSGraph &GTSGraph::operator=(const GTSGraph &otra)
   {

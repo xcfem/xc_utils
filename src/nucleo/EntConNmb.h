@@ -53,11 +53,11 @@ class EntConNmb: public EntCmd
     std::string &Name(void)
       { return name; }
     //! @brief Compara el nombre del elemento con un nombre dado.
-    int operator==(const EntConNmb &otro) const
-      { return (name==otro.name); }
+    int operator==(const EntConNmb &other) const
+      { return (name==other.name); }
     //! @brief Operador menor.
-    int operator<(const EntConNmb &otro) const
-      { return (name<otro.name); }
+    int operator<(const EntConNmb &other) const
+      { return (name<other.name); }
     EntConNmb &operator+=(const EntConNmb &);
     EntConNmb &operator-=(const EntConNmb &);
     EntConNmb &operator*=(const EntConNmb &);

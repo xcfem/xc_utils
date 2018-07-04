@@ -37,8 +37,8 @@ class EntProp
     static int verbosity; //!< Verbosity level.
    public:
     EntProp(EntProp *owr= nullptr);
-    EntProp(const EntProp &otro);
-    EntProp &operator=(const EntProp &otro);
+    EntProp(const EntProp &);
+    EntProp &operator=(const EntProp &);
     static const int &getVerbosityLevel(void);
     static void setVerbosityLevel(const int &);
     virtual std::string getClassName(void) const;

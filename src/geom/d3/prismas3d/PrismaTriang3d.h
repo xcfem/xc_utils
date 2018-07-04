@@ -37,7 +37,7 @@ class PrismaTriang3d : public PrismaRecto3d<Triangle3d>
     typedef PrismaRecto3d<Triangle3d> prisma_triang;
   public:
     PrismaTriang3d(const Triangle3d &tr= Triangle3d(),const double &h=1.0);
-    PrismaTriang3d(const PrismaTriang3d &otro);
+    PrismaTriang3d(const PrismaTriang3d &);
     PrismaTriang3d &operator=(const PrismaTriang3d &c);
     virtual GeomObj *clon(void) const;
     

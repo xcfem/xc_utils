@@ -35,10 +35,10 @@ struct PsoGss1D
       : x(X), w(W) {}
     PsoGss1D(const PsoGss1D &gpw)
       : x(gpw.x), w(gpw.w) {}
-    PsoGss1D &operator=(const PsoGss1D &otro)
+    PsoGss1D &operator=(const PsoGss1D &other)
       {
-        x= otro.x;
-        w= otro.w;
+        x= other.x;
+        w= other.w;
         return *this;
       }
   };
