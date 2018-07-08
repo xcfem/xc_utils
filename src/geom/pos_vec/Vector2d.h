@@ -26,7 +26,7 @@
 
 #include "xc_basic/src/util/mchne_eps.h"
 #include "xc_basic/src/matrices/op_tensor.h"
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 #include "../ProtoGeom.h"
 
 class Pos2d;

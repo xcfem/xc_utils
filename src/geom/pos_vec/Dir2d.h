@@ -24,7 +24,7 @@
 #ifndef DIR2D_H
 #define DIR2D_H
 
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 #include <iostream>
 
 class Vector2d;

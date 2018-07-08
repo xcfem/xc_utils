@@ -24,7 +24,7 @@
 #include "xc_basic/src/util/matem.h"
 #include "matriz_FT.h"
 #include "xc_basic/src/matrices/m_double.h"
-#include "tipos_cgal.h"
+#include "cgal_types.h"
 
 
 

@@ -26,7 +26,7 @@
 
 #include <iostream>
 #include "GeomObj3d.h"
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 
 
 //! @ingroup GEOM

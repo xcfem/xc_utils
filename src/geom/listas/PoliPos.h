@@ -25,7 +25,7 @@
 #define POLIPOS_H
 
 #include <deque>
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 #include "xc_basic/src/util/matem.h"
 
 

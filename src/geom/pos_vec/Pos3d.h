@@ -27,7 +27,7 @@
 
 #include <iostream>
 #include <string>
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 #include "../ProtoGeom.h"
 
 class Vector3d;

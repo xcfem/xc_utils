@@ -25,7 +25,7 @@
 #define CIRCLE2D_H
 
 #include "Superficie2d.h"
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 #include "xc_basic/src/util/matem.h"
 
 class Pos2d;

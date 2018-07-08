@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//tipos_cgal.h
+//cgal_types.h
 
-#ifndef TIPOS_CGAL_H
-#define TIPOS_CGAL_H
+#ifndef CGAL_TYPES_H
+#define CGAL_TYPES_H
 
 #include <CGAL/Homogeneous.h>
 #include <CGAL/Lazy_exact_nt.h>

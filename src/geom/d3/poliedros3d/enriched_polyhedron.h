@@ -32,7 +32,7 @@
 #include <CGAL/Cartesian.h>
 #include <CGAL/Polyhedron_3.h>
 #include <list>
-#include "xc_utils/src/geom/tipos_cgal.h"
+#include "xc_utils/src/geom/cgal_types.h"
 #include "MapPoligonos.h"
 #include <cassert>
 #include <GL/gl.h>

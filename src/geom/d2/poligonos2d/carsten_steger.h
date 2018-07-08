@@ -25,7 +25,7 @@
 #define CARSTEN_STEGER_H
 
 #include "xc_basic/src/util/matem.h"
-#include "../../tipos_cgal.h"
+#include "../../cgal_types.h"
 
 //Aux functions for computing moments of arbitrary order  
 //(0,1,2,3,...) of a polygon according to the algorithm

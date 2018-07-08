@@ -26,7 +26,7 @@
 
 #include "xc_utils/src/geom/d2/D2to3d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 
 
 //! @ingroup GEOM

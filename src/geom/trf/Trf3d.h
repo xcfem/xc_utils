@@ -26,7 +26,7 @@
 #define TRF3D_H
 
 #include "Trf.h"
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 
 class Pos3d;
 class Vector3d;

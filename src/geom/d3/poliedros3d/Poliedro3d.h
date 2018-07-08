@@ -26,7 +26,7 @@
 
 #include <iostream>
 #include "PolyhedronBase.h"
-#include "../../tipos_cgal.h"
+#include "../../cgal_types.h"
 #include "MapPoligonos.h"
 #include "enriched_polyhedron.h"
 

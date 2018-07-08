@@ -25,7 +25,7 @@
 #define GENERALEQUATIONOFPLANE_H
 
 #include <vector>
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 
 class Pos3d;
 class Pos2d;

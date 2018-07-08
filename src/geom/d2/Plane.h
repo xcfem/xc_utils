@@ -29,7 +29,7 @@
 #include "xc_basic/src/util/matem.h"
 #include "Superficie3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 #include <list>
 
 class Recta3d;

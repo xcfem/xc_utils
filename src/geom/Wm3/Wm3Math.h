@@ -13,7 +13,7 @@
 
 //#include "Wm3System.h"
 
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 
 namespace Wm3
 {

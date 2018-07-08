@@ -25,7 +25,7 @@
 #define BND2D_H
 
 #include "GeomObj2d.h"
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 
 class Segment2d;
 class SemiRecta2d;

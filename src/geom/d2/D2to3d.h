@@ -26,7 +26,7 @@
 
 #include "xc_utils/src/geom/d2/Superficie3d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 
 class Plane;
 class Segment2d;

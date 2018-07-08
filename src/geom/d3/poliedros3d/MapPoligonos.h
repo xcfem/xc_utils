@@ -26,7 +26,7 @@
 
 #include <deque>
 #include <CGAL/iterator.h>
-#include "../../tipos_cgal.h"
+#include "../../cgal_types.h"
 #include <CGAL/Polyhedron_incremental_builder_3.h>
 #include <iostream>
 #include <map>

@@ -26,7 +26,7 @@
 
 #include "xc_basic/src/util/mchne_eps.h"
 #include "../ProtoGeom.h"
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 
 class Pos3d;
 class Dir3d;

@@ -24,7 +24,7 @@
 #ifndef DIR3D_H
 #define DIR3D_H
 
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 
 class Vector3d;
 class matriz_FT;

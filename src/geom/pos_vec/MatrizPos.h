@@ -26,7 +26,7 @@
 #define MATRIZPOS_H
 
 #include "xc_basic/src/matrices/matrizT.h"
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 #include "boost/lexical_cast.hpp"
 #include "xc_basic/src/util/matem.h"
 

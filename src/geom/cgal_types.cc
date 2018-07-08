@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//tipos_cgal.cc
+//cgal_types.cc
 
-#include "tipos_cgal.h"
+#include "cgal_types.h"
 #include "CGAL/to_rational.h"
 
 GEOM_FT double_to_FT(const double &d)

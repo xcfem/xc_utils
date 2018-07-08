@@ -26,7 +26,7 @@
 #define TRF2D_H
 
 #include "Trf.h"
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 #include "xc_utils/src/geom/d2/GeomObj2d.h"
 
 class Pos2d;

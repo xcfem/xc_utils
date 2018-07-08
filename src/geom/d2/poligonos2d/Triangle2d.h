@@ -25,7 +25,7 @@
 #define TRIANGLE2D_H
 
 #include "SupPoligonal2d.h"
-#include "xc_utils/src/geom/tipos_cgal.h"
+#include "xc_utils/src/geom/cgal_types.h"
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
 #include "xc_basic/src/util/matem.h"
 

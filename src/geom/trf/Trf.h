@@ -25,7 +25,7 @@
 #ifndef TRF_H
 #define TRF_H
 
-#include "../tipos_cgal.h"
+#include "../cgal_types.h"
 #include "xc_utils/src/nucleo/EntCmd.h"
 
 class matriz_FT;

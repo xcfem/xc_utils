@@ -25,7 +25,7 @@
 #define MATRIZ_FT_H
 
 #include "xc_basic/src/matrices/matrizZ.h"
-#include "tipos_cgal.h"
+#include "cgal_types.h"
 
 
 
