@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//MatrizPos3d.cc
+//Pos3dArray.cc
 
-#include "MatrizPos3d.h"
+#include "Pos3dArray.h"
 #include "xc_basic/src/util/matem.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d2/Triangle3d.h"
@@ -32,37 +32,37 @@
 #include "xc_utils/src/geom/trf/Revolucion3d.h"
 
 //! @brief Constructor.
-MatrizPos3d::MatrizPos3d(const MatrizPos<Pos3d> &mp3d)
-  : MatrizPos<Pos3d>(mp3d) {}
+Pos3dArray::Pos3dArray(const PosArray<Pos3d> &mp3d)
+  : PosArray<Pos3d>(mp3d) {}
 //! @brief Constructor.
-MatrizPos3d::MatrizPos3d(const size_t &f,const size_t &c,const Pos3d &p)
-  : MatrizPos<Pos3d>(f,c,p) {}
+Pos3dArray::Pos3dArray(const size_t &f,const size_t &c,const Pos3d &p)
+  : PosArray<Pos3d>(f,c,p) {}
 //! @brief Constructor.
-MatrizPos3d::MatrizPos3d(const Pos3d &p1,const Pos3d &p2,const size_t &ndiv)
-  : MatrizPos<Pos3d>(p1,p2,ndiv) {}
+Pos3dArray::Pos3dArray(const Pos3d &p1,const Pos3d &p2,const size_t &ndiv)
+  : PosArray<Pos3d>(p1,p2,ndiv) {}
 
-//! @brief Ver el constructor correspondiente en MatrizPos<POS>.
-MatrizPos3d::MatrizPos3d(const Pos3d &p1,const Pos3d &p2,const std::vector<GEOM_FT> &longs)
-  : MatrizPos<Pos3d>(p1,p2,longs) {}
+//! @brief Ver el constructor correspondiente en PosArray<POS>.
+Pos3dArray::Pos3dArray(const Pos3d &p1,const Pos3d &p2,const std::vector<GEOM_FT> &longs)
+  : PosArray<Pos3d>(p1,p2,longs) {}
 
 //! @brief Constructor.
-MatrizPos3d::MatrizPos3d(const Pos3d &p1,const Pos3d &p2,const size_t &num,const GEOM_FT &ratio)
-  : MatrizPos<Pos3d>(p1,p2,num,ratio) {}
+Pos3dArray::Pos3dArray(const Pos3d &p1,const Pos3d &p2,const size_t &num,const GEOM_FT &ratio)
+  : PosArray<Pos3d>(p1,p2,num,ratio) {}
 //! @brief Constructor.
-MatrizPos3d::MatrizPos3d(const Pos3d &p0,const Pos3d &p1,const Pos3d &p2,const size_t &ndiv1,const size_t &ndiv2)
-  : MatrizPos<Pos3d>(p0,p1,p2,ndiv1,ndiv2) {}
+Pos3dArray::Pos3dArray(const Pos3d &p0,const Pos3d &p1,const Pos3d &p2,const size_t &ndiv1,const size_t &ndiv2)
+  : PosArray<Pos3d>(p0,p1,p2,ndiv1,ndiv2) {}
 
-MatrizPos3d::MatrizPos3d(const MatrizPos3d &l1_points,const MatrizPos3d &l2_points,const MatrizPos3d &l3_points,const MatrizPos3d &l4_points)
-  : MatrizPos<Pos3d>(l1_points,l2_points,l3_points,l4_points) {}
+Pos3dArray::Pos3dArray(const Pos3dArray &l1_points,const Pos3dArray &l2_points,const Pos3dArray &l3_points,const Pos3dArray &l4_points)
+  : PosArray<Pos3d>(l1_points,l2_points,l3_points,l4_points) {}
 
-MatrizPos3d::MatrizPos3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2)
-  : MatrizPos<Pos3d>(cuadrilatero<Pos3d>(p1,p2,p3,p4,ndiv1,ndiv2)) {}
+Pos3dArray::Pos3dArray(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2)
+  : PosArray<Pos3d>(cuadrilatero<Pos3d>(p1,p2,p3,p4,ndiv1,ndiv2)) {}
 
 
-Pos3d MatrizPos3d::GetCentro(void) const
+Pos3d Pos3dArray::GetCentro(void) const
   { return get_centro(*this,Segment3d()); }
 
-Pos3d MatrizPos3d::pos_lagrangiana(const size_t &i,const size_t &j) const
+Pos3d Pos3dArray::pos_lagrangiana(const size_t &i,const size_t &j) const
   {
     assert(interior(i,j));
     const GEOM_FT x= ((*this)(i-1,j).x()+(*this)(i+1,j).x()+(*this)(i,j-1).x()+(*this)(i,j+1).x())/GEOM_FT(4);
@@ -74,7 +74,7 @@ Pos3d MatrizPos3d::pos_lagrangiana(const size_t &i,const size_t &j) const
 //! @brief Return the maximum of the distances between the mesh points
 //! y corresponding to the Lagrange interpolation (see page IX-19 of
 //1 the SAP90 manual).
-GEOM_FT MatrizPos3d::dist_lagrange(void) const
+GEOM_FT Pos3dArray::dist_lagrange(void) const
   {
     GEOM_FT retval(0.0);
     for(size_t i=2;i<n_rows;i++) //interior points.
@@ -86,7 +86,7 @@ GEOM_FT MatrizPos3d::dist_lagrange(void) const
 //! @brief Set the interior points of the mesh.
 //! corresponding to the Lagrange interpolation (see page IX-19 of the SAP90 manual).
 //! Return the distance máxima obtenida.
-GEOM_FT MatrizPos3d::ciclo_lagrange(void)
+GEOM_FT Pos3dArray::ciclo_lagrange(void)
   {
     for(size_t i=2;i<n_rows;i++) //interior points.
       for(size_t j=2;j<n_columns;j++)
@@ -96,7 +96,7 @@ GEOM_FT MatrizPos3d::ciclo_lagrange(void)
 
 //! @brief Set the interior points of the mesh
 //! corresponding to the Lagrange interpolation (see page IX-19 of the SAP90 manual).
-GEOM_FT MatrizPos3d::Lagrange(const GEOM_FT &tol)
+GEOM_FT Pos3dArray::Lagrange(const GEOM_FT &tol)
   {
     GEOM_FT err= dist_lagrange();
     size_t conta= 0;
@@ -106,7 +106,7 @@ GEOM_FT MatrizPos3d::Lagrange(const GEOM_FT &tol)
           err= ciclo_lagrange();
         else
           {
-	    std::cerr << "MatrizPos3d::Lagrange; no se alcanzó la convergencia tras: "
+	    std::cerr << "Pos3dArray::Lagrange; no se alcanzó la convergencia tras: "
                       << conta << " iteraciones." << std::endl;
             break;
           }
@@ -114,17 +114,17 @@ GEOM_FT MatrizPos3d::Lagrange(const GEOM_FT &tol)
     return err;
   }
 
-//! @brief Aplica a la matriz la transformación being passed as parameter.
-void MatrizPos3d::Transforma(const Trf3d &trf)
+//! @brief Applies the transformation argument to the matrix.
+void Pos3dArray::Transforma(const Trf3d &trf)
   { trf.Transforma(*this); }
 
-//! @brief Return the superficie de revolución que se obtiene al aplicar
-//! a la matriz la transformación la revolución cuya definición se pasa como parámetro.
-MatrizPos3d crea_sup_revolucion(const Revolucion3d &r,const MatrizPos3d &m)
+//! @brief Return the revolution surface obtained by applying to the matrix
+//! the revolution transformation argument.
+Pos3dArray crea_sup_revolucion(const Revolucion3d &r,const Pos3dArray &m)
   { return r(m); }
 
-MatrizPos3d cuadrilatero(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2)
-  { return MatrizPos3d(p1,p2,p3,p4,ndiv1,ndiv2); }
+Pos3dArray cuadrilatero(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2)
+  { return Pos3dArray(p1,p2,p3,p4,ndiv1,ndiv2); }
 
 
 //! @brief Return the triangle inscribed in the cell of the mesh the has
@@ -136,7 +136,7 @@ MatrizPos3d cuadrilatero(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const P
 //               | / |
 //               |/ 1|
 //           i,j +---+ i,j+1
-Triangle3d MatrizPos3d::getTriangle1(const size_t &i,const size_t &j) const
+Triangle3d Pos3dArray::getTriangle1(const size_t &i,const size_t &j) const
   { return Triangle3d((*this)(i,j),(*this)(i,j+1),(*this)(i+1,j+1)); }
 
 //! @brief Return the triangle inscribed in the cell of the mesh the has
@@ -148,7 +148,7 @@ Triangle3d MatrizPos3d::getTriangle1(const size_t &i,const size_t &j) const
 //               | / |
 //               |/ 1|
 //           i,j +---+ i,j+1
-Triangle3d MatrizPos3d::getTriangle2(const size_t &i,const size_t &j) const
+Triangle3d Pos3dArray::getTriangle2(const size_t &i,const size_t &j) const
   { return Triangle3d((*this)(i,j),(*this)(i+1,j+1),(*this)(i+1,j)); }
 
 
@@ -161,7 +161,7 @@ Triangle3d MatrizPos3d::getTriangle2(const size_t &i,const size_t &j) const
 //               | / |
 //               |/ 1|
 //           i,j +---+ i,j+1
-GEOM_FT dist2(const MatrizPos3d &ptos,const Pos3d &pt)
+GEOM_FT dist2(const Pos3dArray &ptos,const Pos3d &pt)
   {
     if(ptos.size()<1) return NAN; //Set is empty.
     GEOM_FT d= dist2(ptos(1,1),pt);
@@ -198,7 +198,7 @@ GEOM_FT dist2(const MatrizPos3d &ptos,const Pos3d &pt)
 
 //! @brief Return true if the distance from the point to the surface
 //! defined by the point matrix is less than the argument.
-bool dist_menor(const MatrizPos3d &ptos,const Pos3d &pt,const GEOM_FT &d_max)
+bool dist_menor(const Pos3dArray &ptos,const Pos3d &pt,const GEOM_FT &d_max)
   {
     const GEOM_FT d_max2(d_max*d_max);
     if(ptos.size()<1) return false; //El conjunto is empty.
@@ -245,7 +245,7 @@ bool dist_menor(const MatrizPos3d &ptos,const Pos3d &pt,const GEOM_FT &d_max)
     return (d<d_max2);
   }
 //! ! @brief Ver dist2.
-GEOM_FT dist(const MatrizPos3d &ptos,const Pos3d &pt)
+GEOM_FT dist(const Pos3dArray &ptos,const Pos3d &pt)
   { return sqrt_FT(dist2(ptos,pt)); }
 
 
@@ -256,7 +256,7 @@ GEOM_FT dist(const MatrizPos3d &ptos,const Pos3d &pt)
 //!                                                                                    | / |
 //!                                                                                    |/ 1|
 //!                                                                                i,j +---+ i,j+1
-GEOM_FT pseudo_dist2(const MatrizPos3d &ptos,const Pos3d &pt)
+GEOM_FT pseudo_dist2(const Pos3dArray &ptos,const Pos3d &pt)
   {
     if(ptos.size()<1) return NAN; //El conjunto is empty.
     GEOM_FT d= dist2(ptos(1,1),pt);
@@ -293,10 +293,10 @@ GEOM_FT pseudo_dist2(const MatrizPos3d &ptos,const Pos3d &pt)
   }
 
 //! @brief Ver pseudo_dist2.
-GEOM_FT pseudo_dist(const MatrizPos3d &ptos,const Pos3d &pt)
+GEOM_FT pseudo_dist(const Pos3dArray &ptos,const Pos3d &pt)
   { return sqrt_FT(::Abs(pseudo_dist2(ptos,pt))); }
 
-BND3d get_bnd(const MatrizPos3d &ptos)
+BND3d get_bnd(const Pos3dArray &ptos)
   {
     BND3d retval;
     if(ptos.size()<1) //Empty set.

@@ -19,20 +19,20 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//BaseRefCajaTritriz.h 
+//BaseRefCajaArray3d.h 
 
-#ifndef BASEREFCAJATRITRIZ_H
-#define BASEREFCAJATRITRIZ_H
+#ifndef BASEREFCAJAARRAY3D_H
+#define BASEREFCAJAARRAY3D_H
 
 #include <ostream>
 
 class RangoIndice;
-class RangoTritriz;
+class Array3dRange;
 
 //! @ingroup GEOM
 //
-//! @brief Indices que definen una caja de una tritriz.
-class BaseRefCajaTritriz
+//! @brief Indices that define a block of an array.
+class BaseRefCajaArray3d
   {
   protected:
     size_t n_layers; //!< number of layers.
@@ -42,14 +42,14 @@ class BaseRefCajaTritriz
     size_t offset_f; //!< Offset row.
     size_t offset_c; //!< Offset column.
   public:
-    BaseRefCajaTritriz(const size_t &,const size_t &,const size_t &,const size_t &,const size_t &,const size_t &);
-    BaseRefCajaTritriz(const RangoTritriz &rango);
-    BaseRefCajaTritriz(const size_t &iLayer,const RangoIndice &row_range,const RangoIndice &column_range);
-    BaseRefCajaTritriz(const RangoIndice &layer_range,const size_t &iRow,const RangoIndice &column_range);
-    BaseRefCajaTritriz(const RangoIndice &layer_range,const RangoIndice &row_range,const size_t &col);
-    BaseRefCajaTritriz(const size_t &iLayer,const size_t &iRow,const RangoIndice &column_range);
-    BaseRefCajaTritriz(const size_t iLayer,const RangoIndice &row_range,const size_t &col);
-    BaseRefCajaTritriz(const RangoIndice &layer_range,const size_t &iRow,const size_t &col);
+    BaseRefCajaArray3d(const size_t &,const size_t &,const size_t &,const size_t &,const size_t &,const size_t &);
+    BaseRefCajaArray3d(const Array3dRange &rango);
+    BaseRefCajaArray3d(const size_t &iLayer,const RangoIndice &row_range,const RangoIndice &column_range);
+    BaseRefCajaArray3d(const RangoIndice &layer_range,const size_t &iRow,const RangoIndice &column_range);
+    BaseRefCajaArray3d(const RangoIndice &layer_range,const RangoIndice &row_range,const size_t &col);
+    BaseRefCajaArray3d(const size_t &iLayer,const size_t &iRow,const RangoIndice &column_range);
+    BaseRefCajaArray3d(const size_t iLayer,const RangoIndice &row_range,const size_t &col);
+    BaseRefCajaArray3d(const RangoIndice &layer_range,const size_t &iRow,const size_t &col);
     inline const size_t &getNumberOfLayers(void) const
       { return n_layers; }
     inline const size_t &getNumberOfRows(void) const
@@ -64,8 +64,8 @@ class BaseRefCajaTritriz
     RangoIndice RangoCols(void) const;
   };
 
-template <class TRITRIZ>
-inline void PrintTritriz(const TRITRIZ &t,std::ostream &os)
+template <class ARRAY_3D>
+inline void PrintArray3d(const ARRAY_3D &t,std::ostream &os)
   {
     os << '[';
     const size_t n_layers= t.getNumberOfLayers();

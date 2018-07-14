@@ -19,37 +19,37 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//MatrizPos2d.cc
+//Pos2dArray.cc
 
-#include "MatrizPos2d.h"
+#include "Pos2dArray.h"
 #include "xc_basic/src/util/matem.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Triangle2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Cuadrilatero2d.h"
-#include "xc_utils/src/geom/matriz_FT.h"
+#include "xc_utils/src/geom/FT_matrix.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
-//! @brief Ver el constructor correspondiente en MatrizPos<POS>.
-MatrizPos2d::MatrizPos2d(const Pos2d &p1,const Pos2d &p2,const size_t &num,const GEOM_FT &ratio)
+//! @brief Ver el constructor correspondiente en PosArray<POS>.
+Pos2dArray::Pos2dArray(const Pos2d &p1,const Pos2d &p2,const size_t &num,const GEOM_FT &ratio)
   : m_pos(p1,p2,num,ratio) {}
 
-//! @brief Ver el constructor correspondiente en MatrizPos<POS>.
-MatrizPos2d::MatrizPos2d(const Pos2d &p1,const Pos2d &p2,const size_t &ndiv)
+//! @brief Ver el constructor correspondiente en PosArray<POS>.
+Pos2dArray::Pos2dArray(const Pos2d &p1,const Pos2d &p2,const size_t &ndiv)
   : m_pos(p1,p2,ndiv) {}
 
-//! @brief Ver el constructor correspondiente en MatrizPos<POS>.
-MatrizPos2d::MatrizPos2d(const Pos2d &p1,const Pos2d &p2,const std::vector<GEOM_FT> &longs)
+//! @brief Ver el constructor correspondiente en PosArray<POS>.
+Pos2dArray::Pos2dArray(const Pos2d &p1,const Pos2d &p2,const std::vector<GEOM_FT> &longs)
   : m_pos(p1,p2,longs) {}
 
 //! @brief Constructor.
-MatrizPos2d::MatrizPos2d(const Pos2d &p0,const Pos2d &p1,const Pos2d &p2,const size_t &ndiv1,const size_t &ndiv2)
-  : MatrizPos<Pos2d>(p0,p1,p2,ndiv1,ndiv2) {}
+Pos2dArray::Pos2dArray(const Pos2d &p0,const Pos2d &p1,const Pos2d &p2,const size_t &ndiv1,const size_t &ndiv2)
+  : PosArray<Pos2d>(p0,p1,p2,ndiv1,ndiv2) {}
 
 //! @brief Constructor.
-MatrizPos2d::MatrizPos2d(const MatrizPos2d &l1_points,const MatrizPos2d &l2_points,const MatrizPos2d &l3_points,const MatrizPos2d &l4_points)
+Pos2dArray::Pos2dArray(const Pos2dArray &l1_points,const Pos2dArray &l2_points,const Pos2dArray &l3_points,const Pos2dArray &l4_points)
   : m_pos(l1_points,l2_points,l3_points,l4_points) {}
 
-Pos2d MatrizPos2d::pos_lagrangiana(const size_t &i,const size_t &j) const
+Pos2d Pos2dArray::pos_lagrangiana(const size_t &i,const size_t &j) const
   {
     assert(interior(i,j));
     const GEOM_FT x= ((*this)(i-1,j).x()+(*this)(i+1,j).x()+(*this)(i,j-1).x()+(*this)(i,j+1).x())/GEOM_FT(4);
@@ -60,7 +60,7 @@ Pos2d MatrizPos2d::pos_lagrangiana(const size_t &i,const size_t &j) const
 //! @brief Return the maximum distance between the mesh points
 //! and the corresponding ones in the Lagrange interpolation
 //! (see page IX-19 of the SAP90 manual).
-GEOM_FT MatrizPos2d::dist_lagrange(void) const
+GEOM_FT Pos2dArray::dist_lagrange(void) const
   {
     GEOM_FT retval(0.0);
     for(size_t i=2;i<n_rows;i++) //Interior points.
@@ -70,13 +70,13 @@ GEOM_FT MatrizPos2d::dist_lagrange(void) const
   }
 
 //! @brief Return el número de cuadriláteross
-size_t MatrizPos2d::GetNumQuads(void) const
+size_t Pos2dArray::GetNumQuads(void) const
   { return (n_rows-1)*(n_columns-1); }
 
 //! @brief Set the interior points of the mesh
 //! corresponding to Lagrange interpolation (see page IX-19 from SAP90 manual).
 //! Return the maximum computed distance.
-GEOM_FT MatrizPos2d::ciclo_lagrange(void)
+GEOM_FT Pos2dArray::ciclo_lagrange(void)
   {
     for(size_t i=2;i<n_rows;i++) //Interior points.
       for(size_t j=2;j<n_columns;j++)
@@ -86,7 +86,7 @@ GEOM_FT MatrizPos2d::ciclo_lagrange(void)
 
 //! @brief Set the interior points of the mesh
 //! corresponding to Lagrange interpolation (see page IX-19 from SAP90 manual).
-GEOM_FT MatrizPos2d::Lagrange(const GEOM_FT &tol)
+GEOM_FT Pos2dArray::Lagrange(const GEOM_FT &tol)
   {
     GEOM_FT err= dist_lagrange();
     size_t conta= 0;
@@ -96,7 +96,7 @@ GEOM_FT MatrizPos2d::Lagrange(const GEOM_FT &tol)
           err= ciclo_lagrange();
         else
           {
-	    std::cerr << "MatrizPos2d::" << __FUNCTION__
+	    std::cerr << "Pos2dArray::" << __FUNCTION__
 	              << "; convergence not reached after: "
                       << conta << " iterations." << std::endl;
             break;
@@ -106,11 +106,11 @@ GEOM_FT MatrizPos2d::Lagrange(const GEOM_FT &tol)
   }
 
 //! @brief Return the position of the midpoint.
-Pos2d MatrizPos2d::GetCentro(void) const
+Pos2d Pos2dArray::GetCentro(void) const
   { return get_centro(*this,Segment2d()); }
 
 //! @brief Return the center of mass.
-Pos2d MatrizPos2d::getCenterOfMass(void) const
+Pos2d Pos2dArray::getCenterOfMass(void) const
   {
     GEOM_FT areaQuad= 0.0;
     GEOM_FT Atot= 0.0;
@@ -132,7 +132,7 @@ Pos2d MatrizPos2d::getCenterOfMass(void) const
   }
 
 //! @brief Return el moment of inertia with respect to paralelo al y por el origen
-GEOM_FT MatrizPos2d::GetIy(void) const
+GEOM_FT Pos2dArray::GetIy(void) const
   {
     GEOM_FT retval= 0.0;
     Pos2d c;
@@ -148,7 +148,7 @@ GEOM_FT MatrizPos2d::GetIy(void) const
   }
 
 //! @brief Return el moment of inertia with respect to axis parallel to x por el origen
-GEOM_FT MatrizPos2d::GetIx(void) const
+GEOM_FT Pos2dArray::GetIx(void) const
   {
     GEOM_FT retval= 0.0;
     Pos2d c;
@@ -165,7 +165,7 @@ GEOM_FT MatrizPos2d::GetIx(void) const
 
 //! @brief Return el product of inertia with respect to the axis that
 //! pass through the origin.
-GEOM_FT MatrizPos2d::GetPxy(void) const
+GEOM_FT Pos2dArray::GetPxy(void) const
   {
     GEOM_FT retval= 0.0;
     Pos2d c;
@@ -180,7 +180,7 @@ GEOM_FT MatrizPos2d::GetPxy(void) const
     return retval;
   }
 
-GEOM_FT MatrizPos2d::GetArea(void) const
+GEOM_FT Pos2dArray::GetArea(void) const
   {
     GEOM_FT retval= 0.0;
     for(size_t i=1;i<n_rows;i++)
@@ -190,15 +190,15 @@ GEOM_FT MatrizPos2d::GetArea(void) const
   }
 
 //! @brief Moment of inertia with respect to axis parallel to x through the center of mass.
-GEOM_FT MatrizPos2d::Ix(void) const
+GEOM_FT Pos2dArray::Ix(void) const
   { return GetIx()-GetArea()*sqr(getCenterOfMass().y()); }
 
 //! @brief Moment of inertia with respect to the center of mass in local coordinates.
-GEOM_FT MatrizPos2d::Iy(void) const
+GEOM_FT Pos2dArray::Iy(void) const
   { return GetIy()-GetArea()*sqr(getCenterOfMass().x()); }
 
 //! @brief product of inertia with respect to the center of mass in local coordinates.
-GEOM_FT MatrizPos2d::Pxy(void) const
+GEOM_FT Pos2dArray::Pxy(void) const
   {
     const GEOM_FT d2= getCenterOfMass().x()*getCenterOfMass().y();
     return GetPxy()-GetArea()*d2;
@@ -213,7 +213,7 @@ GEOM_FT MatrizPos2d::Pxy(void) const
 //               | / |
 //               |/ 1|
 //           i,j +---+ i,j+1
-Triangle2d MatrizPos2d::getTriangle1(const size_t &i,const size_t &j) const
+Triangle2d Pos2dArray::getTriangle1(const size_t &i,const size_t &j) const
   { return Triangle2d((*this)(i,j),(*this)(i,j+1),(*this)(i+1,j+1)); }
 
 //! @brief Return the triangle inscribed in the cell of the mesh the has
@@ -225,30 +225,30 @@ Triangle2d MatrizPos2d::getTriangle1(const size_t &i,const size_t &j) const
 //               | / |
 //               |/ 1|
 //           i,j +---+ i,j+1
-Triangle2d MatrizPos2d::getTriangle2(const size_t &i,const size_t &j) const
+Triangle2d Pos2dArray::getTriangle2(const size_t &i,const size_t &j) const
   { return Triangle2d((*this)(i,j),(*this)(i+1,j+1),(*this)(i+1,j)); }
 
 
 //! @brief Return the x coordinate of point i,j.
-GEOM_FT MatrizPos2d::GetX(const size_t &i,const size_t &j) const
+GEOM_FT Pos2dArray::GetX(const size_t &i,const size_t &j) const
   { return (*this)(i,j).x(); }
 
 //! @brief Return the y coordinate of point i,j.
-GEOM_FT MatrizPos2d::GetY(const size_t &i,const size_t &j) const
+GEOM_FT Pos2dArray::GetY(const size_t &i,const size_t &j) const
   { return (*this)(i,j).y(); }
 
 //! @brief Return las coordenadas of point i,j.
-const matriz_FT &MatrizPos2d::GetVertCoords(const size_t &i,const size_t &j) const
+const FT_matrix &Pos2dArray::GetVertCoords(const size_t &i,const size_t &j) const
   {
     const Pos2d tmp= getPoint(i,j);
-    static matriz_FT tmp_m(1,2);
+    static FT_matrix tmp_m(1,2);
     tmp_m(1,1)= tmp.x();
     tmp_m(1,2)= tmp.y();
     return tmp_m;
   }
 
 //! @brief Return the point i,j.
-Pos2d MatrizPos2d::getPoint(const size_t &i,const size_t &j) const
+Pos2d Pos2dArray::getPoint(const size_t &i,const size_t &j) const
 { return (*this)(i,j); }
 
 
@@ -258,11 +258,11 @@ Pos2d MatrizPos2d::getPoint(const size_t &i,const size_t &j) const
 //                                                                                   |   |
 //                                                                                   |   |
 //                                                                               i,j +---+ i,j+1
-Cuadrilatero2d MatrizPos2d::GetQuad(const size_t &i,const size_t &j) const
+Cuadrilatero2d Pos2dArray::GetQuad(const size_t &i,const size_t &j) const
   { return Cuadrilatero2d((*this)(i,j),(*this)(i,j+1),(*this)(i+1,j+1),(*this)(i+1,j)); }
 
 
-bool MatrizPos2d::In(const Pos2d &p, const double &tol) const
+bool Pos2dArray::In(const Pos2d &p, const double &tol) const
   {
     bool retval= false;
     for(size_t i=1;i<n_rows;i++)
@@ -281,7 +281,7 @@ bool MatrizPos2d::In(const Pos2d &p, const double &tol) const
 //                                                                                   |   |
 //                                                                                   |   |
 //                                                                               i,j +---+ i,j+1
-GEOM_FT MatrizPos2d::GetAreaQuad(const size_t &i,const size_t &j) const
+GEOM_FT Pos2dArray::GetAreaQuad(const size_t &i,const size_t &j) const
   { return GetQuad(i,j).getArea(); }
 
 //! @brief Return the centroid of the quad at i,j:
@@ -290,11 +290,11 @@ GEOM_FT MatrizPos2d::GetAreaQuad(const size_t &i,const size_t &j) const
 //                                                                                   |   |
 //                                                                                   |   |
 //                                                                               i,j +---+ i,j+1
-Pos2d MatrizPos2d::GetCentroideQuad(const size_t &i,const size_t &j) const
+Pos2d Pos2dArray::GetCentroideQuad(const size_t &i,const size_t &j) const
   { return GetQuad(i,j).Centroide(); }
 
 //! @brief Return the maximum value of the k coordinate.
-GEOM_FT MatrizPos2d::GetMax(unsigned short int k) const
+GEOM_FT Pos2dArray::GetMax(unsigned short int k) const
   {
     register GEOM_FT mx= (*this)(1,1)(k);
     for(size_t i=1;i<=n_rows;i++)
@@ -304,7 +304,7 @@ GEOM_FT MatrizPos2d::GetMax(unsigned short int k) const
   }
 
 //! @brief Return the minimum value of the k coordinate.
-GEOM_FT MatrizPos2d::GetMin(unsigned short int k) const
+GEOM_FT Pos2dArray::GetMin(unsigned short int k) const
   {
     register GEOM_FT mn= (*this)(1,1)(k);
     for(size_t i=1;i<=n_rows;i++)
@@ -314,7 +314,7 @@ GEOM_FT MatrizPos2d::GetMin(unsigned short int k) const
   }
 
 //! @brief Applies the transformation to the points.
-void MatrizPos2d::Transforma(const Trf2d &trf2d)
+void Pos2dArray::Transforma(const Trf2d &trf2d)
   {
     for(size_t i=1;i<=n_rows;i++)
       for(size_t j=1;j<=n_columns;j++)

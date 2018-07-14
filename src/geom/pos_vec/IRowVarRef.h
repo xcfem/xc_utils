@@ -27,49 +27,49 @@
 
 //! @ingroup GEOM
 //
-//! @brief Reference to a row of the tritriz which points have
+//! @brief Reference to a row of the array which points have
 //! constant J and K indices.
-template <class TRITRIZ>
-class IRowVarRef: public VarRefCajaTritriz<TRITRIZ>
+template <class ARRAY_3D>
+class IRowVarRef: public VarRefCajaArray3d<ARRAY_3D>
   {
   public:
-    typedef typename VarRefCajaTritriz<TRITRIZ>::const_reference const_reference;
-    typedef typename VarRefCajaTritriz<TRITRIZ>::reference reference;
+    typedef typename VarRefCajaArray3d<ARRAY_3D>::const_reference const_reference;
+    typedef typename VarRefCajaArray3d<ARRAY_3D>::reference reference;
 
-    explicit IRowVarRef(TRITRIZ &m,const size_t &f= 1,const size_t &c= 1);
-    IRowVarRef(TRITRIZ &m,const size_t &,const size_t &,const size_t &,const size_t &);
-    IRowVarRef(TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const size_t &c);
+    explicit IRowVarRef(ARRAY_3D &m,const size_t &f= 1,const size_t &c= 1);
+    IRowVarRef(ARRAY_3D &m,const size_t &,const size_t &,const size_t &,const size_t &);
+    IRowVarRef(ARRAY_3D &t,const RangoIndice &layer_range,const size_t &f,const size_t &c);
     inline virtual ~IRowVarRef(void) {}
     size_t getRowIndex(void) const
       { return this->offset_f+1; }
     size_t IndiceCol(void) const
       { return this->offset_c+1; }
     virtual const_reference operator()(size_t iLayer=1) const
-      { return VarRefCajaTritriz<TRITRIZ>::operator()(iLayer,1,1); }
+      { return VarRefCajaArray3d<ARRAY_3D>::operator()(iLayer,1,1); }
     virtual reference operator()(size_t iLayer=1)
-      { return VarRefCajaTritriz<TRITRIZ>::operator()(iLayer,1,1); }
+      { return VarRefCajaArray3d<ARRAY_3D>::operator()(iLayer,1,1); }
     inline virtual const_reference operator()(size_t iLayer,size_t iRow,size_t col) const
-      { return VarRefCajaTritriz<TRITRIZ>::operator()(iLayer,iRow,col); }
+      { return VarRefCajaArray3d<ARRAY_3D>::operator()(iLayer,iRow,col); }
     inline virtual reference operator()(size_t iLayer,size_t iRow,size_t col)
-      { return VarRefCajaTritriz<TRITRIZ>::operator()(iLayer,iRow,col); }
+      { return VarRefCajaArray3d<ARRAY_3D>::operator()(iLayer,iRow,col); }
   };
 
 //! @brief Default constructor.
-template<class TRITRIZ>
-IRowVarRef<TRITRIZ>::IRowVarRef(TRITRIZ &t,const size_t &f,const size_t &c)
-  : VarRefCajaTritriz<TRITRIZ>(t,RangoIndice(1,t.getNumberOfLayers()),f,c)
+template<class ARRAY_3D>
+IRowVarRef<ARRAY_3D>::IRowVarRef(ARRAY_3D &t,const size_t &f,const size_t &c)
+  : VarRefCajaArray3d<ARRAY_3D>(t,RangoIndice(1,t.getNumberOfLayers()),f,c)
   {}
 
 //! @brief Constructor.
-template<class TRITRIZ>
-IRowVarRef<TRITRIZ>::IRowVarRef(TRITRIZ &t,const size_t &iLayer1,const size_t &iLayer2,const size_t &f,const size_t &c)
-  : VarRefCajaTritriz<TRITRIZ>(t,RangoIndice(iLayer1,iLayer2),f,c)
+template<class ARRAY_3D>
+IRowVarRef<ARRAY_3D>::IRowVarRef(ARRAY_3D &t,const size_t &iLayer1,const size_t &iLayer2,const size_t &f,const size_t &c)
+  : VarRefCajaArray3d<ARRAY_3D>(t,RangoIndice(iLayer1,iLayer2),f,c)
   {}
 
 //! @brief Constructor.
-template<class TRITRIZ>
-IRowVarRef<TRITRIZ>::IRowVarRef(TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const size_t &c)
-  : VarRefCajaTritriz<TRITRIZ>(t,layer_range,f,c)
+template<class ARRAY_3D>
+IRowVarRef<ARRAY_3D>::IRowVarRef(ARRAY_3D &t,const RangoIndice &layer_range,const size_t &f,const size_t &c)
+  : VarRefCajaArray3d<ARRAY_3D>(t,layer_range,f,c)
   {}
 
 #endif

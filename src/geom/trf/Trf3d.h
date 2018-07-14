@@ -30,8 +30,8 @@
 
 class Pos3d;
 class Vector3d;
-class MatrizPos3d;
-class TritrizPos3d;
+class Pos3dArray;
+class Pos3dArray3d;
 
 
 //! @ingroup GEOM
@@ -56,36 +56,39 @@ class Trf3d: public Trf
            const GEOM_FT & m20,const GEOM_FT & m21,const GEOM_FT & m22,const GEOM_FT & m23);
     //Trf3d Inversa(void) const;
       //Return la transformación inversa.
-    virtual GEOM_FT Cartesianas(const size_t &i,const size_t &j) const
-    //Return el elemento (i,j) de la matriz de transformación en cartesianas.
+    //@brief Return the (i,j) componet of the transformation matrix expressed in
+    // cartesian coordinates.
     //       -              -
     //       | m11  m12 m13 |
     //       | m21  m22 m23 |
     //       |   0    0  1  |
     //       -              -
+    virtual GEOM_FT Cartesianas(const size_t &i,const size_t &j) const
       { return cgtrf.m(i-1,j-1); }
-    virtual GEOM_FT Homogeneas(const size_t &i,const size_t &j) const
-    //Return el elemento (i,j) de la matriz de transformación en homogéneas.
+    
+    //@brief Return the (i,j) componet of the transformation matrix expressed in
+    // homogeneous coordinates.
     //       -              -
     //       | m11  m12 m13 |
     //       | m21  m22 m23 |
     //       |   0    0  hw |
     //       -              -
+    virtual GEOM_FT Homogeneas(const size_t &i,const size_t &j) const
       { return cgtrf.hm(i-1,j-1); }
-    void PutMatrizHomogeneas(const matriz_FT &mh);
-    virtual matriz_FT Cartesianas(void) const;
-    virtual matriz_FT Homogeneas(void) const;
+    void putHomogenousMatrix(const FT_matrix &mh);
+    virtual FT_matrix Cartesianas(void) const;
+    virtual FT_matrix Homogeneas(void) const;
     Pos3d Transforma(const Pos3d &p) const;
     Vector3d Transforma(const Vector3d &v) const;
     template <class InputIterator>
     void Transforma(InputIterator first,InputIterator last) const;
-    void Transforma(MatrizPos3d &m) const;
-    const MatrizPos3d &Transforma(const MatrizPos3d &m) const;
-    void Transforma(TritrizPos3d &m) const;
-    const TritrizPos3d &Transforma(const TritrizPos3d &m) const;
+    void Transforma(Pos3dArray &m) const;
+    const Pos3dArray &Transforma(const Pos3dArray &m) const;
+    void Transforma(Pos3dArray3d &m) const;
+    const Pos3dArray3d &Transforma(const Pos3dArray3d &m) const;
     Pos3d operator()(const Pos3d &p) const;
     Vector3d operator()(const Vector3d &v) const;
-    MatrizPos3d operator()(const MatrizPos3d &m) const;
+    Pos3dArray operator()(const Pos3dArray &m) const;
     friend Trf3d operator*(const Trf3d &a,const Trf3d &b);
     friend Trf3d giroX3d(const double &ang_rad);
     friend Trf3d giroY3d(const double &ang_rad);

@@ -25,17 +25,17 @@
 #ifndef VECTORPOS_H
 #define VECTORPOS_H
 
-#include "MatrizPos.h"
+#include "PosArray.h"
 
 
 //! @ingroup GEOM
 //
 //! @brief Clase base para los vectores de posiciones.
 template <class POS>
-class VectorPos: public MatrizPos<POS>
+class VectorPos: public PosArray<POS>
   {
   public:
-    typedef MatrizPos<POS> m_pos;
+    typedef PosArray<POS> m_pos;
   public:
     VectorPos(const size_t &f=1): m_pos(f,1) {}
     VectorPos(const POS &p1,const POS &p2,const size_t &num,const GEOM_FT &ratio);

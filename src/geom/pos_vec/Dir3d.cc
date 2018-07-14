@@ -24,7 +24,7 @@
 #include "Dir3d.h"
 #include "Vector3d.h"
 
-#include "xc_utils/src/geom/matriz_FT.h"
+#include "xc_utils/src/geom/FT_matrix.h"
 
 //! @brief Constructor from (x,y,z) components.
 Dir3d::Dir3d(GEOM_FT x,GEOM_FT y,GEOM_FT z)
@@ -35,9 +35,9 @@ Dir3d::Dir3d(const Vector3d &v)
   : cgd(v.ToCGAL()) {}
 
 //! @brief Returns the x, y and z components in a row matrix.
-matriz_FT Dir3d::GetMatriz(void) const
+FT_matrix Dir3d::getMatrix(void) const
   {
-    matriz_FT retval(3,1,0.0);
+    FT_matrix retval(3,1,0.0);
     retval(1)= cgd.dx(); retval(2)= cgd.dy(); retval(3)= cgd.dz();
     return retval;
   }

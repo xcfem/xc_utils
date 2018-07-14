@@ -23,7 +23,7 @@
 
 #include "Cuadrilatero2d.h"
 #include "Triangle2d.h"
-#include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
+#include "xc_utils/src/geom/pos_vec/Pos2dArray.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include <vector>
 
@@ -41,19 +41,19 @@ Triangle2d Cuadrilatero2d::getSecondTriangle(void) const
   { return Triangle2d(Vertice(1),Vertice(3),Vertice(4)); }
 
 
-MatrizPos2d Cuadrilatero2d::genMesh(int n1,int n2) const
+Pos2dArray Cuadrilatero2d::genMesh(int n1,int n2) const
   {
-    MatrizPos2d l1(Vertice(1),Vertice(2),n1);
-    MatrizPos2d l2(Vertice(2),Vertice(3),n2);
-    MatrizPos2d l3(Vertice(4),Vertice(3),n1);
-    MatrizPos2d l4(Vertice(1),Vertice(4),n2);
-    return MatrizPos2d(l1,l2,l3,l4);
+    Pos2dArray l1(Vertice(1),Vertice(2),n1);
+    Pos2dArray l2(Vertice(2),Vertice(3),n2);
+    Pos2dArray l3(Vertice(4),Vertice(3),n1);
+    Pos2dArray l4(Vertice(1),Vertice(4),n2);
+    return Pos2dArray(l1,l2,l3,l4);
   }
 
 //! @brief Returns a point mesh (la rutina esta tomada de OpenSees).
-MatrizPos2d Cuadrilatero2d::genBilinMesh(const size_t &nDiv12,const size_t &nDiv23) const
+Pos2dArray Cuadrilatero2d::genBilinMesh(const size_t &nDiv12,const size_t &nDiv23) const
   {
-    MatrizPos2d retval(nDiv23+1,nDiv12+1);
+    Pos2dArray retval(nDiv23+1,nDiv12+1);
     if(nDiv12 > 0  && nDiv23 > 0)
       {
         const double deltaXi= 2.0 / nDiv12;

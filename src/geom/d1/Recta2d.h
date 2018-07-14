@@ -184,7 +184,7 @@ inline bool operator!=(const Recta2d &r1,const Recta2d &r2)
 
 inline Recta2d bisectriz(const Recta2d &r1,const Recta2d &r2)
   { return r1.Bisectriz(r2); }
-Recta2d mediatriz(const Pos2d &p1,const Pos2d &p2);
+Recta2d perpendicular_bisector(const Pos2d &p1,const Pos2d &p2);
  
 #endif
 

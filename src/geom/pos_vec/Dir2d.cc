@@ -24,7 +24,7 @@
 #include "Dir2d.h"
 #include "Vector2d.h"
 
-#include "xc_utils/src/geom/matriz_FT.h"
+#include "xc_utils/src/geom/FT_matrix.h"
 
 //! @brief Constructor from a vector.
 Dir2d::Dir2d(const Vector2d &v)
@@ -39,9 +39,9 @@ Dir2d::Dir2d(const double &ang)
   : cgd(cos(ang),sin(ang)) {}
 
 //! @brief returns the x and y components in a row matrix.
-matriz_FT Dir2d::GetMatriz(void) const
+FT_matrix Dir2d::getMatrix(void) const
   {
-    matriz_FT retval(2,1,0.0);
+    FT_matrix retval(2,1,0.0);
     retval(1)= cgd.dx(); retval(2)= cgd.dy();
     return retval;
   }

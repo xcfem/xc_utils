@@ -38,12 +38,12 @@ SisCooRect1d3d::VGlobal SisCooRect1d3d::GetI(void) const
 //Return el vector unitario I en el sistema global.
   { return getAxisVDir(1); }
 SisCooRect1d3d::VGlobal SisCooRect1d3d::GetCooGlobales(const VLocal &v) const
-{ return SisCooXd3d::GetCooGlobales(matriz_FT(1,1,v)); }
+{ return SisCooXd3d::GetCooGlobales(FT_matrix(1,1,v)); }
 SisCooRect1d3d::VLocal SisCooRect1d3d::GetCooLocales(const SisCooRect1d3d::VGlobal &v) const
 //Return las componentes del vector v expresado en locales
 //expresadas en coordenadas globales.
   {
-    const matriz_FT tmp= SisCooXd3d::GetCooLocales(v);
+    const FT_matrix tmp= SisCooXd3d::GetCooLocales(v);
     return VLocal(tmp(1));
   }
 

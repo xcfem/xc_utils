@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//RangoTritriz.h
+//Array3dRange.h
 
-#ifndef RANGOTRITRIZ_H
-#define RANGOTRITRIZ_H
+#ifndef RANGOARRAY3D_H
+#define RANGOARRAY3D_H
 
 #include "xc_basic/src/matrices/RangoIndice.h"
 
@@ -30,22 +30,22 @@
 //! @ingroup GEOM
 //
 //! @brief Rangos de variación de tres índices, se emplea en ConstRefCaja.
-class RangoTritriz
+class Array3dRange
   {
     RangoIndice layer_range; //!< layers range.
     RangoIndice row_range; //!< row range.
     RangoIndice column_range; //!< columns range.
   public:
-    RangoTritriz(const RangoIndice &rcp= RangoIndice(),const RangoIndice &rf= RangoIndice(),const RangoIndice &rc= RangoIndice())
+    Array3dRange(const RangoIndice &rcp= RangoIndice(),const RangoIndice &rf= RangoIndice(),const RangoIndice &rc= RangoIndice())
       : layer_range(rcp), row_range(rf),column_range(rc) {}
-    RangoTritriz(const size_t &iLayer,const RangoIndice &rf,const RangoIndice &rc)
+    Array3dRange(const size_t &iLayer,const RangoIndice &rf,const RangoIndice &rc)
       : layer_range(iLayer,iLayer), row_range(rf),column_range(rc) {}
-    RangoTritriz(const RangoIndice &rcp,const size_t &iRow,const RangoIndice &rc)
+    Array3dRange(const RangoIndice &rcp,const size_t &iRow,const RangoIndice &rc)
       : layer_range(rcp), row_range(iRow, iRow),column_range(rc) {}
-    RangoTritriz(const RangoIndice &rcp,const RangoIndice &rf,const size_t &col)
+    Array3dRange(const RangoIndice &rcp,const RangoIndice &rf,const size_t &col)
       : layer_range(rcp), row_range(rf),column_range(col,col) {}
     template <class TTZ>
-    RangoTritriz(const TTZ &);
+    Array3dRange(const TTZ &);
 
     size_t getNumberOfLayers(void) const
       { return row_range.Size(); }
@@ -80,23 +80,23 @@ class RangoTritriz
     inline static const char &Separador(void)
       { return RangoIndice::Separador(); }
     void Clip(const size_t &cpmax,const size_t &fmax,const size_t &cmax);
-    void Intersec(const RangoTritriz &);
-    RangoTritriz Intersec(const RangoTritriz &other) const;
+    void Intersec(const Array3dRange &);
+    Array3dRange Intersec(const Array3dRange &other) const;
     void Print(std::ostream &os) const;
   };
 
-RangoTritriz clip(const RangoTritriz &r,const size_t &cpmax,const size_t &fmax,const size_t &cmax);
-RangoTritriz intersec(const RangoTritriz &,const RangoTritriz &);
-std::ostream &operator<<(std::ostream &os,const RangoTritriz &rango);
+Array3dRange clip(const Array3dRange &r,const size_t &cpmax,const size_t &fmax,const size_t &cmax);
+Array3dRange intersec(const Array3dRange &,const Array3dRange &);
+std::ostream &operator<<(std::ostream &os,const Array3dRange &rango);
 
-//! @brief Constructor a partir de una tritriz.
+//! @brief Constructor from an array.
 template <class TTZ>
-RangoTritriz::RangoTritriz(const TTZ &ttz)
+Array3dRange::Array3dRange(const TTZ &ttz)
   : layer_range(1,ttz.getNumberOfLayers()), row_range(1,ttz.getNumberOfRows()),column_range(1,ttz.getNumberOfColumns()) {}
 
-//! @brief Clip the range intervals from the tritriz argument.
+//! @brief Clip the range intervals from the array argument.
 template <class TTZ>
-RangoTritriz clip(const RangoTritriz &rttz,const TTZ &ttz)
-  { return rttz.Intersec(RangoTritriz(ttz)); }
+Array3dRange clip(const Array3dRange &rttz,const TTZ &ttz)
+  { return rttz.Intersec(Array3dRange(ttz)); }
 
 #endif

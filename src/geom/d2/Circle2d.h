@@ -29,7 +29,7 @@
 #include "xc_basic/src/util/matem.h"
 
 class Pos2d;
-class MatrizPos2d;
+class Pos2dArray;
 class Poligono2d;
 
 //! @ingroup GEOM
@@ -40,7 +40,7 @@ class Circle2d : public Superficie2d
     CGCircle_2 cgcirc;
 
   protected:
-    void arc_points(const double &theta_inic,const double &delta_theta,MatrizPos2d &ptos) const;
+    void arc_points(const double &theta_inic,const double &delta_theta,Pos2dArray &ptos) const;
   public:
     Circle2d(void) : Superficie2d(), cgcirc() {}
     Circle2d(const Pos2d &centro,const GEOM_FT &rad);
@@ -84,7 +84,7 @@ class Circle2d : public Superficie2d
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
-    MatrizPos2d getPointsOnPerimeter(const size_t &n,const double &theta_inic= 0.0) const;
+    Pos2dArray getPointsOnPerimeter(const size_t &n,const double &theta_inic= 0.0) const;
     Poligono2d getPoligonoInscrito(const size_t &n,const double &theta_inic= 0.0) const;
 
     void Transforma(const Trf2d &trf2d);

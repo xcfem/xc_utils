@@ -137,8 +137,8 @@ Segment2d Segment2d::Offset(const GEOM_FT &d) const
     return Offset(n);
   }
 
-//! @brief Return the mediatriz of the segment.
-Recta2d Segment2d::Mediatriz(void) const
+//! @brief Return the perpendicular_bisector of the segment.
+Recta2d Segment2d::getPerpendicularBisector(void) const
   {
     const Pos2d p=getCenterOfMass();
     const Vector2d v= VDir().Perpendicular(CGAL::COUNTERCLOCKWISE);

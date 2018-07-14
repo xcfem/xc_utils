@@ -30,7 +30,7 @@
 
 class Pos3d;
 class Dir3d;
-class matriz_FT;
+class FT_matrix;
 class SbVec3f;
 
 
@@ -45,7 +45,7 @@ class Vector3d: public ProtoGeom
     Vector3d(const CGVector_3 &v)
       : cgvct(v) {}
     Vector3d(const GEOM_FT &x,const GEOM_FT &y,const GEOM_FT &z);
-    Vector3d(const matriz_FT &m);
+    Vector3d(const FT_matrix &m);
     Vector3d(const Pos3d &p1,const Pos3d &p2);
     const CGVector_3 &ToCGAL(void) const
       { return cgvct; }
@@ -64,7 +64,7 @@ class Vector3d: public ProtoGeom
       { return cgvct.y(); }
     inline const GEOM_FT z(void) const
       { return cgvct.z(); }
-    matriz_FT GetMatriz(void) const;
+    FT_matrix getMatrix(void) const;
     Dir3d Direccion(void) const;
     Vector3d &operator+=(const Vector3d &);
     Vector3d &operator-=(const Vector3d &);
@@ -82,16 +82,16 @@ class Vector3d: public ProtoGeom
     void Normaliza(void);
     Vector3d Perpendicular(const Vector3d &v) const;
     virtual GEOM_FT GetDot(const Vector3d &v) const;
-    virtual GEOM_FT GetDot(const matriz_FT &m) const;
+    virtual GEOM_FT GetDot(const FT_matrix &m) const;
     Vector3d getCross(const Vector3d &v) const;
     GEOM_FT getAngle(const Vector3d &v) const;
 
 
     inline friend GEOM_FT dot(const Vector3d &v1, const Vector3d &v2)
       { return v1.GetDot(v2); }
-    inline friend GEOM_FT dot(const Vector3d &v1, const matriz_FT &m)
+    inline friend GEOM_FT dot(const Vector3d &v1, const FT_matrix &m)
       { return v1.GetDot(m); }
-    inline friend GEOM_FT dot(const matriz_FT &m, const Vector3d &v1)
+    inline friend GEOM_FT dot(const FT_matrix &m, const Vector3d &v1)
       { return v1.GetDot(m); }
     inline friend Vector3d cross(const Vector3d &v1, const Vector3d &v2)
       { return v1.getCross(v2); }
@@ -99,7 +99,7 @@ class Vector3d: public ProtoGeom
       { return cross(v1,v2); }
     inline friend bool operator==(const Vector3d &v1, const Vector3d &v2)
       { return (v1.cgvct==v2.cgvct); }
-    friend matriz_FT operator*(const matriz_FT &m,const Vector3d &v);
+    friend FT_matrix operator*(const FT_matrix &m,const Vector3d &v);
     friend std::ostream &operator<<(std::ostream &stream,const Vector3d &n);
 
     inline virtual ~Vector3d(void) {}
@@ -125,8 +125,8 @@ GEOM_FT Abs(const Vector3d &v); //Return el módulo del vector.
 GEOM_FT angle(const Vector3d &v1,const Vector3d &v2);
 
 //Producto tensorial.
-matriz_FT prod_tensor(const Vector3d &u,const Vector3d &v);
-matriz_FT operator&(const Vector3d &u,const Vector3d &v);
+FT_matrix prod_tensor(const Vector3d &u,const Vector3d &v);
+FT_matrix operator&(const Vector3d &u,const Vector3d &v);
 
 bool paralelos(const Vector3d &v1,const Vector3d &v2);
 bool coplanarios(const Vector3d &v1,const Vector3d &v2,const Vector3d &v3);
@@ -136,9 +136,9 @@ inline Vector3d operator*(const GEOM_FT &d,const Vector3d &v)
 
 inline Vector3d Normaliza(const Vector3d &v)
   { return v.Normalizado(); } 
-matriz_FT Traspuesta(const Vector3d &v);
-matriz_FT skew_symm_matrix_post(const Vector3d &v);
-matriz_FT skew_symm_matrix_pre(const Vector3d &v);
+FT_matrix Traspuesta(const Vector3d &v);
+FT_matrix skew_symm_matrix_post(const Vector3d &v);
+FT_matrix skew_symm_matrix_pre(const Vector3d &v);
 
 const Vector3d VectorNulo3d;
 

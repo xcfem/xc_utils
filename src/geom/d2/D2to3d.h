@@ -31,8 +31,8 @@
 class Plane;
 class Segment2d;
 class Segment3d;
-class MatrizPos3d;
-class MatrizPos2d;
+class Pos3dArray;
+class Pos2dArray;
 
 //! @ingroup GEOM
 //
@@ -45,7 +45,7 @@ class D2to3d: public Superficie3d
   protected:
     Pos3d to_3d(const Pos2d &p2d) const;
     Segment3d to_3d(const Segment2d &sg2d) const;
-    MatrizPos3d to_3d(const MatrizPos2d &p2d) const;
+    Pos3dArray to_3d(const Pos2dArray &p2d) const;
     Pos2d to_2d(const Pos3d &p3d) const;
 
     D2to3d(const Ref2d3d &rf)

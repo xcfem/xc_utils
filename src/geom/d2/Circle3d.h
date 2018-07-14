@@ -77,7 +77,7 @@ class Circle3d : public D2to3d
     virtual GEOM_FT GetMin(unsigned short int i) const;
 
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const;
-    const MatrizPos3d &getPointsOnPerimeter(const size_t &n,const double &theta_inic= 0.0) const;
+    const Pos3dArray &getPointsOnPerimeter(const size_t &n,const double &theta_inic= 0.0) const;
 
     friend bool operator ==(const Circle3d &a,const Circle3d &b);
 

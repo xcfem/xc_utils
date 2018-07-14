@@ -24,9 +24,9 @@
 #include "Trf3d.h"
 #include "../pos_vec/Pos3d.h"
 #include "../pos_vec/Vector3d.h"
-#include "../pos_vec/MatrizPos3d.h"
-#include "../pos_vec/TritrizPos3d.h"
-#include "xc_utils/src/geom/matriz_FT.h"
+#include "../pos_vec/Pos3dArray.h"
+#include "../pos_vec/Pos3dArray3d.h"
+#include "xc_utils/src/geom/FT_matrix.h"
 
 // Trf3d from_racionales( const GEOM_FT &r00,const GEOM_FT &r01,const GEOM_FT &r02,const GEOM_FT &r03,
 //                        const GEOM_FT &r10,const GEOM_FT &r11,const GEOM_FT &r12,const GEOM_FT &r13,
@@ -95,7 +95,7 @@ Trf3d::Trf3d( const GEOM_FT &r00,const GEOM_FT &r01,const GEOM_FT &r02,const GEO
 Trf3d::Trf3d(const CGAL::Identity_transformation &i)
   : Trf(), cgtrf(i) {}
 
-void Trf3d::PutMatrizHomogeneas(const matriz_FT &mh)
+void Trf3d::putHomogenousMatrix(const FT_matrix &mh)
   {
     assert(mh(4,4)==1);
     //Trf3d::operator=(from_racionales(mh(1,1),mh(1,2),mh(1,3),mh(1,4),mh(2,1),mh(2,2),mh(2,3),mh(2,4),mh(3,1),mh(3,2),mh(3,3),mh(3,4)));
@@ -111,9 +111,9 @@ Trf3d::Trf3d(const CGAL::Scaling &sc,const GEOM_FT &factor_escala)
 //  : Trf(), cgtrf(sc,factor_escala.numerator(),factor_escala.denominator()) {}
 
 //! @brief Return the transformation matrix en cartesianas.
-matriz_FT Trf3d::Cartesianas(void) const
+FT_matrix Trf3d::Cartesianas(void) const
   {
-    matriz_FT retval(4,4,0.0);
+    FT_matrix retval(4,4,0.0);
     retval(1,1)= Cartesianas(1,1); retval(1,2)= Cartesianas(1,2); retval(1,3)= Cartesianas(1,3);
     retval(2,1)= Cartesianas(2,1); retval(2,2)= Cartesianas(2,2); retval(2,3)= Cartesianas(2,3);
     retval(2,1)= Cartesianas(3,1); retval(2,2)= Cartesianas(3,2); retval(3,3)= Cartesianas(3,3);
@@ -122,9 +122,9 @@ matriz_FT Trf3d::Cartesianas(void) const
   }
 
 //! @brief Return the transformation matrix en homogéneas.
-matriz_FT Trf3d::Homogeneas(void) const
+FT_matrix Trf3d::Homogeneas(void) const
   {
-    matriz_FT retval(4,4,0.0);
+    FT_matrix retval(4,4,0.0);
     retval(1,1)= Cartesianas(1,1); retval(1,2)= Cartesianas(1,2); retval(1,3)= Cartesianas(1,3); retval(1,4)= Cartesianas(1,4);
     retval(2,1)= Cartesianas(2,1); retval(2,2)= Cartesianas(2,2); retval(2,3)= Cartesianas(2,3); retval(2,4)= Cartesianas(2,4);
     retval(2,1)= Cartesianas(3,1); retval(2,2)= Cartesianas(3,2); retval(3,3)= Cartesianas(3,3); retval(3,4)= Cartesianas(3,4);
@@ -141,23 +141,23 @@ Vector3d Trf3d::Transforma(const Vector3d &v) const
   { return Vector3d(cgtrf.transform(v.ToCGAL())); }
 
 //! @brief Transform the points of the matrix.
-void Trf3d::Transforma(MatrizPos3d &m) const
+void Trf3d::Transforma(Pos3dArray &m) const
   {
-    for(MatrizPos3d::iterator i= m.begin();i!=m.end();i++)
+    for(Pos3dArray::iterator i= m.begin();i!=m.end();i++)
       (*i)= Transforma(*i);
   }
 
 //! @brief Transform the points of the matrix.
-const MatrizPos3d &Trf3d::Transforma(const MatrizPos3d &m) const
+const Pos3dArray &Trf3d::Transforma(const Pos3dArray &m) const
   {
-    static MatrizPos3d retval;
+    static Pos3dArray retval;
     retval= m;
     Transforma(retval);
     return retval;
   }
 
 //! @brief Transform the points of the argument.
-void Trf3d::Transforma(TritrizPos3d &m) const
+void Trf3d::Transforma(Pos3dArray3d &m) const
   {
     const size_t n_layers= m.getNumberOfLayers();
     const size_t n_rows= m.getNumberOfRows();
@@ -169,9 +169,9 @@ void Trf3d::Transforma(TritrizPos3d &m) const
   }
 
 //! @brief Transform the points of the argument.
-const TritrizPos3d &Trf3d::Transforma(const TritrizPos3d &m) const
+const Pos3dArray3d &Trf3d::Transforma(const Pos3dArray3d &m) const
   {
-    static TritrizPos3d retval;
+    static Pos3dArray3d retval;
     retval= m;
     Transforma(retval);
     return retval;
@@ -180,11 +180,11 @@ const TritrizPos3d &Trf3d::Transforma(const TritrizPos3d &m) const
 //! @brief Transform the point.
 Pos3d Trf3d::operator()(const Pos3d &p) const
   { return Transforma(p); }
-//! @brief Transforma el vector being passed as parameter.
+//! @brief Transform the vector being passed as parameter.
 Vector3d Trf3d::operator()(const Vector3d &v) const
   { return Transforma(v); }
-//! @brief Transforma la matriz being passed as parameter.
-MatrizPos3d Trf3d::operator()(const MatrizPos3d &m) const
+//! @brief Transform the positions in the array argument.
+Pos3dArray Trf3d::operator()(const Pos3dArray &m) const
   { return Transforma(m); }
 
 Trf3d operator*(const Trf3d &a,const Trf3d &b)

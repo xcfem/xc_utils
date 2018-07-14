@@ -23,7 +23,7 @@
 
 #include "Circle2d.h"
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
-#include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
+#include "xc_utils/src/geom/pos_vec/Pos2dArray.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
@@ -152,7 +152,7 @@ double Circle2d::getIncludedAngle(void) const
   { return 2*M_PI; }
 
 //! @brief Return n points equally espaces over the circle perimenter.
-void Circle2d::arc_points(const double &theta_inic,const double &delta_theta,MatrizPos2d &ptos) const
+void Circle2d::arc_points(const double &theta_inic,const double &delta_theta,Pos2dArray &ptos) const
   {
     const GEOM_FT r= getRadius();
     GEOM_FT x= r*double_to_FT(cos(theta_inic));
@@ -174,12 +174,12 @@ void Circle2d::arc_points(const double &theta_inic,const double &delta_theta,Mat
   }
 
 //! @brief Return n points equally spaced over the cicumference.
-MatrizPos2d Circle2d::getPointsOnPerimeter(const size_t &n,const double &theta_inic) const
+Pos2dArray Circle2d::getPointsOnPerimeter(const size_t &n,const double &theta_inic) const
   {
-    MatrizPos2d retval;
+    Pos2dArray retval;
     if(n>0)
       {
-        retval= MatrizPos2d(n,1);
+        retval= Pos2dArray(n,1);
         const double delta_theta= 2*M_PI/n;
         arc_points(theta_inic,delta_theta,retval);
       }
@@ -194,7 +194,7 @@ MatrizPos2d Circle2d::getPointsOnPerimeter(const size_t &n,const double &theta_i
 Poligono2d Circle2d::getPoligonoInscrito(const size_t &n,const double &theta_inic) const
   {
     Poligono2d retval;
-    const MatrizPos2d points= getPointsOnPerimeter(n,theta_inic);
+    const Pos2dArray points= getPointsOnPerimeter(n,theta_inic);
     for(size_t i= 1;i<=n;i++)
       retval.push_back(points(i,1));
     return retval;

@@ -27,7 +27,7 @@
 #include "../pos_vec/Vector3d.h"
 #include "../sis_ref/Ref3d3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
-#include "xc_utils/src/geom/matriz_FT.h"
+#include "xc_utils/src/geom/FT_matrix.h"
 
 #include "xc_utils/src/geom/d3/SemiEspacio3d.h"
 
@@ -103,8 +103,8 @@ GEOM_FT GeomObj3d::I( const unsigned short int &i, const unsigned short int &j) 
 //! through O with the direction of e.
 GEOM_FT GeomObj3d::I(const Pos3d &O,const Vector3d &e) const
   {
-    matriz_FT Io= I(O);
-    return dot(e,Io*e.GetMatriz())/Abs2(e);
+    FT_matrix Io= I(O);
+    return dot(e,Io*e.getMatrix())/Abs2(e);
   }
 
 //! @brief Return el moment of inertia with respect to la recta que se pasa
@@ -135,9 +135,9 @@ GEOM_FT GeomObj3d::I( const unsigned short int i,
 
 //! @brief Return the inertia tensor with respect to the center of mass
 //! of the object.
-matriz_FT GeomObj3d::I(void) const
+FT_matrix GeomObj3d::I(void) const
   {
-    matriz_FT i(3,3);
+    FT_matrix i(3,3);
     i(1,1)= Ix();i(1,2)= -Pxy();i(1,3)= -Pxz();
     i(2,1)= -Pxy();i(2,2)= Iy();i(2,3)= -Pyz();
     i(3,1)= -Pxz();i(3,2)= -Pyz();i(3,3)= Iz();
@@ -145,9 +145,9 @@ matriz_FT GeomObj3d::I(void) const
   }
 
 //! @brief Return the inertia tensor with respect to the point o.
-matriz_FT GeomObj3d::I(const Pos3d &o) const
+FT_matrix GeomObj3d::I(const Pos3d &o) const
   {
-    matriz_FT Ig= I();
+    FT_matrix Ig= I();
     Vector3d og=getCenterOfMass() - o;
     GEOM_FT m= IArea();
     return Ig+m*(Abs2(og)*identidad(Ig)-(og & og));

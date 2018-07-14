@@ -27,8 +27,8 @@
 #include "xc_basic/src/util/matem.h"
 #include <plotter.h>
 
-#include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
-#include "xc_utils/src/geom/pos_vec/MatrizPos3d.h"
+#include "xc_utils/src/geom/pos_vec/Pos2dArray.h"
+#include "xc_utils/src/geom/pos_vec/Pos3dArray.h"
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
 #include "boost/progress.hpp"
 
@@ -148,9 +148,9 @@ bool CircularSector3d::In(const Pos3d &p, const double &tol) const
   }
 
 //! @brief Return n points equally spaced over the circle arc.
-MatrizPos3d CircularSector3d::getArcPoints(const size_t &n) const
+Pos3dArray CircularSector3d::getArcPoints(const size_t &n) const
   {
-    MatrizPos3d retval= to_3d(sect_circ.getArcPoints(n));
+    Pos3dArray retval= to_3d(sect_circ.getArcPoints(n));
     return retval;
   }
 

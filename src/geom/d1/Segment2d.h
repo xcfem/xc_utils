@@ -103,7 +103,7 @@ class Segment2d : public Linea2d
 
     Recta2d Perpendicular(const Pos2d &p) const;
     Recta2d Paralela(const Pos2d &v) const;
-    Recta2d Mediatriz(void) const;
+    Recta2d getPerpendicularBisector(void) const;
 
     bool Paralelo(const Recta2d &r) const
       { return paralelas(RectaSoporte(),r); }
@@ -207,8 +207,8 @@ Pos2d intersection_point(const Segment2d &, const Recta2d &);
 Pos2d intersection_point(const Recta2d &, const Segment2d &);
 Pos2d intersection_point(const Segment2d &, const Segment2d &);
 
-inline Recta2d mediatriz(const Segment2d &sg)
-  { return sg.Mediatriz(); }
+inline Recta2d perpendicular_bisector(const Segment2d &sg)
+  { return sg.getPerpendicularBisector(); }
 
 std::list<Segment2d> sin_degenerados(const std::list<Segment2d> &);
 

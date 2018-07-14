@@ -28,7 +28,7 @@
 #include "../cgal_types.h"
 #include "xc_utils/src/nucleo/EntCmd.h"
 
-class matriz_FT;
+class FT_matrix;
 
 
 //! @ingroup GEOM
@@ -38,24 +38,29 @@ class Trf: public EntCmd
   {
   public:
     inline virtual ~Trf(void) {}
-    virtual GEOM_FT Cartesianas(const size_t &i,const size_t &j) const= 0;
-    //Return el elemento (i,j) de la matriz de transformación en cartesianas.
+    //! @brief Return the (i,j) component of the transformation matrix
+    //! expressed in cartesian coordinates.
     //       -              -
     //       | m11  m12 m13 |
     //       | m21  m22 m23 |
     //       |   0    0  1  |
     //       -              -
-    virtual GEOM_FT Homogeneas(const size_t &i,const size_t &j) const= 0;
-    //Return el elemento (i,j) de la matriz de transformación en homogéneas.
+    virtual GEOM_FT Cartesianas(const size_t &i,const size_t &j) const= 0;
+    
+    //! @brief Return the (i,j) component of the transformation matrix
+    //! expressed in homogeneous coordinates.
     //       -              -
     //       | m11  m12 m13 |
     //       | m21  m22 m23 |
     //       |   0    0  hw |
     //       -              -
-    virtual matriz_FT Cartesianas(void) const= 0;
-    //Return la matriz de transformación en cartesianas.
-    virtual matriz_FT Homogeneas(void) const= 0;
-    //Return la matriz de transformación en homogéneas.
+    virtual GEOM_FT Homogeneas(const size_t &i,const size_t &j) const= 0;
+    //!@brief Return the tranformation matrix expressed in
+    //! cartesian coordinates.
+    virtual FT_matrix Cartesianas(void) const= 0;
+    //!@brief Return the tranformation matrix expressed in
+    //! homogenous coordinates.
+    virtual FT_matrix Homogeneas(void) const= 0;
   };
 
 #endif

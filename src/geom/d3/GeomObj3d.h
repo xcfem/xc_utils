@@ -34,7 +34,7 @@ class Vector3d;
 class Recta3d;
 class BND3d;
 class Ref3d3d;
-class matriz_FT;
+class FT_matrix;
 class SemiEspacio3d;
 
 
@@ -107,8 +107,8 @@ class GeomObj3d: public GeomObj
               const unsigned short int j,
               const Pos3d &o) const;
     GEOM_FT IO(const Pos3d &o) const;
-    matriz_FT I(void) const;
-    matriz_FT I(const Pos3d &o) const;
+    FT_matrix I(void) const;
+    FT_matrix I(const Pos3d &o) const;
     
   };
 

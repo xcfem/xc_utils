@@ -30,8 +30,8 @@
 #include "xc_utils/src/geom/d3/GmGrupo3d.h"
 #include "xc_utils/src/geom/d3/SemiEspacio3d.h"
 #include "xc_utils/src/geom/listas/auxiliares.h"
-#include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
-#include "xc_utils/src/geom/pos_vec/MatrizPos3d.h"
+#include "xc_utils/src/geom/pos_vec/Pos2dArray.h"
+#include "xc_utils/src/geom/pos_vec/Pos3dArray.h"
 
 
 
@@ -77,11 +77,11 @@ Pos3d D2to3d::to_3d(const Pos2d &p2d) const
 Segment3d D2to3d::to_3d(const Segment2d &sg2d) const
   { return Segment3d(to_3d(sg2d.Origen()),to_3d(sg2d.Destino())); }
 
-MatrizPos3d D2to3d::to_3d(const MatrizPos2d &p2d) const
+Pos3dArray D2to3d::to_3d(const Pos2dArray &p2d) const
   {
     const size_t n_rows= p2d.getNumberOfRows();
     const size_t n_columns= p2d.getNumberOfColumns();
-    MatrizPos3d retval(n_rows,n_columns);
+    Pos3dArray retval(n_rows,n_columns);
     for(size_t i=1;i<=n_rows;i++)
       for(size_t j=1;j<=n_columns;j++)
         retval(i,j)= to_3d(p2d(i,j));

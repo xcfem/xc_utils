@@ -101,7 +101,7 @@ class PrismaRecto3d : public Prisma3d
     BND3d Bnd(void) const
     //Return la extension del objeto.
       { return extru.Bnd(); }
-    inline matriz_FT I(void) const
+    inline FT_matrix I(void) const
       { return extru.I(); }
     inline Pos3d getCenterOfMass(void) const
       { return extru.getCenterOfMass(); }

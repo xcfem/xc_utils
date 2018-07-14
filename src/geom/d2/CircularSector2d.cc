@@ -23,7 +23,7 @@
 
 #include "CircularSector2d.h"
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
-#include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
+#include "xc_utils/src/geom/pos_vec/Pos2dArray.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include <plotter.h>
@@ -207,12 +207,12 @@ bool CircularSector2d::In(const Pos2d &p, const double &tol) const
   }
 
 //! @brief Return n points equally spaced over the arc of the circular sector.
-MatrizPos2d CircularSector2d::getArcPoints(const size_t &n) const
+Pos2dArray CircularSector2d::getArcPoints(const size_t &n) const
   {
-    MatrizPos2d retval;
+    Pos2dArray retval;
     if(n>1)
       {
-        retval= MatrizPos2d(n,1);
+        retval= Pos2dArray(n,1);
         if(n==2)
           {
             retval(1,1)= PInic(); //Initial and final points

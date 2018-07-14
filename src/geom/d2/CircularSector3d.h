@@ -87,7 +87,7 @@ class CircularSector3d : public D2to3d
     virtual GEOM_FT GetMin(unsigned short int i) const;
 
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const;
-    MatrizPos3d getArcPoints(const size_t &n) const;
+    Pos3dArray getArcPoints(const size_t &n) const;
 
     friend bool operator ==(const CircularSector3d &a,const CircularSector3d &b);
 

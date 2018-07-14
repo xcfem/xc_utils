@@ -27,7 +27,7 @@
 #include "CircularSector2d.h"
 
 class Pos2d;
-class MatrizPos2d;
+class Pos2dArray;
 class Poligono2d;
 
 //! @ingroup GEOM
@@ -77,10 +77,10 @@ class AnnulusSector2d : public CircularSector2d
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
-    MatrizPos2d getExtArcPoints(const size_t &n) const;
-    MatrizPos2d getIntArcPoints(const size_t &n) const;
-    MatrizPos2d getPointsOnPerimeter(const size_t &n) const;
-    MatrizPos2d genMesh(const size_t &m,const size_t &n) const;
+    Pos2dArray getExtArcPoints(const size_t &n) const;
+    Pos2dArray getIntArcPoints(const size_t &n) const;
+    Pos2dArray getPointsOnPerimeter(const size_t &n) const;
+    Pos2dArray genMesh(const size_t &m,const size_t &n) const;
     Poligono2d getPoligono2d(const size_t &n) const;
 
     void Print(std::ostream &os) const;

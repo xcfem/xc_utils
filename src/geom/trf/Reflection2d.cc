@@ -22,7 +22,7 @@
 //Reflection2d.cc
 
 #include "Reflection2d.h"
-#include "xc_utils/src/geom/matriz_FT.h"
+#include "xc_utils/src/geom/FT_matrix.h"
 #include "../pos_vec/Vector2d.h"
 #include "../pos_vec/Pos2d.h"
 #include "../d1/Recta2d.h"
@@ -31,19 +31,19 @@
 // Reflection2d::Reflection2d(const GEOM_RT &m00,const GEOM_RT &m01,const GEOM_RT &m02,
 //                          const GEOM_RT &m10,const GEOM_RT &m11,const GEOM_RT &m12,
 //                          const GEOM_RT &hw)
-// //Define la matriz de una transformación afin cualquiera.
-// //La submatriz:
+// //Define the transformation matrix for any affine transformation.
+// //the sub-matrix:
 // //
 // //    -1 [[ m00 m01]
 // //  hw    [ m10 m11]] 
 // //
-// // contiene la información sobre scaling y rotación, 
-// // el vector:
+// // contains the information about scaling and rotation, 
+// // and the vector:
 // //
 // //    -1 [[ m02]
 // //  hw    [ m12]] 
 // //
-// // contiene la parte translational de la transformación.
+// // contanins the translational part of the transformation.
 //   : Trf2d(m00,m01,m02,m10,m11,m12,hw) {}
 
 Reflection2d::Reflection2d(const GEOM_FT &m00,const GEOM_FT &m01,const GEOM_FT &m02,
@@ -58,8 +58,8 @@ Reflection2d Reflection2d::crea_reflection2d(const  Pos2d &Q,const Vector2d &d)
                   << " no es unitario." << std::endl;
       }
     const Vector2d d_perp= d.Perpendicular(CGAL::POSITIVE);
-    const matriz_FT T_d=traspuesta(identidad(matriz_FT(2,2))-2*(d_perp & d_perp));
-    const matriz_FT v= (2*dot(Q.VectorPos(),d_perp)*d_perp).GetMatriz();
+    const FT_matrix T_d=traspuesta(identidad(FT_matrix(2,2))-2*(d_perp & d_perp));
+    const FT_matrix v= (2*dot(Q.VectorPos(),d_perp)*d_perp).getMatrix();
     return Reflection2d(T_d(1,1),T_d(1,2),v(1,1),T_d(2,1),T_d(2,2),v(2,1));
   }
 

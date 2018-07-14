@@ -22,7 +22,7 @@
 //Reflection3d.cc
 
 #include "Reflection3d.h"
-#include "xc_utils/src/geom/matriz_FT.h"
+#include "xc_utils/src/geom/FT_matrix.h"
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
@@ -30,15 +30,15 @@
 
 //! Reflexión en 3d según se describe en "Geometric tools for computer graphics"
 //! Philip J. Schneider Morgan Kaufmann Publishers, page 153
-matriz_FT Reflection3d::matriz_reflection3d(const  Pos3d &Q,const Vector3d &n)
+FT_matrix Reflection3d::reflection3d_matrix(const  Pos3d &Q,const Vector3d &n)
   {
     const Vector3d nn= n.Normalizado();
-    matriz_FT retval(4,4);
-    const matriz_FT I= identidad(matriz_FT(3,3));
-    const matriz_FT T_n= traspuesta(I-2*prod_tensor(nn,nn));
+    FT_matrix retval(4,4);
+    const FT_matrix I= identidad(FT_matrix(3,3));
+    const FT_matrix T_n= traspuesta(I-2*prod_tensor(nn,nn));
     retval.PutCaja(1,1,T_n);
     const Vector3d VQ= double_to_FT(2)*dot(Q.VectorPos(),nn)*nn;
-    retval.PutCaja(1,4,VQ.GetMatriz());
+    retval.PutCaja(1,4,VQ.getMatrix());
     retval(4,4)=1;
     return retval;
   }
@@ -47,23 +47,23 @@ matriz_FT Reflection3d::matriz_reflection3d(const  Pos3d &Q,const Vector3d &n)
 Reflection3d::Reflection3d(void)
   : Trf3d()
   {
-    matriz_FT rf=  matriz_reflection3d(Pos3d(0.0,0.0,0.0),Vector3d(0.0,0.0,1.0));
-    PutMatrizHomogeneas(rf);
+    FT_matrix rf=  reflection3d_matrix(Pos3d(0.0,0.0,0.0),Vector3d(0.0,0.0,1.0));
+    putHomogenousMatrix(rf);
   }
 
 //! @brief Constructor.
 Reflection3d::Reflection3d(const Pos3d &Q,const Vector3d &d)
   : Trf3d()
   {
-    matriz_FT rf=  matriz_reflection3d(Q,d);
-    PutMatrizHomogeneas(rf);
+    FT_matrix rf=  reflection3d_matrix(Q,d);
+    putHomogenousMatrix(rf);
   }
 
 //! @brief Constructor.
 Reflection3d::Reflection3d(const Plane &p)
   : Trf3d()
   {
-    matriz_FT rf=  matriz_reflection3d(p.Point(),p.Normal());
-    PutMatrizHomogeneas(rf);
+    FT_matrix rf=  reflection3d_matrix(p.Point(),p.Normal());
+    putHomogenousMatrix(rf);
   }
 

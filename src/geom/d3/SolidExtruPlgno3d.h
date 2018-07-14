@@ -59,7 +59,7 @@ class SolidExtruPlgno3d : public SolidExtru3d<PG>
     inline BND3d Bnd(void) const
     //Return la extension del objeto.
       { return solid_extru_pg::Bnd(); }
-    inline matriz_FT I(void) const
+    inline FT_matrix I(void) const
       { return solid_extru_pg::I(); }
     inline Pos3d getCenterOfMass(void) const
       { return solid_extru_pg::getCenterOfMass(); }

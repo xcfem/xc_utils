@@ -32,7 +32,7 @@
 class Pos2d;
 class Dir2d;
 class Plotter;
-class matriz_FT;
+class FT_matrix;
 
 
 //! @ingroup GEOM
@@ -49,7 +49,7 @@ class Vector2d: public ProtoGeom
       : ProtoGeom(), cgvct(dir.vector()) {}
     Vector2d(const GEOM_FT &x,const GEOM_FT &y);
 /*     Vector2d(const double &x,const double &y); */
-    Vector2d(const matriz_FT &m);
+    Vector2d(const FT_matrix &m);
     Vector2d(const Pos2d &p1,const Pos2d &p2);
     Vector2d(const Vector2d &other): cgvct(other.cgvct){}
     Vector2d &operator=(const Vector2d &other)
@@ -75,7 +75,7 @@ class Vector2d: public ProtoGeom
       { return Vector2d::operator()(1); }
     inline const GEOM_FT y() const
       { return Vector2d::operator()(2); }
-    matriz_FT GetMatriz(void) const;
+    FT_matrix getMatrix(void) const;
     Vector2d operator+(const Vector2d &) const;
     Vector2d operator-(const Vector2d &) const;
     Vector2d operator*(const GEOM_FT &) const;
@@ -99,13 +99,13 @@ class Vector2d: public ProtoGeom
     //Producto escalar.
     inline virtual GEOM_FT GetDot(const Vector2d &v) const
       { return (x()*v.x()+y()*v.y()); }
-    virtual GEOM_FT GetDot(const matriz_FT &m) const;
+    virtual GEOM_FT GetDot(const FT_matrix &m) const;
     inline friend GEOM_FT dot(const Vector2d &v1, const Vector2d &v2)
       { return v1.GetDot(v2); }
-    friend GEOM_FT dot(const Vector2d &v1, const matriz_FT &m);
-    friend GEOM_FT dot(const matriz_FT &m, const Vector2d &v1);
+    friend GEOM_FT dot(const Vector2d &v1, const FT_matrix &m);
+    friend GEOM_FT dot(const FT_matrix &m, const Vector2d &v1);
 
-    friend matriz_FT operator*(const matriz_FT &m,const Vector2d &v);
+    friend FT_matrix operator*(const FT_matrix &m,const Vector2d &v);
 
     inline friend bool operator==(const Vector2d &v1,const Vector2d &v2)
       { return (v1.cgvct==v2.cgvct); }
@@ -142,8 +142,8 @@ inline Vector2d Normaliza(const Vector2d &v)
   { return v.Normalizado(); }
 
 //Producto tensorial.
-matriz_FT prod_tensor(const Vector2d &u,const Vector2d &v);
-matriz_FT operator&(const Vector2d &u,const Vector2d &v);
+FT_matrix prod_tensor(const Vector2d &u,const Vector2d &v);
+FT_matrix operator&(const Vector2d &u,const Vector2d &v);
 
 bool colineales(const Vector2d &v1,const Vector2d &v2);
 bool paralelos(const Vector2d &v1,const Vector2d &v2);

@@ -26,7 +26,7 @@
 #include "Dir2d.h"
 #include <plotter.h>
 #include "xc_basic/src/matrices/giros.h"
-#include "xc_utils/src/geom/matriz_FT.h"
+#include "xc_utils/src/geom/FT_matrix.h"
 
 
 
@@ -36,7 +36,7 @@
 Vector2d::Vector2d(const GEOM_FT &x,const GEOM_FT &y)
   : ProtoGeom(), cgvct(x,y) {}
 
-Vector2d::Vector2d(const matriz_FT &m)
+Vector2d::Vector2d(const FT_matrix &m)
   : cgvct(0,0)
   {
     assert(m.getNumberOfRows()==2);
@@ -84,9 +84,9 @@ Vector2d Vector2d::operator*(const GEOM_FT &d) const
 Vector2d Vector2d::operator/(const GEOM_FT &d) const
   { return Vector2d(ToCGAL()*(1/d)); }
 
-matriz_FT Vector2d::GetMatriz(void) const
+FT_matrix Vector2d::getMatrix(void) const
   {
-    matriz_FT retval(2,1,0);
+    FT_matrix retval(2,1,0);
     retval(1)= x(); retval(2)= y();
     return retval;
   }
@@ -131,24 +131,24 @@ bool Vector2d::EsUnitario(const double &tol) const
 GEOM_FT Vector2d::GetModulus(void) const
   { return sqrt_FT(GetModulus2()); }
 
-//! @brief Producto del vector por una matriz.
-matriz_FT operator*(const matriz_FT &m,const Vector2d &v)
-  { return m*v.GetMatriz(); }
+//! @brief Product of the vector times the matrix.
+FT_matrix operator*(const FT_matrix &m,const Vector2d &v)
+  { return m*v.getMatrix(); }
 
 //! @brief Producto escalar.
-GEOM_FT Vector2d::GetDot(const matriz_FT &m) const
+GEOM_FT Vector2d::GetDot(const FT_matrix &m) const
   {
     assert(m.getNumberOfRows()==2);
     assert(m.getNumberOfColumns()==1);
     return (x()*m(1)+y()*m(2));
   }
 
-//! @brief Return el producto del vector por la matriz.
-GEOM_FT dot(const Vector2d &v1, const matriz_FT &m)
+//! @brief Return the product of the vector times the matrix.
+GEOM_FT dot(const Vector2d &v1, const FT_matrix &m)
   { return v1.GetDot(m); }
 
-//! @brief Return el producto de la matriz por el vector.
-GEOM_FT dot(const matriz_FT &m, const Vector2d &v1)
+//! @brief Return the product of the matrix times the vector.
+GEOM_FT dot(const FT_matrix &m, const Vector2d &v1)
   { return v1.GetDot(m); }
 
 
@@ -244,9 +244,9 @@ double angle(const Vector2d &v1,const Vector2d &v2)
     return retval;
   }
 
-matriz_FT prod_tensor(const Vector2d &u,const Vector2d &v)
-  { return prod_tensor(u.GetMatriz(),v.GetMatriz()); }
-matriz_FT operator&(const Vector2d &u,const Vector2d &v)
+FT_matrix prod_tensor(const Vector2d &u,const Vector2d &v)
+  { return prod_tensor(u.getMatrix(),v.getMatrix()); }
+FT_matrix operator&(const Vector2d &u,const Vector2d &v)
   { return prod_tensor(u,v); }
 
 

@@ -19,13 +19,13 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//MatrizPos.h
+//PosArray.h
 //Matrix of points
 
-#ifndef MATRIZPOS_H
-#define MATRIZPOS_H
+#ifndef POSARRAY_H
+#define POSARRAY_H
 
-#include "xc_basic/src/matrices/matrizT.h"
+#include "xc_basic/src/matrices/TMatrix.h"
 #include "../cgal_types.h"
 #include "boost/lexical_cast.hpp"
 #include "xc_basic/src/util/matem.h"
@@ -35,26 +35,26 @@
 //
 //! @brief Clase base para las matrices de posiciones.
 template <class POS>
-class MatrizPos: public MatrizT<POS,std::vector<POS> >
+class PosArray: public TMatrix<POS,std::vector<POS> >
   {
   public:
-    typedef MatrizT<POS,std::vector<POS> > m_pos;
+    typedef TMatrix<POS,std::vector<POS> > m_pos;
     typedef typename POS::vector vector;
   protected:
-    MatrizPos(const MatrizPos<POS> &mp, size_t &f1, size_t &c1, size_t &f2, size_t &c2)
+    PosArray(const PosArray<POS> &mp, size_t &f1, size_t &c1, size_t &f2, size_t &c2)
       : m_pos(mp,f1,c1,f2,c2) {}
   public:
-    MatrizPos(const size_t &f=1,const size_t &c=1,const POS &p= POS()): m_pos(f,c,p) {}
-    MatrizPos(const POS &p1,const POS &p2,const size_t &num,const GEOM_FT &ratio);
-    MatrizPos(const POS &p1,const POS &p2,const size_t &ndiv);
-    MatrizPos(const POS &p1,const POS &p2,const std::vector<GEOM_FT> &longs);
-    MatrizPos(const POS &p0,const POS &p1,const POS &p2,const size_t &ndiv1,const size_t &ndiv2);
-    MatrizPos(const MatrizPos &l1_points,const MatrizPos &l2_points,const MatrizPos &l3_points,const MatrizPos &l4_points);
-    inline MatrizPos<POS> GetCaja(size_t f1, size_t c1, size_t f2, size_t c2) const
-      { return MatrizPos(*this,f1,c1,f2,c2); }
-    inline MatrizPos<POS> getRow(size_t iRow) const
+    PosArray(const size_t &f=1,const size_t &c=1,const POS &p= POS()): m_pos(f,c,p) {}
+    PosArray(const POS &p1,const POS &p2,const size_t &num,const GEOM_FT &ratio);
+    PosArray(const POS &p1,const POS &p2,const size_t &ndiv);
+    PosArray(const POS &p1,const POS &p2,const std::vector<GEOM_FT> &longs);
+    PosArray(const POS &p0,const POS &p1,const POS &p2,const size_t &ndiv1,const size_t &ndiv2);
+    PosArray(const PosArray &l1_points,const PosArray &l2_points,const PosArray &l3_points,const PosArray &l4_points);
+    inline PosArray<POS> GetCaja(size_t f1, size_t c1, size_t f2, size_t c2) const
+      { return PosArray(*this,f1,c1,f2,c2); }
+    inline PosArray<POS> getRow(size_t iRow) const
       { return GetCaja(iRow,1,iRow,this->n_columns); }
-    inline MatrizPos<POS> getColumn(size_t col) const
+    inline PosArray<POS> getColumn(size_t col) const
       { return GetCaja(1,col,this->n_rows,col); }
   };
 
@@ -62,7 +62,7 @@ class MatrizPos: public MatrizT<POS,std::vector<POS> >
 //! is p1, the number of point is num and each point is obtained by summing
 //! the product of ratio by the p1p2 vector to the previous one.
 template <class POS>
-MatrizPos<POS>::MatrizPos(const POS &p1,const POS &p2,const size_t &num,const GEOM_FT &ratio)
+PosArray<POS>::PosArray(const POS &p1,const POS &p2,const size_t &num,const GEOM_FT &ratio)
   : m_pos(num,1)
   {
     POS p(p1);
@@ -80,7 +80,7 @@ MatrizPos<POS>::MatrizPos(const POS &p1,const POS &p2,const size_t &num,const GE
 //! points are created. If ndiv= 2 the midpoint of the segment is created
 //! in addition to p1 and p2, and so on...
 template <class POS>
-MatrizPos<POS>::MatrizPos(const POS &p1,const POS &p2,const size_t &ndiv)
+PosArray<POS>::PosArray(const POS &p1,const POS &p2,const size_t &ndiv)
   : m_pos(ndiv+1,1)
   {
     POS p(p1);
@@ -107,14 +107,14 @@ MatrizPos<POS>::MatrizPos(const POS &p1,const POS &p2,const size_t &ndiv)
 //!   p1                                          p2
 //!
 template <class POS>
-MatrizPos<POS>::MatrizPos(const POS &p1,const POS &p2,const std::vector<GEOM_FT> &longs)
+PosArray<POS>::PosArray(const POS &p1,const POS &p2,const std::vector<GEOM_FT> &longs)
   : m_pos(longs.size()+1,1)
   {
     const size_t sz= longs.size();
     const size_t num= sz+1;
     if(num<1)
       {
-	std::cerr << "MatrizPos::" << __FUNCTION__
+	std::cerr << "PosArray::" << __FUNCTION__
 		  << "; list of lengths is empty." << std::endl;
         return;
       }
@@ -141,7 +141,7 @@ MatrizPos<POS>::MatrizPos(const POS &p1,const POS &p2,const std::vector<GEOM_FT>
 
 //! @brief Constructor.
 template <class POS>
-MatrizPos<POS>::MatrizPos(const POS &p0,const POS &p1,const POS &p2,const size_t &ndiv1,const size_t &ndiv2)
+PosArray<POS>::PosArray(const POS &p0,const POS &p1,const POS &p2,const size_t &ndiv1,const size_t &ndiv2)
   : m_pos(ndiv1+1,ndiv2+1)
   {
     const GEOM_FT dn1= double_to_FT(1.0/boost::lexical_cast<double>(ndiv1));
@@ -159,7 +159,7 @@ MatrizPos<POS>::MatrizPos(const POS &p0,const POS &p1,const POS &p2,const size_t
   }
 
 template <class POS>
-MatrizPos<POS>::MatrizPos(const MatrizPos &l1_points,const MatrizPos &l2_points,const MatrizPos &l3_points,const MatrizPos &l4_points)
+PosArray<POS>::PosArray(const PosArray &l1_points,const PosArray &l2_points,const PosArray &l3_points,const PosArray &l4_points)
   : m_pos(l1_points.getNumberOfRows(),l2_points.getNumberOfRows())
 //The arguments are the points (X) in the following order (see rows).
 //                 l3_points
@@ -186,7 +186,7 @@ MatrizPos<POS>::MatrizPos(const MatrizPos &l1_points,const MatrizPos &l2_points,
   {
     const size_t row_number= l1_points.getNumberOfRows();
     const size_t num_cols= l2_points.getNumberOfRows();
-    MatrizPos row_points= l4_points;
+    PosArray row_points= l4_points;
     for(size_t i=1;i<=row_number;i++)
       {
         if(i>1)
@@ -194,7 +194,7 @@ MatrizPos<POS>::MatrizPos(const MatrizPos &l1_points,const MatrizPos &l2_points,
             if(i==row_number)
               row_points= l2_points;
             else
-              row_points= MatrizPos(l1_points(i,1),l3_points(i,1),num_cols-1);
+              row_points= PosArray(l1_points(i,1),l3_points(i,1),num_cols-1);
           }
         for(size_t j=1;j<=num_cols;j++)
           (*this)(i,j)= row_points(j,1);
@@ -202,7 +202,7 @@ MatrizPos<POS>::MatrizPos(const MatrizPos &l1_points,const MatrizPos &l2_points,
   }
 
 template <class POS,class SEG>
-POS get_centro(const MatrizPos<POS> &m,const SEG &sg)
+POS get_centro(const PosArray<POS> &m,const SEG &sg)
   {
     POS retval;
     const size_t n_rows= m.getNumberOfRows();
@@ -253,25 +253,25 @@ POS get_centro(const MatrizPos<POS> &m,const SEG &sg)
 //                  --->
 //
 template <class POS>
-MatrizPos<POS> cuadrilatero(const POS &q1,const POS &q2,const POS &q3,const POS &q4,const size_t &ndiv1,const size_t &ndiv2)
+PosArray<POS> cuadrilatero(const POS &q1,const POS &q2,const POS &q3,const POS &q4,const size_t &ndiv1,const size_t &ndiv2)
   {
-    const MatrizPos<POS> l1(q1,q2,ndiv1);
-    const MatrizPos<POS> l2(q2,q4,ndiv2);
-    const MatrizPos<POS> l3(q3,q4,ndiv1);
-    const MatrizPos<POS> l4(q1,q3,ndiv2);
-    return MatrizPos<POS>(l1,l2,l3,l4);
+    const PosArray<POS> l1(q1,q2,ndiv1);
+    const PosArray<POS> l2(q2,q4,ndiv2);
+    const PosArray<POS> l3(q3,q4,ndiv1);
+    const PosArray<POS> l4(q1,q3,ndiv2);
+    return PosArray<POS>(l1,l2,l3,l4);
   }
 
 //! @brief Generate the points by means of the algorithm that SAP90
 //! names "frontal generation" (see page IX-18 of the SAP90 manual).
 //! The first point of both lists is supposed to be the same.
 template <class POS>
-MatrizPos<POS> generacion_frontal(const MatrizPos<POS> &l1_points,const MatrizPos<POS> &l2_points)
+PosArray<POS> generacion_frontal(const PosArray<POS> &l1_points,const PosArray<POS> &l2_points)
   {
     const size_t nptos1= l1_points.getNumberOfRows();
     const size_t nptos2= l2_points.getNumberOfRows();
     const size_t ntot= nptos1*nptos2;
-    MatrizPos<POS> retval(nptos1,nptos2);
+    PosArray<POS> retval(nptos1,nptos2);
 
     //Points of the first row.
     for(size_t j=1;j<=nptos1;j++)
@@ -282,7 +282,7 @@ MatrizPos<POS> generacion_frontal(const MatrizPos<POS> &l1_points,const MatrizPo
     
     for(size_t i=2;i<=nptos1;i++)
       {
-        const typename MatrizPos<POS>::vector v= retval(i,1)-retval(i-1,1);
+        const typename PosArray<POS>::vector v= retval(i,1)-retval(i-1,1);
         for(size_t j=2;j<=nptos1;j++)
           retval(i,j)= retval(i-1,j)+v;
       }

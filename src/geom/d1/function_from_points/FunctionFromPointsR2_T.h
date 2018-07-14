@@ -26,7 +26,7 @@
 
 #include <map>
 #include <iostream>
-#include <xc_utils/src/geom/pos_vec/MatrizPos2d.h>
+#include <xc_utils/src/geom/pos_vec/Pos2dArray.h>
 #include <xc_utils/src/geom/pos_vec/Vector2d.h>
 
 //! @brief función de R2 en T defined on a set of points.
@@ -38,19 +38,19 @@ template <class T>
 class FunctionFromPointsR2_T
   {
   public:
-    typedef MatrizT<T,std::vector<T> > m_values;
+    typedef TMatrix<T,std::vector<T> > m_values;
   private:
-    MatrizPos2d dominio; //< @brief Points where the function is defined.
+    Pos2dArray dominio; //< @brief Points where the function is defined.
     m_values valores; //< @brief Function values on each point.
   public:
     //! @brief Constructor.
     FunctionFromPointsR2_T(const size_t &n_rows=1,const size_t &n_columns=1)
       : dominio(n_rows,n_columns), valores(n_rows,n_columns) {}
     //! @brief Constructor.
-    FunctionFromPointsR2_T(const MatrizPos2d &dom,const T &vdef)
+    FunctionFromPointsR2_T(const Pos2dArray &dom,const T &vdef)
       : dominio(dom), valores(m_values(dom.getNumberOfRows(),dom.getNumberOfColumns(),vdef)) {}
     //! @brief Constructor.
-    FunctionFromPointsR2_T(const MatrizPos2d &dom,const m_values &v);
+    FunctionFromPointsR2_T(const Pos2dArray &dom,const m_values &v);
     std::string getClassName(void) const;
     //! @brief Return el number of rows del dominio.
     size_t getNumberOfRows(void) const
@@ -69,7 +69,7 @@ class FunctionFromPointsR2_T
 
 //! Constructor.
 template <class T>
-FunctionFromPointsR2_T<T>::FunctionFromPointsR2_T(const MatrizPos2d &dom,const m_values &v)
+FunctionFromPointsR2_T<T>::FunctionFromPointsR2_T(const Pos2dArray &dom,const m_values &v)
   : dominio(dom), valores(m_values(dom.getNumberOfRows(),dom.getNumberOfColumns(),T()))
   {
     if((v.getNumberOfRows()==dom.getNumberOfRows()) && (v.getNumberOfColumns()==dom.getNumberOfColumns()) )

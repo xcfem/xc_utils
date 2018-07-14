@@ -23,7 +23,7 @@
 
 #include "AnnulusSector2d.h"
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
-#include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
+#include "xc_utils/src/geom/pos_vec/Pos2dArray.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
 #include "xc_utils/src/geom/d1/Recta2d.h"
 
@@ -155,19 +155,19 @@ bool AnnulusSector2d::In(const Pos2d &p, const double &tol) const
       return false;
   }
 
-MatrizPos2d AnnulusSector2d::getExtArcPoints(const size_t &n) const
+Pos2dArray AnnulusSector2d::getExtArcPoints(const size_t &n) const
   { return CircularSector2d::getArcPoints(n); }
 
-MatrizPos2d AnnulusSector2d::getIntArcPoints(const size_t &n) const
+Pos2dArray AnnulusSector2d::getIntArcPoints(const size_t &n) const
   { return SectorInterior().getArcPoints(n); }
 
 //! @brief Return n points equally spaced over the object perimeter.
-MatrizPos2d AnnulusSector2d::getPointsOnPerimeter(const size_t &n) const
+Pos2dArray AnnulusSector2d::getPointsOnPerimeter(const size_t &n) const
   {
-    MatrizPos2d retval;
+    Pos2dArray retval;
     if(n>3)
       {
-        retval= MatrizPos2d(n,2);
+        retval= Pos2dArray(n,2);
         if(n==4)
           {
             retval(1,2)= PInicExt(); //Initial and final points
@@ -188,9 +188,9 @@ MatrizPos2d AnnulusSector2d::getPointsOnPerimeter(const size_t &n) const
     return retval;
   }
 //! @brief Returns a point mesh equiespaciados sobre el sector del anillo circular.
-MatrizPos2d AnnulusSector2d::genMesh(const size_t &nDivRad,const size_t &nDivCirc) const
+Pos2dArray AnnulusSector2d::genMesh(const size_t &nDivRad,const size_t &nDivCirc) const
   {
-    MatrizPos2d retval(nDivCirc+1,nDivRad+1);
+    Pos2dArray retval(nDivCirc+1,nDivRad+1);
     if(nDivRad>0  && nDivCirc>0)
       {
         const double deltaRad= (outerRadius() - innerRadius())/nDivRad;
@@ -198,7 +198,7 @@ MatrizPos2d AnnulusSector2d::genMesh(const size_t &nDivRad,const size_t &nDivCir
         double rad_j= innerRadius();
         for(size_t j= 0;j<nDivRad+1;j++)
           {
-            MatrizPos2d tmp= getSector(rad_j).getArcPoints(nDivCirc+1);
+            Pos2dArray tmp= getSector(rad_j).getArcPoints(nDivCirc+1);
             retval.PutCol(j+1,tmp);
             rad_j+= deltaRad;
           }
@@ -209,7 +209,7 @@ MatrizPos2d AnnulusSector2d::genMesh(const size_t &nDivRad,const size_t &nDivCir
 Poligono2d AnnulusSector2d::getPoligono2d(const size_t &n) const
   {
     Poligono2d retval;
-    MatrizPos2d ptos= getPointsOnPerimeter(n);
+    Pos2dArray ptos= getPointsOnPerimeter(n);
     for(size_t i=1;i<=n;i++)
       retval.push_back(ptos(i,2));
     for(size_t i=n;i>0;i--)

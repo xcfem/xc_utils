@@ -19,29 +19,29 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//TritrizPos2d
+//Pos2dArray3d
 
-#ifndef TRITRIZPOS2D_H
-#define TRITRIZPOS2D_H
+#ifndef POS2DARRAY3D_H
+#define POS2DARRAY3D_H
 
 #include "Pos2d.h"
-#include "TritrizPos.h"
+#include "PosArray3d.h"
 
-class MatrizPos2d;
+class Pos2dArray;
 
 
 //! @ingroup GEOM
 //
-//! @brief «Tritriz» de posiciones en dos dimensiones.
-class TritrizPos2d: public TritrizPos<Pos2d>
+//! @brief Array of positions ina two-dimensional space.
+class Pos2dArray3d: public PosArray3d<Pos2d>
   {
   public:
-    TritrizPos2d(const size_t iLayers= 1);
+    Pos2dArray3d(const size_t iLayers= 1);
     Pos2d GetCentro(void) const;
   };
 
 class BND2d;
 
-TritrizPos2d create_uniform_grid(const BND2d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z= 0);
+Pos2dArray3d create_uniform_grid(const BND2d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z= 0);
 
 #endif

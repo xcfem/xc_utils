@@ -28,8 +28,8 @@
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "Trf3d.h"
 
-class MatrizPos3d;
-class TritrizPos3d;
+class Pos3dArray;
+class Pos3dArray3d;
 
 
 //! @ingroup GEOM
@@ -42,11 +42,11 @@ class Revolucion3d: public Trf3d
     size_t ndiv; //number of divisions.
   public:
     Revolucion3d(const Recta3d &e,const GEOM_FT &th= 0.0,const size_t &nd= 1);
-    MatrizPos3d Aplica0d(const Pos3d &p) const;
-    MatrizPos3d Aplica1d(const MatrizPos3d &m) const;
-    TritrizPos3d Aplica2d(const MatrizPos3d &m) const;
-    MatrizPos3d operator()(const Pos3d &) const;
-    MatrizPos3d operator()(const MatrizPos3d &) const;
+    Pos3dArray Aplica0d(const Pos3d &p) const;
+    Pos3dArray Aplica1d(const Pos3dArray &m) const;
+    Pos3dArray3d Aplica2d(const Pos3dArray &m) const;
+    Pos3dArray operator()(const Pos3d &) const;
+    Pos3dArray operator()(const Pos3dArray &) const;
   };
 
 #endif

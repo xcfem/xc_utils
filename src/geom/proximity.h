@@ -19,13 +19,13 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//proximidad.h
+//proximity.h
 
-#ifndef PROXIMIDAD_H
-#define PROXIMIDAD_H
+#ifndef PROXIMITY_H
+#define PROXIMITY_H
 
 template<class InputIter, class Pt>
-const InputIter mas_cercano(InputIter first, InputIter last,const Pt &p)
+const InputIter nearest(InputIter first, InputIter last,const Pt &p)
   {
     InputIter i=first;
     InputIter retval= i;

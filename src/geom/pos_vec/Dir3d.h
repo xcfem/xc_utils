@@ -27,7 +27,7 @@
 #include "../cgal_types.h"
 
 class Vector3d;
-class matriz_FT;
+class FT_matrix;
 
 
 //! @ingroup GEOM
@@ -53,7 +53,7 @@ class Dir3d
       { return cgd.dy(); }
     inline GEOM_FT dz(void) const
       { return cgd.dz(); }
-    matriz_FT GetMatriz(void) const;
+    FT_matrix getMatrix(void) const;
     Vector3d GetVector(void) const;
     inline friend bool operator==(const Dir3d &v1,const Dir3d &v2)
       { return (v1.cgd==v2.cgd); }

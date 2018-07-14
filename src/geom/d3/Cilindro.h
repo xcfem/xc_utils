@@ -43,7 +43,7 @@ class Cilindro : public SolidExtru3d<Circle3d>
     virtual GeomObj *clon(void) const;
 
     BND3d Bnd(void) const;
-    matriz_FT I(void) const;
+    FT_matrix I(void) const;
     Pos3d getCenterOfMass(void) const;
   };
 

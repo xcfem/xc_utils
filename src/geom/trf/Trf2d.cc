@@ -25,7 +25,7 @@
 #include "../pos_vec/Vector2d.h"
 #include "../pos_vec/Pos2d.h"
 #include "xc_utils/src/geom/d1/Recta2d.h"
-#include "xc_utils/src/geom/matriz_FT.h"
+#include "xc_utils/src/geom/FT_matrix.h"
 
 // Trf2d from_racionales(const GEOM_FT &r00,const GEOM_FT &r01,const GEOM_FT &r02,
 //              const GEOM_FT &r10,const GEOM_FT &r11,const GEOM_FT &r12)
@@ -57,19 +57,19 @@
 // Trf2d::Trf2d( const GEOM_RT & m00,const GEOM_RT & m01,const GEOM_RT & m02,
 //               const GEOM_RT & m10,const GEOM_RT & m11,const GEOM_RT & m12,
 //               const GEOM_RT & hw)
-// //Define la matriz de una transformación afin cualquiera.
-// //La submatriz:
+// //Define the matrix of an affine transformation.
+// //the sub-matrix:
 // //
 // //    -1 [[ m00 m01]
 // //  hw    [ m10 m11]] 
 // //
-// // contiene la información sobre scaling y rotación, 
-// // el vector:
+// // contains the information about scaling and rotation, 
+// // and the vector:
 // //
 // //    -1 [[ m02]
 // //  hw    [ m12]] 
 // //
-// // contiene la parte translational de la transformación.
+// // contanins the translational part of the transformation.
 //   : Trf(), cgtrf(m00,m01,m02,m10,m11,m12,hw) {}
 
 Trf2d::Trf2d( const GEOM_FT & m00,const GEOM_FT & m01,const GEOM_FT & m02,
@@ -92,19 +92,21 @@ Trf2d::Trf2d(const CGAL::Scaling &sc,const GEOM_FT &factor_escala)
 Trf2d::Trf2d(const CGAL::Identity_transformation &i)
   : Trf(), cgtrf(i) {}
 
-matriz_FT Trf2d::Cartesianas(void) const
-//Return la matriz de transformación en cartesianas.
+//! @brief Return the transformation matrix expressed in
+//! cartesian coordinates.
+FT_matrix Trf2d::Cartesianas(void) const
   {
-    matriz_FT retval(3,3,0.0);
+    FT_matrix retval(3,3,0.0);
     retval(1,1)= Cartesianas(1,1); retval(1,2)= Cartesianas(1,2); retval(1,3)= Cartesianas(1,3);
     retval(2,1)= Cartesianas(2,1); retval(2,2)= Cartesianas(2,2); retval(2,3)= Cartesianas(2,3);
     retval(3,3)= Cartesianas(3,3);
     return retval;
   }
-matriz_FT Trf2d::Homogeneas(void) const
-//Return la matriz de transformación en homogéneas.
+//! @brief Return the transformation matrix expressed in
+//! homogeneous coordinates.
+FT_matrix Trf2d::Homogeneas(void) const
   {
-    matriz_FT retval(3,3,0.0);
+    FT_matrix retval(3,3,0.0);
     retval(1,1)= Homogeneas(1,1); retval(1,2)= Homogeneas(1,2); retval(1,3)= Homogeneas(1,3);
     retval(2,1)= Homogeneas(2,1); retval(2,2)= Homogeneas(2,2); retval(2,3)= Homogeneas(2,3);
     retval(3,3)= Homogeneas(3,3);

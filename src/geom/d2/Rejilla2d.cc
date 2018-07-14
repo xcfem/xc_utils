@@ -26,7 +26,7 @@
 
 
 #include "xc_utils/src/geom/d2/poligonos2d/Cuadrilatero2d.h"
-#include "xc_utils/src/geom/matriz_FT.h"
+#include "xc_utils/src/geom/FT_matrix.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
 
@@ -61,7 +61,7 @@ Pos2d Rejilla2d::getCenterOfMass(void) const
   { return points.getCenterOfMass(); }
 
 //! @brief Return las coordenadas of point i,j.
-const matriz_FT &Rejilla2d::GetVertCoords(const size_t &i,const size_t &j) const
+const FT_matrix &Rejilla2d::GetVertCoords(const size_t &i,const size_t &j) const
   { return points.GetVertCoords(i,j); }
 
 //! @brief Return the point i,j.

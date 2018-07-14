@@ -45,12 +45,12 @@ SisCooRect3d3d::VGlobal SisCooRect3d3d::GetK(void) const
 SisCooRect3d3d::VGlobal SisCooRect3d3d::GetCooGlobales(const VLocal &v) const
 //Return las componentes del vector v expresado en locales
 //expresadas en coordenadas globales.
-  { return SisCooXd3d::GetCooGlobales(v.GetMatriz()); }
+  { return SisCooXd3d::GetCooGlobales(v.getMatrix()); }
 SisCooRect3d3d::VLocal SisCooRect3d3d::GetCooLocales(const VGlobal &v) const
 //Return las componentes del vector v expresado en locales
 //expresadas en coordenadas globales.
   {
-    const matriz_FT tmp= SisCooXd3d::GetCooLocales(v);
+    const FT_matrix tmp= SisCooXd3d::GetCooLocales(v);
     return VLocal(tmp(1),tmp(2),tmp(3));
   }
 

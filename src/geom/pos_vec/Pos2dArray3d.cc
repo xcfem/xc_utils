@@ -19,24 +19,24 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//TritrizPos2d.cc
+//Pos2dArray3d.cc
 
-#include "TritrizPos2d.h"
-#include "MatrizPos2d.h"
+#include "Pos2dArray3d.h"
+#include "Pos2dArray.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d2/BND2d.h"
 
 
-TritrizPos2d::TritrizPos2d(const size_t iLayers)
-  : TritrizPos<Pos2d>(iLayers) {}
+Pos2dArray3d::Pos2dArray3d(const size_t iLayers)
+  : PosArray3d<Pos2d>(iLayers) {}
 
-Pos2d TritrizPos2d::GetCentro(void) const
+Pos2d Pos2dArray3d::GetCentro(void) const
   { return get_centro(*this,Segment2d()); }
 
-TritrizPos2d create_uniform_grid(const BND2d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z)
+Pos2dArray3d create_uniform_grid(const BND2d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z)
   {
     const size_t n_layers= ndiv_z+1;
-    TritrizPos2d retval(n_layers);
+    Pos2dArray3d retval(n_layers);
     Pos2d pmin= bnd.GetPMin();
     Pos2d pmax= bnd.GetPMax();
     GEOM_FT x= pmin.x();
@@ -49,7 +49,7 @@ TritrizPos2d create_uniform_grid(const BND2d &bnd,const size_t &ndiv_x,const siz
     const size_t n_columns= ndiv_y+1;
     for(size_t k=1;k<=n_layers;k++) //For each layer.
       {
-        retval[k-1]= MatrizPos2d(n_rows,n_columns);
+        retval[k-1]= Pos2dArray(n_rows,n_columns);
         for(size_t i=1;i<=n_rows;i++) //For each row.
           {
             for(size_t j=1;j<=n_columns;j++) //For each column.

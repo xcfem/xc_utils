@@ -504,8 +504,8 @@ void Recta2d::Plot(Plotter &psos) const
     //Line is not drawn, it must be clipped first.
   }
 
-Recta2d mediatriz(const Pos2d &p1,const Pos2d &p2)
+Recta2d perpendicular_bisector(const Pos2d &p1,const Pos2d &p2)
   { 
     const Segment2d sg(p1,p2);
-    return sg.Mediatriz();
+    return sg.getPerpendicularBisector();
   }

@@ -28,7 +28,7 @@
 #include "xc_utils/src/nucleo/EntCmd.h"
 #include "xc_utils/src/nucleo/EntConNmb.h"
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
-#include "xc_basic/src/matrices/ProtoMatriz.h"
+#include "xc_basic/src/matrices/ProtoMatrix.h"
 
 BOOST_PYTHON_MODULE(xc_base)
   {
@@ -88,9 +88,9 @@ BOOST_PYTHON_MODULE(xc_base)
       .add_property("name", make_function( &EntConNmb::getName, return_value_policy<copy_const_reference>()), &EntConNmb::setName,"returns object name.")
       ;
 
-    class_<ProtoMatriz, boost::noncopyable>("ProtoMatriz", no_init)
-      .add_property("nRow",&ProtoMatriz::getNumberOfRows,"returns number of rows.")
-      .add_property("nCol",&ProtoMatriz::getNumberOfColumns,"returns number of columns.")
+    class_<ProtoMatrix, boost::noncopyable>("ProtoMatrix", no_init)
+      .add_property("nRow",&ProtoMatrix::getNumberOfRows,"returns number of rows.")
+      .add_property("nCol",&ProtoMatrix::getNumberOfColumns,"returns number of columns.")
       ;
   }
 

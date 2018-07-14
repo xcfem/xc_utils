@@ -41,9 +41,9 @@ class FunctionFromPointsR2_R: public FunctionFromPointsR2_T<double>
     FunctionFromPointsR2_R(const size_t &n_rows=1,const size_t &n_columns=1)
       : fR2_R(n_rows,n_columns) {}
     //! Constructor.
-    FunctionFromPointsR2_R(const MatrizPos2d &dom,const double &vdef)
+    FunctionFromPointsR2_R(const Pos2dArray &dom,const double &vdef)
       : fR2_R(dom,vdef) {}
-    FunctionFromPointsR2_R(const MatrizPos2d &dom,const m_values &v)
+    FunctionFromPointsR2_R(const Pos2dArray &dom,const m_values &v)
       : fR2_R(dom,v) {}
     row_column PosMax(void) const;
     double Max(void) const;

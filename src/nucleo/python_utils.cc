@@ -24,7 +24,7 @@
 #include "python_utils.h"
 #include "xc_utils/src/nucleo/EntCmd.h"
 #include "xc_utils/src/nucleo/EntConNmb.h"
-#include "xc_basic/src/matrices/ProtoMatriz.h"
+#include "xc_basic/src/matrices/ProtoMatrix.h"
 #include "CImg.h"
 
 typedef std::vector<int> std_vector_int;

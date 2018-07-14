@@ -56,8 +56,8 @@ class SisCooXd2d: public SisCoo
     virtual DGlobal getAxisDir(const size_t &axis) const;
     //Return the dirección of the axis que se pasa como parámetro.
 
-    VGlobal GetCooGlobales(const matriz_FT &v) const;
-    matriz_FT GetCooLocales(const VGlobal &v) const;
+    VGlobal GetCooGlobales(const FT_matrix &v) const;
+    FT_matrix GetCooLocales(const VGlobal &v) const;
   };
 
 #endif

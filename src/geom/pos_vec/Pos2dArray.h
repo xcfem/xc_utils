@@ -19,38 +19,38 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//MatrizPos2d
+//Pos2dArray
 
-#ifndef MATRIZPOS2D_H
-#define MATRIZPOS2D_H
+#ifndef POS2DARRAY_H
+#define POS2DARRAY_H
 
 #include "Pos2d.h"
-#include "MatrizPos.h"
+#include "PosArray.h"
 
 class Triangle2d;
 class Cuadrilatero2d;
-class matriz_FT;
+class FT_matrix;
 class Trf2d;
 
 
 //! @ingroup GEOM
 //
-//! @brief Matriz de posiciones en 2 dimensiones.
-class MatrizPos2d: public MatrizPos<Pos2d>
+//! @brief Array of positions in a two-dimensional space.
+class Pos2dArray: public PosArray<Pos2d>
   {
-    friend class TritrizPos2d;
-    typedef MatrizPos<Pos2d> m_pos;
+    friend class Pos2dArray3d;
+    typedef PosArray<Pos2d> m_pos;
     Pos2d pos_lagrangiana(const size_t &i,const size_t &j) const;
     GEOM_FT dist_lagrange(void) const;
     GEOM_FT ciclo_lagrange(void);
     
   public:
-    MatrizPos2d(const size_t &f=1,const size_t &c=1,const Pos2d &p=Pos2d()): m_pos(f,c,p) {}
-    MatrizPos2d(const Pos2d &p1,const Pos2d &p2,const size_t &num,const GEOM_FT &ratio);
-    MatrizPos2d(const Pos2d &p1,const Pos2d &p2,const size_t &ndiv);
-    MatrizPos2d(const Pos2d &p1,const Pos2d &p2,const std::vector<GEOM_FT> &longs);
-    MatrizPos2d(const Pos2d &p0,const Pos2d &p1,const Pos2d &p2,const size_t &ndiv1,const size_t &ndiv2);
-    MatrizPos2d(const MatrizPos2d &,const MatrizPos2d &,const MatrizPos2d &,const MatrizPos2d &);
+    Pos2dArray(const size_t &f=1,const size_t &c=1,const Pos2d &p=Pos2d()): m_pos(f,c,p) {}
+    Pos2dArray(const Pos2d &p1,const Pos2d &p2,const size_t &num,const GEOM_FT &ratio);
+    Pos2dArray(const Pos2d &p1,const Pos2d &p2,const size_t &ndiv);
+    Pos2dArray(const Pos2d &p1,const Pos2d &p2,const std::vector<GEOM_FT> &longs);
+    Pos2dArray(const Pos2d &p0,const Pos2d &p1,const Pos2d &p2,const size_t &ndiv1,const size_t &ndiv2);
+    Pos2dArray(const Pos2dArray &,const Pos2dArray &,const Pos2dArray &,const Pos2dArray &);
  
     size_t GetNumQuads(void) const;
     GEOM_FT GetMax(unsigned short int i) const;
@@ -68,7 +68,7 @@ class MatrizPos2d: public MatrizPos<Pos2d>
     Triangle2d getTriangle2(const size_t &i,const size_t &j) const;
     GEOM_FT GetX(const size_t &,const size_t &) const;
     GEOM_FT GetY(const size_t &,const size_t &) const;
-    const matriz_FT &GetVertCoords(const size_t &,const size_t &) const;
+    const FT_matrix &GetVertCoords(const size_t &,const size_t &) const;
     Pos2d getPoint(const size_t &,const size_t &) const;
     Cuadrilatero2d GetQuad(const size_t &i,const size_t &j) const;
     double GetAreaQuad(const size_t &i,const size_t &j) const;

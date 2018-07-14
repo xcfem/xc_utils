@@ -26,7 +26,7 @@
 #define SIS_COO_H
 
 #include "../ProtoGeom.h"
-#include "xc_utils/src/geom/matriz_FT.h"
+#include "xc_utils/src/geom/FT_matrix.h"
 
 //! @ingroup GEOM
 //
@@ -38,7 +38,7 @@
 //!  
 class SisCoo: public ProtoGeom
   {
-    matriz_FT rot; //Basis vector matrix (as rows).
+    FT_matrix rot; //Basis vector matrix (as rows).
   protected:
     void identidad(void);
     void put(const size_t &i,const size_t &j,const GEOM_FT &);
@@ -62,19 +62,19 @@ class SisCoo: public ProtoGeom
     bool EsOrtogonal(void) const;
     bool EsOrtonormal(void) const;
     bool EsDextrogiro(void) const;
-    matriz_FT getRow(const size_t &i) const;
-    void putRow(const size_t &axis,const matriz_FT &v);
+    FT_matrix getRow(const size_t &i) const;
+    void putRow(const size_t &axis,const FT_matrix &v);
 
-    virtual matriz_FT TransAGlobal(void) const;
+    virtual FT_matrix TransAGlobal(void) const;
       //Return the matrix que transforma un vector expresado
       // en locales al mismo vector expresado en globales.
-    virtual matriz_FT TransDeGlobal(void) const;
+    virtual FT_matrix TransDeGlobal(void) const;
       //Return the matrix que transforma un vector expresado
       // en globales al mismo vector expresado en locales.
-    matriz_FT GetTransA(const SisCoo &dest) const;
+    FT_matrix GetTransA(const SisCoo &dest) const;
       //Return the transformation matrix desde este sistema a dest.
-    matriz_FT GetCooGlobales(const matriz_FT &v) const;
-    matriz_FT GetCooLocales(const matriz_FT &v) const;
+    FT_matrix GetCooGlobales(const FT_matrix &v) const;
+    FT_matrix GetCooLocales(const FT_matrix &v) const;
 
     virtual void Print(std::ostream &os) const;
     friend std::ostream &operator<<(std::ostream &os,const SisCoo &sc);

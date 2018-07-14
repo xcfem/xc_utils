@@ -27,36 +27,36 @@
 
 //! @ingroup GEOM
 //
-//! @brief Reference to a layer de la tritriz which points have constant
+//! @brief Reference to a layer of the array which points have constant
 //! J and K indexes.
-template <class TRITRIZ>
-class JRowConstRef: public ConstRefCajaTritriz<TRITRIZ>
+template <class ARRAY_3D>
+class JRowConstRef: public ConstRefCajaArray3d<ARRAY_3D>
   {
   public:
-    typedef typename ConstRefCajaTritriz<TRITRIZ>::const_reference const_reference;
+    typedef typename ConstRefCajaArray3d<ARRAY_3D>::const_reference const_reference;
 
-    explicit JRowConstRef(const TRITRIZ &m,const size_t &iLayer= 1,const size_t &c= 1);
-    JRowConstRef(const TRITRIZ &m,const size_t &,const size_t &,const size_t &,const size_t &);
-    JRowConstRef(const TRITRIZ &t,const size_t &iLayer,const RangoIndice &row_range,const size_t &c);
+    explicit JRowConstRef(const ARRAY_3D &m,const size_t &iLayer= 1,const size_t &c= 1);
+    JRowConstRef(const ARRAY_3D &m,const size_t &,const size_t &,const size_t &,const size_t &);
+    JRowConstRef(const ARRAY_3D &t,const size_t &iLayer,const RangoIndice &row_range,const size_t &c);
     inline virtual ~JRowConstRef(void) {}
     inline virtual const_reference operator()(size_t f=1) const
-      { return ConstRefCajaTritriz<TRITRIZ>::operator()(1,f,1); }
+      { return ConstRefCajaArray3d<ARRAY_3D>::operator()(1,f,1); }
     inline virtual const_reference operator()(size_t iLayer,size_t iRow,size_t col) const
-      { return ConstRefCajaTritriz<TRITRIZ>::operator()(iLayer,iRow,col); }
+      { return ConstRefCajaArray3d<ARRAY_3D>::operator()(iLayer,iRow,col); }
   };
 
 //! @brief Default constructor.
-template<class TRITRIZ>
-JRowConstRef<TRITRIZ>::JRowConstRef(const TRITRIZ &t,const size_t &iLayer,const size_t &c)
-  : ConstRefCajaTritriz<TRITRIZ>(t,iLayer,RangoIndice(1,t.getNumberOfRows()),c)
+template<class ARRAY_3D>
+JRowConstRef<ARRAY_3D>::JRowConstRef(const ARRAY_3D &t,const size_t &iLayer,const size_t &c)
+  : ConstRefCajaArray3d<ARRAY_3D>(t,iLayer,RangoIndice(1,t.getNumberOfRows()),c)
   {}
 
-template<class TRITRIZ>
-JRowConstRef<TRITRIZ>::JRowConstRef(const TRITRIZ &t,const size_t &iLayer,const size_t &f1,const size_t &f2,const size_t &c)
-  : ConstRefCajaTritriz<TRITRIZ>(t,iLayer,RangoIndice(f1,f2),c) {}
+template<class ARRAY_3D>
+JRowConstRef<ARRAY_3D>::JRowConstRef(const ARRAY_3D &t,const size_t &iLayer,const size_t &f1,const size_t &f2,const size_t &c)
+  : ConstRefCajaArray3d<ARRAY_3D>(t,iLayer,RangoIndice(f1,f2),c) {}
 
-template<class TRITRIZ>
-JRowConstRef<TRITRIZ>::JRowConstRef(const TRITRIZ &t,const size_t &iLayer,const RangoIndice &row_range,const size_t &c)
-  : ConstRefCajaTritriz<TRITRIZ>(t,iLayer,row_range,c) {}
+template<class ARRAY_3D>
+JRowConstRef<ARRAY_3D>::JRowConstRef(const ARRAY_3D &t,const size_t &iLayer,const RangoIndice &row_range,const size_t &c)
+  : ConstRefCajaArray3d<ARRAY_3D>(t,iLayer,row_range,c) {}
 
 #endif

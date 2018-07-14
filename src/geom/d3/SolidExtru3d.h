@@ -26,7 +26,7 @@
 
 #include "Solido3d.h"
 #include "BND3d.h"
-#include "../matriz_FT.h"
+#include "../FT_matrix.h"
 #include "../pos_vec/Pos3d.h"
 
 
@@ -129,7 +129,7 @@ class SolidExtru3d : public Solido3d
     BND3d Bnd(void) const
     //Return la extension of the object.
       { return GeomObj3d::Bnd(); }
-    matriz_FT I(void) const
+    FT_matrix I(void) const
       { return GeomObj3d::I(); }
     Pos3d getCenterOfMass(void) const
       { return scc.getCenterOfMass(); }

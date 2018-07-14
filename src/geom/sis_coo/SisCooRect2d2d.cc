@@ -69,12 +69,12 @@ void SisCooRect2d2d::PutJ(const VGlobal &j)
 //! @brief Return las componentes del vector v expresado en locales
 //! expresadas en coordenadas globales.
 SisCooRect2d2d::VGlobal SisCooRect2d2d::GetCooGlobales(const VLocal &v) const
-  { return SisCooXd2d::GetCooGlobales(v.GetMatriz()); }
+  { return SisCooXd2d::GetCooGlobales(v.getMatrix()); }
 //! @brief Return las componentes del vector v expresado en locales
 //expresadas en coordenadas globales.
 SisCooRect2d2d::VLocal SisCooRect2d2d::GetCooLocales(const VGlobal &v) const
   {
-    const matriz_FT tmp= SisCooXd2d::GetCooLocales(v);
+    const FT_matrix tmp= SisCooXd2d::GetCooLocales(v);
     return VLocal(tmp(1),tmp(2)); 
   }
 

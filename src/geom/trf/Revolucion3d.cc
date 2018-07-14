@@ -22,8 +22,8 @@
 //Revolucion3d.cc
 
 #include "Revolucion3d.h"
-#include "../pos_vec/MatrizPos3d.h"
-#include "../pos_vec/TritrizPos3d.h"
+#include "../pos_vec/Pos3dArray.h"
+#include "../pos_vec/Pos3dArray3d.h"
 #include "Rotation3d.h"
 
 //! @brief Constructor.
@@ -33,9 +33,9 @@ Revolucion3d::Revolucion3d(const Recta3d &e,const GEOM_FT &th,const size_t &nd)
 
 //! @brief Return the point row that results from apply the revolution
 //! to the argument.
-MatrizPos3d Revolucion3d::Aplica0d(const Pos3d &p) const
+Pos3dArray Revolucion3d::Aplica0d(const Pos3d &p) const
   {
-    MatrizPos3d retval(1,ndiv+1);
+    Pos3dArray retval(1,ndiv+1);
     retval(1,1)= p;
     const GEOM_FT angle_inc= theta/ndiv;
     GEOM_FT ang(angle_inc);
@@ -50,12 +50,12 @@ MatrizPos3d Revolucion3d::Aplica0d(const Pos3d &p) const
 
 //! @brief Return the point matrix that results from apply the revolution
 //! to the argument.
-MatrizPos3d Revolucion3d::Aplica1d(const MatrizPos3d &m) const
+Pos3dArray Revolucion3d::Aplica1d(const Pos3dArray &m) const
   {
     const size_t nPoints= m.size();
     if(m.isColumn()) //Column matrix, put points by rows.
       {
-        MatrizPos3d retval(nPoints,ndiv+1);
+        Pos3dArray retval(nPoints,ndiv+1);
         for(size_t i=1;i<=nPoints;i++) //Points of the first column.
           retval(i,1)= m(i,1);
         const GEOM_FT angle_inc= theta/ndiv;
@@ -71,7 +71,7 @@ MatrizPos3d Revolucion3d::Aplica1d(const MatrizPos3d &m) const
       }
     else if(m.isRow()) //Column matrix, put points by columns.
       {
-        MatrizPos3d retval(ndiv+1,nPoints);
+        Pos3dArray retval(ndiv+1,nPoints);
         for(size_t j=1;j<=nPoints;j++) //Points of the first row.
           retval(1,j)= m(1,j);
         const GEOM_FT angle_inc= theta/ndiv;
@@ -92,18 +92,18 @@ MatrizPos3d Revolucion3d::Aplica1d(const MatrizPos3d &m) const
                   << " the result is not a point matrix" 
                   << " use " << getClassName() << "::Aplica2d."
 		  << std::endl;
-        return MatrizPos3d();
+        return Pos3dArray();
       }
   }
 
 //! @brief Return the point matrix that results from apply the revolution
 //! to the bi-dimensional matrix passed as argument.
-TritrizPos3d Revolucion3d::Aplica2d(const MatrizPos3d &m) const
+Pos3dArray3d Revolucion3d::Aplica2d(const Pos3dArray &m) const
   {
     if(!m.isRow() && !m.isColumn()) //bi-dimensional matrix.
       {
         const size_t n_layers= ndiv+1;
-	TritrizPos3d retval(n_layers,m);
+	Pos3dArray3d retval(n_layers,m);
         const GEOM_FT angle_inc= theta/ndiv;
         GEOM_FT ang(angle_inc);
         for(size_t i=2;i<=n_layers;i++)
@@ -121,12 +121,12 @@ TritrizPos3d Revolucion3d::Aplica2d(const MatrizPos3d &m) const
                   << " the result is a point matrix" 
                   << " use " << getClassName() << "::Aplica1d."
 		  << std::endl;
-        return TritrizPos3d();
+        return Pos3dArray3d();
       }
   }
 
-MatrizPos3d Revolucion3d::operator()(const Pos3d &p) const
+Pos3dArray Revolucion3d::operator()(const Pos3d &p) const
   { return Aplica0d(p); }
 
-MatrizPos3d Revolucion3d::operator()(const MatrizPos3d &m) const
+Pos3dArray Revolucion3d::operator()(const Pos3dArray &m) const
   { return Aplica1d(m); }

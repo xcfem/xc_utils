@@ -28,7 +28,7 @@
 #include <iostream>
 
 class Vector2d;
-class matriz_FT;
+class FT_matrix;
 
 
 //! @ingroup GEOM
@@ -55,7 +55,7 @@ class Dir2d
     inline Dir2d Perpendicular(void) const
       //Return la dirección perpendicular en sentido antihorario.
       { return Dir2d(-dy(),dx()); }
-    matriz_FT GetMatriz(void) const;
+    FT_matrix getMatrix(void) const;
     Vector2d GetVector(void) const;
     friend std::ostream &operator << (std::ostream &stream,const Dir2d &n);
     friend bool operator==(const Dir2d &v1,const Dir2d &v2);

@@ -19,13 +19,13 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//MatrizPos3d
+//Pos3dArray
 
-#ifndef MATRIZPOS3D_H
-#define MATRIZPOS3D_H
+#ifndef POS3DARRAY_H
+#define POS3DARRAY_H
 
 #include "Pos3d.h"
-#include "MatrizPos.h"
+#include "PosArray.h"
 
 class Triangle3d;
 class BND3d;
@@ -34,22 +34,22 @@ class Revolucion3d;
 
 //! @ingroup GEOM
 //
-//! @brief Matriz de posiciones en tres dimensiones.
-class MatrizPos3d: public MatrizPos<Pos3d>
+//! @brief Array of positions in a three-dimensional space.
+class Pos3dArray: public PosArray<Pos3d>
   {
-    MatrizPos3d(const MatrizPos<Pos3d> &mp3d);
-    friend class TritrizPos3d;
+    Pos3dArray(const PosArray<Pos3d> &mp3d);
+    friend class Pos3dArray3d;
     Pos3d pos_lagrangiana(const size_t &i,const size_t &j) const;
     GEOM_FT dist_lagrange(void) const;
     GEOM_FT ciclo_lagrange(void);
   public:
-    MatrizPos3d(const size_t &f=1,const size_t &c=1,const Pos3d &p= Pos3d());
-    MatrizPos3d(const Pos3d &p1,const Pos3d &p2,const size_t &num,const GEOM_FT &ratio);
-    MatrizPos3d(const Pos3d &p1,const Pos3d &p2,const size_t &ndiv);
-    MatrizPos3d(const Pos3d &p1,const Pos3d &p2,const std::vector<GEOM_FT> &longs);
-    MatrizPos3d(const Pos3d &p0,const Pos3d &p1,const Pos3d &p2,const size_t &ndiv1,const size_t &ndiv2);
-    MatrizPos3d(const MatrizPos3d &l1_points,const MatrizPos3d &l2_points,const MatrizPos3d &l3_points,const MatrizPos3d &l4_points);
-    MatrizPos3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2);
+    Pos3dArray(const size_t &f=1,const size_t &c=1,const Pos3d &p= Pos3d());
+    Pos3dArray(const Pos3d &p1,const Pos3d &p2,const size_t &num,const GEOM_FT &ratio);
+    Pos3dArray(const Pos3d &p1,const Pos3d &p2,const size_t &ndiv);
+    Pos3dArray(const Pos3d &p1,const Pos3d &p2,const std::vector<GEOM_FT> &longs);
+    Pos3dArray(const Pos3d &p0,const Pos3d &p1,const Pos3d &p2,const size_t &ndiv1,const size_t &ndiv2);
+    Pos3dArray(const Pos3dArray &l1_points,const Pos3dArray &l2_points,const Pos3dArray &l3_points,const Pos3dArray &l4_points);
+    Pos3dArray(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2);
     Pos3d GetCentro(void) const;
     Triangle3d getTriangle1(const size_t &i,const size_t &j) const;
     Triangle3d getTriangle2(const size_t &i,const size_t &j) const;
@@ -57,15 +57,15 @@ class MatrizPos3d: public MatrizPos<Pos3d>
     void Transforma(const Trf3d &trf);
   };
 
-GEOM_FT dist2(const MatrizPos3d &ptos,const Pos3d &pt);
-bool dist_menor(const MatrizPos3d &ptos,const Pos3d &pt,const GEOM_FT &d_max);
-GEOM_FT dist(const MatrizPos3d &ptos,const Pos3d &pt);
-GEOM_FT pseudo_dist2(const MatrizPos3d &ptos,const Pos3d &pt);
-GEOM_FT pseudo_dist(const MatrizPos3d &ptos,const Pos3d &pt);
+GEOM_FT dist2(const Pos3dArray &ptos,const Pos3d &pt);
+bool dist_menor(const Pos3dArray &ptos,const Pos3d &pt,const GEOM_FT &d_max);
+GEOM_FT dist(const Pos3dArray &ptos,const Pos3d &pt);
+GEOM_FT pseudo_dist2(const Pos3dArray &ptos,const Pos3d &pt);
+GEOM_FT pseudo_dist(const Pos3dArray &ptos,const Pos3d &pt);
 
-BND3d get_bnd(const MatrizPos3d &ptos);
+BND3d get_bnd(const Pos3dArray &ptos);
 
-MatrizPos3d crea_sup_revolucion(const Revolucion3d &r,const MatrizPos3d &m);
-MatrizPos3d cuadrilatero(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2);
+Pos3dArray crea_sup_revolucion(const Revolucion3d &r,const Pos3dArray &m);
+Pos3dArray cuadrilatero(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2);
 
 #endif

@@ -36,7 +36,7 @@ class Plane;
 class Reflection3d: public Trf3d
   {
   private:
-    static matriz_FT matriz_reflection3d(const Pos3d &Q,const Vector3d &d);
+    static FT_matrix reflection3d_matrix(const Pos3d &Q,const Vector3d &d);
 
   public:
     Reflection3d(void);

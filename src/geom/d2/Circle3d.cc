@@ -27,8 +27,8 @@
 #include "xc_basic/src/util/matem.h"
 #include <plotter.h>
 
-#include "xc_utils/src/geom/pos_vec/MatrizPos2d.h"
-#include "xc_utils/src/geom/pos_vec/MatrizPos3d.h"
+#include "xc_utils/src/geom/pos_vec/Pos2dArray.h"
+#include "xc_utils/src/geom/pos_vec/Pos3dArray.h"
 
 
 //! @brief Circle defined by three points.
@@ -86,9 +86,9 @@ bool Circle3d::In(const Pos3d &p, const double &tol) const
   }
 
 //! @brief Return n points equally spaced on the object perimeter.
-const MatrizPos3d &Circle3d::getPointsOnPerimeter(const size_t &n,const double &theta_inic) const
+const Pos3dArray &Circle3d::getPointsOnPerimeter(const size_t &n,const double &theta_inic) const
   {
-    static MatrizPos3d retval= to_3d(circ.getPointsOnPerimeter(n,theta_inic));
+    static Pos3dArray retval= to_3d(circ.getPointsOnPerimeter(n,theta_inic));
     return retval;
   }
 

@@ -68,26 +68,30 @@ class Trf2d: public Trf
         cgtrf= otra.cgtrf;
         return *this;
       }
+    //Return la transformación inversa.
     //Trf2d Inversa(void) const;
-      //Return la transformación inversa.
-    virtual GEOM_FT Cartesianas(const size_t &i,const size_t &j) const
-    //Return el elemento (i,j) de la matriz de transformación en cartesianas.
+
+    //@brief Return the (i,j) componet of the transformation matrix expressed in
+    // cartesian coordinates.
     //       -              -
     //       | m11  m12 m13 |
     //       | m21  m22 m23 |
     //       |   0    0  1  |
     //       -              -
+    virtual GEOM_FT Cartesianas(const size_t &i,const size_t &j) const
       { return cgtrf.m(i-1,j-1); }
-    virtual GEOM_FT Homogeneas(const size_t &i,const size_t &j) const
-    //Return el elemento (i,j) de la matriz de transformación en homogéneas.
+    
+    //@brief Return the (i,j) componet of the transformation matrix expressed in
+    // homogeneous coordinates.
     //       -              -
     //       | m11  m12 m13 |
     //       | m21  m22 m23 |
     //       |   0    0  hw |
     //       -              -
+    virtual GEOM_FT Homogeneas(const size_t &i,const size_t &j) const
       { return cgtrf.hm(i-1,j-1); }
-    virtual matriz_FT Cartesianas(void) const;
-    virtual matriz_FT Homogeneas(void) const;
+    virtual FT_matrix Cartesianas(void) const;
+    virtual FT_matrix Homogeneas(void) const;
     Pos2d Transforma(const Pos2d &p) const;
     Vector2d Transforma(const Vector2d &v) const;
     template <class InputIterator>

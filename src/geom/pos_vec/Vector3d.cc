@@ -25,7 +25,7 @@
 #include "Pos3d.h"
 #include "Dir3d.h"
 
-#include "xc_utils/src/geom/matriz_FT.h"
+#include "xc_utils/src/geom/FT_matrix.h"
 #include "xc_basic/src/matrices/op_tensor.h"
 //#include "Inventor/SbVec3f.h"
 
@@ -36,7 +36,7 @@
 Vector3d::Vector3d(const GEOM_FT &x,const GEOM_FT &y,const GEOM_FT &z)
   : cgvct(x,y,z) {}
 
-Vector3d::Vector3d(const matriz_FT &m)
+Vector3d::Vector3d(const FT_matrix &m)
   : cgvct(0,0,0)
   {
     assert(m.getNumberOfRows()==3);
@@ -48,10 +48,10 @@ Vector3d::Vector3d(const Pos3d &p1,const Pos3d &p2)
 
 bool Vector3d::Nulo(void) const
   { return ((*this)==VectorNulo3d); }
-matriz_FT Vector3d::GetMatriz(void) const
+FT_matrix Vector3d::getMatrix(void) const
   //Return el column vector.
   {
-    matriz_FT retval(3,1,0);
+    FT_matrix retval(3,1,0);
     retval(1)= x(); retval(2)= y(); retval(3)= z();
     return retval;
   }
@@ -113,21 +113,21 @@ GEOM_FT Vector3d::GetModulus(void) const
 GEOM_FT Vector3d::GetDot(const Vector3d &v) const
   { return (x()*v.x()+y()*v.y()+z()*v.z()); }
 
-//! @brief Return el producto por la matriz.
-GEOM_FT Vector3d::GetDot(const matriz_FT &m) const
+//! @brief Return the product of the vector times the matrix.
+GEOM_FT Vector3d::GetDot(const FT_matrix &m) const
   {
     assert(m.getNumberOfRows()==3);
     assert(m.getNumberOfColumns()==3);
     return (x()*m(1)+y()*m(2)+z()*m(3));
   }
 
-//! @brief Return el producto vectorial.
+//! @brief Return the cross product.
 Vector3d Vector3d::getCross(const Vector3d &v) const
   { return Vector3d(cross_product(ToCGAL(),v.ToCGAL())); }
 
-//! @brief Producto del vector por una matriz.
-matriz_FT operator*(const matriz_FT &m,const Vector3d &v)
-  { return m*v.GetMatriz(); }
+//! @brief Product of the vector times the matrix.
+FT_matrix operator*(const FT_matrix &m,const Vector3d &v)
+  { return m*v.getMatrix(); }
 
 Vector3d &Vector3d::operator+=(const Vector3d &v)
   {
@@ -223,9 +223,9 @@ GEOM_FT Abs(const Vector3d &v)
 //Return el módulo del vector.
   { return v.GetModulus(); }
 
-matriz_FT Traspuesta(const Vector3d &v)
+FT_matrix Traspuesta(const Vector3d &v)
   {
-    matriz_FT retval(1,3);
+    FT_matrix retval(1,3);
     retval(1,1)= v.x(); retval(1,2)= v.y(); retval(1,3)= v.z();
     return retval;
   }
@@ -241,10 +241,10 @@ double angle(const Vector3d &v1,const Vector3d &v2)
   { return v1.getAngle(v2); }
 
 
-matriz_FT prod_tensor(const Vector3d &u,const Vector3d &v)
-  { return prod_tensor(u.GetMatriz(),v.GetMatriz()); }
+FT_matrix prod_tensor(const Vector3d &u,const Vector3d &v)
+  { return prod_tensor(u.getMatrix(),v.getMatrix()); }
 
-matriz_FT operator&(const Vector3d &u,const Vector3d &v)
+FT_matrix operator&(const Vector3d &u,const Vector3d &v)
   { return prod_tensor(u,v); }
 
 //! @brief For the vector argument v, return the matrix that
@@ -252,9 +252,9 @@ matriz_FT operator&(const Vector3d &u,const Vector3d &v)
 //!
 //! see "Geometric tools for computer graphics"
 //! Philip J. Schneider Morgan Kaufmann Publishers, páginas 119 y 120.
-matriz_FT skew_symm_matrix_post(const Vector3d &v)
+FT_matrix skew_symm_matrix_post(const Vector3d &v)
   {
-    matriz_FT retval(3,3,double_to_FT(0.0));
+    FT_matrix retval(3,3,double_to_FT(0.0));
     const GEOM_FT &v1= v(1);
     const GEOM_FT &v2= v(2);
     const GEOM_FT &v3= v(3);
@@ -269,7 +269,7 @@ matriz_FT skew_symm_matrix_post(const Vector3d &v)
 //!
 //! see "Geometric tools for computer graphics"
 //! Philip J. Schneider Morgan Kaufmann Publishers, páginas 119 y 120.
-matriz_FT skew_symm_matrix_pre(const Vector3d &v)
+FT_matrix skew_symm_matrix_pre(const Vector3d &v)
   { return -skew_symm_matrix_post(v); }
 
 

@@ -44,25 +44,25 @@ SisCooXd2d::SisCooXd2d(const size_t &ne,const PGlobal &o,const PGlobal &p)
   { XAxisVector(p-o); }
 
 void SisCooXd2d::putRow(const size_t &axis,const VGlobal &v)
-  { SisCoo::putRow(axis,traspuesta(v.GetMatriz())); }
+  { SisCoo::putRow(axis,traspuesta(v.getMatrix())); }
 SisCooXd2d::DGlobal SisCooXd2d::getAxisDir(const size_t &axis) const
   { return DGlobal(getAxisVDir(1)); }
 //! @brief Return the direction vector of the axis being passed as parameter.
 SisCooXd2d::VGlobal SisCooXd2d::getAxisVDir(const size_t &axis) const
   { 
-    const matriz_FT row= getRow(axis);
+    const FT_matrix row= getRow(axis);
     return VGlobal(row(1,1),row(1,2));
   }
-SisCooXd2d::VGlobal SisCooXd2d::GetCooGlobales(const matriz_FT &v) const
+SisCooXd2d::VGlobal SisCooXd2d::GetCooGlobales(const FT_matrix &v) const
 //Return las componentes del vector v 
 //being passed as parameter expresado en coordenadas locales
 //expresado en coordenadas globales.
   {
-    const matriz_FT tmp= SisCoo::GetCooGlobales(v);
+    const FT_matrix tmp= SisCoo::GetCooGlobales(v);
     return VGlobal(tmp(1),tmp(2)); 
   }
-matriz_FT SisCooXd2d::GetCooLocales(const SisCooXd2d::VGlobal &v) const
-  { return SisCoo::GetCooLocales(v.GetMatriz()); }
+FT_matrix SisCooXd2d::GetCooLocales(const SisCooXd2d::VGlobal &v) const
+  { return SisCoo::GetCooLocales(v.getMatrix()); }
 
 //! @brief Hace que el vector básico 1 tenga la dirección
 //! y sentido del being passed as parameter. Si el sistema es

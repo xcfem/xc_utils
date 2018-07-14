@@ -24,42 +24,42 @@
 #ifndef CONSTANTJLAYERVARREF_H
 #define CONSTANTJLAYERVARREF_H
 
-#include "RangoTritriz.h"
+#include "Array3dRange.h"
 
 
 //! @ingroup GEOM
 //
-//! @brief Reference to a layer de la tritriz which points have
+//! @brief Reference to a layer of the array which points have
 //! constant J index.
-template <class TRITRIZ>
-class ConstantJLayerVarRef: public VarRefCajaTritriz<TRITRIZ>
+template <class ARRAY_3D>
+class ConstantJLayerVarRef: public VarRefCajaArray3d<ARRAY_3D>
   {
   public:
-    typedef typename VarRefCajaTritriz<TRITRIZ>::const_reference const_reference;
-    typedef typename VarRefCajaTritriz<TRITRIZ>::reference reference;
+    typedef typename VarRefCajaArray3d<ARRAY_3D>::const_reference const_reference;
+    typedef typename VarRefCajaArray3d<ARRAY_3D>::reference reference;
 
-    explicit ConstantJLayerVarRef(TRITRIZ &m,const size_t &iLayer=1,const size_t &f= 1,const size_t &c= 1);
-    ConstantJLayerVarRef(TRITRIZ &m,const size_t &,const size_t &,const size_t &,const size_t &,const size_t &);
-    ConstantJLayerVarRef(TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const RangoIndice &column_range);
+    explicit ConstantJLayerVarRef(ARRAY_3D &m,const size_t &iLayer=1,const size_t &f= 1,const size_t &c= 1);
+    ConstantJLayerVarRef(ARRAY_3D &m,const size_t &,const size_t &,const size_t &,const size_t &,const size_t &);
+    ConstantJLayerVarRef(ARRAY_3D &t,const RangoIndice &layer_range,const size_t &f,const RangoIndice &column_range);
     inline virtual ~ConstantJLayerVarRef(void) {}
     size_t getRowIndex(void) const
       { return this->offset_f+1; }
     virtual const_reference operator()(size_t iLayer=1,size_t col=1) const
-      { return VarRefCajaTritriz<TRITRIZ>::operator()(iLayer,1,col); }
+      { return VarRefCajaArray3d<ARRAY_3D>::operator()(iLayer,1,col); }
     virtual reference operator()(size_t iLayer=1,size_t col=1)
-      { return VarRefCajaTritriz<TRITRIZ>::operator()(iLayer,1,col); }
+      { return VarRefCajaArray3d<ARRAY_3D>::operator()(iLayer,1,col); }
   };
 
-template<class TRITRIZ>
-ConstantJLayerVarRef<TRITRIZ>::ConstantJLayerVarRef(TRITRIZ &t,const size_t &iLayer,const size_t &f,const size_t &c)
-  : VarRefCajaTritriz<TRITRIZ>(t,RangoTritriz(RangoIndice(iLayer,t.getNumberOfLayers()),f,RangoIndice(c,t.getNumberOfColumns()))) {}
+template<class ARRAY_3D>
+ConstantJLayerVarRef<ARRAY_3D>::ConstantJLayerVarRef(ARRAY_3D &t,const size_t &iLayer,const size_t &f,const size_t &c)
+  : VarRefCajaArray3d<ARRAY_3D>(t,Array3dRange(RangoIndice(iLayer,t.getNumberOfLayers()),f,RangoIndice(c,t.getNumberOfColumns()))) {}
 
-template<class TRITRIZ>
-ConstantJLayerVarRef<TRITRIZ>::ConstantJLayerVarRef(TRITRIZ &t,const size_t &f,const size_t &iLayer1,const size_t &c1,const size_t &iLayer2,const size_t &c2)
-  : VarRefCajaTritriz<TRITRIZ>(t,RangoIndice(iLayer1,iLayer2),f,RangoIndice(c1,c2)) {}
+template<class ARRAY_3D>
+ConstantJLayerVarRef<ARRAY_3D>::ConstantJLayerVarRef(ARRAY_3D &t,const size_t &f,const size_t &iLayer1,const size_t &c1,const size_t &iLayer2,const size_t &c2)
+  : VarRefCajaArray3d<ARRAY_3D>(t,RangoIndice(iLayer1,iLayer2),f,RangoIndice(c1,c2)) {}
 
-template<class TRITRIZ>
-ConstantJLayerVarRef<TRITRIZ>::ConstantJLayerVarRef(TRITRIZ &t,const RangoIndice &layer_range,const size_t &f,const RangoIndice &column_range)
-  : VarRefCajaTritriz<TRITRIZ>(t,layer_range,f,column_range) {}
+template<class ARRAY_3D>
+ConstantJLayerVarRef<ARRAY_3D>::ConstantJLayerVarRef(ARRAY_3D &t,const RangoIndice &layer_range,const size_t &f,const RangoIndice &column_range)
+  : VarRefCajaArray3d<ARRAY_3D>(t,layer_range,f,column_range) {}
 
 #endif

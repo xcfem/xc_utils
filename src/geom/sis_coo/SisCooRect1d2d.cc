@@ -42,12 +42,12 @@ SisCooRect1d2d::VGlobal SisCooRect1d2d::GetCooGlobales(const VLocal &v) const
 //Return las componentes del vector v 
 //que se pasa como parámetro expresado en locales
 //expresadas en coordenadas globales.
-  { return SisCooXd2d::GetCooGlobales(matriz_FT(1,1,v)); }
+  { return SisCooXd2d::GetCooGlobales(FT_matrix(1,1,v)); }
 SisCooRect1d2d::VLocal SisCooRect1d2d::GetCooLocales(const SisCooRect1d2d::VGlobal &v) const
 //Return las componentes del vector v expresado en locales
 //expresadas en coordenadas globales.
   {
-    const matriz_FT tmp= SisCooXd2d::GetCooLocales(v);
+    const FT_matrix tmp= SisCooXd2d::GetCooLocales(v);
     return tmp(1,1);
   }
 

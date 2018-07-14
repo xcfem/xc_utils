@@ -19,21 +19,21 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//TritrizPos.h
+//PosArray3d.h
 //Array of point matrices.
 
-#ifndef TRITRIZPOS_H
-#define TRITRIZPOS_H
+#ifndef POSARRAY3D_H
+#define POSARRAY3D_H
 
-#include "MatrizPos.h"
-#include "ConstRefCajaTritriz.h"
+#include "PosArray.h"
+#include "ConstRefCajaArray3d.h"
 #include "ConstantILayerConstRef.h"
 #include "ConstantJLayerConstRef.h"
 #include "ConstantKLayerConstRef.h"
 #include "IRowConstRef.h"
 #include "JRowConstRef.h"
 #include "KRowConstRef.h"
-#include "VarRefCajaTritriz.h"
+#include "VarRefCajaArray3d.h"
 #include "ConstantILayerVarRef.h"
 #include "ConstantJLayerVarRef.h"
 #include "ConstantKLayerVarRef.h"
@@ -45,30 +45,30 @@
 
 //! @ingroup GEOM
 //
-//! @brief Clase base para las «tritrices» de posiciones.
+//! @brief Base class for the position arrays.
 template <class POS>
-class TritrizPos: public std::vector<MatrizPos<POS> >
+class PosArray3d: public std::vector<PosArray<POS> >
   {
   public:
-    typedef MatrizPos<POS> m_pos;
+    typedef PosArray<POS> m_pos;
     typedef typename m_pos::reference reference;
     typedef typename m_pos::const_reference const_reference;
 
-    typedef ConstRefCajaTritriz<TritrizPos<POS> > const_ref_caja;
-    typedef ConstantILayerConstRef<TritrizPos<POS> > constant_i_layer_const_ref;
-    typedef ConstantJLayerConstRef<TritrizPos<POS> > constant_j_layer_const_ref;
-    typedef ConstantKLayerConstRef<TritrizPos<POS> > constant_k_layer_const_ref;
-    typedef IRowConstRef<TritrizPos<POS> > i_row_const_ref;
-    typedef JRowConstRef<TritrizPos<POS> > j_row_const_ref;
-    typedef KRowConstRef<TritrizPos<POS> > k_row_const_ref;
+    typedef ConstRefCajaArray3d<PosArray3d<POS> > const_ref_caja;
+    typedef ConstantILayerConstRef<PosArray3d<POS> > constant_i_layer_const_ref;
+    typedef ConstantJLayerConstRef<PosArray3d<POS> > constant_j_layer_const_ref;
+    typedef ConstantKLayerConstRef<PosArray3d<POS> > constant_k_layer_const_ref;
+    typedef IRowConstRef<PosArray3d<POS> > i_row_const_ref;
+    typedef JRowConstRef<PosArray3d<POS> > j_row_const_ref;
+    typedef KRowConstRef<PosArray3d<POS> > k_row_const_ref;
 
-    typedef VarRefCajaTritriz<TritrizPos<POS> > var_ref_caja;
-    typedef ConstantILayerVarRef<TritrizPos<POS> > constant_i_layer_variable_ref;
-    typedef ConstantJLayerVarRef<TritrizPos<POS> > constant_j_layer_variable_ref;
-    typedef ConstantKLayerVarRef<TritrizPos<POS> > constant_k_layer_variable_ref;
-    typedef IRowVarRef<TritrizPos<POS> > i_row_var_ref;
-    typedef JRowVarRef<TritrizPos<POS> > j_row_var_ref;
-    typedef KRowVarRef<TritrizPos<POS> > k_row_var_ref;
+    typedef VarRefCajaArray3d<PosArray3d<POS> > var_ref_caja;
+    typedef ConstantILayerVarRef<PosArray3d<POS> > constant_i_layer_variable_ref;
+    typedef ConstantJLayerVarRef<PosArray3d<POS> > constant_j_layer_variable_ref;
+    typedef ConstantKLayerVarRef<PosArray3d<POS> > constant_k_layer_variable_ref;
+    typedef IRowVarRef<PosArray3d<POS> > i_row_var_ref;
+    typedef JRowVarRef<PosArray3d<POS> > j_row_var_ref;
+    typedef KRowVarRef<PosArray3d<POS> > k_row_var_ref;
 
   protected:
     inline m_pos &get_layer(const size_t &iLayer)
@@ -76,9 +76,9 @@ class TritrizPos: public std::vector<MatrizPos<POS> >
     inline const m_pos &get_layer(const size_t &iLayer) const
       { return (*this)[iLayer-1]; }
   public:
-    TritrizPos(const size_t iLayers= 1): std::vector<m_pos>(iLayers) {}
-    TritrizPos(const size_t iLayers,const m_pos &m): std::vector<m_pos>(iLayers,m) {}
-    TritrizPos(const m_pos &,const m_pos &,const m_pos &,const m_pos &,const size_t &,const size_t &);
+    PosArray3d(const size_t iLayers= 1): std::vector<m_pos>(iLayers) {}
+    PosArray3d(const size_t iLayers,const m_pos &m): std::vector<m_pos>(iLayers,m) {}
+    PosArray3d(const m_pos &,const m_pos &,const m_pos &,const m_pos &,const size_t &,const size_t &);
     inline size_t getNumberOfLayers(void) const
       { return this->size(); }
     size_t getNumberOfRows(void) const;
@@ -87,7 +87,7 @@ class TritrizPos: public std::vector<MatrizPos<POS> >
 
     const_ref_caja GetConstRefCaja(size_t iLayer=1,size_t f=1, size_t c=1) const
       { return const_ref_caja(*this,iLayer,f,c); }
-    const_ref_caja GetConstRefCaja(const RangoTritriz &rango) const
+    const_ref_caja GetConstRefCaja(const Array3dRange &rango) const
       { return const_ref_caja(*this,rango); }
 
     constant_i_layer_const_ref ConstantILayerGetConstRef(size_t iLayer=1,size_t iRow=1, size_t iColumn=1) const
@@ -118,7 +118,7 @@ class TritrizPos: public std::vector<MatrizPos<POS> >
 
     var_ref_caja GetVarRefCaja(size_t iLayer=1,size_t f=1, size_t c=1)
       { return var_ref_caja(*this,iLayer,f,c); }
-    var_ref_caja GetVarRefCaja(const RangoTritriz &rango)
+    var_ref_caja GetVarRefCaja(const Array3dRange &rango)
       { return var_ref_caja(*this,rango); }
 
     constant_i_layer_variable_ref ConstantILayerGetVarRef(size_t iLayer=1,size_t f=1, size_t c=1)
@@ -158,9 +158,9 @@ class TritrizPos: public std::vector<MatrizPos<POS> >
     POS GetCentro(void) const;
   };
 
-//! @brief Generate the point tritriz from the arguments.
+//! @brief Generate the point arra from the arguments.
 template <class POS>
-TritrizPos<POS>::TritrizPos( const m_pos &l1_points,const m_pos &l2_points,
+PosArray3d<POS>::PosArray3d( const m_pos &l1_points,const m_pos &l2_points,
                              const m_pos &l3_points,const m_pos &l4_points,
                              const size_t &ndiv_12,const size_t &ndiv_14)
   : std::vector<m_pos>(l1_points.size())
@@ -181,9 +181,9 @@ TritrizPos<POS>::TritrizPos( const m_pos &l1_points,const m_pos &l2_points,
       }
   }
 
-//! @brief Return el número de elementos de la tritriz.
+//! @brief Return el número de elementos of the array.
 template <class POS>
-size_t TritrizPos<POS>::NumPos(void) const
+size_t PosArray3d<POS>::NumPos(void) const
   {
     const size_t sz= this->size();
     if(sz<1)
@@ -196,7 +196,7 @@ size_t TritrizPos<POS>::NumPos(void) const
   }
 
 template <class POS>
-size_t TritrizPos<POS>::getNumberOfRows(void) const
+size_t PosArray3d<POS>::getNumberOfRows(void) const
   {
     size_t retval= 0;
     if(this->size())
@@ -205,7 +205,7 @@ size_t TritrizPos<POS>::getNumberOfRows(void) const
   }
 
 template <class POS>
-size_t TritrizPos<POS>::getNumberOfColumns(void) const
+size_t PosArray3d<POS>::getNumberOfColumns(void) const
   {
     size_t retval= 0;
     if(this->size())
@@ -214,18 +214,18 @@ size_t TritrizPos<POS>::getNumberOfColumns(void) const
   }
 
 template <class POS,class SEG>
-POS get_centro(const TritrizPos<POS> t,const SEG &sg)
+POS get_centro(const PosArray3d<POS> t,const SEG &sg)
   {
     POS retval;
-    const typename TritrizPos<POS>::m_pos &base= t(1);
-    const typename TritrizPos<POS>::m_pos &tapa= t(t.getNumberOfLayers());
+    const typename PosArray3d<POS>::m_pos &base= t(1);
+    const typename PosArray3d<POS>::m_pos &tapa= t(t.getNumberOfLayers());
     SEG s(get_centro(base,SEG()),get_centro(tapa,SEG()));
     retval= s.getCenterOfMass();
     return retval;
   }
 
 template <class POS>
-inline std::ostream &operator<<(std::ostream &os,const TritrizPos<POS> &t)
+inline std::ostream &operator<<(std::ostream &os,const PosArray3d<POS> &t)
   {
     const size_t n_layers= t.getNumberOfLayers();
     for(size_t i=1;i<=n_layers;i++)

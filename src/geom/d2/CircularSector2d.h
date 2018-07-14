@@ -27,7 +27,7 @@
 #include "Circle2d.h"
 
 class Pos2d;
-class MatrizPos2d;
+class Pos2dArray;
 
 //! @ingroup GEOM
 //
@@ -68,7 +68,7 @@ class CircularSector2d : public Circle2d
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
-    MatrizPos2d getArcPoints(const size_t &n) const;
+    Pos2dArray getArcPoints(const size_t &n) const;
 
     void Print(std::ostream &os) const;
     void Plot(Plotter &) const;

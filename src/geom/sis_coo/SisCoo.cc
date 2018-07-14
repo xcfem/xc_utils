@@ -50,8 +50,8 @@ void SisCoo::ortogonaliza(void)
       return;
     else //2 o 3 dimensiones.
       {
-        const matriz_FT i= rot.getRow(1);
-        const matriz_FT j= rot.getRow(2);
+        const FT_matrix i= rot.getRow(1);
+        const FT_matrix j= rot.getRow(2);
         const GEOM_FT imod2= i.Abs2();
         if(imod2<geom_epsilon2)
           {
@@ -62,12 +62,12 @@ void SisCoo::ortogonaliza(void)
         else
           {
             const GEOM_FT alpha= -(dot(j,i))/imod2;
-            const matriz_FT nj= j+alpha*i;
+            const FT_matrix nj= j+alpha*i;
             putRow(2,nj);
 	  }
         if(ne>2) //3 dimensiones.
           {
-            const matriz_FT nk= i ^ getRow(2);
+            const FT_matrix nk= i ^ getRow(2);
             putRow(3,nk);
           }
       }
@@ -89,17 +89,17 @@ void SisCoo::identidad(void)
     for(size_t i=1;i<=rot.getNumberOfRows();i++)
       rot(i,i)= 1;
   }
-//! @brief Asigna un valor al elemento (i,j) de la matriz.
+//! @brief Assigns the (i,j) component of the matrix.
 void SisCoo::put(const size_t &i,const size_t &j,const GEOM_FT &rot_ij)
   { rot(i,j)= rot_ij; }
 
-//! @brief Return la i row of the matrix.
-matriz_FT SisCoo::getRow(const size_t &i) const
+//! @brief Return the matrix i row.
+FT_matrix SisCoo::getRow(const size_t &i) const
   {
     assert(i<=numberOfAxis());
     return rot.getRow(i);
   }
-//! @brief Return verdadero si los vectores son unitarios.
+//! @brief Return true if the vectors are normalized.
 bool SisCoo::EsNormal(void) const
   {
     const size_t ne= numberOfAxis();
@@ -123,9 +123,9 @@ bool SisCoo::EsDextrogiro(void) const
           return true;
         else
           {
-            const matriz_FT i= getRow(1).GetTrn();
-            const matriz_FT j= getRow(2).GetTrn();
-            const matriz_FT ivectj= i^j;
+            const FT_matrix i= getRow(1).GetTrn();
+            const FT_matrix j= getRow(2).GetTrn();
+            const FT_matrix ivectj= i^j;
             return (dot(getRow(3),ivectj)>0);
           }
       }
@@ -157,30 +157,30 @@ bool SisCoo::EsOrtonormal(void) const
   { return (EsOrtogonal() && EsNormal()); }
 
 //! @brief Set the i row of the matrix.
-void SisCoo::putRow(const size_t &axis,const matriz_FT &v)
+void SisCoo::putRow(const size_t &axis,const FT_matrix &v)
   { rot.putRow(axis,v); }
 //! @brief Return the matrix que transforma un vector expresado
 //! en locales al mismo vector expresado en globales.
-matriz_FT SisCoo::TransAGlobal(void) const
+FT_matrix SisCoo::TransAGlobal(void) const
   { return rot.GetTrn(); }
 //! @brief Return the matrix que transforma un vector expresado
 //! en globales al mismo vector expresado en locales.
-matriz_FT SisCoo::TransDeGlobal(void) const
+FT_matrix SisCoo::TransDeGlobal(void) const
   { return rot; }
 //! @brief Return the transformation matrix desde este sistema a dest.
-matriz_FT SisCoo::GetTransA(const SisCoo &dest) const
+FT_matrix SisCoo::GetTransA(const SisCoo &dest) const
   { return (dest.rot*TransAGlobal()); }
 
 //! @brief Return las componentes en coordenadas globales del vector v 
 //! being passed as parameter expresado en coordenadas locales.
-matriz_FT SisCoo::GetCooGlobales(const matriz_FT &v) const
+FT_matrix SisCoo::GetCooGlobales(const FT_matrix &v) const
   { return TransAGlobal()*v; }
 //! @brief Return las componentes en coordenadas locales del vector v 
 //! being passed as parameter expresado en coordenadas globales.
-matriz_FT SisCoo::GetCooLocales(const matriz_FT &v) const
+FT_matrix SisCoo::GetCooLocales(const FT_matrix &v) const
   { return TransDeGlobal()*v; }
 
-//! @brief Imprime la matriz.
+//! @brief Prints the matrix.
 void SisCoo::Print(std::ostream &os) const
   { os << rot; }
 

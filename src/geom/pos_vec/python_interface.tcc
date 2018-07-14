@@ -51,40 +51,40 @@ class_<Pos2d, bases<ProtoGeom> >("Pos2d")
   .def(self - Pos2d())
   .def(self_ns::str(self_ns::self))
   ;
-typedef MatrizT<Pos2d,std::vector<Pos2d> > mt_pos2d;
-class_<mt_pos2d, bases<ProtoMatriz> >("mt_pos2d")
+typedef TMatrix<Pos2d,std::vector<Pos2d> > mt_pos2d;
+class_<mt_pos2d, bases<ProtoMatrix> >("mt_pos2d")
    .def("size", &mt_pos2d::size)
  ;
 
-typedef MatrizPos<Pos2d> m_pos2d;
+typedef PosArray<Pos2d> m_pos2d;
 class_<m_pos2d, bases<mt_pos2d> >("m_pos2d")
   ;
 
-class_<MatrizPos2d, bases<m_pos2d> >("MatrixPos2d")
-  .def("getNumQuads",&MatrizPos2d::GetNumQuads)
-  .def("getNumPoints",&MatrizPos2d::size)
-  .def("getMax",&MatrizPos2d::GetMax)
-  .def("getMin",&MatrizPos2d::GetMin)
-  .def("getIx",&MatrizPos2d::GetIx)
-  .def("getIy",&MatrizPos2d::GetIy)
-  .def("getPxy",&MatrizPos2d::GetPxy)
-  .def("Ix",&MatrizPos2d::Ix)
-  .def("Iy",&MatrizPos2d::Iy)
-  .def("Pxy",&MatrizPos2d::Pxy)
-  .def("getCentro",&MatrizPos2d::GetCentro)
-  .def("getCenterOfMass",&MatrizPos2d::getCenterOfMass)
-  .def("getArea",&MatrizPos2d::GetArea,"Return the total area.")
-  .def("getTriangle1",&MatrizPos2d::getTriangle1)
-  .def("getTriangle2",&MatrizPos2d::getTriangle2)
-  .def("getX",&MatrizPos2d::GetX)
-  .def("getY",&MatrizPos2d::GetY)
-  .def("getPoint",&MatrizPos2d::getPoint)
-  .def("getQuad",&MatrizPos2d::GetQuad,"Return the area of the (i,j) quad.")
-  .def("getAreaQuad",&MatrizPos2d::GetAreaQuad)
-  .def("getCentroideQuad",&MatrizPos2d::GetCentroideQuad)
-  .def("In",&MatrizPos2d::In)
-  .def("Transforma",&MatrizPos2d::Transforma)
-  .def("Lagrange",&MatrizPos2d::Lagrange)
+class_<Pos2dArray, bases<m_pos2d> >("MatrixPos2d")
+  .def("getNumQuads",&Pos2dArray::GetNumQuads)
+  .def("getNumPoints",&Pos2dArray::size)
+  .def("getMax",&Pos2dArray::GetMax)
+  .def("getMin",&Pos2dArray::GetMin)
+  .def("getIx",&Pos2dArray::GetIx)
+  .def("getIy",&Pos2dArray::GetIy)
+  .def("getPxy",&Pos2dArray::GetPxy)
+  .def("Ix",&Pos2dArray::Ix)
+  .def("Iy",&Pos2dArray::Iy)
+  .def("Pxy",&Pos2dArray::Pxy)
+  .def("getCentro",&Pos2dArray::GetCentro)
+  .def("getCenterOfMass",&Pos2dArray::getCenterOfMass)
+  .def("getArea",&Pos2dArray::GetArea,"Return the total area.")
+  .def("getTriangle1",&Pos2dArray::getTriangle1)
+  .def("getTriangle2",&Pos2dArray::getTriangle2)
+  .def("getX",&Pos2dArray::GetX)
+  .def("getY",&Pos2dArray::GetY)
+  .def("getPoint",&Pos2dArray::getPoint)
+  .def("getQuad",&Pos2dArray::GetQuad,"Return the area of the (i,j) quad.")
+  .def("getAreaQuad",&Pos2dArray::GetAreaQuad)
+  .def("getCentroideQuad",&Pos2dArray::GetCentroideQuad)
+  .def("In",&Pos2dArray::In)
+  .def("Transforma",&Pos2dArray::Transforma)
+  .def("Lagrange",&Pos2dArray::Lagrange)
   .def(self_ns::str(self_ns::self))
   ;
 
@@ -280,15 +280,15 @@ class_<SVD3d, bases<VDesliz3d> >("SVD3d")
   ;
 
 
-typedef MatrizT<Pos3d,v_pos3d > mt_pos3d;
-class_<mt_pos3d, bases<ProtoMatriz, v_pos3d> >("mt_pos3d")
+typedef TMatrix<Pos3d,v_pos3d > mt_pos3d;
+class_<mt_pos3d, bases<ProtoMatrix, v_pos3d> >("mt_pos3d")
   ;
 
-typedef MatrizPos<Pos3d> m_pos3d;
+typedef PosArray<Pos3d> m_pos3d;
 class_<m_pos3d, bases<mt_pos3d> >("m_pos3d")
   ;
 
-class_<MatrizPos3d, bases<m_pos3d> >("MatrixPos3d")
+class_<Pos3dArray, bases<m_pos3d> >("Pos3dArray")
   ;
 
 typedef std::vector<m_pos3d > ttz_pos3d;
@@ -296,11 +296,11 @@ class_<ttz_pos3d >("ttz_pos3d")
   .def(vector_indexing_suite<ttz_pos3d>() )
   ;
 
-typedef TritrizPos<Pos3d> t_pos3d;
+typedef PosArray3d<Pos3d> t_pos3d;
 class_<t_pos3d, bases<ttz_pos3d> >("t_pos3d")
   ;
 
-class_<TritrizPos3d, bases<t_pos3d> >("TritrizPos3d")
+class_<Pos3dArray3d, bases<t_pos3d> >("Pos3dArray3d")
   ;
 
 class_<ListaPos2d, bases<GeomObj2d> >("ListPos2d")

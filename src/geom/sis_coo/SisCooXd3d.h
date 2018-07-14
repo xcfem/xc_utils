@@ -64,8 +64,8 @@ class SisCooXd3d: public SisCoo
     //Return el direction vector of the axis que se pasa como parámetro.
     virtual DGlobal getAxisDir(const size_t &axis) const;
 
-    VGlobal GetCooGlobales(const matriz_FT &v) const;
-    matriz_FT GetCooLocales(const VGlobal &v) const;
+    VGlobal GetCooGlobales(const FT_matrix &v) const;
+    FT_matrix GetCooLocales(const VGlobal &v) const;
   };
 
 #endif

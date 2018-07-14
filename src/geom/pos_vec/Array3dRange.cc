@@ -19,16 +19,16 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//RangoTritriz.cc
+//Array3dRange.cc
 
-#include "RangoTritriz.h"
+#include "Array3dRange.h"
 
 //! @brief Return verdadero si el rango no contiene ningún índice.
-bool RangoTritriz::Vacio(void) const
+bool Array3dRange::Vacio(void) const
   { return (layer_range.Vacio() || row_range.Vacio() || column_range.Vacio()); }
 
 //! @brief Return la dimensión del rango 80,1,2 ó 3).
-size_t RangoTritriz::Dimension(void) const
+size_t Array3dRange::Dimension(void) const
   {
     size_t retval= 0;
     if(layer_range.Size()>1) retval++;
@@ -38,45 +38,45 @@ size_t RangoTritriz::Dimension(void) const
   }
 
 //! @brief Return verdadero si el único índice que varía es el I.
-bool RangoTritriz::isIRow(void) const
+bool Array3dRange::isIRow(void) const
   {
     if((row_range.Size()>1) || (column_range.Size()>1)) return false;
     return true;
   }
 
 //! @brief Return verdadero si el único índice que varía es el J.
-bool RangoTritriz::isJRow(void) const
+bool Array3dRange::isJRow(void) const
   {
     if((layer_range.Size()>1) || (column_range.Size()>1)) return false;
     return true;
   }
 
 //! @brief Return verdadero si el único índice que varía es el K.
-bool RangoTritriz::isKRow(void) const
+bool Array3dRange::isKRow(void) const
   {
     if((layer_range.Size()>1) || (row_range.Size()>1)) return false;
     return true;
   }
 
 //! @brief Return verdadero si los indices que varían son los J y K.
-bool RangoTritriz::isConstantILayer(void) const
+bool Array3dRange::isConstantILayer(void) const
   { return (layer_range.Size()==1); }
 
 //! @brief Return verdadero si los indices que varían son los I y K.
-bool RangoTritriz::isConstantJLayer(void) const
+bool Array3dRange::isConstantJLayer(void) const
   { return (row_range.Size()==1); }
 
 //! @brief Return verdadero si los indices que varían son los I y J.
-bool RangoTritriz::isConstantKLayer(void) const
+bool Array3dRange::isConstantKLayer(void) const
   { return (column_range.Size()==1); }
 
 //! @brief Imprime el rango.
-void RangoTritriz::Print(std::ostream &os) const
+void Array3dRange::Print(std::ostream &os) const
   { os << layer_range << ',' << row_range << ',' << column_range; }
 
 //! @brief Reduce los valores del rango de manera que ambos sean menores que
 //! los que se pasan como parámetro.
-void RangoTritriz::Clip(const size_t &cpmax,const size_t &fmax,const size_t &cmax)
+void Array3dRange::Clip(const size_t &cpmax,const size_t &fmax,const size_t &cmax)
   {
     layer_range.Clip(cpmax);
     row_range.Clip(fmax);
@@ -84,7 +84,7 @@ void RangoTritriz::Clip(const size_t &cpmax,const size_t &fmax,const size_t &cma
   }
 
 //! @brief Assigns to this one the intersection of both ranges.
-void RangoTritriz::Intersec(const RangoTritriz &other)
+void Array3dRange::Intersec(const Array3dRange &other)
   {
     layer_range.Intersec(other.layer_range);
     row_range.Intersec(other.row_range);
@@ -92,26 +92,26 @@ void RangoTritriz::Intersec(const RangoTritriz &other)
   }
 
 //! @brief Return the intersection of both ranges.
-RangoTritriz RangoTritriz::Intersec(const RangoTritriz &other) const
+Array3dRange Array3dRange::Intersec(const Array3dRange &other) const
   {
-    RangoTritriz retval(*this);
+    Array3dRange retval(*this);
     retval.Intersec(other);
     return retval;
   }
 
-std::ostream &operator<<(std::ostream &os,const RangoTritriz &rango)
+std::ostream &operator<<(std::ostream &os,const Array3dRange &rango)
   {
     rango.Print(os);
     return os;
   }
 
-RangoTritriz clip(const RangoTritriz &r,const size_t &cpmax,const size_t &fmax,const size_t &cmax)
+Array3dRange clip(const Array3dRange &r,const size_t &cpmax,const size_t &fmax,const size_t &cmax)
   {
-    RangoTritriz retval(r);
+    Array3dRange retval(r);
     retval.Clip(cpmax,fmax,cmax);
     return retval;
   }
 
 //! @brief Return the intersection of both ranges.
-RangoTritriz intersec(const RangoTritriz &r1,const RangoTritriz &r2)
+Array3dRange intersec(const Array3dRange &r1,const Array3dRange &r2)
   { return r1.Intersec(r2); }

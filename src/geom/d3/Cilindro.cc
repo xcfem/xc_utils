@@ -45,7 +45,7 @@ GeomObj *Cilindro::clon(void) const
 BND3d Cilindro::Bnd(void) const
   { return solid_extru_cil::Bnd(); }
 
-matriz_FT Cilindro::I(void) const
+FT_matrix Cilindro::I(void) const
   { return solid_extru_cil::I(); }
 
 Pos3d Cilindro::getCenterOfMass(void) const

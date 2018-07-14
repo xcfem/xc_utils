@@ -26,7 +26,7 @@
 #include "xc_utils/src/geom/pos_vec/Dir2d.h"
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
-#include "xc_utils/src/geom/matriz_FT.h"
+#include "xc_utils/src/geom/FT_matrix.h"
 #include "BND2d.h"
 
 
@@ -140,18 +140,18 @@ GEOM_FT GeomObj2d::I(const unsigned short int i,const unsigned short int j,const
   }
 
 //! @brief Return the inertia tensor with respect to the center of mass of the object.
-matriz_FT GeomObj2d::I(void) const
+FT_matrix GeomObj2d::I(void) const
   {
-    matriz_FT i(2,2);
+    FT_matrix i(2,2);
     i(1,1)= Ix();   i(1,2)= -Pxy();
     i(2,1)= i(1,2); i(2,2)= Iy();
     return i;
   }
 
 //! @brief Return the inertia tensor with respect to the point o.
-matriz_FT GeomObj2d::I(const Pos2d &o) const
+FT_matrix GeomObj2d::I(const Pos2d &o) const
   {
-    matriz_FT Ig= I();
+    FT_matrix Ig= I();
     Vector2d og=getCenterOfMass() - o;
     GEOM_FT m= IArea();
     return Ig+m*(Abs2(og)*identidad(Ig)-(og & og));
@@ -167,7 +167,7 @@ GEOM_FT GeomObj2d::I(const Recta2d &r) const
 //! through O with the direction of e.
 GEOM_FT GeomObj2d::I(const Pos2d &O,const Vector2d &e) const
   {
-    const matriz_FT Io= I(O);
+    const FT_matrix Io= I(O);
     return dot(e,Io*e)/Abs2(e);
   }
 

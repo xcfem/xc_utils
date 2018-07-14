@@ -30,7 +30,7 @@
 class BND2d;
 class Dir2d;
 class Recta2d;
-class matriz_FT;
+class FT_matrix;
 
 //! @ingroup GEOM
 //
@@ -39,7 +39,6 @@ class GeomObj2d: public GeomObj
   {
   public:
    typedef PoliPos<Pos2d> list_Pos2d;
-/*     typedef MatrizT<Pos3d,vector<Pos3d> > m_pos3d; */
 
     GeomObj2d(void) {}
     virtual ~GeomObj2d(void) {}
@@ -95,8 +94,8 @@ class GeomObj2d: public GeomObj
               const unsigned short int j,
               const Pos2d &o) const;
     GEOM_FT IO(const Pos2d &o) const;
-    matriz_FT I(void) const;
-    matriz_FT I(const Pos2d &o) const;
+    FT_matrix I(void) const;
+    FT_matrix I(const Pos2d &o) const;
 
     virtual void Mueve(const Vector2d &);
     virtual void Transforma(const Trf2d &trf2d)= 0;    

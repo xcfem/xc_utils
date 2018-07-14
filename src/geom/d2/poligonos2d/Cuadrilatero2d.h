@@ -27,7 +27,7 @@
 #include "Poligono2d.h"
 
 class Triangle2d;
-class MatrizPos2d;
+class Pos2dArray;
 
 // Orden de los vértices 1->2->3->4.
 //
@@ -68,7 +68,7 @@ class Cuadrilatero2d: public Poligono2d
       }
     Triangle2d getFirstTriangle(void) const;
     Triangle2d getSecondTriangle(void) const;
-    MatrizPos2d genMesh(int n1,int n2) const;
-    MatrizPos2d genBilinMesh(const size_t &n1,const size_t &n2) const;
+    Pos2dArray genMesh(int n1,int n2) const;
+    Pos2dArray genBilinMesh(const size_t &n1,const size_t &n2) const;
   };
 #endif
