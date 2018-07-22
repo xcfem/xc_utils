@@ -19,14 +19,32 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PsoGss1d.cc
+#ifndef	PSOGSS1D_H
+#define	PSOGSS1D_H
 
-#include "PsoGss1d.h"
 #include <iostream>
 
 
-std::ostream &operator<<(std::ostream &os, const PsoGss1D &ggw)
+//! Clase para almacenar coordenadas y peso en una dimensión.
+struct GaussWeights1D
   {
-    os << ggw.x << ", peso= " << ggw.w;
-    return os;
-  }
+    double x, w;
+    GaussWeights1D()
+      : x(0.0), w(0.0) {}
+    GaussWeights1D(double X, double W)
+      : x(X), w(W) {}
+    GaussWeights1D(const GaussWeights1D &gpw)
+      : x(gpw.x), w(gpw.w) {}
+    GaussWeights1D &operator=(const GaussWeights1D &other)
+      {
+        x= other.x;
+        w= other.w;
+        return *this;
+      }
+  };
+
+std::ostream &operator<<(std::ostream &o, const GaussWeights1D &ggw);
+
+
+#endif
+

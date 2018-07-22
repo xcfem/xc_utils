@@ -19,30 +19,34 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-#ifndef	PSOGSS2D_H
-#define	PSOGSS2D_H
+#ifndef	CUADRATURA2D_H
+#define	CUADRATURA2D_H
 
-#include <iostream>
-#include "PsoGss1d.h"
+#include <vector>
+#include "GaussWeights2d.h"
+#include "GaussPoints.h"
 
-//! @brief Estructura para almacenar coordenadas y peso en dos dimensiones.
-struct PsoGss2D: public PsoGss1D
+typedef std::vector<GaussWeights2D> ConjPG2;
+
+
+class GaussQuadrature2D : public ConjPG2
   {
-    double y;
-    PsoGss2D(void)
-     : PsoGss1D(), y(0.0) {}
-    PsoGss2D(const PsoGss2D& gpw)
-     : PsoGss1D(gpw), y(gpw.y) {}
-    PsoGss2D(double X, double Y, double W)
-     : PsoGss1D(X,W), y(Y) {}
-    PsoGss2D &operator=(const PsoGss2D &other)
-      {
-        PsoGss1D::operator=(other);
-        y= other.y;
-        return *this;
-      }
+  public:
+    GaussQuadrature2D( double x1, double x2,double y1, double y2,int nx, int ny);
+    inline size_t Size() const
+      { return size(); }
+    inline const GaussWeights2D &Get(int p) const
+      { return (*this)[p]; }
+    friend std::ostream& operator<<(std::ostream& o, const GaussQuadrature2D& gpts);
   };
 
-std::ostream& operator<<(std::ostream& o, const PsoGss2D &ggw);
+const GaussQuadrature2D TwoByTwo(-1.0,1.0,-1.0,1.0,2,2);
 
 #endif
+
+
+
+
+
+
+

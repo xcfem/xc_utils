@@ -87,7 +87,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x")
 
 SET(SQLITE sqlite/SqLiteObject sqlite/SqLiteQuery sqlite/SqLiteDatabase)
 
-SET(cuadGauss gauss_quadrature/Cuadratura2D gauss_quadrature/Cuadratura3D gauss_quadrature/gssleg gauss_quadrature/GaussPoints gauss_quadrature/PsoGss1d gauss_quadrature/PsoGss2d gauss_quadrature/PsoGss3d)
+SET(cuadGauss gauss_quadrature/GaussQuadrature2D gauss_quadrature/GaussQuadrature3D gauss_quadrature/gssleg gauss_quadrature/GaussPoints gauss_quadrature/GaussWeights1d gauss_quadrature/GaussWeights2d gauss_quadrature/GaussWeights3d)
 
 SET(geomTrfs geom/trf/Trf geom/trf/Trf2d geom/trf/Rotation2d geom/trf/Trf3d geom/trf/Translation2d geom/trf/Scaling3d geom/trf/Scaling2d geom/trf/Identidad2d geom/trf/Identidad3d geom/trf/Translation3d geom/trf/Reflection2d geom/trf/Rotation3d geom/trf/Reflection3d geom/trf/Revolucion3d)
 

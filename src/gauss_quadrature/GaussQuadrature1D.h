@@ -19,12 +19,12 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PsoGss2d.cc
+#ifndef	CUADRATURA1D_H
+#define	CUADRATURA1D_H
 
-#include "PsoGss3d.h"
+#include "GaussPoints.h"
 
-std::ostream& operator<<(std::ostream& o, const PsoGss3D &ggw)
-  {
-    o << "x= " << ggw.x << ", y= " << ggw.y << ", z= " << ggw.z << ", peso= " << ggw.w;
-    return o;
-  }
+typedef GaussPoints GaussQuadrature1D;
+
+
+#endif

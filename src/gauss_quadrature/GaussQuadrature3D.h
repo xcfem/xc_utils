@@ -24,24 +24,24 @@
 
 #include <vector>
 #include "GaussPoints.h"
-#include "PsoGss3d.h"
+#include "GaussWeights3d.h"
 
 class Pos3d;
 
-typedef std::vector<PsoGss3D> ConjPG3;
+typedef std::vector<GaussWeights3D> ConjPG3;
 
-class Cuadratura3D : public ConjPG3
+class GaussQuadrature3D : public ConjPG3
   {
     int num_dim;
   public:
-    Cuadratura3D(const Pos3d &p1,const Pos3d &p2,int nx = 2, int ny = 1, int nz = 1);
+    GaussQuadrature3D(const Pos3d &p1,const Pos3d &p2,int nx = 2, int ny = 1, int nz = 1);
     inline size_t Size() const
       { return size(); }
-    inline const PsoGss3D &Get(int p) const
+    inline const GaussWeights3D &Get(int p) const
       { return (*this)[p]; }
     inline int NumDim() const
       { return num_dim; }
-    friend std::ostream& operator<<(std::ostream& o, const Cuadratura3D& gpts);
+    friend std::ostream& operator<<(std::ostream& o, const GaussQuadrature3D& gpts);
   };
 
 #endif

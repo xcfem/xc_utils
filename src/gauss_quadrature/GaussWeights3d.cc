@@ -19,29 +19,12 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-#ifndef	PSOGSS3D_H
-#define	PSOGSS3D_H
+//GaussWeights2d.cc
 
-#include <iostream>
-#include "PsoGss2d.h"
+#include "GaussWeights3d.h"
 
-struct PsoGss3D: public PsoGss2D
+std::ostream& operator<<(std::ostream& o, const GaussWeights3D &ggw)
   {
-    double z;
-    PsoGss3D()
-      : PsoGss2D(), z(0.0) {}
-    PsoGss3D(const PsoGss3D& ggw)
-      : PsoGss2D(ggw), z(ggw.z) {}
-    PsoGss3D(const double &X, const double &Y, const double &Z, const double &W)
-      : PsoGss2D(X,Y,W), z(Z) {}
-    PsoGss3D &operator=(const PsoGss3D &other)
-      {
-        PsoGss2D::operator=(other);
-        z= other.z;
-        return *this;
-      }
-  };
-
-std::ostream& operator<<(std::ostream& o, const PsoGss3D &ggw);
-
-#endif
+    o << "x= " << ggw.x << ", y= " << ggw.y << ", z= " << ggw.z << ", peso= " << ggw.w;
+    return o;
+  }

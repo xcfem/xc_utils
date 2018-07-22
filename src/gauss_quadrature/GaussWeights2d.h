@@ -19,12 +19,30 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-#ifndef	CUADRATURA1D_H
-#define	CUADRATURA1D_H
+#ifndef	PSOGSS2D_H
+#define	PSOGSS2D_H
 
-#include "GaussPoints.h"
+#include <iostream>
+#include "GaussWeights1d.h"
 
-typedef GaussPoints Cuadratura1D;
+//! @brief Estructura para almacenar coordenadas y peso en dos dimensiones.
+struct GaussWeights2D: public GaussWeights1D
+  {
+    double y;
+    GaussWeights2D(void)
+     : GaussWeights1D(), y(0.0) {}
+    GaussWeights2D(const GaussWeights2D& gpw)
+     : GaussWeights1D(gpw), y(gpw.y) {}
+    GaussWeights2D(double X, double Y, double W)
+     : GaussWeights1D(X,W), y(Y) {}
+    GaussWeights2D &operator=(const GaussWeights2D &other)
+      {
+        GaussWeights1D::operator=(other);
+        y= other.y;
+        return *this;
+      }
+  };
 
+std::ostream& operator<<(std::ostream& o, const GaussWeights2D &ggw);
 
 #endif

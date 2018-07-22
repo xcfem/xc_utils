@@ -19,34 +19,29 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-#ifndef	CUADRATURA2D_H
-#define	CUADRATURA2D_H
+#ifndef	PSOGSS3D_H
+#define	PSOGSS3D_H
 
-#include <vector>
-#include "PsoGss2d.h"
-#include "GaussPoints.h"
+#include <iostream>
+#include "GaussWeights2d.h"
 
-typedef std::vector<PsoGss2D> ConjPG2;
-
-
-class Cuadratura2D : public ConjPG2
+struct GaussWeights3D: public GaussWeights2D
   {
-  public:
-    Cuadratura2D( double x1, double x2,double y1, double y2,int nx, int ny);
-    inline size_t Size() const
-      { return size(); }
-    inline const PsoGss2D &Get(int p) const
-      { return (*this)[p]; }
-    friend std::ostream& operator<<(std::ostream& o, const Cuadratura2D& gpts);
+    double z;
+    GaussWeights3D()
+      : GaussWeights2D(), z(0.0) {}
+    GaussWeights3D(const GaussWeights3D& ggw)
+      : GaussWeights2D(ggw), z(ggw.z) {}
+    GaussWeights3D(const double &X, const double &Y, const double &Z, const double &W)
+      : GaussWeights2D(X,Y,W), z(Z) {}
+    GaussWeights3D &operator=(const GaussWeights3D &other)
+      {
+        GaussWeights2D::operator=(other);
+        z= other.z;
+        return *this;
+      }
   };
 
-const Cuadratura2D TwoByTwo(-1.0,1.0,-1.0,1.0,2,2);
+std::ostream& operator<<(std::ostream& o, const GaussWeights3D &ggw);
 
 #endif
-
-
-
-
-
-
-

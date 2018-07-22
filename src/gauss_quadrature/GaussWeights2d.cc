@@ -19,12 +19,12 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PsoGss2d.cc
+//GaussWeights2d.cc
 
-#include "PsoGss2d.h"
+#include "GaussWeights2d.h"
 
 
-std::ostream& operator<<(std::ostream& o, const PsoGss2D &ggw)
+std::ostream& operator<<(std::ostream& o, const GaussWeights2D &ggw)
   {
     o << "x= " << ggw.x << ", y= " << ggw.y << ", peso= " << ggw.w;
     return o;

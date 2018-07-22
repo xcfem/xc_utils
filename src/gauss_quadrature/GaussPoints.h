@@ -26,9 +26,9 @@
 
 #include <cmath>
 #include <vector>
-#include "PsoGss1d.h"
+#include "GaussWeights1d.h"
 
-typedef std::vector<PsoGss1D> ConjPG; //Pesos de Gauss;
+typedef std::vector<GaussWeights1D> ConjPG; //Pesos de Gauss;
 
 
 class GaussPoints : public ConjPG
@@ -38,7 +38,7 @@ class GaussPoints : public ConjPG
     GaussPoints(double x1, double x2, int n);
     inline size_t Size() const
       { return size(); }
-    inline const PsoGss1D &Get(int p) const
+    inline const GaussWeights1D &Get(int p) const
       { return (*this)[p]; }
     friend std::ostream& operator<<(std::ostream& o, const GaussPoints& gpts);
   };
