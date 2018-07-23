@@ -25,7 +25,7 @@
 #include "bool_op_poligono2d.h"
 #include "Poligono2d.h"
 #include "../../d1/Segment2d.h"
-#include "../../d1/Polilinea2d.h"
+#include "../../d1/Polyline2d.h"
 #include "xc_utils/src/geom/d2/HalfPlane2d.h"
 #include <CGAL/Gmpz.h>
 #include <CGAL/Gmpq.h>

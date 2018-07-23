@@ -19,18 +19,18 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Polilinea3d.cc
+//Polyline3d.cc
 
-#include "Polilinea3d.h"
+#include "Polyline3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 
-const Pos3d *Polilinea3d::AgregaVertice(const Pos3d &p)
+const Pos3d *Polyline3d::AgregaVertice(const Pos3d &p)
   {
     GeomObj::list_Pos3d::push_back(p);
     return &(*rbegin());
   }
 
-size_t Polilinea3d::getNumSegments(void) const
+size_t Polyline3d::getNumSegments(void) const
   {
     size_t retval= GetNumVertices();
     if(retval>0)
@@ -39,7 +39,7 @@ size_t Polilinea3d::getNumSegments(void) const
   }
 
 //! @brief Return the segment pointed by the iterator.
-Segment3d Polilinea3d::getSegment(const list_Pos3d::const_iterator &i) const
+Segment3d Polyline3d::getSegment(const list_Pos3d::const_iterator &i) const
   {
     list_Pos3d::const_iterator j= i; j++;
     Segment3d s(*i,*j);
@@ -47,7 +47,7 @@ Segment3d Polilinea3d::getSegment(const list_Pos3d::const_iterator &i) const
   }
 
 //! @brief Return the i-th segment (firt on has index 1).
-Segment3d Polilinea3d::getSegment(const size_t &i) const
+Segment3d Polyline3d::getSegment(const size_t &i) const
   {
     const size_t ns= getNumSegments();
     if(i>ns)
@@ -60,19 +60,19 @@ Segment3d Polilinea3d::getSegment(const size_t &i) const
 
 
 //! @brief Moves the polyline.
-void Polilinea3d::Mueve(const Vector3d &v)
+void Polyline3d::Mueve(const Vector3d &v)
   {
     for(register list_Pos3d::iterator j=begin();j != end();j++)
       (*j)= (*j) + v;
   }
-bool Polilinea3d::In(const Pos3d &p, const double &tol) const
+bool Polyline3d::In(const Pos3d &p, const double &tol) const
   {
     for(register list_Pos3d::const_iterator j=begin();j != end();j++)
       if(getSegment(j).In(p,tol)) return true;
     return false;
   }
 
-GeomObj3d::list_Pos3d Polilinea3d::getIntersection(const Plane &p) const
+GeomObj3d::list_Pos3d Polyline3d::getIntersection(const Plane &p) const
   {
     list_Pos3d retval;
     list_Pos3d::iterator i= retval.end();
@@ -87,7 +87,7 @@ GeomObj3d::list_Pos3d Polilinea3d::getIntersection(const Plane &p) const
     return retval;
   }
 
-GEOM_FT Polilinea3d::GetMax(unsigned short int i) const
+GEOM_FT Polyline3d::GetMax(unsigned short int i) const
 //Return el valor maximo de la coordenada i.
   { 
     if(empty()) return 0.0;
@@ -97,7 +97,7 @@ GEOM_FT Polilinea3d::GetMax(unsigned short int i) const
       mx= std::max((*j)(i),mx);
     return mx;
   }
-GEOM_FT Polilinea3d::GetMin(unsigned short int i) const
+GEOM_FT Polyline3d::GetMin(unsigned short int i) const
 //Return el valor minimo de la coordenada i.
   {
     if(empty()) return 0.0;
@@ -107,20 +107,20 @@ GEOM_FT Polilinea3d::GetMin(unsigned short int i) const
       mn= std::min((*j)(i),mn);
     return mn;
   }
-Polilinea3d Polilinea3d::GetMayores(unsigned short int i,const GEOM_FT &d) const
-//Return una Polilinea3d con los vertices cuya coordenada i
+Polyline3d Polyline3d::GetMayores(unsigned short int i,const GEOM_FT &d) const
+//Return una Polyline3d con los vertices cuya coordenada i
 //es mayor que d.
   {
-    Polilinea3d retval;
+    Polyline3d retval;
     for(register list_Pos3d::const_iterator j=begin();j != end();j++)
       if ((*j)(i) > d) retval.push_back(*j);
     return retval;
   }
-Polilinea3d Polilinea3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
-//Return una Polilinea3d con los vertices cuya coordenada i
+Polyline3d Polyline3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
+//Return una Polyline3d con los vertices cuya coordenada i
 //es menor que d.
   {
-    Polilinea3d retval;
+    Polyline3d retval;
     for(register list_Pos3d::const_iterator j=begin();j != end();j++)
       if ((*j)(i) < d) retval.push_back(*j);
     return retval;
@@ -128,7 +128,7 @@ Polilinea3d Polilinea3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 
 // //! @brief Return the intersections of the 3D polyline with the plane
 // //! given by the equation coord_i= d
-// Polilinea3d::list_Pos3d Polilinea3d::Int(unsigned short int i,const double &d) const
+// Polyline3d::list_Pos3d Polyline3d::Int(unsigned short int i,const double &d) const
 //   {
 //     list_Pos3d l_int; //List of intersections
 // 	list_Pos3d::const_iterator ultimo= end();
@@ -146,9 +146,9 @@ Polilinea3d Polilinea3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 //    //Return a 3D polyline formed with the vertex obtainde from
 //    //cutting this polyline with the plane definde by the
 //    //equation coord_i= d
-// Polilinea3d Polilinea3d::Corta(unsigned short int i,const double &d) const
+// Polyline3d Polyline3d::Corta(unsigned short int i,const double &d) const
 //   {
-//     Polilinea3d result; //List of intersections
+//     Polyline3d result; //List of intersections
 // 	list_Pos3d::const_iterator ultimo= end();
 //     ultimo--;
 //     for(register list_Pos3d::const_iterator j=begin();j != ultimo;j++)
@@ -163,29 +163,29 @@ Polilinea3d Polilinea3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 //      return result;
 //   }
 
-GEOM_FT Polilinea3d::Ix(void) const
+GEOM_FT Polyline3d::Ix(void) const
   {
-    std::cerr << "Polilinea3d Ix() no implementada" << std::endl;
+    std::cerr << "Polyline3d Ix() no implementada" << std::endl;
     return 0.0;
   }
-GEOM_FT Polilinea3d::Iy(void) const
+GEOM_FT Polyline3d::Iy(void) const
   {
-    std::cerr << "Polilinea3d Iy() no implementada" << std::endl;
+    std::cerr << "Polyline3d Iy() no implementada" << std::endl;
     return 0.0;
   }
-GEOM_FT Polilinea3d::Iz(void) const
+GEOM_FT Polyline3d::Iz(void) const
   {
-    std::cerr << "Polilinea3d Iz() no implementada" << std::endl;
+    std::cerr << "Polyline3d Iz() no implementada" << std::endl;
     return 0.0;
   }
 
-//! @brief Suponemos que p es vertice de la Polilinea3d
-//! Return el trozo de Polilinea3d:
+//! @brief Suponemos que p es vertice de la Polyline3d
+//! Return el trozo de Polyline3d:
 //! hasta p si sgn < 0
 //! desde p si sgn >= 0
-Polilinea3d Polilinea3d::Separa(const Pos3d &p,const short int &sgn) const
+Polyline3d Polyline3d::Separa(const Pos3d &p,const short int &sgn) const
   {
-    Polilinea3d result;
+    Polyline3d result;
     GeomObj::list_Pos3d::const_iterator i= find(p);
     if (i == end()) return result;
     if(sgn < 0)
@@ -202,7 +202,7 @@ Polilinea3d Polilinea3d::Separa(const Pos3d &p,const short int &sgn) const
    * @param pMaxDist pointer to the maximum distance of _line[return index].
    * @return the index of the point farthest fromthe segment (t1,t2).
    */
-Polilinea3d::iterator Polilinea3d::getFarthestPointFromSegment(iterator it1, iterator it2, GEOM_FT &pMaxDist)
+Polyline3d::iterator Polyline3d::getFarthestPointFromSegment(iterator it1, iterator it2, GEOM_FT &pMaxDist)
   {
     // Keep track of the point with the maximum distance.
     iterator maxIt = it1;
@@ -230,10 +230,10 @@ Polilinea3d::iterator Polilinea3d::getFarthestPointFromSegment(iterator it1, ite
   }
 
 
-void Polilinea3d::Print(std::ostream &stream) const
+void Polyline3d::Print(std::ostream &stream) const
   {
     if(empty()) return;
-    register Polilinea3d::list_Pos3d::const_iterator i= begin();
+    register Polyline3d::list_Pos3d::const_iterator i= begin();
     stream << *i; i++;
     for(; i!=end(); i++)
       stream << ", " << *i;

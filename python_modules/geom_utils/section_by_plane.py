@@ -18,7 +18,7 @@ class SectionByPlane(object):
 
   def getIntersectionPoints(self,listOfPlines):
     '''Returns the intersection of a list of polylines with the plane.'''
-    retval= geom.Polilinea3d()
+    retval= geom.Polyline3d()
     for pline in listOfPlines:
       lp= pline.getIntersection(self.plane)
       retval.agregaVertice(lp[0])

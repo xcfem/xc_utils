@@ -52,7 +52,7 @@ class Poligono2d: public SupPoligonal2d
     Poligono2d(const GeomObj::list_Pos2d &lv);
     explicit Poligono2d(const CGPoligono_2 &);
     explicit Poligono2d(const std::list<Poligono2d> &lp);
-    explicit Poligono2d(const Polilinea2d &);
+    explicit Poligono2d(const Polyline2d &);
     explicit Poligono2d(const boost::python::list &);
     virtual GeomObj *clon(void) const;
     const CGPoligono_2 &ToCGAL(void) const
@@ -134,14 +134,14 @@ class Poligono2d: public SupPoligonal2d
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
     template <class inputIterator>
     bool In(inputIterator begin, inputIterator end) const;
-    bool In(const Polilinea2d &) const;
+    bool In(const Polyline2d &) const;
     bool In(const Poligono2d &) const;
     bool Overlap(const Pos2d &) const;
     bool Overlap(const Recta2d &r) const;
     bool Overlap(const SemiRecta2d &sr) const;
     bool Overlap(const Segment2d &sg) const;
     bool Overlap(const BND2d &) const;
-    bool Overlap(const Polilinea2d &) const;
+    bool Overlap(const Polyline2d &) const;
     bool Overlap(const Poligono2d &) const;
     bool Overlap(const std::list<Poligono2d> &) const;
     //! @brief Return the position of the i-th vertex.

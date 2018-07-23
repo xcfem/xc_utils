@@ -30,7 +30,7 @@
 class Segment2d;
 class SemiRecta2d;
 class Poligono2d;
-class Polilinea2d;
+class Polyline2d;
 
 
 //! @ingroup GEOM
@@ -92,14 +92,14 @@ class BND2d: public GeomObj2d
     bool In(const Pos2d &) const;
     template <class inputIterator>
     bool In(inputIterator begin, inputIterator end) const;
-    bool In(const Polilinea2d &) const;
+    bool In(const Polyline2d &) const;
     bool In(const Poligono2d &) const;
     bool Overlap(const Pos2d &) const;
     bool Overlap(const Recta2d &r) const;
     bool Overlap(const SemiRecta2d &sr) const;
     bool Overlap(const Segment2d &sg) const;
     bool Overlap(const BND2d &) const;
-    bool Overlap(const Polilinea2d &) const;
+    bool Overlap(const Polyline2d &) const;
     bool Overlap(const Poligono2d &) const;
     bool Overlap(const std::list<Poligono2d> &) const;
     bool Interseca(const Recta2d &r) const;

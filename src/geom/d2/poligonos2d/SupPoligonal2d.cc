@@ -23,7 +23,7 @@
 
 #include "SupPoligonal2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
-#include "xc_utils/src/geom/d1/Polilinea2d.h"
+#include "xc_utils/src/geom/d1/Polyline2d.h"
 #include "xc_utils/src/geom/d2/HalfPlane2d.h"
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
 #include "carsten_steger.h"
@@ -63,13 +63,14 @@ Vector2d SupPoligonal2d::getVertex0Normal(const size_t i) const
     return (n1+n2)/2.0;
   }
 
-//! @brief Return la polilinea cerrada con los vértices of the polygon.
-Polilinea2d SupPoligonal2d::GetPolilinea(void) const
+//! @brief Return the closed polyline formed with the vertices
+//! of the polygon.
+Polyline2d SupPoligonal2d::getPolyline(void) const
   {
-    Polilinea2d retval;
+    Polyline2d retval;
     unsigned int nv= GetNumVertices();
     for(register size_t i= 1; i <= nv; i++) retval.AgregaVertice(Vertice(i));
-    retval.AgregaVertice(Vertice(1)); //Cerramos la polilínea.
+    retval.AgregaVertice(Vertice(1)); //Close the polyline.
     return retval;
   }
 
@@ -318,14 +319,14 @@ void SupPoligonal2d::Plot(Plotter &plotter) const
 //! @brief Return true if the line and the polygonal surface overlap.
 bool SupPoligonal2d::Overlap(const Recta2d &r) const
   {
-    GeomObj::list_Pos2d tmp= GetPolilinea().getIntersection(r);
+    GeomObj::list_Pos2d tmp= getPolyline().getIntersection(r);
     return !tmp.empty();
   }
   
 //! @brief Return true if the ray and the polygonal surface overlap.
 bool SupPoligonal2d::Overlap(const SemiRecta2d &sr) const
   {
-    GeomObj::list_Pos2d tmp= GetPolilinea().getIntersection(sr);
+    GeomObj::list_Pos2d tmp= getPolyline().getIntersection(sr);
     return !tmp.empty();
   }
 
@@ -416,13 +417,13 @@ list<Segment2d> intersection(const SupPoligonal2d &pg,const Recta2d &r)
     list<Segment2d> retval;
     if(pg.GetNumVertices()>0)
       {
-        Polilinea2d pl= pg.GetPolilinea();
+        Polyline2d pl= pg.getPolyline();
         GeomObj::list_Pos2d ptos= intersection(r,pl);
         if(!ptos.empty())
           {
             GeomObj::list_Pos2d ordenados= r.Ordena(ptos);
 
-            Polilinea2d tmp;
+            Polyline2d tmp;
             tmp.assign(ordenados.begin(),ordenados.end());
             const size_t ns= tmp.getNumSegments();
             for(size_t i= 1;i<=ns;i++)
@@ -447,7 +448,7 @@ list<Segment2d> intersection(const SupPoligonal2d &pg,const SemiRecta2d &sr)
     list<Segment2d> retval;
     if(!pg.GetNumVertices()) return retval;
 
-    Polilinea2d pl= pg.GetPolilinea();
+    Polyline2d pl= pg.getPolyline();
     
     GeomObj::list_Pos2d ptos= intersection(sr,pl);
     const Pos2d org= sr.Origen();
@@ -456,7 +457,7 @@ list<Segment2d> intersection(const SupPoligonal2d &pg,const SemiRecta2d &sr)
 
     GeomObj::list_Pos2d ordenados= sr.Ordena(ptos);
 
-    Polilinea2d tmp;
+    Polyline2d tmp;
     tmp.assign(ordenados.begin(),ordenados.end());
     const size_t ns= tmp.getNumSegments();
     for(size_t i= 1;i<=ns;i++)
@@ -479,7 +480,7 @@ list<Segment2d> intersection(const SupPoligonal2d &pg,const Segment2d &sg)
     list<Segment2d> retval;
     if(!pg.GetNumVertices()) return retval;
 
-    Polilinea2d pl= pg.GetPolilinea();
+    Polyline2d pl= pg.getPolyline();
     
     GeomObj::list_Pos2d ptos= intersection(sg,pl);
     const Pos2d org= sg.Origen();
@@ -491,7 +492,7 @@ list<Segment2d> intersection(const SupPoligonal2d &pg,const Segment2d &sg)
 
     GeomObj::list_Pos2d ordenados= sg.Ordena(ptos);
 
-    Polilinea2d tmp;
+    Polyline2d tmp;
     tmp.assign(ordenados.begin(),ordenados.end());
     const size_t ns= tmp.getNumSegments();
     for(size_t i= 1;i<=ns;i++)

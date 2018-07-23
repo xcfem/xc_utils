@@ -27,7 +27,7 @@
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/d1/SemiRecta3d.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
-#include "xc_utils/src/geom/d1/Polilinea3d.h"
+#include "xc_utils/src/geom/d1/Polyline3d.h"
 #include "xc_utils/src/geom/d2/Poligono3d.h"
 #include "xc_utils/src/geom/d2/Triangle3d.h"
 #include "xc_utils/src/geom/d3/GmGrupo3d.h"
@@ -635,11 +635,11 @@ GeomObj3d::list_Pos3d intersection(const Segment3d &sg, const Plane &p)
   { return intersection(p,sg); }
 
 //! @brief Return the intersection(s) of the plane with the polyline.
-GeomObj3d::list_Pos3d intersection(const Plane &p, const Polilinea3d &pl)
+GeomObj3d::list_Pos3d intersection(const Plane &p, const Polyline3d &pl)
   { return pl.getIntersection(p); }
 
 //! @brief Return the intersection(s) of the polyline with the plane.
-GeomObj3d::list_Pos3d intersection(const Polilinea3d &pl, const Plane &p)
+GeomObj3d::list_Pos3d intersection(const Polyline3d &pl, const Plane &p)
   { return pl.getIntersection(p); }
 
 Pos3d intersection_point(const Plane &p, const Recta3d &r)

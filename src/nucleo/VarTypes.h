@@ -48,7 +48,7 @@
 #include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/PoligonoConAgujeros2d.h"
 #include "xc_utils/src/geom/pos_vec/ListaPos2d.h"
-#include "xc_utils/src/geom/d1/Polilinea2d.h"
+#include "xc_utils/src/geom/d1/Polyline2d.h"
 #include "xc_utils/src/geom/pos_vec/ListaPos3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"

@@ -5,7 +5,7 @@ import xc_base
 import geom
 import math
 
-polA=geom.Polilinea3d()
+polA=geom.Polyline3d()
 
 polA.agregaVertice(geom.Pos3d(0,0,0)) #1
 polA.agregaVertice(geom.Pos3d(0.001,0.5,0.09)) #2 (to erase)
@@ -18,7 +18,7 @@ polA.agregaVertice(geom.Pos3d(0,1,2)) #8
 polA.agregaVertice(geom.Pos3d(0,1,1)) #9
 polA.agregaVertice(geom.Pos3d(0,0,1)) #10
 
-polB= geom.Polilinea3d(polA)
+polB= geom.Polyline3d(polA)
 
 polB.agregaVertice(geom.Pos3d(0,0,0)) #11 CAN BE CLOSED.
 

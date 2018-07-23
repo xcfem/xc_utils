@@ -27,7 +27,7 @@
 #include "xc_utils/src/geom/d1/Recta2d.h"
 #include "xc_utils/src/geom/d1/SemiRecta2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
-#include "xc_utils/src/geom/d1/Polilinea2d.h"
+#include "xc_utils/src/geom/d1/Polyline2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
 #include <iostream>
 #include <plotter.h>
@@ -115,7 +115,7 @@ bool BND2d::In(const Pos2d &p) const
   }
 
 //! @brief Return verdadero si el BND contiene a la polilínea.
-bool BND2d::In(const Polilinea2d &p) const
+bool BND2d::In(const Polyline2d &p) const
   { return In(p.begin(),p.end()); }
 
 //! @brief Return verdadero si el BND contiene al polígono.
@@ -143,11 +143,11 @@ bool BND2d::Overlap(const BND2d &bnd) const
   { return do_intersect(cgrectg,bnd.cgrectg); }
 
 //! @brief Return true if the polyline and the boundary overlap.
-bool BND2d::Overlap(const Polilinea2d &p) const
+bool BND2d::Overlap(const Polyline2d &p) const
   {
     bool retval= Overlap(p.begin(),p.end());
     if(!retval)
-      for(Polilinea2d::const_iterator j=p.begin();j!=p.end();j++)
+      for(Polyline2d::const_iterator j=p.begin();j!=p.end();j++)
         if(Overlap(p.getSegment(j)))
           {
             retval= true;

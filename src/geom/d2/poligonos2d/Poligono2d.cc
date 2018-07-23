@@ -26,7 +26,7 @@
 #include<CGAL/create_offset_polygons_2.h>
 #include "xc_utils/src/geom/trf/Trf2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
-#include "xc_utils/src/geom/d1/Polilinea2d.h"
+#include "xc_utils/src/geom/d1/Polyline2d.h"
 #include "xc_utils/src/geom/d2/HalfPlane2d.h"
 #include "xc_utils/src/geom/d2/BND2d.h"
 
@@ -55,10 +55,10 @@ Poligono2d::Poligono2d(const GeomObj::list_Pos2d &lv)
   }
 
 //! @brief Constructor.
-Poligono2d::Poligono2d(const Polilinea2d &p)
+Poligono2d::Poligono2d(const Polyline2d &p)
   {
     //XXX Falla si la linea se interseca a sí misma.
-    for(Polilinea2d::const_iterator i= p.begin(); i!=p.begin(); i++)
+    for(Polyline2d::const_iterator i= p.begin(); i!=p.begin(); i++)
       push_back(*i);
   }
 
@@ -121,11 +121,11 @@ bool Poligono2d::In(const Pos2d &p, const double &tol) const
     return false;
   }
 
-//! @brief Return verdadero si la polilinea está contenida en el polígono.
-bool Poligono2d::In(const Polilinea2d &p) const
+//! @brief Return true if the polyline is inside the polygon.
+bool Poligono2d::In(const Polyline2d &p) const
   { return In(p.begin(),p.end()); }
 
-//! @brief Return verdadero si el polígono está contenido en éste.
+//! @brief Return true if this polygon contains the polygon argument.
 bool Poligono2d::In(const Poligono2d &p) const
   { return In(p.vertices_begin(),p.vertices_end()); }
 
@@ -153,7 +153,7 @@ bool Poligono2d::Overlap(const Segment2d &sg) const
       retval= true;
     else
       {
-        GeomObj::list_Pos2d tmp= GetPolilinea().getIntersection(sg);
+        GeomObj::list_Pos2d tmp= getPolyline().getIntersection(sg);
         retval= !tmp.empty();
       }
     return retval;
@@ -164,11 +164,11 @@ bool Poligono2d::Overlap(const BND2d &bnd) const
   { return bnd.Overlap(*this); }
 
 //! @brief Return true if the polyline and the polygon overlap.
-bool Poligono2d::Overlap(const Polilinea2d &p) const
+bool Poligono2d::Overlap(const Polyline2d &p) const
   {
     bool retval= Overlap(p.begin(),p.end());
     if(!retval)
-      for(Polilinea2d::const_iterator j=p.begin();j!=p.end();j++)
+      for(Polyline2d::const_iterator j=p.begin();j!=p.end();j++)
         if(Overlap(p.getSegment(j)))
           {
             retval= true;

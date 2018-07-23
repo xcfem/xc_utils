@@ -30,7 +30,7 @@ class Recta2d;
 class SemiRecta2d;
 class Segment2d;
 class Poligono2d;
-class Polilinea2d;
+class Polyline2d;
 
 
 //! @ingroup GEOM
@@ -67,7 +67,7 @@ class SupPoligonal2d: public Superficie2d
     GeomObj::list_Pos2d getVertices(void) const;
     Vector2d getLado0Normal(const size_t i) const;
     Vector2d getVertex0Normal(const size_t i) const;
-    Polilinea2d GetPolilinea(void) const;
+    Polyline2d getPolyline(void) const;
     virtual GEOM_FT getLength(void) const;
     inline GEOM_FT Perimetro(void) const
       { return getLength(); }

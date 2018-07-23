@@ -4,8 +4,8 @@ import xc_base
 import geom
 import math
 
-pol1=geom.Polilinea2d()
-pol2=geom.Polilinea2d()
+pol1=geom.Polyline2d()
+pol2=geom.Polyline2d()
 
 pol1.agregaVertice(geom.Pos2d(0,0))
 pol1.agregaVertice(geom.Pos2d(1,0))

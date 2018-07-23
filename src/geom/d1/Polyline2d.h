@@ -19,7 +19,7 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Polilinea2d.
+//Polyline2d.
 
 #ifndef POLILINEA2D_H
 #define POLILINEA2D_H
@@ -35,15 +35,15 @@ class ListaPos2d;
 //! @ingroup GEOM
 //
 //! @brief Polilínea en dos dimensiones.
-class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
+class Polyline2d : public Linea2d, public GeomObj::list_Pos2d
   {
   public:
-    Polilinea2d(void);
-    explicit Polilinea2d(const GeomObj::list_Pos2d &);
-    explicit Polilinea2d(const ListaPos2d &);
+    Polyline2d(void);
+    explicit Polyline2d(const GeomObj::list_Pos2d &);
+    explicit Polyline2d(const ListaPos2d &);
 
     virtual GeomObj *clon(void) const
-      { return new Polilinea2d(*this); }
+      { return new Polyline2d(*this); }
     const GeomObj::list_Pos2d &getVertices(void) const
       { return *this; }
     inline size_t GetNumVertices(void) const
@@ -83,29 +83,29 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     //Return the maximum value of the i coordinate.
     virtual GEOM_FT GetMin(unsigned short int i) const;
     //Return the minimum value of the i coordinate.
-    Polilinea2d GetMayores(unsigned short int i,const GEOM_FT &d) const;
-    //Return una Polilinea2d con los vertices cuya coordenada i
+    Polyline2d GetMayores(unsigned short int i,const GEOM_FT &d) const;
+    //Return una Polyline2d con los vertices cuya coordenada i
     //es mayor que d.
-    Polilinea2d GetMenores(unsigned short int i,const GEOM_FT &d) const;
-    //Return una Polilinea2d con los vertices cuya coordenada i
+    Polyline2d GetMenores(unsigned short int i,const GEOM_FT &d) const;
+    //Return una Polyline2d con los vertices cuya coordenada i
     //es menor que d.
     const Pos2d &Vertice(const size_t &i) const;
     Segment2d getSegment(const const_iterator &i) const;
     Segment2d getSegment(const size_t &i) const;
 /*     virtual list_Pos2d Int(unsigned short int i, const double d) const */
 /*       { */
-/*         cerr << "Polilinea2d Int(i,d) not implemented" << endl; */
+/*         cerr << "Polyline2d Int(i,d) not implemented" << endl; */
 /*         return list_Pos2d(); */
 /*       } */
-    Polilinea2d Offset(const GEOM_FT &d) const;
+    Polyline2d Offset(const GEOM_FT &d) const;
     //! @brief Return the intersections of the polyline with
     //! the line coord_i= d
     // list_Pos2d Int(unsigned short int i,const GEOM_FT &d) const;
     list_Pos2d getIntersection(const Recta2d &r) const;
     list_Pos2d getIntersection(const SemiRecta2d &sr) const;
     list_Pos2d getIntersection(const Segment2d &sr) const;
-    //Polilinea2d Corta(unsigned short int i,const GEOM_FT &d) const;
-    Polilinea2d Separa(const Pos2d &p,const short int &sgn) const;
+    //Polyline2d Corta(unsigned short int i,const GEOM_FT &d) const;
+    Polyline2d Separa(const Pos2d &p,const short int &sgn) const;
     Pos2d getCenterOfMass(void) const
       { return GeomObj::list_Pos2d::getCenterOfMass(); }
 
@@ -115,12 +115,12 @@ class Polilinea2d : public Linea2d, public GeomObj::list_Pos2d
     void Plot(Plotter &) const;
   };
 
-GeomObj::list_Pos2d intersection(const Polilinea2d &p,const Recta2d &r);
-GeomObj::list_Pos2d intersection(const Polilinea2d &p,const SemiRecta2d &);
-GeomObj::list_Pos2d intersection(const Polilinea2d &p,const Segment2d &);
-GeomObj::list_Pos2d intersection(const Recta2d &,const Polilinea2d &);
-GeomObj::list_Pos2d intersection(const SemiRecta2d &,const Polilinea2d &p);
-GeomObj::list_Pos2d intersection(const Segment2d &,const Polilinea2d &p);
+GeomObj::list_Pos2d intersection(const Polyline2d &p,const Recta2d &r);
+GeomObj::list_Pos2d intersection(const Polyline2d &p,const SemiRecta2d &);
+GeomObj::list_Pos2d intersection(const Polyline2d &p,const Segment2d &);
+GeomObj::list_Pos2d intersection(const Recta2d &,const Polyline2d &);
+GeomObj::list_Pos2d intersection(const SemiRecta2d &,const Polyline2d &p);
+GeomObj::list_Pos2d intersection(const Segment2d &,const Polyline2d &p);
 
 #endif
 

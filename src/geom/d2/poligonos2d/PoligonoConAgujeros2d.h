@@ -30,7 +30,7 @@ class Recta2d;
 class SemiRecta2d;
 class Segment2d;
 class Poligono2d;
-class Polilinea2d;
+class Polyline2d;
 
 
 //! @ingroup GEOM

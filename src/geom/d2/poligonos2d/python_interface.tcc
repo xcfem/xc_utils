@@ -33,7 +33,7 @@ class_<SupPoligonal2d, bases<Superficie2d>, boost::noncopyable >("SupPoligonal2d
   .def("getLado",getSide0Segment)
   .def("getNormalLado",&SupPoligonal2d::getLado0Normal)
   .def("getNormalVertice",&SupPoligonal2d::getVertex0Normal)
-  .def("getPolilinea",&SupPoligonal2d::GetPolilinea)
+  .def("getPolyline",&SupPoligonal2d::getPolyline)
   .def("getApproxTangentPositions",&SupPoligonal2d::getApproxTangentPositions,"Return the points for which the polygon is almost tangent to the direction argument.")
   ;
 
@@ -52,7 +52,7 @@ Segment2d (Poligono2d::*clipSemiRecta)(const SemiRecta2d &) const=&Poligono2d::C
 Segment2d (Poligono2d::*clipSegment)(const Segment2d &) const=&Poligono2d::Clip;
 class_<Poligono2d, Poligono2d *, bases<SupPoligonal2d> >("Poligono2d")
   .def(init<>())
-  .def(init<Polilinea2d>())
+  .def(init<Polyline2d>())
   .def(init<Poligono2d>())
   .def(init<boost::python::list>())
   .def("getNumVertices",&Poligono2d::GetNumVertices)

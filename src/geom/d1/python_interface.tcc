@@ -89,28 +89,28 @@ class_<Recta3d, bases<Linea3d> >("Recta3d")
   .def("distPto", &Recta3d::dist,"return the distance to the point.")
  ;
 
-GeomObj::list_Pos2d (Polilinea2d::*intersectionWithLine)(const Recta2d &) const= &Polilinea2d::getIntersection;
-GeomObj::list_Pos2d (Polilinea2d::*intersectionWithRay)(const SemiRecta2d &) const= &Polilinea2d::getIntersection;
-GeomObj::list_Pos2d (Polilinea2d::*intersectionWithSegment)(const Segment2d &) const= &Polilinea2d::getIntersection;
-void (Polilinea2d::*simplify2DPoly)(GEOM_FT epsilon)= &Polilinea2d::simplify;
-Segment2d (Polilinea2d::*get2DSegment)(const size_t &) const= &Polilinea2d::getSegment;
-class_<Polilinea2d, bases<Linea2d, poliPos2d> >("Polilinea2d")
+GeomObj::list_Pos2d (Polyline2d::*intersectionWithLine)(const Recta2d &) const= &Polyline2d::getIntersection;
+GeomObj::list_Pos2d (Polyline2d::*intersectionWithRay)(const SemiRecta2d &) const= &Polyline2d::getIntersection;
+GeomObj::list_Pos2d (Polyline2d::*intersectionWithSegment)(const Segment2d &) const= &Polyline2d::getIntersection;
+void (Polyline2d::*simplify2DPoly)(GEOM_FT epsilon)= &Polyline2d::simplify;
+Segment2d (Polyline2d::*get2DSegment)(const size_t &) const= &Polyline2d::getSegment;
+class_<Polyline2d, bases<Linea2d, poliPos2d> >("Polyline2d")
   .def(init<>())
   .def(init<ListaPos2d>())
-  .def(init<Polilinea2d>())
-  .def("agregaVertice", &Polilinea2d::AgregaVertice,return_internal_reference<>() )
-  .def("getNumVertices", &Polilinea2d::GetNumVertices)
-  .def("getNumSegments", &Polilinea2d::getNumSegments)
-  .def("getIx", &Polilinea2d::Ix)
-  .def("getIy", &Polilinea2d::Iy)
-  .def("getIz", &Polilinea2d::Iz)
-  .def("getPxy", &Polilinea2d::Pxy)
-  .def("getLength", &Polilinea2d::getLength,"Return the length of the polyline.")
-  .def("offset", &Polilinea2d::Offset)
+  .def(init<Polyline2d>())
+  .def("agregaVertice", &Polyline2d::AgregaVertice,return_internal_reference<>() )
+  .def("getNumVertices", &Polyline2d::GetNumVertices)
+  .def("getNumSegments", &Polyline2d::getNumSegments)
+  .def("getIx", &Polyline2d::Ix)
+  .def("getIy", &Polyline2d::Iy)
+  .def("getIz", &Polyline2d::Iz)
+  .def("getPxy", &Polyline2d::Pxy)
+  .def("getLength", &Polyline2d::getLength,"Return the length of the polyline.")
+  .def("offset", &Polyline2d::Offset)
   .def("getIntersectionWithLine", intersectionWithLine)
   .def("getIntersectionWithRay", intersectionWithRay)
   .def("getIntersectionWithSegment", intersectionWithSegment)
-  .def("isClosed",&Polilinea2d::isClosed,"returns true if the last vertex is coincident with the first one -dist(first,last)<tol*length-.")
+  .def("isClosed",&Polyline2d::isClosed,"returns true if the last vertex is coincident with the first one -dist(first,last)<tol*length-.")
   .def("simplify", simplify2DPoly,"simplification of the polyline (Douglas-Peucker algorithm).")
   .def("getSegment", get2DSegment, "return the i-th segment.")  
   ;
@@ -137,24 +137,24 @@ class_<Segment2d, bases<Linea2d> >("Segment2d")
   .def("offsetVector",OffsetSegmentVector)
   .def("offsetDouble",OffsetSegmentDouble);
 
-void (Polilinea3d::*simplify3DPoly)(GEOM_FT epsilon)= &Polilinea3d::simplify;
-Segment3d (Polilinea3d::*get3DSegment)(const size_t &) const= &Polilinea3d::getSegment;
-class_<Polilinea3d, bases<Linea3d, poliPos3d> >("Polilinea3d")
+void (Polyline3d::*simplify3DPoly)(GEOM_FT epsilon)= &Polyline3d::simplify;
+Segment3d (Polyline3d::*get3DSegment)(const size_t &) const= &Polyline3d::getSegment;
+class_<Polyline3d, bases<Linea3d, poliPos3d> >("Polyline3d")
   .def(init<>())
 //.def(init<ListaPos3d>())
-  .def(init<Polilinea3d>())
-  .def("agregaVertice", &Polilinea3d::AgregaVertice,return_internal_reference<>() )
-  .def("getNumVertices", &Polilinea3d::GetNumVertices)
-  .def("getNumSegments", &Polilinea3d::getNumSegments)
-  .def("getLength", &Polilinea3d::getLength,"Return the length of the polyline.")
-  .def("getIntersection", &Polilinea3d::getIntersection)
-  .def("isClosed",&Polilinea3d::isClosed,"returns true if the last vertex is coincident with the first one -dist(first,last)<tol*length-.")
+  .def(init<Polyline3d>())
+  .def("agregaVertice", &Polyline3d::AgregaVertice,return_internal_reference<>() )
+  .def("getNumVertices", &Polyline3d::GetNumVertices)
+  .def("getNumSegments", &Polyline3d::getNumSegments)
+  .def("getLength", &Polyline3d::getLength,"Return the length of the polyline.")
+  .def("getIntersection", &Polyline3d::getIntersection)
+  .def("isClosed",&Polyline3d::isClosed,"returns true if the last vertex is coincident with the first one -dist(first,last)<tol*length-.")
   .def("simplify", simplify3DPoly,"simplification of the polyline (Douglas-Peucker algorithm).")
-  .def("getCenterOfMass", &Polilinea3d::getCenterOfMass)
+  .def("getCenterOfMass", &Polyline3d::getCenterOfMass)
   .def("getSegment", get3DSegment, "return the i-th segment.")
   ;
 
-typedef std::deque<Polilinea3d> dq_polyline3D;
+typedef std::deque<Polyline3d> dq_polyline3D;
 
 class_<dq_polyline3D>("dq_polyline3D")
   .def(vector_indexing_suite<dq_polyline3D>() )

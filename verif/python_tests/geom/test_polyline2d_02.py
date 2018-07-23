@@ -15,12 +15,12 @@ vertices= [  geom.Pos2d(0,0), #1
   geom.Pos2d(0,1) #10
   ]
 
-polA= geom.Polilinea2d()
+polA= geom.Polyline2d()
 
 for v in vertices:
   polA.agregaVertice(v)
 
-polB= geom.Polilinea2d(polA)
+polB= geom.Polyline2d(polA)
 
 polB.agregaVertice(geom.Pos2d(0,0)) #11 CAN BE CLOSED.
 

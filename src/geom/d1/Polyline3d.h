@@ -19,7 +19,7 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Polilinea3d.
+//Polyline3d.
 
 #ifndef POLILINEA3D_H
 #define POLILINEA3D_H
@@ -32,12 +32,12 @@
 //! @ingroup GEOM
 //
 //! @brief Polilínea en 3 dimensiones.
-class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
+class Polyline3d : public Linea3d, public GeomObj::list_Pos3d
   {
   public:
-    Polilinea3d(void): Linea3d(), GeomObj::list_Pos3d() {}
+    Polyline3d(void): Linea3d(), GeomObj::list_Pos3d() {}
     virtual GeomObj *clon(void) const
-      { return new Polilinea3d(*this); }
+      { return new Polyline3d(*this); }
     virtual void Mueve(const Vector3d &);
     const GeomObj::list_Pos3d &getVertices(void) const
       { return *this; }
@@ -65,18 +65,18 @@ class Polilinea3d : public Linea3d, public GeomObj::list_Pos3d
     //Return the maximum value of the i coordinate.
     virtual GEOM_FT GetMin(unsigned short int i) const;
     //Return the minimum value of the i coordinate.
-    Polilinea3d GetMayores(unsigned short int i,const GEOM_FT &d) const;
-    //Return una Polilinea3d con los vertices cuya coordenada i
+    Polyline3d GetMayores(unsigned short int i,const GEOM_FT &d) const;
+    //Return una Polyline3d con los vertices cuya coordenada i
     //es mayor que d.
-    Polilinea3d GetMenores(unsigned short int i,const GEOM_FT &d) const;
-    //Return una Polilinea3d con los vertices cuya coordenada i
+    Polyline3d GetMenores(unsigned short int i,const GEOM_FT &d) const;
+    //Return una Polyline3d con los vertices cuya coordenada i
     //es menor que d.
     Segment3d getSegment(const list_Pos3d::const_iterator &) const;
     Segment3d getSegment(const size_t &) const;
     //list_Pos3d Int(unsigned short int i,const GEOM_FT &d) const;
     list_Pos3d getIntersection(const Plane &) const;
-    //Polilinea3d Corta(unsigned short int i,const GEOM_FT &d) const;
-    Polilinea3d Separa(const Pos3d &p,const short int &sgn) const;
+    //Polyline3d Corta(unsigned short int i,const GEOM_FT &d) const;
+    Polyline3d Separa(const Pos3d &p,const short int &sgn) const;
     Pos3d getCenterOfMass(void) const
       { return GeomObj::list_Pos3d::getCenterOfMass(); }
 
