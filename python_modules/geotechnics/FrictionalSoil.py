@@ -2,7 +2,7 @@
 from __future__ import division
 import math
 from scipy.constants import g
-from geotecnia import mononobe_okabe
+from geotechnics import mononobe_okabe
 
 '''FrictionalSoil.py: frictional (or cohesionless) soil model.'''
 

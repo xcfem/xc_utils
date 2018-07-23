@@ -4,7 +4,7 @@
    Seventh edition. Braja M. Das page 231
    ISBN-13: 978-0-495-66812-1
 '''
-from geotecnia import settlement
+from geotechnics import settlement
 
 __author__= "Luis C. Pérez Tato (LCPT) and Ana Ortega (AOO)"
 __copyright__= "Copyright 2017, LCPT and AOO"

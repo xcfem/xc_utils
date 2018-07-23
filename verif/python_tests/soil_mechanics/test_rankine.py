@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from geotecnia import earth_pressure
+from geotechnics import earth_pressure
 import math
 
 Kp= earth_pressure.RankineSoil(math.pi/6.0).Kp()

@@ -12,7 +12,7 @@ __license__= "GPL"
 __version__= "3.0"
 __email__= "l.pereztato@gmail.com"
 
-from geotecnia import FrictionalCohesionalSoil as fcs
+from geotechnics import FrictionalCohesionalSoil as fcs
 import math
 
 shortTermSoil= fcs.FrictionalCohesionalSoil(0.0,c=10.3,rho= (2.2-1.0)/9.81)

@@ -4,7 +4,7 @@
    "Principios de ingeniería de cimentaciones." Braja M. Das, página 353 y
    de la tabla 10.3 de Geotécnia y Cimientos II. Jiménez Salas, página 683
 '''
-from geotecnia import earth_pressure
+from geotechnics import earth_pressure
 import math
 
 ka1= earth_pressure.ka_coulomb(math.radians(0),math.radians(0),math.radians(28),math.radians(0))

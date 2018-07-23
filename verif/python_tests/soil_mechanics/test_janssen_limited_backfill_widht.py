@@ -4,7 +4,7 @@
    paper: "Narrow backfill lateral earth pressure." Ahmad Al-Hassan et al.
    page 3
 '''
-from geotecnia import earth_pressure
+from geotechnics import earth_pressure
 import math
 
 gammaSoil= 1.6*9.81

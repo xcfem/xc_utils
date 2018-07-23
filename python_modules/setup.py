@@ -47,6 +47,6 @@ print pth_to_libs
 setup(name='LcmdModules',
       version='0.12.0',
       author='Luis C. Pérez Tato',
-      packages=['loadCombinationUtils','geom_utils','geotecnia','geotecnia.cimientos','geotecnia.tuneles','miscUtils','sqliteUtils','latex','vtkUtils'],
+      packages=['loadCombinationUtils','geom_utils','geotechnics','geotechnics.cimientos','geotechnics.tuneles','miscUtils','sqliteUtils','latex','vtkUtils'],
       data_files=[(pth_to_libs, ['extensions/xc_base.so','extensions/loadCombinations.so','extensions/geom.so','extensions/xcGnuGts.so'])]
      )

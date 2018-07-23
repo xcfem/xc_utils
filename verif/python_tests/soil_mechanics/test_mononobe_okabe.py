@@ -5,7 +5,7 @@ from __future__ import division
 import xc_base
 import geom
 import math
-from geotecnia import mononobe_okabe
+from geotechnics import mononobe_okabe
 
 
 H= 7.6 # height of the structure.
