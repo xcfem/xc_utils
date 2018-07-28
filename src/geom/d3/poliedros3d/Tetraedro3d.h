@@ -28,7 +28,7 @@
 #include "PolyhedronBase.h"
 #include "MapPoligonos.h"
 
-class SemiEspacio3d;
+class HalfSpace3d;
 class Poliedro3d;
 
 //! @ingroup GEOM
@@ -40,7 +40,7 @@ class Tetraedro3d: public PolyhedronBase
   public:
     Tetraedro3d(void);
     Tetraedro3d(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);
-    Tetraedro3d(const SemiEspacio3d &, const SemiEspacio3d &,const SemiEspacio3d &, const SemiEspacio3d &);
+    Tetraedro3d(const HalfSpace3d &, const HalfSpace3d &,const HalfSpace3d &, const HalfSpace3d &);
     GeomObj *clon(void) const
       { return new Tetraedro3d(*this); }
     Poliedro3d getPoliedro3d(void) const;

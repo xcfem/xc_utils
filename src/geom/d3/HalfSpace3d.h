@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SemiEspacio3d.h
+//HalfSpace3d.h
 
-#ifndef SEMIESPACIO3D_H
-#define SEMIESPACIO3D_H
+#ifndef HALFSPACE3D_H
+#define HALFSPACE3D_H
 
 
 #include "xc_utils/src/geom/d2/Plane.h"
@@ -40,21 +40,21 @@
 //! A*x_i+B*y_i+C*z_i+D <= 0
 //!
 //! with the point coordinates: (x_i,y_i,z_i).
-class SemiEspacio3d : public GeomObj3d
+class HalfSpace3d : public GeomObj3d
   {
     Plane lim; 
   public:
-    SemiEspacio3d(const Plane &p= Plane());
+    HalfSpace3d(const Plane &p= Plane());
     const Plane &getBoundaryPlane(void) const;
     void setBoundaryPlane(const Plane &);
     
     virtual GeomObj *clon(void) const
-      { return new SemiEspacio3d(*this); }
+      { return new HalfSpace3d(*this); }
     inline void Swap(void)
       { lim.Swap(); }
-    SemiEspacio3d GetSwap(void) const
+    HalfSpace3d GetSwap(void) const
       {
-        SemiEspacio3d retval(*this);
+        HalfSpace3d retval(*this);
         retval.Swap();
         return retval;
       }
@@ -73,11 +73,11 @@ class SemiEspacio3d : public GeomObj3d
     virtual GEOM_FT dist(const Pos3d &p) const;
     virtual GEOM_FT dist2(const Pos3d &p) const;
 
-    GEOM_FT getAngle(const SemiEspacio3d &) const;
+    GEOM_FT getAngle(const HalfSpace3d &) const;
     GEOM_FT getAngle(const Plane &) const;
     GEOM_FT getAngle(const Vector3d &) const;
 
-    Recta3d getLima(const SemiEspacio3d &) const;
+    Recta3d getLima(const HalfSpace3d &) const;
 
     virtual unsigned short int Dimension(void) const;
     virtual GEOM_FT getLength(void) const;
@@ -88,26 +88,26 @@ class SemiEspacio3d : public GeomObj3d
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Pxy(void) const;
     virtual GEOM_FT Iz(void) const;
-    friend bool operator==(const SemiEspacio3d &r1,const SemiEspacio3d &r2);
+    friend bool operator==(const HalfSpace3d &r1,const HalfSpace3d &r2);
     void Print(std::ostream &os) const;
   };
 
-bool operator==(const SemiEspacio3d &r1,const SemiEspacio3d &r2);
+bool operator==(const HalfSpace3d &r1,const HalfSpace3d &r2);
 
-inline GEOM_FT dist(const Pos3d &p,const SemiEspacio3d &r)
+inline GEOM_FT dist(const Pos3d &p,const HalfSpace3d &r)
   { return r.dist(p); }
-inline GEOM_FT dist(const SemiEspacio3d &r,const Pos3d &p)
+inline GEOM_FT dist(const HalfSpace3d &r,const Pos3d &p)
   { return dist(p,r); }
-inline bool operator!=(const SemiEspacio3d &r1,const SemiEspacio3d &r2)
+inline bool operator!=(const HalfSpace3d &r1,const HalfSpace3d &r2)
   { return !(r1==r2); }
 
-TripletMap<Pos3d> intersection_points(const std::deque<SemiEspacio3d> &);
-TripletMap<Pos3d> vertices_poliedro(const std::deque<SemiEspacio3d> &, const double &tol= 1e-10);
-std::deque<Recta3d> rectas_intersection(const std::deque<SemiEspacio3d> &);
-std::deque<Vector3d> vectores_normales(const std::deque<SemiEspacio3d> &);
+TripletMap<Pos3d> intersection_points(const std::deque<HalfSpace3d> &);
+TripletMap<Pos3d> vertices_poliedro(const std::deque<HalfSpace3d> &, const double &tol= 1e-10);
+std::deque<Recta3d> rectas_intersection(const std::deque<HalfSpace3d> &);
+std::deque<Vector3d> vectores_normales(const std::deque<HalfSpace3d> &);
 
-GEOM_FT angle(const SemiEspacio3d &,const SemiEspacio3d &);
-GEOM_FT angle(const Vector3d &,const SemiEspacio3d &);
-GEOM_FT angle(const SemiEspacio3d &,const Vector3d &);
+GEOM_FT angle(const HalfSpace3d &,const HalfSpace3d &);
+GEOM_FT angle(const Vector3d &,const HalfSpace3d &);
+GEOM_FT angle(const HalfSpace3d &,const Vector3d &);
 
 #endif

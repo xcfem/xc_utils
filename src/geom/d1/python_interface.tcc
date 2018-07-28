@@ -22,8 +22,8 @@
 //python_interface.cxx
 
 class_<Linea2d, bases<GeomObj2d>, boost::noncopyable  >("Linea2d", no_init);
-class_<SemiRecta2d, bases<Linea2d> >("SemiRecta2d")
-  .def(init<SemiRecta2d>());
+class_<Ray2d, bases<Linea2d> >("Ray2d")
+  .def(init<Ray2d>());
 
 
 Recta2d (Recta2d::*OffsetVector)(const Vector2d &v) const= &Recta2d::Offset;
@@ -49,8 +49,8 @@ class_<Recta2d, bases<Linea2d> >("Recta2d")
 
 class_<Linea3d, bases<GeomObj3d>, boost::noncopyable  >("Linea3d", no_init);
 
-class_<SemiRecta3d, bases<Linea3d> >("Ray3d")
-  .def(init<SemiRecta3d>());
+class_<Ray3d, bases<Linea3d> >("Ray3d")
+  .def(init<Ray3d>());
 
 GEOM_FT (Segment3d::*AngleVector3D)(const Vector3d &v) const= &Segment3d::getAngle;
 GEOM_FT (Segment3d::*AngleSegment3D)(const Segment3d &v) const= &Segment3d::getAngle;
@@ -90,7 +90,7 @@ class_<Recta3d, bases<Linea3d> >("Recta3d")
  ;
 
 GeomObj::list_Pos2d (Polyline2d::*intersectionWithLine)(const Recta2d &) const= &Polyline2d::getIntersection;
-GeomObj::list_Pos2d (Polyline2d::*intersectionWithRay)(const SemiRecta2d &) const= &Polyline2d::getIntersection;
+GeomObj::list_Pos2d (Polyline2d::*intersectionWithRay)(const Ray2d &) const= &Polyline2d::getIntersection;
 GeomObj::list_Pos2d (Polyline2d::*intersectionWithSegment)(const Segment2d &) const= &Polyline2d::getIntersection;
 void (Polyline2d::*simplify2DPoly)(GEOM_FT epsilon)= &Polyline2d::simplify;
 Segment2d (Polyline2d::*get2DSegment)(const size_t &) const= &Polyline2d::getSegment;

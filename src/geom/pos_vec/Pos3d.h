@@ -33,10 +33,10 @@
 class Vector3d;
 class Pos2d;
 class Recta3d;
-class SemiRecta3d;
+class Ray3d;
 class Segment3d;
 class Plane;
-class SemiEspacio3d;
+class HalfSpace3d;
 class Solido3d;
 
 //! @ingroup GEOM
@@ -106,14 +106,14 @@ class Pos3d : public ProtoGeom
     GEOM_FT dist2(const Pos3d &) const;
     GEOM_FT dist2(const Recta3d &) const;
     GEOM_FT dist(const Recta3d &) const;
-    GEOM_FT dist2(const SemiRecta3d &) const;
-    GEOM_FT dist(const SemiRecta3d &) const;
+    GEOM_FT dist2(const Ray3d &) const;
+    GEOM_FT dist(const Ray3d &) const;
     GEOM_FT dist2(const Segment3d &) const;
     GEOM_FT dist(const Segment3d &) const;
     GEOM_FT dist2(const Plane &) const;
     GEOM_FT dist(const Plane &) const;
-    GEOM_FT dist2(const SemiEspacio3d &) const;
-    GEOM_FT dist(const SemiEspacio3d &) const;
+    GEOM_FT dist2(const HalfSpace3d &) const;
+    GEOM_FT dist(const HalfSpace3d &) const;
     GEOM_FT dist(const Solido3d &) const;
 
     int Cuadrante(void) const;

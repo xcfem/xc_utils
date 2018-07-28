@@ -22,10 +22,10 @@
 //python_interface.cxx
 
 GEOM_FT (Pos2d::*distRecta2d)(const Recta2d &) const= &Pos2d::dist;
-GEOM_FT (Pos2d::*distSemiRecta2d)(const SemiRecta2d &) const= &Pos2d::dist;
+GEOM_FT (Pos2d::*distRay2d)(const Ray2d &) const= &Pos2d::dist;
 GEOM_FT (Pos2d::*distSegment2d)(const Segment2d &) const= &Pos2d::dist;
 GEOM_FT (Pos2d::*dist2Recta2d)(const Recta2d &) const= &Pos2d::dist2;
-GEOM_FT (Pos2d::*dist2SemiRecta2d)(const SemiRecta2d &) const= &Pos2d::dist2;
+GEOM_FT (Pos2d::*dist2Ray2d)(const Ray2d &) const= &Pos2d::dist2;
 GEOM_FT (Pos2d::*dist2Segment2d)(const Segment2d &) const= &Pos2d::dist2;
 GEOM_FT (Pos2d::*distPos2d)(const Pos2d &) const= &Pos2d::dist;
 GEOM_FT (Pos2d::*dist2Pos2d)(const Pos2d &) const= &Pos2d::dist2;
@@ -40,11 +40,11 @@ class_<Pos2d, bases<ProtoGeom> >("Pos2d")
   .def("getPositionVector", &Pos2d::VectorPos,"return position vector of the point.")
   .def("distPos2d",distPos2d,"distance to a point.")
   .def("distRecta2d",distRecta2d,"distance to a straight line.")
-  .def("distSemiRecta2d",distSemiRecta2d,"distance to a ray.")
+  .def("distRay2d",distRay2d,"distance to a ray.")
   .def("distSegment2d",distSegment2d,"distance to a segment.")
   .def("dist2Pos2d",dist2Pos2d,"squared distance to a point.")
   .def("dist2Recta2d",dist2Recta2d,"squared distance to a straight line.")
-  .def("dist2SemiRecta2d",dist2SemiRecta2d,"squared distance to a ray.")
+  .def("dist2Ray2d",dist2Ray2d,"squared distance to a ray.")
   .def("dist2Segment2d",dist2Segment2d,"squared distance to a segment.")
   .def(self + Vector2d())
   .def(self - Vector2d())
@@ -139,19 +139,19 @@ class_<Vector3d, bases<ProtoGeom> >("Vector3d")
    ;
 
 GEOM_FT (Pos3d::*distRecta3d)(const Recta3d &) const= &Pos3d::dist;
-GEOM_FT (Pos3d::*distSemiRecta3d)(const SemiRecta3d &) const= &Pos3d::dist;
+GEOM_FT (Pos3d::*distRay3d)(const Ray3d &) const= &Pos3d::dist;
 GEOM_FT (Pos3d::*distSegment3d)(const Segment3d &) const= &Pos3d::dist;
 GEOM_FT (Pos3d::*dist2Recta3d)(const Recta3d &) const= &Pos3d::dist2;
-GEOM_FT (Pos3d::*dist2SemiRecta3d)(const SemiRecta3d &) const= &Pos3d::dist2;
+GEOM_FT (Pos3d::*dist2Ray3d)(const Ray3d &) const= &Pos3d::dist2;
 GEOM_FT (Pos3d::*dist2Segment3d)(const Segment3d &) const= &Pos3d::dist2;
 GEOM_FT (Pos3d::*getItemPos3d)(const size_t &) const= &Pos3d::at0;
 GEOM_FT (Pos3d::*distPos3d)(const Pos3d &) const= &Pos3d::dist;
 GEOM_FT (Pos3d::*distPlane)(const Plane &) const= &Pos3d::dist;
-GEOM_FT (Pos3d::*distSemiEspacio3d)(const SemiEspacio3d &) const= &Pos3d::dist;
+GEOM_FT (Pos3d::*distHalfSpace3d)(const HalfSpace3d &) const= &Pos3d::dist;
 //GEOM_FT (Pos3d::*distSolido3d)(const Pos3d &) const= &Pos3d::dist;
 GEOM_FT (Pos3d::*dist2Pos3d)(const Pos3d &) const= &Pos3d::dist2;
 GEOM_FT (Pos3d::*dist2Plane)(const Plane &) const= &Pos3d::dist2;
-GEOM_FT (Pos3d::*dist2SemiEspacio3d)(const SemiEspacio3d &) const= &Pos3d::dist2;
+GEOM_FT (Pos3d::*dist2HalfSpace3d)(const HalfSpace3d &) const= &Pos3d::dist2;
 class_<Pos3d, bases<ProtoGeom> >("Pos3d")
   .def(init<double, double, double>())
   .def(init<Pos3d>())
@@ -162,17 +162,17 @@ class_<Pos3d, bases<ProtoGeom> >("Pos3d")
   .def("getPositionVector", &Pos3d::VectorPos)
   .def("distPos3d",distPos3d)
   .def("distRecta3d",distRecta3d)
-  .def("distSemiRecta3d",distSemiRecta3d)
+  .def("distRay3d",distRay3d)
   .def("distSegment3d",distSegment3d)
   .def("distPlane",distPlane)
-  .def("distSemiEspacio3d",distSemiEspacio3d)
+  .def("distHalfSpace3d",distHalfSpace3d)
   //.def("distSolido3d",distSolido3d)
   .def("dist2Pos3d",dist2Pos3d)
   .def("dist2Recta3d",dist2Recta3d)
-  .def("dist2SemiRecta3d",dist2SemiRecta3d)
+  .def("dist2Ray3d",dist2Ray3d)
   .def("dist2Segment3d",dist2Segment3d)
   .def("dist2Plane",dist2Plane)
-  .def("dist2SemiEspacio3d",dist2SemiEspacio3d)
+  .def("dist2HalfSpace3d",dist2HalfSpace3d)
   .def("getDimension", &Pos3d::dimension)
   .def(self + Vector3d())
   .def(self - Vector3d())

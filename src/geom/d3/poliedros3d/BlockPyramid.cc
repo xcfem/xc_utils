@@ -29,12 +29,12 @@
 #include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
 
 
-//! @brief Return el haz de vectores que resulta de intersecar los
-//! semiespacios 2 a 2.
+//! @brief Return el haz de vectors that results from intersecting the
+//! half spaces 2 by 2.
 std::deque<Vector3d> BlockPyramid::haz_vectores(void) const
   {
     std::deque<Vector3d> retval;
-    const std::deque<Vector3d> normales= vectores_normales(semiespacios);
+    const std::deque<Vector3d> normales= vectores_normales(half_spaces);
     const size_t sz= normales.size();
     for(size_t i=0;i<sz;i++)
       for(size_t j=i+1;j<sz;j++)
@@ -46,21 +46,20 @@ std::deque<Vector3d> BlockPyramid::haz_vectores(void) const
     return retval;
   }
 
-//! @brief Return true if el vector está orientado hacia
-//! dentro del semiespacio.
-bool BlockPyramid::es_interior(const SemiEspacio3d &se,const Vector3d &v)
+//! @brief Return true if the vector is oriented inwards the half space.
+bool BlockPyramid::es_interior(const HalfSpace3d &se,const Vector3d &v)
   {
     const Pos3d p= se.getPlane().Point()+1e4*v;
     const bool retval= se.In(p,1e-4);
     return retval;
   }
 
-//! @brief Return true if el vector está orientado hacia
-//! dentro de todos y cada uno de los semiespacios.
+//! @brief Return true if the vector is oriented inwards each of the
+//! half spaces.
 bool BlockPyramid::es_interior(const Vector3d &v) const
   {
     bool retval= true;
-    for(std::deque<SemiEspacio3d>::const_iterator j=semiespacios.begin();j!=semiespacios.end();j++)
+    for(std::deque<HalfSpace3d>::const_iterator j=half_spaces.begin();j!=half_spaces.end();j++)
       {
         if(!es_interior(*j,v))
           {
@@ -71,9 +70,9 @@ bool BlockPyramid::es_interior(const Vector3d &v) const
     return retval;
   }
 
-//! @brief Del haz de vectores que resulta de intersecar los
-//! semiespacios 2 a 2, devuelve aquellos que son interiores a
-//! todos los semiespacios.
+//! @brief From the haz de vectors that results from intersecting the
+//! half spaces 2 by 2, return those thar are interior to all the
+//! half spaces.
 std::deque<Vector3d> BlockPyramid::haz_vectores_interiores(void) const
   {
     std::deque<Vector3d> retval;
@@ -89,8 +88,8 @@ BlockPyramid::BlockPyramid(void)
   : GeomObj3d() {}
 
 //! @brief Constructor.
-BlockPyramid::BlockPyramid(const std::deque<SemiEspacio3d> &se)
-  : GeomObj3d(), semiespacios(se) {}
+BlockPyramid::BlockPyramid(const std::deque<HalfSpace3d> &se)
+  : GeomObj3d(), half_spaces(se) {}
 
 //! @brief Return the object length.
 GEOM_FT BlockPyramid::getLength(void) const

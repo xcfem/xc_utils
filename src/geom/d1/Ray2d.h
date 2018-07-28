@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SemiRecta2d.h
+//Ray2d.h
 
-#ifndef SEMIRECTA2D_H
-#define SEMIRECTA2D_H
+#ifndef RAY2D_H
+#define RAY2D_H
 
 #include "Linea2d.h"
 #include "Recta2d.h"
@@ -32,30 +32,30 @@ class Dir2d;
 
 //! @ingroup GEOM
 //
-//! @brief Semirecta en dos dimensiones.
-class SemiRecta2d : public Linea2d
+//! @brief Ray in a two-dimensional space.
+class Ray2d : public Linea2d
   {
-    CGSemiRecta_2 cgsr;
+    CGRay_2 cgsr;
 
     friend class Segment2d;
   public:
-    SemiRecta2d(void): Linea2d(),cgsr(CGPoint_2(0,0),CGPoint_2(1,0)) {}
-    SemiRecta2d(const CGSemiRecta_2 &r)
+    Ray2d(void): Linea2d(),cgsr(CGPoint_2(0,0),CGPoint_2(1,0)) {}
+    Ray2d(const CGRay_2 &r)
       : Linea2d(), cgsr(r) {}
-    SemiRecta2d(const Pos2d &p1,const Pos2d &p2);
-    SemiRecta2d(const Pos2d &p1,const Vector2d &vdir);
-    SemiRecta2d(const SemiRecta2d &r)
+    Ray2d(const Pos2d &p1,const Pos2d &p2);
+    Ray2d(const Pos2d &p1,const Vector2d &vdir);
+    Ray2d(const Ray2d &r)
       : Linea2d(),cgsr(r.cgsr) {}
-    SemiRecta2d &operator=(const SemiRecta2d &r)
+    Ray2d &operator=(const Ray2d &r)
       {
 	Linea2d::operator=(r);
         cgsr= r.cgsr;
         return *this;
       }
-    const CGSemiRecta_2 &ToCGAL(void) const
+    const CGRay_2 &ToCGAL(void) const
       { return cgsr; }
     virtual GeomObj *clon(void) const
-      { return new SemiRecta2d(*this); }
+      { return new Ray2d(*this); }
     void TwoPoints(const Pos2d &p1,const Pos2d &p2);
     virtual GEOM_FT GetMax(unsigned short int) const
       { return NAN; }
@@ -91,16 +91,16 @@ class SemiRecta2d : public Linea2d
     GeomObj::list_Pos2d Ordena(const GeomObj::list_Pos2d &ptos) const
       { return RectaSoporte().Ordena(ptos); }
 
-    bool intersects(const SemiRecta2d &sr2) const
+    bool intersects(const Ray2d &sr2) const
       { return do_intersect(cgsr,sr2.cgsr); }
     bool intersects(const Recta2d &sr) const;
     GeomObj2d::list_Pos2d getIntersection(unsigned short int, const double &) const;
     GeomObj2d::list_Pos2d getIntersection(const Recta2d &r) const;
-    GeomObj2d::list_Pos2d getIntersection(const SemiRecta2d &sr) const;
+    GeomObj2d::list_Pos2d getIntersection(const Ray2d &sr) const;
 
     bool Paralela(const Recta2d &r) const
       { return paralelas(RectaSoporte(),r); }
-    bool Paralela(const SemiRecta2d &sr) const
+    bool Paralela(const Ray2d &sr) const
       { return Paralela(sr.RectaSoporte()); }
 
     //! @brief Return the length of the object.
@@ -112,7 +112,7 @@ class SemiRecta2d : public Linea2d
     Vector2d VDir(void) const;
     inline GEOM_FT getAngle(const Vector2d &v) const
       { return angle(VDir(),v); }
-    inline friend GEOM_FT angle(const SemiRecta2d &r,const Vector2d &v)
+    inline friend GEOM_FT angle(const Ray2d &r,const Vector2d &v)
       { return r.getAngle(v); }
     //Moment of inertia with respect to the center of mass in local coordinates.
     inline virtual GEOM_FT Ix(void) const
@@ -129,50 +129,50 @@ class SemiRecta2d : public Linea2d
 
     void Transforma(const Trf2d &trf2d);
 
-    inline friend bool operator==(const SemiRecta2d &r1,const SemiRecta2d &r2)
+    inline friend bool operator==(const Ray2d &r1,const Ray2d &r2)
       { return (r1.cgsr==r2.cgsr); }
     void Print(std::ostream &os) const;
     void Plot(Plotter &psos) const;
   };
 
-inline GEOM_FT dist2(const Pos2d &p,const SemiRecta2d &r)
+inline GEOM_FT dist2(const Pos2d &p,const Ray2d &r)
   { return r.dist2(p); }
-inline GEOM_FT dist2(const SemiRecta2d &r,const Pos2d &p)
+inline GEOM_FT dist2(const Ray2d &r,const Pos2d &p)
   { return dist2(p,r); }
-inline GEOM_FT dist(const Pos2d &p,const SemiRecta2d &r)
+inline GEOM_FT dist(const Pos2d &p,const Ray2d &r)
   { return r.dist(p); }
-inline GEOM_FT dist(const SemiRecta2d &r,const Pos2d &p)
+inline GEOM_FT dist(const Ray2d &r,const Pos2d &p)
   { return dist(p,r); }
 
-inline bool paralelas(const SemiRecta2d &sr,const Recta2d &r)
+inline bool paralelas(const Ray2d &sr,const Recta2d &r)
   { return sr.Paralela(r); }
-inline bool paralelas(const Recta2d &r,const SemiRecta2d &sr)
+inline bool paralelas(const Recta2d &r,const Ray2d &sr)
   { return paralelas(sr,r); }
-inline bool paralelas(const SemiRecta2d &r1,const SemiRecta2d &r2)
+inline bool paralelas(const Ray2d &r1,const Ray2d &r2)
   { return r1.Paralela(r2); }
 
-inline bool intersecan(const SemiRecta2d &sr1,const SemiRecta2d &sr2)
+inline bool intersecan(const Ray2d &sr1,const Ray2d &sr2)
   { return sr1.intersects(sr2); }
-inline bool intersecan(const SemiRecta2d &sr,const Recta2d &r)
+inline bool intersecan(const Ray2d &sr,const Recta2d &r)
   { return sr.intersects(r); }
-inline bool intersecan(const Recta2d &r,const SemiRecta2d &sr)
+inline bool intersecan(const Recta2d &r,const Ray2d &sr)
   { return sr.intersects(r); }
-inline GeomObj2d::list_Pos2d intersection(const SemiRecta2d &sr,const Recta2d &r)
+inline GeomObj2d::list_Pos2d intersection(const Ray2d &sr,const Recta2d &r)
   { return sr.getIntersection(r); }
-inline GeomObj2d::list_Pos2d intersection(const Recta2d &r, const SemiRecta2d &sr)
+inline GeomObj2d::list_Pos2d intersection(const Recta2d &r, const Ray2d &sr)
   { return sr.getIntersection(r); }
 
 //! @brief Return the intersection point of both lines, if it does not exists
 //! return an empty list.
-inline GeomObj2d::list_Pos2d intersection(const SemiRecta2d &sr1,const SemiRecta2d &sr2)
+inline GeomObj2d::list_Pos2d intersection(const Ray2d &sr1,const Ray2d &sr2)
   { return sr1.getIntersection(sr2); }
 
 
-inline bool colineales(const SemiRecta2d &sr,const Recta2d &r)
+inline bool colineales(const Ray2d &sr,const Recta2d &r)
   { return colineales(sr.RectaSoporte(),r); }
-inline bool colineales(const Recta2d &r,const SemiRecta2d &sr)
+inline bool colineales(const Recta2d &r,const Ray2d &sr)
   { return colineales(sr,r); }
-inline bool colineales(const SemiRecta2d &sr1,const SemiRecta2d &sr2)
+inline bool colineales(const Ray2d &sr1,const Ray2d &sr2)
   { return colineales(sr1,sr2.RectaSoporte()); }
 
 

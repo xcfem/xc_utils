@@ -29,10 +29,10 @@
 
 
 #include "xc_utils/src/geom/d1/Recta3d.h"
-#include "xc_utils/src/geom/d1/SemiRecta3d.h"
+#include "xc_utils/src/geom/d1/Ray3d.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
-#include "xc_utils/src/geom/d3/SemiEspacio3d.h"
+#include "xc_utils/src/geom/d3/HalfSpace3d.h"
 #include "xc_utils/src/geom/d3/Solido3d.h"
 
 //! @brief Suma de un vector.
@@ -204,12 +204,12 @@ GEOM_FT Pos3d::dist2(const Recta3d &r) const
 GEOM_FT Pos3d::dist(const Recta3d &r) const
   { return r.dist(*this); }
 
-//! @brief Return el cuadrado de la distance a la semirrecta.
-GEOM_FT Pos3d::dist2(const SemiRecta3d &sr) const
+//! @brief Return the squared distance to the ray.
+GEOM_FT Pos3d::dist2(const Ray3d &sr) const
   { return sr.dist2(*this); }
 
-//! @brief Return the distance a la semirrecta.
-GEOM_FT Pos3d::dist(const SemiRecta3d &sr) const
+//! @brief Return the distance to the ray.
+GEOM_FT Pos3d::dist(const Ray3d &sr) const
   { return sr.dist(*this); }
 
 //! @brief Return the squared distance to the segment.
@@ -228,15 +228,15 @@ GEOM_FT Pos3d::dist2(const Plane &p) const
 GEOM_FT Pos3d::dist(const Plane &p) const
   { return p.dist(*this); }
 
-//! @brief Return el cuadrado de la distance al semiespacio.
-GEOM_FT Pos3d::dist2(const SemiEspacio3d &se) const
+//! @brief Return the squared distance to the half space.
+GEOM_FT Pos3d::dist2(const HalfSpace3d &se) const
   { return se.dist2(*this); }
 
-//! @brief Return the distance al semiespacio.
-GEOM_FT Pos3d::dist(const SemiEspacio3d &se) const
+//! @brief Return the distance to the half space.
+GEOM_FT Pos3d::dist(const HalfSpace3d &se) const
   { return se.dist(*this); }
 
-//! @brief Return the distance al sólido.
+//! @brief Return the distance to the solid.
 GEOM_FT Pos3d::dist(const Solido3d &s) const
   { return s.dist(*this); }
 

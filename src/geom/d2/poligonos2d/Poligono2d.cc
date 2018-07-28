@@ -140,7 +140,7 @@ bool Poligono2d::Overlap(const Recta2d &r) const
 
   
 //! @brief Return true if the ray and the polygon overlap.
-bool Poligono2d::Overlap(const SemiRecta2d &sr) const
+bool Poligono2d::Overlap(const Ray2d &sr) const
   { return SupPoligonal2d::Overlap(sr); }
 
 //! @brief Return true if the segment and the polygon overlap.
@@ -352,7 +352,7 @@ Segment2d Poligono2d::Clip(const Recta2d &r) const
   { return SupPoligonal2d::Clip(r); }
 
 //! @brief Return the intersection of the polygon and the ray.
-Segment2d Poligono2d::Clip(const SemiRecta2d &sr) const
+Segment2d Poligono2d::Clip(const Ray2d &sr) const
   { return SupPoligonal2d::Clip(sr); }
 
 //! @brief Return the intersection of the polygon and the segment.

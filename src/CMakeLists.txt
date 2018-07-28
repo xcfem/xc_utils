@@ -95,11 +95,11 @@ SET(geomSisCooRef geom/sis_coo/SisCoo geom/sis_coo/SisCooRect1d3d geom/sis_coo/S
 
 SET(geomD0 geom/d0/Point3d geom/d0/Point2d)
 
-SET(geomD1 geom/d1/Recta3d geom/d1/Recta2d geom/d1/SemiRecta3d geom/d1/Segment2d geom/d1/SemiRecta2d geom/d1/Segment3d geom/d1/Polyline2d geom/d1/Polyline3d)
+SET(geomD1 geom/d1/Recta3d geom/d1/Recta2d geom/d1/Ray3d geom/d1/Segment2d geom/d1/Ray2d geom/d1/Segment3d geom/d1/Polyline2d geom/d1/Polyline3d)
 
 SET(geomD2 geom/d2/GmGrupo2d geom/d2/Superficie2d geom/d2/Superficie3d geom/d2/Plane geom/d2/BND2d geom/d2/Circle2d geom/d2/CircularSector2d geom/d2/CircularSector3d geom/d2/AnnulusSector2d geom/d2/GeomObj2d geom/d2/Poligono3d geom/d2/poligonos2d/Poligono2d geom/d2/poligonos2d/PoligonoConAgujeros2d geom/d2/poligonos2d/SupPoligonal2d geom/d2/poligonos2d/Triangle2d geom/d2/poligonos2d/carsten_steger geom/d2/poligonos2d/bool_op_poligono2d geom/d2/poligonos2d/Cuadrilatero2d geom/d2/poligonos2d/Rectangle2d geom/d2/poligonos2d/Cuadrado2d geom/d2/HalfPlane2d geom/d2/Triangle3d geom/d2/Circle3d geom/d2/D2to3d geom/d2/Trihedron geom/d2/Triang3dMesh geom/d2/ConvexHull2d geom/d2/GeneralEquationOfPlane geom/d2/Rejilla2d)
 
-SET(geomD3 geom/d3/BND3d geom/d3/GeomObj3d geom/d3/BspTree3d geom/d3/Cilindro geom/d3/GmGrupo3d geom/d3/poliedros3d/VertexMap geom/d3/poliedros3d/PolyhedronBase geom/d3/poliedros3d/Poliedro3d geom/d3/poliedros3d/MapPoligonos geom/d3/poliedros3d/modifier_quad_triangle geom/d3/poliedros3d/enriched_polyhedron geom/d3/poliedros3d/Tetraedro3d geom/d3/poliedros3d/BlockPyramid geom/d3/poliedros3d/bool_op_poliedro3d geom/d3/SemiEspacio3d geom/d3/ConvexHull3d geom/d3/Solido3d geom/d3/prismas3d/PrismaTriang3d)
+SET(geomD3 geom/d3/BND3d geom/d3/GeomObj3d geom/d3/BspTree3d geom/d3/Cilindro geom/d3/GmGrupo3d geom/d3/poliedros3d/VertexMap geom/d3/poliedros3d/PolyhedronBase geom/d3/poliedros3d/Poliedro3d geom/d3/poliedros3d/MapPoligonos geom/d3/poliedros3d/modifier_quad_triangle geom/d3/poliedros3d/enriched_polyhedron geom/d3/poliedros3d/Tetraedro3d geom/d3/poliedros3d/BlockPyramid geom/d3/poliedros3d/bool_op_poliedro3d geom/d3/HalfSpace3d geom/d3/ConvexHull3d geom/d3/Solido3d geom/d3/prismas3d/PrismaTriang3d)
 
 SET(funcFromPoints geom/d1/function_from_points/FunctionFromPointsR_R geom/d1/function_from_points/FunctionFromPointsR2_R)
 

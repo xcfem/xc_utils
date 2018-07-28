@@ -29,14 +29,14 @@
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/FT_matrix.h"
 
-#include "xc_utils/src/geom/d3/SemiEspacio3d.h"
+#include "xc_utils/src/geom/d3/HalfSpace3d.h"
 
 
-// std::deque<SemiEspacio3d> GeomObj3d::interpretaSemiEspacios3d(const std::string &str)
+// std::deque<HalfSpace3d> GeomObj3d::interpretaHalfSpaces3d(const std::string &str)
 //   {
 //     typedef std::deque<boost::any> dq_objetos;
 //     const dq_objetos tmp= crea_deque_boost_any(str);
-//     std::deque<SemiEspacio3d> retval;
+//     std::deque<HalfSpace3d> retval;
 //     for(dq_objetos::const_iterator i= tmp.begin();i!=tmp.end();i++)
 //       {
 //         if(boost_any_is_empty(*i))

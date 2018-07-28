@@ -26,7 +26,7 @@
 
 #include "Linea2d.h"
 #include "Recta2d.h"
-#include "SemiRecta2d.h"
+#include "Ray2d.h"
 #include "../pos_vec/Pos2d.h"
 
 class Dir2d;
@@ -95,10 +95,10 @@ class Segment2d : public Linea2d
     inline bool intersects(const Segment2d &r2) const
       { return do_intersect(cgseg,r2.cgseg); }
     bool intersects(const Recta2d &r) const;
-    bool intersects(const SemiRecta2d &sr) const;
+    bool intersects(const Ray2d &sr) const;
     GeomObj2d::list_Pos2d getIntersection(unsigned short int, const double &) const;
     GeomObj2d::list_Pos2d getIntersection(const Recta2d &r) const;
-    GeomObj2d::list_Pos2d getIntersection(const SemiRecta2d &sr) const;
+    GeomObj2d::list_Pos2d getIntersection(const Ray2d &sr) const;
     GeomObj2d::list_Pos2d getIntersection(const Segment2d &sg2) const;
 
     Recta2d Perpendicular(const Pos2d &p) const;
@@ -107,7 +107,7 @@ class Segment2d : public Linea2d
 
     bool Paralelo(const Recta2d &r) const
       { return paralelas(RectaSoporte(),r); }
-    bool Paralelo(const SemiRecta2d &sr) const
+    bool Paralelo(const Ray2d &sr) const
       { return paralelas(RectaSoporte(),sr); }
     bool Paralelo(const Segment2d &r) const
       { return paralelas(RectaSoporte(),r.RectaSoporte()); }
@@ -164,9 +164,9 @@ inline bool paralelas(const Segment2d &sg,const Recta2d &r)
   { return sg.Paralelo(r); }
 inline bool paralelas(const Recta2d &r, const Segment2d &sg)
   { return paralelas(sg,r); }
-inline bool paralelas(const Segment2d &sg,const SemiRecta2d &sr)
+inline bool paralelas(const Segment2d &sg,const Ray2d &sr)
   { return sg.Paralelo(sr); }
-inline bool paralelas(const SemiRecta2d &sr, const Segment2d &sg)
+inline bool paralelas(const Ray2d &sr, const Segment2d &sg)
   { return paralelas(sg,sr); }
 inline bool paralelas(const Segment2d &r1,const Segment2d &r2)
   { return r1.Paralelo(r2); }
@@ -175,9 +175,9 @@ inline bool intersecan(const Segment2d &sg,const Recta2d &r)
   { return sg.intersects(r); }
 inline bool intersecan(const Recta2d &r,const Segment2d &sg)
   { return sg.intersects(r); }
-inline bool intersecan(const Segment2d &sg,const SemiRecta2d &sr)
+inline bool intersecan(const Segment2d &sg,const Ray2d &sr)
   { return sg.intersects(sr); }
-inline bool intersecan(const SemiRecta2d &sr,const Segment2d &sg)
+inline bool intersecan(const Ray2d &sr,const Segment2d &sg)
   { return sg.intersects(sr); }
 inline bool intersecan(const Segment2d &r1,const Segment2d &r2)
   { return r1.intersects(r2); }
@@ -185,9 +185,9 @@ inline GeomObj2d::list_Pos2d intersection(const Segment2d &sg,const Recta2d &r)
   { return sg.getIntersection(r); }
 inline GeomObj2d::list_Pos2d intersection(const Recta2d &r,const Segment2d &sg)
   { return sg.getIntersection(r); }
-inline GeomObj2d::list_Pos2d intersection(const Segment2d &sg,const SemiRecta2d &sr)
+inline GeomObj2d::list_Pos2d intersection(const Segment2d &sg,const Ray2d &sr)
   { return sg.getIntersection(sr); }
-inline GeomObj2d::list_Pos2d intersection(const SemiRecta2d &sr,const Segment2d &sg)
+inline GeomObj2d::list_Pos2d intersection(const Ray2d &sr,const Segment2d &sg)
   { return sg.getIntersection(sr); }
 inline GeomObj2d::list_Pos2d intersection(const Segment2d &sg1,const Segment2d &sg2)
   { return sg1.getIntersection(sg2); }
@@ -196,9 +196,9 @@ inline bool colineales(const Segment2d &sg,const Recta2d &r)
   { return colineales(sg.RectaSoporte(),r); }
 inline bool colineales(const Recta2d &r,const Segment2d &sg)
   { return colineales(sg,r); }
-inline bool colineales(const Segment2d &sg,const SemiRecta2d &sr)
+inline bool colineales(const Segment2d &sg,const Ray2d &sr)
   { return colineales(sg.RectaSoporte(),sr); }
-inline bool colineales(const SemiRecta2d &sr,const Segment2d &sg)
+inline bool colineales(const Ray2d &sr,const Segment2d &sg)
   { return colineales(sg,sr); }
 inline bool colineales(const Segment2d &sg1,const Segment2d &sg2)
   { return colineales(sg1,sg2.RectaSoporte()); }

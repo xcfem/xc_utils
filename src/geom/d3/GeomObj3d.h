@@ -35,7 +35,7 @@ class Recta3d;
 class BND3d;
 class Ref3d3d;
 class FT_matrix;
-class SemiEspacio3d;
+class HalfSpace3d;
 
 
 //! @ingroup GEOM
@@ -44,7 +44,7 @@ class SemiEspacio3d;
 class GeomObj3d: public GeomObj
   {
   protected:
-    //std::deque<SemiEspacio3d> interpretaSemiEspacios3d(const std::string &str);
+    //std::deque<HalfSpace3d> interpretaHalfSpaces3d(const std::string &str);
   public:
     typedef PoliPos<Pos3d> list_Pos3d;
 

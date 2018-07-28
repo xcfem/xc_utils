@@ -25,7 +25,7 @@
 #include "../listas/ThreePoints3d.h"
 #include "GeneralEquationOfPlane.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
-#include "xc_utils/src/geom/d1/SemiRecta3d.h"
+#include "xc_utils/src/geom/d1/Ray3d.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d1/Polyline3d.h"
 #include "xc_utils/src/geom/d2/Poligono3d.h"
@@ -339,11 +339,11 @@ Pos3d Plane::getIntersection(const Recta3d &r) const
 //   }
 
 //! @brief Return verdadero if exists the intersection con la recta que se pasa como parámetro.
-bool Plane::intersects(const SemiRecta3d &sr) const
+bool Plane::intersects(const Ray3d &sr) const
   { return do_intersect(ToCGAL(),sr.ToCGAL()); }
 
-//! @brief Return (if exists) the intersection con la semirrecta que se pasa como parámetro.
-Pos3d Plane::getIntersection(const SemiRecta3d &sr) const
+//! @brief Return (if exists) the intersection with the ray argument.
+Pos3d Plane::getIntersection(const Ray3d &sr) const
   {
     Pos3d retval;
     GeomObj3d::list_Pos3d tmp= intersection(*this,sr);
@@ -359,7 +359,7 @@ Pos3d Plane::getIntersection(const SemiRecta3d &sr) const
 bool Plane::intersects(const Segment3d &sg) const
   { return do_intersect(ToCGAL(),sg.ToCGAL()); }
 
-//! @brief Return (if exists) the intersection con la semirrecta que se pasa como parámetro.
+//! @brief Return (if exists) the intersection with the segment argument.
 Pos3d Plane::getIntersection(const Segment3d &sg) const
   {
     Pos3d retval;
@@ -371,8 +371,8 @@ Pos3d Plane::getIntersection(const Segment3d &sg) const
     return retval;
   }
 
-// //! @brief Return (if exists) the intersection con la recta que se pasa como parámetro.
-// Pos3d Plane::getIntersection(const SemiRecta3d &sr) const
+// //! @brief Return (if exists) the intersection with the line argument
+// Pos3d Plane::getIntersection(const Ray3d &sr) const
 //   {
 //     const Pos3d retval= getIntersection(sr);
 //     if(!retval.exists())
@@ -565,7 +565,7 @@ GeomObj3d::list_Pos3d intersection(const Plane &p, const Recta3d &r)
   }
 
 //! @brief Return the intersection of the plane with the ray.
-GeomObj3d::list_Pos3d intersection(const Plane &p, const SemiRecta3d &sr)
+GeomObj3d::list_Pos3d intersection(const Plane &p, const Ray3d &sr)
   {
     GeomObj3d::list_Pos3d retval;
     if(do_intersect(p.ToCGAL(),sr.ToCGAL()))
@@ -580,13 +580,13 @@ GeomObj3d::list_Pos3d intersection(const Plane &p, const SemiRecta3d &sr)
           if(CGAL::assign(ri, result))
             {
               std::cerr << __FUNCTION__
-			<< "(Plane,SemiRecta3d): the plane contains the line." 
+			<< "(Plane,Ray3d): the plane contains the line." 
                    << std::endl;
             }
           else
             {
               std::cerr << __FUNCTION__
-			<< "(Plane,SemiRecta3d): unknown error." 
+			<< "(Plane,Ray3d): unknown error." 
                         << std::endl;
             }
       }
@@ -596,7 +596,7 @@ GeomObj3d::list_Pos3d intersection(const Plane &p, const SemiRecta3d &sr)
   }
 
 //! @brief Return the intersection of the ray with the plane.
-GeomObj3d::list_Pos3d intersection(const SemiRecta3d &sr, const Plane &p)
+GeomObj3d::list_Pos3d intersection(const Ray3d &sr, const Plane &p)
   { return intersection(p,sr); }
 
 //! @brief Return the intersection of the plane with the segment.
@@ -656,7 +656,7 @@ Pos3d intersection_point(const Plane &p, const Recta3d &r)
 Pos3d intersection_point(const Recta3d &r, const Plane &p)
   { return intersection_point(p,r); }
 
-Pos3d intersection_point(const Plane &p, const SemiRecta3d &sr)
+Pos3d intersection_point(const Plane &p, const Ray3d &sr)
   {
     Pos3d retval;
     GeomObj3d::list_Pos3d tmp= intersection(p,sr);
@@ -667,7 +667,7 @@ Pos3d intersection_point(const Plane &p, const SemiRecta3d &sr)
     return retval;
   }
 
-Pos3d intersection_point(const SemiRecta3d &sr, const Plane &p)
+Pos3d intersection_point(const Ray3d &sr, const Plane &p)
   { return intersection_point(p,sr); }
 
 Pos3d intersection_point(const Plane &p, const Segment3d &sg)

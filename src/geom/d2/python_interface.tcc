@@ -87,7 +87,7 @@ Vector3d (Plane::*Vector3dProjection)(const Vector3d &) const= &Plane::Projectio
 Recta3d (Plane::*Recta3dProjection)(const Recta3d &) const= &Plane::Projection;
 Recta3d (Plane::*IntersPlane)(const Plane &p) const= &Plane::getIntersection;
 Pos3d (Plane::*IntersRecta3d)(const Recta3d &p) const= &Plane::getIntersection;
-Pos3d (Plane::*IntersSemiRecta3d)(const SemiRecta3d &p) const= &Plane::getIntersection;
+Pos3d (Plane::*IntersRay3d)(const Ray3d &p) const= &Plane::getIntersection;
 Pos3d (Plane::*IntersSegment3d)(const Segment3d &p) const= &Plane::getIntersection;
 class_<Plane, bases<Superficie3d> >("Plane3d")
   .def(init<Pos3d,Pos3d,Pos3d>())
@@ -106,7 +106,7 @@ class_<Plane, bases<Superficie3d> >("Plane3d")
   .def("getYZTrace",&Plane::YZTrace,"return the trace on the YZ plane.")
   .def("getIntersPlane",IntersPlane)
   .def("getIntersRecta3d",IntersRecta3d)
-  .def("getIntersSemiRecta3d",IntersSemiRecta3d)
+  .def("getIntersRay3d",IntersRay3d)
   .def("getIntersSegment3d",IntersSegment3d)
   .def("getNormal", &Plane::Normal)
   .def("getBase1", &Plane::Base1)

@@ -138,7 +138,7 @@ class Poligono2d: public SupPoligonal2d
     bool In(const Poligono2d &) const;
     bool Overlap(const Pos2d &) const;
     bool Overlap(const Recta2d &r) const;
-    bool Overlap(const SemiRecta2d &sr) const;
+    bool Overlap(const Ray2d &sr) const;
     bool Overlap(const Segment2d &sg) const;
     bool Overlap(const BND2d &) const;
     bool Overlap(const Polyline2d &) const;
@@ -162,7 +162,7 @@ class Poligono2d: public SupPoligonal2d
     void une(const std::list<Poligono2d> &l);
     void clipBy(const Poligono2d &);
     Segment2d Clip(const Recta2d &) const;
-    Segment2d Clip(const SemiRecta2d &) const;
+    Segment2d Clip(const Ray2d &) const;
     Segment2d Clip(const Segment2d &) const;
     std::list<Poligono2d> Clip(const BND2d &bnd) const;
     std::list<Poligono2d> Clip(const Poligono2d &) const;

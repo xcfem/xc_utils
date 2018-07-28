@@ -26,7 +26,7 @@
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d2/Poligono3d.h"
-#include "xc_utils/src/geom/d3/SemiEspacio3d.h"
+#include "xc_utils/src/geom/d3/HalfSpace3d.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
 #include <CGAL/Polyhedron_incremental_builder_3.h>
 #include <CGAL/IO/Polyhedron_geomview_ostream.h>
@@ -50,13 +50,13 @@ Poliedro3d::Poliedro3d(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const P
   { make_tetrahedron(p0,p1,p2,p3); }
 
 //! @brief Constructor.
-Poliedro3d::Poliedro3d(const std::deque<SemiEspacio3d> &se)
+Poliedro3d::Poliedro3d(const std::deque<HalfSpace3d> &se)
   : cgpoliedro()
   { make_polyhedron(se); }
 
 
 //! @brief Constructor.
-Poliedro3d::Poliedro3d(const SemiEspacio3d &se1, const SemiEspacio3d &se2,const SemiEspacio3d &se3, const SemiEspacio3d &se4)
+Poliedro3d::Poliedro3d(const HalfSpace3d &se1, const HalfSpace3d &se2,const HalfSpace3d &se3, const HalfSpace3d &se4)
   { make_tetrahedron(se1,se2,se3,se4); }
 
 //! @brief Constructor.
@@ -82,16 +82,16 @@ GeomObj *Poliedro3d::clon(void) const
 void Poliedro3d::make_tetrahedron(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3)
   { cgpoliedro.make_tetrahedron(p0.ToCGAL(),p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL()); }
 
-void Poliedro3d::make_polyhedron(const std::deque<SemiEspacio3d> &se)
+void Poliedro3d::make_polyhedron(const std::deque<HalfSpace3d> &se)
   {
     TripletMap<Pos3d> vertices= vertices_poliedro(se);
     BuildFromVertexMap build(vertices);
     cgpoliedro.delegate(build);
   }
 
-void Poliedro3d::make_tetrahedron(const SemiEspacio3d &se1, const SemiEspacio3d &se2,const SemiEspacio3d &se3, const SemiEspacio3d &se4)
+void Poliedro3d::make_tetrahedron(const HalfSpace3d &se1, const HalfSpace3d &se2,const HalfSpace3d &se3, const HalfSpace3d &se4)
   {
-    std::deque<SemiEspacio3d> se;
+    std::deque<HalfSpace3d> se;
     se.push_back(se1);
     se.push_back(se2);
     se.push_back(se3);
@@ -99,12 +99,12 @@ void Poliedro3d::make_tetrahedron(const SemiEspacio3d &se1, const SemiEspacio3d 
     make_polyhedron(se);
   }
 
-// //! @brief Interpreta los semiespacios que definen el poliedro.
-// //! @param cle Si es verdadero borra los vértices, caras y aristas
-// //! que se hubieran definido previamente.
-// void Poliedro3d::semiespacios(const std::string &str,const bool &cle)
+// //! @brief Interprets the half spacess that define the polyhedron.
+// //! @param cle: if true it deletes the previously defined vertices,
+// //! faces and edges.
+// void Poliedro3d::halfSpaces(const std::string &str,const bool &cle)
 //   {
-//     const std::deque<SemiEspacio3d> se= interpretaSemiEspacios3d(str);
+//     const std::deque<HalfSpace3d> se= interpretaHalfSpaces3d(str);
 //     const size_t sz= se.size();
 //     if(sz>=4)
 //       {
@@ -113,8 +113,8 @@ void Poliedro3d::make_tetrahedron(const SemiEspacio3d &se1, const SemiEspacio3d 
 //         make_polyhedron(se);
 //       }
 //     else
-//       std::cerr << "Poliedro3d::semiespacios; "
-//                 << "se esperaban al menos cuatro semiespacios." << std::endl;
+//       std::cerr << getClassName() << "::" << __FUNCTION__
+//                 << "; four half spaces expected." << std::endl;
 //   }
 
 //! @brief Return the sum of the areas of the faces.

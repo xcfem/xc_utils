@@ -29,7 +29,7 @@
 #include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d1/Recta3d.h"
 #include "xc_utils/src/geom/d3/GmGrupo3d.h"
-#include "xc_utils/src/geom/d3/SemiEspacio3d.h"
+#include "xc_utils/src/geom/d3/HalfSpace3d.h"
 #include "xc_utils/src/geom/listas/auxiliares.h"
 
 
@@ -152,7 +152,7 @@ GEOM_FT Poligono3d::distSigno2(const Pos3d &p,const bool &sentido_horario) const
     // Distance to the half spaces defined by the sides.
     for(register unsigned int i=1; i<=nl; i++)
       {
-        SemiEspacio3d se3d(getPlaneFromSide(i));
+        HalfSpace3d se3d(getPlaneFromSide(i));
         const GEOM_FT d_i= signo*se3d.distSigno2(p);
         d= std::max(d,d_i);
       }

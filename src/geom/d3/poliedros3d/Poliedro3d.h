@@ -31,7 +31,7 @@
 #include "enriched_polyhedron.h"
 
 class Plane;
-class SemiEspacio3d;
+class HalfSpace3d;
 class Triang3dMesh;
 class Poligono3d;
 
@@ -47,9 +47,9 @@ class Poliedro3d: public PolyhedronBase
     Poliedro3d(const CGPoliedro_3 &cgp) 
       : PolyhedronBase(), cgpoliedro(cgp) {}
     void make_tetrahedron(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);
-    void make_tetrahedron(const SemiEspacio3d &, const SemiEspacio3d &,const SemiEspacio3d &, const SemiEspacio3d &);
-    void make_polyhedron(const std::deque<SemiEspacio3d> &);
-    //void semiespacios(const std::string &,const bool &clear= true);
+    void make_tetrahedron(const HalfSpace3d &, const HalfSpace3d &,const HalfSpace3d &, const HalfSpace3d &);
+    void make_polyhedron(const std::deque<HalfSpace3d> &);
+    //void halfSpaces(const std::string &,const bool &clear= true);
 
   public:
     typedef CGPoliedro_3::Vertex Vertex;
@@ -72,8 +72,8 @@ class Poliedro3d: public PolyhedronBase
 
     Poliedro3d(void);
     Poliedro3d(const Pos3d &, const Pos3d &,const Pos3d &, const Pos3d &);
-    Poliedro3d(const SemiEspacio3d &, const SemiEspacio3d &,const SemiEspacio3d &, const SemiEspacio3d &);
-    Poliedro3d(const std::deque<SemiEspacio3d> &);
+    Poliedro3d(const HalfSpace3d &, const HalfSpace3d &,const HalfSpace3d &, const HalfSpace3d &);
+    Poliedro3d(const std::deque<HalfSpace3d> &);
     Poliedro3d(const Poliedro3d &);
     Poliedro3d(const EPoliedro &e);
     Poliedro3d &operator=(const Poliedro3d &);

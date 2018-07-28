@@ -27,7 +27,7 @@
 #include "xc_utils/src/geom/d2/Superficie2d.h"
 
 class Recta2d;
-class SemiRecta2d;
+class Ray2d;
 class Segment2d;
 class Poligono2d;
 class Polyline2d;

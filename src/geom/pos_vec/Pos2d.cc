@@ -29,7 +29,7 @@
 
 
 #include "xc_utils/src/geom/d1/Recta2d.h"
-#include "xc_utils/src/geom/d1/SemiRecta2d.h"
+#include "xc_utils/src/geom/d1/Ray2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 
 //! @brief Default constructor.
@@ -152,11 +152,11 @@ GEOM_FT Pos2d::dist(const Recta2d &r) const
   { return r.dist(*this); }
 
 //! @brief Return the squared distance to the ray.
-GEOM_FT Pos2d::dist2(const SemiRecta2d &sr) const
+GEOM_FT Pos2d::dist2(const Ray2d &sr) const
   { return sr.dist2(*this); }
 
 //! @brief Return the distance to the ray.
-GEOM_FT Pos2d::dist(const SemiRecta2d &sr) const
+GEOM_FT Pos2d::dist(const Ray2d &sr) const
   { return sr.dist(*this); }
 
 //! @brief Return the squared distance to the segment.

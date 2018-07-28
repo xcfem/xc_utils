@@ -324,7 +324,7 @@ bool SupPoligonal2d::Overlap(const Recta2d &r) const
   }
   
 //! @brief Return true if the ray and the polygonal surface overlap.
-bool SupPoligonal2d::Overlap(const SemiRecta2d &sr) const
+bool SupPoligonal2d::Overlap(const Ray2d &sr) const
   {
     GeomObj::list_Pos2d tmp= getPolyline().getIntersection(sr);
     return !tmp.empty();
@@ -360,36 +360,37 @@ std::list<Segment2d> empalma(const std::list<Segment2d> &lista)
 Segment2d SupPoligonal2d::Clip(const Recta2d &r) const
   {
     Segment2d retval;
-    list<Segment2d> lista= sin_degenerados(intersection(*this,r));
-    if(lista.size()>1)
-      lista= empalma(lista);
-    if(!lista.empty())
+    list<Segment2d> sg_list= sin_degenerados(intersection(*this,r));
+    if(sg_list.size()>1)
+      sg_list= empalma(sg_list);
+    if(!sg_list.empty())
       {
-        retval= *lista.begin();
-        if(lista.size()>1)
+        retval= *sg_list.begin();
+        if(sg_list.size()>1)
           {
-            std::cerr << "SupPoligonal2d::Clip, el polígono "
-                      << *this << " corta a la recta " << r << " en "
-                      << lista.size() << " tramos." << std::endl;
-	    std::cerr << "lista: ";
-            ::print(std::cerr,lista.begin(),lista.end());
+            std::cerr << getClassName() << "::" << __FUNCTION__
+  		      << "; the polygon clips the line in"
+                      << sg_list.size() << " segments." << std::endl;
+	    std::cerr << "sg_list: ";
+            ::print(std::cerr,sg_list.begin(),sg_list.end());
 	    std::cerr << std::endl;
           }
       }
     return retval;
   }
 
-//! @brief Return the intersection of the polygon con la semirecta (if exists).
-Segment2d SupPoligonal2d::Clip(const SemiRecta2d &sr) const
+//! @brief Return the intersection of the polygon with the ray (if it exists).
+Segment2d SupPoligonal2d::Clip(const Ray2d &sr) const
   {
     Segment2d retval;
-    list<Segment2d> lista= sin_degenerados(intersection(*this,sr));
-    if(!lista.empty())
+    list<Segment2d> sg_list= sin_degenerados(intersection(*this,sr));
+    if(!sg_list.empty())
       {
-        retval= *lista.begin();
-        if(lista.size()>1)
-          std::cerr << "SupPoligonal2d::Clip, el polígono corta a la semirecta en "
-                    << lista.size() << " tramos." << std::endl;
+        retval= *sg_list.begin();
+        if(sg_list.size()>1)
+          std::cerr << getClassName() << "::" << __FUNCTION__
+		    << "; the polygon clips the ray in"
+                    << sg_list.size() << " segments." << std::endl;
       }
     return retval;
   }
@@ -399,14 +400,14 @@ Segment2d SupPoligonal2d::Clip(const SemiRecta2d &sr) const
 Segment2d SupPoligonal2d::Clip(const Segment2d &sg) const
   {
     Segment2d retval;
-    list<Segment2d> lista= sin_degenerados(intersection(*this,sg));
-    if(!lista.empty())
+    list<Segment2d> sg_list= sin_degenerados(intersection(*this,sg));
+    if(!sg_list.empty())
       {
-        retval= *lista.begin();
-        if(lista.size()>1)
+        retval= *sg_list.begin();
+        if(sg_list.size()>1)
           std::cerr << getClassName() << "::" << __FUNCTION__
 	            << "; the polygon clips the segment on "
-                    << lista.size() << " parts." << std::endl;
+                    << sg_list.size() << " segments." << std::endl;
       }
     return retval;
   }
@@ -441,8 +442,8 @@ list<Segment2d> intersection(const SupPoligonal2d &pg,const Recta2d &r)
 list<Segment2d> intersection(const Recta2d &r,const SupPoligonal2d &pg)
   { return intersection(pg,r); }
 
-//! @brief Return the intersection of the polygon con la semirecta.
-list<Segment2d> intersection(const SupPoligonal2d &pg,const SemiRecta2d &sr)
+//! @brief Return the intersection of the polygon with the ray.
+list<Segment2d> intersection(const SupPoligonal2d &pg,const Ray2d &sr)
   {
     
     list<Segment2d> retval;
@@ -469,8 +470,8 @@ list<Segment2d> intersection(const SupPoligonal2d &pg,const SemiRecta2d &sr)
     return retval;
   }
 
-//! @brief Return the intersection of the polygon con la semirecta.
-list<Segment2d> intersection(const SemiRecta2d &sr,const SupPoligonal2d &pg)
+//! @brief Return the intersection of the polygon with the ray.
+list<Segment2d> intersection(const Ray2d &sr,const SupPoligonal2d &pg)
   { return intersection(pg,sr); }
 
 //! @brief Return the intersection of the polygon with the segment.

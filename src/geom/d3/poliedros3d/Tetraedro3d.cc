@@ -24,7 +24,7 @@
 #include "Tetraedro3d.h"
 #include "Poliedro3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
-#include "xc_utils/src/geom/d3/SemiEspacio3d.h"
+#include "xc_utils/src/geom/d3/HalfSpace3d.h"
 
 
 
@@ -45,7 +45,7 @@ Tetraedro3d::Tetraedro3d(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const
   : cgtetraedro(p0.ToCGAL(),p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL()){}
 
 //! @brief Constructor.
-Tetraedro3d::Tetraedro3d(const SemiEspacio3d &se0, const SemiEspacio3d &se1,const SemiEspacio3d &se2, const SemiEspacio3d &se3)
+Tetraedro3d::Tetraedro3d(const HalfSpace3d &se0, const HalfSpace3d &se1,const HalfSpace3d &se2, const HalfSpace3d &se3)
   : cgtetraedro()
   {
     Poliedro3d tmp(se0,se1,se2,se3);

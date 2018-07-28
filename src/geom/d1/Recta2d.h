@@ -52,7 +52,7 @@ class RectaParametricas2d
 
 
 class Dir2d;
-class SemiRecta2d;
+class Ray2d;
 class Segment2d;
 
 
@@ -63,7 +63,7 @@ class Recta2d : public Linea2d
   {
     CGRecta_2 cgr;
 
-    friend class SemiRecta2d;
+    friend class Ray2d;
     friend class Segment2d;
   public:
     Recta2d(void);

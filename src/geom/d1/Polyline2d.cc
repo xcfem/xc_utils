@@ -222,7 +222,7 @@ GeomObj::list_Pos2d Polyline2d::getIntersection(const Recta2d &r) const
 
 //! @brief Return the points of intersection of the polyline with
 //! the argument.
-GeomObj::list_Pos2d Polyline2d::getIntersection(const SemiRecta2d &sr) const
+GeomObj::list_Pos2d Polyline2d::getIntersection(const Ray2d &sr) const
   {
     list_Pos2d retval;
     register const_iterator j=begin();
@@ -311,13 +311,13 @@ void Polyline2d::Plot(Plotter &plotter) const
 
 GeomObj::list_Pos2d intersection(const Polyline2d &p,const Recta2d &r)
   { return p.getIntersection(r); }
-GeomObj::list_Pos2d intersection(const Polyline2d &p,const SemiRecta2d &sr)
+GeomObj::list_Pos2d intersection(const Polyline2d &p,const Ray2d &sr)
   { return p.getIntersection(sr); }
 GeomObj::list_Pos2d intersection(const Polyline2d &p,const Segment2d &sg)
   { return p.getIntersection(sg); }
 GeomObj::list_Pos2d intersection(const Recta2d &r,const Polyline2d &p)
   { return p.getIntersection(r); }
-GeomObj::list_Pos2d intersection(const SemiRecta2d &sr,const Polyline2d &p)
+GeomObj::list_Pos2d intersection(const Ray2d &sr,const Polyline2d &p)
   { return p.getIntersection(sr); }
 GeomObj::list_Pos2d intersection(const Segment2d &sg,const Polyline2d &p)
   { return p.getIntersection(sg); }

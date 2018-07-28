@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SemiRecta3d.h
+//Ray3d.h
 
-#ifndef SEMIRECTA3D_H
-#define SEMIRECTA3D_H
+#ifndef RAY3D_H
+#define RAY3D_H
 
 #include "Linea3d.h"
 #include "Recta3d.h"
@@ -33,18 +33,18 @@ class Dir3d;
 
 //! @ingroup GEOM
 //
-//! @brief Semirrecta en tres dimensiones.
-class SemiRecta3d : public Linea3d
+//! @brief Ray in a three-dimensional space.
+class Ray3d : public Linea3d
   {
-    CGSemiRecta_3 cgsr;
+    CGRay_3 cgsr;
   public:
-    SemiRecta3d(void): Linea3d(),cgsr(CGPoint_3(0,0,0),CGPoint_3(1,0,0)) {}
-    SemiRecta3d(const CGSemiRecta_3 &r)
+    Ray3d(void): Linea3d(),cgsr(CGPoint_3(0,0,0),CGPoint_3(1,0,0)) {}
+    Ray3d(const CGRay_3 &r)
       : Linea3d(), cgsr(r) {}
-    SemiRecta3d(const Pos3d &p1,const Pos3d &p2);
-    SemiRecta3d(const SemiRecta3d &r)
+    Ray3d(const Pos3d &p1,const Pos3d &p2);
+    Ray3d(const Ray3d &r)
       : Linea3d(),cgsr(r.cgsr) {}
-    SemiRecta3d &operator=(const SemiRecta3d &r)
+    Ray3d &operator=(const Ray3d &r)
       {
 	Linea3d::operator=(r);
         cgsr= r.cgsr;
@@ -52,8 +52,8 @@ class SemiRecta3d : public Linea3d
       }
 
     virtual GeomObj *clon(void) const
-      { return new SemiRecta3d(*this); }
-    const CGSemiRecta_3 &ToCGAL(void) const
+      { return new Ray3d(*this); }
+    const CGRay_3 &ToCGAL(void) const
       { return cgsr; }
     void TwoPoints(const Pos3d &p1,const Pos3d &p2);
     virtual GEOM_FT GetMax(unsigned short int) const
@@ -82,12 +82,12 @@ class SemiRecta3d : public Linea3d
     void Put(const Pos3d &p1,const Pos3d &p2)
       { TwoPoints(p1,p2); }
 
-    bool Paralela(const SemiRecta3d &r) const;
+    bool Paralela(const Ray3d &r) const;
     bool Paralela(const Recta3d &r) const;
 
     GeomObj3d::list_Pos3d getIntersection(unsigned short int, const double &) const;
     GeomObj3d::list_Pos3d getIntersection(const Recta3d &r) const;
-    GeomObj3d::list_Pos3d getIntersection(const SemiRecta3d &sr) const;
+    GeomObj3d::list_Pos3d getIntersection(const Ray3d &sr) const;
 
     inline virtual GEOM_FT getLength(void) const
       { return NAN; }
@@ -106,48 +106,48 @@ class SemiRecta3d : public Linea3d
     //Moment of inertia with respect to the center of mass in local coordinates.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
-    inline friend bool operator==(const SemiRecta3d &r1,const SemiRecta3d &r2)
+    inline friend bool operator==(const Ray3d &r1,const Ray3d &r2)
       { return (r1.cgsr==r2.cgsr); }
     inline void Print(std::ostream &os) const
       { os << PtoParametricas(0.0) << " " << PtoParametricas(100.0); }
   };
 
-inline GEOM_FT angle(const SemiRecta3d &r,const Vector3d &v)
+inline GEOM_FT angle(const Ray3d &r,const Vector3d &v)
   { return r.getAngle(v); }
-inline GEOM_FT angle(const SemiRecta3d &sr,const Recta3d &r)
+inline GEOM_FT angle(const Ray3d &sr,const Recta3d &r)
   { return r.getAngle(sr.VDir()); }
-inline GEOM_FT angle(const Recta3d &r,const SemiRecta3d &sr)
+inline GEOM_FT angle(const Recta3d &r,const Ray3d &sr)
   { return r.getAngle(sr.VDir()); }
 
-inline GEOM_FT dist2(const Pos3d &p,const SemiRecta3d &r)
+inline GEOM_FT dist2(const Pos3d &p,const Ray3d &r)
   { return r.dist2(p); }
-inline GEOM_FT dist2(const SemiRecta3d &r,const Pos3d &p)
+inline GEOM_FT dist2(const Ray3d &r,const Pos3d &p)
   { return r.dist2(p); }
-inline GEOM_FT dist(const Pos3d &p,const SemiRecta3d &r)
+inline GEOM_FT dist(const Pos3d &p,const Ray3d &r)
   { return r.dist(p); }
-inline GEOM_FT dist(const SemiRecta3d &r,const Pos3d &p)
+inline GEOM_FT dist(const Ray3d &r,const Pos3d &p)
   { return r.dist(p); }
 
-inline bool paralelas(const SemiRecta3d &r1,const Recta3d &r2)
+inline bool paralelas(const Ray3d &r1,const Recta3d &r2)
   { return r1.Paralela(r2); }
-inline bool paralelas(const Recta3d &r1,const SemiRecta3d &r2)
+inline bool paralelas(const Recta3d &r1,const Ray3d &r2)
   { return paralelas(r2,r1); }
-inline bool paralelas(const SemiRecta3d &r1,const SemiRecta3d &r2)
+inline bool paralelas(const Ray3d &r1,const Ray3d &r2)
   { return r1.Paralela(r2); }
 
-inline GeomObj3d::list_Pos3d intersection(const Recta3d &r1,const SemiRecta3d &r2)
+inline GeomObj3d::list_Pos3d intersection(const Recta3d &r1,const Ray3d &r2)
   { return r2.getIntersection(r1); }
-inline GeomObj3d::list_Pos3d intersection(const SemiRecta3d &r1,const Recta3d &r2)
+inline GeomObj3d::list_Pos3d intersection(const Ray3d &r1,const Recta3d &r2)
   { return r1.getIntersection(r2); }
-inline GeomObj3d::list_Pos3d intersection(const SemiRecta3d &r1,const SemiRecta3d &r2)
+inline GeomObj3d::list_Pos3d intersection(const Ray3d &r1,const Ray3d &r2)
   { return r1.getIntersection(r2); }
 
 
-inline bool colineales(const SemiRecta3d &sr,const Recta3d &r)
+inline bool colineales(const Ray3d &sr,const Recta3d &r)
   { return colineales(sr.RectaSoporte(),r); }
-inline bool colineales(const Recta3d &r,const SemiRecta3d &sr)
+inline bool colineales(const Recta3d &r,const Ray3d &sr)
   { return colineales(sr,r); }
-inline bool colineales(const SemiRecta3d &sr1,const SemiRecta3d &sr2)
+inline bool colineales(const Ray3d &sr1,const Ray3d &sr2)
   { return colineales(sr1,sr2.RectaSoporte()); }
 
 

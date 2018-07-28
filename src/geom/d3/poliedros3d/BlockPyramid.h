@@ -27,7 +27,7 @@
 #include <iostream>
 #include "../GeomObj3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
-#include "xc_utils/src/geom/d3/SemiEspacio3d.h"
+#include "xc_utils/src/geom/d3/HalfSpace3d.h"
 #include "xc_basic/src/matrices/m_double.h"
 
 
@@ -37,15 +37,15 @@
 class BlockPyramid: public GeomObj3d
   {
   protected:
-    std::deque<SemiEspacio3d> semiespacios; //!< Half spaces that define the object.
+    std::deque<HalfSpace3d> half_spaces; //!< Half spaces that define the object.
 
     std::deque<Vector3d> haz_vectores(void) const;
-    static bool es_interior(const SemiEspacio3d &,const Vector3d &);
+    static bool es_interior(const HalfSpace3d &,const Vector3d &);
     bool es_interior(const Vector3d &) const;
     std::deque<Vector3d> haz_vectores_interiores(void) const;
   public:
     BlockPyramid(void);
-    BlockPyramid(const std::deque<SemiEspacio3d> &);
+    BlockPyramid(const std::deque<HalfSpace3d> &);
     virtual GeomObj *clon(void) const
       { return new BlockPyramid(*this); }
     inline unsigned short int Dimension(void) const

@@ -28,7 +28,7 @@
 #include "Linea2d.h"
 
 class Segment2d;
-class SemiRecta2d;
+class Ray2d;
 class Recta2d;
 class ListaPos2d;
 
@@ -102,7 +102,7 @@ class Polyline2d : public Linea2d, public GeomObj::list_Pos2d
     //! the line coord_i= d
     // list_Pos2d Int(unsigned short int i,const GEOM_FT &d) const;
     list_Pos2d getIntersection(const Recta2d &r) const;
-    list_Pos2d getIntersection(const SemiRecta2d &sr) const;
+    list_Pos2d getIntersection(const Ray2d &sr) const;
     list_Pos2d getIntersection(const Segment2d &sr) const;
     //Polyline2d Corta(unsigned short int i,const GEOM_FT &d) const;
     Polyline2d Separa(const Pos2d &p,const short int &sgn) const;
@@ -116,10 +116,10 @@ class Polyline2d : public Linea2d, public GeomObj::list_Pos2d
   };
 
 GeomObj::list_Pos2d intersection(const Polyline2d &p,const Recta2d &r);
-GeomObj::list_Pos2d intersection(const Polyline2d &p,const SemiRecta2d &);
+GeomObj::list_Pos2d intersection(const Polyline2d &p,const Ray2d &);
 GeomObj::list_Pos2d intersection(const Polyline2d &p,const Segment2d &);
 GeomObj::list_Pos2d intersection(const Recta2d &,const Polyline2d &);
-GeomObj::list_Pos2d intersection(const SemiRecta2d &,const Polyline2d &p);
+GeomObj::list_Pos2d intersection(const Ray2d &,const Polyline2d &p);
 GeomObj::list_Pos2d intersection(const Segment2d &,const Polyline2d &p);
 
 #endif

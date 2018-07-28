@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SemiEspacio3d.cc
+//HalfSpace3d.cc
 
-#include "SemiEspacio3d.h"
+#include "HalfSpace3d.h"
 
 
 
@@ -30,19 +30,19 @@
 
 
 //! @brief Default constructor.
-SemiEspacio3d::SemiEspacio3d(const Plane &p)
+HalfSpace3d::HalfSpace3d(const Plane &p)
   : GeomObj3d(), lim(p) {}
 
 //! @brief Return the plane that defined de half space boudary.
-const Plane &SemiEspacio3d::getBoundaryPlane(void) const
+const Plane &HalfSpace3d::getBoundaryPlane(void) const
   { return lim; }
 
-void SemiEspacio3d::setBoundaryPlane(const Plane &p)
+void HalfSpace3d::setBoundaryPlane(const Plane &p)
   { lim= p; }
 
 //! @brief Return true if the point is inside the half-plane.
 //! The points of the edge line belong to the half-plane.
-bool SemiEspacio3d::In(const Pos3d &p, const double &tol) const
+bool HalfSpace3d::In(const Pos3d &p, const double &tol) const
   {
     bool retval= false;
     if(lim.LadoNegativo(p))
@@ -53,35 +53,35 @@ bool SemiEspacio3d::In(const Pos3d &p, const double &tol) const
   }
 
 //! @brief Return the signed distance from the point to the half plane.
-GEOM_FT SemiEspacio3d::distSigno(const Pos3d &p) const
+GEOM_FT HalfSpace3d::distSigno(const Pos3d &p) const
   { return lim.PseudoDist(p); }
 
 //! @brief Return the signed squared distance from the point to the half plane.
-GEOM_FT SemiEspacio3d::distSigno2(const Pos3d &p) const
+GEOM_FT HalfSpace3d::distSigno2(const Pos3d &p) const
   { return lim.PseudoDist2(p); }
 
 //! @brief Return the distance from the point to the half plane.
-GEOM_FT SemiEspacio3d::dist(const Pos3d &p) const
+GEOM_FT HalfSpace3d::dist(const Pos3d &p) const
   { return fabs(distSigno(p)); }
 
 //! @brief Return the squared distance from the point to the half plane.
-GEOM_FT SemiEspacio3d::dist2(const Pos3d &p) const
+GEOM_FT HalfSpace3d::dist2(const Pos3d &p) const
   { return fabs(distSigno2(p)); }
 
 //! @brief Return el the angle with the half space argument.
-GEOM_FT SemiEspacio3d::getAngle(const SemiEspacio3d &se) const
+GEOM_FT HalfSpace3d::getAngle(const HalfSpace3d &se) const
   { return angle(lim,se.getPlane()); }
 
 //! @brief Return the angle with respect to the plane argument.
-GEOM_FT SemiEspacio3d::getAngle(const Plane &p) const
+GEOM_FT HalfSpace3d::getAngle(const Plane &p) const
   { return angle(lim,p); }
 
 //! @brief Return the angle with the vector argument.
-GEOM_FT SemiEspacio3d::getAngle(const Vector3d &v) const
+GEOM_FT HalfSpace3d::getAngle(const Vector3d &v) const
   { return angle(v,lim); }
 
-//! @brief Return la arista de the intersection entre semiespacios.
-Recta3d SemiEspacio3d::getLima(const SemiEspacio3d &se) const
+//! @brief Return la arista de the intersection entre half spaces.
+Recta3d HalfSpace3d::getLima(const HalfSpace3d &se) const
   {
      const Recta3d retval= lim.getIntersection(se.lim);
      if(!retval.exists())
@@ -92,39 +92,39 @@ Recta3d SemiEspacio3d::getLima(const SemiEspacio3d &se) const
   }
 
 //!brief Return the dimension of the object 0, 1, 2 or 3.
-unsigned short int SemiEspacio3d::Dimension(void) const
+unsigned short int HalfSpace3d::Dimension(void) const
   { return 3; }
 
 //! @brief Return the lenght of the object.
-GEOM_FT SemiEspacio3d::getLength(void) const
+GEOM_FT HalfSpace3d::getLength(void) const
   { return NAN; }
 //! @brief Return the object area.
-GEOM_FT SemiEspacio3d::getArea(void) const
+GEOM_FT HalfSpace3d::getArea(void) const
   { return NAN; }
 //! @brief Return the object volume
-GEOM_FT SemiEspacio3d::getVolume(void) const
+GEOM_FT HalfSpace3d::getVolume(void) const
   { return NAN; }
-Pos3d SemiEspacio3d::getCenterOfMass(void) const
+Pos3d HalfSpace3d::getCenterOfMass(void) const
   { return lim.getCenterOfMass(); }
 
 //! @brief Return el moment of inertia with respect to the center of mass in local coordinates.
-GEOM_FT SemiEspacio3d::Ix(void) const
+GEOM_FT HalfSpace3d::Ix(void) const
   { return NAN; }
 
 //! @brief Return el moment of inertia with respect to the center of mass in local coordinates.
-GEOM_FT SemiEspacio3d::Iy(void) const
+GEOM_FT HalfSpace3d::Iy(void) const
   { return NAN; }
 
 //! @brief Return el product of inertia.
-GEOM_FT SemiEspacio3d::Pxy(void) const
+GEOM_FT HalfSpace3d::Pxy(void) const
   { return NAN; }
 
 //! @brief Return el moment of inertia with respect to the center of mass in local coordinates.
-GEOM_FT SemiEspacio3d::Iz(void) const
+GEOM_FT HalfSpace3d::Iz(void) const
   { return NAN; }
 
-//! @brief Return verdadero si los semiespacios son iguales.
-bool operator==(const SemiEspacio3d &r1,const SemiEspacio3d &r2)
+//! @brief Return verdadero si los half spaces son iguales.
+bool operator==(const HalfSpace3d &r1,const HalfSpace3d &r2)
   {
     if(&r1.lim==&r2.lim)
       return true;
@@ -134,20 +134,20 @@ bool operator==(const SemiEspacio3d &r1,const SemiEspacio3d &r2)
 
 //! @brief Return a vector normal to the boundary plane
 //! oriented inside-out.
-Vector3d SemiEspacio3d::NormalExterior(void) const
+Vector3d HalfSpace3d::NormalExterior(void) const
   { return lim.Normal(); }
 
 //! @brief Return a vector normal to the boundary plane
 //! oriented outside-in.
-Vector3d SemiEspacio3d::NormalInterior(void) const
+Vector3d HalfSpace3d::NormalInterior(void) const
   { return -NormalExterior(); }
 
-//! @brief Imprime el semiespacio
-void SemiEspacio3d::Print(std::ostream &os) const
+//! @brief Imprime el half space
+void HalfSpace3d::Print(std::ostream &os) const
       { os << lim; }
 
 //! @brief Return de points of intersection between half spaces.
-TripletMap<Pos3d> intersection_points(const std::deque<SemiEspacio3d> &se)
+TripletMap<Pos3d> intersection_points(const std::deque<HalfSpace3d> &se)
   {
     TripletMap<Pos3d> retval;
     const size_t sz= se.size();
@@ -162,12 +162,12 @@ TripletMap<Pos3d> intersection_points(const std::deque<SemiEspacio3d> &se)
     return retval;
   }
 
-//! @brief Return los vertices del poliedro intersection de los semiespacios.
-TripletMap<Pos3d> vertices_poliedro(const std::deque<SemiEspacio3d> &se, const double &tol)
+//! @brief Return los vertices del poliedro intersection de los half spaces.
+TripletMap<Pos3d> vertices_poliedro(const std::deque<HalfSpace3d> &se, const double &tol)
   {
     TripletMap<Pos3d> tmp= intersection_points(se);
     TripletMap<Pos3d> retval= tmp;
-    for(std::deque<SemiEspacio3d>::const_iterator j=se.begin();j!=se.end();j++)
+    for(std::deque<HalfSpace3d>::const_iterator j=se.begin();j!=se.end();j++)
       for(TripletMap<Pos3d>::const_iterator i= tmp.begin();i!=tmp.end();i++)
         if((*j).Out((*i).second,tol))
           {
@@ -197,8 +197,8 @@ TripletMap<Pos3d> vertices_poliedro(const std::deque<SemiEspacio3d> &se, const d
     return retval;
   }
 
-//! @brief Return las rectas de intersection entre los semiespacios.
-std::deque<Recta3d> rectas_intersection(const std::deque<SemiEspacio3d> &se)
+//! @brief Return the intersection lines between half spaces.
+std::deque<Recta3d> rectas_intersection(const std::deque<HalfSpace3d> &se)
   {
     std::deque<Recta3d> retval;
     const size_t sz= se.size();
@@ -212,8 +212,8 @@ std::deque<Recta3d> rectas_intersection(const std::deque<SemiEspacio3d> &se)
     return retval;
   }
 
-//! @brief Return los vectores normales a cada uno de los semiespacios.
-std::deque<Vector3d> vectores_normales(const std::deque<SemiEspacio3d> &se)
+//! @brief Return los vectores normales a cada uno de los half spaces.
+std::deque<Vector3d> vectores_normales(const std::deque<HalfSpace3d> &se)
   {
     std::deque<Vector3d> retval;
     const size_t sz= se.size();
@@ -223,13 +223,13 @@ std::deque<Vector3d> vectores_normales(const std::deque<SemiEspacio3d> &se)
   }
 
 //! @brief Return the angle between half spaces.
-GEOM_FT angle(const SemiEspacio3d &se1,const SemiEspacio3d &se2)
+GEOM_FT angle(const HalfSpace3d &se1,const HalfSpace3d &se2)
   { return se1.getAngle(se2); }
 
 //! @brief Return the angle between the half space and the vector.
-GEOM_FT angle(const Vector3d &v,const SemiEspacio3d &se)
+GEOM_FT angle(const Vector3d &v,const HalfSpace3d &se)
   { return se.getAngle(v); }
 
 //! @brief Return the angle between the half space and the vector.
-GEOM_FT angle(const SemiEspacio3d &se,const Vector3d &v)
+GEOM_FT angle(const HalfSpace3d &se,const Vector3d &v)
   { return se.getAngle(v); }

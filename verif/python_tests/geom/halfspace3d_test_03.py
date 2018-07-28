@@ -16,7 +16,7 @@ p=geom.Pos3d(0,0,0)
 r=geom.Vector3d(1,2,1)
 
 plBuz=teoria_bloques.computeDipPlane(alpha,beta,p)
-P=geom.SemiEspacio3d(plBuz)
+P=geom.HalfSpace3d(plBuz)
 plLim=P.getBoundaryPlane()
 s=plLim.getVector3dProjection(r)
 s=s.normalizado()

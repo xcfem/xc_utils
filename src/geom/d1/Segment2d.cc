@@ -213,7 +213,7 @@ Pos2d Segment2d::PtoCooNatural(const GEOM_FT &chi) const
 
 bool Segment2d::intersects(const Recta2d &r) const
   { return CGAL::do_intersect(r.cgr,cgseg); }
-bool Segment2d::intersects(const SemiRecta2d &sr) const
+bool Segment2d::intersects(const Ray2d &sr) const
   { return do_intersect(sr.cgsr,cgseg); }
 
 //! @brief Return the intersection of the line with a plane defined
@@ -270,7 +270,7 @@ GeomObj2d::list_Pos2d Segment2d::getIntersection(const Recta2d &r) const
 
 //! @brief Return the intersection of the segment and the ray,
 //! if it doesn't exists return an empty list.
-GeomObj2d::list_Pos2d Segment2d::getIntersection(const SemiRecta2d &sr) const
+GeomObj2d::list_Pos2d Segment2d::getIntersection(const Ray2d &sr) const
   {
     GeomObj2d::list_Pos2d retval;
     if(intersects(sr))
@@ -282,7 +282,7 @@ GeomObj2d::list_Pos2d Segment2d::getIntersection(const SemiRecta2d &sr) const
           retval.push_back(Pos2d(ptoi));
         else
           {
-            cerr << "Segment2d::getIntersection(SemiRecta2d): unknown error." << endl
+            cerr << "Segment2d::getIntersection(Ray2d): unknown error." << endl
                  << "sg: " << *this << endl
                  << "sr: " << sr << endl;
           }

@@ -27,7 +27,7 @@
 #include <iostream>
 #include "../GeomObj3d.h"
 
-class SemiEspacio3d;
+class HalfSpace3d;
 
 
 //! @ingroup GEOM

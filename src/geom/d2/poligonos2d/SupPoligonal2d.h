@@ -27,7 +27,7 @@
 #include "xc_utils/src/geom/d2/Superficie2d.h"
 
 class Recta2d;
-class SemiRecta2d;
+class Ray2d;
 class Segment2d;
 class Poligono2d;
 class Polyline2d;
@@ -91,10 +91,10 @@ class SupPoligonal2d: public Superficie2d
       { return -DistSigno(p); }
 
     bool Overlap(const Recta2d &r) const;
-    bool Overlap(const SemiRecta2d &sr) const;
+    bool Overlap(const Ray2d &sr) const;
 
     Segment2d Clip(const Recta2d &) const;
-    Segment2d Clip(const SemiRecta2d &) const;
+    Segment2d Clip(const Ray2d &) const;
     Segment2d Clip(const Segment2d &) const;
 
     
@@ -106,8 +106,8 @@ class SupPoligonal2d: public Superficie2d
 std::list<Segment2d> intersection(const SupPoligonal2d &p,const Recta2d &r);
 std::list<Segment2d> intersection(const Recta2d &r,const SupPoligonal2d &p);
 
-std::list<Segment2d> intersection(const SupPoligonal2d &p,const SemiRecta2d &sr);
-std::list<Segment2d> intersection(const SemiRecta2d &sr,const SupPoligonal2d &p);
+std::list<Segment2d> intersection(const SupPoligonal2d &p,const Ray2d &sr);
+std::list<Segment2d> intersection(const Ray2d &sr,const SupPoligonal2d &p);
 
 std::list<Segment2d> intersection(const SupPoligonal2d &p,const Segment2d &sg);
 std::list<Segment2d> intersection(const Segment2d &sg,const SupPoligonal2d &p);

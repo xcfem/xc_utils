@@ -23,7 +23,7 @@
 
 #include "HalfPlane2d.h"
 #include "GmGrupo2d.h"
-#include "xc_utils/src/geom/d1/SemiRecta2d.h"
+#include "xc_utils/src/geom/d1/Ray2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 
 #include "../pos_vec/Dir2d.h"
@@ -58,7 +58,7 @@ GeomObj *HalfPlane2d::clon(void) const
 void HalfPlane2d::Swap(void)
   { lim.Swap(); }
 
-bool HalfPlane2d::intersects(const SemiRecta2d &sr) const
+bool HalfPlane2d::intersects(const Ray2d &sr) const
   { return sr.intersects(lim); }
 bool HalfPlane2d::intersects(const Segment2d &sg) const
   { return sg.intersects(lim); }
@@ -79,13 +79,13 @@ GmGrupo2d HalfPlane2d::getIntersection(const Recta2d &r) const
     const Vector2d vd= r.VDir();
     const Pos2d p1= pint+vd;
     if(In(p1))
-      retval.push_back(SemiRecta2d(pint,vd));
+      retval.push_back(Ray2d(pint,vd));
     else
-      retval.push_back(SemiRecta2d(pint,-vd));
+      retval.push_back(Ray2d(pint,-vd));
     return retval;
   }
 
-GmGrupo2d HalfPlane2d::getIntersection(const SemiRecta2d &sr) const
+GmGrupo2d HalfPlane2d::getIntersection(const Ray2d &sr) const
   {
     GmGrupo2d retval;
     if(!intersects(sr)) return retval;
@@ -94,7 +94,7 @@ GmGrupo2d HalfPlane2d::getIntersection(const SemiRecta2d &sr) const
     const Vector2d vd= sr.VDir();
     const Pos2d p1= pint+vd;
     if(In(p1))
-      retval.push_back(SemiRecta2d(pint,vd));
+      retval.push_back(Ray2d(pint,vd));
     return retval;
   }
 
@@ -115,13 +115,13 @@ GmGrupo2d HalfPlane2d::getIntersection(const Segment2d &sg) const
 
 GmGrupo2d intersection(const HalfPlane2d &sp,const Recta2d &r)
   { return sp.getIntersection(r); }
-GmGrupo2d intersection(const HalfPlane2d &sp,const SemiRecta2d &sr)
+GmGrupo2d intersection(const HalfPlane2d &sp,const Ray2d &sr)
   { return sp.getIntersection(sr); }
 GmGrupo2d intersection(const HalfPlane2d &sp,const Segment2d &sg)
   { return sp.getIntersection(sg); }
 GmGrupo2d intersection(const Recta2d &r,const HalfPlane2d &sp)
   { return intersection(sp,r); }
-GmGrupo2d intersection(const SemiRecta2d &sr,const HalfPlane2d &sp)
+GmGrupo2d intersection(const Ray2d &sr,const HalfPlane2d &sp)
   { return intersection(sp,sr); }
 GmGrupo2d intersection(const Segment2d &sg,const HalfPlane2d &sp)
   { return intersection(sp,sg); }

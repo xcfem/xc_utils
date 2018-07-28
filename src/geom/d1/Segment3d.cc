@@ -137,7 +137,7 @@ GEOM_FT Segment3d::dist(const Pos3d &p) const
 
 bool Segment3d::Paralelo(const Recta3d &r) const
   { return paralelas(RectaSoporte(),r); }
-bool Segment3d::Paralelo(const SemiRecta3d &sr) const
+bool Segment3d::Paralelo(const Ray3d &sr) const
   { return paralelas(RectaSoporte(),sr); }
 bool Segment3d::Paralelo(const Segment3d &r) const
   { return paralelas(RectaSoporte(),r.RectaSoporte()); }
@@ -171,7 +171,7 @@ GeomObj3d::list_Pos3d Segment3d::getIntersection(const Recta3d &r) const
 
 //! @brief Return the intersection of the ray and the segment, if
 //! the intersection doesn't exists returns an empty list.
-GeomObj3d::list_Pos3d Segment3d::getIntersection(const SemiRecta3d &sr) const
+GeomObj3d::list_Pos3d Segment3d::getIntersection(const Ray3d &sr) const
   {
     const Recta3d sop= RectaSoporte();
     GeomObj3d::list_Pos3d retval= sr.getIntersection(sop);
