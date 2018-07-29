@@ -77,7 +77,7 @@ def calcLambda0(r,rp):
 def calcM(x,r,rp):
   mNeq1= 1-exp(-x/0.7*r)
   mNeq3= 1-pow(1+x/0.84/rp,-2)
-  return interpolaRecta(1,mNeq1,3,mNeq3,calcNumeroEstabFromRp(r,rp))
+  return interpolateLine(1,mNeq1,3,mNeq3,calcNumeroEstabFromRp(r,rp))
 
 ''' Return the value of lambda (variation of the pressure with the distance to 
     the front) from:
