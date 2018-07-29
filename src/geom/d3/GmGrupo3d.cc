@@ -26,17 +26,19 @@
 
 #include "xc_utils/src/geom/pos_vec/Dir3d.h"
 #include "xc_utils/src/geom/d0/Point3d.h"
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 #include "xc_utils/src/geom/d1/Ray3d.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
 
-GEOM_FT GmGrupo3d::inercia(const Recta3d &e) const
-//Return el moment of inertia with respect to la recta e
+//Return the moment of inertia with respect to the line argument
+GEOM_FT GmGrupo3d::inercia(const Line3d &e) const
   {
     if(objetos.empty()) return 0.0;
     if(!igual_dimension())
       {
-        std::cerr << "¡Ojo!, GmGrupo3d::inercia: los objetos del grupo tienen distintas dimensiones." << std::endl;
+        std::cerr << getClassName() << "::" << __FUNCTION__
+		  << "; Waringi!, the objects of the group have"
+	          << " different dimensions." << std::endl;
       }
     register pdeque_geom_obj::const_iterator i(objetos.begin());
     register GEOM_FT retval((*i)->I(e));
@@ -48,13 +50,13 @@ GEOM_FT GmGrupo3d::inercia(const Recta3d &e) const
 
 GEOM_FT GmGrupo3d::Ix(void) const
 //Moment of inertia with respect to the center of mass in local coordinates.
-{ return inercia(Recta3d(getCenterOfMass(),Dir3d(1.0,0.0,0.0))); }
+{ return inercia(Line3d(getCenterOfMass(),Dir3d(1.0,0.0,0.0))); }
 GEOM_FT GmGrupo3d::Iy(void) const
 //Moment of inertia with respect to the center of mass in local coordinates.
-{ return inercia(Recta3d(getCenterOfMass(),Dir3d(0.0,1.0,0.0))); }
+{ return inercia(Line3d(getCenterOfMass(),Dir3d(0.0,1.0,0.0))); }
 GEOM_FT GmGrupo3d::Iz(void) const
 //Moment of inertia with respect to the center of mass in local coordinates.
-{ return inercia(Recta3d(getCenterOfMass(),Dir3d(0.0,0.0,1.0))); }
+{ return inercia(Line3d(getCenterOfMass(),Dir3d(0.0,0.0,1.0))); }
 GEOM_FT GmGrupo3d::Pxy(void) const
   {
     std::cerr << "GmGrupo3d::Pxy not implemented, 0 is returned." << std::endl;

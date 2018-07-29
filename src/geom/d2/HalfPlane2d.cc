@@ -32,10 +32,10 @@
 HalfPlane2d::HalfPlane2d(void)
   : Superficie2d(), lim() {}
 
-HalfPlane2d::HalfPlane2d(const Recta2d &r)
+HalfPlane2d::HalfPlane2d(const Line2d &r)
   : Superficie2d(), lim(r) {}
 
-HalfPlane2d::HalfPlane2d(const Recta2d &r, const Pos2d &p)
+HalfPlane2d::HalfPlane2d(const Line2d &r, const Pos2d &p)
   : Superficie2d(), lim(r)
   {
     if(!In(p))
@@ -70,7 +70,7 @@ HalfPlane2d HalfPlane2d::GetSwap(void) const
     return retval;
   }
 
-GmGrupo2d HalfPlane2d::getIntersection(const Recta2d &r) const
+GmGrupo2d HalfPlane2d::getIntersection(const Line2d &r) const
   {
     GmGrupo2d retval;
     if(!intersects(r)) return retval;
@@ -113,13 +113,13 @@ GmGrupo2d HalfPlane2d::getIntersection(const Segment2d &sg) const
     return retval;
   }
 
-GmGrupo2d intersection(const HalfPlane2d &sp,const Recta2d &r)
+GmGrupo2d intersection(const HalfPlane2d &sp,const Line2d &r)
   { return sp.getIntersection(r); }
 GmGrupo2d intersection(const HalfPlane2d &sp,const Ray2d &sr)
   { return sp.getIntersection(sr); }
 GmGrupo2d intersection(const HalfPlane2d &sp,const Segment2d &sg)
   { return sp.getIntersection(sg); }
-GmGrupo2d intersection(const Recta2d &r,const HalfPlane2d &sp)
+GmGrupo2d intersection(const Line2d &r,const HalfPlane2d &sp)
   { return intersection(sp,r); }
 GmGrupo2d intersection(const Ray2d &sr,const HalfPlane2d &sp)
   { return intersection(sp,sr); }

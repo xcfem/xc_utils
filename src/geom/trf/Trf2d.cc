@@ -24,7 +24,7 @@
 #include "Trf2d.h"
 #include "../pos_vec/Vector2d.h"
 #include "../pos_vec/Pos2d.h"
-#include "xc_utils/src/geom/d1/Recta2d.h"
+#include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/FT_matrix.h"
 
 // Trf2d from_racionales(const GEOM_FT &r00,const GEOM_FT &r01,const GEOM_FT &r02,
@@ -84,7 +84,7 @@ Trf2d::Trf2d(const CGAL::Translation &tr,const Vector2d &v)
   : Trf(), cgtrf(tr,v.ToCGAL()) {}
 Trf2d::Trf2d(const CGAL::Rotation &rot,const GEOM_RT &seno,const GEOM_RT &coseno)
   : Trf(), cgtrf(rot,seno,coseno) {}
-// Trf2d::Trf2d(const CGAL::Reflection &ref,const Recta2d &r)
+// Trf2d::Trf2d(const CGAL::Reflection &ref,const Line2d &r)
 //   : Trf(), cgtrf(ref)) {}
 Trf2d::Trf2d(const CGAL::Scaling &sc,const GEOM_FT &factor_escala)
   : Trf(), cgtrf(sc,factor_escala) {}

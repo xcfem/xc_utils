@@ -28,7 +28,7 @@
 #include "xc_utils/src/geom/listas/utils_list_pos2d.h"
 
 
-#include "xc_utils/src/geom/d1/Recta2d.h"
+#include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
 #include "xc_utils/src/geom/d2/BND2d.h"
@@ -68,14 +68,14 @@ ListaPos2d ListaPos2d::Offset(const GEOM_FT &d) const
         point_const_iterator i= points_begin();
         point_const_iterator j= i;j++;
         const Segment2d s1= Segment2d(*i,*j).Offset(d);
-        Recta2d r1= s1.RectaSoporte();
+        Line2d r1= s1.getSupportLine();
         retval.appendPoint(s1.Origen());
         Segment2d s2= s1;
         i++;j++;//Next segment.
         for(;j != points_end();i++,j++)
           {
             s2= Segment2d(*i,*j).Offset(d);
-            Recta2d r2= s2.RectaSoporte();
+            Line2d r2= s2.getSupportLine();
             Pos2d ptIntersection= intersection_point(r1,r2);
             retval.appendPoint(ptIntersection);
             if(!ptIntersection.exists())

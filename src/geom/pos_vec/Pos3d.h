@@ -32,7 +32,7 @@
 
 class Vector3d;
 class Pos2d;
-class Recta3d;
+class Line3d;
 class Ray3d;
 class Segment3d;
 class Plane;
@@ -104,8 +104,8 @@ class Pos3d : public ProtoGeom
 
     GEOM_FT dist(const Pos3d &) const;
     GEOM_FT dist2(const Pos3d &) const;
-    GEOM_FT dist2(const Recta3d &) const;
-    GEOM_FT dist(const Recta3d &) const;
+    GEOM_FT dist2(const Line3d &) const;
+    GEOM_FT dist(const Line3d &) const;
     GEOM_FT dist2(const Ray3d &) const;
     GEOM_FT dist(const Ray3d &) const;
     GEOM_FT dist2(const Segment3d &) const;

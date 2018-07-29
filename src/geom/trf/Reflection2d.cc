@@ -25,7 +25,7 @@
 #include "xc_utils/src/geom/FT_matrix.h"
 #include "../pos_vec/Vector2d.h"
 #include "../pos_vec/Pos2d.h"
-#include "../d1/Recta2d.h"
+#include "../d1/Line2d.h"
 
 
 // Reflection2d::Reflection2d(const GEOM_RT &m00,const GEOM_RT &m01,const GEOM_RT &m02,
@@ -66,6 +66,6 @@ Reflection2d Reflection2d::crea_reflection2d(const  Pos2d &Q,const Vector2d &d)
 Reflection2d::Reflection2d(const Pos2d &Q,const Vector2d &d)
   : Trf2d(crea_reflection2d(Q,d)) {}
 
-Reflection2d::Reflection2d(const Recta2d &r)
+Reflection2d::Reflection2d(const Line2d &r)
   : Trf2d(crea_reflection2d(r.Point(),r.VersorDir())) {}
 

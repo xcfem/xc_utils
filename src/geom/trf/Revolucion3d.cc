@@ -27,7 +27,7 @@
 #include "Rotation3d.h"
 
 //! @brief Constructor.
-Revolucion3d::Revolucion3d(const Recta3d &e,const GEOM_FT &th,const size_t &nd)
+Revolucion3d::Revolucion3d(const Line3d &e,const GEOM_FT &th,const size_t &nd)
   : axis(e), theta(th), ndiv(nd)
   {}
 

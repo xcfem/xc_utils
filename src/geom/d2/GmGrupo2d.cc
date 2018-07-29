@@ -28,14 +28,14 @@
 
 #include "xc_utils/src/geom/pos_vec/Dir2d.h"
 #include "xc_utils/src/geom/d0/Point2d.h"
-#include "xc_utils/src/geom/d1/Recta2d.h"
+#include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/d1/Ray2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Triangle2d.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
-GEOM_FT GmGrupo2d::inercia(const Recta2d &e) const
-//Return el moment of inertia with respect to la recta e
+//! @brief Return el moment of inertia with respect to the line argument.
+GEOM_FT GmGrupo2d::inercia(const Line2d &e) const
   {
     if(objetos.empty()) return 0.0;
     if(!igual_dimension())
@@ -52,10 +52,10 @@ GEOM_FT GmGrupo2d::inercia(const Recta2d &e) const
 
 //! @brief Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT GmGrupo2d::Ix(void) const
-  { return inercia(Recta2d(getCenterOfMass(),Dir2d(1.0,0.0))); }
+  { return inercia(Line2d(getCenterOfMass(),Dir2d(1.0,0.0))); }
 //! @brief Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT GmGrupo2d::Iy(void) const
-  { return inercia(Recta2d(getCenterOfMass(),Dir2d(0.0,1.0))); }
+  { return inercia(Line2d(getCenterOfMass(),Dir2d(0.0,1.0))); }
 GEOM_FT GmGrupo2d::Pxy(void) const
   {
     std::cerr << getClassName() << "::" << __FUNCTION__

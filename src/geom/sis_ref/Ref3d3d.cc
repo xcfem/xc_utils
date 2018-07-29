@@ -22,7 +22,7 @@
 //Ref3d3d.cc
 #include "Ref3d3d.h"
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 
 //! @brief Constructor.
@@ -51,41 +51,41 @@ Ref3d3d::Ref3d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2,const Vect
   : BaseRef(o,SisCooRect3d3d(v1,v2,v3)) {}
 
 //! @brief Constructor.
-Ref3d3d::Ref3d3d(const Recta3d &r,const Pos3d &p)
+Ref3d3d::Ref3d3d(const Line3d &r,const Pos3d &p)
   : BaseRef(r.Point(0),SisCooRect3d3d(r.Point(0),r.Point(100),p)) {}
 
 Ref3d3d::~Ref3d3d(void)
   {}
 
+//! @brief Return the unary vector I expressed in global coordinates.
 Vector3d Ref3d3d::GetI(void) const
-//Return el vector unitario I en el sistema global.
   { return getAxisVDir(1); }
+//! @brief Return the unary vector J expressed in global coordinates.
 Vector3d Ref3d3d::GetJ(void) const
-//Return el vector unitario J en el sistema global.
   { return getAxisVDir(2); }
+//! @brief Return the unary vector K expressed in global coordinates.
 Vector3d Ref3d3d::GetK(void) const
-//Return el vector unitario K en el sistema global.
   { return getAxisVDir(3); }
 
-Recta3d Ref3d3d::getXAxis(void) const
-//Return the recta que define el x axis.
+//! @brief Return the line defining the x axis.
+Line3d Ref3d3d::getXAxis(void) const
   {
     const Pos3d dest(org+1000.0*GetI());
-    return Recta3d(org,dest);
+    return Line3d(org,dest);
   }
 
-Recta3d Ref3d3d::getYAxis(void) const
-//Return the recta que define el y axis.
+//! @brief Return the line defining the y axis.
+Line3d Ref3d3d::getYAxis(void) const
   {
     const Pos3d dest(org+1000.0*GetJ());
-    return Recta3d(org,dest);
+    return Line3d(org,dest);
   }
 
-Recta3d Ref3d3d::getZAxis(void) const
-//Return the recta que define el z axis.
+//! @brief Return the line defining the z axis.
+Line3d Ref3d3d::getZAxis(void) const
   {
     const Pos3d dest(org+1000.0*GetK());
-    return Recta3d(org,dest);
+    return Line3d(org,dest);
   }
 
 Plane Ref3d3d::getXYPlane(void) const

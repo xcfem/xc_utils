@@ -30,7 +30,7 @@
 #include "Pos2d.h"
 
 class VDesliz2d;
-class Recta2d;
+class Line2d;
 class Ref2d2d;
 
 //! @ingroup GEOM
@@ -61,7 +61,7 @@ class SVD2d: public ProtoGeom
         mom= -mom;
       }
     SVD2d ReduceA(const Pos2d &Q);
-    Recta2d RectaMomNulo(void) const;
+    Line2d getZeroMomentLine(void) const;
 
     SVD2d &operator+=(const VDesliz2d &v);
     SVD2d &operator-=(const VDesliz2d &v);

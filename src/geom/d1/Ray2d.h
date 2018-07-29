@@ -24,8 +24,8 @@
 #ifndef RAY2D_H
 #define RAY2D_H
 
-#include "Linea2d.h"
-#include "Recta2d.h"
+#include "Linear2d.h"
+#include "Line2d.h"
 #include "../pos_vec/Pos2d.h"
 
 class Dir2d;
@@ -33,22 +33,22 @@ class Dir2d;
 //! @ingroup GEOM
 //
 //! @brief Ray in a two-dimensional space.
-class Ray2d : public Linea2d
+class Ray2d : public Linear2d
   {
     CGRay_2 cgsr;
 
     friend class Segment2d;
   public:
-    Ray2d(void): Linea2d(),cgsr(CGPoint_2(0,0),CGPoint_2(1,0)) {}
+    Ray2d(void): Linear2d(),cgsr(CGPoint_2(0,0),CGPoint_2(1,0)) {}
     Ray2d(const CGRay_2 &r)
-      : Linea2d(), cgsr(r) {}
+      : Linear2d(), cgsr(r) {}
     Ray2d(const Pos2d &p1,const Pos2d &p2);
     Ray2d(const Pos2d &p1,const Vector2d &vdir);
     Ray2d(const Ray2d &r)
-      : Linea2d(),cgsr(r.cgsr) {}
+      : Linear2d(),cgsr(r.cgsr) {}
     Ray2d &operator=(const Ray2d &r)
       {
-	Linea2d::operator=(r);
+	Linear2d::operator=(r);
         cgsr= r.cgsr;
         return *this;
       }
@@ -61,12 +61,12 @@ class Ray2d : public Linea2d
       { return NAN; }
     virtual GEOM_FT GetMin(unsigned short int) const
       { return NAN; }
-    Recta2d RectaSoporte(void) const
-      { return Recta2d(cgsr.supporting_line()); }
+    Line2d getSupportLine(void) const
+      { return Line2d(cgsr.supporting_line()); }
     Pos2d Origen(void) const
       { return Pos2d(cgsr.source()); }
     inline GEOM_FT getSlope(void) const
-      { return RectaSoporte().getSlope(); }
+      { return getSupportLine().getSlope(); }
     const Pos2d Point(const int &i) const
       { return Pos2d(cgsr.point(i)); }
     //@brief Return a point of the line at a distance lambda from its origin.
@@ -87,21 +87,21 @@ class Ray2d : public Linea2d
 
     //! @brief Returns the points ordered by the value of the 
     //! parameter of its projection onto the line from lowest
-    //! to highest. Origin is at Recta2d::Point(0).
+    //! to highest. Origin is at Line2d::Point(0).
     GeomObj::list_Pos2d Ordena(const GeomObj::list_Pos2d &ptos) const
-      { return RectaSoporte().Ordena(ptos); }
+      { return getSupportLine().Ordena(ptos); }
 
     bool intersects(const Ray2d &sr2) const
       { return do_intersect(cgsr,sr2.cgsr); }
-    bool intersects(const Recta2d &sr) const;
+    bool intersects(const Line2d &sr) const;
     GeomObj2d::list_Pos2d getIntersection(unsigned short int, const double &) const;
-    GeomObj2d::list_Pos2d getIntersection(const Recta2d &r) const;
+    GeomObj2d::list_Pos2d getIntersection(const Line2d &r) const;
     GeomObj2d::list_Pos2d getIntersection(const Ray2d &sr) const;
 
-    bool Paralela(const Recta2d &r) const
-      { return paralelas(RectaSoporte(),r); }
+    bool Paralela(const Line2d &r) const
+      { return paralelas(getSupportLine(),r); }
     bool Paralela(const Ray2d &sr) const
-      { return Paralela(sr.RectaSoporte()); }
+      { return Paralela(sr.getSupportLine()); }
 
     //! @brief Return the length of the object.
     inline virtual GEOM_FT getLength(void) const
@@ -144,22 +144,22 @@ inline GEOM_FT dist(const Pos2d &p,const Ray2d &r)
 inline GEOM_FT dist(const Ray2d &r,const Pos2d &p)
   { return dist(p,r); }
 
-inline bool paralelas(const Ray2d &sr,const Recta2d &r)
+inline bool paralelas(const Ray2d &sr,const Line2d &r)
   { return sr.Paralela(r); }
-inline bool paralelas(const Recta2d &r,const Ray2d &sr)
+inline bool paralelas(const Line2d &r,const Ray2d &sr)
   { return paralelas(sr,r); }
 inline bool paralelas(const Ray2d &r1,const Ray2d &r2)
   { return r1.Paralela(r2); }
 
 inline bool intersecan(const Ray2d &sr1,const Ray2d &sr2)
   { return sr1.intersects(sr2); }
-inline bool intersecan(const Ray2d &sr,const Recta2d &r)
+inline bool intersecan(const Ray2d &sr,const Line2d &r)
   { return sr.intersects(r); }
-inline bool intersecan(const Recta2d &r,const Ray2d &sr)
+inline bool intersecan(const Line2d &r,const Ray2d &sr)
   { return sr.intersects(r); }
-inline GeomObj2d::list_Pos2d intersection(const Ray2d &sr,const Recta2d &r)
+inline GeomObj2d::list_Pos2d intersection(const Ray2d &sr,const Line2d &r)
   { return sr.getIntersection(r); }
-inline GeomObj2d::list_Pos2d intersection(const Recta2d &r, const Ray2d &sr)
+inline GeomObj2d::list_Pos2d intersection(const Line2d &r, const Ray2d &sr)
   { return sr.getIntersection(r); }
 
 //! @brief Return the intersection point of both lines, if it does not exists
@@ -168,12 +168,12 @@ inline GeomObj2d::list_Pos2d intersection(const Ray2d &sr1,const Ray2d &sr2)
   { return sr1.getIntersection(sr2); }
 
 
-inline bool colineales(const Ray2d &sr,const Recta2d &r)
-  { return colineales(sr.RectaSoporte(),r); }
-inline bool colineales(const Recta2d &r,const Ray2d &sr)
+inline bool colineales(const Ray2d &sr,const Line2d &r)
+  { return colineales(sr.getSupportLine(),r); }
+inline bool colineales(const Line2d &r,const Ray2d &sr)
   { return colineales(sr,r); }
 inline bool colineales(const Ray2d &sr1,const Ray2d &sr2)
-  { return colineales(sr1,sr2.RectaSoporte()); }
+  { return colineales(sr1,sr2.getSupportLine()); }
 
 
 #endif

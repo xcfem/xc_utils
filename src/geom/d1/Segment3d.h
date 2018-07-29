@@ -24,8 +24,8 @@
 #ifndef SEGMENT3D_H
 #define SEGMENT3D_H
 
-#include "Linea3d.h"
-#include "Recta3d.h"
+#include "Linear3d.h"
+#include "Line3d.h"
 #include "Ray3d.h"
 #include "../pos_vec/Pos3d.h"
 
@@ -35,7 +35,7 @@ class Dir3d;
 //! @ingroup GEOM
 //
 //! @brief Segment en tres dimensiones.
-class Segment3d : public Linea3d
+class Segment3d : public Linear3d
   {
     CGSegment_3 cgseg;
   public:
@@ -51,7 +51,7 @@ class Segment3d : public Linea3d
     void TwoPoints(const Pos3d &p1,const Pos3d &p2);
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
-    Recta3d RectaSoporte(void) const;
+    Line3d getSupportLine(void) const;
     Pos3d Origen(void) const;
     Pos3d Destino(void) const;
     GEOM_FT getSlope(void) const;
@@ -66,12 +66,12 @@ class Segment3d : public Linea3d
     GEOM_FT dist(const Pos3d &p) const;
     void Put(const Pos3d &p1,const Pos3d &p2);
 
-    bool Paralelo(const Recta3d &r) const;
+    bool Paralelo(const Line3d &r) const;
     bool Paralelo(const Ray3d &sr) const;
     bool Paralelo(const Segment3d &r) const;
 
     GeomObj3d::list_Pos3d getIntersection(unsigned short int, const double &) const;
-    GeomObj3d::list_Pos3d getIntersection(const Recta3d &r) const;
+    GeomObj3d::list_Pos3d getIntersection(const Line3d &r) const;
     GeomObj3d::list_Pos3d getIntersection(const Ray3d &sr) const;
     GeomObj3d::list_Pos3d getIntersection(const Segment3d &sg) const;
 
@@ -98,9 +98,9 @@ GEOM_FT dist(const Pos3d &p,const Segment3d &r);
 inline GEOM_FT dist(const Segment3d &r,const Pos3d &p)
   { return dist(p,r); }
 
-inline bool paralelas(const Segment3d &sg,const Recta3d &r)
+inline bool paralelas(const Segment3d &sg,const Line3d &r)
   { return sg.Paralelo(r); }
-inline bool paralelas(const Recta3d &r, const Segment3d &sg)
+inline bool paralelas(const Line3d &r, const Segment3d &sg)
   { return paralelas(sg,r); }
 inline bool paralelas(const Segment3d &sg,const Ray3d &sr)
   { return sg.Paralelo(sr); }
@@ -109,20 +109,20 @@ inline bool paralelas(const Ray3d &sr, const Segment3d &sg)
 inline bool paralelas(const Segment3d &r1,const Segment3d &r2)
   { return r1.Paralelo(r2); }
 
-inline bool colineales(const Segment3d &sg,const Recta3d &r)
-  { return colineales(sg.RectaSoporte(),r); }
-inline bool colineales(const Recta3d &r,const Segment3d &sg)
+inline bool colineales(const Segment3d &sg,const Line3d &r)
+  { return colineales(sg.getSupportLine(),r); }
+inline bool colineales(const Line3d &r,const Segment3d &sg)
   { return colineales(sg,r); }
 inline bool colineales(const Segment3d &sg,const Ray3d &sr)
-  { return colineales(sg.RectaSoporte(),sr); }
+  { return colineales(sg.getSupportLine(),sr); }
 inline bool colineales(const Ray3d &sr,const Segment3d &sg)
   { return colineales(sg,sr); }
 inline bool colineales(const Segment3d &sg1,const Segment3d &sg2)
-  { return colineales(sg1,sg2.RectaSoporte()); }
+  { return colineales(sg1,sg2.getSupportLine()); }
 
-inline GeomObj3d::list_Pos3d intersection(const Segment3d &sg,const Recta3d &r)
+inline GeomObj3d::list_Pos3d intersection(const Segment3d &sg,const Line3d &r)
   { return sg.getIntersection(r); }
-inline GeomObj3d::list_Pos3d intersection(const Recta3d &r, const Segment3d &sg)
+inline GeomObj3d::list_Pos3d intersection(const Line3d &r, const Segment3d &sg)
   { return sg.getIntersection(r); }
 inline GeomObj3d::list_Pos3d intersection(const Segment3d &sg,const Ray3d &sr)
   { return sg.getIntersection(sr); }

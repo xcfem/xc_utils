@@ -28,7 +28,7 @@
 #include "GeomObj2d.h"
 #include "xc_utils/src/geom/listas/GmGrupo.h"
 
-class Recta2d;
+class Line2d;
 
 //! @ingroup GEOM
 //
@@ -36,7 +36,7 @@ class Recta2d;
 class GmGrupo2d : public GmGrupo<GeomObj2d>
   {
 
-    virtual GEOM_FT inercia(const Recta2d &e) const;
+    virtual GEOM_FT inercia(const Line2d &e) const;
   public:
     typedef pdeque_geom_obj::const_iterator const_iterator;
     typedef pdeque_geom_obj::iterator iterator;

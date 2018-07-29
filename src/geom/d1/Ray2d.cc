@@ -30,7 +30,7 @@
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
 Ray2d::Ray2d(const Pos2d &p1,const Pos2d &p2)
-  : Linea2d(), cgsr(p1.ToCGAL(),p2.ToCGAL())
+  : Linear2d(), cgsr(p1.ToCGAL(),p2.ToCGAL())
   {
     if(EsDegenerada())
       {
@@ -40,7 +40,7 @@ Ray2d::Ray2d(const Pos2d &p1,const Pos2d &p2)
       }
   }
 Ray2d::Ray2d(const Pos2d &p1,const Vector2d &vdir)
-  : Linea2d(), cgsr(p1.ToCGAL(),vdir.ToCGAL()) {}
+  : Linear2d(), cgsr(p1.ToCGAL(),vdir.ToCGAL()) {}
 void Ray2d::TwoPoints(const Pos2d &p1,const Pos2d &p2)
   { (*this)= Ray2d(p1,p2); }
 
@@ -53,7 +53,7 @@ Vector2d Ray2d::VDir(void) const
 //! from the point to the ray.
 GEOM_FT Ray2d::dist2(const Pos2d &p) const
   {
-    Recta2d r= RectaSoporte();
+    Line2d r= getSupportLine();
     Pos2d proj= r.Projection(p);
     GEOM_FT retval= p.dist2(proj); //Ok if projection inside half-line.
     if(!In(proj)) //Projection outside half-line.
@@ -66,7 +66,7 @@ GEOM_FT Ray2d::dist2(const Pos2d &p) const
 GEOM_FT Ray2d::dist(const Pos2d &p) const
   { return sqrt_FT(dist2(p)); }
 
-bool Ray2d::intersects(const Recta2d &r) const
+bool Ray2d::intersects(const Line2d &r) const
   { return do_intersect(r.cgr,cgsr); }
 
 //! @brief Return the intersection of the ray with the plane
@@ -74,11 +74,11 @@ bool Ray2d::intersects(const Recta2d &r) const
 GeomObj2d::list_Pos2d Ray2d::getIntersection(unsigned short int i, const double &d) const
   {
     GeomObj2d::list_Pos2d lp;
-    lp= RectaSoporte().getIntersection(i,d);
+    lp= getSupportLine().getIntersection(i,d);
     if(!lp.empty())
       {
         const Vector2d i_= VDir();
-        const double l= RectaSoporte().getLambda(i,d,i_);
+        const double l= getSupportLine().getLambda(i,d,i_);
         if(l<0.0)
           lp.erase(lp.begin(),lp.end());
       }
@@ -87,7 +87,7 @@ GeomObj2d::list_Pos2d Ray2d::getIntersection(unsigned short int i, const double 
 
 //! @brief Return the point intersection of the line and the ray, if it
 //! doesn't exists return an empty list.
-GeomObj2d::list_Pos2d Ray2d::getIntersection(const Recta2d &r) const
+GeomObj2d::list_Pos2d Ray2d::getIntersection(const Line2d &r) const
   {
     GeomObj2d::list_Pos2d retval;
     if(intersects(r))
@@ -108,8 +108,8 @@ GeomObj2d::list_Pos2d Ray2d::getIntersection(const Recta2d &r) const
     return retval;
   }
 
-//Return the point intersection de ambas rectas, if doesn't exists la
-//intersection devuelve la lista vacía.
+//! @brief Return the point intersection of both lines, if doesn't exists
+//! returns an empty list.
 GeomObj2d::list_Pos2d Ray2d::getIntersection(const Ray2d &r2) const
   {
     GeomObj2d::list_Pos2d retval;

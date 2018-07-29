@@ -35,7 +35,7 @@
 
 //! @brief Constructor.
 Segment2d::Segment2d(const Pos2d &p1,const Pos2d &p2)
-  : Linea2d(), cgseg(p1.ToCGAL(),p2.ToCGAL())
+  : Linear2d(), cgseg(p1.ToCGAL(),p2.ToCGAL())
   {
     if(verbosity>2 && EsDegenerada())
       {
@@ -110,15 +110,15 @@ Pos2d Segment2d::getCenterOfMass(void) const
     return retval;
   }
 
-//! @brief Return the recta perpendicular a r que pasa por p.
-Recta2d Segment2d::Perpendicular(const Pos2d &p) const
-  { return RectaSoporte().Perpendicular(p); }
+//! @brief Return the line perpendicular to the segment through p.
+Line2d Segment2d::Perpendicular(const Pos2d &p) const
+  { return getSupportLine().Perpendicular(p); }
 
-//! @brief Return the recta paralela a ésta que pasa por p.
-Recta2d Segment2d::Paralela(const Pos2d &p) const
-  { return RectaSoporte().Paralela(p); }
+//! @brief Return the line parallel to the segment through p.
+Line2d Segment2d::Paralela(const Pos2d &p) const
+  { return getSupportLine().Paralela(p); }
 
-//! @brief Return the a copy of the segment translatec along
+//! @brief Return the a copy of the segment translated along
 //! the vector argument.
 Segment2d Segment2d::Offset(const Vector2d &v) const
   {
@@ -132,18 +132,18 @@ Segment2d Segment2d::Offset(const Vector2d &v) const
 //! be on the right from this one.
 Segment2d Segment2d::Offset(const GEOM_FT &d) const
   {
-    const Vector2d v= d*RectaSoporte().VersorDir();
+    const Vector2d v= d*getSupportLine().VersorDir();
     const Vector2d n(v.y(),-v.x());
     return Offset(n);
   }
 
 //! @brief Return the perpendicular_bisector of the segment.
-Recta2d Segment2d::getPerpendicularBisector(void) const
+Line2d Segment2d::getPerpendicularBisector(void) const
   {
     const Pos2d p=getCenterOfMass();
     const Vector2d v= VDir().Perpendicular(CGAL::COUNTERCLOCKWISE);
     const Pos2d p2= p+100.0*v;
-    return Recta2d(p,p2);
+    return Line2d(p,p2);
   }
 
 //! Return true if the point is on the segment.
@@ -175,7 +175,7 @@ bool Segment2d::In(const Pos2d &p, const double &tol) const
 //! @brief Return the squared distance to the segment.
 GEOM_FT Segment2d::dist2(const Pos2d &p) const
   {
-    const Recta2d r= RectaSoporte();
+    const Line2d r= getSupportLine();
     const Pos2d proj= r.Projection(p);
     GEOM_FT retval= p.dist2(proj); //Ok if projected point inside segment.
     const Pos2d A= Origen();
@@ -211,7 +211,7 @@ double Segment2d::getParamCooNatural(const GEOM_FT &chi) const
 Pos2d Segment2d::PtoCooNatural(const GEOM_FT &chi) const
   { return PtoParametricas(getParamCooNatural(chi)); }
 
-bool Segment2d::intersects(const Recta2d &r) const
+bool Segment2d::intersects(const Line2d &r) const
   { return CGAL::do_intersect(r.cgr,cgseg); }
 bool Segment2d::intersects(const Ray2d &sr) const
   { return do_intersect(sr.cgsr,cgseg); }
@@ -221,11 +221,11 @@ bool Segment2d::intersects(const Ray2d &sr) const
 GeomObj2d::list_Pos2d Segment2d::getIntersection(unsigned short int i, const double &d) const
   {
     GeomObj2d::list_Pos2d lp;
-    lp= RectaSoporte().getIntersection(i,d);
+    lp= getSupportLine().getIntersection(i,d);
     if(!lp.empty())
       {
         const Vector2d i_= VDir();
-        const double l= RectaSoporte().getLambda(i,d,i_);
+        const double l= getSupportLine().getLambda(i,d,i_);
         if( (l<0.0) || (l>getLength()) )
           lp.erase(lp.begin(),lp.end());
       }
@@ -234,7 +234,7 @@ GeomObj2d::list_Pos2d Segment2d::getIntersection(unsigned short int i, const dou
 
 //! @brief Return the intersection point of the line and the segment, if
 //! the intersection doesn't exists returns an empty list.
-GeomObj2d::list_Pos2d Segment2d::getIntersection(const Recta2d &r) const
+GeomObj2d::list_Pos2d Segment2d::getIntersection(const Line2d &r) const
   {
     GeomObj2d::list_Pos2d retval;
     if(intersects(r))
@@ -257,7 +257,7 @@ GeomObj2d::list_Pos2d Segment2d::getIntersection(const Recta2d &r) const
             else if(d2<tol)
               retval.push_back(Destino());
             else
-              cerr << "Segment2d::getIntersection(Recta2d): unknown error." << endl
+              cerr << "Segment2d::getIntersection(Line2d): unknown error." << endl
                    << "sg: " << *this << endl
                    << "r: " << r << endl
                    << "tol: " << tol << endl
@@ -330,8 +330,7 @@ GEOM_FT dist(const Pos2d &p,const Segment2d &r)
 VectorPos2d Segment2d::Divide(int num_partes) const
   { return VectorPos2d(Origen(),Destino(),num_partes); }
 
-//! @brief Aplica a la recta la transformación que se
-//! pasa como parámetro.
+//! @brief Applies to the segment the transformation argument.
 void Segment2d::Transforma(const Trf2d &trf2d)
   {
     const Pos2d p1= trf2d.Transforma(Origen());
@@ -348,8 +347,8 @@ void Segment2d::Plot(Plotter &plotter) const
     plotter.fline(p1.x(),p1.y(),p2.x(),p2.y());
   }
 
-//! Return the point de intersection of the segment con la recta, if exists.
-Pos2d intersection_point(const Segment2d &s, const Recta2d &r)
+//! Return the point de intersection of the segment with the line, if it exists.
+Pos2d intersection_point(const Segment2d &s, const Line2d &r)
   {
     Pos2d retval;
     GeomObj2d::list_Pos2d tmp= intersection(s,r);
@@ -360,8 +359,8 @@ Pos2d intersection_point(const Segment2d &s, const Recta2d &r)
      return retval;
   }
 
-//! Return the point de intersection of the segment con la recta, if exists.
-Pos2d intersection_point(const Recta2d &r, const Segment2d &s)
+//! Return the point de intersection of the segment with the line, if it exists.
+Pos2d intersection_point(const Line2d &r, const Segment2d &s)
   { return intersection_point(s,r); }
 
 //! Return the intersection of the segments if exists.

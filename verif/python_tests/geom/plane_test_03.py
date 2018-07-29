@@ -18,9 +18,9 @@ P=geom.Plane3d(geom.GeneralEquationOfPlane(2,3,1,-4))
 pto=geom.Pos3d(1,1,-2)
 vDir=geom.Dir3d(2,-2,3)
 
-r=geom.Recta3d(pto,vDir)
-dr=ITeor.distRecta3d(r)
-I=P.getIntersRecta3d(r)
+r=geom.Line3d(pto,vDir)
+dr=ITeor.distLine3d(r)
+I=P.getIntersLine3d(r)
 d=I.distPlane(P)
 
 ratio1=ITeor.distPos3d(I)

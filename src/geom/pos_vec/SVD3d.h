@@ -29,7 +29,7 @@
 #include "VDesliz3d.h"
 #include "Pos3d.h"
 
-class Recta3d;
+class Line3d;
 class Plane;
 class Ref3d3d;
 
@@ -49,13 +49,13 @@ class SVD3d: public VDesliz3d
     const Vector3d &getMoment(void) const
       { return mom; }
     VDesliz3d getMoment(const Pos3d &P) const;
-    GEOM_FT getMoment(const Recta3d &e) const;
+    GEOM_FT getMoment(const Line3d &e) const;
     Vector3d getMoment(const Ref3d3d &ref) const;
     bool Nulo(void) const;
     void Neg(void);
-    Recta3d centralAxis(void) const;
-    bool ExisteRectaMomNulo(const double &tol= sqrt_mchne_eps_dbl) const;
-    Recta3d RectaMomNulo(const double &tol= sqrt_mchne_eps_dbl) const;
+    Line3d centralAxis(void) const;
+    bool existsZeroMomentLine(const double &tol= sqrt_mchne_eps_dbl) const;
+    Line3d getZeroMomentLine(const double &tol= sqrt_mchne_eps_dbl) const;
     Pos3d PointOfApplication(const Plane &p) const;
 
     SVD3d ReduceA(const Pos3d &Q) const;

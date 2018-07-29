@@ -24,7 +24,7 @@
 #include "BND2d.h"
 #include "../pos_vec/Pos2d.h"
 #include "../pos_vec/Vector2d.h"
-#include "xc_utils/src/geom/d1/Recta2d.h"
+#include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/d1/Ray2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d1/Polyline2d.h"
@@ -127,7 +127,7 @@ bool BND2d::Overlap(const Pos2d &p) const
   { return In(p); }
 
 //! @brief Return true if the line and the boundary overlap.
-bool BND2d::Overlap(const Recta2d &r) const
+bool BND2d::Overlap(const Line2d &r) const
   { return Interseca(r); }
   
 //! @brief Return true if the ray and the boundary overlap.
@@ -188,7 +188,7 @@ bool BND2d::Overlap(const std::list<Poligono2d> &l) const
   }
 
 
-bool BND2d::Interseca(const Recta2d &r) const
+bool BND2d::Interseca(const Line2d &r) const
   { return do_intersect(cgrectg,r.ToCGAL()); }
 bool BND2d::Interseca(const Ray2d &sr) const
   { return do_intersect(cgrectg,sr.ToCGAL()); }

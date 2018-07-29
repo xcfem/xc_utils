@@ -23,7 +23,7 @@
 
 #include "BlockPyramid.h"
 
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 
 #include "xc_utils/src/geom/pos_vec/Vector2d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d3d.h"

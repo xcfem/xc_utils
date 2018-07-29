@@ -24,10 +24,10 @@
 #include "Poligono3d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
-#include "xc_utils/src/geom/d1/Recta2d.h"
+#include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 #include "xc_utils/src/geom/d3/GmGrupo3d.h"
 #include "xc_utils/src/geom/d3/HalfSpace3d.h"
 #include "xc_utils/src/geom/listas/auxiliares.h"
@@ -196,11 +196,11 @@ std::list<Poligono3d> Poligono3d::Corta(const Plane &pl) const
 
     GmGrupo3d gint= intersection(pl_polig,pl);
     GeomObj3d *ptr=(*gint.begin());
-    const Recta3d r= *((Recta3d *)ptr);
+    const Line3d r= *((Line3d *)ptr);
 
     const Pos2d p2dA= to_2d(r.Point());
     const Pos2d p2dB= to_2d(r.Point(100));
-    const Recta2d r2d(p2dA,p2dB);
+    const Line2d r2d(p2dA,p2dB);
 
     std::list<Poligono2d> inter= corta(plg2d,r2d);
     for(std::list<Poligono2d>::const_iterator i= inter.begin(); i!=inter.end();i++)

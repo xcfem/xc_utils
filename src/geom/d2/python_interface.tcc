@@ -25,7 +25,7 @@ class_<Superficie2d, bases<GeomObj2d>, boost::noncopyable  >("Surface2d", no_ini
 
 class_<HalfPlane2d, bases<Superficie2d> >("HalfPlane2d")
   .def(init<>())
-  .def(init<Recta2d>())
+  .def(init<Line2d>())
   ;
 
 class_<BND2d, bases<GeomObj2d> >("BND2d")
@@ -84,28 +84,28 @@ double (Plane::*PlaneAngle)(const Plane &p) const= &Plane::getAngle;
 double (Plane::*getAngleWithVector3d)(const Vector3d &) const= &Plane::getAngle;
 Pos3d (Plane::*Pos3dProjection)(const Pos3d &) const= &Plane::Projection;
 Vector3d (Plane::*Vector3dProjection)(const Vector3d &) const= &Plane::Projection;
-Recta3d (Plane::*Recta3dProjection)(const Recta3d &) const= &Plane::Projection;
-Recta3d (Plane::*IntersPlane)(const Plane &p) const= &Plane::getIntersection;
-Pos3d (Plane::*IntersRecta3d)(const Recta3d &p) const= &Plane::getIntersection;
+Line3d (Plane::*Line3dProjection)(const Line3d &) const= &Plane::Projection;
+Line3d (Plane::*IntersPlane)(const Plane &p) const= &Plane::getIntersection;
+Pos3d (Plane::*IntersLine3d)(const Line3d &p) const= &Plane::getIntersection;
 Pos3d (Plane::*IntersRay3d)(const Ray3d &p) const= &Plane::getIntersection;
 Pos3d (Plane::*IntersSegment3d)(const Segment3d &p) const= &Plane::getIntersection;
 class_<Plane, bases<Superficie3d> >("Plane3d")
   .def(init<Pos3d,Pos3d,Pos3d>())
   .def(init<Pos3d,Vector3d>())
   .def(init<Pos3d,Vector3d,Vector3d>())
-  .def(init<Recta3d,Pos3d>()) 
+  .def(init<Line3d,Pos3d>()) 
   .def(init<GeneralEquationOfPlane>()) 
   .def(init<Plane>())
   .def("getPlaneAngle",PlaneAngle)
   .def("getAngleWithVector3d",getAngleWithVector3d)
   .def("getPos3dProjection",Pos3dProjection)
   .def("getVector3dProjection",Vector3dProjection)
-  .def("getRecta3dProjection",Recta3dProjection)
+  .def("getLine3dProjection",Line3dProjection)
   .def("getXYTrace",&Plane::XYTrace,"return the trace on the XY plane.")
   .def("getXZTrace",&Plane::XZTrace,"return the trace on the XZ plane.")
   .def("getYZTrace",&Plane::YZTrace,"return the trace on the YZ plane.")
   .def("getIntersPlane",IntersPlane)
-  .def("getIntersRecta3d",IntersRecta3d)
+  .def("getIntersLine3d",IntersLine3d)
   .def("getIntersRay3d",IntersRay3d)
   .def("getIntersSegment3d",IntersSegment3d)
   .def("getNormal", &Plane::Normal)

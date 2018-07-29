@@ -31,7 +31,7 @@
 class SoGroup;
 class Pos3d;
 class Vector3d;
-class Recta3d;
+class Line3d;
 class BND3d;
 class Ref3d3d;
 class FT_matrix;
@@ -102,7 +102,7 @@ class GeomObj3d: public GeomObj
     virtual inline GEOM_FT IArea(void) const
       { return 0.0; }
     GEOM_FT I(const Pos3d &O,const Vector3d &e) const;
-    GEOM_FT I(const Recta3d &r) const;
+    GEOM_FT I(const Line3d &r) const;
     GEOM_FT I( const unsigned short int i,
               const unsigned short int j,
               const Pos3d &o) const;

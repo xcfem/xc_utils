@@ -25,7 +25,7 @@
 #define HALFPLANE2D_H
 
 
-#include "xc_utils/src/geom/d1/Recta2d.h"
+#include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/d2/Superficie2d.h"
 
 class GmGrupo2d;
@@ -38,11 +38,11 @@ class Segment2d;
 //! @brief Half plane in a two-dimensional space.
 class HalfPlane2d : public Superficie2d
   {
-    Recta2d lim; //The points of the half-plane are those we lie to the right of the line.
+    Line2d lim; //The points of the half-plane are those we lie to the right of the line.
   public:
     HalfPlane2d(void);
-    explicit HalfPlane2d(const Recta2d &r);
-    HalfPlane2d(const Recta2d &r, const Pos2d &p);
+    explicit HalfPlane2d(const Line2d &r);
+    HalfPlane2d(const Line2d &r, const Pos2d &p);
     HalfPlane2d(const Pos2d &p1,const Pos2d &p2);
     HalfPlane2d(const HalfPlane2d &sp);
     HalfPlane2d &operator=(const HalfPlane2d &sp);
@@ -50,16 +50,17 @@ class HalfPlane2d : public Superficie2d
     inline void Swap(void);
     HalfPlane2d GetSwap(void) const;
 
-    //! @brief Return el valor de a que corresponde a la ecuación de la recta: a*x + b*y + c= 0
+    //! @brief Return the value of a that corresponds to the
+    //! equation of the line: a*x + b*y + c= 0
     inline GEOM_RT a(void) const
       { return lim.a(); }
+    //! @brief Return the value of b that corresponds to the
+    //! equation of the line: a*x + b*y + c= 0
     inline GEOM_RT b(void) const
-    //Return el valor de a que corresponde a la 
-    //ecuación de la recta: a*x + b*y + c= 0
       { return lim.b(); }
+    //! @brief Return the value of c that corresponds to the
+    //! equation of the line: a*x + b*y + c= 0
     inline GEOM_RT c(void) const
-    //Return el valor de a que corresponde a la 
-    //ecuación de la recta: a*x + b*y + c= 0
       { return lim.c(); } 
     virtual GEOM_FT GetMax(unsigned short int) const
       { return NAN; }
@@ -67,7 +68,7 @@ class HalfPlane2d : public Superficie2d
       { return NAN; }
     inline bool EsDegenerado(void) const
       { return lim.EsDegenerada(); }
-    inline const Recta2d &getBorde(void) const
+    inline const Line2d &getBorde(void) const
       { return lim; }
     //! @brief Return true if the point is inside the half-plane.
     //! The points of the edge line belong to the half-plane.
@@ -92,11 +93,11 @@ class HalfPlane2d : public Superficie2d
 
     inline bool intersects(const HalfPlane2d &r2) const
       { return lim.intersects(r2.lim); }
-    inline bool intersects(const Recta2d &r) const
+    inline bool intersects(const Line2d &r) const
       { return lim.intersects(r); }
     bool intersects(const Ray2d &sr) const;
     bool intersects(const Segment2d &sg) const;
-    GmGrupo2d getIntersection(const Recta2d &r) const;
+    GmGrupo2d getIntersection(const Line2d &r) const;
     GmGrupo2d getIntersection(const Ray2d &sr) const;
     GmGrupo2d getIntersection(const Segment2d &sg) const;
 
@@ -139,23 +140,23 @@ inline bool operator!=(const HalfPlane2d &r1,const HalfPlane2d &r2)
 
 inline bool intersecan(const HalfPlane2d &sp1,const HalfPlane2d &sp2)
   { return sp1.intersects(sp2); }
-inline bool intersecan(const HalfPlane2d &sp,const Recta2d &r)
+inline bool intersecan(const HalfPlane2d &sp,const Line2d &r)
   { return sp.intersects(r); }
 inline bool intersecan(const HalfPlane2d &sp,const Ray2d &sr)
   { return sp.intersects(sr); }
 inline bool intersecan(const HalfPlane2d &sp,const Segment2d &sg)
   { return sp.intersects(sg); }
-inline bool intersecan(const Recta2d &r,const HalfPlane2d &sp)
+inline bool intersecan(const Line2d &r,const HalfPlane2d &sp)
   { return sp.intersects(r); }
 inline bool intersecan(const Ray2d &sr,const HalfPlane2d &sp)
   { return sp.intersects(sr); }
 inline bool intersecan(const Segment2d &sg,const HalfPlane2d &sp)
   { return sp.intersects(sg); }
 
-GmGrupo2d intersection(const HalfPlane2d &sp,const Recta2d &r);
+GmGrupo2d intersection(const HalfPlane2d &sp,const Line2d &r);
 GmGrupo2d intersection(const HalfPlane2d &sp,const Ray2d &sr);
 GmGrupo2d intersection(const HalfPlane2d &sp,const Segment2d &sg);
-GmGrupo2d intersection(const Recta2d &r,const HalfPlane2d &sp);
+GmGrupo2d intersection(const Line2d &r,const HalfPlane2d &sp);
 GmGrupo2d intersection(const Ray2d &sr,const HalfPlane2d &sp);
 GmGrupo2d intersection(const Segment2d &sg,const HalfPlane2d &sp);
 

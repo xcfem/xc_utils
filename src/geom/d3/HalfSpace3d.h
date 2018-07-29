@@ -77,7 +77,7 @@ class HalfSpace3d : public GeomObj3d
     GEOM_FT getAngle(const Plane &) const;
     GEOM_FT getAngle(const Vector3d &) const;
 
-    Recta3d getLima(const HalfSpace3d &) const;
+    Line3d getLima(const HalfSpace3d &) const;
 
     virtual unsigned short int Dimension(void) const;
     virtual GEOM_FT getLength(void) const;
@@ -103,7 +103,7 @@ inline bool operator!=(const HalfSpace3d &r1,const HalfSpace3d &r2)
 
 TripletMap<Pos3d> intersection_points(const std::deque<HalfSpace3d> &);
 TripletMap<Pos3d> vertices_poliedro(const std::deque<HalfSpace3d> &, const double &tol= 1e-10);
-std::deque<Recta3d> rectas_intersection(const std::deque<HalfSpace3d> &);
+std::deque<Line3d> intersection_lines(const std::deque<HalfSpace3d> &);
 std::deque<Vector3d> vectores_normales(const std::deque<HalfSpace3d> &);
 
 GEOM_FT angle(const HalfSpace3d &,const HalfSpace3d &);

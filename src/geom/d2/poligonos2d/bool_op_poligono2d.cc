@@ -354,7 +354,7 @@ void particiona(const Pos2d &c1,Poligono2d &p1,const Pos2d &c2,Poligono2d &p2)
   {
     if(overlap(p1,p2))
       {
-        const Recta2d m= perpendicular_bisector(c1,c2);
+        const Line2d m= perpendicular_bisector(c1,c2);
         const HalfPlane2d sp1(m,c1);
         const HalfPlane2d sp2(m,c2);
         p1= Poligono2d(intersection(p1,sp1));
@@ -380,7 +380,7 @@ void particiona(const Pos2d &c1,std::list<Poligono2d> &lp1,const Pos2d &c2,std::
   {
     if(overlap(lp1,lp2))
       {
-        const Recta2d m= perpendicular_bisector(c1,c2);
+        const Line2d m= perpendicular_bisector(c1,c2);
         const HalfPlane2d sp1(m,c1);
         const HalfPlane2d sp2(m,c2);
         lp1= intersection(lp1,sp1);

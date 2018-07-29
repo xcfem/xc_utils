@@ -27,7 +27,7 @@
 
 #include "Trf2d.h"
 
-class Recta2d;
+class Line2d;
 
 
 //! @ingroup GEOM
@@ -45,7 +45,7 @@ class Reflection2d: public Trf2d
 /*                  const GEOM_RT & hw = GEOM_RT(1.0)); */
   public:
     Reflection2d(const Pos2d &Q,const Vector2d &d);
-    Reflection2d(const Recta2d &r);
+    Reflection2d(const Line2d &r);
   };
 
 #endif

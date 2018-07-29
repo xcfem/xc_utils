@@ -31,7 +31,7 @@
 
 class Pos2d;
 class Vector2d;
-class Recta2d;
+class Line2d;
 
 
 
@@ -47,7 +47,7 @@ class Trf2d: public Trf
   protected:
     Trf2d(const CGAL::Translation &tr,const Vector2d &v);
     Trf2d(const CGAL::Rotation &rot,const GEOM_RT &seno,const GEOM_RT &coseno);
-/*     //Trf2d(const CGAL::Reflection &ref,const Recta2d &r); */
+/*     //Trf2d(const CGAL::Reflection &ref,const Line2d &r); */
     Trf2d(const CGAL::Scaling &sc,const GEOM_FT &factor_escala);
     explicit Trf2d(const CGAL::Identity_transformation &i);
 

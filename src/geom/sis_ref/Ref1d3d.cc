@@ -23,7 +23,7 @@
 #include "Ref1d3d.h"
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
 #include "xc_utils/src/geom/pos_vec/Dir3d.h"
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 
 
 
@@ -39,9 +39,9 @@ Vector3d Ref1d3d::GetI(void) const
   { return getAxisVDir(1); }
 
 //! @brief Returns the line defined by X axis.
-Recta3d Ref1d3d::getXAxis(void) const
+Line3d Ref1d3d::getXAxis(void) const
   {
     const Pos3d dest(org+1000.0*GetI());
-    return Recta3d(org,dest);
+    return Line3d(org,dest);
   }
 

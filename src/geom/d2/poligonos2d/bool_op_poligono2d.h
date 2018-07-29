@@ -29,7 +29,7 @@
 
 class Poligono2d;
 class HalfPlane2d;
-class Recta2d;
+class Line2d;
 
 Poligono2d prueba_conversion(const Poligono2d &p);
 

@@ -29,7 +29,7 @@
 #include "../d3/GeomObj3d.h"
 #include "../pos_vec/Pos3d.h"
 
-class Recta3d;
+class Line3d;
 class Vector3d;
 class Plane;
 
@@ -51,16 +51,13 @@ class Ref3d3d : public Ref<SisCooRect3d3d>
     Ref3d3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
     Ref3d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2);
     Ref3d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2,const Vector3d &v3);
-    Ref3d3d(const Recta3d &r,const Pos3d &p);
-    Vector3d GetI(void) const;
-    //Return el vector unitario I en el sistema global.
-    Vector3d GetJ(void) const;
-    //Return el vector unitario J en el sistema global.
-    Vector3d GetK(void) const;
-    //Return el vector unitario K en el sistema global.
-    Recta3d getXAxis(void) const; //Return la recta que define el x axis.
-    Recta3d getYAxis(void) const; //Return la recta que define el y axis.
-    Recta3d getZAxis(void) const; //Return la recta que define el z axis.
+    Ref3d3d(const Line3d &r,const Pos3d &p);
+    Vector3d GetI(void) const; //I unary vector.
+    Vector3d GetJ(void) const; //J unary vector.
+    Vector3d GetK(void) const; //K unary vector.
+    Line3d getXAxis(void) const; //Return the x axis.
+    Line3d getYAxis(void) const; //Return the y axis.
+    Line3d getZAxis(void) const; //Return the z axis.
     Plane getXYPlane(void) const; //Return the XY plane.
     Plane getXZPlane(void) const; //Return the XZ plane.
     Plane getYZPlane(void) const; //Return the YZ plane.

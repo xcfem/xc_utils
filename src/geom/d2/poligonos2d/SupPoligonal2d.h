@@ -26,7 +26,7 @@
 
 #include "xc_utils/src/geom/d2/Superficie2d.h"
 
-class Recta2d;
+class Line2d;
 class Ray2d;
 class Segment2d;
 class Poligono2d;
@@ -90,10 +90,10 @@ class SupPoligonal2d: public Superficie2d
     inline GEOM_FT GetRecubrimiento(const Pos2d &p) const
       { return -DistSigno(p); }
 
-    bool Overlap(const Recta2d &r) const;
+    bool Overlap(const Line2d &r) const;
     bool Overlap(const Ray2d &sr) const;
 
-    Segment2d Clip(const Recta2d &) const;
+    Segment2d Clip(const Line2d &) const;
     Segment2d Clip(const Ray2d &) const;
     Segment2d Clip(const Segment2d &) const;
 
@@ -103,8 +103,8 @@ class SupPoligonal2d: public Superficie2d
   };
 
 
-std::list<Segment2d> intersection(const SupPoligonal2d &p,const Recta2d &r);
-std::list<Segment2d> intersection(const Recta2d &r,const SupPoligonal2d &p);
+std::list<Segment2d> intersection(const SupPoligonal2d &p,const Line2d &r);
+std::list<Segment2d> intersection(const Line2d &r,const SupPoligonal2d &p);
 
 std::list<Segment2d> intersection(const SupPoligonal2d &p,const Ray2d &sr);
 std::list<Segment2d> intersection(const Ray2d &sr,const SupPoligonal2d &p);

@@ -29,7 +29,7 @@
 
 class BND2d;
 class Dir2d;
-class Recta2d;
+class Line2d;
 class FT_matrix;
 
 //! @ingroup GEOM
@@ -77,8 +77,8 @@ class GeomObj2d: public GeomObj
     double Theta_p(void) const;
     Dir2d IAxisDir_a(void) const;
     Dir2d IAxisDir_b(void) const;
-    Recta2d IAxis_a(void) const;
-    Recta2d IAxis_b(void) const;
+    Line2d IAxis_a(void) const;
+    Line2d IAxis_b(void) const;
     Ref2d2d PrincipalAxesOfInertia(void) const;
     GEOM_FT I1(void) const;
     GEOM_FT I2(void) const;
@@ -89,7 +89,7 @@ class GeomObj2d: public GeomObj
     virtual inline GEOM_FT IArea(void) const
       { return getArea(); }
     GEOM_FT I(const Pos2d &O,const Vector2d &e) const;
-    GEOM_FT I(const Recta2d &r) const;
+    GEOM_FT I(const Line2d &r) const;
     GEOM_FT I( const unsigned short int i,
               const unsigned short int j,
               const Pos2d &o) const;

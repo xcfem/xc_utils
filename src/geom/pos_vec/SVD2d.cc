@@ -23,7 +23,7 @@
 
 #include "SVD2d.h"
 #include "VDesliz2d.h"
-#include "xc_utils/src/geom/d1/Recta2d.h"
+#include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
 
 
@@ -99,9 +99,9 @@ bool SVD2d::Nulo(void) const
   }
 
 //! @brief Line of points with zero moment.
-Recta2d SVD2d::RectaMomNulo(void) const
+Line2d SVD2d::getZeroMomentLine(void) const
   {
-    Recta2d retval; //= Recta2d(Pos2d(NAN,NAN),Pos2d(NAN,NAN));
+    Line2d retval; //= Line2d(Pos2d(NAN,NAN),Pos2d(NAN,NAN));
     const GEOM_FT rx= resul.x();
     const GEOM_FT ry= resul.y();
     const GEOM_FT k= rx*org.y()-ry*org.x()-mom; 
@@ -111,12 +111,12 @@ Recta2d SVD2d::RectaMomNulo(void) const
 	const GEOM_FT yA= (ry*xA+k)/rx;
 	const GEOM_FT xB= 1.0e3;
 	const GEOM_FT yB= (ry*xB+k)/rx;
-        retval= Recta2d(Pos2d(xA,yA),Pos2d(xB,yB));
+        retval= Line2d(Pos2d(xA,yA),Pos2d(xB,yB));
       }
     else if(ry!=0.0)
       {
 	const GEOM_FT x= -k/ry;
-        retval= Recta2d(Pos2d(x,0.0),Pos2d(x,1e3));
+        retval= Line2d(Pos2d(x,0.0),Pos2d(x,1e3));
       }
     else if(mom==0.0)
       std::clog << getClassName() << "::" << __FUNCTION__

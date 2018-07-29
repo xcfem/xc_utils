@@ -24,7 +24,7 @@
 #include "GeomObj2d.h"
 #include "xc_basic/src/util/inercia.h"
 #include "xc_utils/src/geom/pos_vec/Dir2d.h"
-#include "xc_utils/src/geom/d1/Recta2d.h"
+#include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
 #include "xc_utils/src/geom/FT_matrix.h"
 #include "BND2d.h"
@@ -45,7 +45,7 @@ Pos2d GeomObj2d::GetPMin(void) const
   }
 
 
-//! @brief Return el bounding rectangle.
+//! @brief Return the bounding rectangle.
 BND2d GeomObj2d::Bnd(void) const
   { return BND2d(GetPMin(),GetPMax()); }
 
@@ -78,13 +78,13 @@ Dir2d GeomObj2d::IAxisDir_b(void) const
 
 //! @brief Return un principal axis of inertia (no sabemos si
 //! el mayor o el menor
-Recta2d GeomObj2d::IAxis_a(void) const
-  { return Recta2d(getCenterOfMass(),IAxisDir_a()); }
+Line2d GeomObj2d::IAxis_a(void) const
+  { return Line2d(getCenterOfMass(),IAxisDir_a()); }
 
 //! @brief Return un principal axis of inertia (no sabemos si
 //! el mayor o el menor
-Recta2d GeomObj2d::IAxis_b(void) const
-  { return Recta2d(getCenterOfMass(),IAxisDir_b()); }
+Line2d GeomObj2d::IAxis_b(void) const
+  { return Line2d(getCenterOfMass(),IAxisDir_b()); }
 
 //! @brief Return los principal axis of inertia.
 Ref2d2d GeomObj2d::PrincipalAxesOfInertia(void) const
@@ -157,9 +157,8 @@ FT_matrix GeomObj2d::I(const Pos2d &o) const
     return Ig+m*(Abs2(og)*identidad(Ig)-(og & og));
   }
 
-//! @brief Return the moment of inertia respecto a la recta que se pasa
-//! como parámetro.
-GEOM_FT GeomObj2d::I(const Recta2d &r) const
+//! @brief Return the moment of inertia with respect to the line argument.
+GEOM_FT GeomObj2d::I(const Line2d &r) const
   { return I(r.Point(),r.VDir()); }
 
 

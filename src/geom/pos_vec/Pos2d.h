@@ -31,7 +31,7 @@
 
 class Vector2d;
 class Plotter;
-class Recta2d;
+class Line2d;
 class Ray2d;
 class Segment2d;
 
@@ -84,8 +84,8 @@ class Pos2d: public ProtoGeom
     bool domina_a(const Pos2d &) const;
     GEOM_FT dist(const Pos2d &) const;
     GEOM_FT dist2(const Pos2d &) const;
-    GEOM_FT dist2(const Recta2d &) const;
-    GEOM_FT dist(const Recta2d &) const;
+    GEOM_FT dist2(const Line2d &) const;
+    GEOM_FT dist(const Line2d &) const;
     GEOM_FT dist2(const Ray2d &) const;
     GEOM_FT dist(const Ray2d &) const;
     GEOM_FT dist2(const Segment2d &) const;

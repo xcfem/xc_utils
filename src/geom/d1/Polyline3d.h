@@ -26,16 +26,16 @@
 
 #include "../pos_vec/Pos3d.h"
 #include "../listas/PoliPos.h"
-#include "Linea3d.h"
+#include "Linear3d.h"
 #include "Segment3d.h"
 
 //! @ingroup GEOM
 //
 //! @brief Polilínea en 3 dimensiones.
-class Polyline3d : public Linea3d, public GeomObj::list_Pos3d
+class Polyline3d : public Linear3d, public GeomObj::list_Pos3d
   {
   public:
-    Polyline3d(void): Linea3d(), GeomObj::list_Pos3d() {}
+    Polyline3d(void): Linear3d(), GeomObj::list_Pos3d() {}
     virtual GeomObj *clon(void) const
       { return new Polyline3d(*this); }
     virtual void Mueve(const Vector3d &);

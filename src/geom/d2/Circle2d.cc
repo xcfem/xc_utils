@@ -25,7 +25,7 @@
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
 #include "xc_utils/src/geom/pos_vec/Pos2dArray.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
-#include "xc_utils/src/geom/d1/Recta2d.h"
+#include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
 #include <plotter.h>
 
@@ -38,7 +38,7 @@
 //!
 //! Basado en Mathematical elements for computer graphics
 //! (Rogers and Adams) page 234 y siguientes.
-Circle2d Circle2dRTT(const GEOM_FT &radius,const Recta2d &p,const Recta2d &l,const bool &left,const bool &far)
+Circle2d Circle2dRTT(const GEOM_FT &radius,const Line2d &p,const Line2d &l,const bool &left,const bool &far)
   {
     std::cerr << __FUNCTION__
 	      << "; no está probada." << std::endl;
@@ -52,7 +52,7 @@ Circle2d Circle2dRTT(const GEOM_FT &radius,const Recta2d &p,const Recta2d &l,con
     else
       {
         const Pos2d &o= *points_int.begin();
-        const Recta2d bisect= bisectriz(p,l);
+        const Line2d bisect= bisectriz(p,l);
         Ref2d2d ref(o,bisect.GetDir()); //Origen on intersection, x axis aligned with the bisecting line.
         const double theta= angle(bisect,p); //Angle between the bisecting line and the p line.
         const GEOM_FT sintheta= double_to_FT(sin(theta));

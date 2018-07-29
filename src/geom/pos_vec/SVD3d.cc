@@ -24,7 +24,7 @@
 #include "SVD3d.h"
 #include "VDesliz3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 #include "xc_utils/src/geom/sis_ref/Ref3d3d.h"
 
 
@@ -38,7 +38,7 @@ inline bool cond_compat_eq_prod_vect(const Vector3d &a,const Vector3d &b)
 
 //! @brief Solución de la ecuación x ^ a = b siendo x, a y b sliding vectors
 //! y ^ el producto vectorial.
-Recta3d sol_eq_prod_vect(const Vector3d &a,const Vector3d &b)
+Line3d sol_eq_prod_vect(const Vector3d &a,const Vector3d &b)
   {
     //Condición de compatibilidad.
     if(!cond_compat_eq_prod_vect(a,b))
@@ -48,7 +48,7 @@ Recta3d sol_eq_prod_vect(const Vector3d &a,const Vector3d &b)
       std::cerr << "La ecuación del producto vectorial no tiene solución: el vector a es nulo" << std::endl;
     const Pos3d org= Origen3d + ((a ^ b)*(1/sqr_abs_a));
     Pos3d dest= org+1000*a;
-    return Recta3d(org,dest);
+    return Line3d(org,dest);
   }
 
 SVD3d::SVD3d(const Pos3d &O,const Vector3d &R,const Vector3d &Mo)
@@ -72,9 +72,9 @@ VDesliz3d SVD3d::getMoment(const Pos3d &P) const
 Pos3d SVD3d::PointOfApplication(const Plane &p) const
   {
     Pos3d retval(NAN,NAN,NAN);
-    if(ExisteRectaMomNulo())
+    if(existsZeroMomentLine())
       {
-        Recta3d r= RectaMomNulo();
+        Line3d r= getZeroMomentLine();
         GeomObj::list_Pos3d ptos= intersection(p,r);
         if(ptos.size()>0)
           retval= (*ptos.begin());
@@ -98,7 +98,7 @@ void SVD3d::PrintLtx(std::ostream &os,const std::string &ud_long,const GEOM_FT &
 //! @brief Moment with respect to an axis.
 //! Is the moment with respect a point on the axis
 //! projected onto the axis.
-GEOM_FT SVD3d::getMoment(const Recta3d &e) const
+GEOM_FT SVD3d::getMoment(const Line3d &e) const
   { return dot(SVD3d::getMoment(e.Point()),e.VDir().Normalizado()); }
 
 //! @brief Return el moment vector expressed in the reference
@@ -129,20 +129,20 @@ void SVD3d::Neg(void)
   }
 
 //! @brief Return the central axis of the system (moment paraller to resultant).
-Recta3d SVD3d::centralAxis(void) const
+Line3d SVD3d::centralAxis(void) const
   { return sol_eq_prod_vect(getResultant(),mom); }
 
 //! @brief Return the line of the points with zero moment.
-Recta3d SVD3d::RectaMomNulo(const double &tol) const
+Line3d SVD3d::getZeroMomentLine(const double &tol) const
   {
-    if(ExisteRectaMomNulo(tol))
+    if(existsZeroMomentLine(tol))
       return sol_eq_prod_vect(getResultant(),mom);
     else
-      return Recta3d(Pos3d(NAN,NAN,NAN),Pos3d(NAN,NAN,NAN));
+      return Line3d(Pos3d(NAN,NAN,NAN),Pos3d(NAN,NAN,NAN));
   }
 
 //! @brief Return true if the line of the points with zero moment exists.
-bool SVD3d::ExisteRectaMomNulo(const double &tol) const
+bool SVD3d::existsZeroMomentLine(const double &tol) const
   {
     if((VDesliz3d::Nulo()) && !(mom.Nulo())) return false;
     if(dot(getResultant(),mom)>0) return false;

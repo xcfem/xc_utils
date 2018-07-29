@@ -19,27 +19,27 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Recta3d.cc
+//Line3d.cc
 
-#include "Recta3d.h"
-#include "Recta2d.h"
+#include "Line3d.h"
+#include "Line2d.h"
 #include "../pos_vec/Dir3d.h"
 #include "../d2/Plane.h"
 
 
 
 
-const Pos3d Recta3d::defaultOrg= Pos3d(0,0,0);
-const Pos3d Recta3d::defaultDest= Pos3d(1,0,0);
+const Pos3d Line3d::defaultOrg= Pos3d(0,0,0);
+const Pos3d Line3d::defaultDest= Pos3d(1,0,0);
 const Vector3d defaultVDir= Vector3d(1,0,0);
 
-Recta3d::Recta3d(void)
-  : Linea3d(), cgr(defaultOrg.ToCGAL(),defaultDest.ToCGAL()){}
-Recta3d::Recta3d(const CGRecta_3 &r)
-  : Linea3d(),cgr(r) {}
+Line3d::Line3d(void)
+  : Linear3d(), cgr(defaultOrg.ToCGAL(),defaultDest.ToCGAL()){}
+Line3d::Line3d(const CGLine_3 &r)
+  : Linear3d(),cgr(r) {}
 
-Recta3d::Recta3d(const Pos3d &p1,const Pos3d &p2)
-  : Linea3d(), cgr(p1.ToCGAL(),p2.ToCGAL())
+Line3d::Line3d(const Pos3d &p1,const Pos3d &p2)
+  : Linear3d(), cgr(p1.ToCGAL(),p2.ToCGAL())
   {
     if(cgr.is_degenerate())
       {
@@ -54,13 +54,13 @@ Recta3d::Recta3d(const Pos3d &p1,const Pos3d &p2)
 		<< p1 << " and " << p2 << " are too close d(p1,p2)= "
                 << d << ".\n";
   }
-Recta3d::Recta3d(const Pos3d &p,const Dir3d &dir)
-  : Linea3d(), cgr(p.ToCGAL(),dir.ToCGAL()) {}
+Line3d::Line3d(const Pos3d &p,const Dir3d &dir)
+  : Linear3d(), cgr(p.ToCGAL(),dir.ToCGAL()) {}
 
-Recta3d::Recta3d(const Plane &p1,const Plane &p2)
-  : Linea3d(), cgr()
+Line3d::Line3d(const Plane &p1,const Plane &p2)
+  : Linear3d(), cgr()
   {
-    const Recta3d tmp= intersection_line(p1,p2);
+    const Line3d tmp= intersection_line(p1,p2);
     if(tmp.exists())
       cgr= tmp.ToCGAL();
     else
@@ -68,58 +68,58 @@ Recta3d::Recta3d(const Plane &p1,const Plane &p2)
   }
 
 //! @brief Constructs the line from its parametric equation.
-Recta3d::Recta3d(const RectaParametricas3d &param)
-  : Linea3d(), cgr(defaultOrg.ToCGAL(),defaultDest.ToCGAL())
+Line3d::Line3d(const Line3dParametricForm &param)
+  : Linear3d(), cgr(defaultOrg.ToCGAL(),defaultDest.ToCGAL())
   { Parametricas(param); }
 
-void Recta3d::TwoPoints(const Pos3d &p1,const Pos3d &p2)
-  { (*this)= Recta3d(p1,p2); }
+void Line3d::TwoPoints(const Pos3d &p1,const Pos3d &p2)
+  { (*this)= Line3d(p1,p2); }
 
-Dir3d Recta3d::GetDir(void) const
+Dir3d Line3d::GetDir(void) const
   { return Dir3d(cgr.direction()); }
 
 //! @brief Return the direction vector.
-Vector3d Recta3d::VDir(void) const
+Vector3d Line3d::VDir(void) const
   { return Vector3d(cgr.to_vector()); }
 
-double Recta3d::getLambda(unsigned short int i,const double &d,const Vector3d &i_) const
+double Line3d::getLambda(unsigned short int i,const double &d,const Vector3d &i_) const
       { return (d-Point(0)(i))/i_(i);}
 
 //! @brief Return the orthogonal projection onto the line.
-Pos3d Recta3d::Projection(const Pos3d &p) const
+Pos3d Line3d::Projection(const Pos3d &p) const
   { return Pos3d(cgr.projection(p.ToCGAL())); }
 
 //! @brief Return the projection onto the line.
-Vector3d Recta3d::Projection(const Vector3d &v) const
+Vector3d Line3d::Projection(const Vector3d &v) const
   {
     const Vector3d d= VDir().Normalizado();
     return dot(v,d)*d;
   }
 
 //! @brief Return the projection onto the XY plane.
-Recta3d Recta3d::XY3DProjection(void) const
+Line3d Line3d::XY3DProjection(void) const
   { return XYPlane3d.Projection(*this); }
 
 //! @brief Return the projection onto the XZ plane.
-Recta3d Recta3d::XZ3DProjection(void) const
+Line3d Line3d::XZ3DProjection(void) const
   { return XZPlane3d.Projection(*this); }
 
 //! @brief Return the projection onto the YZ plane.
-Recta3d Recta3d::YZ3DProjection(void) const
+Line3d Line3d::YZ3DProjection(void) const
   { return YZPlane3d.Projection(*this); }
 
 //! @brief Return the projection onto the XY plane.
-Recta2d Recta3d::XY2DProjection(void) const
+Line2d Line3d::XY2DProjection(void) const
   {
-    Recta2d retval;
-    Recta3d r3d= XY3DProjection();
+    Line2d retval;
+    Line3d r3d= XY3DProjection();
     if(r3d.exists())
       {
         const Pos2d p1= r3d.Point(0).XY2DProjection();
         const Pos2d p2= r3d.Point(100).XY2DProjection();
         const double d= p1.dist(p2);
         if(d>mchne_eps_dbl)
-          retval= Recta2d(p1,p2);
+          retval= Line2d(p1,p2);
         else
 	  retval.setExists(false);
       }
@@ -127,17 +127,17 @@ Recta2d Recta3d::XY2DProjection(void) const
   }
 
 //! @brief Return the projection onto the XZ plane.
-Recta2d Recta3d::XZ2DProjection(void) const
+Line2d Line3d::XZ2DProjection(void) const
   {
-    Recta2d retval;
-    Recta3d r3d= XZ3DProjection();
+    Line2d retval;
+    Line3d r3d= XZ3DProjection();
     if(r3d.exists())
       {
         const Pos2d p1= r3d.Point(0).XZ2DProjection();
         const Pos2d p2= r3d.Point(100).XZ2DProjection();
         const double d= p1.dist(p2);
         if(d>mchne_eps_dbl)
-          retval= Recta2d(p1,p2);
+          retval= Line2d(p1,p2);
         else
           retval.setExists(false);
       }
@@ -145,17 +145,17 @@ Recta2d Recta3d::XZ2DProjection(void) const
   }
 
 //! @brief Return the projection onto the YZ plane.
-Recta2d Recta3d::YZ2DProjection(void) const
+Line2d Line3d::YZ2DProjection(void) const
   {
-    Recta2d retval;
-    Recta3d r3d= YZ3DProjection();
+    Line2d retval;
+    Line3d r3d= YZ3DProjection();
     if(r3d.exists())
       {
         const Pos2d p1= r3d.Point(0).YZ2DProjection();
         const Pos2d p2= r3d.Point(100).YZ2DProjection();
         const double d= p1.dist(p2);
         if(d>mchne_eps_dbl)
-          retval= Recta2d(p1,p2);
+          retval= Line2d(p1,p2);
         else
           retval.setExists(false);
       }
@@ -163,15 +163,15 @@ Recta2d Recta3d::YZ2DProjection(void) const
   }
 
 //! @brief Return the angle with respecto to XY plane.
-GEOM_FT Recta3d::getSlope(void) const
+GEOM_FT Line3d::getSlope(void) const
   { return angle(*this,XYPlane3d); }
 
 //! @brief Return true if the lines are parallel.
-bool Recta3d::Paralela(const Recta3d &r) const
+bool Line3d::Paralela(const Line3d &r) const
   { return paralelas(GetDir(),r.GetDir()); }
 
 //! @brief Return the plane normal to r that passes through p.
-Plane Recta3d::Perpendicular(const Pos3d &p) const
+Plane Line3d::Perpendicular(const Pos3d &p) const
   { return Plane(cgr.perpendicular_plane(p.ToCGAL())); }
 
 GEOM_FT coo_intersection(const GeomObj2d::list_Pos2d &int_a, const GeomObj2d::list_Pos2d &int_b,const size_t &coo,const double &tol)
@@ -211,11 +211,11 @@ GEOM_FT coo_intersection(const GeomObj2d::list_Pos2d &int_a, const GeomObj2d::li
     return retval;
   }
 
-//Return true if las rectas intersecan.
-bool Recta3d::intersects(const Recta3d &r2) const
+//! @brief Return true if the lines intersect.
+bool Line3d::intersects(const Line3d &r2) const
   {
-    if(!coplanarias(*this,r2)) return false; //No son coplanarias.
-    if(colineales(*this,r2)) return true; //Son la misma.
+    if(!coplanarias(*this,r2)) return false; //Not coplanar.
+    if(colineales(*this,r2)) return true; //Collinear.
     if(paralelas(*this,r2))
       return false; //Son distintas and paralelas.
     else
@@ -224,7 +224,7 @@ bool Recta3d::intersects(const Recta3d &r2) const
 
 //! @brief Return the intersection of the line with the plane
 //! defined by the equation coord_i= d.
-GeomObj3d::list_Pos3d Recta3d::getIntersection(unsigned short int i, const double &d) const
+GeomObj3d::list_Pos3d Line3d::getIntersection(unsigned short int i, const double &d) const
   {
     GeomObj::list_Pos3d lp;
     unsigned short int j=i;
@@ -244,9 +244,9 @@ GeomObj3d::list_Pos3d Recta3d::getIntersection(unsigned short int i, const doubl
     return lp;
   }
 
-//Return the point intersection con la recta r2, if not exists la
-//intersection devuelve la lista vacía.
-GeomObj3d::list_Pos3d Recta3d::getIntersection(const Recta3d &r2,const double &tol) const
+//! @brief Return the point intersection with the line, if it doesn't exists
+//! it returns an empty list.
+GeomObj3d::list_Pos3d Line3d::getIntersection(const Line3d &r2,const double &tol) const
   {
     GeomObj3d::list_Pos3d retval;
     if(!intersecan(*this,r2)) return retval;
@@ -261,13 +261,13 @@ GeomObj3d::list_Pos3d Recta3d::getIntersection(const Recta3d &r2,const double &t
     const double tol2= tol*tol;
     bool exists= true;
 
-    const Recta2d r1_xy= (*this).XY2DProjection();
-    const Recta2d r1_xz= (*this).XZ2DProjection();
-    const Recta2d r1_yz= (*this).YZ2DProjection();
+    const Line2d r1_xy= (*this).XY2DProjection();
+    const Line2d r1_xz= (*this).XZ2DProjection();
+    const Line2d r1_yz= (*this).YZ2DProjection();
 
-    const Recta2d r2_xy= r2.XY2DProjection();
-    const Recta2d r2_xz= r2.XZ2DProjection();
-    const Recta2d r2_yz= r2.YZ2DProjection();
+    const Line2d r2_xy= r2.XY2DProjection();
+    const Line2d r2_xz= r2.XZ2DProjection();
+    const Line2d r2_yz= r2.YZ2DProjection();
     exists= (r1_xy.exists() && r1_xz.exists() && r1_yz.exists() && r2_xy.exists() && r2_xz.exists() && r2_yz.exists());
     if(!exists)
       std::cerr << getClassName() << "::" << __FUNCTION__
@@ -286,26 +286,26 @@ GeomObj3d::list_Pos3d Recta3d::getIntersection(const Recta3d &r2,const double &t
     if((this->dist2(pint)>tol2) || (r2.dist2(pint))>tol2)
       {
         std::cerr << __FUNCTION__
-		  << "(Recta3d,Recta3d): error when computing intersection."
+		  << "(Line3d,Line3d): error when computing intersection."
                   << std::endl;
       }
     retval.push_back(pint);
     return retval;
   }
 
-//! @brief Return el cuadrado de la distance from the point a la recta.
-GEOM_FT Recta3d::dist(const Pos3d &p) const
+//! @brief Return el cuadrado de la distance from the point to the line.
+GEOM_FT Line3d::dist(const Pos3d &p) const
   { return sqrt_FT(dist2(p)); }
 
 //! @brier Print stuff.
-void Recta3d::Print(std::ostream &os) const
+void Line3d::Print(std::ostream &os) const
   { os << PtoParametricas(0.0) << " " << PtoParametricas(100.0); }
 
-//! @brief Return the distance from the point a la recta.
-GEOM_FT dist(const Pos3d &p,const Recta3d &r)
+//! @brief Return the distance from the point to the line.
+GEOM_FT dist(const Pos3d &p,const Line3d &r)
   { return sqrt_FT(dist2(r,p)); }
 
-bool colineales(const Recta3d &r1,const Recta3d &r2)
+bool colineales(const Line3d &r1,const Line3d &r2)
   {
     const Pos3d p1= r2.Point(0);
     const Pos3d p2= r2.Point(100);
@@ -315,7 +315,7 @@ bool colineales(const Recta3d &r1,const Recta3d &r2)
       return false;
   }
 
-bool coplanarias(const Recta3d &r1,const Recta3d &r2)
+bool coplanarias(const Line3d &r1,const Line3d &r2)
   {
     const Pos3d p1= r2.Point(0);
     const Pos3d p2= r2.Point(100);

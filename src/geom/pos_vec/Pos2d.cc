@@ -28,7 +28,7 @@
 
 
 
-#include "xc_utils/src/geom/d1/Recta2d.h"
+#include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/d1/Ray2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 
@@ -144,11 +144,11 @@ GEOM_FT Pos2d::dist2(const Pos2d &p) const
   { return squared_distance(cgpt,p.cgpt); }
 
 //! @brief Return the squared distance to the line.
-GEOM_FT Pos2d::dist2(const Recta2d &r) const
+GEOM_FT Pos2d::dist2(const Line2d &r) const
   { return r.dist2(*this); }
   
 //! @brief Return the distance to the line.
-GEOM_FT Pos2d::dist(const Recta2d &r) const
+GEOM_FT Pos2d::dist(const Line2d &r) const
   { return r.dist(*this); }
 
 //! @brief Return the squared distance to the ray.

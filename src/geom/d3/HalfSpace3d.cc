@@ -26,7 +26,7 @@
 
 
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 
 
 //! @brief Default constructor.
@@ -81,9 +81,9 @@ GEOM_FT HalfSpace3d::getAngle(const Vector3d &v) const
   { return angle(v,lim); }
 
 //! @brief Return la arista de the intersection entre half spaces.
-Recta3d HalfSpace3d::getLima(const HalfSpace3d &se) const
+Line3d HalfSpace3d::getLima(const HalfSpace3d &se) const
   {
-     const Recta3d retval= lim.getIntersection(se.lim);
+     const Line3d retval= lim.getIntersection(se.lim);
      if(!retval.exists())
        std::cerr << getClassName() << "::" << __FUNCTION__
 	         << "; the half space boundaries doesn't intersect."
@@ -198,14 +198,14 @@ TripletMap<Pos3d> vertices_poliedro(const std::deque<HalfSpace3d> &se, const dou
   }
 
 //! @brief Return the intersection lines between half spaces.
-std::deque<Recta3d> rectas_intersection(const std::deque<HalfSpace3d> &se)
+std::deque<Line3d> intersection_lines(const std::deque<HalfSpace3d> &se)
   {
-    std::deque<Recta3d> retval;
+    std::deque<Line3d> retval;
     const size_t sz= se.size();
     for(size_t i=0;i<sz;i++)
       for(size_t j=i+1;j<sz;j++)
         {
-          const Recta3d r= intersection_line(se[i].getPlane(),se[j].getPlane());
+          const Line3d r= intersection_line(se[i].getPlane(),se[j].getPlane());
           if(r.exists())
             retval.push_back(r);
         }

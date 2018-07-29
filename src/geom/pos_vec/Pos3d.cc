@@ -28,7 +28,7 @@
 
 
 
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 #include "xc_utils/src/geom/d1/Ray3d.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
@@ -196,12 +196,12 @@ GEOM_FT Pos3d::dist(const Pos3d &p) const
 GEOM_FT Pos3d::dist2(const Pos3d &p) const
   { return squared_distance(cgpt,p.cgpt); }
 
-//! @brief Return el cuadrado de la distance a la recta.
-GEOM_FT Pos3d::dist2(const Recta3d &r) const
+//! @brief Return the squared distance to the line.
+GEOM_FT Pos3d::dist2(const Line3d &r) const
   { return r.dist2(*this); }
   
-//! @brief Return the distance a la recta.
-GEOM_FT Pos3d::dist(const Recta3d &r) const
+//! @brief Return the distance to the line.
+GEOM_FT Pos3d::dist(const Line3d &r) const
   { return r.dist(*this); }
 
 //! @brief Return the squared distance to the ray.

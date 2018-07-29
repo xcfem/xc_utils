@@ -24,7 +24,7 @@
 #include "Trihedron.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d3/poliedros3d/Poliedro3d.h"
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 
 Trihedron::Trihedron(void)
   : GeomObj3d(), p0(Pos3d(0,0,0)), tr(Pos3d(1,0,0),Pos3d(0,1,0),Pos3d(0,0,1)) {}
@@ -58,17 +58,17 @@ const Pos3d &Trihedron::Cuspide(void) const
 
 
 //! @brief Return the straight line that passes through the trihedron apex.
-Recta3d Trihedron::Axis(void) const
-  { return Recta3d(p0,tr.getCenterOfMass()); }
+Line3d Trihedron::Axis(void) const
+  { return Line3d(p0,tr.getCenterOfMass()); }
 
 //! @brief Return the angle of the cone that has the same apex
 //! and contains the trihedron.
 GEOM_FT Trihedron::getConeHalfAngle(void) const
   {
-    const Recta3d axis= Axis();
-    GEOM_FT angConico= angle(axis,Recta3d(p0,Vertice(1)));
-    angConico= std::max(angConico, angle(axis,Recta3d(p0,Vertice(2))));
-    angConico= std::max(angConico, angle(axis,Recta3d(p0,Vertice(3))));
+    const Line3d axis= Axis();
+    GEOM_FT angConico= angle(axis,Line3d(p0,Vertice(1)));
+    angConico= std::max(angConico, angle(axis,Line3d(p0,Vertice(2))));
+    angConico= std::max(angConico, angle(axis,Line3d(p0,Vertice(3))));
     return angConico;
   }
 
@@ -102,7 +102,7 @@ GEOM_FT Trihedron::PseudoDist(const Pos3d &p) const
 //! @brief Return true if the point is inside the thriedron.
 bool Trihedron::In(const Pos3d &p,const double &tol) const
   {
-    const Recta3d axis= Axis();
+    const Line3d axis= Axis();
     GEOM_FT d= axis.dist(p);
     GEOM_FT cylinderRadius= axis.dist(Vertice(1));
     cylinderRadius= std::max(cylinderRadius,axis.dist(Vertice(2)));
@@ -113,7 +113,7 @@ bool Trihedron::In(const Pos3d &p,const double &tol) const
     else
       {
         const GEOM_FT angConico= fabs(getConeHalfAngle());
-        const GEOM_FT ang= fabs(angle(axis,Recta3d(p0,p)));
+        const GEOM_FT ang= fabs(angle(axis,Line3d(p0,p)));
         if(ang<1.1*angConico)
           {
             Poliedro3d tmp= GetPoliedro3d();

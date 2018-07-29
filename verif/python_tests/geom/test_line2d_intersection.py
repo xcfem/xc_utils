@@ -4,8 +4,8 @@ import xc_base
 import geom
 import math
 
-r1=geom.Recta2d(geom.Pos2d(1.,0.),geom.Pos2d(1.,1.))
-r2=geom.Recta2d(geom.Pos2d(0.,1.),geom.Pos2d(1.,1.))
+r1=geom.Line2d(geom.Pos2d(1.,0.),geom.Pos2d(1.,1.))
+r2=geom.Line2d(geom.Pos2d(0.,1.),geom.Pos2d(1.,1.))
 
 #In lines doesn't intersect the list well be empty.
 p= r1.getIntersectionWithLine(r2)[0] 

@@ -23,10 +23,10 @@
 
 #include "D2to3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
-#include "xc_utils/src/geom/d1/Recta2d.h"
+#include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 #include "xc_utils/src/geom/d3/GmGrupo3d.h"
 #include "xc_utils/src/geom/d3/HalfSpace3d.h"
 #include "xc_utils/src/geom/listas/auxiliares.h"

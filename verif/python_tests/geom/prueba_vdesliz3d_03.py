@@ -6,7 +6,7 @@ import math
 
 ptoOrigen=geom.Pos3d(0.5,0,0)
 ptoDest=geom.Pos3d(0.5,0,100)
-r1=geom.Recta3d(ptoOrigen,ptoDest)
+r1=geom.Line3d(ptoOrigen,ptoDest)
 vdir=r1.getVDir()
 tp=r1.tipo()
 
@@ -14,9 +14,9 @@ pto_aplic=geom.Pos3d(5,0,0)
 vectorDir=geom.Vector3d(0,2,0)
 vec1=geom.VDesliz3d(pto_aplic,vectorDir)
 pto=vec1.getOrg()
-brazo=pto.distRecta3d(r1)
+brazo=pto.distLine3d(r1)
 fuerza=vec1.y
-m=vec1.getMomentRecta3d(r1)
+m=vec1.getMomentLine3d(r1)
 
 mTeor=fuerza*brazo
 ratio1=(m-mTeor)/mTeor

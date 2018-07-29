@@ -27,7 +27,7 @@
 
 #include "Trf3d.h"
 
-class Recta3d;
+class Line3d;
 
 
 //! @ingroup GEOM
@@ -37,7 +37,7 @@ class Rotation3d: public Trf3d
   {
   public:
     Rotation3d(void);
-    Rotation3d(const Recta3d &,const GEOM_FT &);
+    Rotation3d(const Line3d &,const GEOM_FT &);
   };
 
 #endif

@@ -5,7 +5,7 @@ pto=geom.Pos3d(-1.,1.,0.)
 
 ptoOrigen=geom.Pos3d(-1.,1.,0.)
 ptoDest=geom.Pos3d(1.,1.,0.)
-r1=geom.Recta3d(ptoOrigen,ptoDest)
+r1=geom.Line3d(ptoOrigen,ptoDest)
 
 svd1=geom.SVD3d()
 ptoAplic=geom.Pos3d(1,1,0)
@@ -25,7 +25,7 @@ svd1+=vec
 Res=svd1.getResultant()
 Mom=svd1.getMoment()
 MomP=svd1.getMomentPos3d(pto)
-MomR=svd1.getMomentRecta3d(r1) #devuelve el valor con signo (en función del sentido de la recta), probablemente sea mejor ignorar el signo
+MomR=svd1.getMomentLine3d(r1) #devuelve el valor con signo (en función del sentido de la recta), probablemente sea mejor ignorar el signo
 
 ##print "Res.x =", Res.x
 ##print "Res.y =", Res.y

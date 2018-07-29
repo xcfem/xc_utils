@@ -24,8 +24,8 @@
 #ifndef RAY3D_H
 #define RAY3D_H
 
-#include "Linea3d.h"
-#include "Recta3d.h"
+#include "Linear3d.h"
+#include "Line3d.h"
 #include "../pos_vec/Pos3d.h"
 
 class Dir3d;
@@ -34,19 +34,19 @@ class Dir3d;
 //! @ingroup GEOM
 //
 //! @brief Ray in a three-dimensional space.
-class Ray3d : public Linea3d
+class Ray3d : public Linear3d
   {
     CGRay_3 cgsr;
   public:
-    Ray3d(void): Linea3d(),cgsr(CGPoint_3(0,0,0),CGPoint_3(1,0,0)) {}
+    Ray3d(void): Linear3d(),cgsr(CGPoint_3(0,0,0),CGPoint_3(1,0,0)) {}
     Ray3d(const CGRay_3 &r)
-      : Linea3d(), cgsr(r) {}
+      : Linear3d(), cgsr(r) {}
     Ray3d(const Pos3d &p1,const Pos3d &p2);
     Ray3d(const Ray3d &r)
-      : Linea3d(),cgsr(r.cgsr) {}
+      : Linear3d(),cgsr(r.cgsr) {}
     Ray3d &operator=(const Ray3d &r)
       {
-	Linea3d::operator=(r);
+	Linear3d::operator=(r);
         cgsr= r.cgsr;
         return *this;
       }
@@ -60,12 +60,12 @@ class Ray3d : public Linea3d
       { return NAN; }
     virtual GEOM_FT GetMin(unsigned short int) const
       { return NAN; }
-    Recta3d RectaSoporte(void) const
-      { return Recta3d(cgsr.supporting_line()); }
+    Line3d getSupportLine(void) const
+      { return Line3d(cgsr.supporting_line()); }
     Pos3d Origen(void) const
       { return Pos3d(cgsr.source()); }
     inline GEOM_FT getSlope(void) const
-      { return RectaSoporte().getSlope(); }
+      { return getSupportLine().getSlope(); }
     const Pos3d Point(const int &i) const
       { return Pos3d(cgsr.point(i)); }
     //! @brief Return a point of the line at a distance lambda from its origin.
@@ -83,10 +83,10 @@ class Ray3d : public Linea3d
       { TwoPoints(p1,p2); }
 
     bool Paralela(const Ray3d &r) const;
-    bool Paralela(const Recta3d &r) const;
+    bool Paralela(const Line3d &r) const;
 
     GeomObj3d::list_Pos3d getIntersection(unsigned short int, const double &) const;
-    GeomObj3d::list_Pos3d getIntersection(const Recta3d &r) const;
+    GeomObj3d::list_Pos3d getIntersection(const Line3d &r) const;
     GeomObj3d::list_Pos3d getIntersection(const Ray3d &sr) const;
 
     inline virtual GEOM_FT getLength(void) const
@@ -114,9 +114,9 @@ class Ray3d : public Linea3d
 
 inline GEOM_FT angle(const Ray3d &r,const Vector3d &v)
   { return r.getAngle(v); }
-inline GEOM_FT angle(const Ray3d &sr,const Recta3d &r)
+inline GEOM_FT angle(const Ray3d &sr,const Line3d &r)
   { return r.getAngle(sr.VDir()); }
-inline GEOM_FT angle(const Recta3d &r,const Ray3d &sr)
+inline GEOM_FT angle(const Line3d &r,const Ray3d &sr)
   { return r.getAngle(sr.VDir()); }
 
 inline GEOM_FT dist2(const Pos3d &p,const Ray3d &r)
@@ -128,27 +128,27 @@ inline GEOM_FT dist(const Pos3d &p,const Ray3d &r)
 inline GEOM_FT dist(const Ray3d &r,const Pos3d &p)
   { return r.dist(p); }
 
-inline bool paralelas(const Ray3d &r1,const Recta3d &r2)
+inline bool paralelas(const Ray3d &r1,const Line3d &r2)
   { return r1.Paralela(r2); }
-inline bool paralelas(const Recta3d &r1,const Ray3d &r2)
+inline bool paralelas(const Line3d &r1,const Ray3d &r2)
   { return paralelas(r2,r1); }
 inline bool paralelas(const Ray3d &r1,const Ray3d &r2)
   { return r1.Paralela(r2); }
 
-inline GeomObj3d::list_Pos3d intersection(const Recta3d &r1,const Ray3d &r2)
+inline GeomObj3d::list_Pos3d intersection(const Line3d &r1,const Ray3d &r2)
   { return r2.getIntersection(r1); }
-inline GeomObj3d::list_Pos3d intersection(const Ray3d &r1,const Recta3d &r2)
+inline GeomObj3d::list_Pos3d intersection(const Ray3d &r1,const Line3d &r2)
   { return r1.getIntersection(r2); }
 inline GeomObj3d::list_Pos3d intersection(const Ray3d &r1,const Ray3d &r2)
   { return r1.getIntersection(r2); }
 
 
-inline bool colineales(const Ray3d &sr,const Recta3d &r)
-  { return colineales(sr.RectaSoporte(),r); }
-inline bool colineales(const Recta3d &r,const Ray3d &sr)
+inline bool colineales(const Ray3d &sr,const Line3d &r)
+  { return colineales(sr.getSupportLine(),r); }
+inline bool colineales(const Line3d &r,const Ray3d &sr)
   { return colineales(sr,r); }
 inline bool colineales(const Ray3d &sr1,const Ray3d &sr2)
-  { return colineales(sr1,sr2.RectaSoporte()); }
+  { return colineales(sr1,sr2.getSupportLine()); }
 
 
 

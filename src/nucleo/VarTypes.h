@@ -36,7 +36,7 @@
 //Geometría.
 #include "xc_utils/src/geom/FT_matrix.h"
 #include "xc_utils/src/geom/pos_vec/Vector2d.h"
-#include "xc_utils/src/geom/d1/Recta2d.h"
+#include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
@@ -52,7 +52,7 @@
 #include "xc_utils/src/geom/pos_vec/ListaPos3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d2/Circle2d.h"
 #include "xc_utils/src/geom/d3/HalfSpace3d.h"

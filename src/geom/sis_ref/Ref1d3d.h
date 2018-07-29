@@ -31,7 +31,7 @@
 #include "../pos_vec/Vector3d.h"
 #include "../pos_vec/Dir3d.h"
 
-class Recta3d;
+class Line3d;
 
 //! @ingroup SisRef
 //! 
@@ -52,7 +52,7 @@ class Ref1d3d : public Ref<SisCooRect1d3d>
     Ref1d3d(const Pos3d &o,const Pos3d &p);
 
     Vector3d GetI(void) const;
-    Recta3d getXAxis(void) const;
+    Line3d getXAxis(void) const;
 
     virtual ~Ref1d3d(void)
       {}

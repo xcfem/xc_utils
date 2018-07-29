@@ -19,23 +19,23 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Polyline2d.
+//Polyline2d.h
 
-#ifndef POLILINEA2D_H
-#define POLILINEA2D_H
+#ifndef POLYLINE2D_H
+#define POLYLINE2D_H
 
 #include "../pos_vec/Pos2d.h"
-#include "Linea2d.h"
+#include "Linear2d.h"
 
 class Segment2d;
 class Ray2d;
-class Recta2d;
+class Line2d;
 class ListaPos2d;
 
 //! @ingroup GEOM
 //
 //! @brief Polilínea en dos dimensiones.
-class Polyline2d : public Linea2d, public GeomObj::list_Pos2d
+class Polyline2d : public Linear2d, public GeomObj::list_Pos2d
   {
   public:
     Polyline2d(void);
@@ -101,7 +101,7 @@ class Polyline2d : public Linea2d, public GeomObj::list_Pos2d
     //! @brief Return the intersections of the polyline with
     //! the line coord_i= d
     // list_Pos2d Int(unsigned short int i,const GEOM_FT &d) const;
-    list_Pos2d getIntersection(const Recta2d &r) const;
+    list_Pos2d getIntersection(const Line2d &r) const;
     list_Pos2d getIntersection(const Ray2d &sr) const;
     list_Pos2d getIntersection(const Segment2d &sr) const;
     //Polyline2d Corta(unsigned short int i,const GEOM_FT &d) const;
@@ -115,10 +115,10 @@ class Polyline2d : public Linea2d, public GeomObj::list_Pos2d
     void Plot(Plotter &) const;
   };
 
-GeomObj::list_Pos2d intersection(const Polyline2d &p,const Recta2d &r);
+GeomObj::list_Pos2d intersection(const Polyline2d &p,const Line2d &r);
 GeomObj::list_Pos2d intersection(const Polyline2d &p,const Ray2d &);
 GeomObj::list_Pos2d intersection(const Polyline2d &p,const Segment2d &);
-GeomObj::list_Pos2d intersection(const Recta2d &,const Polyline2d &);
+GeomObj::list_Pos2d intersection(const Line2d &,const Polyline2d &);
 GeomObj::list_Pos2d intersection(const Ray2d &,const Polyline2d &p);
 GeomObj::list_Pos2d intersection(const Segment2d &,const Polyline2d &p);
 

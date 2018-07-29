@@ -33,15 +33,15 @@
 
 //! @brief Default constructor.
 Polyline2d::Polyline2d(void)
-  : Linea2d(), GeomObj::list_Pos2d() {}
+  : Linear2d(), GeomObj::list_Pos2d() {}
 
 //! @brief Constructor.
 Polyline2d::Polyline2d(const GeomObj::list_Pos2d &l)
-  : Linea2d(), GeomObj::list_Pos2d(l){}
+  : Linear2d(), GeomObj::list_Pos2d(l){}
 
 //! @brief Constructor.
 Polyline2d::Polyline2d(const ListaPos2d &l)
-  : Linea2d(), GeomObj::list_Pos2d(l.getPoints()){}
+  : Linear2d(), GeomObj::list_Pos2d(l.getPoints()){}
 
 const Pos2d *Polyline2d::AgregaVertice(const Pos2d &p)
   {
@@ -205,7 +205,7 @@ Polyline2d Polyline2d::Separa(const Pos2d &p,const short int &sgn) const
 
 //! @brief Return the points of intersection of the polyline with
 //! the argument.
-GeomObj::list_Pos2d Polyline2d::getIntersection(const Recta2d &r) const
+GeomObj::list_Pos2d Polyline2d::getIntersection(const Line2d &r) const
   {
     list_Pos2d retval;
     register const_iterator j=begin();
@@ -309,13 +309,13 @@ void Polyline2d::Plot(Plotter &plotter) const
       }
   }
 
-GeomObj::list_Pos2d intersection(const Polyline2d &p,const Recta2d &r)
+GeomObj::list_Pos2d intersection(const Polyline2d &p,const Line2d &r)
   { return p.getIntersection(r); }
 GeomObj::list_Pos2d intersection(const Polyline2d &p,const Ray2d &sr)
   { return p.getIntersection(sr); }
 GeomObj::list_Pos2d intersection(const Polyline2d &p,const Segment2d &sg)
   { return p.getIntersection(sg); }
-GeomObj::list_Pos2d intersection(const Recta2d &r,const Polyline2d &p)
+GeomObj::list_Pos2d intersection(const Line2d &r,const Polyline2d &p)
   { return p.getIntersection(r); }
 GeomObj::list_Pos2d intersection(const Ray2d &sr,const Polyline2d &p)
   { return p.getIntersection(sr); }

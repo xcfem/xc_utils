@@ -39,8 +39,8 @@ Segment2d Triangle2d::Altura(const size_t &i) const
         cerr << getClassName() << "::" << __FUNCTION__
 	     << "; warning!, is a degenerated triangle." << endl;
       }
-    const Recta2d rbase= Base(i).RectaSoporte();
-    const Recta2d perp= rbase.Perpendicular(Vertice(i));
+    const Line2d rbase= Base(i).getSupportLine();
+    const Line2d perp= rbase.Perpendicular(Vertice(i));
     const Pos2d pint= *intersection(rbase,perp).begin();
     return Segment2d(Vertice(i),pint);
   }
@@ -97,8 +97,7 @@ void Triangle2d::Plot(Plotter &plotter) const
     plotter.fline(p3.x(),p3.y(),p1.x(),p1.y());
   }
 
-//! @brief Aplica a la recta la transformación que se
-//! pasa como parámetro.
+//! @brief Applies to the triangle the transformation argument.
 void Triangle2d::Transforma(const Trf2d &trf2d)
   {
     const Pos2d pA= trf2d.Transforma(Vertice(1));

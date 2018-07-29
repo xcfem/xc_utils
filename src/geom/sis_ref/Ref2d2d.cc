@@ -23,7 +23,7 @@
 #include "Ref2d2d.h"
 #include "xc_utils/src/geom/pos_vec/Vector2d.h"
 #include "xc_utils/src/geom/pos_vec/Dir2d.h"
-#include "xc_utils/src/geom/d1/Recta2d.h"
+#include "xc_utils/src/geom/d1/Line2d.h"
 
 
 
@@ -34,23 +34,23 @@ Ref2d2d::Ref2d2d(const Pos2d &o,const Vector2d &vX): BaseRef(o,vX) {}
 Ref2d2d::Ref2d2d(const Pos2d &o,const Dir2d &dirX): BaseRef(o,dirX) {}
 Ref2d2d::Ref2d2d(const Pos2d &o,const Pos2d &p): BaseRef(o,p) {}
 
-//! @brief Return el vector unitario I en el sistema global.
+//! @brief Return the unary vector I expressed in global coordinates.
 Vector2d Ref2d2d::GetI(void) const
   { return getAxisVDir(1); }
-//! @brief Return el vector unitario J en el sistema global.
+//! @brief Return the unary vector J expressed in global coordinates.
 Vector2d Ref2d2d::GetJ(void) const
   { return getAxisVDir(2); }
 
-//! @brief Return la recta que define el x axis.
-Recta2d Ref2d2d::getXAxis(void) const
+//! @brief Return la line defining the x axis.
+Line2d Ref2d2d::getXAxis(void) const
   {
     const Pos2d dest(org+1000.0*GetI());
-    return Recta2d(org,dest);
+    return Line2d(org,dest);
   }
-Recta2d Ref2d2d::getYAxis(void) const
-//Return la recta que define el y axis.
+//! @brief Return la line defining the y axis.
+Line2d Ref2d2d::getYAxis(void) const
   {
     const Pos2d dest(org+1000.0*GetJ());
-    return Recta2d(org,dest);
+    return Line2d(org,dest);
   }
 

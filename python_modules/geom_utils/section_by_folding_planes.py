@@ -14,7 +14,7 @@ class XYFoldingPlanes(object):
     err= 0.0
     P0proj= geom.Pos2d(p0.x,p0.y)
     P1proj= geom.Pos2d(p1.x,p1.y)
-    line2d= geom.Recta2d(P0proj,P1proj)
+    line2d= geom.Line2d(P0proj,P1proj)
     proj= self.xyPline.getIntersectionWithLine(line2d)
     for p in proj:
       lmb= p.distPos2d(P0proj)/P1proj.distPos2d(P0proj)

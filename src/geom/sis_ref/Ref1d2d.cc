@@ -23,7 +23,7 @@
 #include "Ref1d2d.h"
 #include "xc_utils/src/geom/pos_vec/Vector2d.h"
 #include "xc_utils/src/geom/pos_vec/Dir2d.h"
-#include "xc_utils/src/geom/d1/Recta2d.h"
+#include "xc_utils/src/geom/d1/Line2d.h"
 
 
 
@@ -34,13 +34,14 @@ Ref1d2d::Ref1d2d(const Pos2d &o,const Vector2d &vX): BaseRef(o,vX) {}
 Ref1d2d::Ref1d2d(const Pos2d &o,const Dir2d &dirX): BaseRef(o,dirX) {}
 Ref1d2d::Ref1d2d(const Pos2d &o,const Pos2d &p): BaseRef(o,p) {}
 
+//! @brief Return the unary vector I in the global system.
 Vector2d Ref1d2d::GetI(void) const
-//Return el vector unitario I en el sistema global.
   { return getAxisVDir(1); }
-Recta2d Ref1d2d::getXAxis(void) const
-//Return la recta que define el x axis.
+
+//! @brief Return the line defining the x axis.
+Line2d Ref1d2d::getXAxis(void) const
   {
     const Pos2d dest(org+1000.0*GetI());
-    return Recta2d(org,dest);
+    return Line2d(org,dest);
   }
 

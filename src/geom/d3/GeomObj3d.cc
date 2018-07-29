@@ -26,7 +26,7 @@
 #include "../pos_vec/Pos3d.h"
 #include "../pos_vec/Vector3d.h"
 #include "../sis_ref/Ref3d3d.h"
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 #include "xc_utils/src/geom/FT_matrix.h"
 
 #include "xc_utils/src/geom/d3/HalfSpace3d.h"
@@ -107,13 +107,12 @@ GEOM_FT GeomObj3d::I(const Pos3d &O,const Vector3d &e) const
     return dot(e,Io*e.getMatrix())/Abs2(e);
   }
 
-//! @brief Return el moment of inertia with respect to la recta que se pasa
-//! como parámetro.
-GEOM_FT GeomObj3d::I(const Recta3d &r) const
+//! @brief Return el moment of inertia with respect to the argument line.
+GEOM_FT GeomObj3d::I(const Line3d &r) const
   { return I(r.Point(),r.VDir()); }
 
-//! @brief Return el moment of inertia (i,j) respecto axis parallel to i
-//! que pasa por o.
+//! @brief Return el moment of inertia (i,j) respect to the axis parallel to i
+//! through o.
 GEOM_FT GeomObj3d::I( const unsigned short int i,
                      const unsigned short int j,
                      const Pos3d &o) const

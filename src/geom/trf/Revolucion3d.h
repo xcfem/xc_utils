@@ -25,7 +25,7 @@
 #ifndef REVOLUCION3D_H
 #define REVOLUCION3D_H
 
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 #include "Trf3d.h"
 
 class Pos3dArray;
@@ -37,11 +37,11 @@ class Pos3dArray3d;
 //! @brief Revolución.
 class Revolucion3d: public Trf3d
   {
-    Recta3d axis; //Revolution axis.
+    Line3d axis; //Revolution axis.
     GEOM_FT theta; //!< Swept angle.
     size_t ndiv; //number of divisions.
   public:
-    Revolucion3d(const Recta3d &e,const GEOM_FT &th= 0.0,const size_t &nd= 1);
+    Revolucion3d(const Line3d &e,const GEOM_FT &th= 0.0,const size_t &nd= 1);
     Pos3dArray Aplica0d(const Pos3d &p) const;
     Pos3dArray Aplica1d(const Pos3dArray &m) const;
     Pos3dArray3d Aplica2d(const Pos3dArray &m) const;

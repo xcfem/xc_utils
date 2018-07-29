@@ -4,9 +4,9 @@ import xc_base
 import geom
 import math
 
-r1=geom.Recta2d(geom.Pos2d(0.,0.),geom.Pos2d(10.,0.))
-r2=geom.Recta2d(geom.Pos2d(0.,-2.),geom.Pos2d(10.,-2.))
-r3=geom.Recta2d(geom.Pos2d(0.,2.),geom.Pos2d(10.,2.))
+r1=geom.Line2d(geom.Pos2d(0.,0.),geom.Pos2d(10.,0.))
+r2=geom.Line2d(geom.Pos2d(0.,-2.),geom.Pos2d(10.,-2.))
+r3=geom.Line2d(geom.Pos2d(0.,2.),geom.Pos2d(10.,2.))
 
 a=r2.getParamA()
 b=r2.getParamB()

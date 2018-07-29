@@ -23,7 +23,7 @@
 #include "Ref2d3d.h"
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
 #include "xc_utils/src/geom/pos_vec/Dir3d.h"
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 
 //! @brief Constructor.
@@ -51,26 +51,26 @@ Ref2d3d::Ref2d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2)
   : BaseRef(o,SisCooRect2d3d(v1,v2)) {}
 
 
-//! @brief Return el vector unitario I en el sistema global.
+//! @brief Return the unary vector I expressed in global coordinates.
 Vector3d Ref2d3d::GetI(void) const
   { return getAxisVDir(1); }
 
-//! @brief Return el vector unitario I en el sistema global.
+//! @brief Return the unary vector J expressed in global coordinates.
 Vector3d Ref2d3d::GetJ(void) const
   { return getAxisVDir(2); }
 
-//! @brief Return la recta que define el x axis.
-Recta3d Ref2d3d::getXAxis(void) const
+//! @brief Return the line defining the x axis.
+Line3d Ref2d3d::getXAxis(void) const
   {
     const Pos3d dest(org+1000.0*GetI());
-    return Recta3d(org,dest);
+    return Line3d(org,dest);
   }
 
-//! @brief Return la recta que define el x axis.
-Recta3d Ref2d3d::getYAxis(void) const
+//! @brief Return the line defining the y axis.
+Line3d Ref2d3d::getYAxis(void) const
   {
     const Pos3d dest(org+1000.0*GetJ());
-    return Recta3d(org,dest);
+    return Line3d(org,dest);
   }
 
 Plane Ref2d3d::getXYPlane(void) const

@@ -22,12 +22,12 @@
 //Rotation3d.cc
 
 #include "Rotation3d.h"
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 #include "xc_utils/src/geom/FT_matrix.h"
 
 //! Rotation in 3D as described in "Geometric tools for computer graphics"
 //! Philip J. Schneider Morgan Kaufmann Publishers, page 141
-FT_matrix rotation_3d_matrix(const Recta3d &axis,const double &theta)
+FT_matrix rotation_3d_matrix(const Line3d &axis,const double &theta)
   {
     FT_matrix retval(4,4);
     const GEOM_FT cos_theta= double_to_FT(cos(theta));
@@ -56,7 +56,7 @@ Rotation3d::Rotation3d(void)
   }
 
 //! @brief Constructor.
-Rotation3d::Rotation3d(const Recta3d &axis,const GEOM_FT &theta)
+Rotation3d::Rotation3d(const Line3d &axis,const GEOM_FT &theta)
   : Trf3d()
   {
     FT_matrix rr=  rotation_3d_matrix(axis,theta);

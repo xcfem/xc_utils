@@ -138,7 +138,7 @@ Pos2d SupPoligonal2d::Centroide(void) const
                                   //we prefer it.
     const BND2d bnd= Bnd();
     const Pos2d c= bnd.getCenterOfMass();
-    const Recta2d r(c,c+Vector2d(0,100));
+    const Line2d r(c,c+Vector2d(0,100));
     list<Segment2d> intersec= intersection(*this,r);
     if(!intersec.empty())
       {
@@ -317,7 +317,7 @@ void SupPoligonal2d::Plot(Plotter &plotter) const
 
 
 //! @brief Return true if the line and the polygonal surface overlap.
-bool SupPoligonal2d::Overlap(const Recta2d &r) const
+bool SupPoligonal2d::Overlap(const Line2d &r) const
   {
     GeomObj::list_Pos2d tmp= getPolyline().getIntersection(r);
     return !tmp.empty();
@@ -330,7 +330,7 @@ bool SupPoligonal2d::Overlap(const Ray2d &sr) const
     return !tmp.empty();
   }
 
-// SOLO debe llamarse desde Clip(recta)
+// ONLY to be called from Clip(line)
 std::list<Segment2d> empalma(const std::list<Segment2d> &lista)
   {
     std::list<Segment2d> retval;
@@ -356,8 +356,8 @@ std::list<Segment2d> empalma(const std::list<Segment2d> &lista)
     return retval;
   }
 
-//! @brief Return the intersection of the polygon con la recta (if exists).
-Segment2d SupPoligonal2d::Clip(const Recta2d &r) const
+//! @brief Return the intersection of the polygon with the line (if exists).
+Segment2d SupPoligonal2d::Clip(const Line2d &r) const
   {
     Segment2d retval;
     list<Segment2d> sg_list= sin_degenerados(intersection(*this,r));
@@ -412,8 +412,8 @@ Segment2d SupPoligonal2d::Clip(const Segment2d &sg) const
     return retval;
   }
 
-//! @brief Return the intersection of the polygon con la recta.
-list<Segment2d> intersection(const SupPoligonal2d &pg,const Recta2d &r)
+//! @brief Return the intersection of the polygon with the line.
+list<Segment2d> intersection(const SupPoligonal2d &pg,const Line2d &r)
   {
     list<Segment2d> retval;
     if(pg.GetNumVertices()>0)
@@ -438,8 +438,8 @@ list<Segment2d> intersection(const SupPoligonal2d &pg,const Recta2d &r)
     return retval;     
   }
 
-//! @brief Return the intersection of the polygon con la recta.
-list<Segment2d> intersection(const Recta2d &r,const SupPoligonal2d &pg)
+//! @brief Return the intersection of the polygon with the line.
+list<Segment2d> intersection(const Line2d &r,const SupPoligonal2d &pg)
   { return intersection(pg,r); }
 
 //! @brief Return the intersection of the polygon with the ray.

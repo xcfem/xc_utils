@@ -32,7 +32,7 @@
 #include "../cgal_types.h"
 #include <list>
 
-class Recta3d;
+class Line3d;
 class Ray3d;
 class Segment3d;
 class Polyline3d;
@@ -61,7 +61,7 @@ class Plane : public Superficie3d
     Plane(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
     Plane(const Pos3d &o,const Vector3d &v);
     Plane(const Pos3d &p,const Vector3d &v1,const Vector3d &v2);
-    Plane(const Recta3d &r,const Pos3d &p);
+    Plane(const Line3d &r,const Pos3d &p);
     Plane(const Segment3d &s,const Vector3d &v);
     Plane(const Poligono3d &trg);
     Plane(const Plane &);
@@ -79,7 +79,7 @@ class Plane : public Superficie3d
       { return NAN; }
     Pos3d Projection(const Pos3d &) const;
     Vector3d Projection(const Vector3d &) const;
-    Recta3d Projection(const Recta3d &) const;
+    Line3d Projection(const Line3d &) const;
     GeomObj3d::list_Pos3d Projection(const GeomObj3d::list_Pos3d &) const;
     //Poligono3d Projection(const Poligono3d &) const;
 
@@ -128,17 +128,17 @@ class Plane : public Superficie3d
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
 
-    Recta3d XYTrace(void) const;
-    Recta3d XZTrace(void) const;
-    Recta3d YZTrace(void) const;
-    Recta3d getMaximumSlopeLineXY(void) const;
-    Recta3d getMaximumSlopeLineXZ(void) const;
-    Recta3d getMaximumSlopeLineYZ(void) const;
+    Line3d XYTrace(void) const;
+    Line3d XZTrace(void) const;
+    Line3d YZTrace(void) const;
+    Line3d getMaximumSlopeLineXY(void) const;
+    Line3d getMaximumSlopeLineXZ(void) const;
+    Line3d getMaximumSlopeLineYZ(void) const;
 
     bool intersects(const Plane &p) const;
-    Recta3d getIntersection(const Plane &p) const;
-    bool intersects(const Recta3d &p) const;
-    Pos3d getIntersection(const Recta3d &p) const;
+    Line3d getIntersection(const Plane &p) const;
+    bool intersects(const Line3d &p) const;
+    Pos3d getIntersection(const Line3d &p) const;
     bool intersects(const Ray3d &p) const;
     Pos3d getIntersection(const Ray3d &p) const;
     bool intersects(const Segment3d &p) const;
@@ -164,32 +164,32 @@ const Plane XYPlane3d(Pos3d(0,0,0),Pos3d(1,0,0),Pos3d(0,1,0));
 const Plane XZPlane3d(Pos3d(0,0,0),Pos3d(1,0,0),Pos3d(0,0,1));
 const Plane YZPlane3d(Pos3d(0,0,0),Pos3d(0,1,0),Pos3d(0,0,1));
 
-GEOM_FT angle(const Recta3d &r,const Plane &p);
-GEOM_FT angle(const Plane &p,const Recta3d &r);
+GEOM_FT angle(const Line3d &r,const Plane &p);
+GEOM_FT angle(const Plane &p,const Line3d &r);
 GEOM_FT angle(const Vector3d &,const Plane &);
 GEOM_FT angle(const Plane &,const Vector3d &);
 GEOM_FT angle(const Plane &,const Plane &);
 
 
-Plane perpendicular(const Recta3d &r, const Pos3d &p);
+Plane perpendicular(const Line3d &r, const Pos3d &p);
 
-bool paralelos(const Plane &p, const Recta3d &r);
+bool paralelos(const Plane &p, const Line3d &r);
 bool paralelos(const Plane &p1, const Plane &p2);
 
 
-Recta3d intersection_line(const Plane &, const Plane &);
+Line3d intersection_line(const Plane &, const Plane &);
 Pos3d intersection_point(const Plane &, const Plane &,const Plane &);
 GmGrupo3d intersection(const Plane &p1, const Plane &p2);
-GeomObj3d::list_Pos3d intersection(const Plane &p, const Recta3d &r);
-GeomObj3d::list_Pos3d intersection(const Recta3d &r, const Plane &p);
+GeomObj3d::list_Pos3d intersection(const Plane &p, const Line3d &r);
+GeomObj3d::list_Pos3d intersection(const Line3d &r, const Plane &p);
 GeomObj3d::list_Pos3d intersection(const Plane &p, const Ray3d &r);
 GeomObj3d::list_Pos3d intersection(const Ray3d &r, const Plane &p);
 GeomObj3d::list_Pos3d intersection(const Plane &p, const Segment3d &);
 GeomObj3d::list_Pos3d intersection(const Segment3d &, const Plane &p);
 GeomObj3d::list_Pos3d intersection(const Plane &p, const Polyline3d &r);
 GeomObj3d::list_Pos3d intersection(const Polyline3d &r, const Plane &p);
-Pos3d intersection_point(const Plane &p, const Recta3d &r);
-Pos3d intersection_point(const Recta3d &r, const Plane &p);
+Pos3d intersection_point(const Plane &p, const Line3d &r);
+Pos3d intersection_point(const Line3d &r, const Plane &p);
 Pos3d intersection_point(const Plane &p, const Ray3d &r);
 Pos3d intersection_point(const Ray3d &r, const Plane &p);
 Pos3d intersection_point(const Plane &p, const Segment3d &r);

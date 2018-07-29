@@ -28,15 +28,15 @@
 #include "../pos_vec/Pos3d.h"
 
 //! @brief Constructor.
-Segment3d::Segment3d(void): Linea3d(),cgseg(CGPoint_3(0,0,0),CGPoint_3(1,0,0)) {}
+Segment3d::Segment3d(void): Linear3d(),cgseg(CGPoint_3(0,0,0),CGPoint_3(1,0,0)) {}
 
 //! @brief Constructor.
 Segment3d::Segment3d(const CGSegment_3 &r)
-  : Linea3d(), cgseg(r) {}
+  : Linear3d(), cgseg(r) {}
 
 //! @brief Constructor.
 Segment3d::Segment3d(const Pos3d &p1,const Pos3d &p2)
-  : Linea3d(), cgseg(p1.ToCGAL(),p2.ToCGAL())
+  : Linear3d(), cgseg(p1.ToCGAL(),p2.ToCGAL())
   {
     if(EsDegenerada())
       {
@@ -48,12 +48,12 @@ Segment3d::Segment3d(const Pos3d &p1,const Pos3d &p2)
 
 //! @brief Constructor.
 Segment3d::Segment3d(const Segment3d &r)
-  : Linea3d(),cgseg(r.cgseg) {}
+  : Linear3d(),cgseg(r.cgseg) {}
 
 //! @brief Operador asignación.
 Segment3d &Segment3d::operator=(const Segment3d &r)
   {
-    Linea3d::operator=(r);
+    Linear3d::operator=(r);
     cgseg= r.cgseg;
     return *this;
   }
@@ -64,14 +64,14 @@ GEOM_FT Segment3d::GetMax(unsigned short int i) const
   { return std::max(Origen()(i),Destino()(i)); }
 GEOM_FT Segment3d::GetMin(unsigned short int i) const
   { return std::min(Origen()(i),Destino()(i)); }
-Recta3d Segment3d::RectaSoporte(void) const
-  { return Recta3d(cgseg.supporting_line()); }
+Line3d Segment3d::getSupportLine(void) const
+  { return Line3d(cgseg.supporting_line()); }
 Pos3d Segment3d::Origen(void) const
   { return Pos3d(cgseg.source()); }
 Pos3d Segment3d::Destino(void) const
   { return Pos3d(cgseg.target()); }
 GEOM_FT Segment3d::getSlope(void) const
-  { return RectaSoporte().getSlope(); }
+  { return getSupportLine().getSlope(); }
 const Pos3d Segment3d::Point(const int &i) const
   { return Pos3d(cgseg.point(i)); }
 
@@ -114,7 +114,7 @@ GEOM_FT Segment3d::getLambda(const Pos3d &p) const
 //! @brief Return el cuadrado de la distance from the point to the segment.
 GEOM_FT Segment3d::dist2(const Pos3d &p) const
   {
-    const Recta3d r= RectaSoporte();
+    const Line3d r= getSupportLine();
     const Pos3d proj= r.Projection(p);
     GEOM_FT retval= p.dist2(proj); //Ok if projected point inside segment.
     const Pos3d A= Origen();
@@ -135,12 +135,12 @@ GEOM_FT Segment3d::dist2(const Pos3d &p) const
 GEOM_FT Segment3d::dist(const Pos3d &p) const
   { return sqrt(dist2(p)); }
 
-bool Segment3d::Paralelo(const Recta3d &r) const
-  { return paralelas(RectaSoporte(),r); }
+bool Segment3d::Paralelo(const Line3d &r) const
+  { return paralelas(getSupportLine(),r); }
 bool Segment3d::Paralelo(const Ray3d &sr) const
-  { return paralelas(RectaSoporte(),sr); }
+  { return paralelas(getSupportLine(),sr); }
 bool Segment3d::Paralelo(const Segment3d &r) const
-  { return paralelas(RectaSoporte(),r.RectaSoporte()); }
+  { return paralelas(getSupportLine(),r.getSupportLine()); }
 
 //! @brief Return the length of the segment.
 GEOM_FT Segment3d::getLength(void) const
@@ -156,9 +156,9 @@ Pos3d Segment3d::getCenterOfMass(void) const
 
 //! @brief Return the intersection of the segment and the line,
 //! if it doesn't exists return an empty list.
-GeomObj3d::list_Pos3d Segment3d::getIntersection(const Recta3d &r) const
+GeomObj3d::list_Pos3d Segment3d::getIntersection(const Line3d &r) const
   {
-    const Recta3d sop= RectaSoporte();
+    const Line3d sop= getSupportLine();
     GeomObj3d::list_Pos3d retval= sop.getIntersection(r);
     if(!retval.empty()) //Intersection exists.
       {
@@ -173,7 +173,7 @@ GeomObj3d::list_Pos3d Segment3d::getIntersection(const Recta3d &r) const
 //! the intersection doesn't exists returns an empty list.
 GeomObj3d::list_Pos3d Segment3d::getIntersection(const Ray3d &sr) const
   {
-    const Recta3d sop= RectaSoporte();
+    const Line3d sop= getSupportLine();
     GeomObj3d::list_Pos3d retval= sr.getIntersection(sop);
     if(!retval.empty()) //Intersection exists.
       {
@@ -189,11 +189,11 @@ GeomObj3d::list_Pos3d Segment3d::getIntersection(const Ray3d &sr) const
 GeomObj3d::list_Pos3d Segment3d::getIntersection(unsigned short int i, const double &d) const
   {
     GeomObj3d::list_Pos3d lp;
-    lp= RectaSoporte().getIntersection(i,d);
+    lp= getSupportLine().getIntersection(i,d);
     if(!lp.empty())
       {
         const Vector3d i_= VDir();
-        const double l= RectaSoporte().getLambda(i,d,i_);
+        const double l= getSupportLine().getLambda(i,d,i_);
         if( (l<0.0) || (l>getLength()) )
           lp.erase(lp.begin(),lp.end());
       }
@@ -205,12 +205,12 @@ GeomObj3d::list_Pos3d Segment3d::getIntersection(unsigned short int i, const dou
 //! the intersection doesn't exists returns an empty list.
 GeomObj3d::list_Pos3d Segment3d::getIntersection(const Segment3d &sg2) const
   {
-    const Recta3d sop= RectaSoporte();
+    const Line3d sop= getSupportLine();
     GeomObj3d::list_Pos3d retval= sg2.getIntersection(sop);
     if(!retval.empty()) //Intersection exists
       {
         const Pos3d &pint= *retval.begin(); //This point is on sg2 and on
-	                                    // the recta soporte de sg1.
+	                                    // the sg1 support line.
         if(!In(pint)) //the intersection point is NOT on sg1.
           retval.erase(retval.begin(),retval.end());
       }

@@ -28,7 +28,7 @@
 
 class Trf2d;
 class HalfPlane2d;
-class Recta2d;
+class Line2d;
 class Segment2d;
 class ListaPos2d;
 
@@ -137,7 +137,7 @@ class Poligono2d: public SupPoligonal2d
     bool In(const Polyline2d &) const;
     bool In(const Poligono2d &) const;
     bool Overlap(const Pos2d &) const;
-    bool Overlap(const Recta2d &r) const;
+    bool Overlap(const Line2d &r) const;
     bool Overlap(const Ray2d &sr) const;
     bool Overlap(const Segment2d &sg) const;
     bool Overlap(const BND2d &) const;
@@ -161,7 +161,7 @@ class Poligono2d: public SupPoligonal2d
     void une(const Poligono2d &);
     void une(const std::list<Poligono2d> &l);
     void clipBy(const Poligono2d &);
-    Segment2d Clip(const Recta2d &) const;
+    Segment2d Clip(const Line2d &) const;
     Segment2d Clip(const Ray2d &) const;
     Segment2d Clip(const Segment2d &) const;
     std::list<Poligono2d> Clip(const BND2d &bnd) const;
@@ -179,7 +179,7 @@ Poligono2d append_mid_points(const Poligono2d &);
 
 std::list<Poligono2d> intersection(const Poligono2d &p1,const Poligono2d &p2);
 std::list<Poligono2d> intersection(const Poligono2d &p,const HalfPlane2d &r);
-std::list<Poligono2d> corta(const Poligono2d &p,const Recta2d &r);
+std::list<Poligono2d> corta(const Poligono2d &p,const Line2d &r);
 
 Pos2d center_of_mass(const std::list<Poligono2d> &);
 

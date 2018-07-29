@@ -47,7 +47,7 @@ class_<polygon_2D_list >("polygon_2D_list")
   ;
 
 void (Poligono2d::*unePoligono2d)(const Poligono2d &) =&Poligono2d::une;
-Segment2d (Poligono2d::*clipRecta)(const Recta2d &) const=&Poligono2d::Clip;
+Segment2d (Poligono2d::*clipLine)(const Line2d &) const=&Poligono2d::Clip;
 Segment2d (Poligono2d::*clipRay)(const Ray2d &) const=&Poligono2d::Clip;
 Segment2d (Poligono2d::*clipSegment)(const Segment2d &) const=&Poligono2d::Clip;
 class_<Poligono2d, Poligono2d *, bases<SupPoligonal2d> >("Poligono2d")
@@ -65,7 +65,7 @@ class_<Poligono2d, Poligono2d *, bases<SupPoligonal2d> >("Poligono2d")
   .def("getArea",&Poligono2d::getArea,"Return the polygon area.")
   .def("getRecubrimiento",&Poligono2d::GetRecubrimiento)
   .def("unePoligono2d",unePoligono2d)
-  .def("clipRecta",clipRecta)
+  .def("clipLine",clipLine)
   .def("clipRay",clipRay)
   .def("clipSegment",clipSegment)
   .def("clipPorPoligono",&Poligono2d::clipBy);

@@ -19,16 +19,16 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Recta3d.h
+//Line3d.h
 
-#ifndef RECTA3D_H
-#define RECTA3D_H
+#ifndef LINE3D_H
+#define LINE3D_H
 
 #include <cstdlib>
 #include <cmath>
 #include <bits/nan.h>
 #include "xc_basic/src/util/matem.h"
-#include "Linea3d.h"
+#include "Linear3d.h"
 #include "../pos_vec/Pos3d.h"
 #include "../pos_vec/Vector3d.h"
 
@@ -36,13 +36,13 @@
 
 //! @ingroup GEOM
 //
-//! @brief Recta 3D en paramétricas.
-class RectaParametricas3d
+//! @brief Line in a three-dimensional space (parametric form).
+class Line3dParametricForm
   {
-    Pos3d org; //Origen de la recta.
-    Vector3d dir; //direction vector.
+    Pos3d org; //!< Line origin.
+    Vector3d dir; //!< Direction vector.
   public:
-    RectaParametricas3d(const Pos3d &o,const Vector3d &d)
+    Line3dParametricForm(const Pos3d &o,const Vector3d &d)
       : org(o), dir(d) {}
     inline const Pos3d &GetOrg(void) const
       { return org; }
@@ -53,34 +53,34 @@ class RectaParametricas3d
       { return org+lambda*dir; }
   };
 
-class Recta2d;
+class Line2d;
 class Plane;
 class Dir3d;
 
 
 //! @ingroup GEOM
 //
-//! @brief Recta en tres dimensiones.
-class Recta3d : public Linea3d
+//! @brief Line in a three-dimensional space.
+class Line3d : public Linear3d
   {
-    CGRecta_3 cgr;
+    CGLine_3 cgr;
     static const Pos3d defaultOrg;
     static const Pos3d defaultDest;
   public:
-    Recta3d(void);
-    explicit Recta3d(const CGRecta_3 &r);
-    Recta3d(const Pos3d &p1,const Pos3d &p2);
-    Recta3d(const Pos3d &p,const Dir3d &dir);
-    Recta3d(const Plane &p1,const Plane &p2);
-    Recta3d(const RectaParametricas3d &param);
+    Line3d(void);
+    explicit Line3d(const CGLine_3 &r);
+    Line3d(const Pos3d &p1,const Pos3d &p2);
+    Line3d(const Pos3d &p,const Dir3d &dir);
+    Line3d(const Plane &p1,const Plane &p2);
+    Line3d(const Line3dParametricForm &param);
     virtual GeomObj *clon(void) const
-      { return new Recta3d(*this); }
+      { return new Line3d(*this); }
     void TwoPoints(const Pos3d &p1,const Pos3d &p2);
     virtual GEOM_FT GetMax(unsigned short int) const
       { return NAN; }
     virtual GEOM_FT GetMin(unsigned short int i) const
       { return NAN; }
-    const CGRecta_3 &ToCGAL(void) const
+    const CGLine_3 &ToCGAL(void) const
       { return cgr; }
     inline Pos3d Point(const int &i=0) const
       { return Pos3d(cgr.point(i)); }
@@ -89,25 +89,25 @@ class Recta3d : public Linea3d
 
     Pos3d Projection(const Pos3d &) const;
     Vector3d Projection(const Vector3d &) const;
-    Recta3d XY3DProjection(void) const;
-    Recta3d XZ3DProjection(void) const;
-    Recta3d YZ3DProjection(void) const;
+    Line3d XY3DProjection(void) const;
+    Line3d XZ3DProjection(void) const;
+    Line3d YZ3DProjection(void) const;
 
-    Recta2d XY2DProjection(void) const;
-    Recta2d XZ2DProjection(void) const;
-    Recta2d YZ2DProjection(void) const;
+    Line2d XY2DProjection(void) const;
+    Line2d XZ2DProjection(void) const;
+    Line2d YZ2DProjection(void) const;
 
     GEOM_FT getSlope(void) const;
     //! @brief Returns the parametric equations of the line as:
     //!   v[0]: point in the line.
     //!   v[1]: dir vector for the line.
-    RectaParametricas3d GetParametricas(void) const
-      { return RectaParametricas3d(Point(0),VDir()); }
+    Line3dParametricForm GetParametricas(void) const
+      { return Line3dParametricForm(Point(0),VDir()); }
     //! @brief Return a point at a distance lambda from its origin.
     Pos3d PtoParametricas(const GEOM_FT &lambda) const
       { return Point(0)+lambda*VDir(); }
     //! @brief Defines the line from its parametric equation.
-    void Parametricas(const RectaParametricas3d &param)
+    void Parametricas(const Line3dParametricForm &param)
       { TwoPoints(param.getPoint(0.0),param.getPoint(100.0)); }
     //! @brief Return true if the point is on the line.
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const
@@ -121,11 +121,11 @@ class Recta3d : public Linea3d
     //! @brief Set the points that define the line.
     void Put(const Pos3d &p1,const Pos3d &p2)
       { TwoPoints(p1,p2); }
-    bool Paralela(const Recta3d &r) const;
+    bool Paralela(const Line3d &r) const;
 
-    bool intersects(const Recta3d &r2) const;
+    bool intersects(const Line3d &r2) const;
     GeomObj3d::list_Pos3d getIntersection(unsigned short int, const double &) const;
-    GeomObj3d::list_Pos3d getIntersection(const Recta3d &r2, const double &tol= sqrt_mchne_eps_dbl) const;
+    GeomObj3d::list_Pos3d getIntersection(const Line3d &r2, const double &tol= sqrt_mchne_eps_dbl) const;
 
     //! @brief Return the length of the object.
    inline virtual GEOM_FT getLength(void) const
@@ -136,9 +136,9 @@ class Recta3d : public Linea3d
     Vector3d VDir(void) const;
     inline double getAngle(const Vector3d &v) const
       { return angle(VDir(),v); }
-    inline friend double angle(const Recta3d &r,const Vector3d &v)
+    inline friend double angle(const Line3d &r,const Vector3d &v)
       { return r.getAngle(v); }
-    inline friend double angle(const Recta3d &r1,const Recta3d &r2)
+    inline friend double angle(const Line3d &r1,const Line3d &r2)
       { return r1.getAngle(r2.VDir()); }
     //! @brief Moment of inertia with respect to the center of mass en local axis.
     inline virtual GEOM_FT Ix(void) const
@@ -152,27 +152,27 @@ class Recta3d : public Linea3d
     void Print(std::ostream &os) const;
   };
 
-const Recta3d XAxis3d(Pos3d(0,0,0),Pos3d(1,0,0));
-const Recta3d YAxis3d(Pos3d(0,0,0),Pos3d(0,1,0));
-const Recta3d ZAxis3d(Pos3d(0,0,0),Pos3d(0,0,1));
+const Line3d XAxis3d(Pos3d(0,0,0),Pos3d(1,0,0));
+const Line3d YAxis3d(Pos3d(0,0,0),Pos3d(0,1,0));
+const Line3d ZAxis3d(Pos3d(0,0,0),Pos3d(0,0,1));
 
 
-inline GEOM_FT dist2(const Pos3d &p,const Recta3d &r)
+inline GEOM_FT dist2(const Pos3d &p,const Line3d &r)
   { return r.dist2(p); }
-inline GEOM_FT dist2(const Recta3d &r,const Pos3d &p)
+inline GEOM_FT dist2(const Line3d &r,const Pos3d &p)
   { return dist2(p,r); }
-GEOM_FT dist(const Pos3d &p,const Recta3d &r);
-inline GEOM_FT dist(const Recta3d &r,const Pos3d &p)
+GEOM_FT dist(const Pos3d &p,const Line3d &r);
+inline GEOM_FT dist(const Line3d &r,const Pos3d &p)
   { return dist(p,r); }
 
-inline bool paralelas(const Recta3d &r1,const Recta3d &r2)
+inline bool paralelas(const Line3d &r1,const Line3d &r2)
   { return r1.Paralela(r2); }
-bool colineales(const Recta3d &r1,const Recta3d &r2);
-bool coplanarias(const Recta3d &r1,const Recta3d &r2);
+bool colineales(const Line3d &r1,const Line3d &r2);
+bool coplanarias(const Line3d &r1,const Line3d &r2);
 
-inline bool intersecan(const Recta3d &r1,const Recta3d &r2)
+inline bool intersecan(const Line3d &r1,const Line3d &r2)
   { return r1.intersects(r2); }
-inline GeomObj3d::list_Pos3d intersection(const Recta3d &r1,const Recta3d &r2)
+inline GeomObj3d::list_Pos3d intersection(const Line3d &r1,const Line3d &r2)
   { return r1.getIntersection(r2); }
 
 

@@ -22,7 +22,7 @@
 //VDesliz3d.cc
 
 #include "VDesliz3d.h"
-#include "xc_utils/src/geom/d1/Recta3d.h"
+#include "xc_utils/src/geom/d1/Line3d.h"
 
 
 
@@ -39,7 +39,7 @@ VDesliz3d::VDesliz3d(const Pos3d &o,const Pos3d &p)
 //! @brief Moment of a sliding vector with respect to an axis.
 //! Is the moment with respect to an axis point
 //! projected onto the axis.
-GEOM_FT VDesliz3d::getMoment(const Recta3d &e) const
+GEOM_FT VDesliz3d::getMoment(const Line3d &e) const
   { return dot(getMoment(e.Point()),e.VDir().Normalizado()); }
 
 //! @brief Moment of a sliding vector with respect to a point.

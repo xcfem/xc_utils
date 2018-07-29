@@ -21,10 +21,10 @@
 //----------------------------------------------------------------------------
 //python_interface.cxx
 
-GEOM_FT (Pos2d::*distRecta2d)(const Recta2d &) const= &Pos2d::dist;
+GEOM_FT (Pos2d::*distLine2d)(const Line2d &) const= &Pos2d::dist;
 GEOM_FT (Pos2d::*distRay2d)(const Ray2d &) const= &Pos2d::dist;
 GEOM_FT (Pos2d::*distSegment2d)(const Segment2d &) const= &Pos2d::dist;
-GEOM_FT (Pos2d::*dist2Recta2d)(const Recta2d &) const= &Pos2d::dist2;
+GEOM_FT (Pos2d::*dist2Line2d)(const Line2d &) const= &Pos2d::dist2;
 GEOM_FT (Pos2d::*dist2Ray2d)(const Ray2d &) const= &Pos2d::dist2;
 GEOM_FT (Pos2d::*dist2Segment2d)(const Segment2d &) const= &Pos2d::dist2;
 GEOM_FT (Pos2d::*distPos2d)(const Pos2d &) const= &Pos2d::dist;
@@ -39,11 +39,11 @@ class_<Pos2d, bases<ProtoGeom> >("Pos2d")
   .def("getDimension", &Pos2d::dimension,"return the dimension of the object.")
   .def("getPositionVector", &Pos2d::VectorPos,"return position vector of the point.")
   .def("distPos2d",distPos2d,"distance to a point.")
-  .def("distRecta2d",distRecta2d,"distance to a straight line.")
+  .def("distLine2d",distLine2d,"distance to a straight line.")
   .def("distRay2d",distRay2d,"distance to a ray.")
   .def("distSegment2d",distSegment2d,"distance to a segment.")
   .def("dist2Pos2d",dist2Pos2d,"squared distance to a point.")
-  .def("dist2Recta2d",dist2Recta2d,"squared distance to a straight line.")
+  .def("dist2Line2d",dist2Line2d,"squared distance to a straight line.")
   .def("dist2Ray2d",dist2Ray2d,"squared distance to a ray.")
   .def("dist2Segment2d",dist2Segment2d,"squared distance to a segment.")
   .def(self + Vector2d())
@@ -138,10 +138,10 @@ class_<Vector3d, bases<ProtoGeom> >("Vector3d")
   .def(self_ns::str(self_ns::self))
    ;
 
-GEOM_FT (Pos3d::*distRecta3d)(const Recta3d &) const= &Pos3d::dist;
+GEOM_FT (Pos3d::*distLine3d)(const Line3d &) const= &Pos3d::dist;
 GEOM_FT (Pos3d::*distRay3d)(const Ray3d &) const= &Pos3d::dist;
 GEOM_FT (Pos3d::*distSegment3d)(const Segment3d &) const= &Pos3d::dist;
-GEOM_FT (Pos3d::*dist2Recta3d)(const Recta3d &) const= &Pos3d::dist2;
+GEOM_FT (Pos3d::*dist2Line3d)(const Line3d &) const= &Pos3d::dist2;
 GEOM_FT (Pos3d::*dist2Ray3d)(const Ray3d &) const= &Pos3d::dist2;
 GEOM_FT (Pos3d::*dist2Segment3d)(const Segment3d &) const= &Pos3d::dist2;
 GEOM_FT (Pos3d::*getItemPos3d)(const size_t &) const= &Pos3d::at0;
@@ -161,14 +161,14 @@ class_<Pos3d, bases<ProtoGeom> >("Pos3d")
   .add_property("z", &Pos3d::z, &Pos3d::SetZ)
   .def("getPositionVector", &Pos3d::VectorPos)
   .def("distPos3d",distPos3d)
-  .def("distRecta3d",distRecta3d)
+  .def("distLine3d",distLine3d)
   .def("distRay3d",distRay3d)
   .def("distSegment3d",distSegment3d)
   .def("distPlane",distPlane)
   .def("distHalfSpace3d",distHalfSpace3d)
   //.def("distSolido3d",distSolido3d)
   .def("dist2Pos3d",dist2Pos3d)
-  .def("dist2Recta3d",dist2Recta3d)
+  .def("dist2Line3d",dist2Line3d)
   .def("dist2Ray3d",dist2Ray3d)
   .def("dist2Segment3d",dist2Segment3d)
   .def("dist2Plane",dist2Plane)
@@ -186,7 +186,7 @@ class_<v_pos3d>("v_pos3d")
  ;
 
 // VDesliz2d (VDesliz2d::*getMomentPos2d)(const Pos2d &o) const= &VDesliz2d::getMoment;
-// GEOM_FT (VDesliz2d::*getMomentRecta2d)(const Recta2d &e) const= &VDesliz2d::getMoment;
+// GEOM_FT (VDesliz2d::*getMomentLine2d)(const Line2d &e) const= &VDesliz2d::getMoment;
 
 class_<VDesliz2d, bases<Vector2d> >("VDesliz2d")
   .def(init<Pos2d,Vector2d>())
@@ -194,7 +194,7 @@ class_<VDesliz2d, bases<Vector2d> >("VDesliz2d")
   .def(init<VDesliz2d>())
   .def("getOrg", &VDesliz2d::getOrg,return_internal_reference<>())
   // .def("getMomentPos2d",getMomentPos2d)
-  // .def("getMomentRecta2d",getMomentRecta2d)
+  // .def("getMomentLine2d",getMomentLine2d)
   .def(self + self)          // __add__
   .def(self - self)           // __sub__
   .def(self * double())
@@ -212,9 +212,9 @@ class_<SVD2d, bases<VDesliz2d> >("SVD2d")
   .def("getResultant",getResultant2D,"Return the resultant of the SVS.")
   .def("getMoment",getMoment2D)
   .def("reduceTo",&SVD2d::ReduceA,"Sets the reference point to express the moments with respect to.")
-  .def("zeroMomentLine",&SVD2d::RectaMomNulo,"Return zero moment line (if it exists).")
+  .def("zeroMomentLine",&SVD2d::getZeroMomentLine,"Return zero moment line (if it exists).")
   // //.def("getMomentPos2d",getMomentPos2d)
-  // //.def("getMomentRecta2d",getMomentRecta2d)
+  // //.def("getMomentLine2d",getMomentLine2d)
   .def(VDesliz2d()+self) //Sobrecarga de operadores
   .def(self+VDesliz2d())
   .def(VDesliz2d()-self)
@@ -233,7 +233,7 @@ class_<SVD2d, bases<VDesliz2d> >("SVD2d")
   ;
 
 VDesliz3d (VDesliz3d::*getMomentPos3d)(const Pos3d &o) const= &VDesliz3d::getMoment;
-GEOM_FT (VDesliz3d::*getMomentRecta3d)(const Recta3d &e) const= &VDesliz3d::getMoment;
+GEOM_FT (VDesliz3d::*getMomentLine3d)(const Line3d &e) const= &VDesliz3d::getMoment;
 
 class_<VDesliz3d, bases<Vector3d> >("VDesliz3d")
   .def(init<Pos3d,Vector3d>())
@@ -241,7 +241,7 @@ class_<VDesliz3d, bases<Vector3d> >("VDesliz3d")
   .def(init<VDesliz3d>())
   .def("getOrg", &VDesliz3d::getOrg,return_internal_reference<>())
   .def("getMomentPos3d",getMomentPos3d)
-  .def("getMomentRecta3d",getMomentRecta3d)
+  .def("getMomentLine3d",getMomentLine3d)
   .def(self + self)          // __add__
   .def(self - self)           // __sub__
   .def(self * double())
@@ -258,9 +258,9 @@ class_<SVD3d, bases<VDesliz3d> >("SVD3d")
   .def(init<VDesliz3d>())
   .def("getResultant",getResultant3D,return_internal_reference<>(),"Return the resultant of the SVS.")
   .def("getMoment",getMoment3D,return_internal_reference<>())
-  .def("zeroMomentLine",&SVD3d::RectaMomNulo,"Return zero moment line (if it exists).")
+  .def("zeroMomentLine",&SVD3d::getZeroMomentLine,"Return zero moment line (if it exists).")
   //.def("getMomentPos3d",getMomentPos3d)
-  //.def("getMomentRecta3d",getMomentRecta3d)
+  //.def("getMomentLine3d",getMomentLine3d)
   .def("reduceTo",&SVD3d::ReduceA,"Sets the reference point to express the moments with respect to.")
   .def(VDesliz3d()+self) //Sobrecarga de operadores
   .def(self+VDesliz3d())

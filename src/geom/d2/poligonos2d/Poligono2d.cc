@@ -135,7 +135,7 @@ bool Poligono2d::Overlap(const Pos2d &p) const
 
 
 //! @brief Return true if the line and the polygon overlap.
-bool Poligono2d::Overlap(const Recta2d &r) const
+bool Poligono2d::Overlap(const Line2d &r) const
   { return SupPoligonal2d::Overlap(r); }
 
   
@@ -261,9 +261,12 @@ GeomObj::list_Pos2d Poligono2d::ListaVertices(void) const
 void Poligono2d::Transforma(const Trf2d &trf2d)
   { trf2d.Transforma(cgpol.vertices_begin(),cgpol.vertices_end()); }
 
-//! Return los polígonos que resultan de cortar por la recta
-//! r, el polígono p, que se pasa como parámetro.
-std::list<Poligono2d> corta(const Poligono2d &p,const Recta2d &r)
+//! @brief Return the polygons that result from clipping the polygon
+//! with the line.
+//! 
+//! @param p: polygon to clip.
+//! @param r: clipping line.
+std::list<Poligono2d> corta(const Poligono2d &p,const Line2d &r)
   {
     std::list<Poligono2d> retval;
     if(!intersecan(p.Bnd(),r)) return retval;
@@ -348,7 +351,7 @@ Poligono2d append_mid_points(const Poligono2d &plg)
   }
 
 //! @brief Return the intersection of the polygon with the line.
-Segment2d Poligono2d::Clip(const Recta2d &r) const
+Segment2d Poligono2d::Clip(const Line2d &r) const
   { return SupPoligonal2d::Clip(r); }
 
 //! @brief Return the intersection of the polygon and the ray.

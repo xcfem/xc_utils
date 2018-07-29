@@ -28,7 +28,7 @@
 #include "../pos_vec/Pos3d.h"
 
 Ray3d::Ray3d(const Pos3d &p1,const Pos3d &p2)
-  : Linea3d(), cgsr(p1.ToCGAL(),p2.ToCGAL())
+  : Linear3d(), cgsr(p1.ToCGAL(),p2.ToCGAL())
   {
     if(EsDegenerada())
       {
@@ -48,7 +48,7 @@ Vector3d Ray3d::VDir(void) const
 //! @brief Returns the squared distand from the point.
 GEOM_FT Ray3d::dist2(const Pos3d &p) const
   {
-    const Recta3d r= RectaSoporte();
+    const Line3d r= getSupportLine();
     const Pos3d proj= r.Projection(p);
     GEOM_FT retval= p.dist2(proj); //OK if projection inside half-line.
     if(!In(proj)) //Projection outside half-line.
@@ -66,14 +66,14 @@ bool Ray3d::Paralela(const Ray3d &r) const
   { return (GetDir()== r.GetDir()); }
 
 //! @brief Return true if son paralelas.
-bool Ray3d::Paralela(const Recta3d &r) const
+bool Ray3d::Paralela(const Line3d &r) const
   { return (GetDir()== r.GetDir()); }
 
 //! @brief Return the intersection point with the argument line
 //! if it doesn't exist return an empty list.
-GeomObj3d::list_Pos3d Ray3d::getIntersection(const Recta3d &r) const
+GeomObj3d::list_Pos3d Ray3d::getIntersection(const Line3d &r) const
   {
-    const Recta3d sop= RectaSoporte();
+    const Line3d sop= getSupportLine();
     GeomObj3d::list_Pos3d retval= sop.getIntersection(r);
     if(!retval.empty()) //Intersection exists.
       {
@@ -89,11 +89,11 @@ GeomObj3d::list_Pos3d Ray3d::getIntersection(const Recta3d &r) const
 GeomObj3d::list_Pos3d Ray3d::getIntersection(unsigned short int i, const double &d) const
   {
     GeomObj3d::list_Pos3d lp;
-    lp= RectaSoporte().getIntersection(i,d);
+    lp= getSupportLine().getIntersection(i,d);
     if(!lp.empty())
       {
         const Vector3d i_= VDir();
-        const double l= RectaSoporte().getLambda(i,d,i_);
+        const double l= getSupportLine().getLambda(i,d,i_);
         if(l<0.0)
           lp.erase(lp.begin(),lp.end());
       }
@@ -104,7 +104,7 @@ GeomObj3d::list_Pos3d Ray3d::getIntersection(unsigned short int i, const double 
 //! return an empty list.
 GeomObj3d::list_Pos3d Ray3d::getIntersection(const Ray3d &sr) const
   {
-    const Recta3d sop1= RectaSoporte();
+    const Line3d sop1= getSupportLine();
     GeomObj3d::list_Pos3d retval= sr.getIntersection(sop1);
     if(!retval.empty()) //Intersection exists.
       {

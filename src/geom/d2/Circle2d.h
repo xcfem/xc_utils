@@ -96,7 +96,7 @@ class Circle2d : public Superficie2d
     void Plot(Plotter &) const;
   };
 
-Circle2d Circle2dRTT(const GEOM_FT &,const Recta2d &,const Recta2d &,const bool &left,const bool &far);
+Circle2d Circle2dRTT(const GEOM_FT &,const Line2d &,const Line2d &,const bool &left,const bool &far);
 
 #endif
 

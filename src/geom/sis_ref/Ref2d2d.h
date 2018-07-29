@@ -31,7 +31,7 @@
 #include "../pos_vec/Vector2d.h"
 #include "../pos_vec/Dir2d.h"
 
-class Recta2d;
+class Line2d;
 
 //! @ingroup SisRef
 //! 
@@ -50,12 +50,10 @@ class Ref2d2d : public Ref<SisCooRect2d2d>
     Ref2d2d(const Pos2d &o,const Vector2d &vX);
     Ref2d2d(const Pos2d &o,const Dir2d &dirX);
     Ref2d2d(const Pos2d &o,const Pos2d &p);
-    Vector2d GetI(void) const;
-    //Return el vector unitario I en el sistema global.
-    Vector2d GetJ(void) const;
-    //Return el vector unitario J en el sistema global.
-    Recta2d getXAxis(void) const; //Return la recta que define el x axis.
-    Recta2d getYAxis(void) const; //Return la recta que define el y axis.
+    Vector2d GetI(void) const; //I unary vector.
+    Vector2d GetJ(void) const; //J unary vector.
+    Line2d getXAxis(void) const; //Return the x axis.
+    Line2d getYAxis(void) const; //Return the y axis.
 
     virtual ~Ref2d2d(void)
       {}

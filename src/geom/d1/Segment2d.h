@@ -24,8 +24,8 @@
 #ifndef SEGMENT2D_H
 #define SEGMENT2D_H
 
-#include "Linea2d.h"
-#include "Recta2d.h"
+#include "Linear2d.h"
+#include "Line2d.h"
 #include "Ray2d.h"
 #include "../pos_vec/Pos2d.h"
 
@@ -35,19 +35,19 @@ class VectorPos2d;
 //! @ingroup GEOM
 //
 //! @brief Segment in a two-dimensional space.
-class Segment2d : public Linea2d
+class Segment2d : public Linear2d
   {
     CGSegment_2 cgseg;
   public:
-    Segment2d(void): Linea2d(),cgseg(CGPoint_2(0,0),CGPoint_2(1,0)) {}
+    Segment2d(void): Linear2d(),cgseg(CGPoint_2(0,0),CGPoint_2(1,0)) {}
     Segment2d(const CGSegment_2 &r)
-      : Linea2d(), cgseg(r) {}
+      : Linear2d(), cgseg(r) {}
     Segment2d(const Pos2d &p1,const Pos2d &p2);
     Segment2d(const Segment2d &r)
-      : Linea2d(),cgseg(r.cgseg) {}
+      : Linear2d(),cgseg(r.cgseg) {}
     Segment2d &operator=(const Segment2d &r)
       {
-	Linea2d::operator=(r);
+	Linear2d::operator=(r);
         cgseg= r.cgseg;
         return *this;
       }
@@ -59,14 +59,14 @@ class Segment2d : public Linea2d
       { return std::max(Origen()(i),Destino()(i)); }
     virtual GEOM_FT GetMin(unsigned short int i) const
       { return std::min(Origen()(i),Destino()(i)); }
-    Recta2d RectaSoporte(void) const
-      { return Recta2d(cgseg.supporting_line()); }
+    Line2d getSupportLine(void) const
+      { return Line2d(cgseg.supporting_line()); }
     Pos2d Origen(void) const
       { return Pos2d(cgseg.source()); }
     Pos2d Destino(void) const
       { return Pos2d(cgseg.target()); }
     inline GEOM_FT getSlope(void) const
-      { return RectaSoporte().getSlope(); }
+      { return getSupportLine().getSlope(); }
     const Pos2d Point(const int &i) const
       { return Pos2d(cgseg.point(i)); }
     Pos2d PtoParametricas(const GEOM_FT &) const;
@@ -85,32 +85,32 @@ class Segment2d : public Linea2d
 
     //! @brief Returns the points ordered by the value of the 
     //! parameter of its projection onto the line from lowest
-    //! to highest. Origin is at Recta2d::Point(0).
+    //! to highest. Origin is at Line2d::Point(0).
     GeomObj::list_Pos2d Ordena(const GeomObj::list_Pos2d &ptos) const
-      { return RectaSoporte().Ordena(ptos); }
+      { return getSupportLine().Ordena(ptos); }
 
     Segment2d Offset(const Vector2d &v) const;
     Segment2d Offset(const GEOM_FT &d) const;
 
     inline bool intersects(const Segment2d &r2) const
       { return do_intersect(cgseg,r2.cgseg); }
-    bool intersects(const Recta2d &r) const;
+    bool intersects(const Line2d &r) const;
     bool intersects(const Ray2d &sr) const;
     GeomObj2d::list_Pos2d getIntersection(unsigned short int, const double &) const;
-    GeomObj2d::list_Pos2d getIntersection(const Recta2d &r) const;
+    GeomObj2d::list_Pos2d getIntersection(const Line2d &r) const;
     GeomObj2d::list_Pos2d getIntersection(const Ray2d &sr) const;
     GeomObj2d::list_Pos2d getIntersection(const Segment2d &sg2) const;
 
-    Recta2d Perpendicular(const Pos2d &p) const;
-    Recta2d Paralela(const Pos2d &v) const;
-    Recta2d getPerpendicularBisector(void) const;
+    Line2d Perpendicular(const Pos2d &p) const;
+    Line2d Paralela(const Pos2d &v) const;
+    Line2d getPerpendicularBisector(void) const;
 
-    bool Paralelo(const Recta2d &r) const
-      { return paralelas(RectaSoporte(),r); }
+    bool Paralelo(const Line2d &r) const
+      { return paralelas(getSupportLine(),r); }
     bool Paralelo(const Ray2d &sr) const
-      { return paralelas(RectaSoporte(),sr); }
+      { return paralelas(getSupportLine(),sr); }
     bool Paralelo(const Segment2d &r) const
-      { return paralelas(RectaSoporte(),r.RectaSoporte()); }
+      { return paralelas(getSupportLine(),r.getSupportLine()); }
 
     virtual GEOM_FT getLength(void) const;
     virtual Pos2d getCenterOfMass(void) const;
@@ -125,7 +125,7 @@ class Segment2d : public Linea2d
     GEOM_FT XAxisAngle(void) const;
     GEOM_FT YAxisAngle(void) const;
     inline GEOM_FT Azimuth(void) const
-      { return RectaSoporte().Azimuth(); }
+      { return getSupportLine().Azimuth(); }
 
     //! @brief Moment of inertia with respect to the center of mass en local axis.
     inline virtual GEOM_FT Ix(void) const
@@ -160,9 +160,9 @@ inline GEOM_FT dist(const Segment2d &r,const Pos2d &p)
 GEOM_FT angle(const Segment2d &,const Vector2d &);
 GEOM_FT angle(const Vector2d &,const Segment2d &);
 
-inline bool paralelas(const Segment2d &sg,const Recta2d &r)
+inline bool paralelas(const Segment2d &sg,const Line2d &r)
   { return sg.Paralelo(r); }
-inline bool paralelas(const Recta2d &r, const Segment2d &sg)
+inline bool paralelas(const Line2d &r, const Segment2d &sg)
   { return paralelas(sg,r); }
 inline bool paralelas(const Segment2d &sg,const Ray2d &sr)
   { return sg.Paralelo(sr); }
@@ -171,9 +171,9 @@ inline bool paralelas(const Ray2d &sr, const Segment2d &sg)
 inline bool paralelas(const Segment2d &r1,const Segment2d &r2)
   { return r1.Paralelo(r2); }
 
-inline bool intersecan(const Segment2d &sg,const Recta2d &r)
+inline bool intersecan(const Segment2d &sg,const Line2d &r)
   { return sg.intersects(r); }
-inline bool intersecan(const Recta2d &r,const Segment2d &sg)
+inline bool intersecan(const Line2d &r,const Segment2d &sg)
   { return sg.intersects(r); }
 inline bool intersecan(const Segment2d &sg,const Ray2d &sr)
   { return sg.intersects(sr); }
@@ -181,9 +181,9 @@ inline bool intersecan(const Ray2d &sr,const Segment2d &sg)
   { return sg.intersects(sr); }
 inline bool intersecan(const Segment2d &r1,const Segment2d &r2)
   { return r1.intersects(r2); }
-inline GeomObj2d::list_Pos2d intersection(const Segment2d &sg,const Recta2d &r)
+inline GeomObj2d::list_Pos2d intersection(const Segment2d &sg,const Line2d &r)
   { return sg.getIntersection(r); }
-inline GeomObj2d::list_Pos2d intersection(const Recta2d &r,const Segment2d &sg)
+inline GeomObj2d::list_Pos2d intersection(const Line2d &r,const Segment2d &sg)
   { return sg.getIntersection(r); }
 inline GeomObj2d::list_Pos2d intersection(const Segment2d &sg,const Ray2d &sr)
   { return sg.getIntersection(sr); }
@@ -192,22 +192,22 @@ inline GeomObj2d::list_Pos2d intersection(const Ray2d &sr,const Segment2d &sg)
 inline GeomObj2d::list_Pos2d intersection(const Segment2d &sg1,const Segment2d &sg2)
   { return sg1.getIntersection(sg2); }
 
-inline bool colineales(const Segment2d &sg,const Recta2d &r)
-  { return colineales(sg.RectaSoporte(),r); }
-inline bool colineales(const Recta2d &r,const Segment2d &sg)
+inline bool colineales(const Segment2d &sg,const Line2d &r)
+  { return colineales(sg.getSupportLine(),r); }
+inline bool colineales(const Line2d &r,const Segment2d &sg)
   { return colineales(sg,r); }
 inline bool colineales(const Segment2d &sg,const Ray2d &sr)
-  { return colineales(sg.RectaSoporte(),sr); }
+  { return colineales(sg.getSupportLine(),sr); }
 inline bool colineales(const Ray2d &sr,const Segment2d &sg)
   { return colineales(sg,sr); }
 inline bool colineales(const Segment2d &sg1,const Segment2d &sg2)
-  { return colineales(sg1,sg2.RectaSoporte()); }
+  { return colineales(sg1,sg2.getSupportLine()); }
 
-Pos2d intersection_point(const Segment2d &, const Recta2d &);
-Pos2d intersection_point(const Recta2d &, const Segment2d &);
+Pos2d intersection_point(const Segment2d &, const Line2d &);
+Pos2d intersection_point(const Line2d &, const Segment2d &);
 Pos2d intersection_point(const Segment2d &, const Segment2d &);
 
-inline Recta2d perpendicular_bisector(const Segment2d &sg)
+inline Line2d perpendicular_bisector(const Segment2d &sg)
   { return sg.getPerpendicularBisector(); }
 
 std::list<Segment2d> sin_degenerados(const std::list<Segment2d> &);
