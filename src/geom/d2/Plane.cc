@@ -32,9 +32,6 @@
 #include "xc_utils/src/geom/d2/Triangle3d.h"
 #include "xc_utils/src/geom/d3/GmGrupo3d.h"
 #include "xc_basic/src/util/mchne_eps.h"
-
-
-
 #include "CGAL/linear_least_squares_fitting_3.h"
 
 Plane::Plane(void)
@@ -118,6 +115,7 @@ Plane::Plane(const GeneralEquationOfPlane &eg)
 Plane::Plane(const Plane &other)
   : Superficie3d(), cgp(other.cgp) {}
 
+//! @brief Assignment operator.
 Plane &Plane::operator=(const Plane &other)
   {
     cgp=(other.cgp);
@@ -456,7 +454,7 @@ GEOM_FT Plane::getSlopeAngleYZ(void) const
   { return angle(*this,YZPlane3d); }
 
 //! @brief Compute the plane that best suits the point cloud.
-GEOM_FT Plane::AjusteMinimosCuadrados(const GeomObj3d::list_Pos3d &lp)
+GEOM_FT Plane::linearLeastSquaresFitting(const GeomObj3d::list_Pos3d &lp)
   {
     std::list<CGPoint_3> points;
     for(GeomObj3d::list_Pos3d::const_iterator i=lp.begin(); i!=lp.end();i++)

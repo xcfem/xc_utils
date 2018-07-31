@@ -140,13 +140,19 @@ class Line3d : public Linear3d
       { return r.getAngle(v); }
     inline friend double angle(const Line3d &r1,const Line3d &r2)
       { return r1.getAngle(r2.VDir()); }
-    //! @brief Moment of inertia with respect to the center of mass en local axis.
+
+    GEOM_FT linearLeastSquaresFitting(const GeomObj3d::list_Pos3d &lp);
+
+    //! @brief Moment of inertia with respect to the local axis x
+    //! passing through the center of mass.
     inline virtual GEOM_FT Ix(void) const
       { return 0.0; }
-    //! @brief Moment of inertia with respect to the center of mass en local axis.
+    //! @brief Moment of inertia with respect to the local axis y
+    //! passing through the center of mass.
     inline virtual GEOM_FT Iy(void) const
       { return NAN; }
-    //! @brief Moment of inertia with respect to the center of mass en local axis.
+    //! @brief Moment of inertia with respect to the local axis z
+    //! passing through the center of mass.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
     void Print(std::ostream &os) const;

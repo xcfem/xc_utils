@@ -25,8 +25,7 @@
 #include "Line2d.h"
 #include "../pos_vec/Dir3d.h"
 #include "../d2/Plane.h"
-
-
+#include "CGAL/linear_least_squares_fitting_3.h"
 
 
 const Pos3d Line3d::defaultOrg= Pos3d(0,0,0);
@@ -165,6 +164,16 @@ Line2d Line3d::YZ2DProjection(void) const
 //! @brief Return the angle with respecto to XY plane.
 GEOM_FT Line3d::getSlope(void) const
   { return angle(*this,XYPlane3d); }
+
+//! @brief Compute the line that best suits the point cloud.
+GEOM_FT Line3d::linearLeastSquaresFitting(const GeomObj3d::list_Pos3d &lp)
+  {
+    std::list<CGPoint_3> points;
+    for(GeomObj3d::list_Pos3d::const_iterator i=lp.begin(); i!=lp.end();i++)
+      points.push_back((*i).ToCGAL()); 
+    GEOM_FT quality= linear_least_squares_fitting_3(points.begin(),points.end(),cgr,CGAL::Dimension_tag<0>());
+    return quality;
+  }
 
 //! @brief Return true if the lines are parallel.
 bool Line3d::Paralela(const Line3d &r) const

@@ -87,6 +87,7 @@ class_<Line3d, bases<Linear3d> >("Line3d")
   .def("getXZ3DProjection",&Line3d::XZ3DProjection,"Return the projection of the line onto the XZ plane as a 3D line.")
   .def("getYZ3DProjection",&Line3d::YZ3DProjection,"Return the projection of the line onto the YZ plane as a 3D line.")
   .def("distPto", &Line3d::dist,"return the distance to the point.")
+  .def("linearLeastSquaresFitting", &Plane::linearLeastSquaresFitting,"compute the line that best suits the point cloud.")
  ;
 
 GeomObj::list_Pos2d (Polyline2d::*intersectionWithLine)(const Line2d &) const= &Polyline2d::getIntersection;

@@ -150,7 +150,7 @@ class Plane : public Superficie3d
     GEOM_FT getSlopeAngleXZ(void) const;
     GEOM_FT getSlopeAngleYZ(void) const;
 
-    GEOM_FT AjusteMinimosCuadrados(const GeomObj3d::list_Pos3d &lp);
+    GEOM_FT linearLeastSquaresFitting(const GeomObj3d::list_Pos3d &lp);
 
     friend Plane FromCGAL(const CGPlane_3 &p);
     friend bool operator==(const Plane &p1,const Plane &p2);

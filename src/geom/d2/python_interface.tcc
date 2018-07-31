@@ -105,12 +105,15 @@ class_<Plane, bases<Superficie3d> >("Plane3d")
   .def("getXZTrace",&Plane::XZTrace,"return the trace on the XZ plane.")
   .def("getYZTrace",&Plane::YZTrace,"return the trace on the YZ plane.")
   .def("getIntersPlane",IntersPlane)
-  .def("getIntersLine3d",IntersLine3d)
-  .def("getIntersRay3d",IntersRay3d)
-  .def("getIntersSegment3d",IntersSegment3d)
-  .def("getNormal", &Plane::Normal)
+  .def("getIntersLine3d",IntersLine3d,"return the intersection with the line argument.")
+  .def("getIntersRay3d",IntersRay3d,"return the intersection with the ray argument.")
+  .def("getIntersSegment3d",IntersSegment3d,"return the intersection with the segment argument.")
+  .def("getNormal", &Plane::Normal,"return the plane normal.")
   .def("getBase1", &Plane::Base1)
-  .def("getBase2", &Plane::Base2);
+  .def("getBase2", &Plane::Base2)
+  .def("getBase2", &Plane::Base2)
+  .def("linearLeastSquaresFitting", &Plane::linearLeastSquaresFitting,"compute the plane that best suits the point cloud.")
+  ;
 
 class_<Poligono3d, bases<D2to3d> >("Polygon3d");
 
