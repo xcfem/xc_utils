@@ -24,8 +24,8 @@
 #include "Pos2dArray.h"
 #include "xc_basic/src/util/matem.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/Triangle2d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/Cuadrilatero2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/Triangle2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/Cuadrilatero2d.h"
 #include "xc_utils/src/geom/FT_matrix.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
 

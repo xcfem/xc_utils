@@ -19,42 +19,42 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Poligono3d.h
+//Polygon3d.h
 
-#ifndef POLIGONO3D_H
-#define POLIGONO3D_H
+#ifndef POLYGON3D_H
+#define POLYGON3D_H
 
 #include "xc_utils/src/geom/d2/D2to3d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/Polygon2d.h"
 #include "../cgal_types.h"
 
 
 //! @ingroup GEOM
 //
 //! @brief Polígono en tres dimensiones.
-class Poligono3d: public D2to3d
+class Polygon3d: public D2to3d
   {
-    Poligono2d plg2d;
+    Polygon2d plg2d;
 
   protected:
-    Poligono3d(const Ref2d3d &rf,const Poligono2d &p)
+    Polygon3d(const Ref2d3d &rf,const Polygon2d &p)
       : D2to3d(rf), plg2d(p) {}
 
   public:
-    Poligono3d(void): D2to3d(),plg2d() {}
-    Poligono3d(const Poligono3d &other)
+    Polygon3d(void): D2to3d(),plg2d() {}
+    Polygon3d(const Polygon3d &other)
       :  D2to3d(other),plg2d(other.plg2d) {}
     template <typename InputIterator>
-    Poligono3d(InputIterator first,InputIterator last);
-    Poligono3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
-    Poligono3d &operator =(const Poligono3d &other) 
+    Polygon3d(InputIterator first,InputIterator last);
+    Polygon3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
+    Polygon3d &operator =(const Polygon3d &other) 
       {
 	D2to3d::operator=(other);
         plg2d=other.plg2d;
         return *this;
       }
     virtual GeomObj *clon(void) const
-      { return new Poligono3d(*this); }
+      { return new Polygon3d(*this); }
 
     inline void push_back(const Pos3d &p)
       { plg2d.push_back(to_2d(p)); }
@@ -69,7 +69,7 @@ class Poligono3d: public D2to3d
     //! @brief Return the area of the object.
     inline GEOM_FT getArea(void) const
       { return plg2d.getArea(); }
-    std::vector<Poligono3d> getPoligonosTributarios(void) const;
+    std::vector<Polygon3d> getTributaryPolygons(void) const;
     inline std::vector<double> getTributaryAreas(void) const
       { return plg2d.getTributaryAreas(); }
     //! @brief Return the position of the i-th vertex.
@@ -106,13 +106,13 @@ class Poligono3d: public D2to3d
     GEOM_FT distSigno2(const Pos3d &p,const bool &sentido_horario= false) const;
     GEOM_FT dist2(const Pos3d &p) const;
 
-    std::list<Poligono3d> Corta(const Plane &p) const;
+    std::list<Polygon3d> Corta(const Plane &p) const;
 
     void Print(std::ostream &os) const;
   };
 
 template <typename InputIterator>
-Poligono3d::Poligono3d(InputIterator first,InputIterator last)
+Polygon3d::Polygon3d(InputIterator first,InputIterator last)
   : D2to3d(),plg2d()
   {
     InputIterator i= first;
@@ -127,7 +127,7 @@ Poligono3d::Poligono3d(InputIterator first,InputIterator last)
       push_back(*i);
   }
 
-inline std::list<Poligono3d> corta(const Poligono3d &pol,const Plane &pl)
+inline std::list<Polygon3d> corta(const Polygon3d &pol,const Plane &pl)
   { return pol.Corta(pl); }
 
 #endif

@@ -61,14 +61,14 @@ class_<Circle2d, bases<Superficie2d> >("Circle2d")
   .def("getRadius",&Circle2d::getRadius,"Return the object radius.")
   .def("getDiametro",&Circle2d::Diametro)
   .def("getPerimetro",&Circle2d::Perimetro)
-  .def("getInscribedPolygon",&Circle2d::getPoligonoInscrito,"getInscribedPolygon(n,theta_inic) return an inscribed regular polygon with n sides starting in the angle argument")
+  .def("getInscribedPolygon",&Circle2d::getInscribedPolygon,"getInscribedPolygon(n,theta_inic) return an inscribed regular polygon with n sides starting in the angle argument")
   .def("getArea", &Circle2d::getArea, "Return the object area.")
   .def("getIx", &Circle2d::Ix)
   .def("getIy", &Circle2d::Iy)
   .def("getPxy", &Circle2d::Pxy)
   .def("getCenterOfMass", &Circle2d::getCenterOfMass);
 
-#include "poligonos2d/python_interface.tcc"
+#include "2d_polygons/python_interface.tcc"
 
 
 class_<Superficie3d, bases<GeomObj3d>, boost::noncopyable  >("Surface3d", no_init);
@@ -115,9 +115,9 @@ class_<Plane, bases<Superficie3d> >("Plane3d")
   .def("linearLeastSquaresFitting", &Plane::linearLeastSquaresFitting,"compute the plane that best suits the point cloud.")
   ;
 
-class_<Poligono3d, bases<D2to3d> >("Polygon3d");
+class_<Polygon3d, bases<D2to3d> >("Polygon3d");
 
-class_<Triangle3d, bases<Poligono3d>  >("Triangle3d")
+class_<Triangle3d, bases<Polygon3d>  >("Triangle3d")
   .def(init<Pos3d,Pos3d,Pos3d>())
   .def(init<Triangle3d>())
   ;

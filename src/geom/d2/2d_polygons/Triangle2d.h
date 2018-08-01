@@ -24,34 +24,34 @@
 #ifndef TRIANGLE2D_H
 #define TRIANGLE2D_H
 
-#include "SupPoligonal2d.h"
+#include "PolygonalSurface2d.h"
 #include "xc_utils/src/geom/cgal_types.h"
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
 #include "xc_basic/src/util/matem.h"
 
 class Segment2d;
-class Poligono2d;
+class Polygon2d;
 
 
 //! @ingroup GEOM
 //
 //! @brief Triangle in a two-dimensional space.
-class Triangle2d : public SupPoligonal2d
+class Triangle2d : public PolygonalSurface2d
   {
     CGTriangle_2 cgtriang;
   public:
-    Triangle2d(void) : SupPoligonal2d(), cgtriang() {}
+    Triangle2d(void) : PolygonalSurface2d(), cgtriang() {}
     Triangle2d(const Pos2d p1,const Pos2d &p2,const Pos2d &p3)
-     : SupPoligonal2d(), cgtriang(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL())
+     : PolygonalSurface2d(), cgtriang(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL())
       {}
-    Triangle2d(const Triangle2d &other) : SupPoligonal2d(other), cgtriang(other.cgtriang) {}
+    Triangle2d(const Triangle2d &other) : PolygonalSurface2d(other), cgtriang(other.cgtriang) {}
     Triangle2d &operator=(const Triangle2d &p)
       {
-	SupPoligonal2d::operator=(p);
+	PolygonalSurface2d::operator=(p);
         cgtriang= p.cgtriang;
         return *this;
       }
-    virtual SupPoligonal2d *clon(void) const
+    virtual PolygonalSurface2d *clon(void) const
       { return new Triangle2d(*this); }
     inline virtual unsigned int GetNumVertices(void) const
       { return 3; }
@@ -77,7 +77,7 @@ class Triangle2d : public SupPoligonal2d
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const
       { return (cgtriang.has_on_positive_side(p.ToCGAL()) || cgtriang.has_on_boundary(p.ToCGAL())); }
 
-    Poligono2d GetPoligono(void) const;
+    Polygon2d getPolygon(void) const;
 
     void Transforma(const Trf2d &trf2d);
 

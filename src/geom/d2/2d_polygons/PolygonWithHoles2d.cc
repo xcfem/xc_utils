@@ -19,58 +19,58 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PoligonoConAgujeros2d.cc
+//PolygonWithHoles2d.cc
 
-#include "PoligonoConAgujeros2d.h"
-#include "Poligono2d.h"
+#include "PolygonWithHoles2d.h"
+#include "Polygon2d.h"
 #include "xc_utils/src/geom/pos_vec/Vector2d.h"
 
 
 
 //! @brief Default constructor.
-PoligonoConAgujeros2d::PoligonoConAgujeros2d(void)
+PolygonWithHoles2d::PolygonWithHoles2d(void)
   : Superficie2d(){}
 
 //! @brief Default constructor.
-PoligonoConAgujeros2d::PoligonoConAgujeros2d(const Poligono2d &p)
+PolygonWithHoles2d::PolygonWithHoles2d(const Polygon2d &p)
   : Superficie2d(), cgpol(p.ToCGAL()) {}
 
 //! @brief Constructor virtual.
-GeomObj *PoligonoConAgujeros2d::clon(void) const
-  { return new PoligonoConAgujeros2d(*this); }
+GeomObj *PolygonWithHoles2d::clon(void) const
+  { return new PolygonWithHoles2d(*this); }
 
-void PoligonoConAgujeros2d::contour(const Poligono2d &plg)
-  { cgpol= CGPoligonoConAgujeros_2(plg.ToCGAL()); }
+void PolygonWithHoles2d::contour(const Polygon2d &plg)
+  { cgpol= CGPolygonWithHoles_2(plg.ToCGAL()); }
 
 //! @brief Return object length.
-GEOM_FT PoligonoConAgujeros2d::getLength(void) const
+GEOM_FT PolygonWithHoles2d::getLength(void) const
   {
     GEOM_FT temp = 0;
     for(Hole_const_iterator i= cgpol.holes_begin();i!=cgpol.holes_end();i++)
       {
-        const Poligono2d p(*i);
+        const Polygon2d p(*i);
         temp += p.getLength();
       }
     if(!cgpol.is_unbounded())
       {
-        const Poligono2d p(cgpol.outer_boundary());
+        const Polygon2d p(cgpol.outer_boundary());
         temp += p.getLength();
       }      
     return temp;
   }
 
 //! @brief Return the object area.
-GEOM_FT PoligonoConAgujeros2d::getArea(void) const
+GEOM_FT PolygonWithHoles2d::getArea(void) const
   {
     GEOM_FT temp = 0;
     for(Hole_const_iterator i= cgpol.holes_begin();i!=cgpol.holes_end();i++)
       {
-        const Poligono2d p(*i);
+        const Polygon2d p(*i);
         temp-= p.getArea();
       }
     if(!cgpol.is_unbounded())
       {
-        const Poligono2d p(cgpol.outer_boundary());
+        const Polygon2d p(cgpol.outer_boundary());
         temp+= p.getArea();
       }
     else
@@ -80,12 +80,12 @@ GEOM_FT PoligonoConAgujeros2d::getArea(void) const
   }
 
 //! @brief Return el valor maximo de la coordenada i.
-GEOM_FT PoligonoConAgujeros2d::GetMax(unsigned short int i) const
+GEOM_FT PolygonWithHoles2d::GetMax(unsigned short int i) const
   { 
     GEOM_FT temp = 0;
     if(!cgpol.is_unbounded())
       {
-        const Poligono2d p(cgpol.outer_boundary());
+        const Polygon2d p(cgpol.outer_boundary());
         temp= p.GetMax(i);
       }
     else
@@ -94,19 +94,19 @@ GEOM_FT PoligonoConAgujeros2d::GetMax(unsigned short int i) const
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
-        const Poligono2d p(*j);
+        const Polygon2d p(*j);
         temp= std::max(temp,p.GetMax(i));
       }
     return temp;
   }
 
 //! @brief Return el valor minimo de la coordenada i.
-GEOM_FT PoligonoConAgujeros2d::GetMin(unsigned short int i) const
+GEOM_FT PolygonWithHoles2d::GetMin(unsigned short int i) const
   {
     GEOM_FT temp = 0;
     if(!cgpol.is_unbounded())
       {
-        const Poligono2d p(cgpol.outer_boundary());
+        const Polygon2d p(cgpol.outer_boundary());
         temp= p.GetMin(i);
       }
     else
@@ -115,19 +115,19 @@ GEOM_FT PoligonoConAgujeros2d::GetMin(unsigned short int i) const
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
-        const Poligono2d p(*j);
+        const Polygon2d p(*j);
         temp= std::min(temp,p.GetMin(i));
       }
     return temp;
   }
 
 //! @brief Return true if the point is inside the object.
-bool PoligonoConAgujeros2d::In(const Pos2d &p, const double &tol) const
+bool PolygonWithHoles2d::In(const Pos2d &p, const double &tol) const
   {
     bool retval= false;
     if(!cgpol.is_unbounded())
       {
-        const Poligono2d pol(cgpol.outer_boundary());
+        const Polygon2d pol(cgpol.outer_boundary());
         retval= pol.In(p,tol);
       }
     else
@@ -137,7 +137,7 @@ bool PoligonoConAgujeros2d::In(const Pos2d &p, const double &tol) const
     if(retval)
       for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
         {
-          const Poligono2d pol(*j);
+          const Polygon2d pol(*j);
           if(pol.In(p,tol))
             {
               retval= false;
@@ -149,13 +149,13 @@ bool PoligonoConAgujeros2d::In(const Pos2d &p, const double &tol) const
   }
 
 //! @brief Return the center of mass.
-Pos2d PoligonoConAgujeros2d::getCenterOfMass(void) const
+Pos2d PolygonWithHoles2d::getCenterOfMass(void) const
   {
     GEOM_FT areaTotal= getArea();
     Vector2d vPos;
     if(!cgpol.is_unbounded())
       {
-        const Poligono2d p(cgpol.outer_boundary());
+        const Polygon2d p(cgpol.outer_boundary());
         vPos= p.getCenterOfMass().VectorPos()*p.getArea();
       }
     else
@@ -164,7 +164,7 @@ Pos2d PoligonoConAgujeros2d::getCenterOfMass(void) const
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
-        const Poligono2d p(*j);
+        const Polygon2d p(*j);
         vPos= vPos-p.getCenterOfMass().VectorPos()*p.getArea();
       }
     vPos= vPos*(1.0/areaTotal);
@@ -176,13 +176,13 @@ Pos2d PoligonoConAgujeros2d::getCenterOfMass(void) const
 //! @brief Compute moment of inertia with respect to an axis parallel to the
 //! x axis that passes through thecenter of mass of the surface.
 //! Ix = Integral y^2 dA
-GEOM_FT PoligonoConAgujeros2d::Ix(void) const
+GEOM_FT PolygonWithHoles2d::Ix(void) const
   { 
     Pos2d center_of_mass=getCenterOfMass();
     GEOM_FT retval= 0.0;
     if(!cgpol.is_unbounded())
       {
-        const Poligono2d p(cgpol.outer_boundary());
+        const Polygon2d p(cgpol.outer_boundary());
         retval+= p.Ix()+p.getArea()*sqr(p.getCenterOfMass().y()-center_of_mass.y());
       }
     else
@@ -191,7 +191,7 @@ GEOM_FT PoligonoConAgujeros2d::Ix(void) const
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
-        const Poligono2d p(*j);
+        const Polygon2d p(*j);
         retval-= p.Ix()+p.getArea()*sqr(p.getCenterOfMass().y()-center_of_mass.y());
       }
     return retval;
@@ -200,13 +200,13 @@ GEOM_FT PoligonoConAgujeros2d::Ix(void) const
 //! @brief Calcula el moment of inertia with respect to an axis parallel to the
 //! y axis que pasa por el polygon centroid.
 //! Iy = Integral x^2 dA
-GEOM_FT PoligonoConAgujeros2d::Iy(void) const
+GEOM_FT PolygonWithHoles2d::Iy(void) const
   { 
     Pos2d center_of_mass=getCenterOfMass();
     GEOM_FT retval= 0.0;
     if(!cgpol.is_unbounded())
       {
-        const Poligono2d p(cgpol.outer_boundary());
+        const Polygon2d p(cgpol.outer_boundary());
         retval+= p.Iy()+p.getArea()*sqr(p.getCenterOfMass().x()-center_of_mass.x());
       }
     else
@@ -215,7 +215,7 @@ GEOM_FT PoligonoConAgujeros2d::Iy(void) const
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
-        const Poligono2d p(*j);
+        const Polygon2d p(*j);
         retval-= p.Iy()+p.getArea()*sqr(p.getCenterOfMass().x()-center_of_mass.x());
       }
     return retval;
@@ -224,13 +224,13 @@ GEOM_FT PoligonoConAgujeros2d::Iy(void) const
 //! @brief Calcula el product of inertia with respect to the axis parallel
 //! to the x and y that passes through the centroid of the polygon.
 //! Pxy = Integral x*y dA
-GEOM_FT PoligonoConAgujeros2d::Pxy(void) const
+GEOM_FT PolygonWithHoles2d::Pxy(void) const
   {
     Pos2d center_of_mass=getCenterOfMass();
     GEOM_FT retval= 0.0;
     if(!cgpol.is_unbounded())
       {
-        const Poligono2d p(cgpol.outer_boundary());
+        const Polygon2d p(cgpol.outer_boundary());
         const GEOM_FT dx= p.getCenterOfMass().x()-center_of_mass.x();
         const GEOM_FT dy= p.getCenterOfMass().y()-center_of_mass.y();
         retval+= p.Pxy()+p.getArea()*dx*dy;
@@ -241,7 +241,7 @@ GEOM_FT PoligonoConAgujeros2d::Pxy(void) const
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
-        const Poligono2d p(*j);
+        const Polygon2d p(*j);
         const GEOM_FT dx= p.getCenterOfMass().x()-center_of_mass.x();
         const GEOM_FT dy= p.getCenterOfMass().y()-center_of_mass.y();
         retval-= p.Iy()+p.getArea()*dx*dy;
@@ -251,18 +251,18 @@ GEOM_FT PoligonoConAgujeros2d::Pxy(void) const
 
 //! @brief Hace un agujero en este polígono con
 //! la forma del que se le pasa como parámetro.
-void PoligonoConAgujeros2d::add_hole(const Poligono2d &p)
+void PolygonWithHoles2d::add_hole(const Polygon2d &p)
   { cgpol.add_hole(p.ToCGAL()); }
 
 //! @brief Aplica la transformación que se pasa como parámetro
-PoligonoConAgujeros2d PoligonoConAgujeros2d::getTransformado(const Trf2d &trf2d)
+PolygonWithHoles2d PolygonWithHoles2d::getTransformado(const Trf2d &trf2d)
   {
-    PoligonoConAgujeros2d retval;
+    PolygonWithHoles2d retval;
     if(!cgpol.is_unbounded())
       {
-        Poligono2d p(cgpol.outer_boundary());
+        Polygon2d p(cgpol.outer_boundary());
         p.Transforma(trf2d);
-        retval.cgpol= CGPoligonoConAgujeros_2(p.ToCGAL());
+        retval.cgpol= CGPolygonWithHoles_2(p.ToCGAL());
       }
     else
       std::cerr << getClassName() << "::" << __FUNCTION__
@@ -270,7 +270,7 @@ PoligonoConAgujeros2d PoligonoConAgujeros2d::getTransformado(const Trf2d &trf2d)
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
-        Poligono2d p(*j);
+        Polygon2d p(*j);
         p.Transforma(trf2d);
         retval.cgpol.add_hole(p.ToCGAL());
       }
@@ -278,17 +278,17 @@ PoligonoConAgujeros2d PoligonoConAgujeros2d::getTransformado(const Trf2d &trf2d)
   }
 
 //! @brief Aplica la transformación que se pasa como parámetro
-void PoligonoConAgujeros2d::Transforma(const Trf2d &trf2d)
+void PolygonWithHoles2d::Transforma(const Trf2d &trf2d)
   {
-    PoligonoConAgujeros2d tmp= getTransformado(trf2d);
-    PoligonoConAgujeros2d::operator=(tmp); 
+    PolygonWithHoles2d tmp= getTransformado(trf2d);
+    PolygonWithHoles2d::operator=(tmp); 
   }
 
-void PoligonoConAgujeros2d::Print(std::ostream &os) const
+void PolygonWithHoles2d::Print(std::ostream &os) const
   {
     if(!cgpol.is_unbounded())
       {
-        const Poligono2d p(cgpol.outer_boundary());
+        const Polygon2d p(cgpol.outer_boundary());
 	os << "contorno: " << p << std::endl;
       }
     else
@@ -297,7 +297,7 @@ void PoligonoConAgujeros2d::Print(std::ostream &os) const
 
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
-        const Poligono2d p(*j);
+        const Polygon2d p(*j);
 	os << "hueco: " << p << std::endl;
       }
   }

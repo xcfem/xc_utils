@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Poligono3d.cc
+//Polygon3d.cc
 
-#include "Poligono3d.h"
+#include "Polygon3d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d1/Line2d.h"
@@ -33,7 +33,7 @@
 #include "xc_utils/src/geom/listas/auxiliares.h"
 
 
-Poligono3d::Poligono3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
+Polygon3d::Polygon3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   : D2to3d(p1,p2,p3), plg2d()
   {
     push_back(p1);
@@ -41,37 +41,37 @@ Poligono3d::Poligono3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
     push_back(p3);
   }
 
-GeomObj::list_Pos3d Poligono3d::ListaVertices(void) const
+GeomObj::list_Pos3d Polygon3d::ListaVertices(void) const
   {
     GeomObj::list_Pos3d retval;
-    register Poligono2d::vertex_iterator i= plg2d.vertices_begin();
+    register Polygon2d::vertex_iterator i= plg2d.vertices_begin();
     for(;i!=plg2d.vertices_end();i++)
       retval.push_back(to_3d(*i));
     return retval;
   }
-Segment3d Poligono3d::Lado(unsigned int i) const
+Segment3d Polygon3d::Lado(unsigned int i) const
   {
     Segment2d sg2d= plg2d.Lado(i);
     return to_3d(sg2d);
   }
 
-Segment3d Poligono3d::Lado0(unsigned int i) const
+Segment3d Polygon3d::Lado0(unsigned int i) const
   {
     Segment2d sg2d= plg2d.Lado0(i);
     return to_3d(sg2d);
   }
 
-Plane Poligono3d::getPlaneFromSide(unsigned int i) const
+Plane Polygon3d::getPlaneFromSide(unsigned int i) const
   {
     Segment3d lado= Lado(i);
     Vector3d v= getPlane().Normal();
     return Plane(lado,v);
   }
 
-Plane Poligono3d::getPlaneFromSide0(unsigned int i) const
+Plane Polygon3d::getPlaneFromSide0(unsigned int i) const
   { return getPlaneFromSide(i+1); }
 
-bool Poligono3d::In(const Pos3d &p,const double &tol)
+bool Polygon3d::In(const Pos3d &p,const double &tol)
   {
     if(!getPlane().In(p,tol)) return false;
     const Pos2d p2d(to_2d(p));
@@ -79,47 +79,47 @@ bool Poligono3d::In(const Pos3d &p,const double &tol)
   }
 
 //! @brief Return the center of mass of the polygon.
-Pos3d Poligono3d::getCenterOfMass(void) const
+Pos3d Polygon3d::getCenterOfMass(void) const
   { return to_3d(plg2d.getCenterOfMass()); }
 
-std::vector<Poligono3d> Poligono3d::getPoligonosTributarios(void) const
+std::vector<Polygon3d> Polygon3d::getTributaryPolygons(void) const
   {
-    const std::vector<Poligono2d> tmp= plg2d.getPoligonosTributarios();
+    const std::vector<Polygon2d> tmp= plg2d.getTributaryPolygons();
     const size_t sz= tmp.size();
-    std::vector<Poligono3d> retval(sz);
+    std::vector<Polygon3d> retval(sz);
     for(size_t i= 0;i<sz;i++)
-      retval[i]= Poligono3d(get_ref(),tmp[i]);
+      retval[i]= Polygon3d(get_ref(),tmp[i]);
     return retval;
   }
 
-GEOM_FT Poligono3d::Ix(void) const
+GEOM_FT Polygon3d::Ix(void) const
   {
-    std::cerr << "Poligono3d::Ix() not implemented, 0 is returned." << std::endl;
+    std::cerr << "Polygon3d::Ix() not implemented, 0 is returned." << std::endl;
     return 0;
   }
-GEOM_FT Poligono3d::Iy(void) const
+GEOM_FT Polygon3d::Iy(void) const
   {
-    std::cerr << "Poligono3d::Iy() not implemented, 0 is returned." << std::endl;
+    std::cerr << "Polygon3d::Iy() not implemented, 0 is returned." << std::endl;
     return 0;
   }
-GEOM_FT Poligono3d::Iz(void) const
+GEOM_FT Polygon3d::Iz(void) const
   {
-    std::cerr << "Poligono3d::Iz() not implemented, 0 is returned." << std::endl;
+    std::cerr << "Polygon3d::Iz() not implemented, 0 is returned." << std::endl;
     return 0;
   }
 
-GEOM_FT Poligono3d::GetMax(unsigned short int i) const
+GEOM_FT Polygon3d::GetMax(unsigned short int i) const
   {
     const GeomObj::list_Pos3d lv= ListaVertices();
     return get_max_i(i,lv.begin(),lv.end());
   }
-GEOM_FT Poligono3d::GetMin(unsigned short int i) const
+GEOM_FT Polygon3d::GetMin(unsigned short int i) const
   {
     const GeomObj::list_Pos3d lv= ListaVertices();
     return get_min_i(i,lv.begin(),lv.end());
   }
 
-void Poligono3d::Print(std::ostream &os) const
+void Polygon3d::Print(std::ostream &os) const
   {
     unsigned int nv= GetNumVertices();
     if(nv<1) return;
@@ -139,7 +139,7 @@ void Poligono3d::Print(std::ostream &os) const
 // correspond to point AT THE SAME SIDE OF THE POLYGON with respect
 // to the segment, otherwise the sign of the computed distance must
 // be changed.
-GEOM_FT Poligono3d::distSigno2(const Pos3d &p,const bool &sentido_horario) const
+GEOM_FT Polygon3d::distSigno2(const Pos3d &p,const bool &sentido_horario) const
   {
     const short int signo= (sentido_horario ? 1 : -1);
     const size_t nv= GetNumVertices();
@@ -158,7 +158,7 @@ GEOM_FT Poligono3d::distSigno2(const Pos3d &p,const bool &sentido_horario) const
       }
     return d;
   }
-GEOM_FT Poligono3d::distSigno(const Pos3d &p,const bool &sentido_horario) const
+GEOM_FT Polygon3d::distSigno(const Pos3d &p,const bool &sentido_horario) const
   { return sqrt_FT(::Abs(distSigno2(p,sentido_horario))); }
 
 //! @brief Return the distance from point to polygon.
@@ -167,7 +167,7 @@ GEOM_FT Poligono3d::distSigno(const Pos3d &p,const bool &sentido_horario) const
 //! that contain a side and are normal to the plane 
 //! that contains the polygon.
 //! If the point is inside the polygon 0 is returned.
-GEOM_FT Poligono3d::dist2(const Pos3d &p) const
+GEOM_FT Polygon3d::dist2(const Pos3d &p) const
   {
     const GEOM_FT retval= distSigno2(p);
     return (retval >= 0 ? retval : 0);
@@ -179,7 +179,7 @@ GEOM_FT Poligono3d::dist2(const Pos3d &p) const
 //! point to each of the planes that contain a side and are perpendicular to the
 //! plane that contains the polygon.
 //! In the point is inside the polygon 0 is returned.
-GEOM_FT Poligono3d::dist(const Pos3d &p) const
+GEOM_FT Polygon3d::dist(const Pos3d &p) const
   {
     const GEOM_FT retval= distSigno(p);
     return (retval >= 0 ? retval : 0);
@@ -187,9 +187,9 @@ GEOM_FT Poligono3d::dist(const Pos3d &p) const
 
 //! @brief Return the polygons that result form cutting the polygon
 //! with the argument plane.
-std::list<Poligono3d> Poligono3d::Corta(const Plane &pl) const
+std::list<Polygon3d> Polygon3d::Corta(const Plane &pl) const
   {
-    std::list<Poligono3d> retval;
+    std::list<Polygon3d> retval;
     const Plane pl_polig= getPlane();
     if(pl_polig==pl) return retval;
     if(paralelos(pl_polig,pl)) return retval;
@@ -202,18 +202,18 @@ std::list<Poligono3d> Poligono3d::Corta(const Plane &pl) const
     const Pos2d p2dB= to_2d(r.Point(100));
     const Line2d r2d(p2dA,p2dB);
 
-    std::list<Poligono2d> inter= corta(plg2d,r2d);
-    for(std::list<Poligono2d>::const_iterator i= inter.begin(); i!=inter.end();i++)
-      retval.push_back(Poligono3d(get_ref(),*i));
+    std::list<Polygon2d> inter= corta(plg2d,r2d);
+    for(std::list<Polygon2d>::const_iterator i= inter.begin(); i!=inter.end();i++)
+      retval.push_back(Polygon3d(get_ref(),*i));
 
     return retval;
   }
 
 //! @brief Return true if alguno de los vertices toca el cuadrante
 //! que se pasa como parámetro.
-bool Poligono3d::TocaCuadrante(const int &cuadrante) const
+bool Polygon3d::TocaCuadrante(const int &cuadrante) const
   {
-    register Poligono2d::vertex_iterator i= plg2d.vertices_begin();
+    register Polygon2d::vertex_iterator i= plg2d.vertices_begin();
     for(;i!=plg2d.vertices_end();i++)
       if(to_3d(*i).Cuadrante() == cuadrante)
         return true;

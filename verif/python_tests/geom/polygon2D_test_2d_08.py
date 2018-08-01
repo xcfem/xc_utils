@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import xc_base
 import geom
-pol1=geom.Poligono2d()
+pol1=geom.Polygon2d()
 pol1.agregaVertice(geom.Pos2d(0.,0.))
 pol1.agregaVertice(geom.Pos2d(4.,0.))
 pol1.agregaVertice(geom.Pos2d(4.,1.))

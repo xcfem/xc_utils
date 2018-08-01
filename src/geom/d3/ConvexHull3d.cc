@@ -28,8 +28,8 @@
 #include <vector>
 #include <CGAL/Gmpz.h>
 #include <CGAL/Gmpq.h>
-#include "xc_utils/src/geom/d3/poliedros3d/Poliedro3d.h"
-#include "xc_utils/src/geom/d3/poliedros3d/MapPoligonos.h"
+#include "xc_utils/src/geom/d3/3d_polyhedrons/Poliedro3d.h"
+#include "xc_utils/src/geom/d3/3d_polyhedrons/PolygonMap.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include <CGAL/cartesian_homogeneous_conversion.h>
 #include <CGAL/Cartesian_converter.h>

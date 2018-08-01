@@ -111,6 +111,6 @@ void Tetraedro3d::Print(std::ostream &os) const
     os << cgtetraedro << std::endl;
   }
 
-MapPoligonos<CGPoliedro_3> getMapPoligonos(const Tetraedro3d &t)
-  { return t.getPoliedro3d().GetMapPoligonos(); }
+PolygonMap<CGPoliedro_3> getPolygonMap(const Tetraedro3d &t)
+  { return t.getPoliedro3d().GetPolygonMap(); }
 

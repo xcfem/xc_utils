@@ -26,14 +26,14 @@
 
 #include "xc_utils/src/geom/d2/GeomObj2d.h"
 
-class Poligono2d;
+class Polygon2d;
 
 
 //! @ingroup GEOM
 //
 //! @brief Return el «convex hull» del conjunto de posiciones
 //! que se pasa como parámetro.
-Poligono2d get_convex_hull2d(const GeomObj::list_Pos2d &lp);
+Polygon2d get_convex_hull2d(const GeomObj::list_Pos2d &lp);
 
 
 #endif

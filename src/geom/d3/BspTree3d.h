@@ -25,29 +25,29 @@
 #define BSPTREE3D_H
 
 #include "xc_utils/src/geom/d2/Plane.h"
-#include "xc_utils/src/geom/d2/Poligono3d.h"
+#include "xc_utils/src/geom/d2/Polygon3d.h"
 #include <list>
 
 
 class BspTree3d
   {
   public:
-    typedef std::list<Poligono3d> lista_poligonos;
-    typedef lista_poligonos::value_type poligono;
+    typedef std::list<Polygon3d> polygons_list;
+    typedef polygons_list::value_type polygon;
 
-    friend void Build_BSP_Tree(BspTree3d *tree,const lista_poligonos &poligonos);
+    friend void Build_BSP_Tree(BspTree3d *,const polygons_list &);
 
   private:
     Plane particion;         //Partition plane.
-    lista_poligonos poligonos; //List of the polygons that lie 
+    polygons_list polygons; //List of the polygons that lie 
                                //in the partition plane.
     BspTree3d *front,*back; //Pointer to the children.
   public:
     BspTree3d(void)
-      : particion(), poligonos(), front(nullptr), back(nullptr) {}
-    BspTree3d(const lista_poligonos &poligonos)
-      : particion(), poligonos(), front(nullptr), back(nullptr)
-      { Build_BSP_Tree(this,poligonos); }
+      : particion(), polygons(), front(nullptr), back(nullptr) {}
+    BspTree3d(const polygons_list &polygons)
+      : particion(), polygons(), front(nullptr), back(nullptr)
+      { Build_BSP_Tree(this,polygons); }
     inline BspTree3d *Delante(void) const
       { return front; }
     inline BspTree3d *Detras(void) const

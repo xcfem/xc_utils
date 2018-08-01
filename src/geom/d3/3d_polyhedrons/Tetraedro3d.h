@@ -19,49 +19,40 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Cuadrado2d.h
+//TETRAEDRO3D.h
 
-#ifndef CUADRADO_H
-#define CUADRADO_H
+#ifndef TETRAEDRO3D_H
+#define TETRAEDRO3D_H
 
-#include "Cuadrilatero2d.h"
+#include <iostream>
+#include "PolyhedronBase.h"
+#include "PolygonMap.h"
 
+class HalfSpace3d;
+class Poliedro3d;
 
 //! @ingroup GEOM
 //
-//! @brief Cuadrado en dos dimensiones.
-class Cuadrado2d : public Cuadrilatero2d
+//! @brief Tetraedro.
+class Tetraedro3d: public PolyhedronBase
   {
+    CGTetrahedron_3 cgtetraedro;
   public:
-    Cuadrado2d(const GEOM_FT &l= 1.0)
-      : Cuadrilatero2d(Pos2d(0,0),Pos2d(l,0),Pos2d(l,l),Pos2d(0,l)) {}
-    Cuadrado2d(const Pos2d &o,const GEOM_FT &l= 1.0);
-    //Cuadrado2d(const Ref2d &ref,const GEOM_FT &l= 1.0): SupPoligonal(ref), lado(l) {}
-    Cuadrado2d(const Cuadrado2d &c): Cuadrilatero2d(c) {}
-    ~Cuadrado2d(void) {}
-    Cuadrado2d &operator=(const Cuadrado2d &c)
-      {
-	Cuadrilatero2d::operator=(c);
-        return *this;
-      }
-    virtual GeomObj *clon(void) const
-      { return new Cuadrado2d(*this); }
-/*     void Offset(const GEOM_FT &offset) */
-/*       { lado+=2*offset; } */
-/*     Cuadrado2d GetOffset(const GEOM_FT &offset) const */
-/*       { */
-/*         Cuadrado2d retval(*this); */
-/*         retval.Offset(offset); */
-/*         return retval; */
-/*       } */
-    
-
+    Tetraedro3d(void);
+    Tetraedro3d(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);
+    Tetraedro3d(const HalfSpace3d &, const HalfSpace3d &,const HalfSpace3d &, const HalfSpace3d &);
+    GeomObj *clon(void) const
+      { return new Tetraedro3d(*this); }
+    Poliedro3d getPoliedro3d(void) const;
+    GEOM_FT getArea(void) const;
+    GEOM_FT getVolumeWithSign(void) const;
+    GEOM_FT getVolume(void) const;
+    double GetMax(short unsigned int i) const;
+    double GetMin(short unsigned int i) const;
+    bool In(const Pos3d &,const double &) const;
+    void Print(std::ostream &os) const;
   };
 
+PolygonMap<CGPoliedro_3> getPolygonMap(const Tetraedro3d &t);
+
 #endif
-
-
-
-
-
-

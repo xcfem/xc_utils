@@ -25,7 +25,7 @@
 
 
 
-#include "xc_utils/src/geom/d2/poligonos2d/Cuadrilatero2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/Cuadrilatero2d.h"
 #include "xc_utils/src/geom/FT_matrix.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
 

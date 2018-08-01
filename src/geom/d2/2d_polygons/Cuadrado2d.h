@@ -19,33 +19,49 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//utils_list_pos2d.h
+//Cuadrado2d.h
 
-#ifndef UTILS_LIST_POS2D_H
-#define UTILS_LIST_POS2D_H
+#ifndef CUADRADO_H
+#define CUADRADO_H
 
-#include "xc_utils/src/geom/GeomObj.h"
+#include "Cuadrilatero2d.h"
 
-class BND2d;
-class Polygon2d;
-
-//Funciones auxiliares para la manipulación de listas 
-//de posiciones en 2d.
 
 //! @ingroup GEOM
 //
-//! @brief Suma a las posiciones de la lista el vector que
-//! se pasa como parámetro.
-void mueve(GeomObj::list_Pos2d &l,const Vector2d &);
-//! @brief Applies the transformation to the points of the list.
-void transforma(GeomObj::list_Pos2d &l,const Trf2d &);
-void plot(Plotter &,const GeomObj::list_Pos2d &l);
-//! @brief Return the maxima of the X and Y coordinates of the points.
-Pos2d getPMax(const GeomObj::list_Pos2d &l);
-//! @brief Return the minima of the X and Y coordinates of the points.
-Pos2d getPMin(const GeomObj::list_Pos2d &l);
-//! @brief Return the boundary of the points.
-BND2d getBnd(const GeomObj::list_Pos2d &l);
-std::deque<GEOM_FT> &getRecubrimientos(const GeomObj::list_Pos2d &l,const Polygon2d &);
+//! @brief Cuadrado en dos dimensiones.
+class Cuadrado2d : public Cuadrilatero2d
+  {
+  public:
+    Cuadrado2d(const GEOM_FT &l= 1.0)
+      : Cuadrilatero2d(Pos2d(0,0),Pos2d(l,0),Pos2d(l,l),Pos2d(0,l)) {}
+    Cuadrado2d(const Pos2d &o,const GEOM_FT &l= 1.0);
+    //Cuadrado2d(const Ref2d &ref,const GEOM_FT &l= 1.0): PolygonalSurface(ref), lado(l) {}
+    Cuadrado2d(const Cuadrado2d &c): Cuadrilatero2d(c) {}
+    ~Cuadrado2d(void) {}
+    Cuadrado2d &operator=(const Cuadrado2d &c)
+      {
+	Cuadrilatero2d::operator=(c);
+        return *this;
+      }
+    virtual GeomObj *clon(void) const
+      { return new Cuadrado2d(*this); }
+/*     void Offset(const GEOM_FT &offset) */
+/*       { lado+=2*offset; } */
+/*     Cuadrado2d GetOffset(const GEOM_FT &offset) const */
+/*       { */
+/*         Cuadrado2d retval(*this); */
+/*         retval.Offset(offset); */
+/*         return retval; */
+/*       } */
+    
+
+  };
+
 #endif
+
+
+
+
+
 

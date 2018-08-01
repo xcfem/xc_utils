@@ -22,7 +22,7 @@
 //Triangle2d.cc
 
 #include "Triangle2d.h"
-#include "Poligono2d.h"
+#include "Polygon2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 
 #include <plotter.h>
@@ -75,9 +75,10 @@ GEOM_FT Triangle2d::GetMin(unsigned short int i) const
     return retval;
   }
 
-Poligono2d Triangle2d::GetPoligono(void) const
+//! @brief Return the triangle as a polygon.
+Polygon2d Triangle2d::getPolygon(void) const
   {
-    Poligono2d retval;
+    Polygon2d retval;
     retval.push_back(Vertice(1));
     retval.push_back(Vertice(2));
     retval.push_back(Vertice(3));

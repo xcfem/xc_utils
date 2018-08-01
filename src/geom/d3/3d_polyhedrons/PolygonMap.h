@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//MapPoligonos.h
+//PolygonMap.h
 
-#ifndef MAP_POLIGONOS_H
-#define MAP_POLIGONOS_H
+#ifndef MAP_POLYGONS_H
+#define MAP_POLYGONS_H
 
 #include <deque>
 #include <CGAL/iterator.h>
@@ -36,13 +36,13 @@
 //
 //! @brief Almacena los indices de los vértices
 //! de un polígono.
-class StoVerticesPoligono
+class PolygonVertexStorage
   {
   protected:
     std::deque<size_t> ind_vertices;
 
   public:
-    StoVerticesPoligono(const size_t &sz,const size_t &V);
+    PolygonVertexStorage(const size_t &sz,const size_t &V);
     inline size_t GetNumVertices(void) const
       { return ind_vertices.size(); }
     inline const size_t &Vertice(const size_t &i) const
@@ -53,7 +53,7 @@ class StoVerticesPoligono
   };
 
 template <class TPOL>
-class IndVerticesPoligono: public StoVerticesPoligono
+class PolygonVerticesIndices: public PolygonVertexStorage
   {
   public:
     typedef typename TPOL::Vertex_const_iterator VCI;
@@ -61,12 +61,12 @@ class IndVerticesPoligono: public StoVerticesPoligono
     typedef typename TPOL::Halfedge_around_facet_const_circulator HFCC;
 
   public:
-    IndVerticesPoligono(const Index &index,const HFCC &f);
+    PolygonVerticesIndices(const Index &index,const HFCC &f);
   };
 
 template <class TPOL>
-IndVerticesPoligono<TPOL>::IndVerticesPoligono(const IndVerticesPoligono<TPOL>::Index &index,const IndVerticesPoligono<TPOL>::HFCC &ihc)
-  : StoVerticesPoligono(circulator_size(ihc),0)
+PolygonVerticesIndices<TPOL>::PolygonVerticesIndices(const PolygonVerticesIndices<TPOL>::Index &index,const PolygonVerticesIndices<TPOL>::HFCC &ihc)
+  : PolygonVertexStorage(circulator_size(ihc),0)
   {
     HFCC hc= ihc;
     HFCC hc_end = hc;
@@ -112,10 +112,10 @@ void MapPosVertices<TPOS>::Print(std::ostream &os) const
   }
 
 template <class TPOL>
-class MapPoligonos
+class PolygonMap
   {
   public:
-    typedef IndVerticesPoligono<TPOL> IndVertices;
+    typedef PolygonVerticesIndices<TPOL> IndVertices;
     typedef typename IndVertices::VCI VCI;
     typedef typename IndVertices::Index Index;
     typedef typename IndVertices::HFCC HFCC;
@@ -129,7 +129,7 @@ class MapPoligonos
     std::deque<IndVertices> caras;
   public:
 
-    MapPoligonos(const TPOL &pol);
+    PolygonMap(const TPOL &pol);
 
     vertices_const_iterator VerticesBegin(void) const
       { return mv.begin(); }
@@ -144,7 +144,7 @@ class MapPoligonos
   };
 
 template <class TPOL>
-MapPoligonos<TPOL>::MapPoligonos(const TPOL &pol)
+PolygonMap<TPOL>::PolygonMap(const TPOL &pol)
   {
     typedef typename TPOL::Facet_const_iterator FCI;
     size_t cont= 0;
@@ -163,7 +163,7 @@ MapPoligonos<TPOL>::MapPoligonos(const TPOL &pol)
   }
 
 template <class TPOL>
-void MapPoligonos<TPOL>::Print(std::ostream &os) const
+void PolygonMap<TPOL>::Print(std::ostream &os) const
   {
     os << "Lista de vértices: " << std::endl;
     mv.Print(os);
@@ -177,15 +177,15 @@ void MapPoligonos<TPOL>::Print(std::ostream &os) const
 
 
 template <class TPOL>
-std::ostream &operator<<(std::ostream &os, const MapPoligonos<TPOL> &mt)
+std::ostream &operator<<(std::ostream &os, const PolygonMap<TPOL> &mt)
   {
     mt.Print(os);
     return os;
   }
 
 template <class TPOL>
-MapPoligonos<TPOL> getMapPoligonos(const TPOL &pol)
-  { return MapPoligonos<TPOL>(pol); }
+PolygonMap<TPOL> getPolygonMap(const TPOL &pol)
+  { return PolygonMap<TPOL>(pol); }
 
 template <class TPOLORG,class HDS,class CVPOS>
 class Build_tdest_polyhedron: public CGAL::Modifier_base<HDS>
@@ -195,8 +195,8 @@ class Build_tdest_polyhedron: public CGAL::Modifier_base<HDS>
   public:
     typedef typename HDS::Vertex Vertex;
     typedef typename Vertex::Point Point;
-    typedef typename MapPoligonos<TPOLORG>::vertices_const_iterator vconst_iter;
-    typedef typename MapPoligonos<TPOLORG>::caras_const_iterator cconst_iter;
+    typedef typename PolygonMap<TPOLORG>::vertices_const_iterator vconst_iter;
+    typedef typename PolygonMap<TPOLORG>::caras_const_iterator cconst_iter;
 
   public:
     Build_tdest_polyhedron(const TPOLORG &pol)
@@ -210,7 +210,7 @@ template <class TPOLORG,class HDS,class CVPOS>
     const size_t num_facetas= sf.size_of_facets();
     const size_t num_aristas= sf.size_of_halfedges();
     const size_t num_vertices= sf.size_of_vertices();
-    MapPoligonos<TPOLORG> mt= getMapPoligonos(sf);
+    PolygonMap<TPOLORG> mt= getPolygonMap(sf);
     // Postcondition: `hds' is a valid polyhedral surface.
     CGAL::Polyhedron_incremental_builder_3<HDS> B(hds, true);
 

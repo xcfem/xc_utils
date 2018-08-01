@@ -28,7 +28,7 @@
 
 class Pos2d;
 class Pos2dArray;
-class Poligono2d;
+class Polygon2d;
 
 //! @ingroup GEOM
 //
@@ -81,7 +81,7 @@ class AnnulusSector2d : public CircularSector2d
     Pos2dArray getIntArcPoints(const size_t &n) const;
     Pos2dArray getPointsOnPerimeter(const size_t &n) const;
     Pos2dArray genMesh(const size_t &m,const size_t &n) const;
-    Poligono2d getPoligono2d(const size_t &n) const;
+    Polygon2d getPolygon2d(const size_t &n) const;
 
     void Print(std::ostream &os) const;
   };

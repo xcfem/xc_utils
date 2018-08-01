@@ -23,7 +23,7 @@
 
 #include "carsten_steger.h"
 #include "xc_basic/src/funciones/estadisticas/combinatoria.h"
-#include "xc_utils/src/geom/d2/poligonos2d/SupPoligonal2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/PolygonalSurface2d.h"
 
 inline long long c_p_q_k_l(const int &p,
                                     const int &q,
@@ -52,7 +52,7 @@ double sumatorio_k_l(const double &xi,const double &xi_1,
         retval+=sumando_p_q_k_l(xi,xi_1,yi,yi_1,p,q,k,l);
     return retval;
   }
-double sumatorio_i_p_q(const SupPoligonal2d &sp,const int &p, const int &q)
+double sumatorio_i_p_q(const PolygonalSurface2d &sp,const int &p, const int &q)
   {
     double retval= 0;
     const size_t num_vertices= sp.GetNumVertices();
@@ -74,5 +74,5 @@ double sumatorio_i_p_q(const SupPoligonal2d &sp,const int &p, const int &q)
   }
 inline long long divisor(const int &p, const int &q)
   { return (p+q+2)*(p+q+1)*coeficiente_binomial(p+q,q); }
-GEOM_FT p_q_moment(const SupPoligonal2d &sp,const int &p, const int &q)
+GEOM_FT p_q_moment(const PolygonalSurface2d &sp,const int &p, const int &q)
   { return double_to_FT(sumatorio_i_p_q(sp,p,q)/divisor(p,q)); }

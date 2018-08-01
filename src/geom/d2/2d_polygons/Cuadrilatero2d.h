@@ -24,7 +24,7 @@
 #ifndef CUADRILATERO2D_H
 #define CUADRILATERO2D_H
 
-#include "Poligono2d.h"
+#include "Polygon2d.h"
 
 class Triangle2d;
 class Pos2dArray;
@@ -41,22 +41,22 @@ class Pos2dArray;
 //! @ingroup GEOM
 //
 //! @brief Cuadrilátero en dos dimensiones.
-class Cuadrilatero2d: public Poligono2d
+class Cuadrilatero2d: public Polygon2d
   {
   public:
-    Cuadrilatero2d(void): Poligono2d() 
+    Cuadrilatero2d(void): Polygon2d() 
       {
         push_back(Pos2d(0,0));
         push_back(Pos2d(1,0));
         push_back(Pos2d(1,1));
         push_back(Pos2d(0,1));
       }
-    Cuadrilatero2d(const Cuadrilatero2d &other): Poligono2d(other)
+    Cuadrilatero2d(const Cuadrilatero2d &other): Polygon2d(other)
       {}
     Cuadrilatero2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3,const Pos2d &p4);
     Cuadrilatero2d &operator=(const Cuadrilatero2d &other)
       {
-	Poligono2d::operator=(other);
+	Polygon2d::operator=(other);
         return *this;
       }
     virtual GeomObj *clon(void) const
@@ -64,7 +64,7 @@ class Cuadrilatero2d: public Poligono2d
     inline void push_back(const Pos2d &p)
       {
         if(GetNumVertices()<5)
-	  Poligono2d::push_back(p.ToCGAL());
+	  Polygon2d::push_back(p.ToCGAL());
       }
     Triangle2d getFirstTriangle(void) const;
     Triangle2d getSecondTriangle(void) const;

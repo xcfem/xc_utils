@@ -25,37 +25,37 @@
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 
 
-void Split_Polygon(const BspTree3d::poligono &pg,const Plane &particion,
-                   BspTree3d::lista_poligonos &front_pieces,BspTree3d::lista_poligonos &back_pieces)
+void Split_Polygon(const BspTree3d::polygon &pg,const Plane &particion,
+                   BspTree3d::polygons_list &front_pieces,BspTree3d::polygons_list &back_pieces)
   {
-    BspTree3d::lista_poligonos inter= corta(pg,particion);
+    BspTree3d::polygons_list inter= corta(pg,particion);
 
-    for(BspTree3d::lista_poligonos::const_iterator i= inter.begin();i!=inter.end();i++)
+    for(BspTree3d::polygons_list::const_iterator i= inter.begin();i!=inter.end();i++)
       {
-        if(particion.ClasificaPoligono(*i) == Plane::DELANTE)
+        if(particion.classifyPolygon(*i) == Plane::DELANTE)
           front_pieces.push_back(*i);
         else
           back_pieces.push_back(*i);
       }
   }
 
-void Build_BSP_Tree(BspTree3d *tree,const BspTree3d::BspTree3d::lista_poligonos &poligonos)
+void Build_BSP_Tree(BspTree3d *tree,const BspTree3d::BspTree3d::polygons_list &polygons)
   {
-    typedef BspTree3d::BspTree3d::lista_poligonos::const_iterator const_pol_iterator;
+    typedef BspTree3d::BspTree3d::polygons_list::const_iterator const_pol_iterator;
 
-    const_pol_iterator pol_iter= poligonos.begin();
+    const_pol_iterator pol_iter= polygons.begin();
     const_pol_iterator root = pol_iter; pol_iter++;
     tree->particion = root->getPlane();
-    tree->poligonos.push_back(*root);
-    BspTree3d::BspTree3d::lista_poligonos frontlist,backlist;
+    tree->polygons.push_back(*root);
+    BspTree3d::BspTree3d::polygons_list frontlist,backlist;
 
-    for(;pol_iter!=poligonos.end();pol_iter++)
+    for(;pol_iter!=polygons.end();pol_iter++)
       {
-	Plane::clasif_poligono result= tree->particion.ClasificaPoligono(*pol_iter);
+	Plane::polygon_classification result= tree->particion.classifyPolygon(*pol_iter);
         switch (result)
           {
 	   case Plane::DENTRO:
-              tree->poligonos.push_back(*pol_iter);
+              tree->polygons.push_back(*pol_iter);
               break;
            case Plane::DETRAS:
               backlist.push_back(*pol_iter);
@@ -64,7 +64,7 @@ void Build_BSP_Tree(BspTree3d *tree,const BspTree3d::BspTree3d::lista_poligonos 
               frontlist.push_back(*pol_iter);
               break;
            case Plane::CRUZA:
-              BspTree3d::lista_poligonos front_pieces,back_pieces;
+              BspTree3d::polygons_list front_pieces,back_pieces;
               Split_Polygon(*pol_iter,tree->particion,front_pieces,back_pieces);
               backlist.insert(backlist.end(),back_pieces.begin(),back_pieces.end());
               frontlist.insert(frontlist.end(),front_pieces.begin(),front_pieces.end());

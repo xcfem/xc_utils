@@ -23,7 +23,7 @@
 
 #include "Trihedron.h"
 #include "xc_utils/src/geom/d2/Plane.h"
-#include "xc_utils/src/geom/d3/poliedros3d/Poliedro3d.h"
+#include "xc_utils/src/geom/d3/3d_polyhedrons/Poliedro3d.h"
 #include "xc_utils/src/geom/d1/Line3d.h"
 
 Trihedron::Trihedron(void)

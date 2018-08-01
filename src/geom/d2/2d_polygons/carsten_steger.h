@@ -19,21 +19,34 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//MapPoligonos.cc
+//Carsten_Steger.h
 
-#include "MapPoligonos.h"
+#ifndef CARSTEN_STEGER_H
+#define CARSTEN_STEGER_H
 
-StoVerticesPoligono::StoVerticesPoligono(const size_t &sz,const size_t &V)
-  : ind_vertices(sz,0)
-  {}
-void StoVerticesPoligono::Print(std::ostream &os) const
-  {
-    const size_t nv= ind_vertices.size();
-    if(nv<1) return;
-    os << "Cara: " << ind_vertices[0];
-    for(size_t i=1;i<nv;i++)
-       os << ", " << ind_vertices[i];
-  }
+#include "xc_basic/src/util/matem.h"
+#include "../../cgal_types.h"
+
+//Aux functions for computing moments of arbitrary order  
+//(0,1,2,3,...) of a polygon according to the algorithm
+//según el algoritmo described by Carsten Steger
+//in the document
+
+// On the calculation of arbitrary moments of polygons
+// Carsten Steger
+// Technical Report FGBV-96-05
+// October 1996
+
+class PolygonalSurface2d;
+
+GEOM_FT p_q_moment(const PolygonalSurface2d &sp,const int &p, const int &q);
+
+
+#endif
+
+
+
+
 
 
 

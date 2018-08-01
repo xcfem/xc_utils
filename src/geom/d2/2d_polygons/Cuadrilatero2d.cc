@@ -27,7 +27,7 @@
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include <vector>
 
-Cuadrilatero2d::Cuadrilatero2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3,const Pos2d &p4): Poligono2d()
+Cuadrilatero2d::Cuadrilatero2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3,const Pos2d &p4): Polygon2d()
   {
     push_back(p1);
     push_back(p2);

@@ -24,7 +24,7 @@
 #ifndef TRIANG3D_MESH_H
 #define TRIANG3D_MESH_H
 
-#include "../d3/poliedros3d/Poliedro3d.h"
+#include "../d3/3d_polyhedrons/Poliedro3d.h"
 
 class Triangle3d;
 class SoGroup;

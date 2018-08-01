@@ -30,7 +30,7 @@
 
 class Pos2d;
 class Pos2dArray;
-class Poligono2d;
+class Polygon2d;
 
 //! @ingroup GEOM
 //
@@ -85,7 +85,7 @@ class Circle2d : public Superficie2d
     virtual GEOM_FT GetMin(unsigned short int i) const;
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
     Pos2dArray getPointsOnPerimeter(const size_t &n,const double &theta_inic= 0.0) const;
-    Poligono2d getPoligonoInscrito(const size_t &n,const double &theta_inic= 0.0) const;
+    Polygon2d getInscribedPolygon(const size_t &n,const double &theta_inic= 0.0) const;
 
     void Transforma(const Trf2d &trf2d);
 

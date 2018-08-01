@@ -31,7 +31,7 @@
 #include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/d1/Ray2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/Triangle2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/Triangle2d.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
 //! @brief Return el moment of inertia with respect to the line argument.

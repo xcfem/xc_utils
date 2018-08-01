@@ -23,8 +23,8 @@
 
 #include "ConvexHull2d.h"
 #include <vector>
-#include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
-//#include "xc_utils/src/geom/d2/MapPoligonos.h"
+#include "xc_utils/src/geom/d2/2d_polygons/Polygon2d.h"
+//#include "xc_utils/src/geom/d2/PolygonMap.h"
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/convex_hull_2.h>
@@ -55,16 +55,16 @@ inline CGPoint_2 Point_to_Pos2d(const Point_2 &np)
 //   };
 
 template <class InputIterator>
-Poligono2d get_convex_hull2d(InputIterator first,InputIterator last)
+Polygon2d get_convex_hull2d(InputIterator first,InputIterator last)
   {
     std::vector<Point_2> result;
      CGAL::convex_hull_2(first, last, std::back_inserter(result));
-    Poligono2d retval;
+    Polygon2d retval;
     for(std::vector<Point_2>::const_iterator i= result.begin();i!=result.end();i++)
       retval.push_back(Point_to_Pos2d(*i));
     return retval;
   }
-Poligono2d get_convex_hull2d(const GeomObj::list_Pos2d &lp)
+Polygon2d get_convex_hull2d(const GeomObj::list_Pos2d &lp)
   {
     std::vector<Point_2> input;
     for(GeomObj::list_Pos2d::const_iterator i= lp.begin();i!=lp.end();i++)

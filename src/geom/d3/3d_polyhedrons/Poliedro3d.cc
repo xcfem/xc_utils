@@ -25,7 +25,7 @@
 #include "../../d2/Triang3dMesh.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
-#include "xc_utils/src/geom/d2/Poligono3d.h"
+#include "xc_utils/src/geom/d2/Polygon3d.h"
 #include "xc_utils/src/geom/d3/HalfSpace3d.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
 #include <CGAL/Polyhedron_incremental_builder_3.h>
@@ -169,17 +169,17 @@ Plane Poliedro3d::getPlaneFromFace(const Facet_const_iterator &f) const
   }
 
 //! @brief Return la cara correspondiente al iterador.
-Poligono3d Poliedro3d::GetCara(const Facet_const_iterator &f) const
+Polygon3d Poliedro3d::GetCara(const Facet_const_iterator &f) const
   {
     const GeomObj::list_Pos3d vertices= getVertices();
-    Poligono3d retval(vertices.begin(),vertices.end());
+    Polygon3d retval(vertices.begin(),vertices.end());
     return retval;
   }
 
 //! @brief Return las caras del poliedro.
-std::deque<Poligono3d> Poliedro3d::GetCaras(void) const
+std::deque<Polygon3d> Poliedro3d::GetCaras(void) const
   {
-    std::deque<Poligono3d> retval;
+    std::deque<Polygon3d> retval;
     for(Poliedro3d::Facet_const_iterator i= facets_begin();i!=facets_end();i++)
       retval.push_back(GetCara(i));
     return retval;

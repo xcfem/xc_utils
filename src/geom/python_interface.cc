@@ -23,34 +23,34 @@
 
 #include "python_interface.h"
 
-std::list<Poligono2d> from_python_list(boost::python::list &l)
+std::list<Polygon2d> from_python_list(boost::python::list &l)
   {
-    std::list<Poligono2d> retval;
+    std::list<Polygon2d> retval;
     const size_t sz= len(l);
     for(size_t i= 0;i<sz;++i)
-      retval.push_back(boost::python::extract<Poligono2d>(l[i]));
+      retval.push_back(boost::python::extract<Polygon2d>(l[i]));
     return retval;
   }
 
-boost::python::list to_python_list(const std::list<Poligono2d> &l)
+boost::python::list to_python_list(const std::list<Polygon2d> &l)
   {
     boost::python::list retval;
-    BOOST_FOREACH(const Poligono2d& p, l) retval.append(p);
+    BOOST_FOREACH(const Polygon2d& p, l) retval.append(p);
     return retval;
   }
 
 boost::python::list python_particiona(boost::python::list &l)
   {
-    std::list<Poligono2d> areas= from_python_list(l);
+    std::list<Polygon2d> areas= from_python_list(l);
     particiona(areas);
     return to_python_list(areas);
   }
 
 //! @brief Return the result from clipping the polygons on the list 
 //! using the Voronoi algorithm.
-boost::python::list python_clip(boost::python::list &l, const Poligono2d &plg)
+boost::python::list python_clip(boost::python::list &l, const Polygon2d &plg)
   {
-    std::list<Poligono2d> areas= from_python_list(l);
+    std::list<Polygon2d> areas= from_python_list(l);
     areas= clip(areas,plg);
     return to_python_list(areas);
   }

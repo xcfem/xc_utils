@@ -19,24 +19,24 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SupPoligonal2D.h
+//PolygonalSurface2D.h
 
-#ifndef SUPPOLIGONAL2D_H
-#define SUPPOLIGONAL2D_H
+#ifndef POLYGONALSURFACE2D_H
+#define POLYGONALSURFACE2D_H
 
 #include "xc_utils/src/geom/d2/Superficie2d.h"
 
 class Line2d;
 class Ray2d;
 class Segment2d;
-class Poligono2d;
+class Polygon2d;
 class Polyline2d;
 
 
 //! @ingroup GEOM
 //
-//! @brief Clase base para las superficies poligonales.
-class SupPoligonal2d: public Superficie2d
+//! @brief Base class for the polygonal surfaces.
+class PolygonalSurface2d: public Superficie2d
   {
   private:
     inline GEOM_FT a_i(unsigned int i) const
@@ -45,7 +45,7 @@ class SupPoligonal2d: public Superficie2d
   protected:
     Segment2d Lado0(unsigned int i, unsigned int j) const;
   public:
-    SupPoligonal2d(void): Superficie2d(){}
+    PolygonalSurface2d(void): Superficie2d(){}
 
     virtual GeomObj *clon(void) const= 0;
     inline virtual unsigned int GetNumVertices(void) const
@@ -103,14 +103,14 @@ class SupPoligonal2d: public Superficie2d
   };
 
 
-std::list<Segment2d> intersection(const SupPoligonal2d &p,const Line2d &r);
-std::list<Segment2d> intersection(const Line2d &r,const SupPoligonal2d &p);
+std::list<Segment2d> intersection(const PolygonalSurface2d &p,const Line2d &r);
+std::list<Segment2d> intersection(const Line2d &r,const PolygonalSurface2d &p);
 
-std::list<Segment2d> intersection(const SupPoligonal2d &p,const Ray2d &sr);
-std::list<Segment2d> intersection(const Ray2d &sr,const SupPoligonal2d &p);
+std::list<Segment2d> intersection(const PolygonalSurface2d &p,const Ray2d &sr);
+std::list<Segment2d> intersection(const Ray2d &sr,const PolygonalSurface2d &p);
 
-std::list<Segment2d> intersection(const SupPoligonal2d &p,const Segment2d &sg);
-std::list<Segment2d> intersection(const Segment2d &sg,const SupPoligonal2d &p);
+std::list<Segment2d> intersection(const PolygonalSurface2d &p,const Segment2d &sg);
+std::list<Segment2d> intersection(const Segment2d &sg,const PolygonalSurface2d &p);
 
 #endif
 

@@ -24,7 +24,7 @@
 #ifndef TRIANGLE3D_H
 #define TRIANGLE3D_H
 
-#include "xc_utils/src/geom/d2/Poligono3d.h"
+#include "xc_utils/src/geom/d2/Polygon3d.h"
 
 class Plane;
 class Triangle2d;
@@ -32,12 +32,12 @@ class Triangle2d;
 //! @ingroup GEOM
 //
 //! @brief Triangle in a three-dimensional space.
-class Triangle3d: public Poligono3d
+class Triangle3d: public Polygon3d
   {
     Triangle3d(const Ref2d3d &rf,const Triangle2d &p);
 
     inline void push_back(const Pos3d &p)
-      { Poligono3d::push_back(p); }
+      { Polygon3d::push_back(p); }
   public:
     Triangle3d(void);
     Triangle3d(const Triangle3d &);

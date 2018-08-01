@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SupPoligonal2d.cc
+//PolygonalSurface2d.cc
 
-#include "SupPoligonal2d.h"
+#include "PolygonalSurface2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d1/Polyline2d.h"
 #include "xc_utils/src/geom/d2/HalfPlane2d.h"
@@ -38,7 +38,7 @@
 
 
 //! @brief Return los vertices of the polygon.
-GeomObj::list_Pos2d SupPoligonal2d::getVertices(void) const
+GeomObj::list_Pos2d PolygonalSurface2d::getVertices(void) const
   {
     unsigned int nv= GetNumVertices();
     GeomObj::list_Pos2d lv;
@@ -47,12 +47,12 @@ GeomObj::list_Pos2d SupPoligonal2d::getVertices(void) const
   }
 
 //! @brief Return la normal al lado of the polygon.
-Vector2d SupPoligonal2d::getLado0Normal(const size_t i) const
+Vector2d PolygonalSurface2d::getLado0Normal(const size_t i) const
   { return Lado0(i).Normal(); }
 
 
 //! @brief Return la normal en el vértice of the polygon.
-Vector2d SupPoligonal2d::getVertex0Normal(const size_t i) const
+Vector2d PolygonalSurface2d::getVertex0Normal(const size_t i) const
   {
     const size_t nv= GetNumVertices();
     size_t I= i-1;size_t J= i;
@@ -65,7 +65,7 @@ Vector2d SupPoligonal2d::getVertex0Normal(const size_t i) const
 
 //! @brief Return the closed polyline formed with the vertices
 //! of the polygon.
-Polyline2d SupPoligonal2d::getPolyline(void) const
+Polyline2d PolygonalSurface2d::getPolyline(void) const
   {
     Polyline2d retval;
     unsigned int nv= GetNumVertices();
@@ -75,20 +75,20 @@ Polyline2d SupPoligonal2d::getPolyline(void) const
   }
 
 
-Segment2d SupPoligonal2d::Lado0(unsigned int i, unsigned int j) const
+Segment2d PolygonalSurface2d::Lado0(unsigned int i, unsigned int j) const
   { return Segment2d(Vertice0(i),Vertice0(j)); }
-Segment2d SupPoligonal2d::Lado0(unsigned int i) const
+Segment2d PolygonalSurface2d::Lado0(unsigned int i) const
   {
     const size_t nl= GetNumLados();
     unsigned int i1= i%nl;
     unsigned int i2= (i+1)%nl;
     return Lado0(i1,i2);
   }
-Segment2d SupPoligonal2d::Lado(unsigned int i) const
+Segment2d PolygonalSurface2d::Lado(unsigned int i) const
   { return Lado0(i-1); }
 
 //! @brief Return the perimeter of the surface.
-GEOM_FT SupPoligonal2d::getLength(void) const
+GEOM_FT PolygonalSurface2d::getLength(void) const
   {
     unsigned int nl= GetNumLados();
     register GEOM_FT temp = 0;
@@ -98,11 +98,11 @@ GEOM_FT SupPoligonal2d::getLength(void) const
   }
 
 //! @brief Return the object area.
-GEOM_FT SupPoligonal2d::getArea(void) const
+GEOM_FT PolygonalSurface2d::getArea(void) const
   { return ::Abs(AreaSigno()); }
 
 //! @brief Return el valor maximo de la coordenada i.
-GEOM_FT SupPoligonal2d::GetMax(unsigned short int i) const
+GEOM_FT PolygonalSurface2d::GetMax(unsigned short int i) const
   { 
     register GEOM_FT mx= Vertice(0)(i);
     unsigned int nv= GetNumVertices();
@@ -112,7 +112,7 @@ GEOM_FT SupPoligonal2d::GetMax(unsigned short int i) const
   }
 
 //! @brief Return el valor minimo de la coordenada i.
-GEOM_FT SupPoligonal2d::GetMin(unsigned short int i) const
+GEOM_FT PolygonalSurface2d::GetMin(unsigned short int i) const
   {
     register GEOM_FT mn= Vertice(0)(i);
     unsigned int nv= GetNumVertices();
@@ -122,7 +122,7 @@ GEOM_FT SupPoligonal2d::GetMin(unsigned short int i) const
   }
 
 //! @brief Return the center of mass.
-Pos2d SupPoligonal2d::getCenterOfMass(void) const
+Pos2d PolygonalSurface2d::getCenterOfMass(void) const
   {
      const GEOM_FT area= getArea();
      return Pos2d(getMoment(1,0)/area,getMoment(0,1)/area);
@@ -131,7 +131,7 @@ Pos2d SupPoligonal2d::getCenterOfMass(void) const
 //! Return the centroid (point interior to the polygon).
 //! See the book Sistemas de Información Geográfica de
 //! Joaquín Bosque Sendra (Ed. Rialp ).
-Pos2d SupPoligonal2d::Centroide(void) const
+Pos2d PolygonalSurface2d::Centroide(void) const
   {
     Pos2d retval=getCenterOfMass();
     if(In(retval)) return retval; //If the center of mass is inside, 
@@ -150,9 +150,9 @@ Pos2d SupPoligonal2d::Centroide(void) const
 	   << "; error computing the polygon centroid: " << *this << endl;
     return retval;
   }
-GEOM_FT SupPoligonal2d::moment_sign(const int &p,const int &q) const
+GEOM_FT PolygonalSurface2d::moment_sign(const int &p,const int &q) const
   { return p_q_moment(*this,p,q); }
-GEOM_FT SupPoligonal2d::getMoment(const int &p,const int &q) const
+GEOM_FT PolygonalSurface2d::getMoment(const int &p,const int &q) const
   {
     GEOM_FT retval= moment_sign(p,q); 
     if(AreaSigno()<0) retval*=-1;
@@ -162,7 +162,7 @@ GEOM_FT SupPoligonal2d::getMoment(const int &p,const int &q) const
 //! @brief Calcula el moment of inertia with respect to an axis parallel to the
 //! x axis que pasa por the center of mass of the surface.
 //! Ix = Integral y^2 dA
-GEOM_FT SupPoligonal2d::Ix(void) const
+GEOM_FT PolygonalSurface2d::Ix(void) const
   { 
     const GEOM_FT Ixo= getMoment(0,2);
     return Ixo-getArea()*sqr(getCenterOfMass().y()); //Teorema de Steiner.
@@ -171,7 +171,7 @@ GEOM_FT SupPoligonal2d::Ix(void) const
 //! @brief Calcula el moment of inertia with respect to an axis parallel to the
 //! y axis that passes through the polygon centroid.
 //! Iy = Integral x^2 dA
-GEOM_FT SupPoligonal2d::Iy(void) const
+GEOM_FT PolygonalSurface2d::Iy(void) const
   { 
     const GEOM_FT Iyo= getMoment(2,0);
     return Iyo-getArea()*sqr(getCenterOfMass().x()); //Teorema de Steiner.
@@ -180,7 +180,7 @@ GEOM_FT SupPoligonal2d::Iy(void) const
 //! @brief Calcula el product of inertia with respect to the axis parallel
 //! to the axis x and y with origin in the polygon centroid.
 //! Pxy = Integral x*y dA
-GEOM_FT SupPoligonal2d::Pxy(void) const
+GEOM_FT PolygonalSurface2d::Pxy(void) const
   {
     const GEOM_FT Ixy= getMoment(1,1);
     const Pos2d center_of_mass=getCenterOfMass();
@@ -192,7 +192,7 @@ GEOM_FT SupPoligonal2d::Pxy(void) const
 //! @brief Return the points for which the polygon is almost tangent
 //! to the direction argument.
 // XXX Posiblemente falle con polígonos no convexos.
-GeomObj::list_Pos2d SupPoligonal2d::getApproxTangentPositions(const Vector2d &v) const
+GeomObj::list_Pos2d PolygonalSurface2d::getApproxTangentPositions(const Vector2d &v) const
   {
     const size_t sz= GetNumLados();
     std::vector<double> tangsEnVertices(sz+1);
@@ -242,7 +242,7 @@ GeomObj::list_Pos2d SupPoligonal2d::getApproxTangentPositions(const Vector2d &v)
 // correspond to point AT THE SAME SIDE OF THE POLYGON with respect
 // to the segment, otherwise the sign of the computed distance must
 // be changed.
-GEOM_FT SupPoligonal2d::DistSigno(const Pos2d &p,const bool &sentido_horario) const
+GEOM_FT PolygonalSurface2d::DistSigno(const Pos2d &p,const bool &sentido_horario) const
   {
      const short int signo= (sentido_horario ? 1 : -1);
      const size_t nv= GetNumVertices();
@@ -287,14 +287,14 @@ GEOM_FT SupPoligonal2d::DistSigno(const Pos2d &p,const bool &sentido_horario) co
 //! -The signed distances from the point to each of the planes that contain
 //! one of the sides and are perpendicular to the surface.
 //! If the point is inside the surface 0 is returned.
-GEOM_FT SupPoligonal2d::Dist(const Pos2d &p) const
+GEOM_FT PolygonalSurface2d::Dist(const Pos2d &p) const
   {
     const GEOM_FT retval= DistSigno(p);
     return (retval >= 0 ? retval : 0);
   }
 
 
-void SupPoligonal2d::Print(std::ostream &os) const
+void PolygonalSurface2d::Print(std::ostream &os) const
   {
     unsigned int nv= GetNumVertices();
     if(nv<1) return;
@@ -302,7 +302,7 @@ void SupPoligonal2d::Print(std::ostream &os) const
     for(register unsigned int i= 2; i <= nv; i++)
       os << ", " << Vertice(i);
   }
-void SupPoligonal2d::Plot(Plotter &plotter) const
+void PolygonalSurface2d::Plot(Plotter &plotter) const
   {
     unsigned int nv= GetNumVertices();
     if(nv<2) return;
@@ -317,14 +317,14 @@ void SupPoligonal2d::Plot(Plotter &plotter) const
 
 
 //! @brief Return true if the line and the polygonal surface overlap.
-bool SupPoligonal2d::Overlap(const Line2d &r) const
+bool PolygonalSurface2d::Overlap(const Line2d &r) const
   {
     GeomObj::list_Pos2d tmp= getPolyline().getIntersection(r);
     return !tmp.empty();
   }
   
 //! @brief Return true if the ray and the polygonal surface overlap.
-bool SupPoligonal2d::Overlap(const Ray2d &sr) const
+bool PolygonalSurface2d::Overlap(const Ray2d &sr) const
   {
     GeomObj::list_Pos2d tmp= getPolyline().getIntersection(sr);
     return !tmp.empty();
@@ -357,7 +357,7 @@ std::list<Segment2d> empalma(const std::list<Segment2d> &lista)
   }
 
 //! @brief Return the intersection of the polygon with the line (if exists).
-Segment2d SupPoligonal2d::Clip(const Line2d &r) const
+Segment2d PolygonalSurface2d::Clip(const Line2d &r) const
   {
     Segment2d retval;
     list<Segment2d> sg_list= sin_degenerados(intersection(*this,r));
@@ -380,7 +380,7 @@ Segment2d SupPoligonal2d::Clip(const Line2d &r) const
   }
 
 //! @brief Return the intersection of the polygon with the ray (if it exists).
-Segment2d SupPoligonal2d::Clip(const Ray2d &sr) const
+Segment2d PolygonalSurface2d::Clip(const Ray2d &sr) const
   {
     Segment2d retval;
     list<Segment2d> sg_list= sin_degenerados(intersection(*this,sr));
@@ -397,7 +397,7 @@ Segment2d SupPoligonal2d::Clip(const Ray2d &sr) const
 
 //! @brief Return the intersection of the polygon with the segment
 //! argument (if exists).
-Segment2d SupPoligonal2d::Clip(const Segment2d &sg) const
+Segment2d PolygonalSurface2d::Clip(const Segment2d &sg) const
   {
     Segment2d retval;
     list<Segment2d> sg_list= sin_degenerados(intersection(*this,sg));
@@ -413,7 +413,7 @@ Segment2d SupPoligonal2d::Clip(const Segment2d &sg) const
   }
 
 //! @brief Return the intersection of the polygon with the line.
-list<Segment2d> intersection(const SupPoligonal2d &pg,const Line2d &r)
+list<Segment2d> intersection(const PolygonalSurface2d &pg,const Line2d &r)
   {
     list<Segment2d> retval;
     if(pg.GetNumVertices()>0)
@@ -439,11 +439,11 @@ list<Segment2d> intersection(const SupPoligonal2d &pg,const Line2d &r)
   }
 
 //! @brief Return the intersection of the polygon with the line.
-list<Segment2d> intersection(const Line2d &r,const SupPoligonal2d &pg)
+list<Segment2d> intersection(const Line2d &r,const PolygonalSurface2d &pg)
   { return intersection(pg,r); }
 
 //! @brief Return the intersection of the polygon with the ray.
-list<Segment2d> intersection(const SupPoligonal2d &pg,const Ray2d &sr)
+list<Segment2d> intersection(const PolygonalSurface2d &pg,const Ray2d &sr)
   {
     
     list<Segment2d> retval;
@@ -471,11 +471,11 @@ list<Segment2d> intersection(const SupPoligonal2d &pg,const Ray2d &sr)
   }
 
 //! @brief Return the intersection of the polygon with the ray.
-list<Segment2d> intersection(const Ray2d &sr,const SupPoligonal2d &pg)
+list<Segment2d> intersection(const Ray2d &sr,const PolygonalSurface2d &pg)
   { return intersection(pg,sr); }
 
 //! @brief Return the intersection of the polygon with the segment.
-list<Segment2d> intersection(const SupPoligonal2d &pg,const Segment2d &sg)
+list<Segment2d> intersection(const PolygonalSurface2d &pg,const Segment2d &sg)
   {
     
     list<Segment2d> retval;
@@ -506,5 +506,5 @@ list<Segment2d> intersection(const SupPoligonal2d &pg,const Segment2d &sg)
   }
 
 //! @brief Return the intersection of the polygon with the segment.
-list<Segment2d> intersection(const Segment2d &sg,const SupPoligonal2d &pg)
+list<Segment2d> intersection(const Segment2d &sg,const PolygonalSurface2d &pg)
   { return intersection(pg,sg); }

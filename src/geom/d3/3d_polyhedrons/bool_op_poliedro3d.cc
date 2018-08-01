@@ -31,7 +31,7 @@
 #include "Poliedro3d.h"
 #include <CGAL/cartesian_homogeneous_conversion.h>
 #include <CGAL/Cartesian_converter.h>
-#include "MapPoligonos.h"
+#include "PolygonMap.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 
 typedef CGAL::Gmpz RT;

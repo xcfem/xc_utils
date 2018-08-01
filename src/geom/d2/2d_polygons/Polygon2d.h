@@ -19,12 +19,12 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Poligono2d.h
+//Polygon2d.h
 
-#ifndef POLIGONO2D_H
-#define POLIGONO2D_H
+#ifndef POLYGON2D_H
+#define POLYGON2D_H
 
-#include "xc_utils/src/geom/d2/poligonos2d/SupPoligonal2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/PolygonalSurface2d.h"
 
 class Trf2d;
 class HalfPlane2d;
@@ -36,26 +36,26 @@ class ListaPos2d;
 //! @ingroup GEOM
 //
 //! @brief Polígono en dos dimensiones.
-class Poligono2d: public SupPoligonal2d
+class Polygon2d: public PolygonalSurface2d
   {
-    CGPoligono_2 cgpol; //Poligono de CGAL.
+    CGPolygon_2 cgpol; //CGAL polygon.
     template <class inputIterator>
     bool Overlap(inputIterator begin, inputIterator end) const;
   public:
 
-    typedef CGPoligono_2::Vertex_iterator vertex_iterator; 
-    typedef CGPoligono_2::Vertex_circulator vertex_circulator; 
-    typedef CGPoligono_2::Edge_const_iterator edge_const_iterator; 
-    typedef CGPoligono_2::Edge_const_circulator edge_const_circulator; 
+    typedef CGPolygon_2::Vertex_iterator vertex_iterator; 
+    typedef CGPolygon_2::Vertex_circulator vertex_circulator; 
+    typedef CGPolygon_2::Edge_const_iterator edge_const_iterator; 
+    typedef CGPolygon_2::Edge_const_circulator edge_const_circulator; 
 
-    Poligono2d(void);
-    Poligono2d(const GeomObj::list_Pos2d &lv);
-    explicit Poligono2d(const CGPoligono_2 &);
-    explicit Poligono2d(const std::list<Poligono2d> &lp);
-    explicit Poligono2d(const Polyline2d &);
-    explicit Poligono2d(const boost::python::list &);
+    Polygon2d(void);
+    Polygon2d(const GeomObj::list_Pos2d &lv);
+    explicit Polygon2d(const CGPolygon_2 &);
+    explicit Polygon2d(const std::list<Polygon2d> &lp);
+    explicit Polygon2d(const Polyline2d &);
+    explicit Polygon2d(const boost::python::list &);
     virtual GeomObj *clon(void) const;
-    const CGPoligono_2 &ToCGAL(void) const
+    const CGPolygon_2 &ToCGAL(void) const
       { return cgpol; }
 
     inline virtual unsigned int GetNumVertices(void) const
@@ -109,9 +109,9 @@ class Poligono2d: public SupPoligonal2d
     //traverse the edges of the polygon p.
       { return cgpol.edges_circulator(); }
 
-    Poligono2d GetSwap(void) const
+    Polygon2d GetSwap(void) const
       {
-        Poligono2d retval(*this);
+        Polygon2d retval(*this);
         retval.Swap();
         return retval;
       }
@@ -122,12 +122,12 @@ class Poligono2d: public SupPoligonal2d
     inline void Swap(void)
       { cgpol.reverse_orientation(); }
 
-    Poligono2d Offset(const GEOM_FT &d) const;
+    Polygon2d Offset(const GEOM_FT &d) const;
 
     inline GEOM_FT AreaSigno(void) const
       { return cgpol.area(); }
     virtual GEOM_FT getArea(void) const;
-    std::vector<Poligono2d> getPoligonosTributarios(void) const;
+    std::vector<Polygon2d> getTributaryPolygons(void) const;
     std::vector<double> getTributaryAreas(void) const;
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
@@ -135,15 +135,15 @@ class Poligono2d: public SupPoligonal2d
     template <class inputIterator>
     bool In(inputIterator begin, inputIterator end) const;
     bool In(const Polyline2d &) const;
-    bool In(const Poligono2d &) const;
+    bool In(const Polygon2d &) const;
     bool Overlap(const Pos2d &) const;
     bool Overlap(const Line2d &r) const;
     bool Overlap(const Ray2d &sr) const;
     bool Overlap(const Segment2d &sg) const;
     bool Overlap(const BND2d &) const;
     bool Overlap(const Polyline2d &) const;
-    bool Overlap(const Poligono2d &) const;
-    bool Overlap(const std::list<Poligono2d> &) const;
+    bool Overlap(const Polygon2d &) const;
+    bool Overlap(const std::list<Polygon2d> &) const;
     //! @brief Return the position of the i-th vertex.
     inline Pos2d Vertice(unsigned int i) const
       { return Vertice0(i-1); }
@@ -157,36 +157,36 @@ class Poligono2d: public SupPoligonal2d
 
     std::deque<GEOM_FT> &GetRecubrimientos(const ListaPos2d &) const;
 
-    Poligono2d getUnion(const Poligono2d &other) const;
-    void une(const Poligono2d &);
-    void une(const std::list<Poligono2d> &l);
-    void clipBy(const Poligono2d &);
+    Polygon2d getUnion(const Polygon2d &other) const;
+    void une(const Polygon2d &);
+    void une(const std::list<Polygon2d> &l);
+    void clipBy(const Polygon2d &);
     Segment2d Clip(const Line2d &) const;
     Segment2d Clip(const Ray2d &) const;
     Segment2d Clip(const Segment2d &) const;
-    std::list<Poligono2d> Clip(const BND2d &bnd) const;
-    std::list<Poligono2d> Clip(const Poligono2d &) const;
+    std::list<Polygon2d> Clip(const BND2d &bnd) const;
+    std::list<Polygon2d> Clip(const Polygon2d &) const;
 
-    std::list<Poligono2d> getIntersection(const HalfPlane2d &sp) const;
+    std::list<Polygon2d> getIntersection(const HalfPlane2d &sp) const;
 
-    //std::list<Poligono2d> crea_lista_poligono2d(const std::string &str) const;
+    //std::list<Polygon2d> create_polygon2d_list(const std::string &str) const;
   };
 
-inline Poligono2d transforma(const Trf2d &trf2d,const Poligono2d &pol2d)
+inline Polygon2d transforma(const Trf2d &trf2d,const Polygon2d &pol2d)
   { return getTransformado(pol2d,trf2d); }
 
-Poligono2d append_mid_points(const Poligono2d &);
+Polygon2d append_mid_points(const Polygon2d &);
 
-std::list<Poligono2d> intersection(const Poligono2d &p1,const Poligono2d &p2);
-std::list<Poligono2d> intersection(const Poligono2d &p,const HalfPlane2d &r);
-std::list<Poligono2d> corta(const Poligono2d &p,const Line2d &r);
+std::list<Polygon2d> intersection(const Polygon2d &p1,const Polygon2d &p2);
+std::list<Polygon2d> intersection(const Polygon2d &p,const HalfPlane2d &r);
+std::list<Polygon2d> corta(const Polygon2d &p,const Line2d &r);
 
-Pos2d center_of_mass(const std::list<Poligono2d> &);
+Pos2d center_of_mass(const std::list<Polygon2d> &);
 
 //!@brief Return verdadero si todos los objetos de la secuencia
 //! están contenidos en el polígono.
 template <class inputIterator>
-bool Poligono2d::In(inputIterator begin, inputIterator end) const
+bool Polygon2d::In(inputIterator begin, inputIterator end) const
   {
     bool retval= true;
     for(inputIterator i= begin;i!=end;i++)
@@ -201,7 +201,7 @@ bool Poligono2d::In(inputIterator begin, inputIterator end) const
 //!@brief Return verdadero si alguno de los objetos de la secuencia
 //! está contenido total o parcialmente en el polígono.
 template <class inputIterator>
-bool Poligono2d::Overlap(inputIterator begin, inputIterator end) const
+bool Polygon2d::Overlap(inputIterator begin, inputIterator end) const
   {
     bool retval= false;
     for(inputIterator i= begin;i!=end;i++)

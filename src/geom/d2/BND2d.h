@@ -29,7 +29,7 @@
 
 class Segment2d;
 class Ray2d;
-class Poligono2d;
+class Polygon2d;
 class Polyline2d;
 
 
@@ -62,7 +62,7 @@ class BND2d: public GeomObj2d
     inline GEOM_FT Altura(void) const
       { return GetYMax()-GetYMin(); }
 
-    Poligono2d GetPoligono(void) const;
+    Polygon2d getPolygon(void) const;
     //! @brief Return the object length.
     inline virtual GEOM_FT getLength(void) const
       { return 2*Anchura()+2*Altura(); }
@@ -93,15 +93,15 @@ class BND2d: public GeomObj2d
     template <class inputIterator>
     bool In(inputIterator begin, inputIterator end) const;
     bool In(const Polyline2d &) const;
-    bool In(const Poligono2d &) const;
+    bool In(const Polygon2d &) const;
     bool Overlap(const Pos2d &) const;
     bool Overlap(const Line2d &r) const;
     bool Overlap(const Ray2d &sr) const;
     bool Overlap(const Segment2d &sg) const;
     bool Overlap(const BND2d &) const;
     bool Overlap(const Polyline2d &) const;
-    bool Overlap(const Poligono2d &) const;
-    bool Overlap(const std::list<Poligono2d> &) const;
+    bool Overlap(const Polygon2d &) const;
+    bool Overlap(const std::list<Polygon2d> &) const;
     bool Interseca(const Line2d &r) const;
     bool Interseca(const Ray2d &sr) const;
     bool Interseca(const Segment2d &sg) const;

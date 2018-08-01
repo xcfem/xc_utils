@@ -30,7 +30,7 @@
 
 #include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/Polygon2d.h"
 #include "xc_utils/src/geom/d2/BND2d.h"
 
 ListaPos2d::ListaPos2d(void)
@@ -178,7 +178,7 @@ GEOM_FT ListaPos2d::Iz(void) const
 std::deque<GEOM_FT> &ListaPos2d::GetSeparaciones(void) const
   { return lista_ptos.GetSeparaciones(); }
 
-std::deque<GEOM_FT> &ListaPos2d::GetRecubrimientos(const Poligono2d &plg) const
+std::deque<GEOM_FT> &ListaPos2d::GetRecubrimientos(const Polygon2d &plg) const
   { return getRecubrimientos(lista_ptos,plg); }
 
 double ListaPos2d::GetSeparacionMedia(void) const

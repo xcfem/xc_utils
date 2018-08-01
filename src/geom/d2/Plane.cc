@@ -28,7 +28,7 @@
 #include "xc_utils/src/geom/d1/Ray3d.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d1/Polyline3d.h"
-#include "xc_utils/src/geom/d2/Poligono3d.h"
+#include "xc_utils/src/geom/d2/Polygon3d.h"
 #include "xc_utils/src/geom/d2/Triangle3d.h"
 #include "xc_utils/src/geom/d3/GmGrupo3d.h"
 #include "xc_basic/src/util/mchne_eps.h"
@@ -71,9 +71,9 @@ Plane::Plane(const Pos3d &o,const Vector3d &v)
   : Superficie3d(), cgp(o.ToCGAL(),v.ToCGAL()) {}
 
 //! @brief Converts the point classification to the polygon one.
-Plane::clasif_poligono Plane::clfpnt2clfpol(const CGAL::Oriented_side os)
+Plane::polygon_classification Plane::clfpnt2clfpol(const CGAL::Oriented_side os)
   {
-    clasif_poligono retval= DETRAS;
+    polygon_classification retval= DETRAS;
     switch(os)
       {
         case CGAL::ON_NEGATIVE_SIDE:
@@ -106,7 +106,7 @@ Plane::Plane(const GeomObj3d::list_Pos3d &lp): Superficie3d(), cgp()
     GeomObj3d::list_Pos3d::const_iterator i= lp.begin();
     ThreePoints(*i,*i++,*i++);
   }
-Plane::Plane(const Poligono3d &pg3d)
+Plane::Plane(const Polygon3d &pg3d)
   : Superficie3d(), cgp()
   { *this= pg3d.getPlane(); }
 Plane::Plane(const GeneralEquationOfPlane &eg)
@@ -186,7 +186,7 @@ GeomObj3d::list_Pos3d Plane::Projection(const GeomObj3d::list_Pos3d &ptos) const
       retval.push_back(Projection(*i));
     return retval;
   }
-// Poligono Plane::Projection(const Poligono &pg) const
+// Polygono Plane::Projection(const Polygono &pg) const
 //   { return pg.Projection(*this); }
 
 //! @brief Return an arbitrary point on the plane.
@@ -247,7 +247,7 @@ GeneralEquationOfPlane Plane::getGeneralEquation(void) const
 Pos3d Plane::getCenterOfMass(void) const
   { return Point(); }
 
-Plane::clasif_poligono Plane::ClasificaPoligono(const Poligono3d &pol) const
+Plane::polygon_classification Plane::classifyPolygon(const Polygon3d &pol) const
   {
     GeomObj::list_Pos3d lv= pol.ListaVertices();
     return ClassifyPoints(lv.begin(),lv.end());

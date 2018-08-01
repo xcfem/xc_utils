@@ -27,7 +27,7 @@
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
 #include "xc_utils/src/geom/d1/Line2d.h"
 
-#include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/Polygon2d.h"
 
 
 //! @brief Builds the object from its center and its radius.
@@ -206,9 +206,9 @@ Pos2dArray AnnulusSector2d::genMesh(const size_t &nDivRad,const size_t &nDivCirc
     return retval;
   }
 
-Poligono2d AnnulusSector2d::getPoligono2d(const size_t &n) const
+Polygon2d AnnulusSector2d::getPolygon2d(const size_t &n) const
   {
-    Poligono2d retval;
+    Polygon2d retval;
     Pos2dArray ptos= getPointsOnPerimeter(n);
     for(size_t i=1;i<=n;i++)
       retval.push_back(ptos(i,2));

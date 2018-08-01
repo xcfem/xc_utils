@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 import xc_base
 import geom
-pol1=geom.Poligono2d()
+pol1=geom.Polygon2d()
 pol1.agregaVertice(geom.Pos2d(-1.,-1.))
 pol1.agregaVertice(geom.Pos2d(1.,-1.))
 pol1.agregaVertice(geom.Pos2d(1.,1.))
 pol1.agregaVertice(geom.Pos2d(-1.,1.))
 
-pol2=geom.Poligono2d(pol1)
+pol2=geom.Polygon2d(pol1)
 pol2.mueve(geom.Vector2d(1,1))
 
-pol3=geom.Poligono2d(pol1)
-pol3.clipPorPoligono(pol2)
+pol3=geom.Polygon2d(pol1)
+pol3.clipUsingPolygon(pol2)
 
 
 areaPol=pol3.getArea()

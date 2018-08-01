@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 import xc_base
 import geom
-pol1=geom.Poligono2d()
+pol1=geom.Polygon2d()
 pol1.agregaVertice(geom.Pos2d(0,0))
 pol1.agregaVertice(geom.Pos2d(1,0))
 pol1.agregaVertice(geom.Pos2d(1,1))
 pol1.agregaVertice(geom.Pos2d(0,1))
 
-pol3=geom.Poligono2d()
-pol3.unePoligono2d(pol1)
+pol3=geom.Polygon2d()
+pol3.unePolygon2d(pol1)
 
 areaPol=pol3.getArea()
 perimetroPol=pol3.getPerimetro()

@@ -26,7 +26,7 @@
 #include <plotter.h>
 #include "xc_utils/src/geom/trf/Trf2d.h"
 #include "xc_utils/src/geom/d2/BND2d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/Polygon2d.h"
 
 void plot(Plotter &plt,const GeomObj::list_Pos2d &l)
   {
@@ -59,7 +59,7 @@ BND2d getBnd(const GeomObj::list_Pos2d &l)
   { return BND2d(getPMin(l),getPMax(l)); }
 
 //! @brief Calcula los recubrimientos de las fibras.
-std::deque<GEOM_FT> &getRecubrimientos(const GeomObj::list_Pos2d &l,const Poligono2d &plg)
+std::deque<GEOM_FT> &getRecubrimientos(const GeomObj::list_Pos2d &l,const Polygon2d &plg)
   {
     const size_t sz= l.size();
     static std::deque<GEOM_FT> retval;

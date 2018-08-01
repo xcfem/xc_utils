@@ -19,40 +19,55 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//TETRAEDRO3D.h
+//PolYgonoWithHoles2d.h
 
-#ifndef TETRAEDRO3D_H
-#define TETRAEDRO3D_H
+#ifndef POLYGON_WITH_HOLES_2D_H
+#define POLYGON_WITH_HOLES_2D_H
 
-#include <iostream>
-#include "PolyhedronBase.h"
-#include "MapPoligonos.h"
+#include "xc_utils/src/geom/d2/Superficie2d.h"
 
-class HalfSpace3d;
-class Poliedro3d;
+class Line2d;
+class Ray2d;
+class Segment2d;
+class Polygon2d;
+class Polyline2d;
+
 
 //! @ingroup GEOM
 //
-//! @brief Tetraedro.
-class Tetraedro3d: public PolyhedronBase
+//! @brief Polígono que puede tener huecos.
+class PolygonWithHoles2d: public Superficie2d
   {
-    CGTetrahedron_3 cgtetraedro;
+    CGPolygonWithHoles_2 cgpol; //CGAL polygon.
   public:
-    Tetraedro3d(void);
-    Tetraedro3d(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);
-    Tetraedro3d(const HalfSpace3d &, const HalfSpace3d &,const HalfSpace3d &, const HalfSpace3d &);
-    GeomObj *clon(void) const
-      { return new Tetraedro3d(*this); }
-    Poliedro3d getPoliedro3d(void) const;
+    typedef CGPolygonWithHoles_2::Hole_const_iterator Hole_const_iterator;
+ 
+    PolygonWithHoles2d(void);
+    explicit PolygonWithHoles2d(const Polygon2d &);
+    virtual GeomObj *clon(void) const;
+
+    bool In(const Pos2d &p, const double &tol) const;
+    GEOM_FT getLength(void) const;
+    inline GEOM_FT Perimetro(void) const
+      { return getLength(); }
     GEOM_FT getArea(void) const;
-    GEOM_FT getVolumeWithSign(void) const;
-    GEOM_FT getVolume(void) const;
-    double GetMax(short unsigned int i) const;
-    double GetMin(short unsigned int i) const;
-    bool In(const Pos3d &,const double &) const;
-    void Print(std::ostream &os) const;
+    GEOM_FT GetMax(unsigned short int i) const;
+    GEOM_FT GetMin(unsigned short int i) const;
+    Pos2d getCenterOfMass(void) const;
+    GEOM_FT Ix(void) const;
+    GEOM_FT Iy(void) const;
+    GEOM_FT Pxy(void) const;
+
+    PolygonWithHoles2d getTransformado(const Trf2d &);
+    void Transforma(const Trf2d &);
+
+    void add_hole(const Polygon2d &);
+    void contour(const Polygon2d &);
+
+    void Print(std::ostream &) const;
   };
 
-MapPoligonos<CGPoliedro_3> getMapPoligonos(const Tetraedro3d &t);
-
 #endif
+
+
+

@@ -26,7 +26,7 @@
 #include "xc_utils/src/geom/pos_vec/Pos2dArray.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
 #include "xc_utils/src/geom/d1/Line2d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/Polygon2d.h"
 #include <plotter.h>
 
 #include "xc_utils/src/geom/trf/Trf2d.h"
@@ -191,9 +191,9 @@ Pos2dArray Circle2d::getPointsOnPerimeter(const size_t &n,const double &theta_in
   }
 
 //! @brief Return el polígono de n lados inscrito en la circunferencia que forma el perímetro.
-Poligono2d Circle2d::getPoligonoInscrito(const size_t &n,const double &theta_inic) const
+Polygon2d Circle2d::getInscribedPolygon(const size_t &n,const double &theta_inic) const
   {
-    Poligono2d retval;
+    Polygon2d retval;
     const Pos2dArray points= getPointsOnPerimeter(n,theta_inic);
     for(size_t i= 1;i<=n;i++)
       retval.push_back(points(i,1));

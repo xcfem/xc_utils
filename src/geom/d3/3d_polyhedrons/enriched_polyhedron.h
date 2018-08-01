@@ -33,7 +33,7 @@
 #include <CGAL/Polyhedron_3.h>
 #include <list>
 #include "xc_utils/src/geom/cgal_types.h"
-#include "MapPoligonos.h"
+#include "PolygonMap.h"
 #include <cassert>
 #include <GL/gl.h>
 #include <GL/glu.h>

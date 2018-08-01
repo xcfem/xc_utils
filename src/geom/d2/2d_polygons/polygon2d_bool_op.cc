@@ -19,11 +19,11 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//bool_op_poligono2d.cc
+//polygon2d_bool_op.cc
 //Operaciones booleanas con polígonos.
 
-#include "bool_op_poligono2d.h"
-#include "Poligono2d.h"
+#include "polygon2d_bool_op.h"
+#include "Polygon2d.h"
 #include "../../d1/Segment2d.h"
 #include "../../d1/Polyline2d.h"
 #include "xc_utils/src/geom/d2/HalfPlane2d.h"
@@ -54,9 +54,9 @@ inline double double2intdouble(const double &d)
 Point convert_point(const CGPoint_2 &p)
   { return Point(double2intdouble(p.hx()),double2intdouble(p.hy()),double2intdouble(p.hw())); }
 
-Poligono2d devuelve_poligono(const Poligono2d &p)
+Polygon2d return_polygon(const Polygon2d &p)
   {
-    Poligono2d retval;
+    Polygon2d retval;
     const size_t num_vertices= p.GetNumVertices();
     for(register size_t i=1;i<=num_vertices;i++)
       {
@@ -66,9 +66,9 @@ Poligono2d devuelve_poligono(const Poligono2d &p)
     return retval;
   }
 
-Nef_polyhedron Poligono2d_to_Nef_2(const Poligono2d &poly)
+Nef_polyhedron Polygon2d_to_Nef_2(const Polygon2d &poly)
   {
-    Poligono2d::vertex_iterator it = poly.vertices_begin();
+    Polygon2d::vertex_iterator it = poly.vertices_begin();
     std::list<Point> l_of_p;        
     while(it != poly.vertices_end())
       {
@@ -96,10 +96,10 @@ bool es_estandar(const Halfedge_around_face_const_circulator &c,const PMCDec &ex
     return retval;
   } 
 
-Poligono2d face_cycle(const Halfedge_around_face_const_circulator &c)
+Polygon2d face_cycle(const Halfedge_around_face_const_circulator &c)
   {
     
-    Poligono2d retval;
+    Polygon2d retval;
     Halfedge_around_face_const_circulator i(c);
     const Halfedge_around_face_const_circulator c_end(c);
 
@@ -112,9 +112,9 @@ Poligono2d face_cycle(const Halfedge_around_face_const_circulator &c)
     return retval;
   }
 
-std::list<Poligono2d> Nef_2_to_Poligono2d(const Nef_polyhedron &n)
+std::list<Polygon2d> Nef_2_to_Polygon2d(const Nef_polyhedron &n)
   {
-    std::list<Poligono2d> retval;
+    std::list<Polygon2d> retval;
     PMCDec D = n.explorer(); 
 
     Face_const_iterator fit = D.faces_begin();
@@ -124,23 +124,23 @@ std::list<Poligono2d> Nef_2_to_Poligono2d(const Nef_polyhedron &n)
         if(fit->mark())
           {
             if(es_estandar(hfc,D))
-              retval.push_back(Poligono2d(face_cycle(hfc)));
+              retval.push_back(Polygon2d(face_cycle(hfc)));
             Hole_const_iterator hit;
             for (hit = fit->fc_begin(); hit != fit->fc_end(); ++hit)
               {
                 hfc = Halfedge_around_face_const_circulator(hit);
                 if(es_estandar(hfc,D))
-                  retval.push_back(devuelve_poligono(Poligono2d(face_cycle(hfc))));
+                  retval.push_back(return_polygon(Polygon2d(face_cycle(hfc))));
               }
           }
       }
     return retval;
   }
 
-Nef_polyhedron une(const Poligono2d &p1,const Poligono2d &p2)
+Nef_polyhedron une(const Polygon2d &p1,const Polygon2d &p2)
   {
-    Nef_polyhedron n1=Poligono2d_to_Nef_2(p1);
-    Nef_polyhedron n2=Poligono2d_to_Nef_2(p2);
+    Nef_polyhedron n1=Polygon2d_to_Nef_2(p1);
+    Nef_polyhedron n2=Polygon2d_to_Nef_2(p2);
     if(p1.empty())
       return n2;
     else if(p2.empty())
@@ -149,20 +149,20 @@ Nef_polyhedron une(const Poligono2d &p1,const Poligono2d &p2)
       return n1.join(n2);
   }
 
-Nef_polyhedron une(const Nef_polyhedron &n1,const Poligono2d &p2)
+Nef_polyhedron une(const Nef_polyhedron &n1,const Polygon2d &p2)
   {
     if(p2.empty())
       return n1;
     else
       {
-        Nef_polyhedron n2=Poligono2d_to_Nef_2(p2);
+        Nef_polyhedron n2=Polygon2d_to_Nef_2(p2);
         return n1.join(n2);
       }
   }
 
-std::list<Poligono2d> join(const Poligono2d &p1,const Poligono2d &p2)
+std::list<Polygon2d> join(const Polygon2d &p1,const Polygon2d &p2)
   {
-    std::list<Poligono2d> retval;
+    std::list<Polygon2d> retval;
     if(p1.empty())
       if(!p2.empty())
         retval.push_back(p2);
@@ -170,25 +170,25 @@ std::list<Poligono2d> join(const Poligono2d &p1,const Poligono2d &p2)
       if(!p1.empty())
         retval.push_back(p1);
     if(!p1.empty() && !p2.empty())
-      retval= Nef_2_to_Poligono2d(une(p1,p2));
+      retval= Nef_2_to_Polygon2d(une(p1,p2));
     return retval;
   }
 
 //! @brief Return la unión de los polígonos de la lista.
-std::list<Poligono2d> join(const std::list<Poligono2d> &l)
+std::list<Polygon2d> join(const std::list<Polygon2d> &l)
   {
-    std::list<Poligono2d> retval;
+    std::list<Polygon2d> retval;
     if(!l.empty())
       {
-        std::list<Poligono2d>::const_iterator i= l.begin();
+        std::list<Polygon2d>::const_iterator i= l.begin();
         if(l.size()>1)
           {
-            Nef_polyhedron nfRetval= Poligono2d_to_Nef_2(*i);
+            Nef_polyhedron nfRetval= Polygon2d_to_Nef_2(*i);
             i++;
             for(;i!=l.end();i++)
               if(!(i->empty()))
                 nfRetval= une(nfRetval,*i);
-            retval= Nef_2_to_Poligono2d(nfRetval);
+            retval= Nef_2_to_Polygon2d(nfRetval);
           }
         else
           retval.push_back(*i);
@@ -198,9 +198,9 @@ std::list<Poligono2d> join(const std::list<Poligono2d> &l)
 
 //! @brief Return la unión de los polígonos de la lista con el que se pasa
 //! como parámetro.
-std::list<Poligono2d> join(const std::list<Poligono2d> &l,const Poligono2d &p)
+std::list<Polygon2d> join(const std::list<Polygon2d> &l,const Polygon2d &p)
   {
-    std::list<Poligono2d> retval;
+    std::list<Polygon2d> retval;
     if(p.empty())
       retval= join(l);
     else
@@ -219,20 +219,20 @@ std::list<Poligono2d> join(const std::list<Poligono2d> &l,const Poligono2d &p)
 
 //! @brief Return verdadero si el polígono pl1 se superpone
 //! el p2.
-bool overlap(const Poligono2d &p1,const Poligono2d &p2)
+bool overlap(const Polygon2d &p1,const Polygon2d &p2)
   { return p1.Overlap(p2); }
 
 //! @brief Return verdadero si alguno de los polígonos de l1 se superpone
 //! con alguno de los de l2.
-bool overlap(const std::list<Poligono2d> &l1,const std::list<Poligono2d> &l2)
+bool overlap(const std::list<Polygon2d> &l1,const std::list<Polygon2d> &l2)
   {
     bool retval= false;
     if(!l1.empty() && !l2.empty())
       {
-        for(std::list<Poligono2d>::const_iterator i= l1.begin();i!=l1.end();i++)
+        for(std::list<Polygon2d>::const_iterator i= l1.begin();i!=l1.end();i++)
           {
-            const Poligono2d &p1= *i;
-            for(std::list<Poligono2d>::const_iterator j= l2.begin();j!=l2.end();j++)
+            const Polygon2d &p1= *i;
+            for(std::list<Polygon2d>::const_iterator j= l2.begin();j!=l2.end();j++)
               if(p1.Overlap(*j))
                 {
                   retval= true;
@@ -245,15 +245,15 @@ bool overlap(const std::list<Poligono2d> &l1,const std::list<Poligono2d> &l2)
     return retval;
   }
 
-Nef_polyhedron interseca(const Poligono2d &p1,const Nef_polyhedron &n2)
+Nef_polyhedron interseca(const Polygon2d &p1,const Nef_polyhedron &n2)
   {
-    Nef_polyhedron n1=Poligono2d_to_Nef_2(p1);
+    Nef_polyhedron n1=Polygon2d_to_Nef_2(p1);
     return n1.intersection(n2);
   }
-Nef_polyhedron interseca(const Poligono2d &p1,const Poligono2d &p2)
+Nef_polyhedron interseca(const Polygon2d &p1,const Polygon2d &p2)
   {
-    Nef_polyhedron n1=Poligono2d_to_Nef_2(p1);
-    Nef_polyhedron n2=Poligono2d_to_Nef_2(p2);
+    Nef_polyhedron n1=Polygon2d_to_Nef_2(p1);
+    Nef_polyhedron n2=Polygon2d_to_Nef_2(p2);
     return n1.intersection(n2);
   }
 
@@ -262,30 +262,30 @@ Nef_polyhedron interseca(const Poligono2d &p1,const Poligono2d &p2)
 // , the function crashes when computing the intersection. The problem was
 // fixed defining the line with points that were nearer between them
 // (100 units apart).
-Nef_polyhedron interseca(const Poligono2d &p,const HalfPlane2d &sp)
+Nef_polyhedron interseca(const Polygon2d &p,const HalfPlane2d &sp)
   {
     Nef_polyhedron n2=HalfPlane2d_to_Nef_2(sp);
-    Nef_polyhedron n1=Poligono2d_to_Nef_2(p);
+    Nef_polyhedron n1=Polygon2d_to_Nef_2(p);
     Nef_polyhedron retval= n1.intersection(n2);
     return retval;
   }
 
 //! @brief Return the polygons that result from clipping the polygons on the
 //! list with the polygon argument.
-std::list<Poligono2d> clip(const std::list<Poligono2d> &l,const Poligono2d &p)
+std::list<Polygon2d> clip(const std::list<Polygon2d> &l,const Polygon2d &p)
   {
-    std::list<Poligono2d> retval;
+    std::list<Polygon2d> retval;
     if(!p.empty() && (p.getArea()>areaMin))
       {
-        Nef_polyhedron tmp=Poligono2d_to_Nef_2(p);
+        Nef_polyhedron tmp=Polygon2d_to_Nef_2(p);
         if(!l.empty())
           {
-            std::list<Poligono2d> tmpLst;
-            for(std::list<Poligono2d>::const_iterator i= l.begin();i!=l.end();i++)
+            std::list<Polygon2d> tmpLst;
+            for(std::list<Polygon2d>::const_iterator i= l.begin();i!=l.end();i++)
               {
                 if((*i).getArea()>areaMin)
                   {
-                    tmpLst= Nef_2_to_Poligono2d(interseca(*i,tmp));
+                    tmpLst= Nef_2_to_Polygon2d(interseca(*i,tmp));
                     if(!tmpLst.empty())
                       retval.insert(retval.end(),tmpLst.begin(),tmpLst.end());
                   }
@@ -296,22 +296,22 @@ std::list<Poligono2d> clip(const std::list<Poligono2d> &l,const Poligono2d &p)
   }
 
 //! @brief Return the intersection de los dos polígonos.
-std::list<Poligono2d> intersection(const Poligono2d &p1,const Poligono2d &p2)
-  { return Nef_2_to_Poligono2d(interseca(p1,p2)); }
+std::list<Polygon2d> intersection(const Polygon2d &p1,const Polygon2d &p2)
+  { return Nef_2_to_Polygon2d(interseca(p1,p2)); }
 
 //! @brief Return la intersection of the polygon and the half plane.
-std::list<Poligono2d> intersection(const Poligono2d &p,const HalfPlane2d &sp)
-  { return Nef_2_to_Poligono2d(interseca(p,sp)); }
+std::list<Polygon2d> intersection(const Polygon2d &p,const HalfPlane2d &sp)
+  { return Nef_2_to_Polygon2d(interseca(p,sp)); }
 
 //! @brief Return the intersection of the polygons in the list with the
 //! half plane.
-std::list<Poligono2d> intersection(const std::list<Poligono2d> &l,const HalfPlane2d &sp)
+std::list<Polygon2d> intersection(const std::list<Polygon2d> &l,const HalfPlane2d &sp)
   {
-    std::list<Poligono2d> retval;
+    std::list<Polygon2d> retval;
     if(!l.empty())
       {
-        std::list<Poligono2d> tmpLst;
-        for(std::list<Poligono2d>::const_iterator i= l.begin();i!=l.end();i++)
+        std::list<Polygon2d> tmpLst;
+        for(std::list<Polygon2d>::const_iterator i= l.begin();i!=l.end();i++)
           {
             tmpLst= intersection(*i,sp);
             if(!tmpLst.empty())
@@ -324,21 +324,21 @@ std::list<Poligono2d> intersection(const std::list<Poligono2d> &l,const HalfPlan
 
 //! @brief Return los polígonos que resultan de intersecar los de la lista
 //! con el que se pasa como parámetro.
-std::list<Poligono2d> intersection(const std::list<Poligono2d> &l,const Poligono2d &p)
+std::list<Polygon2d> intersection(const std::list<Polygon2d> &l,const Polygon2d &p)
   {
-    const std::list<Poligono2d> retval= clip(l,p);
+    const std::list<Polygon2d> retval= clip(l,p);
     return join(retval);
   }
 
 //! @brief Return los polígonos que resultan de intersecar los de la lista
 //! l1 con cada uno de los de la lista l2.
-std::list<Poligono2d> intersection(const std::list<Poligono2d> &l1,const std::list<Poligono2d> &l2)
+std::list<Polygon2d> intersection(const std::list<Polygon2d> &l1,const std::list<Polygon2d> &l2)
   {
-    std::list<Poligono2d> retval;
+    std::list<Polygon2d> retval;
     if(!l2.empty())
       {
-        std::list<Poligono2d> tmpLst;
-        for(std::list<Poligono2d>::const_iterator i= l2.begin();i!=l2.end();i++)
+        std::list<Polygon2d> tmpLst;
+        for(std::list<Polygon2d>::const_iterator i= l2.begin();i!=l2.end();i++)
           {
             tmpLst= intersection(l1,*i);
             if(!tmpLst.empty())
@@ -350,21 +350,21 @@ std::list<Poligono2d> intersection(const std::list<Poligono2d> &l1,const std::li
 
 //! @brief Return the partition of the common area of both polygons
 //! using the Voronoi algorithm.
-void particiona(const Pos2d &c1,Poligono2d &p1,const Pos2d &c2,Poligono2d &p2)
+void particiona(const Pos2d &c1,Polygon2d &p1,const Pos2d &c2,Polygon2d &p2)
   {
     if(overlap(p1,p2))
       {
         const Line2d m= perpendicular_bisector(c1,c2);
         const HalfPlane2d sp1(m,c1);
         const HalfPlane2d sp2(m,c2);
-        p1= Poligono2d(intersection(p1,sp1));
-        p2= Poligono2d(intersection(p2,sp2));
+        p1= Polygon2d(intersection(p1,sp1));
+        p2= Polygon2d(intersection(p2,sp2));
       }
   }
 
 //! @brief Return the partition of the common area of both polygons
 //! using the Voronoi algorithm.
-void particiona(Poligono2d &p1,Poligono2d &p2)
+void particiona(Polygon2d &p1,Polygon2d &p2)
   {
     if(overlap(p1,p2))
       {
@@ -376,7 +376,7 @@ void particiona(Poligono2d &p1,Poligono2d &p2)
 
 //! @brief Return the partition of the common area of both polygons lists
 //! using the Voronoi algorithm.
-void particiona(const Pos2d &c1,std::list<Poligono2d> &lp1,const Pos2d &c2,std::list<Poligono2d> &lp2)
+void particiona(const Pos2d &c1,std::list<Polygon2d> &lp1,const Pos2d &c2,std::list<Polygon2d> &lp2)
   {
     if(overlap(lp1,lp2))
       {
@@ -390,21 +390,21 @@ void particiona(const Pos2d &c1,std::list<Poligono2d> &lp1,const Pos2d &c2,std::
 
 
 //! @brief Return the partition using the Voronoi algorithm.
-void particiona(const std::list<Pos2d> &centros,std::list<Poligono2d> &areas)
+void particiona(const std::list<Pos2d> &centros,std::list<Polygon2d> &areas)
   {
     const size_t sz= areas.size();
     if(sz>1)
       {
         assert(centros.size()==sz);
         std::list<Pos2d>::const_iterator cI= centros.begin();
-        for(std::list<Poligono2d>::iterator i= areas.begin();i!=areas.end();i++,cI++)
+        for(std::list<Polygon2d>::iterator i= areas.begin();i!=areas.end();i++,cI++)
           {
-	    Poligono2d &pI= *i;
+	    Polygon2d &pI= *i;
             std::list<Pos2d>::const_iterator cJ= cI; cJ++;
-            std::list<Poligono2d>::iterator j= i; j++;
+            std::list<Polygon2d>::iterator j= i; j++;
             for(;j!=areas.end();j++,cJ++)
               {
-	        Poligono2d &pJ= *j;
+	        Polygon2d &pJ= *j;
                 if(overlap(pI,pJ))
                   particiona(*cI,pI,*cJ,pJ);
               }
@@ -414,12 +414,12 @@ void particiona(const std::list<Pos2d> &centros,std::list<Poligono2d> &areas)
 
 
 //! @brief Return the partition using the Voronoi algorithm.
-void particiona(std::list<Poligono2d> &areas)
+void particiona(std::list<Polygon2d> &areas)
   {
     if(areas.size()>1)
       {
         std::list<Pos2d> centros;
-        for(std::list<Poligono2d>::iterator i= areas.begin();i!=areas.end();i++)
+        for(std::list<Polygon2d>::iterator i= areas.begin();i!=areas.end();i++)
           centros.push_back((*i).getCenterOfMass());
         particiona(centros,areas);
       }

@@ -26,7 +26,7 @@
 
 #include "../d2/GeomObj2d.h"
 
-class Poligono2d;
+class Polygon2d;
 
 //! @ingroup GEOM
 //
@@ -91,7 +91,7 @@ class ListaPos2d: public GeomObj2d
     ListaPos2d Offset(const GEOM_FT &d) const;
 
     std::deque<GEOM_FT> &GetSeparaciones(void) const;
-    std::deque<GEOM_FT> &GetRecubrimientos(const Poligono2d &) const;
+    std::deque<GEOM_FT> &GetRecubrimientos(const Polygon2d &) const;
     double GetSeparacionMedia(void) const;
 
     void Print(std::ostream &stream) const;

@@ -28,7 +28,7 @@
 #include "xc_utils/src/geom/d1/Ray2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d1/Polyline2d.h"
-#include "xc_utils/src/geom/d2/poligonos2d/Poligono2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/Polygon2d.h"
 #include <iostream>
 #include <plotter.h>
 #include "xc_utils/src/geom/trf/Trf2d.h"
@@ -67,11 +67,11 @@ Pos2d BND2d::GetPMax(void) const
 Pos2d BND2d::GetPMin(void) const
   { return Pos2d(cgrectg.min()); }
 
-Poligono2d BND2d::GetPoligono(void) const
+Polygon2d BND2d::getPolygon(void) const
   {
     const Pos2d p1= GetPMin();
     const Pos2d p2= GetPMax();
-    Poligono2d retval;
+    Polygon2d retval;
     retval.push_back(p1);
     retval.push_back(Pos2d(p2.x(),p1.y()));
     retval.push_back(p2);
@@ -119,7 +119,7 @@ bool BND2d::In(const Polyline2d &p) const
   { return In(p.begin(),p.end()); }
 
 //! @brief Return verdadero si el BND contiene al polígono.
-bool BND2d::In(const Poligono2d &p) const
+bool BND2d::In(const Polygon2d &p) const
   { return In(p.vertices_begin(),p.vertices_end()); }
 
 //! @brief Return true if the boundary contains the point.
@@ -156,11 +156,11 @@ bool BND2d::Overlap(const Polyline2d &p) const
     return retval;
   }
 
-bool BND2d::Overlap(const Poligono2d &p) const
+bool BND2d::Overlap(const Polygon2d &p) const
   {
     bool retval= Overlap(p.vertices_begin(),p.vertices_end());
     if(!retval)
-      retval= p.Overlap(GetPoligono());
+      retval= p.Overlap(getPolygon());
     if(!retval)
       {
         const unsigned int nl= p.GetNumLados();
@@ -174,11 +174,11 @@ bool BND2d::Overlap(const Poligono2d &p) const
     return retval;
   }
 
-bool BND2d::Overlap(const std::list<Poligono2d> &l) const
+bool BND2d::Overlap(const std::list<Polygon2d> &l) const
   {
     bool retval= false;
     if(!l.empty())
-      for(std::list<Poligono2d>::const_iterator i=l.begin();i!=l.end();i++)
+      for(std::list<Polygon2d>::const_iterator i=l.begin();i!=l.end();i++)
         if(Overlap(*i))
           {
             retval= true;

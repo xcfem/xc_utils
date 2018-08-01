@@ -36,7 +36,7 @@ class Line3d;
 class Ray3d;
 class Segment3d;
 class Polyline3d;
-class Poligono3d;
+class Polygon3d;
 class GmGrupo3d;
 class GeneralEquationOfPlane;
 class SisCooRect2d3d;
@@ -51,10 +51,10 @@ class Plane : public Superficie3d
     CGPlane_3 cgp;
   public:
 
-    typedef enum{DELANTE,DETRAS,DENTRO,CRUZA} clasif_poligono;
+    typedef enum{DELANTE,DETRAS,DENTRO,CRUZA} polygon_classification;
 
   protected:
-    static clasif_poligono clfpnt2clfpol(const CGAL::Oriented_side os);
+    static polygon_classification clfpnt2clfpol(const CGAL::Oriented_side os);
   public:
     Plane(void);
     explicit Plane(const CGPlane_3 &cgp);
@@ -63,7 +63,7 @@ class Plane : public Superficie3d
     Plane(const Pos3d &p,const Vector3d &v1,const Vector3d &v2);
     Plane(const Line3d &r,const Pos3d &p);
     Plane(const Segment3d &s,const Vector3d &v);
-    Plane(const Poligono3d &trg);
+    Plane(const Polygon3d &trg);
     Plane(const Plane &);
     Plane(const GeneralEquationOfPlane &eg);
     Plane(const GeomObj3d::list_Pos3d &lp);
@@ -81,7 +81,7 @@ class Plane : public Superficie3d
     Vector3d Projection(const Vector3d &) const;
     Line3d Projection(const Line3d &) const;
     GeomObj3d::list_Pos3d Projection(const GeomObj3d::list_Pos3d &) const;
-    //Poligono3d Projection(const Poligono3d &) const;
+    //Polygon3d Projection(const Polygon3d &) const;
 
     virtual Vector3d Normal(void) const;
     Vector3d Base1(void) const;
@@ -99,8 +99,8 @@ class Plane : public Superficie3d
     CGAL::Oriented_side ClassifyPoint(const Pos3d &p) const;
 
     template <typename InputIterator>
-    clasif_poligono ClassifyPoints(InputIterator first,InputIterator last) const;
-    clasif_poligono ClasificaPoligono(const Poligono3d &pol) const;
+    polygon_classification ClassifyPoints(InputIterator first,InputIterator last) const;
+    polygon_classification classifyPolygon(const Polygon3d &pol) const;
 
     GEOM_FT PseudoDist(const Pos3d &p) const;
     GEOM_FT PseudoDist2(const Pos3d &p) const;
@@ -198,7 +198,7 @@ Pos3d intersection_point(const Segment3d &r, const Plane &p);
 GeomObj3d::list_Pos3d intersection_points(const std::deque<Plane> &);
 
 template <typename InputIterator>
-Plane::clasif_poligono Plane::ClassifyPoints(InputIterator first,InputIterator last) const
+Plane::polygon_classification Plane::ClassifyPoints(InputIterator first,InputIterator last) const
   {
     InputIterator i= first;
     CGAL::Oriented_side cf_pinic= ClassifyPoint(*i); i++;

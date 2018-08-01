@@ -80,10 +80,10 @@ GTSSurface Triang3dMesh::get_gts_surface(void) const
   {
      GTSSurface retval;
 //     Triang3dMesh tmp= Triangula();
-//     typedef MapPoligonos<CGTriangMesh_3> map_poligonos;
-//     map_poligonos map= GetMapPoligonos();
+//     typedef PolygonMap<CGTriangMesh_3> polygon_map;
+//     polygon_map map= GetPolygonMap();
 //     deque<GTSVertex> vertices;
-//     for(map_poligonos::vertices_const_iterator i= map.VerticesBegin();
+//     for(polygon_map::vertices_const_iterator i= map.VerticesBegin();
 //         i!= map.VerticesEnd(); i++)
 //       {
 //         Pos3d pos= (*i).second;
@@ -94,7 +94,7 @@ GTSSurface Triang3dMesh::get_gts_surface(void) const
 //     typedef set<verts_arista > set_aristas;
 //     set_aristas s_aristas;
 //     deque<GTSEdge> aristas;
-//     for(map_poligonos::caras_const_iterator i= map.CarasBegin();
+//     for(polygon_map::caras_const_iterator i= map.CarasBegin();
 //         i!= map.CarasEnd(); i++)
 //       {
 //         const size_t v1= (*i).Vertice(1);

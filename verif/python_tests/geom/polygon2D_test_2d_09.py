@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import xc_base
 import geom
-pol1=geom.Poligono2d()
-pol2=geom.Poligono2d()
-pol3=geom.Poligono2d()
+pol1=geom.Polygon2d()
+pol2=geom.Polygon2d()
+pol3=geom.Polygon2d()
 
 pList= geom.polygon_2D_list()
 pList.append(pol1)

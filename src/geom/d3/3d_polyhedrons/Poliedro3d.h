@@ -27,13 +27,13 @@
 #include <iostream>
 #include "PolyhedronBase.h"
 #include "../../cgal_types.h"
-#include "MapPoligonos.h"
+#include "PolygonMap.h"
 #include "enriched_polyhedron.h"
 
 class Plane;
 class HalfSpace3d;
 class Triang3dMesh;
-class Poligono3d;
+class Polygon3d;
 
 
 //! @ingroup GEOM
@@ -118,8 +118,8 @@ class Poliedro3d: public PolyhedronBase
 
     GeomObj::list_Pos3d GetVerticesCara(const Facet_const_iterator &f) const;
     Plane getPlaneFromFace(const Facet_const_iterator &fi) const;
-    Poligono3d GetCara(const Facet_const_iterator &f) const;
-    std::deque<Poligono3d> GetCaras(void) const;
+    Polygon3d GetCara(const Facet_const_iterator &f) const;
+    std::deque<Polygon3d> GetCaras(void) const;
 
     GeomObj::list_Pos3d getVertices(void) const;
 
@@ -127,8 +127,8 @@ class Poliedro3d: public PolyhedronBase
 
     bool TocaCuadrante(const int &) const;
 
-    MapPoligonos<CGPoliedro_3> GetMapPoligonos(void) const
-      { return getMapPoligonos(cgpoliedro); }
+    PolygonMap<CGPoliedro_3> GetPolygonMap(void) const
+      { return getPolygonMap(cgpoliedro); }
     EPoliedro GetEnriquecido(void) const;
     Triang3dMesh Triangula(void) const;
 
@@ -152,8 +152,8 @@ class Poliedro3d: public PolyhedronBase
 
 CGview_stream &operator<<(CGview_stream &v,const Poliedro3d &p);
 
-inline MapPoligonos<CGPoliedro_3> getMapPoligonos(const Poliedro3d &p)
-  { return p.GetMapPoligonos(); }
+inline PolygonMap<CGPoliedro_3> getPolygonMap(const Poliedro3d &p)
+  { return p.GetPolygonMap(); }
 inline EPoliedro enriquece(const Poliedro3d &p)
   { return p.GetEnriquecido(); }
 
