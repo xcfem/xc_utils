@@ -54,7 +54,7 @@ class_<Ray3d, bases<Linear3d> >("Ray3d")
 
 GEOM_FT (Segment3d::*AngleVector3D)(const Vector3d &v) const= &Segment3d::getAngle;
 GEOM_FT (Segment3d::*AngleSegment3D)(const Segment3d &v) const= &Segment3d::getAngle;
-class_<Segment3d, bases<Linear3d> >("LineSegment3d")
+class_<Segment3d, bases<Linear3d> >("Segment3d")
   .def(init<>())
   .def(init<Pos3d,Pos3d>())
   .def("getOrigen", &Segment3d::Origen)
