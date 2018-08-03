@@ -115,7 +115,9 @@ class_<Plane, bases<Superficie3d> >("Plane3d")
   .def("linearLeastSquaresFitting", &Plane::linearLeastSquaresFitting,"compute the plane that best suits the point cloud.")
   ;
 
-class_<Polygon3d, bases<D2to3d> >("Polygon3d");
+class_<Polygon3d, bases<D2to3d> >("Polygon3d")
+  .def("getArea",&Polygon3d::getArea, "Return the object area.")
+  ;
 
 class_<Triangle3d, bases<Polygon3d>  >("Triangle3d")
   .def(init<Pos3d,Pos3d,Pos3d>())
