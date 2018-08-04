@@ -55,7 +55,8 @@ class_<PartialSafetyFactorsMap, bases<factors_map_partial_safety_factors> >("Par
 
 class_<CombinationFactors, bases<EntCmd> >("CombinationFactors")
   .def(init<double, double, double>())
-.def("getCombinationFactor", &CombinationFactors::getCombinationFactor, return_value_policy<copy_const_reference>(),"Return the r-th combination factor.");
+  .def("getCombinationFactor", &CombinationFactors::getCombinationFactor, return_value_policy<copy_const_reference>(),"Return the r-th combination factor.")
+  ;
 
 typedef std::map<std::string,CombinationFactors> map_combination_factors;
 class_<map_combination_factors >("map_combination_factors")

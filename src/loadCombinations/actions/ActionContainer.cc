@@ -58,7 +58,11 @@ cmb_acc::ActionRValue &cmb_acc::ActionContainer::insert(const std::string &famil
       {
         std::cerr << getClassName() << "::" << __FUNCTION__
 	          << "; load family: '"
-                  << familia << "' not found. Added to variable loads.\n";
+                  << familia << "' not found."
+	          << " Candidates are: "
+	          << " permanentes, permanentes_nc, variables,"
+	          << " accidentales and sismicas."
+	          << " Added to variable loads.\n";
         return Q.insert(acc,combination_factors_name,partial_safety_factors_name);
       }
   }

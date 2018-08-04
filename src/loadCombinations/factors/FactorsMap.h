@@ -39,71 +39,100 @@ class LoadCombinationVector;
 template <class Factors>
 class FactorsMap: public EntCmd, public std::map<std::string,Factors>
   {
+  public:
+    typedef typename std::map<std::string,Factors>::const_iterator const_iterator;
+    typedef typename std::map<std::string,Factors>::iterator iterator;
   private:
     static Factors default_factors; //!< Default values (all =1.0).
-    bool exists(const std::string &nmb) const;
-    Factors *getPtrCoefs(const std::string &nmb);
-    Factors *crea_coefs(const std::string &nmb);
+    bool exists(const std::string &) const;
+    Factors *getPtrCoefs(const std::string &);
+    Factors *crea_coefs(const std::string &);
+    void print_err_not_found(const std::string &, const std::string &) const;
   public:
     FactorsMap(void);
     static inline const Factors &getCoefsPorDefecto(void)
       { return default_factors; }
-    const Factors *getPtrCoefs(const std::string &nmb) const;
-    const Factors &BuscaCoefs(const std::string &nmb) const;
+    const Factors *getPtrCoefs(const std::string &) const;
+    const Factors &BuscaCoefs(const std::string &) const;
     void insert(const std::string &,const Factors &);
+    std::deque<std::string> getNames(void) const;
   };
 
 template <class Factors>
 Factors FactorsMap<Factors>::default_factors;
 
-//! @brief Return verdadero si la familia existe.
+//! @brief Return true if the name exists.
 template <class Factors>
-bool FactorsMap<Factors>::exists(const std::string &nmb) const
-  { return (this->find(nmb)!=this->end()); }
+bool FactorsMap<Factors>::exists(const std::string &name) const
+  { return (this->find(name)!=this->end()); }
+
+//! @brief Error message when name not found.
+template <class Factors>
+void FactorsMap<Factors>::print_err_not_found(const std::string &functionName, const std::string &name) const
+   {
+      std::cerr << getClassName() << "::" << functionName
+		<< "; factors with name: '"
+		<< name << "' not found." << std::endl
+		<< " candidates are: ";
+      const std::deque<std::string> candidates= this->getNames();
+      if(!candidates.empty())
+	{
+	  std::deque<std::string>::const_iterator i= candidates.begin();
+	  std::cerr << *i;
+	  i++;
+          for(;i!=candidates.end();i++)
+	    std::cerr << ", " << *i;
+	  std::cerr << std::endl;
+	}
+   }
+   
+//! @brief Return the names of the factor families.
+template <class Factors>
+std::deque<std::string> FactorsMap<Factors>::getNames(void) const
+  {
+    std::deque<std::string> retval;
+    for(const_iterator i= this->begin();i!= this->end();i++)
+      retval.push_back(i->first);
+    return retval;
+  }
+
  
+//! @brief Return a pointer to the factors named with the string
+//! argument.
+template <class Factors>
+Factors *FactorsMap<Factors>::getPtrCoefs(const std::string &name)
+  {
+    Factors *retval= nullptr;
+    if(this->exists(name))
+      retval= &((*this)[name]);
+    else
+      this->print_err_not_found(__FUNCTION__,name);
+    return retval;
+  }
+
 //! @brief Return un apuntador a los coeficientes cuyo nombre se pasa como parámetro.
 template <class Factors>
-Factors *FactorsMap<Factors>::getPtrCoefs(const std::string &nmb)
+const Factors &FactorsMap<Factors>::BuscaCoefs(const std::string &name) const
   {
-    if(this->exists(nmb))
-      return &((*this)[nmb]);
+    if(this->exists(name))
+      return this->find(name)->second;
     else
       {
-	std::cerr << getClassName() << "::" << __FUNCTION__
-	          << "; factors with name: '"
-                  << nmb << "' not found." << std::endl;
-        return nullptr;
+        this->print_err_not_found(__FUNCTION__,name);
+	return default_factors;
       }
   }
 
 //! @brief Return un apuntador a los coeficientes cuyo nombre se pasa como parámetro.
 template <class Factors>
-const Factors &FactorsMap<Factors>::BuscaCoefs(const std::string &nmb) const
+const Factors *FactorsMap<Factors>::getPtrCoefs(const std::string &name) const
   {
-    if(this->exists(nmb))
-      return this->find(nmb)->second;
+    const Factors *retval= nullptr;
+    if(this->exists(name))
+      retval= &(this->find(name)->second);
     else
-      {
-	std::cerr << getClassName() << "::" << __FUNCTION__
-		  << "; factors with name: '"
-                  << nmb << "' not found." << std::endl;
-        return default_factors;
-      }
-  }
-
-//! @brief Return un apuntador a los coeficientes cuyo nombre se pasa como parámetro.
-template <class Factors>
-const Factors *FactorsMap<Factors>::getPtrCoefs(const std::string &nmb) const
-  {
-    if(this->exists(nmb))
-      return &(this->find(nmb)->second);
-    else
-      {
-	std::cerr << getClassName() << "::" << __FUNCTION__
-		  << "; factors with name: '"
-                  << nmb << "' not found." << std::endl;
-        return nullptr;
-      }
+      this->print_err_not_found(__FUNCTION__,name);
+    return retval;
   }
 
 //! @brief Default constructor.
@@ -113,24 +142,24 @@ FactorsMap<Factors>::FactorsMap(void)
 
 //! @brief Crea coeficientes con el nombre que se le pasa como parámetro.
 template <class Factors>
-Factors *FactorsMap<Factors>::crea_coefs(const std::string &nmb)
+Factors *FactorsMap<Factors>::crea_coefs(const std::string &name)
   {
     Factors *retval= nullptr;
-    if(this->exists(nmb))
-      retval= &(this->find(nmb)->second);
+    if(this->exists(name))
+      retval= &(this->find(name)->second);
     else //los coeficientes son nuevos.
       {
         Factors tmp;
-        (*this)[nmb]= tmp;
-        retval= getPtrCoefs(nmb);
+        (*this)[name]= tmp;
+        retval= getPtrCoefs(name);
       }
     return retval;
   }
 
 //! @brief Inserts the coefficients.
 template <class Factors>
-void FactorsMap<Factors>::insert(const std::string &nmb,const Factors &c)
-  { (*this)[nmb]= c; }
+void FactorsMap<Factors>::insert(const std::string &name,const Factors &c)
+  { (*this)[name]= c; }
 
 } // fin namespace cmb_acc
 

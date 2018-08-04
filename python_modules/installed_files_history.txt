@@ -185,6 +185,8 @@
 /usr/local/lib/python2.7/dist-packages/loadCombinationUtils/iap.pyc
 /usr/local/lib/python2.7/dist-packages/loadCombinationUtils/__init__.py
 /usr/local/lib/python2.7/dist-packages/loadCombinationUtils/__init__.pyc
+/usr/local/lib/python2.7/dist-packages/loadCombinationUtils/sia260.py
+/usr/local/lib/python2.7/dist-packages/loadCombinationUtils/sia260.pyc
 /usr/local/lib/python2.7/dist-packages/loadCombinationUtils/sia260_uls_type_2.py
 /usr/local/lib/python2.7/dist-packages/loadCombinationUtils/sia260_uls_type_2.pyc
 /usr/local/lib/python2.7/dist-packages/loadCombinationUtils/utils.py
