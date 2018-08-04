@@ -13,7 +13,7 @@ kh= 0.096 # seismic coefficient of horizontal acceleration.
 kv= kh/2.0 # seismic coefficient of vertical acceleration.
 Kas= 1.0/3.0 #static earth pressure coefficient
 gamma_soil= 20e3 #unit weight of soil (backfill)
-psi= math.radians(90) #back face inclination of the structure (< PI/2)
+psi= math.radians(90) #back face inclination of the structure (<= PI/2)
 beta= 0 #slope inclination of backfill.
 delta_ad= 0 #angle of friction soil - structure.
 theta1= math.radians(5.3)
