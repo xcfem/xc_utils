@@ -50,8 +50,6 @@ class FactorsMap: public EntCmd, public std::map<std::string,Factors>
     void print_err_not_found(const std::string &, const std::string &) const;
   public:
     FactorsMap(void);
-    static inline const Factors &getCoefsPorDefecto(void)
-      { return default_factors; }
     const Factors *getPtrCoefs(const std::string &) const;
     const Factors &BuscaCoefs(const std::string &) const;
     void insert(const std::string &,const Factors &);

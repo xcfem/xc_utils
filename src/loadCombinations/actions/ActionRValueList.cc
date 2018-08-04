@@ -116,8 +116,8 @@ cmb_acc::Variations cmb_acc::ActionRValueList::computeVariations(const bool &uls
     i++;
     for(;i!=end();i++)
       {
-	Variations v= i->getVariations(uls,sit_accidental);
-	retval= Variations::prod_cartesiano(v,retval);
+	v= i->getVariations(uls,sit_accidental);
+	retval= Variations::prod_cartesiano(retval,v); //Order is important (LCPT 4/08/2018) 
       }
     if(retval.empty())
       std::cerr << getClassName() << "::" << __FUNCTION__

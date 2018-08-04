@@ -34,15 +34,15 @@
 //! @brief Default constructor.
 cmb_acc::ActionRValue::ActionRValue(const std::string &n, const std::string &descrip,ActionRValueList *fam)
   : Action(n,descrip), acc_familia(fam),
-    partial_safety_factors(&PartialSafetyFactorsMap::getCoefsPorDefecto()),
-    combination_factors(&CombinationFactorsMap::getCoefsPorDefecto())
+    partial_safety_factors(nullptr),
+    combination_factors(nullptr)
    {}
 
 //! @brief Default constructor.
 cmb_acc::ActionRValue::ActionRValue(const Action &a,ActionRValueList *fam,const std::string &nmb_combination_factors, const std::string &nmb_partial_safety_factors)
   : Action(a), acc_familia(fam),
-    partial_safety_factors(&PartialSafetyFactorsMap::getCoefsPorDefecto()),
-    combination_factors(&CombinationFactorsMap::getCoefsPorDefecto())
+    partial_safety_factors(nullptr),
+    combination_factors(nullptr)
   {
     setPartialSafetyFactors(nmb_partial_safety_factors);
     setCombinationFactors(nmb_combination_factors);
@@ -100,7 +100,7 @@ void cmb_acc::ActionRValue::setPartialSafetyFactors(const std::string &nmb_facto
 	else
           std::cerr << getClassName() << "::" << __FUNCTION__
 	            << "; combination factors with name: '" << nmb_factors
-	            << "' not found." << std::endl;	  
+	            << "' not found." << std::endl;
       }
   }
 
@@ -170,6 +170,8 @@ cmb_acc::Action cmb_acc::ActionRValue::getCombinationValue(const LeadingActionIn
 void cmb_acc::ActionRValue::Print(std::ostream &os) const
   {
     Action::Print(os);
+    if(partial_safety_factors)
+      os << "; " << *partial_safety_factors;
     if(combination_factors)
       os << "; " << *combination_factors;
   }
