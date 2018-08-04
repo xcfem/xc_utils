@@ -52,8 +52,8 @@ GEOM_FT Circle3d::getSquaredRadius(void) const
   { return circ.getSquaredRadius(); }
 GEOM_FT Circle3d::getRadius(void) const
   { return circ.getRadius(); }
-GEOM_FT Circle3d::Diametro(void) const
-  { return circ.Diametro(); }
+GEOM_FT Circle3d::getDiameter(void) const
+  { return circ.getDiameter(); }
 double Circle3d::getAngle(const Pos3d &p) const
   { return circ.getAngle(to_2d(p)); }
 GEOM_FT Circle3d::Ix(void) const

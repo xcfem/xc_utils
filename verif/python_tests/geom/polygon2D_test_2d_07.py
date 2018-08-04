@@ -7,10 +7,10 @@ pol1.agregaVertice(geom.Pos2d(1,0))
 pol1.agregaVertice(geom.Pos2d(1,1))
 pol1.agregaVertice(geom.Pos2d(0,1))
 
-perimPol1=pol1.getPerimetro()
+perimPol1=pol1.getPerimeter()
 
 pol2=pol1.offset(-0.25)
-perimPol2=pol2.getPerimetro()
+perimPol2=pol2.getPerimeter()
 
 ratio1= (perimPol1-4)/4.
 ratio2= (perimPol2-2)/2.

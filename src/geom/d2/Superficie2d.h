@@ -42,7 +42,7 @@ class Superficie2d : public GeomObj2d
     virtual GEOM_FT getLength(void) const
       { return 0.0; }
     //! @brief Return the object perimeter.
-    GEOM_FT Perimetro(void) const
+    GEOM_FT getPerimeter(void) const
       { return getLength(); }
     //! @brief Return the object area.
     virtual GEOM_FT getArea(void) const;

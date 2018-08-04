@@ -69,7 +69,7 @@ class PolygonalSurface2d: public Superficie2d
     Vector2d getVertex0Normal(const size_t i) const;
     Polyline2d getPolyline(void) const;
     virtual GEOM_FT getLength(void) const;
-    inline GEOM_FT Perimetro(void) const
+    inline GEOM_FT getPerimeter(void) const
       { return getLength(); }
     inline GEOM_FT AreaSigno(void) const
       { return moment_sign(0,0); }

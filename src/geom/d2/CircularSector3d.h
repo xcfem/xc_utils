@@ -52,7 +52,7 @@ class CircularSector3d : public D2to3d
     virtual Pos3d ArcCentroid(void) const;
     GEOM_FT getSquaredRadius(void) const;
     GEOM_FT getRadius(void) const;
-    GEOM_FT Diametro(void) const;
+    GEOM_FT getDiameter(void) const;
     inline double getIncludedAngle(void) const
       { return sect_circ.getIncludedAngle(); }
     double getAngle(const Pos3d &) const;
@@ -62,7 +62,7 @@ class CircularSector3d : public D2to3d
     virtual GEOM_FT getArcLength(void) const
       { return sect_circ.getArcLength(); }
     //! @brief Return the perimeter of the object.
-    inline GEOM_FT Perimetro(void) const
+    inline GEOM_FT getPerimeter(void) const
       { return getLength(); }
     //! @brief Return the area of the object.
     virtual GEOM_FT getArea(void) const

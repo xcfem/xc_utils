@@ -62,12 +62,12 @@ class Circle2d : public Superficie2d
     inline GEOM_FT getSquaredRadius(void) const
       { return cgcirc.squared_radius(); }
     GEOM_FT getRadius(void) const;
-    inline GEOM_FT Diametro(void) const
+    inline GEOM_FT getDiameter(void) const
       { return 2*getRadius(); }
     double getAngle(const Pos2d &p) const;
     virtual GEOM_FT getLength(void) const;
     //! @brief Return the perimeter of the object.
-    inline GEOM_FT Perimetro(void) const
+    inline GEOM_FT getPerimeter(void) const
       { return getLength(); }
     virtual double getIncludedAngle(void) const;
     virtual GEOM_FT getArea(void) const;

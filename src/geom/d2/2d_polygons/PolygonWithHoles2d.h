@@ -48,7 +48,7 @@ class PolygonWithHoles2d: public Superficie2d
 
     bool In(const Pos2d &p, const double &tol) const;
     GEOM_FT getLength(void) const;
-    inline GEOM_FT Perimetro(void) const
+    inline GEOM_FT getPerimeter(void) const
       { return getLength(); }
     GEOM_FT getArea(void) const;
     GEOM_FT GetMax(unsigned short int i) const;

@@ -3,7 +3,7 @@ import xc_base
 import geom
 import math
 
-perimetroTeorico=6+math.sqrt(2)
+referencePerimeter=6+math.sqrt(2)
 
 pol1=geom.Polygon2d()
 pol1.agregaVertice(geom.Pos2d(-1.,-1.))
@@ -18,10 +18,10 @@ list1=[pol1,pol2]
 list1=geom.particiona(list1)
 
 p1=list1[0]
-ratio1=(p1.getPerimetro()-perimetroTeorico)/perimetroTeorico
+ratio1=(p1.getPerimeter()-referencePerimeter)/referencePerimeter
 
 p2=list1[1]
-ratio2=(p2.getPerimetro()-perimetroTeorico)/perimetroTeorico
+ratio2=(p2.getPerimeter()-referencePerimeter)/referencePerimeter
 
 import os
 fname= os.path.basename(__file__)

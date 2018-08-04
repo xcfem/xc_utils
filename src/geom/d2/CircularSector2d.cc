@@ -137,7 +137,7 @@ GEOM_FT CircularSector2d::getArcLength(void) const
 
 //! @brief Return the length of the circular sector.
 GEOM_FT CircularSector2d::getLength(void) const
-  { return getArcLength()+ Diametro(); }
+  { return getArcLength()+ getDiameter(); }
 
 //! @brief Return the area of the circular sector.
 GEOM_FT CircularSector2d::getArea(void) const

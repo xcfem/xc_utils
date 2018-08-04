@@ -126,7 +126,7 @@ double Circle2d::getAngle(const Pos2d &p) const
 
 //! @brief Return the length of the círcle.
 GEOM_FT Circle2d::getLength(void) const
-  { return M_PI_FT*Diametro(); }
+  { return M_PI_FT*getDiameter(); }
 //! @brief Return the area of the circle.
 GEOM_FT Circle2d::getArea(void) const
   { return M_PI_FT*getSquaredRadius(); }

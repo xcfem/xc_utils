@@ -108,8 +108,8 @@ GEOM_FT CircularSector3d::getSquaredRadius(void) const
   { return sect_circ.getSquaredRadius(); }
 GEOM_FT CircularSector3d::getRadius(void) const
   { return sect_circ.getRadius(); }
-GEOM_FT CircularSector3d::Diametro(void) const
-  { return sect_circ.Diametro(); }
+GEOM_FT CircularSector3d::getDiameter(void) const
+  { return sect_circ.getDiameter(); }
 
 double CircularSector3d::getAngle(const Pos3d &p) const
   { return sect_circ.getAngle(to_2d(p)); }

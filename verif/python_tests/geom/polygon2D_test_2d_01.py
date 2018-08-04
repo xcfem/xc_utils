@@ -7,7 +7,7 @@ pol1.agregaVertice(geom.Pos2d(1,0))
 pol1.agregaVertice(geom.Pos2d(1,1))
 pol1.agregaVertice(geom.Pos2d(0,1))
 areaPol=pol1.getArea()
-perimetroPol= pol1.getPerimetro()
+polygonPerimeter= pol1.getPerimeter()
 polygonCenterOfMass=pol1.getCenterOfMass()
 polygonCenterOfMassX=polygonCenterOfMass.x
 polygonCenterOfMassY=polygonCenterOfMass.y
@@ -16,7 +16,7 @@ IyPol=pol1.getIy()
 PxyPol=pol1.getPxy()
 
 ratio1= (areaPol-1)
-ratio2= (perimetroPol-4)/4.
+ratio2= (polygonPerimeter-4)/4.
 ratio3= (polygonCenterOfMassX-0.5)/0.5
 ratio4= (polygonCenterOfMassY-0.5)/0.5
 ratio5= (IxPol-(1/12.0))/(1/12.0)

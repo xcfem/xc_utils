@@ -7,7 +7,7 @@ import math
 circ1=geom.Circle2d(geom.Pos2d(0.0,0.0),1.0)
 
 areaCirc=circ1.getArea()
-perimetroCirc= circ1.getPerimetro()
+circlePerimeter= circ1.getPerimeter()
 circleCenterOfMassX= circ1.getCenterOfMass().x
 circleCenterOfMassY= circ1.getCenterOfMass().y
 IxCirc=circ1.getIx()
@@ -15,7 +15,7 @@ IyCirc=circ1.getIy()
 PxyCirc=circ1.getPxy()
 
 ratio1=areaCirc-math.pi
-ratio2=(perimetroCirc-2*math.pi)/2*math.pi
+ratio2=(circlePerimeter-2*math.pi)/2*math.pi
 ratio3=circleCenterOfMassX
 ratio4=circleCenterOfMassY
 ratio5=(IxCirc-(math.pi/4.))/(math.pi/4.)

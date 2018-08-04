@@ -54,13 +54,13 @@ class Circle3d : public D2to3d
     virtual Pos3d getCenterOfMass(void) const;
     GEOM_FT getSquaredRadius(void) const;
     GEOM_FT getRadius(void) const;
-    GEOM_FT Diametro(void) const;
+    GEOM_FT getDiameter(void) const;
     double getAngle(const Pos3d &p) const;
     //! @brief Return the length of the object.
     virtual GEOM_FT getLength(void) const
       { return circ.getLength(); }
     //! @brief Return the perimeter of the object.
-    inline GEOM_FT Perimetro(void) const
+    inline GEOM_FT getPerimeter(void) const
       { return getLength(); }
     //! @brief Return the area of the object.
     virtual GEOM_FT getArea(void) const

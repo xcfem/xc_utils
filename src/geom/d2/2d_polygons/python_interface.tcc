@@ -24,7 +24,7 @@
 
 Segment2d (PolygonalSurface2d::*getSide0Segment)(unsigned int i) const= &PolygonalSurface2d::Lado0;
 class_<PolygonalSurface2d, bases<Superficie2d>, boost::noncopyable >("PolygonalSurface2d", no_init)
-  .def("getPerimetro",&PolygonalSurface2d::Perimetro)
+  .def("getPerimeter",&PolygonalSurface2d::getPerimeter)
   .def("getCenterOfMass",&PolygonalSurface2d::getCenterOfMass)
   .def("getIx",&PolygonalSurface2d::Ix)
   .def("getIy",&PolygonalSurface2d::Iy)
