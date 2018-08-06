@@ -33,28 +33,40 @@
 #include <plotter.h>
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
+//! @brief Constructor.
+BND2d::BND2d(void)
+  : GeomObj2d(),cgrectg(), undefined(true) {}
+
+//! @brief Constructor.
 BND2d::BND2d(const Pos2d &p_min,const Pos2d &p_max)
-  : GeomObj2d(), cgrectg(p_min.ToCGAL(),p_max.ToCGAL()) {}
+  : GeomObj2d(), cgrectg(p_min.ToCGAL(),p_max.ToCGAL()), undefined(false) {}
 
 void BND2d::Update(const Pos2d &p)
   {
-    if(!In(p))
+    if(undefined)
       {
-        GEOM_FT xmin= GetXMin();
-        GEOM_FT xmax= GetXMax();
-        GEOM_FT ymin= GetYMin();
-        GEOM_FT ymax= GetYMax();
-        if(p.x()< xmin)
-          xmin= p.x();
-        else if(p.x()>xmax)
-          xmax= p.x();
-        if(p.y()<ymin)
-          ymin= p.y();
-        else if(p.y()>ymax)
-          ymax= p.y();
-        PutPMin(Pos2d(xmin,ymin));
-        PutPMax(Pos2d(xmax,ymax));
+	PutPMin(p);
+	PutPMax(p);
+	undefined= false;
       }
+    else
+      if(!In(p))
+	{
+	  GEOM_FT xmin= GetXMin();
+	  GEOM_FT xmax= GetXMax();
+	  GEOM_FT ymin= GetYMin();
+	  GEOM_FT ymax= GetYMax();
+	  if(p.x()< xmin)
+	    xmin= p.x();
+	  else if(p.x()>xmax)
+	    xmax= p.x();
+	  if(p.y()<ymin)
+	    ymin= p.y();
+	  else if(p.y()>ymax)
+	    ymax= p.y();
+	  PutPMin(Pos2d(xmin,ymin));
+	  PutPMax(Pos2d(xmax,ymax));
+	}
   }
 void BND2d::PutPMax(const Pos2d &pmax)
   { BND2d::operator=(BND2d(GetPMin(),pmax)); }
@@ -69,6 +81,9 @@ Pos2d BND2d::GetPMin(void) const
 
 Polygon2d BND2d::getPolygon(void) const
   {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
     const Pos2d p1= GetPMin();
     const Pos2d p2= GetPMax();
     Polygon2d retval;
@@ -81,37 +96,65 @@ Polygon2d BND2d::getPolygon(void) const
 
 //! @brief Return the object area.
 GEOM_FT BND2d::getArea(void) const
-  { return cgrectg.area(); }
+  {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
+    return cgrectg.area();
+  }
 Vector2d BND2d::Diagonal(void) const
-  { return GetPMax() - GetPMin(); }
+  {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
+    return GetPMax() - GetPMin();
+  }
 Pos2d BND2d::getCenterOfMass(void) const
   {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
     Pos2d center_of_mass= GetPMin() + Diagonal()/2;
     return center_of_mass;
   }
 GEOM_FT BND2d::Ix(void) const
-  { return (Anchura()*Altura()*Altura()*Altura())/12; }
+  {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
+    return (Anchura()*Altura()*Altura()*Altura())/12.0;
+  }
 GEOM_FT BND2d::Iy(void) const
-  { return (Altura()*Anchura()*Anchura()*Anchura())/12; }
+  {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
+    return (Altura()*Anchura()*Anchura()*Anchura())/12.0;
+  }
 
 
 //! @brief Return true it the boundary contains the point.
 bool BND2d::In(const Pos2d &p) const
   {
-    const GEOM_FT xmin= GetXMin();
-    const GEOM_FT xmax= GetXMax();
-    const GEOM_FT ymin= GetYMin();
-    const GEOM_FT ymax= GetYMax();
-    if(p.x()< xmin)
-      return false;
-    else if(p.x()>xmax)
-      return false;
-    else if(p.y()<ymin)
-      return false;
-    else if(p.y()>ymax)
-      return false;
-    else
-      return true;
+    bool retval= false;
+    if(!undefined)
+      {
+	const GEOM_FT xmin= GetXMin();
+	const GEOM_FT xmax= GetXMax();
+	const GEOM_FT ymin= GetYMin();
+	const GEOM_FT ymax= GetYMax();
+	if(p.x()< xmin)
+	  retval= false;
+	else if(p.x()>xmax)
+	  retval= false;
+	else if(p.y()<ymin)
+	  retval= false;
+	else if(p.y()>ymax)
+	  retval= false;
+	else
+	  retval= true;
+      }
+    return retval;
   }
 
 //! @brief Return verdadero si el BND contiene a la polilínea.
@@ -140,11 +183,19 @@ bool BND2d::Overlap(const Segment2d &sg) const
 
 //! @brief Return true if boundary overlap.
 bool BND2d::Overlap(const BND2d &bnd) const
-  { return do_intersect(cgrectg,bnd.cgrectg); }
+  {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
+    return do_intersect(cgrectg,bnd.cgrectg);
+  }
 
 //! @brief Return true if the polyline and the boundary overlap.
 bool BND2d::Overlap(const Polyline2d &p) const
   {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
     bool retval= Overlap(p.begin(),p.end());
     if(!retval)
       for(Polyline2d::const_iterator j=p.begin();j!=p.end();j++)
@@ -158,6 +209,9 @@ bool BND2d::Overlap(const Polyline2d &p) const
 
 bool BND2d::Overlap(const Polygon2d &p) const
   {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
     bool retval= Overlap(p.vertices_begin(),p.vertices_end());
     if(!retval)
       retval= p.Overlap(getPolygon());
@@ -176,6 +230,9 @@ bool BND2d::Overlap(const Polygon2d &p) const
 
 bool BND2d::Overlap(const std::list<Polygon2d> &l) const
   {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
     bool retval= false;
     if(!l.empty())
       for(std::list<Polygon2d>::const_iterator i=l.begin();i!=l.end();i++)
@@ -201,6 +258,9 @@ bool BND2d::Interseca(const BND2d &bnd) const
 //! pasa como parámetro.
 void BND2d::Transforma(const Trf2d &trf2d)
   {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
     const Pos2d pA= trf2d.Transforma(GetPMin());
     const Pos2d pB= trf2d.Transforma(GetPMax());
     (*this)= BND2d(pA,pB);
@@ -208,12 +268,18 @@ void BND2d::Transforma(const Trf2d &trf2d)
 
 BND2d &BND2d::operator+=(const Pos2d &p)
   {
-    PutPMinMax(pos_min(GetPMin(),p),pos_max(GetPMax(),p));
+    if(undefined)
+      Update(p);
+    else
+      PutPMinMax(pos_min(GetPMin(),p),pos_max(GetPMax(),p));
     return *this;
   }
 BND2d &BND2d::operator+=(const BND2d &a)
   {
-    PutPMinMax(pos_min(GetPMin(),a.GetPMin()),pos_max(GetPMax(),a.GetPMax()));
+    if(undefined)
+      BND2d::operator=(a);
+    else      
+      PutPMinMax(pos_min(GetPMin(),a.GetPMin()),pos_max(GetPMax(),a.GetPMax()));
     return *this;
   }
 BND2d operator +(const BND2d &a, const BND2d &b)

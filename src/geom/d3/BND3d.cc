@@ -26,17 +26,38 @@
 #include "../pos_vec/Vector3d.h"
 #include <iostream>
 
+//! @brief Constructor.
+BND3d::BND3d(void)
+  : GeomObj3d(), cgisocub(), undefined(true) {}
+
+//! @brief Constructor.
 BND3d::BND3d(const Pos3d &p_min,const Pos3d &p_max)
-  : GeomObj3d(), cgisocub(p_min.ToCGAL(),p_max.ToCGAL()) {}
+  : GeomObj3d(), cgisocub(p_min.ToCGAL(),p_max.ToCGAL()), undefined(false) {}
+
 //! @brief Area of the face parallel to XY plane.
 GEOM_FT BND3d::getAreaXYFace(void) const
-  { return getLength()*Anchura(); }
+  {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
+    return getLength()*Anchura();
+  }
 //! @brief Area of the face parallel to XZ plane.
 GEOM_FT BND3d::getAreaXZFace(void) const
-  { return getLength()*Altura(); }
+  {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
+    return getLength()*Altura();
+  }
 //! @brief Area of the face parallel to YZ plane.
 GEOM_FT BND3d::getAreaYZFace(void) const
-  { return Anchura()*Altura(); }
+  {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
+     return Anchura()*Altura();
+  }
 GEOM_FT BND3d::getArea(void) const
   {
     GEOM_FT A= 2*getAreaXYFace();
@@ -63,29 +84,36 @@ GEOM_FT BND3d::Iz(void) const
 //! @brief Updates (enlarges) the boundary with the point.
 void BND3d::Update(const Pos3d &p)
   {
-    if(!In(p))
+    if(undefined)
       {
-        GEOM_FT xmin= GetXMin();
-        GEOM_FT xmax= GetXMax();
-        GEOM_FT ymin= GetYMin();
-        GEOM_FT ymax= GetYMax();
-        GEOM_FT zmin= GetZMin();
-        GEOM_FT zmax= GetZMax();
-        if(p.x()< xmin)
-          xmin= p.x();
-        else if(p.x()>xmax)
-          xmax= p.x();
-        if(p.y()<ymin)
-          ymin= p.y();
-        else if(p.y()>ymax)
-          ymax= p.y();
-        if(p.z()<zmin)
-          zmin= p.z();
-        else if(p.z()>zmax)
-          zmax= p.z();
-        PutPMin(Pos3d(xmin,ymin,zmin));
-        PutPMax(Pos3d(xmax,ymax,zmax));
+	PutPMin(p);
+	PutPMax(p);
+	undefined= false;
       }
+    else
+      if(!In(p))
+	{
+	  GEOM_FT xmin= GetXMin();
+	  GEOM_FT xmax= GetXMax();
+	  GEOM_FT ymin= GetYMin();
+	  GEOM_FT ymax= GetYMax();
+	  GEOM_FT zmin= GetZMin();
+	  GEOM_FT zmax= GetZMax();
+	  if(p.x()< xmin)
+	    xmin= p.x();
+	  else if(p.x()>xmax)
+	    xmax= p.x();
+	  if(p.y()<ymin)
+	    ymin= p.y();
+	  else if(p.y()>ymax)
+	    ymax= p.y();
+	  if(p.z()<zmin)
+	    zmin= p.z();
+	  else if(p.z()>zmax)
+	    zmax= p.z();
+	  PutPMin(Pos3d(xmin,ymin,zmin));
+	  PutPMax(Pos3d(xmax,ymax,zmax));
+	}
   }
 
 void BND3d::PutPMax(const Pos3d &pmax)
@@ -100,22 +128,41 @@ Pos3d BND3d::GetPMin(void) const
   { return Pos3d(cgisocub.min()); }
 
 Vector3d BND3d::Diagonal(void) const
-  { return GetPMax() - GetPMin(); }
+  {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
+     return GetPMax() - GetPMin();
+  }
 Pos3d BND3d::getCenterOfMass(void) const
   {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
     Pos3d center_of_mass= GetPMin() + Diagonal()/2;
     return center_of_mass;
   }
 bool BND3d::ClipLine(const Pos3d &p1,const Pos3d &p2) const
-  { return LBClipLine(p1,p2); }
+  {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
+     return LBClipLine(p1,p2);
+  }
 BND3d &BND3d::operator +=(const Pos3d &p)
   {
-    PutPMinMax(pos_min(GetPMin(),p),pos_max(GetPMax(),p));
+    if(undefined)
+      Update(p);
+    else
+      PutPMinMax(pos_min(GetPMin(),p),pos_max(GetPMax(),p));
     return *this;
   }
 BND3d &BND3d::operator +=(const BND3d &a)
   {
-    PutPMinMax(pos_min(GetPMin(),a.GetPMin()),pos_max(GetPMax(),a.GetPMax()));
+    if(undefined)
+      BND3d::operator=(a);
+    else      
+      PutPMinMax(pos_min(GetPMin(),a.GetPMin()),pos_max(GetPMax(),a.GetPMax()));
     return *this;
   }
 BND3d operator +(const BND3d &a, const BND3d &b)
@@ -131,10 +178,11 @@ bool operator ==(const BND3d &a,const BND3d &b)
     else
       return true;
   }
+
+//! @brief Esta funcion forma parte del algoritmo de recorte de l'ineas de 
+//! Liang-Barsky (p'agina 231 del libro Computer Graphics de Donald Hearn y 
+//! Pauline Baker isbn 0-13-578634-7.
 bool BND3d::LBClipTest(const GEOM_FT &p,const GEOM_FT &q,GEOM_FT &u1,GEOM_FT &u2) const
-//Esta funcion forma parte del algoritmo de recorte de l'ineas de 
-//Liang-Barsky (p'agina 231 del libro Computer Graphics de Donald Hearn y 
-//Pauline Baker isbn 0-13-578634-7.
   {
     GEOM_FT r;
     int retval= true;
@@ -195,7 +243,7 @@ bool BND3d::LBClipLine(const Pos3d &pa,const Pos3d &pb) const
         } //dx
     return false;
   }
-Pos3d BND3d::Vertice(unsigned int i) const
+
 // Numeración de vértices y caras.
 //
 //      Z
@@ -216,12 +264,20 @@ Pos3d BND3d::Vertice(unsigned int i) const
 //    | /        | /
 //    |/         |/
 //    0----------1
+Pos3d BND3d::Vertice(unsigned int i) const
   {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
     unsigned int indice= i%8;
     return Pos3d(cgisocub.vertex(indice));
   }
+
 unsigned short int BND3d::RegionCode(const Pos3d &p,const double &tol) const
   {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
     const Pos3d PMin= GetPMin();
     const Pos3d PMax= GetPMax();
     int reg_code= 0;
@@ -236,6 +292,9 @@ unsigned short int BND3d::RegionCode(const Pos3d &p,const double &tol) const
   }
 bool BND3d::In(const Pos3d &p,const double &tol) const
   {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
     CGAL::Bounded_side side= cgisocub.bounded_side(p.ToCGAL());
     return (side != CGAL::ON_UNBOUNDED_SIDE);
   }
@@ -243,12 +302,19 @@ bool BND3d::In(const Pos3d &p,const double &tol) const
 //! @brief Recrece el BND en la cantidad que se pasa como parámetro.
 BND3d BND3d::Offset(const GEOM_FT &o) const
   {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
     const Vector3d vo(o,o,o);
     return BND3d(GetPMin()-vo,GetPMax()+vo);
   }
 
 CGBbox_3 BND3d::GetCGALBbox_3(void) const
-  { return CGBbox_3(GetXMin(),GetYMin(),GetZMin(),GetXMax(),GetYMax(),GetZMax()); }
+  {
+    if(undefined)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; boundary is undefined." << std::endl;
+    return CGBbox_3(GetXMin(),GetYMin(),GetZMin(),GetXMax(),GetYMax(),GetZMax()); }
 void BND3d::Print(std::ostream &stream) const
   {
     stream << "PMax= " << GetPMax() << ','

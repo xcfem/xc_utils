@@ -35,6 +35,7 @@
 class BND3d: public GeomObj3d
   {
     CGIsoCuboid_3 cgisocub;
+    bool undefined;
   protected:
     bool LBClipTest(const GEOM_FT &p,const GEOM_FT &q,GEOM_FT &u1,GEOM_FT &u2) const;
     //Esta funcion forma parte del algoritmo de recorte de l'ineas de 
@@ -42,16 +43,8 @@ class BND3d: public GeomObj3d
     //Pauline Baker isbn 0-13-578634-7).
     bool LBClipLine(const Pos3d &p1,const Pos3d &p2) const;
   public:
-    BND3d(void): GeomObj3d(), cgisocub() {}
+    BND3d(void);
     BND3d(const Pos3d &p_min,const Pos3d &p_max);
-    BND3d(const BND3d &other) 
-      : GeomObj3d(), cgisocub(other.cgisocub) {}
-    BND3d &operator =(const BND3d &other)
-      {
-	GeomObj3d::operator=(other);
-        cgisocub= other.cgisocub;
-        return *this;
-      }
     virtual GeomObj *clon(void) const
       { return new BND3d(*this); }
     //! @brief Return the dimension of the object 0, 1, 2 or 3.

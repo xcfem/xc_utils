@@ -39,21 +39,16 @@ class Polyline2d;
 class BND2d: public GeomObj2d
   {
     CGIsoRectangle_2 cgrectg;
+    bool undefined;
     template <class inputIterator>
     bool Overlap(inputIterator begin, inputIterator end) const;
   public:
-    BND2d(void): GeomObj2d(),cgrectg() {}
+    BND2d(void);
     BND2d(const Pos2d &p_min,const Pos2d &p_max);
-    BND2d(const BND2d &other) 
-      :  GeomObj2d(other),cgrectg(other.cgrectg) {}
-    BND2d &operator =(const BND2d &other) 
-      {
-	GeomObj2d::operator=(other);
-        cgrectg=other.cgrectg;
-        return *this;
-      }
     virtual GeomObj *clon(void) const
       { return new BND2d(*this); }
+    inline bool isUndefined(void) const
+      { return undefined; }
     inline virtual unsigned short int Dimension(void) const
     //Return the dimension of the object 0, 1, 2 or 3.
       { return 2; }
