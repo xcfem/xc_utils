@@ -19,28 +19,28 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Rejilla2d.h
+//Grid2d.h
 
-#ifndef Rejilla2d_h 
-#define Rejilla2d_h 
+#ifndef Grid2d_h 
+#define Grid2d_h 
 
 #include "Superficie2d.h"
 #include "../pos_vec/Pos2dArray.h"
 
 //! @ingroup GEOM
 //
-//! @brief Rejilla en dos dimensiones.
-class Rejilla2d: public Superficie2d
+//! @brief Grid in a two-dimensional space.
+class Grid2d: public Superficie2d
   {
     Pos2dArray points; //!< mesh points
   public:
-    Rejilla2d(void);
-    Rejilla2d(int numSubdivIJ, int numSubdivJK);
-    explicit Rejilla2d(const Pos2dArray &m)
+    Grid2d(void);
+    Grid2d(int numSubdivIJ, int numSubdivJK);
+    explicit Grid2d(const Pos2dArray &m)
       : Superficie2d(), points(m) {}
-    virtual ~Rejilla2d(void);
+    virtual ~Grid2d(void);
     virtual GeomObj *clon(void) const
-      { return new Rejilla2d(*this); }
+      { return new Grid2d(*this); }
 
     inline const Pos2d &operator()(const size_t &i,const size_t &j) const
       { return points(i,j); }

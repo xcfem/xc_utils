@@ -68,7 +68,7 @@
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d2/Triangle3d.h"
 #include "xc_utils/src/geom/d2/2d_polygons/Cuadrilatero2d.h"
-#include "xc_utils/src/geom/d2/Rejilla2d.h"
+#include "xc_utils/src/geom/d2/Grid2d.h"
 #include "xc_utils/src/geom/pos_vec/SVD2d.h"
 #include "xc_utils/src/geom/pos_vec/SVD3d.h"
 #include "xc_utils/src/geom/sis_ref/PrincipalAxesOfInertia2D.h"
