@@ -27,7 +27,7 @@
 #include <cstdlib>
 #include <cmath>
 #include "xc_basic/src/util/matem.h"
-#include "Superficie3d.h"
+#include "Surface3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include "../cgal_types.h"
 #include <list>
@@ -46,7 +46,7 @@ class Ref2d3d;
 //! @ingroup GEOM
 //
 //! @brief Plane in a three-dimensional space.
-class Plane : public Superficie3d
+class Plane : public Surface3d
   {
     CGPlane_3 cgp;
   public:

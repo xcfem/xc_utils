@@ -21,9 +21,9 @@
 //----------------------------------------------------------------------------
 //python_interface.cxx
 
-class_<Superficie2d, bases<GeomObj2d>, boost::noncopyable  >("Surface2d", no_init);
+class_<Surface2d, bases<GeomObj2d>, boost::noncopyable  >("Surface2d", no_init);
 
-class_<HalfPlane2d, bases<Superficie2d> >("HalfPlane2d")
+class_<HalfPlane2d, bases<Surface2d> >("HalfPlane2d")
   .def(init<>())
   .def(init<Line2d>())
   ;
@@ -52,7 +52,7 @@ class_<BND2d, bases<GeomObj2d> >("BND2d")
   .def("getMin", &BND2d::GetMin,"return minimum value of i coordinate.")
   ;
 
-class_<Circle2d, bases<Superficie2d> >("Circle2d")
+class_<Circle2d, bases<Surface2d> >("Circle2d")
   .def(init<>())
   .def(init<Pos2d, Pos2d, Pos2d>())
   .def(init<Pos2d,double>())
@@ -71,9 +71,9 @@ class_<Circle2d, bases<Superficie2d> >("Circle2d")
 #include "2d_polygons/python_interface.tcc"
 
 
-class_<Superficie3d, bases<GeomObj3d>, boost::noncopyable  >("Surface3d", no_init);
+class_<Surface3d, bases<GeomObj3d>, boost::noncopyable  >("Surface3d", no_init);
 
-class_<D2to3d, bases<Superficie3d>, boost::noncopyable  >("D2to3d", no_init)
+class_<D2to3d, bases<Surface3d>, boost::noncopyable  >("D2to3d", no_init)
   .def("getPlane",&D2to3d::getPlane)
   ;
 
@@ -89,7 +89,7 @@ Line3d (Plane::*IntersPlane)(const Plane &p) const= &Plane::getIntersection;
 Pos3d (Plane::*IntersLine3d)(const Line3d &p) const= &Plane::getIntersection;
 Pos3d (Plane::*IntersRay3d)(const Ray3d &p) const= &Plane::getIntersection;
 Pos3d (Plane::*IntersSegment3d)(const Segment3d &p) const= &Plane::getIntersection;
-class_<Plane, bases<Superficie3d> >("Plane3d")
+class_<Plane, bases<Surface3d> >("Plane3d")
   .def(init<Pos3d,Pos3d,Pos3d>())
   .def(init<Pos3d,Vector3d>())
   .def(init<Pos3d,Vector3d,Vector3d>())
@@ -126,7 +126,7 @@ class_<Triangle3d, bases<Polygon3d>  >("Triangle3d")
   ;
 
 
-class_<Grid2d, bases<Superficie2d> >("Grid2d")
+class_<Grid2d, bases<Surface2d> >("Grid2d")
   .def(init<>())
   .def("getMax",&Grid2d::GetMax)
   .def("getMin",&Grid2d::GetMin)

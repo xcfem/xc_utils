@@ -79,18 +79,18 @@ Circle2d Circle2dRTT(const GEOM_FT &radius,const Line2d &p,const Line2d &l,const
 
 //! @brief Build the circle from its center and its radius.
 Circle2d::Circle2d(const Pos2d &centro,const GEOM_FT &rad)
-  : Superficie2d(), cgcirc(centro.ToCGAL(),rad*rad) {}
+  : Surface2d(), cgcirc(centro.ToCGAL(),rad*rad) {}
 
 //! @brief Build the circle from its center and its squared radius.
 Circle2d::Circle2d(const GEOM_FT &rad2,const Pos2d &centro)
-  : Superficie2d(), cgcirc(centro.ToCGAL(),rad2) {}
+  : Surface2d(), cgcirc(centro.ToCGAL(),rad2) {}
 
 //! @brief Build the circle from three points.
 //!
 //! Basado en Mathematical elements for computer graphics
 //! (Rogers and Adams) page 233.
 Circle2d::Circle2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3)
-  : Superficie2d(), cgcirc(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL())
+  : Surface2d(), cgcirc(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL())
   {}
 Pos2d Circle2d::Centro(void) const
   { return Pos2d(cgcirc.center()); }

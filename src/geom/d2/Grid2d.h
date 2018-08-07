@@ -24,20 +24,20 @@
 #ifndef Grid2d_h 
 #define Grid2d_h 
 
-#include "Superficie2d.h"
+#include "Surface2d.h"
 #include "../pos_vec/Pos2dArray.h"
 
 //! @ingroup GEOM
 //
 //! @brief Grid in a two-dimensional space.
-class Grid2d: public Superficie2d
+class Grid2d: public Surface2d
   {
     Pos2dArray points; //!< mesh points
   public:
     Grid2d(void);
     Grid2d(int numSubdivIJ, int numSubdivJK);
     explicit Grid2d(const Pos2dArray &m)
-      : Superficie2d(), points(m) {}
+      : Surface2d(), points(m) {}
     virtual ~Grid2d(void);
     virtual GeomObj *clon(void) const
       { return new Grid2d(*this); }

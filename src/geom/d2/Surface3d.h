@@ -19,15 +19,41 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Superficie2d.cc
+//Surface3d.h
 
-#include "Superficie2d.h"
+#ifndef SURFACE3D_H
+#define SURFACE3D_H
 
-#include <cstdlib>
-#include <cmath>
-#include "xc_basic/src/util/matem.h"
+#include "../d3/GeomObj3d.h"
 
-//! @brief Return the area of the Superficie2d.
-GEOM_FT Superficie2d::getArea(void) const
-  { return NAN; }
+
+class Pos3d;
+
+
+//! @ingroup GEOM
+//
+//! @brief Base class for surfaces in a three-dimensional space.
+class Surface3d : public GeomObj3d
+  {
+  public:
+    Surface3d(void): GeomObj3d(){}
+
+    //! @brief Return the dimension of the object 0, 1, 2 or 3.
+    inline virtual unsigned short int Dimension(void) const
+      { return 2; }
+    //! @brief Return the length of the object.
+    virtual GEOM_FT getLength(void) const
+      { return 0.0; }
+    GEOM_FT getPerimeter(void) const
+      { return getLength(); }
+    virtual GEOM_FT getArea(void) const;
+    //! @brief Return the volume of the object.
+    virtual GEOM_FT getVolume(void) const
+      { return 0.0; }
+    virtual inline GEOM_FT IArea(void) const
+      { return getArea(); }
+  };
+#endif
+
+
 

@@ -26,7 +26,7 @@
 
 
 #include "xc_utils/src/geom/d1/Line2d.h"
-#include "xc_utils/src/geom/d2/Superficie2d.h"
+#include "xc_utils/src/geom/d2/Surface2d.h"
 
 class GmGrupo2d;
 class Ray2d;
@@ -36,7 +36,7 @@ class Segment2d;
 //! @ingroup GEOM
 //
 //! @brief Half plane in a two-dimensional space.
-class HalfPlane2d : public Superficie2d
+class HalfPlane2d : public Surface2d
   {
     Line2d lim; //The points of the half-plane are those we lie to the right of the line.
   public:

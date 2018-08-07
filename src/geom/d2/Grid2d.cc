@@ -32,11 +32,11 @@
 
 //! @brief Constructor.
 Grid2d::Grid2d(void)
-  : Superficie2d(), points(1,1) {}
+  : Surface2d(), points(1,1) {}
 
 //! @brief Constructor.
 Grid2d::Grid2d(int numSubdivIJ, int numSubdivJK)
-  : Superficie2d(), points(numSubdivIJ,numSubdivJK) {}
+  : Surface2d(), points(numSubdivIJ,numSubdivJK) {}
 
 Grid2d::~Grid2d(void)
   {}

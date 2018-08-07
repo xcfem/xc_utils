@@ -62,12 +62,12 @@ class RankineSoil(fs.FrictionalSoil):
 def ka_coulomb(a,b,fi,d):
     '''
     ka_coulomb(a,b,fi,d):
-    Return the active earth pressure coefficient according to Coulomb's theory 
-    from:
-    a:  angle of the back of the retaining wall (radians).
-    b:  slope of the backfill (radians).
-    fi: internal friction angle of the soil (radians).
-    d:  friction angle between soil an back of retaining wall (radians).
+    Return the active earth pressure coefficient according to Coulomb's theory.
+
+    :param a:  angle of the back of the retaining wall (radians).
+    :param b:  slope of the backfill (radians).
+    :param i: internal friction angle of the soil (radians).
+    :param d:  friction angle between soil an back of retaining wall (radians).
     See Jiménez Salas, Geotecnia y Cimientos página 682 
     '''
     num= 1.0/math.cos(a)*math.cos(fi-a)
@@ -78,11 +78,12 @@ def ka_coulomb(a,b,fi,d):
 def kah_coulomb(a,b,fi,d):
     '''
     Return the horizontal component of the active earth pressure coefficient
-    according to Coulomb's theory from:
-    a:  angle of the back of the retaining wall (radians).
-    b:  slope of the backfill (radians).
-    fi: internal friction angle of the soil (radians).
-    d:  friction angle between soil an back of retaining wall (radians).
+    according to Coulomb's theory.
+
+    :param a:  angle of the back of the retaining wall (radians).
+    :param b:  slope of the backfill (radians).
+    :param i: internal friction angle of the soil (radians).
+    :param d:  friction angle between soil an back of retaining wall (radians).
     '''
     return (ka_coulomb(a,b,fi,d)*math.cos(a+d))
 
@@ -90,11 +91,12 @@ def kav_coulomb(a,b,fi,d):
     '''
     kav_coulomb(a,b,fi,d):
     Return the vertical component of the active earth pressure coefficient
-    according to Coulomb's theory from:
-    a:  angle of the back of the retaining wall (radians).
-    b:  slope of the backfill (radians).
-    fi: internal friction angle of the soil (radians).
-    d:  friction angle between soil an back of retaining wall (radians).
+    according to Coulomb's theory.
+
+    :param a:  angle of the back of the retaining wall (radians).
+    :param b:  slope of the backfill (radians).
+    :param i: internal friction angle of the soil (radians).
+    :param d:  friction angle between soil an back of retaining wall (radians).
     '''
     return (ka_coulomb(a,b,fi,d)*math.sin(a,d))
 
@@ -103,10 +105,11 @@ def k_janssen(k,d,B,z):
     k_janssen(k,d,B,z)
     Lateral earth pressure coefficient for limited backfills according
     to Janssen's Theory (1895) and Kniss et Al (2007):
-    k: lateral earth pressure (usually k= K_0).
-    d: friction angle between soil an back of retaining wall (radians).
-    B: width of the backfill (radians).
-    z: depth from top of wall.
+
+    :param k: lateral earth pressure (usually k= K_0).
+    :param d: friction angle between soil an back of retaining wall (radians).
+    :param B: width of the backfill (radians).
+    :param z: depth from top of wall.
     '''
     retval= 0.0
     if(z!=0.0):
@@ -119,14 +122,14 @@ def k_janssen(k,d,B,z):
 def ep_coulomb(a,b,fi,d,p):
     '''
     ep_coulomb(a,b,fi,d,p):
-    Devuelve el empuje unitario producido por una sobrecarga uniforme p que actúa
-    sobre la superficie del terreno contenido.
-    according to Coulomb's theory from:
-    a:  angle of the back of the retaining wall (radians).
-    b:  slope of the backfill (radians).
-    fi: internal friction angle of the soil (radians).
-    d:  friction angle between soil an back of retaining wall (radians).
-    p: Sobrecarga uniforme.
+    Return the lateral earth pressure caused by a uniform load p
+    action over the backfill surface according to Coulomb's theory.
+
+    :param a:  angle of the back of the retaining wall (radians).
+    :param b:  slope of the backfill (radians).
+    :param i: internal friction angle of the soil (radians).
+    :param d:  friction angle between soil an back of retaining wall (radians).
+    :param p: Sobrecarga uniforme.
     '''
     return(ka_coulomb(a,b,fi,d)*p*math.cos(a)/float(math.cos(b-a)))
 
@@ -135,12 +138,11 @@ def eql_coulomb(x,H,z,ql):
     '''
     Return the earth pressure due to a linear load ql acting on a line
     parallel to the top of the wall on the surface of the retained backfill.
-    from:
 
-    x:  Distance from the top of the back and the linea where the load is applied.
-    H:  Depth of the bottom end of the wall back.
-    z:  depth of the point for which the pressure is computed.
-    ql: value of the linear load.
+    :param x:  Distance from the top of the back and the linea where the load is applied.
+    :param H:  Depth of the bottom end of the wall back.
+    :param z:  depth of the point for which the pressure is computed.
+    :param l: value of the linear load.
     '''
     m=x/float(H)
     n=z/float(H)

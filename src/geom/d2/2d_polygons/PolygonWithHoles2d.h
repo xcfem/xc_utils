@@ -24,7 +24,7 @@
 #ifndef POLYGON_WITH_HOLES_2D_H
 #define POLYGON_WITH_HOLES_2D_H
 
-#include "xc_utils/src/geom/d2/Superficie2d.h"
+#include "xc_utils/src/geom/d2/Surface2d.h"
 
 class Line2d;
 class Ray2d;
@@ -36,7 +36,7 @@ class Polyline2d;
 //! @ingroup GEOM
 //
 //! @brief Polígono que puede tener huecos.
-class PolygonWithHoles2d: public Superficie2d
+class PolygonWithHoles2d: public Surface2d
   {
     CGPolygonWithHoles_2 cgpol; //CGAL polygon.
   public:

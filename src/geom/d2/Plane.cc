@@ -35,14 +35,14 @@
 #include "CGAL/linear_least_squares_fitting_3.h"
 
 Plane::Plane(void)
-  : Superficie3d(), cgp(CGPoint_3(0,0,0), CGPoint_3(1,0,0), CGPoint_3(0,1,0)) {}
+  : Surface3d(), cgp(CGPoint_3(0,0,0), CGPoint_3(1,0,0), CGPoint_3(0,1,0)) {}
 
 Plane::Plane(const CGPlane_3 &cgp)
-  : Superficie3d(), cgp(cgp) {}
+  : Surface3d(), cgp(cgp) {}
 
 //! @brief Constructor: plane defined by three points.
 Plane::Plane(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
-  : Superficie3d(), cgp(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL()) 
+  : Surface3d(), cgp(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL()) 
   {
     // const GEOM_FT tol2= 1e-3;
     // const GEOM_FT d12= p1.dist2(p2);
@@ -68,7 +68,7 @@ Plane::Plane(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
 
 //! @brief Constructor: plane defined by the point and the normal vector.
 Plane::Plane(const Pos3d &o,const Vector3d &v)
-  : Superficie3d(), cgp(o.ToCGAL(),v.ToCGAL()) {}
+  : Surface3d(), cgp(o.ToCGAL(),v.ToCGAL()) {}
 
 //! @brief Converts the point classification to the polygon one.
 Plane::polygon_classification Plane::clfpnt2clfpol(const CGAL::Oriented_side os)
@@ -90,12 +90,12 @@ Plane::polygon_classification Plane::clfpnt2clfpol(const CGAL::Oriented_side os)
   }
 
 Plane::Plane(const Line3d &r,const Pos3d &p)
-  : Superficie3d(), cgp(r.ToCGAL(),p.ToCGAL()) {}
+  : Surface3d(), cgp(r.ToCGAL(),p.ToCGAL()) {}
 Plane::Plane(const Segment3d &s,const Vector3d &v)
-  : Superficie3d(), cgp(s.getSupportLine().ToCGAL(),(s.Origen()+v).ToCGAL()) {}
+  : Surface3d(), cgp(s.getSupportLine().ToCGAL(),(s.Origen()+v).ToCGAL()) {}
 Plane::Plane(const Pos3d &p,const Vector3d &v1,const Vector3d &v2)
-  : Superficie3d(), cgp(p.ToCGAL(),(p+v1).ToCGAL(),(p+v2).ToCGAL()) {}
-Plane::Plane(const GeomObj3d::list_Pos3d &lp): Superficie3d(), cgp()
+  : Surface3d(), cgp(p.ToCGAL(),(p+v1).ToCGAL(),(p+v2).ToCGAL()) {}
+Plane::Plane(const GeomObj3d::list_Pos3d &lp): Surface3d(), cgp()
   {
     if(lp.size()<3)
       {
@@ -107,19 +107,19 @@ Plane::Plane(const GeomObj3d::list_Pos3d &lp): Superficie3d(), cgp()
     ThreePoints(*i,*i++,*i++);
   }
 Plane::Plane(const Polygon3d &pg3d)
-  : Superficie3d(), cgp()
+  : Surface3d(), cgp()
   { *this= pg3d.getPlane(); }
 Plane::Plane(const GeneralEquationOfPlane &eg)
-  : Superficie3d(), cgp(eg.a(),eg.b(),eg.c(),eg.d()) {}
+  : Surface3d(), cgp(eg.a(),eg.b(),eg.c(),eg.d()) {}
 
 Plane::Plane(const Plane &other)
-  : Superficie3d(), cgp(other.cgp) {}
+  : Surface3d(), cgp(other.cgp) {}
 
 //! @brief Assignment operator.
 Plane &Plane::operator=(const Plane &other)
   {
     cgp=(other.cgp);
-    Superficie3d::operator=(other);
+    Surface3d::operator=(other);
     return *this;
   }
 

@@ -24,7 +24,7 @@
 #ifndef D2TO3D_H
 #define D2TO3D_H
 
-#include "xc_utils/src/geom/d2/Superficie3d.h"
+#include "xc_utils/src/geom/d2/Surface3d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
 #include "../cgal_types.h"
 
@@ -38,7 +38,7 @@ class Pos2dArray;
 //
 //! @brief Class that places 2D objects
 //! (circle, ellipse, polygons, ...) in a 3D space.
-class D2to3d: public Superficie3d
+class D2to3d: public Surface3d
   {
     Ref2d3d ref;
 

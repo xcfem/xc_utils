@@ -36,16 +36,16 @@
 
 
 //! @brief Constructor.
-D2to3d::D2to3d(void): Superficie3d(), ref() {}
+D2to3d::D2to3d(void): Surface3d(), ref() {}
 
 //! @brief Constructor.
 D2to3d::D2to3d(const Pos3d &o,const Pos3d &p,const Pos3d &q)
-  : Superficie3d(), ref(o,p,q)
+  : Surface3d(), ref(o,p,q)
   {}
 
 //! @brief Constructor.
 D2to3d::D2to3d(const Pos3d &o,const Vector3d &n,const Vector3d &i)
-  : Superficie3d(), ref(o,o+i,o+(n^i))
+  : Surface3d(), ref(o,o+i,o+(n^i))
   {
     const Vector3d j= n^i;
     if(Abs2(j)>1e-3)
@@ -55,17 +55,17 @@ D2to3d::D2to3d(const Pos3d &o,const Vector3d &n,const Vector3d &i)
 
 //! @brief Constructor.
 D2to3d::D2to3d(const Pos3d &o)
-  : Superficie3d(), ref(o)
+  : Surface3d(), ref(o)
   {}
 
 //! @brief Constructor.
 D2to3d::D2to3d(const D2to3d &other)
-  : Superficie3d(other), ref(other.ref) {}
+  : Surface3d(other), ref(other.ref) {}
 
 //! @brief Operador asignación.
 D2to3d &D2to3d::operator=(const D2to3d &other) 
   {
-    Superficie3d::operator=(other);
+    Surface3d::operator=(other);
     ref= other.ref;
     return *this;
   }

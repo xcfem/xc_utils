@@ -29,11 +29,11 @@
 
 //! @brief Default constructor.
 PolygonWithHoles2d::PolygonWithHoles2d(void)
-  : Superficie2d(){}
+  : Surface2d(){}
 
 //! @brief Default constructor.
 PolygonWithHoles2d::PolygonWithHoles2d(const Polygon2d &p)
-  : Superficie2d(), cgpol(p.ToCGAL()) {}
+  : Surface2d(), cgpol(p.ToCGAL()) {}
 
 //! @brief Constructor virtual.
 GeomObj *PolygonWithHoles2d::clon(void) const

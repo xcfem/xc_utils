@@ -81,13 +81,20 @@ bool GTSSurfaceIntersection::Check(bool &closed) const
     closed= c;
     return retval;
   }
+
+//! @brief Append to the surface argument the part defined by THIS and
+//! the op.
+//! 
+//! @param op: can be one of the following:
+//!            - GTS_1_OUT_2: identifies the part of the first surface which
+//!                           lies outside the second surface.
+//!            - GTS_1_IN_2: identifies the part of the first surface which
+//!                          lies inside the second surface.
+//!            - GTS_2_OUT_1: identifies the part of the second surface which
+//!                           lies outside the first surface.
+//!            - GTS_2_IN_1: identifies the part of the second surface which
+//!                          lies inside the first surface.
 void GTSSurfaceIntersection::InterBoolean(GTSSurface &surface,GtsBooleanOperation op) const
-//Añade a 'surface' la parte de superficie descrita por THIS y op.
-//'op' puede tomar los siguientes valores:
-// GTS_1_OUT_2 identifies the part of the first surface which lies outside the second surface.
-// GTS_1_IN_2 identifies the part of the first surface which lies inside the second surface.
-// GTS_2_OUT_1 identifies the part of the second surface which lies outside the first surface.
-// GTS_2_IN_1 identifies the part of the second surface which lies inside the first surface.
   { gts_surface_inter_boolean(si,surface.get_ptr(),op); }
 
 
@@ -148,12 +155,12 @@ GTSSurface BoolOp(const GTSSurfaceIntersection &si,GTSSurface &s1, GTSSurface &s
     /* check that the surfaces are orientable manifolds */
     if (!s1.IsOrientable())
       {
-        cerr << "BoolOp: la superficie s1 no es orientable." << endl; 
+        cerr << __FUNCTION__ << ": s1 surface is not orientable." << endl; 
         return retval;
       }
     if (!s2.IsOrientable())
       {
-        cerr << "BoolOp: la superficie s2 no es orientable." << endl; 
+        cerr << __FUNCTION__ << ": s2 surface is not orientable." << endl; 
         return retval;
       }
 

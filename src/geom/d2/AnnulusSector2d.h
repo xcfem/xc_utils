@@ -50,7 +50,7 @@ class AnnulusSector2d : public CircularSector2d
         inner_radius= p.inner_radius;
         return *this;
       }
-    virtual Superficie2d *clon(void) const
+    virtual Surface2d *clon(void) const
       { return new AnnulusSector2d(*this); }
     virtual Pos2d getCenterOfMass(void) const;
     Pos2d PInicInt(void) const;

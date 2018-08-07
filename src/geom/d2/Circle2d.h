@@ -24,7 +24,7 @@
 #ifndef CIRCLE2D_H
 #define CIRCLE2D_H
 
-#include "Superficie2d.h"
+#include "Surface2d.h"
 #include "../cgal_types.h"
 #include "xc_basic/src/util/matem.h"
 
@@ -35,26 +35,26 @@ class Polygon2d;
 //! @ingroup GEOM
 //
 //! @brief Círculo en dos dimensiones.
-class Circle2d : public Superficie2d
+class Circle2d : public Surface2d
   {
     CGCircle_2 cgcirc;
 
   protected:
     void arc_points(const double &theta_inic,const double &delta_theta,Pos2dArray &ptos) const;
   public:
-    Circle2d(void) : Superficie2d(), cgcirc() {}
+    Circle2d(void) : Surface2d(), cgcirc() {}
     Circle2d(const Pos2d &centro,const GEOM_FT &rad);
     Circle2d(const GEOM_FT &rad2,const Pos2d &centro);
     Circle2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3);
     Circle2d(const Circle2d &other)
-     : Superficie2d(other), cgcirc(other.cgcirc) {}
+     : Surface2d(other), cgcirc(other.cgcirc) {}
     Circle2d &operator=(const Circle2d &p)
       {
-	Superficie2d::operator=(p);
+	Surface2d::operator=(p);
         cgcirc= p.cgcirc;
         return *this;
       }
-    virtual Superficie2d *clon(void) const
+    virtual Surface2d *clon(void) const
       { return new Circle2d(*this); }
     Pos2d Centro(void) const;
     virtual Pos2d getCenterOfMass(void) const;

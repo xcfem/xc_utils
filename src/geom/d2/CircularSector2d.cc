@@ -81,7 +81,7 @@ CircularSector2d &CircularSector2d::operator=(const CircularSector2d &p)
   }
 
 //! @brief Constructor virtual.
-Superficie2d *CircularSector2d::clon(void) const
+Surface2d *CircularSector2d::clon(void) const
   { return new CircularSector2d(*this); }
 
 

@@ -30,25 +30,25 @@
 #include "../pos_vec/Vector2d.h"
 
 HalfPlane2d::HalfPlane2d(void)
-  : Superficie2d(), lim() {}
+  : Surface2d(), lim() {}
 
 HalfPlane2d::HalfPlane2d(const Line2d &r)
-  : Superficie2d(), lim(r) {}
+  : Surface2d(), lim(r) {}
 
 HalfPlane2d::HalfPlane2d(const Line2d &r, const Pos2d &p)
-  : Superficie2d(), lim(r)
+  : Surface2d(), lim(r)
   {
     if(!In(p))
       Swap();
   }
 
 HalfPlane2d::HalfPlane2d(const Pos2d &p1,const Pos2d &p2)
-  : Superficie2d(), lim(p1,p2) {}
+  : Surface2d(), lim(p1,p2) {}
 HalfPlane2d::HalfPlane2d(const HalfPlane2d &sp)
-  : Superficie2d(sp),lim(sp.lim) {}
+  : Surface2d(sp),lim(sp.lim) {}
 HalfPlane2d &HalfPlane2d::operator=(const HalfPlane2d &sp)
   {
-    Superficie2d::operator=(sp);
+    Surface2d::operator=(sp);
     lim= sp.lim;
     return *this;
   }

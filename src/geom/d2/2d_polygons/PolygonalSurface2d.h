@@ -24,7 +24,7 @@
 #ifndef POLYGONALSURFACE2D_H
 #define POLYGONALSURFACE2D_H
 
-#include "xc_utils/src/geom/d2/Superficie2d.h"
+#include "xc_utils/src/geom/d2/Surface2d.h"
 
 class Line2d;
 class Ray2d;
@@ -36,7 +36,7 @@ class Polyline2d;
 //! @ingroup GEOM
 //
 //! @brief Base class for the polygonal surfaces.
-class PolygonalSurface2d: public Superficie2d
+class PolygonalSurface2d: public Surface2d
   {
   private:
     inline GEOM_FT a_i(unsigned int i) const
@@ -45,7 +45,7 @@ class PolygonalSurface2d: public Superficie2d
   protected:
     Segment2d Lado0(unsigned int i, unsigned int j) const;
   public:
-    PolygonalSurface2d(void): Superficie2d(){}
+    PolygonalSurface2d(void): Surface2d(){}
 
     virtual GeomObj *clon(void) const= 0;
     inline virtual unsigned int GetNumVertices(void) const

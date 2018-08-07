@@ -75,7 +75,9 @@ int GTSSurface::Read(GtsFile *fp)
   {
     if(gts_surface_read (s, fp))
       {
-	    std::cerr << "volume: the file on standard input is not a valid GTS file" << std::endl;
+	std::cerr << "GTSSurface::" << __FUNCTION__
+		  << "; volume: the file on standard input"
+                  << " is not a valid GTS file" << std::endl;
 	    std::cerr << "stdin:  " << fp->line << ':' 
 		 << fp->pos  << ':' << fp->error;
         return 1; /* failure */
@@ -103,13 +105,14 @@ GTSSurface GTSSurface::selfIntersecting(void) const
   { return GTSSurface(gts_surface_is_self_intersecting(s)); }
 bool GTSSurface::Vacia(void) const
   { return (s == nullptr); }
+//! @brief Return true if the surface intersects itself.
 bool GTSSurface::CheckSelfIntersection(bool verbose) const
-//Return verdadero si la superficie interseca consigo misma.
   {
     GTSSurface self_intersects= selfIntersecting();
     if(!self_intersects.Vacia())
       {
-	std::cerr << "CheckSelfIntersection: la superficie interseca con sí misma." << std::endl;
+	std::cerr << "GTSSurface::::" << __FUNCTION__
+		  << "; surface intersects itself.." << std::endl;
         if(verbose)
           self_intersects.PrintStats(stderr);
         return true;

@@ -23,7 +23,7 @@
 
 
 Segment2d (PolygonalSurface2d::*getSide0Segment)(unsigned int i) const= &PolygonalSurface2d::Lado0;
-class_<PolygonalSurface2d, bases<Superficie2d>, boost::noncopyable >("PolygonalSurface2d", no_init)
+class_<PolygonalSurface2d, bases<Surface2d>, boost::noncopyable >("PolygonalSurface2d", no_init)
   .def("getPerimeter",&PolygonalSurface2d::getPerimeter)
   .def("getCenterOfMass",&PolygonalSurface2d::getCenterOfMass)
   .def("getIx",&PolygonalSurface2d::Ix)
@@ -84,7 +84,7 @@ class_<Triangle2d, bases<Polygon2d> >("Triangle2d")
   .def(init<>())
   ;
 
-class_<PolygonWithHoles2d, bases<Superficie2d> >("PolygonWithHoles2d")
+class_<PolygonWithHoles2d, bases<Surface2d> >("PolygonWithHoles2d")
   .def(init<>())
   .def(init<Polygon2d>())
   .def("contour",&PolygonWithHoles2d::contour)
