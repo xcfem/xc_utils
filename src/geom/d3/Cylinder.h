@@ -19,7 +19,7 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Cilindro.h
+//Cylinder.h
 //Sólido de extrusión generado por un polígono.
 
 #ifndef SOLIDEXTRUPLGNO3D_H
@@ -31,15 +31,15 @@
 
 //! @ingroup GEOM
 //
-//! @brief Cilindro.
-class Cilindro : public SolidExtru3d<Circle3d>
+//! @brief Cylinder.
+class Cylinder : public SolidExtru3d<Circle3d>
   {
   public:
     typedef SolidExtru3d<Circle3d> solid_extru_cil;
   public:
-    Cilindro(void);
-    Cilindro(const Circle3d &secc,const GEOM_FT &lng);
-    Cilindro &operator=(const Cilindro &se);
+    Cylinder(void);
+    Cylinder(const Circle3d &secc,const GEOM_FT &lng);
+    Cylinder &operator=(const Cylinder &se);
     virtual GeomObj *clon(void) const;
 
     BND3d Bnd(void) const;

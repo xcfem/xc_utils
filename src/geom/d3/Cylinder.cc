@@ -19,34 +19,34 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Cilindro.cc
+//Cylinder.cc
 
-#include "Cilindro.h"
-
-//! @brief Constructor.
-Cilindro::Cilindro(void) {}
+#include "Cylinder.h"
 
 //! @brief Constructor.
-Cilindro::Cilindro(const Circle3d &secc,const GEOM_FT &lng)
+Cylinder::Cylinder(void) {}
+
+//! @brief Constructor.
+Cylinder::Cylinder(const Circle3d &secc,const GEOM_FT &lng)
   : SolidExtru3d<Circle3d>(secc,lng) {}
 
 //! @brief Operador asignación.
-Cilindro &Cilindro::operator=(const Cilindro &se)
+Cylinder &Cylinder::operator=(const Cylinder &se)
   {
     solid_extru_cil::operator=(se);
     return *this;
   }
 
 //! @brief Constructor virtual.
-GeomObj *Cilindro::clon(void) const
-  { return new Cilindro(*this); }
+GeomObj *Cylinder::clon(void) const
+  { return new Cylinder(*this); }
 
 //! @Return la extension del objeto.
-BND3d Cilindro::Bnd(void) const
+BND3d Cylinder::Bnd(void) const
   { return solid_extru_cil::Bnd(); }
 
-FT_matrix Cilindro::I(void) const
+FT_matrix Cylinder::I(void) const
   { return solid_extru_cil::I(); }
 
-Pos3d Cilindro::getCenterOfMass(void) const
+Pos3d Cylinder::getCenterOfMass(void) const
   { return solid_extru_cil::getCenterOfMass(); }
