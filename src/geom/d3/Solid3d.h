@@ -19,7 +19,7 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Solido3d.h
+//Solid3d.h
 
 #ifndef SOLIDO3D_H
 #define SOLIDO3D_H
@@ -29,10 +29,10 @@
 //! @ingroup GEOM
 //
 //! @brief Clase base para los sólidos en tres dimensiones.
-class Solido3d : public GeomObj3d
+class Solid3d : public GeomObj3d
   {
   public:
-    Solido3d(void);
+    Solid3d(void);
     virtual GEOM_FT dist(const Pos3d &p) const;
     virtual inline GEOM_FT IArea(void) const
       { return getVolume(); }

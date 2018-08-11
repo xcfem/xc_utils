@@ -62,7 +62,7 @@
 #include "xc_utils/src/geom/d3/HalfSpace3d.h"
 #include "xc_utils/src/geom/pos_vec/ListaPos3d.h"
 #include "xc_utils/src/geom/d1/Polyline3d.h"
-//#include "xc_utils/src/geom/d3/Solido3d.h"
+//#include "xc_utils/src/geom/d3/Solid3d.h"
 #include "xc_utils/src/geom/d2/Surface3d.h"
 #include "xc_utils/src/geom/d2/GeneralEquationOfPlane.h"
 #include "xc_utils/src/geom/d2/Plane.h"

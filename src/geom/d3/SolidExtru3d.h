@@ -24,7 +24,7 @@
 #ifndef SOLIDEXTRU3D_H
 #define SOLIDEXTRU3D_H
 
-#include "Solido3d.h"
+#include "Solid3d.h"
 #include "BND3d.h"
 #include "../FT_matrix.h"
 #include "../pos_vec/Pos3d.h"
@@ -36,18 +36,18 @@
 //! La base inferior está a (z=-l/2)
 //! y la base superior (z=+l/2).
 template<class S>
-class SolidExtru3d : public Solido3d
+class SolidExtru3d : public Solid3d
   {
   protected:
     S scc; //!< Surface that create the solid.
     GEOM_FT l; //!< Lentgh of the extruded solid (negative if undefined).
   public:
-    SolidExtru3d(void): Solido3d(), scc(),l(1.0) {}
+    SolidExtru3d(void): Solid3d(), scc(),l(1.0) {}
     SolidExtru3d(const S &secc,const GEOM_FT &lng): scc(secc), l(lng) {}
-    SolidExtru3d(const SolidExtru3d<S> &se): Solido3d(se), scc(se.scc), l(se.l) {}
+    SolidExtru3d(const SolidExtru3d<S> &se): Solid3d(se), scc(se.scc), l(se.l) {}
     SolidExtru3d<S> &operator=(const SolidExtru3d<S> &se)
       {
-	Solido3d::operator=(se);
+	Solid3d::operator=(se);
         scc=se.scc;
         l= se.l;
         return *this;

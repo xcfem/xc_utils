@@ -37,7 +37,7 @@ class Ray3d;
 class Segment3d;
 class Plane;
 class HalfSpace3d;
-class Solido3d;
+class Solid3d;
 
 //! @ingroup GEOM
 //
@@ -114,7 +114,7 @@ class Pos3d : public ProtoGeom
     GEOM_FT dist(const Plane &) const;
     GEOM_FT dist2(const HalfSpace3d &) const;
     GEOM_FT dist(const HalfSpace3d &) const;
-    GEOM_FT dist(const Solido3d &) const;
+    GEOM_FT dist(const Solid3d &) const;
 
     int Cuadrante(void) const;
 

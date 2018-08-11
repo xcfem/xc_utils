@@ -33,7 +33,7 @@
 #include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d3/HalfSpace3d.h"
-#include "xc_utils/src/geom/d3/Solido3d.h"
+#include "xc_utils/src/geom/d3/Solid3d.h"
 
 //! @brief Suma de un vector.
 Pos3d &Pos3d::operator+=(const Vector3d &v)
@@ -237,7 +237,7 @@ GEOM_FT Pos3d::dist(const HalfSpace3d &se) const
   { return se.dist(*this); }
 
 //! @brief Return the distance to the solid.
-GEOM_FT Pos3d::dist(const Solido3d &s) const
+GEOM_FT Pos3d::dist(const Solid3d &s) const
   { return s.dist(*this); }
 
 std::ostream &operator<<(std::ostream &stream,const Pos3d &n)

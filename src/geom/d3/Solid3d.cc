@@ -19,17 +19,17 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Solido3d.cc
+//Solid3d.cc
 
-#include "Solido3d.h"
+#include "Solid3d.h"
 #include <limits>       // std::numeric_limits
 
 //! @brief Constructor.
-Solido3d::Solido3d(void)
+Solid3d::Solid3d(void)
   : GeomObj3d(){}
 
 //! @brief Return the distance to the argument.
-GEOM_FT Solido3d::dist(const Pos3d &p) const
+GEOM_FT Solid3d::dist(const Pos3d &p) const
   {
     std::cerr << getClassName() << "::" << __FUNCTION__
               << "; not implemented."
@@ -37,7 +37,7 @@ GEOM_FT Solido3d::dist(const Pos3d &p) const
     return std::numeric_limits<double>::quiet_NaN( );
   }
 
-void Solido3d::Print(std::ostream &os) const
+void Solid3d::Print(std::ostream &os) const
   {
     std::cerr << getClassName() << "::" << __FUNCTION__
               << "; not implemented."

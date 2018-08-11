@@ -148,7 +148,7 @@ GEOM_FT (Pos3d::*getItemPos3d)(const size_t &) const= &Pos3d::at0;
 GEOM_FT (Pos3d::*distPos3d)(const Pos3d &) const= &Pos3d::dist;
 GEOM_FT (Pos3d::*distPlane)(const Plane &) const= &Pos3d::dist;
 GEOM_FT (Pos3d::*distHalfSpace3d)(const HalfSpace3d &) const= &Pos3d::dist;
-//GEOM_FT (Pos3d::*distSolido3d)(const Pos3d &) const= &Pos3d::dist;
+//GEOM_FT (Pos3d::*distSolid3d)(const Pos3d &) const= &Pos3d::dist;
 GEOM_FT (Pos3d::*dist2Pos3d)(const Pos3d &) const= &Pos3d::dist2;
 GEOM_FT (Pos3d::*dist2Plane)(const Plane &) const= &Pos3d::dist2;
 GEOM_FT (Pos3d::*dist2HalfSpace3d)(const HalfSpace3d &) const= &Pos3d::dist2;
@@ -166,7 +166,7 @@ class_<Pos3d, bases<ProtoGeom> >("Pos3d")
   .def("distSegment3d",distSegment3d)
   .def("distPlane",distPlane)
   .def("distHalfSpace3d",distHalfSpace3d)
-  //.def("distSolido3d",distSolido3d)
+  //.def("distSolid3d",distSolid3d)
   .def("dist2Pos3d",dist2Pos3d)
   .def("dist2Line3d",dist2Line3d)
   .def("dist2Ray3d",dist2Ray3d)

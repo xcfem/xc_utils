@@ -24,20 +24,20 @@
 #ifndef PRISMA3D_H
 #define PRISMA3D_H
 
-#include "xc_utils/src/geom/d3/Solido3d.h"
+#include "xc_utils/src/geom/d3/Solid3d.h"
 
 
 //! @ingroup GEOM
 //
 //! @brief Clase base para los prismas.
-class Prisma3d : public Solido3d
+class Prisma3d : public Solid3d
   {
   public:
-    Prisma3d(void): Solido3d(){}
-    Prisma3d(const Prisma3d &p): Solido3d(p){}
+    Prisma3d(void): Solid3d(){}
+    Prisma3d(const Prisma3d &p): Solid3d(p){}
     Prisma3d &operator=(const Prisma3d &p)
       {
-	Solido3d::operator=(p);
+	Solid3d::operator=(p);
         return *this;
       }
   };
