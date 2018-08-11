@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//GmGrupo3d.cc
+//GeomGroup3d.cc
 
-#include "GmGrupo3d.h"
+#include "GeomGroup3d.h"
 
 
 #include "xc_utils/src/geom/pos_vec/Dir3d.h"
@@ -31,13 +31,13 @@
 #include "xc_utils/src/geom/d1/Segment3d.h"
 
 //Return the moment of inertia with respect to the line argument
-GEOM_FT GmGrupo3d::inercia(const Line3d &e) const
+GEOM_FT GeomGroup3d::inercia(const Line3d &e) const
   {
     if(objetos.empty()) return 0.0;
     if(!igual_dimension())
       {
         std::cerr << getClassName() << "::" << __FUNCTION__
-		  << "; Waringi!, the objects of the group have"
+		  << "; Warning!, the objects of the group have"
 	          << " different dimensions." << std::endl;
       }
     register pdeque_geom_obj::const_iterator i(objetos.begin());
@@ -48,22 +48,32 @@ GEOM_FT GmGrupo3d::inercia(const Line3d &e) const
     return retval;
   }
 
-GEOM_FT GmGrupo3d::Ix(void) const
-//Moment of inertia with respect to the center of mass in local coordinates.
-{ return inercia(Line3d(getCenterOfMass(),Dir3d(1.0,0.0,0.0))); }
-GEOM_FT GmGrupo3d::Iy(void) const
-//Moment of inertia with respect to the center of mass in local coordinates.
-{ return inercia(Line3d(getCenterOfMass(),Dir3d(0.0,1.0,0.0))); }
-GEOM_FT GmGrupo3d::Iz(void) const
-//Moment of inertia with respect to the center of mass in local coordinates.
-{ return inercia(Line3d(getCenterOfMass(),Dir3d(0.0,0.0,1.0))); }
-GEOM_FT GmGrupo3d::Pxy(void) const
+//! @brief Moment of inertia with respect to an axis parallel to
+//! the x axis passing through the center of mass.
+GEOM_FT GeomGroup3d::Ix(void) const
+  { return inercia(Line3d(getCenterOfMass(),Dir3d(1.0,0.0,0.0))); }
+
+//! @brief Moment of inertia with respect to an axis parallel to
+//! the y axis passing through the center of mass.
+GEOM_FT GeomGroup3d::Iy(void) const
+  { return inercia(Line3d(getCenterOfMass(),Dir3d(0.0,1.0,0.0))); }
+
+//! @brief Moment of inertia with respect to an axis parallel to
+//! the z axis passing through the center of mass.
+GEOM_FT GeomGroup3d::Iz(void) const
+  { return inercia(Line3d(getCenterOfMass(),Dir3d(0.0,0.0,1.0))); }
+
+//! @brief Moment of inertia with respect to the axis parallel to
+//! the x and y axis passing through the center of mass.
+GEOM_FT GeomGroup3d::Pxy(void) const
   {
-    std::cerr << "GmGrupo3d::Pxy not implemented, 0 is returned." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented, 0 is returned." << std::endl;
     return 0.0;
   }
 
-Pos3d GmGrupo3d::getCenterOfMass(void) const
+//! @brief Return the position of the object's center of mass.
+Pos3d GeomGroup3d::getCenterOfMass(void) const
   {
     if(objetos.empty()) return Pos3d();
     if(!igual_dimension())

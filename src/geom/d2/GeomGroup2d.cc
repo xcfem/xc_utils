@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//GmGrupo2d.cc
+//GeomGroup2d.cc
 
-#include "GmGrupo2d.h"
+#include "GeomGroup2d.h"
 
 #include <plotter.h>
 #include <iostream>
@@ -35,12 +35,14 @@
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
 //! @brief Return el moment of inertia with respect to the line argument.
-GEOM_FT GmGrupo2d::inercia(const Line2d &e) const
+GEOM_FT GeomGroup2d::inercia(const Line2d &e) const
   {
     if(objetos.empty()) return 0.0;
     if(!igual_dimension())
       {
-        cerr << "¡Ojo!, GmGrupo2d::inercia: los objetos del grupo tienen distintas dimensiones." << endl;
+        cerr << getClassName() << "::" << __FUNCTION__
+	     << "; warning, the object of the group have"
+	     << " different dimensions." << endl;
       }
     register pdeque_geom_obj::const_iterator i(objetos.begin());
     register GEOM_FT retval((*i)->I(e));
@@ -50,13 +52,19 @@ GEOM_FT GmGrupo2d::inercia(const Line2d &e) const
     return retval;
   }
 
-//! @brief Moment of inertia with respect to the center of mass in local coordinates.
-GEOM_FT GmGrupo2d::Ix(void) const
+//! @brief Moment of inertia with respect to an axis parallel to
+//! the x axis passing through the center of mass.
+GEOM_FT GeomGroup2d::Ix(void) const
   { return inercia(Line2d(getCenterOfMass(),Dir2d(1.0,0.0))); }
-//! @brief Moment of inertia with respect to the center of mass in local coordinates.
-GEOM_FT GmGrupo2d::Iy(void) const
+
+//! @brief Moment of inertia with respect to an axis parallel to
+//! the y axis passing through the center of mass.
+GEOM_FT GeomGroup2d::Iy(void) const
   { return inercia(Line2d(getCenterOfMass(),Dir2d(0.0,1.0))); }
-GEOM_FT GmGrupo2d::Pxy(void) const
+
+//! @brief Moment of inertia with respect to the axis parallel to
+//! the x and y axis passing through the center of mass.
+GEOM_FT GeomGroup2d::Pxy(void) const
   {
     std::cerr << getClassName() << "::" << __FUNCTION__
 	 << "; not implemented, 0 is returned." << endl;
@@ -64,7 +72,7 @@ GEOM_FT GmGrupo2d::Pxy(void) const
   }
 
 //! @brief Return the center of mass.
-Pos2d GmGrupo2d::getCenterOfMass(void) const
+Pos2d GeomGroup2d::getCenterOfMass(void) const
   {
     if(objetos.empty()) return Pos2d();
     if(!igual_dimension())
@@ -89,18 +97,18 @@ Pos2d GmGrupo2d::getCenterOfMass(void) const
   }
 
 //! @brief Applies the transformation to the points.
-void GmGrupo2d::Transforma(const Trf2d &trf2d)
+void GeomGroup2d::Transforma(const Trf2d &trf2d)
   {
     for(pdeque_geom_obj::iterator i= objetos.begin();i!=objetos.end();i++)
       (*i)->Transforma(trf2d);
   }
 
-void GmGrupo2d::Print(std::ostream &stream) const
+void GeomGroup2d::Print(std::ostream &stream) const
   {
     for(register pdeque_geom_obj::const_iterator i= objetos.begin();i!=objetos.end();i++)
       (*i)->Print(stream);
   }
-void GmGrupo2d::Plot(Plotter &plotter) const
+void GeomGroup2d::Plot(Plotter &plotter) const
   {
     for(register pdeque_geom_obj::const_iterator i= objetos.begin();i!=objetos.end();i++)
       (*i)->Plot(plotter);

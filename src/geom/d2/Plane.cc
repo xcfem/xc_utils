@@ -30,7 +30,7 @@
 #include "xc_utils/src/geom/d1/Polyline3d.h"
 #include "xc_utils/src/geom/d2/Polygon3d.h"
 #include "xc_utils/src/geom/d2/Triangle3d.h"
-#include "xc_utils/src/geom/d3/GmGrupo3d.h"
+#include "xc_utils/src/geom/d3/GeomGroup3d.h"
 #include "xc_basic/src/util/mchne_eps.h"
 #include "CGAL/linear_least_squares_fitting_3.h"
 
@@ -305,7 +305,8 @@ Line3d Plane::getIntersection(const Plane &p) const
 //   {
 //     const Line3d retval= getIntersection(p);
 //     if(!retval.exists())
-//       std::cerr << "Intersection with plane doesn't exists: "
+//       std::cerr << getClassName() << "::" << __FUNCTION__
+//                 << "; intersection with plane doesn't exists: "
 //                 << p << std::endl;
 //     return retval;
 //   }
@@ -331,7 +332,8 @@ Pos3d Plane::getIntersection(const Line3d &r) const
 //   {
 //     const Pos3d retval= getIntersection(r);
 //     if(!retval.exists())
-//       std::cerr << "Intersection with line "
+//       std::cerr << getClassName() << "::" << __FUNCTION__
+//                 << "; intersection with line "
 //                 << r << "doesn't exists." << std::endl;
 //     return retval;
 //   }
@@ -374,7 +376,8 @@ Pos3d Plane::getIntersection(const Segment3d &sg) const
 //   {
 //     const Pos3d retval= getIntersection(sr);
 //     if(!retval.exists())
-//       std::cerr << "Intersection with ray doesn't exists: "
+//       std::cerr << getClassName() << "::" << __FUNCTION__
+//                 << "; intersection with ray doesn't exists: "
 //                 << sr << std::endl;
 //     return retval;
 //   }
@@ -471,7 +474,7 @@ Plane perpendicular(const Line3d &r, const Pos3d &p)
 Line3d intersection_line(const Plane &p1, const Plane &p2)
   {
     Line3d retval;
-    GmGrupo3d tmp= intersection(p1,p2);
+    GeomGroup3d tmp= intersection(p1,p2);
     if(!tmp.empty())
       {
         const Line3d *line_ptr= dynamic_cast<const Line3d *>(tmp.begin()->get_const_ptr());
@@ -487,7 +490,7 @@ Line3d intersection_line(const Plane &p1, const Plane &p2)
 Pos3d intersection_point(const Plane &p1, const Plane &p2, const Plane &p3)
   {
     Pos3d retval;
-    GmGrupo3d tmp= intersection(p1,p2);
+    GeomGroup3d tmp= intersection(p1,p2);
     if(!tmp.empty())
       {
         const Line3d *line_ptr= dynamic_cast<const Line3d *>(tmp.begin()->get_const_ptr());
@@ -500,9 +503,9 @@ Pos3d intersection_point(const Plane &p1, const Plane &p2, const Plane &p3)
   }
 
 //! @brief Intersection of two planes.
-GmGrupo3d intersection(const Plane &p1, const Plane &p2)
+GeomGroup3d intersection(const Plane &p1, const Plane &p2)
   {
-    GmGrupo3d retval;
+    GeomGroup3d retval;
     const auto p1_cg= p1.ToCGAL();
     const auto p2_cg= p2.ToCGAL();
     if(do_intersect(p1_cg,p2_cg))
@@ -589,7 +592,7 @@ GeomObj3d::list_Pos3d intersection(const Plane &p, const Ray3d &sr)
             }
       }
     // else
-    //   std::cerr << "Doesn't itersect." << std::endl;
+    //   std::cerr << __FUNCTION__ << "Doesn't itersect." << std::endl;
     return retval;    
   }
 
@@ -624,7 +627,7 @@ GeomObj3d::list_Pos3d intersection(const Plane &p, const Segment3d &sg)
             }
       }
     // else
-    //   std::cerr << "No intersecan." << std::endl;
+    //   std::cerr << __FUNCTION__ << "; doesn't intersect." << std::endl;
     return retval;    
   }
 

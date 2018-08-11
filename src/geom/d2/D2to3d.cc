@@ -27,7 +27,7 @@
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d1/Line3d.h"
-#include "xc_utils/src/geom/d3/GmGrupo3d.h"
+#include "xc_utils/src/geom/d3/GeomGroup3d.h"
 #include "xc_utils/src/geom/d3/HalfSpace3d.h"
 #include "xc_utils/src/geom/listas/auxiliares.h"
 #include "xc_utils/src/geom/pos_vec/Pos2dArray.h"
@@ -49,8 +49,9 @@ D2to3d::D2to3d(const Pos3d &o,const Vector3d &n,const Vector3d &i)
   {
     const Vector3d j= n^i;
     if(Abs2(j)>1e-3)
-      std::cerr << "D2to3dONI; error, los vectores n= " << n
-                << " e i= " << i << " son paralelos." << std::endl;
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; error, vectors n= " << n
+                << " and i= " << i << " are parallel." << std::endl;
   }
 
 //! @brief Constructor.

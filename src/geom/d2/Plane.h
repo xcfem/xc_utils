@@ -37,7 +37,7 @@ class Ray3d;
 class Segment3d;
 class Polyline3d;
 class Polygon3d;
-class GmGrupo3d;
+class GeomGroup3d;
 class GeneralEquationOfPlane;
 class SisCooRect2d3d;
 class Ref2d3d;
@@ -179,7 +179,7 @@ bool paralelos(const Plane &p1, const Plane &p2);
 
 Line3d intersection_line(const Plane &, const Plane &);
 Pos3d intersection_point(const Plane &, const Plane &,const Plane &);
-GmGrupo3d intersection(const Plane &p1, const Plane &p2);
+GeomGroup3d intersection(const Plane &p1, const Plane &p2);
 GeomObj3d::list_Pos3d intersection(const Plane &p, const Line3d &r);
 GeomObj3d::list_Pos3d intersection(const Line3d &r, const Plane &p);
 GeomObj3d::list_Pos3d intersection(const Plane &p, const Ray3d &r);

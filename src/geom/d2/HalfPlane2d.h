@@ -28,7 +28,7 @@
 #include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/d2/Surface2d.h"
 
-class GmGrupo2d;
+class GeomGroup2d;
 class Ray2d;
 class Segment2d;
 
@@ -97,9 +97,9 @@ class HalfPlane2d : public Surface2d
       { return lim.intersects(r); }
     bool intersects(const Ray2d &sr) const;
     bool intersects(const Segment2d &sg) const;
-    GmGrupo2d getIntersection(const Line2d &r) const;
-    GmGrupo2d getIntersection(const Ray2d &sr) const;
-    GmGrupo2d getIntersection(const Segment2d &sg) const;
+    GeomGroup2d getIntersection(const Line2d &r) const;
+    GeomGroup2d getIntersection(const Ray2d &sr) const;
+    GeomGroup2d getIntersection(const Segment2d &sg) const;
 
     //! @brief Return the length of the object.
     inline virtual GEOM_FT getLength(void) const
@@ -153,11 +153,11 @@ inline bool intersecan(const Ray2d &sr,const HalfPlane2d &sp)
 inline bool intersecan(const Segment2d &sg,const HalfPlane2d &sp)
   { return sp.intersects(sg); }
 
-GmGrupo2d intersection(const HalfPlane2d &sp,const Line2d &r);
-GmGrupo2d intersection(const HalfPlane2d &sp,const Ray2d &sr);
-GmGrupo2d intersection(const HalfPlane2d &sp,const Segment2d &sg);
-GmGrupo2d intersection(const Line2d &r,const HalfPlane2d &sp);
-GmGrupo2d intersection(const Ray2d &sr,const HalfPlane2d &sp);
-GmGrupo2d intersection(const Segment2d &sg,const HalfPlane2d &sp);
+GeomGroup2d intersection(const HalfPlane2d &sp,const Line2d &r);
+GeomGroup2d intersection(const HalfPlane2d &sp,const Ray2d &sr);
+GeomGroup2d intersection(const HalfPlane2d &sp,const Segment2d &sg);
+GeomGroup2d intersection(const Line2d &r,const HalfPlane2d &sp);
+GeomGroup2d intersection(const Ray2d &sr,const HalfPlane2d &sp);
+GeomGroup2d intersection(const Segment2d &sg,const HalfPlane2d &sp);
 
 #endif

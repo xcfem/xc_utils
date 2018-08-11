@@ -28,7 +28,7 @@
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d1/Line3d.h"
-#include "xc_utils/src/geom/d3/GmGrupo3d.h"
+#include "xc_utils/src/geom/d3/GeomGroup3d.h"
 #include "xc_utils/src/geom/d3/HalfSpace3d.h"
 #include "xc_utils/src/geom/listas/auxiliares.h"
 
@@ -92,19 +92,30 @@ std::vector<Polygon3d> Polygon3d::getTributaryPolygons(void) const
     return retval;
   }
 
+//! @brief Moment of inertia with respect to an axis parallel to
+//! the x axis passing through the center of mass.
 GEOM_FT Polygon3d::Ix(void) const
   {
-    std::cerr << "Polygon3d::Ix() not implemented, 0 is returned." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented, 0 is returned." << std::endl;
     return 0;
   }
+
+//! @brief Moment of inertia with respect to an axis parallel to
+//! the y axis passing through the center of mass.
 GEOM_FT Polygon3d::Iy(void) const
   {
-    std::cerr << "Polygon3d::Iy() not implemented, 0 is returned." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented, 0 is returned." << std::endl;
     return 0;
   }
+
+//! @brief Moment of inertia with respect to an axis parallel to
+//! the z axis passing through the center of mass.
 GEOM_FT Polygon3d::Iz(void) const
   {
-    std::cerr << "Polygon3d::Iz() not implemented, 0 is returned." << std::endl;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+	      << "; not implemented, 0 is returned." << std::endl;
     return 0;
   }
 
@@ -194,7 +205,7 @@ std::list<Polygon3d> Polygon3d::Corta(const Plane &pl) const
     if(pl_polig==pl) return retval;
     if(paralelos(pl_polig,pl)) return retval;
 
-    GmGrupo3d gint= intersection(pl_polig,pl);
+    GeomGroup3d gint= intersection(pl_polig,pl);
     GeomObj3d *ptr=(*gint.begin());
     const Line3d r= *((Line3d *)ptr);
 

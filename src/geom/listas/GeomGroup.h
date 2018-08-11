@@ -19,19 +19,19 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//GmGrupo.h
+//GeomGroup.h
 
-#ifndef GMGRUPO_H
-#define GMGRUPO_H
+#ifndef GEOMGROUP_H
+#define GEOMGROUP_H
 
 #include "xc_basic/src/stl/pdeque.h"
 
 
 //! @ingroup GEOM
 //
-//! @brief Clase base para grupos de entidades geométricas.
+//! @brief Base class for geometric entities groups.
 template <typename GO>
-class GmGrupo : public GO
+class GeomGroup : public GO
   {
     static const GO *downcast(const GeomObj *p)
       { return dynamic_cast<const GO *>(p); }
@@ -39,9 +39,8 @@ class GmGrupo : public GO
       { return dynamic_cast<GO *>(p); }
   protected:
     typedef pdeque<GO> pdeque_geom_obj;
-    pdeque_geom_obj objetos; //Objetos del grupo
+    pdeque_geom_obj objetos; //!< Objects of the group.
     bool igual_dimension(void) const;
-    //Return verdadero si todos los objetos son de la misma dimensión.
   private:
     void copia_objetos(const pdeque_geom_obj &objs);
   public:
@@ -58,8 +57,8 @@ class GmGrupo : public GO
     inline bool Vacio(void) const
       { return objetos.empty(); }
 
-    GmGrupo(void) : GO(), objetos() {}
-    GmGrupo(const GmGrupo &other) : GO(other)
+    GeomGroup(void) : GO(), objetos() {}
+    GeomGroup(const GeomGroup &other) : GO(other)
       { copia_objetos(other.objetos); }
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
@@ -75,15 +74,15 @@ class GmGrupo : public GO
   };
 
 template <typename GO>
-void GmGrupo<GO>::copia_objetos(const pdeque_geom_obj &objs)
+void GeomGroup<GO>::copia_objetos(const pdeque_geom_obj &objs)
   {
     for(register const_iterator i= objs.begin();i!=objs.end();i++)
       objetos.push_back(downcast((*i)->clon()));
   }
 
+//! @brief Return true if all objects have the same dimension.
 template <typename GO>
-bool GmGrupo<GO>::igual_dimension(void) const
-//Return verdadero si todos los objetos son de la misma dimensión.
+bool GeomGroup<GO>::igual_dimension(void) const
   {
     if(objetos.empty()) return true;
     register const_iterator i(objetos.begin());
@@ -94,9 +93,9 @@ bool GmGrupo<GO>::igual_dimension(void) const
     return true;
   }
 
+//! @brief Return the dimension of the object 0, 1, 2 or 3.
 template <typename GO>
-unsigned short int GmGrupo<GO>::Dimension(void) const
-//Return the dimension of the object 0, 1, 2 or 3.
+unsigned short int GeomGroup<GO>::Dimension(void) const
   {
     if(objetos.empty()) return 0;
     register const_iterator i(objetos.begin());
@@ -108,7 +107,7 @@ unsigned short int GmGrupo<GO>::Dimension(void) const
   }
 
 template <typename GO>
-GEOM_FT GmGrupo<GO>::GetMax(unsigned short int i) const
+GEOM_FT GeomGroup<GO>::GetMax(unsigned short int i) const
   {
     if(objetos.empty()) return 0.0;
     register const_iterator j=objetos.begin();
@@ -119,7 +118,7 @@ GEOM_FT GmGrupo<GO>::GetMax(unsigned short int i) const
     return mx;
   }
 template <typename GO>
-GEOM_FT GmGrupo<GO>::GetMin(unsigned short int i) const
+GEOM_FT GeomGroup<GO>::GetMin(unsigned short int i) const
   {
     if(objetos.empty()) return 0.0;
     register const_iterator j=objetos.begin();
@@ -132,7 +131,7 @@ GEOM_FT GmGrupo<GO>::GetMin(unsigned short int i) const
 
 //! @brief Return the length of the object.
 template <typename GO>
-GEOM_FT GmGrupo<GO>::getLength(void) const
+GEOM_FT GeomGroup<GO>::getLength(void) const
   {
     if(objetos.empty()) return 0.0;
 	register const_iterator i(objetos.begin());
@@ -145,7 +144,7 @@ GEOM_FT GmGrupo<GO>::getLength(void) const
 
 //! @brief Return the object area.
 template <typename GO>
-GEOM_FT GmGrupo<GO>::getArea(void) const
+GEOM_FT GeomGroup<GO>::getArea(void) const
   {
     if(objetos.empty()) return 0.0;
 	register const_iterator i(objetos.begin());
@@ -158,7 +157,7 @@ GEOM_FT GmGrupo<GO>::getArea(void) const
 
 //! @brief Return the volume of the object.
 template <typename GO>
-GEOM_FT GmGrupo<GO>::getVolume(void) const
+GEOM_FT GeomGroup<GO>::getVolume(void) const
   {
     if(objetos.empty()) return 0.0;
 	register const_iterator i(objetos.begin());
@@ -170,7 +169,7 @@ GEOM_FT GmGrupo<GO>::getVolume(void) const
   }
 
 template <typename GO>
-void GmGrupo<GO>::Print(std::ostream &os) const
+void GeomGroup<GO>::Print(std::ostream &os) const
   {
     if(Vacio()) return;
     register const_iterator i= begin();

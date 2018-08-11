@@ -19,22 +19,22 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//GmGrupo3d.h
+//GeomGroup3d.h
 
-#ifndef GMGRUPO3D_H
-#define GMGRUPO3D_H
+#ifndef GEOMGROUP3D_H
+#define GEOMGROUP3D_H
 
 #include "xc_basic/src/stl/pdeque.h"
 #include "GeomObj3d.h"
-#include "xc_utils/src/geom/listas/GmGrupo.h"
+#include "xc_utils/src/geom/listas/GeomGroup.h"
 
 class Line3d;
 
 
 //! @ingroup GEOM
 //
-//! @brief Grupo de entidades geométricas en tres dimensiones.
-class GmGrupo3d : public GmGrupo<GeomObj3d>
+//! @brief Group of 3D entities.
+class GeomGroup3d : public GeomGroup<GeomObj3d>
   {
 
     virtual GEOM_FT inercia(const Line3d &e) const;
@@ -43,11 +43,10 @@ class GmGrupo3d : public GmGrupo<GeomObj3d>
     typedef pdeque_geom_obj::iterator iterator;
 
 
-    GmGrupo3d(void) : GmGrupo<GeomObj3d>() {}
-    GmGrupo3d(const GmGrupo3d &other) : GmGrupo<GeomObj3d>(other) {}
+    GeomGroup3d(void) : GeomGroup<GeomObj3d>() {}
 
     virtual GeomObj3d *clon(void) const
-      { return new GmGrupo3d(*this); }
+      { return new GeomGroup3d(*this); }
 
     virtual Pos3d getCenterOfMass(void) const;
 

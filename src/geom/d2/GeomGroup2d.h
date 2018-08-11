@@ -19,21 +19,21 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//GmGrupo2d.h
+//GeomGroup2d.h
 
-#ifndef GMGRUPO2D_H
-#define GMGRUPO2D_H
+#ifndef GEOMGROUP2D_H
+#define GEOMGROUP2D_H
 
 #include "xc_basic/src/stl/pdeque.h"
 #include "GeomObj2d.h"
-#include "xc_utils/src/geom/listas/GmGrupo.h"
+#include "xc_utils/src/geom/listas/GeomGroup.h"
 
 class Line2d;
 
 //! @ingroup GEOM
 //
-//! @brief Grupo de entidades geométricas en dos dimensiones.
-class GmGrupo2d : public GmGrupo<GeomObj2d>
+//! @brief  Group of 3D entities.
+class GeomGroup2d : public GeomGroup<GeomObj2d>
   {
 
     virtual GEOM_FT inercia(const Line2d &e) const;
@@ -42,11 +42,10 @@ class GmGrupo2d : public GmGrupo<GeomObj2d>
     typedef pdeque_geom_obj::iterator iterator;
 
 
-    GmGrupo2d(void) : GmGrupo<GeomObj2d>() {}
-    GmGrupo2d(const GmGrupo2d &other) : GmGrupo<GeomObj2d>(other) {}
+    GeomGroup2d(void) : GeomGroup<GeomObj2d>() {}
 
     virtual GeomObj2d *clon(void) const
-      { return new GmGrupo2d(*this); }
+      { return new GeomGroup2d(*this); }
 
     //! @brief Return the volume of the object.
     inline virtual GEOM_FT getVolume(void) const
@@ -54,11 +53,8 @@ class GmGrupo2d : public GmGrupo<GeomObj2d>
     virtual Pos2d getCenterOfMass(void) const;
 
     virtual GEOM_FT Ix(void) const;
-    //Moment of inertia with respect to the center of mass in local coordinates.
     virtual GEOM_FT Iy(void) const;
-    //Moment of inertia with respect to the center of mass in local coordinates.
     GEOM_FT Pxy(void) const;
-    //product of inertia with respect to the center of mass in local coordinates.
 
     void Print(std::ostream &stream) const;
     void Plot(Plotter &) const;
