@@ -35,7 +35,7 @@ void mueve(GeomObj::list_Pos3d &l,const Vector3d &v)
       (*j)= (*j) + v;
   }
 
-//! @brief Aplica a los vértices la transformación que se pasa como parámetro.
+//! @brief Applies the transformation to the positions.
 void transforma(GeomObj::list_Pos3d &l,const Trf3d &t)
   { t.Transforma(l.begin(),l.end()); }
 

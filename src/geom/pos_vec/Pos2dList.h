@@ -19,35 +19,32 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//ListaPos3d.
+//Pos2dList.
 
-#ifndef LISTAPOS3D_H
-#define LISTAPOS3D_H
+#ifndef LISTAPOS2D_H
+#define LISTAPOS2D_H
 
-#include "Pos3d.h"
-#include "Vector3d.h"
-#include "../d3/GeomObj3d.h"
+#include "../d2/GeomObj2d.h"
 
-class Trf3d;
-
+class Polygon2d;
 
 //! @ingroup GEOM
 //
-//! @brief Lista de posiciones en tres dimensiones.
-class ListaPos3d: public GeomObj3d
+//! @brief List of 2D positions.
+class Pos2dList: public GeomObj2d
   {
   public:
-    typedef GeomObj::list_Pos3d list_Pos3d;
-    typedef GeomObj::list_Pos3d::iterator point_iterator;
-    typedef GeomObj::list_Pos3d::const_iterator point_const_iterator;
+    typedef GeomObj::list_Pos2d list_Pos2d;
+    typedef GeomObj::list_Pos2d::iterator point_iterator;
+    typedef GeomObj::list_Pos2d::const_iterator point_const_iterator;
   protected:
-    list_Pos3d lista_ptos;
-    Pos3d &operator[](const size_t &i);
+    list_Pos2d lista_ptos;
+    Pos2d &operator[](const size_t &i);
   public:
-    ListaPos3d(void);
-    explicit ListaPos3d(const GeomObj::list_Pos3d &l);
+    Pos2dList(void);
+    explicit Pos2dList(const GeomObj::list_Pos2d &l);
     virtual GeomObj *clon(void) const
-      { return new ListaPos3d(*this); }
+      { return new Pos2dList(*this); }
     inline size_t getNumberOfPoints(void) const
       { return lista_ptos.size(); }
     inline point_const_iterator points_begin(void) const
@@ -57,16 +54,17 @@ class ListaPos3d: public GeomObj3d
     inline short unsigned int Dimension(void) const
       { return 0; }
 
-    const GeomObj::list_Pos3d &getPoints(void) const
+    const GeomObj::list_Pos2d &getPoints(void) const
       { return lista_ptos; }
-    const Pos3d &operator[](const size_t &i) const;
+    const Pos2d &operator[](const size_t &i) const;
 
-    const Pos3d *appendPoint(const Pos3d &p);
-    //! @brief Insert the vertices between [first,last).
+    const Pos2d *appendPoint(const Pos2d &p);
+    void appendPointPy(const Pos2d &p);
     template <class InputIterator>
+    //! Insert the vertices between [first,last).
     inline void assign(InputIterator first, InputIterator last)
       { lista_ptos.assign(first,last); }
-    virtual bool In(const Pos3d &p, const double &tol= 0.0) const;
+    virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
 
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;
@@ -75,26 +73,25 @@ class ListaPos3d: public GeomObj3d
     //Producto de inercia.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
-    //! @brief Return the length of the ListaPos3d.
+    //! @brief Return the length of the object.
     virtual GEOM_FT getLength(void) const
       { return 0.0; }
-    //! @brief Return the area of the ListaPos3d.
+    //! @brief Return the area of the object.
     virtual GEOM_FT getArea(void) const
-      { return 0.0; }
-    //! @brief Return the volume of the object.
-    virtual GEOM_FT getVolume(void) const
       { return 0.0; }
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
-    ListaPos3d GetMayores(unsigned short int i,const GEOM_FT &d) const;
-    ListaPos3d GetMenores(unsigned short int i,const GEOM_FT &d) const;
-    const Pos3d &Point(const size_t &i) const;
-    Pos3d getCenterOfMass(void) const
+    Pos2dList GetMayores(unsigned short int i,const GEOM_FT &d) const;
+    Pos2dList GetMenores(unsigned short int i,const GEOM_FT &d) const;
+    const Pos2d &Point(const size_t &i) const;
+    Pos2d getCenterOfMass(void) const
       { return lista_ptos.getCenterOfMass(); }
 
-    void Transforma(const Trf3d &trf3d);
+    void Transforma(const Trf2d &trf2d);
+    Pos2dList Offset(const GEOM_FT &d) const;
 
     std::deque<GEOM_FT> &GetSeparaciones(void) const;
+    std::deque<GEOM_FT> &GetRecubrimientos(const Polygon2d &) const;
     double GetSeparacionMedia(void) const;
 
     void Print(std::ostream &stream) const;

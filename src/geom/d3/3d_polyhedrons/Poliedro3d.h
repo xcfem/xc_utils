@@ -108,7 +108,7 @@ class Poliedro3d: public PolyhedronBase
     GEOM_FT GetMin(unsigned short int i) const;
     size_t GetNumVertices(void) const
       { return cgpoliedro.size_of_vertices(); }
-    size_t GetNumAristas(void) const
+    size_t getNumEdges(void) const
       { return cgpoliedro.size_of_halfedges(); }
     size_t GetNumCaras(void) const
       { return cgpoliedro.size_of_facets(); }

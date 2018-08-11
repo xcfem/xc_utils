@@ -19,36 +19,26 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//utils_list_pos3d.h
+//utils_list_pos2d.h
 
-#ifndef UTILS_LIST_POS3D_H
-#define UTILS_LIST_POS3D_H
+#ifndef UTILS_LIST_POS2D_H
+#define UTILS_LIST_POS2D_H
 
 #include "xc_utils/src/geom/GeomObj.h"
 
-class BND3d;
-class Trf3d;
-class Vector3d;
+class BND2d;
+class Polygon2d;
 
-//Funciones auxiliares para la manipulación de listas 
-//de posiciones en 3d.
-
+//Auxiliary functions for manipulation of position lists.
 
 //! @ingroup GEOM
 //
-//! @brief Suma a las posiciones de la lista el vector que
-//! se pasa como parámetro.
-void mueve(GeomObj::list_Pos3d &l,const Vector3d &);
-//! @brief Applies the transformation to the points of the list.
-void transforma(GeomObj::list_Pos3d &l,const Trf3d &);
-//! @brief Return the maxima of the X,Y,Z coordinates
-//! of the points.
-Pos3d getPMax(const GeomObj::list_Pos3d &l);
-//! @brief Return the minima of the X,Y,Z coordinates
-//! of the points.
-Pos3d getPMin(const GeomObj::list_Pos3d &l);
-//! @brief Return the boundary of the points.
-BND3d getBnd(const GeomObj::list_Pos3d &l);
-
+void mueve(GeomObj::list_Pos2d &l,const Vector2d &);
+void transforma(GeomObj::list_Pos2d &l,const Trf2d &);
+void plot(Plotter &,const GeomObj::list_Pos2d &l);
+Pos2d getPMax(const GeomObj::list_Pos2d &l);
+Pos2d getPMin(const GeomObj::list_Pos2d &l);
+BND2d getBnd(const GeomObj::list_Pos2d &l);
+std::deque<GEOM_FT> &getRecubrimientos(const GeomObj::list_Pos2d &l,const Polygon2d &);
 #endif
 

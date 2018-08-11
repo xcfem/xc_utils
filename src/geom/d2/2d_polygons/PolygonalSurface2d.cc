@@ -32,7 +32,7 @@
 #include <plotter.h>
 
 
-#include "xc_utils/src/geom/pos_vec/ListaPos2d.h"
+#include "xc_utils/src/geom/pos_vec/Pos2dList.h"
 
 
 

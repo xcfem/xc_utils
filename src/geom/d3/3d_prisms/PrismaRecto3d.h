@@ -90,8 +90,8 @@ class PrismaRecto3d : public Prisma3d
       { return extru.GetNumVertices(); }
     inline virtual unsigned int GetNumVerticesFaceta(unsigned int faceta) const
       { return extru.GetNumVerticesFaceta(faceta); }
-    inline virtual unsigned int GetNumAristas(void) const
-      { return extru.GetNumAristas(); }
+    inline virtual unsigned int getNumEdges(void) const
+      { return extru.getNumEdges(); }
     inline virtual unsigned int GetNumFacetas(void) const
       { return extru.GetNumFacetas(); }
     inline Pos3d Vertice(unsigned int i) const

@@ -26,7 +26,7 @@
 
 #include "xc_basic/src/stl/pdeque.h"
 #include "GeomObj2d.h"
-#include "xc_utils/src/geom/listas/GeomGroup.h"
+#include "xc_utils/src/geom/lists/GeomGroup.h"
 
 class Line2d;
 

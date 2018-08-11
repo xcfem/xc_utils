@@ -30,7 +30,7 @@
 class Segment2d;
 class Ray2d;
 class Line2d;
-class ListaPos2d;
+class Pos2dList;
 
 //! @ingroup GEOM
 //
@@ -40,7 +40,7 @@ class Polyline2d : public Linear2d, public GeomObj::list_Pos2d
   public:
     Polyline2d(void);
     explicit Polyline2d(const GeomObj::list_Pos2d &);
-    explicit Polyline2d(const ListaPos2d &);
+    explicit Polyline2d(const Pos2dList &);
 
     virtual GeomObj *clon(void) const
       { return new Polyline2d(*this); }

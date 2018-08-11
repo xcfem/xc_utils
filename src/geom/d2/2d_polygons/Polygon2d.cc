@@ -35,8 +35,8 @@
 
 #include "xc_utils/src/geom/center_of_mass.h"
 #include "xc_utils/src/geom/trf/Translation2d.h"
-#include "xc_utils/src/geom/listas/utils_list_pos2d.h"
-#include "xc_utils/src/geom/pos_vec/ListaPos2d.h"
+#include "xc_utils/src/geom/lists/utils_list_pos2d.h"
+#include "xc_utils/src/geom/pos_vec/Pos2dList.h"
 
 
 //! @brief Default constructor.
@@ -248,7 +248,7 @@ GEOM_FT Polygon2d::GetMin(unsigned short int i) const
     return retval;
   }
 
-GeomObj::list_Pos2d Polygon2d::ListaVertices(void) const
+GeomObj::list_Pos2d Polygon2d::getVertexList(void) const
   {
     GeomObj::list_Pos2d lv;
     if(GetNumVertices() > 0)
@@ -322,7 +322,7 @@ std::vector<double> Polygon2d::getTributaryAreas(void) const
   }
 
 //! @brief Return the cover of the positions in the argument.
-std::deque<GEOM_FT> &Polygon2d::GetRecubrimientos(const ListaPos2d &l) const
+std::deque<GEOM_FT> &Polygon2d::GetRecubrimientos(const Pos2dList &l) const
   { return l.GetRecubrimientos(*this); }
 
 //! @brief Return a polygon with a vertex on the mid-point of each side of

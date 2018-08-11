@@ -39,12 +39,12 @@ class Build_poliedro: public CGAL::Modifier_base<HDS>
     void operator()( HDS& hds)
       {
         const size_t num_facetas= sf.GetNumCaras();
-        const size_t num_aristas= sf.GetNumAristas();
+        const size_t num_edges= sf.getNumEdges();
         const size_t num_vertices= sf.GetNumVertices();
         TriangleMap mt= sf.GetTriangleMap();
         // Postcondition: `hds' is a valid polyhedral surface.
         CGAL::Polyhedron_incremental_builder_3<HDS> B( hds, true);
-        B.begin_surface(num_vertices,num_facetas,num_aristas);
+        B.begin_surface(num_vertices,num_facetas,num_edges);
         const VerticesMap &vertices= mt.getVertices();
         for(VerticesMap::const_iterator i= vertices.begin();
             i!= vertices.end();i++)
@@ -91,9 +91,9 @@ GTSSurface Triang3dMesh::get_gts_surface(void) const
 //         vertices.push_back(v);
 //       }
 //     typedef pair<size_t,size_t> verts_arista;
-//     typedef set<verts_arista > set_aristas;
-//     set_aristas s_aristas;
-//     deque<GTSEdge> aristas;
+//     typedef set<verts_arista > set_edges;
+//     set_edges s_edges;
+//     deque<GTSEdge> edges;
 //     for(polygon_map::caras_const_iterator i= map.CarasBegin();
 //         i!= map.CarasEnd(); i++)
 //       {
@@ -101,22 +101,22 @@ GTSSurface Triang3dMesh::get_gts_surface(void) const
 //         const size_t v2= (*i).Vertice(2);
 //         const size_t v3= (*i).Vertice(3);
 //         const verts_arista lado1(v1,v2);
-//         if(s_aristas.find(lado1)== s_aristas.end()) //Arista nueva.
+//         if(s_edges.find(lado1)== s_edges.end()) //Arista nueva.
 //           {
-// 	    s_aristas.insert(lado1);
-//             aristas.push_back(GTSEdge(vertices[lado1.first],vertices[lado1.second]));
+// 	    s_edges.insert(lado1);
+//             edges.push_back(GTSEdge(vertices[lado1.first],vertices[lado1.second]));
 //           }
 //         const verts_arista lado2(v2,v3);
-//         if(s_aristas.find(lado2)== s_aristas.end()) //Arista nueva.
+//         if(s_edges.find(lado2)== s_edges.end()) //Arista nueva.
 //           {
-// 	    s_aristas.insert(lado2);
-//             aristas.push_back(GTSEdge(vertices[lado2.first],vertices[lado2.second]));
+// 	    s_edges.insert(lado2);
+//             edges.push_back(GTSEdge(vertices[lado2.first],vertices[lado2.second]));
 //           }
 //         const verts_arista lado3(v3,v1);
-//         if(s_aristas.find(lado3)== s_aristas.end()) //Arista nueva.
+//         if(s_edges.find(lado3)== s_edges.end()) //Arista nueva.
 //           {
-// 	    s_aristas.insert(lado3);
-//             aristas.push_back(GTSEdge(vertices[lado3.first],vertices[lado3.second]));
+// 	    s_edges.insert(lado3);
+//             edges.push_back(GTSEdge(vertices[lado3.first],vertices[lado3.second]));
 //           }
 //         GTSEdge l1= XXX
 //       }

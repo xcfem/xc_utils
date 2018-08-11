@@ -49,7 +49,7 @@ class SolidExtruPlgno3d : public SolidExtru3d<PG>
     virtual unsigned int GetNumVertices(void) const
       { return 2*get_num_vertices_plgno(); }
     virtual unsigned int GetNumVerticesFaceta(unsigned int faceta) const;
-    inline virtual unsigned int GetNumAristas(void) const
+    inline virtual unsigned int getNumEdges(void) const
       { return 3*this->scc.GetNumLados(); }
     inline virtual unsigned int GetNumFacetas(void) const
       { return 2+this->scc.GetNumLados(); }
@@ -93,9 +93,9 @@ Pos3d SolidExtruPlgno3d<PG>::Vertice(unsigned int i) const
 /* template <class PG> */
 /* Poliedro::v_ind_vertices SolidExtruPlgno3d<PG>::IndVerticesArista(unsigned int arista) const */
 /*   { */
-/*     const unsigned int num_aristas= GetNumAristas(); */
+/*     const unsigned int num_edges= getNumEdges(); */
 /*     Poliedro::v_ind_vertices va(2); */
-/*     const unsigned int indice= arista%num_aristas; */
+/*     const unsigned int indice= arista%num_edges; */
 /*     const unsigned int num_vert_plgno= get_num_vertices_plgno(); */
 /*     if(indice<num_vert_plgno) //Si es una arista de la base */
 /*       { */

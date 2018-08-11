@@ -25,7 +25,7 @@
 #define POLILINEA3D_H
 
 #include "../pos_vec/Pos3d.h"
-#include "../listas/PoliPos.h"
+#include "../lists/PoliPos.h"
 #include "Linear3d.h"
 #include "Segment3d.h"
 

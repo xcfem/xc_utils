@@ -30,7 +30,7 @@ class Trf2d;
 class HalfPlane2d;
 class Line2d;
 class Segment2d;
-class ListaPos2d;
+class Pos2dList;
 
 
 //! @ingroup GEOM
@@ -151,11 +151,11 @@ class Polygon2d: public PolygonalSurface2d
     //! (0 based: j=0..GetNumVertices()-1).
     inline Pos2d Vertice0(unsigned int j) const
       { return cgpol.vertex(j); }
-    GeomObj::list_Pos2d ListaVertices(void) const;
+    GeomObj::list_Pos2d getVertexList(void) const;
 
     void Transforma(const Trf2d &trf2d);
 
-    std::deque<GEOM_FT> &GetRecubrimientos(const ListaPos2d &) const;
+    std::deque<GEOM_FT> &GetRecubrimientos(const Pos2dList &) const;
 
     Polygon2d getUnion(const Polygon2d &other) const;
     void une(const Polygon2d &);

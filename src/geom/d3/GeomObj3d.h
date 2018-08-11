@@ -26,7 +26,7 @@
 
 #include "../GeomObj.h"
 
-#include "../listas/PoliPos.h"
+#include "../lists/PoliPos.h"
 
 class SoGroup;
 class Pos3d;

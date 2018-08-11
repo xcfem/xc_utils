@@ -30,7 +30,7 @@
 #include "xc_utils/src/geom/d1/Line3d.h"
 #include "xc_utils/src/geom/d3/GeomGroup3d.h"
 #include "xc_utils/src/geom/d3/HalfSpace3d.h"
-#include "xc_utils/src/geom/listas/auxiliares.h"
+#include "xc_utils/src/geom/lists/auxiliares.h"
 
 
 Polygon3d::Polygon3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
@@ -41,7 +41,7 @@ Polygon3d::Polygon3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
     push_back(p3);
   }
 
-GeomObj::list_Pos3d Polygon3d::ListaVertices(void) const
+GeomObj::list_Pos3d Polygon3d::getVertexList(void) const
   {
     GeomObj::list_Pos3d retval;
     register Polygon2d::vertex_iterator i= plg2d.vertices_begin();
@@ -121,12 +121,12 @@ GEOM_FT Polygon3d::Iz(void) const
 
 GEOM_FT Polygon3d::GetMax(unsigned short int i) const
   {
-    const GeomObj::list_Pos3d lv= ListaVertices();
+    const GeomObj::list_Pos3d lv= getVertexList();
     return get_max_i(i,lv.begin(),lv.end());
   }
 GEOM_FT Polygon3d::GetMin(unsigned short int i) const
   {
-    const GeomObj::list_Pos3d lv= ListaVertices();
+    const GeomObj::list_Pos3d lv= getVertexList();
     return get_min_i(i,lv.begin(),lv.end());
   }
 

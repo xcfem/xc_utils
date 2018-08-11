@@ -165,9 +165,9 @@ PolygonMap<TPOL>::PolygonMap(const TPOL &pol)
 template <class TPOL>
 void PolygonMap<TPOL>::Print(std::ostream &os) const
   {
-    os << "Lista de vértices: " << std::endl;
+    os << "vertex list: " << std::endl;
     mv.Print(os);
-    os << "Lista de caras: " << std::endl;
+    os << "face list: " << std::endl;
     for(caras_const_iterator i= caras.begin();i!=caras.end();i++)
       {
         (*i).Print(os);
@@ -208,13 +208,13 @@ template <class TPOLORG,class HDS,class CVPOS>
   void Build_tdest_polyhedron<TPOLORG,HDS,CVPOS>::operator()(HDS& hds)
   {
     const size_t num_facetas= sf.size_of_facets();
-    const size_t num_aristas= sf.size_of_halfedges();
+    const size_t num_edges= sf.size_of_halfedges();
     const size_t num_vertices= sf.size_of_vertices();
     PolygonMap<TPOLORG> mt= getPolygonMap(sf);
     // Postcondition: `hds' is a valid polyhedral surface.
     CGAL::Polyhedron_incremental_builder_3<HDS> B(hds, true);
 
-    B.begin_surface(num_vertices,num_facetas,num_aristas);
+    B.begin_surface(num_vertices,num_facetas,num_edges);
     for(vconst_iter i= mt.VerticesBegin();i!=mt.VerticesEnd();i++)
       {
         B.add_vertex(CVPOS()((*i).second));        

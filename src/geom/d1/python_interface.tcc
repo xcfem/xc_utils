@@ -97,7 +97,7 @@ void (Polyline2d::*simplify2DPoly)(GEOM_FT epsilon)= &Polyline2d::simplify;
 Segment2d (Polyline2d::*get2DSegment)(const size_t &) const= &Polyline2d::getSegment;
 class_<Polyline2d, bases<Linear2d, poliPos2d> >("Polyline2d")
   .def(init<>())
-  .def(init<ListaPos2d>())
+  .def(init<Pos2dList>())
   .def(init<Polyline2d>())
   .def("agregaVertice", &Polyline2d::AgregaVertice,return_internal_reference<>() )
   .def("getNumVertices", &Polyline2d::GetNumVertices)
@@ -142,7 +142,7 @@ void (Polyline3d::*simplify3DPoly)(GEOM_FT epsilon)= &Polyline3d::simplify;
 Segment3d (Polyline3d::*get3DSegment)(const size_t &) const= &Polyline3d::getSegment;
 class_<Polyline3d, bases<Linear3d, poliPos3d> >("Polyline3d")
   .def(init<>())
-//.def(init<ListaPos3d>())
+//.def(init<Pos3dList>())
   .def(init<Polyline3d>())
   .def("agregaVertice", &Polyline3d::AgregaVertice,return_internal_reference<>() )
   .def("getNumVertices", &Polyline3d::GetNumVertices)

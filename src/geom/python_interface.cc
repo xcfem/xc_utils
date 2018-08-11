@@ -102,7 +102,7 @@ BOOST_PYTHON_MODULE(geom)
       .def("getPxz", pure_virtual(&GeomObj3d::Pxz)) 
       .def("getPyz", pure_virtual(&GeomObj3d::Pyz));
 
-    #include "listas/python_interface.tcc"
+    #include "lists/python_interface.tcc"
     #include "pos_vec/python_interface.tcc"
 
     export_d1_entities();

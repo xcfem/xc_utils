@@ -188,7 +188,7 @@ bool cmb_acc::Action::Incompatible(const Action &f) const
     return retval;
   }
 
-std::string cmb_acc::Action::ListaStrIncompatibles(ActionRValueList *af) const
+std::string cmb_acc::Action::incompatibleStringList(ActionRValueList *af) const
   {
     std::string retval;
     if(af)

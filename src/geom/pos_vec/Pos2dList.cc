@@ -19,13 +19,13 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//ListaPos2d.cc
+//Pos2dList.cc
 
-#include "ListaPos2d.h"
+#include "Pos2dList.h"
 #include <plotter.h>
 
 #include "xc_utils/src/geom/trf/Translation2d.h"
-#include "xc_utils/src/geom/listas/utils_list_pos2d.h"
+#include "xc_utils/src/geom/lists/utils_list_pos2d.h"
 
 
 #include "xc_utils/src/geom/d1/Line2d.h"
@@ -33,14 +33,14 @@
 #include "xc_utils/src/geom/d2/2d_polygons/Polygon2d.h"
 #include "xc_utils/src/geom/d2/BND2d.h"
 
-ListaPos2d::ListaPos2d(void)
+Pos2dList::Pos2dList(void)
   : GeomObj2d(), lista_ptos() {}
 
-ListaPos2d::ListaPos2d(const GeomObj::list_Pos2d &l)
+Pos2dList::Pos2dList(const GeomObj::list_Pos2d &l)
   : GeomObj2d(), lista_ptos(l) {}
 
 //! @brief Appends the point to the list.
-const Pos2d *ListaPos2d::appendPoint(const Pos2d &p)
+const Pos2d *Pos2dList::appendPoint(const Pos2d &p)
   {
     lista_ptos.push_back(p);
     return &(*lista_ptos.rbegin());
@@ -48,20 +48,20 @@ const Pos2d *ListaPos2d::appendPoint(const Pos2d &p)
 
 //! @brief Appends the point to the list.
 //! added to make things easier to boost.Python.
-void ListaPos2d::appendPointPy(const Pos2d &p)
+void Pos2dList::appendPointPy(const Pos2d &p)
   { appendPoint(p); }
 
 //! @brief Applies the transformation to the points.
-void ListaPos2d::Transforma(const Trf2d &trf2d)
+void Pos2dList::Transforma(const Trf2d &trf2d)
   { trf2d.Transforma(lista_ptos.begin(),lista_ptos.end()); }
 
 //! @brief Return the vertex list of a polyline parallel to
 //! the polyline builded with the vertex of this line at the
 //! distance being passed as parameter. Si the distance is
 //! positive the new polyline is builded on the right.
-ListaPos2d ListaPos2d::Offset(const GEOM_FT &d) const
+Pos2dList Pos2dList::Offset(const GEOM_FT &d) const
   {
-    ListaPos2d retval;
+    Pos2dList retval;
     const size_t nv= getNumberOfPoints();
     if(nv>1)
       {
@@ -94,13 +94,13 @@ ListaPos2d ListaPos2d::Offset(const GEOM_FT &d) const
 
 //! @brief Return a reference al objeto cuyo
 //! índice se pasa como parámetro.
-Pos2d &ListaPos2d::operator[](const size_t &i)
+Pos2d &Pos2dList::operator[](const size_t &i)
   {
     if(i<lista_ptos.size())
       return lista_ptos[i];
     else
       {
-        std::cerr << "ListaPos2d; indice: " << i << " fuera de rango. "
+        std::cerr << "Pos2dList; indice: " << i << " fuera de rango. "
                   << std::endl;
         exit(0);
       }
@@ -108,83 +108,83 @@ Pos2d &ListaPos2d::operator[](const size_t &i)
 
 //! @brief Return a reference al objeto cuyo
 //! índice se pasa como parámetro.
-const Pos2d &ListaPos2d::operator[](const size_t &i) const
+const Pos2d &Pos2dList::operator[](const size_t &i) const
   {
     if(i<lista_ptos.size())
       return lista_ptos[i];
     else
       {
-        std::cerr << "ListaPos2d; indice: " << i << " fuera de rango. "
+        std::cerr << "Pos2dList; indice: " << i << " fuera de rango. "
                   << std::endl;
         exit(0);
       }
   }
 
 //! @brief Return true if the point belongs to the set.
-bool ListaPos2d::In(const Pos2d &p, const double &tol) const
+bool Pos2dList::In(const Pos2d &p, const double &tol) const
   {
     for(register point_const_iterator j=lista_ptos.begin();j != lista_ptos.end();j++)
       if(dist2(*j,p)<=tol) return true;
     return false;
   }
 //! @brief Return the maximum value of the i coordinate.
-GEOM_FT ListaPos2d::GetMax(unsigned short int i) const
+GEOM_FT Pos2dList::GetMax(unsigned short int i) const
   { return lista_ptos.GetMax(i); }
 
 //! @brief Return the minimum value of the i coordinate.
-GEOM_FT ListaPos2d::GetMin(unsigned short int i) const
+GEOM_FT Pos2dList::GetMin(unsigned short int i) const
   { return lista_ptos.GetMin(i); }
 
-//! @brief Return a ListaPos2d with the points which i coordinate is greater
+//! @brief Return a Pos2dList with the points which i coordinate is greater
 //! than d.
-ListaPos2d ListaPos2d::GetMayores(unsigned short int i,const GEOM_FT &d) const
+Pos2dList Pos2dList::GetMayores(unsigned short int i,const GEOM_FT &d) const
   {
-    ListaPos2d retval;
+    Pos2dList retval;
     retval.lista_ptos= lista_ptos.GetMayores(i,d);
     return retval;
   }
 
-//! @brief Return a ListaPos2d with the points which i coordinate is less
+//! @brief Return a Pos2dList with the points which i coordinate is less
 //! than d.
-ListaPos2d ListaPos2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
+Pos2dList Pos2dList::GetMenores(unsigned short int i,const GEOM_FT &d) const
   {
-    ListaPos2d retval;
+    Pos2dList retval;
     retval.lista_ptos= lista_ptos.GetMenores(i,d);
     return retval;
   }
 
 
 //! @brief Return el vértice i-ésimo (el primero es el 1).
-const Pos2d &ListaPos2d::Point(const size_t &i) const
+const Pos2d &Pos2dList::Point(const size_t &i) const
   { return lista_ptos[i-1]; }
 
 
-GEOM_FT ListaPos2d::Ix(void) const
+GEOM_FT Pos2dList::Ix(void) const
   {
-    std::cerr << "ListaPos2d Ix() not implemented" << std::endl;
+    std::cerr << "Pos2dList Ix() not implemented" << std::endl;
     return 0.0;
   }
-GEOM_FT ListaPos2d::Iy(void) const
+GEOM_FT Pos2dList::Iy(void) const
   {
-    std::cerr << "ListaPos2d Iy() not implemented" << std::endl;
+    std::cerr << "Pos2dList Iy() not implemented" << std::endl;
     return 0.0;
   }
-GEOM_FT ListaPos2d::Iz(void) const
+GEOM_FT Pos2dList::Iz(void) const
   {
-    std::cerr << "ListaPos2d Iz() not implemented" << std::endl;
+    std::cerr << "Pos2dList Iz() not implemented" << std::endl;
     return 0.0;
   }
 
-std::deque<GEOM_FT> &ListaPos2d::GetSeparaciones(void) const
+std::deque<GEOM_FT> &Pos2dList::GetSeparaciones(void) const
   { return lista_ptos.GetSeparaciones(); }
 
-std::deque<GEOM_FT> &ListaPos2d::GetRecubrimientos(const Polygon2d &plg) const
+std::deque<GEOM_FT> &Pos2dList::GetRecubrimientos(const Polygon2d &plg) const
   { return getRecubrimientos(lista_ptos,plg); }
 
-double ListaPos2d::GetSeparacionMedia(void) const
+double Pos2dList::GetSeparacionMedia(void) const
   { return lista_ptos.GetSeparacionMedia(); }
 
-void ListaPos2d::Print(std::ostream &stream) const
+void Pos2dList::Print(std::ostream &stream) const
   {
     if(lista_ptos.empty()) return;
     register point_const_iterator i= lista_ptos.begin();
@@ -192,7 +192,7 @@ void ListaPos2d::Print(std::ostream &stream) const
     for(; i!=lista_ptos.end(); i++)
       stream << ", " << *i;
   }
-void ListaPos2d::Plot(Plotter &plotter) const
+void Pos2dList::Plot(Plotter &plotter) const
   {
-    std::cerr << "ListaPos2d::Plot not implemented." << std::endl;
+    std::cerr << "Pos2dList::Plot not implemented." << std::endl;
   }

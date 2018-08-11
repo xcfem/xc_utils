@@ -30,7 +30,7 @@
 
 //! @ingroup NUCLEO
 //
-//! @brief Lista de señales.
+//! @brief Token list.
 class TokenList: public std::deque<Token>
   {
     friend class AnalisisSintactico;

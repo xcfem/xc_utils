@@ -135,7 +135,7 @@ void GTSSurface::Merge(const GTSSurface &otra)
 
 guint GTSSurface::GetNumVertices(void) const
   { return gts_surface_vertex_number(s); }
-guint GTSSurface::GetNumAristas(void) const
+guint GTSSurface::getNumEdges(void) const
   { return gts_surface_edge_number(s); }
 guint GTSSurface::GetNumCaras(void) const
   { return gts_surface_face_number(s); }

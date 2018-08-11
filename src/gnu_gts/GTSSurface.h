@@ -78,7 +78,7 @@ class GTSSurface
     void Merge(const GTSSurface &otra);
 
     guint GetNumVertices(void) const;
-    guint GetNumAristas(void) const;
+    guint getNumEdges(void) const;
     guint GetNumCaras(void) const;
     GTSSurfaceTraverse Begin(void) const;
     GTSGraph Graph(void) const;

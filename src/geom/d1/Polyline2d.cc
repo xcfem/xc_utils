@@ -25,11 +25,11 @@
 #include "Segment2d.h"
 #include <plotter.h>
 
-#include "xc_utils/src/geom/listas/utils_list_pos2d.h"
+#include "xc_utils/src/geom/lists/utils_list_pos2d.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
 
-#include "xc_utils/src/geom/pos_vec/ListaPos2d.h"
+#include "xc_utils/src/geom/pos_vec/Pos2dList.h"
 
 //! @brief Default constructor.
 Polyline2d::Polyline2d(void)
@@ -40,7 +40,7 @@ Polyline2d::Polyline2d(const GeomObj::list_Pos2d &l)
   : Linear2d(), GeomObj::list_Pos2d(l){}
 
 //! @brief Constructor.
-Polyline2d::Polyline2d(const ListaPos2d &l)
+Polyline2d::Polyline2d(const Pos2dList &l)
   : Linear2d(), GeomObj::list_Pos2d(l.getPoints()){}
 
 const Pos2d *Polyline2d::AgregaVertice(const Pos2d &p)
@@ -112,7 +112,7 @@ Polyline2d Polyline2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 // // the equation coord_i= d
 // Polyline2d Polyline2d::Corta(unsigned short int i,const double &d) const
 //   {
-//     Polyline2d result; //Lista of intersections
+//     Polyline2d result; //List of intersections
 // 	const_iterator ultimo= end();
 //     ultimo--;
 //     for(register const_iterator j=begin();j != ultimo;j++)
@@ -136,7 +136,7 @@ const Pos2d &Polyline2d::Vertice(const size_t &i) const
 //! polyline will be placed on the right.
 Polyline2d Polyline2d::Offset(const GEOM_FT &d) const
   {
-    ListaPos2d tmp(*this);
+    Pos2dList tmp(*this);
     Polyline2d retval(tmp.Offset(d));
     return retval;
   }

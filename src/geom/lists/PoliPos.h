@@ -31,7 +31,7 @@
 
 //! @ingroup GEOM
 //
-//! @brief Clase base para las listas de posiciones.
+//! @brief Base class for position lists.
 template<class pos>
 class PoliPos : public std::deque<pos>
   {

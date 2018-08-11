@@ -55,7 +55,7 @@ class Trihedron: public GeomObj3d
       { return 4; }
     inline virtual unsigned int GetNumVerticesFaceta(unsigned int faceta) const
       { return 3; }
-    inline virtual unsigned int GetNumAristas(void) const
+    inline virtual unsigned int getNumEdges(void) const
       { return 3; }
     inline virtual unsigned int GetNumFacetas(void) const
       { return 3; }

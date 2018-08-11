@@ -19,32 +19,35 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//ListaPos2d.
+//Pos3dList.
 
-#ifndef LISTAPOS2D_H
-#define LISTAPOS2D_H
+#ifndef LISTAPOS3D_H
+#define LISTAPOS3D_H
 
-#include "../d2/GeomObj2d.h"
+#include "Pos3d.h"
+#include "Vector3d.h"
+#include "../d3/GeomObj3d.h"
 
-class Polygon2d;
+class Trf3d;
+
 
 //! @ingroup GEOM
 //
-//! @brief Lista de posiciones en dos dimensiones.
-class ListaPos2d: public GeomObj2d
+//! @brief List of 3D positions.
+class Pos3dList: public GeomObj3d
   {
   public:
-    typedef GeomObj::list_Pos2d list_Pos2d;
-    typedef GeomObj::list_Pos2d::iterator point_iterator;
-    typedef GeomObj::list_Pos2d::const_iterator point_const_iterator;
+    typedef GeomObj::list_Pos3d list_Pos3d;
+    typedef GeomObj::list_Pos3d::iterator point_iterator;
+    typedef GeomObj::list_Pos3d::const_iterator point_const_iterator;
   protected:
-    list_Pos2d lista_ptos;
-    Pos2d &operator[](const size_t &i);
+    list_Pos3d lista_ptos;
+    Pos3d &operator[](const size_t &i);
   public:
-    ListaPos2d(void);
-    explicit ListaPos2d(const GeomObj::list_Pos2d &l);
+    Pos3dList(void);
+    explicit Pos3dList(const GeomObj::list_Pos3d &l);
     virtual GeomObj *clon(void) const
-      { return new ListaPos2d(*this); }
+      { return new Pos3dList(*this); }
     inline size_t getNumberOfPoints(void) const
       { return lista_ptos.size(); }
     inline point_const_iterator points_begin(void) const
@@ -54,17 +57,16 @@ class ListaPos2d: public GeomObj2d
     inline short unsigned int Dimension(void) const
       { return 0; }
 
-    const GeomObj::list_Pos2d &getPoints(void) const
+    const GeomObj::list_Pos3d &getPoints(void) const
       { return lista_ptos; }
-    const Pos2d &operator[](const size_t &i) const;
+    const Pos3d &operator[](const size_t &i) const;
 
-    const Pos2d *appendPoint(const Pos2d &p);
-    void appendPointPy(const Pos2d &p);
+    const Pos3d *appendPoint(const Pos3d &p);
+    //! @brief Insert the vertices between [first,last).
     template <class InputIterator>
-    //! Insert the vertices between [first,last).
     inline void assign(InputIterator first, InputIterator last)
       { lista_ptos.assign(first,last); }
-    virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
+    virtual bool In(const Pos3d &p, const double &tol= 0.0) const;
 
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;
@@ -73,25 +75,26 @@ class ListaPos2d: public GeomObj2d
     //Producto de inercia.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
-    //! @brief Return the length of the object.
+    //! @brief Return the length of the Pos3dList.
     virtual GEOM_FT getLength(void) const
       { return 0.0; }
-    //! @brief Return the area of the object.
+    //! @brief Return the area of the Pos3dList.
     virtual GEOM_FT getArea(void) const
+      { return 0.0; }
+    //! @brief Return the volume of the object.
+    virtual GEOM_FT getVolume(void) const
       { return 0.0; }
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
-    ListaPos2d GetMayores(unsigned short int i,const GEOM_FT &d) const;
-    ListaPos2d GetMenores(unsigned short int i,const GEOM_FT &d) const;
-    const Pos2d &Point(const size_t &i) const;
-    Pos2d getCenterOfMass(void) const
+    Pos3dList GetMayores(unsigned short int i,const GEOM_FT &d) const;
+    Pos3dList GetMenores(unsigned short int i,const GEOM_FT &d) const;
+    const Pos3d &Point(const size_t &i) const;
+    Pos3d getCenterOfMass(void) const
       { return lista_ptos.getCenterOfMass(); }
 
-    void Transforma(const Trf2d &trf2d);
-    ListaPos2d Offset(const GEOM_FT &d) const;
+    void Transforma(const Trf3d &trf3d);
 
     std::deque<GEOM_FT> &GetSeparaciones(void) const;
-    std::deque<GEOM_FT> &GetRecubrimientos(const Polygon2d &) const;
     double GetSeparacionMedia(void) const;
 
     void Print(std::ostream &stream) const;

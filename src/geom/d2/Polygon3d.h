@@ -79,7 +79,7 @@ class Polygon3d: public D2to3d
     //! (0 based: j=0..GetNumVertices()-1)
     inline Pos3d Vertice0(unsigned int j) const
       { return to_3d(plg2d.Vertice0(j)); }
-    GeomObj::list_Pos3d ListaVertices(void) const;
+    GeomObj::list_Pos3d getVertexList(void) const;
     Segment3d Lado0(unsigned int i) const;
     Segment3d Lado(unsigned int i) const;
 

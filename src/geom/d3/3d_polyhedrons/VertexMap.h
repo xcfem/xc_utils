@@ -32,7 +32,7 @@
 //Convenience classes to generate polyhedrons from
 //half-space intersections.
 
-class ListaPos3d;
+class Pos3dList;
 
 
 //! @ingroup GEOM
@@ -69,9 +69,9 @@ class VerticesCara: public std::list<size_t>
     void setVisitada(const bool &);
     const bool &yaVisitada(void) const;
     void Swap(void);
-    ListaPos3d getPosVertices(const std::vector<Pos3d> &) const;
+    Pos3dList getPosVertices(const std::vector<Pos3d> &) const;
     Pos3d getCentroide(const std::vector<Pos3d> &) const;
-    std::list<VerticesArista> getAristas(void) const;
+    std::list<VerticesArista> getEdges(void) const;
     bool tieneArista(const VerticesArista &) const;
     bool tieneAristaOrientada(const VerticesArista &) const;
     std::deque<VerticesCara> compartenArista(const std::deque<VerticesCara> &) const;

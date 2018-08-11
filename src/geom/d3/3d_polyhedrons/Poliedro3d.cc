@@ -35,7 +35,7 @@
 #include "bool_op_poliedro3d.h"
 #include "VertexMap.h"
 #include <set>
-#include "xc_utils/src/geom/pos_vec/ListaPos3d.h"
+#include "xc_utils/src/geom/pos_vec/Pos3dList.h"
 
 
 

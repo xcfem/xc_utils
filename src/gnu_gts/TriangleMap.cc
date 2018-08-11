@@ -212,7 +212,7 @@ void TriangleMap::Renumera(void)
   }
 void TriangleMap::Print(std::ostream &os) const
   {
-    os << "Lista de vértices: " << std::endl;
+    os << "Vertex list: " << std::endl;
     mv.Print(os);
     faces.Print(os);
   }

@@ -23,7 +23,7 @@
 
 #include "VertexMap.h"
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
-#include "xc_utils/src/geom/pos_vec/ListaPos3d.h"
+#include "xc_utils/src/geom/pos_vec/Pos3dList.h"
 #include <stack>
 
 VerticesArista::VerticesArista(const size_t &i,const size_t &j)
@@ -59,21 +59,21 @@ void VerticesCara::Swap(void)
 
 
 
-//! @brief Return las posiciones de los vertices de la cara.
-ListaPos3d VerticesCara::getPosVertices(const std::vector<Pos3d> &vertices) const
+//! @brief Return the face vertex positions.
+Pos3dList VerticesCara::getPosVertices(const std::vector<Pos3d> &vertices) const
   {
-    ListaPos3d retval;
+    Pos3dList retval;
     for(const_iterator i=begin();i!=end();i++)
       retval.appendPoint(vertices[*i]);
     return retval;
   }
 
-//! @brief Return el centroide de la cara.
+//! @brief Return the face centroid.
 Pos3d VerticesCara::getCentroide(const std::vector<Pos3d> &vertices) const
   { return getPosVertices(vertices).getCenterOfMass();  }
 
-//! @brief Return las aristas de la cara.
-std::list<VerticesArista> VerticesCara::getAristas(void) const
+//! @brief Return the face edges.
+std::list<VerticesArista> VerticesCara::getEdges(void) const
   {
     std::list<VerticesArista> retval;
     const_iterator i= begin();
@@ -131,12 +131,12 @@ bool VerticesCara::tieneAristaOrientada(const VerticesArista &arista) const
     return retval;
   }
 
-//! @brief Return las caras que comparten una arista con ésta.
+//! @brief Return the faces that share an edge with this one.
 std::deque<VerticesCara> VerticesCara::compartenArista(const std::deque<VerticesCara> &caras) const
   {
     std::deque<VerticesCara> retval;
-    std::list<VerticesArista> aristas= getAristas();
-    for(std::list<VerticesArista>::const_iterator i= aristas.begin();i!=aristas.end();i++)
+    std::list<VerticesArista> edges= getEdges();
+    for(std::list<VerticesArista>::const_iterator i= edges.begin();i!=edges.end();i++)
       {
         const VerticesArista &arista= *i;
         for(std::deque<VerticesCara>::const_iterator j= caras.begin();j!=caras.end();j++)
@@ -258,8 +258,8 @@ void VertexMap::makeConsistent(void)
       {
         VerticesCara f= pilaCaras.top();
         pilaCaras.pop();
-        const std::list<VerticesArista> aristas= f.getAristas();
-        for(std::list<VerticesArista>::const_iterator i= aristas.begin();i!=aristas.end();i++)
+        const std::list<VerticesArista> edges= f.getEdges();
+        for(std::list<VerticesArista>::const_iterator i= edges.begin();i!=edges.end();i++)
           {
             std::deque<VerticesCara *> adyacentes= tienenArista(*i);
             for(std::deque<VerticesCara *>::iterator j= adyacentes.begin();j!=adyacentes.end();j++)

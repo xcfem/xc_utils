@@ -26,7 +26,7 @@
 
 #include <iostream>
 #include "ProtoGeom.h"
-#include "listas/PoliPos.h"
+#include "lists/PoliPos.h"
 
 class Pos2d;
 class Pos3d;

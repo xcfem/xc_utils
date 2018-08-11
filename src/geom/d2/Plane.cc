@@ -22,7 +22,7 @@
 //Plane.cc
 
 #include "Plane.h"
-#include "../listas/ThreePoints3d.h"
+#include "../lists/ThreePoints3d.h"
 #include "GeneralEquationOfPlane.h"
 #include "xc_utils/src/geom/d1/Line3d.h"
 #include "xc_utils/src/geom/d1/Ray3d.h"
@@ -249,7 +249,7 @@ Pos3d Plane::getCenterOfMass(void) const
 
 Plane::polygon_classification Plane::classifyPolygon(const Polygon3d &pol) const
   {
-    GeomObj::list_Pos3d lv= pol.ListaVertices();
+    GeomObj::list_Pos3d lv= pol.getVertexList();
     return ClassifyPoints(lv.begin(),lv.end());
   }
 

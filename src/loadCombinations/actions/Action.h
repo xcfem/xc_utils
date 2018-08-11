@@ -118,7 +118,7 @@ class Action: public EntConNmb
         return retval;
       }
 
-    std::string ListaStrIncompatibles(ActionRValueList *af) const;
+    std::string incompatibleStringList(ActionRValueList *af) const;
     std::vector<double> getCoeficientes(const std::vector<std::string> &) const;
     virtual void Print(std::ostream &os) const;
   };

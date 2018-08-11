@@ -58,7 +58,7 @@ Pos2d getPMin(const GeomObj::list_Pos2d &l)
 BND2d getBnd(const GeomObj::list_Pos2d &l)
   { return BND2d(getPMin(l),getPMax(l)); }
 
-//! @brief Calcula los recubrimientos de las fibras.
+//! @brief Compute the cover of the positions in the polygon.
 std::deque<GEOM_FT> &getRecubrimientos(const GeomObj::list_Pos2d &l,const Polygon2d &plg)
   {
     const size_t sz= l.size();
