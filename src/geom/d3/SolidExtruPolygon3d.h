@@ -19,7 +19,7 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SolidExtruPlgno3d.h
+//SolidExtruPolygon3d.h
 
 #ifndef SOLIDEXTRUPLGNO3D_H
 #define SOLIDEXTRUPLGNO3D_H
@@ -30,22 +30,22 @@
 //
 //! @brief Sólido de extrusión generado por un polígono.
 template<class PG>
-class SolidExtruPlgno3d : public SolidExtru3d<PG>
+class SolidExtruPolygon3d : public SolidExtru3d<PG>
   {
   public:
     typedef SolidExtru3d<PG> solid_extru_pg;
     inline unsigned int get_num_vertices_plgno(void) const
       { return this->scc.GetNumVertices(); }
   public:
-    SolidExtruPlgno3d(void) {}
-    SolidExtruPlgno3d(const PG &secc,const GEOM_FT &lng): solid_extru_pg(secc,lng) {}
-    SolidExtruPlgno3d<PG> &operator=(const SolidExtruPlgno3d<PG> &se)
+    SolidExtruPolygon3d(void) {}
+    SolidExtruPolygon3d(const PG &secc,const GEOM_FT &lng): solid_extru_pg(secc,lng) {}
+    SolidExtruPolygon3d<PG> &operator=(const SolidExtruPolygon3d<PG> &se)
       {
 	solid_extru_pg::operator=(se);
         return *this;
       }
     virtual GeomObj *clon(void) const
-      { return new SolidExtruPlgno3d<PG>(*this); }
+      { return new SolidExtruPolygon3d<PG>(*this); }
     virtual unsigned int GetNumVertices(void) const
       { return 2*get_num_vertices_plgno(); }
     virtual unsigned int GetNumVerticesFaceta(unsigned int faceta) const;
@@ -67,7 +67,7 @@ class SolidExtruPlgno3d : public SolidExtru3d<PG>
   };
 
 template <class PG>
-unsigned int SolidExtruPlgno3d<PG>::GetNumVerticesFaceta(unsigned int faceta) const
+unsigned int SolidExtruPolygon3d<PG>::GetNumVerticesFaceta(unsigned int faceta) const
   {
     unsigned int retval= 4;
     unsigned int nf= GetNumFacetas();
@@ -77,7 +77,7 @@ unsigned int SolidExtruPlgno3d<PG>::GetNumVerticesFaceta(unsigned int faceta) co
   }
 
 template <class PG>
-Pos3d SolidExtruPlgno3d<PG>::Vertice(unsigned int i) const
+Pos3d SolidExtruPolygon3d<PG>::Vertice(unsigned int i) const
   {
     Pos3d p;
     const unsigned int num_vert_plgno= get_num_vertices_plgno();
@@ -91,7 +91,7 @@ Pos3d SolidExtruPlgno3d<PG>::Vertice(unsigned int i) const
   }
 
 /* template <class PG> */
-/* Poliedro::v_ind_vertices SolidExtruPlgno3d<PG>::IndVerticesArista(unsigned int arista) const */
+/* Poliedro::v_ind_vertices SolidExtruPolygon3d<PG>::IndVerticesArista(unsigned int arista) const */
 /*   { */
 /*     const unsigned int num_edges= getNumEdges(); */
 /*     Poliedro::v_ind_vertices va(2); */
@@ -116,7 +116,7 @@ Pos3d SolidExtruPlgno3d<PG>::Vertice(unsigned int i) const
 /*     return va; */
 /*   } */
 /* template <class PG> */
-/* Poliedro::v_ind_vertices SolidExtruPlgno3d<PG>::IndVerticesFaceta(unsigned int faceta) const */
+/* Poliedro::v_ind_vertices SolidExtruPolygon3d<PG>::IndVerticesFaceta(unsigned int faceta) const */
 /*   { */
 /*     const unsigned int num_facetas= GetNumFacetas(); */
 /*     const unsigned int num_vert_plgno= get_num_vertices_plgno(); */

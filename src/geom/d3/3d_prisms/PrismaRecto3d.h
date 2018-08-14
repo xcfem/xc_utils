@@ -25,7 +25,7 @@
 #define PRISMARECTO3D_H
 
 #include "Prisma3d.h"
-#include "../SolidExtruPlgno3d.h"
+#include "../SolidExtruPolygon3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 
 
@@ -35,7 +35,7 @@
 template<class PG>
 class PrismaRecto3d : public Prisma3d
   {
-    SolidExtruPlgno3d<PG> extru;
+    SolidExtruPolygon3d<PG> extru;
   protected:
     inline unsigned int get_num_vertices_plgno(void) const
       { return extru.GetNumVertices(); }
