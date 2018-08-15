@@ -19,38 +19,38 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Cuadrado2d.h
+//Square2d.h
 
-#ifndef CUADRADO_H
-#define CUADRADO_H
+#ifndef SQUARE2D_H
+#define SQUARE2D_H
 
 #include "Cuadrilatero2d.h"
 
 
 //! @ingroup GEOM
 //
-//! @brief Cuadrado en dos dimensiones.
-class Cuadrado2d : public Cuadrilatero2d
+//! @brief Square in a two-dimensional space.
+class Square2d : public Cuadrilatero2d
   {
   public:
-    Cuadrado2d(const GEOM_FT &l= 1.0)
+    Square2d(const GEOM_FT &l= 1.0)
       : Cuadrilatero2d(Pos2d(0,0),Pos2d(l,0),Pos2d(l,l),Pos2d(0,l)) {}
-    Cuadrado2d(const Pos2d &o,const GEOM_FT &l= 1.0);
-    //Cuadrado2d(const Ref2d &ref,const GEOM_FT &l= 1.0): PolygonalSurface(ref), lado(l) {}
-    Cuadrado2d(const Cuadrado2d &c): Cuadrilatero2d(c) {}
-    ~Cuadrado2d(void) {}
-    Cuadrado2d &operator=(const Cuadrado2d &c)
+    Square2d(const Pos2d &o,const GEOM_FT &l= 1.0);
+    //Square2d(const Ref2d &ref,const GEOM_FT &l= 1.0): PolygonalSurface(ref), lado(l) {}
+    Square2d(const Square2d &c): Cuadrilatero2d(c) {}
+    ~Square2d(void) {}
+    Square2d &operator=(const Square2d &c)
       {
 	Cuadrilatero2d::operator=(c);
         return *this;
       }
     virtual GeomObj *clon(void) const
-      { return new Cuadrado2d(*this); }
+      { return new Square2d(*this); }
 /*     void Offset(const GEOM_FT &offset) */
 /*       { lado+=2*offset; } */
-/*     Cuadrado2d GetOffset(const GEOM_FT &offset) const */
+/*     Square2d GetOffset(const GEOM_FT &offset) const */
 /*       { */
-/*         Cuadrado2d retval(*this); */
+/*         Square2d retval(*this); */
 /*         retval.Offset(offset); */
 /*         return retval; */
 /*       } */

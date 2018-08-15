@@ -73,8 +73,8 @@ class Vector3d: public ProtoGeom
     Vector3d operator*(const GEOM_FT &) const;
     Vector3d operator/(const GEOM_FT &) const;
 
+    //! @brief Return the squared modulus.
     inline virtual GEOM_FT GetModulus2(void) const
-      //Return el cuadrado del módulo del vector.
       { return (x()*x()+y()*y()+z()*z()); }
     virtual GEOM_FT GetModulus(void) const;
     bool EsUnitario(const double &tol= mchne_eps_dbl) const;
@@ -116,11 +116,11 @@ const Vector3d I_3d(1,0,0);
 const Vector3d J_3d(0,1,0);
 const Vector3d K_3d(0,0,1);
 
-//! @brief Return el cuadrado del módulo del vector.
+//! @brief Return the squared modulus.
 inline GEOM_FT Abs2(const Vector3d &v)
   { return v.GetModulus2(); }
 
-GEOM_FT Abs(const Vector3d &v); //Return el módulo del vector.
+GEOM_FT Abs(const Vector3d &v); //Return the vector modulus.
 
 GEOM_FT angle(const Vector3d &v1,const Vector3d &v2);
 

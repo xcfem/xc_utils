@@ -19,15 +19,15 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Cuadrado2d.cc
+//Square2d.cc
 
-#include "Cuadrado2d.h"
+#include "Square2d.h"
 
 #include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/d1/Ray2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 
 
-Cuadrado2d::Cuadrado2d(const Pos2d &o,const GEOM_FT &l)
+Square2d::Square2d(const Pos2d &o,const GEOM_FT &l)
   : Cuadrilatero2d(o,o+Vector2d(l,0),o+Vector2d(l,l),o+Vector2d(0,l)) {}
 

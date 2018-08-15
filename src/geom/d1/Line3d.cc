@@ -302,7 +302,7 @@ GeomObj3d::list_Pos3d Line3d::getIntersection(const Line3d &r2,const double &tol
     return retval;
   }
 
-//! @brief Return el cuadrado de la distance from the point to the line.
+//! @brief Return the squared distance from the point to the line.
 GEOM_FT Line3d::dist(const Pos3d &p) const
   { return sqrt_FT(dist2(p)); }
 

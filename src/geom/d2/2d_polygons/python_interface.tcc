@@ -76,7 +76,7 @@ class_<Cuadrilatero2d, bases<Polygon2d> >("Cuadrilatero2d")
   ;
 
 
-class_<Cuadrado2d, bases<Cuadrilatero2d> >("Cuadrado2d")
+class_<Square2d, bases<Cuadrilatero2d> >("Square2d")
   .def(init<>())
   ;
 

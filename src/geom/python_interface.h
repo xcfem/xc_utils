@@ -46,7 +46,7 @@
 #include "xc_utils/src/geom/d2/Circle2d.h"
 #include "xc_utils/src/geom/d2/2d_polygons/PolygonalSurface2d.h"
 #include "xc_utils/src/geom/d2/2d_polygons/Triangle2d.h"
-#include "xc_utils/src/geom/d2/2d_polygons/Cuadrado2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/Square2d.h"
 #include "xc_utils/src/geom/d1/Polyline2d.h"
 #include "xc_utils/src/geom/pos_vec/Pos2dList.h"
 #include "xc_utils/src/geom/d2/2d_polygons/Polygon2d.h"

@@ -111,7 +111,7 @@ GEOM_FT Segment3d::getLambda(const Pos3d &p) const
     return dot(v,dir);
   }
 
-//! @brief Return el cuadrado de la distance from the point to the segment.
+//! @brief Return the squared distance from the point to the segment.
 GEOM_FT Segment3d::dist2(const Pos3d &p) const
   {
     const Line3d r= getSupportLine();
