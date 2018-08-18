@@ -23,7 +23,7 @@
 
 #include "Trihedron.h"
 #include "xc_utils/src/geom/d2/Plane.h"
-#include "xc_utils/src/geom/d3/3d_polyhedrons/Poliedro3d.h"
+#include "xc_utils/src/geom/d3/3d_polyhedrons/Polyhedron3d.h"
 #include "xc_utils/src/geom/d1/Line3d.h"
 
 Trihedron::Trihedron(void)
@@ -33,16 +33,16 @@ Trihedron::Trihedron( const Pos3d &P0, const Pos3d &p1, const Pos3d &p2, const P
 Trihedron::Trihedron(const Pos3d &P0, const Triangle3d &TR)
   : GeomObj3d(), p0(P0), tr(TR){}
 
-Poliedro3d Trihedron::GetPoliedro3d(void) const
+Polyhedron3d Trihedron::getPolyhedron3d(void) const
   {
-    Poliedro3d retval(Vertice(0),Vertice(1),Vertice(2),Vertice(3));
+    Polyhedron3d retval(Vertice(0),Vertice(1),Vertice(2),Vertice(3));
     return retval;
   }
 
 Plane Trihedron::get_plane(const size_t &i) const
   {
-    Poliedro3d tmp(GetPoliedro3d());
-    Poliedro3d::Facet_const_iterator j= tmp.facets_begin();
+    Polyhedron3d tmp(getPolyhedron3d());
+    Polyhedron3d::Facet_const_iterator j= tmp.facets_begin();
     for(size_t k=0;k<i;k++)
       j++;
     return tmp.getPlaneFromFace(j);
@@ -86,8 +86,8 @@ Pos3d Trihedron::Vertice(const size_t &i) const
 //! each of the three planes that meet in the apex.
 GEOM_FT Trihedron::PseudoDist(const Pos3d &p) const
   {
-    Poliedro3d tmp= GetPoliedro3d();
-    Poliedro3d::Facet_const_iterator j= tmp.facets_begin();
+    Polyhedron3d tmp= getPolyhedron3d();
+    Polyhedron3d::Facet_const_iterator j= tmp.facets_begin();
     Plane plane= tmp.getPlaneFromFace(j);
     GEOM_FT dmax= -plane.PseudoDist(p);
     j++;
@@ -116,9 +116,9 @@ bool Trihedron::In(const Pos3d &p,const double &tol) const
         const GEOM_FT ang= fabs(angle(axis,Line3d(p0,p)));
         if(ang<1.1*angConico)
           {
-            Poliedro3d tmp= GetPoliedro3d();
+            Polyhedron3d tmp= getPolyhedron3d();
             Plane plane;
-            for(Poliedro3d::Facet_const_iterator j= tmp.facets_begin();j!=tmp.facets_end();j++)
+            for(Polyhedron3d::Facet_const_iterator j= tmp.facets_begin();j!=tmp.facets_end();j++)
               {
                 plane= tmp.getPlaneFromFace(j);
                 d= -plane.PseudoDist(p);
@@ -145,11 +145,11 @@ void Trihedron::Put(const Pos3d &P0,const Triangle3d &TR)
   }
 
 GEOM_FT Trihedron::GetMax(short unsigned int i) const
-  { return GetPoliedro3d().GetMax(i); }
+  { return getPolyhedron3d().GetMax(i); }
 GEOM_FT Trihedron::GetMin(short unsigned int i) const
-  { return GetPoliedro3d().GetMin(i); }
+  { return getPolyhedron3d().GetMin(i); }
 Pos3d Trihedron::getCenterOfMass() const
-  { return GetPoliedro3d().getCenterOfMass(); }
+  { return getPolyhedron3d().getCenterOfMass(); }
 
 //! @brief Return true if any vertex touches the quadrant argument.
 bool Trihedron::TocaCuadrante(const int &cuadrante) const
@@ -159,8 +159,8 @@ bool Trihedron::TocaCuadrante(const int &cuadrante) const
 
 void Trihedron::Print(std::ostream &os) const
   {
-    Poliedro3d tmp= GetPoliedro3d();
-    Poliedro3d::Vertex_const_iterator i= tmp.vertices_begin();
+    Polyhedron3d tmp= getPolyhedron3d();
+    Polyhedron3d::Vertex_const_iterator i= tmp.vertices_begin();
     for(;i!=tmp.vertices_end();i++)
       os << i->point() << ", ";
   }

@@ -295,17 +295,17 @@ BuildFromVertexMap::BuildFromVertexMap(const TripletMap<Pos3d> &v)
       :vertex_map(v) {}
 
 //! @brief Operador ().
-void BuildFromVertexMap::operator()(Poliedro3d::HalfedgeDS &hds)
+void BuildFromVertexMap::operator()(Polyhedron3d::HalfedgeDS &hds)
   {
     // Postcondition: `hds' is a valid polyhedral surface.
-    CGAL::Polyhedron_incremental_builder_3<Poliedro3d::HalfedgeDS> B( hds, true);
+    CGAL::Polyhedron_incremental_builder_3<Polyhedron3d::HalfedgeDS> B( hds, true);
     const std::vector<Pos3d> &vertices= vertex_map.getVertices();
     const size_t numVertices= vertices.size();
     const size_t numCaras= vertex_map.getNumCaras();
      
     B.begin_surface(numVertices,numCaras);
     //Agregamos vértices.
-    typedef Poliedro3d::HalfedgeDS::Vertex Vertex;
+    typedef Polyhedron3d::HalfedgeDS::Vertex Vertex;
     typedef Vertex::Point Point;
     for(std::vector<Pos3d>::const_iterator i=vertices.begin();i!=vertices.end();i++)
       B.add_vertex(Point((*i).ToCGAL()));

@@ -30,11 +30,11 @@
 
 
 template <class HDS>
-class Build_poliedro: public CGAL::Modifier_base<HDS>
+class Build_polyhedron: public CGAL::Modifier_base<HDS>
   {
     const GTSSurface &sf;
   public:
-    Build_poliedro(const GTSSurface &gts_surf)
+    Build_polyhedron(const GTSSurface &gts_surf)
       : sf(gts_surf) {}
     void operator()( HDS& hds)
       {
@@ -68,9 +68,9 @@ class Build_poliedro: public CGAL::Modifier_base<HDS>
 
 Triang3dMesh::Triang3dMesh(const GTSSurface &gts_surf)
   {
-    typedef CGPoliedro_3::HalfedgeDS HalfedgeDS;
-    Build_poliedro<HalfedgeDS> bpoli(gts_surf);
-    cgpoliedro.delegate(bpoli);
+    typedef CGPolyhedron_3::HalfedgeDS HalfedgeDS;
+    Build_polyhedron<HalfedgeDS> bpoli(gts_surf);
+    cgpolyhedron.delegate(bpoli);
     //CGAL_assertion( P.is_triangle( P.halfedges_begin()));
   }
 

@@ -24,7 +24,7 @@
 #ifndef TRIANG3D_MESH_H
 #define TRIANG3D_MESH_H
 
-#include "../d3/3d_polyhedrons/Poliedro3d.h"
+#include "../d3/3d_polyhedrons/Polyhedron3d.h"
 
 class Triangle3d;
 class SoGroup;
@@ -35,43 +35,43 @@ class Pos3d;
 //! @ingroup GEOM
 //
 //! @brief 3D Triange mesh.
-class Triang3dMesh: public Poliedro3d
+class Triang3dMesh: public Polyhedron3d
   {
     GTSSurface get_gts_surface(void) const;
 
-    friend class Poliedro3d;
+    friend class Polyhedron3d;
 
   public:
-    typedef Poliedro3d::Vertex Vertex;
-    typedef Poliedro3d::Facet Facet;
-    typedef Poliedro3d::Point_iterator Point_iterator;
-    typedef Poliedro3d::Point_const_iterator Point_const_iterator;
-    typedef Poliedro3d::Vertex_iterator Vertex_iterator;
-    typedef Poliedro3d::Vertex_const_iterator Vertex_const_iterator;
-    typedef Poliedro3d::Facet_iterator Facet_iterator;
-    typedef Poliedro3d::Facet_const_iterator Facet_const_iterator;
-    typedef Poliedro3d::Edge_iterator Edge_iterator;
-    typedef Poliedro3d::Halfedge_iterator Halfedge_iterator;
-    typedef Poliedro3d::Halfedge_around_facet_circulator Halfedge_around_facet_circulator;
-    typedef Poliedro3d::Halfedge_around_vertex_circulator Halfedge_around_vertex_circulator;
-    typedef Poliedro3d::Vertex_handle Vertex_handle;
-    typedef Poliedro3d::Facet_handle Facet_handle;
-    typedef Poliedro3d::Halfedge_handle Halfedge_handle;
+    typedef Polyhedron3d::Vertex Vertex;
+    typedef Polyhedron3d::Facet Facet;
+    typedef Polyhedron3d::Point_iterator Point_iterator;
+    typedef Polyhedron3d::Point_const_iterator Point_const_iterator;
+    typedef Polyhedron3d::Vertex_iterator Vertex_iterator;
+    typedef Polyhedron3d::Vertex_const_iterator Vertex_const_iterator;
+    typedef Polyhedron3d::Facet_iterator Facet_iterator;
+    typedef Polyhedron3d::Facet_const_iterator Facet_const_iterator;
+    typedef Polyhedron3d::Edge_iterator Edge_iterator;
+    typedef Polyhedron3d::Halfedge_iterator Halfedge_iterator;
+    typedef Polyhedron3d::Halfedge_around_facet_circulator Halfedge_around_facet_circulator;
+    typedef Polyhedron3d::Halfedge_around_vertex_circulator Halfedge_around_vertex_circulator;
+    typedef Polyhedron3d::Vertex_handle Vertex_handle;
+    typedef Polyhedron3d::Facet_handle Facet_handle;
+    typedef Polyhedron3d::Halfedge_handle Halfedge_handle;
 
   protected:
     Facet_const_iterator find_trihedron(const Pos3d &org,const Pos3d &p,const double &tol) const;
 
   public:
 
-    Triang3dMesh(void): Poliedro3d() {}
-    explicit Triang3dMesh(const Poliedro3d &p)
-      : Poliedro3d(p) {}
+    Triang3dMesh(void): Polyhedron3d() {}
+    explicit Triang3dMesh(const Polyhedron3d &p)
+      : Polyhedron3d(p) {}
     Triang3dMesh(const GTSSurface &gts_surf);
     Triang3dMesh(const Triang3dMesh &other) 
-      : Poliedro3d(other) {}
+      : Polyhedron3d(other) {}
     Triang3dMesh &operator=(const Triang3dMesh &other)
       {
-	Poliedro3d::operator=(other);
+	Polyhedron3d::operator=(other);
         return *this;
       }
     virtual GeomObj *clon(void) const

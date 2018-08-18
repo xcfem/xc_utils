@@ -19,7 +19,7 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Tetraedro3c.cc
+//Tetrahedron3d.cc
 
 #include "PolyhedronBase.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"

@@ -59,7 +59,7 @@ class PrismaRecto3d : public Prisma3d
         retval.Offset(offset);
         return retval;
       }
-/*     inline virtual Poliedro::v_ind_vertices IndVerticesFaceta(unsigned int faceta) const */
+/*     inline virtual Polyhedron::v_ind_vertices IndVerticesFaceta(unsigned int faceta) const */
 /*       { return extru.IndVerticesFaceta(faceta); } */
     const PG &Seccion(void) const
       { return extru.Seccion(); }

@@ -19,22 +19,22 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//bool_op_poliedro3d.h
-//Operaciones booleanas entre poliedros.
+//polyhedron3d_bool_op.h
+//Boolean operations between polyhedrons.
 
-#ifndef BOOL_OP_POLIEDRO3D_H
-#define BOOL_OP_POLIEDRO3D_H
+#ifndef POLYHEDRON3D_BOOL_OP_H
+#define POLYHEDRON3D_BOOL_OP_H
 
-class Poliedro3d;
+class Polyhedron3d;
 
 
 //! @ingroup GEOM
 //
-//! @brief Unión de los poliedros que se pasan como parámetro.
-Poliedro3d Union(const Poliedro3d &a,const Poliedro3d &b);
+//! @brief Union of the polyhedron arguments.
+Polyhedron3d Union(const Polyhedron3d &a,const Polyhedron3d &b);
 //! @brief Intersection of the polyhedrons.
-Poliedro3d intersection(const Poliedro3d &a,const Poliedro3d &b);
-//! @brief Diferencia de los poliedros que se pasan como parámetro.
-Poliedro3d Diferencia(const Poliedro3d &a,const Poliedro3d &b);
+Polyhedron3d intersection(const Polyhedron3d &a,const Polyhedron3d &b);
+//! @brief Difference of the polyhedrons.
+Polyhedron3d Diferencia(const Polyhedron3d &a,const Polyhedron3d &b);
 
 #endif

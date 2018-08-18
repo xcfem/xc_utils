@@ -102,7 +102,7 @@ inline bool operator!=(const HalfSpace3d &r1,const HalfSpace3d &r2)
   { return !(r1==r2); }
 
 TripletMap<Pos3d> intersection_points(const std::deque<HalfSpace3d> &);
-TripletMap<Pos3d> vertices_poliedro(const std::deque<HalfSpace3d> &, const double &tol= 1e-10);
+TripletMap<Pos3d> polyhedron_vertices(const std::deque<HalfSpace3d> &, const double &tol= 1e-10);
 std::deque<Line3d> intersection_lines(const std::deque<HalfSpace3d> &);
 std::deque<Vector3d> vectores_normales(const std::deque<HalfSpace3d> &);
 

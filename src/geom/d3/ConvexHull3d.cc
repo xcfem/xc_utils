@@ -28,7 +28,7 @@
 #include <vector>
 #include <CGAL/Gmpz.h>
 #include <CGAL/Gmpq.h>
-#include "xc_utils/src/geom/d3/3d_polyhedrons/Poliedro3d.h"
+#include "xc_utils/src/geom/d3/3d_polyhedrons/Polyhedron3d.h"
 #include "xc_utils/src/geom/d3/3d_polyhedrons/PolygonMap.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include <CGAL/cartesian_homogeneous_conversion.h>
@@ -62,19 +62,19 @@ class Point2Pos3d
      { return Point_to_Pos3d(np); }
   };
 
-CGPoliedro_3 Polyhedron_to_Poliedro3d(const Polyhedron_3 &np)
+CGPolyhedron_3 Polyhedron_to_Polyhedron3d(const Polyhedron_3 &np)
   {
-    typedef CGPoliedro_3::HalfedgeDS HalfedgeDS;
-    CGPoliedro_3 retval;
+    typedef CGPolyhedron_3::HalfedgeDS HalfedgeDS;
+    CGPolyhedron_3 retval;
     Build_tdest_polyhedron<Polyhedron_3,HalfedgeDS,Point2Pos3d> bpoli(np);
     retval.delegate(bpoli);
     return retval;
   }
 
 template <class InputIterator>
-Poliedro3d get_convex_hull(InputIterator first,InputIterator last)
+Polyhedron3d get_convex_hull(InputIterator first,InputIterator last)
   {
-    Poliedro3d retval;
+    Polyhedron3d retval;
     const size_t num_points= last-first;
     std::vector<Point_3> points(num_points);
     GeomObj::list_Pos3d::const_iterator j= first;
@@ -96,11 +96,11 @@ Poliedro3d get_convex_hull(InputIterator first,InputIterator last)
     else
       if( CGAL::assign (polyhedron, ch_object))
         {
-          retval= Poliedro3d(Polyhedron_to_Poliedro3d(polyhedron));
+          retval= Polyhedron3d(Polyhedron_to_Polyhedron3d(polyhedron));
         }
       else
         std::cerr << "convex hull error!" << std::endl;
     return retval;
   }
-Poliedro3d get_convex_hull(const GeomObj::list_Pos3d &lp)
+Polyhedron3d get_convex_hull(const GeomObj::list_Pos3d &lp)
   { return get_convex_hull(lp.begin(),lp.end()); }

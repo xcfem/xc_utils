@@ -54,8 +54,8 @@ class SolidExtruPolygon3d : public SolidExtru3d<PG>
     inline virtual unsigned int GetNumFacetas(void) const
       { return 2+this->scc.GetNumLados(); }
     Pos3d Vertice(unsigned int i) const;
-/*     virtual Poliedro::v_ind_vertices IndVerticesArista(unsigned int arista) const; */
-/*     virtual Poliedro::v_ind_vertices IndVerticesFaceta(unsigned int faceta) const; */
+/*     virtual Polyhedron::v_ind_vertices IndVerticesArista(unsigned int arista) const; */
+/*     virtual Polyhedron::v_ind_vertices IndVerticesFaceta(unsigned int faceta) const; */
     inline BND3d Bnd(void) const
     //Return la extension del objeto.
       { return solid_extru_pg::Bnd(); }
@@ -91,10 +91,10 @@ Pos3d SolidExtruPolygon3d<PG>::Vertice(unsigned int i) const
   }
 
 /* template <class PG> */
-/* Poliedro::v_ind_vertices SolidExtruPolygon3d<PG>::IndVerticesArista(unsigned int arista) const */
+/* Polyhedron::v_ind_vertices SolidExtruPolygon3d<PG>::IndVerticesArista(unsigned int arista) const */
 /*   { */
 /*     const unsigned int num_edges= getNumEdges(); */
-/*     Poliedro::v_ind_vertices va(2); */
+/*     Polyhedron::v_ind_vertices va(2); */
 /*     const unsigned int indice= arista%num_edges; */
 /*     const unsigned int num_vert_plgno= get_num_vertices_plgno(); */
 /*     if(indice<num_vert_plgno) //Si es una arista de la base */
@@ -116,7 +116,7 @@ Pos3d SolidExtruPolygon3d<PG>::Vertice(unsigned int i) const
 /*     return va; */
 /*   } */
 /* template <class PG> */
-/* Poliedro::v_ind_vertices SolidExtruPolygon3d<PG>::IndVerticesFaceta(unsigned int faceta) const */
+/* Polyhedron::v_ind_vertices SolidExtruPolygon3d<PG>::IndVerticesFaceta(unsigned int faceta) const */
 /*   { */
 /*     const unsigned int num_facetas= GetNumFacetas(); */
 /*     const unsigned int num_vert_plgno= get_num_vertices_plgno(); */
@@ -124,20 +124,20 @@ Pos3d SolidExtruPolygon3d<PG>::Vertice(unsigned int i) const
 /*     const unsigned int ifac= faceta%num_facetas; */
 /*     if(ifac == 0) //Es la base. */
 /*       { */
-/* 	    Poliedro::v_ind_vertices iv(num_vert_plgno); */
+/* 	    Polyhedron::v_ind_vertices iv(num_vert_plgno); */
 /*         for(register size_t i= 0;i<num_vert_plgno;i++) */
 /*           iv[i]= i; */
 /*         return iv; */
 /*       } */
 /*     if(ifac == num_facetas-1) //Es la tapa. */
 /*       { */
-/* 	    Poliedro::v_ind_vertices iv(num_vert_plgno); */
+/* 	    Polyhedron::v_ind_vertices iv(num_vert_plgno); */
 /*         for(register size_t i= nv-1,j=0;i>=num_vert_plgno;i--,j++) */
 /*           iv[j]= i; */
 /*         return iv; */
 /*       } */
 /*     //Es un lateral. */
-/*     Poliedro::v_ind_vertices iv(4); */
+/*     Polyhedron::v_ind_vertices iv(4); */
 /*     iv[0]= ifac-1; //En la base. */
 /*     iv[1]= iv[0]+num_vert_plgno; //En la tapa. */
 /*     iv[2]= iv[1]+1; //En la tapa. */

@@ -80,7 +80,7 @@ typedef CGAL::Ray_3<GEOMKernel> CGRay_3;
 typedef CGAL::Segment_3<GEOMKernel> CGSegment_3;
 typedef CGAL::Plane_3<GEOMKernel> CGPlane_3;
 typedef CGAL::Iso_cuboid_3<GEOMKernel> CGIsoCuboid_3;
-typedef CGAL::Polyhedron_3<GEOMKernel> CGPoliedro_3;
+typedef CGAL::Polyhedron_3<GEOMKernel> CGPolyhedron_3;
 typedef CGAL::Tetrahedron_3<GEOMKernel> CGTetrahedron_3;
 typedef CGAL::Bbox_3 CGBbox_3;
 typedef CGAL::Aff_transformation_3<GEOMKernel> CGTrfAfin_3;

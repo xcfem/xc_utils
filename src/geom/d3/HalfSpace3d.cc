@@ -162,8 +162,9 @@ TripletMap<Pos3d> intersection_points(const std::deque<HalfSpace3d> &se)
     return retval;
   }
 
-//! @brief Return los vertices del poliedro intersection de los half spaces.
-TripletMap<Pos3d> vertices_poliedro(const std::deque<HalfSpace3d> &se, const double &tol)
+//! @brief Return the vertices of the polyhedron that results from
+//! the half spaces intersection.
+TripletMap<Pos3d> polyhedron_vertices(const std::deque<HalfSpace3d> &se, const double &tol)
   {
     TripletMap<Pos3d> tmp= intersection_points(se);
     TripletMap<Pos3d> retval= tmp;
@@ -175,7 +176,8 @@ TripletMap<Pos3d> vertices_poliedro(const std::deque<HalfSpace3d> &se, const dou
             continue;
           }
     if(retval.size()<4)
-      std::cerr << "vertices_poliedro; se obtuvieron menos de cuatro vértices."
+      std::cerr << __FUNCTION__
+		<< "; less than four vertices were obtained."
                 << std::endl;
     for(TripletMap<Pos3d>::const_iterator i= retval.begin();i!=retval.end();i++)
       {

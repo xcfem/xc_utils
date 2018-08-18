@@ -29,7 +29,7 @@
 #include "xc_utils/src/geom/d2/Triangle3d.h"
 
 class Plane;
-class Poliedro3d;
+class Polyhedron3d;
 
 //! @ingroup GEOM
 //
@@ -86,7 +86,7 @@ class Trihedron: public GeomObj3d
     Line3d Axis(void) const;
     GEOM_FT getConeHalfAngle(void) const;
 
-    Poliedro3d GetPoliedro3d(void) const;
+    Polyhedron3d getPolyhedron3d(void) const;
     Pos3d Vertice(const size_t &i) const;
     virtual GEOM_FT PseudoDist(const Pos3d &p) const;
     virtual bool In(const Pos3d &p,const double &tol= 0.0) const;

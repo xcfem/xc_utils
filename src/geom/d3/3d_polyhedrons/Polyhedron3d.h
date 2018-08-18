@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//POLIEDRO3D.h
+//POLYHEDRON3D.h
 
-#ifndef POLIEDRO3D_H
-#define POLIEDRO3D_H
+#ifndef POLYHEDRON3D_H
+#define POLYHEDRON3D_H
 
 #include <iostream>
 #include "PolyhedronBase.h"
@@ -38,83 +38,83 @@ class Polygon3d;
 
 //! @ingroup GEOM
 //
-//! @brief Clase base para los poliedros.
-class Poliedro3d: public PolyhedronBase
+//! @brief Base class for polyhedrons in a three-dimensional space.
+class Polyhedron3d: public PolyhedronBase
   {
   protected:
-    CGPoliedro_3 cgpoliedro;
+    CGPolyhedron_3 cgpolyhedron;
 
-    Poliedro3d(const CGPoliedro_3 &cgp) 
-      : PolyhedronBase(), cgpoliedro(cgp) {}
+    Polyhedron3d(const CGPolyhedron_3 &cgp) 
+      : PolyhedronBase(), cgpolyhedron(cgp) {}
     void make_tetrahedron(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);
     void make_tetrahedron(const HalfSpace3d &, const HalfSpace3d &,const HalfSpace3d &, const HalfSpace3d &);
     void make_polyhedron(const std::deque<HalfSpace3d> &);
     //void halfSpaces(const std::string &,const bool &clear= true);
 
   public:
-    typedef CGPoliedro_3::Vertex Vertex;
-    typedef CGPoliedro_3::Facet Facet;
+    typedef CGPolyhedron_3::Vertex Vertex;
+    typedef CGPolyhedron_3::Facet Facet;
 
-    typedef CGPoliedro_3::Point_iterator Point_iterator;
-    typedef CGPoliedro_3::Point_const_iterator Point_const_iterator;
-    typedef CGPoliedro_3::Vertex_iterator Vertex_iterator;
-    typedef CGPoliedro_3::Vertex_const_iterator Vertex_const_iterator;
-    typedef CGPoliedro_3::Facet_iterator Facet_iterator;
-    typedef CGPoliedro_3::Facet_const_iterator Facet_const_iterator;
-    typedef CGPoliedro_3::Edge_iterator Edge_iterator;
-    typedef CGPoliedro_3::Halfedge_iterator Halfedge_iterator;
-    typedef CGPoliedro_3::Halfedge_around_facet_circulator Halfedge_around_facet_circulator;
-    typedef CGPoliedro_3::Halfedge_around_vertex_circulator Halfedge_around_vertex_circulator;
-    typedef CGPoliedro_3::Vertex_handle Vertex_handle;
-    typedef CGPoliedro_3::Facet_handle Facet_handle;
-    typedef CGPoliedro_3::Halfedge_handle Halfedge_handle;
-    typedef CGPoliedro_3::HalfedgeDS HalfedgeDS;
+    typedef CGPolyhedron_3::Point_iterator Point_iterator;
+    typedef CGPolyhedron_3::Point_const_iterator Point_const_iterator;
+    typedef CGPolyhedron_3::Vertex_iterator Vertex_iterator;
+    typedef CGPolyhedron_3::Vertex_const_iterator Vertex_const_iterator;
+    typedef CGPolyhedron_3::Facet_iterator Facet_iterator;
+    typedef CGPolyhedron_3::Facet_const_iterator Facet_const_iterator;
+    typedef CGPolyhedron_3::Edge_iterator Edge_iterator;
+    typedef CGPolyhedron_3::Halfedge_iterator Halfedge_iterator;
+    typedef CGPolyhedron_3::Halfedge_around_facet_circulator Halfedge_around_facet_circulator;
+    typedef CGPolyhedron_3::Halfedge_around_vertex_circulator Halfedge_around_vertex_circulator;
+    typedef CGPolyhedron_3::Vertex_handle Vertex_handle;
+    typedef CGPolyhedron_3::Facet_handle Facet_handle;
+    typedef CGPolyhedron_3::Halfedge_handle Halfedge_handle;
+    typedef CGPolyhedron_3::HalfedgeDS HalfedgeDS;
 
-    Poliedro3d(void);
-    Poliedro3d(const Pos3d &, const Pos3d &,const Pos3d &, const Pos3d &);
-    Poliedro3d(const HalfSpace3d &, const HalfSpace3d &,const HalfSpace3d &, const HalfSpace3d &);
-    Poliedro3d(const std::deque<HalfSpace3d> &);
-    Poliedro3d(const Poliedro3d &);
-    Poliedro3d(const EPoliedro &e);
-    Poliedro3d &operator=(const Poliedro3d &);
+    Polyhedron3d(void);
+    Polyhedron3d(const Pos3d &, const Pos3d &,const Pos3d &, const Pos3d &);
+    Polyhedron3d(const HalfSpace3d &, const HalfSpace3d &,const HalfSpace3d &, const HalfSpace3d &);
+    Polyhedron3d(const std::deque<HalfSpace3d> &);
+    Polyhedron3d(const Polyhedron3d &);
+    Polyhedron3d(const EPolyhedron &e);
+    Polyhedron3d &operator=(const Polyhedron3d &);
     virtual GeomObj *clon(void) const;
 
     Point_iterator points_begin(void)
-      { return cgpoliedro.points_begin(); }
+      { return cgpolyhedron.points_begin(); }
     Point_iterator points_end(void)
-      { return cgpoliedro.points_end(); }
+      { return cgpolyhedron.points_end(); }
     Vertex_iterator vertices_begin(void)
-      { return cgpoliedro.vertices_begin(); }
+      { return cgpolyhedron.vertices_begin(); }
     Vertex_iterator vertices_end(void)
-      { return cgpoliedro.vertices_end(); }
+      { return cgpolyhedron.vertices_end(); }
     Facet_iterator facets_begin(void)
-      { return cgpoliedro.facets_begin(); }
+      { return cgpolyhedron.facets_begin(); }
     Facet_iterator facets_end(void)
-      { return cgpoliedro.facets_end(); }
+      { return cgpolyhedron.facets_end(); }
     Point_const_iterator points_begin(void) const
-      { return cgpoliedro.points_begin(); }
+      { return cgpolyhedron.points_begin(); }
     Point_const_iterator points_end(void) const
-      { return cgpoliedro.points_end(); }
+      { return cgpolyhedron.points_end(); }
     Vertex_const_iterator vertices_begin(void) const
-      { return cgpoliedro.vertices_begin(); }
+      { return cgpolyhedron.vertices_begin(); }
     Vertex_const_iterator vertices_end(void) const
-      { return cgpoliedro.vertices_end(); }
+      { return cgpolyhedron.vertices_end(); }
     Facet_const_iterator facets_begin(void) const
-      { return cgpoliedro.facets_begin(); }
+      { return cgpolyhedron.facets_begin(); }
     Facet_const_iterator facets_end(void) const
-      { return cgpoliedro.facets_end(); }
+      { return cgpolyhedron.facets_end(); }
 
     GEOM_FT GetMax(unsigned short int i) const;
     GEOM_FT GetMin(unsigned short int i) const;
     size_t GetNumVertices(void) const
-      { return cgpoliedro.size_of_vertices(); }
+      { return cgpolyhedron.size_of_vertices(); }
     size_t getNumEdges(void) const
-      { return cgpoliedro.size_of_halfedges(); }
+      { return cgpolyhedron.size_of_halfedges(); }
     size_t GetNumCaras(void) const
-      { return cgpoliedro.size_of_facets(); }
+      { return cgpolyhedron.size_of_facets(); }
 
     void clear(void)
-      { cgpoliedro.clear(); }
+      { cgpolyhedron.clear(); }
 
     GeomObj::list_Pos3d GetVerticesCara(const Facet_const_iterator &f) const;
     Plane getPlaneFromFace(const Facet_const_iterator &fi) const;
@@ -127,9 +127,9 @@ class Poliedro3d: public PolyhedronBase
 
     bool TocaCuadrante(const int &) const;
 
-    PolygonMap<CGPoliedro_3> GetPolygonMap(void) const
-      { return getPolygonMap(cgpoliedro); }
-    EPoliedro GetEnriquecido(void) const;
+    PolygonMap<CGPolyhedron_3> GetPolygonMap(void) const
+      { return getPolygonMap(cgpolyhedron); }
+    EPolyhedron GetEnriquecido(void) const;
     Triang3dMesh Triangula(void) const;
 
     GEOM_FT PseudoDist(const Pos3d &p) const;
@@ -138,25 +138,25 @@ class Poliedro3d: public PolyhedronBase
     inline virtual GEOM_FT dist(const Pos3d &p) const
       { return PseudoDist(p); }
 
-    friend Poliedro3d Union(const Poliedro3d &a,const Poliedro3d &b);
-    friend Poliedro3d intersection(const Poliedro3d &a,const Poliedro3d &b);
-    friend Poliedro3d Diferencia(const Poliedro3d &a,const Poliedro3d &b);
-    friend Poliedro3d subdivide_quad_triangle(const Poliedro3d &pol,bool smooth_boundary);
+    friend Polyhedron3d Union(const Polyhedron3d &a,const Polyhedron3d &b);
+    friend Polyhedron3d intersection(const Polyhedron3d &a,const Polyhedron3d &b);
+    friend Polyhedron3d Diferencia(const Polyhedron3d &a,const Polyhedron3d &b);
+    friend Polyhedron3d subdivide_quad_triangle(const Polyhedron3d &pol,bool smooth_boundary);
     template <class InputIterator>
-    friend Poliedro3d get_convex_hull(InputIterator first,InputIterator last);
+    friend Polyhedron3d get_convex_hull(InputIterator first,InputIterator last);
 
     void Print(std::ostream &os) const;
     void Print(CGview_stream &v) const;
     void ReadOFF(std::istream &is);
   };
 
-CGview_stream &operator<<(CGview_stream &v,const Poliedro3d &p);
+CGview_stream &operator<<(CGview_stream &v,const Polyhedron3d &p);
 
-inline PolygonMap<CGPoliedro_3> getPolygonMap(const Poliedro3d &p)
+inline PolygonMap<CGPolyhedron_3> getPolygonMap(const Polyhedron3d &p)
   { return p.GetPolygonMap(); }
-inline EPoliedro enriquece(const Poliedro3d &p)
+inline EPolyhedron enriquece(const Polyhedron3d &p)
   { return p.GetEnriquecido(); }
 
-Poliedro3d subdivide_quad_triangle(const Poliedro3d &pol,bool smooth_boundary= false);
+Polyhedron3d subdivide_quad_triangle(const Polyhedron3d &pol,bool smooth_boundary= false);
 
 #endif

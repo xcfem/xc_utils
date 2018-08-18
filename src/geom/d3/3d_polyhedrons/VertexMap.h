@@ -27,7 +27,7 @@
 #include <vector>
 #include "xc_basic/src/stl/TripletMap.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
-#include "Poliedro3d.h"
+#include "Polyhedron3d.h"
 
 //Convenience classes to generate polyhedrons from
 //half-space intersections.
@@ -37,7 +37,7 @@ class Pos3dList;
 
 //! @ingroup GEOM
 //
-//! @brief Vértices de la arista de un poliedro.
+//! @brief Vertices of a polyhedron edge.
 class VerticesArista
   {
     size_t v0;
@@ -57,7 +57,7 @@ bool operator==(const VerticesArista &,const VerticesArista &);
 
 //! @ingroup GEOM
 //
-//! @brief Vértices de la cara de un poliedro.
+//! @brief Vertices of a polyhedron face.
 class VerticesCara: public std::list<size_t>
   {
     bool visitada;
@@ -82,7 +82,7 @@ std::ostream &operator<<(std::ostream &, const VerticesCara &);
 
 //! @ingroup GEOM
 //
-//! @brief Mapa de vértices de un poliedro.
+//! @brief Polyhedron vertex map.
 class VertexMap
   {
     std::vector<Pos3d> vertices;
@@ -102,12 +102,12 @@ class VertexMap
 
 std::ostream &operator<<(std::ostream &, const VertexMap &);
 
-// Crea un poliedro a partir de un mapa de vértices.
-class BuildFromVertexMap: public CGAL::Modifier_base<Poliedro3d::HalfedgeDS>
+//! @brief Creates a polyhedron from a vertex map.
+class BuildFromVertexMap: public CGAL::Modifier_base<Polyhedron3d::HalfedgeDS>
   {
     const VertexMap vertex_map;
   public:
     BuildFromVertexMap(const TripletMap<Pos3d> &);
-    void operator()(Poliedro3d::HalfedgeDS &);
+    void operator()(Polyhedron3d::HalfedgeDS &);
   };
 #endif

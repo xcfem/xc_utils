@@ -19,16 +19,16 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//bool_op_poliedro3d.cc
+//polyhedron3d_bool_op.cc
 
-#include "bool_op_poliedro3d.h"
+#include "polyhedron3d_bool_op.h"
 #include <CGAL/Gmpz.h>
 #include <CGAL/Gmpq.h>
 #include <CGAL/Homogeneous.h>
 #include <CGAL/Cartesian.h>
 #include <CGAL/Quotient.h>
 #include <CGAL/Nef_polyhedron_3.h>
-#include "Poliedro3d.h"
+#include "Polyhedron3d.h"
 #include <CGAL/cartesian_homogeneous_conversion.h>
 #include <CGAL/Cartesian_converter.h>
 #include "PolygonMap.h"
@@ -76,24 +76,25 @@ class Point2Pos3d
   };
 
 
-Nef_pol3 Poliedro3d_to_Nef_3(const CGPoliedro_3 &pol3)
+Nef_pol3 Polyhedron3d_to_Nef_3(const CGPolyhedron_3 &pol3)
   {
     typedef Polyhedron::HalfedgeDS HalfedgeDS;
     Polyhedron tmp;
     if(pol3.is_closed())
       {
-        Build_tdest_polyhedron<CGPoliedro_3,HalfedgeDS,Pos3d2Point> bpoli(pol3);
+        Build_tdest_polyhedron<CGPolyhedron_3,HalfedgeDS,Pos3d2Point> bpoli(pol3);
         tmp.delegate(bpoli);
       }
     else
-      std::cerr << "El poliedro no es cerrado." << std::endl;
+      std::cerr << __FUNCTION__
+		<< "; not a closed polyhedron." << std::endl;
     return Nef_pol3(tmp);
   }
 
-CGPoliedro_3 Nef_3_to_Poliedro3d(Nef_pol3 &np)
+CGPolyhedron_3 Nef_3_to_Polyhedron3d(Nef_pol3 &np)
   {
-    typedef CGPoliedro_3::HalfedgeDS HalfedgeDS;
-    CGPoliedro_3 retval;
+    typedef CGPolyhedron_3::HalfedgeDS HalfedgeDS;
+    CGPolyhedron_3 retval;
     if(np.is_simple())
       {
         Polyhedron tmp;
@@ -102,28 +103,29 @@ CGPoliedro_3 Nef_3_to_Poliedro3d(Nef_pol3 &np)
         retval.delegate(bpoli);
       }
     else
-      std::cerr << "El poliedro no es simple." << std::endl;
+      std::cerr << __FUNCTION__
+		<< "; not a simple polyhedron." << std::endl;
     return retval;
   }
 
-Poliedro3d Union(const Poliedro3d &a,const Poliedro3d &b)
+Polyhedron3d Union(const Polyhedron3d &a,const Polyhedron3d &b)
   {
-    Nef_pol3 nfa= Poliedro3d_to_Nef_3(a.cgpoliedro);
-    Nef_pol3 nfb= Poliedro3d_to_Nef_3(b.cgpoliedro);
+    Nef_pol3 nfa= Polyhedron3d_to_Nef_3(a.cgpolyhedron);
+    Nef_pol3 nfb= Polyhedron3d_to_Nef_3(b.cgpolyhedron);
     Nef_pol3 nfu= nfa+nfb;
-    return Poliedro3d(Nef_3_to_Poliedro3d(nfu));
+    return Polyhedron3d(Nef_3_to_Polyhedron3d(nfu));
   }
-Poliedro3d intersection(const Poliedro3d &a,const Poliedro3d &b)
+Polyhedron3d intersection(const Polyhedron3d &a,const Polyhedron3d &b)
   {
-    Nef_pol3 nfa= Poliedro3d_to_Nef_3(a.cgpoliedro);
-    Nef_pol3 nfb= Poliedro3d_to_Nef_3(b.cgpoliedro);
+    Nef_pol3 nfa= Polyhedron3d_to_Nef_3(a.cgpolyhedron);
+    Nef_pol3 nfb= Polyhedron3d_to_Nef_3(b.cgpolyhedron);
     Nef_pol3 nfi= nfa*nfb;
-    return Poliedro3d(Nef_3_to_Poliedro3d(nfi));
+    return Polyhedron3d(Nef_3_to_Polyhedron3d(nfi));
   }
-Poliedro3d Diferencia(const Poliedro3d &a,const Poliedro3d &b)
+Polyhedron3d Diferencia(const Polyhedron3d &a,const Polyhedron3d &b)
   {
-    Nef_pol3 nfa= Poliedro3d_to_Nef_3(a.cgpoliedro);
-    Nef_pol3 nfb= Poliedro3d_to_Nef_3(b.cgpoliedro);
+    Nef_pol3 nfa= Polyhedron3d_to_Nef_3(a.cgpolyhedron);
+    Nef_pol3 nfb= Polyhedron3d_to_Nef_3(b.cgpolyhedron);
     Nef_pol3 nfd= nfa-nfb;
-    return Poliedro3d(Nef_3_to_Poliedro3d(nfd));
+    return Polyhedron3d(Nef_3_to_Polyhedron3d(nfd));
   }

@@ -26,14 +26,14 @@
 
 #include "xc_utils/src/geom/d3/GeomObj3d.h"
 
-class Poliedro3d;
+class Polyhedron3d;
 
 
 //! @ingroup GEOM
 //
 //! @brief Return el «convex hull» del conjunto de posiciones
 //! que se pasa como parámetro.
-Poliedro3d get_convex_hull(const GeomObj::list_Pos3d &lp);
+Polyhedron3d get_convex_hull(const GeomObj::list_Pos3d &lp);
 
 
 #endif

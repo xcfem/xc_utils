@@ -19,31 +19,31 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//TETRAEDRO3D.h
+//TETRAHEDRON3D.h
 
-#ifndef TETRAEDRO3D_H
-#define TETRAEDRO3D_H
+#ifndef TETRAHEDRON3D_H
+#define TETRAHEDRON3D_H
 
 #include <iostream>
 #include "PolyhedronBase.h"
 #include "PolygonMap.h"
 
 class HalfSpace3d;
-class Poliedro3d;
+class Polyhedron3d;
 
 //! @ingroup GEOM
 //
-//! @brief Tetraedro.
-class Tetraedro3d: public PolyhedronBase
+//! @brief Tetrahedron.
+class Tetrahedron3d: public PolyhedronBase
   {
-    CGTetrahedron_3 cgtetraedro;
+    CGTetrahedron_3 cgtetrahedron;
   public:
-    Tetraedro3d(void);
-    Tetraedro3d(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);
-    Tetraedro3d(const HalfSpace3d &, const HalfSpace3d &,const HalfSpace3d &, const HalfSpace3d &);
+    Tetrahedron3d(void);
+    Tetrahedron3d(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);
+    Tetrahedron3d(const HalfSpace3d &, const HalfSpace3d &,const HalfSpace3d &, const HalfSpace3d &);
     GeomObj *clon(void) const
-      { return new Tetraedro3d(*this); }
-    Poliedro3d getPoliedro3d(void) const;
+      { return new Tetrahedron3d(*this); }
+    Polyhedron3d getPolyhedron3d(void) const;
     GEOM_FT getArea(void) const;
     GEOM_FT getVolumeWithSign(void) const;
     GEOM_FT getVolume(void) const;
@@ -53,6 +53,6 @@ class Tetraedro3d: public PolyhedronBase
     void Print(std::ostream &os) const;
   };
 
-PolygonMap<CGPoliedro_3> getPolygonMap(const Tetraedro3d &t);
+PolygonMap<CGPolyhedron_3> getPolygonMap(const Tetrahedron3d &t);
 
 #endif

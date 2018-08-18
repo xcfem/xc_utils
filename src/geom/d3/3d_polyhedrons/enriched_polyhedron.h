@@ -778,9 +778,9 @@ void Vertex_normal::operator()(Vertex& v)
         v.normal() = CGAL::NULL_VECTOR;
   }
 
-typedef Enriched_polyhedron<GEOMKernel,Enriched_items> EPoliedro;
+typedef Enriched_polyhedron<GEOMKernel,Enriched_items> EPolyhedron;
 
-EPoliedro enriquece(const CGPoliedro_3 &pol);
-CGPoliedro_3 empobrece(const EPoliedro &pol);
+EPolyhedron enriquece(const CGPolyhedron_3 &pol);
+CGPolyhedron_3 empobrece(const EPolyhedron &pol);
 
 #endif // _POLYGON_MESH_

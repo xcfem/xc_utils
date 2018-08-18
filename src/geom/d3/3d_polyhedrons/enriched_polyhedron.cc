@@ -31,22 +31,22 @@ class ConvPosicion
      { return p; }
   };
 
-EPoliedro enriquece(const CGPoliedro_3 &pol)
+EPolyhedron enriquece(const CGPolyhedron_3 &pol)
   {
-    typedef EPoliedro::HalfedgeDS HalfedgeDS;
-    EPoliedro retval;
-    Build_tdest_polyhedron<CGPoliedro_3,HalfedgeDS,ConvPosicion> bpoli(pol);
+    typedef EPolyhedron::HalfedgeDS HalfedgeDS;
+    EPolyhedron retval;
+    Build_tdest_polyhedron<CGPolyhedron_3,HalfedgeDS,ConvPosicion> bpoli(pol);
     retval.delegate(bpoli);
     return retval;
   }
 
 
-CGPoliedro_3 empobrece(const EPoliedro &pol)
+CGPolyhedron_3 empobrece(const EPolyhedron &pol)
   {
     
-    typedef CGPoliedro_3::HalfedgeDS HalfedgeDS;
-    CGPoliedro_3 retval;
-    Build_tdest_polyhedron<EPoliedro,HalfedgeDS,ConvPosicion> bpoli(pol);
+    typedef CGPolyhedron_3::HalfedgeDS HalfedgeDS;
+    CGPolyhedron_3 retval;
+    Build_tdest_polyhedron<EPolyhedron,HalfedgeDS,ConvPosicion> bpoli(pol);
     retval.delegate(bpoli);
     return retval;
   }

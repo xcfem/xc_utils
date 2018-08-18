@@ -32,7 +32,7 @@ class HalfSpace3d;
 
 //! @ingroup GEOM
 //
-//! @brief Tetraedro.
+//! @brief Base class for the polyhedrons.
 class PolyhedronBase: public GeomObj3d
   {
   public:

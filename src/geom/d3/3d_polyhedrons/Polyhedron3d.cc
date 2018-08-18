@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Poliedro3d.cc
+//Polyhedron3d.cc
 
-#include "Poliedro3d.h"
+#include "Polyhedron3d.h"
 #include "../../d2/Triang3dMesh.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
@@ -32,7 +32,7 @@
 #include <CGAL/IO/Polyhedron_geomview_ostream.h>
 #include <CGAL/IO/Polyhedron_iostream.h>
 #include "quad-triangle.h"
-#include "bool_op_poliedro3d.h"
+#include "polyhedron3d_bool_op.h"
 #include "VertexMap.h"
 #include <set>
 #include "xc_utils/src/geom/pos_vec/Pos3dList.h"
@@ -42,54 +42,54 @@
 
 
 //! @brief Default constructor.
-Poliedro3d::Poliedro3d(void): cgpoliedro() {}
+Polyhedron3d::Polyhedron3d(void): cgpolyhedron() {}
 
 //! @brief Constructor.
-Poliedro3d::Poliedro3d(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3)
-  : cgpoliedro()
+Polyhedron3d::Polyhedron3d(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3)
+  : cgpolyhedron()
   { make_tetrahedron(p0,p1,p2,p3); }
 
 //! @brief Constructor.
-Poliedro3d::Poliedro3d(const std::deque<HalfSpace3d> &se)
-  : cgpoliedro()
+Polyhedron3d::Polyhedron3d(const std::deque<HalfSpace3d> &se)
+  : cgpolyhedron()
   { make_polyhedron(se); }
 
 
 //! @brief Constructor.
-Poliedro3d::Poliedro3d(const HalfSpace3d &se1, const HalfSpace3d &se2,const HalfSpace3d &se3, const HalfSpace3d &se4)
+Polyhedron3d::Polyhedron3d(const HalfSpace3d &se1, const HalfSpace3d &se2,const HalfSpace3d &se3, const HalfSpace3d &se4)
   { make_tetrahedron(se1,se2,se3,se4); }
 
 //! @brief Constructor.
-Poliedro3d::Poliedro3d(const EPoliedro &e)
-  : cgpoliedro(empobrece(e)) {}
+Polyhedron3d::Polyhedron3d(const EPolyhedron &e)
+  : cgpolyhedron(empobrece(e)) {}
 
 //! @brief Copy constructor
-Poliedro3d::Poliedro3d(const Poliedro3d &other) 
-  : PolyhedronBase(other), cgpoliedro(other.cgpoliedro) {}
+Polyhedron3d::Polyhedron3d(const Polyhedron3d &other) 
+  : PolyhedronBase(other), cgpolyhedron(other.cgpolyhedron) {}
 
 //! @brief Assignment operator.
-Poliedro3d &Poliedro3d::operator=(const Poliedro3d &other)
+Polyhedron3d &Polyhedron3d::operator=(const Polyhedron3d &other)
   {
     PolyhedronBase::operator=(other);
-    cgpoliedro= other.cgpoliedro;
+    cgpolyhedron= other.cgpolyhedron;
     return *this;
   }
 
 //! @brief Constructor virtual.
-GeomObj *Poliedro3d::clon(void) const
-  { return new Poliedro3d(*this); }
+GeomObj *Polyhedron3d::clon(void) const
+  { return new Polyhedron3d(*this); }
 
-void Poliedro3d::make_tetrahedron(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3)
-  { cgpoliedro.make_tetrahedron(p0.ToCGAL(),p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL()); }
+void Polyhedron3d::make_tetrahedron(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3)
+  { cgpolyhedron.make_tetrahedron(p0.ToCGAL(),p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL()); }
 
-void Poliedro3d::make_polyhedron(const std::deque<HalfSpace3d> &se)
+void Polyhedron3d::make_polyhedron(const std::deque<HalfSpace3d> &se)
   {
-    TripletMap<Pos3d> vertices= vertices_poliedro(se);
+    TripletMap<Pos3d> vertices= polyhedron_vertices(se);
     BuildFromVertexMap build(vertices);
-    cgpoliedro.delegate(build);
+    cgpolyhedron.delegate(build);
   }
 
-void Poliedro3d::make_tetrahedron(const HalfSpace3d &se1, const HalfSpace3d &se2,const HalfSpace3d &se3, const HalfSpace3d &se4)
+void Polyhedron3d::make_tetrahedron(const HalfSpace3d &se1, const HalfSpace3d &se2,const HalfSpace3d &se3, const HalfSpace3d &se4)
   {
     std::deque<HalfSpace3d> se;
     se.push_back(se1);
@@ -102,7 +102,7 @@ void Poliedro3d::make_tetrahedron(const HalfSpace3d &se1, const HalfSpace3d &se2
 // //! @brief Interprets the half spacess that define the polyhedron.
 // //! @param cle: if true it deletes the previously defined vertices,
 // //! faces and edges.
-// void Poliedro3d::halfSpaces(const std::string &str,const bool &cle)
+// void Polyhedron3d::halfSpaces(const std::string &str,const bool &cle)
 //   {
 //     const std::deque<HalfSpace3d> se= interpretaHalfSpaces3d(str);
 //     const size_t sz= se.size();
@@ -118,32 +118,32 @@ void Poliedro3d::make_tetrahedron(const HalfSpace3d &se1, const HalfSpace3d &se2
 //   }
 
 //! @brief Return the sum of the areas of the faces.
-GEOM_FT Poliedro3d::getArea(void) const
+GEOM_FT Polyhedron3d::getArea(void) const
   {
     GEOM_FT retval= 0.0;
-    for(Poliedro3d::Facet_const_iterator i= facets_begin();i!=facets_end();i++)
+    for(Polyhedron3d::Facet_const_iterator i= facets_begin();i!=facets_end();i++)
       retval+= GetCara(i).getArea();
     return retval;
   }
 
-GEOM_FT Poliedro3d::GetMax(unsigned short int i) const
+GEOM_FT Polyhedron3d::GetMax(unsigned short int i) const
   {
-    CGPoliedro_3::Vertex_const_iterator vi= cgpoliedro.vertices_begin();
+    CGPolyhedron_3::Vertex_const_iterator vi= cgpolyhedron.vertices_begin();
     GEOM_FT retval= vi->point().cartesian(i-1);
-    for(;vi!=cgpoliedro.vertices_end();vi++)
+    for(;vi!=cgpolyhedron.vertices_end();vi++)
       retval= std::max(retval,vi->point().cartesian(i-1));
     return retval;
   }
-GEOM_FT Poliedro3d::GetMin(unsigned short int i) const
+GEOM_FT Polyhedron3d::GetMin(unsigned short int i) const
   {
-    CGPoliedro_3::Vertex_const_iterator vi= cgpoliedro.vertices_begin();
+    CGPolyhedron_3::Vertex_const_iterator vi= cgpolyhedron.vertices_begin();
     GEOM_FT retval= vi->point().cartesian(i-1);
-    for(;vi!=cgpoliedro.vertices_end();vi++)
+    for(;vi!=cgpolyhedron.vertices_end();vi++)
       retval= std::min(retval,vi->point().cartesian(i-1));
     return retval;
   }
 
-GeomObj::list_Pos3d Poliedro3d::GetVerticesCara(const Facet_const_iterator &f) const
+GeomObj::list_Pos3d Polyhedron3d::GetVerticesCara(const Facet_const_iterator &f) const
   {
     Facet::Halfedge_const_handle h = f->halfedge();
     GeomObj::list_Pos3d retval;
@@ -153,15 +153,15 @@ GeomObj::list_Pos3d Poliedro3d::GetVerticesCara(const Facet_const_iterator &f) c
     return retval;
   }
 
-GeomObj::list_Pos3d Poliedro3d::getVertices(void) const
+GeomObj::list_Pos3d Polyhedron3d::getVertices(void) const
   {
     GeomObj::list_Pos3d retval;
-    for(CGPoliedro_3::Vertex_const_iterator vi= cgpoliedro.vertices_begin();vi!=cgpoliedro.vertices_end();vi++)
+    for(CGPolyhedron_3::Vertex_const_iterator vi= cgpolyhedron.vertices_begin();vi!=cgpolyhedron.vertices_end();vi++)
       retval.push_back(vi->point());
     return retval;
   }
 
-Plane Poliedro3d::getPlaneFromFace(const Facet_const_iterator &f) const
+Plane Polyhedron3d::getPlaneFromFace(const Facet_const_iterator &f) const
   {
     Facet::Halfedge_const_handle h= f->halfedge();
     Plane retval(h->vertex()->point(),h->next()->vertex()->point(),h->next()->next()->vertex()->point());
@@ -169,71 +169,72 @@ Plane Poliedro3d::getPlaneFromFace(const Facet_const_iterator &f) const
   }
 
 //! @brief Return la cara correspondiente al iterador.
-Polygon3d Poliedro3d::GetCara(const Facet_const_iterator &f) const
+Polygon3d Polyhedron3d::GetCara(const Facet_const_iterator &f) const
   {
     const GeomObj::list_Pos3d vertices= getVertices();
     Polygon3d retval(vertices.begin(),vertices.end());
     return retval;
   }
 
-//! @brief Return las caras del poliedro.
-std::deque<Polygon3d> Poliedro3d::GetCaras(void) const
+//! @brief Return the faces of the polyhedron.
+std::deque<Polygon3d> Polyhedron3d::GetCaras(void) const
   {
     std::deque<Polygon3d> retval;
-    for(Poliedro3d::Facet_const_iterator i= facets_begin();i!=facets_end();i++)
+    for(Polyhedron3d::Facet_const_iterator i= facets_begin();i!=facets_end();i++)
       retval.push_back(GetCara(i));
     return retval;
   }
 
-void Poliedro3d::Print(std::ostream &os) const
+//! @brief Print stuff.
+void Polyhedron3d::Print(std::ostream &os) const
   {
     CGAL::set_ascii_mode(os);
     CGAL::set_pretty_mode(os);
-    os << cgpoliedro << std::endl;
+    os << cgpolyhedron << std::endl;
   }
 
-void Poliedro3d::Print(CGview_stream &v) const
+void Polyhedron3d::Print(CGview_stream &v) const
   {
-    v << cgpoliedro;
+    v << cgpolyhedron;
   }
 
-void Poliedro3d::ReadOFF(std::istream &is)
-//Lee el poliedro desde un archivo de tipo Object File Format.
-  { is >> cgpoliedro; }
+//! @brief Read the polyhedrom from an Object File Format file.
+void Polyhedron3d::ReadOFF(std::istream &is)
+  { is >> cgpolyhedron; }
 
-CGview_stream &operator<<(CGview_stream &v,const Poliedro3d &p)
+CGview_stream &operator<<(CGview_stream &v,const Polyhedron3d &p)
   {
     p.Print(v);
     return v;
   }
 
-EPoliedro Poliedro3d::GetEnriquecido(void) const
-  { return enriquece(cgpoliedro); }
+EPolyhedron Polyhedron3d::GetEnriquecido(void) const
+  { return enriquece(cgpolyhedron); }
 
 
-Poliedro3d subdivide_quad_triangle(const Poliedro3d &pol,bool smooth_boundary)
+Polyhedron3d subdivide_quad_triangle(const Polyhedron3d &pol,bool smooth_boundary)
   {
-    CSubdivider_quad_triangle<EPoliedro,GEOMKernel> subdivider;
-    EPoliedro retval, tmp(pol.GetEnriquecido());
+    CSubdivider_quad_triangle<EPolyhedron,GEOMKernel> subdivider;
+    EPolyhedron retval, tmp(pol.GetEnriquecido());
     subdivider.subdivide(tmp,retval);
-    return Poliedro3d(retval);
+    return Polyhedron3d(retval);
   }
 
-Triang3dMesh Poliedro3d::Triangula(void) const
+Triang3dMesh Polyhedron3d::Triangula(void) const
   {
-    EPoliedro retval(GetEnriquecido());
-    EPoliedro::Facet_iterator pFacet;
+    EPolyhedron retval(GetEnriquecido());
+    EPolyhedron::Facet_iterator pFacet;
     for(pFacet = retval.facets_begin();
         pFacet != retval.facets_end();
         pFacet++)
       {
-        const unsigned int degree = EPoliedro::degree(pFacet);
+        const unsigned int degree = EPolyhedron::degree(pFacet);
         CGAL_assertion(degree >= 3);
 
-        const EPoliedro::Halfedge_handle pHalfedge1 = pFacet->halfedge();
+        const EPolyhedron::Halfedge_handle pHalfedge1 = pFacet->halfedge();
         if(degree==4)
           {
-            const EPoliedro::Halfedge_handle pHalfedge2 = pHalfedge1->next()->next();
+            const EPolyhedron::Halfedge_handle pHalfedge2 = pHalfedge1->next()->next();
             retval.split_facet(pHalfedge1,pHalfedge2);
           }
         else
@@ -246,21 +247,21 @@ Triang3dMesh Poliedro3d::Triangula(void) const
             }
 
       }
-    return Triang3dMesh(Poliedro3d(retval));
+    return Triang3dMesh(Polyhedron3d(retval));
   }
 
 //! @brief Return the SIGNED distance from the point to the tetrahedron.
 //! The distance is computed as the maximum of the distances from the point
 //! to each of the planes that limit the tetrahedron.
-GEOM_FT Poliedro3d::PseudoDist(const Pos3d &p) const
+GEOM_FT Polyhedron3d::PseudoDist(const Pos3d &p) const
   {
     const size_t nv= GetNumVertices();
     assert(nv>0);
-    Poliedro3d::Vertex_const_iterator pVertex0= vertices_begin();
+    Polyhedron3d::Vertex_const_iterator pVertex0= vertices_begin();
     if(nv==1) return p.dist(pVertex0->point());
-    Poliedro3d::Vertex_const_iterator pVertex1= pVertex0; pVertex1++;
+    Polyhedron3d::Vertex_const_iterator pVertex1= pVertex0; pVertex1++;
     if(nv==2) return p.dist(Segment3d(pVertex0->point(),pVertex1->point()));
-    Poliedro3d::Facet_const_iterator i= facets_begin();
+    Polyhedron3d::Facet_const_iterator i= facets_begin();
     const Plane pl(getPlaneFromFace(i));
     GEOM_FT retval= pl.PseudoDist(p);
     for(;i!=facets_end();i++)
@@ -274,9 +275,9 @@ GEOM_FT Poliedro3d::PseudoDist(const Pos3d &p) const
 
 //! @brief Return verdadero si alguno de los vertices toca el cuadrante
 //! que se pasa como parámetro.
-bool Poliedro3d::TocaCuadrante(const int &cuadrante) const
+bool Polyhedron3d::TocaCuadrante(const int &cuadrante) const
   {
-    for(CGPoliedro_3::Vertex_const_iterator vi= cgpoliedro.vertices_begin();vi!=cgpoliedro.vertices_end();vi++)
+    for(CGPolyhedron_3::Vertex_const_iterator vi= cgpolyhedron.vertices_begin();vi!=cgpolyhedron.vertices_end();vi++)
       if(Pos3d((*vi).point()).Cuadrante() == cuadrante)
         return true;
     return false;
