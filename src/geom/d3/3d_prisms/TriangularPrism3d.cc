@@ -19,29 +19,21 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Prisma3d.h
+//TriangularPrism3d.cc
 
-#ifndef PRISMA3D_H
-#define PRISMA3D_H
-
-#include "xc_utils/src/geom/d3/Solid3d.h"
+#include "TriangularPrism3d.h"
 
 
-//! @ingroup GEOM
-//
-//! @brief Clase base para los prismas.
-class Prisma3d : public Solid3d
+
+TriangularPrism3d::TriangularPrism3d(const Triangle3d &tr,const double &h)
+  : triangular_prism(Triangle3d(tr),h) {}
+TriangularPrism3d::TriangularPrism3d(const TriangularPrism3d &c)
+  : triangular_prism(c) {}
+TriangularPrism3d &TriangularPrism3d::operator=(const TriangularPrism3d &c)
   {
-  public:
-    Prisma3d(void): Solid3d(){}
-    Prisma3d(const Prisma3d &p): Solid3d(p){}
-    Prisma3d &operator=(const Prisma3d &p)
-      {
-	Solid3d::operator=(p);
-        return *this;
-      }
-  };
-#endif
-
-
+    triangular_prism::operator=(c);
+    return *this;
+  }
+GeomObj *TriangularPrism3d::clon(void) const
+  { return new TriangularPrism3d(*this); }
 

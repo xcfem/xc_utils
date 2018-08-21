@@ -19,21 +19,33 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PrismaTriang3d.cc
+//TriangularPrism3d.h
 
-#include "PrismaTriang3d.h"
+#ifndef TRIANGULARPRISM3D_H
+#define TRIANGULARPRISM3D_H
+
+#include "RightPrism3d.h"
+#include "xc_utils/src/geom/d2/Triangle3d.h"
 
 
-
-PrismaTriang3d::PrismaTriang3d(const Triangle3d &tr,const double &h)
-  : prisma_triang(Triangle3d(tr),h) {}
-PrismaTriang3d::PrismaTriang3d(const PrismaTriang3d &c)
-  : prisma_triang(c) {}
-PrismaTriang3d &PrismaTriang3d::operator=(const PrismaTriang3d &c)
+//! @ingroup GEOM
+//
+//! @brief Triangular right prism.
+class TriangularPrism3d : public RightPrism3d<Triangle3d>
   {
-    prisma_triang::operator=(c);
-    return *this;
-  }
-GeomObj *PrismaTriang3d::clon(void) const
-  { return new PrismaTriang3d(*this); }
+  public:
+    typedef RightPrism3d<Triangle3d> triangular_prism;
+  public:
+    TriangularPrism3d(const Triangle3d &tr= Triangle3d(),const double &h=1.0);
+    TriangularPrism3d(const TriangularPrism3d &);
+    TriangularPrism3d &operator=(const TriangularPrism3d &c);
+    virtual GeomObj *clon(void) const;
+    
+  };
+#endif
+
+
+
+
+
 

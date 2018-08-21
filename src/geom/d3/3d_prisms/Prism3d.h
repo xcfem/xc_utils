@@ -19,33 +19,29 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PrismaTriang3d.h
+//Prism3d.h
 
-#ifndef PRISMATRIANG3D_H
-#define PRISMATRIANG3D_H
+#ifndef PRISM3D_H
+#define PRISM3D_H
 
-#include "PrismaRecto3d.h"
-#include "xc_utils/src/geom/d2/Triangle3d.h"
+#include "xc_utils/src/geom/d3/Solid3d.h"
 
 
 //! @ingroup GEOM
 //
-//! @brief Prisma recto de base triangular.
-class PrismaTriang3d : public PrismaRecto3d<Triangle3d>
+//! @brief Base class for prims in a three-dimensional space.
+class Prism3d : public Solid3d
   {
   public:
-    typedef PrismaRecto3d<Triangle3d> prisma_triang;
-  public:
-    PrismaTriang3d(const Triangle3d &tr= Triangle3d(),const double &h=1.0);
-    PrismaTriang3d(const PrismaTriang3d &);
-    PrismaTriang3d &operator=(const PrismaTriang3d &c);
-    virtual GeomObj *clon(void) const;
-    
+    Prism3d(void): Solid3d(){}
+    Prism3d(const Prism3d &p): Solid3d(p){}
+    Prism3d &operator=(const Prism3d &p)
+      {
+	Solid3d::operator=(p);
+        return *this;
+      }
   };
 #endif
-
-
-
 
 
 

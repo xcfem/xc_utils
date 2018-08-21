@@ -19,43 +19,43 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PrismaRecto3d.h
+//RightPrism3d.h
 
-#ifndef PRISMARECTO3D_H
-#define PRISMARECTO3D_H
+#ifndef RIGHTPRISM3D_H
+#define RIGHTPRISM3D_H
 
-#include "Prisma3d.h"
+#include "Prism3d.h"
 #include "../SolidExtruPolygon3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 
 
 //! @ingroup GEOM
 //
-//! @brief Prisma recto.
+//! @brief Right prism.
 template<class PG>
-class PrismaRecto3d : public Prisma3d
+class RightPrism3d : public Prism3d
   {
     SolidExtruPolygon3d<PG> extru;
   protected:
     inline unsigned int get_num_vertices_plgno(void) const
       { return extru.GetNumVertices(); }
   public:
-    PrismaRecto3d(void) {}
-    PrismaRecto3d(const PG &secc,const GEOM_FT &lng): Prisma3d(), extru(secc,lng) {}
-    PrismaRecto3d(const PrismaRecto3d<PG> &se): Prisma3d(se), extru(se.extru) {}
-    PrismaRecto3d<PG> &operator=(const PrismaRecto3d<PG> &se)
+    RightPrism3d(void) {}
+    RightPrism3d(const PG &secc,const GEOM_FT &lng): Prism3d(), extru(secc,lng) {}
+    RightPrism3d(const RightPrism3d<PG> &se): Prism3d(se), extru(se.extru) {}
+    RightPrism3d<PG> &operator=(const RightPrism3d<PG> &se)
       {
-	Prisma3d::operator=(se);
+	Prism3d::operator=(se);
 	extru=se.extru;
         return *this;
       }
     inline virtual GeomObj *clon(void) const
-      { return new PrismaRecto3d<PG>(*this); }
+      { return new RightPrism3d<PG>(*this); }
     inline void Offset(const GEOM_FT &offset)
       { extru.Offset(offset); }
-    inline PrismaRecto3d<PG> GetOffset(const GEOM_FT &offset) const
+    inline RightPrism3d<PG> GetOffset(const GEOM_FT &offset) const
       {
-        PrismaRecto3d<PG> retval(*this);
+        RightPrism3d<PG> retval(*this);
         retval.Offset(offset);
         return retval;
       }
