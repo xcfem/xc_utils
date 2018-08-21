@@ -29,7 +29,7 @@
 #include "xc_utils/src/geom/d1/Line3d.h"
 #include "xc_utils/src/geom/d3/GeomGroup3d.h"
 #include "xc_utils/src/geom/d3/HalfSpace3d.h"
-#include "xc_utils/src/geom/lists/auxiliares.h"
+#include "xc_utils/src/geom/lists/auxiliary.h"
 #include "xc_utils/src/geom/pos_vec/Pos2dArray.h"
 #include "xc_utils/src/geom/pos_vec/Pos3dArray.h"
 

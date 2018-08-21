@@ -30,7 +30,7 @@
 
 //! @ingroup CMDINTRP
 //
-//! @defgroup BASE Clases auxiliares del intérprete de comandos.
+//! @defgroup BASE Auxiliary classes.
 //
 //! @ingroup BASE
 //

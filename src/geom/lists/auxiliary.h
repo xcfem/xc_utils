@@ -19,11 +19,11 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//auxiliares.h
-//Funciones auxiliares.
+//auxiliary.h
+//Auxiliary functions.
 
-#ifndef AUXILIARES_H
-#define AUXILIARES_H
+#ifndef AUXILIARY_H
+#define AUXILIARY_H
 
 
 //! @ingroup GEOM
@@ -36,7 +36,8 @@ inline GEOM_FT get_max_i( short unsigned int i,
   {
     if(first==last)
       {
-	std::cerr << "get_max_i: La lista está vacía, se devuelve 0." << std::endl;
+	std::cerr << "get_max_i: La lista está vacía, se devuelve 0."
+		  << std::endl;
         return 0.0;
       }
     register InputIterator j= first;
@@ -56,7 +57,8 @@ inline GEOM_FT get_min_i( short unsigned int i,
   {
     if(first==last)
       {
-        std::cerr << "get_max_i: La lista está vacía, se devuelve 0." << std::endl;
+        std::cerr << "get_max_i: La lista está vacía, se devuelve 0."
+		  << std::endl;
         return 0.0;
       }
     register InputIterator j= first;

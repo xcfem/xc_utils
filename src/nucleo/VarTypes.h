@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //aux_any.h
-//funciones auxiliares para interpretar variables de tipo boost::any.
+//Auxiliary functions to iterpret variables of boost::any type.
 
 #ifndef VAR_TYPES_H
 #define VAR_TYPES_H
