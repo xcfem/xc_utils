@@ -66,8 +66,8 @@ CGPolyhedron_3 Polyhedron_to_Polyhedron3d(const Polyhedron_3 &np)
   {
     typedef CGPolyhedron_3::HalfedgeDS HalfedgeDS;
     CGPolyhedron_3 retval;
-    Build_tdest_polyhedron<Polyhedron_3,HalfedgeDS,Point2Pos3d> bpoli(np);
-    retval.delegate(bpoli);
+    Build_tdest_polyhedron<Polyhedron_3,HalfedgeDS,Point2Pos3d> bpoly(np);
+    retval.delegate(bpoly);
     return retval;
   }
 

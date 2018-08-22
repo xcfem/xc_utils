@@ -34,7 +34,7 @@ class Pos2dList;
 
 //! @ingroup GEOM
 //
-//! @brief Polilínea en dos dimensiones.
+//! @brief Polyline in a two-dimensional space.
 class Polyline2d : public Linear2d, public GeomObj::list_Pos2d
   {
   public:

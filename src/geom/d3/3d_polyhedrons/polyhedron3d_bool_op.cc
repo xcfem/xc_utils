@@ -82,8 +82,8 @@ Nef_pol3 Polyhedron3d_to_Nef_3(const CGPolyhedron_3 &pol3)
     Polyhedron tmp;
     if(pol3.is_closed())
       {
-        Build_tdest_polyhedron<CGPolyhedron_3,HalfedgeDS,Pos3d2Point> bpoli(pol3);
-        tmp.delegate(bpoli);
+        Build_tdest_polyhedron<CGPolyhedron_3,HalfedgeDS,Pos3d2Point> bpoly(pol3);
+        tmp.delegate(bpoly);
       }
     else
       std::cerr << __FUNCTION__
@@ -99,8 +99,8 @@ CGPolyhedron_3 Nef_3_to_Polyhedron3d(Nef_pol3 &np)
       {
         Polyhedron tmp;
         np.convert_to_Polyhedron(tmp);
-        Build_tdest_polyhedron<Polyhedron,HalfedgeDS,Point2Pos3d> bpoli(tmp);
-        retval.delegate(bpoli);
+        Build_tdest_polyhedron<Polyhedron,HalfedgeDS,Point2Pos3d> bpoly(tmp);
+        retval.delegate(bpoly);
       }
     else
       std::cerr << __FUNCTION__

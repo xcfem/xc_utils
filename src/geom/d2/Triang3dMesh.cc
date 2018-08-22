@@ -69,8 +69,8 @@ class Build_polyhedron: public CGAL::Modifier_base<HDS>
 Triang3dMesh::Triang3dMesh(const GTSSurface &gts_surf)
   {
     typedef CGPolyhedron_3::HalfedgeDS HalfedgeDS;
-    Build_polyhedron<HalfedgeDS> bpoli(gts_surf);
-    cgpolyhedron.delegate(bpoli);
+    Build_polyhedron<HalfedgeDS> bpoly(gts_surf);
+    cgpolyhedron.delegate(bpoly);
     //CGAL_assertion( P.is_triangle( P.halfedges_begin()));
   }
 

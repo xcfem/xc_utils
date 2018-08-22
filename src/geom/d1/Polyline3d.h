@@ -21,17 +21,17 @@
 //----------------------------------------------------------------------------
 //Polyline3d.
 
-#ifndef POLILINEA3D_H
-#define POLILINEA3D_H
+#ifndef POLYLINE3D_H
+#define POLYLINE3D_H
 
 #include "../pos_vec/Pos3d.h"
-#include "../lists/PoliPos.h"
+#include "../lists/PolyPos.h"
 #include "Linear3d.h"
 #include "Segment3d.h"
 
 //! @ingroup GEOM
 //
-//! @brief Polilínea en 3 dimensiones.
+//! @brief Polyline in a three-dimensional space.
 class Polyline3d : public Linear3d, public GeomObj::list_Pos3d
   {
   public:

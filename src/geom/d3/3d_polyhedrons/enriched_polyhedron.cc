@@ -35,8 +35,8 @@ EPolyhedron enriquece(const CGPolyhedron_3 &pol)
   {
     typedef EPolyhedron::HalfedgeDS HalfedgeDS;
     EPolyhedron retval;
-    Build_tdest_polyhedron<CGPolyhedron_3,HalfedgeDS,ConvPosicion> bpoli(pol);
-    retval.delegate(bpoli);
+    Build_tdest_polyhedron<CGPolyhedron_3,HalfedgeDS,ConvPosicion> bpoly(pol);
+    retval.delegate(bpoly);
     return retval;
   }
 
@@ -46,7 +46,7 @@ CGPolyhedron_3 empobrece(const EPolyhedron &pol)
     
     typedef CGPolyhedron_3::HalfedgeDS HalfedgeDS;
     CGPolyhedron_3 retval;
-    Build_tdest_polyhedron<EPolyhedron,HalfedgeDS,ConvPosicion> bpoli(pol);
-    retval.delegate(bpoli);
+    Build_tdest_polyhedron<EPolyhedron,HalfedgeDS,ConvPosicion> bpoly(pol);
+    retval.delegate(bpoly);
     return retval;
   }

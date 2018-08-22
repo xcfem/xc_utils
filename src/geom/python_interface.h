@@ -91,9 +91,9 @@
 #include "xc_utils/src/geom/trf/Translation3d.h"
 
 typedef std::deque<Pos2d> dq_pos2d;
-typedef PoliPos<Pos2d> poliPos2d;
+typedef PolyPos<Pos2d> polyPos2d;
 typedef std::deque<Pos3d> dq_pos3d;
-typedef PoliPos<Pos3d> poliPos3d;
+typedef PolyPos<Pos3d> polyPos3d;
 
 std::list<Polygon2d> from_python_list(boost::python::list &);
 boost::python::list to_python_list(const std::list<Polygon2d> &);

@@ -26,7 +26,7 @@
 
 #include <iostream>
 #include "ProtoGeom.h"
-#include "lists/PoliPos.h"
+#include "lists/PolyPos.h"
 
 class Pos2d;
 class Pos3d;
@@ -41,8 +41,8 @@ class Plotter;
 class GeomObj: public ProtoGeom
   {
   public:
-    typedef PoliPos<Pos3d> list_Pos3d;
-    typedef PoliPos<Pos2d> list_Pos2d;
+    typedef PolyPos<Pos3d> list_Pos3d;
+    typedef PolyPos<Pos2d> list_Pos2d;
 
     GeomObj(void);
     virtual ~GeomObj(void) {}

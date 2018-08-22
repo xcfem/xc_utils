@@ -157,11 +157,11 @@ bool BND2d::In(const Pos2d &p) const
     return retval;
   }
 
-//! @brief Return verdadero si el BND contiene a la polilínea.
+//! @brief Return true if contains the polyline.
 bool BND2d::In(const Polyline2d &p) const
   { return In(p.begin(),p.end()); }
 
-//! @brief Return verdadero si el BND contiene al polígono.
+//! @brief Return true if contains the polygon.
 bool BND2d::In(const Polygon2d &p) const
   { return In(p.vertices_begin(),p.vertices_end()); }
 

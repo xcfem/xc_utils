@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PoliPos.h
+//PolyPos.h
 
-#ifndef POLIPOS_H
-#define POLIPOS_H
+#ifndef POLYPOS_H
+#define POLYPOS_H
 
 #include <deque>
 #include "../cgal_types.h"
@@ -33,7 +33,7 @@
 //
 //! @brief Base class for position lists.
 template<class pos>
-class PoliPos : public std::deque<pos>
+class PolyPos : public std::deque<pos>
   {
   protected:
     typedef std::deque<pos> deque_pos;
@@ -46,9 +46,9 @@ class PoliPos : public std::deque<pos>
     typedef typename deque_pos::const_iterator const_iterator;
     typedef typename pos::vector vector;
 
-    PoliPos(void): deque_pos() {}
-    PoliPos(const PoliPos<pos> &otra): deque_pos(otra) {}
-    PoliPos<pos> &operator =(const PoliPos<pos> &l)
+    PolyPos(void): deque_pos() {}
+    PolyPos(const PolyPos<pos> &otra): deque_pos(otra) {}
+    PolyPos<pos> &operator =(const PolyPos<pos> &l)
       {
         deque_pos::operator= (l);
         return *this;
@@ -58,7 +58,7 @@ class PoliPos : public std::deque<pos>
         deque_pos::push_back(p);
         return &(this->back());
       }
-    inline void Agrega(const PoliPos<pos> &p)
+    inline void Agrega(const PolyPos<pos> &p)
       { Cat(p); }
     void AgregaSiNuevo(const pos &);
     const_iterator find(const pos &p) const
@@ -70,11 +70,11 @@ class PoliPos : public std::deque<pos>
     GEOM_FT getLength(void) const;
     GEOM_FT GetMax(unsigned short i) const;
     GEOM_FT GetMin(unsigned short i) const;
-    PoliPos GetMayores(unsigned short int i,const GEOM_FT &d) const;
-    PoliPos GetMenores(unsigned short int i,const GEOM_FT &d) const;
+    PolyPos GetMayores(unsigned short int i,const GEOM_FT &d) const;
+    PolyPos GetMenores(unsigned short int i,const GEOM_FT &d) const;
     pos getCenterOfMass(void) const;
     pos getWeightedCenterOfMass(const std::deque<GEOM_FT> &) const;
-    PoliPos<pos> GetSwap(void) const;
+    PolyPos<pos> GetSwap(void) const;
     void Swap(void)
       { *this= this->GetSwap(); }
     std::deque<GEOM_FT> &GetSeparaciones(void) const;
@@ -85,10 +85,10 @@ class PoliPos : public std::deque<pos>
     void simplify(GEOM_FT epsilon, iterator it1, iterator it2);
     void simplify(GEOM_FT epsilon);
 
-    void Cat(const PoliPos<pos> &l);
+    void Cat(const PolyPos<pos> &l);
     template <class inputIterator>
     void Cat(inputIterator begin, inputIterator end);
-    friend int operator ==(const PoliPos<pos> &a,const PoliPos<pos> &b)
+    friend int operator ==(const PolyPos<pos> &a,const PolyPos<pos> &b)
       {
         if ( (const deque_pos &) a != (const deque_pos &) b ) return 0;
         return 1;
@@ -98,12 +98,12 @@ class PoliPos : public std::deque<pos>
 
 //! @brief Return true if the points is on en la lista.
 template <class pos>
-bool PoliPos<pos>::In(const pos &p) const
+bool PolyPos<pos>::In(const pos &p) const
   { return (find(p)!=this->end()); }
 
 //! @brief Appends the point to the list (if not already there).
 template <class pos>
-void PoliPos<pos>::AgregaSiNuevo(const pos &p)
+void PolyPos<pos>::AgregaSiNuevo(const pos &p)
   {
     if(!In(p))
       this->push_back(p);
@@ -111,7 +111,7 @@ void PoliPos<pos>::AgregaSiNuevo(const pos &p)
 
 //! @brief True if dist(lastPoint,firstPoint)< tol*length
 template <class pos>
-bool PoliPos<pos>::isClosed(const GEOM_FT &tol) const
+bool PolyPos<pos>::isClosed(const GEOM_FT &tol) const
   {
     bool retval= false;
     const GEOM_FT treshold= tol*getLength();
@@ -122,9 +122,9 @@ bool PoliPos<pos>::isClosed(const GEOM_FT &tol) const
     return retval;
   }
 
-//! @brief Return the length of the PoliPos.
+//! @brief Return the length of the PolyPos.
 template <class pos>
-GEOM_FT PoliPos<pos>::getLength(void) const
+GEOM_FT PolyPos<pos>::getLength(void) const
   {
     if(this->size()<2) return 0.0;
     GEOM_FT temp = 0;
@@ -138,7 +138,7 @@ GEOM_FT PoliPos<pos>::getLength(void) const
   }
 
 template <class pos>
-GEOM_FT PoliPos<pos>::GetMax(unsigned short j) const
+GEOM_FT PolyPos<pos>::GetMax(unsigned short j) const
 //Return el valor mínimo de la coordenada j.
   {
     GEOM_FT retval(0.0);
@@ -153,7 +153,7 @@ GEOM_FT PoliPos<pos>::GetMax(unsigned short j) const
   }
 
 template <class pos>
-GEOM_FT PoliPos<pos>::GetMin(unsigned short j) const
+GEOM_FT PolyPos<pos>::GetMin(unsigned short j) const
 //Return el valor mínimo de la coordenada j.
   {
     GEOM_FT retval(0.0);
@@ -169,7 +169,7 @@ GEOM_FT PoliPos<pos>::GetMin(unsigned short j) const
 
 template <class pos>
 //! @brief Return the center of mass del polígono.
-pos PoliPos<pos>::getCenterOfMass(void) const
+pos PolyPos<pos>::getCenterOfMass(void) const
   {
     if(this->size()<1) return pos();
     if(this->size()<2) return *(this->begin());
@@ -184,7 +184,7 @@ pos PoliPos<pos>::getCenterOfMass(void) const
 
 template <class pos>
 //! @brief Return the center of mass del polígono.
-pos PoliPos<pos>::getWeightedCenterOfMass(const std::deque<GEOM_FT> &areas) const
+pos PolyPos<pos>::getWeightedCenterOfMass(const std::deque<GEOM_FT> &areas) const
   {
     pos retval;
     const size_t sz= this->size();
@@ -217,11 +217,11 @@ pos PoliPos<pos>::getWeightedCenterOfMass(const std::deque<GEOM_FT> &areas) cons
   }
 
 template <class pos>
-PoliPos<pos> PoliPos<pos>::GetSwap(void) const
+PolyPos<pos> PolyPos<pos>::GetSwap(void) const
   //Return una lista con los elementos en orden inverso
   //al de esta.
   {
-    PoliPos<pos> retval(*this);
+    PolyPos<pos> retval(*this);
     const size_t sz= this->size();
     if (sz<2) return retval;
     for(register size_t i=0; i<sz; i++) 
@@ -231,7 +231,7 @@ PoliPos<pos> PoliPos<pos>::GetSwap(void) const
 
 //! @brief Compute the distance from each point to the nearest one.
 template <class pos>
-std::deque<GEOM_FT> &PoliPos<pos>::GetSeparaciones(void) const
+std::deque<GEOM_FT> &PolyPos<pos>::GetSeparaciones(void) const
   {
     const size_t sz= this->size();
     static std::deque<GEOM_FT> retval;
@@ -259,7 +259,7 @@ std::deque<GEOM_FT> &PoliPos<pos>::GetSeparaciones(void) const
   }
 //! @brief Return the average distance between points.
 template <class pos>
-GEOM_FT PoliPos<pos>::GetSeparacionMedia(void) const
+GEOM_FT PolyPos<pos>::GetSeparacionMedia(void) const
   {
     GEOM_FT retval(0);
     const size_t sz= this->size();
@@ -274,18 +274,18 @@ GEOM_FT PoliPos<pos>::GetSeparacionMedia(void) const
   }
 
 template <class pos>
-PoliPos<pos> PoliPos<pos>::GetMayores(unsigned short int i,const GEOM_FT &d) const
+PolyPos<pos> PolyPos<pos>::GetMayores(unsigned short int i,const GEOM_FT &d) const
   {
-    PoliPos<pos> retval;
+    PolyPos<pos> retval;
     for(register const_iterator j=this->begin();j != this->end();j++)
       if ((*j)(i) > d) retval.push_back(*j);
     return retval;
   }
 
 template <class pos>
-PoliPos<pos> PoliPos<pos>::GetMenores(unsigned short int i,const GEOM_FT &d) const
+PolyPos<pos> PolyPos<pos>::GetMenores(unsigned short int i,const GEOM_FT &d) const
   {
-    PoliPos<pos> retval;
+    PolyPos<pos> retval;
     for(register const_iterator j=this->begin();j != this->end();j++)
       if ((*j)(i) < d) retval.push_back(*j);
     return retval;
@@ -293,7 +293,7 @@ PoliPos<pos> PoliPos<pos>::GetMenores(unsigned short int i,const GEOM_FT &d) con
 
 //! @brief Returns the farthest point from those of the list.
 template <class pos>
-typename PoliPos<pos>::iterator PoliPos<pos>::getFarthestPoint(const pos &p)
+typename PolyPos<pos>::iterator PolyPos<pos>::getFarthestPoint(const pos &p)
   {
     iterator i= this->begin();
     iterator retval= i; i++;
@@ -318,7 +318,7 @@ typename PoliPos<pos>::iterator PoliPos<pos>::getFarthestPoint(const pos &p)
    * @return the index of the point farthest fromthe segment (t1,t2).
    */
 template <class pos>
-typename PoliPos<pos>::iterator PoliPos<pos>::getFarthestPointFromSegment(iterator , iterator , GEOM_FT &)
+typename PolyPos<pos>::iterator PolyPos<pos>::getFarthestPointFromSegment(iterator , iterator , GEOM_FT &)
   {
     std::cerr << "PolyPos<>::" << __FUNCTION__
 	      << ";must be redefined in derived classes." << std::endl;
@@ -333,7 +333,7 @@ typename PoliPos<pos>::iterator PoliPos<pos>::getFarthestPointFromSegment(iterat
    * @param iterator of the last point in a segment.
    */
 template <class pos>
-void PoliPos<pos>::simplify(GEOM_FT epsilon, iterator it1, iterator it2)
+void PolyPos<pos>::simplify(GEOM_FT epsilon, iterator it1, iterator it2)
   {
     if (distance(it1, it2) <= 1) return;
 
@@ -361,7 +361,7 @@ void PoliPos<pos>::simplify(GEOM_FT epsilon, iterator it1, iterator it2)
  * @param epsilon The higher, the more points gotten rid of.
  */
 template <class pos>
-void PoliPos<pos>::simplify(GEOM_FT epsilon)
+void PolyPos<pos>::simplify(GEOM_FT epsilon)
   {
     const bool closed= this->isClosed();
     if(closed)
@@ -382,25 +382,25 @@ void PoliPos<pos>::simplify(GEOM_FT epsilon)
   }
 
 template <class pos>
-void PoliPos<pos>::Cat(const PoliPos<pos> &l)
+void PolyPos<pos>::Cat(const PolyPos<pos> &l)
   {
-    for(register typename PoliPos<pos>::const_iterator k= l.begin();k!=l.end();k++)
+    for(register typename PolyPos<pos>::const_iterator k= l.begin();k!=l.end();k++)
       this->push_back(*k);
   }
 
 //!@brief Insert the objects between [first,last).
 template <class pos> template<class inputIterator>
-void PoliPos<pos>::Cat(inputIterator begin, inputIterator end)
+void PolyPos<pos>::Cat(inputIterator begin, inputIterator end)
   {
     for(inputIterator i= begin;i!=end;i++)
       this->push_back(*i);
   }
 
 template <class pos>
-std::ostream &operator<<(std::ostream &os,const PoliPos<pos> &l)
+std::ostream &operator<<(std::ostream &os,const PolyPos<pos> &l)
   {
     if(l.size()<1) return os;
-    typedef typename PoliPos<pos>::const_iterator c_iterator;
+    typedef typename PolyPos<pos>::const_iterator c_iterator;
     register c_iterator i= l.begin();
     os << *i; i++;
     for(;i!= l.end();i++)

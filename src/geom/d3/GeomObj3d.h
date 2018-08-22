@@ -26,7 +26,7 @@
 
 #include "../GeomObj.h"
 
-#include "../lists/PoliPos.h"
+#include "../lists/PolyPos.h"
 
 class SoGroup;
 class Pos3d;
@@ -46,7 +46,7 @@ class GeomObj3d: public GeomObj
   protected:
     //std::deque<HalfSpace3d> interpretaHalfSpaces3d(const std::string &str);
   public:
-    typedef PoliPos<Pos3d> list_Pos3d;
+    typedef PolyPos<Pos3d> list_Pos3d;
 
     GeomObj3d(void) {}
     virtual ~GeomObj3d(void) {}
