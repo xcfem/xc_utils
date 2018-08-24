@@ -30,37 +30,37 @@
 //! @brief Reference to a layer row from the array which points have
 //! constant J and K indices.
 template <class ARRAY_3D>
-class IRowConstRef: public ConstRefCajaArray3d<ARRAY_3D>
+class IRowConstRef: public Array3dBoxConstRef<ARRAY_3D>
   {
   public:
-    typedef typename ConstRefCajaArray3d<ARRAY_3D>::const_reference const_reference;
+    typedef typename Array3dBoxConstRef<ARRAY_3D>::const_reference const_reference;
 
     explicit IRowConstRef(const ARRAY_3D &m,const size_t &f= 1,const size_t &c= 1);
     IRowConstRef(const ARRAY_3D &m,const size_t &,const size_t &,const size_t &,const size_t &);
     IRowConstRef(const ARRAY_3D &t,const RangoIndice &layer_range,const size_t &f,const size_t &c);
     inline virtual ~IRowConstRef(void) {}
     virtual const_reference operator()(size_t iLayer=1) const
-      { return ConstRefCajaArray3d<ARRAY_3D>::operator()(iLayer,1,1); }
+      { return Array3dBoxConstRef<ARRAY_3D>::operator()(iLayer,1,1); }
     inline virtual const_reference operator()(size_t iLayer,size_t iRow,size_t col) const
-      { return ConstRefCajaArray3d<ARRAY_3D>::operator()(iLayer,iRow,col); }
+      { return Array3dBoxConstRef<ARRAY_3D>::operator()(iLayer,iRow,col); }
   };
 
 //! @brief Default constructor.
 template<class ARRAY_3D>
 IRowConstRef<ARRAY_3D>::IRowConstRef(const ARRAY_3D &t,const size_t &f,const size_t &c)
-  : ConstRefCajaArray3d<ARRAY_3D>(t,RangoIndice(1,t.getNumberOfLayers()),f,c)
+  : Array3dBoxConstRef<ARRAY_3D>(t,RangoIndice(1,t.getNumberOfLayers()),f,c)
   {}
 
 //! @brief Constructor.
 template<class ARRAY_3D>
 IRowConstRef<ARRAY_3D>::IRowConstRef(const ARRAY_3D &t,const size_t &iLayer1,const size_t &iLayer2,const size_t &f,const size_t &c)
-  : ConstRefCajaArray3d<ARRAY_3D>(t,RangoIndice(iLayer1,iLayer2),f,c)
+  : Array3dBoxConstRef<ARRAY_3D>(t,RangoIndice(iLayer1,iLayer2),f,c)
   {}
 
 //! @brief Constructor.
 template<class ARRAY_3D>
 IRowConstRef<ARRAY_3D>::IRowConstRef(const ARRAY_3D &t,const RangoIndice &layer_range,const size_t &f,const size_t &c)
-  : ConstRefCajaArray3d<ARRAY_3D>(t,layer_range,f,c)
+  : Array3dBoxConstRef<ARRAY_3D>(t,layer_range,f,c)
   {}
 
 #endif

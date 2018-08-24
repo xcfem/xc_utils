@@ -40,7 +40,7 @@ class VectorPos: public PosArray<POS>
     VectorPos(const size_t &f=1): m_pos(f,1) {}
     VectorPos(const POS &p1,const POS &p2,const size_t &num,const GEOM_FT &ratio);
     VectorPos(const POS &p1,const POS &p2,const size_t &ndiv);
-    inline VectorPos<POS> GetCaja(size_t f1, size_t f2) const
+    inline VectorPos<POS> getBox(size_t f1, size_t f2) const
       { return VectorPos(*this,f1,1,f2,1); }
     inline const POS &getRow(size_t iRow) const
       { return m_pos::operator()(iRow,1); }

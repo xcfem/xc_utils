@@ -29,7 +29,7 @@
 
 //! @ingroup GEOM
 //
-//! @brief Rangos de variación de tres índices, se emplea en ConstRefCaja.
+//! @brief Rangos de variación de tres índices, se emplea en BoxConstRef.
 class Array3dRange
   {
     RangoIndice layer_range; //!< layers range.

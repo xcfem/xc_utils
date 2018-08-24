@@ -38,11 +38,11 @@ FT_matrix rotation_3d_matrix(const Line3d &axis,const double &theta)
     const FT_matrix T_u_theta_2= (double_to_FT(1.0)-cos_theta)*prod_tensor(u,u);
     const FT_matrix T_u_theta_3= sin_theta*skew_symm_matrix_pre(u);
     const FT_matrix T_u_theta= traspuesta(T_u_theta_1+T_u_theta_2+T_u_theta_3);
-    retval.PutCaja(1,1,T_u_theta);
+    retval.putBox(1,1,T_u_theta);
     const Pos3d Q= axis.Point();
     const Vector3d tmp= T_u_theta*Q.VectorPos();
     const Vector3d VQ= Q.VectorPos()-tmp;
-    retval.PutCaja(1,4,VQ.getMatrix());
+    retval.putBox(1,4,VQ.getMatrix());
     retval(4,4)=1;
     return retval;
   }

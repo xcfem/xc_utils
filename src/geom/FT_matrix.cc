@@ -44,18 +44,18 @@ FT_matrix::FT_matrix(size_type rows,size_type cols,GEOM_FT val)
 FT_matrix::FT_matrix(const FT_matrix &orig,size_t f1, size_t c1, size_t f2, size_t c2)
   : ZMatrix<GEOM_FT>(f2-f1+1,c2-c1+1)
   {
-    orig.check_get_caja(f1,c1,f2,c2);
+    orig.check_get_box(f1,c1,f2,c2);
     for(register size_t i=1;i<=n_rows;i++)
       for(register size_t j=1;j<=n_columns;j++)
         (*this)(i,j)= orig(i+f1-1,j+c1-1);
   }
 
-FT_matrix FT_matrix::GetCaja(size_t f1, size_t c1, size_t f2, size_t c2) const
+FT_matrix FT_matrix::getBox(size_t f1, size_t c1, size_t f2, size_t c2) const
   { return FT_matrix(*this,f1,c1,f2,c2); }
 FT_matrix FT_matrix::getRow(size_t iRow) const
-  { return GetCaja(iRow,1,iRow,n_columns); }
+  { return getBox(iRow,1,iRow,n_columns); }
 FT_matrix FT_matrix::getColumn(size_t col) const
-  { return GetCaja(1,col,n_rows,col); }
+  { return getBox(1,col,n_rows,col); }
 
 FT_matrix FT_matrix::GetTrn(void) const
   { return traspuesta(*this); }

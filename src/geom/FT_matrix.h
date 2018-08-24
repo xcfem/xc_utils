@@ -44,7 +44,7 @@ class FT_matrix: public ZMatrix<GEOM_FT>
     FT_matrix(void);
     FT_matrix(size_type rows,size_type cols);
     FT_matrix(size_type rows,size_type cols,GEOM_FT val);
-    FT_matrix GetCaja(size_t f1, size_t c1, size_t f2, size_t c2) const;
+    FT_matrix getBox(size_t f1, size_t c1, size_t f2, size_t c2) const;
     FT_matrix getRow(size_t iRow) const;
     FT_matrix getColumn(size_t col) const;
     FT_matrix GetTrn(void) const;

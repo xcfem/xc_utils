@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//BaseRefCajaArray3d.h 
+//Array3dBoxRefBase.h 
 
-#ifndef BASEREFCAJAARRAY3D_H
-#define BASEREFCAJAARRAY3D_H
+#ifndef ARRAY3DBOXREFBASE_H
+#define ARRAY3DBOXREFBASE_H
 
 #include <ostream>
 
@@ -32,7 +32,7 @@ class Array3dRange;
 //! @ingroup GEOM
 //
 //! @brief Indices that define a block of an array.
-class BaseRefCajaArray3d
+class Array3dBoxRefBase
   {
   protected:
     size_t n_layers; //!< number of layers.
@@ -42,14 +42,14 @@ class BaseRefCajaArray3d
     size_t offset_f; //!< Offset row.
     size_t offset_c; //!< Offset column.
   public:
-    BaseRefCajaArray3d(const size_t &,const size_t &,const size_t &,const size_t &,const size_t &,const size_t &);
-    BaseRefCajaArray3d(const Array3dRange &rango);
-    BaseRefCajaArray3d(const size_t &iLayer,const RangoIndice &row_range,const RangoIndice &column_range);
-    BaseRefCajaArray3d(const RangoIndice &layer_range,const size_t &iRow,const RangoIndice &column_range);
-    BaseRefCajaArray3d(const RangoIndice &layer_range,const RangoIndice &row_range,const size_t &col);
-    BaseRefCajaArray3d(const size_t &iLayer,const size_t &iRow,const RangoIndice &column_range);
-    BaseRefCajaArray3d(const size_t iLayer,const RangoIndice &row_range,const size_t &col);
-    BaseRefCajaArray3d(const RangoIndice &layer_range,const size_t &iRow,const size_t &col);
+    Array3dBoxRefBase(const size_t &,const size_t &,const size_t &,const size_t &,const size_t &,const size_t &);
+    Array3dBoxRefBase(const Array3dRange &rango);
+    Array3dBoxRefBase(const size_t &iLayer,const RangoIndice &row_range,const RangoIndice &column_range);
+    Array3dBoxRefBase(const RangoIndice &layer_range,const size_t &iRow,const RangoIndice &column_range);
+    Array3dBoxRefBase(const RangoIndice &layer_range,const RangoIndice &row_range,const size_t &col);
+    Array3dBoxRefBase(const size_t &iLayer,const size_t &iRow,const RangoIndice &column_range);
+    Array3dBoxRefBase(const size_t iLayer,const RangoIndice &row_range,const size_t &col);
+    Array3dBoxRefBase(const RangoIndice &layer_range,const size_t &iRow,const size_t &col);
     inline const size_t &getNumberOfLayers(void) const
       { return n_layers; }
     inline const size_t &getNumberOfRows(void) const

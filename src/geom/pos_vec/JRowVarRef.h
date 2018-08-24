@@ -30,11 +30,11 @@
 //! @brief Reference to a row of the array which points
 //! have constant J and K indices.
 template <class ARRAY_3D>
-class JRowVarRef: public VarRefCajaArray3d<ARRAY_3D>
+class JRowVarRef: public Array3dBoxVarRef<ARRAY_3D>
   {
   public:
-    typedef typename VarRefCajaArray3d<ARRAY_3D>::const_reference const_reference;
-    typedef typename VarRefCajaArray3d<ARRAY_3D>::reference reference;
+    typedef typename Array3dBoxVarRef<ARRAY_3D>::const_reference const_reference;
+    typedef typename Array3dBoxVarRef<ARRAY_3D>::reference reference;
 
     explicit JRowVarRef(ARRAY_3D &m,const size_t &iLayer= 1,const size_t &c= 1);
     JRowVarRef(ARRAY_3D &m,const size_t &,const size_t &,const size_t &,const size_t &);
@@ -45,26 +45,26 @@ class JRowVarRef: public VarRefCajaArray3d<ARRAY_3D>
     size_t IndiceCol(void) const
       { return this->offset_c+1; }
     inline virtual const_reference operator()(size_t f=1) const
-      { return VarRefCajaArray3d<ARRAY_3D>::operator()(1,f,1); }
+      { return Array3dBoxVarRef<ARRAY_3D>::operator()(1,f,1); }
     inline virtual reference operator()(size_t f=1)
-      { return VarRefCajaArray3d<ARRAY_3D>::operator()(1,f,1); }
+      { return Array3dBoxVarRef<ARRAY_3D>::operator()(1,f,1); }
     inline virtual const_reference operator()(size_t iLayer,size_t iRow,size_t col) const
-      { return VarRefCajaArray3d<ARRAY_3D>::operator()(iLayer,iRow,col); }
+      { return Array3dBoxVarRef<ARRAY_3D>::operator()(iLayer,iRow,col); }
     inline virtual reference operator()(size_t iLayer,size_t iRow,size_t col)
-      { return VarRefCajaArray3d<ARRAY_3D>::operator()(iLayer,iRow,col); }
+      { return Array3dBoxVarRef<ARRAY_3D>::operator()(iLayer,iRow,col); }
   };
 
 //! @brief Default constructor.
 template<class ARRAY_3D>
 JRowVarRef<ARRAY_3D>::JRowVarRef(ARRAY_3D &t,const size_t &iLayer,const size_t &c)
-  : VarRefCajaArray3d<ARRAY_3D>(t,iLayer,RangoIndice(1,t.getNumberOfRows()),c) {}
+  : Array3dBoxVarRef<ARRAY_3D>(t,iLayer,RangoIndice(1,t.getNumberOfRows()),c) {}
 
 template<class ARRAY_3D>
 JRowVarRef<ARRAY_3D>::JRowVarRef(ARRAY_3D &t,const size_t &iLayer,const size_t &f1,const size_t &f2,const size_t &c)
-  : VarRefCajaArray3d<ARRAY_3D>(t,iLayer,RangoIndice(f1,f2),c) {}
+  : Array3dBoxVarRef<ARRAY_3D>(t,iLayer,RangoIndice(f1,f2),c) {}
 
 template<class ARRAY_3D>
 JRowVarRef<ARRAY_3D>::JRowVarRef(ARRAY_3D &t,const size_t &iLayer,const RangoIndice &row_range,const size_t &c)
-  : VarRefCajaArray3d<ARRAY_3D>(t,iLayer,row_range,c) {}
+  : Array3dBoxVarRef<ARRAY_3D>(t,iLayer,row_range,c) {}
 
 #endif

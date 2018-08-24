@@ -30,11 +30,11 @@
 //! @brief Reference to a row of the array which points have constant
 //! K indexes.
 template <class ARRAY_3D>
-class KRowVarRef: public VarRefCajaArray3d<ARRAY_3D>
+class KRowVarRef: public Array3dBoxVarRef<ARRAY_3D>
   {
   public:
-    typedef typename VarRefCajaArray3d<ARRAY_3D>::const_reference const_reference;
-    typedef typename VarRefCajaArray3d<ARRAY_3D>::reference reference;
+    typedef typename Array3dBoxVarRef<ARRAY_3D>::const_reference const_reference;
+    typedef typename Array3dBoxVarRef<ARRAY_3D>::reference reference;
 
     explicit KRowVarRef(ARRAY_3D &m,const size_t &iLayer= 1,const size_t &f= 1);
     KRowVarRef(ARRAY_3D &m,const size_t &,const size_t &,const size_t &,const size_t &);
@@ -45,26 +45,26 @@ class KRowVarRef: public VarRefCajaArray3d<ARRAY_3D>
     size_t getRowIndex(void) const
       { return this->offset_f+1; }
     inline virtual const_reference operator()(size_t c=1) const
-      { return VarRefCajaArray3d<ARRAY_3D>::operator()(1,1,c); }
+      { return Array3dBoxVarRef<ARRAY_3D>::operator()(1,1,c); }
     inline virtual reference operator()(size_t c=1)
-      { return VarRefCajaArray3d<ARRAY_3D>::operator()(1,1,c); }
+      { return Array3dBoxVarRef<ARRAY_3D>::operator()(1,1,c); }
     inline virtual const_reference operator()(size_t iLayer,size_t iRow,size_t col) const
-      { return VarRefCajaArray3d<ARRAY_3D>::operator()(iLayer,iRow,col); }
+      { return Array3dBoxVarRef<ARRAY_3D>::operator()(iLayer,iRow,col); }
     inline virtual reference operator()(size_t iLayer,size_t iRow,size_t col)
-      { return VarRefCajaArray3d<ARRAY_3D>::operator()(iLayer,iRow,col); }
+      { return Array3dBoxVarRef<ARRAY_3D>::operator()(iLayer,iRow,col); }
   };
 
 //! @brief Default constructor.
 template<class ARRAY_3D>
 KRowVarRef<ARRAY_3D>::KRowVarRef(ARRAY_3D &t,const size_t &iLayer,const size_t &f)
-  : VarRefCajaArray3d<ARRAY_3D>(t,iLayer,f,RangoIndice(1,t.getNumberOfColumns())) {}
+  : Array3dBoxVarRef<ARRAY_3D>(t,iLayer,f,RangoIndice(1,t.getNumberOfColumns())) {}
 
 template<class ARRAY_3D>
 KRowVarRef<ARRAY_3D>::KRowVarRef(ARRAY_3D &t,const size_t &iLayer,const size_t &f,const size_t &c1,const size_t &c2)
-  : VarRefCajaArray3d<ARRAY_3D>(t,iLayer,f,RangoIndice(c1,c2)) {}
+  : Array3dBoxVarRef<ARRAY_3D>(t,iLayer,f,RangoIndice(c1,c2)) {}
 
 template<class ARRAY_3D>
 KRowVarRef<ARRAY_3D>::KRowVarRef(ARRAY_3D &t,const size_t &iLayer,const size_t &f,const RangoIndice &rango_col)
-  : VarRefCajaArray3d<ARRAY_3D>(t,iLayer,f,rango_col) {}
+  : Array3dBoxVarRef<ARRAY_3D>(t,iLayer,f,rango_col) {}
 
 #endif

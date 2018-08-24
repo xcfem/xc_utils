@@ -36,9 +36,9 @@ FT_matrix Reflection3d::reflection3d_matrix(const  Pos3d &Q,const Vector3d &n)
     FT_matrix retval(4,4);
     const FT_matrix I= identidad(FT_matrix(3,3));
     const FT_matrix T_n= traspuesta(I-2*prod_tensor(nn,nn));
-    retval.PutCaja(1,1,T_n);
+    retval.putBox(1,1,T_n);
     const Vector3d VQ= double_to_FT(2)*dot(Q.VectorPos(),nn)*nn;
-    retval.PutCaja(1,4,VQ.getMatrix());
+    retval.putBox(1,4,VQ.getMatrix());
     retval(4,4)=1;
     return retval;
   }

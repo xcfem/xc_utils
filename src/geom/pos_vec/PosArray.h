@@ -50,12 +50,12 @@ class PosArray: public TMatrix<POS,std::vector<POS> >
     PosArray(const POS &p1,const POS &p2,const std::vector<GEOM_FT> &longs);
     PosArray(const POS &p0,const POS &p1,const POS &p2,const size_t &ndiv1,const size_t &ndiv2);
     PosArray(const PosArray &l1_points,const PosArray &l2_points,const PosArray &l3_points,const PosArray &l4_points);
-    inline PosArray<POS> GetCaja(size_t f1, size_t c1, size_t f2, size_t c2) const
+    inline PosArray<POS> getBox(size_t f1, size_t c1, size_t f2, size_t c2) const
       { return PosArray(*this,f1,c1,f2,c2); }
     inline PosArray<POS> getRow(size_t iRow) const
-      { return GetCaja(iRow,1,iRow,this->n_columns); }
+      { return getBox(iRow,1,iRow,this->n_columns); }
     inline PosArray<POS> getColumn(size_t col) const
-      { return GetCaja(1,col,this->n_rows,col); }
+      { return getBox(1,col,this->n_rows,col); }
   };
 
 //! Build the point matrix between p1 and p2 in such way that, the firs point

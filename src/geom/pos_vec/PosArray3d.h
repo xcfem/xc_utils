@@ -26,14 +26,14 @@
 #define POSARRAY3D_H
 
 #include "PosArray.h"
-#include "ConstRefCajaArray3d.h"
+#include "Array3dBoxConstRef.h"
 #include "ConstantILayerConstRef.h"
 #include "ConstantJLayerConstRef.h"
 #include "ConstantKLayerConstRef.h"
 #include "IRowConstRef.h"
 #include "JRowConstRef.h"
 #include "KRowConstRef.h"
-#include "VarRefCajaArray3d.h"
+#include "Array3dBoxVarRef.h"
 #include "ConstantILayerVarRef.h"
 #include "ConstantJLayerVarRef.h"
 #include "ConstantKLayerVarRef.h"
@@ -54,7 +54,7 @@ class PosArray3d: public std::vector<PosArray<POS> >
     typedef typename m_pos::reference reference;
     typedef typename m_pos::const_reference const_reference;
 
-    typedef ConstRefCajaArray3d<PosArray3d<POS> > const_ref_caja;
+    typedef Array3dBoxConstRef<PosArray3d<POS> > box_const_ref;
     typedef ConstantILayerConstRef<PosArray3d<POS> > constant_i_layer_const_ref;
     typedef ConstantJLayerConstRef<PosArray3d<POS> > constant_j_layer_const_ref;
     typedef ConstantKLayerConstRef<PosArray3d<POS> > constant_k_layer_const_ref;
@@ -62,7 +62,7 @@ class PosArray3d: public std::vector<PosArray<POS> >
     typedef JRowConstRef<PosArray3d<POS> > j_row_const_ref;
     typedef KRowConstRef<PosArray3d<POS> > k_row_const_ref;
 
-    typedef VarRefCajaArray3d<PosArray3d<POS> > var_ref_caja;
+    typedef Array3dBoxVarRef<PosArray3d<POS> > box_var_ref;
     typedef ConstantILayerVarRef<PosArray3d<POS> > constant_i_layer_variable_ref;
     typedef ConstantJLayerVarRef<PosArray3d<POS> > constant_j_layer_variable_ref;
     typedef ConstantKLayerVarRef<PosArray3d<POS> > constant_k_layer_variable_ref;
@@ -85,10 +85,10 @@ class PosArray3d: public std::vector<PosArray<POS> >
     size_t getNumberOfColumns(void) const;
     size_t NumPos(void) const;
 
-    const_ref_caja GetConstRefCaja(size_t iLayer=1,size_t f=1, size_t c=1) const
-      { return const_ref_caja(*this,iLayer,f,c); }
-    const_ref_caja GetConstRefCaja(const Array3dRange &rango) const
-      { return const_ref_caja(*this,rango); }
+    box_const_ref getBoxConstRef(size_t iLayer=1,size_t f=1, size_t c=1) const
+      { return box_const_ref(*this,iLayer,f,c); }
+    box_const_ref getBoxConstRef(const Array3dRange &rango) const
+      { return box_const_ref(*this,rango); }
 
     constant_i_layer_const_ref ConstantILayerGetConstRef(size_t iLayer=1,size_t iRow=1, size_t iColumn=1) const
       { return constant_i_layer_const_ref(*this,iLayer,iRow,iColumn); }
@@ -116,10 +116,10 @@ class PosArray3d: public std::vector<PosArray<POS> >
     k_row_const_ref KRowGetConstRef(size_t iLayer,size_t f,const RangoIndice &column_range) const
       { return k_row_const_ref(*this,iLayer,f,column_range); }
 
-    var_ref_caja GetVarRefCaja(size_t iLayer=1,size_t f=1, size_t c=1)
-      { return var_ref_caja(*this,iLayer,f,c); }
-    var_ref_caja GetVarRefCaja(const Array3dRange &rango)
-      { return var_ref_caja(*this,rango); }
+    box_var_ref getBoxVarRef(size_t iLayer=1,size_t f=1, size_t c=1)
+      { return box_var_ref(*this,iLayer,f,c); }
+    box_var_ref getBoxVarRef(const Array3dRange &rango)
+      { return box_var_ref(*this,rango); }
 
     constant_i_layer_variable_ref ConstantILayerGetVarRef(size_t iLayer=1,size_t f=1, size_t c=1)
       { return constant_i_layer_variable_ref(*this,iLayer,f,c); }

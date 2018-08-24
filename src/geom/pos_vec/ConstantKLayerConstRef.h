@@ -32,30 +32,30 @@
 //! @brief Reference to a layer of the array which points
 //! have constant K index.
 template <class ARRAY_3D>
-class ConstantKLayerConstRef: public ConstRefCajaArray3d<ARRAY_3D>
+class ConstantKLayerConstRef: public Array3dBoxConstRef<ARRAY_3D>
   {
   public:
-    typedef typename ConstRefCajaArray3d<ARRAY_3D>::const_reference const_reference;
+    typedef typename Array3dBoxConstRef<ARRAY_3D>::const_reference const_reference;
 
     explicit ConstantKLayerConstRef(const ARRAY_3D &m,const size_t &c=1,const size_t &iLayer= 1,const size_t &f= 1);
     ConstantKLayerConstRef(const ARRAY_3D &m,const size_t &,const size_t &,const size_t &,const size_t &,const size_t &);
     ConstantKLayerConstRef(const ARRAY_3D &t,const RangoIndice &column_range,const RangoIndice &row_range,const size_t &c);
     inline virtual ~ConstantKLayerConstRef(void) {}
     virtual const_reference operator()(size_t iLayer=1,size_t iRow=1) const
-      { return ConstRefCajaArray3d<ARRAY_3D>::operator()(iLayer,iRow,1); }
+      { return Array3dBoxConstRef<ARRAY_3D>::operator()(iLayer,iRow,1); }
   };
 
 template<class ARRAY_3D>
 ConstantKLayerConstRef<ARRAY_3D>::ConstantKLayerConstRef(const ARRAY_3D &t,const size_t &c,const size_t &iLayer,const size_t &f)
-  : ConstRefCajaArray3d<ARRAY_3D>(t,Array3dRange(RangoIndice(iLayer,t.getNumberOfLayers()),RangoIndice(f,t.getNumberOfRows()),c)) {}
+  : Array3dBoxConstRef<ARRAY_3D>(t,Array3dRange(RangoIndice(iLayer,t.getNumberOfLayers()),RangoIndice(f,t.getNumberOfRows()),c)) {}
 
 template<class ARRAY_3D>
 ConstantKLayerConstRef<ARRAY_3D>::ConstantKLayerConstRef(const ARRAY_3D &t,const size_t &c,const size_t &iLayer1,const size_t &f1,const size_t &iLayer2,const size_t &f2)
-  : ConstRefCajaArray3d<ARRAY_3D>(t,Array3dRange(RangoIndice(iLayer1,iLayer2),RangoIndice(f1,f2),c)) {}
+  : Array3dBoxConstRef<ARRAY_3D>(t,Array3dRange(RangoIndice(iLayer1,iLayer2),RangoIndice(f1,f2),c)) {}
 
 template<class ARRAY_3D>
 ConstantKLayerConstRef<ARRAY_3D>::ConstantKLayerConstRef(const ARRAY_3D &t,const RangoIndice &column_range,const RangoIndice &row_range,const size_t &c)
-  : ConstRefCajaArray3d<ARRAY_3D>(t,column_range,row_range,c)
+  : Array3dBoxConstRef<ARRAY_3D>(t,column_range,row_range,c)
   {}
 
 #endif
