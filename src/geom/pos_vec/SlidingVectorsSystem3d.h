@@ -19,11 +19,11 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SVD3d.h
+//SlidingVectorsSystem3d.h
 //Sliding vectors system.
 
-#ifndef SVD3D_H
-#define SVD3D_H
+#ifndef SLIDINGVECTORSSYSTEM3D_H
+#define SLIDINGVECTORSSYSTEM3D_H
 
 #include "../ProtoGeom.h"
 #include "VDesliz3d.h"
@@ -37,12 +37,12 @@ class Ref3d3d;
 //! @ingroup GEOM
 //
 //! @brief Sliding vectors system en un espacio tridimensional.
-class SVD3d: public VDesliz3d
+class SlidingVectorsSystem3d: public VDesliz3d
   {
     Vector3d mom; //!< Moment with respect to org;
   public:
-    SVD3d(const Pos3d &O= Pos3d(),const Vector3d &R= Vector3d(),const Vector3d &Mo= Vector3d());
-    explicit SVD3d(const VDesliz3d &v);
+    SlidingVectorsSystem3d(const Pos3d &O= Pos3d(),const Vector3d &R= Vector3d(),const Vector3d &Mo= Vector3d());
+    explicit SlidingVectorsSystem3d(const VDesliz3d &v);
     const Vector3d &getResultant(void) const
       { return getVector(); }
     Vector3d getResultant(const Ref3d3d &ref) const;
@@ -58,30 +58,30 @@ class SVD3d: public VDesliz3d
     Line3d getZeroMomentLine(const double &tol= sqrt_mchne_eps_dbl) const;
     Pos3d PointOfApplication(const Plane &p) const;
 
-    SVD3d ReduceA(const Pos3d &Q) const;
+    SlidingVectorsSystem3d ReduceA(const Pos3d &Q) const;
 
-    SVD3d &operator+=(const VDesliz3d &v);
-    SVD3d &operator-=(const VDesliz3d &v);
-    SVD3d &operator+=(const SVD3d &s);
-    SVD3d &operator-=(const SVD3d &s);
-    SVD3d &operator*=(const GEOM_FT &d);
-    friend SVD3d operator+(const SVD3d &s1,const SVD3d &s2);
-    friend SVD3d operator-(const SVD3d &s1,const SVD3d &s2);
-    friend SVD3d operator*(const GEOM_FT &d, const SVD3d &s);
-    friend SVD3d operator*(const SVD3d &s,const GEOM_FT &d);
+    SlidingVectorsSystem3d &operator+=(const VDesliz3d &v);
+    SlidingVectorsSystem3d &operator-=(const VDesliz3d &v);
+    SlidingVectorsSystem3d &operator+=(const SlidingVectorsSystem3d &s);
+    SlidingVectorsSystem3d &operator-=(const SlidingVectorsSystem3d &s);
+    SlidingVectorsSystem3d &operator*=(const GEOM_FT &d);
+    friend SlidingVectorsSystem3d operator+(const SlidingVectorsSystem3d &s1,const SlidingVectorsSystem3d &s2);
+    friend SlidingVectorsSystem3d operator-(const SlidingVectorsSystem3d &s1,const SlidingVectorsSystem3d &s2);
+    friend SlidingVectorsSystem3d operator*(const GEOM_FT &d, const SlidingVectorsSystem3d &s);
+    friend SlidingVectorsSystem3d operator*(const SlidingVectorsSystem3d &s,const GEOM_FT &d);
     void Print(std::ostream &os) const;
     void PrintLtx(std::ostream &os,const std::string &ud_long= " m",const GEOM_FT &f_long=1.0, const std::string &ud_f= " N",const GEOM_FT &f_f=1.0) const;
-    friend std::ostream &operator<<(std::ostream &os, const SVD3d &svd3d);
+    friend std::ostream &operator<<(std::ostream &os, const SlidingVectorsSystem3d &svd3d);
   };
 
-SVD3d operator+(const SVD3d &s1,const SVD3d &s2);
-SVD3d operator-(const SVD3d &s1,const SVD3d &s2);
-SVD3d operator*(const GEOM_FT &d, const SVD3d &s);
-SVD3d operator*(const SVD3d &s,const GEOM_FT &d);
-SVD3d operator+(const VDesliz3d &v1,const VDesliz3d &v2);
-SVD3d operator+(const SVD3d &s,const VDesliz3d &v);
-SVD3d operator+(const VDesliz3d &v,const SVD3d &s);
-SVD3d operator-(const SVD3d &svd3d);
-std::ostream &operator<<(std::ostream &os, const SVD3d &svd3d);
+SlidingVectorsSystem3d operator+(const SlidingVectorsSystem3d &s1,const SlidingVectorsSystem3d &s2);
+SlidingVectorsSystem3d operator-(const SlidingVectorsSystem3d &s1,const SlidingVectorsSystem3d &s2);
+SlidingVectorsSystem3d operator*(const GEOM_FT &d, const SlidingVectorsSystem3d &s);
+SlidingVectorsSystem3d operator*(const SlidingVectorsSystem3d &s,const GEOM_FT &d);
+SlidingVectorsSystem3d operator+(const VDesliz3d &v1,const VDesliz3d &v2);
+SlidingVectorsSystem3d operator+(const SlidingVectorsSystem3d &s,const VDesliz3d &v);
+SlidingVectorsSystem3d operator+(const VDesliz3d &v,const SlidingVectorsSystem3d &s);
+SlidingVectorsSystem3d operator-(const SlidingVectorsSystem3d &svd3d);
+std::ostream &operator<<(std::ostream &os, const SlidingVectorsSystem3d &svd3d);
 
 #endif

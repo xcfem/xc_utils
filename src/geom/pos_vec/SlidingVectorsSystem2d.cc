@@ -19,78 +19,78 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SVD2D.cc
+//SlidingVectorsSystem2d.cc
 
-#include "SVD2d.h"
+#include "SlidingVectorsSystem2d.h"
 #include "VDesliz2d.h"
 #include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
 
 
 
-SVD2d::SVD2d(const VDesliz2d &v)
+SlidingVectorsSystem2d::SlidingVectorsSystem2d(const VDesliz2d &v)
   : org(v.getOrg()), resul(v),mom(0.0) {}
 
 //! @brief Return the moment about P.
-GEOM_FT SVD2d::getMoment(const Pos2d &P) const
+GEOM_FT SlidingVectorsSystem2d::getMoment(const Pos2d &P) const
   {
     VDesliz2d R(org,resul);
     return mom+R.getMoment(P);
   }
 
-void SVD2d::Print(std::ostream &os) const
+void SlidingVectorsSystem2d::Print(std::ostream &os) const
   {
     os << "Resultant R=" << resul
        << " , moment with respect to " << org << " Mo= " << mom; 
   }
 
-void SVD2d::PrintLtx(std::ostream &os,const std::string &ud_long,const GEOM_FT &f_long, const std::string &ud_f,const GEOM_FT &f_f) const
+void SlidingVectorsSystem2d::PrintLtx(std::ostream &os,const std::string &ud_long,const GEOM_FT &f_long, const std::string &ud_f,const GEOM_FT &f_f) const
   {
     //Se asume que imprimimos en una tabla.
     os << "Point of application: " << org.VectorPos()*f_long << ud_long << "\\\\" << std::endl
        << "Resultant: " << resul*f_f << ud_f << "\\\\" << std::endl 
        << "Moment: " << mom*f_f << ud_f << ud_long << "\\\\" << std::endl;
   }
-Vector2d SVD2d::getResultant(const Ref2d2d &ref) const
+Vector2d SlidingVectorsSystem2d::getResultant(const Ref2d2d &ref) const
   { return ref.GetCooLocales(resul); } 
 
-SVD2d SVD2d::ReduceA(const Pos2d &Q)
-  { return SVD2d(Q,resul,getMoment(Q)); }
+SlidingVectorsSystem2d SlidingVectorsSystem2d::ReduceA(const Pos2d &Q)
+  { return SlidingVectorsSystem2d(Q,resul,getMoment(Q)); }
 
-SVD2d &SVD2d::operator+=(const VDesliz2d &v)
+SlidingVectorsSystem2d &SlidingVectorsSystem2d::operator+=(const VDesliz2d &v)
   {
     resul= resul+v;
     mom= mom + v.getMoment(org);
     return *this;
   }
-SVD2d &SVD2d::operator-=(const VDesliz2d &v)
+SlidingVectorsSystem2d &SlidingVectorsSystem2d::operator-=(const VDesliz2d &v)
   {
     resul= resul - v;
     mom= mom - v.getMoment(org);
     return *this;
   }
-SVD2d &SVD2d::operator+=(const SVD2d &s)
+SlidingVectorsSystem2d &SlidingVectorsSystem2d::operator+=(const SlidingVectorsSystem2d &s)
   //The origin is preserved.
   {
     resul= resul + s.resul;
     mom= mom + s.getMoment(org);
     return *this;
   }
-SVD2d &SVD2d::operator-=(const SVD2d &s)
+SlidingVectorsSystem2d &SlidingVectorsSystem2d::operator-=(const SlidingVectorsSystem2d &s)
   //The origin is preserved.
   {
     resul= resul - s.resul;
     mom= mom - s.getMoment(org);
     return *this;
   }
-SVD2d &SVD2d::operator*=(const GEOM_FT &d)
+SlidingVectorsSystem2d &SlidingVectorsSystem2d::operator*=(const GEOM_FT &d)
   {
     resul= resul * d;
     mom= mom * d;
     return *this;
   }
 
-bool SVD2d::Nulo(void) const
+bool SlidingVectorsSystem2d::Nulo(void) const
   {
     bool retval= true;
     if(!resul.Nulo()) retval= false;
@@ -99,7 +99,7 @@ bool SVD2d::Nulo(void) const
   }
 
 //! @brief Line of points with zero moment.
-Line2d SVD2d::getZeroMomentLine(void) const
+Line2d SlidingVectorsSystem2d::getZeroMomentLine(void) const
   {
     Line2d retval; //= Line2d(Pos2d(NAN,NAN),Pos2d(NAN,NAN));
     const GEOM_FT rx= resul.x();
