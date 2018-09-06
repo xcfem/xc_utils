@@ -203,16 +203,16 @@ class_<VDesliz2d, bases<Vector2d> >("VDesliz2d")
   ;
 
 
-GEOM_FT (SVD2d::*getMoment2D)(void) const= &SVD2d::getMoment;
-Vector2d (SVD2d::*getResultant2D)(void) const= &SVD2d::getResultant;
+GEOM_FT (SlidingVectorsSystem2d::*getMoment2D)(void) const= &SlidingVectorsSystem2d::getMoment;
+Vector2d (SlidingVectorsSystem2d::*getResultant2D)(void) const= &SlidingVectorsSystem2d::getResultant;
 
-class_<SVD2d, bases<VDesliz2d> >("SVD2d")
+class_<SlidingVectorsSystem2d, bases<VDesliz2d> >("SlidingVectorsSystem2d")
   .def(init<Pos2d,Vector2d,GEOM_FT>())
   .def(init<VDesliz2d>())
   .def("getResultant",getResultant2D,"Return the resultant of the SVS.")
   .def("getMoment",getMoment2D)
-  .def("reduceTo",&SVD2d::ReduceA,"Sets the reference point to express the moments with respect to.")
-  .def("zeroMomentLine",&SVD2d::getZeroMomentLine,"Return zero moment line (if it exists).")
+  .def("reduceTo",&SlidingVectorsSystem2d::ReduceA,"Sets the reference point to express the moments with respect to.")
+  .def("zeroMomentLine",&SlidingVectorsSystem2d::getZeroMomentLine,"Return zero moment line (if it exists).")
   // //.def("getMomentPos2d",getMomentPos2d)
   // //.def("getMomentLine2d",getMomentLine2d)
   .def(VDesliz2d()+self) //Sobrecarga de operadores
@@ -221,12 +221,12 @@ class_<SVD2d, bases<VDesliz2d> >("SVD2d")
   .def(self-VDesliz2d())
   .def(self+=VDesliz2d())
   .def(self-=VDesliz2d())
-  .def(SVD2d()+self)
-  .def(self+SVD2d())
-  .def(SVD2d()-self)
-  .def(self-SVD2d())
-  .def(self+=SVD2d())
-  .def(self-=SVD2d())
+  .def(SlidingVectorsSystem2d()+self)
+  .def(self+SlidingVectorsSystem2d())
+  .def(SlidingVectorsSystem2d()-self)
+  .def(self-SlidingVectorsSystem2d())
+  .def(self+=SlidingVectorsSystem2d())
+  .def(self-=SlidingVectorsSystem2d())
   .def(self * double())
   .def(double() * self)
   .def(self_ns::str(self_ns::self))
@@ -250,30 +250,30 @@ class_<VDesliz3d, bases<Vector3d> >("VDesliz3d")
   ;
 
 
-const Vector3d &(SVD3d::*getMoment3D)(void) const= &SVD3d::getMoment;
-const Vector3d &(SVD3d::*getResultant3D)(void) const= &SVD3d::getResultant;
+const Vector3d &(SlidingVectorsSystem3d::*getMoment3D)(void) const= &SlidingVectorsSystem3d::getMoment;
+const Vector3d &(SlidingVectorsSystem3d::*getResultant3D)(void) const= &SlidingVectorsSystem3d::getResultant;
 
-class_<SVD3d, bases<VDesliz3d> >("SVD3d")
+class_<SlidingVectorsSystem3d, bases<VDesliz3d> >("SlidingVectorsSystem3d")
   .def(init<Pos3d,Vector3d,Vector3d>())
   .def(init<VDesliz3d>())
   .def("getResultant",getResultant3D,return_internal_reference<>(),"Return the resultant of the SVS.")
   .def("getMoment",getMoment3D,return_internal_reference<>())
-  .def("zeroMomentLine",&SVD3d::getZeroMomentLine,"Return zero moment line (if it exists).")
+  .def("zeroMomentLine",&SlidingVectorsSystem3d::getZeroMomentLine,"Return zero moment line (if it exists).")
   //.def("getMomentPos3d",getMomentPos3d)
   //.def("getMomentLine3d",getMomentLine3d)
-  .def("reduceTo",&SVD3d::ReduceA,"Sets the reference point to express the moments with respect to.")
+  .def("reduceTo",&SlidingVectorsSystem3d::ReduceA,"Sets the reference point to express the moments with respect to.")
   .def(VDesliz3d()+self) //Sobrecarga de operadores
   .def(self+VDesliz3d())
   .def(VDesliz3d()-self)
   .def(self-VDesliz3d())
   .def(self+=VDesliz3d())
   .def(self-=VDesliz3d())
-  .def(SVD3d()+self)
-  .def(self+SVD3d())
-  .def(SVD3d()-self)
-  .def(self-SVD3d())
-  .def(self+=SVD3d())
-  .def(self-=SVD3d())
+  .def(SlidingVectorsSystem3d()+self)
+  .def(self+SlidingVectorsSystem3d())
+  .def(SlidingVectorsSystem3d()-self)
+  .def(self-SlidingVectorsSystem3d())
+  .def(self+=SlidingVectorsSystem3d())
+  .def(self-=SlidingVectorsSystem3d())
   .def(self * double())
   .def(double() * self)
   .def(self_ns::str(self_ns::self))

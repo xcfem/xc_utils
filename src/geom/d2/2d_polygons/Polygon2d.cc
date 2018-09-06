@@ -380,8 +380,7 @@ void Polygon2d::clipBy(const Polygon2d &plg)
 std::list<Polygon2d> Polygon2d::getIntersection(const HalfPlane2d &sp) const
   { return intersection(*this,sp); }
 
-//! @brief Return la unión de este polígono con el que
-//! se pasa como parámetro.
+//! @brief Return the union of this polygon with the argument.
 Polygon2d Polygon2d::getUnion(const Polygon2d &other) const
   {
     Polygon2d retval;

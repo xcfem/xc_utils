@@ -26,6 +26,7 @@ IxPol=pol3.getIx()
 IyPol=pol3.getIy()
 PxyPol=pol3.getPxy()
 
+
 ratio1= (areaPol-1)
 ratio2= (polygonPerimeter-4)/4.
 ratio3= (polygonCenterOfMassX-0.5)/0.5

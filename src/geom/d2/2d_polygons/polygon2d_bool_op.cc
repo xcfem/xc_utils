@@ -94,21 +94,37 @@ bool es_estandar(const Halfedge_around_face_const_circulator &c,const PMCDec &ex
     for(;i!=c_end;i++)
       retval&= explo.is_standard(i->vertex());
     return retval;
-  } 
+  }
+
+//! @brief Workaraound to avoid the segmentation fault in
+//! CGAL::SPolynomial<CGAL::Gmpz>::eval_at_R() due to
+//! CGAL_STATIC_THREAD_LOCAL_VARIABLE (see Filtered_extended_homogeneous.h)
+inline CGAL::Gmpz eval_at_R(const CGAL::SPolynomial<CGAL::Gmpz> &a)
+ {
+   if(a.m()!=0)
+     std::cerr << __FUNCTION__
+               << "; workaround failed." << std::endl;
+   return a.n();
+ }
+
+inline double to_dbl(const CGAL::SQuotient<CGAL::Gmpz> &q)
+  {
+    auto eval_num= eval_at_R(q.numerator());
+    return (CGAL::to_double(eval_num)/
+          CGAL::to_double(q.denominator()));
+  }
 
 Polygon2d face_cycle(const Halfedge_around_face_const_circulator &c)
   {
-    
     Polygon2d retval;
     Halfedge_around_face_const_circulator i(c);
     const Halfedge_around_face_const_circulator c_end(c);
-
-    retval.push_back(Pos2d(CGAL::to_double(i->vertex()->point().x()),
-                           CGAL::to_double(i->vertex()->point().y())));
+    const auto pt= i->vertex()->point();
+    retval.push_back(Pos2d(to_dbl(pt.x()),to_dbl(pt.y())));
     i++;
     for(;i!=c_end;i++)
-      retval.push_back(Pos2d(CGAL::to_double(i->vertex()->point().x()),
- 	                     CGAL::to_double(i->vertex()->point().y())));
+      retval.push_back(Pos2d(to_dbl(i->vertex()->point().x()),
+ 	                     to_dbl(i->vertex()->point().y())));
     return retval;
   }
 
@@ -120,7 +136,7 @@ std::list<Polygon2d> Nef_2_to_Polygon2d(const Nef_polyhedron &n)
     Face_const_iterator fit = D.faces_begin();
     for (++fit; fit != D.faces_end(); ++fit)
       {
-        Halfedge_around_face_const_circulator hfc(fit->halfedge());//Bordes de la faceta.
+        Halfedge_around_face_const_circulator hfc(fit->halfedge());//Face edge.
         if(fit->mark())
           {
             if(es_estandar(hfc,D))
@@ -139,14 +155,16 @@ std::list<Polygon2d> Nef_2_to_Polygon2d(const Nef_polyhedron &n)
 
 Nef_polyhedron une(const Polygon2d &p1,const Polygon2d &p2)
   {
+    Nef_polyhedron retval;
     Nef_polyhedron n1=Polygon2d_to_Nef_2(p1);
     Nef_polyhedron n2=Polygon2d_to_Nef_2(p2);
     if(p1.empty())
-      return n2;
+      retval= n2;
     else if(p2.empty())
-      return n1;
+      retval= n1;
     else
-      return n1.join(n2);
+      retval= n1.join(n2);
+    return retval;
   }
 
 Nef_polyhedron une(const Nef_polyhedron &n1,const Polygon2d &p2)

@@ -45,6 +45,8 @@ class Variation: public std::vector<double>
     bool compatible(const ActionRValueList &lvr);
     friend std::ostream &operator<<(std::ostream &os,const Variation &v);
   };
+
+std::ostream &operator<<(std::ostream &os,const Variation &v);
 } //fin namespace nmb_acc.
 
 #endif

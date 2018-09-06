@@ -17,26 +17,26 @@ SET(build_setup_dir $ENV{HOME}/.xc_build)
 SET(basica_setup_file ${build_setup_dir}/basica_dirs.cmake)
 INCLUDE(${basica_setup_file})
 SET(xc_basic_DIR ${basica_src_dir}/..)
-message(STATUS "basica project dir: "${xc_basic_DIR})
+message(STATUS "basica project dir: ${xc_basic_DIR}")
 SET(xc_basic_INC ${basica_inc_dir})
-message(STATUS "basica include dir: "${xc_basic_INC})
+message(STATUS "basica include dir: ${xc_basic_INC}")
 INCLUDE_DIRECTORIES(${xc_basic_INC})
 SET(xc_basic_LIB ${basica_lib_dir})
-message(STATUS "basica lib dir: "${xc_basic_LIB})
+message(STATUS "basica lib dir: ${xc_basic_LIB}")
 
 
 SET(xc_utils_DIR ${CMAKE_SOURCE_DIR}/..)
-message(STATUS "project dir: "${xc_utils_DIR})
+message(STATUS "project dir: ${xc_utils_DIR}")
 string(REGEX REPLACE "/xc_utils/src.*" "" xc_utils_INC ${CMAKE_SOURCE_DIR})
-message(STATUS "include dir: "${xc_utils_INC})
+message(STATUS "include dir: ${xc_utils_INC}")
 SET(xc_utils_LIB ${xc_utils_INC}/xc_utils/lib)
-message(STATUS "lib dir: "${xc_utils_LIB})
+message(STATUS "lib dir: ${xc_utils_LIB}")
 
 SET(build_setup_file ${build_setup_dir}/lcmd_dirs.cmake)
 file(MAKE_DIRECTORY ${build_setup_dir})
-file(WRITE ${build_setup_file} "SET(lcmd_src_dir "${CMAKE_SOURCE_DIR}")\n")
-file(APPEND ${build_setup_file} "SET(lcmd_inc_dir "${xc_utils_INC}")\n")
-file(APPEND ${build_setup_file} "SET(lcmd_lib_dir "${xc_utils_LIB}")\n")
+file(WRITE ${build_setup_file} "SET(lcmd_src_dir ${CMAKE_SOURCE_DIR})\n")
+file(APPEND ${build_setup_file} "SET(lcmd_inc_dir ${xc_utils_INC})\n")
+file(APPEND ${build_setup_file} "SET(lcmd_lib_dir ${xc_utils_LIB})\n")
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${xc_basic_DIR}/CMake")
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${xc_utils_DIR}/CMake")
@@ -46,22 +46,29 @@ SET(LIBRARY_OUTPUT_PATH ${xc_utils_LIB})
 INCLUDE_DIRECTORIES(${xc_utils_INC})
 
 INCLUDE(${xc_utils_DIR}/CMake/find_packages.txt)
-MESSAGE(STATUS "Boost_LIBRARIES: "${Boost_LIBRARIES})
 
 #Biblioteca VTK
 #vtk
 IF(USE_VTK_FILE)
   INCLUDE(${USE_VTK_FILE})
-  message(STATUS "vtk file: "${USE_VTK_FILE})
+  message(STATUS "vtk file: ${USE_VTK_FILE}")
   SET(VTK_BIB vtkRendering vtkIO vtkHybrid)
   SET(VTK_FOUND 1)
 ENDIF(USE_VTK_FILE)
-
+#Workaround to allow CGAL to set the Boost_LIBRARIES variables
+#without removing the boost libraries that we also need to use.
+#LCPT 3/09/2018
+SET(XC_UTILS_BOOST_LIBRARIES ${Boost_LIBRARIES})
+MESSAGE(STATUS ${Boost_LIBRARIES})
 #Biblioteca CGAL
 IF(CGAL_USE_FILE)
   INCLUDE(${CGAL_USE_FILE})
-  message(STATUS "cgal file: "${CGAL_USE_FILE})
+  message(STATUS "cgal file: ${CGAL_USE_FILE}")
 ENDIF(CGAL_USE_FILE)
+ADD_TO_LIST(XC_UTILS_BOOST_LIBRARIES ${Boost_LIBRARIES})
+LIST(REMOVE_DUPLICATES XC_UTILS_BOOST_LIBRARIES)
+MESSAGE(STATUS ${XC_UTILS_BOOST_LIBRARIES})
+#End of the Workaround.
 
 #Biblioteca GLIB (para gts)
 INCLUDE_DIRECTORIES(${GLIB2_INCLUDE_DIRS})
@@ -103,7 +110,7 @@ SET(geomD3 geom/d3/BND3d geom/d3/GeomObj3d geom/d3/BspTree3d geom/d3/Cylinder ge
 
 SET(funcFromPoints geom/d1/function_from_points/FunctionFromPointsR_R geom/d1/function_from_points/FunctionFromPointsR2_R)
 
-SET(geom geom/pos_vec/VDesliz3d geom/pos_vec/VFijo3d geom/pos_vec/Vector2d geom/pos_vec/Vector3d geom/pos_vec/Pos2d geom/pos_vec/Pos2dList geom/pos_vec/Pos3d geom/pos_vec/KDTreePos geom/pos_vec/Pos3dList geom/pos_vec/Dir3d geom/pos_vec/Dir2d geom/pos_vec/VDesliz2d geom/pos_vec/VFijo2d geom/pos_vec/SVD3d geom/pos_vec/SVD2d geom/pos_vec/Pos2dArray geom/pos_vec/Array3dBoxRefBase geom/pos_vec/Array3dRange geom/pos_vec/Pos2dArray3d geom/pos_vec/Pos3dArray geom/pos_vec/Pos3dArray3d geom/lists/ThreePoints3d geom/lists/utils_list_pos2d geom/lists/utils_list_pos3d geom/Wm3/Wm3Math geom/Wm3/Wm3Distance geom/Wm3/Wm3DistVector3Triangle3 ${geomD0} ${geomD1} ${geomD2} ${geomD3} ${geomSisCooRef} ${geomTrfs} ${funcFromPoints} geom/cgal_types geom/GeomObj geom/FT_matrix geom/ProtoGeom)
+SET(geom geom/pos_vec/VDesliz3d geom/pos_vec/VFijo3d geom/pos_vec/Vector2d geom/pos_vec/Vector3d geom/pos_vec/Pos2d geom/pos_vec/Pos2dList geom/pos_vec/Pos3d geom/pos_vec/KDTreePos geom/pos_vec/Pos3dList geom/pos_vec/Dir3d geom/pos_vec/Dir2d geom/pos_vec/VDesliz2d geom/pos_vec/VFijo2d geom/pos_vec/SlidingVectorsSystem3d geom/pos_vec/SlidingVectorsSystem2d geom/pos_vec/Pos2dArray geom/pos_vec/Array3dBoxRefBase geom/pos_vec/Array3dRange geom/pos_vec/Pos2dArray3d geom/pos_vec/Pos3dArray geom/pos_vec/Pos3dArray3d geom/lists/ThreePoints3d geom/lists/utils_list_pos2d geom/lists/utils_list_pos3d geom/Wm3/Wm3Math geom/Wm3/Wm3Distance geom/Wm3/Wm3DistVector3Triangle3 ${geomD0} ${geomD1} ${geomD2} ${geomD3} ${geomSisCooRef} ${geomTrfs} ${funcFromPoints} geom/cgal_types geom/GeomObj geom/FT_matrix geom/ProtoGeom)
 
 SET(GnuGts gnu_gts/GTSSurface gnu_gts/GTSVertex gnu_gts/GTSEdge gnu_gts/GTSFace gnu_gts/GTSSplit gnu_gts/GTSSurfaceTraverse gnu_gts/GTSSurfaceIntersection gnu_gts/GTSBBoxTree gnu_gts/GTSGraph gnu_gts/TriangleMap)
 
@@ -117,10 +124,11 @@ SET(ca_acciones loadCombinations/actions/LeadingActionInfo loadCombinations/acti
 
 SET(ca_combinations loadCombinations/comb_analysis/Variation loadCombinations/comb_analysis/Variations loadCombinations/comb_analysis/LoadCombinationVector loadCombinations/comb_analysis/LoadCombinations loadCombinations/comb_analysis/ActionWeightingMap loadCombinations/comb_analysis/LoadCombinationGenerator)
 
+
 ADD_LIBRARY(xc_utils SHARED ${MYSQL} ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${NUCLEO}  ${VtkAux} ${ca_factors} ${ca_acciones} ${ca_combinations})
 
 #Interfaz Python
-LINK_LIBRARIES(xc_utils xc_basic ${VTK_BIB} ${CGAL_LIBRARIES} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${MySQLpp_LIBRARIES} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} boost_python ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
+LINK_LIBRARIES(xc_utils xc_basic ${VTK_BIB} ${CGAL_LIBRARIES} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${MySQLpp_LIBRARIES} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} boost_python ${XC_UTILS_BOOST_LIBRARIES} ${PYTHON_LIBRARIES})
 LINK_DIRECTORIES("/usr/lib/python2.7") # Not needed?
 ADD_DEFINITIONS(-fno-strict-aliasing)
 ADD_LIBRARY(xc_base SHARED nucleo/python_interface.cc)
