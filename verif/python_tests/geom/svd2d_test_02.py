@@ -3,13 +3,13 @@ import xc_base
 import geom
 import math
 
-svd1=geom.SVD2d()
+svd1=geom.SlidingVectorsSystem2d()
 ptoAplic=geom.Pos2d(1,1)
 vectorDir=geom.Vector2d(1,0)
 vec=geom.VDesliz2d(ptoAplic,vectorDir)
 svd1+=vec
 
-svd2=geom.SVD2d()
+svd2=geom.SlidingVectorsSystem2d()
 ptoAplic=geom.Pos2d(1,1)
 vectorDir=geom.Vector2d(0.5,0)
 vec=geom.VDesliz2d(ptoAplic,vectorDir)

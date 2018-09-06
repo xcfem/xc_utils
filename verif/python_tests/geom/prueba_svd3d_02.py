@@ -7,7 +7,7 @@ ptoOrigen=geom.Pos3d(-1.,1.,0.)
 ptoDest=geom.Pos3d(1.,1.,0.)
 r1=geom.Line3d(ptoOrigen,ptoDest)
 
-svd1=geom.SVD3d()
+svd1=geom.SlidingVectorsSystem3d()
 ptoAplic=geom.Pos3d(1,1,0)
 vectorDir=geom.Vector3d(0,0,1)
 vec=geom.VDesliz3d(ptoAplic,vectorDir)

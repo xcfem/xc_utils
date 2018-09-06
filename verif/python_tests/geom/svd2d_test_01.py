@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import xc_base
 import geom
-svd1=geom.SVD2d()
+svd1=geom.SlidingVectorsSystem2d()
 ptoAplic=geom.Pos2d(1,1)
 vectorDir=geom.Vector2d(1,0)
 vec=geom.VDesliz2d(ptoAplic,vectorDir)
@@ -13,7 +13,7 @@ svd1+=vec
 zml1=svd1.zeroMomentLine()
 vDir1= zml1.getVDir()
 
-svd2=geom.SVD2d()
+svd2=geom.SlidingVectorsSystem2d()
 ptoAplic=geom.Pos2d(0,0)
 vectorDir=geom.Vector2d(0,1)
 vec=geom.VDesliz2d(ptoAplic,vectorDir)

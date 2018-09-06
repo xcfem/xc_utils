@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import xc_base
 import geom
-svd1=geom.SVD3d()
+svd1=geom.SlidingVectorsSystem3d()
 ptoAplic=geom.Pos3d(1,1,0)
 vectorDir=geom.Vector3d(0,0,1)
 vec=geom.VDesliz3d(ptoAplic,vectorDir)
@@ -19,7 +19,7 @@ svd1+=vec
 Res=svd1.getResultant()
 Mom=svd1.getMoment()
 
-#It seems there is a bug in svd.getResultant() it returns a SVD3d instead of a Vector3d.
+#It seems there is a bug in svd.getResultant() it returns a SlidingVectorsSystem3d instead of a Vector3d.
 #print 'type<Res>= ', type(Res)
 #print 'Res= ', Res
 
