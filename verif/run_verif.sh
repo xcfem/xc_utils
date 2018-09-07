@@ -11,6 +11,8 @@ CYAN="\\033[1;36m"
 
 echo ""
 
+START=$(date +%s.%N)
+
 #Misc
 echo "$BLEU" "Misc. tests." "$NORMAL"
 python ./python_tests/test_evalPy.py
@@ -29,39 +31,30 @@ python ./python_tests/soil_mechanics/test_brinch_hansen02.py
 python ./python_tests/soil_mechanics/test_stratified_soil.py
 python ./python_tests/soil_mechanics/test_boussinesq.py
 
-#Test de combinaciones.
+#Geometry.
 echo "$BLEU" "Geometry tests." "$NORMAL"
-python ./python_tests/geom/test_coosys_01.py
-python ./python_tests/geom/test_refsys3d3d_01.py
-python ./python_tests/geom/test_refsys2d3d_01.py
-python ./python_tests/geom/prueba_polilinea2d_01.py
-python ./python_tests/geom/test_polyline2d_02.py
-python ./python_tests/geom/test_polyline3d_01.py
-python ./python_tests/geom/pruebaPos3d01.py
-python ./python_tests/geom/prueba_recta2d_01.py
-python ./python_tests/geom/test_line2d_intersection.py
-python ./python_tests/geom/prueba_vdesliz3d_03.py
-python ./python_tests/geom/prueba_list_pos2d_01.py
-python ./python_tests/geom/prueba_segment2d_01.py
-python ./python_tests/geom/prueba_vector3d_01.py
-python ./python_tests/geom/prueba_vector2d_02.py
-#python ./python_tests/geom/prueba_semiespacio3d_02.py
-python ./python_tests/geom/pruebaPos2d01.py
-python ./python_tests/geom/prueba_recta3d_01.py
-python ./python_tests/geom/prueba_vdesliz3d_02.py
-#python ./python_tests/geom/prueba_semiespacio3d_04.py
-python ./python_tests/geom/circle2d_test_01.py
-python ./python_tests/geom/circle2d_test_02.py
-#python ./python_tests/geom/prueba_semiespacio3d_01.py
-python ./python_tests/geom/prueba_vdesliz3d_01.py
-python ./python_tests/geom/plane_test_01.py
-python ./python_tests/geom/plane_test_02.py
-python ./python_tests/geom/plane_test_03.py
-#python ./python_tests/geom/plane_test_04.py
-python ./python_tests/geom/plane_test_05.py
-python ./python_tests/geom/test3dPoly.py
-python ./python_tests/geom/prueba_vector2d_01.py
-python ./python_tests/geom/prueba_segment2d_02.py
+echo "$BLEU" "  Vectors." "$NORMAL"
+python ./python_tests/geom/vector2d_test_01.py
+python ./python_tests/geom/vector2d_test_02.py
+python ./python_tests/geom/vector3d_test_01.py
+python ./python_tests/geom/vector3d_test_02.py
+python ./python_tests/geom/vector3d_angle_test_01.py
+echo "$BLEU" "  Points." "$NORMAL"
+python ./python_tests/geom/pos2d_test_01.py
+python ./python_tests/geom/pos3d_test_01.py
+echo "$BLEU" "  Lines, rays and segments." "$NORMAL"
+python ./python_tests/geom/line2d_test_01.py
+python ./python_tests/geom/line3d_test_01.py
+python ./python_tests/geom/line2d_intersection_test.py
+python ./python_tests/geom/segment2d_test_01.py
+python ./python_tests/geom/segment2d_test_02.py
+echo "$BLEU" "  Polylines." "$NORMAL"
+python ./python_tests/geom/pos2d_list_test_01.py
+python ./python_tests/geom/polyline2d_test_01.py
+python ./python_tests/geom/polyline2d_test_02.py
+python ./python_tests/geom/polyline3d_test_01.py
+python ./python_tests/geom/polyline3d_test_02.py
+echo "$BLEU" "  Polygons." "$NORMAL"
 python ./python_tests/geom/polygon2D_test_2d_01.py
 python ./python_tests/geom/polygon2D_test_2d_02.py
 python ./python_tests/geom/polygon2D_test_2d_03.py
@@ -71,15 +64,36 @@ python ./python_tests/geom/polygon2D_test_2d_06.py
 python ./python_tests/geom/polygon2D_test_2d_07.py
 python ./python_tests/geom/polygon2D_test_2d_08.py
 python ./python_tests/geom/polygon2D_test_2d_09.py
-python ./python_tests/geom/prueba_vector3d_02.py
-python ./python_tests/geom/svd2d_test_01.py
-python ./python_tests/geom/svd2d_test_02.py
-python ./python_tests/geom/prueba_svd3d_01.py
-python ./python_tests/geom/prueba_svd3d_02.py
-#python ./python_tests/geom/prueba_semiespacio3d_03.py
-python ./python_tests/geom/test_angle_vector3d_01.py
-python ./python_tests/geom/test_2drotation_01.py
-python ./python_tests/geom/test_principal_axes_of_inertia2D_01.py
+echo "$BLEU" "  Circles." "$NORMAL"
+python ./python_tests/geom/circle2d_test_01.py
+python ./python_tests/geom/circle2d_test_02.py
+echo "$BLEU" "  Sliding vectors." "$NORMAL"
+python ./python_tests/geom/sliding_vector_3d_test_01.py
+python ./python_tests/geom/sliding_vector_3d_test_02.py
+python ./python_tests/geom/sliding_vector_3d_test_03.py
+python ./python_tests/geom/sliding_vectors_system_2d_test_01.py
+python ./python_tests/geom/sliding_vectors_system_2d_test_02.py
+python ./python_tests/geom/sliding_vectors_system_3d_test_01.py
+python ./python_tests/geom/sliding_vectors_system_3d_test_02.py
+echo "$BLEU" "  Planes." "$NORMAL"
+python ./python_tests/geom/plane_test_01.py
+python ./python_tests/geom/plane_test_02.py
+python ./python_tests/geom/plane_test_03.py
+#python ./python_tests/geom/plane_test_04.py
+python ./python_tests/geom/plane_test_05.py
+# echo "$BLEU" "  3D half spaces." "$NORMAL"
+# python ./python_tests/geom/halfspace3d_test_01.py
+# python ./python_tests/geom/halfspace3d_test_02.py
+# python ./python_tests/geom/halfspace3d_test_03.py
+# python ./python_tests/geom/halfspace3d_test_04.py
+echo "$BLEU" "  Reference systems." "$NORMAL"
+python ./python_tests/geom/coosys_test_01.py
+python ./python_tests/geom/refsys3d3d_test_01.py
+python ./python_tests/geom/refsys2d3d_test_01.py
+echo "$BLEU" "  Transformations." "$NORMAL"
+python ./python_tests/geom/rotation2d_test_01.py
+echo "$BLEU" "  Mechanical properties." "$NORMAL"
+python ./python_tests/geom/principal_axes_of_inertia_2d_test_01.py
 
 #VTK
 #python ./python_tests/vtk/plot_cone.py
@@ -90,3 +104,11 @@ echo "$BLEU" "Load combination tests." "$NORMAL"
 python ./python_tests/loadCombinations/test_esclavas_00.py
 python ./python_tests/loadCombinations/test_accidentales.py
 python ./python_tests/loadCombinations/test_iap11.py
+
+END=$(date +%s.%N)
+DIFF=$(echo "$END - $START" | bc)
+echo $DIFF seconds
+NT=$(grep -c '^python' $0)
+echo ${NT} tests
+Q=$(echo "$DIFF / $NT" | bc -l)
+echo $Q seconds/test
