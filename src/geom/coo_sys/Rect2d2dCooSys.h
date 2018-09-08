@@ -19,36 +19,41 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SisCooRect1d2d.h
-//Sistema de coordenadas de una dimensión en un espacio de 3 dimensiones.
+//Rect2d2dCooSys.h
 
-#ifndef SISCOORECT1D2D_H
-#define SISCOORECT1D2D_H
+#ifndef RECT_2D2D_COO_SYS_H
+#define RECT_2D2D_COO_SYS_H
 
-#include "SisCooXd2d.h"
+#include "Xd2dCooSys.h"
 
-//! @ingroup SisCoo
+
+//! @ingroup CooSys
 //
-//! @brief Sistema de coordenadas de 1 dimensión
+//! @brief Sistema de coordenadas rectangular de 2 dimensiones
 //! definido en un espacio de dos dimensiones.
-class SisCooRect1d2d: public SisCooXd2d
+class Rect2d2dCooSys: public Xd2dCooSys
   {
   public:
-    typedef GEOM_FT VLocal; //Dimensión del vector en locales.
-    typedef GEOM_FT PLocal; //Dimensión del vector en locales.
+    typedef Vector2d VLocal; //!< Dimension of the vector in local coordinates.
+    typedef Pos2d PLocal; //!< Dimension of the point in local coordinates.
 
-    SisCooRect1d2d(void): SisCooXd2d(1) {}
-    SisCooRect1d2d(const PGlobal &o,const PGlobal &p);
-    SisCooRect1d2d(const VGlobal &vX);
-    virtual SisCoo *Copia(void) const
-      { return new SisCooRect1d2d(*this); }
 
-    VGlobal GetI(void) const; //Return el vector unitario I en el sistema global.
+    Rect2d2dCooSys(void);
+    Rect2d2dCooSys(const Pos2d &p1,const Pos2d &p2);
+    Rect2d2dCooSys(const VGlobal &vX);
+    virtual CooSys *Copia(void) const;
 
+    //Acceso a miembros.
+    VGlobal GetI(void) const;
+    VGlobal GetJ(void) const;
+    void PutI(const VGlobal &);
+    void PutJ(const VGlobal &);
+
+    //Conversión vectores.
     VGlobal GetCooGlobales(const VLocal &v) const;
     VLocal GetCooLocales(const VGlobal &v) const;
-    virtual ~SisCooRect1d2d(void)
-      {}
+
+    virtual ~Rect2d2dCooSys(void) {}
   };
 
 #endif

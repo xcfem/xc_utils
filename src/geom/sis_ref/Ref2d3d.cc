@@ -35,20 +35,20 @@ Ref2d3d::Ref2d3d(const Pos3d &o)
   : BaseRef(o) {}
 
 //! @brief Constructor.
-Ref2d3d::Ref2d3d(const Pos3d &o,const SisCooRect2d3d &sc)
+Ref2d3d::Ref2d3d(const Pos3d &o,const Rect2d3dCooSys &sc)
   : BaseRef(o,sc) {}
 
 //! @brief Constructor.
 Ref2d3d::Ref2d3d(const Pos3d &o,const Pos3d &p,const Pos3d &q)
-  : BaseRef(o,SisCooRect2d3d(o,p,q)) {}
+  : BaseRef(o,Rect2d3dCooSys(o,p,q)) {}
 
 //! @brief Constructor.
 Ref2d3d::Ref2d3d(const Pos3d &o,const Vector3d &v)
-  : BaseRef(o,SisCooRect2d3d(v)) {}
+  : BaseRef(o,Rect2d3dCooSys(v)) {}
 
 //! @brief Constructor.
 Ref2d3d::Ref2d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2)
-  : BaseRef(o,SisCooRect2d3d(v1,v2)) {}
+  : BaseRef(o,Rect2d3dCooSys(v1,v2)) {}
 
 
 //! @brief Return the unary vector I expressed in global coordinates.

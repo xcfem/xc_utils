@@ -19,35 +19,31 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SisCooRect1d2d.cc
+//Rect1DCooSys.cc
 
-#include "SisCooRect1d2d.h"
-#include "xc_utils/src/geom/pos_vec/Pos2d.h"
-#include "xc_utils/src/geom/pos_vec/Vector2d.h"
-#include "xc_utils/src/geom/pos_vec/Dir2d.h"
-
-#include "xc_basic/src/text/text_string.h"
-#include "xc_basic/src/funciones/algebra/ExprAlgebra.h"
+#include "Rect1d3dCooSys.h"
+#include "../pos_vec/Vector3d.h"
+#include "../pos_vec/Dir3d.h"
+#include "../pos_vec/Pos3d.h"
 
 
-SisCooRect1d2d::SisCooRect1d2d(const VGlobal &vX)
-  : SisCooXd2d(1,vX) {} //Axis 1 paralelo a Vx.
-SisCooRect1d2d::SisCooRect1d2d(const PGlobal &p1,const PGlobal &p2)
-  : SisCooXd2d(1,p1,p2) {} //Axis 1 desde p1 a p2.
 
-SisCooRect1d2d::VGlobal SisCooRect1d2d::GetI(void) const
+Rect1d3dCooSys::Rect1d3dCooSys(const VGlobal &vX)
+  : Xd3dCooSys(1,vX)  //Axis 1 parallelo to Vx.
+  {}
+Rect1d3dCooSys::Rect1d3dCooSys(const PGlobal &o,const PGlobal &p)
+  : Xd3dCooSys(1,o,p) {}
+
+Rect1d3dCooSys::VGlobal Rect1d3dCooSys::GetI(void) const
 //Return el vector unitario I en el sistema global.
   { return getAxisVDir(1); }
-SisCooRect1d2d::VGlobal SisCooRect1d2d::GetCooGlobales(const VLocal &v) const
-//Return las componentes del vector v 
-//que se pasa como parámetro expresado en locales
-//expresadas en coordenadas globales.
-  { return SisCooXd2d::GetCooGlobales(FT_matrix(1,1,v)); }
-SisCooRect1d2d::VLocal SisCooRect1d2d::GetCooLocales(const SisCooRect1d2d::VGlobal &v) const
+Rect1d3dCooSys::VGlobal Rect1d3dCooSys::GetCooGlobales(const VLocal &v) const
+{ return Xd3dCooSys::GetCooGlobales(FT_matrix(1,1,v)); }
+Rect1d3dCooSys::VLocal Rect1d3dCooSys::GetCooLocales(const Rect1d3dCooSys::VGlobal &v) const
 //Return las componentes del vector v expresado en locales
 //expresadas en coordenadas globales.
   {
-    const FT_matrix tmp= SisCooXd2d::GetCooLocales(v);
-    return tmp(1,1);
+    const FT_matrix tmp= Xd3dCooSys::GetCooLocales(v);
+    return VLocal(tmp(1));
   }
 

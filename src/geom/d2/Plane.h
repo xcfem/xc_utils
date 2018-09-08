@@ -39,7 +39,7 @@ class Polyline3d;
 class Polygon3d;
 class GeomGroup3d;
 class GeneralEquationOfPlane;
-class SisCooRect2d3d;
+class Rect2d3dCooSys;
 class Ref2d3d;
 
 
@@ -86,7 +86,7 @@ class Plane : public Surface3d
     virtual Vector3d Normal(void) const;
     Vector3d Base1(void) const;
     Vector3d Base2(void) const;
-    SisCooRect2d3d getSisCoo(void) const;
+    Rect2d3dCooSys getCooSys(void) const;
     Ref2d3d getRef(const Pos3d &) const;
 
     void Swap(void);

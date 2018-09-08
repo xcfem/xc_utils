@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SisCooXd3d.cc
+//Xd3dCooSys.cc
 
-#include "SisCooXd3d.h"
+#include "Xd3dCooSys.h"
 #include "../pos_vec/Vector3d.h"
 #include "../pos_vec/Dir3d.h"
 #include "../pos_vec/Pos3d.h"
@@ -30,37 +30,37 @@
 //! @brief Define un sistema de coordenadas de dimensión i
 //! el x axis tendrá la dirección y sentido del vector que
 //! se pasa como parámetro.
-SisCooXd3d::SisCooXd3d(const size_t &i,const VGlobal &v)
-  : SisCoo(i,3)
+Xd3dCooSys::Xd3dCooSys(const size_t &i,const VGlobal &v)
+  : CooSys(i,3)
   { XAxisVector(v); }
 
 //! @brief Define un sistema de coordenadas de dimensión i
 //! el x axis tendrá la dirección y sentido del vector v1
 //! se pasa como parámetro.
-SisCooXd3d::SisCooXd3d(const size_t &i,const VGlobal &v1,const VGlobal &v2)
-  : SisCoo(i,3)
+Xd3dCooSys::Xd3dCooSys(const size_t &i,const VGlobal &v1,const VGlobal &v2)
+  : CooSys(i,3)
   { vectores_unitarios(v1,v2,v1 ^ v2); }
 
-SisCooXd3d::SisCooXd3d(const size_t &i,const PGlobal &o,const PGlobal &p)
-  : SisCoo(i,3)
+Xd3dCooSys::Xd3dCooSys(const size_t &i,const PGlobal &o,const PGlobal &p)
+  : CooSys(i,3)
   { TwoPoints(o,p); }
 
-SisCooXd3d::SisCooXd3d(const size_t &i,const PGlobal &p1,const PGlobal &p2, const PGlobal &p3)
-  : SisCoo(i,3)
+Xd3dCooSys::Xd3dCooSys(const size_t &i,const PGlobal &p1,const PGlobal &p2, const PGlobal &p3)
+  : CooSys(i,3)
   { ThreePoints(p1,p2,p3); }
-SisCooXd3d::SisCooXd3d(const size_t &i,const VGlobal &v1,const VGlobal &v2,const VGlobal &v3)
-  : SisCoo(i,3)
+Xd3dCooSys::Xd3dCooSys(const size_t &i,const VGlobal &v1,const VGlobal &v2,const VGlobal &v3)
+  : CooSys(i,3)
   { vectores_unitarios(v1,v2,v3); }
 
-void SisCooXd3d::putRow(const size_t &axis,const VGlobal &v)
-  { SisCoo::putRow(axis,traspuesta(v.getMatrix())); }
+void Xd3dCooSys::putRow(const size_t &axis,const VGlobal &v)
+  { CooSys::putRow(axis,traspuesta(v.getMatrix())); }
 
 //! @brief Return the dirección of the axis being passed as parameter.
-SisCooXd3d::DGlobal SisCooXd3d::getAxisDir(const size_t &axis) const
+Xd3dCooSys::DGlobal Xd3dCooSys::getAxisDir(const size_t &axis) const
   { return DGlobal(getAxisVDir(1)); }
 
 //! @brief Return the direction vector of the axis being passed as parameter.
-SisCooXd3d::VGlobal SisCooXd3d::getAxisVDir(const size_t &axis) const
+Xd3dCooSys::VGlobal Xd3dCooSys::getAxisVDir(const size_t &axis) const
   { 
     const FT_matrix row= getRow(axis);
     return VGlobal(row(1,1),row(1,2),row(1,3));
@@ -68,45 +68,45 @@ SisCooXd3d::VGlobal SisCooXd3d::getAxisVDir(const size_t &axis) const
 //! Return las componentes del vector v 
 //! being passed as parameter expresado en coordenadas locales
 //! expresado en global coordinates.
-SisCooXd3d::VGlobal SisCooXd3d::GetCooGlobales(const FT_matrix &v) const
+Xd3dCooSys::VGlobal Xd3dCooSys::GetCooGlobales(const FT_matrix &v) const
   {
-    const FT_matrix tmp= SisCoo::GetCooGlobales(v);
+    const FT_matrix tmp= CooSys::GetCooGlobales(v);
     return VGlobal(tmp(1),tmp(2),tmp(3)); 
   }
-FT_matrix SisCooXd3d::GetCooLocales(const SisCooXd3d::VGlobal &v) const
-  { return SisCoo::GetCooLocales(v.getMatrix()); }
+FT_matrix Xd3dCooSys::GetCooLocales(const Xd3dCooSys::VGlobal &v) const
+  { return CooSys::GetCooLocales(v.getMatrix()); }
 //! Hace que el sistema de coordenadas tenga por vectores unitarios:
 //! - El versor correspondiente al vector i_, being passed as parameter.
 //! - El versor correspondiente al vector j_, being passed as parameter.
 //! - El versor correspondiente al vector k_, being passed as parameter.
 //!
 //! Comprueba que los tres vectores no sean coplanarios ni paralelos 2 a 2.
-void SisCooXd3d::vectores_unitarios(const VGlobal &i_,const VGlobal &j_,const VGlobal &k_)
+void Xd3dCooSys::vectores_unitarios(const VGlobal &i_,const VGlobal &j_,const VGlobal &k_)
   {
     if(coplanarios(i_,j_,k_))
       {
-        std::cerr << "SisCooXd3d::vectores_unitarios: Los tres vectores: " 
+        std::cerr << "Xd3dCooSys::vectores_unitarios: Los tres vectores: " 
                   << i_ << ' ' << j_ << ' ' << k_ 
                   << " son coplanarios. No se hicieron cambios" << std::endl;
         return;
       }
     if(paralelos(i_,j_))
       {
-        std::cerr << "SisCooXd3d::vectores_unitarios: Los vectores: " 
+        std::cerr << "Xd3dCooSys::vectores_unitarios: Los vectores: " 
 		  << " i= " << i_ << " y j= " << j_
                   << " son paralelos. No se hicieron cambios" << std::endl;
         return;
       }
     if(paralelos(i_,k_))
       {
-        std::cerr << "SisCooXd3d::vectores_unitarios: Los vectores: " 
+        std::cerr << "Xd3dCooSys::vectores_unitarios: Los vectores: " 
 		  << " i= " << i_ << " y k= " << k_
                   << " son paralelos. No se hicieron cambios" << std::endl;
         return;
       }
     if(paralelos(j_,k_))
       {
-        std::cerr << "SisCooXd3d::vectores_unitarios: Los vectores: " 
+        std::cerr << "Xd3dCooSys::vectores_unitarios: Los vectores: " 
 		  << " j= " << j_ << " y k= " << k_
                   << " son paralelos. No se hicieron cambios" << std::endl;
         return;
@@ -130,7 +130,7 @@ void SisCooXd3d::vectores_unitarios(const VGlobal &i_,const VGlobal &j_,const VG
 //! i_ el being passed as parameter.
 //! j_ el horizontal perpendicular a i_ (si es único).
 //! k_ el producto vectorial de ambos.
-void SisCooXd3d::XAxisVector(const VGlobal &i_)
+void Xd3dCooSys::XAxisVector(const VGlobal &i_)
   {
     if(i_.Nulo())
       {
@@ -158,14 +158,14 @@ void SisCooXd3d::XAxisVector(const VGlobal &i_)
 
 //! @brief Construye el sistema de coordenadas formado por los vectores:
 //! i_ el vector op (ver XAxisVector).
-void SisCooXd3d::TwoPoints(const PGlobal &o,const PGlobal &p)
+void Xd3dCooSys::TwoPoints(const PGlobal &o,const PGlobal &p)
   { XAxisVector(p-o); }
 
 //! @brief Create the coordinate system with axis oriented as follows:
 //! x axis: from o to p1;
 //! y axis: normal to x and contained in the plane defined 
 //! by the three points and pointing to p2.
-void SisCooXd3d::ThreePoints(const PGlobal &o,const PGlobal &p1,const PGlobal &p2)
+void Xd3dCooSys::ThreePoints(const PGlobal &o,const PGlobal &p1,const PGlobal &p2)
   {
     if(colineales(o,p1,p2))
       {

@@ -59,7 +59,7 @@
 #include "xc_utils/src/geom/d3/3d_polyhedrons/Polyhedron3d.h"
 #include "xc_utils/src/geom/d3/3d_polyhedrons/Tetrahedron3d.h"
 #include "xc_utils/src/geom/d3/3d_polyhedrons/BlockPyramid.h"
-#include "xc_utils/src/geom/sis_coo/SisCooRect2d3d.h"
+#include "xc_utils/src/geom/coo_sys/Rect2d3dCooSys.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
 
 #endif

@@ -29,6 +29,6 @@ void export_sys_trf(void)
     docstring_options doc_options;
 
 #include "trf/python_interface.tcc"
-#include "sis_coo/python_interface.tcc"
+#include "coo_sys/python_interface.tcc"
 #include "sis_ref/python_interface.tcc"
   }

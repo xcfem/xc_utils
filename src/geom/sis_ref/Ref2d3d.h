@@ -25,7 +25,7 @@
 #define REF2D3D_H
 
 #include "Ref.h"
-#include "../sis_coo/SisCooRect2d3d.h"
+#include "../coo_sys/Rect2d3dCooSys.h"
 #include "../d3/GeomObj3d.h"
 #include "../pos_vec/Pos3d.h"
 
@@ -38,15 +38,15 @@ class Vector3d;
 //! 
 //! @brief Sistema de referencia bidimensional definido
 //! en un sistema de referencia tridimensional.
-class Ref2d3d : public Ref<SisCooRect2d3d>
+class Ref2d3d : public Ref<Rect2d3dCooSys>
   {
   public:
     typedef GeomObj3d::list_Pos3d list_Pos3d;
-    typedef Ref<SisCooRect2d3d> BaseRef;
+    typedef Ref<Rect2d3dCooSys> BaseRef;
   public:
     Ref2d3d(void);
     Ref2d3d(const Pos3d &o);
-    Ref2d3d(const Pos3d &,const SisCooRect2d3d &);
+    Ref2d3d(const Pos3d &,const Rect2d3dCooSys &);
     Ref2d3d(const Pos3d &o,const Pos3d &p,const Pos3d &q);
     Ref2d3d(const Pos3d &o,const Vector3d &v);
     Ref2d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2);

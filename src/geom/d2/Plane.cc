@@ -141,8 +141,8 @@ Vector3d Plane::Base2(void) const
 
 //! @brief Return a coordinate system whose XY plane corresponds to
 //! this one.
-SisCooRect2d3d Plane::getSisCoo(void) const
-  { return SisCooRect2d3d(Base1(),Base2()); }
+Rect2d3dCooSys Plane::getCooSys(void) const
+  { return Rect2d3dCooSys(Base1(),Base2()); }
 
 //! @brief Return a reference frame whose XY plane corresponds to
 //! this one.

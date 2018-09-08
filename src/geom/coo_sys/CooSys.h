@@ -19,8 +19,8 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SisCoo.h
-//Sistema de coordenadas (abstracto).
+//CooSys.h
+//Coordinate systems base class.
 
 #ifndef SIS_COO_H
 #define SIS_COO_H
@@ -30,13 +30,13 @@
 
 //! @ingroup GEOM
 //
-//!  @defgroup SisCoo Sistemas de coordenadas.
+//!  @defgroup CooSys Coordinate systems.
 //
-//!  @ingroup SisCoo
+//!  @ingroup CooSys
 //! 
-//!  @brief Clase base para los sistemas de coordenadas.
+//!  @brief Coordinate systems base class.
 //!  
-class SisCoo: public ProtoGeom
+class CooSys: public ProtoGeom
   {
     FT_matrix rot; //Basis vector matrix (as rows).
   protected:
@@ -45,16 +45,16 @@ class SisCoo: public ProtoGeom
     void normaliza(void);
     void ortogonaliza(void);
     void ortonormaliza(void);
-    SisCoo(const size_t &,const size_t &);
-    SisCoo(const SisCoo &other)
+    CooSys(const size_t &,const size_t &);
+    CooSys(const CooSys &other)
       : ProtoGeom(other), rot(other.rot) {}
-    SisCoo &operator=(const SisCoo &other)
+    CooSys &operator=(const CooSys &other)
       {
 	ProtoGeom::operator=(other);
         rot= other.rot;
         return *this;
       }
-    virtual SisCoo *Copia(void) const= 0;
+    virtual CooSys *Copia(void) const= 0;
   public:
     virtual size_t numberOfAxis(void) const
       { return rot.getNumberOfRows(); }
@@ -71,16 +71,16 @@ class SisCoo: public ProtoGeom
     virtual FT_matrix TransDeGlobal(void) const;
       //Return the matrix que transforma un vector expresado
       // en globales al mismo vector expresado en locales.
-    FT_matrix GetTransA(const SisCoo &dest) const;
-      //Return the transformation matrix desde este sistema a dest.
+    FT_matrix GetTransA(const CooSys &dest) const;
+      //Return the transformation matrix of this coordinates system to dest.
     FT_matrix GetCooGlobales(const FT_matrix &v) const;
     FT_matrix GetCooLocales(const FT_matrix &v) const;
 
     virtual void Print(std::ostream &os) const;
-    friend std::ostream &operator<<(std::ostream &os,const SisCoo &sc);
-    inline friend bool operator==(const SisCoo &a,const SisCoo &b)
+    friend std::ostream &operator<<(std::ostream &os,const CooSys &sc);
+    inline friend bool operator==(const CooSys &a,const CooSys &b)
       { return (a.rot==b.rot); } 
-    inline friend bool operator!=(const SisCoo &a,const SisCoo &b)
+    inline friend bool operator!=(const CooSys &a,const CooSys &b)
       { return !(a==b); }
   };
 

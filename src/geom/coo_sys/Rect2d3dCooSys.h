@@ -19,41 +19,54 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SisCooRect2d2d.h
+//Rect2d3dCooSys.h
+//Sistema de coordenadas rectangular de 2 dimensiones
+//en un espacio de tres dimensiones.
 
-#ifndef SIS_COO_RECT_2D2D_H
-#define SIS_COO_RECT_2D2D_H
+#ifndef RECT2D_COO_SYS_H
+#define RECT2D_COO_SYS_H
 
-#include "SisCooXd2d.h"
+#include "Xd3dCooSys.h"
 
+class Vector2d;
+class Pos2d;
 
-//! @ingroup SisCoo
+//! @ingroup CooSys
 //
-//! @brief Sistema de coordenadas rectangular de 2 dimensiones
-//! definido en un espacio de dos dimensiones.
-class SisCooRect2d2d: public SisCooXd2d
+//! @brief Sistema de coordenadas de dos dimensiones
+//! definido en un espacio de tres dimensiones.
+class Rect2d3dCooSys: public Xd3dCooSys
   {
   public:
-    typedef Vector2d VLocal; //!< Dimension of the vector in local coordinates.
-    typedef Pos2d PLocal; //!< Dimension of the point in local coordinates.
+    typedef Vector2d VLocal; //Vector dimension in local coordinates.
+    typedef Pos2d PLocal; //Point dimension in local coordinates.
 
-
-    SisCooRect2d2d(void);
-    SisCooRect2d2d(const Pos2d &p1,const Pos2d &p2);
-    SisCooRect2d2d(const VGlobal &vX);
-    virtual SisCoo *Copia(void) const;
+    Rect2d3dCooSys(void)
+      : Xd3dCooSys(2) {}
+    Rect2d3dCooSys(const VGlobal &v);
+    Rect2d3dCooSys(const VGlobal &v1,const VGlobal &v2);
+    Rect2d3dCooSys(const PGlobal &p1,const PGlobal &p2, const PGlobal &p3);
+    Rect2d3dCooSys(const Rect2d3dCooSys &other)
+      : Xd3dCooSys(other) {}
+    Rect2d3dCooSys &operator=(const Rect2d3dCooSys &other)
+      {
+	Xd3dCooSys::operator=(other);
+        return *this;
+      }
+    virtual CooSys *Copia(void) const
+      { return new Rect2d3dCooSys(*this); }
+    virtual Xd3dCooSys *CopiaXd3d(void) const
+      { return new Rect2d3dCooSys(*this); }
 
     //Acceso a miembros.
     VGlobal GetI(void) const;
     VGlobal GetJ(void) const;
-    void PutI(const VGlobal &);
-    void PutJ(const VGlobal &);
 
-    //Conversión vectores.
     VGlobal GetCooGlobales(const VLocal &v) const;
     VLocal GetCooLocales(const VGlobal &v) const;
 
-    virtual ~SisCooRect2d2d(void) {}
+    virtual ~Rect2d3dCooSys(void)
+      {}
   };
 
 #endif

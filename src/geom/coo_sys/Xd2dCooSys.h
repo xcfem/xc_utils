@@ -19,33 +19,33 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SisCoo.h
+//CooSys.h
 //Sistema de coordenadas (abstracto).
 
-#ifndef SIS_COO_XD2D_H
-#define SIS_COO_XD2D_H
+#ifndef XD2D_COO_SYS_H
+#define XD2D_COO_SYS_H
 
-#include "SisCoo.h"
+#include "CooSys.h"
 
 class Vector2d;
 class Pos2d;
 class Dir2d;
 
 
-//! @ingroup SisCoo
+//! @ingroup CooSys
 //
-//! @brief Sistema de coordenadas de X dimensiones definido
-//! en un espacio de 2 dimensiones.
-class SisCooXd2d: public SisCoo
+//! @brief Coordinate system of dimension X defined in a
+//! two-dimensional space.
+class Xd2dCooSys: public CooSys
   {
   public:
     typedef Vector2d VGlobal; //!< Vector in the 2D space.
     typedef Dir2d DGlobal; //!< Direction in the 2D space.
     typedef Pos2d PGlobal; //!< Point the 2D space.
   protected:
-    SisCooXd2d(const size_t &);
-    SisCooXd2d(const size_t &,const VGlobal &);
-    SisCooXd2d(const size_t &,const PGlobal &,const PGlobal &);
+    Xd2dCooSys(const size_t &);
+    Xd2dCooSys(const size_t &,const VGlobal &);
+    Xd2dCooSys(const size_t &,const PGlobal &,const PGlobal &);
 
     void putRow(const size_t &axis,const VGlobal &v);
     void XAxisVector(const VGlobal &vX);

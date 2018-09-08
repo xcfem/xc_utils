@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SisCooRect2d2d.cc
+//Rect2d2dCooSys.cc
 
-#include "SisCooRect2d2d.h"
+#include "Rect2d2dCooSys.h"
 #include "../pos_vec/Pos2d.h"
 #include "../pos_vec/Vector2d.h"
 #include "../pos_vec/Vector3d.h"
@@ -31,26 +31,26 @@
 
 
 //! @brief Default constructor.
-SisCooRect2d2d::SisCooRect2d2d(void): SisCooXd2d(2) {}
+Rect2d2dCooSys::Rect2d2dCooSys(void): Xd2dCooSys(2) {}
 //! @brief Constructor.
-SisCooRect2d2d::SisCooRect2d2d(const Pos2d &p1,const Pos2d &p2)
-  : SisCooXd2d(2,p1,p2) {} //Axis 1 desde p1 a p2.
+Rect2d2dCooSys::Rect2d2dCooSys(const Pos2d &p1,const Pos2d &p2)
+  : Xd2dCooSys(2,p1,p2) {} //Axis 1 desde p1 a p2.
 //! @brief Constructor.
-SisCooRect2d2d::SisCooRect2d2d(const VGlobal &vX)
-  : SisCooXd2d(2,vX) {} //Axis x paralelo a vX.
+Rect2d2dCooSys::Rect2d2dCooSys(const VGlobal &vX)
+  : Xd2dCooSys(2,vX) {} //Axis x paralelo a vX.
 
 //! @brief Constructor virtual.
-SisCoo *SisCooRect2d2d::Copia(void) const
-  { return new SisCooRect2d2d(*this); }
+CooSys *Rect2d2dCooSys::Copia(void) const
+  { return new Rect2d2dCooSys(*this); }
 
 //! @brief Return el vector unitario I en el sistema global.
-SisCooRect2d2d::VGlobal SisCooRect2d2d::GetI(void) const
+Rect2d2dCooSys::VGlobal Rect2d2dCooSys::GetI(void) const
   { return getAxisVDir(1); }
 //! @brief Return el vector unitario J en el sistema global.
-SisCooRect2d2d::VGlobal SisCooRect2d2d::GetJ(void) const
+Rect2d2dCooSys::VGlobal Rect2d2dCooSys::GetJ(void) const
   { return getAxisVDir(2); }
 //! @brief Asigna el vector unitario I.
-void SisCooRect2d2d::PutI(const VGlobal &i)
+void Rect2d2dCooSys::PutI(const VGlobal &i)
   {
     put(1,1,i(1));
     put(1,2,i(2));
@@ -58,7 +58,7 @@ void SisCooRect2d2d::PutI(const VGlobal &i)
     put(2,2,i(1)); //Para que sea ortogonal y dextrógiro.
   }
 //! @brief Asigna el vector unitario I.
-void SisCooRect2d2d::PutJ(const VGlobal &j)
+void Rect2d2dCooSys::PutJ(const VGlobal &j)
   {
     put(2,1,j(1));
     put(2,2,j(2));
@@ -68,13 +68,13 @@ void SisCooRect2d2d::PutJ(const VGlobal &j)
 
 //! @brief Return las componentes del vector v expresado en locales
 //! expresadas en coordenadas globales.
-SisCooRect2d2d::VGlobal SisCooRect2d2d::GetCooGlobales(const VLocal &v) const
-  { return SisCooXd2d::GetCooGlobales(v.getMatrix()); }
+Rect2d2dCooSys::VGlobal Rect2d2dCooSys::GetCooGlobales(const VLocal &v) const
+  { return Xd2dCooSys::GetCooGlobales(v.getMatrix()); }
 //! @brief Return las componentes del vector v expresado en locales
 //expresadas en coordenadas globales.
-SisCooRect2d2d::VLocal SisCooRect2d2d::GetCooLocales(const VGlobal &v) const
+Rect2d2dCooSys::VLocal Rect2d2dCooSys::GetCooLocales(const VGlobal &v) const
   {
-    const FT_matrix tmp= SisCooXd2d::GetCooLocales(v);
+    const FT_matrix tmp= Xd2dCooSys::GetCooLocales(v);
     return VLocal(tmp(1),tmp(2)); 
   }
 

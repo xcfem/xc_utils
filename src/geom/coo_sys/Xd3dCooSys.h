@@ -19,23 +19,23 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SisCoo.h
-//Sistema de coordenadas (abstracto).
+//Xd3dCooSys.h
+//Coordinate system of dimension X defined in a three-dimensional space.
 
-#ifndef SIS_COO_XD3D_H
-#define SIS_COO_XD3D_H
+#ifndef XD3D_COO_SYS_H
+#define XD3D_COO_SYS_H
 
-#include "SisCoo.h"
+#include "CooSys.h"
 
 class Vector3d;
 class Dir3d;
 class Pos3d;
 
-//! @ingroup SisCoo
+//! @ingroup CooSys
 //! 
-//! @brief Clase base para los sistemas de coordenadas
-//! definidos en un espacio de 3 dimensiones.
-class SisCooXd3d: public SisCoo
+//! @brief Base class for coordinate systems
+//! defined in a three-dimensional space.
+class Xd3dCooSys: public CooSys
   {
   public:
     typedef Vector3d VGlobal; //!< Vector in the 3D space.
@@ -43,13 +43,13 @@ class SisCooXd3d: public SisCoo
     typedef Dir3d DGlobal; //!< Direction in the 3D space.
   protected:
     void vectores_unitarios(const VGlobal &i_,const VGlobal &j_,const VGlobal &k_);
-    SisCooXd3d(const size_t &i)
-      : SisCoo(i,3) {}
-    SisCooXd3d(const size_t &i,const VGlobal &v1);
-    SisCooXd3d(const size_t &i,const VGlobal &v1,const VGlobal &v2);
-    SisCooXd3d(const size_t &i,const PGlobal &o,const PGlobal &p);
-    SisCooXd3d(const size_t &i,const PGlobal &p1,const PGlobal &p2, const PGlobal &p3);
-    SisCooXd3d(const size_t &i,const VGlobal &v1,const VGlobal &v2,const VGlobal &v3);
+    Xd3dCooSys(const size_t &i)
+      : CooSys(i,3) {}
+    Xd3dCooSys(const size_t &i,const VGlobal &v1);
+    Xd3dCooSys(const size_t &i,const VGlobal &v1,const VGlobal &v2);
+    Xd3dCooSys(const size_t &i,const PGlobal &o,const PGlobal &p);
+    Xd3dCooSys(const size_t &i,const PGlobal &p1,const PGlobal &p2, const PGlobal &p3);
+    Xd3dCooSys(const size_t &i,const VGlobal &v1,const VGlobal &v2,const VGlobal &v3);
 
 
     void putRow(const size_t &axis,const VGlobal &v);
@@ -59,9 +59,9 @@ class SisCooXd3d: public SisCoo
 
   public:
     //@ brief Constructor virtual.
-    virtual SisCooXd3d *CopiaXd3d(void) const= 0;
+    virtual Xd3dCooSys *CopiaXd3d(void) const= 0;
     virtual VGlobal getAxisVDir(const size_t &axis) const;
-    //Return el direction vector of the axis que se pasa como parámetro.
+    //Return the direction vector of the axis.
     virtual DGlobal getAxisDir(const size_t &axis) const;
 
     VGlobal GetCooGlobales(const FT_matrix &v) const;

@@ -19,31 +19,36 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//MEFSisCoo1DRect.cc
+//Rect1d2dCooSys.h
+//One dimensional coordinate system defined in a three-dimensional space.
 
-#include "SisCooRect1d3d.h"
-#include "../pos_vec/Vector3d.h"
-#include "../pos_vec/Dir3d.h"
-#include "../pos_vec/Pos3d.h"
+#ifndef SISCOORECT1D2D_H
+#define SISCOORECT1D2D_H
 
+#include "Xd2dCooSys.h"
 
-
-SisCooRect1d3d::SisCooRect1d3d(const VGlobal &vX)
-  : SisCooXd3d(1,vX)  //Axis 1 paralelo a Vx.
-  {}
-SisCooRect1d3d::SisCooRect1d3d(const PGlobal &o,const PGlobal &p)
-  : SisCooXd3d(1,o,p) {}
-
-SisCooRect1d3d::VGlobal SisCooRect1d3d::GetI(void) const
-//Return el vector unitario I en el sistema global.
-  { return getAxisVDir(1); }
-SisCooRect1d3d::VGlobal SisCooRect1d3d::GetCooGlobales(const VLocal &v) const
-{ return SisCooXd3d::GetCooGlobales(FT_matrix(1,1,v)); }
-SisCooRect1d3d::VLocal SisCooRect1d3d::GetCooLocales(const SisCooRect1d3d::VGlobal &v) const
-//Return las componentes del vector v expresado en locales
-//expresadas en coordenadas globales.
+//! @ingroup CooSys
+//
+//! @brief One dimensional coordinate system defined in a three-dimensional
+//! space.
+class Rect1d2dCooSys: public Xd2dCooSys
   {
-    const FT_matrix tmp= SisCooXd3d::GetCooLocales(v);
-    return VLocal(tmp(1));
-  }
+  public:
+    typedef GEOM_FT VLocal; //Vector type in local system.
+    typedef GEOM_FT PLocal; //Point type in local system.
 
+    Rect1d2dCooSys(void): Xd2dCooSys(1) {}
+    Rect1d2dCooSys(const PGlobal &o,const PGlobal &p);
+    Rect1d2dCooSys(const VGlobal &vX);
+    virtual CooSys *Copia(void) const
+      { return new Rect1d2dCooSys(*this); }
+
+    VGlobal GetI(void) const; //Return global coordinates of unit vector I.
+
+    VGlobal GetCooGlobales(const VLocal &v) const;
+    VLocal GetCooLocales(const VGlobal &v) const;
+    virtual ~Rect1d2dCooSys(void)
+      {}
+  };
+
+#endif

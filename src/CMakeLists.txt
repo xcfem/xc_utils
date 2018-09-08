@@ -98,7 +98,7 @@ SET(cuadGauss gauss_quadrature/GaussQuadrature2D gauss_quadrature/GaussQuadratur
 
 SET(geomTrfs geom/trf/Trf geom/trf/Trf2d geom/trf/Rotation2d geom/trf/Trf3d geom/trf/Translation2d geom/trf/Scaling3d geom/trf/Scaling2d geom/trf/Identidad2d geom/trf/Identidad3d geom/trf/Translation3d geom/trf/Reflection2d geom/trf/Rotation3d geom/trf/Reflection3d geom/trf/Revolucion3d)
 
-SET(geomSisCooRef geom/sis_coo/SisCoo geom/sis_coo/SisCooRect1d3d geom/sis_coo/SisCooRect2d3d geom/sis_coo/SisCooRect3d3d geom/sis_coo/SisCooRect1d2d geom/sis_coo/SisCooRect2d2d geom/sis_coo/SisCooXd3d geom/sis_coo/SisCooXd2d geom/ geom/sis_ref/Ref1d2d geom/sis_ref/Ref3d3d geom/sis_ref/Ref2d2d geom/sis_ref/Ref1d3d geom/sis_ref/Ref2d3d geom/sis_ref/PrincipalAxesOfInertia2D)
+SET(geomRefCooSys geom/coo_sys/CooSys geom/coo_sys/Rect1d3dCooSys geom/coo_sys/Rect2d3dCooSys geom/coo_sys/Rect3d3dCooSys geom/coo_sys/Rect1d2dCooSys geom/coo_sys/Rect2d2dCooSys geom/coo_sys/Xd3dCooSys geom/coo_sys/Xd2dCooSys geom/ geom/sis_ref/Ref1d2d geom/sis_ref/Ref3d3d geom/sis_ref/Ref2d2d geom/sis_ref/Ref1d3d geom/sis_ref/Ref2d3d geom/sis_ref/PrincipalAxesOfInertia2D)
 
 SET(geomD0 geom/d0/Point3d geom/d0/Point2d)
 
@@ -110,7 +110,7 @@ SET(geomD3 geom/d3/BND3d geom/d3/GeomObj3d geom/d3/BspTree3d geom/d3/Cylinder ge
 
 SET(funcFromPoints geom/d1/function_from_points/FunctionFromPointsR_R geom/d1/function_from_points/FunctionFromPointsR2_R)
 
-SET(geom geom/pos_vec/VDesliz3d geom/pos_vec/VFijo3d geom/pos_vec/Vector2d geom/pos_vec/Vector3d geom/pos_vec/Pos2d geom/pos_vec/Pos2dList geom/pos_vec/Pos3d geom/pos_vec/KDTreePos geom/pos_vec/Pos3dList geom/pos_vec/Dir3d geom/pos_vec/Dir2d geom/pos_vec/VDesliz2d geom/pos_vec/VFijo2d geom/pos_vec/SlidingVectorsSystem3d geom/pos_vec/SlidingVectorsSystem2d geom/pos_vec/Pos2dArray geom/pos_vec/Array3dBoxRefBase geom/pos_vec/Array3dRange geom/pos_vec/Pos2dArray3d geom/pos_vec/Pos3dArray geom/pos_vec/Pos3dArray3d geom/lists/ThreePoints3d geom/lists/utils_list_pos2d geom/lists/utils_list_pos3d geom/Wm3/Wm3Math geom/Wm3/Wm3Distance geom/Wm3/Wm3DistVector3Triangle3 ${geomD0} ${geomD1} ${geomD2} ${geomD3} ${geomSisCooRef} ${geomTrfs} ${funcFromPoints} geom/cgal_types geom/GeomObj geom/FT_matrix geom/ProtoGeom)
+SET(geom geom/pos_vec/VDesliz3d geom/pos_vec/VFijo3d geom/pos_vec/Vector2d geom/pos_vec/Vector3d geom/pos_vec/Pos2d geom/pos_vec/Pos2dList geom/pos_vec/Pos3d geom/pos_vec/KDTreePos geom/pos_vec/Pos3dList geom/pos_vec/Dir3d geom/pos_vec/Dir2d geom/pos_vec/VDesliz2d geom/pos_vec/VFijo2d geom/pos_vec/SlidingVectorsSystem3d geom/pos_vec/SlidingVectorsSystem2d geom/pos_vec/Pos2dArray geom/pos_vec/Array3dBoxRefBase geom/pos_vec/Array3dRange geom/pos_vec/Pos2dArray3d geom/pos_vec/Pos3dArray geom/pos_vec/Pos3dArray3d geom/lists/ThreePoints3d geom/lists/utils_list_pos2d geom/lists/utils_list_pos3d geom/Wm3/Wm3Math geom/Wm3/Wm3Distance geom/Wm3/Wm3DistVector3Triangle3 ${geomD0} ${geomD1} ${geomD2} ${geomD3} ${geomRefCooSys} ${geomTrfs} ${funcFromPoints} geom/cgal_types geom/GeomObj geom/FT_matrix geom/ProtoGeom)
 
 SET(GnuGts gnu_gts/GTSSurface gnu_gts/GTSVertex gnu_gts/GTSEdge gnu_gts/GTSFace gnu_gts/GTSSplit gnu_gts/GTSSurfaceTraverse gnu_gts/GTSSurfaceIntersection gnu_gts/GTSBBoxTree gnu_gts/GTSGraph gnu_gts/TriangleMap)
 

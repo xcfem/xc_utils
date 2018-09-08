@@ -25,7 +25,7 @@
 #define REF1D2D_H
 
 #include "Ref.h"
-#include "../sis_coo/SisCooRect1d2d.h"
+#include "../coo_sys/Rect1d2dCooSys.h"
 #include "../d2/GeomObj2d.h"
 #include "../pos_vec/Pos2d.h"
 #include "../pos_vec/Vector2d.h"
@@ -38,16 +38,16 @@ class Dir2d;
 //! 
 //! @brief 1D Reference system defined in a
 //! bi-dimensional one.
-class Ref1d2d : public Ref<SisCooRect1d2d>
+class Ref1d2d : public Ref<Rect1d2dCooSys>
   {
   public:
     typedef GeomObj2d::list_Pos2d list_Pos2d;
-    typedef Ref<SisCooRect1d2d> BaseRef;
+    typedef Ref<Rect1d2dCooSys> BaseRef;
 
   public:
     Ref1d2d(void);
     Ref1d2d(const Pos2d &);
-    Ref1d2d(const Pos2d &,const SisCooRect1d2d &);
+    Ref1d2d(const Pos2d &,const Rect1d2dCooSys &);
     Ref1d2d(const Pos2d &o,const Vector2d &vX);
     Ref1d2d(const Pos2d &o,const Dir2d &dirX);
     Ref1d2d(const Pos2d &o,const Pos2d &p);

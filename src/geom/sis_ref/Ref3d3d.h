@@ -25,7 +25,7 @@
 #define REF3D3D_H
 
 #include "Ref.h"
-#include "../sis_coo/SisCooRect3d3d.h"
+#include "../coo_sys/Rect3d3dCooSys.h"
 #include "../d3/GeomObj3d.h"
 #include "../pos_vec/Pos3d.h"
 
@@ -37,16 +37,16 @@ class Plane;
 //! 
 //! @brief Sistema de referencia tridimensional definido
 //! en un sistema de referencia tridimensional.
-class Ref3d3d : public Ref<SisCooRect3d3d>
+class Ref3d3d : public Ref<Rect3d3dCooSys>
   {
   public:
     typedef GeomObj3d::list_Pos3d list_Pos3d;
-    typedef Ref<SisCooRect3d3d> BaseRef;
+    typedef Ref<Rect3d3dCooSys> BaseRef;
 
   public:
     Ref3d3d(void);
     Ref3d3d(const Pos3d &o);
-    Ref3d3d(const Pos3d &,const SisCooRect3d3d &);
+    Ref3d3d(const Pos3d &,const Rect3d3dCooSys &);
     Ref3d3d(const Pos3d &o,const Pos3d &p);
     Ref3d3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
     Ref3d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2);

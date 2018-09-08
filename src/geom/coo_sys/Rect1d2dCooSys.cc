@@ -19,38 +19,35 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Ref2d2d.cc
-#include "Ref2d2d.h"
+//Rect1d2dCooSys.cc
+
+#include "Rect1d2dCooSys.h"
+#include "xc_utils/src/geom/pos_vec/Pos2d.h"
 #include "xc_utils/src/geom/pos_vec/Vector2d.h"
 #include "xc_utils/src/geom/pos_vec/Dir2d.h"
-#include "xc_utils/src/geom/d1/Line2d.h"
+
+#include "xc_basic/src/text/text_string.h"
+#include "xc_basic/src/funciones/algebra/ExprAlgebra.h"
 
 
+Rect1d2dCooSys::Rect1d2dCooSys(const VGlobal &vX)
+  : Xd2dCooSys(1,vX) {} //Axis 1 paralelo a Vx.
+Rect1d2dCooSys::Rect1d2dCooSys(const PGlobal &p1,const PGlobal &p2)
+  : Xd2dCooSys(1,p1,p2) {} //Axis 1 desde p1 a p2.
 
-Ref2d2d::Ref2d2d(void): BaseRef() {}
-Ref2d2d::Ref2d2d(const Pos2d &o) : BaseRef(o) {}
-Ref2d2d::Ref2d2d(const Pos2d &o,const Rect2d2dCooSys &sc): BaseRef(o,sc) {}
-Ref2d2d::Ref2d2d(const Pos2d &o,const Vector2d &vX): BaseRef(o,vX) {}
-Ref2d2d::Ref2d2d(const Pos2d &o,const Dir2d &dirX): BaseRef(o,dirX) {}
-Ref2d2d::Ref2d2d(const Pos2d &o,const Pos2d &p): BaseRef(o,p) {}
-
-//! @brief Return the unary vector I expressed in global coordinates.
-Vector2d Ref2d2d::GetI(void) const
+Rect1d2dCooSys::VGlobal Rect1d2dCooSys::GetI(void) const
+//Return el vector unitario I en el sistema global.
   { return getAxisVDir(1); }
-//! @brief Return the unary vector J expressed in global coordinates.
-Vector2d Ref2d2d::GetJ(void) const
-  { return getAxisVDir(2); }
-
-//! @brief Return la line defining the x axis.
-Line2d Ref2d2d::getXAxis(void) const
+Rect1d2dCooSys::VGlobal Rect1d2dCooSys::GetCooGlobales(const VLocal &v) const
+//Return las componentes del vector v 
+//que se pasa como parámetro expresado en locales
+//expresadas en coordenadas globales.
+  { return Xd2dCooSys::GetCooGlobales(FT_matrix(1,1,v)); }
+Rect1d2dCooSys::VLocal Rect1d2dCooSys::GetCooLocales(const Rect1d2dCooSys::VGlobal &v) const
+//Return las componentes del vector v expresado en locales
+//expresadas en coordenadas globales.
   {
-    const Pos2d dest(org+1000.0*GetI());
-    return Line2d(org,dest);
-  }
-//! @brief Return la line defining the y axis.
-Line2d Ref2d2d::getYAxis(void) const
-  {
-    const Pos2d dest(org+1000.0*GetJ());
-    return Line2d(org,dest);
+    const FT_matrix tmp= Xd2dCooSys::GetCooLocales(v);
+    return tmp(1,1);
   }
 

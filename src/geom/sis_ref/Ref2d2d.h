@@ -25,7 +25,7 @@
 #define REF2D2D_H
 
 #include "Ref.h"
-#include "../sis_coo/SisCooRect2d2d.h"
+#include "../coo_sys/Rect2d2dCooSys.h"
 #include "../d2/GeomObj2d.h"
 #include "../pos_vec/Pos2d.h"
 #include "../pos_vec/Vector2d.h"
@@ -37,16 +37,16 @@ class Line2d;
 //! 
 //! @brief Sistema de referencia bidimensional definido
 //! en un sistema de referencia bidimensional.
-class Ref2d2d : public Ref<SisCooRect2d2d>
+class Ref2d2d : public Ref<Rect2d2dCooSys>
   {
   public:
     typedef GeomObj2d::list_Pos2d list_Pos2d;
-    typedef Ref<SisCooRect2d2d> BaseRef;
+    typedef Ref<Rect2d2dCooSys> BaseRef;
 
   public:
     Ref2d2d(void);
     Ref2d2d(const Pos2d &o);
-    Ref2d2d(const Pos2d &,const SisCooRect2d2d &);
+    Ref2d2d(const Pos2d &,const Rect2d2dCooSys &);
     Ref2d2d(const Pos2d &o,const Vector2d &vX);
     Ref2d2d(const Pos2d &o,const Dir2d &dirX);
     Ref2d2d(const Pos2d &o,const Pos2d &p);

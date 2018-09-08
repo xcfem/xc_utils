@@ -19,37 +19,37 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SisCooRect1d3d.h
-//Sistema de coordenadas de una dimensión en un espacio de 3 dimensiones.
+//Rect1d3dCooSys.h
+//One-dimensional coordinate system defined in a three-dimensional space.
 
 #ifndef SISCOORECT1D3D_H
 #define SISCOORECT1D3D_H
 
-#include "SisCooXd3d.h"
+#include "Xd3dCooSys.h"
 
-//! @ingroup SisCoo
+//! @ingroup CooSys
 //
-//! @brief Sistema de coordenadas de 1 dimensión
-//! definido en un espacio de tres dimensiones.
-class SisCooRect1d3d: public SisCooXd3d
+//! @brief One-dimensional coordinate system defined in a
+//! three-dimensional space.
+class Rect1d3dCooSys: public Xd3dCooSys
   {
   public:
     typedef GEOM_FT VLocal; //Dimension of the vector in local coordinates.
     typedef GEOM_FT PLocal; //Dimension of the point in local coordinates.
 
   public:
-    SisCooRect1d3d(void): SisCooXd3d(1) {}
-    SisCooRect1d3d(const PGlobal &o,const PGlobal &p);
-    SisCooRect1d3d(const VGlobal &vX);
-    virtual SisCoo *Copia(void) const
-      { return new SisCooRect1d3d(*this); }
-    virtual SisCooXd3d *CopiaXd3d(void) const
-      { return new SisCooRect1d3d(*this); }
+    Rect1d3dCooSys(void): Xd3dCooSys(1) {}
+    Rect1d3dCooSys(const PGlobal &o,const PGlobal &p);
+    Rect1d3dCooSys(const VGlobal &vX);
+    virtual CooSys *Copia(void) const
+      { return new Rect1d3dCooSys(*this); }
+    virtual Xd3dCooSys *CopiaXd3d(void) const
+      { return new Rect1d3dCooSys(*this); }
     void XAxisVector(const VGlobal &vX);
-    VGlobal GetI(void) const; //Return el vector unitario I en el sistema global.
+    VGlobal GetI(void) const; //Return the global coordinates of unit vector I.
     VGlobal GetCooGlobales(const VLocal &v) const;
     VLocal GetCooLocales(const VGlobal &v) const;
-    virtual ~SisCooRect1d3d(void)
+    virtual ~Rect1d3dCooSys(void)
       {}
   };
 

@@ -29,7 +29,7 @@
 
 Ref1d3d::Ref1d3d(void): BaseRef() {}
 Ref1d3d::Ref1d3d(const Pos3d &o): BaseRef(o) {}
-Ref1d3d::Ref1d3d(const Pos3d &o,const SisCooRect1d3d &sc): BaseRef(o,sc) {}
+Ref1d3d::Ref1d3d(const Pos3d &o,const Rect1d3dCooSys &sc): BaseRef(o,sc) {}
 Ref1d3d::Ref1d3d(const Pos3d &o,const Vector3d &vX): BaseRef(o,vX) {}
 Ref1d3d::Ref1d3d(const Pos3d &o,const Dir3d &dirX): BaseRef(o,dirX) {}
 Ref1d3d::Ref1d3d(const Pos3d &o,const Pos3d &p) : BaseRef(o,p) {}

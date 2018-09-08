@@ -19,22 +19,22 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//SisCoo.cc
+//CooSys.cc
 
-#include "SisCoo.h"
+#include "CooSys.h"
 #include "../pos_vec/Pos3d.h"
 
 #include "xc_basic/src/text/text_string.h"
 #include "xc_basic/src/funciones/algebra/ExprAlgebra.h"
 
 
-//! @brief Define un sistema de coordenadas de ne dimensiones
-//! en un espacio de dimensión dim.
-SisCoo::SisCoo(const size_t &ne,const size_t &dim)
+//! @brief Constructor.
+CooSys::CooSys(const size_t &ne,const size_t &dim)
   : ProtoGeom(), rot(ne,dim) 
   { identidad(); }
+
 //! @brief Row-normalize matrix.
-void SisCoo::normaliza(void)
+void CooSys::normaliza(void)
   {
     if(!rot.Nulo())
       NormalizeRows(rot);
@@ -42,21 +42,22 @@ void SisCoo::normaliza(void)
       std::cerr << getClassName() << "::" << __FUNCTION__
                 << rot << " es nula." << std::endl;
   }
-//! @brief Hace que la base sea ortogonal
-void SisCoo::ortogonaliza(void)
+//! @brief Make the base orthogonal.
+void CooSys::ortogonaliza(void)
   {
     const size_t ne= numberOfAxis();
     if(ne==1)
       return;
-    else //2 o 3 dimensiones.
+    else //2 o 3 dimensions.
       {
         const FT_matrix i= rot.getRow(1);
         const FT_matrix j= rot.getRow(2);
         const GEOM_FT imod2= i.Abs2();
         if(imod2<geom_epsilon2)
           {
-	    std::cerr << " SisCoo::ortogonaliza; el vector unitario i= " << i
-                      << " es demasiado pequeño (" << imod2 << ")." << std::endl;
+	    std::cerr << getClassName() << "::" << __FUNCTION__
+	              << "; orthogonalize: unit vector i= " << i
+                      << " is too small (" << imod2 << ")." << std::endl;
             return;
           }
         else
@@ -72,8 +73,8 @@ void SisCoo::ortogonaliza(void)
           }
       }
   }
-//! @brief Hace que la base sea ortonormal
-void SisCoo::ortonormaliza(void)
+//! @brief Makes the base orthonormal.
+void CooSys::ortonormaliza(void)
   {
     ortogonaliza();
     normaliza();
@@ -83,24 +84,24 @@ void SisCoo::ortonormaliza(void)
 //! - Si es un sistema de coordenadas unidimensional lo hace coincidir con el axis 1 of the global system.
 //! - Si es bidimensional, lo hace coincidir con el formado by the axis 1 and 2 of the global system.
 //! - Si es tridimensional, lo hace coincidir con el sistema global.
-void SisCoo::identidad(void)
+void CooSys::identidad(void)
   {
     rot.Con(0);
     for(size_t i=1;i<=rot.getNumberOfRows();i++)
       rot(i,i)= 1;
   }
 //! @brief Assigns the (i,j) component of the matrix.
-void SisCoo::put(const size_t &i,const size_t &j,const GEOM_FT &rot_ij)
+void CooSys::put(const size_t &i,const size_t &j,const GEOM_FT &rot_ij)
   { rot(i,j)= rot_ij; }
 
 //! @brief Return the matrix i row.
-FT_matrix SisCoo::getRow(const size_t &i) const
+FT_matrix CooSys::getRow(const size_t &i) const
   {
     assert(i<=numberOfAxis());
     return rot.getRow(i);
   }
 //! @brief Return true if the vectors are normalized.
-bool SisCoo::EsNormal(void) const
+bool CooSys::EsNormal(void) const
   {
     const size_t ne= numberOfAxis();
     for(size_t i=1;i<=ne;i++)
@@ -113,7 +114,7 @@ bool SisCoo::EsNormal(void) const
   }
 
 //! @brief Return verdadero si el sistema de coordenadas es dextrógiro.
-bool SisCoo::EsDextrogiro(void) const
+bool CooSys::EsDextrogiro(void) const
   {
     if(numberOfAxis()<3)
       return true;
@@ -132,7 +133,7 @@ bool SisCoo::EsDextrogiro(void) const
   }
 
 //! @brief Return verdadero si los vectores son ortogonales.
-bool SisCoo::EsOrtogonal(void) const
+bool CooSys::EsOrtogonal(void) const
   {
     const size_t ne= numberOfAxis();
     if(ne<2)
@@ -153,38 +154,38 @@ bool SisCoo::EsOrtogonal(void) const
   }
 
 //! @brief Return verdadero si los vectores son unitarios y ortogonales.
-bool SisCoo::EsOrtonormal(void) const
+bool CooSys::EsOrtonormal(void) const
   { return (EsOrtogonal() && EsNormal()); }
 
 //! @brief Set the i row of the matrix.
-void SisCoo::putRow(const size_t &axis,const FT_matrix &v)
+void CooSys::putRow(const size_t &axis,const FT_matrix &v)
   { rot.putRow(axis,v); }
 //! @brief Return the matrix que transforma un vector expresado
 //! en locales al mismo vector expresado en globales.
-FT_matrix SisCoo::TransAGlobal(void) const
+FT_matrix CooSys::TransAGlobal(void) const
   { return rot.GetTrn(); }
 //! @brief Return the matrix que transforma un vector expresado
 //! en globales al mismo vector expresado en locales.
-FT_matrix SisCoo::TransDeGlobal(void) const
+FT_matrix CooSys::TransDeGlobal(void) const
   { return rot; }
 //! @brief Return the transformation matrix desde este sistema a dest.
-FT_matrix SisCoo::GetTransA(const SisCoo &dest) const
+FT_matrix CooSys::GetTransA(const CooSys &dest) const
   { return (dest.rot*TransAGlobal()); }
 
 //! @brief Return las componentes en coordenadas globales del vector v 
 //! being passed as parameter expresado en coordenadas locales.
-FT_matrix SisCoo::GetCooGlobales(const FT_matrix &v) const
+FT_matrix CooSys::GetCooGlobales(const FT_matrix &v) const
   { return TransAGlobal()*v; }
 //! @brief Return las componentes en coordenadas locales del vector v 
 //! being passed as parameter expresado en coordenadas globales.
-FT_matrix SisCoo::GetCooLocales(const FT_matrix &v) const
+FT_matrix CooSys::GetCooLocales(const FT_matrix &v) const
   { return TransDeGlobal()*v; }
 
 //! @brief Prints the matrix.
-void SisCoo::Print(std::ostream &os) const
+void CooSys::Print(std::ostream &os) const
   { os << rot; }
 
-std::ostream &operator<<(std::ostream &os,const SisCoo &sc)
+std::ostream &operator<<(std::ostream &os,const CooSys &sc)
   {
     sc.Print(os);
     return os;

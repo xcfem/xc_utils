@@ -32,7 +32,7 @@ Ref3d3d::Ref3d3d(void): BaseRef() {}
 Ref3d3d::Ref3d3d(const Pos3d &o) : BaseRef(o) {}
 
 //! @brief Constructor.
-Ref3d3d::Ref3d3d(const Pos3d &o,const SisCooRect3d3d &sc)
+Ref3d3d::Ref3d3d(const Pos3d &o,const Rect3d3dCooSys &sc)
   : BaseRef(o,sc) {}
 
 //! @brief Constructor.
@@ -40,19 +40,19 @@ Ref3d3d::Ref3d3d(const Pos3d &o,const Pos3d &p) : BaseRef(o,p) {}
 
 //! @brief Constructor.
 Ref3d3d::Ref3d3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
-  : BaseRef(p1,SisCooRect3d3d(p1,p2,p3)) {}
+  : BaseRef(p1,Rect3d3dCooSys(p1,p2,p3)) {}
 
 //! @brief Constructor.
 Ref3d3d::Ref3d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2)
-  : BaseRef(o,SisCooRect3d3d(v1,v2)) {}
+  : BaseRef(o,Rect3d3dCooSys(v1,v2)) {}
 
 //! @brief Constructor.
 Ref3d3d::Ref3d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2,const Vector3d &v3)
-  : BaseRef(o,SisCooRect3d3d(v1,v2,v3)) {}
+  : BaseRef(o,Rect3d3dCooSys(v1,v2,v3)) {}
 
 //! @brief Constructor.
 Ref3d3d::Ref3d3d(const Line3d &r,const Pos3d &p)
-  : BaseRef(r.Point(0),SisCooRect3d3d(r.Point(0),r.Point(100),p)) {}
+  : BaseRef(r.Point(0),Rect3d3dCooSys(r.Point(0),r.Point(100),p)) {}
 
 Ref3d3d::~Ref3d3d(void)
   {}
