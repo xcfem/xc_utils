@@ -25,7 +25,7 @@
 #include "xc_basic/src/util/matem.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d2/2d_polygons/Triangle2d.h"
-#include "xc_utils/src/geom/d2/2d_polygons/Cuadrilatero2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/Quadrilateral2d.h"
 #include "xc_utils/src/geom/FT_matrix.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
@@ -136,7 +136,7 @@ GEOM_FT Pos2dArray::GetIy(void) const
   {
     GEOM_FT retval= 0.0;
     Pos2d c;
-    Cuadrilatero2d q;
+    Quadrilateral2d q;
     for(size_t i=1;i<n_rows;i++)
       for(size_t j=1;j<n_columns;j++)
         {
@@ -152,7 +152,7 @@ GEOM_FT Pos2dArray::GetIx(void) const
   {
     GEOM_FT retval= 0.0;
     Pos2d c;
-    Cuadrilatero2d q;
+    Quadrilateral2d q;
     for(size_t i=1;i<n_rows;i++)
       for(size_t j=1;j<n_columns;j++)
         {
@@ -169,7 +169,7 @@ GEOM_FT Pos2dArray::GetPxy(void) const
   {
     GEOM_FT retval= 0.0;
     Pos2d c;
-    Cuadrilatero2d q;
+    Quadrilateral2d q;
     for(size_t i=1;i<n_rows;i++)
       for(size_t j=1;j<n_columns;j++)
         {
@@ -258,8 +258,8 @@ Pos2d Pos2dArray::getPoint(const size_t &i,const size_t &j) const
 //                                                                                   |   |
 //                                                                                   |   |
 //                                                                               i,j +---+ i,j+1
-Cuadrilatero2d Pos2dArray::GetQuad(const size_t &i,const size_t &j) const
-  { return Cuadrilatero2d((*this)(i,j),(*this)(i,j+1),(*this)(i+1,j+1),(*this)(i+1,j)); }
+Quadrilateral2d Pos2dArray::GetQuad(const size_t &i,const size_t &j) const
+  { return Quadrilateral2d((*this)(i,j),(*this)(i,j+1),(*this)(i+1,j+1),(*this)(i+1,j)); }
 
 
 bool Pos2dArray::In(const Pos2d &p, const double &tol) const

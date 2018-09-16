@@ -67,7 +67,7 @@
 #include "xc_utils/src/geom/d2/GeneralEquationOfPlane.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d2/Triangle3d.h"
-#include "xc_utils/src/geom/d2/2d_polygons/Cuadrilatero2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/Quadrilateral2d.h"
 #include "xc_utils/src/geom/d2/Grid2d.h"
 #include "xc_utils/src/geom/pos_vec/SlidingVectorsSystem2d.h"
 #include "xc_utils/src/geom/pos_vec/SlidingVectorsSystem3d.h"

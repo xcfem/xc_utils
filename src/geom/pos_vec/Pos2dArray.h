@@ -28,7 +28,7 @@
 #include "PosArray.h"
 
 class Triangle2d;
-class Cuadrilatero2d;
+class Quadrilateral2d;
 class FT_matrix;
 class Trf2d;
 
@@ -70,7 +70,7 @@ class Pos2dArray: public PosArray<Pos2d>
     GEOM_FT GetY(const size_t &,const size_t &) const;
     const FT_matrix &GetVertCoords(const size_t &,const size_t &) const;
     Pos2d getPoint(const size_t &,const size_t &) const;
-    Cuadrilatero2d GetQuad(const size_t &i,const size_t &j) const;
+    Quadrilateral2d GetQuad(const size_t &i,const size_t &j) const;
     double GetAreaQuad(const size_t &i,const size_t &j) const;
     Pos2d GetCentroideQuad(const size_t &i,const size_t &j) const;
     bool In(const Pos2d &, const double &) const;

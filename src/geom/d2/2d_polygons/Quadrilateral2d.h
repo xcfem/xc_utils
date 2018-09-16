@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Cuadrilatero2d.h
+//Quadrilateral2d.h
 
-#ifndef CUADRILATERO2D_H
-#define CUADRILATERO2D_H
+#ifndef QUADRILATERAL2D_H
+#define QUADRILATERAL2D_H
 
 #include "Polygon2d.h"
 
@@ -41,26 +41,26 @@ class Pos2dArray;
 //! @ingroup GEOM
 //
 //! @brief Cuadrilátero en dos dimensiones.
-class Cuadrilatero2d: public Polygon2d
+class Quadrilateral2d: public Polygon2d
   {
   public:
-    Cuadrilatero2d(void): Polygon2d() 
+    Quadrilateral2d(void): Polygon2d() 
       {
         push_back(Pos2d(0,0));
         push_back(Pos2d(1,0));
         push_back(Pos2d(1,1));
         push_back(Pos2d(0,1));
       }
-    Cuadrilatero2d(const Cuadrilatero2d &other): Polygon2d(other)
+    Quadrilateral2d(const Quadrilateral2d &other): Polygon2d(other)
       {}
-    Cuadrilatero2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3,const Pos2d &p4);
-    Cuadrilatero2d &operator=(const Cuadrilatero2d &other)
+    Quadrilateral2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3,const Pos2d &p4);
+    Quadrilateral2d &operator=(const Quadrilateral2d &other)
       {
 	Polygon2d::operator=(other);
         return *this;
       }
     virtual GeomObj *clon(void) const
-      { return new Cuadrilatero2d(*this); }
+      { return new Quadrilateral2d(*this); }
     inline void push_back(const Pos2d &p)
       {
         if(GetNumVertices()<5)

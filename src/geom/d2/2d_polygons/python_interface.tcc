@@ -70,13 +70,13 @@ class_<Polygon2d, Polygon2d *, bases<PolygonalSurface2d> >("Polygon2d")
   .def("clipSegment",clipSegment)
   .def("clipUsingPolygon",&Polygon2d::clipBy);
 
-class_<Cuadrilatero2d, bases<Polygon2d> >("Cuadrilatero2d")
+class_<Quadrilateral2d, bases<Polygon2d> >("Quadrilateral2d")
   .def(init<>())
   .def(init<Pos2d, Pos2d, Pos2d, Pos2d>())
   ;
 
 
-class_<Square2d, bases<Cuadrilatero2d> >("Square2d")
+class_<Square2d, bases<Quadrilateral2d> >("Square2d")
   .def(init<>())
   ;
 

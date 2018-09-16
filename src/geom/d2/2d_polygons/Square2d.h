@@ -24,24 +24,24 @@
 #ifndef SQUARE2D_H
 #define SQUARE2D_H
 
-#include "Cuadrilatero2d.h"
+#include "Quadrilateral2d.h"
 
 
 //! @ingroup GEOM
 //
 //! @brief Square in a two-dimensional space.
-class Square2d : public Cuadrilatero2d
+class Square2d : public Quadrilateral2d
   {
   public:
     Square2d(const GEOM_FT &l= 1.0)
-      : Cuadrilatero2d(Pos2d(0,0),Pos2d(l,0),Pos2d(l,l),Pos2d(0,l)) {}
+      : Quadrilateral2d(Pos2d(0,0),Pos2d(l,0),Pos2d(l,l),Pos2d(0,l)) {}
     Square2d(const Pos2d &o,const GEOM_FT &l= 1.0);
     //Square2d(const Ref2d &ref,const GEOM_FT &l= 1.0): PolygonalSurface(ref), lado(l) {}
-    Square2d(const Square2d &c): Cuadrilatero2d(c) {}
+    Square2d(const Square2d &c): Quadrilateral2d(c) {}
     ~Square2d(void) {}
     Square2d &operator=(const Square2d &c)
       {
-	Cuadrilatero2d::operator=(c);
+	Quadrilateral2d::operator=(c);
         return *this;
       }
     virtual GeomObj *clon(void) const

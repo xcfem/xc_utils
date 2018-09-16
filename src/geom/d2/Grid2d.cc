@@ -25,7 +25,7 @@
 
 
 
-#include "xc_utils/src/geom/d2/2d_polygons/Cuadrilatero2d.h"
+#include "xc_utils/src/geom/d2/2d_polygons/Quadrilateral2d.h"
 #include "xc_utils/src/geom/FT_matrix.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
@@ -70,7 +70,7 @@ Pos2d Grid2d::getPoint(const size_t &i,const size_t &j) const
   { return points.getPoint(i,j); }
 
 //! @brief Return the i,j cell quad:
-Cuadrilatero2d Grid2d::GetQuad(const size_t &i,const size_t &j) const
+Quadrilateral2d Grid2d::GetQuad(const size_t &i,const size_t &j) const
   { return points.GetQuad(i,j); }
 
 //! @brief Return true if the point belongs to the grid.

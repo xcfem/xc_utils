@@ -29,5 +29,5 @@
 
 
 Square2d::Square2d(const Pos2d &o,const GEOM_FT &l)
-  : Cuadrilatero2d(o,o+Vector2d(l,0),o+Vector2d(l,l),o+Vector2d(0,l)) {}
+  : Quadrilateral2d(o,o+Vector2d(l,0),o+Vector2d(l,l),o+Vector2d(0,l)) {}
 

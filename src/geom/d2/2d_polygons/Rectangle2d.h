@@ -24,40 +24,40 @@
 #ifndef RECTANGLE2D_H
 #define RECTANGLE2D_H
 
-#include "Cuadrilatero2d.h"
+#include "Quadrilateral2d.h"
 
 //! @ingroup GEOM
 //
 //! @brief Rectangle in a two dimensional space.
-class Rectangle2d: public Cuadrilatero2d
+class Rectangle2d: public Quadrilateral2d
   {
   public:
-    Rectangle2d(const double &b=1.0,const double &h=1.0): Cuadrilatero2d()
+    Rectangle2d(const double &b=1.0,const double &h=1.0): Quadrilateral2d()
       {
         push_back(Pos2d(0,0));
         push_back(Pos2d(b,0));
         push_back(Pos2d(b,h));
         push_back(Pos2d(0,h));
       }
-    Rectangle2d(const Pos2d &o,const double &b=1.0,const double &h=1.0): Cuadrilatero2d()
+    Rectangle2d(const Pos2d &o,const double &b=1.0,const double &h=1.0): Quadrilateral2d()
       {
         push_back(o+Vector2d(0,0));
         push_back(o+Vector2d(b,0));
         push_back(o+Vector2d(b,h));
         push_back(o+Vector2d(0,h));
       }
-      //Rectangle2d(const Ref2d &ref, const double &b=1.0,const double &h=1.0) : Cuadrilatero2d(ref,b),altura(h) {}
-    Rectangle2d(const Rectangle2d &r): Cuadrilatero2d(r) {}
+      //Rectangle2d(const Ref2d &ref, const double &b=1.0,const double &h=1.0) : Quadrilateral2d(ref,b),altura(h) {}
+    Rectangle2d(const Rectangle2d &r): Quadrilateral2d(r) {}
     Rectangle2d &operator=(const Rectangle2d &r)
       {
-	Cuadrilatero2d::operator=(r);
+	Quadrilateral2d::operator=(r);
         return *this;
       }
     virtual GeomObj *clon(void) const
       { return new Rectangle2d(*this); }
 /*     void Offset(const double &offset) */
 /*       { */
-/* 	Cuadrilatero2d::Offset(offset); */
+/* 	Quadrilateral2d::Offset(offset); */
 /*         altura+=2.0*offset; */
 /*       } */
 /*     Rectangle2d GetOffset(const double &offset) const */

@@ -253,7 +253,7 @@ POS get_centro(const PosArray<POS> &m,const SEG &sg)
 //                  --->
 //
 template <class POS>
-PosArray<POS> cuadrilatero(const POS &q1,const POS &q2,const POS &q3,const POS &q4,const size_t &ndiv1,const size_t &ndiv2)
+PosArray<POS> Quadrilateral(const POS &q1,const POS &q2,const POS &q3,const POS &q4,const size_t &ndiv1,const size_t &ndiv2)
   {
     const PosArray<POS> l1(q1,q2,ndiv1);
     const PosArray<POS> l2(q2,q4,ndiv2);

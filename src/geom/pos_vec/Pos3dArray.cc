@@ -56,7 +56,7 @@ Pos3dArray::Pos3dArray(const Pos3dArray &l1_points,const Pos3dArray &l2_points,c
   : PosArray<Pos3d>(l1_points,l2_points,l3_points,l4_points) {}
 
 Pos3dArray::Pos3dArray(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2)
-  : PosArray<Pos3d>(cuadrilatero<Pos3d>(p1,p2,p3,p4,ndiv1,ndiv2)) {}
+  : PosArray<Pos3d>(Quadrilateral<Pos3d>(p1,p2,p3,p4,ndiv1,ndiv2)) {}
 
 
 Pos3d Pos3dArray::GetCentro(void) const
@@ -123,7 +123,7 @@ void Pos3dArray::Transforma(const Trf3d &trf)
 Pos3dArray crea_sup_revolucion(const Revolucion3d &r,const Pos3dArray &m)
   { return r(m); }
 
-Pos3dArray cuadrilatero(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2)
+Pos3dArray Quadrilateral(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2)
   { return Pos3dArray(p1,p2,p3,p4,ndiv1,ndiv2); }
 
 

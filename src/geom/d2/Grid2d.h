@@ -58,7 +58,7 @@ class Grid2d: public Surface2d
     Pos2d getCenterOfMass(void) const;
     const FT_matrix &GetVertCoords(const size_t &,const size_t &) const;
     Pos2d getPoint(const size_t &,const size_t &) const;
-    Cuadrilatero2d GetQuad(const size_t &i,const size_t &j) const;
+    Quadrilateral2d GetQuad(const size_t &i,const size_t &j) const;
     bool In(const Pos2d &, const double &) const;
     
     void Transforma(const Trf2d &trf2d);

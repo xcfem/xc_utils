@@ -66,6 +66,6 @@ GEOM_FT pseudo_dist(const Pos3dArray &ptos,const Pos3d &pt);
 BND3d get_bnd(const Pos3dArray &ptos);
 
 Pos3dArray crea_sup_revolucion(const Revolucion3d &r,const Pos3dArray &m);
-Pos3dArray cuadrilatero(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2);
+Pos3dArray Quadrilateral(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2);
 
 #endif
