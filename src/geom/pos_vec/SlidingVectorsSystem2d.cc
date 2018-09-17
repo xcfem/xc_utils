@@ -22,19 +22,19 @@
 //SlidingVectorsSystem2d.cc
 
 #include "SlidingVectorsSystem2d.h"
-#include "VDesliz2d.h"
+#include "SlidingVector2d.h"
 #include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
 
 
 
-SlidingVectorsSystem2d::SlidingVectorsSystem2d(const VDesliz2d &v)
+SlidingVectorsSystem2d::SlidingVectorsSystem2d(const SlidingVector2d &v)
   : org(v.getOrg()), resul(v),mom(0.0) {}
 
 //! @brief Return the moment about P.
 GEOM_FT SlidingVectorsSystem2d::getMoment(const Pos2d &P) const
   {
-    VDesliz2d R(org,resul);
+    SlidingVector2d R(org,resul);
     return mom+R.getMoment(P);
   }
 
@@ -57,13 +57,13 @@ Vector2d SlidingVectorsSystem2d::getResultant(const Ref2d2d &ref) const
 SlidingVectorsSystem2d SlidingVectorsSystem2d::ReduceA(const Pos2d &Q)
   { return SlidingVectorsSystem2d(Q,resul,getMoment(Q)); }
 
-SlidingVectorsSystem2d &SlidingVectorsSystem2d::operator+=(const VDesliz2d &v)
+SlidingVectorsSystem2d &SlidingVectorsSystem2d::operator+=(const SlidingVector2d &v)
   {
     resul= resul+v;
     mom= mom + v.getMoment(org);
     return *this;
   }
-SlidingVectorsSystem2d &SlidingVectorsSystem2d::operator-=(const VDesliz2d &v)
+SlidingVectorsSystem2d &SlidingVectorsSystem2d::operator-=(const SlidingVector2d &v)
   {
     resul= resul - v;
     mom= mom - v.getMoment(org);

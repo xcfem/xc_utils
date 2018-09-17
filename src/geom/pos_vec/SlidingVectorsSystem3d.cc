@@ -22,7 +22,7 @@
 //SlidingVectorsSystem3d.cc
 
 #include "SlidingVectorsSystem3d.h"
-#include "VDesliz3d.h"
+#include "SlidingVector3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d1/Line3d.h"
 #include "xc_utils/src/geom/sis_ref/Ref3d3d.h"
@@ -52,17 +52,17 @@ Line3d sol_eq_prod_vect(const Vector3d &a,const Vector3d &b)
   }
 
 SlidingVectorsSystem3d::SlidingVectorsSystem3d(const Pos3d &O,const Vector3d &R,const Vector3d &Mo)
-  : VDesliz3d(O,R), mom(Mo) {}
+  : SlidingVector3d(O,R), mom(Mo) {}
 
-SlidingVectorsSystem3d::SlidingVectorsSystem3d(const VDesliz3d &v)
-  : VDesliz3d(v), mom(0,0,0) {}
+SlidingVectorsSystem3d::SlidingVectorsSystem3d(const SlidingVector3d &v)
+  : SlidingVector3d(v), mom(0,0,0) {}
 
 //! @brief Moment field of the SlidingVectorsSystem3d.
 //! Return themoment of the SlidingVectorsSystem3d with respect to the point P.
-VDesliz3d SlidingVectorsSystem3d::getMoment(const Pos3d &P) const
+SlidingVector3d SlidingVectorsSystem3d::getMoment(const Pos3d &P) const
   {
-    const VDesliz3d m2= VDesliz3d::getMoment(P);
-    return VDesliz3d(P,mom+m2);
+    const SlidingVector3d m2= SlidingVector3d::getMoment(P);
+    return SlidingVector3d(P,mom+m2);
   }
 
 //! @brief Return the intersection of the zero moment line (if exists)
@@ -105,7 +105,7 @@ GEOM_FT SlidingVectorsSystem3d::getMoment(const Line3d &e) const
 //! frame being passed as parameter.
 Vector3d SlidingVectorsSystem3d::getMoment(const Ref3d3d &ref) const
   {
-    VDesliz3d m= getMoment(ref.Org());
+    SlidingVector3d m= getMoment(ref.Org());
     return ref.GetCooLocales(m);
   }
 
@@ -117,14 +117,14 @@ Vector3d SlidingVectorsSystem3d::getResultant(const Ref3d3d &ref) const
 bool SlidingVectorsSystem3d::Nulo(void) const
   {
     bool retval= true;
-    if(!VDesliz3d::Nulo()) retval= false;
+    if(!SlidingVector3d::Nulo()) retval= false;
     if(!mom.Nulo()) retval= false;
     return retval;
   }
 
 void SlidingVectorsSystem3d::Neg(void)
   {
-    VDesliz3d::Neg();
+    SlidingVector3d::Neg();
     mom=-mom;
   }
 
@@ -144,7 +144,7 @@ Line3d SlidingVectorsSystem3d::getZeroMomentLine(const double &tol) const
 //! @brief Return true if the line of the points with zero moment exists.
 bool SlidingVectorsSystem3d::existsZeroMomentLine(const double &tol) const
   {
-    if((VDesliz3d::Nulo()) && !(mom.Nulo())) return false;
+    if((SlidingVector3d::Nulo()) && !(mom.Nulo())) return false;
     if(dot(getResultant(),mom)>0) return false;
     return true;
   }
@@ -152,22 +152,22 @@ bool SlidingVectorsSystem3d::existsZeroMomentLine(const double &tol) const
 SlidingVectorsSystem3d SlidingVectorsSystem3d::ReduceA(const Pos3d &Q) const
   { return SlidingVectorsSystem3d(Q,getResultant(),getMoment(Q)); }
 
-SlidingVectorsSystem3d &SlidingVectorsSystem3d::operator+=(const VDesliz3d &v)
+SlidingVectorsSystem3d &SlidingVectorsSystem3d::operator+=(const SlidingVector3d &v)
   {
     Vector3d::operator+=(v);
     mom= mom + v.getMoment(org);
     return *this;
   }
-SlidingVectorsSystem3d &SlidingVectorsSystem3d::operator-=(const VDesliz3d &v)
+SlidingVectorsSystem3d &SlidingVectorsSystem3d::operator-=(const SlidingVector3d &v)
   {
-    VDesliz3d::operator-=(v);
+    SlidingVector3d::operator-=(v);
     mom= mom - v.getMoment(org);
     return *this;
   }
 SlidingVectorsSystem3d &SlidingVectorsSystem3d::operator+=(const SlidingVectorsSystem3d &s)
   //The org point is preserved.
   {
-    VDesliz3d::operator+=(s);
+    SlidingVector3d::operator+=(s);
     mom= mom + s.getMoment(org);
     return *this;
   }
@@ -175,13 +175,13 @@ SlidingVectorsSystem3d &SlidingVectorsSystem3d::operator+=(const SlidingVectorsS
 SlidingVectorsSystem3d &SlidingVectorsSystem3d::operator-=(const SlidingVectorsSystem3d &s)
   //The org point is preserved.
   {
-    VDesliz3d::operator-=(s);
+    SlidingVector3d::operator-=(s);
     mom= mom - s.getMoment(org);
     return *this;
   }
 SlidingVectorsSystem3d &SlidingVectorsSystem3d::operator*=(const GEOM_FT &d)
   {
-    VDesliz3d::operator*=(d);
+    SlidingVector3d::operator*=(d);
     mom= mom * d;
     return *this;
   }
@@ -220,7 +220,7 @@ void SlidingVectorsSystem3d::Print(std::ostream &os) const
   }
 
 //! @brief Return the suma de los sliding vectors.
-SlidingVectorsSystem3d operator+(const VDesliz3d &v1,const VDesliz3d &v2)
+SlidingVectorsSystem3d operator+(const SlidingVector3d &v1,const SlidingVector3d &v2)
   {
     SlidingVectorsSystem3d suma(v1);
     suma+=v2;
@@ -229,7 +229,7 @@ SlidingVectorsSystem3d operator+(const VDesliz3d &v1,const VDesliz3d &v2)
 
 //! @brief Return the sum of the sliding vector system
 //! with the vector being passed as parameter.
-SlidingVectorsSystem3d operator+(const SlidingVectorsSystem3d &s,const VDesliz3d &v)
+SlidingVectorsSystem3d operator+(const SlidingVectorsSystem3d &s,const SlidingVector3d &v)
   {
     SlidingVectorsSystem3d suma(s);
     suma+=v;
@@ -238,7 +238,7 @@ SlidingVectorsSystem3d operator+(const SlidingVectorsSystem3d &s,const VDesliz3d
 
 //! @brief Return the sum of the sliding vector system
 //! with the vector being passed as parameter.
-SlidingVectorsSystem3d operator+(const VDesliz3d &v,const SlidingVectorsSystem3d &s)
+SlidingVectorsSystem3d operator+(const SlidingVector3d &v,const SlidingVectorsSystem3d &s)
   { return s+v; }
 
 //! @brief Cambia de signo al sliding vector.

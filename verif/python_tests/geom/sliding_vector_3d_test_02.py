@@ -7,7 +7,7 @@ import math
 pos1=geom.Pos3d(0.5,0,0)
 ptoAplica=geom.Pos3d(5,0,0)
 vectorDir=geom.Vector3d(0,2,0)
-vec1=geom.VDesliz3d(ptoAplica,vectorDir)
+vec1=geom.SlidingVector3d(ptoAplica,vectorDir)
 
 brazo=vec1.getOrg().x-pos1.x
 m=vec1.getMomentPos3d(pos1)

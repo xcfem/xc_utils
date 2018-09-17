@@ -19,7 +19,7 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//VDesliz2d.h
+//SlidingVector2d.h
 
 #ifndef VDESLIZ2D_H
 #define VDESLIZ2D_H
@@ -33,16 +33,16 @@
 //! @ingroup GEOM
 //
 //! @brief sliding vector en dos dimensiones.
-class VDesliz2d : public Vector2d
+class SlidingVector2d : public Vector2d
   {
     Pos2d org; //Point that fixes the line of action.
   public:
-    VDesliz2d(const Pos2d &o= Pos2d(),const Vector2d &v= Vector2d())
+    SlidingVector2d(const Pos2d &o= Pos2d(),const Vector2d &v= Vector2d())
       : Vector2d(v), org(o) {}
-    VDesliz2d(const Pos2d &o,const Pos2d &p);
-    VDesliz2d(const VDesliz2d &other)
+    SlidingVector2d(const Pos2d &o,const Pos2d &p);
+    SlidingVector2d(const SlidingVector2d &other)
       : Vector2d(other), org(other.org) {}
-    VDesliz2d &operator=(const VDesliz2d &other)
+    SlidingVector2d &operator=(const SlidingVector2d &other)
       {
         Vector2d::operator=(other);
         org= other.org;
@@ -55,12 +55,12 @@ class VDesliz2d : public Vector2d
       { return org+(const Vector2d &)(*this); }
     const Vector2d &getVector(void) const
       { return *this; }
-    friend VDesliz2d operator*(const VDesliz2d &m,const GEOM_FT &p)
-      { return VDesliz2d(m.getOrg(),m.getVector()*p); }
-    friend VDesliz2d operator*(const GEOM_FT &p,const VDesliz2d &m)
+    friend SlidingVector2d operator*(const SlidingVector2d &m,const GEOM_FT &p)
+      { return SlidingVector2d(m.getOrg(),m.getVector()*p); }
+    friend SlidingVector2d operator*(const GEOM_FT &p,const SlidingVector2d &m)
       { return m*p; }
-    friend VDesliz2d operator/(const VDesliz2d &m,const GEOM_FT &p);
-    friend std::ostream &operator<<(std::ostream &os,const VDesliz2d &v)
+    friend SlidingVector2d operator/(const SlidingVector2d &m,const GEOM_FT &p);
+    friend std::ostream &operator<<(std::ostream &os,const SlidingVector2d &v)
       {
         os << (const Vector2d &) v;
         os << " (O=" << v.org << ')';
@@ -68,9 +68,9 @@ class VDesliz2d : public Vector2d
       }
   };
 
-VDesliz2d operator-(const VDesliz2d &v);
+SlidingVector2d operator-(const SlidingVector2d &v);
 
-inline GEOM_FT Abs(const VDesliz2d &v)
+inline GEOM_FT Abs(const SlidingVector2d &v)
   { return v.GetModulus(); }
 
 #endif

@@ -4,10 +4,10 @@ import geom
 svd1=geom.SlidingVectorsSystem2d()
 ptoAplic=geom.Pos2d(1,1)
 vectorDir=geom.Vector2d(1,0)
-vec=geom.VDesliz2d(ptoAplic,vectorDir)
+vec=geom.SlidingVector2d(ptoAplic,vectorDir)
 svd1+=vec
 ptoAplic=geom.Pos2d(1,-1)
-vec=geom.VDesliz2d(ptoAplic,vectorDir)
+vec=geom.SlidingVector2d(ptoAplic,vectorDir)
 svd1+=vec
 
 zml1=svd1.zeroMomentLine()
@@ -16,10 +16,10 @@ vDir1= zml1.getVDir()
 svd2=geom.SlidingVectorsSystem2d()
 ptoAplic=geom.Pos2d(0,0)
 vectorDir=geom.Vector2d(0,1)
-vec=geom.VDesliz2d(ptoAplic,vectorDir)
+vec=geom.SlidingVector2d(ptoAplic,vectorDir)
 svd2+=vec
 ptoAplic=geom.Pos2d(-1,0)
-vec=geom.VDesliz2d(ptoAplic,vectorDir)
+vec=geom.SlidingVector2d(ptoAplic,vectorDir)
 svd2+=vec
 
 zml2=svd2.zeroMomentLine()

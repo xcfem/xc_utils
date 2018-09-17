@@ -29,7 +29,7 @@
 #include "Vector2d.h"
 #include "Pos2d.h"
 
-class VDesliz2d;
+class SlidingVector2d;
 class Line2d;
 class Ref2d2d;
 
@@ -44,7 +44,7 @@ class SlidingVectorsSystem2d: public ProtoGeom
   public:
     SlidingVectorsSystem2d(const Pos2d &O= Pos2d(),const Vector2d &R= Vector2d(),const GEOM_FT &Mo= 0.0)
       : org(O), resul(R), mom(Mo) {}
-    SlidingVectorsSystem2d(const VDesliz2d &v);
+    SlidingVectorsSystem2d(const SlidingVector2d &v);
     Pos2d GetOrg(void) const
       { return org; }
     //Resultant and moment.
@@ -63,8 +63,8 @@ class SlidingVectorsSystem2d: public ProtoGeom
     SlidingVectorsSystem2d ReduceA(const Pos2d &Q);
     Line2d getZeroMomentLine(void) const;
 
-    SlidingVectorsSystem2d &operator+=(const VDesliz2d &v);
-    SlidingVectorsSystem2d &operator-=(const VDesliz2d &v);
+    SlidingVectorsSystem2d &operator+=(const SlidingVector2d &v);
+    SlidingVectorsSystem2d &operator-=(const SlidingVector2d &v);
     SlidingVectorsSystem2d &operator+=(const SlidingVectorsSystem2d &s);
     SlidingVectorsSystem2d &operator-=(const SlidingVectorsSystem2d &s);
     SlidingVectorsSystem2d &operator*=(const GEOM_FT &d);
@@ -96,19 +96,19 @@ class SlidingVectorsSystem2d: public ProtoGeom
       }
   };
 
-inline SlidingVectorsSystem2d operator+(const VDesliz2d &v1,const VDesliz2d &v2)
+inline SlidingVectorsSystem2d operator+(const SlidingVector2d &v1,const SlidingVector2d &v2)
   {
     SlidingVectorsSystem2d suma(v1);
     suma+=v2;
     return suma;
   }
-inline SlidingVectorsSystem2d operator+(const SlidingVectorsSystem2d &s,const VDesliz2d &v)
+inline SlidingVectorsSystem2d operator+(const SlidingVectorsSystem2d &s,const SlidingVector2d &v)
   {
     SlidingVectorsSystem2d suma(s);
     suma+=v;
     return suma;
   }
-inline SlidingVectorsSystem2d operator+(const VDesliz2d &v,const SlidingVectorsSystem2d &s)
+inline SlidingVectorsSystem2d operator+(const SlidingVector2d &v,const SlidingVectorsSystem2d &s)
   { return s+v; }
 inline SlidingVectorsSystem2d operator-(const SlidingVectorsSystem2d &svd2d)
   {

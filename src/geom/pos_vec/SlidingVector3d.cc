@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//VDesliz3d.cc
+//SlidingVector3d.cc
 
-#include "VDesliz3d.h"
+#include "SlidingVector3d.h"
 #include "xc_utils/src/geom/d1/Line3d.h"
 
 
@@ -29,64 +29,64 @@
 
 
 //! @brief Constructor.
-VDesliz3d::VDesliz3d(const Pos3d &o,const Vector3d &v)
+SlidingVector3d::SlidingVector3d(const Pos3d &o,const Vector3d &v)
   : Vector3d(v), org(o) {}
 
 //! @brief Constructor.
-VDesliz3d::VDesliz3d(const Pos3d &o,const Pos3d &p)
+SlidingVector3d::SlidingVector3d(const Pos3d &o,const Pos3d &p)
   : Vector3d(p-o), org(o) {}
 
 //! @brief Moment of a sliding vector with respect to an axis.
 //! Is the moment with respect to an axis point
 //! projected onto the axis.
-GEOM_FT VDesliz3d::getMoment(const Line3d &e) const
+GEOM_FT SlidingVector3d::getMoment(const Line3d &e) const
   { return dot(getMoment(e.Point()),e.VDir().Normalizado()); }
 
 //! @brief Moment of a sliding vector with respect to a point.
-VDesliz3d VDesliz3d::getMoment(const Pos3d &o) const
+SlidingVector3d SlidingVector3d::getMoment(const Pos3d &o) const
   {
-    VDesliz3d retval(o);
+    SlidingVector3d retval(o);
     if(!Nulo()) //Si ESTE vector no es nulo.
       {
         Vector3d r= org - o;
         if(!r.Nulo()) //Si r no es nulo.
           if(!paralelos(r,*this)) //Si r y ESTE no son paralelos
-            retval= VDesliz3d(o,r^*this);
+            retval= SlidingVector3d(o,r^*this);
       }
     return retval;
   }
 
-const Pos3d &VDesliz3d::getOrg(void) const
+const Pos3d &SlidingVector3d::getOrg(void) const
   { return org; }
 
-const Pos3d VDesliz3d::getDest(void) const
+const Pos3d SlidingVector3d::getDest(void) const
   { return org+(const Vector3d &)(*this); }
 
-const Vector3d &VDesliz3d::getVector(void) const
+const Vector3d &SlidingVector3d::getVector(void) const
   { return *this; }
 
-VDesliz3d operator-(const VDesliz3d &v)
+SlidingVector3d operator-(const SlidingVector3d &v)
   {
-    VDesliz3d neg(v);
+    SlidingVector3d neg(v);
     neg.Neg();
     return neg;
   }
-VDesliz3d  &VDesliz3d::operator*=(const GEOM_FT &p)
+SlidingVector3d  &SlidingVector3d::operator*=(const GEOM_FT &p)
   {
-    (*this)= VDesliz3d(getOrg(),getVector()*p);
+    (*this)= SlidingVector3d(getOrg(),getVector()*p);
     return *this;
   }
 
-VDesliz3d operator*(const VDesliz3d &m,const GEOM_FT &p)
-  { return VDesliz3d(m.getOrg(),m.getVector()*p); }
+SlidingVector3d operator*(const SlidingVector3d &m,const GEOM_FT &p)
+  { return SlidingVector3d(m.getOrg(),m.getVector()*p); }
 
-VDesliz3d operator*(const GEOM_FT &p,const VDesliz3d &m)
+SlidingVector3d operator*(const GEOM_FT &p,const SlidingVector3d &m)
   { return m*p; }
 
-VDesliz3d operator/(const VDesliz3d &m,const GEOM_FT &p)
+SlidingVector3d operator/(const SlidingVector3d &m,const GEOM_FT &p)
   { return m*(1/p); }
 
-std::ostream &operator<<(std::ostream &os,const VDesliz3d &v)
+std::ostream &operator<<(std::ostream &os,const SlidingVector3d &v)
   {
     os << (const Vector3d &) v;
     os << " (O=" << v.org << ')';

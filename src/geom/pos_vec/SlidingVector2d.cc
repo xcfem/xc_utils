@@ -19,20 +19,20 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//VDesliz2d.cc
+//SlidingVector2d.cc
 
-#include "VDesliz2d.h"
+#include "SlidingVector2d.h"
 
 
 
 
 
 //! @brief Constructor.
-VDesliz2d::VDesliz2d(const Pos2d &o,const Pos2d &p)
+SlidingVector2d::SlidingVector2d(const Pos2d &o,const Pos2d &p)
   : Vector2d(p-o), org(o) {}
 
 //! @brief Moment of a sliding vector with respect to a point.
-GEOM_FT VDesliz2d::getMoment(const Pos2d &o) const
+GEOM_FT SlidingVector2d::getMoment(const Pos2d &o) const
   {
     GEOM_FT retval(0.0);
     if(!this->Nulo()) //Si ESTE vector no es nulo.
@@ -48,12 +48,12 @@ GEOM_FT VDesliz2d::getMoment(const Pos2d &o) const
 GEOM_FT inverso(const GEOM_FT &p)
   { return GEOM_FT(1.0/p); }
 
-VDesliz2d operator/(const VDesliz2d &m,const GEOM_FT &p)
+SlidingVector2d operator/(const SlidingVector2d &m,const GEOM_FT &p)
   { return m*inverso(p); }
 
-VDesliz2d operator-(const VDesliz2d &v)
+SlidingVector2d operator-(const SlidingVector2d &v)
   {
-    VDesliz2d neg(v);
+    SlidingVector2d neg(v);
     neg.Neg();
     return neg;
   }

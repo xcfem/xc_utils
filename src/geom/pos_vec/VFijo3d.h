@@ -25,13 +25,13 @@
 #define VFIJO3D_H
 
 
-#include "VDesliz3d.h"
+#include "SlidingVector3d.h"
 
 
 //! @ingroup GEOM
 //
 //! @brief Vector fijo en dos dimensiones.
-class VFijo3d : public VDesliz3d
+class VFijo3d : public SlidingVector3d
   {
   };
 

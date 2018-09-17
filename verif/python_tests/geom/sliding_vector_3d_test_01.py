@@ -6,7 +6,7 @@ import math
 
 pto=geom.Pos3d(0,0,0)
 vectorDir=geom.Vector3d(1,2,3)
-vec1=geom.VDesliz3d(pto,vectorDir)
+vec1=geom.SlidingVector3d(pto,vectorDir)
 
 import os
 fname= os.path.basename(__file__)

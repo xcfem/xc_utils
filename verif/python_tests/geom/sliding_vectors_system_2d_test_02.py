@@ -6,13 +6,13 @@ import math
 svd1=geom.SlidingVectorsSystem2d()
 ptoAplic=geom.Pos2d(1,1)
 vectorDir=geom.Vector2d(1,0)
-vec=geom.VDesliz2d(ptoAplic,vectorDir)
+vec=geom.SlidingVector2d(ptoAplic,vectorDir)
 svd1+=vec
 
 svd2=geom.SlidingVectorsSystem2d()
 ptoAplic=geom.Pos2d(1,1)
 vectorDir=geom.Vector2d(0.5,0)
-vec=geom.VDesliz2d(ptoAplic,vectorDir)
+vec=geom.SlidingVector2d(ptoAplic,vectorDir)
 svd2+=vec
 
 R= 5.0*svd1-10.0*svd2

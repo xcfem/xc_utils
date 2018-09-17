@@ -12,7 +12,7 @@ tp=r1.tipo()
 
 pto_aplic=geom.Pos3d(5,0,0)
 vectorDir=geom.Vector3d(0,2,0)
-vec1=geom.VDesliz3d(pto_aplic,vectorDir)
+vec1=geom.SlidingVector3d(pto_aplic,vectorDir)
 pto=vec1.getOrg()
 brazo=pto.distLine3d(r1)
 fuerza=vec1.y

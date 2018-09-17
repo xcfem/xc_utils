@@ -19,7 +19,7 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//VDesliz3d.h
+//SlidingVector3d.h
 
 #ifndef VDESLIZ3D_H
 #define VDESLIZ3D_H
@@ -34,32 +34,32 @@ class Line3d;
 //! @ingroup GEOM
 //
 //! @brief sliding vector en tres dimensiones.
-class VDesliz3d : public Vector3d
+class SlidingVector3d : public Vector3d
   {
   protected:
     Pos3d org; //!< Point that fix the line of action.
   public:
-    VDesliz3d(const Pos3d &o= Pos3d(),const Vector3d &v= Vector3d());
-    VDesliz3d(const Pos3d &o,const Pos3d &p);
-    VDesliz3d getMoment(const Pos3d &o) const;
+    SlidingVector3d(const Pos3d &o= Pos3d(),const Vector3d &v= Vector3d());
+    SlidingVector3d(const Pos3d &o,const Pos3d &p);
+    SlidingVector3d getMoment(const Pos3d &o) const;
     GEOM_FT getMoment(const Line3d &e) const;
     const Pos3d &getOrg(void) const;
     const Pos3d getDest(void) const;
     const Vector3d &getVector(void) const;
-    VDesliz3d &operator*=(const GEOM_FT &);
-    friend VDesliz3d operator*(const VDesliz3d &m,const GEOM_FT &p);
-    friend VDesliz3d operator*(const GEOM_FT &p,const VDesliz3d &m);
-    friend VDesliz3d operator/(const VDesliz3d &m,const GEOM_FT &p);
-    friend std::ostream &operator<<(std::ostream &os,const VDesliz3d &v);
+    SlidingVector3d &operator*=(const GEOM_FT &);
+    friend SlidingVector3d operator*(const SlidingVector3d &m,const GEOM_FT &p);
+    friend SlidingVector3d operator*(const GEOM_FT &p,const SlidingVector3d &m);
+    friend SlidingVector3d operator/(const SlidingVector3d &m,const GEOM_FT &p);
+    friend std::ostream &operator<<(std::ostream &os,const SlidingVector3d &v);
   };
 
-VDesliz3d operator*(const VDesliz3d &m,const GEOM_FT &p);
-VDesliz3d operator*(const GEOM_FT &p,const VDesliz3d &m);
-VDesliz3d operator/(const VDesliz3d &m,const GEOM_FT &p);
-std::ostream &operator<<(std::ostream &os,const VDesliz3d &v);
-VDesliz3d operator-(const VDesliz3d &v);
+SlidingVector3d operator*(const SlidingVector3d &m,const GEOM_FT &p);
+SlidingVector3d operator*(const GEOM_FT &p,const SlidingVector3d &m);
+SlidingVector3d operator/(const SlidingVector3d &m,const GEOM_FT &p);
+std::ostream &operator<<(std::ostream &os,const SlidingVector3d &v);
+SlidingVector3d operator-(const SlidingVector3d &v);
 
-inline GEOM_FT Abs(const VDesliz3d &v)
+inline GEOM_FT Abs(const SlidingVector3d &v)
   { return v.GetModulus(); }
 
 #endif
