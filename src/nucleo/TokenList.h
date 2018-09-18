@@ -36,7 +36,7 @@ class TokenList: public std::deque<Token>
     friend class AnalisisSintactico;
   private:
     void DetectaNeg(void);
-    void DetectaOpPrefijo(void);
+    void DetectaOpPrefix(void);
     void DetectaOpIgual(void);
     void DetectaOpMenorOIgual(void);
     void DetectaOpMayorOIgual(void);

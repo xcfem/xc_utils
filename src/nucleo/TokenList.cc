@@ -86,9 +86,9 @@ void TokenList::DetectaNeg(void)
       }
   }
 
-//! @brief Detecta los casos en los un identificador corresponde a un operador prefijo,
-//! es decir cuando el identificador precede a un paréntesis izquierdo.
-void TokenList::DetectaOpPrefijo(void)
+//! @brief Detect the cases in which the identifier corresponds to a prefix
+//! operator, that is to say, when the identifier precedes a left parenthesis.
+void TokenList::DetectaOpPrefix(void)
   {
     for(TokenList::iterator i= begin();i!=end();i++)
       {
@@ -99,7 +99,7 @@ void TokenList::DetectaOpPrefijo(void)
             if(j!=end())
               {
                 if((*j).Clase() == Token::CL_PARENT_IZDO)
-                  tmp.Tipo()= Token::OP_PREFIJO;
+                  tmp.Tipo()= Token::OP_PREFIX;
               }
           }
       }
@@ -128,7 +128,7 @@ void TokenList::DetectaOpRcl(void)
             else
               push_back(tmp);
           }
-        else if(tmp.Tipo() == Token::OP_PREFIJO)
+        else if(tmp.Tipo() == Token::OP_PREFIX)
           {
             const std::string &lexema= tmp.Lexema();
             if(has_char(lexema,'.'))
@@ -302,11 +302,11 @@ void TokenList::InvierteOpRcl(void)
       }
   }
 
-//! @brief Detecta símbolos ambiguos (operador neg, igualdad, operadores prefijos,...)
+//! @brief Detecta símbolos ambiguos (operador neg, igualdad, prefix operators,...)
 void TokenList::ProcesaSintaxis(void)
   {
     DetectaNeg();
-    DetectaOpPrefijo();
+    DetectaOpPrefix();
     DetectaOpIgual();
     DetectaOpMenorOIgual();
     DetectaOpMayorOIgual();

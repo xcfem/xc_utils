@@ -48,7 +48,7 @@ class LoadCombinationVector: public std::vector<Action>, public EntCmd
       : std::vector<Action>(sz), EntCmd() {}
     static LoadCombinationVector ProdCartesiano(const LoadCombinationVector &f1,const LoadCombinationVector &f2,const double &tol);
     static LoadCombinationVector Concat(const LoadCombinationVector &f1,const LoadCombinationVector &f2,const double &tol);
-    void Numera(const std::string &prefijo= "H");
+    void Numera(const std::string &prefix= "H");
     const LoadCombinationVector &GetDistintas(void) const;
     const LoadCombinationVector &GetNoNulas(const double &tol) const;
     m_double getCoeficientes(const std::vector<std::string> &) const;

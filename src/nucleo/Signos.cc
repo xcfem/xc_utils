@@ -65,7 +65,7 @@ int Token::Clase(void) const
       case EXPR_LIT:
       case STR_LIT:
         return CL_OPERANDO;
-      case OP_PREFIJO:
+      case OP_PREFIX:
       case OP_SUMA:
       case OP_RESTA:
       case OP_MULT:
@@ -160,7 +160,7 @@ const std::string &Token::convertToken(int t)
     static const std::string str_STR_LIT= "STR_LIT";
     static const std::string str_ERROR= "ERROR";
     static const std::string str_FIN= "FIN";
-    static const std::string str_OP_PREFIJO= "OP_PREFIJO";
+    static const std::string str_OP_PREFIX= "OP_PREFIX";
     static const std::string str_OP_SUMA= "OP_SUMA";
     static const std::string str_OP_RESTA= "OP_RESTA";
     static const std::string str_OP_MULT= "OP_MULT";
@@ -237,8 +237,8 @@ const std::string &Token::convertToken(int t)
       case FIN:
         retval= &str_FIN;
         break;
-      case OP_PREFIJO:
-        retval= &str_OP_PREFIJO;
+      case OP_PREFIX:
+        retval= &str_OP_PREFIX;
         break;
       case OP_SUMA:
         retval= &str_OP_SUMA;

@@ -19,22 +19,14 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//VFijo2d.h
+//FixedVector2d.cc
 
-#ifndef VFIJO2D_H
-#define VFIJO2D_H
+#include "FixedVector2d.h"
 
-
-#include "SlidingVector2d.h"
-
-
-//! @ingroup GEOM
-//
-//! @brief Vector fijo en dos dimensiones.
-class VFijo2d : public SlidingVector2d
+FixedVector2d operator-(const FixedVector2d &v)
   {
-  };
+    FixedVector2d neg(v);
+    neg.Neg();
+    return neg;
+  }
 
-VFijo2d operator-(const VFijo2d &v);
-
-#endif

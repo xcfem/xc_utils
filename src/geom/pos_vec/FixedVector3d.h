@@ -19,14 +19,22 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//VFijo3d.cc
+//FixedVector3d.h
 
-#include "VFijo3d.h"
+#ifndef FIXEDVECTOR3D_H
+#define FIXEDVECTOR3D_H
 
-VFijo3d operator-(const VFijo3d &v)
+
+#include "SlidingVector3d.h"
+
+
+//! @ingroup GEOM
+//
+//! @brief Fixed vector in a three-dimensional space.
+class FixedVector3d : public SlidingVector3d
   {
-    VFijo3d neg(v);
-    neg.Neg();
-    return neg;
-  }
+  };
 
+FixedVector3d operator-(const FixedVector3d &v);
+
+#endif

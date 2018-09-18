@@ -178,14 +178,14 @@ cmb_acc::LoadCombinationVector cmb_acc::LoadCombinationVector::Concat(const Load
     return retval;
   }
         
-//! \fn void cmb_acc::LoadCombinationVector::Numera(const std::string &prefijo)
+//! \fn void cmb_acc::LoadCombinationVector::Numera(const std::string &prefix)
 //! @brief Appends the prefix text 'HNNN=' to the name of each of the vector
 //! components, where NNN is the hypothesis number.
-void cmb_acc::LoadCombinationVector::Numera(const std::string &prefijo)
+void cmb_acc::LoadCombinationVector::Numera(const std::string &prefix)
   {
     size_t cont= 1;
     for(iterator i= begin(); i!=end();i++,cont++)
-      (*i).setName(prefijo + num2str(cont) + "= " + (*i).getName());
+      (*i).setName(prefix + num2str(cont) + "= " + (*i).getName());
   }
 
 //! @brief Return the factors that correspond to the actions in the argument
