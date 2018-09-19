@@ -19,10 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Identidad2d.cc
+//Identity3d.cc
 
-#include "Identidad2d.h"
-#include "../pos_vec/Vector2d.h"
+#include "Identity3d.h"
+#include "../pos_vec/Vector3d.h"
 
-Identidad2d::Identidad2d(void)
-  : Trf2d(CGAL::Identity_transformation()) {}
+Identity3d::Identity3d(void)
+  : Trf3d(CGAL::Identity_transformation()) {}

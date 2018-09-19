@@ -31,7 +31,7 @@ class_<Trf2d, bases<Trf>, boost::noncopyable >("Trf2d", no_init)
   .def("getTrfPos2d", TrfPos2d)
    ;
 
-// class_<Identidad2d, bases<Trf2d> >("Identidad2d");
+// class_<Identity2d, bases<Trf2d> >("Identity2d");
 // class_<Escalado2d, bases<Trf2d> >("Escalado2d");
 // class_<Reflexion2d, bases<Trf2d> >("Reflexion2d");
 class_<Rotation2d, bases<Trf2d> >("Rotation2d")
@@ -47,7 +47,7 @@ class_<Trf3d, bases<Trf>, boost::noncopyable >("Trf3d", no_init)
   ;
 
 // class_<Escalado3d, bases<Trf3d> >("Escalado3d");
-// class_<Identidad3d, bases<Trf3d> >("Identidad3d");
+// class_<Identity3d, bases<Trf3d> >("Identity3d");
 // class_<Reflexion3d, bases<Trf3d> >("Reflexion3d");
 // class_<Rotation3d, bases<Trf3d> >("Rotation3d");
 

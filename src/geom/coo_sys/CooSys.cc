@@ -31,7 +31,7 @@
 //! @brief Constructor.
 CooSys::CooSys(const size_t &ne,const size_t &dim)
   : ProtoGeom(), rot(ne,dim) 
-  { identidad(); }
+  { identity(); }
 
 //! @brief Row-normalize matrix.
 void CooSys::normaliza(void)
@@ -84,7 +84,7 @@ void CooSys::ortonormaliza(void)
 //! - Si es un sistema de coordenadas unidimensional lo hace coincidir con el axis 1 of the global system.
 //! - Si es bidimensional, lo hace coincidir con el formado by the axis 1 and 2 of the global system.
 //! - Si es tridimensional, lo hace coincidir con el sistema global.
-void CooSys::identidad(void)
+void CooSys::identity(void)
   {
     rot.Con(0);
     for(size_t i=1;i<=rot.getNumberOfRows();i++)

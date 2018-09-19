@@ -154,7 +154,7 @@ FT_matrix GeomObj2d::I(const Pos2d &o) const
     FT_matrix Ig= I();
     Vector2d og=getCenterOfMass() - o;
     GEOM_FT m= IArea();
-    return Ig+m*(Abs2(og)*identidad(Ig)-(og & og));
+    return Ig+m*(Abs2(og)*identity(Ig)-(og & og));
   }
 
 //! @brief Return the moment of inertia with respect to the line argument.

@@ -40,7 +40,7 @@ class CooSys: public ProtoGeom
   {
     FT_matrix rot; //Basis vector matrix (as rows).
   protected:
-    void identidad(void);
+    void identity(void);
     void put(const size_t &i,const size_t &j,const GEOM_FT &);
     void normaliza(void);
     void ortogonaliza(void);

@@ -149,7 +149,7 @@ FT_matrix GeomObj3d::I(const Pos3d &o) const
     FT_matrix Ig= I();
     Vector3d og=getCenterOfMass() - o;
     GEOM_FT m= IArea();
-    return Ig+m*(Abs2(og)*identidad(Ig)-(og & og));
+    return Ig+m*(Abs2(og)*identity(Ig)-(og & og));
   }
 
 //! @brief Return the polar moment of inertia with respect to the point o.

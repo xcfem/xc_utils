@@ -58,7 +58,7 @@ Reflection2d Reflection2d::crea_reflection2d(const  Pos2d &Q,const Vector2d &d)
                   << " no es unitario." << std::endl;
       }
     const Vector2d d_perp= d.Perpendicular(CGAL::POSITIVE);
-    const FT_matrix T_d=traspuesta(identidad(FT_matrix(2,2))-2*(d_perp & d_perp));
+    const FT_matrix T_d=traspuesta(identity(FT_matrix(2,2))-2*(d_perp & d_perp));
     const FT_matrix v= (2*dot(Q.VectorPos(),d_perp)*d_perp).getMatrix();
     return Reflection2d(T_d(1,1),T_d(1,2),v(1,1),T_d(2,1),T_d(2,2),v(2,1));
   }

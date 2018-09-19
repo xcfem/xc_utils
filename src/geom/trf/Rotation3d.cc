@@ -32,7 +32,7 @@ FT_matrix rotation_3d_matrix(const Line3d &axis,const double &theta)
     FT_matrix retval(4,4);
     const GEOM_FT cos_theta= double_to_FT(cos(theta));
     const GEOM_FT sin_theta= double_to_FT(sin(theta));
-    const FT_matrix I= identidad(FT_matrix(3,3));
+    const FT_matrix I= identity(FT_matrix(3,3));
     const Vector3d u= axis.VDir();
     const FT_matrix T_u_theta_1= cos_theta*I;
     const FT_matrix T_u_theta_2= (double_to_FT(1.0)-cos_theta)*prod_tensor(u,u);
@@ -51,7 +51,7 @@ FT_matrix rotation_3d_matrix(const Line3d &axis,const double &theta)
 Rotation3d::Rotation3d(void)
   : Trf3d()
   {
-    FT_matrix rr=  identidad(4);
+    FT_matrix rr=  identity(4);
     putHomogenousMatrix(rr);
   }
 

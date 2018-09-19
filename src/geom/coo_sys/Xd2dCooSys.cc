@@ -31,7 +31,7 @@
 //! en un espacio de dimensión 2.
 //! The axis are those of the global system.
 Xd2dCooSys::Xd2dCooSys(const size_t &ne)
-  : CooSys(ne,2) { identidad(); }
+  : CooSys(ne,2) { identity(); }
 //! @brief Define un sistema de coordenadas de dimensión ne
 //! en un espacio de dimensión 2. ver Xd2dCooSys::XAxisVector.
 Xd2dCooSys::Xd2dCooSys(const size_t &ne,const VGlobal &vX)

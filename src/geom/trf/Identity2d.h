@@ -19,22 +19,22 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Identidad2d.h
+//Identity2d.h
 //Identity transformation.
 
-#ifndef IDENTIDAD2D_H
-#define IDENTIDAD2D_H
+#ifndef IDENTITY2D_H
+#define IDENTITY2D_H
 
 #include "Trf2d.h"
 
 
 //! @ingroup GEOM
 //
-//! @brief Transformación identidad en dos dimensiones.
-class Identidad2d: public Trf2d
+//! @brief Identity transformation in a two dimensional space.
+class Identity2d: public Trf2d
   {
   public:
-    Identidad2d(void);
+    Identity2d(void);
   };
 
 #endif

@@ -19,22 +19,10 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Identidad3d.h
-//Identity transformation.
+//Identity2d.cc
 
-#ifndef IDENTIDAD3D_H
-#define IDENTIDAD3D_H
+#include "Identity2d.h"
+#include "../pos_vec/Vector2d.h"
 
-#include "Trf3d.h"
-
-
-//! @ingroup GEOM
-//
-//! @brief Transformación identidad en tres dimensiones.
-class Identidad3d: public Trf3d
-  {
-  public:
-    Identidad3d(void);
-  };
-
-#endif
+Identity2d::Identity2d(void)
+  : Trf2d(CGAL::Identity_transformation()) {}

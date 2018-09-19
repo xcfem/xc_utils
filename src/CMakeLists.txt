@@ -96,7 +96,7 @@ SET(SQLITE sqlite/SqLiteObject sqlite/SqLiteQuery sqlite/SqLiteDatabase)
 
 SET(cuadGauss gauss_quadrature/GaussQuadrature2D gauss_quadrature/GaussQuadrature3D gauss_quadrature/gssleg gauss_quadrature/GaussPoints gauss_quadrature/GaussWeights1d gauss_quadrature/GaussWeights2d gauss_quadrature/GaussWeights3d)
 
-SET(geomTrfs geom/trf/Trf geom/trf/Trf2d geom/trf/Rotation2d geom/trf/Trf3d geom/trf/Translation2d geom/trf/Scaling3d geom/trf/Scaling2d geom/trf/Identidad2d geom/trf/Identidad3d geom/trf/Translation3d geom/trf/Reflection2d geom/trf/Rotation3d geom/trf/Reflection3d geom/trf/Revolucion3d)
+SET(geomTrfs geom/trf/Trf geom/trf/Trf2d geom/trf/Rotation2d geom/trf/Trf3d geom/trf/Translation2d geom/trf/Scaling3d geom/trf/Scaling2d geom/trf/Identity2d geom/trf/Identity3d geom/trf/Translation3d geom/trf/Reflection2d geom/trf/Rotation3d geom/trf/Reflection3d geom/trf/Revolucion3d)
 
 SET(geomRefCooSys geom/coo_sys/CooSys geom/coo_sys/Rect1d3dCooSys geom/coo_sys/Rect2d3dCooSys geom/coo_sys/Rect3d3dCooSys geom/coo_sys/Rect1d2dCooSys geom/coo_sys/Rect2d2dCooSys geom/coo_sys/Xd3dCooSys geom/coo_sys/Xd2dCooSys geom/ geom/sis_ref/Ref1d2d geom/sis_ref/Ref3d3d geom/sis_ref/Ref2d2d geom/sis_ref/Ref1d3d geom/sis_ref/Ref2d3d geom/sis_ref/PrincipalAxesOfInertia2D)
 

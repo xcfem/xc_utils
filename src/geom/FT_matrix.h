@@ -56,8 +56,8 @@ class FT_matrix: public ZMatrix<GEOM_FT>
     friend FT_matrix operator^(const FT_matrix &,const FT_matrix &v2);
   };
 
-FT_matrix identidad(const size_t &f);
-FT_matrix identidad(const FT_matrix &m);
+FT_matrix identity(const size_t &f);
+FT_matrix identity(const FT_matrix &m);
 FT_matrix traspuesta(const FT_matrix &m);
 
 

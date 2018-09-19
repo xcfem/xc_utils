@@ -107,22 +107,22 @@ FT_matrix operator^(const FT_matrix &v1,const FT_matrix &v2)
   { return prod_vectorial(v1,v2); }
 
 
-//! @brief Return the matrix identidad de f rows y f columns.
-FT_matrix identidad(const size_t &f)
+//! @brief Return an identity matrix with f rows and f columns.
+FT_matrix identity(const size_t &f)
   {
     FT_matrix retval(f,f);
     retval.Idn();
     return retval;
   }
 
-FT_matrix identidad(const FT_matrix &m)
+FT_matrix identity(const FT_matrix &m)
   {
     FT_matrix retval(m);
     retval.Idn();
     return retval;
   }
 
-//! @brief Return la traspuesta de la being passed as parameter.
+//! @brief Return the transposed of the argument.
 FT_matrix traspuesta(const FT_matrix &m)
   { 
     FT_matrix retval(m);
