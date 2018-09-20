@@ -19,21 +19,21 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Revolucion3d.cc
+//Revolution3d.cc
 
-#include "Revolucion3d.h"
+#include "Revolution3d.h"
 #include "../pos_vec/Pos3dArray.h"
 #include "../pos_vec/Pos3dArray3d.h"
 #include "Rotation3d.h"
 
 //! @brief Constructor.
-Revolucion3d::Revolucion3d(const Line3d &e,const GEOM_FT &th,const size_t &nd)
+Revolution3d::Revolution3d(const Line3d &e,const GEOM_FT &th,const size_t &nd)
   : axis(e), theta(th), ndiv(nd)
   {}
 
 //! @brief Return the point row that results from apply the revolution
 //! to the argument.
-Pos3dArray Revolucion3d::Aplica0d(const Pos3d &p) const
+Pos3dArray Revolution3d::Aplica0d(const Pos3d &p) const
   {
     Pos3dArray retval(1,ndiv+1);
     retval(1,1)= p;
@@ -50,7 +50,7 @@ Pos3dArray Revolucion3d::Aplica0d(const Pos3d &p) const
 
 //! @brief Return the point matrix that results from apply the revolution
 //! to the argument.
-Pos3dArray Revolucion3d::Aplica1d(const Pos3dArray &m) const
+Pos3dArray Revolution3d::Aplica1d(const Pos3dArray &m) const
   {
     const size_t nPoints= m.size();
     if(m.isColumn()) //Column matrix, put points by rows.
@@ -98,7 +98,7 @@ Pos3dArray Revolucion3d::Aplica1d(const Pos3dArray &m) const
 
 //! @brief Return the point matrix that results from apply the revolution
 //! to the bi-dimensional matrix passed as argument.
-Pos3dArray3d Revolucion3d::Aplica2d(const Pos3dArray &m) const
+Pos3dArray3d Revolution3d::Aplica2d(const Pos3dArray &m) const
   {
     if(!m.isRow() && !m.isColumn()) //bi-dimensional matrix.
       {
@@ -125,8 +125,8 @@ Pos3dArray3d Revolucion3d::Aplica2d(const Pos3dArray &m) const
       }
   }
 
-Pos3dArray Revolucion3d::operator()(const Pos3d &p) const
+Pos3dArray Revolution3d::operator()(const Pos3d &p) const
   { return Aplica0d(p); }
 
-Pos3dArray Revolucion3d::operator()(const Pos3dArray &m) const
+Pos3dArray Revolution3d::operator()(const Pos3dArray &m) const
   { return Aplica1d(m); }

@@ -19,11 +19,11 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Revolucion3d.h
+//Revolution3d.h
 //Revolution in a three-dimensional space.
 
-#ifndef REVOLUCION3D_H
-#define REVOLUCION3D_H
+#ifndef REVOLUTION3D_H
+#define REVOLUTION3D_H
 
 #include "xc_utils/src/geom/d1/Line3d.h"
 #include "Trf3d.h"
@@ -34,14 +34,14 @@ class Pos3dArray3d;
 
 //! @ingroup GEOM
 //
-//! @brief Revolución.
-class Revolucion3d: public Trf3d
+//! @brief Revolution transformation.
+class Revolution3d: public Trf3d
   {
     Line3d axis; //Revolution axis.
     GEOM_FT theta; //!< Swept angle.
     size_t ndiv; //number of divisions.
   public:
-    Revolucion3d(const Line3d &e,const GEOM_FT &th= 0.0,const size_t &nd= 1);
+    Revolution3d(const Line3d &e,const GEOM_FT &th= 0.0,const size_t &nd= 1);
     Pos3dArray Aplica0d(const Pos3d &p) const;
     Pos3dArray Aplica1d(const Pos3dArray &m) const;
     Pos3dArray3d Aplica2d(const Pos3dArray &m) const;

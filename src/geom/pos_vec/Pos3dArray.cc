@@ -29,7 +29,7 @@
 #include "xc_utils/src/geom/d3/BND3d.h"
 
 #include "xc_utils/src/geom/trf/Trf3d.h"
-#include "xc_utils/src/geom/trf/Revolucion3d.h"
+#include "xc_utils/src/geom/trf/Revolution3d.h"
 
 //! @brief Constructor.
 Pos3dArray::Pos3dArray(const PosArray<Pos3d> &mp3d)
@@ -106,8 +106,9 @@ GEOM_FT Pos3dArray::Lagrange(const GEOM_FT &tol)
           err= ciclo_lagrange();
         else
           {
-	    std::cerr << "Pos3dArray::Lagrange; no se alcanzó la convergencia tras: "
-                      << conta << " iteraciones." << std::endl;
+	    std::cerr << "Pos3dArray::" << __FUNCTION__
+		      << "; doesn't converge after: "
+                      << conta << " iterations." << std::endl;
             break;
           }
       }
@@ -120,7 +121,7 @@ void Pos3dArray::Transforma(const Trf3d &trf)
 
 //! @brief Return the revolution surface obtained by applying to the matrix
 //! the revolution transformation argument.
-Pos3dArray crea_sup_revolucion(const Revolucion3d &r,const Pos3dArray &m)
+Pos3dArray create_revolution_surface(const Revolution3d &r,const Pos3dArray &m)
   { return r(m); }
 
 Pos3dArray Quadrilateral(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2)

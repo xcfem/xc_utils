@@ -84,7 +84,7 @@
 #include "xc_utils/src/geom/trf/Identity3d.h"
 #include "xc_utils/src/geom/trf/Reflection2d.h"
 #include "xc_utils/src/geom/trf/Reflection3d.h"
-#include "xc_utils/src/geom/trf/Revolucion3d.h"
+#include "xc_utils/src/geom/trf/Revolution3d.h"
 #include "xc_utils/src/geom/trf/Rotation2d.h"
 #include "xc_utils/src/geom/trf/Rotation3d.h"
 #include "xc_utils/src/geom/trf/Translation2d.h"

@@ -29,7 +29,7 @@
 
 class Pos3dArray;
 class Trf3d;
-class Revolucion3d;
+class Revolution3d;
 
 
 //! @ingroup GEOM
@@ -54,6 +54,6 @@ class Pos3dArray3d: public PosArray3d<Pos3d>
 class BND3d;
 
 Pos3dArray3d create_uniform_grid(const BND3d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z);
-Pos3dArray3d crea_vol_revolucion(const Revolucion3d &r,const Pos3dArray &m);
+Pos3dArray3d create_revolution_volume(const Revolution3d &r,const Pos3dArray &m);
 
 #endif

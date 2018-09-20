@@ -26,7 +26,7 @@
 #include "xc_utils/src/geom/d1/Segment3d.h"
 #include "xc_utils/src/geom/d3/BND3d.h"
 #include "xc_utils/src/geom/trf/Trf3d.h"
-#include "xc_utils/src/geom/trf/Revolucion3d.h"
+#include "xc_utils/src/geom/trf/Revolution3d.h"
 
 Pos3dArray3d::Pos3dArray3d(const size_t &iLayers)
   : PosArray3d<Pos3d>(iLayers) {}
@@ -92,7 +92,7 @@ Pos3dArray3d create_uniform_grid(const BND3d &bnd,const size_t &ndiv_x,const siz
 
 //! @brief Return the revolution solid obtained by applying
 //! to the matrix the transformation argument.
-Pos3dArray3d crea_vol_revolucion(const Revolucion3d &r,const Pos3dArray &m)
+Pos3dArray3d create_revolution_volume(const Revolution3d &r,const Pos3dArray &m)
   {
     if(m.isRow() || m.isColumn()) //Unidimensional.
       {
