@@ -114,7 +114,7 @@ SET(geom geom/pos_vec/SlidingVector3d geom/pos_vec/FixedVector3d geom/pos_vec/Ve
 
 SET(GnuGts gnu_gts/GTSSurface gnu_gts/GTSVertex gnu_gts/GTSEdge gnu_gts/GTSFace gnu_gts/GTSSplit gnu_gts/GTSSurfaceTraverse gnu_gts/GTSSurfaceIntersection gnu_gts/GTSBBoxTree gnu_gts/GTSGraph gnu_gts/TriangleMap)
 
-SET(NUCLEO nucleo/EntProp nucleo/EntCmd nucleo/Signos nucleo/TokenList nucleo/EntConNmb nucleo/EntWOwner nucleo/ErrLogFiles nucleo/python_utils.cc)
+SET(NUCLEO nucleo/EntProp nucleo/EntCmd nucleo/EntConNmb nucleo/EntWOwner nucleo/ErrLogFiles nucleo/python_utils.cc)
 
 #SET(VtkAux vtk_aux/vtkShStrArray vtk_aux/vtkLabeledShStrMapper vtk_aux/vtkTakePhotoDefs vtk_aux/vtkTakePhoto vtk_aux/vtkXOpenGLOffScreenRenderWindow vtk_aux/vtkDoubleHeadedArrowSource vtk_aux/vtkArcSource)
 
