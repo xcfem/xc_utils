@@ -25,14 +25,19 @@
 #include "../pos_vec/Pos3d.h"
 #include "../pos_vec/Vector3d.h"
 #include <iostream>
+#include <cmath>
+
+const double no_number= nan("");
+const Pos3d P(no_number,no_number,no_number);
 
 //! @brief Constructor.
 BND3d::BND3d(void)
-  : GeomObj3d(), cgisocub(), undefined(true) {}
+  : GeomObj3d(), cgisocub(P.ToCGAL(),P.ToCGAL()), undefined(true) {}
 
 //! @brief Constructor.
-BND3d::BND3d(const Pos3d &p_min,const Pos3d &p_max)
-  : GeomObj3d(), cgisocub(p_min.ToCGAL(),p_max.ToCGAL()), undefined(false) {}
+BND3d::BND3d(const Pos3d &pa,const Pos3d &pb)
+  : GeomObj3d(), cgisocub(pos_min(pa,pb).ToCGAL(),pos_max(pa,pb).ToCGAL()),
+    undefined(false) {}
 
 //! @brief Area of the face parallel to XY plane.
 GEOM_FT BND3d::getAreaXYFace(void) const

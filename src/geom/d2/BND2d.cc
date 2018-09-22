@@ -32,14 +32,19 @@
 #include <iostream>
 #include <plotter.h>
 #include "xc_utils/src/geom/trf/Trf2d.h"
+#include <cmath>
+
+const double no_number= nan("");
+const Pos2d P(no_number,no_number);
 
 //! @brief Constructor.
 BND2d::BND2d(void)
-  : GeomObj2d(),cgrectg(), undefined(true) {}
+  : GeomObj2d(),cgrectg(P.ToCGAL(),P.ToCGAL()), undefined(true) {}
 
 //! @brief Constructor.
-BND2d::BND2d(const Pos2d &p_min,const Pos2d &p_max)
-  : GeomObj2d(), cgrectg(p_min.ToCGAL(),p_max.ToCGAL()), undefined(false) {}
+BND2d::BND2d(const Pos2d &pa,const Pos2d &pb)
+  : GeomObj2d(), cgrectg(pos_min(pa,pb).ToCGAL(),pos_max(pa,pb).ToCGAL()),
+    undefined(false) {}
 
 void BND2d::Update(const Pos2d &p)
   {
