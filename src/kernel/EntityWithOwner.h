@@ -19,51 +19,22 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//EntConNmb.cc
+//EntityWithOwner.h
+//Entidad con punetero a su propietaria.
 
-#include "EntConNmb.h"
+#ifndef ENTWOWNER_H
+#define ENTWOWNER_H
 
-//! @brief += operator.
-EntConNmb &EntConNmb::operator+=(const EntConNmb &other)
+#include "../kernel/CommandEntity.h"
+
+//! @ingroup BASE
+//
+//!  @brief Entidad con puntero a su propietaria.
+class EntityWithOwner: public CommandEntity
   {
-    name= '('+ name + '+' + other.getName()+')';
-    return *this;
-  }
+  protected:
+    //! @brief Constructor.
+    EntityWithOwner(CommandEntity *owr);
+  };
 
-//! @brief -= operator.
-EntConNmb &EntConNmb::operator-=(const EntConNmb &other)
-  {
-    name= '('+ name + '-' + other.getName()+')';
-    return *this;
-  }
-
-//! @brief *= operator.
-EntConNmb &EntConNmb::operator*=(const EntConNmb &other)
-  {
-    name= '('+ name + '*' + other.getName()+')';
-    return *this;
-  }
-
-//! @brief Return the object named as: '(a.name+b.name)'
-EntConNmb operator+(const EntConNmb &a,const EntConNmb &b)
-  {
-    EntConNmb retval(a);
-    retval+=b;
-    return retval;
-  }
-
-//! @brief Return the object named as: '(a.name-b.name)'
-EntConNmb operator-(const EntConNmb &a,const EntConNmb &b)
-  {
-    EntConNmb retval(a);
-    retval-= b;
-    return retval;
-  }
-
-//! @brief Return the object named as: '(a.name*b.name)'
-EntConNmb operator*(const EntConNmb &a,const EntConNmb &b)
-  {
-    EntConNmb retval(a);
-    retval*= b;
-    return retval;    
-  }
+#endif

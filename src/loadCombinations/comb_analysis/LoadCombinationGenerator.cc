@@ -26,8 +26,8 @@
 #include "LoadCombinations.h"
 
 //! @brief Constructor.
-cmb_acc::LoadCombinationGenerator::LoadCombinationGenerator(EntCmd *owr)
-  : EntCmd(owr), combinations(nullptr) {}
+cmb_acc::LoadCombinationGenerator::LoadCombinationGenerator(CommandEntity *owr)
+  : CommandEntity(owr), combinations(nullptr) {}
 
 //! @brief Insert the action being passed as parameter.
 cmb_acc::ActionRValue &cmb_acc::LoadCombinationGenerator::insert(const std::string &pond,const std::string &familia,const Action &acc,const std::string &combination_factors_name, const std::string &partial_safety_factors_name)

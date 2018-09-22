@@ -26,7 +26,7 @@
 #ifndef PARTIALSAFETYFACTORS_HXX
 #define PARTIALSAFETYFACTORS_HXX
 
-#include "xc_utils/src/nucleo/EntCmd.h"
+#include "xc_utils/src/kernel/CommandEntity.h"
 
 
 namespace cmb_acc{
@@ -37,7 +37,7 @@ class ActionRValueList;
 //! @ingroup CMBACC
 //
 //! @brief Serviceability limit states partial safety factors.
-class SLSPartialSafetyFactors: public EntCmd
+class SLSPartialSafetyFactors: public CommandEntity
   {
   protected:
     //Partial safety factors
@@ -97,7 +97,7 @@ class ULSPartialSafetyFactors: public SLSPartialSafetyFactors
   };
 
 //! @brief Partial safety factors de una familia de acciones en SLS y ULS.
-class PartialSafetyFactors: public EntCmd
+class PartialSafetyFactors: public CommandEntity
   {
     ULSPartialSafetyFactors uls_partial_safety_factors; //!< Partial safety factors en estados límite últimos.
     SLSPartialSafetyFactors sls_partial_safety_factors; //!< Partial safety factors en serviceability limit states.

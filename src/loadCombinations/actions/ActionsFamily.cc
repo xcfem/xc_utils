@@ -32,7 +32,7 @@
 
 //! @brief Default constructor.
 cmb_acc::ActionsFamily::ActionsFamily(const std::string &nmb)
-  : EntConNmb(nmb)
+  : NamedEntity(nmb)
   {
     actions.set_owner(this);
   }
@@ -40,7 +40,7 @@ cmb_acc::ActionsFamily::ActionsFamily(const std::string &nmb)
 //! @brief Return the container that contains this object.
 const  cmb_acc::ActionsAndFactors *cmb_acc::ActionsFamily::getActionsAndFactors(void) const
   {
-    const EntCmd *owr= Owner();
+    const CommandEntity *owr= Owner();
     const ActionsAndFactors *retval= dynamic_cast<const ActionsAndFactors *>(owr);
     if(!retval)
       std::cerr << getClassName() << "::" << __FUNCTION__

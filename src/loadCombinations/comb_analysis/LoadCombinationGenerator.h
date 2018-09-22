@@ -33,13 +33,13 @@ class LoadCombinations;
 //! @ingroup CMBACC
 //
 //! @brief Objeto that generates and manages the combinations.
-class LoadCombinationGenerator: public EntCmd
+class LoadCombinationGenerator: public CommandEntity
   {
   private:
     ActionWeightingMap action_weighting;
     LoadCombinations *combinations;
   public:
-    LoadCombinationGenerator(EntCmd *owr= nullptr);
+    LoadCombinationGenerator(CommandEntity *owr= nullptr);
 
     ActionRValue &insert(const std::string &pond,const std::string &,const Action &,const std::string &combination_factors_name="",const std::string &partial_safety_factors_name="");
     void genera(void);

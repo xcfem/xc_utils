@@ -21,7 +21,7 @@
 //----------------------------------------------------------------------------
 //python_interface.tcc
 
-class_<cmb_acc::SLSPartialSafetyFactors, bases<EntCmd> >("SLSPartialSafetyFactors")
+class_<cmb_acc::SLSPartialSafetyFactors, bases<CommandEntity> >("SLSPartialSafetyFactors")
   .def(init<float, float>())
   .add_property("favorable", &cmb_acc::SLSPartialSafetyFactors::getFavorable, &cmb_acc::SLSPartialSafetyFactors::setFavorable)
   .add_property("desfavorable", &cmb_acc::SLSPartialSafetyFactors::getDesfavorable, &cmb_acc::SLSPartialSafetyFactors::setDesfavorable)
@@ -33,7 +33,7 @@ class_<ULSPartialSafetyFactors, bases<SLSPartialSafetyFactors> >("ULSPartialSafe
   .add_property("favorableAccidental", &ULSPartialSafetyFactors::getFavorableAccidental, &ULSPartialSafetyFactors::setFavorableAccidental)
   .add_property("desfavorableAccidental", &ULSPartialSafetyFactors::getDesfavorableAccidental, &ULSPartialSafetyFactors::setDesfavorableAccidental);
 
-class_<PartialSafetyFactors, bases<EntCmd> >("PartialSafetyFactors")
+class_<PartialSafetyFactors, bases<CommandEntity> >("PartialSafetyFactors")
   .def(init<ULSPartialSafetyFactors, SLSPartialSafetyFactors>())
   .add_property("getULSPartialSafetyFactors", make_function( &PartialSafetyFactors::getULSPartialSafetyFactors, return_internal_reference<>() ))
   .add_property("getSLSPartialSafetyFactors", make_function( &PartialSafetyFactors::getSLSPartialSafetyFactors, return_internal_reference<>() ))
@@ -46,14 +46,14 @@ class_<map_partial_safety_factors >("map_partial_safety_factorss")
   ;
 
 typedef FactorsMap<PartialSafetyFactors> factors_map_partial_safety_factors;
-class_<factors_map_partial_safety_factors, bases<EntCmd,map_partial_safety_factors> >("factors_map_partial_safety_factors")
+class_<factors_map_partial_safety_factors, bases<CommandEntity,map_partial_safety_factors> >("factors_map_partial_safety_factors")
   ;
 
 class_<PartialSafetyFactorsMap, bases<factors_map_partial_safety_factors> >("PartialSafetyFactorsDict")
   .def("get", &PartialSafetyFactorsMap::BuscaCoefs, return_value_policy<copy_const_reference>())
   .def("insert", &PartialSafetyFactorsMap::insert);
 
-class_<CombinationFactors, bases<EntCmd> >("CombinationFactors")
+class_<CombinationFactors, bases<CommandEntity> >("CombinationFactors")
   .def(init<double, double, double>())
   .def("getCombinationFactor", &CombinationFactors::getCombinationFactor, return_value_policy<copy_const_reference>(),"Return the r-th combination factor.")
   ;
@@ -64,7 +64,7 @@ class_<map_combination_factors >("map_combination_factors")
   ;
 
 typedef FactorsMap<CombinationFactors> factors_map_combination_factors;
-class_<factors_map_combination_factors, bases<EntCmd,map_combination_factors> >("factors_map_combination_factors")
+class_<factors_map_combination_factors, bases<CommandEntity,map_combination_factors> >("factors_map_combination_factors")
   ;
 
 class_<CombinationFactorsMap, bases<factors_map_combination_factors> >("CombinationFactorsDict")
@@ -72,7 +72,7 @@ class_<CombinationFactorsMap, bases<factors_map_combination_factors> >("Combinat
   .def("insert", &CombinationFactorsMap::insert);
 
 
-class_<Factors, bases<EntCmd> >("Factors")
+class_<Factors, bases<CommandEntity> >("Factors")
   .def("getPartialSafetyFactors", &Factors::getPartialSafetyFactors, return_internal_reference<>())
   .def("getCombinationFactors", &Factors::getCombinationFactors, return_internal_reference<>())
   ;

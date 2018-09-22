@@ -68,11 +68,11 @@ cmb_acc::ActionsAndFactors *cmb_acc::ActionWeightingMap::findOrCreate(const std:
 
 //! @brief Default constructor.
 cmb_acc::ActionWeightingMap::ActionWeightingMap(void)
-  : EntCmd() {}
+  : CommandEntity() {}
 
 //! @brief Copy constructor(NO COPIA LAS ACTIONS_AND_FACTORS).
 cmb_acc::ActionWeightingMap::ActionWeightingMap(const ActionWeightingMap &other)
-  : EntCmd(other)
+  : CommandEntity(other)
   {
     copy(other.actions_and_factors);
   }
@@ -80,7 +80,7 @@ cmb_acc::ActionWeightingMap::ActionWeightingMap(const ActionWeightingMap &other)
 //! @brief Assignment operator (NO COPIA LAS ACTIONS_AND_FACTORS).
 cmb_acc::ActionWeightingMap &cmb_acc::ActionWeightingMap::operator=(const ActionWeightingMap &other)
   {
-    EntCmd::operator=(other);
+    CommandEntity::operator=(other);
     copy(other.actions_and_factors);
     return *this;
   }

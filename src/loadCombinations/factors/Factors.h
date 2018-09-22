@@ -32,7 +32,7 @@ namespace cmb_acc{
 //! @ingroup CMBACC
 //
 //! @brief Almacena todas las familias de acciones.
-class Factors: public EntCmd
+class Factors: public CommandEntity
   {
   private:
     PartialSafetyFactorsMap partial_safety_factors; //!< Partial safety factors.

@@ -24,14 +24,14 @@
 #ifndef PROTOGEOM_H
 #define PROTOGEOM_H
 
-#include "xc_utils/src/nucleo/EntCmd.h"
+#include "xc_utils/src/kernel/CommandEntity.h"
 
 //! @defgroup GEOM Entidades geométricas.
 //
 //! @ingroup GEOM
 //
 //! @brief Clase base para redefinir el método printprop
-class ProtoGeom: public EntCmd
+class ProtoGeom: public CommandEntity
   {
   private:
     bool exts; //! False when solution is not possible: intersection of parallel planes.

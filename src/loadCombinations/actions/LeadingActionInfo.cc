@@ -25,7 +25,7 @@
 #include "Action.h"
 
 cmb_acc::LeadingActionInfo::LeadingActionInfo(const short int &i, const short int &lrv, const short int &grv)
-  : EntCmd(),index(i), leading_representative_value_index(lrv),
+  : CommandEntity(),index(i), leading_representative_value_index(lrv),
     general_representative_value_index(grv) {}
 
 //! @brief Print stuff.

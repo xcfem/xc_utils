@@ -114,7 +114,7 @@ SET(geom geom/pos_vec/SlidingVector3d geom/pos_vec/FixedVector3d geom/pos_vec/Ve
 
 SET(GnuGts gnu_gts/GTSSurface gnu_gts/GTSVertex gnu_gts/GTSEdge gnu_gts/GTSFace gnu_gts/GTSSplit gnu_gts/GTSSurfaceTraverse gnu_gts/GTSSurfaceIntersection gnu_gts/GTSBBoxTree gnu_gts/GTSGraph gnu_gts/TriangleMap)
 
-SET(NUCLEO nucleo/EntProp nucleo/EntCmd nucleo/EntConNmb nucleo/EntWOwner nucleo/ErrLogFiles nucleo/python_utils.cc)
+SET(KERNEL kernel/EntityWithProperties kernel/CommandEntity kernel/NamedEntity kernel/EntityWithOwner kernel/ErrLogFiles kernel/python_utils.cc)
 
 #SET(VtkAux vtk_aux/vtkShStrArray vtk_aux/vtkLabeledShStrMapper vtk_aux/vtkTakePhotoDefs vtk_aux/vtkTakePhoto vtk_aux/vtkXOpenGLOffScreenRenderWindow vtk_aux/vtkDoubleHeadedArrowSource vtk_aux/vtkArcSource)
 
@@ -125,13 +125,13 @@ SET(ca_acciones loadCombinations/actions/LeadingActionInfo loadCombinations/acti
 SET(ca_combinations loadCombinations/comb_analysis/Variation loadCombinations/comb_analysis/Variations loadCombinations/comb_analysis/LoadCombinationVector loadCombinations/comb_analysis/LoadCombinations loadCombinations/comb_analysis/ActionWeightingMap loadCombinations/comb_analysis/LoadCombinationGenerator)
 
 
-ADD_LIBRARY(xc_utils SHARED ${MYSQL} ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${NUCLEO}  ${VtkAux} ${ca_factors} ${ca_acciones} ${ca_combinations})
+ADD_LIBRARY(xc_utils SHARED ${MYSQL} ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${KERNEL}  ${VtkAux} ${ca_factors} ${ca_acciones} ${ca_combinations})
 
 #Interfaz Python
 LINK_LIBRARIES(xc_utils xc_basic ${VTK_BIB} ${CGAL_LIBRARIES} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${MySQLpp_LIBRARIES} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} boost_python ${XC_UTILS_BOOST_LIBRARIES} ${PYTHON_LIBRARIES})
 LINK_DIRECTORIES("/usr/lib/python2.7") # Not needed?
 ADD_DEFINITIONS(-fno-strict-aliasing)
-ADD_LIBRARY(xc_base SHARED nucleo/python_interface.cc)
+ADD_LIBRARY(xc_base SHARED kernel/python_interface.cc)
 ADD_LIBRARY(loadCombinations SHARED loadCombinations/python_interface.cc)
 ADD_LIBRARY(geom SHARED geom/d1/export_d1_entities.cc geom/d2/export_d2_entities.cc geom/d3/export_d3_entities.cc geom/export_sys_trf.cc geom/python_interface.cc)
 ADD_LIBRARY(xcGnuGts SHARED gnu_gts/python_interface.cc)

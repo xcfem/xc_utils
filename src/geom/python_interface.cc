@@ -68,7 +68,7 @@ BOOST_PYTHON_MODULE(geom)
     class_<std::vector<double> >("StdVectorDouble")
       .def(vector_indexing_suite<std::vector<double> >() );
 
-    class_<ProtoGeom, bases<EntCmd> >("ProtoGeom");
+    class_<ProtoGeom, bases<CommandEntity> >("ProtoGeom");
 
     class_<GeomObj, bases<ProtoGeom>, boost::noncopyable >("GeomObj", no_init)
       .def("getLength", pure_virtual(&GeomObj::getLength))

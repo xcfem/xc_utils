@@ -25,14 +25,14 @@
 #ifndef COMBINATIONFACTORS_H
 #define COMBINATIONFACTORS_H
 
-#include "xc_utils/src/nucleo/EntCmd.h"
+#include "xc_utils/src/kernel/CommandEntity.h"
 
 namespace cmb_acc{
 
 //! @ingroup CMBACC
 //
 //! @brief Coeficientes de simultaneidad de una acción.
-class CombinationFactors: public EntCmd
+class CombinationFactors: public CommandEntity
   {
   private:
     float psi_0; //!< To compute the combination value.
@@ -41,7 +41,7 @@ class CombinationFactors: public EntCmd
   public:
     //! @brief Default constructor.
     CombinationFactors(const float &p0= 1.0, const float &p1= 1.0, const float &p2= 1.0)
-      : EntCmd(),psi_0(p0), psi_1(p1), psi_2(p2) {}
+      : CommandEntity(),psi_0(p0), psi_1(p1), psi_2(p2) {}
     //! @brief Copy constructor
     const float &getCombinationFactor(short int r) const;
     void Print(std::ostream &os) const;

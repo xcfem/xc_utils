@@ -25,7 +25,7 @@
 #ifndef ACTIONWEIGHTINGMAP_H
 #define ACTIONWEIGHTINGMAP_H
 
-#include "xc_utils/src/nucleo/EntCmd.h"
+#include "xc_utils/src/kernel/CommandEntity.h"
 #include "xc_utils/src/loadCombinations/factors/Factors.h"
 #include <map>
 
@@ -40,7 +40,7 @@ class LoadCombinations;
 //! @ingroup CMBACC
 //
 //! @brief Container for ActionAndFactors objects.
-class ActionWeightingMap: public EntCmd
+class ActionWeightingMap: public CommandEntity
   {
   public:
     typedef std::map<std::string,ActionsAndFactors *> map_actions_and_factors;

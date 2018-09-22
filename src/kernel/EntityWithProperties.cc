@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//EntProp.cc
+//EntityWithProperties.cc
 
-#include "EntProp.h"
+#include "EntityWithProperties.h"
 #include <fstream>
 #include <iostream>
 #include "xc_basic/src/util/memoria.h"
@@ -34,11 +34,11 @@
 #include <cctype>
 #include "CImg.h"
 
-//Variables estáticas de EntProp.
-int EntProp::verbosity= 1;
+//Variables estáticas de EntityWithProperties.
+int EntityWithProperties::verbosity= 1;
 
 //! @brief Default constructor.
-EntProp::EntProp(EntProp *owr)
+EntityWithProperties::EntityWithProperties(EntityWithProperties *owr)
   : owner(owr)
   {
     if(this == owner)
@@ -47,7 +47,7 @@ EntProp::EntProp(EntProp *owr)
   }
 
 //! @brief Copy constructor
-EntProp::EntProp(const EntProp &other)
+EntityWithProperties::EntityWithProperties(const EntityWithProperties &other)
   : owner(other.owner)
   {
     if(this == owner)
@@ -56,21 +56,22 @@ EntProp::EntProp(const EntProp &other)
   }
 
 //! @brief Assignment operator.
-EntProp &EntProp::operator=(const EntProp &other)
+EntityWithProperties &EntityWithProperties::operator=(const EntityWithProperties &other)
   {
     owner= other.owner;
     if(this == owner)
       {
-        std::cerr << "EntProp operador asignación; ¡ojo!, objeto de clase: '"
+        std::cerr << getClassName() << "::" << __FUNCTION__
+		  << "; ¡ojo!, objeto of class: '"
 		  << getClassName() 
-                  << "', propietario de sí mismo." << std::endl;
+                  << "', owns itself." << std::endl;
         owner= nullptr;
       }
     return *this;
   }
 
 //! @brief Returns demangled class name.
-std::string EntProp::getClassName(void) const
+std::string EntityWithProperties::getClassName(void) const
   {
     std::string tmp= typeid(*this).name();
     std::bad_exception  e;
@@ -83,14 +84,14 @@ std::string EntProp::getClassName(void) const
   }
 
 //! @brief Get the value of the verbosity level.
-const int &EntProp::getVerbosityLevel(void)
+const int &EntityWithProperties::getVerbosityLevel(void)
   { return verbosity; }
 
 //! @brief Set the value of the verbosity level.
-void EntProp::setVerbosityLevel(const int &vl)
+void EntityWithProperties::setVerbosityLevel(const int &vl)
   { verbosity= vl; }
 
 //! @brief Asigna el propietario del objeto.
-void EntProp::set_owner(EntProp *owr)
+void EntityWithProperties::set_owner(EntityWithProperties *owr)
   { owner= owr; }
 

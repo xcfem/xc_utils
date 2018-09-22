@@ -31,7 +31,7 @@ namespace cmb_acc{
 //! @ingroup CMBACC
 //
 //! @brief Almacena todas las familias de acciones.
-class ActionContainer: public EntCmd
+class ActionContainer: public CommandEntity
   {
   protected:
     ActionsFamily G; //!< Permanent actions.

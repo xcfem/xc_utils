@@ -19,9 +19,9 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//EntCmd.cxx
+//CommandEntity.cxx
 
-#include "EntCmd.h"
+#include "CommandEntity.h"
 #include <boost/tokenizer.hpp>
 #include "xc_basic/src/matrices/RangoIndice.h"
 #include <typeinfo>
@@ -34,87 +34,92 @@
 #include <limits>
 #include <cstdlib>
 
-//Variables estáticas de EntCmd.
-ErrLogFiles EntCmd::err_log_files; //!< Streams para errores y avisos.
+//Variables estáticas de CommandEntity.
+ErrLogFiles CommandEntity::err_log_files; //!< Streams para errores y avisos.
 
 //! @brief Default constructor.
-EntCmd::EntCmd(EntCmd *owr)
-  : EntProp(owr) {}
+CommandEntity::CommandEntity(CommandEntity *owr)
+  : EntityWithProperties(owr) {}
 
 //! @brief Return un puntero al objeto propietario de ESTE.
-EntCmd *EntCmd::Owner(void)
+CommandEntity *CommandEntity::Owner(void)
   {
-    EntCmd *retval= nullptr;
-    EntProp *tmp= EntProp::Owner();
+    CommandEntity *retval= nullptr;
+    EntityWithProperties *tmp= EntityWithProperties::Owner();
     if(tmp)
-      retval= dynamic_cast<EntCmd *>(tmp);
+      retval= dynamic_cast<CommandEntity *>(tmp);
     return retval;
   }
 
 //! @brief Return un puntero al objeto propietario de ESTE.
-const EntCmd *EntCmd::Owner(void) const
+const CommandEntity *CommandEntity::Owner(void) const
   {
-    const EntCmd *retval= nullptr;
-    const EntProp *tmp= EntProp::Owner();
+    const CommandEntity *retval= nullptr;
+    const EntityWithProperties *tmp= EntityWithProperties::Owner();
     if(tmp)
-      retval= dynamic_cast<const EntCmd *>(tmp);
+      retval= dynamic_cast<const CommandEntity *>(tmp);
     return retval;
   }
 
 //! @brief Returns log file name.
-const std::string &EntCmd::getLogFileName(void) const
+const std::string &CommandEntity::getLogFileName(void) const
   { return err_log_files.getLogFileName(); }
 
 //! @brief Sets log file name.
-void EntCmd::setLogFileName(const std::string &fname)
+void CommandEntity::setLogFileName(const std::string &fname)
   {
     if(fname != "")
       err_log_files.setLogFileName(fname);
   }
 
 //! @brief Returns err file name.
-const std::string &EntCmd::getErrFileName(void) const
+const std::string &CommandEntity::getErrFileName(void) const
   { return err_log_files.getErrFileName(); }
 
 //! @brief Sets log file name.
-void EntCmd::setErrFileName(const std::string &fname)
+void CommandEntity::setErrFileName(const std::string &fname)
   {
     if(fname != "")
       err_log_files.setErrFileName(fname);
   }
 
 //! @brief Clear python properties map.
-void EntCmd::clearPyProps(void)
+void CommandEntity::clearPyProps(void)
   { python_dict.clear(); }
 
 //! @brief Returns true if property exists.
-bool EntCmd::hasPyProp(const std::string &str)
+bool CommandEntity::hasPyProp(const std::string &str)
   { return (python_dict.find(str) != python_dict.end()); }
 
 //! @brief Return el objeto de Python cuyo nombre se pasa como parámetro.
-//Python checks the class attributes before it calls __getattr__ so we don't have to do anything special here.
-boost::python::object EntCmd::getPyProp(const std::string &str)
+boost::python::object CommandEntity::getPyProp(const std::string &str)
    {
+     // Python checks the class attributes before it calls __getattr__
+     // so we don't have to do anything special here.
      if(python_dict.find(str) == python_dict.end())
        {
-         std::cerr << "No se encontró la propiedad: '" << str << "'" << std::endl;
+         std::cerr << getClassName() << "::" << __FUNCTION__
+	           << "; property: '" << str << "' not found."
+		   << std::endl;
          PyErr_SetString(PyExc_AttributeError, str.c_str());
          throw boost::python::error_already_set();
        }
      return python_dict[str];
    }
 
-//! @brief Asigna al objeto de Python cuyo nombre se pasa como parámetro el valor «val».
-//However, with __setattr__, python doesn't do anything with the class attributes first, it just calls __setattr__.
-//Which means anything that's been defined as a class attribute won't be modified here - including things set with
+//! @brief Sets/appends a value tho the Python object's dictionary.
+// However, with __setattr__, python doesn't do anything with the class attributes first,
+// it just calls __setattr__.
+// Which means anything that's been defined as a class attribute won't be modified
+// here - including things set with
 //add_property(), def_readwrite(), etc.
-void EntCmd::setPyProp(std::string str, boost::python::object val)
+void CommandEntity::setPyProp(std::string str, boost::python::object val)
   {
     python_dict[str] = val;
   }
 
-//! @brief Return el objeto de Python que resulta de evaluar la expresión.
-boost::python::object EntCmd::evalPy(boost::python::object dict,const std::string &str)
+//! @brief Return the Python object that results from evaluating the argument.
+boost::python::object CommandEntity::evalPy(boost::python::object dict,const std::string &str)
    {
      boost::python::object main_module = boost::python::import("__main__");
      boost::python::object main_namespace = main_module.attr("__dict__");
@@ -122,16 +127,16 @@ boost::python::object EntCmd::evalPy(boost::python::object dict,const std::strin
    }
 
 
-//! @brief Return el objeto de Python que resulta de evaluar el bloque de código.
-boost::python::object EntCmd::execPy(boost::python::object dict,const std::string &block)
+//! @brief Return the Python objects that results from executing the code in the string argument.
+boost::python::object CommandEntity::execPy(boost::python::object dict,const std::string &block)
    {
      boost::python::object main_module = boost::python::import("__main__");
      boost::python::object main_namespace = main_module.attr("__dict__");
      return boost::python::exec(block.c_str(),main_namespace,dict);
    }
 
-//! @brief Return el objeto de Python que resulta de evaluar el bloque de código.
-boost::python::object EntCmd::execFilePy(boost::python::object dict,const std::string &fName)
+//! @brief Return the Python object that results from executing the code in the file.
+boost::python::object CommandEntity::execFilePy(boost::python::object dict,const std::string &fName)
    {
      boost::python::object main_module = boost::python::import("__main__");
      boost::python::object main_namespace = main_module.attr("__dict__");

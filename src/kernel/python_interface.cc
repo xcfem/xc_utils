@@ -25,8 +25,8 @@
 #include <boost/python/module.hpp>
 #include <boost/python/def.hpp>
 #include <boost/python/class.hpp>
-#include "xc_utils/src/nucleo/EntCmd.h"
-#include "xc_utils/src/nucleo/EntConNmb.h"
+#include "xc_utils/src/kernel/CommandEntity.h"
+#include "xc_utils/src/kernel/NamedEntity.h"
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include "xc_basic/src/matrices/ProtoMatrix.h"
 
@@ -61,31 +61,31 @@ BOOST_PYTHON_MODULE(xc_base)
       // .def("count", &set_ints::count)
        ;
 
-    const EntProp *(EntProp::*getOwner)(void) const= &EntProp::Owner;
-    class_<EntProp,EntProp *, boost::noncopyable  >("EntProp", no_init)
+    const EntityWithProperties *(EntityWithProperties::*getOwner)(void) const= &EntityWithProperties::Owner;
+    class_<EntityWithProperties,EntityWithProperties *, boost::noncopyable  >("EntityWithProperties", no_init)
       .add_property("owner", make_function( getOwner, return_internal_reference<>() ), "returns object's owner (container).")
-      .def("setVerbosityLevel", &EntProp::setVerbosityLevel,"Set verbosity level.")
+      .def("setVerbosityLevel", &EntityWithProperties::setVerbosityLevel,"Set verbosity level.")
         .staticmethod("setVerbosityLevel")
-      // .def("getVerbosityLevel", make_function(&EntProp::getVerbosityLevel, return_internal_reference<>() ),"Get verbosity level.")
+      // .def("getVerbosityLevel", make_function(&EntityWithProperties::getVerbosityLevel, return_internal_reference<>() ),"Get verbosity level.")
       //   .staticmethod("getVerbosityLevel")
       ;
 
-    class_<EntCmd, bases<EntProp> >("EntCmd")
-      .add_property("logFileName", make_function( &EntCmd::getLogFileName, return_internal_reference<>() ), &EntCmd::setLogFileName)
-      .add_property("errFileName", make_function( &EntCmd::getErrFileName, return_internal_reference<>() ), &EntCmd::setErrFileName)
-      .def("hasProp", &EntCmd::hasPyProp,"True if property exists.")
-      .def("getProp", &EntCmd::getPyProp,"Return una propiedad definida por el usuario.")
-      .def("setProp", &EntCmd::setPyProp,"Define (o asigna) una propiedad definida por el usuario.")
-      .def("evalPy", &EntCmd_eval,"Evaluates expresion.")
-      .def("execPy", &EntCmd_exec,"Executes code block.")
-      .def("execFilePy", &EntCmd_exec_file,"Executes code block.")
-      .def("tipo", &EntCmd::getClassName,"DEPRECATED Return el nombre de la clase.")
-      .def("type", &EntCmd::getClassName,"Returns class name.")
+    class_<CommandEntity, bases<EntityWithProperties> >("CommandEntity")
+      .add_property("logFileName", make_function( &CommandEntity::getLogFileName, return_internal_reference<>() ), &CommandEntity::setLogFileName)
+      .add_property("errFileName", make_function( &CommandEntity::getErrFileName, return_internal_reference<>() ), &CommandEntity::setErrFileName)
+      .def("hasProp", &CommandEntity::hasPyProp,"True if property exists.")
+      .def("getProp", &CommandEntity::getPyProp,"Return una propiedad definida por el usuario.")
+      .def("setProp", &CommandEntity::setPyProp,"Define (o asigna) una propiedad definida por el usuario.")
+      .def("evalPy", &CommandEntity_eval,"Evaluates expresion.")
+      .def("execPy", &CommandEntity_exec,"Executes code block.")
+      .def("execFilePy", &CommandEntity_exec_file,"Executes code block.")
+      .def("tipo", &CommandEntity::getClassName,"DEPRECATED Return el nombre de la clase.")
+      .def("type", &CommandEntity::getClassName,"Returns class name.")
   ;
 
-    class_<EntConNmb, bases<EntCmd> >("EntConNmb")
-      .add_property("nombre", make_function( &EntConNmb::getName, return_value_policy<copy_const_reference>()), &EntConNmb::setName,"DEPRECATED returns object name.")
-      .add_property("name", make_function( &EntConNmb::getName, return_value_policy<copy_const_reference>()), &EntConNmb::setName,"returns object name.")
+    class_<NamedEntity, bases<CommandEntity> >("NamedEntity")
+      .add_property("nombre", make_function( &NamedEntity::getName, return_value_policy<copy_const_reference>()), &NamedEntity::setName,"DEPRECATED returns object name.")
+      .add_property("name", make_function( &NamedEntity::getName, return_value_policy<copy_const_reference>()), &NamedEntity::setName,"returns object name.")
       ;
 
     class_<ProtoMatrix, boost::noncopyable>("ProtoMatrix", no_init)

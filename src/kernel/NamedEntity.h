@@ -19,14 +19,14 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//EntConNmb.h
+//NamedEntity.h
 //Entidad con nombre.
 
 #ifndef ENTCONNMB_H
 #define ENTCONNMB_H
 
 #include <string>
-#include "EntCmd.h"
+#include "CommandEntity.h"
 
 //! @ingroup CMDINTRP
 //
@@ -35,14 +35,14 @@
 //! @ingroup BASE
 //
 //!  @brief Objeto identificado por un nombre.
-class EntConNmb: public EntCmd
+class NamedEntity: public CommandEntity
   {
   private:
     std::string name; //!< @brief Object name.
   public:
     //! @brief Constructor.
-  EntConNmb(const std::string &Nombre="",EntCmd *owr= nullptr)
-      : EntCmd(owr), name(Nombre) {}
+  NamedEntity(const std::string &Nombre="",CommandEntity *owr= nullptr)
+      : CommandEntity(owr), name(Nombre) {}
     //! @brief Return the object name.
     const std::string &getName(void) const
       { return name; }
@@ -53,18 +53,18 @@ class EntConNmb: public EntCmd
     std::string &Name(void)
       { return name; }
     //! @brief Compara el nombre del elemento con un nombre dado.
-    int operator==(const EntConNmb &other) const
+    int operator==(const NamedEntity &other) const
       { return (name==other.name); }
     //! @brief Operador menor.
-    int operator<(const EntConNmb &other) const
+    int operator<(const NamedEntity &other) const
       { return (name<other.name); }
-    EntConNmb &operator+=(const EntConNmb &);
-    EntConNmb &operator-=(const EntConNmb &);
-    EntConNmb &operator*=(const EntConNmb &);
+    NamedEntity &operator+=(const NamedEntity &);
+    NamedEntity &operator-=(const NamedEntity &);
+    NamedEntity &operator*=(const NamedEntity &);
   };
 
-EntConNmb operator+(const EntConNmb &,const EntConNmb &);
-EntConNmb operator-(const EntConNmb &,const EntConNmb &);
-EntConNmb operator*(const EntConNmb &,const EntConNmb &);
+NamedEntity operator+(const NamedEntity &,const NamedEntity &);
+NamedEntity operator-(const NamedEntity &,const NamedEntity &);
+NamedEntity operator*(const NamedEntity &,const NamedEntity &);
 
 #endif

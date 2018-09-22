@@ -27,7 +27,7 @@
 #include <string>
 #include <deque>
 #include <cmath>
-#include "xc_utils/src/nucleo/EntConNmb.h"
+#include "xc_utils/src/kernel/NamedEntity.h"
 #include "ActionRelationships.h"
 
 //! \namespace<cmb_acc>
@@ -41,7 +41,7 @@ class ActionRValueList;
 //! @ingroup CMBACC
 //
 //! @brief Action or linear combination of actions.
-class Action: public EntConNmb
+class Action: public NamedEntity
   {
     std::string descripcion; //!< Descripcion de la acción p. ej. "Viento derecho".
     ActionRelationships relaciones; //!< Relaciones de una acción con el resto.
@@ -58,7 +58,7 @@ class Action: public EntConNmb
     static Action NULA(void);
     //! @brief Sets the name to the action.
     inline void setName(const std::string &nmb)
-      { EntConNmb::Name()= nmb; }
+      { NamedEntity::Name()= nmb; }
     const std::string GetNombreExpandido(void) const;
     //! @brief Return la descripción de la acción.
     inline const std::string &GetDescripcion(void) const

@@ -35,7 +35,7 @@ const double cmb_acc::Action::zero= 1e-6;
 
 //! @brief Default constructor.
 cmb_acc::Action::Action(const std::string &n, const std::string &descrip)
-  : EntConNmb(n), descripcion(descrip),relaciones(), f_pond(1.0) {}
+  : NamedEntity(n), descripcion(descrip),relaciones(), f_pond(1.0) {}
 
 //! \fn cmb_acc::Action::NULA(void)
 //! @brief Return una acción nula.
@@ -108,7 +108,7 @@ std::vector<double> cmb_acc::Action::getCoeficientes(const std::vector<std::stri
 //! @brief ??
 void cmb_acc::Action::limpia_nombres(void)
   {
-    EntConNmb::Name()= ActionRelationships::limpia(getName());
+    NamedEntity::Name()= ActionRelationships::limpia(getName());
     descripcion= ActionRelationships::limpia(descripcion);
   }
 
@@ -119,7 +119,7 @@ void cmb_acc::Action::multiplica(const double &d)
     f_pond*= d;
     limpia_nombres();
     const std::string strnum= num2str(f_pond,2);
-    EntConNmb::Name()= strnum + "*" + getName();
+    NamedEntity::Name()= strnum + "*" + getName();
     descripcion= strnum + "*" + descripcion;
   }
 
@@ -137,12 +137,12 @@ void cmb_acc::Action::suma(const Action &f)
 
     if(getName().size()>0)
       {
-        EntConNmb::Name()+= " + " + f.getName();
+        NamedEntity::Name()+= " + " + f.getName();
         descripcion+= " + " + f.descripcion;
       }
     else
       {
-	EntConNmb::Name()= f.getName();
+	NamedEntity::Name()= f.getName();
         descripcion= f.descripcion;
       }
     relaciones.concat(f.relaciones);
@@ -152,7 +152,7 @@ void cmb_acc::Action::suma(const Action &f)
     else //Otherwise we don't know.
       f_pond= 1.0;
     if(!Owner())
-      set_owner(const_cast<EntCmd *>(f.Owner()));
+      set_owner(const_cast<CommandEntity *>(f.Owner()));
   }
 
 //! @brief Return verdadero si la acción que se pasa como parámetro es incompatible con esta,

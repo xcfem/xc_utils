@@ -25,7 +25,7 @@
 #ifndef LEADINGACTIONINFO_H
 #define LEADINGACTIONINFO_H
 
-#include "xc_utils/src/nucleo/EntCmd.h"
+#include "xc_utils/src/kernel/CommandEntity.h"
 
 namespace cmb_acc{
 class Action;
@@ -33,7 +33,7 @@ class Action;
 //! @ingroup CMBACC
 //
 //! @brief Information about the leading action.
-class LeadingActionInfo: public EntCmd
+class LeadingActionInfo: public CommandEntity
   {
   private:
     short int index; //!< Index of leading variable action (-1 if none).

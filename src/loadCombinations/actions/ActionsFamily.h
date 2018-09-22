@@ -42,7 +42,7 @@ class LeadingActionInfo;
 //! -Variable actions.
 //! -Accidental actions.
 //! -Earthquake actions.
-class ActionsFamily: public EntConNmb
+class ActionsFamily: public NamedEntity
   {
   private:
     ActionRValueList actions; //!< Family actions container.

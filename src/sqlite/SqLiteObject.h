@@ -25,7 +25,7 @@
 #ifndef SQLITEOBJECT_H
 #define SQLITEOBJECT_H
 
-#include "../nucleo/EntCmd.h"
+#include "../kernel/CommandEntity.h"
 
 class SqLiteDatabase;
 class SqLiteQuery;
@@ -35,7 +35,7 @@ class SqLiteQuery;
 //! @ingroup SQLITE
 //
 //!  @brief Clase base de los objetos de base de datos.
-class SqLiteObject: public EntCmd
+class SqLiteObject: public CommandEntity
   {
   public:
     typedef std::map<std::string,SqLiteObject *> map_sql_objs;//!< Contenedor de objetos de base de datos.

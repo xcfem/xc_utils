@@ -33,7 +33,7 @@ class ActionWeightingMap;
 //! @ingroup CMBACC
 //
 //! @brief Almacena todas las Load Combinations que deben formarse para las acciones.
-class LoadCombinations: public EntCmd
+class LoadCombinations: public CommandEntity
   {
   private:
     //LoadCombinations para estados límite últimos.

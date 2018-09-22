@@ -21,14 +21,14 @@
 //----------------------------------------------------------------------------
 //python_interface.tcc
 
-class_<ActionRelationships, bases<EntCmd> >("ActionRelationships")
+class_<ActionRelationships, bases<CommandEntity> >("ActionRelationships")
   .add_property("no_determinante", &ActionRelationships::NoDeterminante, &ActionRelationships::setNoDeterminante)
   .def("agregaIncompatible", &ActionRelationships::AgregaIncompatible)
   .def("nombresIncompatibles", &ActionRelationships::nombresIncompatibles)
   .def("agregaMaestra", &ActionRelationships::AgregaMaestra)
   .def("nombresMaestras", &ActionRelationships::nombresMaestras);
 
-class_<Action, bases<EntConNmb> >("Action")
+class_<Action, bases<NamedEntity> >("Action")
   .def(init<std::string, std::string>())
   .add_property("descripcion", make_function( &Action::GetDescripcion, return_value_policy<copy_const_reference>() ), &Action::SetDescripcion)
   .add_property("getRelaciones", make_function( &Action::getRelaciones, return_internal_reference<>() ))
@@ -49,18 +49,18 @@ class_<dq_action_r_value >("dq_action_r_values")
   .def(vector_indexing_suite<dq_action_r_value>())
   ;
 
-class_<ActionRValueList, bases<dq_action_r_value,EntCmd> >("ActionRValueLists")
+class_<ActionRValueList, bases<dq_action_r_value,CommandEntity> >("ActionRValueLists")
   .def(self_ns::str(self_ns::self))
   ;
 
 const ActionRValueList &(ActionsFamily::*getFamilyActions)(void) const= &ActionsFamily::getActions;
-class_<ActionsFamily, bases<EntConNmb> >("ActionsFamily")
+class_<ActionsFamily, bases<NamedEntity> >("ActionsFamily")
   .def(init<std::string>())
   .add_property("actions", make_function( getFamilyActions, return_internal_reference<>() ), &ActionsFamily::setActions)
   .def("insert", make_function(&ActionsFamily::insert,return_internal_reference<>()))
   ;
 
-class_<ActionContainer, bases<EntCmd> >("ActionContainer")
+class_<ActionContainer, bases<CommandEntity> >("ActionContainer")
   .add_property("permanentActions", make_function( &ActionContainer::getPermanentActions, return_internal_reference<>() ), &ActionContainer::setPermanentActions)
   .add_property("ncPermanentActions", make_function( &ActionContainer::getPermanentActionsNC, return_internal_reference<>() ), &ActionContainer::setPermanentActionsNC,"return a reference to the families of non-constant permanent actions container.")
   .add_property("variableActions", make_function( &ActionContainer::getVariableActions, return_internal_reference<>() ), &ActionContainer::setVariableActions,"return a reference to the families of variable actions container.")

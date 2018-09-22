@@ -24,7 +24,7 @@
 #ifndef RELACCIONES_H
 #define RELACCIONES_H
 
-#include "xc_utils/src/nucleo/EntCmd.h"
+#include "xc_utils/src/kernel/CommandEntity.h"
 
 //! \namespace<cmb_acc>
 //! Routines that generate combinations of actions.
@@ -35,7 +35,7 @@ class LoadCombinationVector;
 //! @ingroup CMBACC
 //
 //! @brief Relationship of an action with the other ones.
-class ActionRelationships: public EntCmd
+class ActionRelationships: public CommandEntity
   {
   public:
     typedef std::deque<std::string> dq_string;

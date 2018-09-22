@@ -22,8 +22,8 @@
 //python_utils.cc
 
 #include "python_utils.h"
-#include "xc_utils/src/nucleo/EntCmd.h"
-#include "xc_utils/src/nucleo/EntConNmb.h"
+#include "xc_utils/src/kernel/CommandEntity.h"
+#include "xc_utils/src/kernel/NamedEntity.h"
 #include "xc_basic/src/matrices/ProtoMatrix.h"
 #include "CImg.h"
 
@@ -198,7 +198,7 @@ float compare_images(const std::string &fNameA, const std::string &fNameB)
 //     return retval;
 //   }
 
-boost::python::object EntCmd_eval(boost::python::object self, const std::string &str)
+boost::python::object CommandEntity_eval(boost::python::object self, const std::string &str)
   {
     boost::python::object retval;
     if(!str.empty())
@@ -212,7 +212,7 @@ boost::python::object EntCmd_eval(boost::python::object self, const std::string 
         self_dict["self"]= self;
 
         // Extract the C++ object from the Python object.
-        EntCmd &ent= boost::python::extract<EntCmd &>(self);
+        CommandEntity &ent= boost::python::extract<CommandEntity &>(self);
 
         // Pass the Python object's `__dict__` to the C++ object.
         retval= ent.evalPy(self_dict,str);
@@ -220,7 +220,7 @@ boost::python::object EntCmd_eval(boost::python::object self, const std::string 
     return retval;
   }
 
-boost::python::object EntCmd_exec(boost::python::object self, const std::string &block)
+boost::python::object CommandEntity_exec(boost::python::object self, const std::string &block)
   {
     boost::python::object retval;
     if(!block.empty())
@@ -234,7 +234,7 @@ boost::python::object EntCmd_exec(boost::python::object self, const std::string 
         self_dict["self"]= self;
 
         // Extract the C++ object from the Python object.
-        EntCmd &ent= boost::python::extract<EntCmd &>(self);
+        CommandEntity &ent= boost::python::extract<CommandEntity &>(self);
 
         // Pass the Python object's `__dict__` to the C++ object.
         retval= ent.execPy(self_dict,block);
@@ -242,7 +242,7 @@ boost::python::object EntCmd_exec(boost::python::object self, const std::string 
     return retval;
   }
 
-boost::python::object EntCmd_exec_file(boost::python::object self, const std::string &fileName)
+boost::python::object CommandEntity_exec_file(boost::python::object self, const std::string &fileName)
   {
     boost::python::object retval;
     if(!fileName.empty())
@@ -256,7 +256,7 @@ boost::python::object EntCmd_exec_file(boost::python::object self, const std::st
         self_dict["self"]= self;
 
         // Extract the C++ object from the Python object.
-        EntCmd &ent= boost::python::extract<EntCmd &>(self);
+        CommandEntity &ent= boost::python::extract<CommandEntity &>(self);
 
         // Pass the Python object's `__dict__` to the C++ object.
         retval= ent.execFilePy(self_dict,fileName);

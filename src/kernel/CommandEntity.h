@@ -19,18 +19,18 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//EntCmd.h
+//CommandEntity.h
 
 #ifndef ENTCMD_H
 #define ENTCMD_H
 
-#include "EntProp.h"
+#include "EntityWithProperties.h"
 #include <map>
 #include <set>
 #include <deque>
 #include <stack>
 #include "xc_basic/src/text/text_string.h"
-#include "xc_utils/src/nucleo/ErrLogFiles.h"
+#include "xc_utils/src/kernel/ErrLogFiles.h"
 #include <boost/python.hpp>
 
 namespace boost
@@ -40,26 +40,26 @@ namespace boost
 
 typedef enum{FALLO,CONTINUA,COMPLETADO} resul_lectura;
 
-//! @ingroup NUCLEO
+//! @ingroup KERNEL
 //
 //! @brief Objet that can execute python scripts.
-class EntCmd: public EntProp
+class CommandEntity: public EntityWithProperties
   {
   private:
     static ErrLogFiles err_log_files; //!< Streams para errores y avisos.
     std::map<std::string, boost::python::object> python_dict; //!< Variables de Python.
   protected:
 
-    static EntCmd *entcmd_cast(boost::any &data);
+    static CommandEntity *entcmd_cast(boost::any &data);
 
 
     template <class T>
     void string_to(T &,const std::string &) const;
   public:
-    EntCmd(EntCmd *owr= nullptr);
+    CommandEntity(CommandEntity *owr= nullptr);
 
-    EntCmd *Owner(void);
-    const EntCmd *Owner(void) const;
+    CommandEntity *Owner(void);
+    const CommandEntity *Owner(void) const;
 
     const std::string &getLogFileName(void) const;
     void setLogFileName(const std::string &);

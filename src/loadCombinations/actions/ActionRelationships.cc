@@ -64,7 +64,7 @@ std::deque<std::string> cmb_acc::ActionRelationships::get_combination_actions_na
 
 //! @brief Default constructor.
 cmb_acc::ActionRelationships::ActionRelationships(void)
-  : EntCmd(), incompatibles(0), maestras(0), nodet(false), contiene_incomp(false) {}
+  : CommandEntity(), incompatibles(0), maestras(0), nodet(false), contiene_incomp(false) {}
 
 //! @brief Return una text string con los nombres de la lista que se pasa como parámetro separados por comas.
 std::string cmb_acc::ActionRelationships::nombres(const dq_string &l) const

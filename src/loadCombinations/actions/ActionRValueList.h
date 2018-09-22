@@ -25,7 +25,7 @@
 #ifndef LISTAVRACCION_HXX
 #define LISTAVRACCION_HXX
 
-#include "xc_utils/src/nucleo/EntCmd.h"
+#include "xc_utils/src/kernel/CommandEntity.h"
 #include <deque>
 #include "ActionRValue.h"
 
@@ -39,7 +39,7 @@ class ActionsFamily;
 //! @ingroup CMBACC
 //
 //! @brief List of representative values of actions (objetos ActionRValue).
-class ActionRValueList: public std::deque<ActionRValue>, public EntCmd
+class ActionRValueList: public std::deque<ActionRValue>, public CommandEntity
   {
     friend class Variation;
     friend class ActionsFamily;

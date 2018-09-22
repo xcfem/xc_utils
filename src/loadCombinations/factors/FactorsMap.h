@@ -25,7 +25,7 @@
 #ifndef FACTORSMAP_H
 #define FACTORSMAP_H
 
-#include "xc_utils/src/nucleo/EntCmd.h"
+#include "xc_utils/src/kernel/CommandEntity.h"
 #include <map>
 
 
@@ -37,7 +37,7 @@ class LoadCombinationVector;
 //
 //! @brief Contenedor de coeficientes de simultaneidad de acciones.
 template <class Factors>
-class FactorsMap: public EntCmd, public std::map<std::string,Factors>
+class FactorsMap: public CommandEntity, public std::map<std::string,Factors>
   {
   public:
     typedef typename std::map<std::string,Factors>::const_iterator const_iterator;
@@ -136,7 +136,7 @@ const Factors *FactorsMap<Factors>::getPtrCoefs(const std::string &name) const
 //! @brief Default constructor.
 template <class Factors>
 FactorsMap<Factors>::FactorsMap(void)
-  : EntCmd() {}
+  : CommandEntity() {}
 
 //! @brief Crea coeficientes con el nombre que se le pasa como parámetro.
 template <class Factors>

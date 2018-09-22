@@ -49,11 +49,11 @@ float psnrImagenes(const std::string &fNameA, const std::string &fNameB);
 float compare_images(const std::string &fNameA, const std::string &fNameB);
 
 
-boost::python::object EntCmd_eval(boost::python::object self, const std::string &str);
+boost::python::object CommandEntity_eval(boost::python::object self, const std::string &str);
 
-boost::python::object EntCmd_exec(boost::python::object self, const std::string &block);
+boost::python::object CommandEntity_exec(boost::python::object self, const std::string &block);
 
-boost::python::object EntCmd_exec_file(boost::python::object self, const std::string &fileName);
+boost::python::object CommandEntity_exec_file(boost::python::object self, const std::string &fileName);
 
 //Helper class to expose container like std::list
 inline void IndexError(void)

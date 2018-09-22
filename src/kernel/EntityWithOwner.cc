@@ -19,34 +19,12 @@
 // junto a este programa. 
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//EntProp.h
+//EntityWithOwner.cc
 
-#ifndef ENTPROP_H
-#define ENTPROP_H
+#include "EntityWithOwner.h"
 
-#include <string>
+//! @brief Constructor.
+EntityWithOwner::EntityWithOwner(CommandEntity *owr)
+  : CommandEntity(owr) {}
 
-//! @ingroup NUCLEO
-//
-//! @brief Object that can return properties as Python objects.
-class EntProp
-  {
-  private:
-    EntProp *owner; //! Objeto propietario de ESTE.
-  protected:
-    static int verbosity; //!< Verbosity level.
-   public:
-    EntProp(EntProp *owr= nullptr);
-    EntProp(const EntProp &);
-    EntProp &operator=(const EntProp &);
-    static const int &getVerbosityLevel(void);
-    static void setVerbosityLevel(const int &);
-    virtual std::string getClassName(void) const;
-    void set_owner(EntProp *owr);
-    inline EntProp *Owner(void)
-      { return owner; }
-    inline const EntProp *Owner(void) const
-      { return owner; }
-  };
 
-#endif

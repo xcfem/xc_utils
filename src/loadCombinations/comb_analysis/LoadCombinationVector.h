@@ -34,7 +34,7 @@ namespace cmb_acc{
 //
 //! @brief Combination container. Each component of the vector is a
 //! combination of actions.
-class LoadCombinationVector: public std::vector<Action>, public EntCmd
+class LoadCombinationVector: public std::vector<Action>, public CommandEntity
   {
   private:
     bool Existe(const Action &f) const;
@@ -45,7 +45,7 @@ class LoadCombinationVector: public std::vector<Action>, public EntCmd
   public:
     //! @brief Constructor.
     LoadCombinationVector(const size_t &sz= 0)
-      : std::vector<Action>(sz), EntCmd() {}
+      : std::vector<Action>(sz), CommandEntity() {}
     static LoadCombinationVector ProdCartesiano(const LoadCombinationVector &f1,const LoadCombinationVector &f2,const double &tol);
     static LoadCombinationVector Concat(const LoadCombinationVector &f1,const LoadCombinationVector &f2,const double &tol);
     void Numera(const std::string &prefix= "H");

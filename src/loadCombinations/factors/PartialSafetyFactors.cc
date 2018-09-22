@@ -74,7 +74,7 @@ void cmb_acc::ULSPartialSafetyFactors::Print(std::ostream &os) const
 
 //! @brief Constructor
 cmb_acc::PartialSafetyFactors::PartialSafetyFactors(const ULSPartialSafetyFactors &gf_uls, const SLSPartialSafetyFactors &gf_els)
-  : EntCmd(), uls_partial_safety_factors(gf_uls), sls_partial_safety_factors(gf_els) {}
+  : CommandEntity(), uls_partial_safety_factors(gf_uls), sls_partial_safety_factors(gf_els) {}
 
 //! @brief Return the partial safety factors for serviceability limit states.
 cmb_acc::Variation cmb_acc::PartialSafetyFactors::CoefsEls(void) const

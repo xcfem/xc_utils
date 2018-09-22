@@ -25,7 +25,7 @@
 #ifndef PARTIALSAFETYFACTORSMAP_H
 #define PARTIALSAFETYFACTORSMAP_H
 
-#include "xc_utils/src/nucleo/EntCmd.h"
+#include "xc_utils/src/kernel/CommandEntity.h"
 #include "PartialSafetyFactors.h"
 #include "FactorsMap.h"
 
