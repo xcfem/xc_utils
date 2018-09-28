@@ -30,7 +30,7 @@ def distXYToPline(p,pline):
     p1= pline[i]
     p12d= geom.Pos2d(p1[0],p1[1])
     s= geom.Segment2d(p02d,p12d)
-    ds= s.distPto(p2d)
+    ds= s.distPos3d(p2d)
     d= min(d,ds)
     p0= p1
     p02d= geom.Pos2d(p0[0],p0[1])

@@ -14,8 +14,8 @@ normal=plane.getNormal()
 YZplane= geom.Plane3d(geom.Pos3d(0,0,0),geom.Pos3d(0,1,0),geom.Pos3d(0,0,1))
 angle= plane.getPlaneAngle(YZplane)
 yzTrace= plane.getYZTrace()
-dA= yzTrace.distPto(pA)
-dB= yzTrace.distPto(pB)
+dA= yzTrace.distPos3d(pA)
+dB= yzTrace.distPos3d(pB)
 
 '''
 print 'normal: ', normal*(1.0/1e4)
