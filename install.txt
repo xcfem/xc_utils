@@ -19,22 +19,28 @@ xc_utils installation.
     - The library is supposed to be used over Linux, maybe it's possible
       to use it with other Unix flavours.
     - Libraries needed:
+    
+         * Libraries you must to download from GitHub and install yourself:
+	 
+             -xc_basic: basic routines (download it from https://github.com/lcpt/xc_basic).
+	     
+	 * Libraries that can be installed from OS packages.
 
-         -Boost c++ libraries (<http://www.boost.org/>).
-         -xc_basic (must be previously installed xc_basic.tar.gz).
-         -CImg C++ Template Image Processing Toolkit (cimg-dev).
-         -CGAL computational geometry algorithms library <http://www.cgal.org/> (libcgal-dev).
-         -GNU plotutils libraries (libplot gnuplot).
-         -GLib library (libglib2.0-dev).
-         -Multiprecision arithmetic library developers tools (libgmp3-dev).
-         -GTK GIMP Tookit (libgtk2.0-dev, libgtkgl2.0-dev,
-               libgtkglextmm-x11-1.2-dev, libgtkmm-2.4-dev).
-         -GNU Triangulated Surface Library (libgts-bin libgts-dev).
-         -Multiple precision floating-point computation developers tools (libmpfr-dev).
-         -MySQL C++ library bindings (libmysql++-dev).
-         -SQLite 3 development files (libsqlite3).
-         -VTK Visualization ToolKit <http://www.vtk.org> (libvtk5-dev).
-         -X11 (libX11-dev).
+	     -Boost c++ libraries (<http://www.boost.org/>).
+	     -xc_basic (must be previously installed xc_basic.tar.gz).
+	     -CImg C++ Template Image Processing Toolkit (cimg-dev).
+	     -CGAL computational geometry algorithms library <http://www.cgal.org/> (libcgal-dev).
+	     -GNU plotutils libraries (libplot gnuplot).
+	     -GLib library (libglib2.0-dev).
+	     -Multiprecision arithmetic library developers tools (libgmp3-dev).
+	     -GTK GIMP Tookit (libgtk2.0-dev, libgtkgl2.0-dev,
+		   libgtkglextmm-x11-1.2-dev, libgtkmm-2.4-dev).
+	     -GNU Triangulated Surface Library (libgts-bin libgts-dev).
+	     -Multiple precision floating-point computation developers tools (libmpfr-dev).
+	     -MySQL C++ library bindings (libmysql++-dev).
+	     -SQLite 3 development files (libsqlite3).
+	     -VTK Visualization ToolKit <http://www.vtk.org> (libvtk5-dev).
+	     -X11 (libX11-dev).
 
       You can find a list of the Ubuntu (or Debian) packages you need to
       fulfil the installation in "doc/needed_packages.txt". If you have
