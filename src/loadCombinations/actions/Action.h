@@ -25,6 +25,7 @@
 #define ACTION_H
 
 #include <string>
+#include <vector>
 #include <deque>
 #include <cmath>
 #include "xc_utils/src/kernel/NamedEntity.h"
