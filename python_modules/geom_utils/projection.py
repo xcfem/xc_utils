@@ -6,6 +6,6 @@ import geom
 def projXYPline3d(xyzPline):
   retval= geom.Polyline2d()
   for p in xyzPline:
-    retval.agregaVertice(geom.Pos2d(p.x,p.y))
+    retval.appendVertex(geom.Pos2d(p.x,p.y))
   return retval
 

@@ -7,20 +7,20 @@ import math
 
 polA=geom.Polyline3d()
 
-polA.agregaVertice(geom.Pos3d(0,0,0)) #1
-polA.agregaVertice(geom.Pos3d(0.001,0.5,0.09)) #2 (to erase)
-polA.agregaVertice(geom.Pos3d(0,1,0)) #3
-polA.agregaVertice(geom.Pos3d(0.002,1.001,0.5)) #4 (to erase)
-polA.agregaVertice(geom.Pos3d(0,1,1)) #5
-polA.agregaVertice(geom.Pos3d(0,2,1)) #6
-polA.agregaVertice(geom.Pos3d(0,2,2)) #7
-polA.agregaVertice(geom.Pos3d(0,1,2)) #8
-polA.agregaVertice(geom.Pos3d(0,1,1)) #9
-polA.agregaVertice(geom.Pos3d(0,0,1)) #10
+polA.appendVertex(geom.Pos3d(0,0,0)) #1
+polA.appendVertex(geom.Pos3d(0.001,0.5,0.09)) #2 (to erase)
+polA.appendVertex(geom.Pos3d(0,1,0)) #3
+polA.appendVertex(geom.Pos3d(0.002,1.001,0.5)) #4 (to erase)
+polA.appendVertex(geom.Pos3d(0,1,1)) #5
+polA.appendVertex(geom.Pos3d(0,2,1)) #6
+polA.appendVertex(geom.Pos3d(0,2,2)) #7
+polA.appendVertex(geom.Pos3d(0,1,2)) #8
+polA.appendVertex(geom.Pos3d(0,1,1)) #9
+polA.appendVertex(geom.Pos3d(0,0,1)) #10
 
 polB= geom.Polyline3d(polA)
 
-polB.agregaVertice(geom.Pos3d(0,0,0)) #11 CAN BE CLOSED.
+polB.appendVertex(geom.Pos3d(0,0,0)) #11 CAN BE CLOSED.
 
 nv0A= polA.getNumVertices()
 polA.simplify(0.1)

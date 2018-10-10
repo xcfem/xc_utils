@@ -2,16 +2,16 @@
 import xc_base
 import geom
 pol1=geom.Polygon2d()
-pol1.agregaVertice(geom.Pos2d(0,0))
-pol1.agregaVertice(geom.Pos2d(1,0))
-pol1.agregaVertice(geom.Pos2d(1,1))
-pol1.agregaVertice(geom.Pos2d(0,1))
+pol1.appendVertex(geom.Pos2d(0,0))
+pol1.appendVertex(geom.Pos2d(1,0))
+pol1.appendVertex(geom.Pos2d(1,1))
+pol1.appendVertex(geom.Pos2d(0,1))
 
 pol2=geom.Polygon2d()
-pol2.agregaVertice(geom.Pos2d(0.25,0))
-pol2.agregaVertice(geom.Pos2d(1,0))
-pol2.agregaVertice(geom.Pos2d(1,1))
-pol2.agregaVertice(geom.Pos2d(0.25,1))
+pol2.appendVertex(geom.Pos2d(0.25,0))
+pol2.appendVertex(geom.Pos2d(1,0))
+pol2.appendVertex(geom.Pos2d(1,1))
+pol2.appendVertex(geom.Pos2d(0.25,1))
 
 pol3=geom.Polygon2d()
 pol3.unePolygon2d(pol1)

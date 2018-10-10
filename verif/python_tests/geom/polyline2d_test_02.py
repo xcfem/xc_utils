@@ -18,11 +18,11 @@ vertices= [  geom.Pos2d(0,0), #1
 polA= geom.Polyline2d()
 
 for v in vertices:
-  polA.agregaVertice(v)
+  polA.appendVertex(v)
 
 polB= geom.Polyline2d(polA)
 
-polB.agregaVertice(geom.Pos2d(0,0)) #11 CAN BE CLOSED.
+polB.appendVertex(geom.Pos2d(0,0)) #11 CAN BE CLOSED.
 
 nv0A= polA.getNumVertices()
 polA.simplify(0.1)

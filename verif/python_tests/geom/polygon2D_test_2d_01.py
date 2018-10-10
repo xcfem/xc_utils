@@ -2,10 +2,10 @@
 import xc_base
 import geom
 pol1=geom.Polygon2d()
-pol1.agregaVertice(geom.Pos2d(0,0))
-pol1.agregaVertice(geom.Pos2d(1,0))
-pol1.agregaVertice(geom.Pos2d(1,1))
-pol1.agregaVertice(geom.Pos2d(0,1))
+pol1.appendVertex(geom.Pos2d(0,0))
+pol1.appendVertex(geom.Pos2d(1,0))
+pol1.appendVertex(geom.Pos2d(1,1))
+pol1.appendVertex(geom.Pos2d(0,1))
 areaPol=pol1.getArea()
 polygonPerimeter= pol1.getPerimeter()
 polygonCenterOfMass=pol1.getCenterOfMass()

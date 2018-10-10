@@ -21,5 +21,5 @@ class SectionByPlane(object):
     retval= geom.Polyline3d()
     for pline in listOfPlines:
       lp= pline.getIntersection(self.plane)
-      retval.agregaVertice(lp[0])
+      retval.appendVertex(lp[0])
     return retval

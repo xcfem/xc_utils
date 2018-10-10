@@ -7,10 +7,10 @@ import math
 pol1=geom.Polyline2d()
 pol2=geom.Polyline2d()
 
-pol1.agregaVertice(geom.Pos2d(0,0))
-pol1.agregaVertice(geom.Pos2d(1,0))
-pol1.agregaVertice(geom.Pos2d(1,1))
-pol1.agregaVertice(geom.Pos2d(0,1))
+pol1.appendVertex(geom.Pos2d(0,0))
+pol1.appendVertex(geom.Pos2d(1,0))
+pol1.appendVertex(geom.Pos2d(1,1))
+pol1.appendVertex(geom.Pos2d(0,1))
 
 longPol1=pol1.getLength()
 pol2=pol1.offset(-0.25)

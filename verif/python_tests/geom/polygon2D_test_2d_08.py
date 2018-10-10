@@ -2,10 +2,10 @@
 import xc_base
 import geom
 pol1=geom.Polygon2d()
-pol1.agregaVertice(geom.Pos2d(0.,0.))
-pol1.agregaVertice(geom.Pos2d(4.,0.))
-pol1.agregaVertice(geom.Pos2d(4.,1.))
-pol1.agregaVertice(geom.Pos2d(0.,1.))
+pol1.appendVertex(geom.Pos2d(0.,0.))
+pol1.appendVertex(geom.Pos2d(4.,0.))
+pol1.appendVertex(geom.Pos2d(4.,1.))
+pol1.appendVertex(geom.Pos2d(0.,1.))
 
 areasTrib=pol1.getTributaryAreas()
 
