@@ -27,6 +27,9 @@
 *.out
 *.app
 
+# Depends on distribution so ignored
+distro_name.txt
+
 #Python
 *~
 python_modules/build/lib*
