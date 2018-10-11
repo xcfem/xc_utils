@@ -22,7 +22,7 @@
 //GeomObj2d.cc
 
 #include "GeomObj2d.h"
-#include "xc_basic/src/util/inercia.h"
+#include "xc_basic/src/util/inertia.h"
 #include "xc_utils/src/geom/pos_vec/Dir2d.h"
 #include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
@@ -64,7 +64,7 @@ bool GeomObj2d::Out(const Pos2d &p, const double &tol) const
 
 //! @brief Return the angle of one of the principal axis of inertia.
 double GeomObj2d::Theta_p(void) const
-  { return theta_inercia(Ix(),Iy(),Pxy()); }
+  { return theta_inertia(Ix(),Iy(),Pxy()); }
 
 //! @brief Return the dirección de un principal axis of inertia (we don't know
 //! if it's the major or the minor yet).
@@ -92,11 +92,11 @@ Ref2d2d GeomObj2d::PrincipalAxesOfInertia(void) const
 
 //! @brief Return the moment of inertia principal mayor.
 GEOM_FT GeomObj2d::I1(void) const
-  { return I1_inercia(Ix(),Iy(),Pxy()); }
+  { return I1_inertia(Ix(),Iy(),Pxy()); }
 
 //! @brief Return the moment of inertia principal menor.
 GEOM_FT GeomObj2d::I2(void) const
-  { return I2_inercia(Ix(),Iy(),Pxy()); }
+  { return I2_inertia(Ix(),Iy(),Pxy()); }
 
 //! @brief Return the componente i,j of the inertia tensor computed
 //! with respect to the center of mass.

@@ -69,7 +69,7 @@ class GeomObj2d: public GeomObj
     virtual GEOM_FT Ix(void) const= 0;
     //! @brief Moment of inertia with respect to the center of mass en local axis.
     virtual GEOM_FT Iy(void) const= 0;
-    //! @brief Producto de inercia with respect to the center of mass en local axis.
+    //! @brief ! @brief Product of inertia with respect to the center of mass en local axis.
     virtual GEOM_FT Pxy(void) const= 0;
     //! @brief Moment of inertia polar with respect to the center of mass en local axis.
     inline virtual GEOM_FT Iz(void) const
@@ -82,7 +82,7 @@ class GeomObj2d: public GeomObj
     Ref2d2d PrincipalAxesOfInertia(void) const;
     GEOM_FT I1(void) const;
     GEOM_FT I2(void) const;
-    inline PrincipalAxesOfInertia2D Inercia(void)
+    inline PrincipalAxesOfInertia2D Inertia(void)
       { return PrincipalAxesOfInertia2D(getCenterOfMass(),Ix(),Iy(),Pxy()); }
     GEOM_FT I( const unsigned short int &i,
               const unsigned short int &j) const;

@@ -36,7 +36,7 @@ class Line2d;
 class GeomGroup2d : public GeomGroup<GeomObj2d>
   {
 
-    virtual GEOM_FT inercia(const Line2d &e) const;
+    virtual GEOM_FT inertia(const Line2d &e) const;
   public:
     typedef pdeque_geom_obj::const_iterator const_iterator;
     typedef pdeque_geom_obj::iterator iterator;

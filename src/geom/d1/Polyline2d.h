@@ -73,7 +73,7 @@ class Polyline2d : public Linear2d, public GeomObj::list_Pos2d
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Iz(void) const;
 
-    //Producto de inercia.
+    //! @brief Inertia product.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
     //! @brief Return the length of the object.

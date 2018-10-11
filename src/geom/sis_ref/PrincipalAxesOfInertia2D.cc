@@ -22,7 +22,7 @@
 //GeomObj2d.cc
 
 #include "PrincipalAxesOfInertia2D.h"
-#include "xc_basic/src/util/inercia.h"
+#include "xc_basic/src/util/inertia.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
 
 
@@ -30,7 +30,7 @@
 PrincipalAxesOfInertia2D::PrincipalAxesOfInertia2D(const Pos2d &center_of_mass_,const GEOM_FT &Ix,const GEOM_FT &Iy,const GEOM_FT &Pxy)
   : center_of_mass(center_of_mass_), axis1(1,0), i1(0.0), i2(0.0)
   {
-    double th1= theta_inercia(Ix,Iy,Pxy);
+    double th1= theta_inertia(Ix,Iy,Pxy);
     const GEOM_FT media= (Ix+Iy)/2;
     const GEOM_FT dif2= (Ix-Iy)/2;
     const double th1_por2= 2*th1;

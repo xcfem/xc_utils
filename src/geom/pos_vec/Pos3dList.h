@@ -72,7 +72,7 @@ class Pos3dList: public GeomObj3d
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Iz(void) const;
 
-    //Producto de inercia.
+    //! @brief Product of inertia.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
     //! @brief Return the length of the Pos3dList.

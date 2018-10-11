@@ -133,7 +133,7 @@ class Segment2d : public Linear2d
     //! @brief Moment of inertia with respect to the center of mass en local axis.
     inline virtual GEOM_FT Iy(void) const
       { return NAN; }
-    //Producto de inercia.
+    //! @brief Product of inertia.
     inline virtual GEOM_FT Pxy(void) const
       { return NAN; }
     //! @brief Moment of inertia with respect to the center of mass en local axis.

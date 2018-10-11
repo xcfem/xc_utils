@@ -35,7 +35,7 @@
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
 //! @brief Return el moment of inertia with respect to the line argument.
-GEOM_FT GeomGroup2d::inercia(const Line2d &e) const
+GEOM_FT GeomGroup2d::inertia(const Line2d &e) const
   {
     if(objetos.empty()) return 0.0;
     if(!igual_dimension())
@@ -55,12 +55,12 @@ GEOM_FT GeomGroup2d::inercia(const Line2d &e) const
 //! @brief Moment of inertia with respect to an axis parallel to
 //! the x axis passing through the center of mass.
 GEOM_FT GeomGroup2d::Ix(void) const
-  { return inercia(Line2d(getCenterOfMass(),Dir2d(1.0,0.0))); }
+  { return inertia(Line2d(getCenterOfMass(),Dir2d(1.0,0.0))); }
 
 //! @brief Moment of inertia with respect to an axis parallel to
 //! the y axis passing through the center of mass.
 GEOM_FT GeomGroup2d::Iy(void) const
-  { return inercia(Line2d(getCenterOfMass(),Dir2d(0.0,1.0))); }
+  { return inertia(Line2d(getCenterOfMass(),Dir2d(0.0,1.0))); }
 
 //! @brief Moment of inertia with respect to the axis parallel to
 //! the x and y axis passing through the center of mass.
