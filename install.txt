@@ -5,7 +5,7 @@ xc_utils installation.
     It’s not always easy to verify than installation works properly
     (obviously the developer's machine is the worst place to test
     installation process). If you find a bug in the installation please 
-    feel free to add an issue at https://github.com/xcfem/xc/issues.
+    feel free to add an issue at https://github.com/xcfem/xc_utils/issues.
 
 1.- Pre-requisites.
 
