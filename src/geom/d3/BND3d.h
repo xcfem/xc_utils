@@ -38,9 +38,6 @@ class BND3d: public GeomObj3d
     bool undefined;
   protected:
     bool LBClipTest(const GEOM_FT &p,const GEOM_FT &q,GEOM_FT &u1,GEOM_FT &u2) const;
-    //Esta funcion forma parte del algoritmo de recorte de l'ineas de 
-    //Liang-Barsky (página 231 del libro Computer Graphics de Donald Hearn y 
-    //Pauline Baker isbn 0-13-578634-7).
     bool LBClipLine(const Pos3d &p1,const Pos3d &p2) const;
   public:
     BND3d(void);

@@ -27,7 +27,7 @@
 #include "xc_utils/src/geom/pos_vec/Dir2d.h"
 
 #include "xc_basic/src/text/text_string.h"
-#include "xc_basic/src/funciones/algebra/ExprAlgebra.h"
+#include "xc_basic/src/functions/algebra/ExprAlgebra.h"
 
 
 Rect1d2dCooSys::Rect1d2dCooSys(const VGlobal &vX)

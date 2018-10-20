@@ -25,7 +25,7 @@
 #include "../pos_vec/Pos3d.h"
 
 #include "xc_basic/src/text/text_string.h"
-#include "xc_basic/src/funciones/algebra/ExprAlgebra.h"
+#include "xc_basic/src/functions/algebra/ExprAlgebra.h"
 
 
 //! @brief Constructor.

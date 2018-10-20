@@ -90,7 +90,7 @@ class Vector2d: public ProtoGeom
     inline Vector2d Normalizado(void) const
       { return (*this)/GetModulus(); }
     Vector2d Normal(void) const;
-    Dir2d Direccion(void) const;
+    Dir2d getDirection(void) const;
     GEOM_FT getSignedAngle(const Vector2d &v) const;
     GEOM_FT getAngle(const Vector2d &v) const;
     GEOM_FT XAxisAngle(void) const;

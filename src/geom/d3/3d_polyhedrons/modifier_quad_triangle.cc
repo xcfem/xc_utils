@@ -23,7 +23,7 @@
 
 #include "modifier_quad_triangle.h"
 
-float factor_correccion(unsigned int ne, unsigned int nq)
+float correction_factor(unsigned int ne, unsigned int nq)
   {
     if(ne == 2 && nq == 1)
       return -0.20505f;

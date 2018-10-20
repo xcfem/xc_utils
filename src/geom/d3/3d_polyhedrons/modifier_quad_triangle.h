@@ -38,7 +38,7 @@
 // Computer Aided Geometric Design.
 // pages 41-60, volume 20(1), 2003.
 
-float factor_correccion(unsigned int ne, unsigned int nq);
+float correction_factor(unsigned int ne, unsigned int nq);
 
 
 template <class HDS,class Polyhedron,class kernel>
@@ -84,7 +84,7 @@ class CModifierQuadTriangle: public CGAL::Modifier_base<HDS>
 
     // correcting factor
     static float correcting_factor(unsigned int ne,unsigned int nq)
-      { return factor_correccion(ne,nq); }
+      { return correction_factor(ne,nq); }
   
     // smooth vertex positions
     static void smooth_trata_vertice_borde(const unsigned int &index,Polyhedron *pMesh,typename Polyhedron::Vertex_iterator pVertex,typename kernel::FT *pPos,bool smooth_boundary);

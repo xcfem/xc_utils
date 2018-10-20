@@ -326,7 +326,7 @@ dq_double merge_abcisas(const FunctionFromPointsR_R &f1,const FunctionFromPoints
     return retval;
   }
 
-//! @brief Suma dos funciones.
+//! @brief Function addition.
 FunctionFromPointsR_R operator+(const FunctionFromPointsR_R &f1,const FunctionFromPointsR_R &f2)
   {
     FunctionFromPointsR_R retval;
@@ -336,7 +336,7 @@ FunctionFromPointsR_R operator+(const FunctionFromPointsR_R &f1,const FunctionFr
     return retval;
   }
 
-//! @brief Resta dos funciones.
+//! @brief Function substraction.
 FunctionFromPointsR_R operator-(const FunctionFromPointsR_R &f1,const FunctionFromPointsR_R &f2)
   {
     FunctionFromPointsR_R retval;
@@ -346,7 +346,7 @@ FunctionFromPointsR_R operator-(const FunctionFromPointsR_R &f1,const FunctionFr
     return retval;
   }
 
-//! @brief Multiplica dos funciones.
+//! @brief Function product.
 FunctionFromPointsR_R operator*(const FunctionFromPointsR_R &f1,const FunctionFromPointsR_R &f2)
   {
     FunctionFromPointsR_R retval;
@@ -356,7 +356,7 @@ FunctionFromPointsR_R operator*(const FunctionFromPointsR_R &f1,const FunctionFr
     return retval;
   }
 
-//! @brief Divide dos funciones.
+//! @brief Function division.
 FunctionFromPointsR_R operator/(const FunctionFromPointsR_R &f1,const FunctionFromPointsR_R &f2)
   {
     FunctionFromPointsR_R retval;

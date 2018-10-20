@@ -38,7 +38,7 @@ class PolyPos : public std::deque<pos>
   protected:
     typedef std::deque<pos> deque_pos;
   protected:
-  //Funcion auxiliar.
+    //Auxiliary function.
     static GEOM_FT g(GEOM_FT v1, GEOM_FT v2)
       { return (sqr(v1) + v1 * v2 + sqr(v2)); }
   public:

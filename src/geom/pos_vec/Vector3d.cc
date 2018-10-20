@@ -55,7 +55,7 @@ FT_matrix Vector3d::getMatrix(void) const
     retval(1)= x(); retval(2)= y(); retval(3)= z();
     return retval;
   }
-Dir3d Vector3d::Direccion(void) const
+Dir3d Vector3d::getDirection(void) const
   { return Dir3d(*this); }
 
 bool Vector3d::EsUnitario(const double &tol) const
@@ -210,7 +210,7 @@ GEOM_FT Vector3d::getAngle(const Vector3d &v) const
   }
 
 bool paralelos(const Vector3d &v1,const Vector3d &v2)
-  { return paralelas(v1.Direccion(),v2.Direccion()); } 
+  { return paralelas(v1.getDirection(),v2.getDirection()); } 
 bool coplanarios(const Vector3d &v1,const Vector3d &v2,const Vector3d &v3)
   {
     const Pos3d p1= Origen3d + v1;

@@ -66,9 +66,11 @@ class SolidExtru3d : public Solid3d
         retval.Offset(offset);
         return retval;
       }
-    const S &Seccion(void) const
+    //! @brief Return the extruded section.
+    const S &Section(void) const
       { return scc; }
-    S &Seccion(void)
+    //! @brief Return the extruded section.
+    S &Section(void)
       { return scc; }
     //! @brief Return the object area.
     inline GEOM_FT getArea(void) const

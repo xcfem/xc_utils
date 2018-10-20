@@ -29,7 +29,7 @@
 
 
 #include "ActionRValueList.h"
-#include "xc_basic/src/funciones/algebra/ExprAlgebra.h"
+#include "xc_basic/src/functions/algebra/ExprAlgebra.h"
 
 const double cmb_acc::Action::zero= 1e-6;
 

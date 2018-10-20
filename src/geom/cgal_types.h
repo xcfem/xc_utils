@@ -86,7 +86,7 @@ typedef CGAL::Bbox_3 CGBbox_3;
 typedef CGAL::Aff_transformation_3<GEOMKernel> CGTrfAfin_3;
 
 
-//Funciones
+//Functions
 
 //Misc
 typedef CGAL::Geomview_stream CGview_stream;

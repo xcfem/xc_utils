@@ -95,7 +95,7 @@ FT_matrix Vector2d::getMatrix(void) const
 Vector2d Vector2d::Normal(void) const
   { return Vector2d(y(),-x()); }
 
-Dir2d Vector2d::Direccion(void) const
+Dir2d Vector2d::getDirection(void) const
   { return Dir2d(*this); }
 
 //! @brief Return the angle with the vector argument.
@@ -217,7 +217,7 @@ bool colineales(const Vector2d &v1,const Vector2d &v2)
     return colineales(Origen2d,p1,p2);
   }
 bool paralelos(const Vector2d &v1,const Vector2d &v2)
-  { return paralelas(v1.Direccion(),v2.Direccion()); } 
+  { return paralelas(v1.getDirection(),v2.getDirection()); } 
 
 double signedAngle(const Vector2d &v1,const Vector2d &v2)
   {

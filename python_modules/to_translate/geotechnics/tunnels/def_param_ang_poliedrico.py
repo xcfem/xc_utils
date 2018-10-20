@@ -18,7 +18,7 @@ if(not(JPvacio))
         if(angI1I2<PI)
             \then
               {
-                ptsTang= computePointsOfTangency("seccionTunel",I1,I2)
+                ptsTang= computePointsOfTangency("tunnelSection",I1,I2)
                 r1= 
                 p1= ptsTang.at(1)
                 \r1{\puntoyVector{[p1,I1]}}

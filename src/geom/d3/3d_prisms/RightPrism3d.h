@@ -61,10 +61,10 @@ class RightPrism3d : public Prism3d
       }
 /*     inline virtual Polyhedron::v_ind_vertices IndVerticesFaceta(unsigned int faceta) const */
 /*       { return extru.IndVerticesFaceta(faceta); } */
-    const PG &Seccion(void) const
-      { return extru.Seccion(); }
-    PG &Seccion(void)
-      { return extru.Seccion(); }
+    const PG &Section(void) const
+      { return extru.Section(); }
+    PG &Section(void)
+      { return extru.Section(); }
     //! @brief Return the object length.
     inline GEOM_FT getLength(void) const
       { return extru.getLength(); }

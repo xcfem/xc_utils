@@ -54,7 +54,7 @@ def processPolyhedralAngle(nmbAng,nmbTunel):
                                 \lineWidth{0.1} # line thickness in user coordinates
                                 \penColorName{"blue"}  # path will be drawn in red
                                 \erase{} # erase Plotter's graphics display
-                                \seccionTunel
+                                \tunnelSection
                                   {
                                     nv= getNumVertices
                                     ptPlot= at(1)
@@ -99,14 +99,14 @@ def processPolyhedralAngle(nmbAng,nmbTunel):
   }
 
 '''Computes the points of tangency of the external vectors with the section.'''
-def computePointsOfTangency(nmbSeccion,vector2d vt1,vector2d vt2):
+def computePointsOfTangency(sectionName,vector2d vt1,vector2d vt2):
   {
     retval= 
-    \nmbSeccion{retval= getPosTangAprox(vt1)}
+    \sectionName{retval= getPosTangAprox(vt1)}
     pt0= 
     pt0= retval.at(1)
     \retval{\clear{}}
-    \nmbSeccion{retval= getPosTangAprox(vt2)}
+    \sectionName{retval= getPosTangAprox(vt2)}
     pt1= 
     pt1= retval.at(1)
     \retval{\clear{}}

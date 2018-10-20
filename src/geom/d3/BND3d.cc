@@ -184,9 +184,9 @@ bool operator ==(const BND3d &a,const BND3d &b)
       return true;
   }
 
-//! @brief Esta funcion forma parte del algoritmo de recorte de l'ineas de 
-//! Liang-Barsky (p'agina 231 del libro Computer Graphics de Donald Hearn y 
-//! Pauline Baker isbn 0-13-578634-7.
+//! @brief This functions is part of the line clipping algorithm of Liang-Barsky
+//! (page 231 of the book Computer Graphics by Donald Hearn y 
+//! Pauline Baker isbn 0-13-578634-7).
 bool BND3d::LBClipTest(const GEOM_FT &p,const GEOM_FT &q,GEOM_FT &u1,GEOM_FT &u2) const
   {
     GEOM_FT r;
