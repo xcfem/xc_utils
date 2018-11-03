@@ -24,7 +24,7 @@
 #include "Surface3d.h"
 #include <cstdlib>
 #include <cmath>
-#include "xc_basic/src/util/matem.h"
+#include "xc_utils/src/utils/misc_utils/matem.h"
 
 //! @brief Return the object area.
 GEOM_FT Surface3d::getArea(void) const

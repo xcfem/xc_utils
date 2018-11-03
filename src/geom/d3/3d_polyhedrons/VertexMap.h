@@ -25,7 +25,7 @@
 #define VERTEXMAP_H
 
 #include <vector>
-#include "xc_basic/src/stl/TripletMap.h"
+#include "xc_utils/src/utils/stl/TripletMap.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include "Polyhedron3d.h"
 

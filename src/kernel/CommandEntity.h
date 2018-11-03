@@ -29,7 +29,7 @@
 #include <set>
 #include <deque>
 #include <stack>
-#include "xc_basic/src/text/text_string.h"
+#include "xc_utils/src/utils/text/text_string.h"
 #include "xc_utils/src/kernel/ErrLogFiles.h"
 #include <boost/python.hpp>
 

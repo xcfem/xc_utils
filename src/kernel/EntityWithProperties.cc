@@ -24,7 +24,7 @@
 #include "EntityWithProperties.h"
 #include <fstream>
 #include <iostream>
-#include "xc_basic/src/util/memoria.h"
+#include "xc_utils/src/utils/misc_utils/memoria.h"
 #include "boost/lexical_cast.hpp"
 #include "boost/algorithm/string/trim.hpp"
 #include "boost/algorithm/string.hpp"

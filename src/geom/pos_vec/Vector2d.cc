@@ -25,7 +25,7 @@
 #include "Pos2d.h"
 #include "Dir2d.h"
 #include <plotter.h>
-#include "xc_basic/src/matrices/giros.h"
+#include "xc_utils/src/matrices/giros.h"
 #include "xc_utils/src/geom/FT_matrix.h"
 
 

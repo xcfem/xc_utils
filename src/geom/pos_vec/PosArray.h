@@ -25,10 +25,10 @@
 #ifndef POSARRAY_H
 #define POSARRAY_H
 
-#include "xc_basic/src/matrices/TMatrix.h"
+#include "xc_utils/src/matrices/TMatrix.h"
 #include "../cgal_types.h"
 #include "boost/lexical_cast.hpp"
-#include "xc_basic/src/util/matem.h"
+#include "xc_utils/src/utils/misc_utils/matem.h"
 
 
 //! @ingroup GEOM

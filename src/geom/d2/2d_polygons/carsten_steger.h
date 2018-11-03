@@ -24,7 +24,7 @@
 #ifndef CARSTEN_STEGER_H
 #define CARSTEN_STEGER_H
 
-#include "xc_basic/src/util/matem.h"
+#include "xc_utils/src/utils/misc_utils/matem.h"
 #include "../../cgal_types.h"
 
 //Aux functions for computing moments of arbitrary order  

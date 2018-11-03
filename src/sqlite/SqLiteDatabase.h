@@ -26,9 +26,9 @@
 
 #include "SqLiteObject.h"
 #include <sqlite3.h>
-#include "xc_basic/src/sqlitepp/IError.h"
-#include "xc_basic/src/sqlitepp/Database.h"
-#include "xc_basic/src/sqlitepp/StderrLog.h"
+#include "xc_utils/src/utils/sqlitepp/IError.h"
+#include "xc_utils/src/utils/sqlitepp/Database.h"
+#include "xc_utils/src/utils/sqlitepp/StderrLog.h"
 
 //! @ingroup SQLITE
 //

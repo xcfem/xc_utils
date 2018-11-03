@@ -26,7 +26,7 @@
 
 
 #include "xc_utils/src/geom/d2/Plane.h"
-#include "xc_basic/src/stl/TripletMap.h"
+#include "xc_utils/src/utils/stl/TripletMap.h"
 
 
 

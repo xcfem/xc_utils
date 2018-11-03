@@ -22,8 +22,8 @@
 //ActionRelationships.cxx
 
 #include "ActionRelationships.h"
-#include "xc_basic/src/text/text_string.h"
-#include "xc_basic/src/functions/algebra/ExprAlgebra.h"
+#include "xc_utils/src/utils/text/text_string.h"
+#include "xc_utils/src/functions/algebra/ExprAlgebra.h"
 
 #include "boost/regex.hpp"
 #include "xc_utils/src/loadCombinations/comb_analysis/LoadCombinationVector.h"

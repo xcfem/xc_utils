@@ -24,7 +24,7 @@
 #ifndef RANGOARRAY3D_H
 #define RANGOARRAY3D_H
 
-#include "xc_basic/src/matrices/RangoIndice.h"
+#include "xc_utils/src/matrices/RangoIndice.h"
 
 
 //! @ingroup GEOM

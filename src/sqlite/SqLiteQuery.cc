@@ -23,7 +23,7 @@
 
 #include "SqLiteQuery.h"
 #include "SqLiteDatabase.h"
-#include "xc_basic/src/sqlitepp/Database.h"
+#include "xc_utils/src/utils/sqlitepp/Database.h"
 
 //! @brief Constructor.
 SqLiteQuery::SqLiteQuery(Database &db)

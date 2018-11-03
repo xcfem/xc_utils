@@ -24,7 +24,7 @@
 #ifndef VECTOR3D_H
 #define VECTOR3D_H
 
-#include "xc_basic/src/util/mchne_eps.h"
+#include "xc_utils/src/utils/misc_utils/mchne_eps.h"
 #include "../ProtoGeom.h"
 #include "../cgal_types.h"
 

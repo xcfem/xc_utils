@@ -31,7 +31,7 @@
 #include "xc_utils/src/geom/d2/Polygon3d.h"
 #include "xc_utils/src/geom/d2/Triangle3d.h"
 #include "xc_utils/src/geom/d3/GeomGroup3d.h"
-#include "xc_basic/src/util/mchne_eps.h"
+#include "xc_utils/src/utils/misc_utils/mchne_eps.h"
 #include "CGAL/linear_least_squares_fitting_3.h"
 
 Plane::Plane(void)

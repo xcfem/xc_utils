@@ -23,13 +23,13 @@
 
 #include "Action.h"
 #include "boost/lexical_cast.hpp"
-#include "xc_basic/src/text/text_string.h"
-#include "xc_basic/src/text/en_letra.h"
-#include "xc_basic/src/text/latex.h"
+#include "xc_utils/src/utils/text/text_string.h"
+#include "xc_utils/src/utils/text/en_letra.h"
+#include "xc_utils/src/utils/text/latex.h"
 
 
 #include "ActionRValueList.h"
-#include "xc_basic/src/functions/algebra/ExprAlgebra.h"
+#include "xc_utils/src/functions/algebra/ExprAlgebra.h"
 
 const double cmb_acc::Action::zero= 1e-6;
 

@@ -22,7 +22,7 @@
 //Pos2dArray.cc
 
 #include "Pos2dArray.h"
-#include "xc_basic/src/util/matem.h"
+#include "xc_utils/src/utils/misc_utils/matem.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d2/2d_polygons/Triangle2d.h"
 #include "xc_utils/src/geom/d2/2d_polygons/Quadrilateral2d.h"

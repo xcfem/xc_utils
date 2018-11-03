@@ -25,7 +25,7 @@
 #include "SqLiteDatabase.h"
 #include "SqLiteQuery.h"
 #include "boost/algorithm/string/trim.hpp"
-#include "xc_basic/src/sqlitepp/StderrLog.h"
+#include "xc_utils/src/utils/sqlitepp/StderrLog.h"
 
 
 SqLiteObject::map_sql_objs SqLiteObject::SqLiteObjs;

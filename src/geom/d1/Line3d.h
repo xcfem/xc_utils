@@ -26,7 +26,7 @@
 
 #include <cstdlib>
 #include <cmath>
-#include "xc_basic/src/util/matem.h"
+#include "xc_utils/src/utils/misc_utils/matem.h"
 #include "Linear3d.h"
 #include "../pos_vec/Pos3d.h"
 #include "../pos_vec/Vector3d.h"

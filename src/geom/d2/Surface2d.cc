@@ -25,7 +25,7 @@
 
 #include <cstdlib>
 #include <cmath>
-#include "xc_basic/src/util/matem.h"
+#include "xc_utils/src/utils/misc_utils/matem.h"
 
 //! @brief Return the area of the Surface2d.
 GEOM_FT Surface2d::getArea(void) const

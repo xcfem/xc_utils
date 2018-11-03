@@ -22,7 +22,7 @@
 //Array3dBoxRefBase.cc
 
 #include "Array3dBoxRefBase.h"
-#include "xc_basic/src/matrices/RangoIndice.h"
+#include "xc_utils/src/matrices/RangoIndice.h"
 #include "Array3dRange.h"
 #include <iostream>
 

@@ -13,18 +13,6 @@ PROJECT(xc_utils)
 
 SET(build_setup_dir $ENV{HOME}/.xc_build)
 
-#xc_basic
-SET(basica_setup_file ${build_setup_dir}/basica_dirs.cmake)
-INCLUDE(${basica_setup_file})
-SET(xc_basic_DIR ${basica_src_dir}/..)
-message(STATUS "basica project dir: ${xc_basic_DIR}")
-SET(xc_basic_INC ${basica_inc_dir})
-message(STATUS "basica include dir: ${xc_basic_INC}")
-INCLUDE_DIRECTORIES(${xc_basic_INC})
-SET(xc_basic_LIB ${basica_lib_dir})
-message(STATUS "basica lib dir: ${xc_basic_LIB}")
-
-
 SET(xc_utils_DIR ${CMAKE_SOURCE_DIR}/..)
 message(STATUS "project dir: ${xc_utils_DIR}")
 string(REGEX REPLACE "/xc_utils/src.*" "" xc_utils_INC ${CMAKE_SOURCE_DIR})
@@ -38,14 +26,23 @@ file(WRITE ${build_setup_file} "SET(lcmd_src_dir ${CMAKE_SOURCE_DIR})\n")
 file(APPEND ${build_setup_file} "SET(lcmd_inc_dir ${xc_utils_INC})\n")
 file(APPEND ${build_setup_file} "SET(lcmd_lib_dir ${xc_utils_LIB})\n")
 
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${xc_basic_DIR}/CMake")
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${xc_utils_DIR}/CMake")
 
 SET(LIBRARY_OUTPUT_PATH ${xc_utils_LIB})
 
 INCLUDE_DIRECTORIES(${xc_utils_INC})
 
+enable_language(Fortran) #umfpack, itpack,
+
 INCLUDE(${xc_utils_DIR}/CMake/find_packages.txt)
+if(GTK2_FOUND)
+  include_directories(${GTK2_INCLUDE_DIRS})
+endif()
+INCLUDE_DIRECTORIES(${GTK_INCLUDE_DIR})
+
+if(MPI_FOUND)
+  include_directories(${MPI_INCLUDE_PATH})
+endif()
 
 #Biblioteca VTK
 #vtk
@@ -91,8 +88,27 @@ ADD_DEFINITIONS(-Wall -O3 -march=native -frounding-math -pedantic -fPIC)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x")
 #SET(CMAKE_VERBOSE_MAKEFILE ON)
 
+SET(text_utils utils/text/text_string utils/text/LabelContainer utils/text/en_letra utils/text/StrTok utils/text/tab_cod utils/text/latex utils/text/StringFormatter utils/text/FixedWidthReader)
+SET(stream_utils utils/streams/imanip utils/streams/prep)
+SET(misc_utils utils/misc_utils/cmd_args utils/misc_utils/memoria utils/misc_utils/inertia utils/misc_utils/print_trace)
 
 SET(SQLITE sqlite/SqLiteObject sqlite/SqLiteQuery sqlite/SqLiteDatabase)
+
+SET(sqlitepp_utils utils/sqlitepp/Database utils/sqlitepp/Query utils/sqlitepp/StderrLog utils/sqlitepp/SysLog)
+
+SET(matrices matrices/MMatrix matrices/vcolM matrices/RangoIndice matrices/MatrixRange matrices/BoxConstRef matrices/ExpressionMatrix matrices/MExpressionMatrix matrices/PolynomialMatrix matrices/m_double matrices/m_int matrices/m_sizet matrices/m_string matrices/giros matrices/op_tensor matrices/solvers/solver matrices/IndicesMatrix matrices/Indices3dArray)
+
+SET(skypack skypack/skypri.f skypack/skypds.f skypack/skyscf.f skypack/skyssb.f skypack/mtrxys.f skypack/skyssf.f skypack/skypsb.f skypack/skypdc.f skypack/skypf1.f skypack/skysdc.f skypack/skypsp.f skypack/skypcf.f skypack/skymef.f skypack/skyssd.f skypack/skyss.f skypack/skysf1.f skypack/skypf2.f skypack/mtrxy.f skypack/mtrxyd.f skypack/skysf2.f skypack/skypci.f)
+
+SET(itpack itpack/dsrc2c.f itpack/jcg.f itpack/jsi.f itpack/rscg.f itpack/rssi.f itpack/sor.f itpack/ssorcg.f itpack/ssorsi.f)
+
+SET(umfpack umfpack/umd2fb.f umfpack/umd2co.f umfpack/umd2fa.f umfpack/umd2f0.f umfpack/umd2f1.f umfpack/umd2f2.f umfpack/umd2fg.f umfpack/umd2in.f umfpack/umd2of.f umfpack/umd2s2.f umfpack/umd2sl.f umfpack/umd2so.f umfpack/umd2su.f umfpack/umd2er.f umfpack/umd2p1.f umfpack/umd2p2.f umfpack/umd2lt.f umfpack/umd2ut.f umfpack/umd2rf.f umfpack/umd2ra.f umfpack/umd2r0.f umfpack/umd2r2.f umfpack/umd2rg.f umfpack/umd21i.f umfpack/mc21b.f umfpack/mc13e.f)
+
+SET(algebra functions/algebra/TablaLiterales functions/algebra/ArbolExpr functions/algebra/ExprAlgebra functions/algebra/Expresion functions/algebra/ExprInfija functions/algebra/ExprPostfija functions/algebra/LexAlgebra functions/algebra/Lexico functions/algebra/Literal functions/algebra/OpBinario functions/algebra/OpComparacion functions/algebra/OpBooleano functions/algebra/Macaulay functions/algebra/Operando functions/algebra/OpUnario functions/algebra/ProtoExpr functions/algebra/Rama functions/algebra/Variable functions/algebra/Operador functions/algebra/Segnal functions/algebra/ExprFunctor functions/algebra/OpndoConNombre functions/algebra/OpTrigonometricas functions/algebra/ConjVariables functions/algebra/MapValores functions/algebra/integ_num)
+
+SET(functions_misc functions/estadisticas/statlib functions/estadisticas/Muestra functions/estadisticas/combinatoria functions/extremos/extremo functions/macaulay/Macaulay functions/polinomios/Polinomio functions/polinomios/IndPol functions/polinomios/NmbVars functions/raices/NewtonRaphson functions/raices/root functions/funcs_forma/FForma functions/funcs_forma/PtosIntegracion)
+
+SET(functions ${algebra} ${functions_misc})
 
 SET(cuadGauss gauss_quadrature/GaussQuadrature2D gauss_quadrature/GaussQuadrature3D gauss_quadrature/gssleg gauss_quadrature/GaussPoints gauss_quadrature/GaussWeights1d gauss_quadrature/GaussWeights2d gauss_quadrature/GaussWeights3d)
 
@@ -124,11 +140,13 @@ SET(ca_acciones loadCombinations/actions/LeadingActionInfo loadCombinations/acti
 
 SET(ca_combinations loadCombinations/comb_analysis/Variation loadCombinations/comb_analysis/Variations loadCombinations/comb_analysis/LoadCombinationVector loadCombinations/comb_analysis/LoadCombinations loadCombinations/comb_analysis/ActionWeightingMap loadCombinations/comb_analysis/LoadCombinationGenerator)
 
+ADD_LIBRARY(xc_basic_utils ${text_utils} ${stream_utils} ${misc_utils} ${sqlitepp_utils} ${matrices} ${skypack} ${itpack} ${umfpack} ${functions})
+INSTALL(TARGETS xc_basic_utils DESTINATION lib)
 
 ADD_LIBRARY(xc_utils SHARED ${MYSQL} ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${KERNEL}  ${VtkAux} ${ca_factors} ${ca_acciones} ${ca_combinations})
 
 #Interfaz Python
-LINK_LIBRARIES(xc_utils xc_basic ${VTK_BIB} ${CGAL_LIBRARIES} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${MySQLpp_LIBRARIES} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} boost_python ${XC_UTILS_BOOST_LIBRARIES} ${PYTHON_LIBRARIES})
+LINK_LIBRARIES(xc_utils xc_basic_utils ${VTK_BIB} ${CGAL_LIBRARIES} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${MySQLpp_LIBRARIES} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} boost_python ${XC_UTILS_BOOST_LIBRARIES} ${PYTHON_LIBRARIES})
 LINK_DIRECTORIES("/usr/lib/python2.7") # Not needed?
 ADD_DEFINITIONS(-fno-strict-aliasing)
 ADD_LIBRARY(xc_base SHARED kernel/python_interface.cc)
@@ -137,5 +155,5 @@ ADD_LIBRARY(geom SHARED geom/d1/export_d1_entities.cc geom/d2/export_d2_entities
 ADD_LIBRARY(xcGnuGts SHARED gnu_gts/python_interface.cc)
 #ADD_LIBRARY(vtk_aux SHARED vtk_aux/python_interface.cc)
 
-INSTALL(TARGETS xc_utils loadCombinations geom DESTINATION lib)
+INSTALL(TARGETS xc_basic_utils xc_utils loadCombinations geom DESTINATION lib)
 

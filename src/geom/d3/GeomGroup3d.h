@@ -24,7 +24,7 @@
 #ifndef GEOMGROUP3D_H
 #define GEOMGROUP3D_H
 
-#include "xc_basic/src/stl/pdeque.h"
+#include "xc_utils/src/utils/stl/pdeque.h"
 #include "GeomObj3d.h"
 #include "xc_utils/src/geom/lists/GeomGroup.h"
 

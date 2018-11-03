@@ -1,0 +1,188 @@
+//----------------------------------------------------------------------------
+//  xc_utils library; general purpose classes and functions.
+//
+//  Copyright (C)  Luis Claudio Pérez Tato
+//
+//  Este software es libre: usted puede redistribuirlo y/o modificarlo 
+//  bajo los términos de la Licencia Pública General GNU publicada 
+//  por la Fundación para el Software Libre, ya sea la versión 3 
+//  de la Licencia, o (a su elección) cualquier versión posterior.
+//
+//  Este software se distribuye con la esperanza de que sea útil, pero 
+//  SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita 
+//  MERCANTIL o de APTITUD PARA UN PROPÓSITO DETERMINADO. 
+//  Consulte los detalles de la Licencia Pública General GNU para obtener 
+//  una información más detallada. 
+//
+// Debería haber recibido una copia de la Licencia Pública General GNU 
+// junto a este programa. 
+// En caso contrario, consulte <http://www.gnu.org/licenses/>.
+//----------------------------------------------------------------------------
+//Rama.h
+
+#ifndef RAMA_H
+#define RAMA_H
+
+#include "ProtoExpr.h"
+#include "Segnal.h"
+#include "Operando.h"
+
+class ExprFunctor;
+class ConjVariables;
+
+class Rama : public ProtoExpresion
+  {
+  private:
+    static const double &no_numero;
+
+    inline void BorraIzdo(void)
+      {
+        if(izdo)
+          {
+            izdo->BorraHijos();
+            delete izdo;
+            izdo= NULL;
+          }
+      }
+    inline void BorraDcho(void)
+      {
+        if(dcho)
+          {
+            dcho->BorraHijos();
+            delete dcho;
+            dcho= NULL;
+          }
+      }
+    inline void BorraHijos(void)
+      {
+        BorraIzdo();
+        BorraDcho();
+      }
+    friend class ArbolExpr;
+    friend class OpUnario;
+    friend class OpBinario;
+    Rama(const Operando *s,Rama *i,Rama *j= NULL);
+
+    friend Rama *ContraeIzdo(Rama *);
+    friend Rama *ContraeDcho(Rama *);
+  protected:
+
+    const Operando *data;
+
+    Rama *izdo;
+    Rama *dcho;
+    
+  public:
+    friend class OpProd;
+    friend class OpSuma;
+
+    //! @brief Constructor por defecto.
+    Rama(void)
+      : data(NULL), izdo(NULL), dcho(NULL) {}
+
+    explicit Rama(const double &d);
+    Rama(const Rama &otra);
+    Rama &operator=(const Rama &otra);
+
+    Rama *getCopy(void) const
+      {
+        if(izdo)
+          {
+            if(dcho) //Izquierdo y derecho.
+              return new Rama(data,izdo->getCopy(),dcho->getCopy());
+            else //Sólo izquierdo.
+              return new Rama(data,izdo->getCopy(),NULL);
+          }
+        else
+          {
+            if(dcho) //Sólo derecho.
+              return new Rama(data,NULL,dcho->getCopy());
+            else //Ni derecho ni izquierdo.
+              return new Rama(data,NULL,NULL);
+          }
+      }
+    virtual ~Rama(void);
+    inline void PutIzdo(Rama *i)
+      {
+        BorraIzdo();
+        if(i) izdo= i->getCopy();
+      }
+    inline void PutDcho(Rama *j)
+      {
+        BorraDcho();
+        if(j) dcho= j->getCopy();
+      }
+/*     inline void Put(const Operando *s,Rama *i,Rama *j) */
+/*       { */
+/*         data= s; */
+/*         izdo= i; */
+/*         PutDcho(j); */
+/*       } */
+    inline const Operando *GetData(void) const
+      { return data; }
+    inline Rama *GetIzdo(void) const
+      { return izdo; }
+    inline Rama *GetDcho(void) const
+      { return dcho; }
+    Clase GetClase(void) const;
+    const std::string &StrClase(void) const;
+    inline const Operando *DatoIzdo(void)
+      { return izdo->data; }
+    inline const Operando *DatoDcho(void)
+      { return dcho->data; }
+    inline int GetPrioridad(void) const;
+    bool Evaluable(void) const;
+    bool EsToNum(void) const;
+    const Operando &Opera(void);
+    static void Opera(Rama *raiz);
+    inline const double &GetValor(void) const
+      { return ((GetClase() == operando) ? data->GetValor() : no_numero); }
+    void Asigna(Operando *po,const Rama *p)
+    //Sustituye todas las ocurrencias de po por p en el arbol.
+      {
+        if(dcho)
+          if(dcho->data == po)
+            {
+              BorraDcho();
+              if(p) dcho= p->getCopy();
+            }
+        if(izdo)
+          if(izdo->data == po)
+            {
+              BorraIzdo();
+              if(p) izdo= p->getCopy();
+            }
+      }
+    void Borra(void)
+      {
+        BorraHijos();
+        data= NULL;
+      }
+    void GetVariables(ConjVariables &cv) const;
+    const std::string &GetFullString(void) const;
+    friend Rama *distrib(Rama *raiz);
+    friend bool operator==(const Rama &r1,const Rama &r2);
+    friend bool operator==(const Rama &r1,const double &d);
+    friend std::ostream &operator <<(std::ostream &stream,const Rama &e);
+  };
+
+Rama *ContraeIzdo(Rama *raiz);
+Rama *ContraeDcho(Rama *raiz);
+
+Rama diferencia(const Rama &raiz,const Variable &v);
+Rama *simplifica(Rama *raiz);
+Rama *distrib(Rama *raiz);
+void Escribe(const Rama *raiz,const int &prior, std::ostream &stream);
+void RecorrePreorden(Rama *raiz,const ExprFunctor &f);
+void RecorreEnorden(Rama *raiz,const ExprFunctor &f);
+void RecorrePostorden(Rama *raiz,const ExprFunctor &f);
+
+bool operator==(const Rama &r1,const Rama &r2);
+bool operator==(const Rama &r1,const double &d);
+inline bool operator==(const double &d,const Rama &r)
+  { return (r==d); }
+
+#endif
+
+
+

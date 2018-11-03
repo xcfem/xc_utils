@@ -22,7 +22,7 @@
 //LoadCombinationVector.cxx
 
 #include "LoadCombinationVector.h"
-#include "xc_basic/src/text/en_letra.h"
+#include "xc_utils/src/utils/text/en_letra.h"
 
 
 

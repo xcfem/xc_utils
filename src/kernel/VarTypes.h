@@ -26,12 +26,12 @@
 #define VAR_TYPES_H
 
 //Matrices.
-#include "xc_basic/src/matrices/ExpressionMatrix.h"
-#include "xc_basic/src/matrices/m_double.h"
-#include "xc_basic/src/matrices/m_int.h"
-#include "xc_basic/src/matrices/m_sizet.h"
-#include "xc_basic/src/matrices/Mmatrix.h"
-#include "xc_basic/src/matrices/ExpressionMatrix.h"
+#include "xc_utils/src/matrices/ExpressionMatrix.h"
+#include "xc_utils/src/matrices/m_double.h"
+#include "xc_utils/src/matrices/m_int.h"
+#include "xc_utils/src/matrices/m_sizet.h"
+#include "xc_utils/src/matrices/Mmatrix.h"
+#include "xc_utils/src/matrices/ExpressionMatrix.h"
 
 //Geometría.
 #include "xc_utils/src/geom/FT_matrix.h"

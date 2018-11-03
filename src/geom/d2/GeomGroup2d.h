@@ -24,7 +24,7 @@
 #ifndef GEOMGROUP2D_H
 #define GEOMGROUP2D_H
 
-#include "xc_basic/src/stl/pdeque.h"
+#include "xc_utils/src/utils/stl/pdeque.h"
 #include "GeomObj2d.h"
 #include "xc_utils/src/geom/lists/GeomGroup.h"
 

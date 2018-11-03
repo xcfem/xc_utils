@@ -28,7 +28,7 @@
 #include "xc_utils/src/kernel/CommandEntity.h"
 #include "xc_utils/src/kernel/NamedEntity.h"
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
-#include "xc_basic/src/matrices/ProtoMatrix.h"
+#include "xc_utils/src/matrices/ProtoMatrix.h"
 
 BOOST_PYTHON_MODULE(xc_base)
   {

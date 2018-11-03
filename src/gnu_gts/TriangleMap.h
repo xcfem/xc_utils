@@ -35,7 +35,7 @@
 #include "xc_utils/src/gnu_gts/GTSSurface.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include "xc_utils/src/geom/pos_vec/KDTreePos.h"
-#include "xc_basic/src/kdtree++/kdtree.hpp"
+#include "xc_utils/src/kdtree++/kdtree.hpp"
 #include <iostream>
 #include <map>
 

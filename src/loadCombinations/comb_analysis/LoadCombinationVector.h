@@ -27,7 +27,7 @@
 #define LOADCOMBINATIONVECTOR_HXX
 
 #include "xc_utils/src/loadCombinations/actions/Action.h"
-#include "xc_basic/src/matrices/m_double.h"
+#include "xc_utils/src/matrices/m_double.h"
 
 namespace cmb_acc{
 //! @ingroup CMBACC

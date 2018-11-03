@@ -24,7 +24,7 @@
 #include "python_utils.h"
 #include "xc_utils/src/kernel/CommandEntity.h"
 #include "xc_utils/src/kernel/NamedEntity.h"
-#include "xc_basic/src/matrices/ProtoMatrix.h"
+#include "xc_utils/src/matrices/ProtoMatrix.h"
 #include "CImg.h"
 
 typedef std::vector<int> std_vector_int;

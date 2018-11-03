@@ -24,7 +24,7 @@
 #include "Circle3d.h"
 #include "../cgal_types.h"
 #include "xc_utils/src/geom/d2/Plane.h"
-#include "xc_basic/src/util/matem.h"
+#include "xc_utils/src/utils/misc_utils/matem.h"
 #include <plotter.h>
 
 #include "xc_utils/src/geom/pos_vec/Pos2dArray.h"

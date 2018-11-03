@@ -22,7 +22,7 @@
 //Line2d.cc
 
 #include "Line2d.h"
-#include "xc_basic/src/util/matem.h"
+#include "xc_utils/src/utils/misc_utils/matem.h"
 #include <plotter.h>
 
 #include "../pos_vec/Dir2d.h"

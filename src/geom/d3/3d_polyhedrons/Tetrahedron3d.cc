@@ -28,7 +28,7 @@
 
 
 
-#include "xc_basic/src/matrices/m_double.h"
+#include "xc_utils/src/matrices/m_double.h"
 #include "xc_utils/src/geom/pos_vec/Pos3dList.h"
 
 const Pos3d v1PorDefecto(1.0,0.0,0.0);

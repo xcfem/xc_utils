@@ -24,8 +24,8 @@
 #ifndef VECTOR2D_H
 #define VECTOR2D_H
 
-#include "xc_basic/src/util/mchne_eps.h"
-#include "xc_basic/src/matrices/op_tensor.h"
+#include "xc_utils/src/utils/misc_utils/mchne_eps.h"
+#include "xc_utils/src/matrices/op_tensor.h"
 #include "../cgal_types.h"
 #include "../ProtoGeom.h"
 

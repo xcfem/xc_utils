@@ -24,7 +24,7 @@
 #ifndef GEOMGROUP_H
 #define GEOMGROUP_H
 
-#include "xc_basic/src/stl/pdeque.h"
+#include "xc_utils/src/utils/stl/pdeque.h"
 
 
 //! @ingroup GEOM

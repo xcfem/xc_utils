@@ -21,9 +21,9 @@
 //----------------------------------------------------------------------------
 //FT_matrix.cc
 
-#include "xc_basic/src/util/matem.h"
+#include "xc_utils/src/utils/misc_utils/matem.h"
 #include "FT_matrix.h"
-#include "xc_basic/src/matrices/m_double.h"
+#include "xc_utils/src/matrices/m_double.h"
 #include "cgal_types.h"
 
 

@@ -26,7 +26,7 @@
 #include "Dir3d.h"
 
 #include "xc_utils/src/geom/FT_matrix.h"
-#include "xc_basic/src/matrices/op_tensor.h"
+#include "xc_utils/src/matrices/op_tensor.h"
 //#include "Inventor/SbVec3f.h"
 
 

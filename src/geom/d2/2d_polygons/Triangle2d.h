@@ -27,7 +27,7 @@
 #include "PolygonalSurface2d.h"
 #include "xc_utils/src/geom/cgal_types.h"
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
-#include "xc_basic/src/util/matem.h"
+#include "xc_utils/src/utils/misc_utils/matem.h"
 
 class Segment2d;
 class Polygon2d;

@@ -24,7 +24,7 @@
 #ifndef FT_MATRIX_H
 #define FT_MATRIX_H
 
-#include "xc_basic/src/matrices/ZMatrix.h"
+#include "xc_utils/src/matrices/ZMatrix.h"
 #include "cgal_types.h"
 
 

@@ -26,7 +26,7 @@
 
 #include <deque>
 #include "../cgal_types.h"
-#include "xc_basic/src/util/matem.h"
+#include "xc_utils/src/utils/misc_utils/matem.h"
 
 
 //! @ingroup GEOM
