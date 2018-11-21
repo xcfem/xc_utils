@@ -34,6 +34,7 @@ class_<PolygonalSurface2d, bases<Surface2d>, boost::noncopyable >("PolygonalSurf
   .def("getNormalLado",&PolygonalSurface2d::getLado0Normal)
   .def("getNormalVertice",&PolygonalSurface2d::getVertex0Normal)
   .def("getPolyline",&PolygonalSurface2d::getPolyline)
+  .def("getVertices",&PolygonalSurface2d::getVertices,"Return the vertices list.")
   .def("getApproxTangentPositions",&PolygonalSurface2d::getApproxTangentPositions,"Return the points for which the polygon is almost tangent to the direction argument.")
   ;
 
