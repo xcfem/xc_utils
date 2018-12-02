@@ -25,9 +25,9 @@
 #ifndef TRITRIZINDICES_H
 #define TRITRIZINDICES_H
 
-#include "IndicesMatrix.h"
+#include "xc_utils/src/matrices/IndicesMatrix.h"
 
-//! @ingroup GEOM
+//! @ingroup arrays3d
 //
 //! @brief Clase base para las «tritrices» de posiciones.
 class Indices3dArray: public std::vector<IndicesMatrix >

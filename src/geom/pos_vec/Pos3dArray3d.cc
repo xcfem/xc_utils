@@ -41,7 +41,7 @@ Pos3dArray3d::Pos3dArray3d(const Pos3dArray &l1_points,const Pos3dArray &l2_poin
                            const size_t &ndiv_12,const size_t &ndiv_13)
   : PosArray3d<Pos3d>(l1_points,l2_points,l3_points,l4_points,ndiv_12,ndiv_13) {}
 
-Pos3d Pos3dArray3d::GetCentro(void) const
+Pos3d Pos3dArray3d::getCenter(void) const
   { return get_centro(*this,Segment3d()); }
 
 void Pos3dArray3d::Transforma(const Trf3d &trf)

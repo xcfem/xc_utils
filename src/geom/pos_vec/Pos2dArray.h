@@ -61,7 +61,7 @@ class Pos2dArray: public PosArray<Pos2d>
     GEOM_FT Ix(void) const;
     GEOM_FT Iy(void) const;
     GEOM_FT Pxy(void) const;
-    Pos2d GetCentro(void) const;
+    Pos2d getCenter(void) const;
     Pos2d getCenterOfMass(void) const;
     GEOM_FT GetArea(void) const;
     Triangle2d getTriangle1(const size_t &i,const size_t &j) const;
@@ -72,7 +72,7 @@ class Pos2dArray: public PosArray<Pos2d>
     Pos2d getPoint(const size_t &,const size_t &) const;
     Quadrilateral2d GetQuad(const size_t &i,const size_t &j) const;
     double GetAreaQuad(const size_t &i,const size_t &j) const;
-    Pos2d GetCentroideQuad(const size_t &i,const size_t &j) const;
+    Pos2d getQuadCentroid(const size_t &i,const size_t &j) const;
     bool In(const Pos2d &, const double &) const;
 
     void Transforma(const Trf2d &trf2d);

@@ -27,7 +27,7 @@
 #include "xc_utils/src/matrices/RangoIndice.h"
 
 
-//! @ingroup GEOM
+//! @ingroup arrays3d
 //
 //! @brief Rangos de variación de tres índices, se emplea en BoxConstRef.
 class Array3dRange

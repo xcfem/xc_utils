@@ -28,7 +28,7 @@
 #include "Array3dRange.h"
 
 
-//! @ingroup GEOM
+//! @ingroup arrays3d
 //
 //! @brief Referencia a una "sub array 3D".
 template <class ARRAY_3D>

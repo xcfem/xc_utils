@@ -106,7 +106,7 @@ GEOM_FT Pos2dArray::Lagrange(const GEOM_FT &tol)
   }
 
 //! @brief Return the position of the midpoint.
-Pos2d Pos2dArray::GetCentro(void) const
+Pos2d Pos2dArray::getCenter(void) const
   { return get_centro(*this,Segment2d()); }
 
 //! @brief Return the center of mass.
@@ -121,7 +121,7 @@ Pos2d Pos2dArray::getCenterOfMass(void) const
       for(size_t j=1;j<n_columns;j++)
         {
           areaQuad= GetAreaQuad(i,j);
-          c= GetCentroideQuad(i,j);
+          c= getQuadCentroid(i,j);
           Atot+= areaQuad;
           Qx+= c.x()*areaQuad;
           Qy+= c.y()*areaQuad;
@@ -290,7 +290,7 @@ GEOM_FT Pos2dArray::GetAreaQuad(const size_t &i,const size_t &j) const
 //                                                                                   |   |
 //                                                                                   |   |
 //                                                                               i,j +---+ i,j+1
-Pos2d Pos2dArray::GetCentroideQuad(const size_t &i,const size_t &j) const
+Pos2d Pos2dArray::getQuadCentroid(const size_t &i,const size_t &j) const
   { return GetQuad(i,j).Centroide(); }
 
 //! @brief Return the maximum value of the k coordinate.

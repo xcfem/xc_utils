@@ -50,7 +50,7 @@ class Pos3dArray: public PosArray<Pos3d>
     Pos3dArray(const Pos3d &p0,const Pos3d &p1,const Pos3d &p2,const size_t &ndiv1,const size_t &ndiv2);
     Pos3dArray(const Pos3dArray &l1_points,const Pos3dArray &l2_points,const Pos3dArray &l3_points,const Pos3dArray &l4_points);
     Pos3dArray(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4,const size_t &ndiv1,const size_t &ndiv2);
-    Pos3d GetCentro(void) const;
+    Pos3d getCenter(void) const;
     Triangle3d getTriangle1(const size_t &i,const size_t &j) const;
     Triangle3d getTriangle2(const size_t &i,const size_t &j) const;
     GEOM_FT Lagrange(const GEOM_FT &tol);

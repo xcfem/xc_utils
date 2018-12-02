@@ -25,7 +25,7 @@
 #define JROWVARREF_H
 
 
-//! @ingroup GEOM
+//! @ingroup arrays3d
 //
 //! @brief Reference to a row of the array which points
 //! have constant J and K indices.

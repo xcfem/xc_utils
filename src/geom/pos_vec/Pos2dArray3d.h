@@ -37,7 +37,7 @@ class Pos2dArray3d: public PosArray3d<Pos2d>
   {
   public:
     Pos2dArray3d(const size_t iLayers= 1);
-    Pos2d GetCentro(void) const;
+    Pos2d getCenter(void) const;
   };
 
 class BND2d;

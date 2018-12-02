@@ -26,136 +26,23 @@
 #define POSARRAY3D_H
 
 #include "PosArray.h"
-#include "xc_utils/src/matrices/3d_arrays/Array3dBoxConstRef.h"
-#include "xc_utils/src/matrices/3d_arrays/ConstantILayerConstRef.h"
-#include "xc_utils/src/matrices/3d_arrays/ConstantJLayerConstRef.h"
-#include "xc_utils/src/matrices/3d_arrays/ConstantKLayerConstRef.h"
-#include "xc_utils/src/matrices/3d_arrays/IRowConstRef.h"
-#include "xc_utils/src/matrices/3d_arrays/JRowConstRef.h"
-#include "xc_utils/src/matrices/3d_arrays/KRowConstRef.h"
-#include "xc_utils/src/matrices/3d_arrays/Array3dBoxVarRef.h"
-#include "xc_utils/src/matrices/3d_arrays/ConstantILayerVarRef.h"
-#include "xc_utils/src/matrices/3d_arrays/ConstantJLayerVarRef.h"
-#include "xc_utils/src/matrices/3d_arrays/ConstantKLayerVarRef.h"
-#include "xc_utils/src/matrices/3d_arrays/IRowVarRef.h"
-#include "xc_utils/src/matrices/3d_arrays/JRowVarRef.h"
-#include "xc_utils/src/matrices/3d_arrays/KRowVarRef.h"
-
+#include "xc_utils/src/matrices/3d_arrays/Array3dBase.h"
 
 
 //! @ingroup GEOM
 //
 //! @brief Base class for grids of positions in 3D.
 template <class POS>
-class PosArray3d: public std::vector<PosArray<POS> >
+class PosArray3d: public Array3dBase<PosArray<POS> >
   {
   public:
     typedef PosArray<POS> m_pos;
-    typedef typename m_pos::reference reference;
-    typedef typename m_pos::const_reference const_reference;
-
-    typedef Array3dBoxConstRef<PosArray3d<POS> > box_const_ref;
-    typedef ConstantILayerConstRef<PosArray3d<POS> > constant_i_layer_const_ref;
-    typedef ConstantJLayerConstRef<PosArray3d<POS> > constant_j_layer_const_ref;
-    typedef ConstantKLayerConstRef<PosArray3d<POS> > constant_k_layer_const_ref;
-    typedef IRowConstRef<PosArray3d<POS> > i_row_const_ref;
-    typedef JRowConstRef<PosArray3d<POS> > j_row_const_ref;
-    typedef KRowConstRef<PosArray3d<POS> > k_row_const_ref;
-
-    typedef Array3dBoxVarRef<PosArray3d<POS> > box_var_ref;
-    typedef ConstantILayerVarRef<PosArray3d<POS> > constant_i_layer_variable_ref;
-    typedef ConstantJLayerVarRef<PosArray3d<POS> > constant_j_layer_variable_ref;
-    typedef ConstantKLayerVarRef<PosArray3d<POS> > constant_k_layer_variable_ref;
-    typedef IRowVarRef<PosArray3d<POS> > i_row_var_ref;
-    typedef JRowVarRef<PosArray3d<POS> > j_row_var_ref;
-    typedef KRowVarRef<PosArray3d<POS> > k_row_var_ref;
-
-  protected:
-    inline m_pos &get_layer(const size_t &iLayer)
-      { return (*this)[iLayer-1]; }
-    inline const m_pos &get_layer(const size_t &iLayer) const
-      { return (*this)[iLayer-1]; }
-  public:
-    PosArray3d(const size_t iLayers= 1): std::vector<m_pos>(iLayers) {}
-    PosArray3d(const size_t iLayers,const m_pos &m): std::vector<m_pos>(iLayers,m) {}
+    PosArray3d(const size_t iLayers= 1): Array3dBase<m_pos >(iLayers) {}
+    PosArray3d(const size_t iLayers,const m_pos &m): Array3dBase<m_pos >(iLayers,m) {}
     PosArray3d(const m_pos &,const m_pos &,const m_pos &,const m_pos &,const size_t &,const size_t &);
-    inline size_t getNumberOfLayers(void) const
-      { return this->size(); }
-    size_t getNumberOfRows(const size_t &layer= 1) const;
-    size_t getNumberOfColumns(const size_t &layer= 1) const;
     size_t NumPos(void) const;
 
-    box_const_ref getBoxConstRef(size_t iLayer=1,size_t f=1, size_t c=1) const
-      { return box_const_ref(*this,iLayer,f,c); }
-    box_const_ref getBoxConstRef(const Array3dRange &rango) const
-      { return box_const_ref(*this,rango); }
-
-    constant_i_layer_const_ref ConstantILayerGetConstRef(size_t iLayer=1,size_t iRow=1, size_t iColumn=1) const
-      { return constant_i_layer_const_ref(*this,iLayer,iRow,iColumn); }
-    constant_i_layer_const_ref ConstantILayerGetConstRef(size_t iLayer,const RangoIndice &row_range,const RangoIndice &column_range) const
-      { return constant_i_layer_const_ref(*this,iLayer,row_range,column_range); }
-    constant_j_layer_const_ref ConstantJLayerGetConstRef(size_t f=1,size_t iLayer=1, size_t c=1) const
-      { return constant_j_layer_const_ref(*this,iLayer,f,c); }
-    constant_j_layer_const_ref ConstantJLayerGetConstRef(const RangoIndice &layer_range,size_t f,const RangoIndice &column_range) const
-      { return constant_j_layer_const_ref(*this,layer_range,f,column_range); }
-    constant_k_layer_const_ref ConstantKLayerGetConstRef(size_t c=1,size_t iLayer=1, size_t f=1) const
-      { return constant_k_layer_const_ref(*this,c,iLayer,f); }
-    constant_k_layer_const_ref ConstantKLayerGetConstRef(const RangoIndice &layer_range,const RangoIndice &row_range,const size_t &c) const
-      { return constant_k_layer_const_ref(*this,layer_range,row_range,c); }
-
-    i_row_const_ref IRowGetConstRef(size_t f=1,size_t c=1) const
-      { return i_row_const_ref(*this,f,c); }
-    i_row_const_ref IRowGetConstRef(const RangoIndice &layer_range,size_t f,size_t c) const
-      { return i_row_const_ref(*this,layer_range,f,c); }
-    j_row_const_ref JRowGetConstRef(size_t iLayer=1,size_t c=1) const
-      { return j_row_const_ref(*this,iLayer,c); }
-    j_row_const_ref JRowGetConstRef(size_t iLayer,const RangoIndice &row_range,size_t c) const
-      { return j_row_const_ref(*this,iLayer,row_range,c); }
-    k_row_const_ref KRowGetConstRef(size_t iLayer=1,size_t f=1) const
-      { return k_row_const_ref(*this,iLayer,f); }
-    k_row_const_ref KRowGetConstRef(size_t iLayer,size_t f,const RangoIndice &column_range) const
-      { return k_row_const_ref(*this,iLayer,f,column_range); }
-
-    box_var_ref getBoxVarRef(size_t iLayer=1,size_t f=1, size_t c=1)
-      { return box_var_ref(*this,iLayer,f,c); }
-    box_var_ref getBoxVarRef(const Array3dRange &rango)
-      { return box_var_ref(*this,rango); }
-
-    constant_i_layer_variable_ref ConstantILayerGetVarRef(size_t iLayer=1,size_t f=1, size_t c=1)
-      { return constant_i_layer_variable_ref(*this,iLayer,f,c); }
-    constant_i_layer_variable_ref ConstantILayerGetVarRef(size_t iLayer,const RangoIndice &row_range,const RangoIndice &column_range)
-      { return constant_i_layer_variable_ref(*this,iLayer,row_range,column_range); }
-    constant_j_layer_variable_ref ConstantJLayerGetVarRef(size_t f=1,size_t iLayer=1, size_t c=1)
-      { return constant_j_layer_variable_ref(*this,iLayer,f,c); }
-    constant_j_layer_variable_ref ConstantJLayerGetVarRef(const RangoIndice &layer_range,size_t f,const RangoIndice &column_range)
-      { return constant_j_layer_variable_ref(*this,layer_range,f,column_range); }
-    constant_k_layer_variable_ref ConstantKLayerGetVarRef(size_t c=1,size_t iLayer=1, size_t f=1)
-      { return constant_k_layer_variable_ref(*this,c,iLayer,f); }
-    constant_k_layer_variable_ref ConstantKLayerGetVarRef(const RangoIndice &layer_range,const RangoIndice &row_range,const size_t &c)
-      { return constant_k_layer_variable_ref(*this,layer_range,row_range,c); }
-
-    i_row_var_ref IRowGetVarRef(size_t f=1,size_t c=1)
-      { return i_row_var_ref(*this,f,c); }
-    i_row_var_ref IRowGetVarRef(const RangoIndice &layer_range,size_t f,size_t c)
-      { return i_row_var_ref(*this,layer_range,f,c); }
-    j_row_var_ref JRowGetVarRef(size_t f=1,size_t c=1)
-      { return j_row_var_ref(*this,f,c); }
-    j_row_var_ref JRowGetVarRef(size_t iLayer,const RangoIndice &row_range,size_t c)
-      { return j_row_var_ref(*this,iLayer,row_range,c); }
-    k_row_var_ref KRowGetVarRef(size_t f=1,size_t c=1)
-      { return k_row_var_ref(*this,f,c); }
-    k_row_var_ref KRowGetVarRef(size_t iLayer,size_t f,const RangoIndice &column_range)
-      { return k_row_var_ref(*this,iLayer,f,column_range); }
-
-    inline const m_pos &operator()(const size_t &iLayer) const
-      { return get_layer(iLayer); }
-    inline m_pos &operator()(const size_t &iLayer)
-      { return get_layer(iLayer); }
-    inline const POS &operator()(const size_t &i,const size_t &j,const size_t &k) const
-      { return get_layer(i)(j,k); }
-    inline POS &operator()(const size_t &i,const size_t &j,const size_t &k)
-      { return get_layer(i)(j,k); }
-    POS GetCentro(void) const;
+    POS getCenter(void) const;
   };
 
 //! @brief Generate the point array from the arguments.
@@ -163,7 +50,7 @@ template <class POS>
 PosArray3d<POS>::PosArray3d( const m_pos &l1_points,const m_pos &l2_points,
                              const m_pos &l3_points,const m_pos &l4_points,
                              const size_t &ndiv_12,const size_t &ndiv_14)
-  : std::vector<m_pos>(l1_points.size())
+  : Array3dBase<PosArray<POS> >(l1_points.size())
   {
     const size_t n_layers= this->size();
     for(size_t i=1;i<=n_layers;i++) //Iteration on the point "layers".
@@ -184,40 +71,7 @@ PosArray3d<POS>::PosArray3d( const m_pos &l1_points,const m_pos &l2_points,
 //! @brief Return the number of points in the container.
 template <class POS>
 size_t PosArray3d<POS>::NumPos(void) const
-  {
-    const size_t sz= this->size();
-    if(sz<1)
-      return 0;
-    else
-      {
-        const m_pos &layer= (*this)(1); 
-        return sz*layer.getNumberOfRows()*layer.getNumberOfColumns();
-      }
-  }
-
-//! @brief Return the number of columns.
-//!
-//! @param layer: layer to retrieve the number rows of.
-template <class POS>
-size_t PosArray3d<POS>::getNumberOfRows(const size_t &layer) const
-  {
-    size_t retval= 0;
-    if(this->size())
-      retval= (*this)[layer-1].getNumberOfRows();
-    return retval;
-  }
-
-//! @brief Return the number of columns of the layer.
-//!
-//! @param layer: layer to retrieve the number columns of.
-template <class POS>
-size_t PosArray3d<POS>::getNumberOfColumns(const size_t &layer) const
-  {
-    size_t retval= 0;
-    if(this->size())
-      retval= (*this)[layer-1].getNumberOfColumns();
-    return retval;
-  }
+  { return this->getNumberOfComponents(); }
 
 template <class POS,class SEG>
 POS get_centro(const PosArray3d<POS> t,const SEG &sg)
@@ -228,15 +82,6 @@ POS get_centro(const PosArray3d<POS> t,const SEG &sg)
     SEG s(get_centro(base,SEG()),get_centro(tapa,SEG()));
     retval= s.getCenterOfMass();
     return retval;
-  }
-
-template <class POS>
-inline std::ostream &operator<<(std::ostream &os,const PosArray3d<POS> &t)
-  {
-    const size_t n_layers= t.getNumberOfLayers();
-    for(size_t i=1;i<=n_layers;i++)
-      os << t(i);
-    return os;
   }
 
 #endif

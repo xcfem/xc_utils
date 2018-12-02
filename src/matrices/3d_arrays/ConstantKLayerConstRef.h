@@ -27,7 +27,7 @@
 #include "Array3dRange.h"
 
 
-//! @ingroup GEOM
+//! @ingroup arrays3d
 //
 //! @brief Reference to a layer of the array which points
 //! have constant K index.

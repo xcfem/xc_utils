@@ -29,7 +29,7 @@
 class RangoIndice;
 class Array3dRange;
 
-//! @ingroup GEOM
+//! @ingroup arrays3d
 //
 //! @brief Indices that define a block of an array.
 class Array3dBoxRefBase

@@ -30,7 +30,7 @@
 Pos2dArray3d::Pos2dArray3d(const size_t iLayers)
   : PosArray3d<Pos2d>(iLayers) {}
 
-Pos2d Pos2dArray3d::GetCentro(void) const
+Pos2d Pos2dArray3d::getCenter(void) const
   { return get_centro(*this,Segment2d()); }
 
 Pos2dArray3d create_uniform_grid(const BND2d &bnd,const size_t &ndiv_x,const size_t &ndiv_y,const size_t &ndiv_z)

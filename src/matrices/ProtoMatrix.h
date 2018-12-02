@@ -25,6 +25,10 @@
 #include <string>
 #include <iostream>
 
+//! @defgroup Matrices
+//! @ingroup Matrices
+//! 
+//! @brief Base class for matrices.
 class ProtoMatrix
   {
   protected:

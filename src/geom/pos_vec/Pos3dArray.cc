@@ -59,7 +59,7 @@ Pos3dArray::Pos3dArray(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos
   : PosArray<Pos3d>(Quadrilateral<Pos3d>(p1,p2,p3,p4,ndiv1,ndiv2)) {}
 
 
-Pos3d Pos3dArray::GetCentro(void) const
+Pos3d Pos3dArray::getCenter(void) const
   { return get_centro(*this,Segment3d()); }
 
 Pos3d Pos3dArray::pos_lagrangiana(const size_t &i,const size_t &j) const

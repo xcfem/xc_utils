@@ -38,7 +38,7 @@ class Revolution3d;
 class Pos3dArray3d: public PosArray3d<Pos3d>
   {
   public:
-    Pos3d GetCentro(void) const;
+    Pos3d getCenter(void) const;
     Pos3dArray3d(const size_t &iLayers= 1);
     Pos3dArray3d(const size_t &,const PosArray<Pos3d> &);
     Pos3dArray3d(const PosArray<Pos3d> &l1_points,const PosArray<Pos3d> &l2_points,

@@ -27,7 +27,7 @@
 #include "Array3dBoxRefBase.h"
 
 
-//! @ingroup GEOM
+//! @ingroup arrays3d
 //
 //! @brief Reference to a "sub-array".
 template <class ARRAY_3D>

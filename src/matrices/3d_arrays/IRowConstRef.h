@@ -25,7 +25,7 @@
 #define IROWCONSTREF_H
 
 
-//! @ingroup GEOM
+//! @ingroup arrays3d
 //
 //! @brief Reference to a layer row from the array which points have
 //! constant J and K indices.

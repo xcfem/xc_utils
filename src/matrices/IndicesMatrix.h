@@ -31,7 +31,7 @@
 
 typedef vectorZ<int> VIndices;
 
-//! @ingroup GEOM
+//! @ingroup Matrices
 //
 //! @brief Matrix of indices. I'ts used to express a
 //! set of positions by its indices, i. e. :
