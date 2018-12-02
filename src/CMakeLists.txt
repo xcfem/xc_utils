@@ -98,6 +98,8 @@ SET(sqlitepp_utils utils/sqlitepp/Database utils/sqlitepp/Query utils/sqlitepp/S
 
 SET(matrices matrices/MMatrix matrices/vcolM matrices/RangoIndice matrices/MatrixRange matrices/BoxConstRef matrices/ExpressionMatrix matrices/MExpressionMatrix matrices/PolynomialMatrix matrices/m_double matrices/m_bool matrices/m_double matrices/m_int matrices/m_sizet matrices/m_string matrices/giros matrices/op_tensor matrices/solvers/solver matrices/IndicesMatrix matrices/Indices3dArray)
 
+SET(three_d_arrays matrices/3d_arrays/Array3dBoxRefBase matrices/3d_arrays/Array3dRange matrices/3d_arrays/BoolArray3d)
+
 SET(skypack skypack/skypri.f skypack/skypds.f skypack/skyscf.f skypack/skyssb.f skypack/mtrxys.f skypack/skyssf.f skypack/skypsb.f skypack/skypdc.f skypack/skypf1.f skypack/skysdc.f skypack/skypsp.f skypack/skypcf.f skypack/skymef.f skypack/skyssd.f skypack/skyss.f skypack/skysf1.f skypack/skypf2.f skypack/mtrxy.f skypack/mtrxyd.f skypack/skysf2.f skypack/skypci.f)
 
 SET(itpack itpack/dsrc2c.f itpack/jcg.f itpack/jsi.f itpack/rscg.f itpack/rssi.f itpack/sor.f itpack/ssorcg.f itpack/ssorsi.f)
@@ -126,7 +128,7 @@ SET(geomD3 geom/d3/BND3d geom/d3/GeomObj3d geom/d3/BspTree3d geom/d3/Cylinder ge
 
 SET(funcFromPoints geom/d1/function_from_points/FunctionFromPointsR_R geom/d1/function_from_points/FunctionFromPointsR2_R)
 
-SET(geom geom/pos_vec/SlidingVector3d geom/pos_vec/FixedVector3d geom/pos_vec/Vector2d geom/pos_vec/Vector3d geom/pos_vec/Pos2d geom/pos_vec/Pos2dList geom/pos_vec/Pos3d geom/pos_vec/KDTreePos geom/pos_vec/Pos3dList geom/pos_vec/Dir3d geom/pos_vec/Dir2d geom/pos_vec/SlidingVector2d geom/pos_vec/FixedVector2d geom/pos_vec/SlidingVectorsSystem3d geom/pos_vec/SlidingVectorsSystem2d geom/pos_vec/Pos2dArray geom/pos_vec/Array3dBoxRefBase geom/pos_vec/Array3dRange geom/pos_vec/Pos2dArray3d geom/pos_vec/Pos3dArray geom/pos_vec/Pos3dArray3d geom/pos_vec/BoolArray3d geom/lists/ThreePoints3d geom/lists/utils_list_pos2d geom/lists/utils_list_pos3d geom/Wm3/Wm3Math geom/Wm3/Wm3Distance geom/Wm3/Wm3DistVector3Triangle3 ${geomD0} ${geomD1} ${geomD2} ${geomD3} ${geomRefCooSys} ${geomTrfs} ${funcFromPoints} geom/cgal_types geom/GeomObj geom/FT_matrix geom/ProtoGeom)
+SET(geom geom/pos_vec/SlidingVector3d geom/pos_vec/FixedVector3d geom/pos_vec/Vector2d geom/pos_vec/Vector3d geom/pos_vec/Pos2d geom/pos_vec/Pos2dList geom/pos_vec/Pos3d geom/pos_vec/KDTreePos geom/pos_vec/Pos3dList geom/pos_vec/Dir3d geom/pos_vec/Dir2d geom/pos_vec/SlidingVector2d geom/pos_vec/FixedVector2d geom/pos_vec/SlidingVectorsSystem3d geom/pos_vec/SlidingVectorsSystem2d geom/pos_vec/Pos2dArray geom/pos_vec/Pos2dArray3d geom/pos_vec/Pos3dArray geom/pos_vec/Pos3dArray3d geom/lists/ThreePoints3d geom/lists/utils_list_pos2d geom/lists/utils_list_pos3d geom/Wm3/Wm3Math geom/Wm3/Wm3Distance geom/Wm3/Wm3DistVector3Triangle3 ${geomD0} ${geomD1} ${geomD2} ${geomD3} ${geomRefCooSys} ${geomTrfs} ${funcFromPoints} geom/cgal_types geom/GeomObj geom/FT_matrix geom/ProtoGeom)
 
 SET(GnuGts gnu_gts/GTSSurface gnu_gts/GTSVertex gnu_gts/GTSEdge gnu_gts/GTSFace gnu_gts/GTSSplit gnu_gts/GTSSurfaceTraverse gnu_gts/GTSSurfaceIntersection gnu_gts/GTSBBoxTree gnu_gts/GTSGraph gnu_gts/TriangleMap)
 
@@ -140,7 +142,7 @@ SET(ca_acciones loadCombinations/actions/LeadingActionInfo loadCombinations/acti
 
 SET(ca_combinations loadCombinations/comb_analysis/Variation loadCombinations/comb_analysis/Variations loadCombinations/comb_analysis/LoadCombinationVector loadCombinations/comb_analysis/LoadCombinations loadCombinations/comb_analysis/ActionWeightingMap loadCombinations/comb_analysis/LoadCombinationGenerator)
 
-ADD_LIBRARY(xc_basic_utils ${text_utils} ${stream_utils} ${misc_utils} ${sqlitepp_utils} ${matrices} ${skypack} ${itpack} ${umfpack} ${functions})
+ADD_LIBRARY(xc_basic_utils ${text_utils} ${stream_utils} ${misc_utils} ${sqlitepp_utils} ${matrices} ${three_d_arrays} ${skypack} ${itpack} ${umfpack} ${functions})
 INSTALL(TARGETS xc_basic_utils DESTINATION lib)
 
 ADD_LIBRARY(xc_utils SHARED ${MYSQL} ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${KERNEL}  ${VtkAux} ${ca_factors} ${ca_acciones} ${ca_combinations})
