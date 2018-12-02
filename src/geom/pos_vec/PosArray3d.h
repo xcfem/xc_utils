@@ -45,7 +45,7 @@
 
 //! @ingroup GEOM
 //
-//! @brief Base class for the position arrays.
+//! @brief Base class for grids of positions in 3D.
 template <class POS>
 class PosArray3d: public std::vector<PosArray<POS> >
   {
@@ -81,8 +81,8 @@ class PosArray3d: public std::vector<PosArray<POS> >
     PosArray3d(const m_pos &,const m_pos &,const m_pos &,const m_pos &,const size_t &,const size_t &);
     inline size_t getNumberOfLayers(void) const
       { return this->size(); }
-    size_t getNumberOfRows(void) const;
-    size_t getNumberOfColumns(void) const;
+    size_t getNumberOfRows(const size_t &layer= 1) const;
+    size_t getNumberOfColumns(const size_t &layer= 1) const;
     size_t NumPos(void) const;
 
     box_const_ref getBoxConstRef(size_t iLayer=1,size_t f=1, size_t c=1) const
@@ -158,7 +158,7 @@ class PosArray3d: public std::vector<PosArray<POS> >
     POS GetCentro(void) const;
   };
 
-//! @brief Generate the point arra from the arguments.
+//! @brief Generate the point array from the arguments.
 template <class POS>
 PosArray3d<POS>::PosArray3d( const m_pos &l1_points,const m_pos &l2_points,
                              const m_pos &l3_points,const m_pos &l4_points,
@@ -166,7 +166,7 @@ PosArray3d<POS>::PosArray3d( const m_pos &l1_points,const m_pos &l2_points,
   : std::vector<m_pos>(l1_points.size())
   {
     const size_t n_layers= this->size();
-    for(size_t i=1;i<=n_layers;i++) //Iteration of the point "layers".
+    for(size_t i=1;i<=n_layers;i++) //Iteration on the point "layers".
       {
         const POS &p1= l1_points(i); //1st. point of the quadrangle. 
         const POS &p2= l2_points(i); //2nd. point of the quadrangle. 
@@ -181,7 +181,7 @@ PosArray3d<POS>::PosArray3d( const m_pos &l1_points,const m_pos &l2_points,
       }
   }
 
-//! @brief Return el número de elementos of the array.
+//! @brief Return the number of points in the container.
 template <class POS>
 size_t PosArray3d<POS>::NumPos(void) const
   {
@@ -195,21 +195,27 @@ size_t PosArray3d<POS>::NumPos(void) const
       }
   }
 
+//! @brief Return the number of columns.
+//!
+//! @param layer: layer to retrieve the number rows of.
 template <class POS>
-size_t PosArray3d<POS>::getNumberOfRows(void) const
+size_t PosArray3d<POS>::getNumberOfRows(const size_t &layer) const
   {
     size_t retval= 0;
     if(this->size())
-      retval= (*this)[0].getNumberOfRows();
+      retval= (*this)[layer-1].getNumberOfRows();
     return retval;
   }
 
+//! @brief Return the number of columns of the layer.
+//!
+//! @param layer: layer to retrieve the number columns of.
 template <class POS>
-size_t PosArray3d<POS>::getNumberOfColumns(void) const
+size_t PosArray3d<POS>::getNumberOfColumns(const size_t &layer) const
   {
     size_t retval= 0;
     if(this->size())
-      retval= (*this)[0].getNumberOfColumns();
+      retval= (*this)[layer-1].getNumberOfColumns();
     return retval;
   }
 
