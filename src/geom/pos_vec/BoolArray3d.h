@@ -111,6 +111,8 @@ class BoolArray3d: public std::vector<m_bool>
       { return get_layer(iLayer); }
     inline bool operator()(const size_t &i,const size_t &j,const size_t &k) const
       { return get_layer(i)(j,k); }
+    inline void assign(const size_t &i,const size_t &j,const size_t &k, const bool &value)
+      { get_layer(i).assign(j,k,value); }
   };
 
 //! @brief Generate the bool arrays from the arguments.

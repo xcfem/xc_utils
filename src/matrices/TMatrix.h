@@ -92,6 +92,9 @@ class TMatrix: public ProtoMatrix, public STO
       { return STO::at(Indice(iRow,col)); }
     virtual const_reference at(size_t iRow=1,size_t col=1) const
       { return STO::at(Indice(iRow,col)); }
+    //! @brief Put the box int the position (f,c) of this matrix.
+    void assign(size_t row,size_t col,const T &value)
+      { STO::assign(Indice(row,col),value); }
     void Swap(size_t f1,size_t c1,size_t f2, size_t c2)
       { std::swap((*this)(f1,c1),(*this)(f2,c2)); }    
     TMatrix<T,STO> &Trn(void)
