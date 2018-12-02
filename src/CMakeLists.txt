@@ -96,7 +96,7 @@ SET(SQLITE sqlite/SqLiteObject sqlite/SqLiteQuery sqlite/SqLiteDatabase)
 
 SET(sqlitepp_utils utils/sqlitepp/Database utils/sqlitepp/Query utils/sqlitepp/StderrLog utils/sqlitepp/SysLog)
 
-SET(matrices matrices/MMatrix matrices/vcolM matrices/RangoIndice matrices/MatrixRange matrices/BoxConstRef matrices/ExpressionMatrix matrices/MExpressionMatrix matrices/PolynomialMatrix matrices/m_double matrices/m_int matrices/m_sizet matrices/m_string matrices/giros matrices/op_tensor matrices/solvers/solver matrices/IndicesMatrix matrices/Indices3dArray)
+SET(matrices matrices/MMatrix matrices/vcolM matrices/RangoIndice matrices/MatrixRange matrices/BoxConstRef matrices/ExpressionMatrix matrices/MExpressionMatrix matrices/PolynomialMatrix matrices/m_double matrices/m_bool matrices/m_double matrices/m_int matrices/m_sizet matrices/m_string matrices/giros matrices/op_tensor matrices/solvers/solver matrices/IndicesMatrix matrices/Indices3dArray)
 
 SET(skypack skypack/skypri.f skypack/skypds.f skypack/skyscf.f skypack/skyssb.f skypack/mtrxys.f skypack/skyssf.f skypack/skypsb.f skypack/skypdc.f skypack/skypf1.f skypack/skysdc.f skypack/skypsp.f skypack/skypcf.f skypack/skymef.f skypack/skyssd.f skypack/skyss.f skypack/skysf1.f skypack/skypf2.f skypack/mtrxy.f skypack/mtrxyd.f skypack/skysf2.f skypack/skypci.f)
 

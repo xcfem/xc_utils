@@ -33,7 +33,7 @@
 
 //! @ingroup GEOM
 //
-//! @brief Clase base para las matrices de posiciones.
+//! @brief Base class for position matrices used to represent grids of points.
 template <class POS>
 class PosArray: public TMatrix<POS,std::vector<POS> >
   {
