@@ -261,13 +261,13 @@ bool BND2d::Interseca(const BND2d &bnd) const
 
 //! @brief Aplica al objeto la transformación que se
 //! pasa como parámetro.
-void BND2d::Transforma(const Trf2d &trf2d)
+void BND2d::Transform(const Trf2d &trf2d)
   {
     if(undefined)
       std::cerr << getClassName() << "::" << __FUNCTION__
 	        << "; boundary is undefined." << std::endl;
-    const Pos2d pA= trf2d.Transforma(GetPMin());
-    const Pos2d pB= trf2d.Transforma(GetPMax());
+    const Pos2d pA= trf2d.Transform(GetPMin());
+    const Pos2d pB= trf2d.Transform(GetPMax());
     (*this)= BND2d(pA,pB);
   }
 

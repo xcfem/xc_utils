@@ -97,10 +97,10 @@ Pos2d GeomGroup2d::getCenterOfMass(void) const
   }
 
 //! @brief Applies the transformation to the points.
-void GeomGroup2d::Transforma(const Trf2d &trf2d)
+void GeomGroup2d::Transform(const Trf2d &trf2d)
   {
     for(pdeque_geom_obj::iterator i= objetos.begin();i!=objetos.end();i++)
-      (*i)->Transforma(trf2d);
+      (*i)->Transform(trf2d);
   }
 
 void GeomGroup2d::Print(std::ostream &stream) const

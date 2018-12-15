@@ -58,8 +58,8 @@ size_t Polyline2d::getNumSegments(void) const
   }
 
 //! @brief Applies the transformation to the points que se pasa como parámetro.
-void Polyline2d::Transforma(const Trf2d &trf2d)
-  { trf2d.Transforma(begin(),end()); }
+void Polyline2d::Transform(const Trf2d &trf2d)
+  { trf2d.Transform(begin(),end()); }
 
 //! @brief Return true if the point is in the polyline.
 bool Polyline2d::In(const Pos2d &p, const double &tol) const

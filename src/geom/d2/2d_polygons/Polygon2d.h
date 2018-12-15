@@ -153,7 +153,7 @@ class Polygon2d: public PolygonalSurface2d
       { return cgpol.vertex(j); }
     GeomObj::list_Pos2d getVertexList(void) const;
 
-    void Transforma(const Trf2d &trf2d);
+    void Transform(const Trf2d &trf2d);
 
     std::deque<GEOM_FT> &GetRecubrimientos(const Pos2dList &) const;
 
@@ -172,8 +172,8 @@ class Polygon2d: public PolygonalSurface2d
     //std::list<Polygon2d> create_polygon2d_list(const std::string &str) const;
   };
 
-inline Polygon2d transforma(const Trf2d &trf2d,const Polygon2d &pol2d)
-  { return getTransformado(pol2d,trf2d); }
+inline Polygon2d transform(const Trf2d &trf2d,const Polygon2d &pol2d)
+  { return getTransformed(pol2d,trf2d); }
 
 Polygon2d append_mid_points(const Polygon2d &);
 

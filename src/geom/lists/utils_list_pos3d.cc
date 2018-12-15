@@ -36,8 +36,8 @@ void mueve(GeomObj::list_Pos3d &l,const Vector3d &v)
   }
 
 //! @brief Applies the transformation to the positions.
-void transforma(GeomObj::list_Pos3d &l,const Trf3d &t)
-  { t.Transforma(l.begin(),l.end()); }
+void transform(GeomObj::list_Pos3d &l,const Trf3d &t)
+  { t.Transform(l.begin(),l.end()); }
 
 //! @brief Return the upper right corner of the bounding rectangle.
 Pos3d getPMax(const GeomObj::list_Pos3d &l)

@@ -489,10 +489,10 @@ Pos2d intersection_point(const Line2d &r1, const Line2d &r2)
   }
 
 //! @brief Applies the transformation argument to the line.
-void Line2d::Transforma(const Trf2d &trf2d)
+void Line2d::Transform(const Trf2d &trf2d)
   {
-    const Pos2d p1= trf2d.Transforma(Point(0));
-    const Pos2d p2= trf2d.Transforma(Point(100));
+    const Pos2d p1= trf2d.Transform(Point(0));
+    const Pos2d p2= trf2d.Transform(Point(100));
     (*this)= Line2d(p1,p2);
   }
 

@@ -254,14 +254,14 @@ GEOM_FT PolygonWithHoles2d::Pxy(void) const
 void PolygonWithHoles2d::add_hole(const Polygon2d &p)
   { cgpol.add_hole(p.ToCGAL()); }
 
-//! @brief Aplica la transformación que se pasa como parámetro
-PolygonWithHoles2d PolygonWithHoles2d::getTransformado(const Trf2d &trf2d)
+//! @brief Applies the transformation being passed as parameter.
+PolygonWithHoles2d PolygonWithHoles2d::getTransformed(const Trf2d &trf2d)
   {
     PolygonWithHoles2d retval;
     if(!cgpol.is_unbounded())
       {
         Polygon2d p(cgpol.outer_boundary());
-        p.Transforma(trf2d);
+        p.Transform(trf2d);
         retval.cgpol= CGPolygonWithHoles_2(p.ToCGAL());
       }
     else
@@ -271,16 +271,16 @@ PolygonWithHoles2d PolygonWithHoles2d::getTransformado(const Trf2d &trf2d)
     for(Hole_const_iterator j= cgpol.holes_begin();j!=cgpol.holes_end();j++)
       {
         Polygon2d p(*j);
-        p.Transforma(trf2d);
+        p.Transform(trf2d);
         retval.cgpol.add_hole(p.ToCGAL());
       }
     return retval;
   }
 
-//! @brief Aplica la transformación que se pasa como parámetro
-void PolygonWithHoles2d::Transforma(const Trf2d &trf2d)
+//! @brief Applies the transformation being passed as parameter.
+void PolygonWithHoles2d::Transform(const Trf2d &trf2d)
   {
-    PolygonWithHoles2d tmp= getTransformado(trf2d);
+    PolygonWithHoles2d tmp= getTransformed(trf2d);
     PolygonWithHoles2d::operator=(tmp); 
   }
 

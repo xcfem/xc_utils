@@ -141,7 +141,7 @@ class Segment2d : public Linear2d
       { return NAN; }
     VectorPos2d Divide(int num_partes) const;
 
-    void Transforma(const Trf2d &trf2d);
+    void Transform(const Trf2d &trf2d);
 
     inline friend bool operator==(const Segment2d &r1,const Segment2d &r2)
       { return (r1.cgseg==r2.cgseg); }

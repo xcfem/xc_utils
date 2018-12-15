@@ -331,10 +331,10 @@ VectorPos2d Segment2d::Divide(int num_partes) const
   { return VectorPos2d(Origen(),Destino(),num_partes); }
 
 //! @brief Applies to the segment the transformation argument.
-void Segment2d::Transforma(const Trf2d &trf2d)
+void Segment2d::Transform(const Trf2d &trf2d)
   {
-    const Pos2d p1= trf2d.Transforma(Origen());
-    const Pos2d p2= trf2d.Transforma(Destino());
+    const Pos2d p1= trf2d.Transform(Origen());
+    const Pos2d p2= trf2d.Transform(Destino());
     (*this)= Segment2d(p1,p2);
   }
 

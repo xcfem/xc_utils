@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Trf2d.h
-//Transformación afín (abstracto).
+//Two-dimensional transformations.
 
 #ifndef TRF2D_H
 #define TRF2D_H
@@ -37,7 +37,7 @@ class Line2d;
 
 //! @ingroup GEOM
 //
-//! @brief Clase base para las transformaciones en dos dimensiones.
+//! @brief Base class for two-dimensional transformations.
 class Trf2d: public Trf
   {
   private:
@@ -51,7 +51,7 @@ class Trf2d: public Trf
     Trf2d(const CGAL::Scaling &sc,const GEOM_FT &factor_escala);
     explicit Trf2d(const CGAL::Identity_transformation &i);
 
-    CGPoint_2 Transforma(const CGPoint_2 &cgpt2) const;
+    CGPoint_2 Transform(const CGPoint_2 &cgpt2) const;
   public:
     Trf2d(void)
       : Trf(), cgtrf(CGAL::Identity_transformation()) {}
@@ -68,7 +68,7 @@ class Trf2d: public Trf
         cgtrf= otra.cgtrf;
         return *this;
       }
-    //Return la transformación inversa.
+    //Return the inverse transformation.
     //Trf2d Inversa(void) const;
 
     //@brief Return the (i,j) componet of the transformation matrix expressed in
@@ -92,11 +92,11 @@ class Trf2d: public Trf
       { return cgtrf.hm(i-1,j-1); }
     virtual FT_matrix Cartesianas(void) const;
     virtual FT_matrix Homogeneas(void) const;
-    Pos2d Transforma(const Pos2d &p) const;
-    Vector2d Transforma(const Vector2d &v) const;
+    Pos2d Transform(const Pos2d &p) const;
+    Vector2d Transform(const Vector2d &v) const;
     template <class InputIterator>
-    void Transforma(InputIterator first,InputIterator last) const;
-    GeomObj::list_Pos2d Transforma(const GeomObj::list_Pos2d &lp2d) const;
+    void Transform(InputIterator first,InputIterator last) const;
+    GeomObj::list_Pos2d Transform(const GeomObj::list_Pos2d &lp2d) const;
     Pos2d operator()(const Pos2d &p) const;
     Vector2d operator()(const Vector2d &v) const;
     GeomObj::list_Pos2d operator()(const GeomObj::list_Pos2d &lp2d) const;
@@ -105,10 +105,10 @@ class Trf2d: public Trf
   };
 
 template <class InputIterator>
-void Trf2d::Transforma(InputIterator first,InputIterator last) const
+void Trf2d::Transform(InputIterator first,InputIterator last) const
   {
     for(InputIterator i= first;i!=last;i++)
-      (*i)= Transforma(*i);
+      (*i)= Transform(*i);
   }
 
 #endif

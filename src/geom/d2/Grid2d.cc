@@ -88,8 +88,8 @@ GEOM_FT Grid2d::GetMin(unsigned short int i) const
 
 //! @brief Aplica al objeto la transformación que se
 //! pasa como parámetro.
-void Grid2d::Transforma(const Trf2d &trf2d)
-  { points.Transforma(trf2d); }
+void Grid2d::Transform(const Trf2d &trf2d)
+  { points.Transform(trf2d); }
 
 void Grid2d::Print(std::ostream &os) const
   {

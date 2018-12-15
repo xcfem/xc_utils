@@ -202,9 +202,9 @@ Polygon2d Circle2d::getInscribedPolygon(const size_t &n,const double &theta_inic
 
 //! @brief Aplica al objeto la transformación que se
 //! pasa como parámetro.
-void Circle2d::Transforma(const Trf2d &trf2d)
+void Circle2d::Transform(const Trf2d &trf2d)
   {
-    const Pos2d pA= trf2d.Transforma(getCenterOfMass());
+    const Pos2d pA= trf2d.Transform(getCenterOfMass());
     (*this)= Circle2d(pA,getRadius());
   }
 

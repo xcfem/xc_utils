@@ -314,9 +314,9 @@ GEOM_FT Pos2dArray::GetMin(unsigned short int k) const
   }
 
 //! @brief Applies the transformation to the points.
-void Pos2dArray::Transforma(const Trf2d &trf2d)
+void Pos2dArray::Transform(const Trf2d &trf2d)
   {
     for(size_t i=1;i<=n_rows;i++)
       for(size_t j=1;j<=n_columns;j++)
-        (*this)(i,j)= trf2d.Transforma((*this)(i,j));
+        (*this)(i,j)= trf2d.Transform((*this)(i,j));
   }

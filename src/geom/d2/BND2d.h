@@ -102,7 +102,7 @@ class BND2d: public GeomObj2d
     bool Interseca(const Segment2d &sg) const;
     bool Interseca(const BND2d &) const;
 
-    void Transforma(const Trf2d &trf2d);
+    void Transform(const Trf2d &trf2d);
 
     BND2d &operator +=(const Pos2d &p);
     BND2d &operator +=(const BND2d &a);

@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Trf3d.h
-//Transformación afín (abstracto).
+//Three dimensional transformation.
 
 #ifndef TRF3D_H
 #define TRF3D_H
@@ -36,7 +36,7 @@ class Pos3dArray3d;
 
 //! @ingroup GEOM
 //
-//! @brief Transformación de coordenadas en 3d.
+//! @brief Three-dimensional transformation.
 class Trf3d: public Trf
   {
   private:
@@ -55,7 +55,7 @@ class Trf3d: public Trf
            const GEOM_FT & m10,const GEOM_FT & m11,const GEOM_FT & m12,const GEOM_FT & m13,
            const GEOM_FT & m20,const GEOM_FT & m21,const GEOM_FT & m22,const GEOM_FT & m23);
     //Trf3d Inversa(void) const;
-      //Return la transformación inversa.
+      //Return the inverse transformation.
     //@brief Return the (i,j) componet of the transformation matrix expressed in
     // cartesian coordinates.
     //       -              -
@@ -78,14 +78,14 @@ class Trf3d: public Trf
     void putHomogenousMatrix(const FT_matrix &mh);
     virtual FT_matrix Cartesianas(void) const;
     virtual FT_matrix Homogeneas(void) const;
-    Pos3d Transforma(const Pos3d &p) const;
-    Vector3d Transforma(const Vector3d &v) const;
+    Pos3d Transform(const Pos3d &p) const;
+    Vector3d Transform(const Vector3d &v) const;
     template <class InputIterator>
-    void Transforma(InputIterator first,InputIterator last) const;
-    void Transforma(Pos3dArray &m) const;
-    const Pos3dArray &Transforma(const Pos3dArray &m) const;
-    void Transforma(Pos3dArray3d &m) const;
-    const Pos3dArray3d &Transforma(const Pos3dArray3d &m) const;
+    void Transform(InputIterator first,InputIterator last) const;
+    void Transform(Pos3dArray &m) const;
+    const Pos3dArray &Transform(const Pos3dArray &m) const;
+    void Transform(Pos3dArray3d &m) const;
+    const Pos3dArray3d &Transform(const Pos3dArray3d &m) const;
     Pos3d operator()(const Pos3d &p) const;
     Vector3d operator()(const Vector3d &v) const;
     Pos3dArray operator()(const Pos3dArray &m) const;
@@ -104,10 +104,10 @@ inline Trf3d giroXYZ3d(const double &rx,const double &ry,const double &rz)
   { return giroZ3d(rz) * giroY3d(ry) * giroX3d(rx); }
 
 template <class InputIterator>
-void Trf3d::Transforma(InputIterator first,InputIterator last) const
+void Trf3d::Transform(InputIterator first,InputIterator last) const
   {
     for(InputIterator i= first;i!=last;i++)
-      (*i)= Transforma(*i);
+      (*i)= Transform(*i);
   }
 
 #endif

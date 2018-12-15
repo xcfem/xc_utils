@@ -52,8 +52,8 @@ void Pos2dList::appendPointPy(const Pos2d &p)
   { appendPoint(p); }
 
 //! @brief Applies the transformation to the points.
-void Pos2dList::Transforma(const Trf2d &trf2d)
-  { trf2d.Transforma(lista_ptos.begin(),lista_ptos.end()); }
+void Pos2dList::Transform(const Trf2d &trf2d)
+  { trf2d.Transform(lista_ptos.begin(),lista_ptos.end()); }
 
 //! @brief Return the vertex list of a polyline parallel to
 //! the polyline builded with the vertex of this line at the

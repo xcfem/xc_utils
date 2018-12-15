@@ -44,13 +44,13 @@ Pos3dArray3d::Pos3dArray3d(const Pos3dArray &l1_points,const Pos3dArray &l2_poin
 Pos3d Pos3dArray3d::getCenter(void) const
   { return get_centro(*this,Segment3d()); }
 
-void Pos3dArray3d::Transforma(const Trf3d &trf)
-  { trf.Transforma(*this); }
+void Pos3dArray3d::Transform(const Trf3d &trf)
+  { trf.Transform(*this); }
 
-Pos3dArray3d Pos3dArray3d::Transforma(const Trf3d &trf) const
+Pos3dArray3d Pos3dArray3d::Transform(const Trf3d &trf) const
   {
     Pos3dArray3d retval(*this);
-    retval.Transforma(trf);
+    retval.Transform(trf);
     return retval;
   }
 

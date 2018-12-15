@@ -20,7 +20,7 @@
 // En caso contrario, consulte <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Trf.h
-//Transformación afín (abstracto).
+//Geometric transformation.
 
 #ifndef TRF_H
 #define TRF_H
@@ -33,7 +33,7 @@ class FT_matrix;
 
 //! @ingroup GEOM
 //
-//! @brief Clase base para las transformaciones de coordenadas.
+//! @brief Base class for coordinate transformation.
 class Trf: public CommandEntity
   {
   public:

@@ -75,7 +75,7 @@ class Pos2dArray: public PosArray<Pos2d>
     Pos2d getQuadCentroid(const size_t &i,const size_t &j) const;
     bool In(const Pos2d &, const double &) const;
 
-    void Transforma(const Trf2d &trf2d);
+    void Transform(const Trf2d &trf2d);
 
     GEOM_FT Lagrange(const GEOM_FT &tol);
   };

@@ -258,8 +258,8 @@ GeomObj::list_Pos2d Polygon2d::getVertexList(void) const
   }
 
 //! @brief Aplica a los vértices la transformación que se pasa como parámetro.
-void Polygon2d::Transforma(const Trf2d &trf2d)
-  { trf2d.Transforma(cgpol.vertices_begin(),cgpol.vertices_end()); }
+void Polygon2d::Transform(const Trf2d &trf2d)
+  { trf2d.Transform(cgpol.vertices_begin(),cgpol.vertices_end()); }
 
 //! @brief Return the polygons that result from clipping the polygon
 //! with the line.

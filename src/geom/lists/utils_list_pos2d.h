@@ -34,7 +34,7 @@ class Polygon2d;
 //! @ingroup GEOM
 //
 void mueve(GeomObj::list_Pos2d &l,const Vector2d &);
-void transforma(GeomObj::list_Pos2d &l,const Trf2d &);
+void transform(GeomObj::list_Pos2d &l,const Trf2d &);
 void plot(Plotter &,const GeomObj::list_Pos2d &l);
 Pos2d getPMax(const GeomObj::list_Pos2d &l);
 Pos2d getPMin(const GeomObj::list_Pos2d &l);

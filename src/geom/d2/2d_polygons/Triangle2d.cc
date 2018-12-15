@@ -99,10 +99,10 @@ void Triangle2d::Plot(Plotter &plotter) const
   }
 
 //! @brief Applies to the triangle the transformation argument.
-void Triangle2d::Transforma(const Trf2d &trf2d)
+void Triangle2d::Transform(const Trf2d &trf2d)
   {
-    const Pos2d pA= trf2d.Transforma(Vertice(1));
-    const Pos2d pB= trf2d.Transforma(Vertice(2));
-    const Pos2d pC= trf2d.Transforma(Vertice(3));
+    const Pos2d pA= trf2d.Transform(Vertice(1));
+    const Pos2d pB= trf2d.Transform(Vertice(2));
+    const Pos2d pC= trf2d.Transform(Vertice(3));
     (*this)= Triangle2d(pA,pB,pC);
   }

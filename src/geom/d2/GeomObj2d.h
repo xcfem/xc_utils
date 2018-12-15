@@ -98,15 +98,15 @@ class GeomObj2d: public GeomObj
     FT_matrix I(const Pos2d &o) const;
 
     virtual void Mueve(const Vector2d &);
-    virtual void Transforma(const Trf2d &trf2d)= 0;    
+    virtual void Transform(const Trf2d &trf2d)= 0;    
   };
 
 //! @brief Return the transformed object.
 template <class T>
-T getTransformado(const T &obj,const Trf2d &trf2d)
+T getTransformed(const T &obj,const Trf2d &trf2d)
   {
     T retval(obj);
-    retval.Transforma(trf2d);
+    retval.Transform(trf2d);
     return retval;
   }
 

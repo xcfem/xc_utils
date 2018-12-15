@@ -79,7 +79,7 @@ class Triangle2d : public PolygonalSurface2d
 
     Polygon2d getPolygon(void) const;
 
-    void Transforma(const Trf2d &trf2d);
+    void Transform(const Trf2d &trf2d);
 
     friend int operator ==(const Triangle2d &a,const Triangle2d &b)
       { return ( a.cgtriang == b.cgtriang ); };

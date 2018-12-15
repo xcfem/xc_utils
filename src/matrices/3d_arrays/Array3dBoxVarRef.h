@@ -139,7 +139,7 @@ inline std::ostream &operator<<(std::ostream &os,const Array3dBoxVarRef<ARRAY_3D
   }
 
 template <class ARRAY_3D, class TRF>
-const Array3dBoxVarRef<ARRAY_3D> &transforma(const Array3dBoxVarRef<ARRAY_3D> &box,const TRF &trf)
+const Array3dBoxVarRef<ARRAY_3D> &transform(const Array3dBoxVarRef<ARRAY_3D> &box,const TRF &trf)
   {
     static Array3dBoxVarRef<ARRAY_3D> retval;
     retval= box;
@@ -149,7 +149,7 @@ const Array3dBoxVarRef<ARRAY_3D> &transforma(const Array3dBoxVarRef<ARRAY_3D> &b
     for(size_t k=1;k<=n_layers;k++) //For each layer.
       for(size_t i=1;i<=n_rows;i++) //For each row.
         for(size_t j=1;j<=n_columns;j++) //For each column.
-          retval(i,j,k)= Transforma(box(i,j,k));
+          retval(i,j,k)= Transform(box(i,j,k));
     return retval;
   }
 

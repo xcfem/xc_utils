@@ -145,7 +145,7 @@ class Line2d : public Linear2d
     virtual GEOM_FT Pxy(void) const;
     virtual GEOM_FT Iz(void) const;
 
-    void Transforma(const Trf2d &trf2d);
+    void Transform(const Trf2d &trf2d);
 
     friend bool operator==(const Line2d &r1,const Line2d &r2);
 

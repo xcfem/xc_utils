@@ -73,7 +73,7 @@ class Point2d : public GeomObj2d
     inline virtual GEOM_FT GetMin(unsigned short int i) const
       { return org(i); }
 
-    void Transforma(const Trf2d &trf2d);
+    void Transform(const Trf2d &trf2d);
 
     friend int operator ==(const Point2d &a,const Point2d &b)
       { return ( a.org == b.org ); };

@@ -119,7 +119,7 @@ class HalfPlane2d : public Surface2d
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
 
-    void Transforma(const Trf2d &trf2d);
+    void Transform(const Trf2d &trf2d);
 
     inline friend bool operator==(const HalfPlane2d &r1,const HalfPlane2d &r2)
       {

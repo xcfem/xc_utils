@@ -44,8 +44,8 @@ const Pos3d *Pos3dList::appendPoint(const Pos3d &p)
   }
 
 //! @brief Applies the transformation to the points.
-void Pos3dList::Transforma(const Trf3d &trf3d)
-  { trf3d.Transforma(lista_ptos.begin(),lista_ptos.end()); }
+void Pos3dList::Transform(const Trf3d &trf3d)
+  { trf3d.Transform(lista_ptos.begin(),lista_ptos.end()); }
 
 
 //! @brief Return a reference al objeto cuyo

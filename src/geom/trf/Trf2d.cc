@@ -112,25 +112,25 @@ FT_matrix Trf2d::Homogeneas(void) const
     retval(3,3)= Homogeneas(3,3);
     return retval;
   }
-CGPoint_2 Trf2d::Transforma(const CGPoint_2 &cgpt2) const
+CGPoint_2 Trf2d::Transform(const CGPoint_2 &cgpt2) const
   { return cgtrf.transform(cgpt2);  }
-Pos2d Trf2d::Transforma(const Pos2d &p) const
-  { return Pos2d(Transforma(p.ToCGAL())); }
-Vector2d Trf2d::Transforma(const Vector2d &v) const
+Pos2d Trf2d::Transform(const Pos2d &p) const
+  { return Pos2d(Transform(p.ToCGAL())); }
+Vector2d Trf2d::Transform(const Vector2d &v) const
   { return Vector2d(cgtrf.transform(v.ToCGAL())); }
 //! @brief Return the transformed points.
-GeomObj::list_Pos2d Trf2d::Transforma(const GeomObj::list_Pos2d &lp2d) const
+GeomObj::list_Pos2d Trf2d::Transform(const GeomObj::list_Pos2d &lp2d) const
   {
     GeomObj::list_Pos2d retval(lp2d);
-    Transforma(retval.begin(),retval.end());
+    Transform(retval.begin(),retval.end());
     return retval;
   }
 Pos2d Trf2d::operator()(const Pos2d &p) const
-  { return Transforma(p); }
+  { return Transform(p); }
 Vector2d Trf2d::operator()(const Vector2d &v) const
-  { return Transforma(v); }
+  { return Transform(v); }
 GeomObj::list_Pos2d Trf2d::operator()(const GeomObj::list_Pos2d &lp2d) const
-  { return Transforma(lp2d); }
+  { return Transform(lp2d); }
 Trf2d operator*(const Trf2d &a,const Trf2d &b)
   {
     Trf2d retval(a*b);

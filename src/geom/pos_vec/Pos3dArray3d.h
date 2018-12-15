@@ -47,8 +47,8 @@ class Pos3dArray3d: public PosArray3d<Pos3d>
     Pos3dArray3d(const Pos3dArray &l1_points,const Pos3dArray &l2_points,
                  const Pos3dArray &l3_points,const Pos3dArray &l4_points,
                  const size_t &ndiv_12,const size_t &ndiv_13);
-    void Transforma(const Trf3d &trf);
-    Pos3dArray3d Transforma(const Trf3d &trf) const;
+    void Transform(const Trf3d &trf);
+    Pos3dArray3d Transform(const Trf3d &trf) const;
   };
 
 class BND3d;

@@ -83,7 +83,7 @@ class_<Pos2dArray, bases<m_pos2d> >("MatrixPos2d")
   .def("getAreaQuad",&Pos2dArray::GetAreaQuad)
   .def("getQuadCentroid",&Pos2dArray::getQuadCentroid)
   .def("In",&Pos2dArray::In)
-  .def("Transforma",&Pos2dArray::Transforma)
+  .def("Transform",&Pos2dArray::Transform)
   .def("Lagrange",&Pos2dArray::Lagrange)
   .def(self_ns::str(self_ns::self))
   ;

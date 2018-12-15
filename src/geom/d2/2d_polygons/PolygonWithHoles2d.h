@@ -58,8 +58,8 @@ class PolygonWithHoles2d: public Surface2d
     GEOM_FT Iy(void) const;
     GEOM_FT Pxy(void) const;
 
-    PolygonWithHoles2d getTransformado(const Trf2d &);
-    void Transforma(const Trf2d &);
+    PolygonWithHoles2d getTransformed(const Trf2d &);
+    void Transform(const Trf2d &);
 
     void add_hole(const Polygon2d &);
     void contour(const Polygon2d &);

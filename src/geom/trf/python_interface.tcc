@@ -23,8 +23,8 @@
 class_<Trf, boost::noncopyable >("Trf", no_init)
   ;
 
-Pos2d (Trf2d::*TrfPos2d)(const Pos2d &) const= &Trf2d::Transforma;
-Vector2d (Trf2d::*TrfVector2d)(const Vector2d &) const= &Trf2d::Transforma;
+Pos2d (Trf2d::*TrfPos2d)(const Pos2d &) const= &Trf2d::Transform;
+Vector2d (Trf2d::*TrfVector2d)(const Vector2d &) const= &Trf2d::Transform;
 class_<Trf2d, bases<Trf>, boost::noncopyable >("Trf2d", no_init)
 //.def("getInverse", &Trf2d::Inversa)
   .def("getTrfVector2d", TrfVector2d)
@@ -39,8 +39,8 @@ class_<Rotation2d, bases<Trf2d> >("Rotation2d")
   ;
 //class_<Translation2d, bases<Trf2d> >("Translation2d");
 
-Pos3d (Trf3d::*TrfPos3d)(const Pos3d &) const= &Trf3d::Transforma;
-Vector3d (Trf3d::*TrfVector3d)(const Vector3d &) const= &Trf3d::Transforma;
+Pos3d (Trf3d::*TrfPos3d)(const Pos3d &) const= &Trf3d::Transform;
+Vector3d (Trf3d::*TrfVector3d)(const Vector3d &) const= &Trf3d::Transform;
 class_<Trf3d, bases<Trf>, boost::noncopyable >("Trf3d", no_init)
   .def("getTrfVector3d", TrfVector3d)
   .def("getTrfPos3d", TrfPos3d)

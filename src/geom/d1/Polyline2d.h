@@ -54,7 +54,7 @@ class Polyline2d : public Linear2d, public GeomObj::list_Pos2d
     const const_iterator vertices_end(void) const
       { return GeomObj::list_Pos2d::end(); }
 
-    void Transforma(const Trf2d &trf2d);
+    void Transform(const Trf2d &trf2d);
     
 /*     inline virtual void GiraX(double ang) */
 /*       { Ref2d::GiraX(ang); TrfPoints(); } */

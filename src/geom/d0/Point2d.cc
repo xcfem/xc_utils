@@ -34,9 +34,9 @@ void Point2d::Plot(Plotter &plotter) const
 
 //! @brief Aplica al objeto la transformación que se
 //! pasa como parámetro.
-void Point2d::Transforma(const Trf2d &trf2d)
+void Point2d::Transform(const Trf2d &trf2d)
   {
-    const Pos2d pA= trf2d.Transforma(org);
+    const Pos2d pA= trf2d.Transform(org);
     (*this)= Point2d(pA);
   }
 

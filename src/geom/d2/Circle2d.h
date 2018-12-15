@@ -87,7 +87,7 @@ class Circle2d : public Surface2d
     Pos2dArray getPointsOnPerimeter(const size_t &n,const double &theta_inic= 0.0) const;
     Polygon2d getInscribedPolygon(const size_t &n,const double &theta_inic= 0.0) const;
 
-    void Transforma(const Trf2d &trf2d);
+    void Transform(const Trf2d &trf2d);
 
     friend int operator ==(const Circle2d &a,const Circle2d &b)
       { return ( a.cgcirc == b.cgcirc ); };

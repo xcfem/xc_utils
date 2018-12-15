@@ -138,10 +138,10 @@ GeomObj2d::list_Pos2d Ray2d::getIntersection(const Ray2d &r2) const
 
 
 //! @brief Applies to the ray the transformation argument.
-void Ray2d::Transforma(const Trf2d &trf2d)
+void Ray2d::Transform(const Trf2d &trf2d)
   {
-    const Pos2d p1= trf2d.Transforma(Origen());
-    const Pos2d p2= trf2d.Transforma(Point(100));
+    const Pos2d p1= trf2d.Transform(Origen());
+    const Pos2d p2= trf2d.Transform(Point(100));
     (*this)= Ray2d(p1,p2);
   }
 

@@ -178,5 +178,5 @@ GEOM_FT GeomObj2d::IO(const Pos2d &o) const
 void GeomObj2d::Mueve(const Vector2d &v)
   {
     Translation2d m(v);
-    Transforma(m);
+    Transform(m);
   }

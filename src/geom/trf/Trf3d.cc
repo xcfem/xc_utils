@@ -133,31 +133,31 @@ FT_matrix Trf3d::Homogeneas(void) const
   }
 
 //! @brief Return the transformed of the point.
-Pos3d Trf3d::Transforma(const Pos3d &p) const
+Pos3d Trf3d::Transform(const Pos3d &p) const
   { return Pos3d(cgtrf.transform(p.ToCGAL())); }
 
 //! @brief Return el transformado del vector being passed as parameter.
-Vector3d Trf3d::Transforma(const Vector3d &v) const
+Vector3d Trf3d::Transform(const Vector3d &v) const
   { return Vector3d(cgtrf.transform(v.ToCGAL())); }
 
 //! @brief Transform the points of the matrix.
-void Trf3d::Transforma(Pos3dArray &m) const
+void Trf3d::Transform(Pos3dArray &m) const
   {
     for(Pos3dArray::iterator i= m.begin();i!=m.end();i++)
-      (*i)= Transforma(*i);
+      (*i)= Transform(*i);
   }
 
 //! @brief Transform the points of the matrix.
-const Pos3dArray &Trf3d::Transforma(const Pos3dArray &m) const
+const Pos3dArray &Trf3d::Transform(const Pos3dArray &m) const
   {
     static Pos3dArray retval;
     retval= m;
-    Transforma(retval);
+    Transform(retval);
     return retval;
   }
 
 //! @brief Transform the points of the argument.
-void Trf3d::Transforma(Pos3dArray3d &m) const
+void Trf3d::Transform(Pos3dArray3d &m) const
   {
     const size_t n_layers= m.getNumberOfLayers();
     const size_t n_rows= m.getNumberOfRows();
@@ -165,27 +165,27 @@ void Trf3d::Transforma(Pos3dArray3d &m) const
     for(size_t k=1;k<=n_layers;k++) //For each layer.
       for(size_t i=1;i<=n_rows;i++) //For each row.
         for(size_t j=1;j<=n_columns;j++) //For each column.
-          m(i,j,k)= Transforma(m(i,j,k));
+          m(i,j,k)= Transform(m(i,j,k));
   }
 
 //! @brief Transform the points of the argument.
-const Pos3dArray3d &Trf3d::Transforma(const Pos3dArray3d &m) const
+const Pos3dArray3d &Trf3d::Transform(const Pos3dArray3d &m) const
   {
     static Pos3dArray3d retval;
     retval= m;
-    Transforma(retval);
+    Transform(retval);
     return retval;
   }
 
 //! @brief Transform the point.
 Pos3d Trf3d::operator()(const Pos3d &p) const
-  { return Transforma(p); }
+  { return Transform(p); }
 //! @brief Transform the vector being passed as parameter.
 Vector3d Trf3d::operator()(const Vector3d &v) const
-  { return Transforma(v); }
+  { return Transform(v); }
 //! @brief Transform the positions in the array argument.
 Pos3dArray Trf3d::operator()(const Pos3dArray &m) const
-  { return Transforma(m); }
+  { return Transform(m); }
 
 Trf3d operator*(const Trf3d &a,const Trf3d &b)
   {

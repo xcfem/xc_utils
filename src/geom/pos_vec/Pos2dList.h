@@ -87,7 +87,7 @@ class Pos2dList: public GeomObj2d
     Pos2d getCenterOfMass(void) const
       { return lista_ptos.getCenterOfMass(); }
 
-    void Transforma(const Trf2d &trf2d);
+    void Transform(const Trf2d &trf2d);
     Pos2dList Offset(const GEOM_FT &d) const;
 
     std::deque<GEOM_FT> &GetSeparaciones(void) const;

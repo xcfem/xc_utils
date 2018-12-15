@@ -92,7 +92,7 @@ class Pos3dList: public GeomObj3d
     Pos3d getCenterOfMass(void) const
       { return lista_ptos.getCenterOfMass(); }
 
-    void Transforma(const Trf3d &trf3d);
+    void Transform(const Trf3d &trf3d);
 
     std::deque<GEOM_FT> &GetSeparaciones(void) const;
     double GetSeparacionMedia(void) const;

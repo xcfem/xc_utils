@@ -54,7 +54,7 @@ class Pos3dArray: public PosArray<Pos3d>
     Triangle3d getTriangle1(const size_t &i,const size_t &j) const;
     Triangle3d getTriangle2(const size_t &i,const size_t &j) const;
     GEOM_FT Lagrange(const GEOM_FT &tol);
-    void Transforma(const Trf3d &trf);
+    void Transform(const Trf3d &trf);
   };
 
 GEOM_FT dist2(const Pos3dArray &ptos,const Pos3d &pt);

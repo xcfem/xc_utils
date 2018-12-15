@@ -42,9 +42,9 @@ void mueve(GeomObj::list_Pos2d &l,const Vector2d &v)
       (*j)= (*j) + v;
   }
 
-//! @brief Aplica a los vértices la transformación que se pasa como parámetro.
-void transforma(GeomObj::list_Pos2d &l,const Trf2d &t)
-  { t.Transforma(l.begin(),l.end()); }
+//! @brief Applies the transformation to the vertices.
+void transform(GeomObj::list_Pos2d &l,const Trf2d &t)
+  { t.Transform(l.begin(),l.end()); }
 
 //! @brief Return the upper right corner of the bounding rectangle. 
 Pos2d getPMax(const GeomObj::list_Pos2d &l)

@@ -131,5 +131,5 @@ HalfPlane2d HalfPlane2d::getNormalizado(void) const
 
 //! @brief Aplica al objeto la transformación que se
 //! pasa como parámetro.
-void HalfPlane2d::Transforma(const Trf2d &trf2d)
-  { lim.Transforma(trf2d); }
+void HalfPlane2d::Transform(const Trf2d &trf2d)
+  { lim.Transform(trf2d); }

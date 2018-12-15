@@ -59,7 +59,7 @@ class GeomGroup2d : public GeomGroup<GeomObj2d>
     void Print(std::ostream &stream) const;
     void Plot(Plotter &) const;
 
-    void Transforma(const Trf2d &trf2d);
+    void Transform(const Trf2d &trf2d);
 
     
   };

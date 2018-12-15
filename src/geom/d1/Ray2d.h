@@ -127,7 +127,7 @@ class Ray2d : public Linear2d
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
 
-    void Transforma(const Trf2d &trf2d);
+    void Transform(const Trf2d &trf2d);
 
     inline friend bool operator==(const Ray2d &r1,const Ray2d &r2)
       { return (r1.cgsr==r2.cgsr); }

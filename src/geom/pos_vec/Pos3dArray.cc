@@ -116,8 +116,8 @@ GEOM_FT Pos3dArray::Lagrange(const GEOM_FT &tol)
   }
 
 //! @brief Applies the transformation argument to the matrix.
-void Pos3dArray::Transforma(const Trf3d &trf)
-  { trf.Transforma(*this); }
+void Pos3dArray::Transform(const Trf3d &trf)
+  { trf.Transform(*this); }
 
 //! @brief Return the revolution surface obtained by applying to the matrix
 //! the revolution transformation argument.
