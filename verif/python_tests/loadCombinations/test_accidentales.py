@@ -21,10 +21,10 @@ import os
 os.system("rm -f "+dbName)
 
 import sqlite3 as sqlite
-from sqliteUtils import macros_sqlite
+from sqliteUtils import sqlite_macros
 
 
-macros_sqlite.SQLTcreaDBase(dbName)
+sqlite_macros.SQLTcreaDBase(dbName)
 nmbTablaComb= "comb_elu_accidentales"
 
 lcg.genera()

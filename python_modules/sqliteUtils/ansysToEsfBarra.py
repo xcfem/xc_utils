@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from sqliteUtils import macros_sqlite
+from sqliteUtils import sqlite_macros
 
 def ansysToEsfBarra(nmbArch,nmbDBase,nmbTabla):
   '''Importa el listado de esfuerzos en barras de ansys que se pasa como parámetro
@@ -7,7 +7,7 @@ def ansysToEsfBarra(nmbArch,nmbDBase,nmbTabla):
    nmbDBase: Nombre de la base de datos donde se guardará la tabla.
    nmbTabla: Nombre de la tabla que contendrá los esfuerzos.'''
 
-  macros_sqlite.SQLTcreaTabla(nmbDBase,nmbTabla,"(ACCION string,ELEM integer,AXIL double,Q_1 double,Q_2 double,M_1 double,M_2 double,TORSOR double)")
+  sqlite_macros.SQLTcreaTabla(nmbDBase,nmbTabla,"(ACCION string,ELEM integer,AXIL double,Q_1 double,Q_2 double,M_1 double,M_2 double,TORSOR double)")
 
   fieldwidths = (0,8,9,20,21,32,33,44,45,56,57,68,69,80)
   fmtstring = ''.join('%ds' % f for f in fieldwidths)
@@ -35,7 +35,7 @@ def ansysExtractElem(nmbDBase,nmbTablaEsf,nmbTablaElem):
    nmbDBase: Nombre de la base de datos donde se guardará la tabla.
    nmbTablaEsf: Nombre de la tabla que contiene los esfuerzos.
    nmbTableElem: Nombre de la tabla que contendrá los índices de elemento.'''
-  macros_sqlite.SQLTcreaTabla(nmbDBase,nmbTablaElem,"(ELEM integer)")
+  sqlite_macros.SQLTcreaTabla(nmbDBase,nmbTablaElem,"(ELEM integer)")
 
   con= sqlite.connect(nmbDBase)
   cur= con.cursor()

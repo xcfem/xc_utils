@@ -207,6 +207,10 @@
 /usr/local/lib/python2.7/dist-packages/sqliteUtils/__init__.pyc
 /usr/local/lib/python2.7/dist-packages/sqliteUtils/macros_sqlite.py
 /usr/local/lib/python2.7/dist-packages/sqliteUtils/macros_sqlite.pyc
+/usr/local/lib/python2.7/dist-packages/sqliteUtils/sqlite_macros.py
+/usr/local/lib/python2.7/dist-packages/sqliteUtils/sqlite_macros.pyc
+/usr/local/lib/python2.7/dist-packages/sqliteUtils/squlite_macros.py
+/usr/local/lib/python2.7/dist-packages/sqliteUtils/squlite_macros.pyc
 /usr/local/lib/python2.7/dist-packages/vtkUtils/displayVtk.py
 /usr/local/lib/python2.7/dist-packages/vtkUtils/displayVtk.pyc
 /usr/local/lib/python2.7/dist-packages/vtkUtils/__init__.py
