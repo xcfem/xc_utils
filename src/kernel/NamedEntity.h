@@ -47,10 +47,10 @@ class NamedEntity: public CommandEntity
     const std::string &getName(void) const
       { return name; }
     //! @brief Set the  object name.
-    void setName(const std::string &s)
+    virtual void setName(const std::string &s)
       { name= s; }
     //! @brief Return a reference to the object name.
-    std::string &Name(void)
+    virtual std::string &Name(void)
       { return name; }
     //! @brief Compara el nombre del elemento con un nombre dado.
     int operator==(const NamedEntity &other) const
