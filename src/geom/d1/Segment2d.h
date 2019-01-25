@@ -56,14 +56,14 @@ class Segment2d : public Linear2d
     virtual GeomObj *clon(void) const;
     void TwoPoints(const Pos2d &p1,const Pos2d &p2);
     virtual GEOM_FT GetMax(unsigned short int i) const
-      { return std::max(Origen()(i),Destino()(i)); }
+      { return std::max(getFromPoint()(i),getToPoint()(i)); }
     virtual GEOM_FT GetMin(unsigned short int i) const
-      { return std::min(Origen()(i),Destino()(i)); }
+      { return std::min(getFromPoint()(i),getToPoint()(i)); }
     Line2d getSupportLine(void) const
       { return Line2d(cgseg.supporting_line()); }
-    Pos2d Origen(void) const
+    Pos2d getFromPoint(void) const
       { return Pos2d(cgseg.source()); }
-    Pos2d Destino(void) const
+    Pos2d getToPoint(void) const
       { return Pos2d(cgseg.target()); }
     inline GEOM_FT getSlope(void) const
       { return getSupportLine().getSlope(); }

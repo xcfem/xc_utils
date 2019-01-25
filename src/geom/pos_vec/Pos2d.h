@@ -114,7 +114,7 @@ inline Pos2d pos_max(const Pos2d &a,const Pos2d &b)
 inline Pos2d pos_min(const Pos2d &a,const Pos2d &b)
   { return Pos2d(std::min(a.x(),b.x()),std::min(a.y(),b.y())); }
 
-const Pos2d Origen2d;
+const Pos2d Origin2d;
 
 #endif
 

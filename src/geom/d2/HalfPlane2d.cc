@@ -104,8 +104,8 @@ GeomGroup2d HalfPlane2d::getIntersection(const Segment2d &sg) const
     if(!intersects(sg)) return retval;
     GeomObj::list_Pos2d lista= intersection(lim,sg);
     const Pos2d pint= *lista.begin();
-    const Pos2d p1= sg.Destino();
-    const Pos2d p2= sg.Origen();
+    const Pos2d p1= sg.getToPoint();
+    const Pos2d p2= sg.getFromPoint();
     if(In(p1))
       retval.push_back(Segment2d(pint,p1));
     else

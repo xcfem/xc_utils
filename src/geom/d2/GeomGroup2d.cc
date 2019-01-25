@@ -93,7 +93,7 @@ Pos2d GeomGroup2d::getCenterOfMass(void) const
         denom+= area_i;
       }
     num= num*(1/denom);
-    return Origen2d+num;
+    return Origin2d+num;
   }
 
 //! @brief Applies the transformation to the points.

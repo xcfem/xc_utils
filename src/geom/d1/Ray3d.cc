@@ -52,7 +52,7 @@ GEOM_FT Ray3d::dist2(const Pos3d &p) const
     const Pos3d proj= r.Projection(p);
     GEOM_FT retval= p.dist2(proj); //OK if projection inside half-line.
     if(!In(proj)) //Projection outside half-line.
-      retval= p.dist2(Origen());
+      retval= p.dist2(getFromPoint());
     return retval;
   }
 

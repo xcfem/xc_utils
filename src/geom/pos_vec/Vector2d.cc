@@ -212,9 +212,9 @@ std::ostream &operator<<(std::ostream &stream,const Vector2d &n)
   }
 bool colineales(const Vector2d &v1,const Vector2d &v2)
   {
-    Pos2d p1= Origen2d + v1;
-    Pos2d p2= Origen2d + v2;
-    return colineales(Origen2d,p1,p2);
+    Pos2d p1= Origin2d + v1;
+    Pos2d p2= Origin2d + v2;
+    return colineales(Origin2d,p1,p2);
   }
 bool paralelos(const Vector2d &v1,const Vector2d &v2)
   { return paralelas(v1.getDirection(),v2.getDirection()); } 

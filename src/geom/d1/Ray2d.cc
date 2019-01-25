@@ -57,7 +57,7 @@ GEOM_FT Ray2d::dist2(const Pos2d &p) const
     Pos2d proj= r.Projection(p);
     GEOM_FT retval= p.dist2(proj); //Ok if projection inside half-line.
     if(!In(proj)) //Projection outside half-line.
-      retval= p.dist2(Origen());
+      retval= p.dist2(getFromPoint());
     return retval;
   }
 
@@ -140,7 +140,7 @@ GeomObj2d::list_Pos2d Ray2d::getIntersection(const Ray2d &r2) const
 //! @brief Applies to the ray the transformation argument.
 void Ray2d::Transform(const Trf2d &trf2d)
   {
-    const Pos2d p1= trf2d.Transform(Origen());
+    const Pos2d p1= trf2d.Transform(getFromPoint());
     const Pos2d p2= trf2d.Transform(Point(100));
     (*this)= Ray2d(p1,p2);
   }

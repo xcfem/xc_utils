@@ -341,8 +341,8 @@ std::list<Segment2d> empalma(const std::list<Segment2d> &lista)
         for(;i!=lista.end();i++)
           {
             const Segment2d &s2= *i;
-            if(dist2(s1.Destino(),s2.Origen())<sqrt_mchne_eps_dbl)
-              s1= Segment2d(s1.Origen(),s2.Destino());
+            if(dist2(s1.getToPoint(),s2.getFromPoint())<sqrt_mchne_eps_dbl)
+              s1= Segment2d(s1.getFromPoint(),s2.getToPoint());
             else
               {
                 retval.push_back(s1);
@@ -452,7 +452,7 @@ list<Segment2d> intersection(const PolygonalSurface2d &pg,const Ray2d &sr)
     Polyline2d pl= pg.getPolyline();
     
     GeomObj::list_Pos2d ptos= intersection(sr,pl);
-    const Pos2d org= sr.Origen();
+    const Pos2d org= sr.getFromPoint();
     if(pg.In(org))
       ptos.push_front(org);
 
@@ -484,10 +484,10 @@ list<Segment2d> intersection(const PolygonalSurface2d &pg,const Segment2d &sg)
     Polyline2d pl= pg.getPolyline();
     
     GeomObj::list_Pos2d ptos= intersection(sg,pl);
-    const Pos2d org= sg.Origen();
+    const Pos2d org= sg.getFromPoint();
     if(pg.In(org))
       ptos.push_front(org);
-    const Pos2d dest= sg.Destino();
+    const Pos2d dest= sg.getToPoint();
     if(pg.In(org))
       ptos.push_back(dest);
 

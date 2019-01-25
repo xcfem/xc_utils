@@ -147,9 +147,9 @@ bool Polygon2d::Overlap(const Ray2d &sr) const
 bool Polygon2d::Overlap(const Segment2d &sg) const
   {
     bool retval= false;
-    if(In(sg.Origen()))
+    if(In(sg.getFromPoint()))
       retval= true;
-    else if(In(sg.Destino()))
+    else if(In(sg.getToPoint()))
       retval= true;
     else
       {

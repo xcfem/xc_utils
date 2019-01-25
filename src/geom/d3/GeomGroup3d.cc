@@ -93,5 +93,5 @@ Pos3d GeomGroup3d::getCenterOfMass(void) const
         denom+= area_i;
       }
     num= num*(1/denom);
-    return Origen3d+num;
+    return Origin3d+num;
   }

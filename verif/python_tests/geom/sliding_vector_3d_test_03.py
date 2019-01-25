@@ -4,9 +4,9 @@ import xc_base
 import geom
 import math
 
-ptoOrigen=geom.Pos3d(0.5,0,0)
+fromPoint=geom.Pos3d(0.5,0,0)
 ptoDest=geom.Pos3d(0.5,0,100)
-r1=geom.Line3d(ptoOrigen,ptoDest)
+r1=geom.Line3d(fromPoint,ptoDest)
 vdir=r1.getVDir()
 tp=r1.tipo()
 

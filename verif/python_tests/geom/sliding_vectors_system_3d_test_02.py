@@ -3,9 +3,9 @@ import xc_base
 import geom
 pto=geom.Pos3d(-1.,1.,0.)
 
-ptoOrigen=geom.Pos3d(-1.,1.,0.)
+fromPoint=geom.Pos3d(-1.,1.,0.)
 ptoDest=geom.Pos3d(1.,1.,0.)
-r1=geom.Line3d(ptoOrigen,ptoDest)
+r1=geom.Line3d(fromPoint,ptoDest)
 
 svd1=geom.SlidingVectorsSystem3d()
 ptoAplic=geom.Pos3d(1,1,0)

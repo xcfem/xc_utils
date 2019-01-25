@@ -97,7 +97,7 @@ Pos2d Pos2d::operator+(const Vector2d &v) const
 
 //! @brief Return the position vector of the point.
 Vector2d Pos2d::VectorPos(void) const
-  { return (*this)-Origen2d; }
+  { return (*this)-Origin2d; }
 
 void Pos2d::SetX(const GEOM_FT &vx)
   { cgpt= CGPoint_2(vx,y()); }

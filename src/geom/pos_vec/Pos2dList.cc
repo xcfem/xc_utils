@@ -69,7 +69,7 @@ Pos2dList Pos2dList::Offset(const GEOM_FT &d) const
         point_const_iterator j= i;j++;
         const Segment2d s1= Segment2d(*i,*j).Offset(d);
         Line2d r1= s1.getSupportLine();
-        retval.appendPoint(s1.Origen());
+        retval.appendPoint(s1.getFromPoint());
         Segment2d s2= s1;
         i++;j++;//Next segment.
         for(;j != points_end();i++,j++)
@@ -86,7 +86,7 @@ Pos2dList Pos2dList::Offset(const GEOM_FT &d) const
 			<< " not found." << std::endl;
             r1= r2;
           }
-        retval.appendPoint(s2.Destino());
+        retval.appendPoint(s2.getToPoint());
       }
     return retval;
   }

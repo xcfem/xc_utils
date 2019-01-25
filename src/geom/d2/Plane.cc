@@ -92,7 +92,7 @@ Plane::polygon_classification Plane::clfpnt2clfpol(const CGAL::Oriented_side os)
 Plane::Plane(const Line3d &r,const Pos3d &p)
   : Surface3d(), cgp(r.ToCGAL(),p.ToCGAL()) {}
 Plane::Plane(const Segment3d &s,const Vector3d &v)
-  : Surface3d(), cgp(s.getSupportLine().ToCGAL(),(s.Origen()+v).ToCGAL()) {}
+  : Surface3d(), cgp(s.getSupportLine().ToCGAL(),(s.getFromPoint()+v).ToCGAL()) {}
 Plane::Plane(const Pos3d &p,const Vector3d &v1,const Vector3d &v2)
   : Surface3d(), cgp(p.ToCGAL(),(p+v1).ToCGAL(),(p+v2).ToCGAL()) {}
 Plane::Plane(const GeomObj3d::list_Pos3d &lp): Surface3d(), cgp()

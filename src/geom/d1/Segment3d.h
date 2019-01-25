@@ -52,8 +52,8 @@ class Segment3d : public Linear3d
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;
     Line3d getSupportLine(void) const;
-    Pos3d Origen(void) const;
-    Pos3d Destino(void) const;
+    Pos3d getFromPoint(void) const;
+    Pos3d getToPoint(void) const;
     GEOM_FT getSlope(void) const;
     const Pos3d Point(const int &i) const;
     Pos3d PtoParametricas(const GEOM_FT &lambda) const;

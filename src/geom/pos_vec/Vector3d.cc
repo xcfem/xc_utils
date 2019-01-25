@@ -213,10 +213,10 @@ bool paralelos(const Vector3d &v1,const Vector3d &v2)
   { return paralelas(v1.getDirection(),v2.getDirection()); } 
 bool coplanarios(const Vector3d &v1,const Vector3d &v2,const Vector3d &v3)
   {
-    const Pos3d p1= Origen3d + v1;
-    const Pos3d p2= Origen3d + v2;
-    const Pos3d p3= Origen3d + v3;
-    return coplanarios(Origen3d,p1,p2,p3);
+    const Pos3d p1= Origin3d + v1;
+    const Pos3d p2= Origin3d + v2;
+    const Pos3d p3= Origin3d + v3;
+    return coplanarios(Origin3d,p1,p2,p3);
   }
 
 GEOM_FT Abs(const Vector3d &v)

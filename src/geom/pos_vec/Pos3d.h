@@ -156,6 +156,6 @@ inline Pos3d pos_max(const Pos3d &a,const Pos3d &b)
 inline Pos3d pos_min(const Pos3d &a,const Pos3d &b)
   { return Pos3d(std::min(a.x(),b.x()),std::min(a.y(),b.y()),std::min(a.z(),b.z())); }
 
-const Pos3d Origen3d;
+const Pos3d Origin3d;
 
 #endif

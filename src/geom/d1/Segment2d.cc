@@ -64,7 +64,7 @@ Vector2d Segment2d::Normal(void) const
 
 //! @brief Return el vector que une el origen con el extremo of the segment.
 Vector2d Segment2d::GetVector(void) const
-  { return Destino()-Origen(); }
+  { return getToPoint()-getFromPoint(); }
 
 //! @brief Return the angle of the segment con el vector (0->2PI).
 GEOM_FT Segment2d::getAngle(const Vector2d &v) const
@@ -99,13 +99,13 @@ GEOM_FT angle(const Vector2d &v, const Segment2d &r)
 
 //! @brief Return object length.
 GEOM_FT Segment2d::getLength(void) const
-  { return Origen().dist(Destino()); }
+  { return getFromPoint().dist(getToPoint()); }
 
 //! @brief Return the position of the center of mass of the segment.
 Pos2d Segment2d::getCenterOfMass(void) const
   {
-    Pos2d retval= Origen();
-    const Vector2d v= (Destino()-retval)/2;
+    Pos2d retval= getFromPoint();
+    const Vector2d v= (getToPoint()-retval)/2;
     retval= retval+v;
     return retval;
   }
@@ -122,8 +122,8 @@ Line2d Segment2d::Paralela(const Pos2d &p) const
 //! the vector argument.
 Segment2d Segment2d::Offset(const Vector2d &v) const
   {
-    const Pos2d p= Origen()+v;
-    const Pos2d q= Destino()+v;
+    const Pos2d p= getFromPoint()+v;
+    const Pos2d q= getToPoint()+v;
     return Segment2d(p,q);
   }
 
@@ -152,8 +152,8 @@ bool Segment2d::In(const Pos2d &p, const double &tol) const
     bool retval= cgseg.has_on(p.ToCGAL());
     if(!retval)
       {
-        const Pos2d &O= Origen();
-        const Pos2d &D= Origen();
+        const Pos2d &O= getFromPoint();
+        const Pos2d &D= getFromPoint();
         const double L= getLength();
         if(L>=tol)
           {
@@ -178,8 +178,8 @@ GEOM_FT Segment2d::dist2(const Pos2d &p) const
     const Line2d r= getSupportLine();
     const Pos2d proj= r.Projection(p);
     GEOM_FT retval= p.dist2(proj); //Ok if projected point inside segment.
-    const Pos2d A= Origen();
-    const Pos2d B= Destino();
+    const Pos2d A= getFromPoint();
+    const Pos2d B= getToPoint();
     const GEOM_FT denom= (B.x()-A.x())*(B.x()-A.x())+(B.y()-A.y())*(B.y()-A.y());
     if(denom!=0)
       {
@@ -199,7 +199,7 @@ GEOM_FT Segment2d::dist(const Pos2d &p) const
 
 //! @brief Return a point of the segment at a distance lambda from its origin.
 Pos2d Segment2d::PtoParametricas(const GEOM_FT &lambda) const
-  { return Origen()+lambda*VDir().Normalizado(); }
+  { return getFromPoint()+lambda*VDir().Normalizado(); }
 
 //! @brief Return the coordenada paramétrica que corresponde
 //! a la coordenada natural se pasa como parámetro.
@@ -249,13 +249,13 @@ GeomObj2d::list_Pos2d Segment2d::getIntersection(const Line2d &r) const
           retval.push_back(getCenterOfMass()); //Return el centro de ESTE.
         else
           {
-            const GEOM_FT d1= r.dist2(Origen());
-            const GEOM_FT d2= r.dist2(Destino());
+            const GEOM_FT d1= r.dist2(getFromPoint());
+            const GEOM_FT d2= r.dist2(getToPoint());
             const GEOM_FT tol= getLength()/1e4;
             if(d1<tol)
-              retval.push_back(Origen());
+              retval.push_back(getFromPoint());
             else if(d2<tol)
-              retval.push_back(Destino());
+              retval.push_back(getToPoint());
             else
               cerr << "Segment2d::getIntersection(Line2d): unknown error." << endl
                    << "sg: " << *this << endl
@@ -300,8 +300,8 @@ GeomObj2d::list_Pos2d Segment2d::getIntersection(const Segment2d &r2) const
         cerr << getClassName() << "::" << __FUNCTION__
 	     << "; segments are de same, all its points belong to the"
 	     << " intersection." << endl;
-        retval.push_back(Origen());
-        retval.push_back(Destino());
+        retval.push_back(getFromPoint());
+        retval.push_back(getToPoint());
         return retval;
       }
     if(intersects(r2))
@@ -328,22 +328,22 @@ GEOM_FT dist(const Pos2d &p,const Segment2d &r)
 //! @brief Return the points that results from the segment division.
 //! @param num_partes: number of segments.
 VectorPos2d Segment2d::Divide(int num_partes) const
-  { return VectorPos2d(Origen(),Destino(),num_partes); }
+  { return VectorPos2d(getFromPoint(),getToPoint(),num_partes); }
 
 //! @brief Applies to the segment the transformation argument.
 void Segment2d::Transform(const Trf2d &trf2d)
   {
-    const Pos2d p1= trf2d.Transform(Origen());
-    const Pos2d p2= trf2d.Transform(Destino());
+    const Pos2d p1= trf2d.Transform(getFromPoint());
+    const Pos2d p2= trf2d.Transform(getToPoint());
     (*this)= Segment2d(p1,p2);
   }
 
 void Segment2d::Print(std::ostream &os) const
-  { os << Origen() << " " << Destino(); }
+  { os << getFromPoint() << " " << getToPoint(); }
 void Segment2d::Plot(Plotter &plotter) const
   {
-    const Pos2d p1= Origen();
-    const Pos2d p2= Destino();
+    const Pos2d p1= getFromPoint();
+    const Pos2d p2= getToPoint();
     plotter.fline(p1.x(),p1.y(),p2.x(),p2.y());
   }
 

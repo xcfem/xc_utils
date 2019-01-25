@@ -45,7 +45,7 @@ class Ref : public ProtoGeom
     typedef typename SC::PLocal PLocal; //!< Dimension of the local point.
     
   protected:
-    PGlobal org; //!< Origen of the sistema de coordenadas.
+    PGlobal org; //!< Origin of the coordinate system.
     SC trf;  //!< local --> global coordinate system axis transformation.
 
   public:

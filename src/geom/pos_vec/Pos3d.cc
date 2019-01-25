@@ -72,7 +72,7 @@ Pos3d Pos3d::operator+(const Vector3d &v) const
 
 //! @brief Return the position vector of the point.
 Vector3d Pos3d::VectorPos(void) const
-  { return (*this)-Origen3d; }
+  { return (*this)-Origin3d; }
 
 GEOM_FT Pos3d::at0(const size_t &i) const
   { return cgpt.cartesian(i); }

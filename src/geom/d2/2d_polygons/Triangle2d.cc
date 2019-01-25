@@ -57,7 +57,7 @@ Pos2d Triangle2d::getCenterOfMass(void) const
     Vector2d v= Vertice(1).VectorPos();
     v= v+Vertice(2).VectorPos();
     v= v+Vertice(3).VectorPos();
-    return Origen2d+v/3.0;
+    return Origin2d+v/3.0;
   }
 
 GEOM_FT Triangle2d::GetMax(unsigned short int i) const

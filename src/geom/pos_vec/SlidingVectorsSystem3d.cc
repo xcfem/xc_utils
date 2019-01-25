@@ -46,7 +46,7 @@ Line3d sol_eq_prod_vect(const Vector3d &a,const Vector3d &b)
     const GEOM_FT sqr_abs_a= Abs2(a);
     if(sqr_abs_a<=0)
       std::cerr << "La ecuación del producto vectorial no tiene solución: el vector a es nulo" << std::endl;
-    const Pos3d org= Origen3d + ((a ^ b)*(1/sqr_abs_a));
+    const Pos3d org= Origin3d + ((a ^ b)*(1/sqr_abs_a));
     Pos3d dest= org+1000*a;
     return Line3d(org,dest);
   }

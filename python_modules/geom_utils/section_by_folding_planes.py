@@ -30,8 +30,8 @@ class XYFoldingPlanes(object):
     return retval
   def getIntersectionWith3DSegment(self,segment3d):
     retval= []
-    p0= segment3d.getOrigen()
-    p1= segment3d.getDestino()
+    p0= segment3d.getFromPoint()
+    p1= segment3d.getToPoint()
     P0proj= geom.Pos2d(p0.x,p0.y)
     P1proj= geom.Pos2d(p1.x,p1.y)
     segment2d= geom.Segment2d(P0proj,P1proj)

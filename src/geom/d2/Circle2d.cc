@@ -53,7 +53,7 @@ Circle2d Circle2dRTT(const GEOM_FT &radius,const Line2d &p,const Line2d &l,const
       {
         const Pos2d &o= *points_int.begin();
         const Line2d bisect= bisectriz(p,l);
-        Ref2d2d ref(o,bisect.GetDir()); //Origen on intersection, x axis aligned with the bisecting line.
+        Ref2d2d ref(o,bisect.GetDir()); //Origin on intersection, x axis aligned with the bisecting line.
         const double theta= angle(bisect,p); //Angle between the bisecting line and the p line.
         const GEOM_FT sintheta= double_to_FT(sin(theta));
         const GEOM_FT costheta= double_to_FT(cos(theta));

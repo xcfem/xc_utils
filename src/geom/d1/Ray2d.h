@@ -63,7 +63,7 @@ class Ray2d : public Linear2d
       { return NAN; }
     Line2d getSupportLine(void) const
       { return Line2d(cgsr.supporting_line()); }
-    Pos2d Origen(void) const
+    Pos2d getFromPoint(void) const
       { return Pos2d(cgsr.source()); }
     inline GEOM_FT getSlope(void) const
       { return getSupportLine().getSlope(); }

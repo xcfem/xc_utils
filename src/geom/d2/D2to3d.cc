@@ -76,7 +76,7 @@ Pos3d D2to3d::to_3d(const Pos2d &p2d) const
   { return ref.GetPosGlobal(p2d); }
 
 Segment3d D2to3d::to_3d(const Segment2d &sg2d) const
-  { return Segment3d(to_3d(sg2d.Origen()),to_3d(sg2d.Destino())); }
+  { return Segment3d(to_3d(sg2d.getFromPoint()),to_3d(sg2d.getToPoint())); }
 
 Pos3dArray D2to3d::to_3d(const Pos2dArray &p2d) const
   {

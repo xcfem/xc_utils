@@ -61,14 +61,14 @@ Segment3d &Segment3d::operator=(const Segment3d &r)
 GeomObj *Segment3d::clon(void) const
   { return new Segment3d(*this); }
 GEOM_FT Segment3d::GetMax(unsigned short int i) const
-  { return std::max(Origen()(i),Destino()(i)); }
+  { return std::max(getFromPoint()(i),getToPoint()(i)); }
 GEOM_FT Segment3d::GetMin(unsigned short int i) const
-  { return std::min(Origen()(i),Destino()(i)); }
+  { return std::min(getFromPoint()(i),getToPoint()(i)); }
 Line3d Segment3d::getSupportLine(void) const
   { return Line3d(cgseg.supporting_line()); }
-Pos3d Segment3d::Origen(void) const
+Pos3d Segment3d::getFromPoint(void) const
   { return Pos3d(cgseg.source()); }
-Pos3d Segment3d::Destino(void) const
+Pos3d Segment3d::getToPoint(void) const
   { return Pos3d(cgseg.target()); }
 GEOM_FT Segment3d::getSlope(void) const
   { return getSupportLine().getSlope(); }
@@ -103,10 +103,10 @@ Dir3d Segment3d::GetDir(void) const
 Vector3d Segment3d::VDir(void) const
   { return GetDir().GetVector(); }
 
-//! @brief Return el parámetro «lambda» tal que p= Origen()+lambda*VDir()
+//! @brief Return el parámetro «lambda» tal que p= getFromPoint()+lambda*VDir()
 GEOM_FT Segment3d::getLambda(const Pos3d &p) const
   {
-    const Vector3d v(Origen(),p);
+    const Vector3d v(getFromPoint(),p);
     const Vector3d dir(Normaliza(VDir()));
     return dot(v,dir);
   }
@@ -117,8 +117,8 @@ GEOM_FT Segment3d::dist2(const Pos3d &p) const
     const Line3d r= getSupportLine();
     const Pos3d proj= r.Projection(p);
     GEOM_FT retval= p.dist2(proj); //Ok if projected point inside segment.
-    const Pos3d A= Origen();
-    const Pos3d B= Destino();
+    const Pos3d A= getFromPoint();
+    const Pos3d B= getToPoint();
     const GEOM_FT denom= (B.x()-A.x())*(B.x()-A.x())+(B.y()-A.y())*(B.y()-A.y())+(B.z()-A.z())*(B.z()-A.z());
     if(denom!=0)
       {
@@ -144,12 +144,12 @@ bool Segment3d::Paralelo(const Segment3d &r) const
 
 //! @brief Return the length of the segment.
 GEOM_FT Segment3d::getLength(void) const
-  { return Origen().dist(Destino()); }
+  { return getFromPoint().dist(getToPoint()); }
 
 Pos3d Segment3d::getCenterOfMass(void) const
   {
-    Pos3d retval= Origen();
-    const Vector3d v= (Destino()-retval)/2;
+    Pos3d retval= getFromPoint();
+    const Vector3d v= (getToPoint()-retval)/2;
     retval= retval+v;
     return retval;
   }
@@ -240,5 +240,5 @@ GEOM_FT Segment3d::Iz(void) const
 bool operator==(const Segment3d &r1,const Segment3d &r2)
   { return (r1.cgseg==r2.cgseg); }
 void Segment3d::Print(std::ostream &os) const
-  { os << Origen() << " " << Destino(); }
+  { os << getFromPoint() << " " << getToPoint(); }
 

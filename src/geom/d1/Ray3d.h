@@ -62,7 +62,7 @@ class Ray3d : public Linear3d
       { return NAN; }
     Line3d getSupportLine(void) const
       { return Line3d(cgsr.supporting_line()); }
-    Pos3d Origen(void) const
+    Pos3d getFromPoint(void) const
       { return Pos3d(cgsr.source()); }
     inline GEOM_FT getSlope(void) const
       { return getSupportLine().getSlope(); }
