@@ -74,10 +74,6 @@ INCLUDE_DIRECTORIES(${GLIB2_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${CGAL_INCL_DIR})
 INCLUDE_DIRECTORIES(${CGAL_INCL_CONF_DIR})
 
-#Biblioteca MySql++
-INCLUDE_DIRECTORIES(${MYSQL_INCLUDE_DIRECTORIES})
-INCLUDE_DIRECTORIES(${MYSQLPP_INCL_DIR})
-
 #Biblioteca SqLiteWrapped
 INCLUDE_DIRECTORIES(${SQLITEWP_INCL_DIR})
 
@@ -145,10 +141,10 @@ SET(ca_combinations loadCombinations/comb_analysis/Variation loadCombinations/co
 ADD_LIBRARY(xc_basic_utils ${text_utils} ${stream_utils} ${misc_utils} ${sqlitepp_utils} ${matrices} ${three_d_arrays} ${skypack} ${itpack} ${umfpack} ${functions})
 INSTALL(TARGETS xc_basic_utils DESTINATION lib)
 
-ADD_LIBRARY(xc_utils SHARED ${MYSQL} ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${KERNEL}  ${VtkAux} ${ca_factors} ${ca_acciones} ${ca_combinations})
+ADD_LIBRARY(xc_utils SHARED ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${KERNEL}  ${VtkAux} ${ca_factors} ${ca_acciones} ${ca_combinations})
 
 #Interfaz Python
-LINK_LIBRARIES(xc_utils xc_basic_utils ${VTK_BIB} ${CGAL_LIBRARIES} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${MySQLpp_LIBRARIES} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} boost_python ${XC_UTILS_BOOST_LIBRARIES} ${PYTHON_LIBRARIES})
+LINK_LIBRARIES(xc_utils xc_basic_utils ${VTK_BIB} ${CGAL_LIBRARIES} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} boost_python ${XC_UTILS_BOOST_LIBRARIES} ${PYTHON_LIBRARIES})
 LINK_DIRECTORIES("/usr/lib/python2.7") # Not needed?
 ADD_DEFINITIONS(-fno-strict-aliasing)
 ADD_LIBRARY(xc_base SHARED kernel/python_interface.cc)
