@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 import geom
 from geom_utils import XYParametrized3DPoly as param
 from geom_utils import acad_script_utils as script
@@ -86,10 +87,10 @@ def writeAcadScripts(pointsPiquetage,pointsFileName,textFileName):
   Ay= yMax-yMin
   diag= math.sqrt(Ax*Ax+Ay*Ay)
   hText= math.ceil(diag/100.0)
-  print xMax
-  print xMin
-  print diag
-  print hText
+  print(xMax)
+  print(xMin)
+  print(diag)
+  print(hText)
   fScriptDrawing= open(pointsFileName,"w")
   fScriptTableau= open(textFileName,"w")
   script.snap(fScriptTableau,1.0e-8)

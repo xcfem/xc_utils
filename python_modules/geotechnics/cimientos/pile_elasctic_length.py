@@ -1,3 +1,4 @@
+from __future__ import print_function
 import math
 def longElasticaPiloteArcillas(Epilote,Ipilote,Eterreno,L):
     '''
@@ -6,7 +7,7 @@ def longElasticaPiloteArcillas(Epilote,Ipilote,Eterreno,L):
     '''
     LePA=math.pow(Epilote*Ipilote/(Eterreno/3.),0.25)
     if LePA>2*L:
-        print "Pile is too short to compute its elastic lenght."
+        print("Pile is too short to compute its elastic lenght.")
     return(LePA)
 
 def longEmpotramientoPiloteArcillas(Epilote,Ipilote,Eterreno,L):

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 import scipy.interpolate
 import math
 from geom_utils import acad_script_utils as script
@@ -12,7 +13,7 @@ class extrap1d(object):
       x0= x[i-1]
       x1= x[i]
       if(x1<=x0):
-        print "problem at position: ", i, " in ", x
+        print("problem at position: ", i, " in ", x)
   def __init__(self,x,y):
     self.check_x(x)
     self.fn= scipy.interpolate.interp1d(x, y)
@@ -24,13 +25,13 @@ class extrap1d(object):
       if Ax!=0.0:
         retval= self.fn.y[0]+(self.fn.y[1]-self.fn.y[0])/Ax*(x-self.fn.x[0])
       else:
-        print "repeated vertices at the beginning; Ax= ", Ax
+        print("repeated vertices at the beginning; Ax= ", Ax)
     elif (x > self.fn.x[-1]):
       Ax= self.fn.x[-1]-self.fn.x[-2]
       if Ax!=0.0:
         retval= self.fn.y[-2]+(self.fn.y[-1]-self.fn.y[-2])/Ax*(x-self.fn.x[-2])
       else:
-        print "repeated vertices at the end; Ax= ", Ax
+        print("repeated vertices at the end; Ax= ", Ax)
     else:
       retval= self.fn(x)
     return retval

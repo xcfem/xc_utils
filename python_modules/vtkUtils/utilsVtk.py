@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+from __future__ import print_function
 import vtk
 import math
 
@@ -54,7 +56,7 @@ def parallelTo(actor,vDir):
     '''
     nc= len(vDir)
     if(nc!=3):
-        print "parallelTo: ", vDir, " wrong dimension (must be 3)."
+        print("parallelTo: ", vDir, " wrong dimension (must be 3).")
     else:
         v= [vDir[0],vDir[1],vDir[2]]
         thetaZ= math.degrees(math.atan2(v[1],v[0]))

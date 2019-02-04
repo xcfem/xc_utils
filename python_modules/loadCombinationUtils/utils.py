@@ -1,39 +1,39 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import print_function
 import math
 import loadCombinations
 
 def listActionGroup(actionGroup):
     '''List the defined actions in a group (permanent, variable, accidental).'''
     for familyName in actionGroup.getKeys():
-        print '    actions family: ', familyName
+        print('    actions family: ', familyName)
         actionFamily= actionGroup[familyName]
-        print '      partial safety factors: ', actionFamily.partial_safety_factors
+        print('      partial safety factors: ', actionFamily.partial_safety_factors)
         for a in actionFamily.actions:
-          print '     ', a
+          print('     ', a)
 
 def listActionFamily(actionFamily):
     '''List the defined actions in a family.'''
-    print '    partial safety factors: ', actionFamily.partial_safety_factors
+    print('    partial safety factors: ', actionFamily.partial_safety_factors)
     actions= actionFamily.actions
     for a in actions:
-        print '     ', a
+        print('     ', a)
 
 def listActionWeighting(actionWeighting):
     '''List the defined actions and the weighting for each one.'''
     for awKey in actionWeighting.getKeys():
-        print awKey
+        print(awKey)
         aw= actionWeighting[awKey]
         permanentActions= aw.permanentActions
-        print '  Permanent actions: '
+        print('  Permanent actions: ')
         listActionGroup(aw.permanentActions)
-        print '  Non-constant permanent actions: '
+        print('  Non-constant permanent actions: ')
         listActionGroup(aw.ncPermanentActions)
-        print '  Variable actions: '
+        print('  Variable actions: ')
         listActionGroup(aw.variableActions)
-        print '  Accidental actions: '
+        print('  Accidental actions: ')
         listActionFamily(aw.accidentalActions)
-        print '  Seismic actions: '
+        print('  Seismic actions: ')
         listActionFamily(aw.seismicActions)
   
 

@@ -19,7 +19,7 @@
 #
 # See https://github.com/lcpt/xc_utils or email : l.pereztato@gmail.com
 #
-
+from __future__ import print_function
 from distutils.core import setup, sys
 from distutils.sysconfig import get_python_lib
 
@@ -42,7 +42,7 @@ if not myPrefix or not len (myPrefix):
     myPrefix = "/usr/local"
 
 pth_to_libs= get_python_lib(1,0,myPrefix)
-print pth_to_libs
+print(pth_to_libs)
 
 setup(name='LcmdModules',
       version='0.12.0',

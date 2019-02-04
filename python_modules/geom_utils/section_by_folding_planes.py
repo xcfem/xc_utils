@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 
 import xc_base
 import geom
@@ -21,10 +22,10 @@ class XYFoldingPlanes(object):
       pInt= geom.LineSegment3d(p0,p1).getPoint(lmb)
       err= (pInt.x-p.x)**2+(pInt.y-p.y)**2
       if(err>1e-6):
-        print "Error finding intersection; err= ", err
-        print "p= ", p
-        print "pInt= ", pInt
-        print "lmb= ", lmb
+        print("Error finding intersection; err= ", err)
+        print("p= ", p)
+        print("pInt= ", pInt)
+        print("lmb= ", lmb)
       else:
         retval.append(pInt)
     return retval
