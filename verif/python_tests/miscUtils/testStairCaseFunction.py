@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 import math
 from miscUtils import staircase_function as scf
 
@@ -21,8 +22,8 @@ error= math.sqrt(error)
 import os
 fname= os.path.basename(__file__)
 if (error<1e-15):
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")
 
   

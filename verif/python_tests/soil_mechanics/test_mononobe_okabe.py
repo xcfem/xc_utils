@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import division
-
 import xc_base
 import geom
 import math
@@ -36,20 +35,20 @@ AEd1Teor= 1278.02671863e3/L
 ratio3= abs(AEd1-AEd1Teor)/AEd1Teor
 
 '''
-print "theta1= ", math.degrees(theta1)
-print "phi_d= ", math.degrees(phi_d)
-print "K_ad1=", K_ad1
-print "K_ad2=", K_ad2
-print "AEd1=", AEd1/1e3*L, " kN"
-print "AEd2=", AEd2/1e3*L, " kN"
-print "ratio1= ", ratio1
-print "ratio2= ", ratio2
-print "ratio3= ", ratio3
+print("theta1= ", math.degrees(theta1))
+print("phi_d= ", math.degrees(phi_d))
+print("K_ad1=", K_ad1)
+print("K_ad2=", K_ad2)
+print("AEd1=", AEd1/1e3*L, " kN")
+print("AEd2=", AEd2/1e3*L, " kN")
+print("ratio1= ", ratio1)
+print("ratio2= ", ratio2)
+print("ratio3= ", ratio3)
 '''
 
 import os
 fname= os.path.basename(__file__)
 if abs(ratio1)<1e-3 and abs(ratio2)<1e-3 and abs(ratio3)<1e-3:
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")

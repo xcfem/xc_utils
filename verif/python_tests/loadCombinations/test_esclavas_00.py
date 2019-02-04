@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 import xc_base
 import loadCombinations
 from loadCombinationUtils import ehe
@@ -33,20 +34,20 @@ sz= len(coeficientesRef_elu_persistentes)
 for i in range(0,sz):
   vR= coeficientesRef_elu_persistentes[i]
   v= coeficientes_elu_persistentes[i]
-  #print "vR", vR, " v= ", v
+  #print("vR", vR, " v= ", v)
   resta= numpy.subtract(vR,v)
   error+= numpy.linalg.norm(resta)**2
-  #print resta
-  #print "error= ", error
+  #print(resta)
+  #print("error= ", error)
 
 import math
 error= math.sqrt(error)
 
-#print "error= ", error
+#print("error= ", error)
 
 import os
 fname= os.path.basename(__file__)
 if (abs(error)<1e-5):
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")

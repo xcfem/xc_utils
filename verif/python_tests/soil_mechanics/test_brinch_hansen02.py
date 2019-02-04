@@ -12,6 +12,7 @@ __license__= "GPL"
 __version__= "3.0"
 __email__= "l.pereztato@gmail.com"
 
+from __future__ import print_function
 from geotechnics import FrictionalCohesionalSoil as fcs
 import math
 
@@ -86,36 +87,36 @@ err+= (abs(quLTS-quTeorLTS)/quTeorLTS)**2
 
 
 '''
-print 'NgammaSTS= ', NgammaSTS
-print 'NqSTS= ', NqSTS
-print 'NcSTS= ', NcSTS
-print 'dcSTS= ', dcSTS
-print 'scSTS= ', scSTS
-print 'icSTS= ', icSTS
-print 'quSTS=',quSTS
-print 'NgammaLTS= ', NgammaLTS
-print 'NqLTS= ', NqLTS
-print 'NcLTS= ', NcLTS
-print 'dcLTS= ', dcLTS
-print 'scLTS= ', scLTS
-print 'sgammaLTS= ', sgammaLTS
-print 'iqLTS= ', iqLTS
-print 'igammaLTS= ', igammaLTS
-print 'icLTS= ', icLTS
-print 'quGammaLTS=',quGammaLTS
-print 'quGammaTeorLTS=',quGammaTeorLTS
-print 'quCohesionLTS=',quCohesionLTS
-print 'quCohesionTeorLTS=',quCohesionTeorLTS
-print 'quQLTS=',quQLTS
-print 'quQTeorLTS=',quQTeorLTS
-print 'quLTS=',quLTS
-print 'quTeorLTS=',quTeorLTS
-print 'err= ', err
+print('NgammaSTS= ', NgammaSTS)
+print('NqSTS= ', NqSTS)
+print('NcSTS= ', NcSTS)
+print('dcSTS= ', dcSTS)
+print('scSTS= ', scSTS)
+print('icSTS= ', icSTS)
+print('quSTS=',quSTS)
+print('NgammaLTS= ', NgammaLTS)
+print('NqLTS= ', NqLTS)
+print('NcLTS= ', NcLTS)
+print('dcLTS= ', dcLTS)
+print('scLTS= ', scLTS)
+print('sgammaLTS= ', sgammaLTS)
+print('iqLTS= ', iqLTS)
+print('igammaLTS= ', igammaLTS)
+print('icLTS= ', icLTS)
+print('quGammaLTS=',quGammaLTS)
+print('quGammaTeorLTS=',quGammaTeorLTS)
+print('quCohesionLTS=',quCohesionLTS)
+print('quCohesionTeorLTS=',quCohesionTeorLTS)
+print('quQLTS=',quQLTS)
+print('quQTeorLTS=',quQTeorLTS)
+print('quLTS=',quLTS)
+print('quTeorLTS=',quTeorLTS)
+print('err= ', err)
 '''
 
 import os
 fname= os.path.basename(__file__)
 if (err<0.0005):
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")

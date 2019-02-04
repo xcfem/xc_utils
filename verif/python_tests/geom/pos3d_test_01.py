@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 import xc_base
 import geom
 pos1= geom.Pos3d(1,2,3);
@@ -13,6 +14,6 @@ zPt= pos1.z
 import os
 fname= os.path.basename(__file__)
 if(xPt==1. and yPt==2. and zPt==3.):
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")

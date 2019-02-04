@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import print_function
 import xc_base
 import geom
 import math
@@ -87,31 +87,31 @@ ratio9= pt9.distPos2d(pt9Teor)
 
 
 '''
-print "pt0: ",pt0,"\n"
-print "pt1: ",pt1,"\n"
-print "pt2: ",pt2,"\n"
-print "pt3: ",pt3,"\n"
-print "pt4: ",pt4,"\n"
-print "pt5: ",pt5,"\n"
-print "pt6: ",pt6,"\n"
-print "pt7: ",pt7,"\n"
-print "pt8: ",pt8,"\n"
-print "pt9: ",pt9,"\n"
-print "ratio0= ",ratio0,"\n"
-print "ratio1= ",ratio1,"\n"
-print "ratio2= ",ratio2,"\n"
-print "ratio3= ",ratio3,"\n"
-print "ratio4= ",ratio4,"\n"
-print "ratio5= ",ratio5,"\n"
-print "ratio6= ",ratio6,"\n"
-print "ratio7= ",ratio7,"\n"
-print "ratio8= ",ratio8,"\n"
-print "ratio9= ",ratio9,"\n"
+print("pt0: ",pt0,"\n")
+print("pt1: ",pt1,"\n")
+print("pt2: ",pt2,"\n")
+print("pt3: ",pt3,"\n")
+print("pt4: ",pt4,"\n")
+print("pt5: ",pt5,"\n")
+print("pt6: ",pt6,"\n")
+print("pt7: ",pt7,"\n")
+print("pt8: ",pt8,"\n")
+print("pt9: ",pt9,"\n")
+print("ratio0= ",ratio0,"\n")
+print("ratio1= ",ratio1,"\n")
+print("ratio2= ",ratio2,"\n")
+print("ratio3= ",ratio3,"\n")
+print("ratio4= ",ratio4,"\n")
+print("ratio5= ",ratio5,"\n")
+print("ratio6= ",ratio6,"\n")
+print("ratio7= ",ratio7,"\n")
+print("ratio8= ",ratio8,"\n")
+print("ratio9= ",ratio9,"\n")
 '''
 
 import os
 fname= os.path.basename(__file__)
 if math.fabs(ratio0)<1e-6 and math.fabs(ratio1)<1e-6 and math.fabs(ratio2)<1e-6 and math.fabs(ratio3)<1e-6 and math.fabs(ratio4)<1e-6  and math.fabs(ratio5)<1e-6 and math.fabs(ratio6)<1e-6 and math.fabs(ratio7)<1e-6 and math.fabs(ratio8)<1e-6 and math.fabs(ratio9)<1e-6:
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")

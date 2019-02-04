@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 import re
 import unicodedata
 
@@ -10,7 +11,7 @@ def remove_accents(input_str):
 def slugify(s):
     """
     Simplifies ugly strings into something URL-friendly.
-    >>> print slugify("[Some] _ Article's Title--")
+    >>> print(slugify("[Some] _ Article's Title--"))
     some-articles-title
     """
 

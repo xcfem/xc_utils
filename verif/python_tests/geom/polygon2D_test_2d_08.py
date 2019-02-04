@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 import xc_base
 import geom
 pol1=geom.Polygon2d()
@@ -17,6 +18,6 @@ ratio4= areasTrib[3]-1
 import os
 fname= os.path.basename(__file__)
 if abs(ratio1)<1e-10 and abs(ratio2)<1e-10:
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")

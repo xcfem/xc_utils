@@ -4,6 +4,7 @@
    "Principios de ingeniería de cimentaciones." Braja M. Das, página 353 y
    de la tabla 10.3 de Geotécnia y Cimientos II. Jiménez Salas, página 683
 '''
+from __future__ import print_function
 from geotechnics import earth_pressure
 import math
 
@@ -18,19 +19,19 @@ ratio3= abs(ka3-0.2853)/0.2853
 ratio4= abs(ka4-0.085)/0.085
 
 '''
-print "ka1= ",ka1
-print "ka2= ",ka2
-print "ka3= ",ka3
-print "ka4= ",ka4
-print "ratio1= ",ratio1
-print "ratio2= ",ratio2
-print "ratio3= ",ratio3
-print "ratio4= ",ratio4
+print("ka1= ",ka1)
+print("ka2= ",ka2)
+print("ka3= ",ka3)
+print("ka4= ",ka4)
+print("ratio1= ",ratio1)
+print("ratio2= ",ratio2)
+print("ratio3= ",ratio3)
+print("ratio4= ",ratio4)
 '''
 
 import os
 fname= os.path.basename(__file__)
 if (ratio1<1e-3) & (ratio2<1e-3) & (ratio3<1e-3) & (ratio4<3e-2):
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")

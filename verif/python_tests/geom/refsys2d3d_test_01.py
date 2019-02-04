@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 import math
 import xc_base
 import geom
@@ -23,20 +24,20 @@ ref.Org+=geom.Vector3d(1,1,1)
 ratio3= p1.distPos3d(ref.Org)
 
 '''
-print "vTrf= ", vTrf
-print "ratio= ", ratio
-print "p0= ", p0
-print "ratio2= ", ratio2
-print ref.Org
-print "ratio3= ", ratio3
+print("vTrf= ", vTrf)
+print("ratio= ", ratio)
+print("p0= ", p0)
+print("ratio2= ", ratio2)
+print(ref.Org)
+print("ratio3= ", ratio3)
 '''
 
 import os
 fname= os.path.basename(__file__)
 if (abs(ratio)<1e-12 and abs(ratio2)<1e-12 and abs(ratio3)<1e-15):
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")
 
 
 

@@ -22,10 +22,10 @@ ratio2= qq-5
 rr= pos1.evalPy("1+lado")
 ss= pos1.evalPy("1+self.getProp('radius')")
 
-#print pp
-#print qq
-#print rr
-#print "ss= ",ss
+#print(pp)
+#print(qq)
+#print(rr)
+#print("ss= ",ss)
 
 import os
 fname= os.path.basename(__file__)

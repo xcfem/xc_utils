@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 import xc_base
 import loadCombinations
 from loadCombinationUtils import ehe
@@ -36,13 +37,13 @@ ratio1= abs(cont-6.0)/6.0
 
 '''    
 for comb in combAcc:
-  print comb.nombre
-print "cont= ", cont
-print "ratio1= ", ratio1
+  print(comb.nombre)
+print("cont= ", cont)
+print("ratio1= ", ratio1)
 '''   
 
 fname= os.path.basename(__file__)
 if (abs(ratio1)<1e-15):
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")

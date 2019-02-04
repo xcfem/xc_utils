@@ -4,6 +4,7 @@
 #Example 1.13 of the thesis «La teoría de bloque aplicada a la dinámica
 #de rocas» by Juan Carlos Ayes Zamudio
 
+from __future__ import print_function
 import xc_base
 import geom
 import math
@@ -38,6 +39,6 @@ n3=n1.cross(n2)
 import os
 fname= os.path.basename(__file__)
 if abs(ratio1)<1e-4:
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")

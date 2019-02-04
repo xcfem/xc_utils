@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # Macros that are useful in block theory calculations (see Goodman & Shi, Block theory and its application to rock engineering 1985)
+from __future__ import print_function
+
 
 '''Return the dip plane defined by:
    alpha: dip angle.
@@ -16,36 +18,36 @@ def computeDipPlane(alpha,beta,pos3d p):
 
 def processPolyhedralAngle(nmbAng,nmbTunel):
   {
-    print "\n\\subsection{Polyhedral angle: ",nmbAng,"}\n"
-    print "\n\\begin{alltt}\n"
+    print("\n\\subsection{Polyhedral angle: ",nmbAng,"}\n")
+    print("\n\\begin{alltt}\n")
     if(not(JPvacio))
         \then
           {
             if(containsTunnelAxis)
                 \then
                   {
-                    print "  Contains tunnel axis= Yes.\n"
-                    print "\\end{alltt}\n"
+                    print("  Contains tunnel axis= Yes.\n")
+                    print("\\end{alltt}\n")
                   }
                 else:
                   {
-                    print "  Contains tunnel axis= No.\n"
-                    print "  Vectores externos:\n"
-                    print "    I1= ",I1," I2= ",I2,"\n"
-                    print "    angI1= ",rad2deg(angI1),"\n"
-                    print "    angI2= ",rad2deg(angI2),"\n"
-                    print "    angI1I2= ",rad2deg(angI1I2),"\n"
+                    print("  Contains tunnel axis= No.\n")
+                    print("  Vectores externos:\n")
+                    print("    I1= ",I1," I2= ",I2,"\n")
+                    print("    angI1= ",rad2deg(angI1),"\n")
+                    print("    angI2= ",rad2deg(angI2),"\n")
+                    print("    angI1I2= ",rad2deg(angI1I2),"\n")
                     if(angI1I2>=PI)
                         \then
                           {
-                            print "  La cuña abarca toda la sección (bloque inamovible).\n"
-                            print "\\end{alltt}\n"
+                            print("  La cuña abarca toda la sección (bloque inamovible).\n")
+                            print("\\end{alltt}\n")
                           }
                         else:
                           {
-                            print "  Pirámide:\n"
-                            print "    points of tangency= ",ptsTang,"\n"
-                            print "    cúspide= ",p3,"\n"
+                            print("  Pirámide:\n")
+                            print("    points of tangency= ",ptsTang,"\n")
+                            print("    cúspide= ",p3,"\n")
                             \psplot
                               {
                                 \pageSize{"letter"}
@@ -78,12 +80,12 @@ def processPolyhedralAngle(nmbAng,nmbTunel):
                                 \cont{p2.x,p2.y}
                                 \flush{}
                                 \close{}
-                                print "\\end{alltt}\n"
-                                print "\\begin{figure}\n"
-                                print "  \\centering\n"
-                                print "  \\includegraphics[width=40mm]{",nmbTunel+nmbAng+".ps","}\n"
-                                print "  \\caption{",caption+" Pirámide "+ nmbAng,"}\n"
-                                print "\\end{figure}\n"
+                                print("\\end{alltt}\n")
+                                print("\\begin{figure}\n")
+                                print("  \\centering\n")
+                                print("  \\includegraphics[width=40mm]{",nmbTunel+nmbAng+".ps","}\n")
+                                print("  \\caption{",caption+" Pirámide "+ nmbAng,"}\n")
+                                print("\\end{figure}\n")
                               }
                           }
                       }
@@ -92,8 +94,8 @@ def processPolyhedralAngle(nmbAng,nmbTunel):
           }
         else:
           {
-            print "  El bloque generado es inamovible.\n"
-            print "\\end{alltt}\n"
+            print("  El bloque generado es inamovible.\n")
+            print("\\end{alltt}\n")
           }
       }
   }

@@ -1,3 +1,4 @@
+from __future__ import print_function 
 import xc_base
 import geom
 p0=geom.Pos3d(0.000331586,0,0)
@@ -18,16 +19,16 @@ dA= yzTrace.distPos3d(pA)
 dB= yzTrace.distPos3d(pB)
 
 '''
-print 'normal: ', normal*(1.0/1e4)
-print 'angle= ', angle
-print 'trace= ', yzTrace
-print 'dA= ', dA
-print 'dB= ', dB
+print('normal: ', normal*(1.0/1e4))
+print('angle= ', angle)
+print('trace= ', yzTrace)
+print('dA= ', dA)
+print('dB= ', dB)
 '''
 
 import os
 fname= os.path.basename(__file__)
 if(dA<1e-6 and dB<1e-6):
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")
