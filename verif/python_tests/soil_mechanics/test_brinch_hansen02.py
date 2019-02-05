@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
+from __future__ import print_function
 '''
 Verification of the Brinch Hansen formula.
 
@@ -12,7 +13,6 @@ __license__= "GPL"
 __version__= "3.0"
 __email__= "l.pereztato@gmail.com"
 
-from __future__ import print_function
 from geotechnics import FrictionalCohesionalSoil as fcs
 import math
 

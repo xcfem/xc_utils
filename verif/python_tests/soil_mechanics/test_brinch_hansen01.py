@@ -7,6 +7,7 @@
    (Spain) 2002 Table on page 101.
    (https://books.google.ch/books?id=a0eoygAACAAJ)
 '''
+from __future__ import print_function
 
 __author__= "Luis C. Pérez Tato (LCPT)"
 __copyright__= "Copyright 2016, LCPT"
@@ -14,7 +15,6 @@ __license__= "GPL"
 __version__= "3.0"
 __email__= "l.pereztato@gmail.com"
 
-from __future__ import print_function
 from geotechnics import FrictionalCohesionalSoil as fcs
 import math
 
