@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 import xc_base
 import geom
 v1=geom.Vector3d(0,1,0)
@@ -12,15 +13,15 @@ vTrf= sc.getCooLocales(v)
 vTrfTeor= geom.Vector3d(1,-1,1)
 ratio= (vTrf-vTrfTeor).getModulo()
 
-#print "vTrf= ", vTrf
-#print "ratio= ", ratio
+#print("vTrf= ", vTrf)
+#print("ratio= ", ratio)
 
 import os
 fname= os.path.basename(__file__)
 if abs(ratio)<1e-5:
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")
 
 
 

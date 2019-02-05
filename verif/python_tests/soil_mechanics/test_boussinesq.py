@@ -4,6 +4,7 @@
    Seventh edition. Braja M. Das page 231
    ISBN-13: 978-0-495-66812-1
 '''
+from __future__ import print_function
 from geotechnics import settlement
 
 __author__= "Luis C. Pérez Tato (LCPT) and Ana Ortega (AOO)"
@@ -19,15 +20,15 @@ ratio1= abs(incSigma-19.65e3)/19.65e3
 ratio2= abs(averageIncSigma-21e3)/21e3
 
 '''
-print "incSigma= ",incSigma/1e3, 'kN/m2'
-print "ratio1= ",ratio1
-print "averageIncSigma= ",averageIncSigma/1e3, 'kN/m2'
-print "ratio2= ",ratio2
+print("incSigma= ",incSigma/1e3, 'kN/m2')
+print("ratio1= ",ratio1)
+print("averageIncSigma= ",averageIncSigma/1e3, 'kN/m2')
+print("ratio2= ",ratio2)
 '''
 
 import os
 fname= os.path.basename(__file__)
 if (ratio1<5e-3) and (ratio2<0.1):
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")

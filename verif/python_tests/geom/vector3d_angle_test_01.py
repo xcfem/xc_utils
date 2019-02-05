@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-
 # Angle between two vectors.
 
+from __future__ import print_function
 import xc_base
 import geom
 import math
@@ -12,14 +12,14 @@ angle=vec1.getAngle(vec2)
 angleTeor=0.0
 ratio1=math.fabs(angleTeor-angle)#/angleTeor
 
-#print "angle= ", math.degrees(angle)
+#print("angle= ", math.degrees(angle))
 
 import os
 fname= os.path.basename(__file__)
 if math.fabs(ratio1)<1e-4:
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")
 
 
 

@@ -3,7 +3,7 @@
 #Angle between two planes.
 #Exemple 1.7 of the thesis «La teoría de bloque aplicada a la dinámica
 #de rocas» Juan Carlos Ayes Zamudio
-
+from __future__ import print_function
 import xc_base
 import geom
 import math
@@ -29,6 +29,6 @@ ratio1= math.fabs(deltaTeor-delta)/deltaTeor
 import os
 fname= os.path.basename(__file__)
 if math.fabs(ratio1)<0.021:
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")

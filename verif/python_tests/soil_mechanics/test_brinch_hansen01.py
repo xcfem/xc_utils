@@ -14,6 +14,7 @@ __license__= "GPL"
 __version__= "3.0"
 __email__= "l.pereztato@gmail.com"
 
+from __future__ import print_function
 from geotechnics import FrictionalCohesionalSoil as fcs
 import math
 
@@ -56,11 +57,11 @@ for values in tableValues:
 
 err= math.sqrt(err)
 
-#print 'err= ', err
+#print('err= ', err)
 
 import os
 fname= os.path.basename(__file__)
 if (err<0.05):
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")

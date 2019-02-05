@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 import xc_base
 import geom
 import math
@@ -18,8 +19,8 @@ mTeor=fuerza*brazo
 import os
 fname= os.path.basename(__file__)
 if m.x==0 and m.y==0and m.z==mTeor:
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")
 
 

@@ -5,6 +5,7 @@
 #Exemple 1.3 of the thesis «La teoría de bloque aplicada a la dinámica
 #de rocas» de Juan Carlos Ayes Zamudio
 
+from __future__ import print_function
 import xc_base
 import geom
 import math
@@ -32,8 +33,8 @@ ratio1=(I12-I12Teor).getModulo()
 import os
 fname= os.path.basename(__file__)
 if math.fabs(ratio1)<1e-4:
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")
 
 #Terminar!!!

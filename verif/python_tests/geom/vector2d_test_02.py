@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 import xc_base
 import geom
 import math
@@ -24,9 +25,9 @@ ratio2=math.degrees(alpha)-45
 import os
 fname= os.path.basename(__file__)
 if math.fabs(ratio1)<1e-10 and math.fabs(ratio2)<1e-10:
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")
 
 
 

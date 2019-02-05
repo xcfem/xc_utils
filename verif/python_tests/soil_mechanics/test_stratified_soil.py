@@ -13,6 +13,7 @@ __license__= "GPL"
 __version__= "3.0"
 __email__= "l.pereztato@gmail.com"
 
+from __future__ import print_function
 from geotechnics import FrictionalCohesionalSoil as fcs
 import math
 
@@ -34,16 +35,16 @@ ratio1= (equivalentRho-equivalentRhoTeor)/equivalentRhoTeor
 ratio2= (equivalentC-equivalentCTeor)/equivalentCTeor
 ratio3= (equivalentPhi-equivalentPhiTeor)/equivalentPhiTeor
 
-# print 'equivalentRho= ', equivalentRho
-# print 'equivalentRhoTeor= ', equivalentRhoTeor
-# print 'equivalentC= ', equivalentC
-# print 'equivalentCTeor= ', equivalentCTeor
-# print 'equivalentPhi= ', math.degrees(equivalentPhi)
-# print 'equivalentPhiTeor= ', math.degrees(equivalentPhiTeor)
+# print('equivalentRho= ', equivalentRho)
+# print('equivalentRhoTeor= ', equivalentRhoTeor)
+# print('equivalentC= ', equivalentC)
+# print('equivalentCTeor= ', equivalentCTeor)
+# print('equivalentPhi= ', math.degrees(equivalentPhi))
+# print('equivalentPhiTeor= ', math.degrees(equivalentPhiTeor))
 
 import os
 fname= os.path.basename(__file__)
 if (ratio1<1e-3) & (ratio2<1e-3) & (ratio3<1e-3):# & (ratio4<3e-2):
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")

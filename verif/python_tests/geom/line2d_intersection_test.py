@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 '''Compute the intersection of two straight lines.'''
+
+from __future__ import print_function
 import xc_base
 import geom
 import math
@@ -14,17 +16,17 @@ ratio1= math.fabs(p.x-1.0)
 ratio2= math.fabs(p.y-1.0)
 
 '''
-print 'p= ', p
-print 'ratio1= ', ratio1
-print 'ratio2= ', ratio2
+print('p= ', p)
+print('ratio1= ', ratio1)
+print('ratio2= ', ratio2)
 '''
 
 import os
 fname= os.path.basename(__file__)
 if ratio1<1e-20 and ratio2<1e-20 :
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")
 
 
 

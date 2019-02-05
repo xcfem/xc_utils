@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 import xc_base
 import loadCombinations
 from loadCombinationUtils import iap11
@@ -7,7 +8,7 @@ from loadCombinationUtils import utils
 from miscUtils import LogMessages as lmsg
 
 lcg= iap11.controlCombGenerator
-#print '*******', pond.permanentActions.gammaF.getGammaFELU.desfavorable
+#print('*******', pond.permanentActions.gammaF.getGammaFELU.desfavorable)
 
 G1= lcg.insert("IAP11","permanentes",loadCombinations.Action("G1", "Peso propio"),"permanentes","permanentes")
 G2= lcg.insert("IAP11","permanentes",loadCombinations.Action("G2", "Carga muerta"),"permanentes","permanentes")
@@ -40,35 +41,35 @@ else:
   for i in range(0,szRef):
     vR= coeficientesRef_elu_persistentes[i]
     v= coeficientes_elu_persistentes[i]
-    #print "vR", vR, " v= ", v
+    #print("vR", vR, " v= ", v)
     resta= numpy.subtract(vR,v)
     norm= numpy.linalg.norm(resta)**2
     # if(norm>0.1):
-    #    print 'i= ', i
-    #    print 'vR= ', vR
-    #    print 'v= ', v
-    #    print 'diff: ', resta
-    #    print 'error= ', norm
+    #    print('i= ', i)
+    #    print('vR= ', vR)
+    #    print('v= ', v)
+    #    print('diff: ', resta)
+    #    print('error= ', norm)
     error+= norm
-    #print resta
-    #print "error= ", error
+    #print(resta)
+    #print("error= ", error)
 
 import math
 error= math.sqrt(error)
 
 
 '''
-print coeficientes_elu_persistentes
-print "error= ", error
+print(coeficientes_elu_persistentes)
+print("error= ", error)
 utils.listActionWeighting(lcg.actionWeighting)
 lc=lcg.getLoadCombinations
 ULS=lc.getULSTransientCombinations
 comb=[c for c in ULS]
 for c in comb:
-    print c.descripcion
+    print(c.descripcion)
 '''
 if (abs(error)<1e-6):
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 import xc_base
 import geom
 import math
@@ -20,15 +21,15 @@ result= R.getResultant()
 mom= R.getMoment()
 ratio= result.getModulo()+ math.sqrt(mom**2)
 
-# print 'R= ', R
-# print 'result= ', result
-# print 'mom= ', mom
-# print 'ratio= ', ratio
+# print('R= ', R)
+# print('result= ', result)
+# print('mom= ', mom)
+# print('ratio= ', ratio)
 
 import os
 fname= os.path.basename(__file__)
 if(ratio<1e-13):
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")
 

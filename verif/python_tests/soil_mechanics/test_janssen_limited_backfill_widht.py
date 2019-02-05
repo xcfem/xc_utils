@@ -4,6 +4,7 @@
    paper: "Narrow backfill lateral earth pressure." Ahmad Al-Hassan et al.
    page 3
 '''
+from __future__ import print_function
 from geotechnics import earth_pressure
 import math
 
@@ -84,14 +85,14 @@ for r,tr in zip(results,theorResults):
     ratio+= (v-tv)**2
     
 '''
-print 'B/H= 0.1', results01
-print 'B/H= 0.2', results02 
-print 'B/H= 0.3', results03 
-print 'B/H= 0.5', results05 
-print 'B/H= 1', results1
-print 'B/H= 1000', results10
-print 'At rest pressure', resultsRest
-print ratio
+print('B/H= 0.1', results01)
+print('B/H= 0.2', results02)
+print('B/H= 0.3', results03) 
+print('B/H= 0.5', results05)
+print('B/H= 1', results1)
+print('B/H= 1000', results10)
+print('At rest pressure', resultsRest)
+print(ratio)
 '''
 
 #Drawing stuff
@@ -123,6 +124,6 @@ print ratio
 import os
 fname= os.path.basename(__file__)
 if (ratio<1e-15):
-  print "test ",fname,": ok."
+  print("test ",fname,": ok.")
 else:
-  print "test ",fname,": ERROR."
+  print("test ",fname,": ERROR.")
