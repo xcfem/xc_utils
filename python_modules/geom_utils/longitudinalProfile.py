@@ -136,7 +136,7 @@ class LongProfile:
     retval= []
     for xi in x:
       retval.append(fn(xi))
-    return retval;
+    return retval
 
   def getEnvelope(self,x):
     sz= len(x)
@@ -192,7 +192,7 @@ class LongProfile:
     for ordName in self.ordinateNames:
       script.comment(fScript,ordName+" ordinates.")
       y= self.getInterpolatedValues(ordName,x.xData)
-      pts= self.getTrfPoints(y);
+      pts= self.getTrfPoints(y)
       script.makeLayer(fScript,ordName,"_white")
       script.pline(fScript,pts)
 

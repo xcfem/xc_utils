@@ -3,7 +3,7 @@ from __future__ import print_function
 
 import xc_base
 import geom
-pos1= geom.Pos2d(1,2);
+pos1= geom.Pos2d(1,2)
 
 
 exampleNumber= 4

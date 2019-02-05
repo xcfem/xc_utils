@@ -2,7 +2,7 @@
 
 import xc_base
 import geom
-pos1= geom.Pos3d(1,2,3);
+pos1= geom.Pos3d(1,2,3)
 
 xPt= pos1.x
 yPt= pos1.y

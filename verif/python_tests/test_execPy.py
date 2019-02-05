@@ -3,10 +3,10 @@
 import xc_base
 import geom
 
-pos1= geom.Pos2d(1,2);
+pos1= geom.Pos2d(1,2)
 
 j= 0
-cooY= -1.0;
+cooY= -1.0
 mycode = 'global j;j= j+1;global cooY;cooY= self.y'
 
 #exec mycode
