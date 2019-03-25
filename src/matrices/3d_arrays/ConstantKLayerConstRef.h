@@ -1,13 +1,12 @@
 //----------------------------------------------------------------------------
-//  biblioteca xc_utils; bilioteca de comandos para el intérprete del lenguaje
-//  de entrada de datos.
+//  xc_utils library; general purpose classes and functions.
 //
 //  Copyright (C)  Luis Claudio Pérez Tato
 //
-//  Este software es libre: usted puede redistribuirlo y/o modificarlo 
-//  bajo los términos de la Licencia Pública General GNU publicada 
-//  por la Fundación para el Software Libre, ya sea la versión 3 
-//  de la Licencia, o (a su elección) cualquier versión posterior.
+//  XC utils is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or 
+//  (at your option) any later version.
 //
 //  Este software se distribuye con la esperanza de que sea útil, pero 
 //  SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita 
