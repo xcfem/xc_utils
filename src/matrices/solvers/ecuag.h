@@ -64,7 +64,7 @@ template <class treal>
 void resultados(void)
   {
     size_t i,j,l;
-    holgura= n-1-rango;      (* holgura y variables libres *)
+    holgura= n-1-rango;      // holgura and free variables
     for(i=1;i<=mmax;i++)
       for(j=1;j<=nmax;j++) x(i,j)=0.0;
     if(holgura>0)
@@ -77,7 +77,7 @@ void resultados(void)
               libres[i]=j;
             }
       }
-    for(j=1;j<= n-1;j++)         (* almacena solucion *)
+    for(j=1;j<= n-1;j++)         //stores solution
       {
         l=pivot[j];i=1;
         if(In(cp,j)) x(1,j)= a(l,n);
@@ -174,8 +174,8 @@ void ecuag(const size_t &m,
 //         x        = solution matrix
 //                        column 1 variables dependientes
 //                               2 a holguras+1 independientes
-//         libres   = indices de variables libres
-//         holgura  = numero de variables libres
+//         libres   = indices of free variables
+//         holgura  = number of free variables
 //           error  = si el sistema es incompatible,
 //                             error cuadratico medio
   {

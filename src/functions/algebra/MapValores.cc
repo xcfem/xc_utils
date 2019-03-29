@@ -3,20 +3,19 @@
 //
 //  Copyright (C)  Luis Claudio Pérez Tato
 //
-//  Este software es libre: usted puede redistribuirlo y/o modificarlo 
-//  bajo los términos de la Licencia Pública General GNU publicada 
-//  por la Fundación para el Software Libre, ya sea la versión 3 
-//  de la Licencia, o (a su elección) cualquier versión posterior.
+//  XC utils is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or 
+//  (at your option) any later version.
 //
-//  Este software se distribuye con la esperanza de que sea útil, pero 
-//  SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita 
-//  MERCANTIL o de APTITUD PARA UN PROPÓSITO DETERMINADO. 
-//  Consulte los detalles de la Licencia Pública General GNU para obtener 
-//  una información más detallada. 
+//  This software is distributed in the hope that it will be useful, but 
+//  WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details. 
 //
-// Debería haber recibido una copia de la Licencia Pública General GNU 
-// junto a este programa. 
-// En caso contrario, consulte <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License 
+// along with this program.
+// If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //MapValores.cc
 
@@ -27,7 +26,7 @@
 MapValores::MapValores(void)
   :map_valores() {}
 
-//! @brief Constructor (recibe una cadena de la forma 'x=4.2,y=x+z,...'.
+//! @brief Constructor (receives a string of the form: 'x=4.2,y=x+z,...'.
 MapValores::MapValores(const std::string &str)
   :map_valores()
   {
@@ -39,8 +38,9 @@ MapValores::MapValores(const std::string &str)
         if(par.size()>1)
           (*this)[par[0]]= ExprAlgebra(par[1]);
         else
-	  std::cerr << "MapValores::MapValores("
-                    << str << "); se esperaba una expresión de asignación, se obtuvo: '"
+	  std::cerr << "MapValores::" << __FUNCTION__
+                    << str <<
+	            "); assignment expresion was expected, we get: '"
                     << *i << "'\n";
       }
   }

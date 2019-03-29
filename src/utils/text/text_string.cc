@@ -3,20 +3,19 @@
 //
 //  Copyright (C)  Luis Claudio Pérez Tato
 //
-//  Este software es libre: usted puede redistribuirlo y/o modificarlo 
-//  bajo los términos de la Licencia Pública General GNU publicada 
-//  por la Fundación para el Software Libre, ya sea la versión 3 
-//  de la Licencia, o (a su elección) cualquier versión posterior.
+//  XC utils is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or 
+//  (at your option) any later version.
 //
-//  Este software se distribuye con la esperanza de que sea útil, pero 
-//  SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita 
-//  MERCANTIL o de APTITUD PARA UN PROPÓSITO DETERMINADO. 
-//  Consulte los detalles de la Licencia Pública General GNU para obtener 
-//  una información más detallada. 
+//  This software is distributed in the hope that it will be useful, but 
+//  WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details. 
 //
-// Debería haber recibido una copia de la Licencia Pública General GNU 
-// junto a este programa. 
-// En caso contrario, consulte <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License 
+// along with this program.
+// If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //text_string.cc
 
@@ -601,14 +600,11 @@ const std::deque<std::string> &separa_sumandos(const std::string &str)
   }
 
 
-//! Recibe una text string del tipo:
-//
-//! function_name(arg1,arg2,arg3,...)
+//! Receive a text string of type: function_name(arg1,arg2,arg3,...)
 //!
-//! y devuelve las text strings;
+//! and return the following text strings;
 //! - retval[0]= function_name
 //! - retval[1]= arg1,arg2,arg3,...
-//!
 std::deque<std::string> getfuncargs(const std::string &str)
   {
     static std::deque<std::string> retval;
@@ -620,11 +616,11 @@ std::deque<std::string> getfuncargs(const std::string &str)
     return retval;
   }
 
-//! Recibe una text string del tipo:
+//! Receive a text string like:
 //
 //! function_name(arg1,arg2,arg3,...)
 //!
-//! y devuelve las text strings;
+//! and return the text strings:
 //! - retval[0]= function_name
 //! - retval[1]= arg1
 //! - retval[2]= arg2
@@ -646,11 +642,11 @@ const std::deque<std::string> &getargs(const std::string &str)
     return retval;
   }
 
-//! Recibe una text string del tipo:
+//! Receive a text string like:
 //
 //! nombre[v1,v2,v3,...]
 //!
-//! y devuelve las text strings;
+//! and return the text strings:
 //! - retval[0]= nombre
 //! - retval[1]= v1,v2,v3,...
 //!
@@ -665,17 +661,16 @@ const std::deque<std::string> &getnmbindices(const std::string &str)
     return retval;
   }
 
-//! Recibe una text string del tipo:
+//!  Receive a text string like:
 //
 //! nombre[v1,v2,v3,...]
 //!
-//! y devuelve las text strings;
+//! and return the text strings:
 //! - retval[0]= nombre
 //! - retval[1]= v1
 //! - retval[2]= v2
 //! - retval[3]= v3
 //! - ...
-//!
 const std::deque<std::string> &getindices(const std::string &str)
   {
     std::deque<std::string> tmp= getnmbindices(str);
@@ -691,7 +686,8 @@ const std::deque<std::string> &getindices(const std::string &str)
     return retval;
   }
 
-//! @brief Devuelve el número de comillas (sin escape) en la cadena que se pasa como parámetro.
+//! @brief Return the number of quotation marks (without escape)
+//! in the argument string.
 size_t cuenta_comillas(const std::string &str)
   {
     size_t retval= 0;
