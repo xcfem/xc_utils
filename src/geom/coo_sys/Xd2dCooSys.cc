@@ -26,18 +26,18 @@
 #include "../pos_vec/Pos2d.h"
 
 
-//! @brief Define un sistema de coordenadas de dimensión ne
-//! en un espacio de dimensión 2.
+//! @brief Define a coordinate system of dimension ne
+//! in a two-dimensional space.
 //! The axis are those of the global system.
 Xd2dCooSys::Xd2dCooSys(const size_t &ne)
   : CooSys(ne,2) { identity(); }
-//! @brief Define un sistema de coordenadas de dimensión ne
-//! en un espacio de dimensión 2. ver Xd2dCooSys::XAxisVector.
+//! @brief Define a coordinate system of dimension ne
+//! in a two-dimensional space. See Xd2dCooSys::XAxisVector.
 Xd2dCooSys::Xd2dCooSys(const size_t &ne,const VGlobal &vX)
   : CooSys(ne,2) //Axis 1 paralelo a Vx.
   { XAxisVector(vX); }
-//! @brief Define un sistema de coordenadas de dimensión ne
-//! en un espacio de dimensión 2. ver Xd2dCooSys::XAxisVector.
+//! @brief Define a coordinate system of dimension ne
+//! in a two-dimensional space. See Xd2dCooSys::XAxisVector.
 Xd2dCooSys::Xd2dCooSys(const size_t &ne,const PGlobal &o,const PGlobal &p)
   : CooSys(ne,2)
   { XAxisVector(p-o); }
@@ -52,14 +52,19 @@ Xd2dCooSys::VGlobal Xd2dCooSys::getAxisVDir(const size_t &axis) const
     const FT_matrix row= getRow(axis);
     return VGlobal(row(1,1),row(1,2));
   }
+
+//! @brief Return the global coordinates of the vector.
+//!
+//! @param v: Local coordinates of the vector.
 Xd2dCooSys::VGlobal Xd2dCooSys::GetCooGlobales(const FT_matrix &v) const
-//Return las componentes del vector v 
-//being passed as parameter expresado en coordenadas locales
-//expresado en coordenadas globales.
   {
     const FT_matrix tmp= CooSys::GetCooGlobales(v);
     return VGlobal(tmp(1),tmp(2)); 
   }
+
+//! @brief Return the local coordinates of the vector.
+//!
+//! @param v: Global coordinates of the vector.
 FT_matrix Xd2dCooSys::GetCooLocales(const Xd2dCooSys::VGlobal &v) const
   { return CooSys::GetCooLocales(v.getMatrix()); }
 

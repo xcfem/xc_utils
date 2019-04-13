@@ -89,8 +89,9 @@ class Ref : public ProtoGeom
       {}
   };
 
-//! @brief Return the position of the point p (expressed in local coordinates)
-//! expresssed in global coordinates.
+//! @brief Return the global coordinates of the position vector of the point.
+//!
+//! @param p: local coordinates of the point.
 template<class SC>
 typename Ref<SC>::PGlobal Ref<SC>::GetPosGlobal(const PLocal &p) const
   {
@@ -98,7 +99,9 @@ typename Ref<SC>::PGlobal Ref<SC>::GetPosGlobal(const PLocal &p) const
     return retval;
   }
 
-//! @brief Return el vector v expresado en locales expresado en coordenadas globales.
+//! @brief Return the local coordinates of the vector.
+//!
+//! @param v: local coordinates of the vector.
 template<class SC>
 typename Ref<SC>::VGlobal Ref<SC>::GetCooGlobales(const VLocal &v) const
   { return trf.GetCooGlobales(v); }
@@ -112,7 +115,9 @@ typename Ref<SC>::PLocal Ref<SC>::GetPosLocal(const PGlobal &p) const
     return PLocal(PLocal()+v);
   }
 
-//! @brief Return el vector v expresado en globales expresado en coordenadas locales.
+//! @brief Return the local coordinates of the vector.
+//!
+//! @param v: global coordinates of the vector.
 template<class SC>
 typename Ref<SC>::VLocal Ref<SC>::GetCooLocales(const VGlobal &v) const
   { return trf.GetCooLocales(v); }

@@ -65,12 +65,15 @@ void Rect2d2dCooSys::PutJ(const VGlobal &j)
     put(1,2,-j(1)); //Para que sea ortogonal y dextrógiro.
   }
 
-//! @brief Return las componentes del vector v expresado en locales
-//! expresadas en coordenadas globales.
+//! @brief Return the global coordinates of the vector.
+//!
+//! @param v: local coordinates of the vector.
 Rect2d2dCooSys::VGlobal Rect2d2dCooSys::GetCooGlobales(const VLocal &v) const
   { return Xd2dCooSys::GetCooGlobales(v.getMatrix()); }
-//! @brief Return las componentes del vector v expresado en locales
-//expresadas en coordenadas globales.
+
+//! @brief Return the local coordinates of the vector.
+//!
+//! @param v: global coordinates of the vector.
 Rect2d2dCooSys::VLocal Rect2d2dCooSys::GetCooLocales(const VGlobal &v) const
   {
     const FT_matrix tmp= Xd2dCooSys::GetCooLocales(v);

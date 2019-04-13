@@ -163,9 +163,9 @@ void Gauss( int ip, int nip, double& xi, double& weight )
 //! nip, devuelve su abcisa xi y su peso weight.
 //! @param ip: Índice del punto de integración.
 //! @param nip: Número de puntos de integración.
-//! @param L1: Primera coordenada natural del punto de integración.
-//! @param L2: Segunda coordenada natural del punto de integración.
-//! @param L3: Tercera coordenada natural del punto de integración.
+//! @param L1: First natural coordinate of the integration point.
+//! @param L2: Second natural coordinate of the integration point.
+//! @param L3: Third natural coordinate of the integration point.
 //! @param weight: Peso del punto de integración.
 void Hammer( int ip, int nip, double& L1, double& L2, double& L3,
              double& weight )
@@ -314,8 +314,12 @@ void PtosIntegracion::set_nr_intpt( int nr )
 //! @brief Devuelve el número de puntos de integración.
 int PtosIntegracion::get_nr_intpt() const
   { return nr_of_intpt; }
-//! @brief Asigna las coordenadas naturales coor y el peso wght al punto
-//! de integración cuyo índice se pasa como parámetro.
+//! @brief Sets the natural coordinates and the weight to the
+//! integration point.
+//!
+//! @param ip: index of the integration point.
+//! @param coor: natural coordinates.
+//! @param wght: weight of the integration point.
 void PtosIntegracion::set_values( int ip,const m_double &coor,const double &wght)
   {
     if( ip < 1 || ip > nr_of_intpt )
@@ -326,7 +330,9 @@ void PtosIntegracion::set_values( int ip,const m_double &coor,const double &wght
     intpts[ip-1].nat_coord = coor;
     intpts[ip-1].weight = wght;
   }
-//! @brief Devuelve las coordenadas naturales del punto de integración cuyo índice se pasa como parámetro.
+//! @brief Return the natural coordinates of the integration point.
+//!
+//! @param ip: index of the integration point.
 m_double PtosIntegracion::get_coor(int ip) const
   { return ( intpts[ip-1].nat_coord ); }
 

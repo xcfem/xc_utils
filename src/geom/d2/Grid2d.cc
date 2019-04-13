@@ -60,7 +60,7 @@ GEOM_FT Grid2d::Pxy(void) const
 Pos2d Grid2d::getCenterOfMass(void) const
   { return points.getCenterOfMass(); }
 
-//! @brief Return las coordenadas of point i,j.
+//! @brief Return the coordinates of the i,j point.
 const FT_matrix &Grid2d::GetVertCoords(const size_t &i,const size_t &j) const
   { return points.GetVertCoords(i,j); }
 

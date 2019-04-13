@@ -72,8 +72,8 @@ class Ref3d3d : public Ref<Rect3d3dCooSys>
     //Return the la Z of the point p expressed in local coordinates
     //expressed in local coordinates.
 
-    //Return el vector v expresado en globales
-    //expresado en coordenadas locales.
+    //Return the global coordinates of vector v from its
+    //local coordinates.
 /*     m_double Trf(const m_double &v) */
 /*       { */
 /*         m_double vt(3,1); */

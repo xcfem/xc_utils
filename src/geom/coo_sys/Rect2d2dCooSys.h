@@ -27,8 +27,8 @@
 
 //! @ingroup CooSys
 //
-//! @brief Sistema de coordenadas rectangular de 2 dimensiones
-//! definido en un espacio de dos dimensiones.
+//! @brief Twp-dimensional rectangular coordinate system
+//! defined in a two-dimensional space.
 class Rect2d2dCooSys: public Xd2dCooSys
   {
   public:

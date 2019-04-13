@@ -39,11 +39,11 @@ Pos2d::Pos2d(void)
 Pos2d::Pos2d(const CGPoint_2 &p)
   : ProtoGeom(), cgpt(p) {}
 
-//! @brief Constructor a partir de coordenadas cartesianas.
+//! @brief Constructor from cartesian coordinates.
 Pos2d::Pos2d(const GEOM_FT &Ax,const GEOM_FT &Ay)
   : ProtoGeom(), cgpt(Ax,Ay) {}
 
-//! @brief Constructor a partir de coordenadas homogéneas.
+//! @brief Constructor from homogeneous coordinates.
 Pos2d::Pos2d(const GEOM_RT &x,const GEOM_RT &y,const GEOM_RT &h)
   : ProtoGeom(), cgpt(x,y,h) {}
 

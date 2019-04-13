@@ -23,7 +23,7 @@
 #include <iostream>
 
 
-//! Clase para almacenar coordenadas y peso en una dimensión.
+//! Class to store coordinates and weight in a one-dimensional space.
 struct GaussWeights1D
   {
     double x, w;

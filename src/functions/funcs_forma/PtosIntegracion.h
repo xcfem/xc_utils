@@ -46,7 +46,7 @@ class PtosIntegracion
       public:
         pto_int(){};
         ~pto_int(){};
-        m_double nat_coord;//!< Coordenadas naturales del punto de integración.
+        m_double nat_coord;//!< Natural coordinates of the integration point.
         double weight; //!< Peso del punto de integración.
       };
 
