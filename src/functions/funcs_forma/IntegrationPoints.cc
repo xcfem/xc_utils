@@ -22,15 +22,16 @@
 #include "IntegrationPoints.h"
 #include <sstream>
 
-//! Abcisa y peso de un punto de Gauss.
+//! Abscissa and weight of an integration point.
 //!
-//! Dado un punto de integración definido por su índice ip
-//! y por el número total de puntos de integración a emplear
-//! nip, devuelve su abcisa xi y su peso weight.
-//! @param ip: Índice del punto de integración.
-//! @param nip: Número de puntos de integración.
-//! @param xi: Abcisa del punto de integración.
-//! @param weight: Peso del punto de integración.
+//! Given an integration point defined by its index
+//! and the total number of integration points to use
+//! , this routine returns its abscissae and its weight.
+//! 
+//! @param ip: index of the integration point.
+//! @param nip: number of integration points.
+//! @param xi: abscissa of the intetration point.
+//! @param weight: weight of the integration point.
 void Gauss( int ip, int nip, double& xi, double& weight )
   {
     if ( ip<1 || ip>nip )
@@ -156,17 +157,18 @@ void Gauss( int ip, int nip, double& xi, double& weight )
      }
   }
 
-//! Abcisa y peso de un punto de integración en un dominio triangular.
+//! Abscissa and weight of an integration point on a triangular domain
 //!
-//! Dado un punto de integración definido por su índice ip
-//! y por el número total de puntos de integración a emplear
-//! nip, devuelve su abcisa xi y su peso weight.
-//! @param ip: Índice del punto de integración.
-//! @param nip: Número de puntos de integración.
+//! Given an integration point defined by its index
+//! and the total number of integration points to use
+//! , this routine returns its abscissae and its weight.
+//! 
+//! @param ip: index of the integration point.
+//! @param nip: number of integration points.
 //! @param L1: First natural coordinate of the integration point.
 //! @param L2: Second natural coordinate of the integration point.
 //! @param L3: Third natural coordinate of the integration point.
-//! @param weight: Peso del punto de integración.
+//! @param weight: weight of the integration point.
 void Hammer( int ip, int nip, double& L1, double& L2, double& L3,
              double& weight )
   {
@@ -276,14 +278,14 @@ IntegrationPoints::IntegrationPoints()
 
 //! @brief Constructor.
 //!
-//! @param nr: Número de puntos de integración.
+//! @param nr: Number of integration points.
 IntegrationPoints::IntegrationPoints( int nr )
   {
     nr_of_intpt = nr;
     intpts = new pto_int[nr];
   }
 
-//! @brief Constructor de copia.
+//! @brief Copy constructor.
 IntegrationPoints::IntegrationPoints( const IntegrationPoints& intlocs )
   {
     nr_of_intpt = intlocs.nr_of_intpt;
@@ -303,7 +305,7 @@ IntegrationPoints::IntegrationPoints( const IntegrationPoints& intlocs )
 IntegrationPoints::~IntegrationPoints()
   { if ( intpts != NULL ) delete [] intpts; }
 
-//! @brief Establece el número de puntos de integración.
+//! @brief Set the number of integration points.
 void IntegrationPoints::set_nr_intpt( int nr )
   {
     if ( intpts != NULL ) delete [] intpts;
@@ -311,9 +313,10 @@ void IntegrationPoints::set_nr_intpt( int nr )
     intpts = new pto_int[nr];
   }
 
-//! @brief Devuelve el número de puntos de integración.
+//! @brief Return the number of integration points.
 int IntegrationPoints::get_nr_intpt() const
   { return nr_of_intpt; }
+
 //! @brief Sets the natural coordinates and the weight to the
 //! integration point.
 //!
@@ -324,8 +327,8 @@ void IntegrationPoints::set_values( int ip,const m_double &coor,const double &wg
   {
     if( ip < 1 || ip > nr_of_intpt )
       {
-        std::cerr << "wrong integration point number: " << ip << std::endl;
-        std::cerr << "should be between 1 and " << nr_of_intpt;
+        std::cerr << "wrong integration point number: " << ip << std::endl
+		  << "should be between 1 and " << nr_of_intpt;
       }
     intpts[ip-1].nat_coord = coor;
     intpts[ip-1].weight = wght;
@@ -336,6 +339,7 @@ void IntegrationPoints::set_values( int ip,const m_double &coor,const double &wg
 m_double IntegrationPoints::get_coor(int ip) const
   { return ( intpts[ip-1].nat_coord ); }
 
-//! @brief Devuelve el peso del punto de integración cuyo índice se pasa como parámetro.
+//! @brief Return the weigth of the integration point with the
+//! index beint passed as parmeter.
 double IntegrationPoints::get_weight(int ip) const
   { return ( intpts[ip-1].weight ); }

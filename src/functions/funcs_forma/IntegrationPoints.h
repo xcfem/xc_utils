@@ -22,10 +22,10 @@
 //FeaTure is put on the internet as free software. I would very 
 //much like to hear your feedback and if possible improvements. See 
 //also the 'Future plans' part in the manual.
-//Modificado por LCPT para integrarlo en Swing.
+//Modified by LCPT to integrate it in XC.
 
-#ifndef PTOSINTEGRACION_H
-#define PTOSINTEGRACION_H
+#ifndef INTEGRATIONPOINTS_H
+#define INTEGRATIONPOINTS_H
 
 #include "xc_utils/src/matrices/m_double.h"
 
@@ -37,22 +37,22 @@ void Hammer( int ip, int nip, double& L1, double& L2, double& L3,
 
 //! @ingroup ShapeFunctionsGroup
 //!
-//! @brief Contenedor de puntos de integración.
+//! @brief Integration points container.
 class IntegrationPoints
   {
-    //! @brief Definición del un punto de integración.
+    //! @brief Definition of an integration point.
     class pto_int
       { 
       public:
         pto_int(){};
         ~pto_int(){};
         m_double nat_coord;//!< Natural coordinates of the integration point.
-        double weight; //!< Peso del punto de integración.
+        double weight; //!< Integration point weight.
       };
 
     private:
-      int nr_of_intpt; //!< Número de puntos de integración.
-      pto_int *intpts; //!< Puntos de integración.
+      int nr_of_intpt; //!< Number of integration points.
+      pto_int *intpts; //!< Integration points.
 
     public:
       IntegrationPoints();
@@ -67,4 +67,4 @@ class IntegrationPoints
       double get_weight(int ip) const;
 };
 
-#endif /* PTOSINTEGRACION_H */
+#endif /* INTEGRATIONPOINTS_H */

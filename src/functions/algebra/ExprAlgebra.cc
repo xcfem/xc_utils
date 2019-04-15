@@ -143,13 +143,15 @@ ExprAlgebra colct(const ExprAlgebra &a)
     return retval;
   }
 
-//! @brief Integra la expresión mediante la regla del trapecio.
-//! @param i: Intervalo de integración.
+//! @brief Integrates the expresion using the trapezoidal rule.
+//! 
+//! @param i: Integration interval.
 ExprAlgebra ExprAlgebra::IntegTrapecio(const Intervalo1D &i) const
   { return integ_trapecio(*this,i); }
 
-//! @brief Integra la expresión mediante la regla de simpson.
-//! @param i: Intervalo de integración.
+//! @brief Integrates the expresion using the Simpson rule.
+//! 
+//! @param i: Integration interval.
 ExprAlgebra ExprAlgebra::IntegSimpson(const Intervalo1D &i) const
   { return integ_simpson(*this,i); }
 

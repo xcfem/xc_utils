@@ -22,7 +22,7 @@
 //FeaTure is put on the internet as free software. I would very 
 //much like to hear your feedback and if possible improvements. See 
 //also the 'Future plans' part in the manual.
-//Modificado por LCPT para integrarlo en Swing.
+//Modified by LCPT to integrate it in XC.
 
 #ifndef FFORMA_H
 #define FFORMA_H
@@ -75,7 +75,7 @@ class FForma
 class Segmento: public FForma
   {
   private:
-    size_t int_scheme;//!< Número de puntos de integración.
+    size_t int_scheme;//!< Number of integration points.
 
   protected:
     //! @brief Constructor.
@@ -85,7 +85,7 @@ class Segmento: public FForma
     //! @brief Destructor.
     ~Segmento(){}
     IntegrationPoints get_integ_points(void) const;
-    //! @brief Devuelve el número de puntos de integración.
+    //! @brief Return the number of integration points.
     size_t get_nr_integ_points(void) const { return int_scheme; }
 
     m_double dVdA(size_t face_nr) const;
@@ -113,7 +113,7 @@ class Seg_lin:public Segmento
 class Triangular: public FForma
   {
   private:
-    size_t int_scheme;//!< Número de puntos de integración.
+    size_t int_scheme;//!< Number of integration points.
 
   protected:
     //! @brief Constructor.
@@ -123,7 +123,7 @@ class Triangular: public FForma
     //! @brief Destructor.
     ~Triangular(){}
     IntegrationPoints get_integ_points(void) const;
-    //! @brief Devuelve el número de puntos de integración.
+    //! @brief Return the number of integration points.
     size_t get_nr_integ_points(void) const { return int_scheme; }
 
     m_double dVdA(size_t face_nr) const;
@@ -191,7 +191,7 @@ class Quadrilateral:public FForma
     //! @brief Destructor
     ~Quadrilateral(){}
     IntegrationPoints get_integ_points() const;
-    //! @brief Devuelve el número de puntos de integración.
+    //! @brief Return the number of integration points.
     size_t get_nr_integ_points() const
       { return int_scheme[0]*int_scheme[1]; }
 
@@ -261,7 +261,7 @@ class Hexaedrico:public FForma
     //! @brief Destructor
     ~Hexaedrico(){}
     IntegrationPoints get_integ_points() const;
-    //! @brief Devuelve el número de puntos de integración.
+    //! @brief Return the numberof integration points.
     size_t get_nr_integ_points() const
       { return int_scheme[0]*int_scheme[1]*int_scheme[2]; }
 
