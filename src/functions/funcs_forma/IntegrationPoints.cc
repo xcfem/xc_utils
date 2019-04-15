@@ -19,7 +19,7 @@
 //----------------------------------------------------------------------------
 // Copyright (c) 1999, A.H. van den Boogaard
 
-#include "PtosIntegracion.h"
+#include "IntegrationPoints.h"
 #include <sstream>
 
 //! Abcisa y peso de un punto de Gauss.
@@ -268,7 +268,7 @@ void Hammer( int ip, int nip, double& L1, double& L2, double& L3,
      }
   }
 //! @brief Constructor por defecto.
-PtosIntegracion::PtosIntegracion()
+IntegrationPoints::IntegrationPoints()
   {
     nr_of_intpt = 0;
     intpts = NULL;
@@ -277,14 +277,14 @@ PtosIntegracion::PtosIntegracion()
 //! @brief Constructor.
 //!
 //! @param nr: Número de puntos de integración.
-PtosIntegracion::PtosIntegracion( int nr )
+IntegrationPoints::IntegrationPoints( int nr )
   {
     nr_of_intpt = nr;
     intpts = new pto_int[nr];
   }
 
 //! @brief Constructor de copia.
-PtosIntegracion::PtosIntegracion( const PtosIntegracion& intlocs )
+IntegrationPoints::IntegrationPoints( const IntegrationPoints& intlocs )
   {
     nr_of_intpt = intlocs.nr_of_intpt;
     if( nr_of_intpt == 0 )
@@ -300,11 +300,11 @@ PtosIntegracion::PtosIntegracion( const PtosIntegracion& intlocs )
   }
 
 //! @brief Destructor.
-PtosIntegracion::~PtosIntegracion()
+IntegrationPoints::~IntegrationPoints()
   { if ( intpts != NULL ) delete [] intpts; }
 
 //! @brief Establece el número de puntos de integración.
-void PtosIntegracion::set_nr_intpt( int nr )
+void IntegrationPoints::set_nr_intpt( int nr )
   {
     if ( intpts != NULL ) delete [] intpts;
     nr_of_intpt = nr;
@@ -312,7 +312,7 @@ void PtosIntegracion::set_nr_intpt( int nr )
   }
 
 //! @brief Devuelve el número de puntos de integración.
-int PtosIntegracion::get_nr_intpt() const
+int IntegrationPoints::get_nr_intpt() const
   { return nr_of_intpt; }
 //! @brief Sets the natural coordinates and the weight to the
 //! integration point.
@@ -320,7 +320,7 @@ int PtosIntegracion::get_nr_intpt() const
 //! @param ip: index of the integration point.
 //! @param coor: natural coordinates.
 //! @param wght: weight of the integration point.
-void PtosIntegracion::set_values( int ip,const m_double &coor,const double &wght)
+void IntegrationPoints::set_values( int ip,const m_double &coor,const double &wght)
   {
     if( ip < 1 || ip > nr_of_intpt )
       {
@@ -333,9 +333,9 @@ void PtosIntegracion::set_values( int ip,const m_double &coor,const double &wght
 //! @brief Return the natural coordinates of the integration point.
 //!
 //! @param ip: index of the integration point.
-m_double PtosIntegracion::get_coor(int ip) const
+m_double IntegrationPoints::get_coor(int ip) const
   { return ( intpts[ip-1].nat_coord ); }
 
 //! @brief Devuelve el peso del punto de integración cuyo índice se pasa como parámetro.
-double PtosIntegracion::get_weight(int ip) const
+double IntegrationPoints::get_weight(int ip) const
   { return ( intpts[ip-1].weight ); }

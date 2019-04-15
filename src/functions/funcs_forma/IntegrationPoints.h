@@ -17,7 +17,7 @@
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//PtosIntegracion.h
+//IntegrationPoints.h
 // ORIGINAL: Copyright (c) 1999, A.H. van den Boogaard
 //FeaTure is put on the internet as free software. I would very 
 //much like to hear your feedback and if possible improvements. See 
@@ -38,7 +38,7 @@ void Hammer( int ip, int nip, double& L1, double& L2, double& L3,
 //! @ingroup ShapeFunctionsGroup
 //!
 //! @brief Contenedor de puntos de integración.
-class PtosIntegracion
+class IntegrationPoints
   {
     //! @brief Definición del un punto de integración.
     class pto_int
@@ -55,10 +55,10 @@ class PtosIntegracion
       pto_int *intpts; //!< Puntos de integración.
 
     public:
-      PtosIntegracion();
-      PtosIntegracion(const PtosIntegracion &);
-      PtosIntegracion(int nr);
-      ~PtosIntegracion();
+      IntegrationPoints();
+      IntegrationPoints(const IntegrationPoints &);
+      IntegrationPoints(int nr);
+      ~IntegrationPoints();
 
       void set_nr_intpt(int nr);
       int  get_nr_intpt() const;
