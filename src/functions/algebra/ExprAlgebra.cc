@@ -22,7 +22,7 @@
 #include "TablaVariables.h"
 #include "LexAlgebra.h"
 #include "ConjVariables.h"
-#include "integ_num.h"
+#include "num_integration.h"
 #include <cmath>
 #include "MapValores.h"
 

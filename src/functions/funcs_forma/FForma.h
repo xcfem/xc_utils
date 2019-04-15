@@ -58,13 +58,13 @@ class FForma
     //! parameter. The (i,j) component of the matrix is equal to d(Nj)/d(xi)
     virtual m_double getPartialDerivatives(const m_double &natcor) const=0;
     //! @brief Return the integration points for the shape functions domain.
-    virtual IntegrationPoints get_ptos_integ(void) const=0;
+    virtual IntegrationPoints get_integ_points(void) const=0;
     //! @brief Return the integration points for the shape functions domain.
-    virtual size_t get_nr_ptos_integ() const=0;
+    virtual size_t get_nr_integ_points() const=0;
 
     //! @brief Return the integration points for a side (2D domains) or a
     //! face (3D domains) of the shape functions.
-    virtual IntegrationPoints get_ptos_integ_face(size_t face_nr) const=0;
+    virtual IntegrationPoints get_face_integ_points(size_t face_nr) const=0;
     //! ??
     virtual m_double dVdA(size_t face_nr) const=0;
   };
@@ -84,12 +84,12 @@ class Segmento: public FForma
   public:
     //! @brief Destructor.
     ~Segmento(){}
-    IntegrationPoints get_ptos_integ(void) const;
+    IntegrationPoints get_integ_points(void) const;
     //! @brief Devuelve el número de puntos de integración.
-    size_t get_nr_ptos_integ(void) const { return int_scheme; }
+    size_t get_nr_integ_points(void) const { return int_scheme; }
 
     m_double dVdA(size_t face_nr) const;
-    IntegrationPoints get_ptos_integ_face(size_t face_nr) const;
+    IntegrationPoints get_face_integ_points(size_t face_nr) const;
   };
 
 //! @ingroup ShapeFunctionsGroup
@@ -122,12 +122,12 @@ class Triangular: public FForma
   public:
     //! @brief Destructor.
     ~Triangular(){}
-    IntegrationPoints get_ptos_integ(void) const;
+    IntegrationPoints get_integ_points(void) const;
     //! @brief Devuelve el número de puntos de integración.
-    size_t get_nr_ptos_integ(void) const { return int_scheme; }
+    size_t get_nr_integ_points(void) const { return int_scheme; }
 
     m_double dVdA(size_t face_nr) const;
-    IntegrationPoints get_ptos_integ_face(size_t face_nr) const;
+    IntegrationPoints get_face_integ_points(size_t face_nr) const;
   };
 
 //! @ingroup ShapeFunctionsGroup
@@ -190,13 +190,13 @@ class Quadrilateral:public FForma
   public:
     //! @brief Destructor
     ~Quadrilateral(){}
-    IntegrationPoints get_ptos_integ() const;
+    IntegrationPoints get_integ_points() const;
     //! @brief Devuelve el número de puntos de integración.
-    size_t get_nr_ptos_integ() const
+    size_t get_nr_integ_points() const
       { return int_scheme[0]*int_scheme[1]; }
 
     m_double dVdA(size_t face_nr) const;
-    IntegrationPoints get_ptos_integ_face(size_t face_nr) const;
+    IntegrationPoints get_face_integ_points(size_t face_nr) const;
   };
 
 //! @ingroup ShapeFunctionsGroup
@@ -260,13 +260,13 @@ class Hexaedrico:public FForma
   public:
     //! @brief Destructor
     ~Hexaedrico(){}
-    IntegrationPoints get_ptos_integ() const;
+    IntegrationPoints get_integ_points() const;
     //! @brief Devuelve el número de puntos de integración.
-    size_t get_nr_ptos_integ() const
+    size_t get_nr_integ_points() const
       { return int_scheme[0]*int_scheme[1]*int_scheme[2]; }
 
     m_double dVdA(size_t face_nr) const;
-    IntegrationPoints get_ptos_integ_face(size_t face_nr) const;
+    IntegrationPoints get_face_integ_points(size_t face_nr) const;
   };
 
 //! @ingroup ShapeFunctionsGroup

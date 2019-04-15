@@ -17,11 +17,11 @@
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//integ_num.h
-//Rutinas de integración numérica.
+//num_integration.h
+//Numerical integration routines.
 
-#ifndef INTEG_NUM_H
-#define INTEG_NUM_H
+#ifndef NUM_INTEGRATION_H
+#define NUM_INTEGRATION_H
 
 #include "ExprAlgebra.h"
 #include <string>

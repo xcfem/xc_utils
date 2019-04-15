@@ -23,21 +23,21 @@
 #include "IntegrationPoints.h"
 #include <iostream>
 
-//! @brief Devuelve los puntos de integración de un dominio segmento.
-IntegrationPoints Segmento::get_ptos_integ() const
+//! @brief Return the integration point of a segment domain.
+IntegrationPoints Segmento::get_integ_points() const
   {
     double w1;
     m_double natcor(1,1);
 
-    IntegrationPoints ptos_integ(get_nr_ptos_integ());
+    IntegrationPoints integ_points(get_nr_integ_points());
     size_t ip = 0;
 
     for(size_t xip=1; xip<=int_scheme; xip++)
       {
         Gauss(xip, int_scheme, natcor[0], w1);
-        ptos_integ.set_values(++ip, natcor, w1);
+        integ_points.set_values(++ip, natcor, w1);
       }
-    return ptos_integ;
+    return integ_points;
   }
 
 //! @brief ??
@@ -48,29 +48,29 @@ m_double Segmento::dVdA(size_t face_nr) const
     return dvda;
   }
 
-//! @brief Devuelve los puntos de integración para dominios triangulares.
-IntegrationPoints Triangular::get_ptos_integ() const
+//! @brief Return the integration points for triangular domains.
+IntegrationPoints Triangular::get_integ_points() const
   {
     double w;
     m_double Xi(3,1);
 
-    IntegrationPoints ptos_integ(int_scheme);
+    IntegrationPoints integ_points(int_scheme);
 
-    for(size_t ip=1; ip<=get_nr_ptos_integ(); ip++)
+    for(size_t ip=1; ip<=get_nr_integ_points(); ip++)
       {
         Hammer(ip, int_scheme, Xi[0], Xi[1], Xi[2], w);
-        ptos_integ.set_values(ip, Xi, w);
+        integ_points.set_values(ip, Xi, w);
       }
-    return ptos_integ;
+    return integ_points;
   }
-//! @brief Devuelve los puntos de integración correspondientes a un lado 
-//! de un dominio cuadrilátero.
-IntegrationPoints Segmento::get_ptos_integ_face(size_t face_nr) const
+//! @brief Return the integration points corresponding to a side 
+//! of a quadrilateral domain.
+IntegrationPoints Segmento::get_face_integ_points(size_t face_nr) const
   {
-    std::cerr << "illegal face number in Segmento::get_ptos_integ_face()" 
+    std::cerr << "illegal face number in Segmento::get_face_integ_points()" 
               << std::endl;
-    IntegrationPoints ptos_integ(0);
-    return ptos_integ;
+    IntegrationPoints integ_points(0);
+    return integ_points;
   }
 
 //! @brief Return the values of the shape functions at the point
@@ -98,8 +98,8 @@ m_double Seg_lin::getPartialDerivatives(const m_double &natcor) const
     return P;
   }
 
-//! @brief Devuelve los puntos de integración para un lado de un dominio triangular.
-IntegrationPoints Triangular::get_ptos_integ_face(size_t face_nr) const
+//! @brief Return the integration points of a triangular domain.
+IntegrationPoints Triangular::get_face_integ_points(size_t face_nr) const
   {
     size_t i=0, j=0, k=0;
     m_double Xi(3,1);
@@ -116,7 +116,7 @@ IntegrationPoints Triangular::get_ptos_integ_face(size_t face_nr) const
         i=1; j=3; k=2;
         break;
       default:
-	std::cerr << "illegal face number in Triangular::get_ptos_integ_face()" << std::endl;
+	std::cerr << "illegal face number in Triangular::get_face_integ_points()" << std::endl;
       }
 
     size_t nr_line_ip= 0;
@@ -128,7 +128,7 @@ IntegrationPoints Triangular::get_ptos_integ_face(size_t face_nr) const
       else
         nr_line_ip = 4;
 
-    IntegrationPoints ptos_integ(nr_line_ip);
+    IntegrationPoints integ_points(nr_line_ip);
 
     double xi,w,L;
     for(size_t ip=1; ip<=nr_line_ip; ip++)
@@ -138,9 +138,9 @@ IntegrationPoints Triangular::get_ptos_integ_face(size_t face_nr) const
         Xi(i,1) = L;
         Xi(j,1) = 1.0-L;
         Xi(k,1) = 0.0;
-        ptos_integ.set_values(ip, Xi, w);
+        integ_points.set_values(ip, Xi, w);
       }
-    return ptos_integ;
+    return integ_points;
   }
 
 //! @brief ??
@@ -270,13 +270,13 @@ m_double Tri_quad_alt::getPartialDerivatives(const m_double &Xi) const
     return P;
   }
 
-//! @brief Devuelve los puntos de integración de un dominio cuadrilátero.
-IntegrationPoints Quadrilateral::get_ptos_integ() const
+//! @brief Return the integration points of a quadrilateral domain.
+IntegrationPoints Quadrilateral::get_integ_points() const
   {
     double w1, w2;
     m_double natcor(2,1);
 
-    IntegrationPoints ptos_integ(get_nr_ptos_integ());
+    IntegrationPoints integ_points(get_nr_integ_points());
     size_t ip = 0;
 
     for(size_t xip=1; xip<=int_scheme[0]; xip++)
@@ -285,15 +285,15 @@ IntegrationPoints Quadrilateral::get_ptos_integ() const
         for(size_t eip=1; eip<= int_scheme[1]; eip++)
           {
             Gauss(eip, int_scheme[1], natcor[1], w2);
-            ptos_integ.set_values(++ip, natcor, w1*w2);
+            integ_points.set_values(++ip, natcor, w1*w2);
           }
       }
-    return ptos_integ;
+    return integ_points;
   }
 
-//! @brief Devuelve los puntos de integración correspondientes a un lado 
-//! de un dominio cuadrilátero.
-IntegrationPoints Quadrilateral::get_ptos_integ_face(size_t face_nr) const
+//! @brief Return the integration points corresponding to a side of a
+// quadrilateral domain.
+IntegrationPoints Quadrilateral::get_face_integ_points(size_t face_nr) const
   {
     size_t nr_line_ip=0, i=0;
     m_double Xi(2,1,0.0);
@@ -313,18 +313,18 @@ IntegrationPoints Quadrilateral::get_ptos_integ_face(size_t face_nr) const
         i=2; Xi(1)=-1; nr_line_ip=int_scheme[1];
         break;
       default:
-        std::cerr << "illegal face number in Quadrilateral::get_ptos_integ_face()" << std::endl;
+        std::cerr << "illegal face number in Quadrilateral::get_face_integ_points()" << std::endl;
       }
 
-    IntegrationPoints ptos_integ(nr_line_ip);
+    IntegrationPoints integ_points(nr_line_ip);
 
     double w;
     for(size_t ip=1; ip<=nr_line_ip; ip++)
       {
         Gauss(ip, nr_line_ip, Xi(i), w);
-        ptos_integ.set_values(ip, Xi, w);
+        integ_points.set_values(ip, Xi, w);
       }
-    return ptos_integ;
+    return integ_points;
   }
 
 //! @brief ??
@@ -468,13 +468,13 @@ m_double Quad_quad_alt::getPartialDerivatives(const m_double &natcor) const
     return P;
   }
 
-//! @brief Devuelve los puntos de integración de un dominio hexaédrico.
-IntegrationPoints Hexaedrico::get_ptos_integ() const
+//! @brief Return the integration points of a hexahedron.
+IntegrationPoints Hexaedrico::get_integ_points() const
   {
     double w1, w2, w3;
     m_double natcor(3,1);
 
-    IntegrationPoints ptos_integ(get_nr_ptos_integ());
+    IntegrationPoints integ_points(get_nr_integ_points());
     size_t ip = 0;
 
     for(size_t xip=1; xip<=int_scheme[0]; xip++)
@@ -486,15 +486,15 @@ IntegrationPoints Hexaedrico::get_ptos_integ() const
             for(size_t zip=1; zip<=int_scheme[2]; zip++)
               {
                 Gauss(zip, int_scheme[2], natcor(3), w3);
-                ptos_integ.set_values(++ip, natcor, w1*w2*w3);
+                integ_points.set_values(++ip, natcor, w1*w2*w3);
               }
           }
       }
-    return ptos_integ;
+    return integ_points;
   }
 
 //! @brief Devuelve los puntos de una cara de un dominio hexahédrico.
-IntegrationPoints Hexaedrico::get_ptos_integ_face(size_t face_nr) const
+IntegrationPoints Hexaedrico::get_face_integ_points(size_t face_nr) const
   {
     size_t i=0, j=0;
     m_double Xi(3,1,0);
@@ -520,11 +520,11 @@ IntegrationPoints Hexaedrico::get_ptos_integ_face(size_t face_nr) const
         i=2; j=3; Xi(1)=-1;
         break;
       default:
-	std::cerr << "illegal face number in Hexaedrico::get_ptos_integ_face()" << std::endl;
+	std::cerr << "illegal face number in Hexaedrico::get_face_integ_points()" << std::endl;
       }
 
     size_t nr_face_ip = int_scheme[i-1]*int_scheme[j-1];
-    IntegrationPoints ptos_integ(nr_face_ip);
+    IntegrationPoints integ_points(nr_face_ip);
 
     double w1, w2;
     size_t ip=0;
@@ -534,10 +534,10 @@ IntegrationPoints Hexaedrico::get_ptos_integ_face(size_t face_nr) const
         for(size_t eip=1; eip<=int_scheme[j-1]; eip++)
           {
             Gauss(eip, int_scheme[j-1], Xi(j), w2);
-            ptos_integ.set_values(++ip, Xi, w1*w2);
+            integ_points.set_values(++ip, Xi, w1*w2);
           }
       }
-    return ptos_integ;
+    return integ_points;
   }
 
 //! @brief ??
