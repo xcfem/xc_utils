@@ -17,15 +17,15 @@
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//FForma.h
+//ShapeFunction.h
 // ORIGINAL: shape.h Copyright (c) 1999, A.H. van den Boogaard
 //FeaTure is put on the internet as free software. I would very 
 //much like to hear your feedback and if possible improvements. See 
 //also the 'Future plans' part in the manual.
 //Modified by LCPT to integrate it in XC.
 
-#ifndef FFORMA_H
-#define FFORMA_H
+#ifndef SHAPEFUNCTION_H
+#define SHAPEFUNCTION_H
 
 #include <cstddef>
 #include "xc_utils/src/matrices/m_double.h"
@@ -41,15 +41,15 @@ class IntegrationPoints;
 //! @ingroup ShapeFunctionsGroup
 //!
 //! @brief Base class for shape functions.
-class FForma
+class ShapeFunction
   {
   protected:
     //! @brief Constructor por defecto
-    FForma(){}
+    ShapeFunction(){}
 
   public:
     //! Destructor.
-    virtual ~FForma(){}
+    virtual ~ShapeFunction(){}
     //! @brief Return the values of the shape functions at the point
 //! with the natural coordinates being passed as parameter.
     virtual m_double get_N_vec(const m_double &natcor) const=0;
@@ -72,7 +72,7 @@ class FForma
 //! @ingroup ShapeFunctionsGroup
 //!
 //! @brief Clase base para dominios de tipo segmento.
-class Segmento: public FForma
+class Segmento: public ShapeFunction
   {
   private:
     size_t int_scheme;//!< Number of integration points.
@@ -110,7 +110,7 @@ class Seg_lin:public Segmento
 //! @ingroup ShapeFunctionsGroup
 //!
 //! @brief Clase base para dominios triangulares.
-class Triangular: public FForma
+class Triangular: public ShapeFunction
   {
   private:
     size_t int_scheme;//!< Number of integration points.
@@ -177,7 +177,7 @@ class Tri_quad_alt:public Triangular
 //! @ingroup ShapeFunctionsGroup
 //!
 //! @brief Base class for quadrilateral domains.
-class Quadrilateral:public FForma
+class Quadrilateral:public ShapeFunction
   {
   private:
     size_t int_scheme[2];
@@ -247,7 +247,7 @@ class Quad_quad_alt:public Quadrilateral
 //! @ingroup ShapeFunctionsGroup
 //!
 //! @brief Base class for shape functions over hexahedrons.
-class Hexaedrico:public FForma
+class Hexaedrico:public ShapeFunction
   {
   private:
     size_t int_scheme[3];
@@ -284,4 +284,4 @@ class Hex_lin:public Hexaedrico
     m_double getPartialDerivatives(const m_double &natcor) const;
   };
 
-#endif // FFORMA_H
+#endif // SHAPEFUNCTION_H

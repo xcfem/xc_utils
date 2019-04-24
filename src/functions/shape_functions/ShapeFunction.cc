@@ -19,7 +19,7 @@
 //----------------------------------------------------------------------------
 // Copyright (c) 1999, A.H. van den Boogaard
 
-#include "FForma.h"
+#include "ShapeFunction.h"
 #include "IntegrationPoints.h"
 #include <iostream>
 
