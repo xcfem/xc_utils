@@ -66,7 +66,7 @@ FunctionFromPointsR_R::const_iterator FunctionFromPointsR_R::PosMin(void) const
     return retval;
   }
 
-//! @brief Return el dominio en el que se define la función.
+//! @brief Return the function domain.
 dq_double FunctionFromPointsR_R::Dominio(void) const
   {
     dq_double retval(2,0.0);
@@ -75,7 +75,7 @@ dq_double FunctionFromPointsR_R::Dominio(void) const
     return retval;
   }
 
-//! @brief Return las abcisas en las que se define la función.
+//! @brief Return the abcissae of the function definition points.
 dq_double FunctionFromPointsR_R::Abcisas(void) const
   {
     dq_double retval;
@@ -124,7 +124,7 @@ double FunctionFromPointsR_R::firstX(void) const
     if(!empty())
       retval= begin()->first;
     else
-      std::cerr << "La función está sin definir." << std::endl;
+      std::cerr << "Undefined function." << std::endl;
     return retval;
   }
 double FunctionFromPointsR_R::firstY(void) const
@@ -133,7 +133,7 @@ double FunctionFromPointsR_R::firstY(void) const
     if(!empty())
       retval= begin()->second;
     else
-      std::cerr << "La función está sin definir." << std::endl;
+      std::cerr << "Undefined function." << std::endl;
     return retval;
   }
 double FunctionFromPointsR_R::lastX(void) const
@@ -142,7 +142,7 @@ double FunctionFromPointsR_R::lastX(void) const
     if(!empty())
       retval= rbegin()->first;
     else
-      std::cerr << "La función está sin definir." << std::endl;
+      std::cerr << "Undefined function." << std::endl;
     return retval;
   }
 double FunctionFromPointsR_R::lastY(void) const
@@ -151,7 +151,7 @@ double FunctionFromPointsR_R::lastY(void) const
     if(!empty())
       retval= rbegin()->second;
     else
-      std::cerr << "La función está sin definir." << std::endl;
+      std::cerr << "Undefined function." << std::endl;
     return retval;
   }
 
@@ -193,16 +193,16 @@ FunctionFromPointsR_R getSub(const FunctionFromPointsR_R &f1,const double &x0,co
     return retval;
   }
 
-//! @brief Return the parte de la función entre x0 and x1.
+//! @brief Return the part of the function between x0 and x1.
 FunctionFromPointsR_R FunctionFromPointsR_R::sub(const double &x0,const double &x1) const
   { return getSub(*this,x0,x1); }
 
 
-//! @brief Return the función cambiada de signo.
+//! @brief Return the function with the opposite sign.
 FunctionFromPointsR_R FunctionFromPointsR_R::getNeg(void) const
   { return (*this)*-1.0; }
 
-//! @brief Cambia de signo la función.
+//! @brief Change the sign of the function.
 FunctionFromPointsR_R &FunctionFromPointsR_R::Neg(void)
   {
     (*this)= getNeg();
@@ -250,7 +250,8 @@ FunctionFromPointsR_R &FunctionFromPointsR_R::operator/=(const FunctionFromPoint
     return *this;
   }
 
-//! @brief Return the función que resulta de integrar entre x0 and x1.
+//! @brief Return the function that results from the integration
+//! between x0 and x1.
 FunctionFromPointsR_R FunctionFromPointsR_R::integra(const double &x0,const double &x1,const double &d) const
   {
     double delta(d);
@@ -289,7 +290,7 @@ FunctionFromPointsR_R FunctionFromPointsR_R::integra(const double &x0,const doub
     return retval;
   }
 
-//! @brief Asigna a la función una constante.
+//! @brief Assigns a constant to the function.
 FunctionFromPointsR_R asigna(const FunctionFromPointsR_R &f,const double &c)
   {
     FunctionFromPointsR_R retval;
@@ -298,7 +299,7 @@ FunctionFromPointsR_R asigna(const FunctionFromPointsR_R &f,const double &c)
     return retval;
   }
 
-//! @brief Suma a la función una constante.
+//! @brief Sums a constant to the function.
 FunctionFromPointsR_R operator+(const FunctionFromPointsR_R &f,const double &c)
   {
     FunctionFromPointsR_R retval;
@@ -365,7 +366,7 @@ FunctionFromPointsR_R operator/(const FunctionFromPointsR_R &f1,const FunctionFr
     return retval;
   }
 
-//! @brief Multiplica la función por una constante.
+//! @brief Multiplies the function by a constant.
 FunctionFromPointsR_R operator*(const double &c,const FunctionFromPointsR_R &f)
   {
     FunctionFromPointsR_R retval;

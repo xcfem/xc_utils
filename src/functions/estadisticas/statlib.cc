@@ -24,9 +24,9 @@
 #include <cmath>
 #include "xc_utils/src/utils/misc_utils/matem.h"
 
+//! @brief Return the integral of the probability function
+//! corresponding to a "Normal" distribution.
 double Q(const double &x)
-  //Devuelve la integral de la función de probabilidad
-  //correspondiente a una distribución "Normal".
   {
     const double twoPi = 2*M_PI;
 

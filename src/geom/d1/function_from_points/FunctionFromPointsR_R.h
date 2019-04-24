@@ -27,10 +27,10 @@
 
 typedef std::deque<double> dq_double;
 
-//! @brief función de R en R defined on a set of points.
+//! @brief f:R->R function defined on a set of points.
 //!
-//! Function that for each point x de la recta real le asigna un
-//! valor real. The correspondence is established by points,
+//! Function that for each point x from the real domain returns a 
+//! real value. The correspondence is established by points,
 //! that is, by pairs (x1,y1), (x2,y2), ...
 class FunctionFromPointsR_R: public FunctionFromPointsR_T<double>
   {

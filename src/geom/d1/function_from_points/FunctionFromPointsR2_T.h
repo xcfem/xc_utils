@@ -27,10 +27,10 @@
 #include <xc_utils/src/geom/pos_vec/Pos2dArray.h>
 #include <xc_utils/src/geom/pos_vec/Vector2d.h>
 
-//! @brief función de R2 en T defined on a set of points.
+//! @brief f:R2->T defined on a set of points.
 //!
-//! Function that for each point P of the plane le asigna un
-//! valor de clase T. The correspondence is established by points,
+//! Function that for each point P of the plane returns a
+//! T class value. The correspondence is established by points,
 //! that is, by pairs (x1,T1), (x2,T2), ...
 template <class T>
 class FunctionFromPointsR2_T

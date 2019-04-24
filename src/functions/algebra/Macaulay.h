@@ -27,7 +27,7 @@
 
 class Rama;
 
-//! @brief Función de Macaulay F0 (Ver Mecánica de materiales Gere-Timoshenko apdo. 7.9).
+//! @brief Macaulay function F0 (See Mecánica de materiales Gere-Timoshenko paragraph 7.9).
 //! se define como:
 //! <x-a>= 0 si x<=a.
 //! <x-a>= 1 si x>=a.
@@ -47,7 +47,7 @@ class OpMacaulay0: public OpBinario
   };
 
 
-//! @brief Función de Macaulay Fn (Ver Mecánica de materiales Gere-Timoshenko apdo. 7.9).
+//! @brief Macaulay function Fn (Ver Mecánica de materiales Gere-Timoshenko paragraph 7.9).
 //! se define como:
 //! <x-a>= 0 si x<=a.
 //! <x-a>= (x-a)^n si x>=a.
