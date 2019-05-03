@@ -78,11 +78,14 @@ void CooSys::ortonormaliza(void)
     ortogonaliza();
     normaliza();
   }
-//! @brief Hace coincidir el sistema de coordenadas con el correspondiente global.
-//! es decir:
-//! - Si es un sistema de coordenadas unidimensional lo hace coincidir con el axis 1 of the global system.
-//! - Si es bidimensional, lo hace coincidir con el formado by the axis 1 and 2 of the global system.
-//! - Si es tridimensional, lo hace coincidir con el sistema global.
+//! @brief Aligns the coordinate system with the global one.
+//! i. e:
+//! - If it's a one-dimensional coordinate system it is placed on the
+//! first axis of the global coordinate system.
+//! - If it's a two-dimensional coordinate system it is placed on the
+//! first axis and second axis of the global coordinate system.
+//! - If it's a three-dimensional coordinate system we make it match the
+//! global one.
 void CooSys::identity(void)
   {
     rot.Con(0);
@@ -112,7 +115,7 @@ bool CooSys::EsNormal(void) const
     return true;
   }
 
-//! @brief Return verdadero si el sistema de coordenadas es dextrógiro.
+//! @brief Return true if it's a dextrorotatory coordinate system.
 bool CooSys::EsDextrogiro(void) const
   {
     if(numberOfAxis()<3)
@@ -171,12 +174,15 @@ FT_matrix CooSys::TransDeGlobal(void) const
 FT_matrix CooSys::GetTransA(const CooSys &dest) const
   { return (dest.rot*TransAGlobal()); }
 
-//! @brief Return las componentes en coordenadas globales del vector v 
-//! being passed as parameter expresado en coordenadas locales.
+//! @brief Return the global coordinates of the vector.
+//!
+//! @param v: vector in local coordinates.
 FT_matrix CooSys::GetCooGlobales(const FT_matrix &v) const
   { return TransAGlobal()*v; }
-//! @brief Return las componentes en coordenadas locales del vector v 
-//! being passed as parameter expresado en coordenadas globales.
+
+//! @brief Return the local coordinates of the vector.
+//!
+//! @param v: vector in global coordinates.
 FT_matrix CooSys::GetCooLocales(const FT_matrix &v) const
   { return TransDeGlobal()*v; }
 

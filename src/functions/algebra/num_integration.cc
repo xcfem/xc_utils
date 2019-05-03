@@ -17,9 +17,9 @@
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//integ_num.cc
+//num_integration.cc
 
-#include "integ_num.h"
+#include "num_integration.h"
 #include "ExprAlgebra.h"
 
 //! @brief Integra la expresión mediante la regla del trapecio.

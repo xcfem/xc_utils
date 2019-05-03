@@ -37,14 +37,19 @@ Rect1d2dCooSys::Rect1d2dCooSys(const PGlobal &p1,const PGlobal &p2)
 Rect1d2dCooSys::VGlobal Rect1d2dCooSys::GetI(void) const
 //Return el vector unitario I en el sistema global.
   { return getAxisVDir(1); }
+
+//! @brief Return the global coordinates components of the vector from
+//! the local ones.
+//!
+//! @param v: local coordinates of the vector.
 Rect1d2dCooSys::VGlobal Rect1d2dCooSys::GetCooGlobales(const VLocal &v) const
-//Return las componentes del vector v 
-//que se pasa como parámetro expresado en locales
-//expresadas en coordenadas globales.
   { return Xd2dCooSys::GetCooGlobales(FT_matrix(1,1,v)); }
+
+//! @brief Return the local coordinates of the vector from the
+//! global ones.
+//!
+//! @param v: local coordinates of the vector.
 Rect1d2dCooSys::VLocal Rect1d2dCooSys::GetCooLocales(const Rect1d2dCooSys::VGlobal &v) const
-//Return las componentes del vector v expresado en locales
-//expresadas en coordenadas globales.
   {
     const FT_matrix tmp= Xd2dCooSys::GetCooLocales(v);
     return tmp(1,1);

@@ -51,7 +51,8 @@ class ProtoMatrix
     inline void check_get_box(size_t f1, size_t c1, size_t f2, size_t c2) const
       {
         if ( (f2 < f1) || (c2 < c1) )
-          std::cerr << "Indices erróneos en función getBox." << std::endl;
+          std::cerr << "Erroneous indexes in "
+	            << __FUNCTION__ << " function." << std::endl;
       }
     inline void check_sto_sum(const ProtoMatrix &m) const
       {

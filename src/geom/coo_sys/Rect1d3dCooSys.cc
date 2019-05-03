@@ -36,11 +36,17 @@ Rect1d3dCooSys::Rect1d3dCooSys(const PGlobal &o,const PGlobal &p)
 Rect1d3dCooSys::VGlobal Rect1d3dCooSys::GetI(void) const
 //Return el vector unitario I en el sistema global.
   { return getAxisVDir(1); }
+
+//! @brief Return the global coordinates of the vector.
+//!
+//! @param v: local coordinates of the vector.
 Rect1d3dCooSys::VGlobal Rect1d3dCooSys::GetCooGlobales(const VLocal &v) const
-{ return Xd3dCooSys::GetCooGlobales(FT_matrix(1,1,v)); }
+  { return Xd3dCooSys::GetCooGlobales(FT_matrix(1,1,v)); }
+
+//! @brief Return the local coordinates of the vector.
+//!
+//! @param v: global coordinates of the vector.
 Rect1d3dCooSys::VLocal Rect1d3dCooSys::GetCooLocales(const Rect1d3dCooSys::VGlobal &v) const
-//Return las componentes del vector v expresado en locales
-//expresadas en coordenadas globales.
   {
     const FT_matrix tmp= Xd3dCooSys::GetCooLocales(v);
     return VLocal(tmp(1));

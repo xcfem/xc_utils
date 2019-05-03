@@ -35,9 +35,8 @@
 //! applied sequentially align the global system with this one.
 Rect2d3dCooSys::Rect2d3dCooSys(const VGlobal &v)
   : Xd3dCooSys(2,v) {}
-//! @brief Define un sistema de coordenadas de dimensión i
-//! el x axis tendrá la dirección y sentido del vector v1
-//! se pasa como parámetro.
+//! @brief Define a coordinate system with dimension i
+//! the x axis will have the orientation and sense of the v1 argument.
 Rect2d3dCooSys::Rect2d3dCooSys(const VGlobal &v1,const VGlobal &v2)
   : Xd3dCooSys(2,v1,v2) {}
 //! @brief Build the 2D coordinate system defined in a 3D space, so 
@@ -53,14 +52,16 @@ Rect2d3dCooSys::VGlobal Rect2d3dCooSys::GetI(void) const
 Rect2d3dCooSys::VGlobal Rect2d3dCooSys::GetJ(void) const
   { return getAxisVDir(2); }
 
+//! @brief Return the global coordinates of the vector.
+//!
+//! @param v: local coordinates of the vector.
 Rect2d3dCooSys::VGlobal Rect2d3dCooSys::GetCooGlobales(const VLocal &v) const
-//Return las componentes del vector v expresado en locales
-//expresadas en coordenadas globales.
   { return Xd3dCooSys::GetCooGlobales(v.getMatrix()); }
 
+//! @brief Return the local coordinates of the vector.
+//!
+//! @param v: global coordinates of the vector.
 Rect2d3dCooSys::VLocal Rect2d3dCooSys::GetCooLocales(const VGlobal &v) const
-//Return las componentes del vector v expresado en locales
-//expresadas en coordenadas globales.
   {
     const FT_matrix tmp= Xd3dCooSys::GetCooLocales(v);
     return VLocal(tmp(1),tmp(2));

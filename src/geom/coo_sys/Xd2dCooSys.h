@@ -18,7 +18,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //CooSys.h
-//Sistema de coordenadas (abstracto).
+//Coordinate system (abstract).
 
 #ifndef XD2D_COO_SYS_H
 #define XD2D_COO_SYS_H

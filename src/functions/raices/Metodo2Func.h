@@ -23,12 +23,10 @@
 #define METODO2FUNC_H
 
 
+//! @brief Converts a method into a function in order to
+//! allow calling the root computation templates with it.
 template<class T,class metodo>
 class Metodo2Func
-//Este objeto vale para "convertir" un método
-//de un objeto en una función de manera
-//que se pueda llamar con ella a las templates
-//de calculo de raíces.
   {
   protected:
     T *t_;

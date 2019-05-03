@@ -26,16 +26,16 @@
 #include "../pos_vec/Pos3d.h"
 
 
-//! @brief Define un sistema de coordenadas de dimensión i
-//! el x axis tendrá la dirección y sentido del vector que
-//! se pasa como parámetro.
+//! @brief Defines a coordinate system of dimension i
+//! the x axis will have the orientation and sense of the vector
+//! argument.
 Xd3dCooSys::Xd3dCooSys(const size_t &i,const VGlobal &v)
   : CooSys(i,3)
   { XAxisVector(v); }
 
-//! @brief Define un sistema de coordenadas de dimensión i
-//! el x axis tendrá la dirección y sentido del vector v1
-//! se pasa como parámetro.
+//! @brief Defines a coordinate system of dimension i
+//! the x axis will have the orientation and sense of the v1
+//! argument.
 Xd3dCooSys::Xd3dCooSys(const size_t &i,const VGlobal &v1,const VGlobal &v2)
   : CooSys(i,3)
   { vectores_unitarios(v1,v2,v1 ^ v2); }
@@ -64,20 +64,25 @@ Xd3dCooSys::VGlobal Xd3dCooSys::getAxisVDir(const size_t &axis) const
     const FT_matrix row= getRow(axis);
     return VGlobal(row(1,1),row(1,2),row(1,3));
   }
-//! Return las componentes del vector v 
-//! being passed as parameter expresado en coordenadas locales
-//! expresado en global coordinates.
+//! @brief Return the global coordinates of the vector.
+//!
+//! @param v: local coordinates of the vector.
 Xd3dCooSys::VGlobal Xd3dCooSys::GetCooGlobales(const FT_matrix &v) const
   {
     const FT_matrix tmp= CooSys::GetCooGlobales(v);
     return VGlobal(tmp(1),tmp(2),tmp(3)); 
   }
+
+//! @brief Return the local coordinates of the vector.
+//!
+//! @param v: global coordinates of the vector.
 FT_matrix Xd3dCooSys::GetCooLocales(const Xd3dCooSys::VGlobal &v) const
   { return CooSys::GetCooLocales(v.getMatrix()); }
-//! Hace que el sistema de coordenadas tenga por vectores unitarios:
-//! - El versor correspondiente al vector i_, being passed as parameter.
-//! - El versor correspondiente al vector j_, being passed as parameter.
-//! - El versor correspondiente al vector k_, being passed as parameter.
+
+//! Makes the system of coordinates have the following unit vectors:
+//! - The versor corresponding to vector i_, being passed as parameter.
+//! - The versor corresponding to vector j_, being passed as parameter.
+//! - The versor corresponding to vector k_, being passed as parameter.
 //!
 //! Comprueba que los tres vectores no sean coplanarios ni paralelos 2 a 2.
 void Xd3dCooSys::vectores_unitarios(const VGlobal &i_,const VGlobal &j_,const VGlobal &k_)
@@ -125,10 +130,10 @@ void Xd3dCooSys::vectores_unitarios(const VGlobal &i_,const VGlobal &j_,const VG
       }
   }
 
-//! @brief Construye el sistema de coordenadas formado por los vectores:
-//! i_ el being passed as parameter.
-//! j_ el horizontal perpendicular a i_ (si es único).
-//! k_ el producto vectorial de ambos.
+//! @brief Builds the coordinate system formed by the vectors:
+//! i_ the vector being passed as parameter.
+//! j_ the horizontal vector which is perpendicular to i_ (if it is unique).
+//! k_ the cross producto of both vectors.
 void Xd3dCooSys::XAxisVector(const VGlobal &i_)
   {
     if(i_.Nulo())
@@ -155,8 +160,8 @@ void Xd3dCooSys::XAxisVector(const VGlobal &i_)
       }
   }
 
-//! @brief Construye el sistema de coordenadas formado por los vectores:
-//! i_ el vector op (ver XAxisVector).
+//! @brief Build the coordinate system formed by the vectors:
+//! i_ the op vector (see XAxisVector).
 void Xd3dCooSys::TwoPoints(const PGlobal &o,const PGlobal &p)
   { XAxisVector(p-o); }
 

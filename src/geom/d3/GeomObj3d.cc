@@ -65,7 +65,8 @@ BND3d GeomObj3d::Bnd(void) const
 //! @brief Return true if point lies inside the object.
 bool GeomObj3d::In(const Pos3d &p, const double &tol) const
   {
-    std::cerr << "Función 'In', no definida" << std::endl;
+    std::cerr << "Function: '" << __FUNCTION__
+              << "' undefined." << std::endl;
     return (BND3d().In(p,tol));
   }
 

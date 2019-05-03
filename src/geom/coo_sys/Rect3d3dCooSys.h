@@ -18,8 +18,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Rect3d3dCooSys.h
-//Sistema de coordenadas rectangular en 3 dimensiones en un espacio de tres
-//dimensiones.
+//Three-dimensional coordinate system defined in a three-dimensional space.
 
 #ifndef RECT3D3D_COO_SYS_H
 #define RECT3D3D_COO_SYS_H
@@ -28,8 +27,8 @@
 
 //! @ingroup CooSys
 //
-//! @brief Sistema de coordenadas de tres dimensiones
-//! definido en un espacio de tres dimensiones.
+//! @brief Three-dimensional coordinate system defined in a
+//! three-dimensional space.
 class Rect3d3dCooSys: public Xd3dCooSys
   {
   public:

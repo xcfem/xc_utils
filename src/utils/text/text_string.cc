@@ -360,7 +360,7 @@ int get_balance_characters(const std::string &s,const char &abre,const char &cie
   }
 
 
-// //! Función copiada de Kernighan & Ritchie, p64. Implemen-
+// //! Function taken from Kernighan & Ritchie, p64. Implemen-
 // //! ted for portability (the PC function itoa(int,char*,int) is not ANSI
 // //! C). Returns s, the std::string conversion of n.
 // const std::string &itos(int n)
@@ -612,7 +612,7 @@ std::deque<std::string> getfuncargs(const std::string &str)
     if(retval.size()>1)
       boost::algorithm::trim_right_if(retval[1],boost::algorithm::is_any_of(") ")); //Quitamos paréntesis derecho y espacios.
     if(retval.size()>2)
-      std::cerr << "Error al separar función y argurmentos." << std::endl;
+      std::cerr << "Error when splitting function and arguments." << std::endl;
     return retval;
   }
 

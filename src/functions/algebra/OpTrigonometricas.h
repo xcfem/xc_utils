@@ -79,7 +79,7 @@ class OpAtan : public OpUnario
     virtual Rama Diferencia(const Variable &,const Rama &r) const;
   };
 
-//! @brief Función secante sec(x)= 1/cos(x)
+//! @brief Secant function sec(x)= 1/cos(x)
 class OpSec : public OpUnario
   {
     
@@ -90,7 +90,7 @@ class OpSec : public OpUnario
     virtual const Operando &Opera(const Operando *,const Operando *v2= NULL) const;
   };
 
-//! @brief Función cosecante cosec(x)= 1/sin(x)
+//! @brief Cosecant function cosec(x)= 1/sin(x)
 class OpCosec : public OpUnario
   {
     
@@ -101,7 +101,7 @@ class OpCosec : public OpUnario
     virtual const Operando &Opera(const Operando *,const Operando *v2= NULL) const;
   };
 
-//! @brief Función cotangente cotg(x)= 1/tan(x)
+//! @brief Cotangent function cotg(x)= 1/tan(x)
 class OpCotg : public OpUnario
   {
     
@@ -112,7 +112,8 @@ class OpCotg : public OpUnario
     virtual const Operando &Opera(const Operando *,const Operando *v2= NULL) const;
   };
 
-//! @brief Función que convierte grados sexagesimales en radianes deg2rad(x)= pi/180*x
+//! @brief Function that converts sexagesimal degrees into
+//! radians deg2rad(x)= pi/180*x
 class OpDeg2Rad : public OpUnario
   {
     
@@ -125,7 +126,8 @@ class OpDeg2Rad : public OpUnario
   };
 
 
-//! @brief Función que convierte radianes en grados sexagesimales rad2deg(x)= 180/pi*x
+//! @brief Function that converts radians into sexagesimal degrees
+//! rad2deg(x)= 180/pi*x
 class OpRad2Deg : public OpUnario
   {
     

@@ -236,7 +236,7 @@ GEOM_FT Pos2dArray::GetX(const size_t &i,const size_t &j) const
 GEOM_FT Pos2dArray::GetY(const size_t &i,const size_t &j) const
   { return (*this)(i,j).y(); }
 
-//! @brief Return las coordenadas of point i,j.
+//! @brief Return the coordinates of the i,j point.
 const FT_matrix &Pos2dArray::GetVertCoords(const size_t &i,const size_t &j) const
   {
     const Pos2d tmp= getPoint(i,j);

@@ -18,9 +18,9 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Extremo.h
-//Cálculo del extremo de una función unimodal
-//en el intervalo (a,b) mediante el método
-//de la razón aurea.
+// Computation of the extreme of a function that is
+// unimodal on the interval (a,b) using the golden section
+// method.
 
 #ifndef EXTREMO_H
 #define EXTREMO_H

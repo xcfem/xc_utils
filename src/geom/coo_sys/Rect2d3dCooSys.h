@@ -18,8 +18,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Rect2d3dCooSys.h
-//Sistema de coordenadas rectangular de 2 dimensiones
-//en un espacio de tres dimensiones.
+//Two-dimensional rectangular coordinate system in a three-dimensional space.
 
 #ifndef RECT2D_COO_SYS_H
 #define RECT2D_COO_SYS_H
@@ -31,8 +30,8 @@ class Pos2d;
 
 //! @ingroup CooSys
 //
-//! @brief Sistema de coordenadas de dos dimensiones
-//! definido en un espacio de tres dimensiones.
+//! @brief Two-dimensional rectangular coordinate system
+//! definde in a three-dimensional space.
 class Rect2d3dCooSys: public Xd3dCooSys
   {
   public:

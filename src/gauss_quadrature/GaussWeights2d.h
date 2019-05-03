@@ -23,7 +23,8 @@
 #include <iostream>
 #include "GaussWeights1d.h"
 
-//! @brief Estructura para almacenar coordenadas y peso en dos dimensiones.
+//! @brief Structure to store coordinates and weight in a
+//! two-dimensional space.
 struct GaussWeights2D: public GaussWeights1D
   {
     double y;

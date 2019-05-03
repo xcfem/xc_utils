@@ -38,8 +38,9 @@ void Expresion::update_nueva_lista(void)
       Lex().NuevaRefLiteral(*i);
   }
 
-//! @brief Inserta un literal en la lista, esta función existe para evitar pasar por PonerSegnal
-//! y que aumente erróneamente el contador de referencias a literales.
+//! @brief Inserts a literal on the list, this functions exists
+//! to avoid calling PonerSegnal
+//! and to increment by error, the literal reference counter.
 void Expresion::PonerDouble(const double &d)
   { lista.push_back(const_cast<Operando *>(Lex().NuevoLiteral(d))); }
 

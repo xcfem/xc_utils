@@ -17,23 +17,23 @@
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//integ_num.h
-//Rutinas de integración numérica.
+//num_integration.h
+//Numerical integration routines.
 
-#ifndef INTEG_NUM_H
-#define INTEG_NUM_H
+#ifndef NUM_INTEGRATION_H
+#define NUM_INTEGRATION_H
 
 #include "ExprAlgebra.h"
 #include <string>
 #include <vector>
 
-//! @brief Intervalo de integración en una dimensión.
+//! @brief Integration interval in one dimension.
 class Intervalo1D
   {
-    std::string nmb_var; //!< Nombre de la variable respecto a la que se integra.
-    int n; //!< Número de intervalos a adoptar.
-    ExprAlgebra x0; //!< Límite de integración inferior.
-    ExprAlgebra x1; //!< Límite de integración superior.
+    std::string nmb_var; //!< Name of the variable to integrate with.
+    int n; //!< Number of intervals to adopt.
+    ExprAlgebra x0; //!< Lower integration limit.
+    ExprAlgebra x1; //!< Upper integration limit.
   public:
     Intervalo1D(const std::string &palabra,const ExprAlgebra &a= ExprAlgebra(0.0),const ExprAlgebra &b=ExprAlgebra(1.0),const unsigned int &N=10)
       : nmb_var(palabra), n(N),x0(a),x1(b) {}

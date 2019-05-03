@@ -27,7 +27,7 @@
 
 typedef std::deque<double> dq_double;
 
-//! @brief función de R2 en R defined on a set of points.
+//! @brief f:R2->R defined on a set of points.
 //!
 //! Function that assigns a real to the points of its domain.
 class FunctionFromPointsR2_R: public FunctionFromPointsR2_T<double>

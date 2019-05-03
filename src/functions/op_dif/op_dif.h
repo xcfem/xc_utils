@@ -34,11 +34,17 @@ inline double calcula_incremento(const double &t)
     return retval;
   }
 
+//! @brief Return the partial derivative of the function argument.
+//!
+//! Return the partial derivative of the function argument
+//! evaluated at the point x with respecto to the i component
+//! using the "forward difference" method.
+//!
+//! @param x: point to evaluate the function.
+//! @param f: function to differentiate.
+//! @param i: index of the component to differentiate with respect to.
 template<class F>
 inline double parcial_fd(const m_double &x,const F &f,const size_t &i)
-//Return la derivada parcial de la función f
-//en el punto x respecto al parámetro i empleando
-//el método "forward difference" 
   {
     m_double x2(x);
     register const double temp= x2(i);
@@ -47,11 +53,17 @@ inline double parcial_fd(const m_double &x,const F &f,const size_t &i)
     return (f(x2)-f(x))/h;
   }
 
+//! @brief Return the partial derivative of the function argument.
+//!
+//! Return the partial derivative of the function argument
+//! evaluated at the point x with respecto to the i component
+//! using the "extended central difference" method.
+//!
+//! @param x: point to evaluate the function.
+//! @param f: function to differentiate.
+//! @param i: index of the component to differentiate with respect to.
 template<class F>
 inline double parcial_cdf(const m_double &x,const F &f,const size_t &i)
-//Return la derivada parcial de la función f
-//en el punto x respecto al parámetro i empleando
-//el método "extended central difference" 
   {
     m_double x_2(x); //Punto a -2*h de x
     m_double x_1(x); //Punto a -h de x
@@ -67,10 +79,13 @@ inline double parcial_cdf(const m_double &x,const F &f,const size_t &i)
     return (f(x_2)-8.0*f(x_1)+8.0*f(x1)-f(x2))/(12.0*h);
   }
 
+//! @brief Return the gradient vector of the function argument
+//! using the "extended central difference" method.
+//!
+//! @param x: point to evaluate the function.
+//! @param f: function to compute the gradient.
 template<class F>
 inline m_double gradiente_cdf(const m_double &x,const F &f)
-//Return el vector gradiente de f en el punto x
-//empleando el método "extended central difference"
   {
     m_double g(x);
     size_t n_rows= x.getNumberOfRows();
@@ -79,9 +94,11 @@ inline m_double gradiente_cdf(const m_double &x,const F &f)
     return g;
   }
 
-//! @brief Return el vector gradiente de f en el punto x
-//! empleando el método "extended central difference"
-//! como row vector
+//! @brief Return the gradient vector of the function argument
+//! as row vector using the "extended central difference" method.
+//!
+//! @param x: point to evaluate the function.
+//! @param f: function to compute the gradient.
 template<class F>
 inline m_double extended_central_differece_row_gradient(const m_double &x,const F &f)
   {
@@ -92,7 +109,7 @@ inline m_double extended_central_differece_row_gradient(const m_double &x,const 
     return g;
   }
 
-//! @brief Return the jacobian vector de f en el punto x
+//! @brief Return the jacobian vector de f at the point x
 //! using the "extended central difference" method
 template<class MF>
 inline m_double jacobiano_cdf(const m_double &x,const MF &mf)

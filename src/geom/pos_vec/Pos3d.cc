@@ -164,19 +164,19 @@ Pos2d Pos3d::YZ2DProjection(void) const
     return Pos2d(p3d.y(),p3d.z());
   }
 
-//! @brief Equivalente a la función de autocad @mod<arg con el giro en
-//! torno al x axis.
+//! @brief Equivalent to the @mod<arg command from Autocad @mod<arg
+//! Rotation with respect to the x axis.
 Pos3d Pos3d::getModArgX(const GEOM_FT &mod,const GEOM_FT &giroX) const
   { return Pos3d(x(),y()+mod*cos(giroX),z()+mod*sin(giroX)); }
 
-//! @brief Equivalente a la función de autocad @mod<arg con el giro en
-//! torno al y axis.
+//! @brief Equivalent to the @mod<arg command from Autocad @mod<arg
+//! Rotation with respect to the y axis.
 Pos3d Pos3d::getModArgY(const GEOM_FT &mod,const GEOM_FT &giroY) const
   { return Pos3d(x()+mod*cos(giroY),y(),z()-mod*sin(giroY)); }
 
 
-//! @brief Equivalente a la función de autocad @mod<arg con el giro en
-//! torno al z axis.
+//! @brief Equivalent to the @mod<arg command from Autocad @mod<arg
+//! Rotation with respect to the z axis.
 Pos3d Pos3d::getModArgZ(const GEOM_FT &mod,const GEOM_FT &giroZ) const
   { return Pos3d(x()+mod*cos(giroZ),y()+mod*sin(giroZ),z()); }
 
