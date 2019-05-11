@@ -78,13 +78,13 @@ const Pos3d Segment3d::Point(const int &i) const
 Pos3d Segment3d::PtoParametricas(const GEOM_FT &lambda) const
   { return Point(0)+lambda*VDir(); }
 
-//! @brief Return the coordenada paramétrica que corresponde
-//! a la coordenada natural se pasa como parámetro.
+//! @brief Return the parametric coordinate that corresponds
+//! to the natural coordinate being passed as parameter.
 double Segment3d::getParamCooNatural(const GEOM_FT &chi) const
   { return (chi+1.0)/2.0; }
 
-//! @brief Return the point of the segment cuyas coordenada
-//! natural se pasa como parámetro.
+//! @brief Return the parametric coordinate that corresponds
+//! to the natural coordinate being passed as parameter.
 Pos3d Segment3d::PtoCooNatural(const GEOM_FT &chi) const
   { return PtoParametricas(getParamCooNatural(chi)); }
 

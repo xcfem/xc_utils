@@ -60,16 +60,16 @@ Circle2d Circle2dRTT(const GEOM_FT &radius,const Line2d &p,const Line2d &l,const
         if(left) //Círculos C2 o C3 de la figura.
           {
             if(far) //Círculo C2 de la figura.
-              k= radius/costheta; //Coordenada y del centro expresada en locales.
+              k= radius/costheta; //y coordinate of the center expressed in the local system.
             else //Círculo C3 de la figura.
-              h= -radius/sintheta; //Coordenada x del centro expresada en locales.
+              h= -radius/sintheta; //x coordinate of the center expressed in the local system.
           }
         else //Círculos C1 o C4 de la figura.
           {
             if(far) //Círculo C1 de la figura.
-              h= -radius/sintheta; //Coordenada x del centro expresada en locales.
+              h= -radius/sintheta; //x coordinate of the center expressed in the local system.
             else //Círculo C4 de la figura.
-              k= -radius/costheta; //Coordenada y del centro expresada en locales.
+              k= -radius/costheta; //y coordinate of the center expressed in the local system.
           }
         const Pos2d centro= ref.GetPosGlobal(Pos2d(h,k)); //Centro del círculo.
         return Circle2d(centro,radius);

@@ -76,16 +76,18 @@ inline void PCLFramePos(std::ostream &os,short int y)
 //en la posici'on actual del cursor.
   { PCLFrameBase(os); os << char(48) << char(84); }
 
-//Posicion del cursor.
+//! @brief Cursor position.
 inline void PCLCurPosBase(std::ostream &os)
   { os << char(27) << char(42) << char(112); }
+
+//! @brief Horizontal position of the cursor expressed in points.
+//! @param x: coordinate expresed in points.
 inline void PCLCurPosX(std::ostream &os, short int x)
-//Poscicion del cursor en horizontal expresada en puntos.
-//x: Coordenada x en puntos.
   { PCLCurPosBase(os); os << char(x) << char(88); }
+
+//! @brief Vertical position of the cursor expressed in points.
+//! @param y: coordinate expresed in points.
 inline void PCLCurPosY(std::ostream &os, short int y)
-//Poscicion del cursor en vertical expresada en puntos.
-//y: Coordenada y en puntos.
   { PCLCurPosBase(os); os << char(y) << char(89); }
   
 //Modo HPGL

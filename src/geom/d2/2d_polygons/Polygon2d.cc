@@ -221,7 +221,7 @@ bool Polygon2d::Overlap(const std::list<Polygon2d> &l) const
     return retval;
   }
 
-//! @brief Return el valor maximo de la coordenada i.
+//! @brief Return the maximum value of the i-th coordinate.
 GEOM_FT Polygon2d::GetMax(unsigned short int i) const
   {
     if (GetNumVertices() < 1) return 0.0;
@@ -234,7 +234,7 @@ GEOM_FT Polygon2d::GetMax(unsigned short int i) const
     return retval;
   }
 
-//! @brief Return el valor minimo de la coordenada i.
+//! @brief Return the minimum value of the i-th coordinate.
 GEOM_FT Polygon2d::GetMin(unsigned short int i) const
   {
     if (GetNumVertices() < 1) return 0.0;

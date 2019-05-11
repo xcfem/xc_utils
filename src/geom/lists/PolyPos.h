@@ -135,9 +135,9 @@ GEOM_FT PolyPos<pos>::getLength(void) const
     return temp;
   }
 
+//! @brief Return the maximum value of j-th coordinate.
 template <class pos>
 GEOM_FT PolyPos<pos>::GetMax(unsigned short j) const
-//Return el valor mínimo de la coordenada j.
   {
     GEOM_FT retval(0.0);
     if(!this->empty())
@@ -150,9 +150,9 @@ GEOM_FT PolyPos<pos>::GetMax(unsigned short j) const
     return retval;
   }
 
+//! @brief Return the minimum value of j-th coordinate.
 template <class pos>
 GEOM_FT PolyPos<pos>::GetMin(unsigned short j) const
-//Return el valor mínimo de la coordenada j.
   {
     GEOM_FT retval(0.0);
     if(!this->empty())

@@ -100,7 +100,7 @@ GEOM_FT PolygonalSurface2d::getLength(void) const
 GEOM_FT PolygonalSurface2d::getArea(void) const
   { return ::Abs(AreaSigno()); }
 
-//! @brief Return el valor maximo de la coordenada i.
+//! @brief Return the maximum value of the i-th coordinate.
 GEOM_FT PolygonalSurface2d::GetMax(unsigned short int i) const
   { 
     register GEOM_FT mx= Vertice(0)(i);
@@ -110,7 +110,7 @@ GEOM_FT PolygonalSurface2d::GetMax(unsigned short int i) const
     return mx;
   }
 
-//! @brief Return el valor minimo de la coordenada i.
+//! @brief Return the minimum value of the i-th coordinate.
 GEOM_FT PolygonalSurface2d::GetMin(unsigned short int i) const
   {
     register GEOM_FT mn= Vertice(0)(i);

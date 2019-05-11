@@ -76,15 +76,16 @@ GEOM_FT Polyline2d::GetMax(unsigned short int i) const
 GEOM_FT Polyline2d::GetMin(unsigned short int i) const
   { return GeomObj::list_Pos2d::GetMin(i); }
 
-//! @brief Return una Polyline2d con los vertices cuya coordenada i
-//! es mayor que d.
+//! @brief Return a Polyline2d with the vertices whose i-th coordinate
+//! is greater than d.
 Polyline2d Polyline2d::GetMayores(unsigned short int i,const GEOM_FT &d) const
   {
     Polyline2d retval(GeomObj::list_Pos2d::GetMayores(i,d));
     return retval;
   }
-//! @brief Return una Polyline2d con los vertices cuya coordenada i
-//! es menor que d.
+
+//! @brief Return a Polyline2d with the vertices whose i-th coordinate
+//! is smaller than d.
 Polyline2d Polyline2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
   {
     Polyline2d retval(GeomObj::list_Pos2d::GetMenores(i,d));

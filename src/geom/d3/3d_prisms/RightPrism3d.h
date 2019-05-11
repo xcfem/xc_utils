@@ -78,11 +78,11 @@ class RightPrism3d : public Prism3d
       { return extru.Iy(); }
     inline virtual GEOM_FT Iz(void) const
       { return extru.Iz(); }
+    //! @brief Return the maximum value of the i-th coordinate.
     inline virtual GEOM_FT GetMax(unsigned short int i) const
-    //Return el valor maximo de la coordenada i.
       { return extru.GetMax(i); }
+    //! @brief Return the minimum value of the i-th coordinate.
     inline virtual GEOM_FT GetMin(unsigned short int i) const
-    //Return el valor minimo de la coordenada i.
       { return extru.GetMin(i); }
     inline virtual unsigned int GetNumVertices(void) const
       { return extru.GetNumVertices(); }

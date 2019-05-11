@@ -78,7 +78,7 @@ GEOM_FT PolygonWithHoles2d::getArea(void) const
     return temp;    
   }
 
-//! @brief Return el valor maximo de la coordenada i.
+//! @brief Return the maximum value of the i-th coordinate.
 GEOM_FT PolygonWithHoles2d::GetMax(unsigned short int i) const
   { 
     GEOM_FT temp = 0;
@@ -99,7 +99,7 @@ GEOM_FT PolygonWithHoles2d::GetMax(unsigned short int i) const
     return temp;
   }
 
-//! @brief Return el valor minimo de la coordenada i.
+//! @brief Return the minimum value of the i-th coordinate.
 GEOM_FT PolygonWithHoles2d::GetMin(unsigned short int i) const
   {
     GEOM_FT temp = 0;
