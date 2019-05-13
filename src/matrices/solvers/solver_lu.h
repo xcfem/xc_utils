@@ -101,7 +101,7 @@ class SolverLU: public SolverM<M>
         return true;
       }
     void triang_inf(V &B) const
-    //Recorre el triangulo inferior
+    //Iterates through the lower triangle
       {
         for(register size_t k=1; k<=this->n; k++) 
           {

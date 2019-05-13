@@ -132,7 +132,7 @@ class Triangular: public ShapeFunction
 
 //! @ingroup ShapeFunctionsGroup
 //!
-//! @brief Functiones de forma para triángulo lineal (3 nodos).
+//! @brief Shape functions for linear triangles (3 nodes).
 class Tri_lin:public Triangular
   {
   public:
@@ -147,7 +147,7 @@ class Tri_lin:public Triangular
 
 //! @ingroup ShapeFunctionsGroup
 //!
-//! @brief Shape functions for quadratic triangle (6 nodes).
+//! @brief Shape functions for quadratic triangles (6 nodes).
 class Tri_quad:public Triangular
   {
   public:
