@@ -25,6 +25,7 @@ class_<cmb_acc::SLSPartialSafetyFactors, bases<CommandEntity> >("SLSPartialSafet
   .add_property("favorable", &cmb_acc::SLSPartialSafetyFactors::getFavorable, &cmb_acc::SLSPartialSafetyFactors::setFavorable)
   .add_property("desfavorable", &cmb_acc::SLSPartialSafetyFactors::getDesfavorable, &cmb_acc::SLSPartialSafetyFactors::setDesfavorable)
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
   ;
 
 class_<ULSPartialSafetyFactors, bases<SLSPartialSafetyFactors> >("ULSPartialSafetyFactors")
@@ -37,6 +38,7 @@ class_<PartialSafetyFactors, bases<CommandEntity> >("PartialSafetyFactors")
   .add_property("getULSPartialSafetyFactors", make_function( &PartialSafetyFactors::getULSPartialSafetyFactors, return_internal_reference<>() ))
   .add_property("getSLSPartialSafetyFactors", make_function( &PartialSafetyFactors::getSLSPartialSafetyFactors, return_internal_reference<>() ))
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
   ;
 
 typedef std::map<std::string,PartialSafetyFactors> map_partial_safety_factors;

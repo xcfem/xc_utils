@@ -36,6 +36,7 @@ class_<Action, bases<NamedEntity> >("Action")
   .def("getCoeficientes", &Action::getCoeficientes)
   .def("getDescomp", &Action::getDescomp)
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
   ;
 
 class_<ActionRValue, bases<Action>, boost::noncopyable >("ActionRValue", no_init)
@@ -50,6 +51,7 @@ class_<dq_action_r_value >("dq_action_r_values")
 
 class_<ActionRValueList, bases<dq_action_r_value,CommandEntity> >("ActionRValueLists")
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
   ;
 
 const ActionRValueList &(ActionsFamily::*getFamilyActions)(void) const= &ActionsFamily::getActions;

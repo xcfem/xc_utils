@@ -74,7 +74,9 @@ BOOST_PYTHON_MODULE(geom)
       .def("getArea", pure_virtual(&GeomObj::getArea), "return the object area.")
       .def("getVolume", pure_virtual(&GeomObj::getVolume))
       .def("getDimension", pure_virtual(&GeomObj::Dimension))
-      .def(self_ns::str(self_ns::self));
+      .def(self_ns::str(self_ns::self))
+      .def(self_ns::repr(self_ns::self))
+      ;
 
     class_<GeomObj2d, bases<GeomObj>, boost::noncopyable >("GeomObj2d", no_init)
       .def("getMax",&GeomObj2d::GetMax)

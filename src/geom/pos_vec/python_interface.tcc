@@ -49,6 +49,7 @@ class_<Pos2d, bases<ProtoGeom> >("Pos2d")
   .def(self - Vector2d())
   .def(self - Pos2d())
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
   ;
 typedef TMatrix<Pos2d,std::vector<Pos2d> > mt_pos2d;
 class_<mt_pos2d, bases<ProtoMatrix> >("mt_pos2d")
@@ -85,6 +86,7 @@ class_<Pos2dArray, bases<m_pos2d> >("MatrixPos2d")
   .def("Transform",&Pos2dArray::Transform)
   .def("Lagrange",&Pos2dArray::Lagrange)
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
   ;
 
 
@@ -106,6 +108,7 @@ class_<Vector2d, bases<ProtoGeom> >("Vector2d")
   .def(self * double())
   .def(double() * self)
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
    ;
 
 
@@ -113,6 +116,7 @@ class_<Dir3d, boost::noncopyable>("Dir3d", no_init)
   .def(init<Dir3d>())
   .def(init<double, double, double>())
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
   ;
 
 GEOM_FT (Vector3d::*dotVector3d)(const Vector3d &) const= &Vector3d::GetDot;
@@ -135,6 +139,7 @@ class_<Vector3d, bases<ProtoGeom> >("Vector3d")
   .def(self * double())
   .def(double() * self)
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
    ;
 
 GEOM_FT (Pos3d::*distLine3d)(const Line3d &) const= &Pos3d::dist;
@@ -177,6 +182,7 @@ class_<Pos3d, bases<ProtoGeom> >("Pos3d")
   .def(self - Vector3d())
   .def(self - Pos3d())
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
   ;
 
 typedef std::vector<Pos3d> v_pos3d;
@@ -199,6 +205,7 @@ class_<SlidingVector2d, bases<Vector2d> >("SlidingVector2d")
   .def(self * double())
   .def(double() * self)
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
   ;
 
 
@@ -229,6 +236,7 @@ class_<SlidingVectorsSystem2d, bases<SlidingVector2d> >("SlidingVectorsSystem2d"
   .def(self * double())
   .def(double() * self)
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
   ;
 
 SlidingVector3d (SlidingVector3d::*getMomentPos3d)(const Pos3d &o) const= &SlidingVector3d::getMoment;
@@ -246,6 +254,7 @@ class_<SlidingVector3d, bases<Vector3d> >("SlidingVector3d")
   .def(self * double())
   .def(double() * self)
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
   ;
 
 
@@ -276,6 +285,7 @@ class_<SlidingVectorsSystem3d, bases<SlidingVector3d> >("SlidingVectorsSystem3d"
   .def(self * double())
   .def(double() * self)
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
   ;
 
 
@@ -310,6 +320,7 @@ class_<Pos2dList, bases<GeomObj2d> >("ListPos2d")
   .def("appendPoint", &Pos2dList::appendPoint,return_internal_reference<>(),"appends a point to the end of the list." )
   .def("getNumberOfVertices", &Pos2dList::getNumberOfPoints,"returns the number of vertices.")
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
   ;
 
 class_<Pos3dList, bases<GeomObj3d> >("ListPos3d")
@@ -318,4 +329,5 @@ class_<Pos3dList, bases<GeomObj3d> >("ListPos3d")
   .def("getCenterOfMass", &Pos3dList::getCenterOfMass)
   .def("appendPoint", &Pos3dList::appendPoint,return_internal_reference<>() )
   .def(self_ns::str(self_ns::self))
+  .def(self_ns::repr(self_ns::self))
   ;
