@@ -44,5 +44,5 @@ void print_trace(void)
   }
 #else
 void print_trace(void)
-  { std::cerr << "print_trace no implementada en este sistema." << std::endl; }
+  { std::cerr << "print_trace not implemented on this system." << std::endl; }
 #endif

@@ -69,15 +69,15 @@ FT_matrix Xd2dCooSys::GetCooLocales(const Xd2dCooSys::VGlobal &v) const
   { return CooSys::GetCooLocales(v.getMatrix()); }
 
 //! @brief Hace que el vector básico 1 tenga la dirección
-//! y sentido del being passed as parameter. Si el sistema es
-//! de dimensión 2 el vector básico 2 es perpendicular al
-//! primero en sentido antihorario.
+//! y sentido del being passed as parameter. If the system has
+//! dimension 2 the basic vector is normal to the first one
+//! in couterclockwise sense.
 void Xd2dCooSys::XAxisVector(const VGlobal &vX)
   {
     if(vX.Nulo())
       {
-	std::cerr << "Xd2dCooSys::XAxisVector: El vector: " 
-             << vX << " es nulo. No se hicieron cambios"
+	std::cerr << "Xd2dCooSys::XAxisVector: the vector: " 
+             << vX << " is null. No changes were made."
              << std::endl;
         return;
       }

@@ -33,8 +33,8 @@ class Line2d;
 
 //! @ingroup SisRef
 //! 
-//! @brief Sistema de referencia bidimensional definido
-//! en un sistema de referencia bidimensional.
+//! @brief Two-dimensional reference system defined in a 
+//! two-dimensional space.
 class Ref2d2d : public Ref<Rect2d2dCooSys>
   {
   public:

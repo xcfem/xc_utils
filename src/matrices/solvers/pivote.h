@@ -18,8 +18,8 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //pivote.h
-//Procedimiento para la obtencion del pivote en los mEtodos
-//de Gauss y de Jordan para la solucion de un sistema de ecuaciones lineal.
+// Procedure for obtaining the pivot in the methods
+// of Gauss and Jordan for the solution of a linear system of equations.
 
 #ifndef PIVOTE_H
 #define PIVOTE_H

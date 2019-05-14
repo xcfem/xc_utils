@@ -18,8 +18,8 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Orto.h
-//Procedimiento de ortogonalizaciOn para la soluciOn
-//de un sistema de ecuaciones lineal.
+// Orthogonalization procedure for the solution
+// of a system of linear equations
 
 #ifndef ORTO_H
 #define ORTO_H

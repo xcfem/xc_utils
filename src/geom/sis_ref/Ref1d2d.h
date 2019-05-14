@@ -51,7 +51,7 @@ class Ref1d2d : public Ref<Rect1d2dCooSys>
     Ref1d2d(const Pos2d &o,const Pos2d &p);
 
     Vector2d GetI(void) const;
-    //Return el vector unitario I en el sistema global.
+    //! @brief Return the I unary vector of the global system.
     Line2d getXAxis(void) const; //Return the line defining x axis.
 
     virtual ~Ref1d2d(void)

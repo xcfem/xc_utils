@@ -18,11 +18,11 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Tridiag.h
-//Procedimiento para la soluciOn de un sistema de ecuaciones tridiagonal.
-//Que el mEtodo devuelva como resultado regular= 1 sOlo quiere decir
-//que no puede calcular la solucion no que no exista. Por tanto en
-//estos casos deberA intentarse encontrar la soluciOn mediante un mEtodo
-//general (gauss,...)
+//Procedure to solve a tridiagonal system of equations.
+//The method returns regular= 1 when it can't solve the system
+//even if the solution exists. So, in those cases,
+//you must use another method (gauss, ...) to find the solution.
+
 
 #ifndef TRIDIAG_H
 #define TRIDIAG_H

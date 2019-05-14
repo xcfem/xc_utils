@@ -18,7 +18,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Jordan.h
-//Procedimiento de Jordan para la solucion de un sistema de ecuaciones lineal.
+// Jordan procedure for the solution of a linear system of equations.
 
 #ifndef JORDAN_H
 #define JORDAN_H

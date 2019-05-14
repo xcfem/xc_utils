@@ -76,7 +76,7 @@ void GaussJordan(matsimZ<treal> &a,ZMatrix<treal> &x,ZMatrix<treal> &b)
             if(piv(k)) continue;
             a(l,k)/= r;
           }
-        b(l)/= r; //Termino independiente
+        b(l)/= r; //Right hand side
         //Transformation of the rest of the matrix.
         for(i=1;i<=n;i++)
           {
@@ -89,11 +89,11 @@ void GaussJordan(matsimZ<treal> &a,ZMatrix<treal> &x,ZMatrix<treal> &b)
             piv(i)= 1;
           }  
       }
-    //Solucion del sistema triangular.
+    //Solution of the triangular system.
     for(i=1;i<=n_rows;i++)
       {
         j= n1-i;
-        l= ipx(j); //Incognita a despejar.
+        l= ipx(j); //Unknown variable to isolate.
         x(l)= b(l);
         if(i==1) continue;
         j1= j+1;

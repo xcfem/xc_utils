@@ -59,7 +59,7 @@ ZMatrix<treal> calcularx(const matsimZ<treal> &a, const ZMatrix<treal> &b)
   {
     size_t i,k,n= a.getNumberOfRows();
     ZMatrix<treal> x(n,1,0.0);
-    for(i= 1;i<=n;i++)          //primer sistema
+    for(i= 1;i<=n;i++)          //first system
       {
         x(i,1)= b(i,1); k=1;
         while(k<i)
@@ -69,7 +69,7 @@ ZMatrix<treal> calcularx(const matsimZ<treal> &a, const ZMatrix<treal> &b)
           }
         x(i,1)/= a(i,i);
       }
-    for(i=n;i>=1;i--)      //segundo sistema
+    for(i=n;i>=1;i--)      //second system
       {
         k=n;
         while(k>i)
