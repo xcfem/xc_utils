@@ -21,7 +21,7 @@
 #ifndef MACAULAY_H
 #define MACAULAY_H
 
-#include "../polinomios/function.h"
+#include "../polynomials/function.h"
 
 typedef vectorZ<double> vZ_double;
 

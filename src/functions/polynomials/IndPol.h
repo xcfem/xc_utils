@@ -25,8 +25,8 @@
 #include "NmbVars.h"
 #include "xc_utils/src/matrices/vectorZ.h"
 
-//Clase de tipo vector de enteros que se emplea para almacenar los exponentes de las
-//variables de un polinomio. La correspondencia se establece como sigue:
+// Integer vector used to store the powers of the polynomial variables
+// as follows:
 
 //    x2 y3 z8 -----> [2,3,8]
 typedef vectorZ<short unsigned int> vZ_sui; 

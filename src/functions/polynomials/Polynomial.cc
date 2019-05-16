@@ -17,13 +17,13 @@
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Polinomio.cc
+//Polynomial.cc
 
-#include "Polinomio.h"
+#include "Polynomial.h"
 #include "xc_utils/src/functions/estadisticas/combinatoria.h"
 
-const Polinomio polinomio_uno= Polinomio::neutro_producto();
-const Polinomio polinomio_cero= Polinomio::neutro_suma();
+const Polynomial one_polynomial= Polynomial::neutro_producto();
+const Polynomial zero_polynomial= Polynomial::neutro_suma();
 
 
 size_t GetNumCoefs(char m,short unsigned int n)
@@ -36,7 +36,8 @@ size_t GetNumCoefs(char m,short unsigned int n)
     t= t / factorial(n);
     return t;
   }
-void Polinomio::PutSuma(const IndPol &v,const Polinomio &p)
+
+void Polynomial::PutSuma(const IndPol &v,const Polynomial &p)
 //Le suma al coeficiente que corresponde a IndoPol la cantidad d.
   {
     mapPol::const_iterator i;
@@ -47,9 +48,9 @@ void Polinomio::PutSuma(const IndPol &v,const Polinomio &p)
         PutSuma(this->Vars,v+ip1,(*i).second);
       }
   }
-IndPol Polinomio::Grados(void) const
-//Devuelve los grados del polinomio para cada una 
-//de sus variables.
+
+//! @brief Retunr the polynomial degrees for each of its variables.
+IndPol Polynomial::Grados(void) const
   {
     IndPol gs= GetIndPol();
     size_t i,sz= gs.size();
@@ -57,8 +58,9 @@ IndPol Polinomio::Grados(void) const
       gs[i]= Grado(i+1);
     return gs;
   }
-int Polinomio::Grado(short unsigned int j) const
-//Devuelve el grado del polinomio en la variable de indice j.
+
+//! @brief Return the polynomial degree for the j-th variable.
+int Polynomial::Grado(short unsigned int j) const
   {
     int g= 0;
     mapPol::const_iterator i;
@@ -66,53 +68,59 @@ int Polinomio::Grado(short unsigned int j) const
       g= std::max((int)(*i).first.Grado(j-1),g);
     return g;
   }
-void Polinomio::Neg(void)
-//Cambia el signo del polinomio.
+
+//! @brief Changes the arithmetic inverse of the polynomial.
+void Polynomial::Neg(void)
   {
     mapPol::iterator i;
     for (i= begin();i != end();i++) (*i).second= -(*i).second;
   }
-Polinomio Polinomio::Eval(short unsigned int j,const double &val) const
-//Devuelve el polinomio que resulta de sustituir la variable de indice j por
-//el valor que se pasa como parametro.
+
+//! @brief Return the polynomial that results from the substitution of
+//! the j-th variable with the value being passed as parameter.
+Polynomial Polynomial::Eval(short unsigned int j,const double &val) const
   {
-    Polinomio q= *this;
+    Polynomial q= *this;
     while (q.Grado(j) > 0) q= q.Reduce(j,val);
-    q= q.CompactaVar(j); //El polinomio ya no depende de esta variable.
+    q= q.CompactaVar(j); //The polynomial doesn't depends on this variable anymore.
     return q;
   }
-Polinomio Polinomio::Eval(short unsigned int j,const Polinomio &val) const
-//Devuelve el polinomio que resulta de sustituir la variable de indice j por
-//el polinomio que se pasa como parametro.
+
+//! @brief Return the polynomial that results from the substitution of
+//! the j-th variable with the value being passed as parameter.
+Polynomial Polynomial::Eval(short unsigned int j,const Polynomial &val) const
   {
-    Polinomio q= *this;
-    Polinomio q2= val;
+    Polynomial q= *this;
+    Polynomial q2= val;
     while (q.Grado(j) > 0) q= q.Reduce(j,q2);
-    q= q.CompactaVar(j); //El polinomio ya no depende de esta variable.
+    q= q.CompactaVar(j);  //The polynomial doesn't depends on this variable anymore.
     return q;
   }
-double Polinomio::Eval(const vZ_double &v) const
-//Devuelve el valor del polinomio en el punto v.
+
+//! @brief Return the value of the polynomial at point v.
+double Polynomial::Eval(const vZ_double &v) const
   {
-    Polinomio q= *this;
+    Polynomial q= *this;
     size_t i,sz= v.size();
     for (i=0;i<sz;i++) q= q.Eval(i+1,v[i]);
     return (*q.begin()).second;
   }
-double Polinomio::Eval(const mZ_double &v) const
-//Devuelve el valor del polinomio en el punto v.
+
+//! @brief Return the value of the polynomial at point v.
+double Polynomial::Eval(const mZ_double &v) const
   {
-    Polinomio q= *this;
+    Polynomial q= *this;
     size_t i,sz= v.size();
     for (i=1;i<=sz;i++) q= q.Eval(i,v(i,1));
     return (*q.begin()).second;
   }
-Polinomio Polinomio::Parcial(short unsigned int j) const
-//Devuelve la derivada parcial del polinomio respecto a la variable de 
-//indice j.
+
+//! @brief Return the partial derivative of the polynomial with respect
+//! to the j-th variable.
+Polynomial Polynomial::Parcial(short unsigned int j) const
   {
     j--; //El indice de IndPol empieza en 0;
-    Polinomio q(Vars);
+    Polynomial q(Vars);
     if (Grado() == 0) return q;
     IndPol ip1= GetIndPol();
     IndPol ip2= GetIndPol();
@@ -124,12 +132,13 @@ Polinomio Polinomio::Parcial(short unsigned int j) const
       }
     return q;
   }
-Polinomio Polinomio::Primitiva(short unsigned int j) const
-//Devuelve la primitiva del polinomio para la variable
-//de indice j.
+
+//! @brief Returns the primitive of the polynomial with respect
+//! to the j-th variable.
+Polynomial Polynomial::Primitiva(short unsigned int j) const
   {
     j--; //El indice de las variables empieza en 0;
-    Polinomio q(Vars);
+    Polynomial q(Vars);
     if (Grado() == 0) return q;
     IndPol ip1= GetIndPol();
     IndPol ip2= GetIndPol();
@@ -141,14 +150,15 @@ Polinomio Polinomio::Primitiva(short unsigned int j) const
       }
     return q;
   }
-Polinomio Polinomio::Reduce(short unsigned int j,const double &val) const
-//Devuelve el polinomio que resulta de sustituir UNA VEZ la variable j por el valor
-//que se pasa como parametro.
-//La rutina se llama Reduce porque el polinomio resultante tiene un grado menos en
-//la variable j.
+
+//! @brief Return the polynomial that result of substituting once the
+//! j-th variable by the argument. The name of the routine is due to the
+//! fact that the returned polynomial has a degree less that this one in
+//! the j-th variable.
+Polynomial Polynomial::Reduce(short unsigned int j,const double &val) const
   {
     j--; //El indice de IndPol empieza en 0;
-    Polinomio result(Vars);
+    Polynomial result(Vars);
     IndPol ip1= GetIndPol();
     if (Grado() == 0) return result;
     IndPol ip2= ip1;
@@ -163,15 +173,17 @@ Polinomio Polinomio::Reduce(short unsigned int j,const double &val) const
       }
     return result;    
   }
-Polinomio Polinomio::Reduce(short unsigned int j,const Polinomio &val) const
-//Devuelve el polinomio que resulta de sustituir UNA VEZ la variable j por el polinomio
-//que se pasa como parametro.
-//La rutina se llama reduce por similitud con la anterior.
+
+//! @brief Return the polynomial that result of substituting once the
+//! j-th variable by the argument. The name of the routine is due to the
+//! fact that the returned polynomial has a degree less that this one in
+//! the j-th variable.
+Polynomial Polynomial::Reduce(short unsigned int j,const Polynomial &val) const
   {
     j--; //El indice de IndPol empieza en 0;
-    //El polinomio tendra por variables la union de los conjuntos de variables
-    //del polinomio que se evalua y del que se pasa como parametro.
-    Polinomio result(this->Vars + val.Vars);
+    //The polynomial will have as variables the union of the variables
+    // of both polynomials.
+    Polynomial result(this->Vars + val.Vars);
     if (Grado() == 0) return result;
     IndPol ip1= result.GetIndPol();
     IndPol ip2= ip1;
@@ -186,16 +198,16 @@ Polinomio Polinomio::Reduce(short unsigned int j,const Polinomio &val) const
       }
     return result;    
   }
-Polinomio Polinomio::CompactaVar(unsigned short int j) const
-//Elimina la variable j del polinomio.
-//Si se elimina una variable cuyo grado en el polinomio no es nulo
-//el resultado puede ser un desastre.
+
+//! @brief Eliminates the j-th variable. If the variable to eliminate
+//! has not zero degree in the polynomial the result is a disaster.
+Polynomial Polynomial::CompactaVar(unsigned short int j) const
   {
     NmbVars Vars= GetVars();
     //Vars.erase(&Vars.at(j-1)); Doesn't works.
     NmbVars::iterator ij= Vars.begin() + (j-1);
     Vars.erase(ij);
-    Polinomio result(Vars);
+    Polynomial result(Vars);
     IndPol ip1= GetIndPol();
     for ( mapPol::const_iterator i= begin();i != end();i++)
       {
@@ -207,16 +219,17 @@ Polinomio Polinomio::CompactaVar(unsigned short int j) const
       }
     return result;
   }
-double Polinomio::Integral(const vZ_double &x0,const vZ_double &x1) const
-//Devuelve la integral del polinomio en el dominio delimitado por los puntos
-//x0 y x1.
+
+//! @brief Returns the integral of the polynomial between x0 and x1.
+double Polynomial::Integral(const vZ_double &x0,const vZ_double &x1) const
   {
-    Polinomio q= *this;
+    Polynomial q= *this;
     size_t i,sz= x0.size();
     for (i=0;i<sz;i++) q= q.Integral(i+1,x0[i],x1[i]);
     return (*q.begin()).second;  
   }
-void Polinomio::OutVars(std::ostream &stream,mapPol::const_iterator &i) const
+
+void Polynomial::OutVars(std::ostream &stream,mapPol::const_iterator &i) const
 //Imprime las variebales elevadas a sus correspondientes potencias.
   {
     int j,d= GetDim();  
@@ -230,9 +243,9 @@ void Polinomio::OutVars(std::ostream &stream,mapPol::const_iterator &i) const
       }
   }
 
-Polinomio& Polinomio::operator+=(const Polinomio &p)
+Polynomial& Polynomial::operator+=(const Polynomial &p)
   {
-    Polinomio s(Vars + p.Vars);
+    Polynomial s(Vars + p.Vars);
     mapPol::const_iterator i;
     for (i= begin();i != end();i++) 
       s.PutSuma(Vars,(*i).first,(*i).second);    
@@ -242,7 +255,7 @@ Polinomio& Polinomio::operator+=(const Polinomio &p)
     return *this;
   }
 
-std::ostream &operator<<(std::ostream &stream,const Polinomio &p)
+std::ostream &operator<<(std::ostream &stream,const Polynomial &p)
   {
     for ( mapPol::const_iterator i= p.begin() ; 
           i != p.end() ; 
@@ -260,42 +273,42 @@ std::ostream &operator<<(std::ostream &stream,const Polinomio &p)
     return stream;
   }
 
-std::istream &operator>>(std::istream &stream,const Polinomio &p)
+std::istream &operator>>(std::istream &stream,const Polynomial &p)
   {
-    std::cerr << "Polinomio; lectura desde stream no implementada." << std::endl;
+    std::cerr << "Polynomial; lectura desde stream no implementada." << std::endl;
     return stream;
   }
 
-Polinomio &Polinomio::operator*=(const double &d)
+Polynomial &Polynomial::operator*=(const double &d)
   {
     if(d == 1) return *this;
     if(d == 0) 
       {
-        (*this)= polinomio_cero;
+        (*this)= zero_polynomial;
         return *this;
       }
     for ( mapPol::iterator i= begin() ; i != end() ; i++)
        (*i).second*= d;
     return *this;
   }
-Polinomio &Polinomio::operator*=(const Polinomio &p)
+Polynomial &Polynomial::operator*=(const Polynomial &p)
   {
-    if(p == polinomio_uno) return *this;
-    if(p == polinomio_cero) 
+    if(p == one_polynomial) return *this;
+    if(p == zero_polynomial) 
       {
-        (*this)= polinomio_cero;
+        (*this)= zero_polynomial;
         return *this;
       }
     (*this)= (*this) * p;
     return *this;
   }
-Polinomio operator *(const Polinomio &p1,const Polinomio &p2)
+Polynomial operator *(const Polynomial &p1,const Polynomial &p2)
   {
-    if(p1 == polinomio_uno) return p2;
-    if(p2 == polinomio_uno) return p1;
-    if( (p1 == polinomio_cero) || (p2 == polinomio_cero) )
-      return polinomio_cero;
-    Polinomio p(p1.Vars + p2.Vars);
+    if(p1 == one_polynomial) return p2;
+    if(p2 == one_polynomial) return p1;
+    if( (p1 == zero_polynomial) || (p2 == zero_polynomial) )
+      return zero_polynomial;
+    Polynomial p(p1.Vars + p2.Vars);
     mapPol::const_iterator i,j;
     for(i=p1.begin();i!= p1.end();i++)
       for(j=p2.begin();j!= p2.end();j++)
@@ -307,10 +320,10 @@ Polinomio operator *(const Polinomio &p1,const Polinomio &p2)
     return p;
   }
 
-Polinomio pow(const Polinomio &p,unsigned int n)
-//Eleva el polinomio a la potencia entera n.
+//! @brief Return p^n.
+Polynomial pow(const Polynomial &p,unsigned int n)
   {
-    Polinomio q= p;
+    Polynomial q= p;
     unsigned int i;
     for(i=1;i<n;i++) q= q*p;
     return q;

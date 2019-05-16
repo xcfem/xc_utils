@@ -24,21 +24,21 @@
 #define POLYNOMIALMATRIX_H
 
 #include "ZMatrix.h"
-#include "xc_utils/src/functions/polinomios/Polinomio.h"
+#include "xc_utils/src/functions/polynomials/Polynomial.h"
 #include "m_double.h"
 
-typedef ZMatrix<Polinomio> polynomial_matrix;
+typedef ZMatrix<Polynomial> polynomial_matrix;
 
 class PolynomialMatrix: public polynomial_matrix
   {
     PolynomialMatrix(const m_double &m);
 
     void eval(short unsigned int j,const double &val);
-    void eval(short unsigned int j,const Polinomio &val);
+    void eval(short unsigned int j,const Polynomial &val);
     void eval(const vZ_double &v);
     void eval(const mZ_double &v);
   public:
-    PolynomialMatrix(size_type n_rows=1,size_type cols=1,const Polinomio &val=Polinomio())
+    PolynomialMatrix(size_type n_rows=1,size_type cols=1,const Polynomial &val=Polynomial())
       : polynomial_matrix(n_rows,cols,val) {}
     PolynomialMatrix(const PolynomialMatrix &otra) : polynomial_matrix(otra) {}
     PolynomialMatrix &operator=(const PolynomialMatrix &m)
@@ -50,12 +50,12 @@ class PolynomialMatrix: public polynomial_matrix
     PolynomialMatrix GetTrn(void) const;
 
     PolynomialMatrix NeutroSuma(void) const
-      { return PolynomialMatrix(getNumberOfRows(),getNumberOfColumns(),Polinomio::neutro_suma()); }
+      { return PolynomialMatrix(getNumberOfRows(),getNumberOfColumns(),Polynomial::neutro_suma()); }
     PolynomialMatrix NeutroProducto(void) const
-      { return PolynomialMatrix(getNumberOfRows(),getNumberOfColumns(),Polinomio::neutro_producto()); }
+      { return PolynomialMatrix(getNumberOfRows(),getNumberOfColumns(),Polynomial::neutro_producto()); }
 
     PolynomialMatrix Eval(short unsigned int j,const double &val) const;
-    PolynomialMatrix Eval(short unsigned int j,const Polinomio &val) const;
+    PolynomialMatrix Eval(short unsigned int j,const Polynomial &val) const;
     PolynomialMatrix Eval(const vZ_double &v) const;
     PolynomialMatrix Eval(const mZ_double &v) const;
 
@@ -99,14 +99,14 @@ inline PolynomialMatrix Eval(const PolynomialMatrix &m,short unsigned int k,cons
   { return m.Eval(k,d); }
 
 //! @brief Evaluate the polynomials of the matrix with a polynomial argument.
-inline PolynomialMatrix Eval(const PolynomialMatrix &m,short unsigned int k,const Polinomio &p)
+inline PolynomialMatrix Eval(const PolynomialMatrix &m,short unsigned int k,const Polynomial &p)
   { return m.Eval(k,p); }
 
-Polinomio Eval(const Polinomio &p,const PolynomialMatrix &vp);
+Polynomial Eval(const Polynomial &p,const PolynomialMatrix &vp);
 m_double Eval(const PolynomialMatrix &p,const m_double &x);
 PolynomialMatrix Eval(const PolynomialMatrix &m1,const PolynomialMatrix &m2);
 
-inline void CambioVar(PolynomialMatrix &m,short unsigned int j,const Polinomio &cambio)
+inline void CambioVar(PolynomialMatrix &m,short unsigned int j,const Polynomial &cambio)
   { m= Eval(m,j,cambio); }
 inline void CambioVar(PolynomialMatrix &m,const PolynomialMatrix &cambio)
   { m= Eval(m,cambio); }
@@ -118,11 +118,11 @@ inline PolynomialMatrix operator +(const m_double &m1,const PolynomialMatrix &m2
   { return m2+m1; }
 PolynomialMatrix operator-(const PolynomialMatrix &m1,const m_double &m2);
 
-Polinomio dot(const PolynomialMatrix &v1,const m_double &v2);
-Polinomio dot(const m_double &v1,const PolynomialMatrix &v2);
+Polynomial dot(const PolynomialMatrix &v1,const m_double &v2);
+Polynomial dot(const m_double &v1,const PolynomialMatrix &v2);
 
-PolynomialMatrix operator *(const Polinomio &p,const m_double &m);
-inline PolynomialMatrix operator*(const m_double &m,const Polinomio &p)
+PolynomialMatrix operator *(const Polynomial &p,const m_double &m);
+inline PolynomialMatrix operator*(const m_double &m,const Polynomial &p)
   { return p*m; }
 PolynomialMatrix operator*(const PolynomialMatrix &m,const double &d);
 inline PolynomialMatrix operator *(const double &d,const PolynomialMatrix &m)
@@ -134,10 +134,10 @@ PolynomialMatrix Primitiva(const PolynomialMatrix &m,short unsigned int k);
 PolynomialMatrix Diferencial(const PolynomialMatrix &m, short unsigned int k);
 
 PolynomialMatrix Integral(const PolynomialMatrix &m,short unsigned int j,const double &x0,const double &x1);
-PolynomialMatrix Integral(const PolynomialMatrix &m,short unsigned int j,const Polinomio &x0,const Polinomio &x1);
-PolynomialMatrix Integral(const PolynomialMatrix &m,short unsigned int j,const Polinomio &x0,const double &x1);
-PolynomialMatrix Integral(const PolynomialMatrix &m,short unsigned int j,const double &x0,const Polinomio &x1);
+PolynomialMatrix Integral(const PolynomialMatrix &m,short unsigned int j,const Polynomial &x0,const Polynomial &x1);
+PolynomialMatrix Integral(const PolynomialMatrix &m,short unsigned int j,const Polynomial &x0,const double &x1);
+PolynomialMatrix Integral(const PolynomialMatrix &m,short unsigned int j,const double &x0,const Polynomial &x1);
 PolynomialMatrix Derivada(const PolynomialMatrix &m,short unsigned int j,const double &x);
-PolynomialMatrix Derivada(const PolynomialMatrix &m,short unsigned int j,const Polinomio &x);
+PolynomialMatrix Derivada(const PolynomialMatrix &m,short unsigned int j,const Polynomial &x);
  
 #endif

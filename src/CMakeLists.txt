@@ -104,7 +104,7 @@ SET(umfpack umfpack/umd2fb.f umfpack/umd2co.f umfpack/umd2fa.f umfpack/umd2f0.f 
 
 SET(algebra functions/algebra/TablaLiterales functions/algebra/ArbolExpr functions/algebra/ExprAlgebra functions/algebra/Expresion functions/algebra/ExprInfija functions/algebra/ExprPostfija functions/algebra/LexAlgebra functions/algebra/Lexico functions/algebra/Literal functions/algebra/OpBinario functions/algebra/OpComparacion functions/algebra/OpBooleano functions/algebra/Macaulay functions/algebra/Operando functions/algebra/OpUnario functions/algebra/ProtoExpr functions/algebra/Rama functions/algebra/Variable functions/algebra/Operador functions/algebra/Segnal functions/algebra/ExprFunctor functions/algebra/OpndoConNombre functions/algebra/OpTrigonometricas functions/algebra/ConjVariables functions/algebra/MapValores functions/algebra/num_integration)
 
-SET(functions_misc functions/estadisticas/statlib functions/estadisticas/Muestra functions/estadisticas/combinatoria functions/extremos/extremo functions/macaulay/Macaulay functions/polinomios/Polinomio functions/polinomios/IndPol functions/polinomios/NmbVars functions/raices/NewtonRaphson functions/raices/root functions/shape_functions/ShapeFunction functions/shape_functions/IntegrationPoints)
+SET(functions_misc functions/estadisticas/statlib functions/estadisticas/Muestra functions/estadisticas/combinatoria functions/extremos/extremo functions/macaulay/Macaulay functions/polynomials/Polynomial functions/polynomials/IndPol functions/polynomials/NmbVars functions/raices/NewtonRaphson functions/raices/root functions/shape_functions/ShapeFunction functions/shape_functions/IntegrationPoints)
 
 SET(functions ${algebra} ${functions_misc})
 

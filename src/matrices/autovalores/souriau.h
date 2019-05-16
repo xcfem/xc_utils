@@ -39,13 +39,12 @@ ZMatrix<treal> calbk(const ZMatrix<treal> &ak,const treal &tk)
   }
 
 template <class treal>  
+//! @brief Souriau procedure to compute the characteristic equation of a matrix.
+//	@param a:	matrix to obtain the characteristic equation of.
+//	Returns:
+//		vector whose element with index (k,1) is the
+//		coefficient of degree n-k of the polynomial.
 vectorZ<treal> souriau(ZMatrix<treal> &a)
-//Souriau procedure to compute the characteristic equation of a matrix.
-//Devuelve un 
-//	a:	matrix to obtain the characteristic equation of.
-//	Valor devuelto:
-//		vector en el que el elemento de Indice (k,1) es el
-//		coeficiente de grado n-k del polinomio.
   {
     size_t n= a.getNumberOfRows();
     vectorZ<treal> t(n+1,1);    
