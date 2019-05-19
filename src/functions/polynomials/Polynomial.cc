@@ -20,7 +20,7 @@
 //Polynomial.cc
 
 #include "Polynomial.h"
-#include "xc_utils/src/functions/estadisticas/combinatoria.h"
+#include "xc_utils/src/functions/statistics/combinatorics.h"
 
 const Polynomial one_polynomial= Polynomial::neutro_producto();
 const Polynomial zero_polynomial= Polynomial::neutro_suma();

@@ -21,7 +21,7 @@
 //Carsten_Steger.cc
 
 #include "carsten_steger.h"
-#include "xc_utils/src/functions/estadisticas/combinatoria.h"
+#include "xc_utils/src/functions/statistics/combinatorics.h"
 #include "xc_utils/src/geom/d2/2d_polygons/PolygonalSurface2d.h"
 
 inline long long c_p_q_k_l(const int &p,

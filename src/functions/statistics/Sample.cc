@@ -17,19 +17,19 @@
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Muestra.cc
+//Sample.cc
 
-#include "Muestra.h"
+#include "Sample.h"
 #include "xc_utils/src/utils/misc_utils/matem.h"
 
-double Muestra::Media(void) const
+double Sample::Media(void) const
   {
     double retval= 0.0;
     for(const_iterator i=begin();i!=end();i++)
       retval+= *i;
     return retval/double(size());
   }
-double Muestra::DesviacionTipica(void) const
+double Sample::DesviacionTipica(void) const
   {
     double media= Media();
     double retval= 0.0;

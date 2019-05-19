@@ -81,7 +81,7 @@ class MMatrix: public m_matrix
       }
     friend MMatrix operator*(const MMatrix &mM, const m_double &m)
       { return m*mM; }
-    friend MMatrix to_boxes(const MMatrix &muestra,const m_double &a);
+    friend MMatrix to_boxes(const MMatrix &Sample,const m_double &a);
     friend MMatrix to_boxes(const std::vector<size_t> dim_n_rows,const std::vector<size_t> dim_n_columns,const m_double &a);
   };
 

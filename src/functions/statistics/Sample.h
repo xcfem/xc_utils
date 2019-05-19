@@ -11,35 +11,24 @@
 //  This software is distributed in the hope that it will be useful, but 
 //  WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details. 
+//  GNU General Public License for more details.  
 //
 // You should have received a copy of the GNU General Public License 
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Combinatoria.cc
+//Sample.h
 
-#include "combinatoria.h"
+#ifndef SAMPLE_HXX
+#define SAMPLE_HXX
 
-unsigned long long factorial(const unsigned int &n)
+#include <deque>
+
+class Sample: public std::deque<double>
   {
-    register unsigned long long i,f=1;
-    for(i= 2;i<=n;i++)
-      f*=i;
-    return f;
-  }
+  public:
+    double Media(void) const;
+    double DesviacionTipica(void) const;
+  };
 
-unsigned long long coeficiente_binomial(const unsigned int &n,const unsigned int &k)
-  //Devuelve el valor del coeficiente binomial C(n,k):
-  //              n!
-  //  C(n,k)= -----------
-  //           k!.(n-k)!
-  {
-    if((n==k) || (k==0)) return 1;
-    register unsigned long long i,num=n,denom;
-    denom= factorial(n-k);
-    for(i=n-1;i>k;i--)
-      num*=i;
-    return num/denom;
-  }
-
+#endif

@@ -11,24 +11,35 @@
 //  This software is distributed in the hope that it will be useful, but 
 //  WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.  
+//  GNU General Public License for more details. 
 //
 // You should have received a copy of the GNU General Public License 
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Muestra.h
+//Combinatorics.cc
 
-#ifndef MUESTRA_HXX
-#define MUESTRA_HXX
+#include "combinatorics.h"
 
-#include <deque>
-
-class Muestra: public std::deque<double>
+unsigned long long factorial(const unsigned int &n)
   {
-  public:
-    double Media(void) const;
-    double DesviacionTipica(void) const;
-  };
+    register unsigned long long i,f=1;
+    for(i= 2;i<=n;i++)
+      f*=i;
+    return f;
+  }
 
-#endif
+unsigned long long coeficiente_binomial(const unsigned int &n,const unsigned int &k)
+  //Devuelve el valor del coeficiente binomial C(n,k):
+  //              n!
+  //  C(n,k)= -----------
+  //           k!.(n-k)!
+  {
+    if((n==k) || (k==0)) return 1;
+    register unsigned long long i,num=n,denom;
+    denom= factorial(n-k);
+    for(i=n-1;i>k;i--)
+      num*=i;
+    return num/denom;
+  }
+

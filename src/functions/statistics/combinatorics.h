@@ -17,10 +17,10 @@
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Combinatoria.h
+//Combinatorics.h
 
-#ifndef COMBINATORIA_H
-#define COMBINATORIA_H
+#ifndef COMBINATORICS_H
+#define COMBINATORICS_H
 
 //Factorial
 unsigned long long factorial(const unsigned int &n);
