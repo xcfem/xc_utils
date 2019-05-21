@@ -27,7 +27,7 @@ PolynomialMatrix::PolynomialMatrix(const m_double &m)
   {
     for(register size_type i=1;i<=n_rows;i++)
       for(register size_type j=1;j<=n_columns;j++)
-        (*this)(i,j)= Polinomio(m(i,j));
+        (*this)(i,j)= Polynomial(m(i,j));
   }
 void PolynomialMatrix::eval(short unsigned int k,const double &val)
   {
@@ -35,7 +35,7 @@ void PolynomialMatrix::eval(short unsigned int k,const double &val)
       for(register size_type j=1;j<=n_columns;j++)
         (*this)(i,j)= (*this)(i,j).Eval(k,val);
   }
-void PolynomialMatrix::eval(short unsigned int k,const Polinomio &val)
+void PolynomialMatrix::eval(short unsigned int k,const Polynomial &val)
   {
     for(register size_type i=1;i<=n_rows;i++)
       for(register size_type j=1;j<=n_columns;j++)
@@ -59,7 +59,7 @@ PolynomialMatrix PolynomialMatrix::Eval(short unsigned int j,const double &val) 
     retval.eval(j,val);
     return retval;
   }
-PolynomialMatrix PolynomialMatrix::Eval(short unsigned int j,const Polinomio &val) const
+PolynomialMatrix PolynomialMatrix::Eval(short unsigned int j,const Polynomial &val) const
   {
     PolynomialMatrix retval(*this);
     retval.eval(j,val);
@@ -196,10 +196,10 @@ PolynomialMatrix operator-(const PolynomialMatrix &m)
     return retval;
   }
 
-//Return el valor del polinomio en el punto vp.
-Polinomio Eval(const Polinomio &p,const PolynomialMatrix &vp)
+//! Return the value of the polynomial at point vp.
+Polynomial Eval(const Polynomial &p,const PolynomialMatrix &vp)
   {
-    Polinomio result= p;
+    Polynomial result= p;
     size_t i,sz= vp.getNumberOfRows();
     for (i=1;i<=sz;i++) result= result.Eval(i,vp(i,1));
     return result;
@@ -228,7 +228,7 @@ PolynomialMatrix Eval(const PolynomialMatrix &m1,const PolynomialMatrix &m2)
         f(i,j)= Eval(m1(i,j),m2);
     return f;
   }
-Polinomio dot(const PolynomialMatrix &v1,const m_double &v2)
+Polynomial dot(const PolynomialMatrix &v1,const m_double &v2)
 //Producto escalar de dos vectores.
 //v1: row vector.
 //v2: column vector.
@@ -239,12 +239,12 @@ Polinomio dot(const PolynomialMatrix &v1,const m_double &v2)
         std::cerr << "Matrices de dimensiones incompatibles en producto escalar." << std::endl;
         abort();      
       }
-    Polinomio retval= Polinomio::neutro_suma();
+    Polynomial retval= Polynomial::neutro_suma();
     for(register PolynomialMatrix::size_type i=1;i<=n_columns;i++)
       retval+= v1(1,i) * v2(i,1);
     return retval;
   }
-Polinomio dot(const m_double &v1,const PolynomialMatrix &v2)
+Polynomial dot(const m_double &v1,const PolynomialMatrix &v2)
 //Producto escalar de dos vectores.
 //v1: row vector.
 //v2: column vector.
@@ -257,12 +257,12 @@ Polinomio dot(const m_double &v1,const PolynomialMatrix &v2)
         std::cerr << "  v2= " << v2 << std::endl;
         abort();
       }
-    Polinomio retval= Polinomio::neutro_suma();
+    Polynomial retval= Polynomial::neutro_suma();
     for(register PolynomialMatrix::size_type i=1;i<=n_columns;i++)
       retval+= v1(1,i) * v2(i,1);
     return retval;  
   }
-PolynomialMatrix operator*(const Polinomio &p,const m_double &m)
+PolynomialMatrix operator*(const Polynomial &p,const m_double &m)
   {
     const m_double::size_type n_rows= m.getNumberOfRows();
     const m_double::size_type n_columns= m.getNumberOfColumns();
@@ -298,22 +298,22 @@ PolynomialMatrix Integral(const PolynomialMatrix &m,short unsigned int j,const d
     PolynomialMatrix p= Primitiva(m,j);
     return Eval(p,j,x1) - Eval(p,j,x0);
   }
-PolynomialMatrix Integral(const PolynomialMatrix &m,short unsigned int j,const Polinomio &x0,const Polinomio &x1)
+PolynomialMatrix Integral(const PolynomialMatrix &m,short unsigned int j,const Polynomial &x0,const Polynomial &x1)
   {
     PolynomialMatrix p= Primitiva(m,j);
     return Eval(p,j,x1) - Eval(p,j,x0);
   }
-PolynomialMatrix Integral(const PolynomialMatrix &m,short unsigned int j,const Polinomio &x0,const double &x1)
+PolynomialMatrix Integral(const PolynomialMatrix &m,short unsigned int j,const Polynomial &x0,const double &x1)
   {
     PolynomialMatrix p= Primitiva(m,j);
     return Eval(p,j,x1) - Eval(p,j,x0);
   }
-PolynomialMatrix Integral(const PolynomialMatrix &m,short unsigned int j,const double &x0,const Polinomio &x1)
+PolynomialMatrix Integral(const PolynomialMatrix &m,short unsigned int j,const double &x0,const Polynomial &x1)
   {
     PolynomialMatrix p= Integral(m,j,x1,x0);
     return -p;
   }
 PolynomialMatrix Derivada(const PolynomialMatrix &m,short unsigned int j,const double &x)
   { return Eval(Diferencial(m,j),j,x); }
-PolynomialMatrix Derivada(const PolynomialMatrix &m,short unsigned int j,const Polinomio &x)
+PolynomialMatrix Derivada(const PolynomialMatrix &m,short unsigned int j,const Polynomial &x)
   { return Eval(Diferencial(m,j),j,x); }

@@ -196,11 +196,11 @@ GEOM_FT coo_intersection(const GeomObj2d::list_Pos2d &int_a, const GeomObj2d::li
         else
           {
             std::cerr << __FUNCTION__
-		      << "(int_a,int_b): error when promediar la coordenada "
+		      << "(int_a,int_b): error when averaging coordinate "
 		      << coo 
-                      << " of the intersection. Los valores obtenidos: "
+                      << " of the intersection. Obtained values: "
 		      << pint_a(coo) << " and " << pint_b(coo)
-                      << " son muy diferentes." << std::endl;
+                      << " are too different." << std::endl;
           }
       }
     else

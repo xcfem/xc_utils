@@ -40,10 +40,10 @@ class GeomObj2d: public GeomObj
 
     GeomObj2d(void) {}
     virtual ~GeomObj2d(void) {}
+    //! @brief Return the maximum value of the i-th coordinate.
     virtual GEOM_FT GetMax(unsigned short int i) const= 0;
-    //Return el valor maximo de la coordenada i.
+    //! @brief Return the minimum value of the i-th coordinate.
     virtual GEOM_FT GetMin(unsigned short int i) const= 0;
-    //Return el valor minimo de la coordenada i.
     GEOM_FT GetXMax(void) const { return GetMax(1); }
     GEOM_FT GetYMax(void) const { return GetMax(2); }
     GEOM_FT GetXMin(void) const { return GetMin(1); }

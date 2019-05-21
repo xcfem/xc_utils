@@ -111,13 +111,13 @@ MMatrix to_boxes(const std::vector<size_t> dim_rows,const std::vector<size_t> di
 
 //! @brief Convert the argument matrix in a block matrix.
 //!
-//! @param muestra: template matrix which blocks dimensions will be used
+//! @param Sample: template matrix which blocks dimensions will be used
 //! to define the blocks of the new matrix.
 //! @param a: matrix that will be converted.
-MMatrix to_boxes(const MMatrix &muestra,const m_double &a)
+MMatrix to_boxes(const MMatrix &Sample,const m_double &a)
   {
-    const std::vector<size_t> dim_rows= muestra.get_dim_rows();
-    const std::vector<size_t> dim_columns= muestra.get_dim_columns();
+    const std::vector<size_t> dim_rows= Sample.get_dim_rows();
+    const std::vector<size_t> dim_columns= Sample.get_dim_columns();
     return to_boxes(dim_rows,dim_columns,a);
   }
 

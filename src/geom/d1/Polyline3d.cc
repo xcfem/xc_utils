@@ -86,8 +86,8 @@ GeomObj3d::list_Pos3d Polyline3d::getIntersection(const Plane &p) const
     return retval;
   }
 
+//!@brief Return the maximum value of the i-th coordinate.
 GEOM_FT Polyline3d::GetMax(unsigned short int i) const
-//Return el valor maximo de la coordenada i.
   { 
     if(empty()) return 0.0;
     const list_Pos3d::const_iterator primero= begin();
@@ -96,8 +96,9 @@ GEOM_FT Polyline3d::GetMax(unsigned short int i) const
       mx= std::max((*j)(i),mx);
     return mx;
   }
+
+//!@brief Return the minimum value of the i-th coordinate.
 GEOM_FT Polyline3d::GetMin(unsigned short int i) const
-//Return el valor minimo de la coordenada i.
   {
     if(empty()) return 0.0;
     const list_Pos3d::const_iterator primero= begin();
@@ -106,18 +107,20 @@ GEOM_FT Polyline3d::GetMin(unsigned short int i) const
       mn= std::min((*j)(i),mn);
     return mn;
   }
+
+//! @brief Return a Polyline3d with the vertices whose i-th coordinate
+//! is greater than d.
 Polyline3d Polyline3d::GetMayores(unsigned short int i,const GEOM_FT &d) const
-//Return una Polyline3d con los vertices cuya coordenada i
-//es mayor que d.
   {
     Polyline3d retval;
     for(register list_Pos3d::const_iterator j=begin();j != end();j++)
       if ((*j)(i) > d) retval.push_back(*j);
     return retval;
   }
+
+//! @brief Return a Polyline3d with the vertices whose i-th coordinate
+//! is smaller than d.
 Polyline3d Polyline3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
-//Return una Polyline3d con los vertices cuya coordenada i
-//es menor que d.
   {
     Polyline3d retval;
     for(register list_Pos3d::const_iterator j=begin();j != end();j++)

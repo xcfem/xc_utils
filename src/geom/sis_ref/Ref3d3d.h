@@ -33,8 +33,8 @@ class Plane;
 
 //! @ingroup SisRef
 //! 
-//! @brief Sistema de referencia tridimensional definido
-//! en un sistema de referencia tridimensional.
+//! @brief Three-dimensional reference system defined 
+//! in a three-dimensional space.
 class Ref3d3d : public Ref<Rect3d3dCooSys>
   {
   public:

@@ -18,7 +18,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //ecuag.h
-//Procedimiento general para la soluciOn de un sistema de ecuaciones.
+// General procedure for the soluition of a linear system of equations.
 
 #ifndef ECUAG_H
 #define ECUAG_H
@@ -166,18 +166,17 @@ void ecuag(const size_t &m,
            int holgura,
            const treal &error,
            int &compatible)
-// solucion general de un sistema de ecuaciones
-//         m        = numero de ecuaciones
-//         n        = numero de incognitas mas uno
+// general solution of a system of equations
+//         m        = number of equations
+//         n        = number of unknowns plus one
 //         a        = matrix of the coefficients
-//                          termino independiente in column n
+//                          right hand side in column n
 //         x        = solution matrix
-//                        column 1 variables dependientes
+//                        column 1 dependent variables
 //                               2 a holguras+1 independientes
 //         libres   = indices of free variables
 //         holgura  = number of free variables
-//           error  = si el sistema es incompatible,
-//                             error cuadratico medio
+//           error  = if the system is incompatible, mean square error
   {
     int compa;
     ZMatrix<treal> b=a; //ecuag
@@ -196,8 +195,8 @@ void salida(void)
     size_t i,j,l;
     if(!compatible)
       {
-        std::clog << " sistema incompatible " << std::endl;
-        std::clog << " mejor aproximacion en media cuadratica " << std::endl;
+        std::clog << " system is incompatible " << std::endl;
+        std::clog << " quadratic mean best approximation." << std::endl;
         std::clog << std::endl;
       }
     std::cout << "         - 0- ";

@@ -34,8 +34,8 @@ class Vector3d;
 
 //! @ingroup SisRef
 //! 
-//! @brief Sistema de referencia bidimensional definido
-//! en un sistema de referencia tridimensional.
+//! @brief Two-dimensional reference system defined in a 
+//! three-dimensional space.
 class Ref2d3d : public Ref<Rect2d3dCooSys>
   {
   public:

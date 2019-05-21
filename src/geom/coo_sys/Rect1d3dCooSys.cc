@@ -33,8 +33,8 @@ Rect1d3dCooSys::Rect1d3dCooSys(const VGlobal &vX)
 Rect1d3dCooSys::Rect1d3dCooSys(const PGlobal &o,const PGlobal &p)
   : Xd3dCooSys(1,o,p) {}
 
+//! @brief Return the unary vector I in global coordinates.
 Rect1d3dCooSys::VGlobal Rect1d3dCooSys::GetI(void) const
-//Return el vector unitario I en el sistema global.
   { return getAxisVDir(1); }
 
 //! @brief Return the global coordinates of the vector.

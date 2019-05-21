@@ -45,10 +45,10 @@ Rect2d3dCooSys::Rect2d3dCooSys(const VGlobal &v1,const VGlobal &v2)
 Rect2d3dCooSys::Rect2d3dCooSys(const PGlobal &p1,const PGlobal &p2, const PGlobal &p3)
   : Xd3dCooSys(2,p1,p2,p3) {}
 
-//! @brief Return el vector unitario I en el sistema global.
+//! @brief Return the unary vector I in global coordinates.
 Rect2d3dCooSys::VGlobal Rect2d3dCooSys::GetI(void) const
   { return getAxisVDir(1); }
-//! @brief Return el vector unitario J en el sistema global.
+//! @brief Return the unary vector J in global coordinates.
 Rect2d3dCooSys::VGlobal Rect2d3dCooSys::GetJ(void) const
   { return getAxisVDir(2); }
 

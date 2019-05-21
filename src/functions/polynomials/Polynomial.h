@@ -17,9 +17,9 @@
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Polinomio.h
-#ifndef POLINOMIO_H
-#define POLINOMIO_H
+//Polynomial.h
+#ifndef POLYNOMIAL_H
+#define POLYNOMIAL_H
 
 #include "function.h"
 #include "IndPol.h"
@@ -37,7 +37,7 @@ typedef std::map< IndPol, double, std::less<IndPol> > mapPol;
 typedef vectorZ<double> vZ_double;
 typedef ZMatrix<double> mZ_double;
 
-class Polinomio : public Function, public mapPol
+class Polynomial : public Function, public mapPol
   {
   protected:
     inline void init(const double &d)
@@ -55,7 +55,7 @@ class Polinomio : public Function, public mapPol
         else
           mapPol::operator[](v2) += d;
       }
-    void PutSuma(const IndPol &v,const Polinomio &p);
+    void PutSuma(const IndPol &v,const Polynomial &p);
     void PutProd(const IndPol &v,const double &d)
     //Multiplica el coeficiente que corresponde a IndPol por la cantidad d.
       {
@@ -71,146 +71,146 @@ class Polinomio : public Function, public mapPol
           stream << " + ";
       }
     void OutVars(std::ostream &stream,mapPol::const_iterator &i) const;
-    Polinomio Reduce(short unsigned int j,const double &val) const;
+    Polynomial Reduce(short unsigned int j,const double &val) const;
   public:
-    Polinomio(const double &d= 0.0): Function(), mapPol() 
+    Polynomial(const double &d= 0.0): Function(), mapPol() 
       { init(d); }
-    Polinomio(const NmbVars &vars): Function(vars), mapPol() 
+    Polynomial(const NmbVars &vars): Function(vars), mapPol() 
       { init(0.0); }      
-    Polinomio(const char *vars): Function(vars), mapPol() 
+    Polynomial(const char *vars): Function(vars), mapPol() 
       { init(0.0); }
-    Polinomio(const char var): Function(var), mapPol() 
+    Polynomial(const char var): Function(var), mapPol() 
       { init(0.0); }
-    Polinomio(const Polinomio &otro): Function(otro), mapPol(otro) {}
-    Polinomio &operator=(const Polinomio &p)
+    Polynomial(const Polynomial &otro): Function(otro), mapPol(otro) {}
+    Polynomial &operator=(const Polynomial &p)
       {
         Function::operator=(p);
         mapPol::operator=(p);
         return *this;
       }
+    //! @brief Return a vector of indexes suited to
+    //! the polynomial.
     IndPol GetIndPol(void) const
-    //Devuelve un vector de indices adecuado para
-    //el polinomio.
       {
         IndPol i(GetDim());
         return i;
       }
     int Grado(short unsigned int j) const;
     IndPol Grados(void) const;
+    //! @brief Return the degree of the polynomial.
     int Grado(void) const
-    //Devuelve el grado del polinomio.
       {
         IndPol gs= Grados();
         return *max_element(gs.begin(),gs.end());  
       }
     void Neg(void);
-    static Polinomio neutro_suma(void)
-      { return Polinomio(0.0); }
-    static Polinomio neutro_producto(void)
-      { return Polinomio(1.0); }
-    Polinomio Reduce(short unsigned int j,const Polinomio &val) const;
-    Polinomio Eval(short unsigned int j,const double &val) const;
-    //Devuelve el polinomio que resulta de sustituir la variable de indice j por
-    //el valor que se pasa como parametro.
-    Polinomio Eval(short unsigned int j,const Polinomio &val) const;
-    //Devuelve el polinomio que resulta de sustituir la variable de indice j por
-    //el polinomio que se pasa como parametro.
+    static Polynomial neutro_suma(void)
+      { return Polynomial(0.0); }
+    static Polynomial neutro_producto(void)
+      { return Polynomial(1.0); }
+    Polynomial Reduce(short unsigned int j,const Polynomial &val) const;
+    //! @brief Return the polynomial that results from the substitution of
+    //! the j-th variable with the value being passed as parameter.
+    Polynomial Eval(short unsigned int j,const double &val) const;
+    //! @brief Return the polynomial that results from the substitution of
+    //! the j-th variable with the value being passed as parameter.
+    Polynomial Eval(short unsigned int j,const Polynomial &val) const;
+    //! @brief Return the value of the polynomial at point v.
     double Eval(const vZ_double &v) const;
-    //Devuelve el valor del polinomio en el punto v.
+    //! @brief Return the value of the polynomial at point v.
     double Eval(const mZ_double &v) const;
-    //Devuelve el valor del polinomio en el punto v.
-    Polinomio CompactaVar(unsigned short int j) const;
+    Polynomial CompactaVar(unsigned short int j) const;
+    //! @brief Evaluates the polynomial in point x.
     double operator()(const vZ_double &x) const
-    //Evalua el polinomio en el punto x.
       { return Eval(x); }
-    friend bool operator ==(const Polinomio &p1,const Polinomio &p2)
+    friend bool operator ==(const Polynomial &p1,const Polynomial &p2)
       {
         if ((const Function &) p1 != (const Function &) p2) return 0;
         if ((const mapPol &) p1 != (const mapPol &) p2) return 0;
         return 1;
       }
-    friend Polinomio operator -(const Polinomio &p)
+    friend Polynomial operator -(const Polynomial &p)
       {
-        Polinomio neg(p);
+        Polynomial neg(p);
         neg.Neg();
         return neg;
       }
-    Polinomio& operator+=(const Polinomio &p);
-    Polinomio &operator-=(const Polinomio &m)
+    Polynomial& operator+=(const Polynomial &p);
+    Polynomial &operator-=(const Polynomial &m)
       {
-        Polinomio p(*this);
+        Polynomial p(*this);
         p+= -m;
         (*this)= p;
         return *this;
       }
-    Polinomio &operator +=(const double &d)
+    Polynomial &operator +=(const double &d)
       {
         IndPol v= GetIndPol();
         PutSuma(Vars,v,d);
         return *this;        
       }
-    friend Polinomio operator +(const Polinomio &p1,const Polinomio &p2)
+    friend Polynomial operator +(const Polynomial &p1,const Polynomial &p2)
       {
-        Polinomio p(p1);
+        Polynomial p(p1);
         p+= p2;
         return p;
       }
-    friend Polinomio operator -(const Polinomio &p1,const Polinomio &p2)
+    friend Polynomial operator -(const Polynomial &p1,const Polynomial &p2)
       { return p1 + (-p2); }
-    friend Polinomio operator +(const Polinomio &p,const double &d)
+    friend Polynomial operator +(const Polynomial &p,const double &d)
       {
-        Polinomio q(p);
+        Polynomial q(p);
         q+=d;
         return q;
       }
-    friend Polinomio operator +(const double &d,const Polinomio &p)
+    friend Polynomial operator +(const double &d,const Polynomial &p)
       { return p+d; }
-    friend Polinomio operator -(const Polinomio &p,const double &d)
+    friend Polynomial operator -(const Polynomial &p,const double &d)
       { return p + (-d); }
-    friend Polinomio operator -(const double d,const Polinomio &p)
+    friend Polynomial operator -(const double d,const Polynomial &p)
       { return d+(-p); }
-    friend Polinomio operator *(const Polinomio &p1,const Polinomio &p2);
-    Polinomio &operator*=(const double &d);
-    Polinomio &operator*=(const Polinomio &p);
-    inline friend Polinomio operator *(const Polinomio &p,const double &d)
+    friend Polynomial operator *(const Polynomial &p1,const Polynomial &p2);
+    Polynomial &operator*=(const double &d);
+    Polynomial &operator*=(const Polynomial &p);
+    inline friend Polynomial operator *(const Polynomial &p,const double &d)
       {
-        Polinomio q(p);
+        Polynomial q(p);
         q*= d;
         return q;
       }
-    inline friend Polinomio operator *(const double &d,const Polinomio &p)
+    inline friend Polynomial operator *(const double &d,const Polynomial &p)
       { return p*d; }
-    Polinomio Parcial(short unsigned int j) const;
-    Polinomio Derivada(short unsigned int j,const double &x) const
+    Polynomial Parcial(short unsigned int j) const;
+    Polynomial Derivada(short unsigned int j,const double &x) const
       {
-        Polinomio p= Parcial(j);
+        Polynomial p= Parcial(j);
         return p.Eval(j,x);
       }
-    Polinomio Primitiva(short unsigned int j) const;
-    Polinomio Integral(short unsigned int j,const double &x0,const double &x1) const
+    Polynomial Primitiva(short unsigned int j) const;
+    Polynomial Integral(short unsigned int j,const double &x0,const double &x1) const
       {
-        Polinomio p= Primitiva(j);
+        Polynomial p= Primitiva(j);
         return p.Eval(j,x1)-p.Eval(j,x0);
       }
     double Integral(const vZ_double &x0,const vZ_double &x1) const;
-    friend std::ostream &operator <<(std::ostream &stream,const Polinomio &p);
+    friend std::ostream &operator <<(std::ostream &stream,const Polynomial &p);
   };
 
-Polinomio operator *(const Polinomio &p1,const Polinomio &p2);
-std::ostream &operator<<(std::ostream &stream,const Polinomio &p);
-std::istream &operator>>(std::istream &stream,const Polinomio &p);
+Polynomial operator *(const Polynomial &p1,const Polynomial &p2);
+std::ostream &operator<<(std::ostream &stream,const Polynomial &p);
+std::istream &operator>>(std::istream &stream,const Polynomial &p);
 
-inline Polinomio sqr(const Polinomio &p)
-//Calcula el cuadrado de un polinomio.
+//! @brief Computes the square of the polynomial
+inline Polynomial sqr(const Polynomial &p)
   { return p*p; }
 
-Polinomio pow(const Polinomio &p,unsigned int n);
-//Eleva el polinomio a la potencia entera n.
+//! @brief Return p^n
+Polynomial pow(const Polynomial &p,unsigned int n);
 
-inline Polinomio neutro_suma(const Polinomio &)
-  { return Polinomio::neutro_suma(); }
-inline Polinomio neutro_producto(const Polinomio &)
-  { return Polinomio::neutro_producto(); }
+inline Polynomial neutro_suma(const Polynomial &)
+  { return Polynomial::neutro_suma(); }
+inline Polynomial neutro_producto(const Polynomial &)
+  { return Polynomial::neutro_producto(); }
 
 #endif
 

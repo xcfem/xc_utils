@@ -80,13 +80,9 @@ class Polyline2d : public Linear2d, public GeomObj::list_Pos2d
     virtual GEOM_FT GetMax(unsigned short int i) const;
     //Return the maximum value of the i coordinate.
     virtual GEOM_FT GetMin(unsigned short int i) const;
-    //Return the minimum value of the i coordinate.
+    //! @brief Return the minimum value of the i coordinate.
     Polyline2d GetMayores(unsigned short int i,const GEOM_FT &d) const;
-    //Return una Polyline2d con los vertices cuya coordenada i
-    //es mayor que d.
     Polyline2d GetMenores(unsigned short int i,const GEOM_FT &d) const;
-    //Return una Polyline2d con los vertices cuya coordenada i
-    //es menor que d.
     const Pos2d &Vertice(const size_t &i) const;
     Segment2d getSegment(const const_iterator &i) const;
     Segment2d getSegment(const size_t &i) const;

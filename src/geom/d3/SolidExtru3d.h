@@ -112,15 +112,15 @@ class SolidExtru3d : public Solid3d
 /*         secc.setOrg(p); */
 /*         return secc; */
 /*       } */
+    //! @brief Return the maximum value of the i-th coordinate.
     inline virtual GEOM_FT GetMax(unsigned short int i) const
-    //Return el valor maximo de la coordenada i.
       { 
         //return max(GetBase(0).GetMax(i),GetBase(1).GetMax(i));
 	std::cerr << "SolidExtru3d::GetMax no implementada" << std::endl;
         return 0.0;
       }
+    //! @brief Return the minimum value of the i-th coordinate.
     inline virtual GEOM_FT GetMin(unsigned short int i) const
-    //Return el valor minimo de la coordenada i.
       {
         //return min(GetBase(0).GetMin(i),GetBase(1).GetMin(i));
 	std::cerr << "SolidExtru3d::GetMax no implementada" << std::endl;

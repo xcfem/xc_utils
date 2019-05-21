@@ -18,7 +18,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Crout.h
-//Procedimiento de crout para la soluciOn de un sistema de ecuaciones lineal.
+//Crout procedure for the solution of a linear system of equations.
 
 #ifndef CROUT_H
 #define CROUT_H

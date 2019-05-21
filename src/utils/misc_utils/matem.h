@@ -175,7 +175,7 @@ inline double dicot_zero(double f(double), double a, double b,double &err)
     return xx; 
   }
 
-//Interpolación.
+//Interpolation.
 inline double IntRecta(double x0,double y0,double x1,double y1, double x)
   {
     double a= (y1-y0)/(x1-x0);
@@ -183,7 +183,7 @@ inline double IntRecta(double x0,double y0,double x1,double y1, double x)
   }
 
 
-//Angulos.
+//Angles.
 inline double HMS_C(const double &hms)
   {
     double h= floor(hms);

@@ -18,8 +18,8 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //calcularx.h
-//Procedimiento para la sustitucion hacia atras en los mEtodos
-//de Gauss y Crout para la solucion de un sistema de ecuaciones lineal.
+// Backward substitution procedure for the Gauss and Crout methods
+// for the solution of linear equations systems.
 
 #ifndef CALCULARX_H
 #define CALCULARX_H

@@ -26,11 +26,11 @@
 
 //! @ingroup GEOM
 //
-//! @defgroup SisRef Sistemas de referencia.
+//! @defgroup SisRef Reference system.
 //
 //! @ingroup SisRef
 //! 
-//! @brief Clase base para los sistemas de referencia.
+//! @brief Base class for reference systems.
 //!  
 template<class SC>
 class Ref : public ProtoGeom

@@ -49,10 +49,10 @@ class GeomObj3d: public GeomObj
     GeomObj3d(void) {}
     virtual ~GeomObj3d(void) {}
     virtual GeomObj *clon(void) const=0;
+    //! @brief Return the maximum value of the i-th coordinate.
     virtual GEOM_FT GetMax(unsigned short int i) const= 0;
-    //Return el valor maximo de la coordenada i.
+    //! @brief Return the minimum value of the i-th coordinate.
     virtual GEOM_FT GetMin(unsigned short int i) const= 0;
-    //Return el valor minimo de la coordenada i.
     GEOM_FT GetXMax(void) const { return GetMax(1); }
     GEOM_FT GetYMax(void) const { return GetMax(2); }
     GEOM_FT GetZMax(void) const { return GetMax(3); }

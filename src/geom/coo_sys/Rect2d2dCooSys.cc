@@ -42,13 +42,14 @@ Rect2d2dCooSys::Rect2d2dCooSys(const VGlobal &vX)
 CooSys *Rect2d2dCooSys::Copia(void) const
   { return new Rect2d2dCooSys(*this); }
 
-//! @brief Return el vector unitario I en el sistema global.
+//! @brief Return the unary vector I in global coordinates.
 Rect2d2dCooSys::VGlobal Rect2d2dCooSys::GetI(void) const
   { return getAxisVDir(1); }
-//! @brief Return el vector unitario J en el sistema global.
+//! @brief Return the unary vector J in global coordinates.
 Rect2d2dCooSys::VGlobal Rect2d2dCooSys::GetJ(void) const
   { return getAxisVDir(2); }
-//! @brief Asigna el vector unitario I.
+
+//! @brief Set the unary vector I.
 void Rect2d2dCooSys::PutI(const VGlobal &i)
   {
     put(1,1,i(1));

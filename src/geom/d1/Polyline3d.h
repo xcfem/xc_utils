@@ -60,15 +60,9 @@ class Polyline3d : public Linear3d, public GeomObj::list_Pos3d
     virtual GEOM_FT getLength(void) const
       { return GeomObj::list_Pos3d::getLength(); }
     virtual GEOM_FT GetMax(unsigned short int i) const;
-    //Return the maximum value of the i coordinate.
     virtual GEOM_FT GetMin(unsigned short int i) const;
-    //Return the minimum value of the i coordinate.
     Polyline3d GetMayores(unsigned short int i,const GEOM_FT &d) const;
-    //Return una Polyline3d con los vertices cuya coordenada i
-    //es mayor que d.
     Polyline3d GetMenores(unsigned short int i,const GEOM_FT &d) const;
-    //Return una Polyline3d con los vertices cuya coordenada i
-    //es menor que d.
     Segment3d getSegment(const list_Pos3d::const_iterator &) const;
     Segment3d getSegment(const size_t &) const;
     //list_Pos3d Int(unsigned short int i,const GEOM_FT &d) const;

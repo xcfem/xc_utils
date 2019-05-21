@@ -18,7 +18,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //Gauss.h
-//Procedimiento de Gauss para la solución de un sistema de ecuaciones lineal.
+// Gaussian procedure for the solution of a linear system of equations.
 
 #ifndef GAUSS_H
 #define GAUSS_H

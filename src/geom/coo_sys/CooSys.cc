@@ -170,7 +170,8 @@ FT_matrix CooSys::TransAGlobal(void) const
 //! en globales al mismo vector expresado en locales.
 FT_matrix CooSys::TransDeGlobal(void) const
   { return rot; }
-//! @brief Return the transformation matrix desde este sistema a dest.
+//! @brief Return the transformation matrix from this system to
+//! the argument one.
 FT_matrix CooSys::GetTransA(const CooSys &dest) const
   { return (dest.rot*TransAGlobal()); }
 

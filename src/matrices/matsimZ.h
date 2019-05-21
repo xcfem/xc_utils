@@ -18,8 +18,8 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //MatsimZ.h
-//Matrices simétricas y hemisimétricas.
-//Se almacena el triángulo inferior.
+//Symmetric and antysimmetric matrices.
+//Lower triangle is stored.
 #ifndef MATSIMZ_H
 #define MATSIMZ_H
 
@@ -33,8 +33,8 @@ class matsimZ : public ZMatrix<numero>
     typedef ZMatrix<numero> ZMatrix_number;
     typedef typename ZMatrix_number::size_type size_type;
   protected:
-    //Multiplica a los elementos del triangulo inferior
-    //sirve para matrices hemisimEtricas.
+    //Multiplies the elements of the lower triangle
+    //can be used with antysimmetric matrices.
     int signo;
     inline virtual size_type Tam(size_type n_rows,size_type cols)
       { return (n_rows*(n_rows+1)/2); }
