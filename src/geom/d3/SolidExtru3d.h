@@ -116,14 +116,16 @@ class SolidExtru3d : public Solid3d
     inline virtual GEOM_FT GetMax(unsigned short int i) const
       { 
         //return max(GetBase(0).GetMax(i),GetBase(1).GetMax(i));
-	std::cerr << "SolidExtru3d::GetMax no implementada" << std::endl;
+	std::cerr << "SolidExtru3d::" << __FUNCTION__
+	          << "not implemented." << std::endl;
         return 0.0;
       }
     //! @brief Return the minimum value of the i-th coordinate.
     inline virtual GEOM_FT GetMin(unsigned short int i) const
       {
         //return min(GetBase(0).GetMin(i),GetBase(1).GetMin(i));
-	std::cerr << "SolidExtru3d::GetMax no implementada" << std::endl;
+	std::cerr << "SolidExtru3d::" << __FUNCTION__
+	          << "not implemented." << std::endl;
         return 0.0;
       }
     BND3d Bnd(void) const

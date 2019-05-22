@@ -275,7 +275,7 @@ std::ostream &operator<<(std::ostream &stream,const Polynomial &p)
 
 std::istream &operator>>(std::istream &stream,const Polynomial &p)
   {
-    std::cerr << "Polynomial; lectura desde stream no implementada." << std::endl;
+    std::cerr << "Polynomial; read from stream not implemented yet." << std::endl;
     return stream;
   }
 

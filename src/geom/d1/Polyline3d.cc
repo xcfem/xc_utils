@@ -165,19 +165,27 @@ Polyline3d Polyline3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 //      return result;
 //   }
 
+//! @brief Return the moment of inertia about the x axis.
 GEOM_FT Polyline3d::Ix(void) const
   {
-    std::cerr << "Polyline3d Ix() no implementada" << std::endl;
+    std::cerr << "Polyline3d::" << __FUNCTION__
+              << "Ix() not implemented." << std::endl;
     return 0.0;
   }
+
+//! @brief Return the moment of inertia about the y axis.
 GEOM_FT Polyline3d::Iy(void) const
   {
-    std::cerr << "Polyline3d Iy() no implementada" << std::endl;
+    std::cerr << "Polyline3d::" << __FUNCTION__
+              << "Iy() not implemented." << std::endl;
     return 0.0;
   }
+
+//! @brief Return the moment of inertia about the z axis.
 GEOM_FT Polyline3d::Iz(void) const
   {
-    std::cerr << "Polyline3d Iz() no implementada" << std::endl;
+    std::cerr << "Polyline3d::" << __FUNCTION__
+              << "Iz() not implemented." << std::endl;
     return 0.0;
   }
 
