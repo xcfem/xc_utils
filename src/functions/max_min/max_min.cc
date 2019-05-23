@@ -17,9 +17,9 @@
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//extremo.cc
+//max_min.cc
 
-#include "extremo.h"
+#include "max_min.h"
 
 m_double extremo_calcx(const double &a,const double &b,const double &ab)
   {
