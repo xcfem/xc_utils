@@ -17,10 +17,10 @@
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Parametriza.h
+//Parameterize.h
 
-#ifndef PARAMETRIZA_H
-#define PARAMETRIZA_H
+#ifndef PARAMETERIZE_H
+#define PARAMETERIZE_H
 
 #include "xc_utils/src/matrices/m_double.h"
 
@@ -28,12 +28,12 @@
 //! function fixing all the variables except
 //! the i-th one.
 template<class F,size_t i>
-class Parametriza
+class Parameterize
   {
     const F f_;
     const m_double &x;
   public:
-    Parametriza(const F &f,const m_double &x0)
+    Parameterize(const F &f,const m_double &x0)
       : f_(f), x(x0) {}
     double operator()(const double &d) const
       {

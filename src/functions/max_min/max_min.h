@@ -27,7 +27,7 @@
 
 #include "xc_utils/src/matrices/m_double.h"
 #include "xc_utils/src/utils/misc_utils/mchne_eps.h"
-#include "parametriza.h"
+#include "Parameterize.h"
 
 typedef enum {interior=1, exterior=2} situ;   // interior, exterior
 
@@ -75,7 +75,7 @@ double extremo( const double &a,const double &b,bool minimo,
                 F f, const m_double &x0,
                 const double &dx= sqrt_mchne_eps_dbl)
   {
-    Parametriza<F,i> pf(f,x0);
+    Parameterize<F,i> pf(f,x0);
     return extremo(a, b, minimo, pf);
   }
 
