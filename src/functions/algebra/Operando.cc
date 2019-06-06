@@ -27,7 +27,8 @@
 
 Rama Operando::Diferencia(const Variable &,const Rama &r) const
   {
-    std::cerr << "Operando::Diferencia no implementada." << std::endl;
+    std::cerr << "Operando::" << __FUNCTION__
+              << " not implemented." << std::endl;
     return Rama();
 //     r->Put(Lex().NuevoLiteral(0.0),r->GetIzdo(),r->GetDcho());
 //     return r;

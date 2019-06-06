@@ -149,7 +149,8 @@ int vtkArcSource::RequestData( vtkInformation *vtkNotUsed(request),vtkInformatio
   
     if(this->GeneratePolygon )
       {
-	std::cerr << "vtkArcSource; no esta implementada la generación del polígono." << std::endl;
+	std::cerr << __FUNCTION__
+	          << "polygon generation not implemented." << std::endl;
 //    vtkCellArray *newPoly;
 //         newPoly = vtkCellArray::New();
 //         newPoly->Allocate(newPoly->EstimateSize(1,numPts));

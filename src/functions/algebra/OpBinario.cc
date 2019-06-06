@@ -30,7 +30,8 @@ Rama *OpBinario::operator()(Rama *r1,Rama *r2) const
 
 Rama OpSuma::Diferencia(const Variable &v,const Rama &r) const
   {
-    std::cerr << "OpSuma::Diferencia no implementada." << std::endl;
+    std::cerr << "OpSuma::" << __FUNCTION__
+              << " not implemented." << std::endl;
     return Rama();
 //     Rama retval(r.GetData());
 //     if(r.GetIzdo())
@@ -50,7 +51,8 @@ const Operando &OpSuma::Opera(const Operando *v1,const Operando *v2) const
 
 Rama OpResta::Diferencia(const Variable &v,const Rama &r) const
   {
-    std::cerr << "OpResta::Diferencia no implementada." << std::endl;
+    std::cerr << "OpResta::" << __FUNCTION__
+              << " not implemented." << std::endl;
     return Rama();
 //     Rama retval(r.GetData());
 //     retval.PutIzdo(diferencia(r->GetIzdo(),v));
@@ -63,7 +65,8 @@ const Operando &OpResta::Opera(const Operando *v1,const Operando *v2) const
 
 Rama OpProd::Diferencia(const Variable &v,const Rama &r) const
   {
-    std::cerr << "OpProd::Diferencia no implementada." << std::endl;
+    std::cerr << "OpProd::" << __FUNCTION__
+              << " not implemented." << std::endl;
     return Rama();
 //     Rama *ap= diferencia(Copia(r->GetIzdo()),v);
 //     Rama *bp= diferencia(Copia(r->GetDcho()),v);
@@ -139,7 +142,8 @@ const Operando &OpProd::Opera(const Operando *v1,const Operando *v2) const
 
 Rama OpDiv::Diferencia(const Variable &v,const Rama &r) const
   {
-    std::cerr << "OpDiv::Diferencia no implementada." << std::endl;
+    std::cerr << "OpDiv::" << __FUNCTION__
+              << " not implemented." << std::endl;
     return Rama();
 //     Rama *up= diferencia(Copia(r->GetIzdo()),v);
 //     Rama *vp= diferencia(Copia(r->GetDcho()),v);

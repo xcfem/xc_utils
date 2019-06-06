@@ -61,23 +61,23 @@ Vector2d Segment2d::VDir(void) const
 Vector2d Segment2d::Normal(void) const
   { return VDir().Normal(); }
 
-//! @brief Return el vector que une el origen con el extremo of the segment.
+//! @brief Return the vector from origin to the segment end point.
 Vector2d Segment2d::GetVector(void) const
   { return getToPoint()-getFromPoint(); }
 
-//! @brief Return the angle of the segment con el vector (0->2PI).
+//! @brief Return the angle of the segment with the vector (0->2PI).
 GEOM_FT Segment2d::getAngle(const Vector2d &v) const
   { return angle(VDir(),v); }
 
-//! @brief Return the angle of the segment con el vector (-PI->0->PI).
+//! @brief Return the angle of the segment with the vector (-PI->0->PI).
 GEOM_FT Segment2d::getSignedAngle(const Vector2d &v) const
   { return signedAngle(VDir(),v); }
 
-//! @brief Return the angle of the segment con el vector (0->2PI).
+//! @brief Return the angle of the segment with the vector (0->2PI).
 GEOM_FT Segment2d::getAngle(const Segment2d &s) const
   { return getAngle(s.VDir()); }
 
-//! @brief Return the angle of the segment con el vector (-PI->0->PI).
+//! @brief Return the angle of the segment with the vector (-PI->0->PI).
 GEOM_FT Segment2d::getSignedAngle(const Segment2d &s) const
   { return getSignedAngle(s.VDir()); }
 

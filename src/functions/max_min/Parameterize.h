@@ -11,33 +11,46 @@
 //  This software is distributed in the hope that it will be useful, but 
 //  WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details. 
+//  GNU General Public License for more details.  
 //
 // You should have received a copy of the GNU General Public License 
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//extremo.cc
+//Parameterize.h
 
-#include "extremo.h"
+#ifndef PARAMETERIZE_H
+#define PARAMETERIZE_H
 
-m_double extremo_calcx(const double &a,const double &b,const double &ab)
+#include "xc_utils/src/matrices/m_double.h"
+
+//! Converts a Rn->R function in a R->R
+//! function fixing all the variables except
+//! the i-th one.
+template<class F,size_t i>
+class Parameterize
   {
-    const double r= (sqrt(5.0)-1)/2.0; //0.61803399...
+    const F f_;
+    const m_double &x;
+  public:
+    Parameterize(const F &f,const m_double &x0)
+      : f_(f), x(x0) {}
+    double operator()(const double &d) const
+      {
+        m_double nuevo(x);
+        nuevo(i)= d;
+        return f_(nuevo);
+      }
+  };
 
-    m_double x(2,2);
-    x(ant+1,exterior)= a;  x(ant+1,interior)= b - ab * r;
-    x(post+1,exterior)= b; x(post+1,interior)= a + ab * r;
-    return x;
+template <class F>
+inline m_double matrix_argument(const F &f,const m_double &m)
+  {
+    m_double retval(m.getNumberOfRows(),m.getNumberOfColumns());
+    for(size_t k= 1; k <= m.getNumberOfRows(); k++)
+      for(size_t l= 1; l <= m.getNumberOfColumns(); l++)
+        retval(k,l)= f(m(k,l));
+    return retval;
   }
 
-m_double extremo_cx( m_double &x,const bool &cambia,
-                            const long &interior,const long &exterior)
-  {
-    x(cambia+1,exterior)= x(cambia+1,interior);
-    x(cambia+1,interior)= x(!cambia+1,interior);
-    x(!cambia+1,interior)= x(ant+1,exterior) + 
-                           x(post+1,exterior) - 
-                           x(cambia+1,interior);
-    return x;
-  }
+#endif

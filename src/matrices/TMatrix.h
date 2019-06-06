@@ -254,7 +254,8 @@ std::ostream &operator<<(std::ostream &os,const TMatrix<T,STO> &m)
 template <class T,class STO>
 void TMatrix<T,STO>::Input(std::istream &is)
   {
-    std::cerr << "TMatrix<T,STO>::Input no implementada." << std::endl;
+    std::cerr << "TMatrix<T,STO>::" << __FUNCTION__
+              << " not implemented." << std::endl;
     return;
   }
 

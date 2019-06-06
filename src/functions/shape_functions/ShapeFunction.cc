@@ -44,7 +44,8 @@ IntegrationPoints Segmento::get_integ_points() const
 m_double Segmento::dVdA(size_t face_nr) const
   {
     m_double dvda(1,1,0);
-    std::cerr << "Segmento::dVdA no implementada." << std::endl;
+    std::cerr << "Segmento::" << __FUNCTION__
+              << " not implemented." << std::endl;
     return dvda;
   }
 

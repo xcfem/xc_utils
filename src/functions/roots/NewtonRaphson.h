@@ -29,7 +29,7 @@
 #include "xc_utils/src/matrices/m_int.h"
 #include "xc_utils/src/matrices/solvers/solver_lu.h"
 #include "xc_utils/src/functions/op_dif/op_dif.h"
-#include "xc_utils/src/functions/extremos/extremo.h"
+#include "xc_utils/src/functions/max_min/max_min.h"
 
 bool norma_inf_nula(const m_double &x,const double &tolerance);
 

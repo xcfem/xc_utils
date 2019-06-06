@@ -120,7 +120,8 @@ GTSSurface Triang3dMesh::get_gts_surface(void) const
 //         GTSEdge l1= XXX
 //       }
     
-    std::cerr << "Triang3dMesh::get_gts_surface no implementada." << std::endl;
+     std::cerr << "Triang3dMesh::" << __FUNCTION__
+               << " not implemented." << std::endl;
     return retval;
   }
 

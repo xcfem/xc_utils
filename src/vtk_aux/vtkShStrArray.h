@@ -45,12 +45,12 @@ private:
 
   // Description:
   // Set the tuple value at the ith location in the array.
-  void SetTupleValue(vtkIdType i, const double *) {} //No implementada.
+  void SetTupleValue(vtkIdType i, const double *) {} //Not implemented.
 
   // Description:
   // Insert (memory allocation performed) the tuple into the ith location
   // in the array.
-  void InsertTupleValue(vtkIdType i, const double* ) {} //No implementada.
+  void InsertTupleValue(vtkIdType i, const double* ) {} //Not implemented.
 
   // Description:
   // This method lets the user specify data to be held by the array.  The

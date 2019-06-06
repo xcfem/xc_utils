@@ -25,7 +25,8 @@
 
 Rama Variable::Diferencia(const Variable &v,const Rama &r) const
   {
-    std::cerr << "Variable::Diferencia no implementada." << std::endl;
+    std::cerr << "Variable::" << __FUNCTION__
+              << " not implemented." << std::endl;
     return Rama();
 //     if(getName() == v.getName())
 //       r->Put(Lex().NuevoLiteral(1.0),NULL,NULL);

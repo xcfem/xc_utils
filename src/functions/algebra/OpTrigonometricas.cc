@@ -34,7 +34,8 @@ const Operando &OpSin::Opera(const Operando *,const Operando *v2) const
   { return *Lex().NuevoLiteral(sin(v2->GetValor())); }
 Rama OpSin::Diferencia(const Variable &v,const Rama &r) const
   {
-    std::cerr << "OpSin::Diferencia no implementada." << std::endl;
+    std::cerr << "OpSin::" << __FUNCTION__
+              << " not implemented." << std::endl;
     return Rama();
 //     Rama *ri= Lex().cose(Copia(r->GetDcho())); //coseno
 //     r=Lex().prodt(ri,diferencia(r->GetDcho(),v));
@@ -45,7 +46,8 @@ const Operando &OpCos::Opera(const Operando *,const Operando *v2) const
   { return *Lex().NuevoLiteral(cos(v2->GetValor())); }
 Rama OpCos::Diferencia(const Variable &v,const Rama &r) const
   {
-    std::cerr << "OpCos::Diferencia no implementada." << std::endl;
+    std::cerr << "OpCos::" << __FUNCTION__
+              << " not implemented." << std::endl;
     return Rama();
 //     Rama *ri= Lex().neg(Lex().seno(Copia(r->GetDcho()))); //-seno
 //     r=Lex().prodt(ri,diferencia(r->GetDcho(),v));
@@ -56,7 +58,8 @@ const Operando &OpTan::Opera(const Operando *,const Operando *v2) const
   { return *Lex().NuevoLiteral(tan(v2->GetValor())); }
 Rama OpTan::Diferencia(const Variable &v,const Rama &r) const
   {
-    std::cerr << "OpTan::Diferencia no implementada." << std::endl;
+    std::cerr << "OpTan::" << __FUNCTION__
+              << " not implemented." << std::endl;
     return Rama();
 //     Rama *ri= Lex().suma(new Rama(1.0),Lex().sqr(Copia(r)));
 //     r=Lex().prodt(ri,diferencia(r->GetDcho(),v));
@@ -67,7 +70,8 @@ const Operando &OpAtan::Opera(const Operando *,const Operando *v2) const
   { return *Lex().NuevoLiteral(atan(v2->GetValor())); }
 Rama OpAtan::Diferencia(const Variable &v,const Rama &r) const
   {
-    std::cerr << "OpAtan::Diferencia no implementada." << std::endl;
+    std::cerr << "OpAtan::" << __FUNCTION__
+              << " not implemented." << std::endl;
     return Rama();
 //     Rama *ri= Lex().inv(Lex().suma(new Rama(1.0),Lex().sqr(Copia(r->GetDcho()))));
 //     r=Lex().prodt(ri,diferencia(r->GetDcho(),v));
@@ -87,7 +91,8 @@ const Operando &OpDeg2Rad::Opera(const Operando *,const Operando *v2) const
   { return *Lex().NuevoLiteral(DegToRad(v2->GetValor())); }
 Rama OpDeg2Rad::Diferencia(const Variable &v,const Rama &r) const
   {
-    std::cerr << "OpDeg2Rad::Diferencia no implementada." << std::endl;
+    std::cerr << "OpDeg2Rad::" << __FUNCTION__
+              << " not implemented." << std::endl;
     return Rama();
 //     Rama *c= Lex().divn(new Rama(M_PI),new Rama(180));
 //     Rama *bp= diferencia(Copia(r->GetDcho()),v);
@@ -99,7 +104,8 @@ const Operando &OpRad2Deg::Opera(const Operando *,const Operando *v2) const
   { return *Lex().NuevoLiteral(RadToDeg(v2->GetValor())); }
 Rama OpRad2Deg::Diferencia(const Variable &v,const Rama &r) const
   {
-    std::cerr << "OpRad2Deg::Diferencia no implementada." << std::endl;
+    std::cerr << "OpRad2Deg::" << __FUNCTION__
+              << " not implemented." << std::endl;
     return Rama();
 //     Rama *c= Lex().divn(new Rama(180),new Rama(M_PI));
 //     Rama *bp= diferencia(Copia(r->GetDcho()),v);
