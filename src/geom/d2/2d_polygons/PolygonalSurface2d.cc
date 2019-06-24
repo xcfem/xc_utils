@@ -29,12 +29,7 @@
 #include "xc_utils/src/utils/misc_utils/matem.h"
 #include "../BND2d.h"
 #include <plotter.h>
-
-
 #include "xc_utils/src/geom/pos_vec/Pos2dList.h"
-
-
-
 
 //! @brief Return los vertices of the polygon.
 GeomObj::list_Pos2d PolygonalSurface2d::getVertices(void) const
