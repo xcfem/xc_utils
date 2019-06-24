@@ -49,7 +49,7 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
     :param d:  friction angle between soil an back of retaining wall (radians).
     See Jiménez Salas, Geotecnia y Cimientos page 682 and Bell's relationship
     '''
-    ka= super(FrictionalCohesionalSoil,self).Ka_coulomb(a.b,d)
+    ka= super(FrictionalCohesionalSoil,self).Ka_coulomb(a,b,d)
     return ka*sg_v-2*self.getDesignC*math.sqrt(ka)
   def eah_coulomb(self, sg_v,a,b,d):
     '''
