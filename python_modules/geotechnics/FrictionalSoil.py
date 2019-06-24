@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
+from __future__ import print_function
 import math
 from scipy.constants import g
 from geotechnics import mononobe_okabe
+from miscUtils import LogMessages as lmsg
 
 
 '''FrictionalSoil.py: frictional (or cohesionless) soil model.'''
@@ -54,6 +56,8 @@ class FrictionalSoil(object):
     fi= self.getDesignPhi()
     num= 1.0/math.cos(a)*math.cos(fi-a)
     r1=math.sqrt(math.cos(a+d))
+    if(b>fi):
+      lmsg.error('The angle of the backfill: '+str(math.degrees(b))+' is greater than the friction angle: '+str(math.degrees(fi)))
     r2=math.sqrt(math.sin(fi+d)*math.sin(fi-b)/math.cos(b-a))
     return (math.pow((num/(r1+r2)),2))
   def Kah_coulomb(self,a,b,d):
