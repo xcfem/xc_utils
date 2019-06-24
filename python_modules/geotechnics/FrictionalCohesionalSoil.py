@@ -39,6 +39,40 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
   def getDesignC(self):
     '''Return the design value of the soil cohesion.'''
     return self.c/self.gammaMc
+  def ea_coulomb(self, sg_v, a, b, d= 0.0):
+    '''
+    Return the lateral earth active pressure.
+
+    :param sg_v:  vertical stress.
+    :param a:  angle of the back of the retaining wall (radians).
+    :param b:  slope of the backfill (radians).
+    :param d:  friction angle between soil an back of retaining wall (radians).
+    See Jiménez Salas, Geotecnia y Cimientos page 682 and Bell's relationship
+    '''
+    ka= super(FrictionalCohesionalSoil,self).Ka_coulomb(a.b,d)
+    return ka*sg_v-2*self.getDesignC*math.sqrt(ka)
+  def eah_coulomb(self, sg_v,a,b,d):
+    '''
+    Return the horizontal component of the lateral earth active pressure.
+
+    :param sg_v:  vertical stress.
+    :param a:  angle of the back of the retaining wall (radians).
+    :param b:  slope of the backfill (radians).
+    :param d:  friction angle between soil an back of retaining wall (radians).
+    '''
+    return (self.ea_coulomb(a,b,d)*math.cos(a+d))
+  def eav_coulomb(self, sg_v,a,b,d):
+    '''
+    Return the vertical component of the active earth pressure coefficient
+    according to Coulomb's theory.
+
+    :param sg_v:  vertical stress.
+    :param a:  angle of the back of the retaining wall (radians).
+    :param b:  slope of the backfill (radians).
+    :param fi: internal friction angle of the soil (radians).
+    :param d:  friction angle between soil an back of retaining wall (radians).
+    '''
+    return (self.ea_coulomb(a,b,d)*math.sin(a+d))
   def sq(self,Beff,Leff):
     '''Factor that introduces the effect of foundation shape on
        the overburden component.
