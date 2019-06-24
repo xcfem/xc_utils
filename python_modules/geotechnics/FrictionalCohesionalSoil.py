@@ -50,7 +50,7 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
     See Jiménez Salas, Geotecnia y Cimientos page 682 and Bell's relationship
     '''
     ka= super(FrictionalCohesionalSoil,self).Ka_coulomb(a,b,d)
-    return ka*sg_v-2*self.getDesignC*math.sqrt(ka)
+    return ka*sg_v-2*self.getDesignC()*math.sqrt(ka)
   def eah_coulomb(self, sg_v,a,b,d):
     '''
     Return the horizontal component of the lateral earth active pressure.
