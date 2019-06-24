@@ -4,6 +4,7 @@ import math
 from scipy.constants import g
 from geotechnics import mononobe_okabe
 
+
 '''FrictionalSoil.py: frictional (or cohesionless) soil model.'''
 
 __author__= "Luis C. Pérez Tato (LCPT)"
@@ -34,13 +35,48 @@ class FrictionalSoil(object):
     '''Returns Jaky's earth pressure at rest.'''
     return 1.0-math.sin(self.getDesignPhi())
   def Ka(self):
-    '''Passive earth pressure coefficient.'''
+    '''Active earth pressure coefficient.'''
     sinPhi= math.sin(self.getDesignPhi())
     return (1-sinPhi)/(1+sinPhi)
   def Kp(self):
     '''Passive earth pressure coefficient.'''
     sinPhi= math.sin(self.getDesignPhi())
     return (1+sinPhi)/(1-sinPhi)
+  def Ka_coulomb(self, a, b, d= 0.0):
+    '''
+    Return the active earth pressure coefficient according to Coulomb's theory.
+
+    :param a:  angle of the back of the retaining wall (radians).
+    :param b:  slope of the backfill (radians).
+    :param d:  friction angle between soil an back of retaining wall (radians).
+    See Jiménez Salas, Geotecnia y Cimientos page 682 
+    '''
+    fi= self.getDesignPhi()
+    num= 1.0/math.cos(a)*math.cos(fi-a)
+    r1=math.sqrt(math.cos(a+d))
+    r2=math.sqrt(math.sin(fi+d)*math.sin(fi-b)/math.cos(b-a))
+    return (math.pow((num/(r1+r2)),2))
+  def Kah_coulomb(self,a,b,d):
+    '''
+    Return the horizontal component of the active earth pressure coefficient
+    according to Coulomb's theory.
+
+    :param a:  angle of the back of the retaining wall (radians).
+    :param b:  slope of the backfill (radians).
+    :param d:  friction angle between soil an back of retaining wall (radians).
+    '''
+    return (self.Ka_coulomb(a,b,d)*math.cos(a+d))
+  def Kav_coulomb(self,a,b,d):
+    '''
+    Return the vertical component of the active earth pressure coefficient
+    according to Coulomb's theory.
+
+    :param a:  angle of the back of the retaining wall (radians).
+    :param b:  slope of the backfill (radians).
+    :param fi: internal friction angle of the soil (radians).
+    :param d:  friction angle between soil an back of retaining wall (radians).
+    '''
+    return (self.Ka_coulomb(a,b,d)*math.sin(a+d))
   def gamma(self):
     '''Unit weight of soil'''
     return self.rho*g

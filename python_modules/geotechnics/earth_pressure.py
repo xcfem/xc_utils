@@ -66,14 +66,12 @@ def ka_coulomb(a,b,fi,d):
 
     :param a:  angle of the back of the retaining wall (radians).
     :param b:  slope of the backfill (radians).
-    :param i: internal friction angle of the soil (radians).
+    :param fi: internal friction angle of the soil (radians).
     :param d:  friction angle between soil an back of retaining wall (radians).
-    See Jiménez Salas, Geotecnia y Cimientos página 682 
+    See Jiménez Salas, Geotecnia y Cimientos page 682 
     '''
-    num= 1.0/math.cos(a)*math.cos(fi-a)
-    r1=math.sqrt(math.cos(a+d))
-    r2=math.sqrt(math.sin(fi+d)*math.sin(fi-b)/math.cos(b-a))
-    return (math.pow((num/(r1+r2)),2))
+    fSoil= fs.FrictionalSoil(fi)
+    return fSoil.Ka_coulomb(a, b, d)
 
 def kah_coulomb(a,b,fi,d):
     '''
@@ -82,10 +80,11 @@ def kah_coulomb(a,b,fi,d):
 
     :param a:  angle of the back of the retaining wall (radians).
     :param b:  slope of the backfill (radians).
-    :param i: internal friction angle of the soil (radians).
+    :param fi: internal friction angle of the soil (radians).
     :param d:  friction angle between soil an back of retaining wall (radians).
     '''
-    return (ka_coulomb(a,b,fi,d)*math.cos(a+d))
+    fSoil= fs.FrictionalSoil(fi)
+    return fSoil.Kah_coulomb(a, b, d)
 
 def kav_coulomb(a,b,fi,d):
     '''
@@ -95,10 +94,11 @@ def kav_coulomb(a,b,fi,d):
 
     :param a:  angle of the back of the retaining wall (radians).
     :param b:  slope of the backfill (radians).
-    :param i: internal friction angle of the soil (radians).
+    :param fi: internal friction angle of the soil (radians).
     :param d:  friction angle between soil an back of retaining wall (radians).
     '''
-    return (ka_coulomb(a,b,fi,d)*math.sin(a,d))
+    fSoil= fs.FrictionalSoil(fi)
+    return fSoil.Kav_coulomb(a, b, d)
 
 def k_janssen(k,d,B,z):
     '''
