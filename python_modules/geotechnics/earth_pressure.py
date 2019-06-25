@@ -127,12 +127,12 @@ def ep_coulomb(a,b,fi,d,p):
 
     :param a:  angle of the back of the retaining wall (radians).
     :param b:  slope of the backfill (radians).
-    :param i: internal friction angle of the soil (radians).
+    :param fi: internal friction angle of the soil (radians).
     :param d:  friction angle between soil an back of retaining wall (radians).
     :param p: Sobrecarga uniforme.
     '''
-    return(ka_coulomb(a,b,fi,d)*p*math.cos(a)/float(math.cos(b-a)))
-
+    fSoil= fs.FrictionalSoil(fi)
+    return fSoil.ep_coulomb(a, b, d, p)
 
 def eql_coulomb(x,H,z,ql):
     '''
@@ -167,7 +167,7 @@ def eqp_coulomb(x,H,z,qp):
     :param qp: carga puntual
     '''
     m=x/float(H)
-    nz/float(H)
+    n= z/float(H)
     if m<=0.4:
         return(0.28*n**2/float(math.pow((0.16+n**2),3))*qp/float(H**2))
     else:
