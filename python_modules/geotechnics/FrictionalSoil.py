@@ -99,6 +99,9 @@ class FrictionalSoil(object):
   def getDesignPhi(self):
     '''Return the design value of the soil internal friction angle.'''
     return self.phi/self.gammaMPhi
+  def getDesignC(self):
+    '''Return the design value of the soil cohesion.'''
+    return 0.0
   def getMononobeOkabeDryOverpressure(self,H,kv,kh,psi= math.radians(90),delta_ad= 0.0,beta= 0.0,Kas= None,g= 9.81):
     ''' Overpressure due to seismic action according to Mononobe-Okabe
 
