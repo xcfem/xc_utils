@@ -734,10 +734,10 @@ GeomObj3d::list_Pos3d intersection_points(const std::deque<Plane> &planes)
   }
 
 //! @brief Return true if the line is parallel to the plane.
-bool paralelos(const Plane &p, const Line3d &r)
+bool parallel(const Plane &p, const Line3d &r)
   { return(!do_intersect(p.ToCGAL(),r.ToCGAL())); }
 
 //! @brief Return true if the planes are parallel.
-bool paralelos(const Plane &p1, const Plane &p2)
+bool parallel(const Plane &p1, const Plane &p2)
   { return(!do_intersect(p1.ToCGAL(),p2.ToCGAL())); }
 

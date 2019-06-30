@@ -68,7 +68,7 @@ inline Dir2d operator-(const Dir2d &d)
 
 inline bool operator==(const Dir2d &v1,const Dir2d &v2)
   { return (v1.cgd==v2.cgd); }  
-inline bool paralelas(const Dir2d &v1,const Dir2d &v2)
+inline bool parallel(const Dir2d &v1,const Dir2d &v2)
   { return ((v1==v2) || (v1==-v2)); } 
 
 #endif

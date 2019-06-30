@@ -84,35 +84,36 @@ FT_matrix Xd3dCooSys::GetCooLocales(const Xd3dCooSys::VGlobal &v) const
 //! - The versor corresponding to vector j_, being passed as parameter.
 //! - The versor corresponding to vector k_, being passed as parameter.
 //!
-//! Comprueba que los tres vectores no sean coplanarios ni paralelos 2 a 2.
+//! Controls that the three vectors are not coplanar nor parallel (2 by 2).
 void Xd3dCooSys::vectores_unitarios(const VGlobal &i_,const VGlobal &j_,const VGlobal &k_)
   {
     if(coplanarios(i_,j_,k_))
       {
-        std::cerr << "Xd3dCooSys::vectores_unitarios: Los tres vectores: " 
+        std::cerr << getClassName() << "::" << __FUNCTION__
+	          << "; vectors: " 
                   << i_ << ' ' << j_ << ' ' << k_ 
-                  << " son coplanarios. No se hicieron cambios" << std::endl;
+                  << " are coplanar. No changes were made." << std::endl;
         return;
       }
-    if(paralelos(i_,j_))
+    if(parallel(i_,j_))
       {
-        std::cerr << "Xd3dCooSys::vectores_unitarios: Los vectores: " 
-		  << " i= " << i_ << " y j= " << j_
-                  << " son paralelos. No se hicieron cambios" << std::endl;
+        std::cerr << getClassName() << "::" << __FUNCTION__
+		  << "; vectors: i= " << i_ << " y j= " << j_
+                  << " are parallel. No changes were made." << std::endl;
         return;
       }
-    if(paralelos(i_,k_))
+    if(parallel(i_,k_))
       {
-        std::cerr << "Xd3dCooSys::vectores_unitarios: Los vectores: " 
-		  << " i= " << i_ << " y k= " << k_
-                  << " son paralelos. No se hicieron cambios" << std::endl;
+        std::cerr << getClassName() << "::" << __FUNCTION__
+		  << "; vectors: i= " << i_ << " y k= " << k_
+                  << " are parallel. No changes were made." << std::endl;
         return;
       }
-    if(paralelos(j_,k_))
+    if(parallel(j_,k_))
       {
-        std::cerr << "Xd3dCooSys::vectores_unitarios: Los vectores: " 
-		  << " j= " << j_ << " y k= " << k_
-                  << " son paralelos. No se hicieron cambios" << std::endl;
+        std::cerr << getClassName() << "::" << __FUNCTION__
+		  << "; vectors: j= " << j_ << " y k= " << k_
+                  << " are parallel. No changes were made." << std::endl;
         return;
       }
     const size_t ne= numberOfAxis();
@@ -149,11 +150,11 @@ void Xd3dCooSys::XAxisVector(const VGlobal &i_)
         const GEOM_FT imod= Abs2(i_); //Módulo de i.
         //const GEOM_FT tol= imod/1e8;
         VGlobal k_;
-        //if( (fabs(i_(1))<tol) && (fabs(i_(2))<tol) ) //Si i es casi paralelo al z axis global.
-        if(paralelos(i_,Vector3d(0,0,1))) //Si i es paralelo al z axis global.
-          k_= imod*J_3d; //k paralelo a y axis global.
+        //if( (fabs(i_(1))<tol) && (fabs(i_(2))<tol) ) //If i is almost parallel to global z axis.
+        if(parallel(i_,Vector3d(0,0,1))) //If i is parallel to global z axis.
+          k_= imod*J_3d; //k parallel to global y axis.
         else
-          k_= imod*K_3d; //k paralelo a z axis global.
+          k_= imod*K_3d; //k parallel to global z axis.
         const VGlobal j_= k_ ^ i_;
         k_= i_ ^ j_;
         vectores_unitarios(i_,j_,k_); //Normalizamos.

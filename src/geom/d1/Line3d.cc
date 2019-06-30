@@ -175,8 +175,8 @@ GEOM_FT Line3d::linearLeastSquaresFitting(const GeomObj3d::list_Pos3d &lp)
   }
 
 //! @brief Return true if the lines are parallel.
-bool Line3d::Paralela(const Line3d &r) const
-  { return paralelas(GetDir(),r.GetDir()); }
+bool Line3d::isParallel(const Line3d &r) const
+  { return parallel(GetDir(),r.GetDir()); }
 
 //! @brief Return the plane normal to r that passes through p.
 Plane Line3d::Perpendicular(const Pos3d &p) const
@@ -224,8 +224,8 @@ bool Line3d::intersects(const Line3d &r2) const
   {
     if(!coplanarias(*this,r2)) return false; //Not coplanar.
     if(colineales(*this,r2)) return true; //Collinear.
-    if(paralelas(*this,r2))
-      return false; //Son distintas and paralelas.
+    if(parallel(*this,r2))
+      return false; //Different and parallel.
     else
       return true;
   }

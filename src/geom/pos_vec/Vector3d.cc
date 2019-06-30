@@ -165,16 +165,17 @@ Vector3d Vector3d::Perpendicular(const Vector3d &v) const
     if( Nulo() || v.Nulo() )
       {
 	std::cerr << getClassName() << "::" << __FUNCTION__
-		  << "; One of the vectors: "
-                  << *this << " o " << v << " es nulo."
-                  << " La operación no tiene sentido, se devuelve un vector nulo." << std::endl;
+		  << "; one of the vectors: "
+                  << *this << " o " << v << " is null."
+                  << " Null vector returned." << std::endl;
       }
     else
-      if(paralelos(*this,v))
+      if(parallel(*this,v))
         {
-	  std::cerr << "Vector3d::Perpendicular; el vector :" << v
-                    << " es paralelo a éste: " << *this
-                    << ", se devuelve un vector nulo." << std::endl;
+	  std::cerr << getClassName() << "::" << __FUNCTION__
+		    << "; vector :" << v
+                    << " is parallel to this one: " << *this
+                    << ", null vector returned." << std::endl;
         }
       else
         {
@@ -208,8 +209,8 @@ GEOM_FT Vector3d::getAngle(const Vector3d &v) const
     return retval;
   }
 
-bool paralelos(const Vector3d &v1,const Vector3d &v2)
-  { return paralelas(v1.getDirection(),v2.getDirection()); } 
+bool parallel(const Vector3d &v1,const Vector3d &v2)
+  { return parallel(v1.getDirection(),v2.getDirection()); } 
 bool coplanarios(const Vector3d &v1,const Vector3d &v2,const Vector3d &v3)
   {
     const Pos3d p1= Origin3d + v1;

@@ -38,7 +38,7 @@ GEOM_FT SlidingVector2d::getMoment(const Pos2d &o) const
       {
         Vector2d r= org - o;
         if(!r.Nulo()) //Si r no es nulo.
-          if(!paralelos(r,*this)) //Si r y ESTE no son paralelos
+          if(!parallel(r,*this)) //If r and THIS are not parallel.
             retval= r.x()*this->y()-this->x()*r.y();
       }
     return retval;

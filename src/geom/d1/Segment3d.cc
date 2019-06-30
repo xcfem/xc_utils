@@ -134,12 +134,12 @@ GEOM_FT Segment3d::dist2(const Pos3d &p) const
 GEOM_FT Segment3d::dist(const Pos3d &p) const
   { return sqrt(dist2(p)); }
 
-bool Segment3d::Paralelo(const Line3d &r) const
-  { return paralelas(getSupportLine(),r); }
-bool Segment3d::Paralelo(const Ray3d &sr) const
-  { return paralelas(getSupportLine(),sr); }
-bool Segment3d::Paralelo(const Segment3d &r) const
-  { return paralelas(getSupportLine(),r.getSupportLine()); }
+bool Segment3d::isParallel(const Line3d &r) const
+  { return parallel(getSupportLine(),r); }
+bool Segment3d::isParallel(const Ray3d &sr) const
+  { return parallel(getSupportLine(),sr); }
+bool Segment3d::isParallel(const Segment3d &r) const
+  { return parallel(getSupportLine(),r.getSupportLine()); }
 
 //! @brief Return the length of the segment.
 GEOM_FT Segment3d::getLength(void) const

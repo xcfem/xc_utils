@@ -125,11 +125,11 @@ def ep_coulomb(a,b,fi,d,p):
     Return the lateral earth pressure caused by a uniform load p
     action over the backfill surface according to Coulomb's theory.
 
-    :param a:  angle of the back of the retaining wall (radians).
-    :param b:  slope of the backfill (radians).
+    :param a: angle of the back of the retaining wall (radians).
+    :param b: slope of the backfill (radians).
     :param fi: internal friction angle of the soil (radians).
-    :param d:  friction angle between soil an back of retaining wall (radians).
-    :param p: Sobrecarga uniforme.
+    :param d: friction angle between soil an back of retaining wall (radians).
+    :param p: Uniform load.
     '''
     fSoil= fs.FrictionalSoil(fi)
     return fSoil.ep_coulomb(a, b, d, p)
@@ -164,7 +164,7 @@ def eqp_coulomb(x,H,z,qp):
         of the load.
     :param H:  Profundidad del extremo inferior del trasdós.
     :param z:  depth of the point for which the pressure is computed.
-    :param qp: carga puntual
+    :param qp: punctual load
     '''
     m=x/float(H)
     n= z/float(H)

@@ -171,8 +171,8 @@ GEOM_FT angle(const Plane &,const Plane &);
 
 Plane perpendicular(const Line3d &r, const Pos3d &p);
 
-bool paralelos(const Plane &p, const Line3d &r);
-bool paralelos(const Plane &p1, const Plane &p2);
+bool parallel(const Plane &p, const Line3d &r);
+bool parallel(const Plane &p1, const Plane &p2);
 
 
 Line3d intersection_line(const Plane &, const Plane &);

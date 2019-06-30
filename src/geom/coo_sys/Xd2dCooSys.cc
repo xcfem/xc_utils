@@ -34,7 +34,7 @@ Xd2dCooSys::Xd2dCooSys(const size_t &ne)
 //! @brief Define a coordinate system of dimension ne
 //! in a two-dimensional space. See Xd2dCooSys::XAxisVector.
 Xd2dCooSys::Xd2dCooSys(const size_t &ne,const VGlobal &vX)
-  : CooSys(ne,2) //Axis 1 paralelo a Vx.
+  : CooSys(ne,2) //Axis 1 parallel to Vx.
   { XAxisVector(vX); }
 //! @brief Define a coordinate system of dimension ne
 //! in a two-dimensional space. See Xd2dCooSys::XAxisVector.

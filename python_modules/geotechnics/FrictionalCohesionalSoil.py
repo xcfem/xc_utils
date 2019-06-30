@@ -106,7 +106,7 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
     :param a:  angle of the back of the retaining wall (radians).
     :param b:  slope of the backfill (radians).
     :param d:  friction angle between soil an back of retaining wall (radians).
-    :param p: Sobrecarga uniforme.
+    :param p: Uniform load.
     '''
     return(self.Ka_bell(p,a,b,d)*p*math.cos(a)/float(math.cos(b-a)))    
   def sq(self,Beff,Leff):

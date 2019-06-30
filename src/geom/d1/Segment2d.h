@@ -100,15 +100,15 @@ class Segment2d : public Linear2d
     GeomObj2d::list_Pos2d getIntersection(const Segment2d &sg2) const;
 
     Line2d Perpendicular(const Pos2d &p) const;
-    Line2d Paralela(const Pos2d &v) const;
+    Line2d isParallel(const Pos2d &v) const;
     Line2d getPerpendicularBisector(void) const;
 
-    bool Paralelo(const Line2d &r) const
-      { return paralelas(getSupportLine(),r); }
-    bool Paralelo(const Ray2d &sr) const
-      { return paralelas(getSupportLine(),sr); }
-    bool Paralelo(const Segment2d &r) const
-      { return paralelas(getSupportLine(),r.getSupportLine()); }
+    bool isParallel(const Line2d &r) const
+      { return parallel(getSupportLine(),r); }
+    bool isParallel(const Ray2d &sr) const
+      { return parallel(getSupportLine(),sr); }
+    bool isParallel(const Segment2d &r) const
+      { return parallel(getSupportLine(),r.getSupportLine()); }
 
     virtual GEOM_FT getLength(void) const;
     virtual Pos2d getCenterOfMass(void) const;
@@ -158,16 +158,16 @@ inline GEOM_FT dist(const Segment2d &r,const Pos2d &p)
 GEOM_FT angle(const Segment2d &,const Vector2d &);
 GEOM_FT angle(const Vector2d &,const Segment2d &);
 
-inline bool paralelas(const Segment2d &sg,const Line2d &r)
-  { return sg.Paralelo(r); }
-inline bool paralelas(const Line2d &r, const Segment2d &sg)
-  { return paralelas(sg,r); }
-inline bool paralelas(const Segment2d &sg,const Ray2d &sr)
-  { return sg.Paralelo(sr); }
-inline bool paralelas(const Ray2d &sr, const Segment2d &sg)
-  { return paralelas(sg,sr); }
-inline bool paralelas(const Segment2d &r1,const Segment2d &r2)
-  { return r1.Paralelo(r2); }
+inline bool parallel(const Segment2d &sg,const Line2d &r)
+  { return sg.isParallel(r); }
+inline bool parallel(const Line2d &r, const Segment2d &sg)
+  { return parallel(sg,r); }
+inline bool parallel(const Segment2d &sg,const Ray2d &sr)
+  { return sg.isParallel(sr); }
+inline bool parallel(const Ray2d &sr, const Segment2d &sg)
+  { return parallel(sg,sr); }
+inline bool parallel(const Segment2d &r1,const Segment2d &r2)
+  { return r1.isParallel(r2); }
 
 inline bool intersecan(const Segment2d &sg,const Line2d &r)
   { return sg.intersects(r); }

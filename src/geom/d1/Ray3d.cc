@@ -60,12 +60,12 @@ GEOM_FT Ray3d::dist2(const Pos3d &p) const
 GEOM_FT Ray3d::dist(const Pos3d &p) const
   { return sqrt_FT(dist2(p)); }
 
-//! @brief Return true if son paralelas.
-bool Ray3d::Paralela(const Ray3d &r) const
+//! @brief Return true if parallel.
+bool Ray3d::isParallel(const Ray3d &r) const
   { return (GetDir()== r.GetDir()); }
 
-//! @brief Return true if son paralelas.
-bool Ray3d::Paralela(const Line3d &r) const
+//! @brief Return true if parallel.
+bool Ray3d::isParallel(const Line3d &r) const
   { return (GetDir()== r.GetDir()); }
 
 //! @brief Return the intersection point with the argument line
