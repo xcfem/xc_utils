@@ -181,11 +181,12 @@ Vector2d Vector2d::Perpendicular(const Vector2d &v) const
                   << " La operación no tiene sentido, se devuelve un vector nulo." << std::endl;
       }
     else
-      if(paralelos(*this,v))
+      if(parallel(*this,v))
         {
-	  std::cerr << "Vector2d::Perpendicular; el vector :" << v
-                    << " es paralelo a éste: " << *this
-                    << ", se devuelve un vector nulo." << std::endl;
+	  std::cerr << getClassName() << "::" << __FUNCTION__
+	            << "; vector :" << v
+                    << " is parallel to this one: " << *this
+                    << ", null vector returned." << std::endl;
         }
       else
         {
@@ -215,8 +216,10 @@ bool colineales(const Vector2d &v1,const Vector2d &v2)
     Pos2d p2= Origin2d + v2;
     return colineales(Origin2d,p1,p2);
   }
-bool paralelos(const Vector2d &v1,const Vector2d &v2)
-  { return paralelas(v1.getDirection(),v2.getDirection()); } 
+
+//! @brief Return true if vector are parallel.
+bool parallel(const Vector2d &v1,const Vector2d &v2)
+  { return parallel(v1.getDirection(),v2.getDirection()); } 
 
 double signedAngle(const Vector2d &v1,const Vector2d &v2)
   {

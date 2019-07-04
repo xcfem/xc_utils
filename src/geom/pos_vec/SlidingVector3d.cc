@@ -49,7 +49,7 @@ SlidingVector3d SlidingVector3d::getMoment(const Pos3d &o) const
       {
         Vector3d r= org - o;
         if(!r.Nulo()) //Si r no es nulo.
-          if(!paralelos(r,*this)) //Si r y ESTE no son paralelos
+          if(!parallel(r,*this)) //If r and THIS are not parallel.
             retval= SlidingVector3d(o,r^*this);
       }
     return retval;

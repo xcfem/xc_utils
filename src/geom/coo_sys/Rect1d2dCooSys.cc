@@ -30,7 +30,7 @@
 
 
 Rect1d2dCooSys::Rect1d2dCooSys(const VGlobal &vX)
-  : Xd2dCooSys(1,vX) {} //Axis 1 paralelo a Vx.
+  : Xd2dCooSys(1,vX) {} //Axis 1 parallel to Vx.
 Rect1d2dCooSys::Rect1d2dCooSys(const PGlobal &p1,const PGlobal &p2)
   : Xd2dCooSys(1,p1,p2) {} //Axis 1 desde p1 a p2.
 

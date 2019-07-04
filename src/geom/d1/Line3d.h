@@ -118,7 +118,7 @@ class Line3d : public Linear3d
     //! @brief Set the points that define the line.
     void Put(const Pos3d &p1,const Pos3d &p2)
       { TwoPoints(p1,p2); }
-    bool Paralela(const Line3d &r) const;
+    bool isParallel(const Line3d &r) const;
 
     bool intersects(const Line3d &r2) const;
     GeomObj3d::list_Pos3d getIntersection(unsigned short int, const double &) const;
@@ -168,8 +168,8 @@ GEOM_FT dist(const Pos3d &p,const Line3d &r);
 inline GEOM_FT dist(const Line3d &r,const Pos3d &p)
   { return dist(p,r); }
 
-inline bool paralelas(const Line3d &r1,const Line3d &r2)
-  { return r1.Paralela(r2); }
+inline bool parallel(const Line3d &r1,const Line3d &r2)
+  { return r1.isParallel(r2); }
 bool colineales(const Line3d &r1,const Line3d &r2);
 bool coplanarias(const Line3d &r1,const Line3d &r2);
 

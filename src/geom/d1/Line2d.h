@@ -114,7 +114,7 @@ class Line2d : public Linear2d
     virtual GEOM_FT dist(const Pos2d &p) const;
 
     Line2d Perpendicular(const Pos2d &p) const;
-    Line2d Paralela(const Pos2d &v) const;
+    Line2d isParallel(const Pos2d &v) const;
     Line2d Offset(const Vector2d &v) const;
     Line2d Offset(const GEOM_FT &d) const;
     void Put(const Pos2d &p1,const Pos2d &p2);
@@ -123,7 +123,7 @@ class Line2d : public Linear2d
     GeomObj2d::list_Pos2d getIntersection(unsigned short int i, const double &d) const;
     GeomObj2d::list_Pos2d getIntersection(const Line2d &r2) const;
 
-    bool Paralela(const Line2d &r) const;
+    bool isParallel(const Line2d &r) const;
 
     virtual GEOM_FT getLength(void) const;
     virtual Pos2d getCenterOfMass(void) const;
@@ -168,8 +168,8 @@ inline GEOM_FT dist(const Line2d &r,const Pos2d &p)
 GEOM_FT dist2(const Line2d &r1,const Line2d &r2);
 GEOM_FT dist(const Line2d &r1,const Line2d &r2);
 
-inline bool paralelas(const Line2d &r1,const Line2d &r2)
-  { return r1.Paralela(r2); }
+inline bool parallel(const Line2d &r1,const Line2d &r2)
+  { return r1.isParallel(r2); }
 
 bool intersecan(const Line2d &r1,const Line2d &r2);
 GeomObj2d::list_Pos2d intersection(const Line2d &r1,const Line2d &r2);

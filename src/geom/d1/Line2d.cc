@@ -260,7 +260,7 @@ Line2d Line2d::Offset(const Vector2d &v) const
   }
 
 //! @brief Return a parallel line passing through p.
-Line2d Line2d::Paralela(const Pos2d &p) const
+Line2d Line2d::isParallel(const Pos2d &p) const
   {
     const Vector2d v= p-Point();
     return Offset(v);
@@ -332,7 +332,7 @@ GeomObj2d::list_Pos2d Line2d::getIntersection(const Line2d &r2) const
              << endl;
         return retval;
       }
-    if(!paralelas(*this,r2))
+    if(!parallel(*this,r2))
       {
         CGAL::Object result;
         CGPoint_2 ptoi;
@@ -361,7 +361,7 @@ Pos2d Line2d::Point(const int &i) const
 GEOM_FT dist2(const Line2d &r1,const Line2d &r2)
   {
     GEOM_FT retval= 0.0;
-    if(!intersecan(r1,r2)) //son paralelas
+    if(!intersecan(r1,r2)) //parallel
       if(r1 != r2) //They are different lines.
         {
           const Pos2d p1= r1.Point(0);
@@ -387,8 +387,8 @@ double angle(const Line2d &r,const Vector2d &v)
 double angle(const Line2d &r1,const Line2d &r2)
   { return r1.getAngle(r2.VDir()); }
 
-bool Line2d::Paralela(const Line2d &r) const
-  { return (paralelas(GetDir(),r.GetDir())); }
+bool Line2d::isParallel(const Line2d &r) const
+  { return (parallel(GetDir(),r.GetDir())); }
 
 //! @brief Return the bisection line of this one
 //! an the argument line.

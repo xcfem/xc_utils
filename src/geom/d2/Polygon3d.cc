@@ -202,7 +202,7 @@ std::list<Polygon3d> Polygon3d::Corta(const Plane &pl) const
     std::list<Polygon3d> retval;
     const Plane polygonPlane= getPlane();
     if(polygonPlane==pl) return retval;
-    if(paralelos(polygonPlane,pl)) return retval;
+    if(parallel(polygonPlane,pl)) return retval;
 
     GeomGroup3d gint= intersection(polygonPlane,pl);
     GeomObj3d *ptr=(*gint.begin());

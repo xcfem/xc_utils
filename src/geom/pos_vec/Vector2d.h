@@ -144,7 +144,7 @@ FT_matrix prod_tensor(const Vector2d &u,const Vector2d &v);
 FT_matrix operator&(const Vector2d &u,const Vector2d &v);
 
 bool colineales(const Vector2d &v1,const Vector2d &v2);
-bool paralelos(const Vector2d &v1,const Vector2d &v2);
+bool parallel(const Vector2d &v1,const Vector2d &v2);
 
 const Vector2d VectorNulo2d;
 

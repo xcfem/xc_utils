@@ -80,8 +80,8 @@ class Ray3d : public Linear3d
     void Put(const Pos3d &p1,const Pos3d &p2)
       { TwoPoints(p1,p2); }
 
-    bool Paralela(const Ray3d &r) const;
-    bool Paralela(const Line3d &r) const;
+    bool isParallel(const Ray3d &r) const;
+    bool isParallel(const Line3d &r) const;
 
     GeomObj3d::list_Pos3d getIntersection(unsigned short int, const double &) const;
     GeomObj3d::list_Pos3d getIntersection(const Line3d &r) const;
@@ -126,12 +126,12 @@ inline GEOM_FT dist(const Pos3d &p,const Ray3d &r)
 inline GEOM_FT dist(const Ray3d &r,const Pos3d &p)
   { return r.dist(p); }
 
-inline bool paralelas(const Ray3d &r1,const Line3d &r2)
-  { return r1.Paralela(r2); }
-inline bool paralelas(const Line3d &r1,const Ray3d &r2)
-  { return paralelas(r2,r1); }
-inline bool paralelas(const Ray3d &r1,const Ray3d &r2)
-  { return r1.Paralela(r2); }
+inline bool parallel(const Ray3d &r1,const Line3d &r2)
+  { return r1.isParallel(r2); }
+inline bool parallel(const Line3d &r1,const Ray3d &r2)
+  { return parallel(r2,r1); }
+inline bool parallel(const Ray3d &r1,const Ray3d &r2)
+  { return r1.isParallel(r2); }
 
 inline GeomObj3d::list_Pos3d intersection(const Line3d &r1,const Ray3d &r2)
   { return r2.getIntersection(r1); }

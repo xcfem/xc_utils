@@ -96,10 +96,10 @@ class Ray2d : public Linear2d
     GeomObj2d::list_Pos2d getIntersection(const Line2d &r) const;
     GeomObj2d::list_Pos2d getIntersection(const Ray2d &sr) const;
 
-    bool Paralela(const Line2d &r) const
-      { return paralelas(getSupportLine(),r); }
-    bool Paralela(const Ray2d &sr) const
-      { return Paralela(sr.getSupportLine()); }
+    bool isParallel(const Line2d &r) const
+      { return parallel(getSupportLine(),r); }
+    bool isParallel(const Ray2d &sr) const
+      { return isParallel(sr.getSupportLine()); }
 
     //! @brief Return the length of the object.
     inline virtual GEOM_FT getLength(void) const
@@ -142,12 +142,12 @@ inline GEOM_FT dist(const Pos2d &p,const Ray2d &r)
 inline GEOM_FT dist(const Ray2d &r,const Pos2d &p)
   { return dist(p,r); }
 
-inline bool paralelas(const Ray2d &sr,const Line2d &r)
-  { return sr.Paralela(r); }
-inline bool paralelas(const Line2d &r,const Ray2d &sr)
-  { return paralelas(sr,r); }
-inline bool paralelas(const Ray2d &r1,const Ray2d &r2)
-  { return r1.Paralela(r2); }
+inline bool parallel(const Ray2d &sr,const Line2d &r)
+  { return sr.isParallel(r); }
+inline bool parallel(const Line2d &r,const Ray2d &sr)
+  { return parallel(sr,r); }
+inline bool parallel(const Ray2d &r1,const Ray2d &r2)
+  { return r1.isParallel(r2); }
 
 inline bool intersecan(const Ray2d &sr1,const Ray2d &sr2)
   { return sr1.intersects(sr2); }

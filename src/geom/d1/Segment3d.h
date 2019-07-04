@@ -64,9 +64,9 @@ class Segment3d : public Linear3d
     GEOM_FT dist(const Pos3d &p) const;
     void Put(const Pos3d &p1,const Pos3d &p2);
 
-    bool Paralelo(const Line3d &r) const;
-    bool Paralelo(const Ray3d &sr) const;
-    bool Paralelo(const Segment3d &r) const;
+    bool isParallel(const Line3d &r) const;
+    bool isParallel(const Ray3d &sr) const;
+    bool isParallel(const Segment3d &r) const;
 
     GeomObj3d::list_Pos3d getIntersection(unsigned short int, const double &) const;
     GeomObj3d::list_Pos3d getIntersection(const Line3d &r) const;
@@ -96,16 +96,16 @@ GEOM_FT dist(const Pos3d &p,const Segment3d &r);
 inline GEOM_FT dist(const Segment3d &r,const Pos3d &p)
   { return dist(p,r); }
 
-inline bool paralelas(const Segment3d &sg,const Line3d &r)
-  { return sg.Paralelo(r); }
-inline bool paralelas(const Line3d &r, const Segment3d &sg)
-  { return paralelas(sg,r); }
-inline bool paralelas(const Segment3d &sg,const Ray3d &sr)
-  { return sg.Paralelo(sr); }
-inline bool paralelas(const Ray3d &sr, const Segment3d &sg)
-  { return paralelas(sg,sr); }
-inline bool paralelas(const Segment3d &r1,const Segment3d &r2)
-  { return r1.Paralelo(r2); }
+inline bool parallel(const Segment3d &sg,const Line3d &r)
+  { return sg.isParallel(r); }
+inline bool parallel(const Line3d &r, const Segment3d &sg)
+  { return parallel(sg,r); }
+inline bool parallel(const Segment3d &sg,const Ray3d &sr)
+  { return sg.isParallel(sr); }
+inline bool parallel(const Ray3d &sr, const Segment3d &sg)
+  { return parallel(sg,sr); }
+inline bool parallel(const Segment3d &r1,const Segment3d &r2)
+  { return r1.isParallel(r2); }
 
 inline bool colineales(const Segment3d &sg,const Line3d &r)
   { return colineales(sg.getSupportLine(),r); }

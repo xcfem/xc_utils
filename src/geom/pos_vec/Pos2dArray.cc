@@ -130,7 +130,8 @@ Pos2d Pos2dArray::getCenterOfMass(void) const
     return Pos2d(Qx,Qy);
   }
 
-//! @brief Return el moment of inertia with respect to paralelo al y por el origen
+//! @brief Return the moment of inertia with respect to the
+//! axis which is parallel to the y axis through the origin.
 GEOM_FT Pos2dArray::GetIy(void) const
   {
     GEOM_FT retval= 0.0;

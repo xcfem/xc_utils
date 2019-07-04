@@ -126,7 +126,7 @@ GEOM_FT angle(const Vector3d &v1,const Vector3d &v2);
 FT_matrix prod_tensor(const Vector3d &u,const Vector3d &v);
 FT_matrix operator&(const Vector3d &u,const Vector3d &v);
 
-bool paralelos(const Vector3d &v1,const Vector3d &v2);
+bool parallel(const Vector3d &v1,const Vector3d &v2);
 bool coplanarios(const Vector3d &v1,const Vector3d &v2,const Vector3d &v3);
 
 inline Vector3d operator*(const GEOM_FT &d,const Vector3d &v)

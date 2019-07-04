@@ -33,10 +33,10 @@
 Rect2d2dCooSys::Rect2d2dCooSys(void): Xd2dCooSys(2) {}
 //! @brief Constructor.
 Rect2d2dCooSys::Rect2d2dCooSys(const Pos2d &p1,const Pos2d &p2)
-  : Xd2dCooSys(2,p1,p2) {} //Axis 1 desde p1 a p2.
+  : Xd2dCooSys(2,p1,p2) {} //Axis 1 from p1 to p2.
 //! @brief Constructor.
 Rect2d2dCooSys::Rect2d2dCooSys(const VGlobal &vX)
-  : Xd2dCooSys(2,vX) {} //Axis x paralelo a vX.
+  : Xd2dCooSys(2,vX) {} //x axis parallel to vX.
 
 //! @brief Constructor virtual.
 CooSys *Rect2d2dCooSys::Copia(void) const

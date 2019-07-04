@@ -66,14 +66,12 @@ def ka_coulomb(a,b,fi,d):
 
     :param a:  angle of the back of the retaining wall (radians).
     :param b:  slope of the backfill (radians).
-    :param i: internal friction angle of the soil (radians).
+    :param fi: internal friction angle of the soil (radians).
     :param d:  friction angle between soil an back of retaining wall (radians).
-    See Jiménez Salas, Geotecnia y Cimientos página 682 
+    See Jiménez Salas, Geotecnia y Cimientos page 682 
     '''
-    num= 1.0/math.cos(a)*math.cos(fi-a)
-    r1=math.sqrt(math.cos(a+d))
-    r2=math.sqrt(math.sin(fi+d)*math.sin(fi-b)/math.cos(b-a))
-    return (math.pow((num/(r1+r2)),2))
+    fSoil= fs.FrictionalSoil(fi)
+    return fSoil.Ka_coulomb(a, b, d)
 
 def kah_coulomb(a,b,fi,d):
     '''
@@ -82,10 +80,11 @@ def kah_coulomb(a,b,fi,d):
 
     :param a:  angle of the back of the retaining wall (radians).
     :param b:  slope of the backfill (radians).
-    :param i: internal friction angle of the soil (radians).
+    :param fi: internal friction angle of the soil (radians).
     :param d:  friction angle between soil an back of retaining wall (radians).
     '''
-    return (ka_coulomb(a,b,fi,d)*math.cos(a+d))
+    fSoil= fs.FrictionalSoil(fi)
+    return fSoil.Kah_coulomb(a, b, d)
 
 def kav_coulomb(a,b,fi,d):
     '''
@@ -95,10 +94,11 @@ def kav_coulomb(a,b,fi,d):
 
     :param a:  angle of the back of the retaining wall (radians).
     :param b:  slope of the backfill (radians).
-    :param i: internal friction angle of the soil (radians).
+    :param fi: internal friction angle of the soil (radians).
     :param d:  friction angle between soil an back of retaining wall (radians).
     '''
-    return (ka_coulomb(a,b,fi,d)*math.sin(a,d))
+    fSoil= fs.FrictionalSoil(fi)
+    return fSoil.Kav_coulomb(a, b, d)
 
 def k_janssen(k,d,B,z):
     '''
@@ -125,14 +125,14 @@ def ep_coulomb(a,b,fi,d,p):
     Return the lateral earth pressure caused by a uniform load p
     action over the backfill surface according to Coulomb's theory.
 
-    :param a:  angle of the back of the retaining wall (radians).
-    :param b:  slope of the backfill (radians).
-    :param i: internal friction angle of the soil (radians).
-    :param d:  friction angle between soil an back of retaining wall (radians).
-    :param p: Sobrecarga uniforme.
+    :param a: angle of the back of the retaining wall (radians).
+    :param b: slope of the backfill (radians).
+    :param fi: internal friction angle of the soil (radians).
+    :param d: friction angle between soil an back of retaining wall (radians).
+    :param p: Uniform load.
     '''
-    return(ka_coulomb(a,b,fi,d)*p*math.cos(a)/float(math.cos(b-a)))
-
+    fSoil= fs.FrictionalSoil(fi)
+    return fSoil.ep_coulomb(a, b, d, p)
 
 def eql_coulomb(x,H,z,ql):
     '''
@@ -164,10 +164,10 @@ def eqp_coulomb(x,H,z,qp):
         of the load.
     :param H:  Profundidad del extremo inferior del trasdós.
     :param z:  depth of the point for which the pressure is computed.
-    :param qp: carga puntual
+    :param qp: punctual load
     '''
     m=x/float(H)
-    nz/float(H)
+    n= z/float(H)
     if m<=0.4:
         return(0.28*n**2/float(math.pow((0.16+n**2),3))*qp/float(H**2))
     else:
