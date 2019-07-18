@@ -115,6 +115,8 @@ class_<Plane, bases<Surface3d> >("Plane3d")
   ;
 
 class_<Polygon3d, bases<D2to3d> >("Polygon3d")
+  .def(init<Pos3d,Pos3d,Pos3d>())
+  .def("appendVertex",&Polygon3d::push_back)
   .def("getArea",&Polygon3d::getArea, "Return the object area.")
   .def("getPerimeter",&Polygon3d::getPerimeter, "Return the object perimeter.")
   ;
