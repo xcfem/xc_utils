@@ -93,6 +93,8 @@
 /usr/local/lib/python2.7/dist-packages/geom_utils/longitudinalProfile.pyc
 /usr/local/lib/python2.7/dist-packages/geom_utils/parabola.py
 /usr/local/lib/python2.7/dist-packages/geom_utils/parabola.pyc
+/usr/local/lib/python2.7/dist-packages/geom_utils/principal_axis.py
+/usr/local/lib/python2.7/dist-packages/geom_utils/principal_axis.pyc
 /usr/local/lib/python2.7/dist-packages/geom_utils/projection.py
 /usr/local/lib/python2.7/dist-packages/geom_utils/projection.pyc
 /usr/local/lib/python2.7/dist-packages/geom_utils/regression_plane.py
