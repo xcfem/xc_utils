@@ -36,7 +36,7 @@ class FT_matrix;
 class GeomObj2d: public GeomObj
   {
   public:
-   typedef PolyPos<Pos2d> list_Pos2d;
+    typedef PolyPos<Pos2d> list_Pos2d;
 
     GeomObj2d(void) {}
     virtual ~GeomObj2d(void) {}
