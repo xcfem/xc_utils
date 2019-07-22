@@ -97,16 +97,16 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
     :param d:  friction angle between soil an back of retaining wall (radians).
     '''
     return (self.ea_coulomb(a,b,d)*math.sin(a+d))
-  def ep_bell(self, p, a, b, d):
+  def eq_bell(self, p, a, b, d):
     '''
-    ep_bell(p,a,b,d):
-    Return the lateral earth pressure caused by a uniform load p
+    eq_bell(p,a,b,d):
+    Return the lateral earth pressure caused by a uniform load q
     action over the backfill surface according to Coulomb's theory.
 
     :param a:  angle of the back of the retaining wall (radians).
     :param b:  slope of the backfill (radians).
     :param d:  friction angle between soil an back of retaining wall (radians).
-    :param p: Uniform load.
+    :param q: Uniform load.
     '''
     return(self.Ka_bell(p,a,b,d)*p*math.cos(a)/float(math.cos(b-a)))    
   def sq(self,Beff,Leff):

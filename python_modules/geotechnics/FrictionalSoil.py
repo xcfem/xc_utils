@@ -81,10 +81,10 @@ class FrictionalSoil(object):
     :param d:  friction angle between soil an back of retaining wall (radians).
     '''
     return (self.Ka_coulomb(a,b,d)*math.sin(a+d))
-  def ep_coulomb(self, a, b, d, p):
+  def eq_coulomb(self, a, b, d, p):
     '''
-    ep_coulomb(a,b,d,p):
-    Return the lateral earth pressure caused by a uniform load p
+    eq_coulomb(a,b,d,p):
+    Return the lateral earth pressure caused by a uniform load q
     action over the backfill surface according to Coulomb's theory.
 
     :param a: angle of the back of the retaining wall (radians).

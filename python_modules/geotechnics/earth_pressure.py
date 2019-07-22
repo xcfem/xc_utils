@@ -119,20 +119,20 @@ def k_janssen(k,d,B,z):
 
 #Empujes unitarios debidos a cargas sobre el terreno.
 
-def ep_coulomb(a,b,fi,d,p):
+def eq_coulomb(a,b,fi,d,p):
     '''
-    ep_coulomb(a,b,fi,d,p):
-    Return the lateral earth pressure caused by a uniform load p
+    eq_coulomb(a,b,fi,d,p):
+    Return the lateral earth pressure caused by a uniform load q
     action over the backfill surface according to Coulomb's theory.
 
     :param a: angle of the back of the retaining wall (radians).
     :param b: slope of the backfill (radians).
     :param fi: internal friction angle of the soil (radians).
     :param d: friction angle between soil an back of retaining wall (radians).
-    :param p: Uniform load.
+    :param q: Uniform load.
     '''
     fSoil= fs.FrictionalSoil(fi)
-    return fSoil.ep_coulomb(a, b, d, p)
+    return fSoil.eq_coulomb(a, b, d, p)
 
 def eql_coulomb(x,H,z,ql):
     '''
