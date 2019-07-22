@@ -117,6 +117,19 @@ def k_janssen(k,d,B,z):
         retval= 1.0/(2*tanD)*(B/z)*(1-math.exp(-2*k*z/B*tanD))
     return retval
 
+def kp_coulomb(a,b,fi,d):
+    '''
+    kp_coulomb(a,b,fi,d):
+    Return the passive earth pressure coefficient according to Coulomb's theory.
+
+    :param a:  angle of the back of the retaining wall (radians).
+    :param b:  slope of the backfill (radians).
+    :param fi: internal friction angle of the soil (radians).
+    :param d:  friction angle between soil an back of retaining wall (radians).
+    '''
+    fSoil= fs.FrictionalSoil(fi)
+    return fSoil.Kp_coulomb(a, b, d)
+
 #Empujes unitarios debidos a cargas sobre el terreno.
 
 def eq_coulomb(a,b,fi,d,p):

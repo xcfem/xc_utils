@@ -48,7 +48,6 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
     :param a:  angle of the back of the retaining wall (radians).
     :param b:  slope of the backfill (radians).
     :param d:  friction angle between soil an back of retaining wall (radians).
-    See Jiménez Salas, Geotecnia y Cimientos page 682 
     '''
     retval= 0.0
     if(sg_v>0.0):

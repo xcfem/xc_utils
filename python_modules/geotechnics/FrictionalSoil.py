@@ -51,7 +51,7 @@ class FrictionalSoil(object):
     :param a:  angle of the back of the retaining wall (radians).
     :param b:  slope of the backfill (radians).
     :param d:  friction angle between soil an back of retaining wall (radians).
-    See Jiménez Salas, Geotecnia y Cimientos page 682 
+    See Recomendaciones para obras marítimas ROM 0.5-05 page 315 
     '''
     fi= self.getDesignPhi()
     num= 1.0/math.cos(a)*math.cos(fi-a)
@@ -60,6 +60,7 @@ class FrictionalSoil(object):
       lmsg.error('The angle of the backfill: '+str(math.degrees(b))+' is greater than the friction angle: '+str(math.degrees(fi)))
     r2=math.sqrt(math.sin(fi+d)*math.sin(fi-b)/math.cos(b-a))
     return (math.pow((num/(r1+r2)),2))
+
   def Kah_coulomb(self,a,b,d):
     '''
     Return the horizontal component of the active earth pressure coefficient
@@ -81,6 +82,25 @@ class FrictionalSoil(object):
     :param d:  friction angle between soil an back of retaining wall (radians).
     '''
     return (self.Ka_coulomb(a,b,d)*math.sin(a+d))
+  
+  def Kp_coulomb(self, a, b, d= 0.0):
+    '''
+    Return the passive earth pressure coefficient according to Coulomb's theory.
+
+    :param a:  angle of the back of the retaining wall (radians).
+    :param b:  slope of the backfill (radians).
+    :param d:  friction angle between soil an back of retaining wall (radians).
+    '''
+    fi= self.getDesignPhi()
+    if(b>fi):
+      lmsg.error('The angle of the backfill: '+str(math.degrees(b))+' is greater than the friction angle: '+str(math.degrees(fi)))
+    p1= 1.0/(math.cos(a)**2)
+    num= math.cos(fi+a)
+    r1=math.sqrt(math.sin(fi-d)*math.sin(fi+b)/(math.cos(a+d)*math.cos(b-a)))
+    denom= 1.0-r1
+    retval= p1*((num/denom)**2)/math.cos(a+d)
+    return retval
+  
   def eq_coulomb(self, a, b, d, p):
     '''
     eq_coulomb(a,b,d,p):
