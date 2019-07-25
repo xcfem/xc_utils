@@ -117,6 +117,14 @@
 /usr/local/lib/python2.7/dist-packages/geotechnics/cimientos/roz_cimiento_terreno.pyc
 /usr/local/lib/python2.7/dist-packages/geotechnics/earth_pressure.py
 /usr/local/lib/python2.7/dist-packages/geotechnics/earth_pressure.pyc
+/usr/local/lib/python2.7/dist-packages/geotechnics/foundations/asientos.py
+/usr/local/lib/python2.7/dist-packages/geotechnics/foundations/asientos.pyc
+/usr/local/lib/python2.7/dist-packages/geotechnics/foundations/__init__.py
+/usr/local/lib/python2.7/dist-packages/geotechnics/foundations/__init__.pyc
+/usr/local/lib/python2.7/dist-packages/geotechnics/foundations/pile_elasctic_length.py
+/usr/local/lib/python2.7/dist-packages/geotechnics/foundations/pile_elasctic_length.pyc
+/usr/local/lib/python2.7/dist-packages/geotechnics/foundations/roz_cimiento_terreno.py
+/usr/local/lib/python2.7/dist-packages/geotechnics/foundations/roz_cimiento_terreno.pyc
 /usr/local/lib/python2.7/dist-packages/geotechnics/FrictionalCohesionalSoil.py
 /usr/local/lib/python2.7/dist-packages/geotechnics/FrictionalCohesionalSoil.pyc
 /usr/local/lib/python2.7/dist-packages/geotechnics/FrictionalSoil.py
