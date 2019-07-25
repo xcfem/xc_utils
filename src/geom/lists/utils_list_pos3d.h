@@ -35,9 +35,9 @@ class Vector3d;
 //
 void mueve(GeomObj::list_Pos3d &l,const Vector3d &);
 void transform(GeomObj::list_Pos3d &l,const Trf3d &);
-Pos3d getPMax(const GeomObj::list_Pos3d &l);
-Pos3d getPMin(const GeomObj::list_Pos3d &l);
-BND3d getBnd(const GeomObj::list_Pos3d &l);
+Pos3d getPMax(const GeomObj::list_Pos3d &);
+Pos3d getPMin(const GeomObj::list_Pos3d &);
+BND3d getBnd(const GeomObj::list_Pos3d &);
 
 #endif
 
