@@ -29,6 +29,8 @@
 #include <boost/python/docstring_options.hpp>
 #include "xc_utils/src/geom/pos_vec/Pos2d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
+#include "xc_utils/src/geom/pos_vec/VectorPos2d.h"
+#include "xc_utils/src/geom/pos_vec/VectorPos3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos2dArray.h"
 #include "xc_utils/src/geom/pos_vec/Pos3dArray.h"
 #include "xc_utils/src/geom/pos_vec/Pos2dArray3d.h"

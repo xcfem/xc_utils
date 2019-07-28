@@ -94,6 +94,10 @@ FT_matrix Vector2d::getMatrix(void) const
 Vector2d Vector2d::Normal(void) const
   { return Vector2d(y(),-x()); }
 
+//! @brief Normalize vector.
+void Vector2d::Normalize(void)
+  { operator=(this->getNormalized()); }
+
 Dir2d Vector2d::getDirection(void) const
   { return Dir2d(*this); }
 

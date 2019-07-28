@@ -85,8 +85,9 @@ class Vector2d: public ProtoGeom
     bool EsUnitario(const double &tol= mchne_eps_dbl) const;
 
     //! @brief Return el versor (vector de módulo unidad) correspondiente a éste vector.
-    inline Vector2d Normalizado(void) const
+    inline Vector2d getNormalized(void) const
       { return (*this)/GetModulus(); }
+    void Normalize(void);
     Vector2d Normal(void) const;
     Dir2d getDirection(void) const;
     GEOM_FT getSignedAngle(const Vector2d &v) const;
@@ -136,8 +137,8 @@ double angle(const Vector2d &v1,const Vector2d &v2);
 inline Vector2d operator*(const GEOM_FT &d,const Vector2d &v)
   { return v*d; }
 //! @brief Return el versor (vector de módulo unidad) correspondiente a éste vector.
-inline Vector2d Normaliza(const Vector2d &v)
-  { return v.Normalizado(); }
+inline Vector2d normalize(const Vector2d &v)
+  { return v.getNormalized(); }
 
 //Producto tensorial.
 FT_matrix prod_tensor(const Vector2d &u,const Vector2d &v);

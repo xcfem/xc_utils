@@ -31,7 +31,7 @@
 //! Philip J. Schneider Morgan Kaufmann Publishers, page 153
 FT_matrix Reflection3d::reflection3d_matrix(const  Pos3d &Q,const Vector3d &n)
   {
-    const Vector3d nn= n.Normalizado();
+    const Vector3d nn= n.getNormalized();
     FT_matrix retval(4,4);
     const FT_matrix I= identity(FT_matrix(3,3));
     const FT_matrix T_n= traspuesta(I-2*prod_tensor(nn,nn));

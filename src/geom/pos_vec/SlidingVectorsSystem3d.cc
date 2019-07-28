@@ -98,7 +98,7 @@ void SlidingVectorsSystem3d::PrintLtx(std::ostream &os,const std::string &ud_lon
 //! Is the moment with respect a point on the axis
 //! projected onto the axis.
 GEOM_FT SlidingVectorsSystem3d::getMoment(const Line3d &e) const
-  { return dot(SlidingVectorsSystem3d::getMoment(e.Point()),e.VDir().Normalizado()); }
+  { return dot(SlidingVectorsSystem3d::getMoment(e.Point()),e.VDir().getNormalized()); }
 
 //! @brief Return el moment vector expressed in the reference
 //! frame being passed as parameter.

@@ -40,9 +40,9 @@ class CooSys: public ProtoGeom
   protected:
     void identity(void);
     void put(const size_t &i,const size_t &j,const GEOM_FT &);
-    void normaliza(void);
+    void normalize(void);
     void ortogonaliza(void);
-    void ortonormaliza(void);
+    void orthonormalize(void);
     CooSys(const size_t &,const size_t &);
     CooSys(const CooSys &other)
       : ProtoGeom(other), rot(other.rot) {}

@@ -109,7 +109,7 @@ Dir2d Line2d::GetDir(void) const
 Vector2d Line2d::VDir(void) const
   { return GetDir().GetVector(); }
 Vector2d Line2d::VersorDir(void) const
-  { return VDir().Normalizado(); }
+  { return VDir().getNormalized(); }
 
 double Line2d::getLambda(unsigned short int i,const double &d,const Vector2d &i_) const
   { return (d-Point(0)(i))/i_(i);}
@@ -121,7 +121,7 @@ Pos2d Line2d::Projection(const Pos2d &p) const
 //! @brief Return orthogonal projection of v onto the line.
 Vector2d Line2d::Projection(const Vector2d &v) const
   {
-    const Vector2d d= VDir().Normalizado();
+    const Vector2d d= VDir().getNormalized();
     return dot(v,d)*d;
   }
 
@@ -395,7 +395,7 @@ bool Line2d::isParallel(const Line2d &r) const
 Line2d Line2d::Bisectriz(const Line2d &r) const
   { return Line2d(bisector(this->ToCGAL(),r.ToCGAL())); }
 
-Line2d Line2d::getNormalizada(void) const
+Line2d Line2d::getNormalized(void) const
   { return Line2d(Point(),VersorDir()); }
 
 //! @brief Return true if the line is vertical.

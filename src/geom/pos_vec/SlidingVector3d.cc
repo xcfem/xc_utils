@@ -39,7 +39,7 @@ SlidingVector3d::SlidingVector3d(const Pos3d &o,const Pos3d &p)
 //! Is the moment with respect to an axis point
 //! projected onto the axis.
 GEOM_FT SlidingVector3d::getMoment(const Line3d &e) const
-  { return dot(getMoment(e.Point()),e.VDir().Normalizado()); }
+  { return dot(getMoment(e.Point()),e.VDir().getNormalized()); }
 
 //! @brief Moment of a sliding vector with respect to a point.
 SlidingVector3d SlidingVector3d::getMoment(const Pos3d &o) const

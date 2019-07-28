@@ -17,17 +17,17 @@
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Normaliza.h
+//Normalize.h
 
-#ifndef NORMALIZA_H
-#define NORMALIZA_H
+#ifndef NORMALIZE_H
+#define NORMALIZE_H
 
 
 #include "ZMatrix.h"
 
 template<class treal>
 //! @brief Divide the components of the matrix by its norm.
-inline void Normaliza(ZMatrix<treal> &m)
+inline void normalize(ZMatrix<treal> &m)
   {
     const treal vabs= Abs(m);
     if(vabs>0) m*= 1.0/vabs;
@@ -35,10 +35,10 @@ inline void Normaliza(ZMatrix<treal> &m)
 
 template<class treal>
 //! @brief Divide the components of the matrix by its norm.
-inline ZMatrix<treal> Normaliza(const ZMatrix<treal> &m)
+inline ZMatrix<treal> normalize(const ZMatrix<treal> &m)
   {
     ZMatrix<treal> retval(m);
-    Normaliza(retval);
+    normalize(retval);
     return retval;
   }
 

@@ -66,9 +66,9 @@ FT_matrix prod_tensor(const FT_matrix &u,const FT_matrix &v);
 inline FT_matrix operator&(const FT_matrix &u,const FT_matrix &v)
   { return prod_tensor(u,v); }
 
-void Normaliza(FT_matrix &m);
+void normalize(FT_matrix &m);
 void NormalizeRows(FT_matrix &m);
-FT_matrix Normaliza(const FT_matrix &m);
+FT_matrix normalize(const FT_matrix &m);
 
 FT_matrix operator-(const FT_matrix &m);
 

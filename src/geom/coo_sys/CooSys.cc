@@ -33,7 +33,7 @@ CooSys::CooSys(const size_t &ne,const size_t &dim)
   { identity(); }
 
 //! @brief Row-normalize matrix.
-void CooSys::normaliza(void)
+void CooSys::normalize(void)
   {
     if(!rot.Nulo())
       NormalizeRows(rot);
@@ -73,10 +73,10 @@ void CooSys::ortogonaliza(void)
       }
   }
 //! @brief Makes the base orthonormal.
-void CooSys::ortonormaliza(void)
+void CooSys::orthonormalize(void)
   {
     ortogonaliza();
-    normaliza();
+    normalize();
   }
 //! @brief Aligns the coordinate system with the global one.
 //! i. e:

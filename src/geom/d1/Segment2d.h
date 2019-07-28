@@ -137,6 +137,7 @@ class Segment2d : public Linear2d
     //! @brief Moment of inertia with respect to the center of mass en local axis.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
+    
     VectorPos2d Divide(int num_partes) const;
 
     void Transform(const Trf2d &trf2d);
@@ -144,7 +145,6 @@ class Segment2d : public Linear2d
     inline friend bool operator==(const Segment2d &r1,const Segment2d &r2)
       { return (r1.cgseg==r2.cgseg); }
     void Print(std::ostream &os) const;
-    void Plot(Plotter &) const;
   };
 
 inline GEOM_FT dist2(const Pos2d &p,const Segment2d &r)

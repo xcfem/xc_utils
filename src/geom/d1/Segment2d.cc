@@ -198,7 +198,7 @@ GEOM_FT Segment2d::dist(const Pos2d &p) const
 
 //! @brief Return a point of the segment at a distance lambda from its origin.
 Pos2d Segment2d::PtoParametricas(const GEOM_FT &lambda) const
-  { return getFromPoint()+lambda*VDir().Normalizado(); }
+  { return getFromPoint()+lambda*VDir().getNormalized(); }
 
 //! @brief Return the parametric coordinate that corresponds to the
 //! natural coordinate argument.
@@ -325,6 +325,7 @@ GEOM_FT dist(const Pos2d &p,const Segment2d &r)
   { return sqrt_FT(r.dist2(p)); }
 
 //! @brief Return the points that results from the segment division.
+//!
 //! @param num_partes: number of segments.
 VectorPos2d Segment2d::Divide(int num_partes) const
   { return VectorPos2d(getFromPoint(),getToPoint(),num_partes); }
@@ -339,14 +340,8 @@ void Segment2d::Transform(const Trf2d &trf2d)
 
 void Segment2d::Print(std::ostream &os) const
   { os << getFromPoint() << " " << getToPoint(); }
-void Segment2d::Plot(Plotter &plotter) const
-  {
-    const Pos2d p1= getFromPoint();
-    const Pos2d p2= getToPoint();
-    plotter.fline(p1.x(),p1.y(),p2.x(),p2.y());
-  }
 
-//! Return the point de intersection of the segment with the line, if it exists.
+//! @brief Return the point de intersection of the segment with the line, if it exists.
 Pos2d intersection_point(const Segment2d &s, const Line2d &r)
   {
     Pos2d retval;
@@ -358,11 +353,11 @@ Pos2d intersection_point(const Segment2d &s, const Line2d &r)
      return retval;
   }
 
-//! Return the point de intersection of the segment with the line, if it exists.
+//! @brief Return the point de intersection of the segment with the line, if it exists.
 Pos2d intersection_point(const Line2d &r, const Segment2d &s)
   { return intersection_point(s,r); }
 
-//! Return the intersection of the segments if exists.
+//! @brief Return the intersection of the segments if exists.
 Pos2d intersection_point(const Segment2d &s1, const Segment2d &s2)
   {
     Pos2d retval;

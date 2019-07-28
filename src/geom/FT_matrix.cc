@@ -144,7 +144,7 @@ FT_matrix prod_tensor(const FT_matrix &u,const FT_matrix &v)
   }
 
 //! @brief Divide the components of the matrix by its modulus.
-void Normaliza(FT_matrix &m)
+void normalize(FT_matrix &m)
   {
     const GEOM_FT vabs= ::Abs(m);
     if(vabs>0) m*= 1/vabs;
@@ -167,11 +167,11 @@ void NormalizeRows(FT_matrix &m)
       }
   }
 
-//! @brief Return the matrix normalizada de la being passed as parameter.
-FT_matrix Normaliza(const FT_matrix &m)
+//! @brief Return the normalized matrix.
+FT_matrix normalize(const FT_matrix &m)
   {
     FT_matrix retval(m);
-    Normaliza(retval);
+    normalize(retval);
     return retval;
   }
 

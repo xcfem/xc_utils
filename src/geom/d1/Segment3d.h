@@ -28,7 +28,7 @@
 #include "../pos_vec/Pos3d.h"
 
 class Dir3d;
-
+class VectorPos3d;
 
 //! @ingroup GEOM
 //
@@ -84,6 +84,9 @@ class Segment3d : public Linear3d
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Iz(void) const;
     friend bool operator==(const Segment3d &r1,const Segment3d &r2);
+    
+    VectorPos3d Divide(int num_partes) const;
+    
     void Print(std::ostream &os) const;
     
   };

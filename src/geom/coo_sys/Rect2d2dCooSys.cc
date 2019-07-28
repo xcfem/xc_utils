@@ -24,7 +24,7 @@
 #include "../pos_vec/Pos2d.h"
 #include "../pos_vec/Vector2d.h"
 #include "../pos_vec/Vector3d.h"
-#include "xc_utils/src/matrices/normaliza.h"
+#include "xc_utils/src/matrices/normalize.h"
 #include "xc_utils/src/utils/misc_utils/matem.h"
 
 

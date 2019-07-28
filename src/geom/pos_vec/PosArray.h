@@ -122,7 +122,7 @@ PosArray<POS>::PosArray(const POS &p1,const POS &p2,const std::vector<GEOM_FT> &
         (*this)(num,1)= p2;
         if(num>1)
           {
-            //Normalizamos la lista.
+            //Normalize the list.
             GEOM_FT denom(0);
             for(std::vector<GEOM_FT>::const_iterator i=longs.begin();i!=longs.end();i++)
               denom+= *i;

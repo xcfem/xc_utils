@@ -87,7 +87,7 @@ class HalfPlane2d : public Surface2d
     inline virtual GEOM_FT Dist(const Pos2d &p) const
       { return fabs(DistSigno(p)); }
 
-    HalfPlane2d getNormalizado(void) const;
+    HalfPlane2d getNormalized(void) const;
 
     inline bool intersects(const HalfPlane2d &r2) const
       { return lim.intersects(r2.lim); }

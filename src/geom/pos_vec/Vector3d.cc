@@ -66,8 +66,8 @@ bool Vector3d::EsUnitario(const double &tol) const
       return true;
   }
 
-//! @brief Return el vector normalizado.
-Vector3d Vector3d::Normalizado(void) const
+//! @brief Return the normalized vector.
+Vector3d Vector3d::getNormalized(void) const
   {
     Vector3d retval(*this);
     const double m= GetModulus();
@@ -75,9 +75,9 @@ Vector3d Vector3d::Normalizado(void) const
       retval= retval/m;
     return retval; }
 
-//! @brief Normaliza el vector.
-void Vector3d::Normaliza(void)
-  { operator=(this->Normalizado()); }
+//! @brief Normalize vector.
+void Vector3d::Normalize(void)
+  { operator=(this->getNormalized()); }
 
 void Vector3d::SetX(const GEOM_FT &vx)
   { cgvct= CGVector_3(vx,y(),z()); }

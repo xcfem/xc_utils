@@ -160,7 +160,7 @@ Pos3d Plane::Projection(const Pos3d &p) const
 //! @brief Return the projection of the vector onto this plane.
 Vector3d Plane::Projection(const Vector3d &v) const
   {
-    const Vector3d n= Normal().Normalizado();
+    const Vector3d n= Normal().getNormalized();
     return cross(cross(n,v),n);
   }
 

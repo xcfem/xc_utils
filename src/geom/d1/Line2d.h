@@ -131,7 +131,7 @@ class Line2d : public Linear2d
     Vector2d VDir(void) const;
     Vector2d VersorDir(void) const;
     Line2d Bisectriz(const Line2d &r) const;
-    Line2d getNormalizada(void) const;
+    Line2d getNormalized(void) const;
 
     double getAngle(const Vector2d &v) const;
     double Azimuth(void) const;

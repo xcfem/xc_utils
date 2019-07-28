@@ -25,6 +25,7 @@
 #include "../pos_vec/Dir3d.h"
 #include "../pos_vec/Vector3d.h"
 #include "../pos_vec/Pos3d.h"
+#include "xc_utils/src/geom/pos_vec/VectorPos3d.h"
 
 //! @brief Constructor.
 Segment3d::Segment3d(void): Linear3d(),cgseg(CGPoint_3(0,0,0),CGPoint_3(1,0,0)) {}
@@ -106,7 +107,7 @@ Vector3d Segment3d::VDir(void) const
 GEOM_FT Segment3d::getLambda(const Pos3d &p) const
   {
     const Vector3d v(getFromPoint(),p);
-    const Vector3d dir(Normaliza(VDir()));
+    const Vector3d dir(normalize(VDir()));
     return dot(v,dir);
   }
 
@@ -227,17 +228,28 @@ GEOM_FT Segment3d::getAngle(const Segment3d &s) const
   { return getAngle(s.VDir()); }
 GEOM_FT angle(const Segment3d &r,const Vector3d &v)
   { return r.getAngle(v); }
-//Moment of inertia with respect to the center of mass in local coordinates.
+
+//! @brief Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Segment3d::Ix(void) const
   { return 0.0; }
-//Moment of inertia with respect to the center of mass in local coordinates.
+
+//! @brief Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Segment3d::Iy(void) const
   { return NAN; }
-//Moment of inertia with respect to the center of mass in local coordinates.
+
+//! @brief Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Segment3d::Iz(void) const
   { return NAN; }
+
 bool operator==(const Segment3d &r1,const Segment3d &r2)
   { return (r1.cgseg==r2.cgseg); }
+
+//! @brief Return the points that results from the segment division.
+//!
+//! @param num_partes: number of segments.
+VectorPos3d Segment3d::Divide(int num_partes) const
+  { return VectorPos3d(getFromPoint(),getToPoint(),num_partes); }
+
 void Segment3d::Print(std::ostream &os) const
   { os << getFromPoint() << " " << getToPoint(); }
 

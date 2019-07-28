@@ -125,8 +125,8 @@ GeomGroup2d intersection(const Ray2d &sr,const HalfPlane2d &sp)
 GeomGroup2d intersection(const Segment2d &sg,const HalfPlane2d &sp)
   { return intersection(sp,sg); }
 
-HalfPlane2d HalfPlane2d::getNormalizado(void) const
-  { return HalfPlane2d(lim.getNormalizada()); }
+HalfPlane2d HalfPlane2d::getNormalized(void) const
+  { return HalfPlane2d(lim.getNormalized()); }
 
 //! @brief Aplica al objeto la transformación que se
 //! pasa como parámetro.

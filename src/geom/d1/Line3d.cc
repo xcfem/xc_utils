@@ -90,7 +90,7 @@ Pos3d Line3d::Projection(const Pos3d &p) const
 //! @brief Return the projection onto the line.
 Vector3d Line3d::Projection(const Vector3d &v) const
   {
-    const Vector3d d= VDir().Normalizado();
+    const Vector3d d= VDir().getNormalized();
     return dot(v,d)*d;
   }
 

@@ -76,8 +76,8 @@ class Vector3d: public ProtoGeom
       { return (x()*x()+y()*y()+z()*z()); }
     virtual GEOM_FT GetModulus(void) const;
     bool EsUnitario(const double &tol= mchne_eps_dbl) const;
-    Vector3d Normalizado(void) const;
-    void Normaliza(void);
+    Vector3d getNormalized(void) const;
+    void Normalize(void);
     Vector3d Perpendicular(const Vector3d &v) const;
     virtual GEOM_FT GetDot(const Vector3d &v) const;
     virtual GEOM_FT GetDot(const FT_matrix &m) const;
@@ -132,8 +132,8 @@ bool coplanarios(const Vector3d &v1,const Vector3d &v2,const Vector3d &v3);
 inline Vector3d operator*(const GEOM_FT &d,const Vector3d &v)
   { return v*d; }
 
-inline Vector3d Normaliza(const Vector3d &v)
-  { return v.Normalizado(); } 
+inline Vector3d normalize(const Vector3d &v)
+  { return v.getNormalized(); } 
 FT_matrix Traspuesta(const Vector3d &v);
 FT_matrix skew_symm_matrix_post(const Vector3d &v);
 FT_matrix skew_symm_matrix_pre(const Vector3d &v);

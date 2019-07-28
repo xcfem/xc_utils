@@ -81,7 +81,7 @@ void Xd2dCooSys::XAxisVector(const VGlobal &vX)
              << std::endl;
         return;
       }
-    const VGlobal i_= vX.Normalizado();
+    const VGlobal i_= vX.getNormalized();
     putRow(1,i_);
     if(numberOfAxis()>1)
       putRow(2,i_.Perpendicular(CGAL::COUNTERCLOCKWISE));

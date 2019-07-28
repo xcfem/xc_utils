@@ -117,16 +117,16 @@ void Xd3dCooSys::vectores_unitarios(const VGlobal &i_,const VGlobal &j_,const VG
         return;
       }
     const size_t ne= numberOfAxis();
-    const VGlobal e1= Normaliza(i_);
+    const VGlobal e1= ::normalize(i_);
     putRow(1,e1);
     if(ne>1)
       {
-        const VGlobal e2= Normaliza(j_);
+        const VGlobal e2= ::normalize(j_);
         putRow(2,e2);
       }
     if(ne>2)
       {
-        const VGlobal e3= Normaliza(k_);
+        const VGlobal e3= ::normalize(k_);
         putRow(3,e3);
       }
   }
@@ -157,7 +157,7 @@ void Xd3dCooSys::XAxisVector(const VGlobal &i_)
           k_= imod*K_3d; //k parallel to global z axis.
         const VGlobal j_= k_ ^ i_;
         k_= i_ ^ j_;
-        vectores_unitarios(i_,j_,k_); //Normalizamos.
+        vectores_unitarios(i_,j_,k_); //Lets normalize.
       }
   }
 

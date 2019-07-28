@@ -66,6 +66,7 @@ class_<Segment3d, bases<Linear3d> >("Segment3d")
   .def("getAngleWithVector",AngleVector3D,"Returns the angle between the line segment and the vector.")
   .def("getAngleWithLineSegment",AngleSegment3D,"Returns the angle between both line segments.")
   .def("getVDir",&Segment3d::VDir,"return the direction vector of the segment.")
+  .def("Divide", &Segment2d::Divide,"Divide(numparts); returns the points that divide the segment.")
   ;
 
 Pos3d (Line3d::*Pos3dProj)(const Pos3d &) const= &Line3d::Projection;
@@ -134,11 +135,13 @@ class_<Segment2d, bases<Linear2d> >("Segment2d")
   .def("getNormal", &Segment2d::Normal,"return a vector perpendicular to the segment.")
   .def("distPos3d", &Segment2d::dist,"return the distance to the point.")
   .def("getLength", &Segment2d::getLength,"Return the length of the segment.")
-  .def("getCenterOfMass", &Segment2d::getCenterOfMass)
+.def("getCenterOfMass", &Segment2d::getCenterOfMass, "Return the position of the center of mass.")
   .def("angleVector",AngleVector)
   .def("angleSegment",AngleSegment)
   .def("offsetVector",OffsetSegmentVector)
-  .def("offsetDouble",OffsetSegmentDouble);
+  .def("offsetDouble",OffsetSegmentDouble)
+  .def("Divide", &Segment2d::Divide,"Divide(numparts); returns the points that divide the segment.")
+  ;
 
 void (Polyline3d::*simplify3DPoly)(GEOM_FT epsilon)= &Polyline3d::simplify;
 Segment3d (Polyline3d::*get3DSegment)(const size_t &) const= &Polyline3d::getSegment;
