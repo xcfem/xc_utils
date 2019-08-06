@@ -59,7 +59,7 @@ Segment3d Polyline3d::getSegment(const size_t &i) const
 
 
 //! @brief Moves the polyline.
-void Polyline3d::Mueve(const Vector3d &v)
+void Polyline3d::Move(const Vector3d &v)
   {
     for(register list_Pos3d::iterator j=begin();j != end();j++)
       (*j)= (*j) + v;

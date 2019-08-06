@@ -95,7 +95,7 @@ class GeomObj2d: public GeomObj
     FT_matrix I(void) const;
     FT_matrix I(const Pos2d &o) const;
 
-    virtual void Mueve(const Vector2d &);
+    virtual void Move(const Vector2d &);
     virtual void Transform(const Trf2d &trf2d)= 0;    
   };
 

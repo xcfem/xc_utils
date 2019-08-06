@@ -174,7 +174,7 @@ GEOM_FT GeomObj2d::IO(const Pos2d &o) const
   { return (I(1,1,o)+I(2,2,o)+I(3,3,o))/2; }
 
 //! @brief Desplaza el objeto.
-void GeomObj2d::Mueve(const Vector2d &v)
+void GeomObj2d::Move(const Vector2d &v)
   {
     Translation2d m(v);
     Transform(m);

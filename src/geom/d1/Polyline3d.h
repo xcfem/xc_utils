@@ -36,7 +36,7 @@ class Polyline3d : public Linear3d, public GeomObj::list_Pos3d
     Polyline3d(void): Linear3d(), GeomObj::list_Pos3d() {}
     virtual GeomObj *clon(void) const
       { return new Polyline3d(*this); }
-    virtual void Mueve(const Vector3d &);
+    virtual void Move(const Vector3d &);
     const GeomObj::list_Pos3d &getVertices(void) const
       { return *this; }
     inline size_t GetNumVertices(void) const

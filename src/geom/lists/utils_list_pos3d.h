@@ -33,7 +33,7 @@ class Vector3d;
 
 //! @ingroup GEOM
 //
-void mueve(GeomObj::list_Pos3d &l,const Vector3d &);
+void move(GeomObj::list_Pos3d &l,const Vector3d &);
 void transform(GeomObj::list_Pos3d &l,const Trf3d &);
 Pos3d getPMax(const GeomObj::list_Pos3d &);
 Pos3d getPMin(const GeomObj::list_Pos3d &);

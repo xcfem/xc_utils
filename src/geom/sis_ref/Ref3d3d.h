@@ -59,8 +59,8 @@ class Ref3d3d : public Ref<Rect3d3dCooSys>
     Plane getXYPlane(void) const; //Return the XY plane.
     Plane getXZPlane(void) const; //Return the XZ plane.
     Plane getYZPlane(void) const; //Return the YZ plane.
-/*     virtual void Mueve(double Ax,double Ay,double Az) */
-/*       { org.Mueve(Ax,Ay,Az); } */
+/*     virtual void Move(const Vector3d &v) */
+/*       { org.Move(v); } */
 /*     inline virtual void GiraX(const double &ang_rad) */
 /*       { trf.GiraX(ang_rad); } */
 /*     inline virtual void GiraY(const double &ang_rad) */

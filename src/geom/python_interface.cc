@@ -89,7 +89,7 @@ BOOST_PYTHON_MODULE(geom)
       .def("getIy", pure_virtual(&GeomObj2d::Iy))
       .def("getIz", &GeomObj2d::Iz)
       .def("getPxy", pure_virtual(&GeomObj2d::Pxy))
-      .def("mueve",&GeomObj2d::Mueve)
+      .def("move",&GeomObj2d::Move,"move(vector): move the object.")
       .def("In",&GeomObj2d::In)
       ;
 
