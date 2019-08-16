@@ -438,7 +438,7 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
                      (see figure 12 in page 44 of reference[2]).
         :param Leff: Length of the effective foundation area
                      (see figure 12 in page 44 of reference[2]).
-        :param Vload: Vertical load. 
+        :param Vload: Vertical load (positive downwards). 
         :param HloadB: Horizontal load on Beff direction. 
         :param HloadL: Horizontal load on Leff direction. 
         :param NgammaCoef: 1.5 in reference [1], 1.8 in reference 2 
@@ -447,6 +447,8 @@ class FrictionalCohesionalSoil(fs.FrictionalSoil):
                     (see figure 4.7 in page 102 of reference [3])
                     must be determined by iterations.
         '''
+        if(Vload<0.0):
+             lmsg.warning('Negative vertical load (V= '+str(Vload)+') means pushing upwards.')
         deltaB= math.atan(HloadB/Vload)
         deltaL= math.atan(HloadL/Vload)
         Hload= math.sqrt(HloadB**2+HloadL**2)
