@@ -37,6 +37,8 @@ class EntityWithProperties
     EntityWithProperties(EntityWithProperties *owr= nullptr);
     EntityWithProperties(const EntityWithProperties &);
     EntityWithProperties &operator=(const EntityWithProperties &);
+    //! @brief Virtual destructor
+    virtual ~EntityWithProperties(void) {}
     static const int &getVerbosityLevel(void);
     static void setVerbosityLevel(const int &);
     virtual std::string getClassName(void) const;
