@@ -43,9 +43,10 @@ typedef enum{FALLO,CONTINUA,COMPLETADO} resul_lectura;
 //! @brief Objet that can execute python scripts.
 class CommandEntity: public EntityWithProperties
   {
+    typedef std::map<std::string, boost::python::object> PythonDict;
   private:
     static ErrLogFiles err_log_files; //!< Streams para errores y avisos.
-    std::map<std::string, boost::python::object> python_dict; //!< Variables de Python.
+    PythonDict python_dict; //!< Variables de Python.
   protected:
 
     static CommandEntity *entcmd_cast(boost::any &data);
