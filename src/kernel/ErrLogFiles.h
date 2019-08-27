@@ -36,6 +36,8 @@ class ErrLogFiles
     std::ofstream *salida_err_file;
     std::string nmbLogFile;
     std::ofstream *salida_log_file;
+    std::streambuf *stream_buffer_cerr;
+    std::streambuf *stream_buffer_clog;
   public:
     ErrLogFiles(void);
     std::ostream &getErrFile(void);

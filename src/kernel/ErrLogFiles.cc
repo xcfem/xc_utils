@@ -25,7 +25,10 @@
 
 ErrLogFiles::ErrLogFiles(void)
   : nmbErrFile("cerr"), salida_err_file(nullptr),
-    nmbLogFile("clog"), salida_log_file(nullptr) {}
+    nmbLogFile("clog"), salida_log_file(nullptr),
+    stream_buffer_cerr(std::cerr.rdbuf()),
+    stream_buffer_clog(std::clog.rdbuf())
+  {}
 
 std::ostream &ErrLogFiles::getErrFile(void)
   {
@@ -43,19 +46,24 @@ void ErrLogFiles::setErrFileName(const std::string &filename)
         salida_err_file= nullptr;
         nmbErrFile= "";
       }
-    nmbErrFile= filename;
-    if(nmbErrFile!=nmbLogFile)
+    if(filename=="cerr")
+      std::cerr.rdbuf(stream_buffer_cerr);
+    else
       {
-        if(nmbErrFile!="cerr")
-          salida_err_file= new std::ofstream(filename.c_str());
+	nmbErrFile= filename;
+	if(nmbErrFile!=nmbLogFile)
+	  {
+	    if(nmbErrFile!="cerr")
+	      salida_err_file= new std::ofstream(filename.c_str());
+	  }
+	else
+	  salida_err_file= salida_log_file;
+	if(salida_err_file)
+	  std::cerr.rdbuf(salida_err_file->rdbuf());
+	else
+	  std::cerr << "ErrLogFiles::" << __FUNCTION__
+		    << "; error redirecting default error stream.";
       }
-    else
-      salida_err_file= salida_log_file;
-    if(salida_err_file)
-      std::cerr.rdbuf(salida_err_file->rdbuf());
-    else
-      std::cerr << "ErrLogFiles::" << __FUNCTION__
-		<< "; error redirecting default error stream.";
   }
 
 std::ostream &ErrLogFiles::getLogFile(void)
@@ -74,17 +82,22 @@ void ErrLogFiles::setLogFileName(const std::string &filename)
         salida_log_file= nullptr;
         nmbLogFile= "";
       }
-    nmbLogFile= filename;
-    if(nmbLogFile!=nmbErrFile)
+    if(filename=="clog")
+      std::clog.rdbuf(stream_buffer_clog);
+    else
       {
-        if(nmbLogFile!="clog")
-          salida_log_file= new std::ofstream(filename.c_str());
+	nmbLogFile= filename;
+	if(nmbLogFile!=nmbErrFile)
+	  {
+	    if(nmbLogFile!="clog")
+	      salida_log_file= new std::ofstream(filename.c_str());
+	  }
+	else
+	  salida_log_file= salida_err_file;
+	if(salida_log_file)
+	  std::clog.rdbuf(salida_log_file->rdbuf());
+	else
+	  std::cerr << "ErrLogFiles::" << __FUNCTION__
+		    << "; error redirecting default 'log' stream.";
       }
-    else
-      salida_log_file= salida_err_file;
-    if(salida_log_file)
-      std::clog.rdbuf(salida_log_file->rdbuf());
-    else
-      std::cerr << "ErrLogFiles::" << __FUNCTION__
-		<< "; error redirecting default 'log' stream.";
   }
