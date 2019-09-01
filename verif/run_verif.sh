@@ -48,6 +48,8 @@ python ./python_tests/geom/line3d_test_01.py
 python ./python_tests/geom/line2d_intersection_test.py
 python ./python_tests/geom/segment2d_test_01.py
 python ./python_tests/geom/segment2d_test_02.py
+python ./python_tests/geom/line_segment_intersection_test.py
+python ./python_tests/geom/ray2d_test.py
 echo "$BLEU" "  Polylines." "$NORMAL"
 python ./python_tests/geom/pos2d_list_test_01.py
 python ./python_tests/geom/polyline2d_test_01.py
