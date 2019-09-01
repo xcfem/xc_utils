@@ -55,8 +55,11 @@ GEOM_FT Ray2d::dist2(const Pos2d &p) const
     Line2d r= getSupportLine();
     Pos2d proj= r.Projection(p);
     GEOM_FT retval= p.dist2(proj); //Ok if projection inside half-line.
-    if(!In(proj)) //Projection outside half-line.
-      retval= p.dist2(getFromPoint());
+    const Vector2d vDir= VDir();
+    const Vector2d v= proj-getFromPoint();
+    const GEOM_FT dt= dot(v,vDir);
+    if(dt<0) //Projection outside half-line.
+      retval= std::max(retval,p.dist2(getFromPoint()));
     return retval;
   }
 

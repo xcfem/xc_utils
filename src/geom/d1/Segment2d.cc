@@ -248,20 +248,42 @@ GeomObj2d::list_Pos2d Segment2d::getIntersection(const Line2d &r) const
           retval.push_back(getCenterOfMass()); //Return el centro de ESTE.
         else
           {
-            const GEOM_FT d1= r.dist2(getFromPoint());
-            const GEOM_FT d2= r.dist2(getToPoint());
+	    Pos2d p= getFromPoint();
+	    Pos2d q= getToPoint();
+            const GEOM_FT d1= r.dist2(p);
+            const GEOM_FT d2= r.dist2(q);
             const GEOM_FT tol= getLength()/1e4;
             if(d1<tol)
-              retval.push_back(getFromPoint());
+              retval.push_back(p);
             else if(d2<tol)
-              retval.push_back(getToPoint());
+              retval.push_back(q);
             else
-              cerr << "Segment2d::getIntersection(Line2d): unknown error." << endl
-                   << "sg: " << *this << endl
-                   << "r: " << r << endl
-                   << "tol: " << tol << endl
-                   << "d1: " << d1 << endl
-                   << "d2: " << d2 << endl;
+	      {
+		//Dirty (but accurate) solution to CGAL bug.
+		Pos2d A= r.Point(0);
+		Pos2d B= r.Point(100);
+		const GEOM_FT a= B.y() - A.y();
+                const GEOM_FT b= A.x() - B.x();
+                const GEOM_FT c= B.x() * A.y() - A.x() * B.y();
+                const GEOM_FT u= fabs(a * p.x() + b * p.y() + c);
+                const GEOM_FT v= fabs(a * q.x() + b * q.y() + c);
+		Pos2d result((p.x() * v + q.x() * u) / (u+v), (p.y() * v + q.y() * u) / (u+v));
+		const GEOM_FT dr= r.dist2(result);
+		const GEOM_FT ds= dist2(result);
+		if((dr<tol) and (ds<tol))
+		  retval.push_back(result);
+		else
+		  cerr << getClassName() << "::" << __FUNCTION__
+		       << "(Line2d): unknown error." << endl
+		       << "sg: " << *this << endl
+		       << "r: " << r << endl
+		       << "tol: " << tol << endl
+		       << "d1: " << d1 << endl
+		       << "d2: " << d2 << endl
+		       << "result: " << result << endl
+		       << "ds: " << ds << endl
+		       << "dr: " << dr << endl;
+	      }
           }
       }
     return retval;
@@ -281,9 +303,42 @@ GeomObj2d::list_Pos2d Segment2d::getIntersection(const Ray2d &sr) const
           retval.push_back(Pos2d(ptoi));
         else
           {
-            cerr << "Segment2d::getIntersection(Ray2d): unknown error." << endl
-                 << "sg: " << *this << endl
-                 << "sr: " << sr << endl;
+ 	    Pos2d p= getFromPoint();
+	    Pos2d q= getToPoint();
+            const GEOM_FT d1= sr.dist2(p);
+            const GEOM_FT d2= sr.dist2(q);
+            const GEOM_FT tol= getLength()/1e4;
+            if(d1<tol)
+              retval.push_back(p);
+            else if(d2<tol)
+              retval.push_back(q);
+            else
+	      {
+		//Dirty (but accurate) solution to CGAL bug.
+		Pos2d A= sr.Point(0);
+		Pos2d B= sr.Point(100);
+		const GEOM_FT a= B.y() - A.y();
+                const GEOM_FT b= A.x() - B.x();
+                const GEOM_FT c= B.x() * A.y() - A.x() * B.y();
+                const GEOM_FT u= fabs(a * p.x() + b * p.y() + c);
+                const GEOM_FT v= fabs(a * q.x() + b * q.y() + c);
+		Pos2d result((p.x() * v + q.x() * u) / (u+v), (p.y() * v + q.y() * u) / (u+v));
+		const GEOM_FT dsr= sr.dist2(result);
+		const GEOM_FT ds= dist2(result);
+		if((dsr<tol) and (ds<tol))
+		  retval.push_back(result);
+		else
+		  cerr << getClassName() << "::" << __FUNCTION__
+		       << "(Ray2d): unknown error." << endl
+		       << "sg: " << *this << endl
+		       << "sr: " << sr << endl
+		       << "tol: " << tol << endl
+		       << "d1: " << d1 << endl
+		       << "d2: " << d2 << endl
+		       << "result: " << result << endl
+		       << "ds: " << ds << endl
+		       << "dsr: " << dsr << endl;
+	      }
           }
       }
     return retval;

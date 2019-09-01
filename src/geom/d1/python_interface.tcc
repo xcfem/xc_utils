@@ -20,9 +20,13 @@
 //----------------------------------------------------------------------------
 //python_interface.cxx
 
-class_<Linear2d, bases<GeomObj2d>, boost::noncopyable  >("Linear2d", no_init);
+class_<Linear2d, bases<GeomObj2d>, boost::noncopyable  >("Linear2d", no_init)
+  ;
 class_<Ray2d, bases<Linear2d> >("Ray2d")
-  .def(init<Ray2d>());
+  .def(init<Pos2d, Pos2d>())
+  .def(init<Ray2d>())
+  .def("distPos2d", &Ray2d::dist,"return the distance to the point.")
+  ;
 
 
 Line2d (Line2d::*OffsetVector)(const Vector2d &v) const= &Line2d::Offset;
@@ -43,7 +47,7 @@ class_<Line2d, bases<Linear2d> >("Line2d")
   .def("getPoint",&Line2d::PtoParametricas,"return a point on the line.")
   .def("getVDir",&Line2d::VDir,"return the line direction vector.")
   .def("getSlope", &Line2d::getSlope)
-  .def("distPos3d", &Line2d::dist,"return the distance to the point.")
+  .def("distPos2d", &Line2d::dist,"return the distance to the point.")
   ;
 
 class_<Linear3d, bases<GeomObj3d>, boost::noncopyable  >("Linear3d", no_init);
@@ -66,7 +70,7 @@ class_<Segment3d, bases<Linear3d> >("Segment3d")
   .def("getAngleWithVector",AngleVector3D,"Returns the angle between the line segment and the vector.")
   .def("getAngleWithLineSegment",AngleSegment3D,"Returns the angle between both line segments.")
   .def("getVDir",&Segment3d::VDir,"return the direction vector of the segment.")
-  .def("Divide", &Segment2d::Divide,"Divide(numparts); returns the points that divide the segment.")
+  .def("Divide", &Segment3d::Divide,"Divide(numparts); returns the points that divide the segment.")
   ;
 
 Pos3d (Line3d::*Pos3dProj)(const Pos3d &) const= &Line3d::Projection;
@@ -122,7 +126,8 @@ GEOM_FT (Segment2d::*AngleSegment)(const Segment2d &v) const= &Segment2d::getAng
 
 Segment2d (Segment2d::*OffsetSegmentVector)(const Vector2d &v) const= &Segment2d::Offset;
 Segment2d (Segment2d::*OffsetSegmentDouble)(const GEOM_FT &d) const= &Segment2d::Offset;
-
+GeomObj::list_Pos2d (Segment2d::*segment2dIntersectionWithLine)(const Line2d &) const= &Segment2d::getIntersection;
+GeomObj::list_Pos2d (Segment2d::*segment2dIntersectionWithRay)(const Ray2d &) const= &Segment2d::getIntersection;
 class_<Segment2d, bases<Linear2d> >("Segment2d")
   .def(init<>())
   .def(init<Pos2d,Pos2d>())
@@ -135,11 +140,13 @@ class_<Segment2d, bases<Linear2d> >("Segment2d")
   .def("getNormal", &Segment2d::Normal,"return a vector perpendicular to the segment.")
   .def("distPos3d", &Segment2d::dist,"return the distance to the point.")
   .def("getLength", &Segment2d::getLength,"Return the length of the segment.")
-.def("getCenterOfMass", &Segment2d::getCenterOfMass, "Return the position of the center of mass.")
+  .def("getCenterOfMass", &Segment2d::getCenterOfMass, "Return the position of the center of mass.")
   .def("angleVector",AngleVector)
   .def("angleSegment",AngleSegment)
   .def("offsetVector",OffsetSegmentVector)
   .def("offsetDouble",OffsetSegmentDouble)
+  .def("getIntersectionWithLine", segment2dIntersectionWithLine)
+  .def("getIntersectionWithRay", segment2dIntersectionWithRay)
   .def("Divide", &Segment2d::Divide,"Divide(numparts); returns the points that divide the segment.")
   ;
 
