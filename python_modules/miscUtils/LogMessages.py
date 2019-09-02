@@ -19,12 +19,16 @@ logging.addLevelName( logging.WARNING, "\033[1;31m%s\033[1;0m" % logging.getLeve
 logging.addLevelName( logging.ERROR, "\033[1;41m%s\033[1;0m" % logging.getLevelName(logging.ERROR))
 
 def log(msg):
-  logging.info(msg)
+    logging.info(msg)
 
 def warning(msg):
-  logging.warning(msg)
+    logging.warning(msg)
 
 def error(msg):
-  logging.error(msg)
+    logging.error(msg)
+
+def to_file(fName):
+    logging.basicConfig(filename= fName, filemode='w', format='%(name)s - %(levelname)s - %(message)s')
+
 
 
