@@ -24,7 +24,7 @@ s=s.normalized()
 
 sTeor=geom.Vector3d(0.5488,0.7818,0.2959)
 ratio1= (sTeor-s)
-ratio1=ratio1.getModulo()
+ratio1=ratio1.getModulus()
 
 import os
 fname= os.path.basename(__file__)

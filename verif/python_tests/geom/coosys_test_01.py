@@ -11,7 +11,7 @@ v= geom.Vector3d(1,1,1)
 sc= geom.CooSysRect3d3d(v1,v2,v3)
 vTrf= sc.getCooLocales(v)
 vTrfTeor= geom.Vector3d(1,-1,1)
-ratio= (vTrf-vTrfTeor).getModulo()
+ratio= (vTrf-vTrfTeor).getModulus()
 
 #print("vTrf= ", vTrf)
 #print("ratio= ", ratio)

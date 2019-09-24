@@ -27,7 +27,7 @@ OpResta Lexico::resta;
 OpProd Lexico::prodt;
 OpDiv Lexico::divn;
 OpDivEnt Lexico::dive;
-OpMod Lexico::modulo;
+OpMod Lexico::modulus;
 OpPot Lexico::pot;
 OpMenor Lexico::menor;
 OpMenorIgual Lexico::menor_igual;
@@ -110,7 +110,7 @@ Segnal *Lexico::CalcDirOpBinario(const std::string &nmb)
     if(nmb == prodt.getName()) return &prodt;
     if(nmb == divn.getName()) return &divn;
     if(nmb == dive.getName()) return &dive;
-    if(nmb == modulo.getName()) return &modulo;
+    if(nmb == modulus.getName()) return &modulus;
     if(nmb == pot.getName()) return &pot;
     if(nmb == menor.getName()) return &menor;
     if(nmb == menor_igual.getName()) return &menor_igual;
@@ -164,7 +164,7 @@ void Lexico::PrintPrioridades(std::ostream &os) const
     os << prodt.getName() << ": " << prodt.GetPrioridad() << std::endl;
     os << divn.getName() << ": " << divn.GetPrioridad() << std::endl;
     os << dive.getName() << ": " << dive.GetPrioridad() << std::endl;
-    os << modulo.getName() << ": " << modulo.GetPrioridad() << std::endl;
+    os << modulus.getName() << ": " << modulus.GetPrioridad() << std::endl;
     os << pot.getName() << ": " << pot.GetPrioridad() << std::endl;
     os << menor.getName() << ": " << menor.GetPrioridad() << std::endl;
     os << menor_igual.getName() << ": " << menor_igual.GetPrioridad() << std::endl;

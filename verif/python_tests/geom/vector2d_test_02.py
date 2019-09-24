@@ -6,7 +6,7 @@ import geom
 import math
 
 def getAbs(vt1):
-  return vt1.getModulo()
+  return vt1.getModulus()
 
 def getAngle(vt1,vt2):
   return vt1.getAngle(vt2)
@@ -14,10 +14,10 @@ def getAngle(vt1,vt2):
 
 u=geom.Vector2d(1,0)
 v=geom.Vector2d(1,1)
-modulo=getAbs(u)
+modulus=getAbs(u)
 alpha=getAngle(v,u)
 
-ratio1= modulo-1
+ratio1= modulus-1
 ratio2=math.degrees(alpha)-45
 
 

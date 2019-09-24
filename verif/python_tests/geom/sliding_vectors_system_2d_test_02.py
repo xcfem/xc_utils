@@ -19,7 +19,7 @@ svd2+=vec
 R= 5.0*svd1-10.0*svd2
 result= R.getResultant()
 mom= R.getMoment()
-ratio= result.getModulo()+ math.sqrt(mom**2)
+ratio= result.getModulus()+ math.sqrt(mom**2)
 
 # print('R= ', R)
 # print('result= ', result)

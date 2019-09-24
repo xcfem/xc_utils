@@ -55,7 +55,7 @@ class Lexico
     static OpProd prodt;
     static OpDiv divn;
     static OpDivEnt dive;
-    static OpMod modulo;
+    static OpMod modulus;
     static OpPot pot;
     static OpMenor menor;
     static OpMenorIgual menor_igual;

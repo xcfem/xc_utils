@@ -30,7 +30,7 @@ s=r.getVector3dProj(R)
 s=s.normalized()
 sTeor=geom.Vector3d(-0.7650,-0.5992,-0.2363)
 ratio1= sTeor-s
-ratio1=ratio1.getModulo()
+ratio1=ratio1.getModulus()
 
 n1=P1.getNormalExterior()
 n2=P2.getNormalExterior()

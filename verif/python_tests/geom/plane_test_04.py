@@ -28,7 +28,7 @@ I12=n1.cross(n2)
 
 I12Teor=geom.Vector3d(0.7345,0.5753,0.2269)
 
-ratio1=(I12-I12Teor).getModulo()
+ratio1=(I12-I12Teor).getModulus()
 
 import os
 fname= os.path.basename(__file__)
