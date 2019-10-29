@@ -93,17 +93,22 @@ bool CommandEntity::hasPyProp(const std::string &str)
 //! @brief Return el objeto de Python cuyo nombre se pasa como parámetro.
 boost::python::object CommandEntity::getPyProp(const std::string &str)
    {
+     boost::python::object retval; //Defaults to None.
      // Python checks the class attributes before it calls __getattr__
      // so we don't have to do anything special here.
-     if(python_dict.find(str) == python_dict.end())
+     PythonDict::const_iterator i= python_dict.find(str);
+     if(i == python_dict.end())
        {
-         std::cerr << getClassName() << "::" << __FUNCTION__
-	           << "; property: '" << str << "' not found."
+         std::clog << getClassName() << "::" << __FUNCTION__
+	           << "; Warning, property: '" << str
+		   << "' not found. Returning None."
 		   << std::endl;
-         PyErr_SetString(PyExc_AttributeError, str.c_str());
-         throw boost::python::error_already_set();
+         // PyErr_SetString(PyExc_AttributeError, str.c_str());
+         // throw boost::python::error_already_set();
        }
-     return python_dict[str];
+     else
+       retval= i->second;
+     return retval;
    }
 
 //! @brief Sets/appends a value tho the Python object's dictionary.
