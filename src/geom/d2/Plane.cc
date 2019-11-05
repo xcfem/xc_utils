@@ -42,27 +42,7 @@ Plane::Plane(const CGPlane_3 &cgp)
 //! @brief Constructor: plane defined by three points.
 Plane::Plane(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   : Surface3d(), cgp(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL()) 
-  {
-    // const GEOM_FT tol2= 1e-3;
-    // const GEOM_FT d12= p1.dist2(p2);
-    // if(d12<tol2)
-    //   {
-    //     std::clog << "Plane; points p1= " << p1 << " and p2= " 
-    //               << p2 << " are too close d= " << sqrt(d12) << std::endl;
-    //   }
-    // const GEOM_FT d13= p1.dist2(p3);
-    // if(d13<tol2)
-    //   {
-    //     std::clog << "Plane; points p1= " << p1 << " and p3= " 
-    //               << p3 << " are too close d= " << sqrt(d13) << std::endl;
-    //   }
-    // const GEOM_FT d23= p2.dist2(p3);
-    // if(d23<tol2)
-    //   {
-    //     std::clog << "Plane; points p2= " << p2 << " and p3= " 
-    //               << p3 << " are too close d= " << sqrt(d23) << std::endl;
-    //   }  
-  }
+  { }
 
 
 //! @brief Constructor: plane defined by the point and the normal vector.
@@ -88,12 +68,19 @@ Plane::polygon_classification Plane::clfpnt2clfpol(const CGAL::Oriented_side os)
     return retval;
   }
 
+//! @brief Constructor
 Plane::Plane(const Line3d &r,const Pos3d &p)
   : Surface3d(), cgp(r.ToCGAL(),p.ToCGAL()) {}
+
+//! @brief Constructor
 Plane::Plane(const Segment3d &s,const Vector3d &v)
   : Surface3d(), cgp(s.getSupportLine().ToCGAL(),(s.getFromPoint()+v).ToCGAL()) {}
+
+//! @brief Constructor
 Plane::Plane(const Pos3d &p,const Vector3d &v1,const Vector3d &v2)
   : Surface3d(), cgp(p.ToCGAL(),(p+v1).ToCGAL(),(p+v2).ToCGAL()) {}
+
+//! @brief Constructor
 Plane::Plane(const GeomObj3d::list_Pos3d &lp): Surface3d(), cgp()
   {
     if(lp.size()<3)
@@ -105,12 +92,17 @@ Plane::Plane(const GeomObj3d::list_Pos3d &lp): Surface3d(), cgp()
     GeomObj3d::list_Pos3d::const_iterator i= lp.begin();
     ThreePoints(*i,*i++,*i++);
   }
+
+//! @brief Constructor
 Plane::Plane(const Polygon3d &pg3d)
   : Surface3d(), cgp()
   { *this= pg3d.getPlane(); }
+
+//! @brief Constructor
 Plane::Plane(const GeneralEquationOfPlane &eg)
   : Surface3d(), cgp(eg.a(),eg.b(),eg.c(),eg.d()) {}
 
+//! @brief Constructor
 Plane::Plane(const Plane &other)
   : Surface3d(), cgp(other.cgp) {}
 
