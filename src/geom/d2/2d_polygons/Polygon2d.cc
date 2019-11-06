@@ -31,12 +31,18 @@
 
 #include <CGAL/Boolean_set_operations_2.h>
 #include <boost/any.hpp>
+#include "mark_bayazit.h"
 
 #include "xc_utils/src/geom/center_of_mass.h"
 #include "xc_utils/src/geom/trf/Translation2d.h"
 #include "xc_utils/src/geom/lists/utils_list_pos2d.h"
 #include "xc_utils/src/geom/pos_vec/Pos2dList.h"
 
+Pos2d at(const Polygon2d &p, int i)
+  {
+    const int s= int(p.GetNumVertices());
+    return p.Vertice0(i < 0 ? s - 1 - ((-i - 1) % s) : i % s);
+  }
 
 //! @brief Default constructor.
 Polygon2d::Polygon2d(void)
@@ -127,6 +133,13 @@ bool Polygon2d::In(const Polyline2d &p) const
 //! @brief Return true if this polygon contains the polygon argument.
 bool Polygon2d::In(const Polygon2d &p) const
   { return In(p.vertices_begin(),p.vertices_end()); }
+
+//! @brief Makes the polygon counter clockwise.
+void Polygon2d::makeCounterClockWise(void)
+  {
+    if(Horario())
+      Swap();
+  }
 
 //! @brief Return true if the polygon contains the point.
 bool Polygon2d::Overlap(const Pos2d &p) const
@@ -374,6 +387,14 @@ std::list<Polygon2d> Polygon2d::Clip(const Polygon2d &other) const
 //! @brief Clip this polygont with the polygon argument.
 void Polygon2d::clipBy(const Polygon2d &plg)
   { (*this)= Polygon2d(Clip(plg)); }
+
+//! @brief 
+std::list<Polygon2d> Polygon2d::getBayazitDecomposition(void) const
+  {
+    std::list<Polygon2d> retval;
+    decompose_poly(*this,retval);
+    return retval;
+  }
 
 //! @brief Return the intersection with the polygon parameter.
 std::list<Polygon2d> Polygon2d::getIntersection(const HalfPlane2d &sp) const

@@ -119,6 +119,7 @@ class Polygon2d: public PolygonalSurface2d
       { return (cgpol.is_counterclockwise_oriented()); }
     inline void Swap(void)
       { cgpol.reverse_orientation(); }
+    void makeCounterClockWise(void);
 
     Polygon2d Offset(const GEOM_FT &d) const;
 
@@ -167,8 +168,14 @@ class Polygon2d: public PolygonalSurface2d
 
     std::list<Polygon2d> getIntersection(const HalfPlane2d &sp) const;
 
+    std::list<Polygon2d> getBayazitDecomposition(void) const;
+   
+
     //std::list<Polygon2d> create_polygon2d_list(const std::string &str) const;
   };
+
+Pos2d at(const Polygon2d &p, int i);
+
 
 inline Polygon2d transform(const Trf2d &trf2d,const Polygon2d &pol2d)
   { return getTransformed(pol2d,trf2d); }

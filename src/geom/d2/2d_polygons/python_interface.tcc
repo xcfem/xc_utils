@@ -39,6 +39,7 @@ class_<PolygonalSurface2d, bases<Surface2d>, boost::noncopyable >("PolygonalSurf
 
 typedef std::list<Polygon2d> polygon_2D_list;
 class_<polygon_2D_list >("polygon_2D_list")
+//.def(vector_indexing_suite<std::list<Polygon2d> >())
   .def("__iter__", iterator<polygon_2D_list >())
   .add_property("size", &polygon_2D_list::size)
   .def("__len__", &polygon_2D_list::size)
@@ -68,7 +69,9 @@ class_<Polygon2d, Polygon2d *, bases<PolygonalSurface2d> >("Polygon2d")
   .def("clipLine",clipLine)
   .def("clipRay",clipRay)
   .def("clipSegment",clipSegment)
-  .def("clipUsingPolygon",&Polygon2d::clipBy);
+  .def("clipUsingPolygon",&Polygon2d::clipBy)
+  .def("getBayazitDecomposition",&Polygon2d::getBayazitDecomposition)
+  ;
 
 class_<Quadrilateral2d, bases<Polygon2d> >("Quadrilateral2d")
   .def(init<>())

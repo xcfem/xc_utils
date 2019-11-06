@@ -66,6 +66,7 @@ python ./python_tests/geom/polygon2D_test_2d_06.py
 python ./python_tests/geom/polygon2D_test_2d_07.py
 python ./python_tests/geom/polygon2D_test_2d_08.py
 python ./python_tests/geom/polygon2D_test_2d_09.py
+python ./python_tests/geom/polygon2D_test_2d_10.py
 echo "$BLEU" "  Circles." "$NORMAL"
 python ./python_tests/geom/circle2d_test_01.py
 python ./python_tests/geom/circle2d_test_02.py
