@@ -46,8 +46,8 @@ class GTSFace
 
     GTSFace(GtsFace *f= nullptr);
     GTSFace(GTSEdge &e1,GTSEdge &e2,GTSEdge &e3);
-    GTSFace(const GTSFace &otra);
-    GTSFace &operator=(const GTSFace &otra);
+    GTSFace(const GTSFace &);
+    GTSFace &operator=(const GTSFace &);
     bool Null(void) const;
     ~GTSFace(void);
   };

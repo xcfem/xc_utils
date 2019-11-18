@@ -30,10 +30,10 @@
 #include <cstdio>
 
 //! @brief Operador de asignación.
-ExprInfija &ExprInfija::operator=(const ExprInfija &otra)
+ExprInfija &ExprInfija::operator=(const ExprInfija &other)
   {
-    Expresion::operator =(otra);
-    op_bin_en_espera= otra.op_bin_en_espera;
+    Expresion::operator =(other);
+    op_bin_en_espera= other.op_bin_en_espera;
     return *this;
   }
 

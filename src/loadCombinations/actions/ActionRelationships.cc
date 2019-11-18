@@ -80,16 +80,16 @@ std::string cmb_acc::ActionRelationships::nombres(const dq_string &l) const
   }
 
 //! @brief Añade a las acciones incompatibles la lista de expresiones regulares que se pasa como parámetro.
-void cmb_acc::ActionRelationships::concat_incompatibles(const dq_string &otra)
+void cmb_acc::ActionRelationships::concat_incompatibles(const dq_string &other)
   {
-    for(const_iterator i= otra.begin();i!=otra.end();i++)
+    for(const_iterator i= other.begin();i!=other.end();i++)
       AgregaIncompatible(*i);
   }
 
 //! @brief Añade a las acciones maestras la lista de expresiones regulares que se pasa como parámetro.
-void cmb_acc::ActionRelationships::concat_maestras(const dq_string &otra)
+void cmb_acc::ActionRelationships::concat_maestras(const dq_string &other)
   {
-    for(const_iterator i= otra.begin();i!=otra.end();i++)
+    for(const_iterator i= other.begin();i!=other.end();i++)
       AgregaMaestra(*i);
   }
 
@@ -180,10 +180,10 @@ void cmb_acc::ActionRelationships::updateMaestras(const std::string &nmb)
       }
   }
 
-void cmb_acc::ActionRelationships::concat(const ActionRelationships &otra)
+void cmb_acc::ActionRelationships::concat(const ActionRelationships &other)
   {
-    concat_incompatibles(otra.incompatibles);
-    concat_maestras(otra.maestras);
+    concat_incompatibles(other.incompatibles);
+    concat_maestras(other.maestras);
   }
 
 std::string cmb_acc::ActionRelationships::nombresIncompatibles(void) const

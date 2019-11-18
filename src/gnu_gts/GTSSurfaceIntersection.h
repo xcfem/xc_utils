@@ -48,8 +48,8 @@ class GTSSurfaceIntersection
     GTSSurfaceIntersection(GtsSurfaceInter *f= nullptr);
     GTSSurfaceIntersection(GtsSurfaceInterClass *klass,
                            GTSSurface &s1, GTSSurface &s2);
-    GTSSurfaceIntersection(const GTSSurfaceIntersection &otra);
-    GTSSurfaceIntersection &operator=(const GTSSurfaceIntersection &otra);
+    GTSSurfaceIntersection(const GTSSurfaceIntersection &);
+    GTSSurfaceIntersection &operator=(const GTSSurfaceIntersection &);
 
     void Write(FILE *fp);
 

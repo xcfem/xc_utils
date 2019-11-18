@@ -36,7 +36,7 @@ class KDTreePos
     value_type d[3];
   public:
     explicit KDTreePos(const Pos3d &p);
-    double distance_to(const KDTreePos &otra) const;
+    double distance_to(const KDTreePos &other) const;
     inline value_type operator[](const size_t &N) const { return d[N]; }
   };
 

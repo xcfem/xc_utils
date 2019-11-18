@@ -24,5 +24,5 @@
 
 GTSBBoxTree::GTSBBoxTree(GtsBBox *b)
   { bbt = b; }
-GTSBBoxTree::GTSBBoxTree(const GTSBBoxTree &otra)
-  { bbt= otra.bbt; }
+GTSBBoxTree::GTSBBoxTree(const GTSBBoxTree &other)
+  { bbt= other.bbt; }

@@ -51,8 +51,8 @@ class matsimZ : public ZMatrix<numero>
       { PutDim(dim,dim); }
     matsimZ(size_type dim,numero val) : ZMatrix_number(1,Tam(dim,dim),val)
       { PutDim(dim,dim); }
-    matsimZ(const matsimZ<numero> &otra) : ZMatrix_number(otra)
-      { PutDim(otra.n_rows,otra.n_columns); }
+    matsimZ(const matsimZ<numero> &other) : ZMatrix_number(other)
+      { PutDim(other.n_rows,other.n_columns); }
     matsimZ<numero>& operator =(const matsimZ<numero> &m)
       {
         ZMatrix_number::operator =(m);

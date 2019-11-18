@@ -45,7 +45,7 @@ class PolyPos : public std::deque<pos>
     typedef typename pos::vector vector;
 
     PolyPos(void): deque_pos() {}
-    PolyPos(const PolyPos<pos> &otra): deque_pos(otra) {}
+    PolyPos(const PolyPos<pos> &other): deque_pos(other) {}
     PolyPos<pos> &operator =(const PolyPos<pos> &l)
       {
         deque_pos::operator= (l);

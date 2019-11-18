@@ -45,10 +45,10 @@ GTSGraph::GTSGraph(const GTSSurface &s)
 GTSGraph::GTSGraph(const GTSGraph &other)
   : gph(other.gph), borrar(false)
   {}
-GTSGraph &GTSGraph::operator=(const GTSGraph &otra)
+GTSGraph &GTSGraph::operator=(const GTSGraph &other)
   {
     borra();
-    gph= otra.gph;
+    gph= other.gph;
     borrar= false;
     return *this;
   }

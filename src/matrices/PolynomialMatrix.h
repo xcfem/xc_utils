@@ -40,7 +40,7 @@ class PolynomialMatrix: public polynomial_matrix
   public:
     PolynomialMatrix(size_type n_rows=1,size_type cols=1,const Polynomial &val=Polynomial())
       : polynomial_matrix(n_rows,cols,val) {}
-    PolynomialMatrix(const PolynomialMatrix &otra) : polynomial_matrix(otra) {}
+    PolynomialMatrix(const PolynomialMatrix &other) : polynomial_matrix(other) {}
     PolynomialMatrix &operator=(const PolynomialMatrix &m)
       {
 	polynomial_matrix::operator=(m);

@@ -30,11 +30,11 @@ class VarExpr : public Variable
   public:
     VarExpr(void) : Variable() {}
     VarExpr(const std::string &nmb): Variable(nmb) {}
-    VarExpr(const VarExpr &otra): Variable(otra) {}
-    VarExpr &operator=(const VarExpr &otra)
+    VarExpr(const VarExpr &other): Variable(other) {}
+    VarExpr &operator=(const VarExpr &other)
       {
-        Variable::operator =(otra);
-        expr= otra.expr;
+        Variable::operator =(other);
+        expr= other.expr;
         return *this;
       }
     inline ExprAlgebra GetExpr(void) const

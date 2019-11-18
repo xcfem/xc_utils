@@ -41,21 +41,21 @@ Rama::Rama(const double &d)
   : data(Lex().NuevoLiteral(d)), izdo(NULL), dcho(NULL) {}
 
 //! @brief Constructor de copia.
-Rama::Rama(const Rama &otra)
-  : data(otra.data)
+Rama::Rama(const Rama &other)
+  : data(other.data)
   {
-    if(otra.izdo) izdo= otra.izdo->getCopy();
-    if(otra.dcho) dcho= otra.dcho->getCopy();
+    if(other.izdo) izdo= other.izdo->getCopy();
+    if(other.dcho) dcho= other.dcho->getCopy();
     Lex().NuevaRefLiteral(data);
   }
 
 //! @brief Operador asignación.
-Rama &Rama::operator=(const Rama &otra)
+Rama &Rama::operator=(const Rama &other)
   {
     Borra();
-    data= otra.data;
-    if(otra.izdo) izdo= otra.izdo->getCopy();
-    if(otra.dcho) dcho= otra.dcho->getCopy();
+    data= other.data;
+    if(other.izdo) izdo= other.izdo->getCopy();
+    if(other.dcho) dcho= other.dcho->getCopy();
     Lex().NuevaRefLiteral(data);
     return *this;
   }

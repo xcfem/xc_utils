@@ -48,7 +48,7 @@ class LoadCombinations: public CommandEntity
     LoadCombinations(void);
     LoadCombinations(const ActionContainer &acc);
     inline virtual ~LoadCombinations(void) {}
-    void Concat(const LoadCombinations &otras);
+    void Concat(const LoadCombinations &others);
 
     inline LoadCombinationVector getULSTransientCombinations(void)
       { return comb_uls_transient;}

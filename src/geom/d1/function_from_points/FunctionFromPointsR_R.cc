@@ -24,9 +24,9 @@
 #include <set>
 
 //! @brief Operador asignación.
-FunctionFromPointsR_R &FunctionFromPointsR_R::operator=(const FunctionFromPointsR_R &otra)
+FunctionFromPointsR_R &FunctionFromPointsR_R::operator=(const FunctionFromPointsR_R &other)
   {
-    FunctionFromPointsR_T<double>::operator=(otra);
+    FunctionFromPointsR_T<double>::operator=(other);
     return *this;
   }
 

@@ -43,8 +43,8 @@ class vcolM: public MMatrix
     vcolM(const std::vector<size_t> &dim);
     vcolM(const MMatrix &m,const size_type &c);
     //! Constructor de copia.
-    vcolM(const vcolM &otra) 
-      : MMatrix(otra) {}
+    vcolM(const vcolM &other) 
+      : MMatrix(other) {}
     //! Operador asignacion.
     vcolM &operator=(const vcolM &m)
       {

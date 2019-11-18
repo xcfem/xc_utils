@@ -55,7 +55,7 @@ class TMatrix: public ProtoMatrix, public STO
     TMatrix(size_t n_rows,size_t n_columns,T val);
     template <class InputIterator>
     TMatrix(const size_t &n_rows,const size_t &n_columns,InputIterator b,InputIterator e);
-    TMatrix(const TMatrix<T,STO> &otra);
+    TMatrix(const TMatrix<T,STO> &);
     TMatrix<T,STO>& operator=(const TMatrix<T,STO> &m);
     TMatrix<T,STO>& operator=(const T &n)
       { return Con(n); }
@@ -173,8 +173,8 @@ TMatrix<T,STO>::TMatrix(size_t n_rows,size_t n_columns,T val)
   : ProtoMatrix(n_rows,n_columns), STO(Tam(),val) {}
 //! @brief Constructor de copia.
 template <class T,class STO>
-TMatrix<T,STO>::TMatrix(const TMatrix<T,STO> &otra) 
-  : ProtoMatrix(otra),STO(otra) {}
+TMatrix<T,STO>::TMatrix(const TMatrix<T,STO> &other) 
+  : ProtoMatrix(other),STO(other) {}
 
 //! @brief Constructor con lista inicialización.
 template <class T,class STO> template<class InputIterator>

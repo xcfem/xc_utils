@@ -43,12 +43,12 @@ void GTSSurfaceTraverse::borra(void)
 GTSSurfaceTraverse::GTSSurfaceTraverse(const GTSSurface &s,const GTSFace &f)
   : sft(nullptr), borrar(false)
   { crea(s,f); }
-GTSSurfaceTraverse::GTSSurfaceTraverse(const GTSSurfaceTraverse &otra)
-  : sft(otra.sft), borrar(false)
+GTSSurfaceTraverse::GTSSurfaceTraverse(const GTSSurfaceTraverse &other)
+  : sft(other.sft), borrar(false)
   {}
-GTSSurfaceTraverse &GTSSurfaceTraverse::operator=(const GTSSurfaceTraverse &otra)
+GTSSurfaceTraverse &GTSSurfaceTraverse::operator=(const GTSSurfaceTraverse &other)
   {
-    sft= otra.sft;
+    sft= other.sft;
     borrar= false;
     return *this;
   }  

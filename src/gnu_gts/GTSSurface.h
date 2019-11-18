@@ -56,8 +56,8 @@ class GTSSurface
     friend class GTSGraph;
 
     GTSSurface(void);
-    GTSSurface(const GTSSurface &otra);
-    GTSSurface &operator=(const GTSSurface &otra);
+    GTSSurface(const GTSSurface &);
+    GTSSurface &operator=(const GTSSurface &);
 
     int Read(GtsFile *fp);
     void Write(FILE *fp);
@@ -73,7 +73,7 @@ class GTSSurface
 
     void appendFace(GTSFace &f);
     void removeFace(GTSFace &f);
-    void Merge(const GTSSurface &otra);
+    void Merge(const GTSSurface &);
 
     guint GetNumVertices(void) const;
     guint getNumEdges(void) const;

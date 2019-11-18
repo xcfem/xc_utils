@@ -40,7 +40,7 @@ class MExpressionMatrix: public m_expression_matrix
     MExpressionMatrix(size_type n_rows,size_type cols) : m_expression_matrix(n_rows,cols) {}
     MExpressionMatrix(size_type n_rows,size_type cols,const ExpressionMatrix &val)
       : m_expression_matrix(n_rows,cols,val) {}
-    MExpressionMatrix(const MExpressionMatrix &otra) : m_expression_matrix(otra) {}
+    MExpressionMatrix(const MExpressionMatrix &other) : m_expression_matrix(other) {}
     MExpressionMatrix& operator=(const MExpressionMatrix &m)
       {
 	m_expression_matrix::operator=(m);

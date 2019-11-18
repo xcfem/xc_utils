@@ -27,7 +27,7 @@
 #include <cctype>
 #include "xc_utils/src/utils/misc_utils/matem.h"
 
-//! Ajusta una text string a la derecha dentro de otra de
+//! Ajusta una text string a la derecha dentro de other de
 //! tamaño n rellena de characters 'c'.
 const std::string &ajusta_dcha(const std::string &s,const size_t &n,const char &fill_char)
   {

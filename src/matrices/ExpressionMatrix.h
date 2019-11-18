@@ -39,7 +39,7 @@ class ExpressionMatrix: public expression_matrix
   public:
     ExpressionMatrix(size_type n_rows=1,size_type cols=1,const ExprAlgebra &val=ExprAlgebra())
       : expression_matrix(n_rows,cols,val) {}
-    ExpressionMatrix(const ExpressionMatrix &otra) : expression_matrix(otra) {}
+    ExpressionMatrix(const ExpressionMatrix &other) : expression_matrix(other) {}
     ExpressionMatrix &operator=(const ExpressionMatrix &m)
       {
 	expression_matrix::operator=(m);

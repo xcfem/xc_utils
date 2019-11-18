@@ -38,7 +38,7 @@ class FMatrix: public ZMatrix<F>
 
     FMatrix(void) : f_matrix(1,1) {}
     FMatrix(size_type n_rows,size_type cols) : f_matrix(n_rows,cols) {}
-    FMatrix(const FMatrix<F> &otra) : f_matrix(otra) {}
+    FMatrix(const FMatrix<F> &other) : f_matrix(other) {}
     m_double Eval(const m_double &d) const;
   };
 

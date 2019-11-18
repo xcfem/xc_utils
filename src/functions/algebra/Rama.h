@@ -80,8 +80,8 @@ class Rama : public ProtoExpresion
       : data(NULL), izdo(NULL), dcho(NULL) {}
 
     explicit Rama(const double &d);
-    Rama(const Rama &otra);
-    Rama &operator=(const Rama &otra);
+    Rama(const Rama &);
+    Rama &operator=(const Rama &);
 
     Rama *getCopy(void) const
       {

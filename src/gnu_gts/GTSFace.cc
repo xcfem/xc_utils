@@ -44,12 +44,12 @@ GTSFace::GTSFace(GtsFace *f)
 GTSFace::GTSFace(GTSEdge &e1,GTSEdge &e2,GTSEdge &e3)
   : fc(nullptr), borrar(false)
   { crea(e1,e2,e3); }
-GTSFace::GTSFace(const GTSFace &otra)
-  :fc(otra.fc), borrar(false) {}
-GTSFace &GTSFace::operator=(const GTSFace &otra)
+GTSFace::GTSFace(const GTSFace &other)
+  :fc(other.fc), borrar(false) {}
+GTSFace &GTSFace::operator=(const GTSFace &other)
   {
     borra();
-    fc= otra.fc;
+    fc= other.fc;
     borrar= false;
     return *this;
   }

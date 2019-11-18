@@ -87,7 +87,7 @@ class ActionRelationships: public CommandEntity
     inline bool contieneIncomp(void) const
       { return contiene_incomp; }
 
-    void concat(const ActionRelationships &otra);
+    void concat(const ActionRelationships &);
 
     std::string nombresIncompatibles(void) const;
     std::string nombresMaestras(void) const;

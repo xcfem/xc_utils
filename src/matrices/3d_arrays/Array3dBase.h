@@ -152,7 +152,7 @@ class Array3dBase: public std::vector<Array>
     var_ref_k_row getVarRefKRow(size_t layer=1,size_t f=1);
     var_ref_k_row getVarRefKRow(const size_t &layer,const size_t &f,const RangoIndice &);
 
-    void putBox(size_t layer_offset,size_t row_offset,size_t offset_col,const Array3dBase<Array> &otra);
+    void putBox(size_t layer_offset,size_t row_offset,size_t offset_col,const Array3dBase<Array> &);
 
   };
 
@@ -499,11 +499,11 @@ typename Array3dBase<Array>::var_ref_k_row Array3dBase<Array>::getVarRefKRow(con
 
 //! @brief Put in the array the array argument.
 template <class Array>
-void Array3dBase<Array>::putBox(size_t layer_offset,size_t row_offset,size_t offset_col,const Array3dBase<Array> &otra)
+void Array3dBase<Array>::putBox(size_t layer_offset,size_t row_offset,size_t offset_col,const Array3dBase<Array> &other)
   {
-    const size_t numberOfLayers= otra.getNumberOfLayers();
-    const size_t numberOfRows= otra.getNumberOfRows();
-    const size_t numberOfColumns= otra.getNumberOfColumns();
+    const size_t numberOfLayers= other.getNumberOfLayers();
+    const size_t numberOfRows= other.getNumberOfRows();
+    const size_t numberOfColumns= other.getNumberOfColumns();
     if((numberOfLayers+layer_offset)>getNumberOfLayers())
       {
         std::cerr << "Array3dBase::" << __FUNCTION__
@@ -525,7 +525,7 @@ void Array3dBase<Array>::putBox(size_t layer_offset,size_t row_offset,size_t off
     for(size_t i=1;i<=numberOfLayers;i++)
       for(size_t j=1;j<=numberOfRows;j++)
         for(size_t k=1;k<=numberOfColumns;k++)
-          (*this)(layer_offset+i,row_offset+j,offset_col+k)= otra(i,j,k);
+          (*this)(layer_offset+i,row_offset+j,offset_col+k)= other(i,j,k);
   }
 
 //! @brief Print stuff.

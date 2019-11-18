@@ -54,8 +54,8 @@ class matridZ : public ZMatrix<numero>
       { PutDim(dim,dim); vectorZ_numero::operator[](0)= 0.0; }
     matridZ(const size_type &dim,const numero &val) : ZMatrix_number(1,Tam(dim,dim))
       { PutDim(dim,dim); vectorZ_numero::operator[](0)= 0.0; }
-    matridZ(const matridZ<numero> &otra) : ZMatrix_number(otra)
-      { PutDim(otra.n_rows,otra.n_columns); vectorZ_numero::operator[](0)= 0.0; }
+    matridZ(const matridZ<numero> &other) : ZMatrix_number(other)
+      { PutDim(other.n_rows,other.n_columns); vectorZ_numero::operator[](0)= 0.0; }
     matridZ<numero>& operator =(const matridZ<numero> &m)
       {
         ZMatrix_number::operator =(m);

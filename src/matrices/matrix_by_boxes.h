@@ -47,7 +47,7 @@ class MatrixByBoxes: public ZMatrix<TBOX>
     MatrixByBoxes(size_type n_rows,size_type n_columns,const TBOX &val);
     MatrixByBoxes(const std::vector<size_t> &);
     MatrixByBoxes(const std::vector<size_t> &,const std::vector<size_t> &);
-    MatrixByBoxes(const MatrixByBoxes &otra);
+    MatrixByBoxes(const MatrixByBoxes &);
     MatrixByBoxes& operator=(const MatrixByBoxes &m);
 
     size_t getTotalNumberOfRows(void) const;
@@ -103,8 +103,8 @@ MatrixByBoxes<TBOX>::MatrixByBoxes(const std::vector<size_t> &dim_rows,const std
 
 //! Constructor de copia.
 template <class TBOX>
-MatrixByBoxes<TBOX>::MatrixByBoxes(const MatrixByBoxes &otra)
-  : box_matrix(otra) {}
+MatrixByBoxes<TBOX>::MatrixByBoxes(const MatrixByBoxes &other)
+  : box_matrix(other) {}
 
 //! @brief Assignment operator.
 template <class TBOX>

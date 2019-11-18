@@ -63,10 +63,10 @@ GTSVertex::GTSVertex(const GTSVertex &other)
   {}
 
 //! @brief Assignment operator.
-GTSVertex &GTSVertex::operator=(const GTSVertex &otra)
+GTSVertex &GTSVertex::operator=(const GTSVertex &other)
   {
     borra();
-    vt= otra.vt;
+    vt= other.vt;
     borrar= false;
     return *this;
   }

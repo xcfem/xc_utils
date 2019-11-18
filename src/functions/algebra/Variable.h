@@ -33,11 +33,11 @@ class Variable : public OpndoConNombre
   public:
     Variable(void) : OpndoConNombre(), asignada(false) {}
     Variable(const std::string &nmb): OpndoConNombre(nmb), asignada(false) {}
-    Variable(const Variable &otra): OpndoConNombre(otra), asignada(otra.asignada) {}
-    Variable &operator=(const Variable &otra)
+    Variable(const Variable &other): OpndoConNombre(other), asignada(other.asignada) {}
+    Variable &operator=(const Variable &other)
       {
-        OpndoConNombre::operator =(otra);
-        asignada= otra.asignada;
+        OpndoConNombre::operator =(other);
+        asignada= other.asignada;
         return *this;
       }
     inline virtual bool Evaluable(void) const

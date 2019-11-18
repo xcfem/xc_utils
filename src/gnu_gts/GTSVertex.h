@@ -48,7 +48,7 @@ class GTSVertex
     GTSVertex(const double &x= 0.0,const double &y= 0.0,const double &z= 0.0);
     GTSVertex(GtsVertex *pvt);
     GTSVertex(const GTSVertex &);
-    GTSVertex &operator=(const GTSVertex &otra);
+    GTSVertex &operator=(const GTSVertex &);
 
     Pos3d Posicion(void) const;
 

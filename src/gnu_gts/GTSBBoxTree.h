@@ -37,7 +37,7 @@ class GTSBBoxTree
   public:
 
     GTSBBoxTree(GtsBBox *b= nullptr);
-    GTSBBoxTree(const GTSBBoxTree &otra);
+    GTSBBoxTree(const GTSBBoxTree &);
   };
 
 

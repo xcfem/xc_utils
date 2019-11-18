@@ -29,7 +29,7 @@
 class Function
   {
   protected:
-    NmbVars Vars; //Nombres de las variables independientes.
+    NmbVars Vars; //!< Independent variable names.
   public:
     Function(void) {}
     Function(const NmbVars &vars)
@@ -38,11 +38,11 @@ class Function
       { Vars= PutVars(vars); }
     Function(const char var)
       { Vars= PutVars(var); }
-    Function(const Function &otra) 
-      { Vars= otra.Vars; }
-    Function &operator=(const Function &otra)
+    Function(const Function &other) 
+      { Vars= other.Vars; }
+    Function &operator=(const Function &other)
       {
-        Vars= otra.Vars;
+        Vars= other.Vars;
         return *this;
       }
     short unsigned int GetDim(void) const

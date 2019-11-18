@@ -47,7 +47,7 @@ class VerticesArista
       { return v0; }
     const size_t &getVJ(void) const
       { return v1; }
-    bool comparteVertices(const VerticesArista &otra) const;
+    bool comparteVertices(const VerticesArista &other) const;
     friend bool operator==(const VerticesArista &,const VerticesArista &);
   };
 

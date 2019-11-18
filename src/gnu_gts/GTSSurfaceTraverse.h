@@ -40,8 +40,8 @@ class GTSSurfaceTraverse
   public:
 
     GTSSurfaceTraverse(const GTSSurface &s,const GTSFace &f);
-    GTSSurfaceTraverse(const GTSSurfaceTraverse &otra);
-    GTSSurfaceTraverse &operator=(const GTSSurfaceTraverse &otra);
+    GTSSurfaceTraverse(const GTSSurfaceTraverse &);
+    GTSSurfaceTraverse &operator=(const GTSSurfaceTraverse &);
     GTSFace Next(guint *level= nullptr) const;
     ~GTSSurfaceTraverse(void);
   };

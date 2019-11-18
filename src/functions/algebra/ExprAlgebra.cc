@@ -33,8 +33,8 @@ ExprAlgebra::ExprAlgebra(void)
 ExprAlgebra::ExprAlgebra(const std::string &str)
   : ArbolExpr(str) {}
 //! @brief Constructor.
-ExprAlgebra::ExprAlgebra(const ExprAlgebra &otra)
-  : ArbolExpr(otra) {}
+ExprAlgebra::ExprAlgebra(const ExprAlgebra &other)
+  : ArbolExpr(other) {}
 //! @brief Constructor.
 ExprAlgebra::ExprAlgebra(const double &d)
   : ArbolExpr(d) {}
@@ -92,17 +92,17 @@ double ExprAlgebra::RaizNewton(const double &tol,size_t max_iter,const std::stri
   }
 
 //! @brief Devuelve el valor absoluto del argumento.
-ExprAlgebra abs(const ExprAlgebra &otro)
+ExprAlgebra abs(const ExprAlgebra &other)
   {
-    ExprAlgebra retval(otro);
+    ExprAlgebra retval(other);
     retval.Abs();
     return retval;
   }
 
 //! @brief Devuelve la raía cuadrada del argumento.
-ExprAlgebra sqrt(const ExprAlgebra &otro)
+ExprAlgebra sqrt(const ExprAlgebra &other)
   {
-    ExprAlgebra retval(otro);
+    ExprAlgebra retval(other);
     retval.Sqrt();
     return retval;
   }

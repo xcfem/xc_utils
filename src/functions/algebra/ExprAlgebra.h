@@ -54,9 +54,9 @@ class ExprAlgebra : public ArbolExpr
     explicit ExprAlgebra(const std::string &);
     ExprAlgebra(const ExprAlgebra &);
     explicit ExprAlgebra(const double &);
-    ExprAlgebra &operator=(const ExprAlgebra &otra)
+    ExprAlgebra &operator=(const ExprAlgebra &other)
       {
-        ArbolExpr::operator=(otra);
+        ArbolExpr::operator=(other);
         return *this;
       }
     ExprAlgebra &operator+=(const ExprAlgebra &a2)

@@ -42,7 +42,7 @@ class MMatrix: public m_matrix
     MMatrix(const std::vector<size_t> &dim);
     MMatrix(const std::vector<size_t> &dim_rows,const std::vector<size_t> &dim_cols);
     //! Constructor de copia.
-    MMatrix(const MMatrix &otra) : m_matrix(otra) {}
+    MMatrix(const MMatrix &other) : m_matrix(other) {}
     MMatrix& operator=(const MMatrix &m)
       {
 	m_matrix::operator=(m);

@@ -58,16 +58,16 @@ GTSSurface::GTSSurface(GtsSurface *ptr)
 GTSSurface::GTSSurface(void)
   : s(nullptr), borrar(false)
   { crea(); }
-GTSSurface::GTSSurface(const GTSSurface &otra)
+GTSSurface::GTSSurface(const GTSSurface &other)
   : s(nullptr), borrar(false)
   {
     crea();
-    gts_surface_copy(s,otra.s);
+    gts_surface_copy(s,other.s);
   }
-GTSSurface &GTSSurface::operator=(const GTSSurface &otra)
+GTSSurface &GTSSurface::operator=(const GTSSurface &other)
   {
     crea();
-    gts_surface_copy(s,otra.s);
+    gts_surface_copy(s,other.s);
     return *this;
   }  
 int GTSSurface::Read(GtsFile *fp)
@@ -128,9 +128,9 @@ void GTSSurface::appendFace(GTSFace &f)
 void GTSSurface::removeFace(GTSFace &f)
   { gts_surface_remove_face(s,f.get_ptr()); }
 
-void GTSSurface::Merge(const GTSSurface &otra)
-//Añade a esta todas las caras de 'otra' que no estén ya en esta.
-  { gts_surface_merge(s,otra.s); }
+void GTSSurface::Merge(const GTSSurface &other)
+//Añade a esta todas las caras de 'other' que no estén ya en esta.
+  { gts_surface_merge(s,other.s); }
 
 guint GTSSurface::GetNumVertices(void) const
   { return gts_surface_vertex_number(s); }

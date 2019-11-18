@@ -31,12 +31,12 @@ VerticesArista::VerticesArista(const size_t &i,const size_t &j)
 void VerticesArista::Swap(void)
   { std::swap(v0,v1); }
 
-bool VerticesArista::comparteVertices(const VerticesArista &otra) const
+bool VerticesArista::comparteVertices(const VerticesArista &other) const
   {
     bool retval= false;
-    if((*this)==otra)
+    if((*this)==other)
       retval= false;
-    else if((v0== otra.v1) && (v1== otra.v0))
+    else if((v0== other.v1) && (v1== other.v0))
       retval= true;
     return retval;
   }

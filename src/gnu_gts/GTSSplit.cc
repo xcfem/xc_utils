@@ -45,10 +45,10 @@ GTSSplit::GTSSplit(const GTSVertex &v,const GTSVertex &v1,const GTSVertex &v2)
 GTSSplit::GTSSplit(const GTSSplit &other)
   : spt(other.spt), borrar(false)
   {}
-GTSSplit &GTSSplit::operator=(const GTSSplit &otra)
+GTSSplit &GTSSplit::operator=(const GTSSplit &other)
   {
     borra();
-    spt= otra.spt;
+    spt= other.spt;
     borrar= false;
     return *this;
   }

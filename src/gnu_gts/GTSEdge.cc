@@ -47,10 +47,10 @@ GTSEdge::GTSEdge(GTSVertex &v1,GTSVertex &v2)
 GTSEdge::GTSEdge(const GTSEdge &other)
   : edg(other.edg), borrar(false)
   {}
-GTSEdge &GTSEdge::operator=(const GTSEdge &otra)
+GTSEdge &GTSEdge::operator=(const GTSEdge &other)
   {
     borra();
-    edg= otra.edg;
+    edg= other.edg;
     borrar= false;
     return *this;
   }

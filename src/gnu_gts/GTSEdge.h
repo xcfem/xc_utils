@@ -42,7 +42,7 @@ class GTSEdge
 
     GTSEdge(GTSVertex &v1,GTSVertex &v2);
     GTSEdge(const GTSEdge &);
-    GTSEdge &operator=(const GTSEdge &otra);
+    GTSEdge &operator=(const GTSEdge &);
 
     GTSVertex V1(void) const;
     GTSVertex V2(void) const;

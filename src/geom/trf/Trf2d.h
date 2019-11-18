@@ -58,12 +58,12 @@ class Trf2d: public Trf
 /*            const GEOM_RT & hw = GEOM_RT(1.0)); */
     Trf2d( const GEOM_FT & m00,const GEOM_FT & m01,const GEOM_FT & m02,
            const GEOM_FT & m10,const GEOM_FT & m11,const GEOM_FT & m12);
-    Trf2d(const Trf2d &otra)
-      : Trf(otra), cgtrf(otra.cgtrf) {}
-    Trf2d &operator=(const Trf2d &otra)
+    Trf2d(const Trf2d &other)
+      : Trf(other), cgtrf(other.cgtrf) {}
+    Trf2d &operator=(const Trf2d &other)
       {
-	Trf::operator=(otra);
-        cgtrf= otra.cgtrf;
+	Trf::operator=(other);
+        cgtrf= other.cgtrf;
         return *this;
       }
     //Return the inverse transformation.

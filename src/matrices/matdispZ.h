@@ -73,7 +73,7 @@ class matdispZ : public ZMatrix<numero>
       { return (columns.find(c)!=columns.end()); }
     inline const numero &PorDefecto(void) const
       { return (ZMatrix_number::operator()(1,1)); }
-    bool IgualA(const matdispZ<numero> &otra) const;
+    bool IgualA(const matdispZ<numero> &other) const;
 
     template<class M>
     matdispZ<numero> Post(const M &b) const;
@@ -85,9 +85,9 @@ class matdispZ : public ZMatrix<numero>
     matdispZ(size_type n_rows=1,size_type n_columns= 1)
       : ZMatrix_number(1,1,numero())
       { this->PutDim(n_rows,n_columns); }
-    matdispZ(const matdispZ<numero> &otra)
-      : ZMatrix_number(otra), columns(otra.columns)
-      { this->PutDim(otra.n_rows,otra.n_columns); }
+    matdispZ(const matdispZ<numero> &other)
+      : ZMatrix_number(other), columns(other.columns)
+      { this->PutDim(other.n_rows,other.n_columns); }
     matdispZ<numero>& operator =(const matdispZ<numero> &m)
       {
         ZMatrix_number::operator =(m);
@@ -548,15 +548,15 @@ typename matdispZ<numero>::ZMatrix_number matdispZ<numero>::GetCompleta(void) co
   }
 
 template<class numero>
-bool matdispZ<numero>::IgualA(const matdispZ<numero> &otra) const
+bool matdispZ<numero>::IgualA(const matdispZ<numero> &other) const
   {
-    if(!CompDim(*this,otra)) return false;
+    if(!CompDim(*this,other)) return false;
     typename matdispZ<numero>::const_c_iterator c;
     for(c= this->columns.begin();c!=this->columns.end();c++)
       {
         typename matdispZ<numero>::const_f_iterator f;
         for(f= c->second.begin();f!=c->second.end();f++)
-          if(f->second != otra(f->first,c->first)) return false;
+          if(f->second != other(f->first,c->first)) return false;
       }
     return true;
   }

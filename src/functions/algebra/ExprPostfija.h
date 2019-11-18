@@ -44,17 +44,17 @@ class ExprPostfija: public Expresion
       : Expresion() {}
     ExprPostfija(const std::string &str): Expresion()
       { Expresion::operator=(str); }
-    ExprPostfija(const ExprPostfija &otra): Expresion(otra) {}
-    ExprPostfija &operator=(const ExprPostfija &otra)
+    ExprPostfija(const ExprPostfija &other): Expresion(other) {}
+    ExprPostfija &operator=(const ExprPostfija &other)
       {
-        Expresion::operator =(otra);
+        Expresion::operator =(other);
         return *this;
       }
-    ExprPostfija(const ExprInfija &otra): Expresion(otra)
-      { Traduce(otra); }
-    ExprPostfija &operator=(const ExprInfija &otra)
+    ExprPostfija(const ExprInfija &other): Expresion(other)
+      { Traduce(other); }
+    ExprPostfija &operator=(const ExprInfija &other)
       {
-        Traduce(otra);
+        Traduce(other);
         return *this;
       }
     ExprPostfija &operator=(const std::string &str)

@@ -37,12 +37,12 @@ cmb_acc::LoadCombinations::LoadCombinations(const ActionContainer &acc)
 
 
 //! @brief Concatenate the combinations from both objects.
-void cmb_acc::LoadCombinations::Concat(const LoadCombinations &otras)
+void cmb_acc::LoadCombinations::Concat(const LoadCombinations &others)
   {
-    comb_uls_transient= LoadCombinationVector::Concat(comb_uls_transient,otras.comb_uls_transient,0.0);
-    comb_uls_accid= LoadCombinationVector::Concat(comb_uls_accid,otras.comb_uls_accid,0.0);
-    comb_uls_sism= LoadCombinationVector::Concat(comb_uls_sism,otras.comb_uls_sism,0.0);
-    comb_sls_poco_frec= LoadCombinationVector::Concat(comb_sls_poco_frec,otras.comb_sls_poco_frec,0.0);
-    comb_sls_frec= LoadCombinationVector::Concat(comb_sls_frec,otras.comb_sls_frec,0.0);
-    comb_sls_cuasi_perm= LoadCombinationVector::Concat(comb_sls_cuasi_perm,otras.comb_sls_cuasi_perm,0.0);
+    comb_uls_transient= LoadCombinationVector::Concat(comb_uls_transient,others.comb_uls_transient,0.0);
+    comb_uls_accid= LoadCombinationVector::Concat(comb_uls_accid,others.comb_uls_accid,0.0);
+    comb_uls_sism= LoadCombinationVector::Concat(comb_uls_sism,others.comb_uls_sism,0.0);
+    comb_sls_poco_frec= LoadCombinationVector::Concat(comb_sls_poco_frec,others.comb_sls_poco_frec,0.0);
+    comb_sls_frec= LoadCombinationVector::Concat(comb_sls_frec,others.comb_sls_frec,0.0);
+    comb_sls_cuasi_perm= LoadCombinationVector::Concat(comb_sls_cuasi_perm,others.comb_sls_cuasi_perm,0.0);
   }

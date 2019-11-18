@@ -58,7 +58,7 @@ class ZMatrix : public TMatrix<numero,vectorZ<numero> >
     ZMatrix(size_type n_rows,size_type n_columns,numero val) : mT_numero(n_rows,n_columns,val) {}
     ZMatrix(size_type n_rows,size_type n_columns,const lst_numero &ln) : mT_numero(n_rows,n_columns)
       { vectorZ_numero::operator=(vectorZ_numero(ln)); }
-    ZMatrix(const ZMatrix<numero> &otra) : mT_numero(otra) {}
+    ZMatrix(const ZMatrix<numero> &other) : mT_numero(other) {}
     template <class InputIterator>
     ZMatrix(const size_t &n_rows,const size_t &n_columns,InputIterator b,InputIterator e);
     ZMatrix<numero> &operator=(const ZMatrix<numero> &m)

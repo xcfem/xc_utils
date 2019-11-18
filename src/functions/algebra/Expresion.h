@@ -48,15 +48,15 @@ class Expresion: public ExprBase
     Expresion(void)
       : ExprBase(false), lista() {}
     //! @brief Constructor de copia.
-    Expresion(const Expresion &otra)
-      : ExprBase(otra), lista(otra.lista)
+    Expresion(const Expresion &other)
+      : ExprBase(other), lista(other.lista)
       { update_nueva_lista(); }
     //! @brief Operador de asignación. 
-    Expresion &operator=(const Expresion &otra)
+    Expresion &operator=(const Expresion &other)
       {
-	ExprBase::operator=(otra);
+	ExprBase::operator=(other);
         borra_lista();
-        lista=(otra.lista);
+        lista=(other.lista);
         update_nueva_lista();
         return *this;
       }

@@ -59,9 +59,9 @@ class ExprInfija: public Expresion
       : Expresion(), op_bin_en_espera()
       { Traduce(is); }
     //! @brief Constructor de copia.
-    ExprInfija(const ExprInfija &otra)
-      : Expresion(otra), op_bin_en_espera(otra.op_bin_en_espera) {}
-    ExprInfija &operator=(const ExprInfija &otra);
+    ExprInfija(const ExprInfija &other)
+      : Expresion(other), op_bin_en_espera(other.op_bin_en_espera) {}
+    ExprInfija &operator=(const ExprInfija &);
     ExprInfija &operator=(const std::string &str);
   };
 

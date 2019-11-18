@@ -29,10 +29,10 @@ KDTreePos::KDTreePos(const Pos3d &p)
   { d[0] = p.x(); d[1] = p.y(); d[2] = p.z(); }
   
 //! @brief Distance between positions.
-double KDTreePos::distance_to(const KDTreePos &otra) const
+double KDTreePos::distance_to(const KDTreePos &other) const
   {
-    double dist = sqr(d[0]-otra.d[0]);
-    dist+= sqr(d[1]-otra.d[1]);
-    dist+= sqr(d[2]-otra.d[2]);
+    double dist = sqr(d[0]-other.d[0]);
+    dist+= sqr(d[1]-other.d[1]);
+    dist+= sqr(d[2]-other.d[2]);
     return sqrt(dist);
   }

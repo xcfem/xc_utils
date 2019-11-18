@@ -58,12 +58,12 @@ GTSSurfaceIntersection::GTSSurfaceIntersection(GtsSurfaceInterClass *klass,
     gts_bb_tree_destroy (tree1, TRUE);
     gts_bb_tree_destroy (tree2, TRUE);
   }
-GTSSurfaceIntersection::GTSSurfaceIntersection(const GTSSurfaceIntersection &otra)
-  : si(otra.si), borrar(false)
+GTSSurfaceIntersection::GTSSurfaceIntersection(const GTSSurfaceIntersection &other)
+  : si(other.si), borrar(false)
   {}
-GTSSurfaceIntersection &GTSSurfaceIntersection::operator=(const GTSSurfaceIntersection &otra)
+GTSSurfaceIntersection &GTSSurfaceIntersection::operator=(const GTSSurfaceIntersection &other)
   {
-    si= otra.si;
+    si= other.si;
     borrar= false;
     return *this;
   }

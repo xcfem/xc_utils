@@ -122,8 +122,8 @@ class ProtoMatrix
   public:
     ProtoMatrix(size_t n_rows= 1,size_t n_columns= 1)
       { inic(n_rows,n_columns); }
-    ProtoMatrix(const ProtoMatrix &otra)
-      { inic(otra.n_rows,otra.n_columns); }
+    ProtoMatrix(const ProtoMatrix &other)
+      { inic(other.n_rows,other.n_columns); }
     ProtoMatrix& operator =(const ProtoMatrix &m)
       {
         inic(m.n_rows,m.n_columns);
