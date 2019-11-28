@@ -59,3 +59,4 @@ class_<BND3d, bases<GeomObj3d> >("BND3d")
   .def("getMin", &BND3d::GetMin,"returns minimum value of i coordinate.")
   ;
 
+#include "xc_utils/src/geom/d3/3d_polyhedrons/python_interface.tcc"
