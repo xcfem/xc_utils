@@ -19,17 +19,25 @@ def drawVtkSymb(symbType,renderer, RGBcolor, vPos, vDir, scale):
     :param vDir: director vector to orient the symbol
     :param scale: scale to be applied to the symbol representation
     '''
-    symTpLow=symbType.lower()
+    symTpLow= symbType.lower()
     if 'arrow' in symTpLow:
-        symbSource=vtk.vtkArrowSource()
+        symbSource= vtk.vtkArrowSource()
     elif 'cone' in symTpLow:
-        symbSource=vtk.vtkConeSource()
+        symbSource= vtk.vtkConeSource()
     elif 'sphere' in symTpLow:
-        symbSource=vtk.vtkSphereSource()
+        symbSource= vtk.vtkSphereSource()
     elif 'cube' in symTpLow:
-        symbSource=vtk.vtkCubeSource()
+        symbSource= vtk.vtkCubeSource()
+    elif 'shaftkey' in symTpLow:
+        symbSource= vtk.vtkCubeSource()
+        symbSource.SetZLength(0.25)
+        symbSource.SetXLength(0.75)
     elif 'cylinder' in symTpLow:
-        symbSource=vtk.vtkCylinderSource()
+        symbSource= vtk.vtkCylinderSource()
+    elif 'disk' in symTpLow:
+        symbSource= vtk.vtkCylinderSource()
+        symbSource.SetHeight(0.25)
+        symbSource.SetResolution(10)
     vPosVx=[vPos[i]-scale/2.0*vDir[i] for i in range(3)] #vertex position
     addSymb(symbSource,renderer, RGBcolor, vPosVx, vDir, scale)
     if 'double' in symTpLow:
