@@ -81,7 +81,7 @@ INCLUDE_DIRECTORIES(${SQLITEWP_INCL_DIR})
 INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_DIRS})
 
 ADD_DEFINITIONS(-Wall -O3 -march=native -frounding-math -pedantic -fPIC)
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 #SET(CMAKE_VERBOSE_MAKEFILE ON)
 
 SET(text_utils utils/text/text_string utils/text/LabelContainer utils/text/en_letra utils/text/StrTok utils/text/tab_cod utils/text/latex utils/text/StringFormatter utils/text/FixedWidthReader)
