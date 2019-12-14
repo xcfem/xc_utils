@@ -87,6 +87,14 @@ class_<Triangle2d, bases<Polygon2d> >("Triangle2d")
   .def(init<>())
   ;
 
+class_<LineSegmentArrangement, bases<Surface2d> >("LineSegmentArrangement")
+  .def(init<>())
+  .def(init<std::list<Segment2d> >())
+  .def("getNumVertices",&LineSegmentArrangement::getNumberOfVertices)
+  .def("getNumEdges",&LineSegmentArrangement::getNumberOfEdges)
+  .def("getNumFaces",&LineSegmentArrangement::getNumberOfFaces)
+  ;
+
 class_<PolygonWithHoles2d, bases<Surface2d> >("PolygonWithHoles2d")
   .def(init<>())
   .def(init<Polygon2d>())

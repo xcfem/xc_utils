@@ -35,6 +35,7 @@
 #include <iostream>
 #include <CGAL/IO/Geomview_stream.h>
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+#include <CGAL/Arrangement_2.h>
 
 #ifdef __GNUC__
 #define VARIABLE_IS_NOT_USED __attribute__ ((unused))
