@@ -54,6 +54,7 @@ boost::python::list python_clip(boost::python::list &l, const Polygon2d &plg)
     return to_python_list(areas);
   }
 
+void export_d0_entities(void);
 void export_d1_entities(void);
 void export_d2_entities(void);
 void export_d3_entities(void);
@@ -106,6 +107,7 @@ BOOST_PYTHON_MODULE(geom)
     #include "lists/python_interface.tcc"
     #include "pos_vec/python_interface.tcc"
 
+    export_d0_entities();
     export_d1_entities();
     export_d2_entities();
     export_d3_entities();

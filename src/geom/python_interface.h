@@ -35,6 +35,8 @@
 #include "xc_utils/src/geom/pos_vec/Pos3dArray.h"
 #include "xc_utils/src/geom/pos_vec/Pos2dArray3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3dArray3d.h"
+#include "xc_utils/src/geom/d0/Point2d.h"
+#include "xc_utils/src/geom/d0/Point3d.h"
 #include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/pos_vec/Dir3d.h"
 #include "xc_utils/src/geom/d1/Line3d.h"
