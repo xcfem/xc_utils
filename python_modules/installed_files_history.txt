@@ -3,6 +3,8 @@
 /usr/local/lib/python2.7/dist-packages/geom_utils/acad_script_utils.pyc
 /usr/local/lib/python2.7/dist-packages/geom_utils/auxCairoPlot.py
 /usr/local/lib/python2.7/dist-packages/geom_utils/auxCairoPlot.pyc
+/usr/local/lib/python2.7/dist-packages/geom_utils/DxfReader.py
+/usr/local/lib/python2.7/dist-packages/geom_utils/DxfReader.pyc
 /usr/local/lib/python2.7/dist-packages/geom_utils/__init__.py
 /usr/local/lib/python2.7/dist-packages/geom_utils/__init__.pyc
 /usr/local/lib/python2.7/dist-packages/geom_utils/interpolation.py
