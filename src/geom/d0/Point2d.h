@@ -34,7 +34,7 @@ class Point2d : public GeomObj2d
   public:
     Point2d(void) : GeomObj2d() {}
     explicit Point2d(const Pos2d &p): GeomObj2d(), org(p) {}
-    Point2d(GEOM_FT x,GEOM_FT y) : GeomObj2d(), org(Pos2d(x,y))
+    Point2d(GEOM_FT x,GEOM_FT y) : GeomObj2d(), org(x,y)
       {}
     operator const Pos2d &()
       { return org; }
