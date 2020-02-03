@@ -85,6 +85,8 @@
 /usr/local/lib/python2.7/dist-packages/miscUtils/__init__.pyc
 /usr/local/lib/python2.7/dist-packages/miscUtils/LogMessages.py
 /usr/local/lib/python2.7/dist-packages/miscUtils/LogMessages.pyc
+/usr/local/lib/python2.7/dist-packages/miscUtils/pickle_utils.py
+/usr/local/lib/python2.7/dist-packages/miscUtils/pickle_utils.pyc
 /usr/local/lib/python2.7/dist-packages/miscUtils/staircase_function.py
 /usr/local/lib/python2.7/dist-packages/miscUtils/staircase_function.pyc
 /usr/local/lib/python2.7/dist-packages/miscUtils/string_utils.py
