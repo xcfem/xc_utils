@@ -43,7 +43,7 @@ class RankineSoil(fs.FrictionalSoil):
 # Expressions taken from the books:
 # @book{calavera2001muros,
 #   title={Muros de contenci{\'o}n y muros de s{\'o}tano},
-#   author={CALAVERA, J.A. and Ruiz, J.C. and Instituto T{\'e}cnico de Materiales y Construcciones (Madrid)},
+#   author={CALAVERA, J.A. and Ruiz, J.C. and Instituto Técnico de Materiales y Construcciones (Madrid)},
 #   isbn={9788488764102},
 #   url={https://books.google.ch/books?id=f41cOgAACAAJ},
 #   year={2001},
