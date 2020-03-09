@@ -3,7 +3,7 @@
 from __future__ import print_function
 import xc_base
 import loadCombinations
-from loadCombinationUtils import ehe
+from load_combination_utils import ehe
 
 lcg= ehe.intenseControlCombGenerator
 PP1= lcg.insert("EHEIntenso","permanentes",loadCombinations.Action("PP1","Peso propio"),"permanents","permanentes_ctr_intenso")

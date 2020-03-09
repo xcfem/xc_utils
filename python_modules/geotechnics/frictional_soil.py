@@ -7,7 +7,7 @@ from geotechnics import mononobe_okabe
 from miscUtils import LogMessages as lmsg
 
 
-'''FrictionalSoil.py: frictional (or cohesionless) soil model.'''
+'''frictional_soil.py: frictional (or cohesionless) soil model.'''
 
 __author__= "Luis C. Pérez Tato (LCPT)"
 __copyright__= "Copyright 2016, LCPT"

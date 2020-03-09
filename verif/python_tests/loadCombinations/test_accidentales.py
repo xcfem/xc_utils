@@ -3,7 +3,7 @@
 from __future__ import print_function
 import xc_base
 import loadCombinations
-from loadCombinationUtils import ehe
+from load_combination_utils import ehe
 
 dbName= "/tmp/test_accidentales.db"
 tbName= "combinations"

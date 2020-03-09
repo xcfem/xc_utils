@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import FrictionalSoil as fs
+import frictional_soil as fs
 import math
 
 '''earth_pressure.py: earth pressures for retaining structures.'''

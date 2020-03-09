@@ -3,8 +3,8 @@
 from __future__ import print_function
 import xc_base
 import loadCombinations
-from loadCombinationUtils import iap11
-from loadCombinationUtils import utils
+from load_combination_utils import iap11
+from load_combination_utils import utils
 from miscUtils import LogMessages as lmsg
 
 lcg= iap11.controlCombGenerator
