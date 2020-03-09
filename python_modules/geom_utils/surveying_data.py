@@ -2,7 +2,7 @@
 
 from __future__ import print_function
 import geom
-from geom_utils import XYParametrized3DPoly as param
+from geom_utils import XY_parametrized_3Dpoly as param
 from geom_utils import acad_script_utils as script
 import math
 import os

@@ -6,11 +6,11 @@ Computes principal axes of a point cloud. Original authors:
 from __future__ import division
 from __future__ import print_function
 
-__author__= "Luis C. Pérez Tato (LCPT) and Ana Ortega (AOO)"
-__copyright__= "Copyright 2015, LCPT and AOO"
+__author__= "Luis C. Pérez Tato (LCPT) and Ana Ortega (AO_O)"
+__copyright__= "Copyright 2015, LCPT and AO_O"
 __license__= "GPL"
 __version__= "3.0"
-__email__= "l.pereztato@gmail.com" "anaOrtegaOrt@gmail.com"
+__email__= "l.pereztato@gmail.com" "ana.ortega.ort@gmail.com"
 
 
 import numpy

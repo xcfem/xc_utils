@@ -3,7 +3,7 @@ import scipy.interpolate
 import math
 from geom_utils import acad_script_utils as script
 import os
-from geom_utils import longitudinalProfile
+from geom_utils import longitudinal_profile
 import xc_base
 import geom
 
@@ -12,7 +12,7 @@ def filterDuplicatePoints(points):
   p0= points[0]
   retval.append(p0)
   for p in points:
-    dist= longitudinalProfile.getDistXYZ(p,p0) #Distance to the previous point.
+    dist= longitudinal_profile.getDistXYZ(p,p0) #Distance to the previous point.
     if(dist>=1e-12):
       retval.append(p)
       p0= p
@@ -32,7 +32,7 @@ class XYParametrized3DPoly:
     z= []
     distOrg= 0
     for p in pline3D:
-      dist= longitudinalProfile.getDistXY(p0,p) #Distance in the XY plane.
+      dist= longitudinal_profile.getDistXY(p0,p) #Distance in the XY plane.
       distOrg+= dist
       x.append(p.x)
       y.append(p.y)
