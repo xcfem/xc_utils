@@ -147,6 +147,8 @@
 /usr/local/lib/python2.7/dist-packages/sqliteUtils/ansysToEsfBarra.py
 /usr/local/lib/python2.7/dist-packages/sqlite_utils/ansysToEsfBarra.pyc
 /usr/local/lib/python2.7/dist-packages/sqliteUtils/ansysToEsfBarra.pyc
+/usr/local/lib/python2.7/dist-packages/sqlite_utils/ansys_to_intforc_beam.py
+/usr/local/lib/python2.7/dist-packages/sqlite_utils/ansys_to_intforc_beam.pyc
 /usr/local/lib/python2.7/dist-packages/sqlite_utils/__init__.py
 /usr/local/lib/python2.7/dist-packages/sqliteUtils/__init__.py
 /usr/local/lib/python2.7/dist-packages/sqlite_utils/__init__.pyc
