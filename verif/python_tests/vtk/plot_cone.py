@@ -1,5 +1,5 @@
 import vtk
-from vtkUtils import displayVtk
+from vtk_utils import displayVtk
 outputFileName= "/tmp/plot_cone.jpeg"
  
 # create a rendering window and renderer
