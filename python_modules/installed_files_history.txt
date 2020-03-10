@@ -143,11 +143,17 @@
 /usr/local/lib/python2.7/dist-packages/miscUtils/units_utils.py
 /usr/local/lib/python2.7/dist-packages/misc_utils/units_utils.pyc
 /usr/local/lib/python2.7/dist-packages/miscUtils/units_utils.pyc
+/usr/local/lib/python2.7/dist-packages/sqlite_utils/ansysToEsfBarra.py
 /usr/local/lib/python2.7/dist-packages/sqliteUtils/ansysToEsfBarra.py
+/usr/local/lib/python2.7/dist-packages/sqlite_utils/ansysToEsfBarra.pyc
 /usr/local/lib/python2.7/dist-packages/sqliteUtils/ansysToEsfBarra.pyc
+/usr/local/lib/python2.7/dist-packages/sqlite_utils/__init__.py
 /usr/local/lib/python2.7/dist-packages/sqliteUtils/__init__.py
+/usr/local/lib/python2.7/dist-packages/sqlite_utils/__init__.pyc
 /usr/local/lib/python2.7/dist-packages/sqliteUtils/__init__.pyc
+/usr/local/lib/python2.7/dist-packages/sqlite_utils/sqlite_macros.py
 /usr/local/lib/python2.7/dist-packages/sqliteUtils/sqlite_macros.py
+/usr/local/lib/python2.7/dist-packages/sqlite_utils/sqlite_macros.pyc
 /usr/local/lib/python2.7/dist-packages/sqliteUtils/sqlite_macros.pyc
 /usr/local/lib/python2.7/dist-packages/vtkUtils/displayVtk.py
 /usr/local/lib/python2.7/dist-packages/vtkUtils/displayVtk.pyc
