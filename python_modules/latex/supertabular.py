@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 def cabeceraSupertabular(nmbArch,numCampos,defCampos,idsCampos,caption):
     'cabeceraSupertabular(nmbArch,numCampos,defCampos,idsCampos,caption):'
