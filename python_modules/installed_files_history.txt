@@ -15,7 +15,9 @@
 /usr/local/lib/python2.7/dist-packages/geom_utils/__init__.pyc
 /usr/local/lib/python2.7/dist-packages/geom_utils/interpolation.py
 /usr/local/lib/python2.7/dist-packages/geom_utils/interpolation.pyc
+/usr/local/lib/python2.7/dist-packages/geom_utils/longitudinal_profile.py
 /usr/local/lib/python2.7/dist-packages/geom_utils/longitudinalProfile.py
+/usr/local/lib/python2.7/dist-packages/geom_utils/longitudinal_profile.pyc
 /usr/local/lib/python2.7/dist-packages/geom_utils/longitudinalProfile.pyc
 /usr/local/lib/python2.7/dist-packages/geom_utils/parabola.py
 /usr/local/lib/python2.7/dist-packages/geom_utils/parabola.pyc
