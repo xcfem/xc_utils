@@ -31,7 +31,9 @@
 /usr/local/lib/python2.7/dist-packages/geom_utils/section_by_plane.pyc
 /usr/local/lib/python2.7/dist-packages/geom_utils/surveying_data.py
 /usr/local/lib/python2.7/dist-packages/geom_utils/surveying_data.pyc
+/usr/local/lib/python2.7/dist-packages/geom_utils/XY_parametrized_3Dpoly.py
 /usr/local/lib/python2.7/dist-packages/geom_utils/XYParametrized3DPoly.py
+/usr/local/lib/python2.7/dist-packages/geom_utils/XY_parametrized_3Dpoly.pyc
 /usr/local/lib/python2.7/dist-packages/geom_utils/XYParametrized3DPoly.pyc
 /usr/local/lib/python2.7/dist-packages/geotechnics/earth_pressure.py
 /usr/local/lib/python2.7/dist-packages/geotechnics/earth_pressure.pyc

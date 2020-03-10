@@ -60,15 +60,13 @@ class RankineSoil(fs.FrictionalSoil):
 # Earth pressure coefficients.
 
 def ka_coulomb(a,b,fi,d):
-    '''
-    ka_coulomb(a,b,fi,d):
-    Return the active earth pressure coefficient according to Coulomb's theory.
+    '''Return the active earth pressure coefficient according to Coulomb theory.
 
     :param a:  angle of the back of the retaining wall (radians).
     :param b:  slope of the backfill (radians).
     :param fi: internal friction angle of the soil (radians).
-    :param d:  friction angle between soil an back of retaining wall (radians).
-    See Jiménez Salas, Geotecnia y Cimientos page 682 
+    :param d:  friction angle between soil an back of retaining wall (radians).See Jiménez Salas, Geotecnia y Cimientos page 682.
+
     '''
     fSoil= fs.FrictionalSoil(fi)
     return fSoil.Ka_coulomb(a, b, d)
@@ -88,7 +86,6 @@ def kah_coulomb(a,b,fi,d):
 
 def kav_coulomb(a,b,fi,d):
     '''
-    kav_coulomb(a,b,fi,d):
     Return the vertical component of the active earth pressure coefficient
     according to Coulomb's theory.
 
@@ -102,7 +99,6 @@ def kav_coulomb(a,b,fi,d):
 
 def k_janssen(k,d,B,z):
     '''
-    k_janssen(k,d,B,z)
     Lateral earth pressure coefficient for limited backfills according
     to Janssen's Theory (1895) and Kniss et Al (2007):
 
@@ -119,7 +115,6 @@ def k_janssen(k,d,B,z):
 
 def kp_coulomb(a,b,fi,d):
     '''
-    kp_coulomb(a,b,fi,d):
     Return the passive earth pressure coefficient according to Coulomb's theory.
 
     :param a:  angle of the back of the retaining wall (radians).
@@ -134,7 +129,6 @@ def kp_coulomb(a,b,fi,d):
 
 def eq_coulomb(a,b,fi,d,p):
     '''
-    eq_coulomb(a,b,fi,d,p):
     Return the lateral earth pressure caused by a uniform load q
     action over the backfill surface according to Coulomb's theory.
 
@@ -168,7 +162,6 @@ def eql_coulomb(x,H,z,ql):
 
 def eqp_coulomb(x,H,z,qp):
     '''
-    eqp_coulomb(x,H,z,qp):
     Return the earth pressure resulting from a vertical point load qp
     acting behind a retaining wall and is contained in the same vertical
     plane of the wall section.

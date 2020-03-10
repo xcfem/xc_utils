@@ -10,13 +10,12 @@ def active_earth_pressure_coefficient_Kad(psi, phi, theta, delta_ad,beta):
   ''' Return the active earth pressure coefficient according
       to Mononobe-Okabe.
 
-      Args:
       :param psi: back face inclination of the structure (< PI/2)ç
       :param phi: angle of internal friction of soil.
       :param theta: angle of weight with vertical:
-         kv= seismic coefficient of vertical acceleration.
-         kh= seismic coefficient of horizontal acceleration.
-         tan(theta)= kh/(1+kv) AND tan(theta)= kh/(1-kv)
+         - kv= seismic coefficient of vertical acceleration.
+         - kh= seismic coefficient of horizontal acceleration.
+         - tan(theta)= kh/(1+kv) AND tan(theta)= kh/(1-kv)
       :param delta_ad: angle of friction soil - structure.
       :param beta: slope inclination of terrain.'''
   num= (math.sin(psi+phi-theta))**2
@@ -30,7 +29,6 @@ def active_earth_pressure_coefficient_Kad(psi, phi, theta, delta_ad,beta):
 def overpressure_dry(H, gamma_soil, kv, kh, psi, phi, delta_ad, beta, Kas):
   ''' Overpressure due to seismic action according to Mononobe-Okabe
 
-      Args:
       :param H: height of the structure.
       :param gamma_soil: unit weight of soil (backfill)
       :param kv: seismic coefficient of vertical acceleration.

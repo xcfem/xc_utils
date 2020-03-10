@@ -1,4 +1,4 @@
-# Expresiones para estimar asientos de cimentaciones.
+# -*- coding: utf-8 -*-
 
 import math
 def coefRAsientoZapRectangularFlexible(l,b):

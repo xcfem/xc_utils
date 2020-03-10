@@ -50,8 +50,7 @@ class FrictionalSoil(object):
 
     :param a:  angle of the back of the retaining wall (radians).
     :param b:  slope of the backfill (radians).
-    :param d:  friction angle between soil an back of retaining wall (radians).
-    See Recomendaciones para obras marítimas ROM 0.5-05 page 315 
+    :param d:  friction angle between soil an back of retaining wall (radians). See Recomendaciones para obras marítimas ROM 0.5-05 page 315 
     '''
     fi= self.getDesignPhi()
     num= 1.0/math.cos(a)*math.cos(fi-a)
