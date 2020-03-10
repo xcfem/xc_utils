@@ -1,5 +1,5 @@
 import vtk
-from vtk_utils import displayVtk
+from vtk_utils import display_vtk
 outputFileName= "/tmp/plot_cone.jpeg"
  
 # create a rendering window and renderer
@@ -29,4 +29,4 @@ ren.AddActor(coneActor)
 import os
 os.system("rm -f "+outputFileName)
 renWin.Render()
-displayVtk.plotToFile(outputFileName,renWin,ren,750,400)
+display_vtk.plotToFile(outputFileName,renWin,ren,750,400)
