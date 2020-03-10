@@ -119,7 +119,9 @@
 /usr/local/lib/python2.7/dist-packages/loadCombinationUtils/utils.pyc
 /usr/local/lib/python2.7/dist-packages/miscUtils/__init__.py
 /usr/local/lib/python2.7/dist-packages/miscUtils/__init__.pyc
+/usr/local/lib/python2.7/dist-packages/miscUtils/log_messages.py
 /usr/local/lib/python2.7/dist-packages/miscUtils/LogMessages.py
+/usr/local/lib/python2.7/dist-packages/miscUtils/log_messages.pyc
 /usr/local/lib/python2.7/dist-packages/miscUtils/LogMessages.pyc
 /usr/local/lib/python2.7/dist-packages/miscUtils/pickle_utils.py
 /usr/local/lib/python2.7/dist-packages/miscUtils/pickle_utils.pyc

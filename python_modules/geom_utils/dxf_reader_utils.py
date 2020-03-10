@@ -14,7 +14,7 @@ import dxfgrabber
 from dxfwrite import DXFEngine as dxf
 import xc_base
 import geom
-from miscUtils import LogMessages as lmsg
+from miscUtils import log_messages as lmsg
 
 def layerToImport(layerName,namesToImport):
     '''Return true if the layer name matches one of the regular expressions
