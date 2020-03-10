@@ -2,7 +2,7 @@
 
 from __future__ import print_function
 import math
-from miscUtils import staircase_function as scf
+from misc_utils import staircase_function as scf
 
 xi= [0.0,1.0,2.0,3.0]
 

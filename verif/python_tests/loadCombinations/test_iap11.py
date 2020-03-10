@@ -5,7 +5,7 @@ import xc_base
 import loadCombinations
 from load_combination_utils import iap11
 from load_combination_utils import utils
-from miscUtils import log_messages as lmsg
+from misc_utils import log_messages as lmsg
 
 lcg= iap11.controlCombGenerator
 #print('*******', pond.permanentActions.gammaF.getGammaFELU.desfavorable)

@@ -4,7 +4,7 @@ from __future__ import print_function
 import math
 from scipy.constants import g
 from geotechnics import mononobe_okabe
-from miscUtils import log_messages as lmsg
+from misc_utils import log_messages as lmsg
 
 
 '''frictional_soil.py: frictional (or cohesionless) soil model.'''
