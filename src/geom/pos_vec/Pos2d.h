@@ -53,6 +53,9 @@ class Pos2d: public ProtoGeom
     Vector2d operator-(const Pos2d &) const;
     Pos2d operator-(const Vector2d &) const;
     Pos2d operator+(const Vector2d &) const;
+    virtual bool operator==(const Pos2d &) const;
+    inline bool operator!=(const Pos2d &other) const
+      { return !(*this==other); }
     const CGPoint_2 &ToCGAL(void) const
       { return cgpt; }
     inline GEOM_FT operator()(const size_t &i) const //Base 1
@@ -89,10 +92,6 @@ class Pos2d: public ProtoGeom
     GEOM_FT dist2(const Segment2d &) const;
     GEOM_FT dist(const Segment2d &) const;
 
-    inline friend bool operator==(const Pos2d &a,const Pos2d &b)
-      { return (a.cgpt==b.cgpt); }
-    inline friend bool operator!=(const Pos2d &a,const Pos2d &b)
-      { return !(a==b); }
     friend bool colineales(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3);
 
     void Print(std::ostream &os) const;

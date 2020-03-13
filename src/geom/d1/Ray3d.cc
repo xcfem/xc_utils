@@ -36,6 +36,22 @@ Ray3d::Ray3d(const Pos3d &p1,const Pos3d &p2)
              << p1 << " and " << p2 << " are the same." << std::endl;
       }
   }
+
+//! @brief Comparison operator.
+bool Ray3d::operator==(const Ray3d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= Linear3d::operator==(other);
+        if(retval)
+          retval= (cgsr==other.cgsr); 
+       }
+    return retval;
+  }
+
 void Ray3d::TwoPoints(const Pos3d &p1,const Pos3d &p2)
   { (*this)= Ray3d(p1,p2); }
 

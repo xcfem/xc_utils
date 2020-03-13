@@ -40,6 +40,22 @@ Ray2d::Ray2d(const Pos2d &p1,const Pos2d &p2)
   }
 Ray2d::Ray2d(const Pos2d &p1,const Vector2d &vdir)
   : Linear2d(), cgsr(p1.ToCGAL(),vdir.ToCGAL()) {}
+
+//! @brief Comparison operator.
+bool Ray2d::operator==(const Ray2d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= Linear2d::operator==(other);
+        if(retval)
+          retval= (cgsr==other.cgsr); 
+       }
+    return retval;
+  }
+
 void Ray2d::TwoPoints(const Pos2d &p1,const Pos2d &p2)
   { (*this)= Ray2d(p1,p2); }
 

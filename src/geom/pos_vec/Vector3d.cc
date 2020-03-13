@@ -45,6 +45,21 @@ Vector3d::Vector3d(const FT_matrix &m)
 Vector3d::Vector3d(const Pos3d &p1,const Pos3d &p2)
   : cgvct(p1.ToCGAL(),p2.ToCGAL()) {}
 
+//! @brief Comparison operator.
+bool Vector3d::operator==(const Vector3d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= ProtoGeom::operator==(other);
+        if(retval)
+          retval= (cgvct==other.cgvct); 
+       }
+    return retval;
+  }
+
 bool Vector3d::Nulo(void) const
   { return ((*this)==VectorNulo3d); }
 FT_matrix Vector3d::getMatrix(void) const

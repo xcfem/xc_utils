@@ -48,9 +48,9 @@ class Ray3d : public Linear3d
         cgsr= r.cgsr;
         return *this;
       }
-
     virtual GeomObj *clon(void) const
       { return new Ray3d(*this); }
+    virtual bool operator==(const Ray3d &) const;
     const CGRay_3 &ToCGAL(void) const
       { return cgsr; }
     void TwoPoints(const Pos3d &p1,const Pos3d &p2);
@@ -104,8 +104,6 @@ class Ray3d : public Linear3d
     //Moment of inertia with respect to the center of mass in local coordinates.
     inline virtual GEOM_FT Iz(void) const
       { return NAN; }
-    inline friend bool operator==(const Ray3d &r1,const Ray3d &r2)
-      { return (r1.cgsr==r2.cgsr); }
     inline void Print(std::ostream &os) const
       { os << PtoParametricas(0.0) << " " << PtoParametricas(100.0); }
   };

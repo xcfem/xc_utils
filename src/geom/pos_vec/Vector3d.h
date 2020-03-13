@@ -45,6 +45,7 @@ class Vector3d: public ProtoGeom
     Vector3d(const GEOM_FT &x,const GEOM_FT &y,const GEOM_FT &z);
     Vector3d(const FT_matrix &m);
     Vector3d(const Pos3d &p1,const Pos3d &p2);
+    virtual bool operator==(const Vector3d &) const;
     const CGVector_3 &ToCGAL(void) const
       { return cgvct; }
     void Neg(void)
@@ -95,8 +96,6 @@ class Vector3d: public ProtoGeom
       { return v1.getCross(v2); }
     inline friend Vector3d operator^(const Vector3d &v1, const Vector3d &v2)
       { return cross(v1,v2); }
-    inline friend bool operator==(const Vector3d &v1, const Vector3d &v2)
-      { return (v1.cgvct==v2.cgvct); }
     friend FT_matrix operator*(const FT_matrix &m,const Vector3d &v);
     friend std::ostream &operator<<(std::ostream &stream,const Vector3d &n);
 

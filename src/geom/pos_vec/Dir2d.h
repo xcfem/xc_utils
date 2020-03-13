@@ -40,6 +40,7 @@ class Dir2d
     Dir2d(const GEOM_FT &x,const GEOM_FT &y);
     Dir2d(const double &ang);
     Dir2d(const Vector2d &v);
+    virtual bool operator==(const Dir2d &) const;
     const CGDirection_2 &ToCGAL(void) const
       { return cgd; }
     void Neg(void)
@@ -56,7 +57,6 @@ class Dir2d
     FT_matrix getMatrix(void) const;
     Vector2d GetVector(void) const;
     friend std::ostream &operator << (std::ostream &stream,const Dir2d &n);
-    friend bool operator==(const Dir2d &v1,const Dir2d &v2);
     inline virtual ~Dir2d(void) {}
   };
 inline Dir2d operator-(const Dir2d &d)
@@ -66,8 +66,6 @@ inline Dir2d operator-(const Dir2d &d)
     return retval;
   }
 
-inline bool operator==(const Dir2d &v1,const Dir2d &v2)
-  { return (v1.cgd==v2.cgd); }  
 inline bool parallel(const Dir2d &v1,const Dir2d &v2)
   { return ((v1==v2) || (v1==-v2)); } 
 

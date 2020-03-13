@@ -69,6 +69,17 @@ EntityWithProperties &EntityWithProperties::operator=(const EntityWithProperties
     return *this;
   }
 
+//! @brief Comparison operator.
+bool EntityWithProperties::operator==(const EntityWithProperties &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      { retval= (owner==other.owner); }
+    return retval;
+  }
+
 //! @brief Returns demangled class name.
 std::string EntityWithProperties::getClassName(void) const
   {

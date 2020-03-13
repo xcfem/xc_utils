@@ -72,7 +72,7 @@ class Line2d : public Linear2d
     Line2d(const Line2d &r);
     Line2d(const Line2dParametricForm &param);
     Line2d &operator=(const Line2d &r);
-
+    virtual bool operator==(const Line2d &) const;
     const CGLine_2 &ToCGAL(void) const;
     virtual GeomObj *clon(void) const;
     void Swap(void);
@@ -145,8 +145,6 @@ class Line2d : public Linear2d
 
     void Transform(const Trf2d &trf2d);
 
-    friend bool operator==(const Line2d &r1,const Line2d &r2);
-
     void Print(std::ostream &os) const;
     void Plot(Plotter &psos) const;
     
@@ -154,8 +152,6 @@ class Line2d : public Linear2d
 
 double angle(const Line2d &r,const Vector2d &v);
 double angle(const Line2d &r1,const Line2d &r2);
-
-bool operator==(const Line2d &r1,const Line2d &r2);
 
 inline GEOM_FT dist2(const Pos2d &p,const Line2d &r)
   { return r.dist2(p); }

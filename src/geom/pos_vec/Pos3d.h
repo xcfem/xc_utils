@@ -67,6 +67,9 @@ class Pos3d : public ProtoGeom
     Vector3d operator-(const Pos3d &) const;
     Pos3d operator-(const Vector3d &) const;
     Pos3d operator+(const Vector3d &) const;
+    virtual bool operator==(const Pos3d &) const;
+    inline bool operator!=(const Pos3d &other) const
+      { return !(*this==other); }
     const CGPoint_3 &ToCGAL(void) const
       { return cgpt; }
     GEOM_FT at0(const size_t &i) const;
@@ -131,10 +134,6 @@ class Pos3d : public ProtoGeom
     friend bool colineales(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
     friend bool coplanarios(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3,const Pos3d &p4);
     friend std::ostream &operator<<(std::ostream &stream,const Pos3d &n);
-    inline friend bool operator==(const Pos3d &a,const Pos3d &b)
-      { return (a.cgpt==b.cgpt); }
-    inline friend bool operator!=(const Pos3d &a,const Pos3d &b)
-      { return !(a==b); }
   };
 
 Pos3d To3dXY2d(const Pos2d &p,const GEOM_FT &z= 0);

@@ -43,6 +43,22 @@ Segment2d::Segment2d(const Pos2d &p1,const Pos2d &p2)
              << p1 << " and " << p2 << " are the same." << endl;
       }
   }
+
+//! @brief Comparison operator.
+bool Segment2d::operator==(const Segment2d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= Linear2d::operator==(other);
+        if(retval)
+          retval= (cgseg==other.cgseg); 
+       }
+    return retval;
+  }
+
 void Segment2d::TwoPoints(const Pos2d &p1,const Pos2d &p2)
   { (*this)= Segment2d(p1,p2); }
 

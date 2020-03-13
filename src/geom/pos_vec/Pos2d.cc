@@ -94,6 +94,21 @@ Pos2d Pos2d::operator+(const Vector2d &v) const
     return retval;
   }
 
+//! @brief Comparison operator.
+bool Pos2d::operator==(const Pos2d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= ProtoGeom::operator==(other);
+        if(retval)
+          retval= (cgpt==other.cgpt); 
+       }
+    return retval;
+  }
+
 //! @brief Return the position vector of the point.
 Vector2d Pos2d::VectorPos(void) const
   { return (*this)-Origin2d; }

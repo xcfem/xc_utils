@@ -58,6 +58,7 @@ class D2to3d: public Surface3d
     D2to3d(void);
     D2to3d(const D2to3d &);
     D2to3d &operator =(const D2to3d &);
+    virtual bool operator==(const D2to3d &) const;
     void ThreePoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
 
     inline virtual unsigned short int Dimension(void) const
@@ -66,7 +67,6 @@ class D2to3d: public Surface3d
 
     Plane getPlane(void) const;
 
-    friend bool operator ==(const D2to3d &a,const D2to3d &b);
     void Print(std::ostream &os) const;
   };
 

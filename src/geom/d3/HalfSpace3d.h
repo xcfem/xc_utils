@@ -43,6 +43,8 @@ class HalfSpace3d : public GeomObj3d
     Plane lim; 
   public:
     HalfSpace3d(const Plane &p= Plane());
+    virtual bool operator==(const HalfSpace3d &) const;
+    
     const Plane &getBoundaryPlane(void) const;
     void setBoundaryPlane(const Plane &);
     
@@ -86,11 +88,8 @@ class HalfSpace3d : public GeomObj3d
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Pxy(void) const;
     virtual GEOM_FT Iz(void) const;
-    friend bool operator==(const HalfSpace3d &r1,const HalfSpace3d &r2);
     void Print(std::ostream &os) const;
   };
-
-bool operator==(const HalfSpace3d &r1,const HalfSpace3d &r2);
 
 inline GEOM_FT dist(const Pos3d &p,const HalfSpace3d &r)
   { return r.dist(p); }

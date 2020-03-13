@@ -56,6 +56,7 @@ class Vector2d: public ProtoGeom
         cgvct=other.cgvct;
         return *this;
       }
+    virtual bool operator==(const Vector2d &) const;
     const CGVector_2 &ToCGAL(void) const
       { return cgvct; }
     void Neg(void)
@@ -105,9 +106,6 @@ class Vector2d: public ProtoGeom
     friend GEOM_FT dot(const FT_matrix &m, const Vector2d &v1);
 
     friend FT_matrix operator*(const FT_matrix &m,const Vector2d &v);
-
-    inline friend bool operator==(const Vector2d &v1,const Vector2d &v2)
-      { return (v1.cgvct==v2.cgvct); }
 
     //void Gira(const GEOM_FT &ang_rad);
     //Vector2d GetGirado(const double &ang_rad) const;

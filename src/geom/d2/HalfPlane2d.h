@@ -44,6 +44,7 @@ class HalfPlane2d : public Surface2d
     HalfPlane2d(const Pos2d &p1,const Pos2d &p2);
     HalfPlane2d(const HalfPlane2d &sp);
     HalfPlane2d &operator=(const HalfPlane2d &sp);
+    virtual bool operator==(const HalfPlane2d &) const;
     virtual GeomObj *clon(void) const;
     inline void Swap(void);
     HalfPlane2d GetSwap(void) const;
@@ -119,12 +120,6 @@ class HalfPlane2d : public Surface2d
 
     void Transform(const Trf2d &trf2d);
 
-    inline friend bool operator==(const HalfPlane2d &r1,const HalfPlane2d &r2)
-      {
-        if(&r1.lim==&r2.lim) return true;
-        else
-          return (r1.lim==r2.lim); 
-      }
     inline void Print(std::ostream &os) const
       { os << lim; }
   };

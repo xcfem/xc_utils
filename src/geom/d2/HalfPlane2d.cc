@@ -52,6 +52,21 @@ HalfPlane2d &HalfPlane2d::operator=(const HalfPlane2d &sp)
     return *this;
   }
 
+//! @brief Comparison operator.
+bool HalfPlane2d::operator==(const HalfPlane2d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= Surface2d::operator==(other);
+        if(retval)
+          retval= (lim==other.lim);
+       }
+    return retval;
+  }
+
 GeomObj *HalfPlane2d::clon(void) const
   { return new HalfPlane2d(*this); }
 void HalfPlane2d::Swap(void)

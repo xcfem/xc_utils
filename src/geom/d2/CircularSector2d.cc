@@ -79,6 +79,21 @@ CircularSector2d &CircularSector2d::operator=(const CircularSector2d &p)
     return *this;
   }
 
+//! @brief Comparison operator.
+bool CircularSector2d::operator==(const CircularSector2d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= Circle2d::operator==(other);
+        if(retval)
+          retval= ((theta1==other.theta1) && (theta2==other.theta2));
+       }
+    return retval;
+  }
+
 //! @brief Constructor virtual.
 Surface2d *CircularSector2d::clon(void) const
   { return new CircularSector2d(*this); }
@@ -243,10 +258,3 @@ void CircularSector2d::Plot(Plotter &plotter) const
     return;
   }
 
-bool operator==(const CircularSector2d &a,const CircularSector2d &b)
-  {
-    if((const Circle2d &)(a) == (const Circle2d &)(b))
-      return ( (a.Theta1() == b.Theta1()) && (a.Theta2() == b.Theta2()));
-   else
-     return false;
-  }

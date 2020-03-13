@@ -56,6 +56,7 @@ class Ref : public ProtoGeom
       : org(o), trf(dirX.GetVector()) {}
     Ref(const PGlobal &o,const PGlobal &p)
       : org(o), trf(o,p) {}
+    virtual bool operator==(const Ref &) const;    
     PGlobal &Org(void)
       { return org; }
     const PGlobal &Org(void) const
@@ -74,12 +75,6 @@ class Ref : public ProtoGeom
     VGlobal GetCooGlobales(const VLocal &v) const;
     PLocal GetPosLocal(const PGlobal &p) const;
     VLocal GetCooLocales(const VGlobal &v) const;
-    friend bool operator ==(const Ref<SC> &a,const Ref<SC> &b)
-      {
-        if (a.org != b.org) return false;
-        if (a.trf != b.trf) return false;
-        return true;
-      }
     friend std::ostream &operator<<(std::ostream &os,const Ref<SC> &r)
       {
         os << "origen= " << r.org << " transformación= " << r.trf;
@@ -121,6 +116,22 @@ typename Ref<SC>::PLocal Ref<SC>::GetPosLocal(const PGlobal &p) const
 template<class SC>
 typename Ref<SC>::VLocal Ref<SC>::GetCooLocales(const VGlobal &v) const
   { return trf.GetCooLocales(v); }
+
+//! @brief Comparison operator.
+template<class SC>
+bool Ref<SC>::operator==(const Ref<SC> &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= ProtoGeom::operator==(other);
+        if(retval)
+          retval= ((org==other.org) && (trf==other.trf));
+       }
+    return retval;
+  }
 
 #endif
 

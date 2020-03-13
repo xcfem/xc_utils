@@ -39,6 +39,7 @@ class Dir3d
       : cgd(d) {}
     Dir3d(GEOM_FT x,GEOM_FT y,GEOM_FT z);
     Dir3d(const Vector3d &v);
+    virtual bool operator==(const Dir3d &) const;
     const CGDirection_3 &ToCGAL(void) const
       { return cgd; }
     void Neg(void)
@@ -53,8 +54,6 @@ class Dir3d
       { return cgd.dz(); }
     FT_matrix getMatrix(void) const;
     Vector3d GetVector(void) const;
-    inline friend bool operator==(const Dir3d &v1,const Dir3d &v2)
-      { return (v1.cgd==v2.cgd); }
     friend std::ostream &operator << (std::ostream &stream,const Dir3d &n);
     inline virtual ~Dir3d(void) {}
   };

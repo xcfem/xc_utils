@@ -23,6 +23,21 @@
 #include "Polyline3d.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 
+//! @brief Comparison operator.
+bool Polyline3d::operator==(const Polyline3d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= Linear3d::operator==(other);
+        if(retval)
+          retval= GeomObj::list_Pos3d::operator==(other);
+       }
+    return retval;
+  }
+
 const Pos3d *Polyline3d::AgregaVertice(const Pos3d &p)
   {
     GeomObj::list_Pos3d::push_back(p);

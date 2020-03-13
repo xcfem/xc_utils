@@ -30,13 +30,14 @@
 class EntityWithProperties
   {
   private:
-    EntityWithProperties *owner; //! Objeto propietario de ESTE.
+    EntityWithProperties *owner; //! Object that owns THIS ONE.
   protected:
     static int verbosity; //!< Verbosity level.
    public:
     EntityWithProperties(EntityWithProperties *owr= nullptr);
     EntityWithProperties(const EntityWithProperties &);
     EntityWithProperties &operator=(const EntityWithProperties &);
+    virtual bool operator==(const EntityWithProperties &) const;
     //! @brief Virtual destructor
     virtual ~EntityWithProperties(void) {}
     static const int &getVerbosityLevel(void);

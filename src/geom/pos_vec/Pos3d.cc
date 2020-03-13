@@ -69,6 +69,21 @@ Pos3d Pos3d::operator+(const Vector3d &v) const
     return retval;
   }
 
+//! @brief Comparison operator.
+bool Pos3d::operator==(const Pos3d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= ProtoGeom::operator==(other);
+        if(retval)
+          retval= (cgpt==other.cgpt); 
+       }
+    return retval;
+  }
+
 //! @brief Return the position vector of the point.
 Vector3d Pos3d::VectorPos(void) const
   { return (*this)-Origin3d; }

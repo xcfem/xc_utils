@@ -82,6 +82,21 @@ Line2d &Line2d::operator=(const Line2d &r)
     return *this;
   }
 
+//! @brief Comparison operator.
+bool Line2d::operator==(const Line2d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= Linear2d::operator==(other);
+        if(retval)
+          retval= (cgr==other.cgr); 
+       }
+    return retval;
+  }
+
 const CGLine_2 &Line2d::ToCGAL(void) const
   { return cgr; }
 
@@ -444,14 +459,6 @@ GEOM_FT Line2d::Pxy(void) const
 //Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Line2d::Iz(void) const
   { return NAN; }
-
-bool operator==(const Line2d &r1,const Line2d &r2)
-  {
-    if(&r1==&r2)
-      return true;
-    else
-      return (r1.cgr==r2.cgr); 
-  }
 
 //! @brief Return the distance between the lines.
 GEOM_FT dist(const Line2d &r1,const Line2d &r2)

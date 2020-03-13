@@ -49,6 +49,21 @@ Plane::Plane(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
 Plane::Plane(const Pos3d &o,const Vector3d &v)
   : Surface3d(), cgp(o.ToCGAL(),v.ToCGAL()) {}
 
+//! @brief Comparison operator.
+bool Plane::operator==(const Plane &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= Surface3d::operator==(other);
+        if(retval)
+          retval= (cgp==other.cgp); 
+       }
+    return retval;
+  }
+
 //! @brief Converts the point classification to the polygon one.
 Plane::polygon_classification Plane::clfpnt2clfpol(const CGAL::Oriented_side os)
   {
@@ -246,9 +261,6 @@ Plane::polygon_classification Plane::classifyPolygon(const Polygon3d &pol) const
 
 Plane FromCGAL(const CGPlane_3 &p)
   { return Plane(p); }
-
-bool operator==(const Plane &p1,const Plane &p2)
-  { return (p1.cgp == p2.cgp); }
 
 void Plane::Print(std::ostream &os) const
   {

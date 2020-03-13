@@ -45,6 +45,21 @@ Vector2d::Vector2d(const FT_matrix &m)
 Vector2d::Vector2d(const Pos2d &p1,const Pos2d &p2)
   : ProtoGeom(), cgvct(p1.ToCGAL(),p2.ToCGAL()) {}
 
+//! @brief Comparison operator.
+bool Vector2d::operator==(const Vector2d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= ProtoGeom::operator==(other);
+        if(retval)
+          retval= (cgvct==other.cgvct); 
+       }
+    return retval;
+  }
+
 bool Vector2d::Nulo(void) const
   { return ((*this)==VectorNulo2d); }
 void Vector2d::SetX(const GEOM_FT &vx)

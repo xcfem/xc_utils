@@ -40,6 +40,21 @@ ErrLogFiles CommandEntity::err_log_files; //!< Streams para errores y avisos.
 CommandEntity::CommandEntity(CommandEntity *owr)
   : EntityWithProperties(owr) {}
 
+//! @brief Comparison operator.
+bool CommandEntity::operator==(const CommandEntity &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= EntityWithProperties::operator==(other);
+        if(retval)
+          retval= (python_dict==other.python_dict);
+       }
+    return retval;
+  }
+
 //! @brief Return un puntero al objeto propietario de ESTE.
 CommandEntity *CommandEntity::Owner(void)
   {

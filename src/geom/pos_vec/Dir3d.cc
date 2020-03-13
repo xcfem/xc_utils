@@ -33,6 +33,17 @@ Dir3d::Dir3d(GEOM_FT x,GEOM_FT y,GEOM_FT z)
 Dir3d::Dir3d(const Vector3d &v)
   : cgd(v.ToCGAL()) {}
 
+//! @brief Comparison operator.
+bool Dir3d::operator==(const Dir3d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      { retval= (cgd==other.cgd); }
+    return retval;
+  }
+
 //! @brief Returns the x, y and z components in a row matrix.
 FT_matrix Dir3d::getMatrix(void) const
   {

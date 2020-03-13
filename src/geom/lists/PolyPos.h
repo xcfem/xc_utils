@@ -46,10 +46,14 @@ class PolyPos : public std::deque<pos>
 
     PolyPos(void): deque_pos() {}
     PolyPos(const PolyPos<pos> &other): deque_pos(other) {}
-    PolyPos<pos> &operator =(const PolyPos<pos> &l)
+    PolyPos<pos> &operator=(const PolyPos<pos> &l)
       {
         deque_pos::operator= (l);
         return *this;
+      }
+    bool operator==(const PolyPos<pos> &other) const
+      {
+        return ( (const deque_pos &) (*this) == (const deque_pos &) other );
       }
     inline pos *Agrega(const pos &p)
       {
@@ -86,11 +90,6 @@ class PolyPos : public std::deque<pos>
     void Cat(const PolyPos<pos> &l);
     template <class inputIterator>
     void Cat(inputIterator begin, inputIterator end);
-    friend int operator ==(const PolyPos<pos> &a,const PolyPos<pos> &b)
-      {
-        if ( (const deque_pos &) a != (const deque_pos &) b ) return 0;
-        return 1;
-      }
   };
 
 

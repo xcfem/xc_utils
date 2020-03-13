@@ -66,6 +66,7 @@ class Plane : public Surface3d
     Plane(const GeneralEquationOfPlane &eg);
     Plane(const GeomObj3d::list_Pos3d &lp);
     Plane &operator=(const Plane &);
+    virtual bool operator==(const Plane &) const;
 
     virtual GeomObj *clon(void) const;
     const CGPlane_3 &ToCGAL(void) const
@@ -151,12 +152,10 @@ class Plane : public Surface3d
     GEOM_FT linearLeastSquaresFitting(const GeomObj3d::list_Pos3d &lp);
 
     friend Plane FromCGAL(const CGPlane_3 &p);
-    friend bool operator==(const Plane &p1,const Plane &p2);
     void Print(std::ostream &os) const;
   };
 
 Plane FromCGAL(const CGPlane_3 &p);
-bool operator==(const Plane &p1,const Plane &p2);
 
 const Plane XYPlane3d(Pos3d(0,0,0),Pos3d(1,0,0),Pos3d(0,1,0));
 const Plane XZPlane3d(Pos3d(0,0,0),Pos3d(1,0,0),Pos3d(0,0,1));

@@ -42,6 +42,7 @@ class Segment3d : public Linear3d
     Segment3d(const Pos3d &p1,const Pos3d &p2);
     Segment3d(const Segment3d &r);
     Segment3d &operator=(const Segment3d &r);
+    virtual bool operator==(const Segment3d &) const;
 
     const CGSegment_3 &ToCGAL(void) const
       { return cgseg; }
@@ -83,7 +84,6 @@ class Segment3d : public Linear3d
     virtual GEOM_FT Ix(void) const;
     virtual GEOM_FT Iy(void) const;
     virtual GEOM_FT Iz(void) const;
-    friend bool operator==(const Segment3d &r1,const Segment3d &r2);
     
     VectorPos3d Divide(int num_partes) const;
     

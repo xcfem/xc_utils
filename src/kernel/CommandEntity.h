@@ -46,7 +46,7 @@ class CommandEntity: public EntityWithProperties
     typedef std::map<std::string, boost::python::object> PythonDict;
   private:
     static ErrLogFiles err_log_files; //!< Streams para errores y avisos.
-    PythonDict python_dict; //!< Variables de Python.
+    PythonDict python_dict; //!< Python variables.
   protected:
 
     static CommandEntity *entcmd_cast(boost::any &data);
@@ -56,6 +56,7 @@ class CommandEntity: public EntityWithProperties
     void string_to(T &,const std::string &) const;
   public:
     CommandEntity(CommandEntity *owr= nullptr);
+    virtual bool operator==(const CommandEntity &) const;
 
     CommandEntity *Owner(void);
     const CommandEntity *Owner(void) const;

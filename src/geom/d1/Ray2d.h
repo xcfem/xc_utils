@@ -50,6 +50,7 @@ class Ray2d : public Linear2d
         cgsr= r.cgsr;
         return *this;
       }
+    virtual bool operator==(const Ray2d &) const;
     const CGRay_2 &ToCGAL(void) const
       { return cgsr; }
     virtual GeomObj *clon(void) const
@@ -127,8 +128,6 @@ class Ray2d : public Linear2d
 
     void Transform(const Trf2d &trf2d);
 
-    inline friend bool operator==(const Ray2d &r1,const Ray2d &r2)
-      { return (r1.cgsr==r2.cgsr); }
     void Print(std::ostream &os) const;
     void Plot(Plotter &psos) const;
   };

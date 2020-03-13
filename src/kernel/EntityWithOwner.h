@@ -27,7 +27,7 @@
 
 //! @ingroup BASE
 //
-//!  @brief Entidad con puntero a su propietaria.
+//!  @brief Entity with a pointer to its owner (TO DEPRECATE).
 class EntityWithOwner: public CommandEntity
   {
   protected:

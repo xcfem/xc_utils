@@ -54,6 +54,11 @@ class CooSys: public ProtoGeom
       }
     virtual CooSys *Copia(void) const= 0;
   public:
+    inline virtual bool operator==(const CooSys &other) const
+      { return (rot==other.rot); } 
+    inline bool operator!=(const CooSys &other)
+      { return !(*this==other); }
+    
     virtual size_t numberOfAxis(void) const
       { return rot.getNumberOfRows(); }
     bool EsNormal(void) const;
@@ -76,10 +81,6 @@ class CooSys: public ProtoGeom
 
     virtual void Print(std::ostream &os) const;
     friend std::ostream &operator<<(std::ostream &os,const CooSys &sc);
-    inline friend bool operator==(const CooSys &a,const CooSys &b)
-      { return (a.rot==b.rot); } 
-    inline friend bool operator!=(const CooSys &a,const CooSys &b)
-      { return !(a==b); }
   };
 
 #endif

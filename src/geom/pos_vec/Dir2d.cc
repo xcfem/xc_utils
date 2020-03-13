@@ -37,6 +37,17 @@ Dir2d::Dir2d(const GEOM_FT &x,const GEOM_FT &y)
 Dir2d::Dir2d(const double &ang)
   : cgd(cos(ang),sin(ang)) {}
 
+//! @brief Comparison operator.
+bool Dir2d::operator==(const Dir2d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      { retval= (cgd==other.cgd); }
+    return retval;
+  }
+
 //! @brief returns the x and y components in a row matrix.
 FT_matrix Dir2d::getMatrix(void) const
   {

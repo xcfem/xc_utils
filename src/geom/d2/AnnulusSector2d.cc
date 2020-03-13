@@ -33,6 +33,21 @@
 AnnulusSector2d::AnnulusSector2d(const CircularSector2d &c,const double &r)
   : CircularSector2d(c), inner_radius(r) {}
 
+//! @brief Comparison operator.
+bool AnnulusSector2d::operator==(const AnnulusSector2d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= CircularSector2d::operator==(other);
+        if(retval)
+          retval= (inner_radius==other.inner_radius);
+       }
+    return retval;
+  }
+
 //! @brief Return the position of the center of mass.
 Pos2d AnnulusSector2d::getCenterOfMass(void) const
   {
@@ -222,10 +237,3 @@ void AnnulusSector2d::Print(std::ostream &os) const
     os << " inner_radius= " << inner_radius;
   }
 
-bool operator==(const AnnulusSector2d &a,const AnnulusSector2d &b)
-  {
-    if((const CircularSector2d &)(a) == (const CircularSector2d &)(b))
-      return ( (a.Theta1() == b.Theta1()) && (a.Theta2() == b.Theta2()));
-   else
-     return false;
-  }

@@ -58,6 +58,21 @@ Segment3d &Segment3d::operator=(const Segment3d &r)
     return *this;
   }
 
+//! @brief Comparison operator.
+bool Segment3d::operator==(const Segment3d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= Linear3d::operator==(other);
+        if(retval)
+          retval= (cgseg==other.cgseg); 
+       }
+    return retval;
+  }
+
 GeomObj *Segment3d::clon(void) const
   { return new Segment3d(*this); }
 GEOM_FT Segment3d::GetMax(unsigned short int i) const
@@ -240,9 +255,6 @@ GEOM_FT Segment3d::Iy(void) const
 //! @brief Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Segment3d::Iz(void) const
   { return NAN; }
-
-bool operator==(const Segment3d &r1,const Segment3d &r2)
-  { return (r1.cgseg==r2.cgseg); }
 
 //! @brief Return the points that results from the segment division.
 //!

@@ -50,11 +50,11 @@ class NamedEntity: public CommandEntity
     //! @brief Return a reference to the object name.
     std::string &Name(void)
       { return name; }
-    //! @brief Compara el nombre del elemento con un nombre dado.
-    int operator==(const NamedEntity &other) const
+    //! @brief Comparison operator.
+    inline virtual bool operator==(const NamedEntity &other) const
       { return (name==other.name); }
-    //! @brief Operador menor.
-    int operator<(const NamedEntity &other) const
+    //! @brief Less than operator.
+    inline bool operator<(const NamedEntity &other) const
       { return (name<other.name); }
     NamedEntity &operator+=(const NamedEntity &);
     NamedEntity &operator-=(const NamedEntity &);

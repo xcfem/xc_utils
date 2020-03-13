@@ -34,6 +34,7 @@ class Polyline3d : public Linear3d, public GeomObj::list_Pos3d
   {
   public:
     Polyline3d(void): Linear3d(), GeomObj::list_Pos3d() {}
+    virtual bool operator==(const Polyline3d &) const;
     virtual GeomObj *clon(void) const
       { return new Polyline3d(*this); }
     virtual void Move(const Vector3d &);

@@ -49,6 +49,7 @@ class Segment2d : public Linear2d
         cgseg= r.cgseg;
         return *this;
       }
+    virtual bool operator==(const Segment2d &) const;
     const CGSegment_2 &ToCGAL(void) const
       { return cgseg; }
     virtual GeomObj *clon(void) const;
@@ -142,8 +143,6 @@ class Segment2d : public Linear2d
 
     void Transform(const Trf2d &trf2d);
 
-    inline friend bool operator==(const Segment2d &r1,const Segment2d &r2)
-      { return (r1.cgseg==r2.cgseg); }
     void Print(std::ostream &os) const;
   };
 

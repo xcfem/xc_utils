@@ -48,6 +48,7 @@ class AnnulusSector2d : public CircularSector2d
         inner_radius= p.inner_radius;
         return *this;
       }
+    virtual bool operator==(const AnnulusSector2d &) const;
     virtual Surface2d *clon(void) const
       { return new AnnulusSector2d(*this); }
     virtual Pos2d getCenterOfMass(void) const;
@@ -83,8 +84,6 @@ class AnnulusSector2d : public CircularSector2d
 
     void Print(std::ostream &os) const;
   };
-
-bool operator==(const AnnulusSector2d &a,const AnnulusSector2d &b);
 
 #endif
 

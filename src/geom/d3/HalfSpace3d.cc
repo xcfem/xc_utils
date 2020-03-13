@@ -32,6 +32,21 @@
 HalfSpace3d::HalfSpace3d(const Plane &p)
   : GeomObj3d(), lim(p) {}
 
+//! @brief Comparison operator.
+bool HalfSpace3d::operator==(const HalfSpace3d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= GeomObj3d::operator==(other);
+        if(retval)
+          retval= (lim==other.lim);
+       }
+    return retval;
+  }
+
 //! @brief Return the plane that defined de half space boudary.
 const Plane &HalfSpace3d::getBoundaryPlane(void) const
   { return lim; }
@@ -121,15 +136,6 @@ GEOM_FT HalfSpace3d::Pxy(void) const
 //! @brief Return el moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT HalfSpace3d::Iz(void) const
   { return NAN; }
-
-//! @brief Return verdadero si los half spaces son iguales.
-bool operator==(const HalfSpace3d &r1,const HalfSpace3d &r2)
-  {
-    if(&r1.lim==&r2.lim)
-      return true;
-    else
-      return (r1.lim==r2.lim); 
-  }
 
 //! @brief Return a vector normal to the boundary plane
 //! oriented inside-out.

@@ -70,6 +70,21 @@ D2to3d &D2to3d::operator=(const D2to3d &other)
     return *this;
   }
 
+//! @brief Comparison operator.
+bool D2to3d::operator==(const D2to3d &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= Surface3d::operator==(other);
+        if(retval)
+          retval= (ref==other.ref);
+       }
+    return retval;
+  }
+
 
 Pos3d D2to3d::to_3d(const Pos2d &p2d) const
   { return ref.GetPosGlobal(p2d); }
@@ -97,9 +112,6 @@ void D2to3d::ThreePoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   }
 Plane D2to3d::getPlane(void) const
   { return ref.getXYPlane(); }
-
-bool operator ==(const D2to3d &a,const D2to3d &b)
-  { return ( a.ref == b.ref ); }
 
 void D2to3d::Print(std::ostream &os) const
   { os << "Ref2d3d: " << ref << std::endl; }
