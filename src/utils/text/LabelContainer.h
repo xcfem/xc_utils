@@ -27,8 +27,8 @@
 #include "bimap.h"
 #include <iostream>
 
-
-class DiccionarioEtiquetas
+//! @brief Label dictionary
+class LabelDictionary
   {
     friend class LabelContainer;
   private:
@@ -39,7 +39,7 @@ class DiccionarioEtiquetas
     const std::string &get_etiqueta_indice(const int &i) const;
     int insert(const std::string &e);
   public:
-    size_t getNumEtiquetas(void) const;
+    size_t getNumLabels(void) const;
 
     const std::string &operator()(const int &) const;
     int operator()(const std::string &) const;
@@ -47,30 +47,31 @@ class DiccionarioEtiquetas
     void Print(std::ostream &os) const;
   };
 
-std::ostream &operator<<(std::ostream &os,const DiccionarioEtiquetas &lc);
+std::ostream &operator<<(std::ostream &os,const LabelDictionary &lc);
 
-//! @brief Contenedor de etiquetas para objetos.
+//! @brief Label container.
 class LabelContainer
   {
-    static DiccionarioEtiquetas dic;
-    std::set<int> etiquetas;
-    bool hasEtiqueta(const int &i) const;
+    static LabelDictionary dic;
+    std::set<int> labels;
+    bool hasLabel(const int &i) const;
 
   public:
     LabelContainer(void);
     LabelContainer &operator+=(const LabelContainer &);
     LabelContainer &operator-=(const LabelContainer &);
     LabelContainer &operator*=(const LabelContainer &);
+    bool operator==(const LabelContainer &) const;
 
     void extend(const LabelContainer &);
 
-    const std::set<int> &getIdsEtiquetas(void) const;
+    const std::set<int> &getIdsLabels(void) const;
 
-    static const DiccionarioEtiquetas &getDiccionario(void);
-    size_t getNumEtiquetas(void) const;
-    int addEtiqueta(const std::string &e);
-    int removeEtiqueta(const std::string &e);
-    bool hasEtiqueta(const std::string &e) const;
+    static const LabelDictionary &getDictionary(void);
+    size_t getNumLabels(void) const;
+    int addLabel(const std::string &e);
+    int removeLabel(const std::string &e);
+    bool hasLabel(const std::string &e) const;
     void clear(void);
 
     void Print(std::ostream &os) const;

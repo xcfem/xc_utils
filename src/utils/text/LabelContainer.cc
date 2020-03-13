@@ -23,7 +23,7 @@
 #include <iostream>
 
 //! @brief Devuelve el valor de la etiqueta de índice i.
-const std::string &DiccionarioEtiquetas::get_etiqueta_indice(const int &i) const
+const std::string &LabelDictionary::get_etiqueta_indice(const int &i) const
   {
     static std::string retval;
     retval= "";
@@ -38,7 +38,7 @@ const std::string &DiccionarioEtiquetas::get_etiqueta_indice(const int &i) const
 
 //! @brief Devuelve el valor del indice de la etiqueta que se pasa como
 //! parámetro.
-int DiccionarioEtiquetas::get_indice_etiqueta(const std::string &e) const
+int LabelDictionary::get_indice_etiqueta(const std::string &e) const
   {
     int retval= -1;
     bm_type::index_iterator<to>::type it=boost::multi_index::get<to>(bm).find(e);
@@ -47,13 +47,13 @@ int DiccionarioEtiquetas::get_indice_etiqueta(const std::string &e) const
     return retval;
   }
 
-const std::string &DiccionarioEtiquetas::operator()(const int &i) const
+const std::string &LabelDictionary::operator()(const int &i) const
   { return get_etiqueta_indice(i); }
 
-int DiccionarioEtiquetas::operator()(const std::string &str) const
+int LabelDictionary::operator()(const std::string &str) const
   { return get_indice_etiqueta(str); }
 
-int DiccionarioEtiquetas::insert(const std::string &e)
+int LabelDictionary::insert(const std::string &e)
   {
     int id= get_indice_etiqueta(e);
     if(id<0) //la etiqueta no existe.
@@ -65,27 +65,37 @@ int DiccionarioEtiquetas::insert(const std::string &e)
     return id;
   }
 
-size_t DiccionarioEtiquetas::getNumEtiquetas(void) const
+size_t LabelDictionary::getNumLabels(void) const
   { return bm.size(); }
 
-void DiccionarioEtiquetas::Print(std::ostream &os) const
+void LabelDictionary::Print(std::ostream &os) const
   {
     bm_type::index_iterator<to>::type i=boost::multi_index::get<to>(bm).begin();
     for(;i!=boost::multi_index::get<to>(bm).end();i++)
       os << i->first << " " << i->second << std::endl;
   }
 
-std::ostream &operator<<(std::ostream &os,const DiccionarioEtiquetas &d)
+std::ostream &operator<<(std::ostream &os,const LabelDictionary &d)
   {
     d.Print(os);
     return os;
   }
 
-DiccionarioEtiquetas LabelContainer::dic;
+LabelDictionary LabelContainer::dic;
 
 //! @brief Constructor.
 LabelContainer::LabelContainer(void)
    {}
+
+bool LabelContainer::operator==(const LabelContainer &other) const
+  {
+    bool retval= false;
+    if(this == &other)
+      retval= true;
+    else if(labels==other.labels)
+      retval= true;
+    return retval;
+  }
 
 //! @brief += operator.
 LabelContainer &LabelContainer::operator+=(const LabelContainer &otro)
@@ -98,8 +108,8 @@ LabelContainer &LabelContainer::operator+=(const LabelContainer &otro)
 LabelContainer &LabelContainer::operator-=(const LabelContainer &otro)
   {
     std::set<int> tmp;
-    std::set_difference(etiquetas.begin(),etiquetas.end(),otro.etiquetas.begin(),otro.etiquetas.end(), std::inserter(tmp,tmp.begin()));
-    etiquetas= tmp;
+    std::set_difference(labels.begin(),labels.end(),otro.labels.begin(),otro.labels.end(), std::inserter(tmp,tmp.begin()));
+    labels= tmp;
     return *this;
   }
 
@@ -107,68 +117,68 @@ LabelContainer &LabelContainer::operator-=(const LabelContainer &otro)
 LabelContainer &LabelContainer::operator*=(const LabelContainer &otro)
   {
     std::set<int> tmp;
-    std::set_intersection(etiquetas.begin(),etiquetas.end(),otro.etiquetas.begin(),otro.etiquetas.end(), std::inserter(tmp,tmp.begin()));
-    etiquetas= tmp;
+    std::set_intersection(labels.begin(),labels.end(),otro.labels.begin(),otro.labels.end(), std::inserter(tmp,tmp.begin()));
+    labels= tmp;
     return *this;
   }
 
 //! @brief Return a reference to the label dictionary.
-const DiccionarioEtiquetas &LabelContainer::getDiccionario(void)
+const LabelDictionary &LabelContainer::getDictionary(void)
   { return dic; }
 
 //! @brief Return the number of labels in this object.
-size_t LabelContainer::getNumEtiquetas(void) const
-  { return etiquetas.size(); }
+size_t LabelContainer::getNumLabels(void) const
+  { return labels.size(); }
 
 //! @brief Return the label identifiers.
-const std::set<int> &LabelContainer::getIdsEtiquetas(void) const
-  { return etiquetas; }
+const std::set<int> &LabelContainer::getIdsLabels(void) const
+  { return labels; }
 
 void LabelContainer::extend(const LabelContainer &otro)
   {
-    for(std::set<int>::const_iterator i= otro.etiquetas.begin();i!=otro.etiquetas.end();i++)
-      etiquetas.insert(*i);
+    for(std::set<int>::const_iterator i= otro.labels.begin();i!=otro.labels.end();i++)
+      labels.insert(*i);
   }
 
-int LabelContainer::addEtiqueta(const std::string &e)
+int LabelContainer::addLabel(const std::string &e)
   {
     int retval= dic.insert(e);
-    etiquetas.insert(retval);
+    labels.insert(retval);
     return retval;
   }
 
-int LabelContainer::removeEtiqueta(const std::string &e)
+int LabelContainer::removeLabel(const std::string &e)
   {
     const int retval= dic.get_indice_etiqueta(e);
     if(retval>=0)
-      if(hasEtiqueta(retval))
-        { etiquetas.erase(retval); }
+      if(hasLabel(retval))
+        { labels.erase(retval); }
     return retval;
   }
 
-bool LabelContainer::hasEtiqueta(const int &id) const
+bool LabelContainer::hasLabel(const int &id) const
   {
     bool retval= false;
-    std::set<int>::iterator it= etiquetas.find(id);
-    retval= (it!=etiquetas.end());
+    std::set<int>::iterator it= labels.find(id);
+    retval= (it!=labels.end());
     return retval;
   }
 
-bool LabelContainer::hasEtiqueta(const std::string &e) const
+bool LabelContainer::hasLabel(const std::string &e) const
   {
     bool retval= false;
     const int id= dic.get_indice_etiqueta(e);
     if(id>=0)
-      retval= hasEtiqueta(id);
+      retval= hasLabel(id);
     return retval;
   }
 
 void LabelContainer::clear(void)
-  { etiquetas.clear(); }
+  { labels.clear(); }
 
 void LabelContainer::Print(std::ostream &os) const
   {
-    for(std::set<int>::const_iterator i= etiquetas.begin();i!=etiquetas.end();i++)
+    for(std::set<int>::const_iterator i= labels.begin();i!=labels.end();i++)
       os << dic.get_etiqueta_indice(*i) << " ";
   }
 
