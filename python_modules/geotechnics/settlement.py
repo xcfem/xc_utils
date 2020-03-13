@@ -21,7 +21,6 @@ def stress_increment_under_concentrated_load(P, x, y, z):
   ''' Return the increment in the vertical stress of a point inside an
       homogeneous and elastic soil due to a load on the surface.
 
-      Parameters:
       :param P: value of the load.
       :param x: x-coordinate of the point relative to the loaded point.
       :param y: y-coordinate of the point relative to the loaded point.
@@ -35,7 +34,6 @@ def average_stress_increment_under_concentrated_load(P, x, y, z1, z2, zInc= 0.2)
   ''' Return the average increment in the vertical stress of a the points
       between z1 and z2.
 
-      Parameters:
       :param P: value of the load.
       :param x: x-coordinate of the point relative to the loaded point.
       :param y: y-coordinate of the point relative to the loaded point.
@@ -58,7 +56,6 @@ def stress_increment_under_rectangular_loaded_area(q, B, L, x, y, z, eSize= 0.1)
       homogeneous and elastic soil due to a load distributed on
       a rectangular area.
 
-      Parameters:
       :param q: pressure on the loaded area.
       :param B: dimension of the rectangular area in direction x.
       :param L: dimension of the rectangular area in direction y.
@@ -86,7 +83,6 @@ def average_stress_increment_under_rectangular_loaded_area(q, B, L, x, y, z1, z2
       points between z1 and z2 inside an homogeneous and elastic soil 
       due to a load distributed on a rectangular area.
 
-      Parameters:
       :param q: pressure on the loaded area.
       :param B: dimension of the rectangular area in direction x.
       :param L: dimension of the rectangular area in direction y.
