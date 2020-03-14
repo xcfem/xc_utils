@@ -38,7 +38,7 @@ class TMatrix: public ProtoMatrix, public STO
   protected:
     inline virtual size_t Indice(const size_t &iRow,const size_t &iCol) const
       { return iRow*n_columns-n_columns+iCol-1; }
-    bool igual_a(const TMatrix<T,STO> &m2) const;
+    bool equal_to(const TMatrix<T,STO> &m2) const;
     TMatrix(const TMatrix<T,STO> &orig,size_t f1, size_t c1, size_t f2, size_t c2);
   public:
     typedef std::list<T> lst_T;
@@ -59,7 +59,7 @@ class TMatrix: public ProtoMatrix, public STO
     TMatrix<T,STO>& operator=(const TMatrix<T,STO> &m);
     TMatrix<T,STO>& operator=(const T &n)
       { return Con(n); }
-
+    virtual bool operator==(const TMatrix<T,STO> &) const;
     void resize(size_t n_rows,size_t n_columns,T val);
     inline size_t size(void) const
       { return STO::size(); }
@@ -158,8 +158,6 @@ class TMatrix: public ProtoMatrix, public STO
     virtual void Print(std::ostream &) const;
     virtual void Input(std::istream &);
     virtual void Input(const std::string &);
-    inline friend bool operator==(const TMatrix<T,STO> &m1,const TMatrix<T,STO> &m2)
-      { return m1.igual_a(m2); }
     virtual ~TMatrix(void) {}
   };
 
@@ -205,6 +203,22 @@ void TMatrix<T,STO>::resize(size_t n_rows,size_t n_columns,T val)
     STO::resize(Tam());
   }
 
+//! @brief Comparison operator.
+template <class T,class STO>
+bool TMatrix<T,STO>::operator==(const TMatrix<T,STO> &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= ProtoMatrix::operator==(other);
+        if(retval)
+          retval= this->equal_to(other);
+      }
+    return retval;
+  }
+ 
 template <class MATR>
 MATR GetMenor(const MATR &matrix,const size_t &f,const size_t &c)
   {
@@ -327,7 +341,7 @@ void TMatrix<T,STO>::Print(std::ostream &os) const
     os << ']';
   }
 template<class T,class STO>
-bool TMatrix<T,STO>::igual_a(const TMatrix<T,STO> &m2) const
+bool TMatrix<T,STO>::equal_to(const TMatrix<T,STO> &m2) const
   {
     if (!CompDim(*this,m2)) return false;
     for(register size_t i=1;i<=n_rows;i++)

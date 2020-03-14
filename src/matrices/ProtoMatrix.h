@@ -129,6 +129,17 @@ class ProtoMatrix
         inic(m.n_rows,m.n_columns);
         return *this;
       }
+    virtual bool operator==(const ProtoMatrix &other) const
+      {
+	bool retval= false;
+	if(this==&other)
+	  retval= true;
+	else
+	  {
+	    retval= (this->n_rows==other.n_rows) && (this->n_columns==other.n_columns);
+	  }
+	return retval;
+      }
     virtual ~ProtoMatrix(void) {}
     inline virtual void resize(size_t n_rows,size_t n_columns)
       { inic(n_rows,n_columns); }
