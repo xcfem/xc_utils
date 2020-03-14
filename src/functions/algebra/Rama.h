@@ -82,6 +82,8 @@ class Rama : public ProtoExpresion
     explicit Rama(const double &d);
     Rama(const Rama &);
     Rama &operator=(const Rama &);
+    bool operator==(const Rama &r2) const;
+    bool operator==(const double &d) const;
 
     Rama *getCopy(void) const
       {
@@ -160,8 +162,6 @@ class Rama : public ProtoExpresion
     void GetVariables(ConjVariables &cv) const;
     const std::string &GetFullString(void) const;
     friend Rama *distrib(Rama *raiz);
-    friend bool operator==(const Rama &r1,const Rama &r2);
-    friend bool operator==(const Rama &r1,const double &d);
     friend std::ostream &operator <<(std::ostream &stream,const Rama &e);
   };
 
@@ -176,8 +176,6 @@ void RecorrePreorden(Rama *raiz,const ExprFunctor &f);
 void RecorreEnorden(Rama *raiz,const ExprFunctor &f);
 void RecorrePostorden(Rama *raiz,const ExprFunctor &f);
 
-bool operator==(const Rama &r1,const Rama &r2);
-bool operator==(const Rama &r1,const double &d);
 inline bool operator==(const double &d,const Rama &r)
   { return (r==d); }
 

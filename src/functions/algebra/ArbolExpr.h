@@ -96,16 +96,8 @@ class ArbolExpr : public ExprBase
     ArbolExpr(const std::string &str);
     ArbolExpr(const ArbolExpr &otro);
     explicit ArbolExpr(const double &d);
-
-    //! @brief Operador asignación.
-    ArbolExpr &operator=(const ArbolExpr &otro)
-      {
-	ExprBase::operator=(otro);
-        delete raiz;
-        raiz= NULL;
-        if(otro.raiz) raiz= otro.raiz->getCopy();
-        return *this;
-      }
+    virtual bool operator==(const ArbolExpr &) const;
+    ArbolExpr &operator=(const ArbolExpr &otro);
     ArbolExpr &operator+=(const ArbolExpr &a2);
     ArbolExpr &operator-=(const ArbolExpr &a2);
     ArbolExpr &operator*=(const ArbolExpr &a2);

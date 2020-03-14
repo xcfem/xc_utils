@@ -31,16 +31,16 @@
 #include "MapValores.h"
 
 //! @brief Constructor por defecto.
-ArbolExpr::ArbolExpr(void): ExprBase(false), raiz(NULL) {}
+ArbolExpr::ArbolExpr(void): ExprBase(false), raiz(nullptr) {}
 
 //! @brief Constructor a partir de text string.
 ArbolExpr::ArbolExpr(const std::string &str)
-  : ExprBase(false), raiz(NULL)
+  : ExprBase(false), raiz(nullptr)
   { InicFromStr(str); }
 
 //! @brief Constructor de copia.
 ArbolExpr::ArbolExpr(const ArbolExpr &otro)
-  : ExprBase(otro), raiz(NULL) 
+  : ExprBase(otro), raiz(nullptr) 
   {
     if(otro.raiz)
       raiz= otro.raiz->getCopy();
@@ -55,18 +55,47 @@ ArbolExpr::~ArbolExpr(void)
     if(raiz)
       {
         delete raiz;
-        raiz= NULL;
+        raiz= nullptr;
       }
+  }
+
+//! @brief Comparison operator.
+bool ArbolExpr::operator==(const ArbolExpr &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= ExprBase::operator==(other);
+        if(this->raiz==other.raiz)
+	  retval= true;
+        else if((this->raiz) && (other.raiz)) //Not null
+	  retval= this->raiz->operator==(*other.raiz);
+	else
+	  retval= false;
+      } 
+    return retval;
+  }
+
+//! @brief Operador asignación.
+ArbolExpr &ArbolExpr::operator=(const ArbolExpr &otro)
+  {
+    ExprBase::operator=(otro);
+    delete raiz;
+    raiz= nullptr;
+    if(otro.raiz) raiz= otro.raiz->getCopy();
+    return *this;
   }
 
 Rama *ArbolExpr::Traduce(const std::string &cadena_entrada)
   {
-    Rama *retval= NULL;
+    Rama *retval= nullptr;
     ExprPostfija postfija(cadena_entrada);
     if(postfija.ErrorTraduccion())
       {
         std::cerr << "ArbolExpr::Traduce; se produjo un error al interpretar la expresión: '"
-                  << cadena_entrada << "', se devuelve NULL." << std::endl;
+                  << cadena_entrada << "', se devuelve nullptr." << std::endl;
         err_traduc= true;
       }
     else
@@ -76,10 +105,10 @@ Rama *ArbolExpr::Traduce(const std::string &cadena_entrada)
 
 Rama *ArbolExpr::Traduce(const ExprPostfija &e)
   {
-    if (e.Size() == 0) return NULL;
+    if (e.Size() == 0) return nullptr;
     Pila pila;
     register ExprPostfija::const_iterator_segnales i= e.Begin();
-    const Operando *s= NULL;
+    const Operando *s= nullptr;
     while(i != e.End())
       {
         s= dynamic_cast<const Operando *>(*i);
@@ -109,7 +138,7 @@ void ArbolExpr::InicFromStr(const std::string &str)
     if(raiz)
       {
         delete raiz;
-        raiz= NULL;
+        raiz= nullptr;
       }
     if(isNumber(str)) //La cadena representa un número (no una expresión)
       raiz= new Rama(boost::lexical_cast<double>(str));
@@ -197,21 +226,21 @@ const double &ArbolExpr::ToNum(const MapValores &mv) const
 void ArbolExpr::Neg(void)
   {
     Rama *tmp= raiz;
-    raiz= new Rama(&(ptr_lex->neg),NULL,tmp);
+    raiz= new Rama(&(ptr_lex->neg),nullptr,tmp);
   }
 
 //! @brief Aplica el operador "valor absoluto" a la expresión contenida en el árbol.
 void ArbolExpr::Abs(void)
   {
     Rama *tmp= raiz;
-    raiz= new Rama(&(ptr_lex->abs),NULL,tmp);
+    raiz= new Rama(&(ptr_lex->abs),nullptr,tmp);
   }
 
 //! @brief Aplica el operador "raíz cuadrada" a la expresión contenida en el árbol.
 void ArbolExpr::Sqrt(void)
   {
     Rama *tmp= raiz;
-    raiz= new Rama(&(ptr_lex->raiz2),NULL,tmp);
+    raiz= new Rama(&(ptr_lex->raiz2),nullptr,tmp);
   }
 
 

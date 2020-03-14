@@ -60,6 +60,46 @@ Rama &Rama::operator=(const Rama &other)
     return *this;
   }
 
+//! @brief Comparison operator.
+bool Rama::operator==(const Rama &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+	bool eq_izdo= false;
+	bool eq_dcho= false;
+	if(this->data == other.data)
+	  {
+	    if(this->izdo)
+	      if(other.izdo)
+		eq_izdo= ((*this->izdo) == (*other.izdo));
+	      else
+		return false;
+	    else
+	      if(other.izdo) return false;
+	    if(this->dcho)
+	      if(other.dcho)
+		eq_izdo= ((*this->dcho) == (*other.dcho));
+	      else
+		return false;
+	    else
+	      if(other.dcho) return false;
+	  }
+	retval= (eq_izdo && eq_dcho);
+      } 
+    return retval;
+  }
+
+bool Rama::operator==(const double &d) const
+  {
+    if(this->data)
+      return (this->data->EqualTo(d));
+    else
+      return false;
+  }
+
 //! @brief Destructor.
 Rama::~Rama(void)
   {
@@ -294,37 +334,6 @@ const std::string &Rama::GetFullString(void) const
     return retval;
   }
 
-bool operator==(const Rama &r1,const Rama &r2)
-  {
-    bool eq_izdo= false;
-    bool eq_dcho= false;
-    if(r1.data == r2.data)
-      {
-        if(r1.izdo)
-          if(r2.izdo)
-            eq_izdo= ((*r1.izdo) == (*r2.izdo));
-          else
-            return 0;
-        else
-          if(r2.izdo) return 0;
-        if(r1.dcho)
-          if(r2.dcho)
-            eq_izdo= ((*r1.dcho) == (*r2.dcho));
-          else
-            return 0;
-        else
-          if(r2.dcho) return 0;
-      }
-    return (eq_izdo && eq_dcho);
-  }
-
-bool operator==(const Rama &r1,const double &d)
-  {
-    if(r1.data)
-      return (r1.data->IgualA(d));
-    else
-      return false;
-  }
 
 void Rama::GetVariables(ConjVariables &cv) const
   { data->GetVariables(cv); }
