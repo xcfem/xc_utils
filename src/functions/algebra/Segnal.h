@@ -51,7 +51,7 @@ class Lexico;
 //! 6: Todos los operadores aritméticos unitarios, elevado a (^).
 //! 5: Producto, división, mod, div.
 //! 4: Suma, resta,
-//! 3: Operadores de comparación (igualdad, desigualdad, menor que, mayor que,...).
+//! 3: Operadores de comparación (equality, inequality, menor que, mayor que,...).
 //! 3: No (booleano).
 //! 2: y,o (booleanos).
 //! 1: asignación.
@@ -68,12 +68,12 @@ class Segnal
       { return -1; }
     const std::string &StrClase(void) const;
     virtual std::ostream &Imprime(std::ostream &os) const;
-    inline virtual bool IgualA(const double &) const
+    inline virtual bool EqualTo(const double &) const
       { return false; }
     friend int operator<(const Segnal &s1,const Segnal &s2)
       { return (s1.getName() < s2.getName()); }
     friend int operator==(const Segnal &s,const double &d)
-      { return s.IgualA(d); }
+      { return s.EqualTo(d); }
     friend int operator==(const double &d,const Segnal &s)
       { return (s == d); }
   };

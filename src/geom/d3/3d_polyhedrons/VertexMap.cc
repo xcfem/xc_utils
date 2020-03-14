@@ -111,8 +111,8 @@ bool VerticesCara::tieneArista(const VerticesArista &arista) const
     return retval;
   }
 
-//! @brief Return true if la cara contiene la arista
-//! que se pasa como parámetro y está orientada igual.
+//! @brief Return true if the face contains the edge
+//! being passed as paramenter and the orientations match.
 bool VerticesCara::tieneAristaOrientada(const VerticesArista &arista) const
   {
     bool retval= false;

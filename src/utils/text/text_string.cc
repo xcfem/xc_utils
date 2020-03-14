@@ -64,11 +64,13 @@ void deletrea_ascii(const std::string &s,std::ostream &os)
       os << int(*i) << ',';
   }
 
-//! @brief Devuelve el número de characters iguales a C que hay en la cadena.
+//! @brief Return the number of characters that are equal to C
+//! in the string.
 size_t num_car(const char *str,const char C)
-{ return num_car(std::string(str),C); }
+  { return num_car(std::string(str),C); }
 
-//! @brief Devuelve el número de characters iguales a C que hay en la cadena.
+//! @brief Return the number of characters that are equal to C
+//! in the string.
 size_t num_car(const std::string &str,const char C)
   {
     size_t conta= 0;
@@ -537,7 +539,7 @@ const std::deque<std::string> &separa_cadena(const std::string &str,const std::s
 //!
 //! @param str: text string a dividir.
 //! @param sp: Characters que separan campos.
-//! @param sz: Número de campos que se espera obtener (si es igual a cero no se comprueba).
+//! @param sz: Number of expected fieldsr (if zero don't check it).
 const std::deque<std::string> &separa_cadena(const std::string &str,const std::string &sp,const size_t &sz)
   {
     static std::deque<std::string> retval;

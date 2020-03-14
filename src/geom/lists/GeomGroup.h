@@ -38,7 +38,7 @@ class GeomGroup : public GO
   protected:
     typedef pdeque<GO> pdeque_geom_obj;
     pdeque_geom_obj objetos; //!< Objects of the group.
-    bool igual_dimension(void) const;
+    bool equal_dimension(void) const;
   private:
     void copia_objetos(const pdeque_geom_obj &objs);
   public:
@@ -80,7 +80,7 @@ void GeomGroup<GO>::copia_objetos(const pdeque_geom_obj &objs)
 
 //! @brief Return true if all objects have the same dimension.
 template <typename GO>
-bool GeomGroup<GO>::igual_dimension(void) const
+bool GeomGroup<GO>::equal_dimension(void) const
   {
     if(objetos.empty()) return true;
     register const_iterator i(objetos.begin());

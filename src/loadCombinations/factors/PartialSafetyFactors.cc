@@ -34,7 +34,7 @@ cmb_acc::SLSPartialSafetyFactors::SLSPartialSafetyFactors(const float &fav,const
 //! @brief Return the partial safety factors for serviceability limit state.
 cmb_acc::Variation cmb_acc::SLSPartialSafetyFactors::Coefs(void) const
   {
-    if(partial_safety_factors_fav == partial_safety_factors_unfav) return Variation(1,partial_safety_factors_fav); //Si son iguales devuelve solo uno.
+    if(partial_safety_factors_fav == partial_safety_factors_unfav) return Variation(1,partial_safety_factors_fav); //If they are equal return only one.
     Variation retval(2,0.0); //Partial safety factors.
     retval[0]= partial_safety_factors_fav; //Favorable.
     retval[1]= partial_safety_factors_unfav; //Desfavorable.
@@ -56,7 +56,7 @@ cmb_acc::Variation cmb_acc::ULSPartialSafetyFactors::CoefsPT(void) const
 //! a situaciones accidentales o sísmicas.
 cmb_acc::Variation cmb_acc::ULSPartialSafetyFactors::CoefsAcc(void) const
   {
-    if(partial_safety_factors_fav_acc == partial_safety_factors_unfav_acc) return Variation(1,partial_safety_factors_fav_acc); //Si son iguales devuelve solo uno.
+    if(partial_safety_factors_fav_acc == partial_safety_factors_unfav_acc) return Variation(1,partial_safety_factors_fav_acc); //If they are equal return only one.
     Variation retval(2,0.0); //Partial safety factors.
     retval[0]= partial_safety_factors_fav_acc; //Favorable.
     retval[1]= partial_safety_factors_unfav_acc; //Desfavorable.

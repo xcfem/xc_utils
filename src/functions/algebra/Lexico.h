@@ -58,10 +58,10 @@ class Lexico
     static OpMod modulus;
     static OpPot pot;
     static OpMenor menor;
-    static OpMenorIgual menor_igual;
-    static OpIgual igual;
+    static OpLessOrEqual op_less_or_equal;
+    static OpEqual equal;
     static OpMayor mayor;
-    static OpMayorIgual mayor_igual;
+    static OpGreaterOrEqual op_greater_or_equal;
     static OpDistinto distinto;
     static OpAnd And;
     static OpOr Or;

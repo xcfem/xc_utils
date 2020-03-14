@@ -30,7 +30,7 @@ FunctionFromPointsR_R &FunctionFromPointsR_R::operator=(const FunctionFromPoints
     return *this;
   }
 
-//! @brief Operador asignación. Iguala a una constante.
+//! @brief Assignment operator. Equal to a constant.
 FunctionFromPointsR_R &FunctionFromPointsR_R::operator=(const double &c)
   {
     (*this)= asigna(*this,c);

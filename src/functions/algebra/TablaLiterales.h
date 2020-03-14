@@ -36,7 +36,7 @@ class TablaLiterales
 	explicit Literal(const double &d= 0.0);
         inline virtual bool Evaluable(void) const
           { return true; }
-        inline virtual bool IgualA(const double &d) const
+        inline virtual bool EqualTo(const double &d) const
           { return (valor == d); }
         virtual Rama Diferencia(const Variable &,const Rama &) const;
         virtual int GetPrioridad(void) const

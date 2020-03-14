@@ -33,7 +33,7 @@
 GEOM_FT GeomGroup3d::inertia(const Line3d &e) const
   {
     if(objetos.empty()) return 0.0;
-    if(!igual_dimension())
+    if(!equal_dimension())
       {
         std::cerr << getClassName() << "::" << __FUNCTION__
 		  << "; Warning!, the objects of the group have"
@@ -75,7 +75,7 @@ GEOM_FT GeomGroup3d::Pxy(void) const
 Pos3d GeomGroup3d::getCenterOfMass(void) const
   {
     if(objetos.empty()) return Pos3d();
-    if(!igual_dimension())
+    if(!equal_dimension())
       {
         std::cerr << getClassName() << "::" << __FUNCTION__
 	          << "; Warning!, the objects of this group"

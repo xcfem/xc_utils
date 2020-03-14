@@ -30,7 +30,7 @@ const Operando &OpMenor::Opera(const Operando *v1,const Operando *v2) const
       return *Lex().NuevoLiteral(0.0);
   }
 
-const Operando &OpMenorIgual::Opera(const Operando *v1,const Operando *v2) const
+const Operando &OpLessOrEqual::Opera(const Operando *v1,const Operando *v2) const
   {
     if(v1->GetValor()<=v2->GetValor())
       return *Lex().NuevoLiteral(1.0);
@@ -38,7 +38,7 @@ const Operando &OpMenorIgual::Opera(const Operando *v1,const Operando *v2) const
       return *Lex().NuevoLiteral(0.0);
   }
 
-const Operando &OpIgual::Opera(const Operando *v1,const Operando *v2) const
+const Operando &OpEqual::Opera(const Operando *v1,const Operando *v2) const
   {
     if(v1->GetValor()==v2->GetValor())
       return *Lex().NuevoLiteral(1.0);
@@ -54,7 +54,7 @@ const Operando &OpMayor::Opera(const Operando *v1,const Operando *v2) const
       return *Lex().NuevoLiteral(0.0);
   }
 
-const Operando &OpMayorIgual::Opera(const Operando *v1,const Operando *v2) const
+const Operando &OpGreaterOrEqual::Opera(const Operando *v1,const Operando *v2) const
   {
     if(v1->GetValor()>=v2->GetValor())
       return *Lex().NuevoLiteral(1.0);

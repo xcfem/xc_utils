@@ -47,29 +47,29 @@ class OpMenor : public OpComparacion
     virtual const Operando &Opera(const Operando *v1= NULL,const Operando *v2= NULL) const;
   };
 
-//! @brief Operador menor o igual que.
-//! Devuelve 1 si el valor izquierdo es menor o igual que el derecho
-//! y 0 en caso contrario.
-class OpMenorIgual : public OpComparacion
+//! @brief Operador less or equal than.
+//! Return 1 if the left value is smaller than the right one,
+//!  0 otherwise.
+class OpLessOrEqual : public OpComparacion
   {
     
   public:
-    OpMenorIgual(void) : OpComparacion() {}
+    OpLessOrEqual(void) : OpComparacion() {}
     inline virtual const std::string &getName(void) const
-      { return nmbOpMenorIgual; }
+      { return nmbOpLessOrEqual; }
     virtual const Operando &Opera(const Operando *v1= NULL,const Operando *v2= NULL) const;
   };
 
-//! @brief Operador igualdad
-//! Devuelve 1 si el valor izquierdo es igual que el derecho
-//! y 0 en caso contrario.
-class OpIgual : public OpComparacion
+//! @brief Equal operator
+//! Return 1 if the left value is equal to the right one,
+//!  0 otherwise.
+class OpEqual : public OpComparacion
   {
     
   public:
-    OpIgual(void) : OpComparacion() {}
+    OpEqual(void) : OpComparacion() {}
     inline virtual const std::string &getName(void) const
-      { return nmbOpIgual; }
+      { return nmbOpEqual; }
     virtual const Operando &Opera(const Operando *v1= NULL,const Operando *v2= NULL) const;
   };
 
@@ -86,16 +86,16 @@ class OpMayor : public OpComparacion
     virtual const Operando &Opera(const Operando *v1= NULL,const Operando *v2= NULL) const;
   };
 
-//! @brief Operador mayor o igual que.
-//! Devuelve 1 si el valor izquierdo es mayor o igual que el derecho
-//! y 0 en caso contrario.
-class OpMayorIgual : public OpComparacion
+//! @brief Operador greater thar or equal to.
+//! Return 1 if the left value is greater than or equal to the right one,
+//!  0 otherwise.
+class OpGreaterOrEqual : public OpComparacion
   {
     
   public:
-    OpMayorIgual(void) : OpComparacion() {}
+    OpGreaterOrEqual(void) : OpComparacion() {}
     inline virtual const std::string &getName(void) const
-      { return nmbOpMayorIgual; }
+      { return nmbOpGreaterOrEqual; }
     virtual const Operando &Opera(const Operando *v1= NULL,const Operando *v2= NULL) const;
   };
 

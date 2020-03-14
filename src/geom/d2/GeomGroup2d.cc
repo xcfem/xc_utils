@@ -37,7 +37,7 @@
 GEOM_FT GeomGroup2d::inertia(const Line2d &e) const
   {
     if(objetos.empty()) return 0.0;
-    if(!igual_dimension())
+    if(!equal_dimension())
       {
         cerr << getClassName() << "::" << __FUNCTION__
 	     << "; warning, the object of the group have"
@@ -74,7 +74,7 @@ GEOM_FT GeomGroup2d::Pxy(void) const
 Pos2d GeomGroup2d::getCenterOfMass(void) const
   {
     if(objetos.empty()) return Pos2d();
-    if(!igual_dimension())
+    if(!equal_dimension())
       {
         cerr << getClassName() << "::" << __FUNCTION__
 	     << "; Warning!, the objects in the group"

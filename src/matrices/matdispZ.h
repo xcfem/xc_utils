@@ -73,7 +73,7 @@ class matdispZ : public ZMatrix<numero>
       { return (columns.find(c)!=columns.end()); }
     inline const numero &PorDefecto(void) const
       { return (ZMatrix_number::operator()(1,1)); }
-    bool IgualA(const matdispZ<numero> &other) const;
+    bool EqualTo(const matdispZ<numero> &other) const;
 
     template<class M>
     matdispZ<numero> Post(const M &b) const;
@@ -197,7 +197,7 @@ class matdispZ : public ZMatrix<numero>
         return resta;
       }
     inline friend bool operator==(const matdispZ<numero> &m1,const matdispZ<numero> &m2)
-      { return m1.IgualA(m2); }
+      { return m1.EqualTo(m2); }
     //Producto escalar de dos vectores.
     //v1: row vector.
     //v2: column vector.
@@ -548,7 +548,7 @@ typename matdispZ<numero>::ZMatrix_number matdispZ<numero>::GetCompleta(void) co
   }
 
 template<class numero>
-bool matdispZ<numero>::IgualA(const matdispZ<numero> &other) const
+bool matdispZ<numero>::EqualTo(const matdispZ<numero> &other) const
   {
     if(!CompDim(*this,other)) return false;
     typename matdispZ<numero>::const_c_iterator c;
