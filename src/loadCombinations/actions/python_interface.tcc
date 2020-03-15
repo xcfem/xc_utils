@@ -23,16 +23,16 @@
 class_<ActionRelationships, bases<CommandEntity> >("ActionRelationships")
   .add_property("no_determinante", &ActionRelationships::NoDeterminante, &ActionRelationships::setNoDeterminante)
   .def("agregaIncompatible", &ActionRelationships::AgregaIncompatible)
-  .def("nombresIncompatibles", &ActionRelationships::nombresIncompatibles)
+  .def("incompatibleNames", &ActionRelationships::incompatibleNames)
   .def("agregaMaestra", &ActionRelationships::AgregaMaestra)
-  .def("nombresMaestras", &ActionRelationships::nombresMaestras);
+  .def("masterNames", &ActionRelationships::masterNames);
 
 class_<Action, bases<NamedEntity> >("Action")
   .def(init<std::string, std::string>())
   .add_property("descripcion", make_function( &Action::GetDescripcion, return_value_policy<copy_const_reference>() ), &Action::SetDescripcion)
   .add_property("getRelaciones", make_function( &Action::getRelaciones, return_internal_reference<>() ))
   .add_property("weightingFactor", &Action::getWeightingFactor, &Action::setWeightingFactor)
-  .def("getNombreExpandido", &Action::GetNombreExpandido)
+  .def("getExpandedName", &Action::getExpandedName)
   .def("getCoeficientes", &Action::getCoeficientes)
   .def("getDescomp", &Action::getDescomp)
   .def(self_ns::str(self_ns::self))

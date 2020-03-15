@@ -33,8 +33,8 @@ bool ConjVariables::In(const Variable &var) const
     return (find(&var)!=end());
   }
 
-//! @brief Devuelve los nombres de las variables.
-std::vector<std::string> ConjVariables::getNombres(void) const
+//! @brief Return the names of the variables.
+std::vector<std::string> ConjVariables::getNames(void) const
   {
     std::vector<std::string> retval(size());
     size_t conta= 0;

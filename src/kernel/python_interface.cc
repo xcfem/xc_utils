@@ -83,7 +83,7 @@ BOOST_PYTHON_MODULE(xc_base)
   ;
 
     class_<NamedEntity, bases<CommandEntity> >("NamedEntity")
-      .add_property("nombre", make_function( &NamedEntity::getName, return_value_policy<copy_const_reference>()), &NamedEntity::setName,"DEPRECATED returns object name.")
+      //.add_property("nombr e", make_function( &NamedEntity::getName, return_value_policy<copy_const_reference>()), &NamedEntity::setName,"DEPRECATED returns object name.")
       .add_property("name", make_function( &NamedEntity::getName, return_value_policy<copy_const_reference>()), &NamedEntity::setName,"returns object name.")
       ;
 

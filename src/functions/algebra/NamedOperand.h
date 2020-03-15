@@ -17,40 +17,40 @@
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//OpdoConNombre.h
+//NamedOperand.h
 
-#ifndef OPNDOCONNOMBRE_H
-#define OPNDOCONNOMBRE_H
+#ifndef NAMEDOPERAND_H
+#define NAMEDOPERAND_H
 
 #include "Operando.h"
 
-class OpndoConNombre : public Operando
+class NamedOperand : public Operando
   {
   protected:
-    std::string nombre;
+    std::string name;
   public:
-    OpndoConNombre(void) : Operando(), nombre() {}
-    OpndoConNombre(const std::string &nmb,const double &d=0.0): Operando(d), nombre(nmb) {}
-    OpndoConNombre(const OpndoConNombre &otro): Operando(otro), nombre(otro.nombre) {}
-    OpndoConNombre &operator=(const OpndoConNombre &otro)
+    NamedOperand(void) : Operando(), name() {}
+    NamedOperand(const std::string &nmb,const double &d=0.0): Operando(d), name(nmb) {}
+    NamedOperand(const NamedOperand &otro): Operando(otro), name(otro.name) {}
+    NamedOperand &operator=(const NamedOperand &otro)
       {
         Operando::operator =(otro);
-        nombre= otro.nombre;
+        name= otro.name;
         return *this;
       }
     void Put(const std::string &nmb, const double &v)
       {
 	Operando::Put(v);
-        nombre= nmb;
+        name= nmb;
       }
     inline virtual const std::string &getName(void) const
-      { return nombre; }
+      { return name; }
     inline virtual const std::string &GetFullString(void) const
-      { return nombre; }
-    friend std::istream &operator >>(std::istream &is, OpndoConNombre &s);
+      { return name; }
+    friend std::istream &operator >>(std::istream &is, NamedOperand &s);
     virtual int GetPrioridad(void) const
       { return 8; }
-    virtual ~OpndoConNombre(void)
+    virtual ~NamedOperand(void)
       {}
   };
 

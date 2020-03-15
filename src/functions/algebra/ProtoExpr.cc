@@ -50,23 +50,28 @@ LexAlgebra &ProtoExpresion::CreaLexico(void)
 bool ProtoExpresion::TieneLexico(void)
   { return (ptr_lex!=NULL); }
 
-//! @brief Devuelve un puntero a la variable cuyo nombre se pasa como parámetro.
+//! @brief Return a pointer to the variable which name
+//! is being passed as parameter.
 Variable *ProtoExpresion::CalcDirVar(const std::string &nmb)
   { return ptr_lex->CalcDirVar(nmb); }
-//! @brief Crea la variable cuyo nombre se pasa como parámetro.
-OpndoConNombre *ProtoExpresion::NuevaVar(const Variable &v)
+//! @brief Creates the variable being passed as parameter.
+NamedOperand *ProtoExpresion::NuevaVar(const Variable &v)
   { return ptr_lex->NuevaVar(v); }
-//! @brief Crea la variable cuyo nombre se pasa como parámetro.
-OpndoConNombre *ProtoExpresion::NuevaVar(const std::string &palabra)
+//! @brief Creates the variable which name
+//! is being passed as parameter.
+NamedOperand *ProtoExpresion::NuevaVar(const std::string &palabra)
   { return ptr_lex->NuevaVar(Variable(palabra)); }
 
-//! @brief Devuelve un puntero a la señal cuyo nombre se pasa como parámetro.
+//! @brief Return a pointer to the signal which name
+//! is being passed as parameter.
 Segnal *ProtoExpresion::CalcularDireccion(const std::string &nmb)
   { return ptr_lex->CalcularDireccion(nmb); }
 
-//! @brief Asigna a la variable de nombre 'palabra' el valor que se pasa como parámetro.
+//! @brief Assigns to the variable named 'palabra' the value
+//! being passed as parameter.
 void ProtoExpresion::Asigna(const std::string &palabra,const double &d)
   { ptr_lex->Asigna(palabra,d); }
-//! @brief Elimina la asignación a la variable cuyo nombre se pasa como parámetro.
+//! @brief Removes the assignment to the variable which name
+//! is being passed as parameter.
 void ProtoExpresion::DesAsigna(const std::string &palabra)
   { ptr_lex->DesAsigna(palabra); }

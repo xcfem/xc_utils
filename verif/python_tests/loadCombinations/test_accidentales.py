@@ -37,7 +37,7 @@ ratio1= abs(cont-6.0)/6.0
 
 '''    
 for comb in combAcc:
-  print(comb.nombre)
+  print(comb.name)
 print("cont= ", cont)
 print("ratio1= ", ratio1)
 '''   

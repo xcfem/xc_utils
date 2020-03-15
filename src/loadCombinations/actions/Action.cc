@@ -52,7 +52,7 @@ bool cmb_acc::Action::Simple(void) const
 //! @brief Return the expandend name by applying the distributive property
 //! of the multiplication so, if the combination name is '1.5*G1+1.35*(G2+F2)'
 //! it returns '1.5*G1+1.35*G2+1.35*F2'.
-const std::string cmb_acc::Action::GetNombreExpandido(void) const
+const std::string cmb_acc::Action::getExpandedName(void) const
   {
     std::string retval= getName();
     if(has_char(retval,'('))
@@ -103,9 +103,9 @@ std::vector<double> cmb_acc::Action::getCoeficientes(const std::vector<std::stri
     return retval;
   }
 
-//! \fn cmb_acc::Action::limpia_nombres(void)
+//! \fn cmb_acc::Action::clean_names(void)
 //! @brief ??
-void cmb_acc::Action::limpia_nombres(void)
+void cmb_acc::Action::clean_names(void)
   {
     NamedEntity::Name()= ActionRelationships::limpia(getName());
     descripcion= ActionRelationships::limpia(descripcion);
@@ -116,7 +116,7 @@ void cmb_acc::Action::limpia_nombres(void)
 void cmb_acc::Action::multiplica(const double &d)
   {
     f_pond*= d;
-    limpia_nombres();
+    clean_names();
     const std::string strnum= num2str(f_pond,2);
     NamedEntity::Name()= strnum + "*" + getName();
     descripcion= strnum + "*" + descripcion;
@@ -157,8 +157,8 @@ void cmb_acc::Action::suma(const Action &f)
 //! @brief Return verdadero si la acción que se pasa como parámetro es incompatible con esta,
 //! es decir que ambas no pueden estar presentes en la misma hipótesis.
 //!
-//! La acción será incompatible cuando su nombre verifique alguna de las expresiones
-//! regulares contenidas en el miembro incompatibles.
+//! Action will be incompatible if its name verifies one or more of the 
+//! regular expressions contained in the incompatibles member.
 //! La acción no podrá ser incompatible consigo misma.
 bool cmb_acc::Action::incompatible(const Action &f) const
   {
@@ -173,8 +173,8 @@ bool cmb_acc::Action::incompatible(const Action &f) const
 //! es decir que ambas no pueden estar presentes en la misma hipótesis.
 //!
 //! @param f: Action cuya incompatibilidad con ésta se comprueba.
-//! La acción será incompatible cuando su nombre verifique alguna de las expresiones
-//! regulares contenidas en el miembro incompatibles.
+//! Action will be incompatible if its name verifies one or more of the 
+//! regular expressions contained in the incompatibles member.
 //! La acción no podrá ser incompatible consigo misma.
 bool cmb_acc::Action::Incompatible(const Action &f) const
   {

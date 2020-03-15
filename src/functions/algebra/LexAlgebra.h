@@ -48,11 +48,11 @@ class LexAlgebra : public Lexico
          retval= vars.CalcDir(nmb);
         return retval;
       }
-    OpndoConNombre *NuevaVar(const Variable &v);
-    inline OpndoConNombre *NuevaVar(const std::string &palabra)
+    NamedOperand *NuevaVar(const Variable &v);
+    inline NamedOperand *NuevaVar(const std::string &palabra)
       { return NuevaVar(Variable(palabra)); }
-    OpndoConNombre *NuevaExpr(const VarExpr &v);
-    inline OpndoConNombre *NuevaExpr(const std::string &palabra)
+    NamedOperand *NuevaExpr(const VarExpr &v);
+    inline NamedOperand *NuevaExpr(const std::string &palabra)
       { return NuevaExpr(VarExpr(palabra)); }
     void AsignaExpr(const std::string &palabra,const ExprAlgebra &e);
  };

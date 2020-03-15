@@ -40,9 +40,8 @@ class NmbVars : public vZ_char
       { (*this)[0]= c; }
   public:
     NmbVars(const size_t &sz=1,const char &c='x') : vZ_char(sz,'x') {}
+    //! @brief Initializes the names of the first n variables from the argument string.
     NmbVars(const std::string &vars) : vZ_char(vars.size(),'x') 
-    //Inicializa los nombres de las n primeras variables a partir de una
-    //cadena de caracteres.
       { PutStr(vars); }
     NmbVars(const char c) : vZ_char(1)
     //Ojo! este es el que utiliza cuando se da un solo parámetro. 
@@ -59,9 +58,8 @@ class NmbVars : public vZ_char
         vZ_char::operator =(otro);
         return *this;
       }
+    //! @brief Return a set of variable names excepth the j-th one.
     NmbVars QuitaVar(short unsigned int j) const
-    //Devuelve un conjunto de nombres de variables al que le falta
-    //la de índice j.
       { return GetMenor(j); }    
     NmbVars Combina(const NmbVars &n2) const;
     vZ_sui Indices(const NmbVars &n) const;

@@ -9,7 +9,7 @@ def writeULSCombinations(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
             \expr{conta= 1}
             \for_each
               {
-                def_hip_elu.write("\combination[\"",format(int(conta),nmbFormat),"\"]{ \descomp{\"",getNombre,"\"}}\n")
+                def_hip_elu.write("\combination[\"",format(int(conta),nmbFormat),"\"]{ \descomp{\"",getName,"\"}}\n")
                 \expr{conta= tonum(conta+1)}
               }
           }
@@ -17,7 +17,7 @@ def writeULSCombinations(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
           {
             \for_each
               {
-                def_hip_elu.write("\combination[\"",format(int(conta),nmbFormat),"\"]{ \descomp{\"",getNombre,"\"}}\n")
+                def_hip_elu.write("\combination[\"",format(int(conta),nmbFormat),"\"]{ \descomp{\"",getName,"\"}}\n")
                 \expr{conta= tonum(conta+1)}
               }
           }
@@ -32,7 +32,7 @@ def writeULSCombinations(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
             \expr{conta= 1}
             \for_each
               {
-                hip_elu_tex.write(format(int(conta),nmbFormat)," & ",getNombre,"\\\\\n")
+                hip_elu_tex.write(format(int(conta),nmbFormat)," & ",getName,"\\\\\n")
                 \expr{conta= tonum(conta+1)}
               }
           }
@@ -40,7 +40,7 @@ def writeULSCombinations(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
           {
             \for_each
               {
-                hip_elu_tex.write(format(int(conta),nmbFormat)," & ",getNombre,"\\\\\n")
+                hip_elu_tex.write(format(int(conta),nmbFormat)," & ",getName,"\\\\\n")
                 \expr{conta= tonum(conta+1)}
               }
           }
@@ -60,7 +60,7 @@ def writeFrequentSLSCombinations(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
             \expr{conta= 1}
             \for_each
               {
-                def_hip_els.write("\combination[\"",format(int(conta),nmbFormat),"\"]{ \descomp{\"",getNombre,"\"}}\n")
+                def_hip_els.write("\combination[\"",format(int(conta),nmbFormat),"\"]{ \descomp{\"",getName,"\"}}\n")
                 \expr{conta= tonum(conta+1)}
               }
           }
@@ -75,7 +75,7 @@ def writeFrequentSLSCombinations(nmbArchivoDef, nmbArchivoLatex,nmbFormat):
             \expr{conta= 1}
             \for_each
               {
-                hip_els_tex.write(format(int(conta),nmbFormat)," & ",getNombre,"\\\\\n")
+                hip_els_tex.write(format(int(conta),nmbFormat)," & ",getName,"\\\\\n")
                 \expr{conta= tonum(conta+1)}
               }
           }

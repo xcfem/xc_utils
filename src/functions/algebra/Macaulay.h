@@ -23,7 +23,7 @@
 #define MACAULAY_H
 
 #include "OpBinario.h"
-#include "nombres_operadores.h"
+#include "operator_names.h"
 
 class Rama;
 

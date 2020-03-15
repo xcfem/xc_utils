@@ -23,7 +23,7 @@
 #define OPCOMPARACION_H
 
 #include "OpBinario.h"
-#include "nombres_operadores.h"
+#include "operator_names.h"
 
 //! @brief Clase base para operadores de comparación.
 class OpComparacion: public OpBinario

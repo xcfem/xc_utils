@@ -42,7 +42,7 @@ Rama *Operando::Simplifica(Rama *r) const
 Rama *Operando::Distrib(Rama *r) const
   { return r; }
 
-//! @brief Devuelve el nombre del operando.
+//! @brief Return the operand name.
 const std::string &Operando::getName(void) const
   { return GetFullString(); }
 
@@ -50,8 +50,8 @@ const std::string &Operando::getName(void) const
 //! con toda la precisión posible.
 const std::string &Operando::GetFullString(void) const
   {
-    static std::string strNombre= "";
-    strNombre= boost::lexical_cast<std::string>(valor);
-    return strNombre;
+    static std::string strName= "";
+    strName= boost::lexical_cast<std::string>(valor);
+    return strName;
   }
 

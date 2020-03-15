@@ -646,10 +646,10 @@ const std::deque<std::string> &getargs(const std::string &str)
 
 //! Receive a text string like:
 //
-//! nombre[v1,v2,v3,...]
+//! name[v1,v2,v3,...]
 //!
 //! and return the text strings:
-//! - retval[0]= nombre
+//! - retval[0]= name
 //! - retval[1]= v1,v2,v3,...
 //!
 const std::deque<std::string> &getnmbindices(const std::string &str)
@@ -659,16 +659,16 @@ const std::deque<std::string> &getnmbindices(const std::string &str)
     if(retval.size()>1)
       boost::algorithm::trim_right_if(retval[1],boost::algorithm::is_any_of("] ")); //Quitamos paréntesis derecho y espacios.
     if(retval.size()>2)
-      std::cerr << "Error al separar nombre e índices." << std::endl;
+      std::cerr << "Error splitting name and indexes." << std::endl;
     return retval;
   }
 
 //!  Receive a text string like:
 //
-//! nombre[v1,v2,v3,...]
+//! name[v1,v2,v3,...]
 //!
 //! and return the text strings:
-//! - retval[0]= nombre
+//! - retval[0]= name
 //! - retval[1]= v1
 //! - retval[2]= v2
 //! - retval[3]= v3

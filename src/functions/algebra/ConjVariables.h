@@ -33,7 +33,7 @@ class ConjVariables : public std::set<const Variable *>
 
     bool In(const Variable *var) const;
     bool In(const Variable &var) const;
-    std::vector<std::string> getNombres(void) const;
+    std::vector<std::string> getNames(void) const;
   };
 
 std::ostream &operator << (std::ostream &stream,const ConjVariables &cv);

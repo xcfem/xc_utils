@@ -46,6 +46,6 @@ def writeLoadCombinations(outputFileName, prefix, loadCombs):
     for comb in loadCombs:
         cod= prefix+str(conta).zfill(szLength)
         output= 'comb= combs.newLoadCombination('
-        output+= '"'+cod+'","'+comb.nombre+'")\n'
+        output+= '"'+cod+'","'+comb.name+'")\n'
         f.write(output)
         conta+= 1

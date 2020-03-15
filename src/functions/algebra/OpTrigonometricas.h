@@ -23,7 +23,7 @@
 #define OPTRIGONOMETRICAS_H
 
 #include "OpUnario.h"
-#include "nombres_operadores.h"
+#include "operator_names.h"
 
 class OpPi : public OpUnario
   {

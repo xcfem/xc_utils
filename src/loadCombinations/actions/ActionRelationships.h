@@ -49,7 +49,7 @@ class ActionRelationships: public CommandEntity
     bool nodet; //!< Verdadero si la acción no puede ser determinante.
     bool contiene_incomp; //!< True if the combination contains incompatible actions.
 
-    std::string nombres(const dq_string &) const;
+    std::string names(const dq_string &) const;
     void concat_incompatibles(const dq_string &);
     void concat_maestras(const dq_string &);
     bool match(const std::string &,const dq_string &) const;
@@ -89,8 +89,8 @@ class ActionRelationships: public CommandEntity
 
     void concat(const ActionRelationships &);
 
-    std::string nombresIncompatibles(void) const;
-    std::string nombresMaestras(void) const;
+    std::string incompatibleNames(void) const;
+    std::string masterNames(void) const;
     void Print(std::ostream &os) const;
   };
 

@@ -300,7 +300,7 @@ long Query::num_rows(void) const
 size_t Query::num_columns(void) const
   { return m_nmap.size(); }
 
-//! @brief Devuelve una cadena de caracteres con los nombres de los campos.
+//! @brief Return a string with the fields names.
 std::string Query::field_names(void) const
   {
     std::string retval= "";

@@ -31,9 +31,9 @@ class TablaVariables : public tabla_variables
   {
   public:
     TablaVariables(void) : tabla_variables() {}
-    inline OpndoConNombre *Nueva(const Variable &v)
+    inline NamedOperand *Nueva(const Variable &v)
       { return tabla_variables::Nueva(v); }
-    inline OpndoConNombre *Nueva(const std::string &palabra)
+    inline NamedOperand *Nueva(const std::string &palabra)
       { return tabla_variables::Nueva(Variable(palabra)); }
 
     inline void Asigna(const std::string &palabra,const double &d)

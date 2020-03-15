@@ -136,7 +136,7 @@ class ArbolExpr : public ExprBase
     bool TieneVariable(const VarExpr &var) const;
     bool TieneVariable(const Variable &var) const;
     int NumVariables(void) const;
-    std::vector<std::string> getNombresVariables(void) const;
+    std::vector<std::string> getNamesOfVariables(void) const;
 
     std::string GetString(void) const;
     const std::string &GetFullString(void) const;

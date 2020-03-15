@@ -105,7 +105,7 @@ void CommandEntity::clearPyProps(void)
 bool CommandEntity::hasPyProp(const std::string &str)
   { return (python_dict.find(str) != python_dict.end()); }
 
-//! @brief Return el objeto de Python cuyo nombre se pasa como parámetro.
+//! @brief Return the Python object with the name being passed as parameter.
 boost::python::object CommandEntity::getPyProp(const std::string &str)
    {
      boost::python::object retval; //Defaults to None.

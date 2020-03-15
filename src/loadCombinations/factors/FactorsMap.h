@@ -106,7 +106,7 @@ Factors *FactorsMap<Factors>::getPtrCoefs(const std::string &name)
     return retval;
   }
 
-//! @brief Return un apuntador a los coeficientes cuyo nombre se pasa como parámetro.
+//! @brief Return the factors identified by name.
 template <class Factors>
 const Factors &FactorsMap<Factors>::BuscaCoefs(const std::string &name) const
   {
@@ -119,7 +119,7 @@ const Factors &FactorsMap<Factors>::BuscaCoefs(const std::string &name) const
       }
   }
 
-//! @brief Return un apuntador a los coeficientes cuyo nombre se pasa como parámetro.
+//! @brief Return a pointer to the factors identified by name.
 template <class Factors>
 const Factors *FactorsMap<Factors>::getPtrCoefs(const std::string &name) const
   {
@@ -136,7 +136,7 @@ template <class Factors>
 FactorsMap<Factors>::FactorsMap(void)
   : CommandEntity() {}
 
-//! @brief Crea coeficientes con el nombre que se le pasa como parámetro.
+//! @brief Creates the factors with the name being passed as parameter.
 template <class Factors>
 Factors *FactorsMap<Factors>::crea_coefs(const std::string &name)
   {

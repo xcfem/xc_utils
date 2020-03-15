@@ -23,7 +23,7 @@
 #define OPBINARIO_H
 
 #include "Operador.h"
-#include "nombres_operadores.h"
+#include "operator_names.h"
 
 class Rama;
 

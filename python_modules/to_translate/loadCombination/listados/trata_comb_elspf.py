@@ -11,10 +11,10 @@ hip_elspf_tex.open("./hipotesis_elspf.tex","w")
         \expr{conta= 1}
         \for_each
           {
-            def_hip_elspf.write("\combination[\"",format(int(conta),"ELSPF%03u"),"\"]{ \descomp{\"",getNombre,"\"}}\n")
+            def_hip_elspf.write("\combination[\"",format(int(conta),"ELSPF%03u"),"\"]{ \descomp{\"",getName,"\"}}\n")
             calc_hip_elspf.write("\\resuelveCombEstatLin(\"",format(int(conta),"ELSPF%03u"),"\"){}","\n")
             calc_hip_elspf.write("\\trataResultsComb(\"",format(int(conta),"ELSPF%03u"),"\"){}","\n")
-            hip_elspf_tex.write(format(int(conta),"ELSPF%03u")," & ",getNombre,"\\\\\n")
+            hip_elspf_tex.write(format(int(conta),"ELSPF%03u")," & ",getName,"\\\\\n")
             \expr{conta= tonum(conta+1)}
           }
       }

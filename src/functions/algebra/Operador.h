@@ -23,7 +23,7 @@
 #define OPERADOR_H
 
 #include "Operando.h"
-#include "nombres_operadores.h"
+#include "operator_names.h"
 
 //! @brief Clase base de los operadores unarios y binarios.
 class Operador : public Operando

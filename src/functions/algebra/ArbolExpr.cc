@@ -288,8 +288,8 @@ ConjVariables ArbolExpr::Variables() const
     return cvar;
   }
 
-//! @brief Devuelve verdadero si la expresión depende de la variable cuyo
-//! nombre se pasa como parámetro.
+//! @brief Return true if the expression depends on the variable name
+//! being passed as parameter.
 bool ArbolExpr::TieneVariable(const std::string &palabra) const
   {
     const Variable *v= CalcDirVar(palabra);
@@ -314,8 +314,9 @@ bool ArbolExpr::TieneVariable(const Variable &var) const
 int ArbolExpr::NumVariables(void) const
   { return Variables().size(); }
 
-std::vector<std::string> ArbolExpr::getNombresVariables(void) const
-  { return Variables().getNombres(); }
+//! @brief Return the names of the variables.
+std::vector<std::string> ArbolExpr::getNamesOfVariables(void) const
+  { return Variables().getNames(); }
 
 //! @brief Imprime la expresión en el stream que se pasa como parámetro.
 void ArbolExpr::Print(std::ostream &os) const

@@ -126,8 +126,8 @@ class Lexico
     inline Segnal *CalcularDireccion(const std::string &nmb)
       {
         if (nmb.length() <= 0)
-	  std::cerr << "Se intentó el cálculo de una"
-                    << " dirección con un nombre vacío" << std::endl;
+	  std::cerr << "Tried to compute the addres"
+                    << " of an empty name" << std::endl;
         else
           return CalcDir(nmb);
         return NULL;
@@ -144,9 +144,9 @@ class Lexico
       { literales.Borra(d); }
     inline void BorraSiLiteral(const Segnal *s)
       { literales.BorraSiLiteral(s); }
-    inline OpndoConNombre *NuevaVar(const Variable &v)
+    inline NamedOperand *NuevaVar(const Variable &v)
       { return vars.Nueva(v); }
-    inline OpndoConNombre *NuevaVar(const std::string &palabra)
+    inline NamedOperand *NuevaVar(const std::string &palabra)
       { return NuevaVar(Variable(palabra)); }
     void Asigna(const std::string &palabra,const double &d)
       {

@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 import sqlite3 as sqlite
 
-# Crea una base de datos con el nombre que se pasa como parámetro.
+# Create a databas with the name being passed as parameter.
 def SQLTcreaDBase(nmbDBase):
   conn = sqlite.connect(nmbDBase)
 
-# Abra una base de datos que ya existe con el nombre que se pasa como parámetro.
+# Open an existing database with the name being passed as parameter.
 def SQLTabreDBase(nmbDBase):
   conn = sqlite.connect(nmbDBase)
 
-# Crea una tabla con el nombre y la definición que se pasan como parámetro.
+# Creates a database with the name and the definition being passed as parameter.
 def SQLTcreaTabla(nmbDBase,nmbTabla,defTabla):
  conn = sqlite.connect(nmbDBase)
  c= conn.cursor()

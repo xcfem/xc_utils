@@ -65,8 +65,9 @@ std::deque<std::string> cmb_acc::ActionRelationships::get_combination_actions_na
 cmb_acc::ActionRelationships::ActionRelationships(void)
   : CommandEntity(), incompatibles(0), maestras(0), nodet(false), contiene_incomp(false) {}
 
-//! @brief Return una text string con los nombres de la lista que se pasa como parámetro separados por comas.
-std::string cmb_acc::ActionRelationships::nombres(const dq_string &l) const
+//! @brief Return a string with the names of the list
+//! separated by commas.
+std::string cmb_acc::ActionRelationships::names(const dq_string &l) const
   {
     std::string retval;
     if(!l.empty())
@@ -141,8 +142,9 @@ bool cmb_acc::ActionRelationships::match_all(const dq_string &exprReg,const dq_s
 bool cmb_acc::ActionRelationships::matchIncompatibles(const dq_string &sumandos) const
   { return match_any(incompatibles,sumandos); }
 
-//! @brief Return verdadero si la acción cuyo nombre se pasa como parámetro es incompatible con esta,
-//! es decir que ambas no pueden estar presentes en la misma hipótesis.
+//! @brief Return true if the action which name is being passed as
+//! parameter is not compatible with this one, 
+//! otherwise said they cannot be present in the same hypothesis.
 bool cmb_acc::ActionRelationships::incompatible(const std::string &nmb) const
   {
     bool retval= false;
@@ -151,8 +153,9 @@ bool cmb_acc::ActionRelationships::incompatible(const std::string &nmb) const
     return retval;
   }
 
-//! @brief Return verdadero si la acción cuyo nombre se pasa como parámetro es maestra de esta,
-//! es decir que ambas no pueden estar presentes en la misma hipótesis.
+//! @brief Return true if the action which name is being passed as parameter
+//! is a master of this one, otherwise said this one can only be present 
+//! in a hypothesis if the master does it too.
 bool cmb_acc::ActionRelationships::esclavaDe(const std::string &nmb) const
   { 
     bool retval= false;
@@ -165,8 +168,8 @@ bool cmb_acc::ActionRelationships::esclavaDe(const std::string &nmb) const
     return retval;
   }
 
-//! @brief Elimina de la lista de maestras aquellas que ya se encuentran en la lista de
-//! nombres de acciones que se pasa como parámetro.
+//! @brief Remove from the masters lists those which names match with
+//! the argument name.
 void cmb_acc::ActionRelationships::updateMaestras(const std::string &nmb)
   {
     if(!maestras.empty())
@@ -186,15 +189,15 @@ void cmb_acc::ActionRelationships::concat(const ActionRelationships &other)
     concat_maestras(other.maestras);
   }
 
-std::string cmb_acc::ActionRelationships::nombresIncompatibles(void) const
-  { return nombres(incompatibles); }
-std::string cmb_acc::ActionRelationships::nombresMaestras(void) const
-  { return nombres(maestras); }
+std::string cmb_acc::ActionRelationships::incompatibleNames(void) const
+  { return names(incompatibles); }
+std::string cmb_acc::ActionRelationships::masterNames(void) const
+  { return names(maestras); }
 
 void cmb_acc::ActionRelationships::Print(std::ostream &os) const
   {
-    os << "incompatibles: {" << nombresIncompatibles() << "}; maestras: {"
-       << nombresMaestras() << "}";
+    os << "incompatibles: {" << incompatibleNames() << "}; maestras: {"
+       << masterNames() << "}";
     if(contiene_incomp) os << " contiente incompatibles." << std::endl;
   }
 

@@ -17,10 +17,10 @@
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//Nombres_Operadores.h
+//Operators_names.h
 
-#ifndef NOMBRES_OPERADORES_H
-#define NOMBRES_OPERADORES_H
+#ifndef OPERATORS_NAMES_H
+#define OPERATORS_NAMES_H
 
 #include <string>
 

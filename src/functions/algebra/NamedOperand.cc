@@ -17,19 +17,19 @@
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
-//OpndoConNombre.cc
+//NamedOperand.cc
 
-#include "OpndoConNombre.h"
+#include "NamedOperand.h"
 #include <iostream>
 
-std::istream &operator>>(std::istream &is, OpndoConNombre &s)
+std::istream &operator>>(std::istream &is, NamedOperand &s)
   {
     if(is.eof()) return is;
-    s.nombre= "";
+    s.name= "";
     register char c; c= is.get();
     while(isalnum(c))
       {
-        s.nombre+= c;
+        s.name+= c;
         if(is.eof()) break;
         c= is.get();
       }

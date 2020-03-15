@@ -24,7 +24,7 @@ def printComb(pathArchSalida):
     \expr{cont= 1}
     \for_each
       {
-        arch_salida_ltx.write(cont," & ",ascii2ltx(getNombreExpandido),"\\\\\n")
+        arch_salida_ltx.write(cont," & ",ascii2ltx(getExpandedName),"\\\\\n")
         \expr{cont= tonum(cont+1)}
       }
     arch_salida_ltx.write("\\end{longtable}\n")

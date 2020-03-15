@@ -133,7 +133,7 @@ m_opendbs vector. New Query objects can then reuse old connections.
      /** Convert string to unsigned 64-bit integer. */
      uint64_t a2ubigint(const std::string& );
 
-     inline const std::string &getNombre(void) const
+     inline const std::string &getName(void) const
        { return database; }
 
    private:

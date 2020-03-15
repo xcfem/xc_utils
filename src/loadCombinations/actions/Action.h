@@ -46,7 +46,7 @@ class Action: public NamedEntity
     ActionRelationships relaciones; //!< Relaciones de una acción con el resto.
     double f_pond; //!< Factor que pondera a la acción.
 
-    void limpia_nombres(void);
+    void clean_names(void);
     bool incompatible(const Action &f) const;
     void multiplica(const double &d);
     void suma(const Action &f);
@@ -58,7 +58,7 @@ class Action: public NamedEntity
     //! @brief Sets the name to the action.
     inline void setName(const std::string &nmb)
       { NamedEntity::Name()= nmb; }
-    const std::string GetNombreExpandido(void) const;
+    const std::string getExpandedName(void) const;
     //! @brief Return la descripción de la acción.
     inline const std::string &GetDescripcion(void) const
       { return descripcion; }
@@ -126,7 +126,8 @@ std::ostream &operator<<(std::ostream &os,const Action &acc);
 
 bool incompatibles(const Action &acc_i,const Action &acc_j);
 
-//! @brief Return la lista de acciones incompatibles con aquella cuyo nombre se pasa como parámetro.
+//! @brief Return the list of actions incompatible with the one 
+//! being passed as parameter.
 template <class InputIterator>
 std::deque<const Action *> listaIncompatibles(const Action *acc,InputIterator begin,InputIterator end)
   {

@@ -131,8 +131,8 @@ Segnal *Lexico::CalcDirOpBinario(const std::string &nmb)
     return NULL;
   }
 
-//! @brief Devuelve un puntero a la variable cuyo nombre se pasa
-//! como parámetro.
+//! @brief Return a pointer to the variable which name is
+//! being passed as parameter.
 Variable *Lexico::CalcDirVar(const std::string &nmb)
   { return vars.CalcDir(nmb); }
 

@@ -12,7 +12,7 @@ def cargaCombTabla(nmbDataBase,nmbTabla,nmbGrupo,nmbSubGrupo):
             \execute_sql{"CREATE TABLE IF NOT EXISTS nmbTabla (idComb INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, grupo CHAR(20), subgrupo CHAR(10), descomp CHAR(100))"}
             \for_each
               {
-                \execute_sql{"INSERT INTO nmbTabla (grupo,subgrupo,descomp) VALUES ('nmbGrupo','nmbSubGrupo','getNombre')"}
+                \execute_sql{"INSERT INTO nmbTabla (grupo,subgrupo,descomp) VALUES ('nmbGrupo','nmbSubGrupo','getName')"}
               }
           }
       }

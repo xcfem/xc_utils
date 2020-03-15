@@ -87,7 +87,8 @@ void SqLiteObject::insert_object(const std::string &nmb,SqLiteObject *ptr)
       SqLiteObjs[nmb]= ptr;
   }
 
-//! @brief Return un puntero al objeto cuyo nombre se pasa como parámetro (si existe). 
+//! @brief Return a pointer to the object which name is being passed
+//! as parameter.
 SqLiteObject *SqLiteObject::busca_objeto(const std::string &nmb)
   {
     SqLiteObject *retval= nullptr;
@@ -109,7 +110,7 @@ SqLiteObject::~SqLiteObject(void)
 void SqLiteObject::clearAll(void)
   { borra_objetos(); }
 
-//! @brief Crea la base de datos con el nombre que se pasa como parametro.
+//! @brief Creates the database with the name being passed as parameter.
 void SqLiteObject::NuevaDatabase(const std::string &nmb)
   { 
     SqLiteObject *ptr= new SqLiteDatabase(nmb);
@@ -119,7 +120,7 @@ void SqLiteObject::NuevaDatabase(const std::string &nmb)
       std::cerr << "SqLiteObject::NuevoObjetoSql; el puntero al objeto es nulo." << std::endl;
   }
 
-//! @brief Crea la consulta el nombre que se pasa como parametro.
+//! @brief Creates a query with the name being passed as parameter.
 void SqLiteObject::NuevaQuery(const std::string &nmb,const std::string &nmb_db)
   { 
     SqLiteDatabase *ptr_db= getDatabase(nmb_db);
@@ -138,7 +139,7 @@ std::string SqLiteObject::preprocesa_str_sql(const std::string &str) const
   }
 
 
-//! @brief Return la base de datos cuyo nombre se pasa como parámetro. 
+//! @brief Return the database with the name being passed as parameter.
 SqLiteDatabase *SqLiteObject::getDatabase(const std::string &nmb)
   {
     SqLiteDatabase *retval= nullptr;
@@ -148,7 +149,7 @@ SqLiteDatabase *SqLiteObject::getDatabase(const std::string &nmb)
     return retval;
   }
 
-//! @brief Return la consulta cuyo nombre se pasa como parámetro. 
+//! @brief Return the query with the name being passed as parameter.
 SqLiteQuery *SqLiteObject::getQuery(const std::string &nmb)
   {
     SqLiteQuery *retval= nullptr;
@@ -158,7 +159,8 @@ SqLiteQuery *SqLiteObject::getQuery(const std::string &nmb)
     return retval;
   }
 
-//! @brief Borra del contenedor el objeto cuyo nombre se pasa como parámetro. 
+//! @brief Removes from container the object which name is being
+//! passed as parameter.
 void SqLiteObject::BorraObjeto(const std::string &nmb)
   {
     sql_objs_iterator i= SqLiteObjs.find(nmb);

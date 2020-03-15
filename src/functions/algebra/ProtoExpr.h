@@ -27,7 +27,7 @@
 class Lexico;
 class LexAlgebra;
 class Operando;
-class OpndoConNombre;
+class NamedOperand;
 class Segnal;
 class Variable;
 
@@ -43,8 +43,8 @@ class ProtoExpresion
     static Lexico &Lex(void);
     static LexAlgebra &LexA(void);
     static bool TieneLexico(void);
-    static OpndoConNombre *NuevaVar(const Variable &v);
-    static OpndoConNombre *NuevaVar(const std::string &palabra);
+    static NamedOperand *NuevaVar(const Variable &v);
+    static NamedOperand *NuevaVar(const std::string &palabra);
     static Variable *CalcDirVar(const std::string &nmb);
     static void Asigna(const std::string &palabra,const double &d);
     static void DesAsigna(const std::string &palabra);

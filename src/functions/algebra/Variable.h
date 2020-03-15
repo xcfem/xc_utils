@@ -22,21 +22,21 @@
 #ifndef VARIABLE_H
 #define VARIABLE_H
 
-#include "OpndoConNombre.h"
+#include "NamedOperand.h"
 
 
 class ExprAlgebra;
 
-class Variable : public OpndoConNombre
+class Variable : public NamedOperand
   {
     bool asignada;
   public:
-    Variable(void) : OpndoConNombre(), asignada(false) {}
-    Variable(const std::string &nmb): OpndoConNombre(nmb), asignada(false) {}
-    Variable(const Variable &other): OpndoConNombre(other), asignada(other.asignada) {}
+    Variable(void) : NamedOperand(), asignada(false) {}
+    Variable(const std::string &nmb): NamedOperand(nmb), asignada(false) {}
+    Variable(const Variable &other): NamedOperand(other), asignada(other.asignada) {}
     Variable &operator=(const Variable &other)
       {
-        OpndoConNombre::operator =(other);
+        NamedOperand::operator =(other);
         asignada= other.asignada;
         return *this;
       }

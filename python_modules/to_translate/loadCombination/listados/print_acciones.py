@@ -2,13 +2,13 @@
 def listaAccionesFamilia(nmbArchivo):
   {
     nmbArchivo.write("\\hline\n")
-    nmbArchivo.write("\\multicolumn{6}{|c|}{",getNombre,"}\\\\\n")
+    nmbArchivo.write("\\multicolumn{6}{|c|}{",getName,"}\\\\\n")
     nmbArchivo.write("\\hline\n")
-    nmbArchivo.write("Nombre & Descripción & $\\psi_0$ & $\\psi_1$ & $\\psi_2$ & Incompatibles \\\\\n")
+    nmbArchivo.write("Name & Description & $\\psi_0$ & $\\psi_1$ & $\\psi_2$ & Incompatibles \\\\\n")
     nmbArchivo.write("\\hline\n")
     \for_each_accion
       {
-        nmbArchivo.write(getNombre)
+        nmbArchivo.write(getName)
         nmbArchivo.write(" & ",getDescripcion)
         nmbArchivo.write(" & ",psi_0)
         nmbArchivo.write(" & ",psi_1)
@@ -56,7 +56,7 @@ def listaPonderacion(pathArchivo,elimite,accidental):
         if(num_acciones>0)
             \then
               {
-                outPonderacion.write(getNombre)
+                outPonderacion.write(getName)
                 outPonderacion.write(" & ",lista_acciones)
                 \gammaf{\elimite
                   {

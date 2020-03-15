@@ -29,7 +29,7 @@ LexAlgebra::LexAlgebra(void)
 VarExpr *LexAlgebra::CalcDirExpr(const std::string &nmb)
   { return expresiones.CalcDir(nmb); }
 
-OpndoConNombre *LexAlgebra::NuevaVar(const Variable &v)
+NamedOperand *LexAlgebra::NuevaVar(const Variable &v)
   {
     //Si existía como expresión advertimos del problema:
     TablaExpresiones::const_iterator i= expresiones.find(v.getName());
@@ -40,7 +40,7 @@ OpndoConNombre *LexAlgebra::NuevaVar(const Variable &v)
     return vars.Nueva(v);
   }
 
-OpndoConNombre *LexAlgebra::NuevaExpr(const VarExpr &v)
+NamedOperand *LexAlgebra::NuevaExpr(const VarExpr &v)
   {
     //Si existía como variable advertimos del problema:
     TablaVariables::const_iterator i= vars.find(v.getName());
@@ -49,7 +49,7 @@ OpndoConNombre *LexAlgebra::NuevaExpr(const VarExpr &v)
            << "' ya existe como variable." << std::endl;
     //Si realmente es nueva, la agregamos a la tabla de expresiones.
     TablaExpresiones::iterator j= expresiones.find(v.getName());
-    OpndoConNombre *retval= NULL;
+    NamedOperand *retval= NULL;
     if(j==expresiones.end())
       retval= expresiones.Nueva(v);
     else

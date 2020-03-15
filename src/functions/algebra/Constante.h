@@ -23,17 +23,17 @@
 #define CONSTANTE_H
 
 #include "Literal.h"
-#include "OpndoConNombre.h"
+#include "NamedOperand.h"
 
-class Constante : public virtual OpndoConNombre, public virtual Literal
+class Constante : public virtual NamedOperand, public virtual Literal
   {
   public:
-    Constante(void) : OpndoConNombre() {}
-    Constante(const std::string &nmb,const double &d): OpndoConNombre(nmb,d) {}
-    Constante(const Constante &otro): OpndoConNombre(otro) {}
+    Constante(void) : NamedOperand() {}
+    Constante(const std::string &nmb,const double &d): NamedOperand(nmb,d) {}
+    Constante(const Constante &otro): NamedOperand(otro) {}
     Constante &operator=(const Constante &otro)
       {
-        OpndoConNombre::operator =(otro);
+        NamedOperand::operator =(otro);
         return *this;
       }
     virtual bool Evaluable(void) const

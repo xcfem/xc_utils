@@ -24,7 +24,7 @@
 #include <cmath>
 #include <cassert>
 #include "Lexico.h"
-#include "OpndoConNombre.h"
+#include "NamedOperand.h"
 #include "Variable.h"
 #include "OpBinario.h"
 #include <cstdio>
@@ -78,7 +78,7 @@ void ExprInfija::InsertaPalabra(const std::streampos &pos,Segnal *t)
 //! @brief Inserta la palabra que se pasa como parámetro.
 Segnal *ExprInfija::InsertaNuevaPalabra(const std::streampos &pos,const std::string &palabra)
   {
-    OpndoConNombre *t= NULL;
+    NamedOperand *t= NULL;
     if(!Inicial())
       {
         std::cerr << "ExprInfija::InsertaNuevaPalabra; error, pos: " << pos
@@ -210,22 +210,22 @@ std::streampos ExprInfija::EncontrarSimbolo(const std::streampos &pos,std::istre
   {
     std::streampos retval(pos);
     if(is.eof()) return pos;
-    std::string nombre;
+    std::string name;
     //Leemos el primer carácter del símbolo.
     char c; is >> c; retval= is.tellg();
-    if(es_simbolo(c)) nombre+= c;
+    if(es_simbolo(c)) name+= c;
     // Probamos si el símbolo es de dos caracteres.
     c= is.peek();
-    if(son_simbolo(nombre[0],c)) //Parece símbolo.
+    if(son_simbolo(name[0],c)) //Parece símbolo.
       {
         is >> c; //Leemos el carácter del stream.
-        nombre+= c;
+        name+= c;
         retval= is.tellg();
       }
-    Segnal *t= CalcularDireccion(nombre);
+    Segnal *t= CalcularDireccion(name);
     if(!t)
       {
-        if(nombre==",") //La coma separa los argumentos de un operador binario prefijo (max,min,...)
+        if(name==",") //La coma separa los argumentos de un operador binario prefijo (max,min,...)
           {
             assert(!op_bin_en_espera.empty()); //No debe estar vacío.
             t= CalcularDireccion(op_bin_en_espera.top());
@@ -234,7 +234,7 @@ std::streampos ExprInfija::EncontrarSimbolo(const std::streampos &pos,std::istre
           }
         else
           {
-            std::cerr << "ExprInfija::EncontrarSimbolo; el símbolo: '" << nombre << "' es desconocido." << std::endl;
+            std::cerr << "ExprInfija::EncontrarSimbolo; el símbolo: '" << name << "' es desconocido." << std::endl;
             err_traduc= true;
             return retval;
           }

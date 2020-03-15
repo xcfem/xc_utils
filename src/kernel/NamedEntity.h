@@ -18,7 +18,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------------
 //NamedEntity.h
-//Entidad con nombre.
+//Named entity.
 
 #ifndef ENTCONNMB_H
 #define ENTCONNMB_H
@@ -32,15 +32,15 @@
 //
 //! @ingroup BASE
 //
-//!  @brief Objeto identificado por un nombre.
+//!  @brief Object identified by a name.
 class NamedEntity: public CommandEntity
   {
   private:
     std::string name; //!< @brief Object name.
   public:
     //! @brief Constructor.
-  NamedEntity(const std::string &Nombre="",CommandEntity *owr= nullptr)
-      : CommandEntity(owr), name(Nombre) {}
+  NamedEntity(const std::string &Name="",CommandEntity *owr= nullptr)
+      : CommandEntity(owr), name(Name) {}
     //! @brief Return the object name.
     const std::string &getName(void) const
       { return name; }

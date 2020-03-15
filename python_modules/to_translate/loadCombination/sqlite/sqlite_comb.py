@@ -6,7 +6,7 @@ def SQLTcreaTablaComb(nmbDBase,nmbTabla):
     \pond_acciones
       {
         \for_each_accion
-          {nmbAccs= (nmbAccs + " float," + sqlValue(getNombre))}
+          {nmbAccs= (nmbAccs + " float," + sqlValue(getName))}
         nmbAccs= "("+copiaDesde(",",nmbAccs)+" float)" # Le quitamos la primera coma.
       }
     SQLTcreaTabla(nmbDBase,nmbTabla,nmbAccs){}
@@ -33,7 +33,7 @@ def SQLTtablaCombs(nmbDBase,nmbTabla,combinationsName,offset):
             sqlQuery= 
             \for_each
               {
-                sqlQuery= "insert into " + nmbTabla + " values ("+ sqlValue(int(cont)) + "," + sqlValue(getNombreExpandido) +")"
+                sqlQuery= "insert into " + nmbTabla + " values ("+ sqlValue(int(cont)) + "," + sqlValue(getExpandedName) +")"
                 \sqlite{\nmbDBase{\execute_sql{sqlQuery}}}
                 cont= cont+1
               }
@@ -55,7 +55,7 @@ def SQLTtablaCombsULS(nmbDBase,nmbTabla,offset):
           {
             \for_each
               {
-                \sqlite{\nmbDBase{\execute_sql{"insert into " + nmbTabla + " values ("+ sqlValue(int(cont)) + ", " + sqlValue(getNombreExpandido) +")"}}}
+                \sqlite{\nmbDBase{\execute_sql{"insert into " + nmbTabla + " values ("+ sqlValue(int(cont)) + ", " + sqlValue(getExpandedName) +")"}}}
                 cont= cont+1
               }
           }
@@ -63,7 +63,7 @@ def SQLTtablaCombsULS(nmbDBase,nmbTabla,offset):
           {
             \for_each
               {
-                \sqlite{\nmbDBase{\execute_sql{"insert into " + nmbTabla + " values ("+ sqlValue(int(cont)) + ", " + sqlValue(getNombreExpandido) +")"}}}
+                \sqlite{\nmbDBase{\execute_sql{"insert into " + nmbTabla + " values ("+ sqlValue(int(cont)) + ", " + sqlValue(getExpandedName) +")"}}}
                 cont= cont+1
               }
           }
@@ -71,7 +71,7 @@ def SQLTtablaCombsULS(nmbDBase,nmbTabla,offset):
           {
             \for_each
               {
-                \sqlite{\nmbDBase{\execute_sql{"insert into " + nmbTabla + " values ("+ sqlValue(int(cont)) + ", " + sqlValue(getNombreExpandido) +")"}}}
+                \sqlite{\nmbDBase{\execute_sql{"insert into " + nmbTabla + " values ("+ sqlValue(int(cont)) + ", " + sqlValue(getExpandedName) +")"}}}
                 cont= cont+1
               }
           }
@@ -92,7 +92,7 @@ def SQLTtablaCombsSLSPF(nmbDBase,nmbTabla,offset):
           {
             \for_each
               {
-                \sqlite{\nmbDBase{\execute_sql{"insert into " + nmbTabla + " values ("+ sqlValue(int(cont)) + ", " + sqlValue(getNombreExpandido) +")"}}}
+                \sqlite{\nmbDBase{\execute_sql{"insert into " + nmbTabla + " values ("+ sqlValue(int(cont)) + ", " + sqlValue(getExpandedName) +")"}}}
                 cont= cont+1
               }
           }
@@ -112,7 +112,7 @@ def SQLTtablaCombsSLSF(nmbDBase,nmbTabla,offset):
           {
             \for_each
               {
-                \sqlite{\nmbDBase{\execute_sql{"insert into " + nmbTabla + " values ("+ sqlValue(int(cont)) + ", " + sqlValue(getNombreExpandido) +")"}}}
+                \sqlite{\nmbDBase{\execute_sql{"insert into " + nmbTabla + " values ("+ sqlValue(int(cont)) + ", " + sqlValue(getExpandedName) +")"}}}
                 cont= cont+1
               }
           }
@@ -132,7 +132,7 @@ def SQLTtablaCombsSLSCP(nmbDBase,nmbTabla,offset):
           {
             \for_each
               {
-                \sqlite{\nmbDBase{\execute_sql{"insert into " + nmbTabla + " values ("+ sqlValue(int(cont)) + ", " + sqlValue(getNombreExpandido) +")"}}}
+                \sqlite{\nmbDBase{\execute_sql{"insert into " + nmbTabla + " values ("+ sqlValue(int(cont)) + ", " + sqlValue(getExpandedName) +")"}}}
                 cont= cont+1
               }
           }

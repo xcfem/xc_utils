@@ -31,7 +31,7 @@ SqLiteDatabase::SqLiteDatabase(const std::string &nmb)
   : SqLiteObject(), db(mutex,nmb,&log), defaultQuery(nullptr) 
   { defaultQuery= NuevaQuery("defaultQuery"); }
 
-//! @brief Return verdadero si existe la tabla cuyo nombre se pasa como parámetro.
+//! @brief Return true if the table with the argument name exists.
 bool SqLiteDatabase::existeTabla(const std::string &nmbTabla) const
   {
     SqLiteQuery tmp(const_cast<Database &>(db));
@@ -55,7 +55,7 @@ bool SqLiteDatabase::borraTabla(const std::string &nmbTabla)
 SqLiteQuery *SqLiteDatabase::getDefaultQuery(void)
   { return defaultQuery; }
 
-//! @brief Crea la consulta con el nombre que se pasa como parametro.
+//! @brief Create the quefy with the name being passed as parameter.
 SqLiteQuery *SqLiteDatabase::NuevaQuery(const std::string &nmb)
   {
     SqLiteObject *ptr= busca_objeto(nmb);
