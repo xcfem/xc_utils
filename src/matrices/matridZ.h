@@ -1,3 +1,4 @@
+// -*-c++-*-
 //----------------------------------------------------------------------------
 //  xc_utils library; general purpose classes and functions.
 //
