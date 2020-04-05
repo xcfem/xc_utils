@@ -26,6 +26,9 @@
 #include "../pos_vec/Vector3d.h"
 #include "../pos_vec/Pos3d.h"
 #include "xc_utils/src/geom/pos_vec/VectorPos3d.h"
+#include <CGAL/AABB_tree.h>
+#include <CGAL/AABB_traits.h>
+#include <CGAL/AABB_segment_primitive.h>
 
 //! @brief Constructor.
 Segment3d::Segment3d(void): Linear3d(),cgseg(CGPoint_3(0,0,0),CGPoint_3(1,0,0)) {}
@@ -265,3 +268,103 @@ VectorPos3d Segment3d::Divide(int num_partes) const
 void Segment3d::Print(std::ostream &os) const
   { os << getFromPoint() << " " << getToPoint(); }
 
+typedef std::vector<CGSegment_3> SegmentVector;
+typedef SegmentVector::const_iterator ConstIterator;
+typedef std::pair<ConstIterator,ConstIterator> IdPair;
+typedef std::list<IdPair> PairList;
+typedef SegmentVector::iterator Iterator;
+typedef CGAL::AABB_segment_primitive<GEOMKernel, Iterator> Primitive;
+typedef CGAL::AABB_traits<GEOMKernel, Primitive> Traits;
+typedef CGAL::AABB_tree<Traits> Tree;
+typedef Tree::Primitive_id PrimitiveId;
+typedef std::list<PrimitiveId> IdList;
+typedef PairList::iterator PairIterator;
+
+bool connected(const CGSegment_3 &a, const CGSegment_3 &b, const double &tol= 1e-6)
+  {
+    bool retval= false;
+    if(&a!=&b)
+      {
+	const Pos3d &pa0= a.source();
+	const Pos3d &pa1= a.target();
+	const Pos3d &pb0= b.source();
+	const Pos3d &pb1= b.target();
+	const double d1= dist2(pa0,pb0);
+	if(d1<tol)
+	  { retval= true; }
+	else
+	  {
+	    const double d2= dist2(pa0,pb1);
+	    if(d2<tol)
+	      { retval= true; }
+	    else
+	      {
+		const double d3= dist2(pa1,pb0);
+		if(d3<tol)
+		  { retval= true; }
+		else
+		  {
+		    const double d4= dist2(pa1,pb1);
+		    if(d4<tol)
+		      { retval= true; }
+		  }
+	      }
+	  }
+      }
+    return retval;
+  }
+
+PairList getIntersections(SegmentVector &segments)
+  {
+    
+    // constructs the AABB tree and the internal search tree for 
+    // efficient distance computations.
+    Tree tree(segments.begin(),segments.end());
+    tree.accelerate_distance_queries();
+
+    PairList pairList;
+    std::set<ConstIterator> visited;    
+
+    for(ConstIterator i= segments.begin();i!= segments.end();i++)
+      {
+    	const CGSegment_3 &s= *i;
+        IdList intersectedPrimitives;
+    	tree.all_intersected_primitives(s,std::back_inserter(intersectedPrimitives));
+    	visited.insert(i);
+        for(IdList::iterator j= intersectedPrimitives.begin();j!= intersectedPrimitives.end();j++)
+          {
+    	    const Iterator k= *j;
+    	    if(visited.find(k)!=visited.end())
+    	      {
+    	        const auto &is= *k;
+    	        const bool itself= (&is==&s);
+    	        const bool conn= connected(is,s);
+    	        if(!itself && !conn)
+    	          pairList.push_back(IdPair(i,k));
+    	      }
+    	  }
+      }
+    return pairList;
+  }
+
+//! @brief Return the intersections between the segments in
+//! the container.
+int_pair_deque getIntersections(const std::deque<Segment3d> &segments)
+  {
+    // We copy the segments to CGAL (not a very elegant solution indeed).
+    const size_t sz= segments.size();
+    SegmentVector cgalSegments(sz);
+    for(size_t i= 0;i<sz;i++)
+      cgalSegments[i]= segments[i].ToCGAL();
+    PairList pairList= getIntersections(cgalSegments);
+    ConstIterator begin= cgalSegments.begin();
+    int_pair_deque retval;
+    for(PairList::const_iterator i= pairList.begin(); i!=pairList.end(); i++)
+      {
+	IdPair idPair= *i;
+	const int first= idPair.first-begin;
+	const int second= idPair.second-begin;
+	retval.push_back(int_pair(first,second));
+      }
+    return retval;
+  }

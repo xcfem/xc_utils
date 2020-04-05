@@ -168,9 +168,23 @@ class_<Polyline3d, bases<Linear3d, polyPos3d> >("Polyline3d")
   ;
 
 typedef std::deque<Polyline3d> dq_polyline3D;
-
 class_<dq_polyline3D>("dq_polyline3D")
   .def(vector_indexing_suite<dq_polyline3D>() )
   ;
+
+typedef std::deque<Segment3d> dq_segment3D;
+class_<dq_segment3D>("dq_segment3D")
+  .def(vector_indexing_suite<dq_segment3D>() )
+  ;
+
+class_<int_pair>("IntPair")
+  .def_readwrite("first", &std::pair<int, int>::first)
+  .def_readwrite("second", &std::pair<int, int>::second)
+  ;
+class_<int_pair_deque>("int_pair_deque")
+  .def(vector_indexing_suite<int_pair_deque>() )
+  ;
+
+def("getSegmentIntersections",getIntersections);
 
 #include "function_from_points/python_interface.tcc"

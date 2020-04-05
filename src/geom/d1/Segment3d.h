@@ -31,6 +31,9 @@
 class Dir3d;
 class VectorPos3d;
 
+typedef std::pair<int,int> int_pair;
+typedef std::deque<int_pair> int_pair_deque;
+
 //! @ingroup GEOM
 //
 //! @brief Segment en tres dimensiones.
@@ -88,8 +91,7 @@ class Segment3d : public Linear3d
     
     VectorPos3d Divide(int num_partes) const;
     
-    void Print(std::ostream &os) const;
-    
+    void Print(std::ostream &os) const;    
   };
 
 inline GEOM_FT dist2(const Pos3d &p,const Segment3d &r)
@@ -133,6 +135,7 @@ inline GeomObj3d::list_Pos3d intersection(const Ray3d &sr, const Segment3d &sg)
 inline GeomObj3d::list_Pos3d intersection(const Segment3d &sg1,const Segment3d &sg2)
   { return sg1.getIntersection(sg2); }
 
+int_pair_deque getIntersections(const std::deque<Segment3d> &);
 
 
 #endif
