@@ -8,7 +8,7 @@ ELSE (${CMAKE_VERSION_STRING} GREATER 2.8.4)
   MESSAGE ("CMake version is not greater than 2.8.4")
 ENDIF (${CMAKE_VERSION_STRING} GREATER 2.8.4)
 
-#Project name.
+# Project name.
 PROJECT(xc_utils)
 SET(build_setup_dir $ENV{HOME}/.xc_build)
 
@@ -31,9 +31,9 @@ SET(LIBRARY_OUTPUT_PATH ${xc_utils_LIB})
 
 INCLUDE_DIRECTORIES(${xc_utils_INC})
 
-enable_language(Fortran) #umfpack, itpack,
+enable_language(Fortran) # umfpack, itpack,
 
-INCLUDE(${xc_utils_DIR}/CMake/find_packages.txt)
+INCLUDE(${xc_utils_DIR}/CMake/find_packages.cmake)
 if(GTK2_FOUND)
   include_directories(${GTK2_INCLUDE_DIRS})
 endif()
@@ -44,8 +44,7 @@ if(MPI_FOUND)
 endif()
 
 
-#Biblioteca VTK
-#vtk
+# VTK library
 IF(USE_VTK_FILE)
   INCLUDE(${USE_VTK_FILE})
   message(STATUS "vtk file: ${USE_VTK_FILE}")
@@ -56,20 +55,18 @@ SET(XC_UTILS_BOOST_LIBRARIES ${Boost_LIBRARIES})
 list(APPEND XC_UTILS_BOOST_LIBRARIES ${XC_UTILS_BOOST_PYTHON_LIBRARIES})
 list(REMOVE_DUPLICATES XC_UTILS_BOOST_LIBRARIES)
 #MESSAGE(STATUS "Boost_LIBRARIES = ${XC_UTILS_BOOST_LIBRARIES}")
-#End of the Workaround.
 
-
-#Biblioteca GLIB (para gts)
+# Biblioteca GLIB (para gts)
 INCLUDE_DIRECTORIES(${GLIB2_INCLUDE_DIRS})
 
-#Biblioteca CGAL
+# CGAL library
 INCLUDE_DIRECTORIES(${CGAL_INCL_DIR})
 INCLUDE_DIRECTORIES(${CGAL_INCL_CONF_DIR})
 
-#Biblioteca SqLiteWrapped
+# SqLiteWrapped library
 INCLUDE_DIRECTORIES(${SQLITEWP_INCL_DIR})
 
-#Python
+# Python
 INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_DIRS})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 ${CMAKE_CXX_FLAGS_RELEASE} -Wall -march=native -pedantic -fPIC")
@@ -140,9 +137,9 @@ INSTALL(TARGETS xc_basic_utils DESTINATION lib)
 
 ADD_LIBRARY(xc_utils SHARED ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${KERNEL}  ${VtkAux} ${ca_factors} ${ca_actions} ${ca_combinations})
 
-#Python interface
+# Python interface
 link_libraries(xc_utils xc_basic_utils OpenMP::OpenMP_CXX ${VTK_BIB} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} ${XC_UTILS_BOOST_LIBRARIES} ${PYTHON_LIBRARIES} )
-target_link_libraries(xc_utils CGAL::CGAL CGAL::CGAL_Core) #CGAL stuff
+target_link_libraries(xc_utils CGAL::CGAL CGAL::CGAL_Core) # CGAL stuff
 
 ADD_DEFINITIONS(-fno-strict-aliasing)
 ADD_LIBRARY(xc_base SHARED kernel/python_interface.cc)
