@@ -10,7 +10,6 @@ ENDIF (${CMAKE_VERSION_STRING} GREATER 2.8.4)
 
 #Project name.
 PROJECT(xc_utils)
-
 SET(build_setup_dir $ENV{HOME}/.xc_build)
 
 SET(xc_utils_DIR ${CMAKE_SOURCE_DIR}/..)
@@ -44,6 +43,7 @@ if(MPI_FOUND)
   include_directories(${MPI_INCLUDE_PATH})
 endif()
 
+
 #Biblioteca VTK
 #vtk
 IF(USE_VTK_FILE)
@@ -52,20 +52,12 @@ IF(USE_VTK_FILE)
   SET(VTK_BIB vtkRendering vtkIO vtkHybrid)
   SET(VTK_FOUND 1)
 ENDIF(USE_VTK_FILE)
-#Workaround to allow CGAL to set the Boost_LIBRARIES variables
-#without removing the boost libraries that we also need to use.
-#LCPT 3/09/2018
 SET(XC_UTILS_BOOST_LIBRARIES ${Boost_LIBRARIES})
-MESSAGE(STATUS ${Boost_LIBRARIES})
-#Biblioteca CGAL
-IF(CGAL_USE_FILE)
-  INCLUDE(${CGAL_USE_FILE})
-  message(STATUS "cgal file: ${CGAL_USE_FILE}")
-ENDIF(CGAL_USE_FILE)
-ADD_TO_LIST(XC_UTILS_BOOST_LIBRARIES ${Boost_LIBRARIES})
-LIST(REMOVE_DUPLICATES XC_UTILS_BOOST_LIBRARIES)
-MESSAGE(STATUS ${XC_UTILS_BOOST_LIBRARIES})
+list(APPEND XC_UTILS_BOOST_LIBRARIES ${XC_UTILS_BOOST_PYTHON_LIBRARIES})
+list(REMOVE_DUPLICATES XC_UTILS_BOOST_LIBRARIES)
+#MESSAGE(STATUS "Boost_LIBRARIES = ${XC_UTILS_BOOST_LIBRARIES}")
 #End of the Workaround.
+
 
 #Biblioteca GLIB (para gts)
 INCLUDE_DIRECTORIES(${GLIB2_INCLUDE_DIRS})
@@ -80,9 +72,14 @@ INCLUDE_DIRECTORIES(${SQLITEWP_INCL_DIR})
 #Python
 INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_DIRS})
 
-ADD_DEFINITIONS(-Wall -O3 -march=native -frounding-math -pedantic -fPIC)
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
-#SET(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 ${CMAKE_CXX_FLAGS_RELEASE} -Wall -march=native -pedantic -fPIC")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
+MESSAGE(STATUS "**** compiler c flags ${CMAKE_C_FLAGS}")
+MESSAGE(STATUS "**** compiler cxx flags ${CMAKE_CXX_FLAGS}")
+MESSAGE(STATUS "**** linker flags ${CMAKE_EXE_LINKER_FLAGS}")
+# set(CMAKE_VERBOSE_MAKEFILE ON)
 
 SET(text_utils utils/text/text_string utils/text/LabelContainer utils/text/en_letra utils/text/StrTok utils/text/tab_cod utils/text/latex utils/text/StringFormatter utils/text/FixedWidthReader)
 SET(stream_utils utils/streams/imanip utils/streams/prep)
@@ -134,17 +131,18 @@ SET(KERNEL kernel/EntityWithProperties kernel/CommandEntity kernel/NamedEntity k
 
 SET(ca_factors loadCombinations/factors/PartialSafetyFactors loadCombinations/factors/PartialSafetyFactorsMap loadCombinations/factors/CombinationFactors loadCombinations/factors/CombinationFactorsMap loadCombinations/factors/Factors)
 
-SET(ca_acciones loadCombinations/actions/LeadingActionInfo loadCombinations/actions/Action loadCombinations/actions/ActionRelationships loadCombinations/actions/ActionRValue loadCombinations/actions/ActionRValueList loadCombinations/actions/ActionsFamily loadCombinations/actions/ActionContainer loadCombinations/actions/ActionsAndFactors)
+SET(ca_actions loadCombinations/actions/LeadingActionInfo loadCombinations/actions/Action loadCombinations/actions/ActionRelationships loadCombinations/actions/ActionRValue loadCombinations/actions/ActionRValueList loadCombinations/actions/ActionsFamily loadCombinations/actions/ActionContainer loadCombinations/actions/ActionsAndFactors)
 
 SET(ca_combinations loadCombinations/comb_analysis/Variation loadCombinations/comb_analysis/Variations loadCombinations/comb_analysis/LoadCombinationVector loadCombinations/comb_analysis/LoadCombinations loadCombinations/comb_analysis/ActionWeightingMap loadCombinations/comb_analysis/LoadCombinationGenerator)
 
 ADD_LIBRARY(xc_basic_utils ${text_utils} ${stream_utils} ${misc_utils} ${sqlitepp_utils} ${matrices} ${three_d_arrays} ${skypack} ${itpack} ${umfpack} ${functions})
 INSTALL(TARGETS xc_basic_utils DESTINATION lib)
 
-ADD_LIBRARY(xc_utils SHARED ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${KERNEL}  ${VtkAux} ${ca_factors} ${ca_acciones} ${ca_combinations})
+ADD_LIBRARY(xc_utils SHARED ${SQLITE} ${cuadGauss} ${geom} ${GnuGts} ${KERNEL}  ${VtkAux} ${ca_factors} ${ca_actions} ${ca_combinations})
 
-#Interfaz Python
-LINK_LIBRARIES(xc_utils xc_basic_utils ${VTK_BIB} ${CGAL_LIBRARIES} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} boost_python ${XC_UTILS_BOOST_LIBRARIES} ${PYTHON_LIBRARIES})
+#Python interface
+link_libraries(xc_utils xc_basic_utils OpenMP::OpenMP_CXX ${VTK_BIB} ${Plot_LIBRARY} ${MPFR_LIBRARIES} ${GMP_LIBRARY} ${SQLITE3_LIBRARY} ${GNUGTS_LIBRARIES} ${XC_UTILS_BOOST_LIBRARIES} ${PYTHON_LIBRARIES} )
+target_link_libraries(xc_utils CGAL::CGAL CGAL::CGAL_Core) #CGAL stuff
 
 ADD_DEFINITIONS(-fno-strict-aliasing)
 ADD_LIBRARY(xc_base SHARED kernel/python_interface.cc)
