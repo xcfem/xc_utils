@@ -38,7 +38,7 @@ class Cylinder : public SolidExtru3d<Circle3d>
   public:
     Cylinder(void);
     Cylinder(const Circle3d &secc,const GEOM_FT &lng);
-    Cylinder &operator=(const Cylinder &se);
+
     virtual GeomObj *clon(void) const;
 
     BND3d Bnd(void) const;

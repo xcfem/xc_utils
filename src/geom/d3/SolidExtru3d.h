@@ -43,7 +43,8 @@ class SolidExtru3d : public Solid3d
   public:
     SolidExtru3d(void): Solid3d(), scc(),l(1.0) {}
     SolidExtru3d(const S &secc,const GEOM_FT &lng): scc(secc), l(lng) {}
-    SolidExtru3d(const SolidExtru3d<S> &se): Solid3d(se), scc(se.scc), l(se.l) {}
+    explicit SolidExtru3d(const SolidExtru3d<S> &se)
+      : Solid3d(se), scc(se.scc), l(se.l) {}
     SolidExtru3d<S> &operator=(const SolidExtru3d<S> &se)
       {
 	Solid3d::operator=(se);

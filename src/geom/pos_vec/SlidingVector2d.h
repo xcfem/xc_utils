@@ -39,14 +39,7 @@ class SlidingVector2d : public Vector2d
     SlidingVector2d(const Pos2d &o= Pos2d(),const Vector2d &v= Vector2d())
       : Vector2d(v), org(o) {}
     SlidingVector2d(const Pos2d &o,const Pos2d &p);
-    SlidingVector2d(const SlidingVector2d &other)
-      : Vector2d(other), org(other.org) {}
-    SlidingVector2d &operator=(const SlidingVector2d &other)
-      {
-        Vector2d::operator=(other);
-        org= other.org;
-        return *this;
-      }
+
     GEOM_FT getMoment(const Pos2d &o) const;
     const Pos2d &getOrg(void) const
       { return org; }

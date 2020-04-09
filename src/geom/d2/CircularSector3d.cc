@@ -32,18 +32,6 @@
 #include "boost/progress.hpp"
 
 
-//! @brief Constructor de copia
-CircularSector3d::CircularSector3d(const CircularSector3d &other)
-  : D2to3d(other), sect_circ(other.sect_circ) {}
-
-//! @brief Operador asignación.
-CircularSector3d &CircularSector3d::operator=(const CircularSector3d &p)
-  {
-    D2to3d::operator=(p);
-    sect_circ= p.sect_circ;
-    return *this;
-  }
-
 //! @brief Constructor virtual.
 D2to3d *CircularSector3d::clon(void) const
   { return new CircularSector3d(*this); }

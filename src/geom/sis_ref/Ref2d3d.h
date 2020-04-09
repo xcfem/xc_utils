@@ -44,7 +44,7 @@ class Ref2d3d : public Ref<Rect2d3dCooSys>
     typedef Ref<Rect2d3dCooSys> BaseRef;
   public:
     Ref2d3d(void);
-    Ref2d3d(const Pos3d &o);
+    explicit Ref2d3d(const Pos3d &o);
     Ref2d3d(const Pos3d &,const Rect2d3dCooSys &);
     Ref2d3d(const Pos3d &o,const Pos3d &p,const Pos3d &q);
     Ref2d3d(const Pos3d &o,const Vector3d &v);

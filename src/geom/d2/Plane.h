@@ -62,11 +62,10 @@ class Plane : public Surface3d
     Plane(const Pos3d &p,const Vector3d &v1,const Vector3d &v2);
     Plane(const Line3d &r,const Pos3d &p);
     Plane(const Segment3d &s,const Vector3d &v);
-    Plane(const Polygon3d &trg);
-    Plane(const Plane &);
-    Plane(const GeneralEquationOfPlane &eg);
-    Plane(const GeomObj3d::list_Pos3d &lp);
-    Plane &operator=(const Plane &);
+    explicit Plane(const Polygon3d &trg);
+    explicit Plane(const GeneralEquationOfPlane &eg);
+    explicit Plane(const GeomObj3d::list_Pos3d &lp);
+    
     virtual bool operator==(const Plane &) const;
 
     virtual GeomObj *clon(void) const;

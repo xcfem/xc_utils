@@ -33,7 +33,7 @@
 class Scaling2d: public Trf2d
   {
   public:
-    Scaling2d(const GEOM_FT &fe= 1.0);
+    explicit Scaling2d(const GEOM_FT &fe= 1.0);
   };
 
 #endif

@@ -43,13 +43,7 @@ class Triangle2d : public PolygonalSurface2d
     Triangle2d(const Pos2d p1,const Pos2d &p2,const Pos2d &p3)
      : PolygonalSurface2d(), cgtriang(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL())
       {}
-    Triangle2d(const Triangle2d &other) : PolygonalSurface2d(other), cgtriang(other.cgtriang) {}
-    Triangle2d &operator=(const Triangle2d &p)
-      {
-	PolygonalSurface2d::operator=(p);
-        cgtriang= p.cgtriang;
-        return *this;
-      }
+
     virtual PolygonalSurface2d *clon(void) const
       { return new Triangle2d(*this); }
     inline virtual unsigned int GetNumVertices(void) const

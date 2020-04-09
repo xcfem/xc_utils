@@ -36,13 +36,8 @@ class Square2d : public Quadrilateral2d
       : Quadrilateral2d(Pos2d(0,0),Pos2d(l,0),Pos2d(l,l),Pos2d(0,l)) {}
     Square2d(const Pos2d &o,const GEOM_FT &l= 1.0);
     //Square2d(const Ref2d &ref,const GEOM_FT &l= 1.0): PolygonalSurface(ref), lado(l) {}
-    Square2d(const Square2d &c): Quadrilateral2d(c) {}
     ~Square2d(void) {}
-    Square2d &operator=(const Square2d &c)
-      {
-	Quadrilateral2d::operator=(c);
-        return *this;
-      }
+
     virtual GeomObj *clon(void) const
       { return new Square2d(*this); }
 /*     void Offset(const GEOM_FT &offset) */

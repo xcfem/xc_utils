@@ -70,7 +70,7 @@ class Line3d : public Linear3d
     Line3d(const Pos3d &p1,const Pos3d &p2);
     Line3d(const Pos3d &p,const Dir3d &dir);
     Line3d(const Plane &p1,const Plane &p2);
-    Line3d(const Line3dParametricForm &param);
+    explicit Line3d(const Line3dParametricForm &param);
     virtual GeomObj *clon(void) const
       { return new Line3d(*this); }
     void TwoPoints(const Pos3d &p1,const Pos3d &p2);

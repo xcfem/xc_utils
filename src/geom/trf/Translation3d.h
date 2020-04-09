@@ -34,7 +34,7 @@ class Translation3d: public Trf3d
   {
   public:
     Translation3d(void);
-    Translation3d(const Vector3d &v);
+    explicit Translation3d(const Vector3d &v);
   };
 
 #endif

@@ -117,18 +117,6 @@ Plane::Plane(const Polygon3d &pg3d)
 Plane::Plane(const GeneralEquationOfPlane &eg)
   : Surface3d(), cgp(eg.a(),eg.b(),eg.c(),eg.d()) {}
 
-//! @brief Constructor
-Plane::Plane(const Plane &other)
-  : Surface3d(), cgp(other.cgp) {}
-
-//! @brief Assignment operator.
-Plane &Plane::operator=(const Plane &other)
-  {
-    cgp=(other.cgp);
-    Surface3d::operator=(other);
-    return *this;
-  }
-
 GeomObj *Plane::clon(void) const
   { return new Plane(*this); }
 

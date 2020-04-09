@@ -20,8 +20,8 @@
 //----------------------------------------------------------------------------
 //Solid3d.h
 
-#ifndef SOLIDO3D_H
-#define SOLIDO3D_H
+#ifndef SOLID3D_H
+#define SOLID3D_H
 
 #include "GeomObj3d.h"
 

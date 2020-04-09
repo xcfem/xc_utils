@@ -45,14 +45,7 @@ class Circle2d : public Surface2d
     Circle2d(const Pos2d &centro,const GEOM_FT &rad);
     Circle2d(const GEOM_FT &rad2,const Pos2d &centro);
     Circle2d(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3);
-    Circle2d(const Circle2d &other)
-     : Surface2d(other), cgcirc(other.cgcirc) {}
-    Circle2d &operator=(const Circle2d &p)
-      {
-	Surface2d::operator=(p);
-        cgcirc= p.cgcirc;
-        return *this;
-      }
+    
     virtual Surface2d *clon(void) const
       { return new Circle2d(*this); }
     Pos2d Centro(void) const;

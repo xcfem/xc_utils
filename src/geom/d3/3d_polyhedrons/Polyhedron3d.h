@@ -43,7 +43,7 @@ class Polyhedron3d: public PolyhedronBase
   protected:
     CGPolyhedron_3 cgpolyhedron;
 
-    Polyhedron3d(const CGPolyhedron_3 &cgp) 
+    explicit Polyhedron3d(const CGPolyhedron_3 &cgp) 
       : PolyhedronBase(), cgpolyhedron(cgp) {}
     void make_tetrahedron(const Pos3d &p0, const Pos3d &p1,const Pos3d &p2, const Pos3d &p3);
     void make_tetrahedron(const HalfSpace3d &, const HalfSpace3d &,const HalfSpace3d &, const HalfSpace3d &);

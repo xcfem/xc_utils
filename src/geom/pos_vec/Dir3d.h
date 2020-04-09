@@ -36,10 +36,10 @@ class Dir3d
   {
     CGDirection_3 cgd;
   public:
-    Dir3d(const CGDirection_3 &d)
+    explicit Dir3d(const CGDirection_3 &d)
       : cgd(d) {}
     Dir3d(GEOM_FT x,GEOM_FT y,GEOM_FT z);
-    Dir3d(const Vector3d &v);
+    explicit Dir3d(const Vector3d &v);
     virtual bool operator==(const Dir3d &) const;
     const CGDirection_3 &ToCGAL(void) const
       { return cgd; }

@@ -35,13 +35,7 @@ class Linear2d : public GeomObj2d
   {
   public:
     Linear2d(void): GeomObj2d(){}
-    Linear2d(const Linear2d &l): GeomObj2d(l){}
     ~Linear2d(void) {}
-    Linear2d &operator=(const Linear2d &l)
-      {
-	GeomObj2d::operator=(l);
-        return *this;
-      }
     virtual GeomObj *clon(void) const= 0;
     inline virtual unsigned short int Dimension(void) const
       { return 1; }

@@ -39,18 +39,11 @@ class Ray2d : public Linear2d
     friend class Segment2d;
   public:
     Ray2d(void): Linear2d(),cgsr(CGPoint_2(0,0),CGPoint_2(1,0)) {}
-    Ray2d(const CGRay_2 &r)
+    explicit Ray2d(const CGRay_2 &r)
       : Linear2d(), cgsr(r) {}
     Ray2d(const Pos2d &p1,const Pos2d &p2);
     Ray2d(const Pos2d &p1,const Vector2d &vdir);
-    Ray2d(const Ray2d &r)
-      : Linear2d(),cgsr(r.cgsr) {}
-    Ray2d &operator=(const Ray2d &r)
-      {
-	Linear2d::operator=(r);
-        cgsr= r.cgsr;
-        return *this;
-      }
+
     virtual bool operator==(const Ray2d &) const;
     const CGRay_2 &ToCGAL(void) const
       { return cgsr; }

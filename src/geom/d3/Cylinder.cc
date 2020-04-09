@@ -29,13 +29,6 @@ Cylinder::Cylinder(void) {}
 Cylinder::Cylinder(const Circle3d &secc,const GEOM_FT &lng)
   : SolidExtru3d<Circle3d>(secc,lng) {}
 
-//! @brief Operador asignación.
-Cylinder &Cylinder::operator=(const Cylinder &se)
-  {
-    solid_extru_cil::operator=(se);
-    return *this;
-  }
-
 //! @brief Constructor virtual.
 GeomObj *Cylinder::clon(void) const
   { return new Cylinder(*this); }

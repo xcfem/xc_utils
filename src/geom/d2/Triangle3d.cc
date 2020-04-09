@@ -28,16 +28,8 @@
 Triangle3d::Triangle3d(const Ref2d3d &rf,const Triangle2d &t)
   : Polygon3d(rf,t.getPolygon()) {}
 Triangle3d::Triangle3d(void): Polygon3d() {}
-Triangle3d::Triangle3d(const Triangle3d &other)
-  : Polygon3d(other) {}
 Triangle3d::Triangle3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   : Polygon3d(p1,p2,p3) {}
-
-Triangle3d &Triangle3d::operator =(const Triangle3d &other) 
-  {
-    Polygon3d::operator=(other);
-    return *this;
-  }
 
 //! @brief Return the squared distance from the point to the triangle.
 GEOM_FT Triangle3d::dist2(const Pos3d &p) const

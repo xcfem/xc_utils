@@ -42,21 +42,15 @@ class Vector2d: public ProtoGeom
     CGVector_2 cgvct;
   public:
     Vector2d(void): ProtoGeom(), cgvct(CGAL::NULL_VECTOR) {}
-    Vector2d(const CGVector_2 &v)
+    explicit Vector2d(const CGVector_2 &v)
       : ProtoGeom(), cgvct(v) {}
-    Vector2d(const CGDirection_2 &dir)
+    explicit Vector2d(const CGDirection_2 &dir)
       : ProtoGeom(), cgvct(dir.vector()) {}
     Vector2d(const GEOM_FT &x,const GEOM_FT &y);
 /*     Vector2d(const double &x,const double &y); */
-    Vector2d(const FT_matrix &m);
+    explicit Vector2d(const FT_matrix &m);
     Vector2d(const Pos2d &p1,const Pos2d &p2);
-    Vector2d(const Vector2d &other): cgvct(other.cgvct){}
-    Vector2d &operator=(const Vector2d &other)
-      {
-	ProtoGeom::operator=(other);
-        cgvct=other.cgvct;
-        return *this;
-      }
+
     virtual bool operator==(const Vector2d &) const;
     const CGVector_2 &ToCGAL(void) const
       { return cgvct; }

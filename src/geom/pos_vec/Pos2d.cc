@@ -47,18 +47,6 @@ Pos2d::Pos2d(const GEOM_FT &Ax,const GEOM_FT &Ay)
 Pos2d::Pos2d(const GEOM_RT &x,const GEOM_RT &y,const GEOM_RT &h)
   : ProtoGeom(), cgpt(x,y,h) {}
 
-//! @brief Copy constructor
-Pos2d::Pos2d(const Pos2d &other)
-  : ProtoGeom(other), cgpt(other.cgpt) {}
-
-//! @brief Assignment operator.
-Pos2d &Pos2d::operator=(const Pos2d &other)
-  {
-    ProtoGeom::operator=(other);
-    cgpt= other.cgpt;
-    return *this;
-  }
-
 //! @brief Suma de un vector.
 Pos2d &Pos2d::operator+=(const Vector2d &v)
   {

@@ -156,14 +156,14 @@ GeomObj::list_Pos3d Polyhedron3d::getVertices(void) const
   {
     GeomObj::list_Pos3d retval;
     for(CGPolyhedron_3::Vertex_const_iterator vi= cgpolyhedron.vertices_begin();vi!=cgpolyhedron.vertices_end();vi++)
-      retval.push_back(vi->point());
+      retval.push_back(Pos3d(vi->point()));
     return retval;
   }
 
 Plane Polyhedron3d::getPlaneFromFace(const Facet_const_iterator &f) const
   {
     Facet::Halfedge_const_handle h= f->halfedge();
-    Plane retval(h->vertex()->point(),h->next()->vertex()->point(),h->next()->next()->vertex()->point());
+    Plane retval(Pos3d(h->vertex()->point()),Pos3d(h->next()->vertex()->point()),Pos3d(h->next()->next()->vertex()->point()));
     return retval;
   }
 
@@ -257,9 +257,9 @@ GEOM_FT Polyhedron3d::PseudoDist(const Pos3d &p) const
     const size_t nv= GetNumVertices();
     assert(nv>0);
     Polyhedron3d::Vertex_const_iterator pVertex0= vertices_begin();
-    if(nv==1) return p.dist(pVertex0->point());
+    if(nv==1) return p.dist(Pos3d(pVertex0->point()));
     Polyhedron3d::Vertex_const_iterator pVertex1= pVertex0; pVertex1++;
-    if(nv==2) return p.dist(Segment3d(pVertex0->point(),pVertex1->point()));
+    if(nv==2) return p.dist(Segment3d(Pos3d(pVertex0->point()),Pos3d(pVertex1->point())));
     Polyhedron3d::Facet_const_iterator i= facets_begin();
     const Plane pl(getPlaneFromFace(i));
     GEOM_FT retval= pl.PseudoDist(p);

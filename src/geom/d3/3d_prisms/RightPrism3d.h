@@ -41,13 +41,6 @@ class RightPrism3d : public Prism3d
   public:
     RightPrism3d(void) {}
     RightPrism3d(const PG &secc,const GEOM_FT &lng): Prism3d(), extru(secc,lng) {}
-    RightPrism3d(const RightPrism3d<PG> &se): Prism3d(se), extru(se.extru) {}
-    RightPrism3d<PG> &operator=(const RightPrism3d<PG> &se)
-      {
-	Prism3d::operator=(se);
-	extru=se.extru;
-        return *this;
-      }
     inline virtual GeomObj *clon(void) const
       { return new RightPrism3d<PG>(*this); }
     inline void Offset(const GEOM_FT &offset)

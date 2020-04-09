@@ -39,9 +39,8 @@ class Triangle3d: public Polygon3d
       { Polygon3d::push_back(p); }
   public:
     Triangle3d(void);
-    Triangle3d(const Triangle3d &);
     Triangle3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
-    Triangle3d &operator =(const Triangle3d &other) ;
+    
     virtual GeomObj *clon(void) const
       { return new Triangle3d(*this); }
 

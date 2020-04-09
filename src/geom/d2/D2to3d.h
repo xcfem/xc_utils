@@ -47,9 +47,9 @@ class D2to3d: public Surface3d
     Pos3dArray to_3d(const Pos2dArray &p2d) const;
     Pos2d to_2d(const Pos3d &p3d) const;
 
-    D2to3d(const Ref2d3d &rf)
+    explicit D2to3d(const Ref2d3d &rf)
       : ref(rf) {}
-    D2to3d(const Pos3d &o);
+    explicit D2to3d(const Pos3d &o);
     D2to3d(const Pos3d &o,const Pos3d &p,const Pos3d &q);
     D2to3d(const Pos3d &o,const Vector3d &n,const Vector3d &i);
 
@@ -57,8 +57,7 @@ class D2to3d: public Surface3d
       { return ref; }
   public:
     D2to3d(void);
-    D2to3d(const D2to3d &);
-    D2to3d &operator =(const D2to3d &);
+    
     virtual bool operator==(const D2to3d &) const;
     void ThreePoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
 

@@ -39,17 +39,10 @@ class Segment2d : public Linear2d
     CGSegment_2 cgseg;
   public:
     Segment2d(void): Linear2d(),cgseg(CGPoint_2(0,0),CGPoint_2(1,0)) {}
-    Segment2d(const CGSegment_2 &r)
+    explicit Segment2d(const CGSegment_2 &r)
       : Linear2d(), cgseg(r) {}
     Segment2d(const Pos2d &p1,const Pos2d &p2);
-    Segment2d(const Segment2d &r)
-      : Linear2d(),cgseg(r.cgseg) {}
-    Segment2d &operator=(const Segment2d &r)
-      {
-	Linear2d::operator=(r);
-        cgseg= r.cgseg;
-        return *this;
-      }
+    
     virtual bool operator==(const Segment2d &) const;
     const CGSegment_2 &ToCGAL(void) const
       { return cgseg; }

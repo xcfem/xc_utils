@@ -66,19 +66,6 @@ CircularSector2d::CircularSector2d(const Circle2d &c,const double &th1,const dou
       theta1-= 2*M_PI;
   }
 
-//! @brief Copy constructor
-CircularSector2d::CircularSector2d(const CircularSector2d &other)
-  : Circle2d(other), theta1(other.theta1), theta2(other.theta2) {}
-
-//! @brief Operador asignacion.
-CircularSector2d &CircularSector2d::operator=(const CircularSector2d &p)
-  {
-    Circle2d::operator=(p);
-    theta1= p.theta1;
-    theta2= p.theta2;
-    return *this;
-  }
-
 //! @brief Comparison operator.
 bool CircularSector2d::operator==(const CircularSector2d &other) const
   {

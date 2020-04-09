@@ -37,8 +37,6 @@ class Rect3d3dCooSys: public Xd3dCooSys
     typedef Pos3d PLocal; //Dimensión del vector en locales.
   public:
     Rect3d3dCooSys(void): Xd3dCooSys(3) {}
-    Rect3d3dCooSys(const Rect3d3dCooSys &other)
-      : Xd3dCooSys(other) {}
     Rect3d3dCooSys(const PGlobal &o,const PGlobal &p);
     Rect3d3dCooSys(const PGlobal &p1,const PGlobal &p2, const PGlobal &p3);
     Rect3d3dCooSys(const VGlobal &v1,const VGlobal &v2,const VGlobal &v3);

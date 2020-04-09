@@ -41,17 +41,10 @@ class Polygon3d: public D2to3d
 
   public:
     Polygon3d(void): D2to3d(),plg2d() {}
-    Polygon3d(const Polygon3d &other)
-      :  D2to3d(other),plg2d(other.plg2d) {}
     template <typename InputIterator>
     Polygon3d(InputIterator first,InputIterator last);
     Polygon3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
-    Polygon3d &operator =(const Polygon3d &other) 
-      {
-	D2to3d::operator=(other);
-        plg2d=other.plg2d;
-        return *this;
-      }
+
     virtual GeomObj *clon(void) const
       { return new Polygon3d(*this); }
 

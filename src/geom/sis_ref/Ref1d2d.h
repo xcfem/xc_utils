@@ -45,7 +45,7 @@ class Ref1d2d : public Ref<Rect1d2dCooSys>
 
   public:
     Ref1d2d(void);
-    Ref1d2d(const Pos2d &);
+    explicit Ref1d2d(const Pos2d &);
     Ref1d2d(const Pos2d &,const Rect1d2dCooSys &);
     Ref1d2d(const Pos2d &o,const Vector2d &vX);
     Ref1d2d(const Pos2d &o,const Dir2d &dirX);

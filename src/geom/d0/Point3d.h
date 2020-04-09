@@ -34,9 +34,8 @@ class Point3d : public GeomObj3d
     Pos3d org;
   public:
     Point3d(void) : GeomObj3d() {}
-    Point3d(GEOM_FT x,GEOM_FT y,GEOM_FT z=0) : GeomObj3d(), org(Pos3d(x,y,z))
-      {}
-    Point3d(const Point3d &other) : GeomObj3d(other), org(other.org) {}
+    Point3d(GEOM_FT x,GEOM_FT y,GEOM_FT z=0)
+      : GeomObj3d(), org(Pos3d(x,y,z)) {}
     Point3d &operator=(const Point3d &p)
       {
 	GeomObj3d::operator=(p);

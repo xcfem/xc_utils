@@ -40,6 +40,11 @@ class Polygon2d: public PolygonalSurface2d
     CGPolygon_2 cgpol; //CGAL polygon.
     template <class inputIterator>
     bool Overlap(inputIterator begin, inputIterator end) const;
+  protected:
+    inline bool In(const CGPoint_2 &p) const
+      { return In(Pos2d(p)); }
+    inline bool Overlap(const CGPoint_2 &p) const
+      { return Overlap(Pos2d(p)); }     
   public:
 
     typedef CGPolygon_2::Vertex_iterator vertex_iterator; 
@@ -150,7 +155,7 @@ class Polygon2d: public PolygonalSurface2d
     //! @brief Return the position of the i-th vertex
     //! (0 based: j=0..GetNumVertices()-1).
     inline Pos2d Vertice0(unsigned int j) const
-      { return cgpol.vertex(j); }
+      { return Pos2d(cgpol.vertex(j)); }
     GeomObj::list_Pos2d getVertexList(void) const;
 
     void Transform(const Trf2d &trf2d);
@@ -196,7 +201,7 @@ bool Polygon2d::In(inputIterator begin, inputIterator end) const
   {
     bool retval= true;
     for(inputIterator i= begin;i!=end;i++)
-      if(!In(*i))
+      if(!In(Pos2d(*i)))
         {
           retval= false;
           break;

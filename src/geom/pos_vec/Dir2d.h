@@ -37,10 +37,10 @@ class Dir2d
   {
     CGDirection_2 cgd;
   public:
-    Dir2d(const CGDirection_2 d): cgd(d) {}
+    explicit Dir2d(const CGDirection_2 d): cgd(d) {}
     Dir2d(const GEOM_FT &x,const GEOM_FT &y);
-    Dir2d(const double &ang);
-    Dir2d(const Vector2d &v);
+    explicit Dir2d(const double &ang);
+    explicit Dir2d(const Vector2d &v);
     virtual bool operator==(const Dir2d &) const;
     const CGDirection_2 &ToCGAL(void) const
       { return cgd; }

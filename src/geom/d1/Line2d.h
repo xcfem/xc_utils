@@ -70,9 +70,8 @@ class Line2d : public Linear2d
     Line2d(const Pos2d &p1,const Pos2d &p2);
     Line2d(const Pos2d &p,const Dir2d &dir);
     Line2d(const Pos2d &p,const Vector2d &vdir);
-    Line2d(const Line2d &r);
-    Line2d(const Line2dParametricForm &param);
-    Line2d &operator=(const Line2d &r);
+    explicit Line2d(const Line2dParametricForm &param);
+    
     virtual bool operator==(const Line2d &) const;
     const CGLine_2 &ToCGAL(void) const;
     virtual GeomObj *clon(void) const;

@@ -60,7 +60,7 @@ Polygon2d get_convex_hull2d(InputIterator first,InputIterator last)
      CGAL::convex_hull_2(first, last, std::back_inserter(result));
     Polygon2d retval;
     for(std::vector<Point_2>::const_iterator i= result.begin();i!=result.end();i++)
-      retval.push_back(Point_to_Pos2d(*i));
+      retval.push_back(Pos2d(Point_to_Pos2d(*i)));
     return retval;
   }
 Polygon2d get_convex_hull2d(const GeomObj::list_Pos2d &lp)

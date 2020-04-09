@@ -44,7 +44,7 @@ class Ref3d3d : public Ref<Rect3d3dCooSys>
 
   public:
     Ref3d3d(void);
-    Ref3d3d(const Pos3d &o);
+    explicit Ref3d3d(const Pos3d &o);
     Ref3d3d(const Pos3d &,const Rect3d3dCooSys &);
     Ref3d3d(const Pos3d &o,const Pos3d &p);
     Ref3d3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);

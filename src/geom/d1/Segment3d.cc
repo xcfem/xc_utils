@@ -49,18 +49,6 @@ Segment3d::Segment3d(const Pos3d &p1,const Pos3d &p2)
       }
   }
 
-//! @brief Constructor.
-Segment3d::Segment3d(const Segment3d &r)
-  : Linear3d(),cgseg(r.cgseg) {}
-
-//! @brief Operador asignación.
-Segment3d &Segment3d::operator=(const Segment3d &r)
-  {
-    Linear3d::operator=(r);
-    cgseg= r.cgseg;
-    return *this;
-  }
-
 //! @brief Comparison operator.
 bool Segment3d::operator==(const Segment3d &other) const
   {
@@ -285,10 +273,10 @@ bool connected(const CGSegment_3 &a, const CGSegment_3 &b, const double &tol= 1e
     bool retval= false;
     if(&a!=&b)
       {
-	const Pos3d &pa0= a.source();
-	const Pos3d &pa1= a.target();
-	const Pos3d &pb0= b.source();
-	const Pos3d &pb1= b.target();
+	const Pos3d &pa0= Pos3d(a.source());
+	const Pos3d &pa1= Pos3d(a.target());
+	const Pos3d &pb0= Pos3d(b.source());
+	const Pos3d &pb1= Pos3d(b.target());
 	const double d1= dist2(pa0,pb0);
 	if(d1<tol)
 	  { retval= true; }

@@ -44,7 +44,7 @@ class BlockPyramid: public GeomObj3d
     std::deque<Vector3d> haz_vectores_interiores(void) const;
   public:
     BlockPyramid(void);
-    BlockPyramid(const std::deque<HalfSpace3d> &);
+    explicit BlockPyramid(const std::deque<HalfSpace3d> &);
     virtual GeomObj *clon(void) const
       { return new BlockPyramid(*this); }
     inline unsigned short int Dimension(void) const

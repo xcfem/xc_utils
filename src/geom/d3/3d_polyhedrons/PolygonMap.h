@@ -29,6 +29,7 @@
 #include <CGAL/Polyhedron_incremental_builder_3.h>
 #include <iostream>
 #include <map>
+#include "xc_utils/src/geom/pos_vec/Pos3d.h"
 
 
 //! @ingroup GEOM
@@ -204,7 +205,7 @@ class Build_tdest_polyhedron: public CGAL::Modifier_base<HDS>
   };
 
 template <class TPOLORG,class HDS,class CVPOS>
-  void Build_tdest_polyhedron<TPOLORG,HDS,CVPOS>::operator()(HDS& hds)
+void Build_tdest_polyhedron<TPOLORG,HDS,CVPOS>::operator()(HDS& hds)
   {
     const size_t num_facetas= sf.size_of_facets();
     const size_t num_edges= sf.size_of_halfedges();
@@ -216,7 +217,8 @@ template <class TPOLORG,class HDS,class CVPOS>
     B.begin_surface(num_vertices,num_facetas,num_edges);
     for(vconst_iter i= mt.VerticesBegin();i!=mt.VerticesEnd();i++)
       {
-        B.add_vertex(CVPOS()((*i).second));        
+	auto p= (*i).second;
+        B.add_vertex(CVPOS()(p));        
       }
     for(cconst_iter j= mt.CarasBegin();j!=mt.CarasEnd();j++)
       {

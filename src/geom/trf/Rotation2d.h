@@ -33,7 +33,7 @@
 class Rotation2d: public Trf2d
   {
   public:
-    Rotation2d(const double &ang_rad= 0.0);
+    explicit Rotation2d(const double &ang_rad= 0.0);
   };
 
 #endif

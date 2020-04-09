@@ -46,12 +46,7 @@ class Rectangle2d: public Quadrilateral2d
         push_back(o+Vector2d(0,h));
       }
       //Rectangle2d(const Ref2d &ref, const double &b=1.0,const double &h=1.0) : Quadrilateral2d(ref,b),altura(h) {}
-    Rectangle2d(const Rectangle2d &r): Quadrilateral2d(r) {}
-    Rectangle2d &operator=(const Rectangle2d &r)
-      {
-	Quadrilateral2d::operator=(r);
-        return *this;
-      }
+
     virtual GeomObj *clon(void) const
       { return new Rectangle2d(*this); }
 /*     void Offset(const double &offset) */

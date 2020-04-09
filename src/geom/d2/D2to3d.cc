@@ -58,18 +58,6 @@ D2to3d::D2to3d(const Pos3d &o)
   : Surface3d(), ref(o)
   {}
 
-//! @brief Constructor.
-D2to3d::D2to3d(const D2to3d &other)
-  : Surface3d(other), ref(other.ref) {}
-
-//! @brief Operador asignación.
-D2to3d &D2to3d::operator=(const D2to3d &other) 
-  {
-    Surface3d::operator=(other);
-    ref= other.ref;
-    return *this;
-  }
-
 //! @brief Comparison operator.
 bool D2to3d::operator==(const D2to3d &other) const
   {

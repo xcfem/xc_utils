@@ -44,7 +44,7 @@ class BspTree3d
   public:
     BspTree3d(void)
       : particion(), polygons(), front(nullptr), back(nullptr) {}
-    BspTree3d(const polygons_list &polygons)
+    explicit BspTree3d(const polygons_list &polygons)
       : particion(), polygons(), front(nullptr), back(nullptr)
       { Build_BSP_Tree(this,polygons); }
     inline BspTree3d *Delante(void) const

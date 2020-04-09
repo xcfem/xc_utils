@@ -44,8 +44,6 @@ class Segment3d : public Linear3d
     Segment3d(void);
     Segment3d(const CGSegment_3 &r);
     Segment3d(const Pos3d &p1,const Pos3d &p2);
-    Segment3d(const Segment3d &r);
-    Segment3d &operator=(const Segment3d &r);
     virtual bool operator==(const Segment3d &) const;
 
     const CGSegment_3 &ToCGAL(void) const

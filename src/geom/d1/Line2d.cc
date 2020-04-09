@@ -67,20 +67,9 @@ Line2d::Line2d(const Pos2d &p,const Vector2d &vdir)
 Line2d::Line2d(const CGLine_2 &r)
   : Linear2d(), cgr(r) {}
 
-Line2d::Line2d(const Line2d &r)
-  : Linear2d(),cgr(r.cgr) {}
-
 //! @brief Constructs the line from its parametric equation.
 Line2d::Line2d(const Line2dParametricForm &param): Linear2d(),cgr(CGPoint_2(0,0),CGPoint_2(1,0))
   { Parametricas(param); }
-
-//! @brief Assignment operator.
-Line2d &Line2d::operator=(const Line2d &r)
-  {
-    Linear2d::operator=(r);
-    cgr= r.cgr;
-    return *this;
-  }
 
 //! @brief Comparison operator.
 bool Line2d::operator==(const Line2d &other) const

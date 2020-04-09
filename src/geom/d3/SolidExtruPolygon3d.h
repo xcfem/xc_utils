@@ -38,11 +38,7 @@ class SolidExtruPolygon3d : public SolidExtru3d<PG>
   public:
     SolidExtruPolygon3d(void) {}
     SolidExtruPolygon3d(const PG &secc,const GEOM_FT &lng): solid_extru_pg(secc,lng) {}
-    SolidExtruPolygon3d<PG> &operator=(const SolidExtruPolygon3d<PG> &se)
-      {
-	solid_extru_pg::operator=(se);
-        return *this;
-      }
+
     virtual GeomObj *clon(void) const
       { return new SolidExtruPolygon3d<PG>(*this); }
     virtual unsigned int GetNumVertices(void) const

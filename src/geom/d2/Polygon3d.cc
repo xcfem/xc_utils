@@ -45,7 +45,7 @@ GeomObj::list_Pos3d Polygon3d::getVertexList(void) const
     GeomObj::list_Pos3d retval;
     register Polygon2d::vertex_iterator i= plg2d.vertices_begin();
     for(;i!=plg2d.vertices_end();i++)
-      retval.push_back(to_3d(*i));
+      retval.push_back(to_3d(Pos2d(*i)));
     return retval;
   }
 Segment3d Polygon3d::Lado(unsigned int i) const
@@ -225,7 +225,7 @@ bool Polygon3d::TocaCuadrante(const int &cuadrante) const
   {
     register Polygon2d::vertex_iterator i= plg2d.vertices_begin();
     for(;i!=plg2d.vertices_end();i++)
-      if(to_3d(*i).Cuadrante() == cuadrante)
+      if(to_3d(Pos2d(*i)).Cuadrante() == cuadrante)
         return true;
     return false;
   }

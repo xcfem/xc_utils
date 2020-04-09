@@ -44,13 +44,7 @@ class Rect2d3dCooSys: public Xd3dCooSys
     Rect2d3dCooSys(const VGlobal &v);
     Rect2d3dCooSys(const VGlobal &v1,const VGlobal &v2);
     Rect2d3dCooSys(const PGlobal &p1,const PGlobal &p2, const PGlobal &p3);
-    Rect2d3dCooSys(const Rect2d3dCooSys &other)
-      : Xd3dCooSys(other) {}
-    Rect2d3dCooSys &operator=(const Rect2d3dCooSys &other)
-      {
-	Xd3dCooSys::operator=(other);
-        return *this;
-      }
+
     virtual CooSys *Copia(void) const
       { return new Rect2d3dCooSys(*this); }
     virtual Xd3dCooSys *CopiaXd3d(void) const

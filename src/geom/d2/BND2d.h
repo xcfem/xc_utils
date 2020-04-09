@@ -41,6 +41,11 @@ class BND2d: public GeomObj2d
     bool undefined;
     template <class inputIterator>
     bool Overlap(inputIterator begin, inputIterator end) const;
+  protected:
+    inline bool In(const CGPoint_2 &p) const
+      { return In(Pos2d(p)); }
+    inline bool Overlap(const CGPoint_2 &p) const
+      { return Overlap(Pos2d(p)); }     
   public:
     BND2d(void);
     BND2d(const Pos2d &p_min,const Pos2d &p_max);
@@ -103,10 +108,10 @@ class BND2d: public GeomObj2d
 
     void Transform(const Trf2d &trf2d);
 
-    BND2d &operator +=(const Pos2d &p);
-    BND2d &operator +=(const BND2d &a);
-    friend BND2d operator +(const BND2d &a, const BND2d &b);
-    friend bool operator ==(const BND2d &a,const BND2d &b);
+    BND2d &operator+=(const Pos2d &p);
+    BND2d &operator+=(const BND2d &a);
+    friend BND2d operator+(const BND2d &a, const BND2d &b);
+    friend bool operator==(const BND2d &a,const BND2d &b);
     void Print(std::ostream &stream) const;
     void Plot(Plotter &) const;
   };

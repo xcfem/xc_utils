@@ -26,13 +26,7 @@
 
 TriangularPrism3d::TriangularPrism3d(const Triangle3d &tr,const double &h)
   : triangular_prism(Triangle3d(tr),h) {}
-TriangularPrism3d::TriangularPrism3d(const TriangularPrism3d &c)
-  : triangular_prism(c) {}
-TriangularPrism3d &TriangularPrism3d::operator=(const TriangularPrism3d &c)
-  {
-    triangular_prism::operator=(c);
-    return *this;
-  }
+
 GeomObj *TriangularPrism3d::clon(void) const
   { return new TriangularPrism3d(*this); }
 

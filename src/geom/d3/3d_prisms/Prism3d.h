@@ -33,12 +33,6 @@ class Prism3d : public Solid3d
   {
   public:
     Prism3d(void): Solid3d(){}
-    Prism3d(const Prism3d &p): Solid3d(p){}
-    Prism3d &operator=(const Prism3d &p)
-      {
-	Solid3d::operator=(p);
-        return *this;
-      }
   };
 #endif
 

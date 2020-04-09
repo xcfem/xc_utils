@@ -33,7 +33,7 @@
 class Translation2d: public Trf2d
   {
   public:
-    Translation2d(const Vector2d &v);
+    explicit Translation2d(const Vector2d &v);
   };
 
 #endif
