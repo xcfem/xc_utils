@@ -99,13 +99,13 @@ Pos3d Segment3d::PtoParametricas(const GEOM_FT &lambda) const
 
 //! @brief Return the parametric coordinate that corresponds
 //! to the natural coordinate being passed as parameter.
-double Segment3d::getParamCooNatural(const GEOM_FT &chi) const
+double Segment3d::getParamNaturalCoord(const GEOM_FT &chi) const
   { return (chi+1.0)/2.0; }
 
 //! @brief Return the parametric coordinate that corresponds
 //! to the natural coordinate being passed as parameter.
-Pos3d Segment3d::PtoCooNatural(const GEOM_FT &chi) const
-  { return PtoParametricas(getParamCooNatural(chi)); }
+Pos3d Segment3d::getPointNaturalCoord(const GEOM_FT &chi) const
+  { return PtoParametricas(getParamNaturalCoord(chi)); }
 
 inline bool Segment3d::EsDegenerada(void) const
   { return cgseg.is_degenerate(); }
@@ -121,7 +121,7 @@ Dir3d Segment3d::GetDir(void) const
 Vector3d Segment3d::VDir(void) const
   { return GetDir().GetVector(); }
 
-//! @brief Return el parámetro «lambda» tal que p= getFromPoint()+lambda*VDir()
+//! @brief Return the lambda parameter: p= getFromPoint()+lambda*VDir()
 GEOM_FT Segment3d::getLambda(const Pos3d &p) const
   {
     const Vector3d v(getFromPoint(),p);

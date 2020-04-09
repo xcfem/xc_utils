@@ -218,13 +218,13 @@ Pos2d Segment2d::PtoParametricas(const GEOM_FT &lambda) const
 
 //! @brief Return the parametric coordinate that corresponds to the
 //! natural coordinate argument.
-double Segment2d::getParamCooNatural(const GEOM_FT &chi) const
+double Segment2d::getParamNaturalCoord(const GEOM_FT &chi) const
   { return (chi+1.0)/2.0; }
 
 //! @brief Return the point of the segment with the natural coordinate
 //! being passed as parameter.
-Pos2d Segment2d::PtoCooNatural(const GEOM_FT &chi) const
-  { return PtoParametricas(getParamCooNatural(chi)); }
+Pos2d Segment2d::getPointNaturalCoord(const GEOM_FT &chi) const
+  { return PtoParametricas(getParamNaturalCoord(chi)); }
 
 bool Segment2d::intersects(const Line2d &r) const
   { return CGAL::do_intersect(r.cgr,cgseg); }

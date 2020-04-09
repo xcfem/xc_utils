@@ -60,8 +60,8 @@ class Segment3d : public Linear3d
     GEOM_FT getSlope(void) const;
     const Pos3d Point(const int &i) const;
     Pos3d PtoParametricas(const GEOM_FT &lambda) const;
-    double getParamCooNatural(const GEOM_FT &) const;
-    Pos3d PtoCooNatural(const GEOM_FT &chi) const;
+    double getParamNaturalCoord(const GEOM_FT &) const;
+    Pos3d getPointNaturalCoord(const GEOM_FT &chi) const;
     GEOM_FT getLambda(const Pos3d &p) const;
     bool EsDegenerada(void) const;
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const;
