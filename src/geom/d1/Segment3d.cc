@@ -252,6 +252,8 @@ GeomObj3d::list_Pos3d Segment3d::getIntersection(const Segment3d &sg2) const
 	    retval.push_back(Pos3d(*p));
           }
       }
+    else
+      retval= sg2.getIntersection(*this); // Sometimes this works.
     return retval;
   }
 
