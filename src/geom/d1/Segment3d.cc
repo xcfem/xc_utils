@@ -164,13 +164,24 @@ Pos3d Segment3d::getCenterOfMass(void) const
 //! if it doesn't exists return an empty list.
 GeomObj3d::list_Pos3d Segment3d::getIntersection(const Line3d &r) const
   {
-    const Line3d sop= getSupportLine();
-    GeomObj3d::list_Pos3d retval= sop.getIntersection(r);
-    if(!retval.empty()) //Intersection exists.
+    GeomObj3d::list_Pos3d retval;
+    auto result= intersection(cgseg, r.ToCGAL());
+    if(result)
       {
-        const Pos3d &pint= *retval.begin();
-        if(!In(pint)) //the intersection point is NOT on the segment.
-          retval.erase(retval.begin(),retval.end());
+	const CGSegment_3 *s= boost::get<CGSegment_3>(&*result);
+        if(s)
+	  {
+	    std::cerr << getClassName() << "::" << __FUNCTION__
+	              << "; segments is inside the line."
+	              << " All its points belong to their intersection set."
+	              << std::endl;
+            retval.push_back(getCenterOfMass()); //Return the segment center.
+	  }
+	else
+	  {
+            const CGPoint_3* p= boost::get<CGPoint_3 >(&*result);
+	    retval.push_back(Pos3d(*p));
+          }
       }
     return retval;
   }
@@ -179,13 +190,24 @@ GeomObj3d::list_Pos3d Segment3d::getIntersection(const Line3d &r) const
 //! the intersection doesn't exists returns an empty list.
 GeomObj3d::list_Pos3d Segment3d::getIntersection(const Ray3d &sr) const
   {
-    const Line3d sop= getSupportLine();
-    GeomObj3d::list_Pos3d retval= sr.getIntersection(sop);
-    if(!retval.empty()) //Intersection exists.
+    GeomObj3d::list_Pos3d retval;
+    auto result= intersection(cgseg, sr.ToCGAL());
+    if(result)
       {
-        const Pos3d &pint= *retval.begin();
-        if(!In(pint)) //the intersection point is NOT on the segment.
-          retval.erase(retval.begin(),retval.end());
+	const CGSegment_3 *s= boost::get<CGSegment_3>(&*result);
+        if(s)
+	  {
+	    std::cerr << getClassName() << "::" << __FUNCTION__
+	              << "; segments is inside the ray."
+	              << " All its points belong to their intersection set."
+	              << std::endl;
+            retval.push_back(getCenterOfMass()); //Return the segment center.
+	  }
+	else
+	  {
+            const CGPoint_3* p= boost::get<CGPoint_3 >(&*result);
+	    retval.push_back(Pos3d(*p));
+          }
       }
     return retval;
   }
@@ -211,14 +233,24 @@ GeomObj3d::list_Pos3d Segment3d::getIntersection(unsigned short int i, const dou
 //! the intersection doesn't exists returns an empty list.
 GeomObj3d::list_Pos3d Segment3d::getIntersection(const Segment3d &sg2) const
   {
-    const Line3d sop= getSupportLine();
-    GeomObj3d::list_Pos3d retval= sg2.getIntersection(sop);
-    if(!retval.empty()) //Intersection exists
+    GeomObj3d::list_Pos3d retval;
+    auto result= intersection(cgseg, sg2.cgseg);
+    if(result)
       {
-        const Pos3d &pint= *retval.begin(); //This point is on sg2 and on
-	                                    // the sg1 support line.
-        if(!In(pint)) //the intersection point is NOT on sg1.
-          retval.erase(retval.begin(),retval.end());
+	const CGSegment_3 *s= boost::get<CGSegment_3>(&*result);
+        if(s)
+	  {
+	    std::cerr << getClassName() << "::" << __FUNCTION__
+	              << "; both segments are coincident."
+	              << " All its points belong to their intersection set."
+	              << std::endl;
+            retval.push_back(getCenterOfMass()); //Return the segment center.
+	  }
+	else
+	  {
+            const CGPoint_3* p= boost::get<CGPoint_3 >(&*result);
+	    retval.push_back(Pos3d(*p));
+          }
       }
     return retval;
   }

@@ -260,8 +260,14 @@ GeomObj2d::list_Pos2d Segment2d::getIntersection(const Line2d &r) const
         result = CGAL::intersection(cgseg,r.cgr);
         if(CGAL::assign(ptoi, result))
           retval.push_back(Pos2d(ptoi));
-        else if(CGAL::assign(segi, result)) 
-          retval.push_back(getCenterOfMass()); //Return el centro de ESTE.
+        else if(CGAL::assign(segi, result))
+	  {
+	    std::cerr << getClassName() << "::" << __FUNCTION__
+	              << "; segments is inside the line."
+	              << " All its points belong to their intersection set."
+	              << std::endl;
+            retval.push_back(getCenterOfMass()); //Return el centro de ESTE.
+	  }
         else
           {
 	    Pos2d p= getFromPoint();
