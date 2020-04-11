@@ -262,11 +262,15 @@ GeomObj2d::list_Pos2d Segment2d::getIntersection(const Line2d &r) const
           retval.push_back(Pos2d(ptoi));
         else if(CGAL::assign(segi, result))
 	  {
-	    std::cerr << getClassName() << "::" << __FUNCTION__
-	              << "; segments is inside the line."
-	              << " All its points belong to their intersection set."
-	              << std::endl;
-            retval.push_back(getCenterOfMass()); //Return el centro de ESTE.
+            // This error message creates a false alarm when used
+	    // from Poygon2d::Clip called from getAnchoMecanico
+	    // in GeomSection.
+	    // std::cerr << getClassName() << "::" << __FUNCTION__
+	    //           << "; segment: " << (*this)
+	    //           << " is inside the line: " << r
+	    //           << ". All its points belong to their intersection set."
+	    //           << std::endl;
+            retval.push_back(getCenterOfMass()); // Return the center of this segment.
 	  }
         else
           {
