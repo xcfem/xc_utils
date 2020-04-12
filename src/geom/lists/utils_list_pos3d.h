@@ -24,6 +24,7 @@
 #define UTILS_LIST_POS3D_H
 
 #include "xc_utils/src/geom/GeomObj.h"
+#include "xc_utils/src/geom/pos_vec/Vector3d.h"
 
 class BND3d;
 class Trf3d;
@@ -39,6 +40,37 @@ void transform(GeomObj::list_Pos3d &l,const Trf3d &);
 Pos3d getPMax(const GeomObj::list_Pos3d &);
 Pos3d getPMin(const GeomObj::list_Pos3d &);
 BND3d getBnd(const GeomObj::list_Pos3d &);
+
+//! @brief Returns the maximum corner angle quality parameter.
+template <class InputIterator>
+double getMaxCornerAngle(InputIterator first, InputIterator last)
+  {
+    std::deque<Vector3d> vectors;
+    std::deque<Pos3d>::const_iterator i= first;
+    Pos3d ptA= *i;
+    i++;
+    for(;i!=last;i++)
+      {
+        Pos3d ptB= *i;
+	Vector3d v(ptA,ptB);
+        vectors.push_back(v);
+	ptA= ptB;
+      }
+    Vector3d v= Vector3d(ptA,*first);
+    vectors.push_back(v);
+    std::deque<Vector3d>::const_iterator j= vectors.begin();
+    Vector3d a= *j;
+    Vector3d b= *vectors.rbegin();
+    double retval= M_PI-a.getAngle(b);
+    j++;
+    for(;j!=vectors.end();j++)
+      {
+	b= *j;
+        retval= std::max(retval,M_PI-a.getAngle(b));
+	a= b;
+      }
+    return retval;
+  }
 
 #endif
 
