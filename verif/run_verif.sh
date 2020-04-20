@@ -18,6 +18,7 @@ echo "$BLEU" "Misc. tests." "$NORMAL"
 python ./python_tests/test_evalPy.py
 python ./python_tests/test_execPy.py
 python ./python_tests/miscUtils/testStairCaseFunction.py
+python ./python_tests/miscUtils/test_linear_interpolation.py
 
 
 #Soil mechanics

@@ -131,6 +131,8 @@
 /usr/local/lib/python2.7/dist-packages/misc_utils/log_messages.pyc
 /usr/local/lib/python2.7/dist-packages/miscUtils/log_messages.pyc
 /usr/local/lib/python2.7/dist-packages/miscUtils/LogMessages.pyc
+/usr/local/lib/python2.7/dist-packages/misc_utils/math_utils.py
+/usr/local/lib/python2.7/dist-packages/misc_utils/math_utils.pyc
 /usr/local/lib/python2.7/dist-packages/misc_utils/pickle_utils.py
 /usr/local/lib/python2.7/dist-packages/miscUtils/pickle_utils.py
 /usr/local/lib/python2.7/dist-packages/misc_utils/pickle_utils.pyc
