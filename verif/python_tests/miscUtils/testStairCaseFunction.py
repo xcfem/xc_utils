@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
-
+''' Test staircase function.'''
 from __future__ import print_function
+from __future__ import division
+
+__author__= "Luis C. Pérez Tato (LCPT)"
+__cppyright__= "Copyright 2020 LCPT"
+__license__= "GPL"
+__version__= "3.0"
+__email__= "l.pereztato@gmail.com"
+
 import math
 from misc_utils import staircase_function as scf
 

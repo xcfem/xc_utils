@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 ''' Show error and log messages. '''
 
 __author__= "Luis C. Pérez Tato (LCPT)"
