@@ -53,6 +53,7 @@ Segment2d (Polygon2d::*clipRay)(const Ray2d &) const=&Polygon2d::Clip;
 Segment2d (Polygon2d::*clipSegment)(const Segment2d &) const=&Polygon2d::Clip;
 class_<Polygon2d, Polygon2d *, bases<PolygonalSurface2d> >("Polygon2d")
   .def(init<>())
+//.def(init<GeomObj::list_Pos2d>()) # Apparently this doesn't works.
   .def(init<Polyline2d>())
   .def(init<Polygon2d>())
   .def(init<boost::python::list>())

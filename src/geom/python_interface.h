@@ -47,6 +47,8 @@
 #include "xc_utils/src/geom/d2/Surface2d.h"
 #include "xc_utils/src/geom/d2/HalfPlane2d.h"
 #include "xc_utils/src/geom/d2/Circle2d.h"
+#include "xc_utils/src/geom/d2/ConvexHull2d.h"
+#include "xc_utils/src/geom/d2/BasicAlphaShape2d.h"
 #include "xc_utils/src/geom/d2/2d_polygons/PolygonalSurface2d.h"
 #include "xc_utils/src/geom/d2/2d_polygons/Triangle2d.h"
 #include "xc_utils/src/geom/d2/2d_polygons/Square2d.h"

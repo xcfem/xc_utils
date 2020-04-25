@@ -25,7 +25,7 @@ class_<dq_pos2d>("dq_pos2d")
   .def(vector_indexing_suite<dq_pos2d>() )
   ;
 
-class_<polyPos2d, bases<dq_pos2d> >("polyPos2d")
+class_<polyPos2d, bases<dq_pos2d> >("PolyPos2d")
   .def("getCenterOfMass", &polyPos2d::getCenterOfMass, "Return the center of mass of the point list.")
   ;
 
@@ -33,7 +33,7 @@ class_<dq_pos3d>("dq_pos3d")
   .def(vector_indexing_suite<dq_pos3d>() )
   ;
 
-class_<polyPos3d, bases<dq_pos3d> >("polyPos3d")
+class_<polyPos3d, bases<dq_pos3d> >("PolyPos3d")
   .def("getCenterOfMass", &polyPos3d::getCenterOfMass, "Return the center of mass of the point list.")
   ;
 

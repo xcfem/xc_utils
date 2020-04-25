@@ -30,8 +30,7 @@ class Polygon2d;
 
 //! @ingroup GEOM
 //
-//! @brief Return el «convex hull» del conjunto de posiciones
-//! que se pasa como parámetro.
+//! @brief Return el «convex hull» of the point set argument.
 Polygon2d get_convex_hull2d(const GeomObj::list_Pos2d &lp);
 
 

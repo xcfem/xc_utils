@@ -69,6 +69,9 @@ class_<Circle2d, bases<Surface2d> >("Circle2d")
 
 #include "2d_polygons/python_interface.tcc"
 
+def("get_convex_hull2d",get_convex_hull2d);
+def("get_basic_alpha_shape2d",get_basic_alpha_shape2d);
+
 
 class_<Surface3d, bases<GeomObj3d>, boost::noncopyable  >("Surface3d", no_init);
 
