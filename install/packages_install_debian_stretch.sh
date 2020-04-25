@@ -74,6 +74,7 @@ apt-get install -y $packages_div
 # free disk space by cleaning install files
 apt-get clean
 
-
+# cairo installation. 
+sudo -H pip install pycairo
 
 

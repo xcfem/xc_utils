@@ -74,5 +74,6 @@ sudo apt-get clean
 
 apt-get install  
 
-
+# cairo installation. 
+sudo -H pip install pycairo
 
