@@ -44,7 +44,7 @@ GEOM_FT BND3d::getAreaXYFace(void) const
     if(undefined)
       std::cerr << getClassName() << "::" << __FUNCTION__
 	        << "; boundary is undefined." << std::endl;
-    return getLength()*Anchura();
+    return getLength()*getWidth();
   }
 //! @brief Area of the face parallel to XZ plane.
 GEOM_FT BND3d::getAreaXZFace(void) const
@@ -52,7 +52,7 @@ GEOM_FT BND3d::getAreaXZFace(void) const
     if(undefined)
       std::cerr << getClassName() << "::" << __FUNCTION__
 	        << "; boundary is undefined." << std::endl;
-    return getLength()*Altura();
+    return getLength()*getHeight();
   }
 //! @brief Area of the face parallel to YZ plane.
 GEOM_FT BND3d::getAreaYZFace(void) const
@@ -60,7 +60,7 @@ GEOM_FT BND3d::getAreaYZFace(void) const
     if(undefined)
       std::cerr << getClassName() << "::" << __FUNCTION__
 	        << "; boundary is undefined." << std::endl;
-     return Anchura()*Altura();
+     return getWidth()*getHeight();
   }
 GEOM_FT BND3d::getArea(void) const
   {

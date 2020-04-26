@@ -126,14 +126,14 @@ GEOM_FT BND2d::Ix(void) const
     if(undefined)
       std::cerr << getClassName() << "::" << __FUNCTION__
 	        << "; boundary is undefined." << std::endl;
-    return (Anchura()*Altura()*Altura()*Altura())/12.0;
+    return (getWidth()*getHeight()*getHeight()*getHeight())/12.0;
   }
 GEOM_FT BND2d::Iy(void) const
   {
     if(undefined)
       std::cerr << getClassName() << "::" << __FUNCTION__
 	        << "; boundary is undefined." << std::endl;
-    return (Altura()*Anchura()*Anchura()*Anchura())/12.0;
+    return (getHeight()*getWidth()*getWidth()*getWidth())/12.0;
   }
 
 

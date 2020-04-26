@@ -45,14 +45,14 @@ class Rectangle2d: public Quadrilateral2d
         push_back(o+Vector2d(b,h));
         push_back(o+Vector2d(0,h));
       }
-      //Rectangle2d(const Ref2d &ref, const double &b=1.0,const double &h=1.0) : Quadrilateral2d(ref,b),altura(h) {}
+      //Rectangle2d(const Ref2d &ref, const double &b=1.0,const double &h=1.0) : Quadrilateral2d(ref,b),height(h) {}
 
     virtual GeomObj *clon(void) const
       { return new Rectangle2d(*this); }
 /*     void Offset(const double &offset) */
 /*       { */
 /* 	Quadrilateral2d::Offset(offset); */
-/*         altura+=2.0*offset; */
+/*         height+=2.0*offset; */
 /*       } */
 /*     Rectangle2d GetOffset(const double &offset) const */
 /*       { */
@@ -64,10 +64,10 @@ class Rectangle2d: public Quadrilateral2d
 /*       { return lado; } */
 /*     inline double &Base(void) */
 /*       { return lado; } */
-/*     inline const double &Altura(void) const */
-/*       { return altura; } */
-/*     inline double &Altura(void) */
-/*       { return altura; } */
+/*     inline const double &getHeight(void) const */
+/*       { return height; } */
+/*     inline double &getHeight(void) */
+/*       { return height; } */
   };
 
 #endif

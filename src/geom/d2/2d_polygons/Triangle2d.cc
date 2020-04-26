@@ -30,7 +30,7 @@
 //! @brief Return la base opuesta al vértice i.
 Segment2d Triangle2d::Base(const size_t &i) const
   { return Lado(i%3+1); }
-//! @brief Return la altura correspondiente al vértice i.
+//! @brief Return the height corresponding to the i-th vertex.
 Segment2d Triangle2d::Altura(const size_t &i) const
   {
     if(Degenerado())

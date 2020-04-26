@@ -56,15 +56,17 @@ class BND2d: public GeomObj2d
     inline virtual unsigned short int Dimension(void) const
     //Return the dimension of the object 0, 1, 2 or 3.
       { return 2; }
-    inline virtual GEOM_FT Anchura(void) const
+    //! @brief Return object width (x axis).
+    inline virtual GEOM_FT getWidth(void) const
       { return GetXMax()-GetXMin(); }
-    inline GEOM_FT Altura(void) const
+    //! @brief Return object height (z axis).
+    inline GEOM_FT getHeight(void) const
       { return GetYMax()-GetYMin(); }
 
     Polygon2d getPolygon(void) const;
     //! @brief Return the object length.
     inline virtual GEOM_FT getLength(void) const
-      { return 2*Anchura()+2*Altura(); }
+      { return 2*getWidth()+2*getHeight(); }
     Vector2d Diagonal(void) const;
     virtual GEOM_FT getArea(void) const;
     //! @brief Return the volume of the object.

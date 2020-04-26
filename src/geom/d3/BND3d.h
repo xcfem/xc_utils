@@ -46,12 +46,14 @@ class BND3d: public GeomObj3d
     //! @brief Return the dimension of the object 0, 1, 2 or 3.
     inline virtual unsigned short int Dimension(void) const
       { return 3; }
-    //! @brief Return object length.
+    //! @brief Return object length (x axis).
     inline virtual GEOM_FT getLength(void) const
       { return GetXMax()-GetXMin(); }
-    inline GEOM_FT Anchura(void) const
+    //! @brief Return object width (y axis).
+    inline GEOM_FT getWidth(void) const
       { return GetYMax()-GetYMin(); }
-    inline GEOM_FT Altura(void) const
+    //! @brief Return object height (z axis).
+    inline GEOM_FT getHeight(void) const
       { return GetZMax()-GetZMin(); }
     Vector3d Diagonal(void) const;
     GEOM_FT getAreaXYFace(void) const;
