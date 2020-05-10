@@ -28,8 +28,8 @@
 #include <string>
 
 void quita_comentarios(std::istream &,std::ostream &);
-int busca_y_sust1(std::istream &,const std::string &,std::ostream &,const std::string &);
-int busca_y_sust(std::istream &,const std::string &,std::ostream &,const std::string &);
+int find_and_replace1(std::istream &,const std::string &,std::ostream &,const std::string &);
+int find_and_replace(std::istream &,const std::string &,std::ostream &,const std::string &);
 
 std::string get_bloque_comillas(std::istream &, bool &error);
 std::string get_bloque_parentesis(std::istream &,bool &error);

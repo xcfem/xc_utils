@@ -89,7 +89,7 @@ void SqLiteObject::insert_object(const std::string &nmb,SqLiteObject *ptr)
 
 //! @brief Return a pointer to the object which name is being passed
 //! as parameter.
-SqLiteObject *SqLiteObject::busca_objeto(const std::string &nmb)
+SqLiteObject *SqLiteObject::find_object(const std::string &nmb)
   {
     SqLiteObject *retval= nullptr;
     sql_objs_iterator i= SqLiteObjs.find(nmb);

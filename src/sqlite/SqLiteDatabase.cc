@@ -58,7 +58,7 @@ SqLiteQuery *SqLiteDatabase::getDefaultQuery(void)
 //! @brief Create the quefy with the name being passed as parameter.
 SqLiteQuery *SqLiteDatabase::NuevaQuery(const std::string &nmb)
   {
-    SqLiteObject *ptr= busca_objeto(nmb);
+    SqLiteObject *ptr= find_object(nmb);
     SqLiteQuery *retval= dynamic_cast<SqLiteQuery *>(ptr);
     if(!retval) //No existe
       {

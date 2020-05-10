@@ -39,7 +39,7 @@ class SolverLU: public SolverM<M>
 
     long v;
 
-    virtual tipo_val busca_pivote(const size_t &k,size_t &maxi) const
+    virtual tipo_val find_pivot(const size_t &k,size_t &maxi) const
       {
         //For each row of the k colum starting by row k
         tipo_val c;
@@ -82,7 +82,7 @@ class SolverLU: public SolverM<M>
 
         for(register size_t k= 1;k<= this->n; k++) //For each column.
           {
-            c= busca_pivote(k,maxi);
+            c= find_pivot(k,maxi);
             if (k != maxi)
               {
                 p++;
@@ -195,7 +195,7 @@ class SolverDispLU: public SolverLU<matdispZ<treal>,V>
     typedef typename msp_treal::sp_vector sp_vector;
 
   private:
-    tipo_val busca_pivote( const c_iterator &ic,
+    tipo_val find_pivot( const c_iterator &ic,
                            const_f_iterator &maxi) const
       {
         //For each row of the column starting with row ic->first
@@ -235,7 +235,7 @@ class SolverDispLU: public SolverLU<matdispZ<treal>,V>
         for(ic= this->A->rows_begin();ic!= this->A->rows_end(); ic++) //For each column.
           {
             size_t k= ic->first;
-            c= busca_pivote(ic,maxi);
+            c= find_pivot(ic,maxi);
             if (k != maxi->first)
               {
                 p++;

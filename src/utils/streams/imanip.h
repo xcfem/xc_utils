@@ -49,12 +49,12 @@ std::istream &ignorar_hasta(std::istream &is,char delim);
 
 
 int busquedabruta(std::istream &a,const std::string &p);
-//Coloca el puntero de lectura del stream despues de la
+//Coloca el puntero de lectura del stream después de la
 //primera ocurrencia de la cadena p.
 //Esta rutina se puede mejorar (Ver Algoritmos en C++).
 //Devuelve verdadero si encontro la cadena.
 
-inline int busca_inicio(std::istream &is,const std::string &str)
+inline int find_start(std::istream &is,const std::string &str)
 //Devuelve la posici'on del primer car'acter de la cadena str
 //en el stream is.
   {
@@ -64,9 +64,9 @@ inline int busca_inicio(std::istream &is,const std::string &str)
     return encontrada;
   }
 
-inline std::streampos busca_fin(std::istream &is,const std::string &str)
-//Devuelve la posici'on del primer car'acter de la cadena str
-//en el stream is.
+//! @brief Devuelve la posicióon del primer caráacter de la cadena str
+//! en el stream is.
+inline std::streampos find_end(std::istream &is,const std::string &str)
   { return busquedabruta(is,str); }
 
 inline std::istream &ignorar_hasta(std::istream &is,const std::string &p)
@@ -81,9 +81,9 @@ inline imanip<char> ignore_to(char delim)
 inline imanip<const std::string &> ignore_to(const std::string &delim)
   { return imanip<const std::string &>(&ignorar_hasta,delim); }
 
-std::istream &busca_alnum(std::istream &is);
+std::istream &find_alnum(std::istream &is);
 
-std::istream &busca_notspace(std::istream &is);
+std::istream &find_notspace(std::istream &is);
 
 template <class T>
 struct token_pair

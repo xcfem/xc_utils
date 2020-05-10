@@ -69,7 +69,7 @@ int busquedabruta(std::istream &a,const std::string &p)
     return encontrada;
   }
 
-std::istream &busca_alnum(std::istream &is)
+std::istream &find_alnum(std::istream &is)
   {
     if(is.eof()) return is;
     char c;
@@ -84,7 +84,7 @@ std::istream &busca_alnum(std::istream &is)
     return is;
   }
 
-std::istream &busca_notspace(std::istream &is)
+std::istream &find_notspace(std::istream &is)
   {
     if(is.eof()) return is;
     char c;

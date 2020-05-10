@@ -45,11 +45,11 @@ void quita_comentarios(std::istream &in,std::ostream &out)
   }
 
 //! @brief Escribe en os lo mismo que haya en is HASTA a_sust luego escribe en os sust.
-int busca_y_sust1(std::istream &is,const std::string &a_sust,std::ostream &os,const std::string &sust)
+int find_and_replace1(std::istream &is,const std::string &a_sust,std::ostream &os,const std::string &sust)
   {
     char c;
     const std::streampos start= is.tellg(); //Punto de comienzo de la busqueda.
-    int encontrada= busca_inicio(is,a_sust);
+    int encontrada= find_start(is,a_sust);
     std::streampos ini= is.tellg(); 
     is.seekg(start);
     if(encontrada)
@@ -72,11 +72,11 @@ int busca_y_sust1(std::istream &is,const std::string &a_sust,std::ostream &os,co
   }
 
 //! @brief Escribe en os lo mismo que haya en is sustituyendo a_sust por sust.
-int busca_y_sust(std::istream &is,const std::string &a_sust,std::ostream &os,const std::string &sust)
+int find_and_replace(std::istream &is,const std::string &a_sust,std::ostream &os,const std::string &sust)
   {
     int encontrada= 0;
     while(is)
-      encontrada= busca_y_sust1(is,a_sust,os,sust);
+      encontrada= find_and_replace1(is,a_sust,os,sust);
     vuelca_stream(is,os);
     return encontrada;
   }

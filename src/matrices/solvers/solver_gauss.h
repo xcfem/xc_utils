@@ -32,7 +32,7 @@ class SolverGauss: public SolverM<M>
   {
     typedef typename SolverM<M>::tipo_val tipo_val;
     
-    inline size_t busca_pivote(const size_t &k)
+    inline size_t find_pivot(const size_t &k)
       {
         size_t l= 0;
         tipo_val smax= fabs((*A)(P(k),k));
@@ -53,7 +53,7 @@ class SolverGauss: public SolverM<M>
         inic_p();
         for(size_t k=1, l=0; k<=n; k++)
           {
-            l= busca_pivote(k);
+            l= find_pivot(k);
 
             if(l) std::swap(P(k),P(l));
             size_t pi= P(k);
