@@ -235,13 +235,16 @@ GeomObj3d::list_Pos3d Segment3d::getIntersection(const Segment3d &sg2) const
   {
     GeomObj3d::list_Pos3d retval;
     auto result= intersection(cgseg, sg2.cgseg);
+    if(!result)
+      result= intersection(sg2.cgseg, cgseg); // Sometimes this works.
     if(result)
       {
 	const CGSegment_3 *s= boost::get<CGSegment_3>(&*result);
         if(s)
 	  {
 	    std::cerr << getClassName() << "::" << __FUNCTION__
-	              << "; both segments are coincident."
+	              << "; both: " << (*this) << " and " << sg2
+	              << " segments are coincident."
 	              << " All its points belong to their intersection set."
 	              << std::endl;
             retval.push_back(getCenterOfMass()); //Return the segment center.
@@ -252,8 +255,6 @@ GeomObj3d::list_Pos3d Segment3d::getIntersection(const Segment3d &sg2) const
 	    retval.push_back(Pos3d(*p));
           }
       }
-    else
-      retval= sg2.getIntersection(*this); // Sometimes this works.
     return retval;
   }
 
