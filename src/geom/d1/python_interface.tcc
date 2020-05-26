@@ -41,7 +41,7 @@ class_<Line2d, bases<Linear2d> >("Line2d")
   .def("OffsetDouble",OffsetDouble,"returns a parallel line.")
   .def("getParamA",&Line2d::GetParamA,"returns line slope; 'a' parameter from equation (y= a*x+b).")
   .def("getParamB",&Line2d::GetParamB,"returns line y-intercept; 'b' parameter from equation (y= a*x+b).")
-  .def("getIntersectionWithLine", intersectionWithR2D)
+  .def("getIntersectionWithLine", intersectionWithR2D, "Return the intersection with the line argument.")
   .def("getPos2dProj",Pos2dProj,"return the projection of a point onto the line.")
   .def("getVector2dProj",Vector2dProj,"return the projection of a vector onto the line.")
   .def("getPoint",&Line2d::PtoParametricas,"return a point on the line.")
@@ -57,6 +57,9 @@ class_<Ray3d, bases<Linear3d> >("Ray3d")
 
 GEOM_FT (Segment3d::*AngleVector3D)(const Vector3d &v) const= &Segment3d::getAngle;
 GEOM_FT (Segment3d::*AngleSegment3D)(const Segment3d &v) const= &Segment3d::getAngle;
+GeomObj::list_Pos3d (Segment3d::*segment3dIntersectionWithLine)(const Line3d &) const= &Segment3d::getIntersection;
+GeomObj::list_Pos3d (Segment3d::*segment3dIntersectionWithRay)(const Ray3d &) const= &Segment3d::getIntersection;
+GeomObj::list_Pos3d (Segment3d::*segment3dIntersectionWithSegment)(const Segment3d &) const= &Segment3d::getIntersection;
 class_<Segment3d, bases<Linear3d> >("Segment3d")
   .def(init<>())
   .def(init<Pos3d,Pos3d>())
@@ -69,6 +72,9 @@ class_<Segment3d, bases<Linear3d> >("Segment3d")
   .def("getPoint",&Segment3d::PtoParametricas)
   .def("getAngleWithVector",AngleVector3D,"Returns the angle between the line segment and the vector.")
   .def("getAngleWithLineSegment",AngleSegment3D,"Returns the angle between both line segments.")
+  .def("getIntersectionWithLine", segment3dIntersectionWithLine, "Return the intersection with the line argument.")
+  .def("getIntersectionWithRay", segment3dIntersectionWithRay, "Return the intersection with the ray argument.")
+  .def("getIntersectionWithSegment", segment3dIntersectionWithSegment, "Return the intersection with the segment argument.")
   .def("getVDir",&Segment3d::VDir,"return the direction vector of the segment.")
   .def("Divide", &Segment3d::Divide,"Divide(numparts); returns the points that divide the segment.")
   ;
@@ -112,9 +118,9 @@ class_<Polyline2d, bases<Linear2d, polyPos2d> >("Polyline2d")
   .def("getPxy", &Polyline2d::Pxy)
   .def("getLength", &Polyline2d::getLength,"Return the length of the polyline.")
   .def("offset", &Polyline2d::Offset)
-  .def("getIntersectionWithLine", intersectionWithLine)
-  .def("getIntersectionWithRay", intersectionWithRay)
-  .def("getIntersectionWithSegment", intersectionWithSegment)
+  .def("getIntersectionWithLine", intersectionWithLine, "Return the intersection with the line argument.")
+  .def("getIntersectionWithRay", intersectionWithRay, "Return the intersection with the ray argument.")
+  .def("getIntersectionWithSegment", intersectionWithSegment, "Return the intersection with the segment argument.")
   .def("isClosed",&Polyline2d::isClosed,"returns true if the last vertex is coincident with the first one -dist(first,last)<tol*length-.")
   .def("simplify", simplify2DPoly,"simplification of the polyline (Douglas-Peucker algorithm).")
   .def("getSegment", get2DSegment, "return the i-th segment.")  
@@ -145,8 +151,8 @@ class_<Segment2d, bases<Linear2d> >("Segment2d")
   .def("angleSegment",AngleSegment)
   .def("offsetVector",OffsetSegmentVector)
   .def("offsetDouble",OffsetSegmentDouble)
-  .def("getIntersectionWithLine", segment2dIntersectionWithLine)
-  .def("getIntersectionWithRay", segment2dIntersectionWithRay)
+  .def("getIntersectionWithLine", segment2dIntersectionWithLine, "Return the intersection with the line argument.")
+  .def("getIntersectionWithRay", segment2dIntersectionWithRay, "Return the intersection with the ray argument.")
   .def("Divide", &Segment2d::Divide,"Divide(numparts); returns the points that divide the segment.")
   ;
 
@@ -160,7 +166,7 @@ class_<Polyline3d, bases<Linear3d, polyPos3d> >("Polyline3d")
   .def("getNumVertices", &Polyline3d::GetNumVertices)
   .def("getNumSegments", &Polyline3d::getNumSegments)
   .def("getLength", &Polyline3d::getLength,"Return the length of the polyline.")
-  .def("getIntersection", &Polyline3d::getIntersection)
+  .def("getIntersection", &Polyline3d::getIntersection, "Return the intersection with the plane argument.")
   .def("isClosed",&Polyline3d::isClosed,"returns true if the last vertex is coincident with the first one -dist(first,last)<tol*length-.")
   .def("simplify", simplify3DPoly,"simplification of the polyline (Douglas-Peucker algorithm).")
   .def("getCenterOfMass", &Polyline3d::getCenterOfMass)
@@ -185,6 +191,6 @@ class_<int_pair_deque>("int_pair_deque")
   .def(vector_indexing_suite<int_pair_deque>() )
   ;
 
-def("getSegmentIntersections",getIntersections);
+def("getSegmentIntersections",getIntersections, "Return the intersection between the segments.");
 
 #include "function_from_points/python_interface.tcc"

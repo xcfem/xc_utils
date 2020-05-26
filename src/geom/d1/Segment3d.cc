@@ -197,11 +197,12 @@ GeomObj3d::list_Pos3d Segment3d::getIntersection(const Ray3d &sr) const
 	const CGSegment_3 *s= boost::get<CGSegment_3>(&*result);
         if(s)
 	  {
-	    std::cerr << getClassName() << "::" << __FUNCTION__
-	              << "; segments is inside the ray."
-	              << " All its points belong to their intersection set."
+	    std::clog << getClassName() << "::" << __FUNCTION__
+	              << "; segments and ray overlap."
+	              << " Returning the center of the intersection segment."
 	              << std::endl;
-            retval.push_back(getCenterOfMass()); //Return the segment center.
+	    const Segment3d tmp(*s);
+            retval.push_back(tmp.getCenterOfMass()); //Return the segment center.
 	  }
 	else
 	  {
@@ -242,12 +243,13 @@ GeomObj3d::list_Pos3d Segment3d::getIntersection(const Segment3d &sg2) const
 	const CGSegment_3 *s= boost::get<CGSegment_3>(&*result);
         if(s)
 	  {
-	    std::cerr << getClassName() << "::" << __FUNCTION__
+	    std::clog << getClassName() << "::" << __FUNCTION__
 	              << "; both: " << (*this) << " and " << sg2
-	              << " segments are coincident."
-	              << " All its points belong to their intersection set."
+	              << " segments overlap."
+	              << " Returning the center of the intersection segment."
 	              << std::endl;
-            retval.push_back(getCenterOfMass()); //Return the segment center.
+	    const Segment3d tmp(*s);
+            retval.push_back(tmp.getCenterOfMass()); //Return the segment center.
 	  }
 	else
 	  {
