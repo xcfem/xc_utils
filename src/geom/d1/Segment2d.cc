@@ -380,17 +380,22 @@ GeomObj2d::list_Pos2d Segment2d::getIntersection(const Segment2d &r2) const
         cerr << getClassName() << "::" << __FUNCTION__
 	     << "; segments are de same, all its points belong to the"
 	     << " intersection." << endl;
-        retval.push_back(getFromPoint());
-        retval.push_back(getToPoint());
+        retval.push_back(getCenterOfMass()); //Return the segment center.
         return retval;
       }
     if(intersects(r2))
       {
         CGAL::Object result;
         CGPoint_2 ptoi;
+        CGSegment_2 segi;
         result = CGAL::intersection(cgseg,r2.cgseg);
         if(CGAL::assign(ptoi, result))
           retval.push_back(Pos2d(ptoi));
+        else if(CGAL::assign(segi, result))
+	  {
+	    const Segment2d tmp(segi);
+            retval.push_back(tmp.getCenterOfMass()); //Return the segment center.
+	  }
         else
           {
             cerr << getClassName() << "::" << __FUNCTION__
