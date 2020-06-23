@@ -157,9 +157,9 @@ vectorZ<numero>::vectorZ(InputIterator b,InputIterator e)
 template <class numero>
 vectorZ<numero>::vectorZ(const lst_numero &ln) : vector_numero(ln.size())
   {
-    register size_type j= 0;
+    size_type j= 0;
     typedef typename lst_numero::const_iterator c_iterator;
-    for(register c_iterator i=ln.begin();i!=ln.end();i++)
+    for(c_iterator i=ln.begin();i!=ln.end();i++)
       { (*this)[j]= *i; j++; }
   }
 
@@ -175,7 +175,7 @@ template <class numero>
 long vectorZ<numero>::Busca(const numero &n) const
   {
     size_type sz= this->size();
-    for(register size_type i=0;i<sz;i++)
+    for(size_type i=0;i<sz;i++)
       if ((*this)[i] == n) return i;
     return -1;
   }
@@ -184,14 +184,14 @@ template <class numero>
 void vectorZ<numero>::Neg(void)
   {
     size_type sz= this->size();
-    for(register size_type i= 0;i<sz;i++)
+    for(size_type i= 0;i<sz;i++)
       (*this)[i] = -(*this)[i];
   }
 template <class numero>
 bool vectorZ<numero>::Nulos(const numero &tol)
   {
     size_type sz= this->size();
-    for(register size_type i= 0;i<sz;i++)
+    for(size_type i= 0;i<sz;i++)
       if(Abs((*this)[i])>tol) return false;
     return true;
   }
@@ -200,21 +200,21 @@ template <class numero>
 void vectorZ<numero>::Suma(const vectorZ<numero> &v)
   {
     size_type sz= v.size();  
-    for(register size_type i=0;i<sz;i++) PutSuma(i,v[i]);
+    for(size_type i=0;i<sz;i++) PutSuma(i,v[i]);
   }
 
 template <class numero>
 void vectorZ<numero>::Resta(const vectorZ<numero> &v)
   {
     size_type sz= v.size();
-    for(register size_type i=0;i<sz;i++) PutResta(i,v[i]);
+    for(size_type i=0;i<sz;i++) PutResta(i,v[i]);
   }
 
 template <class numero>
 void vectorZ<numero>::Prod(const numero &n)
   {
     size_type sz= this->size();      
-    for(register size_type i= 0;i<sz;i++)
+    for(size_type i= 0;i<sz;i++)
       PutProd(i,n);
   }
   
@@ -224,7 +224,7 @@ vectorZ<numero> vectorZ<numero>::Left(size_t j) const
   {
     assert(j>0);
     vectorZ<numero> left(j);
-    for(register size_t i=0;i<j;i++) left[i]= (*this)[i];
+    for(size_t i=0;i<j;i++) left[i]= (*this)[i];
     return left;
   }
 
@@ -236,7 +236,7 @@ vectorZ<numero> vectorZ<numero>::Right(size_t j) const
     assert(j<sz);
     size_type szr= sz-j-1;
     vectorZ<numero> right(szr);
-    for(register size_type i=0;i<szr;i++) right[i]= (*this)[i+j+1];
+    for(size_type i=0;i<szr;i++) right[i]= (*this)[i+j+1];
     return right;
   }
 
@@ -247,7 +247,7 @@ vectorZ<numero> vectorZ<numero>::Mid(size_t i,size_t j) const
     assert(j>i);  
     size_type sz= j-i-1;
     vectorZ<numero> mid(sz);
-    for(register size_type k=0;k<sz;k++) mid[k]= (*this)[k+i+1];
+    for(size_type k=0;k<sz;k++) mid[k]= (*this)[k+i+1];
     return mid;
   }
   
@@ -276,7 +276,7 @@ unsigned long vectorZ<numero>::Distintos(const vectorZ<numero> &v) const
 //Cuenta el número de elementos distintos entre los dos vectores
   {
     unsigned long c= this->size(),sz=v.size();
-    for(register unsigned long i=0;i<sz;i++)
+    for(unsigned long i=0;i<sz;i++)
       if (Busca(v[i]) < 0) c++;
     return c;
   }
@@ -288,7 +288,7 @@ std::ostream &operator << (std::ostream &os,const vectorZ<numero> &n)
     typedef typename vectorZ<numero>::size_type sz_type;
     sz_type sz= n.size();
     if(sz>0) os << n[0];
-    for(register sz_type i= 1;i<sz;i++) os << ',' << n[i];
+    for(sz_type i= 1;i<sz;i++) os << ',' << n[i];
     os << ']';
     return os;
   }
@@ -322,9 +322,9 @@ vectorZ<numero> Cat(const vectorZ<numero> &v1,const vectorZ<numero> &v2)
     size_t szc= sz1 + sz2;
     vectorZ<numero> cat(szc);
     typedef typename vectorZ<numero>::size_type sz_type;
-    for(register sz_type i=0;i<sz1;i++)
+    for(sz_type i=0;i<sz1;i++)
       cat[i]= v1[i];
-    for(register sz_type i=0;i<sz2;i++)
+    for(sz_type i=0;i<sz2;i++)
       cat[i+sz1]= v2[i];
     return cat;
   }

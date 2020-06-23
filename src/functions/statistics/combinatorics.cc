@@ -23,7 +23,7 @@
 
 unsigned long long factorial(const unsigned int &n)
   {
-    register unsigned long long i,f=1;
+    unsigned long long i,f=1;
     for(i= 2;i<=n;i++)
       f*=i;
     return f;
@@ -36,7 +36,7 @@ unsigned long long coeficiente_binomial(const unsigned int &n,const unsigned int
   //           k!.(n-k)!
   {
     if((n==k) || (k==0)) return 1;
-    register unsigned long long i,num=n,denom;
+    unsigned long long i,num=n,denom;
     denom= factorial(n-k);
     for(i=n-1;i>k;i--)
       num*=i;

@@ -91,11 +91,11 @@ void BoxConstRef<MAT>::Print(std::ostream &os) const
   {
     os << '[';
     size_t n_rows= this->getNumberOfRows(),n_columns= this->getNumColumns();
-    for(register size_t i= 1;i<=n_rows;i++)
+    for(size_t i= 1;i<=n_rows;i++)
       {
         os << '[';
         if(n_columns > 0) os << (*this)(i,1);
-	for(register size_t j= 2;j<=n_columns;j++)
+	for(size_t j= 2;j<=n_columns;j++)
 	  os << ',' << (*this)(i,j);
         os << ']';
       }

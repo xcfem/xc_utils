@@ -44,7 +44,7 @@ class SolverLU: public SolverM<M>
         //For each row of the k colum starting by row k
         tipo_val c;
         tipo_val c1;
-        register size_t i= 0;
+        size_t i= 0;
         for(i= k, maxi= k, c=solver_m::CERO;i<=this->n;i++)
           {
             c1= (*this->A)(this->P(i),k);
@@ -56,18 +56,18 @@ class SolverLU: public SolverM<M>
     void rest_of_row(const size_t &i,const size_t &k,const tipo_val &d)
       {
         const size_t pk= this->P(k);
-        for(register size_t j=k+1;j<=this->n;j++) //Next columns of the row.
+        for(size_t j=k+1;j<=this->n;j++) //Next columns of the row.
           (*this->A)(i,j)-= d * (*this->A)(pk,j);
       }
     void aplica_pivote(const size_t &k)
       {
-        register tipo_val d= (*this->A)(this->P(k),k);
-        for(register size_t i= k+1;i<=this->n;i++)
+        tipo_val d= (*this->A)(this->P(k),k);
+        for(size_t i= k+1;i<=this->n;i++)
           {
             //Divide el elemento de the column 
 	    //del pivote por el pivote.
-            register const size_t pi= this->P(i);
-            register const tipo_val &dd= ((*this->A)(pi,k)/= d);
+            const size_t pi= this->P(i);
+            const tipo_val &dd= ((*this->A)(pi,k)/= d);
             if(dd!=solver_m::CERO) rest_of_row(pi,k,dd);
           }
       }
@@ -80,7 +80,7 @@ class SolverLU: public SolverM<M>
         size_t p= 1;
         this->inic_p();
 
-        for(register size_t k= 1;k<= this->n; k++) //For each column.
+        for(size_t k= 1;k<= this->n; k++) //For each column.
           {
             c= find_pivot(k,maxi);
             if (k != maxi)
@@ -104,13 +104,13 @@ class SolverLU: public SolverM<M>
     void triang_inf(V &B) const
     //Iterates through the lower triangle
       {
-        for(register size_t k=1; k<=this->n; k++) 
+        for(size_t k=1; k<=this->n; k++) 
           {
-            register const size_t pk= this->P(k);
+            const size_t pk= this->P(k);
             const tipo_val &Bpk= B(pk);
-            for(register size_t i=k+1; i<=this->n; i++)
+            for(size_t i=k+1; i<=this->n; i++)
               {
-                register const size_t pi= this->P(i);
+                const size_t pi= this->P(i);
 	        B(pi)-= ( (*this->A)(pi,k) * Bpk );
               }
           }
@@ -118,15 +118,15 @@ class SolverLU: public SolverM<M>
     V atras(const V &B) const
       //Sustitución hacia atrás.
       {
-        register size_t j;
+        size_t j;
         tipo_val sum;
         V X(B);
         X(this->n)= B(this->P(this->n)) / (*this->A)(this->P(this->n),this->n);
-        for(register size_t k=this->n; k>1;)
+        for(size_t k=this->n; k>1;)
           {
             k--;
             sum=solver_m::CERO;
-            register const size_t pk= this->P(k);
+            const size_t pk= this->P(k);
             for(j=k+1; j<=this->n; j++) sum+= (*this->A)(pk,j) * X(j);
             X(k)= (B(pk) - sum) /(*this->A)(pk,k);
           }
@@ -214,7 +214,7 @@ class SolverDispLU: public SolverLU<matdispZ<treal>,V>
         tipo_val d= (*this->A)(this->P(k),k);
         std::cout << "***** aplica pivote col: " << k << ' ' << d << std::endl;
 	sp_vector &col= this->A->getColumn(ic);
-        for(register size_t i= k+1;i<=this->n;i++)
+        for(size_t i= k+1;i<=this->n;i++)
           {
             //Divide el elemento de the column 
 	    //del pivote por el pivote.

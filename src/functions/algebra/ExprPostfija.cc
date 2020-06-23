@@ -32,7 +32,7 @@ void ExprPostfija::TrataParentDcho(Pila &pila,const Segnal *t)
   }
 void ExprPostfija::TrataOpBinario(Pila &pila,const Segnal *t)
   {
-    register bool fin_derecha= false;
+    bool fin_derecha= false;
     do
       {
         if (pila.empty()) 
@@ -63,7 +63,7 @@ void ExprPostfija::Traduce(const ExprInfija &infija)
     borra_lista();//erase(begin(),end());
     if (infija.Vacia()) return;
     Pila pila;
-    register ExprInfija::const_iterator_segnales i= infija.Begin();
+    ExprInfija::const_iterator_segnales i= infija.Begin();
     while(i!= infija.End())
       {
         switch((*i)->GetClase())

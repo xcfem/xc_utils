@@ -48,8 +48,8 @@ template<class F>
 inline double parcial_fd(const m_double &x,const F &f,const size_t &i)
   {
     m_double x2(x);
-    register const double temp= x2(i);
-    register const double h= calcula_incremento(temp);
+    const double temp= x2(i);
+    const double h= calcula_incremento(temp);
     x2(i)+=h;
     return (f(x2)-f(x))/h;
   }
@@ -70,9 +70,9 @@ inline double parcial_cdf(const m_double &x,const F &f,const size_t &i)
     m_double x_1(x); //Punto a -h de x
     m_double x1(x);  //Punto a +x de x
     m_double x2(x);  //Punto a +2h de x
-    register const double temp= x(i);
-    register const double h= calcula_incremento(temp);
-    register const double h2= 2.0*h;
+    const double temp= x(i);
+    const double h= calcula_incremento(temp);
+    const double h2= 2.0*h;
     x_2(i)-=h2;
     x_1(i)-=h;
     x1(i)+=h;
@@ -90,7 +90,7 @@ inline m_double gradiente_cdf(const m_double &x,const F &f)
   {
     m_double g(x);
     size_t n_rows= x.getNumberOfRows();
-    for(register size_t i= 1;i<=n_rows;i++)
+    for(size_t i= 1;i<=n_rows;i++)
       g(i)= parcial_cdf(x,f,i);
     return g;
   }
@@ -105,7 +105,7 @@ inline m_double extended_central_differece_row_gradient(const m_double &x,const 
   {
     m_double g(1,x.getNumberOfRows());
     size_t n_rows= x.getNumberOfRows();
-    for(register size_t i= 1;i<=n_rows;i++)
+    for(size_t i= 1;i<=n_rows;i++)
       g(1,i)= parcial_cdf(x,f,i);
     return g;
   }
@@ -118,7 +118,7 @@ inline m_double jacobiano_cdf(const m_double &x,const MF &mf)
     size_t n_rows= mf.getNumberOfRows();
     size_t n_columns= x.getNumberOfRows();
     m_double J(n_rows,n_columns);
-    for(register size_t i= 1;i<=n_rows;i++)
+    for(size_t i= 1;i<=n_rows;i++)
       {
         m_double g= extended_central_differece_row_gradient(x,mf(i));
         J.putRow(i,g);

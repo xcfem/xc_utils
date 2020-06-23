@@ -30,7 +30,7 @@
 //! @brief Moves the points of the list.
 void move(GeomObj::list_Pos3d &l,const Vector3d &v)
   {
-    for(register GeomObj::list_Pos3d::iterator j=l.begin();j != l.end();j++)
+    for(GeomObj::list_Pos3d::iterator j=l.begin();j != l.end();j++)
       (*j)= (*j) + v;
   }
 

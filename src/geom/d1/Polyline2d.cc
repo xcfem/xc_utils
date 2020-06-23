@@ -63,7 +63,7 @@ void Polyline2d::Transform(const Trf2d &trf2d)
 //! @brief Return true if the point is in the polyline.
 bool Polyline2d::In(const Pos2d &p, const double &tol) const
   {
-    for(register const_iterator j=begin();j != end();j++)
+    for(const_iterator j=begin();j != end();j++)
       if(getSegment(j).In(p,tol)) return true;
     return false;
   }
@@ -98,7 +98,7 @@ Polyline2d Polyline2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 //     list_Pos2d l_int; //List of intersections
 // 	const_iterator ultimo= end();
 //     ultimo--;
-//     for(register const_iterator j=begin();j != ultimo;j++)
+//     for(const_iterator j=begin();j != ultimo;j++)
 //       {
 //         Segment2d s= getSegment(j);
 //         list_Pos2d l_temp= s.Int(i,d);
@@ -115,7 +115,7 @@ Polyline2d Polyline2d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 //     Polyline2d result; //List of intersections
 // 	const_iterator ultimo= end();
 //     ultimo--;
-//     for(register const_iterator j=begin();j != ultimo;j++)
+//     for(const_iterator j=begin();j != ultimo;j++)
 //       {
 //         Segment2d s= getSegment(j);
 //         list_Pos2d l_temp= s.Int(i,d);
@@ -208,8 +208,8 @@ Polyline2d Polyline2d::Separa(const Pos2d &p,const short int &sgn) const
 GeomObj::list_Pos2d Polyline2d::getIntersection(const Line2d &r) const
   {
     list_Pos2d retval;
-    register const_iterator j=begin();
-    register const_iterator k= j;k++;
+    const_iterator j=begin();
+    const_iterator k= j;k++;
     for(;k != end();j++,k++)
       {
         Segment2d s(*j,*k);
@@ -225,8 +225,8 @@ GeomObj::list_Pos2d Polyline2d::getIntersection(const Line2d &r) const
 GeomObj::list_Pos2d Polyline2d::getIntersection(const Ray2d &sr) const
   {
     list_Pos2d retval;
-    register const_iterator j=begin();
-    register const_iterator k= j;k++;
+    const_iterator j=begin();
+    const_iterator k= j;k++;
     for(;k != end();j++,k++)
       {
         Segment2d s(*j,*k);
@@ -242,8 +242,8 @@ GeomObj::list_Pos2d Polyline2d::getIntersection(const Ray2d &sr) const
 GeomObj::list_Pos2d Polyline2d::getIntersection(const Segment2d &sg) const
   {
     list_Pos2d retval;
-    register const_iterator j=begin();
-    register const_iterator k= j;k++;
+    const_iterator j=begin();
+    const_iterator k= j;k++;
     for(;k != end();j++,k++)
       {
         Segment2d s(*j,*k);
@@ -291,7 +291,7 @@ Polyline2d::iterator Polyline2d::getFarthestPointFromSegment(iterator it1, itera
 void Polyline2d::Print(std::ostream &stream) const
   {
     if(empty()) return;
-    register const_iterator i= begin();
+    const_iterator i= begin();
     stream << *i; i++;
     for(; i!=end(); i++)
       stream << ", " << *i;
@@ -299,7 +299,7 @@ void Polyline2d::Print(std::ostream &stream) const
 void Polyline2d::Plot(Plotter &plotter) const
   {
     if(size()<2) return;
-    register const_iterator i= begin();
+    const_iterator i= begin();
     Pos2d pto1= *i; i++;
     for(; i!=end(); i++)
       {

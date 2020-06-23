@@ -56,8 +56,8 @@ cmb_acc::Variation cmb_acc::Variation::concat(const cmb_acc::Variation &a,const 
 bool cmb_acc::Variation::compatible(const ActionRValueList &lvr)
   {
     const size_t sz= size();
-    for(register size_t i=0;i<sz;i++)
-      for(register size_t j=i+1;j<sz;j++)
+    for(size_t i=0;i<sz;i++)
+      for(size_t j=i+1;j<sz;j++)
         if( ((*this)[i]!= 0.0) && ((*this)[j]!= 0.0) )
           if(incompatibles(lvr[i],lvr[j]))
             return false;

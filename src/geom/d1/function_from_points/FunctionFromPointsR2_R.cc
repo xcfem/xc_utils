@@ -30,9 +30,9 @@ FunctionFromPointsR2_R::row_column FunctionFromPointsR2_R::PosMax(void) const
     retval.second= 1;
     const size_t n_rows= getNumberOfRows();
     const size_t n_columns= getNumberOfColumns();
-    register double max= Valor(1,1);
-    for(register size_t i=1;i<=n_rows;i++)
-      for(register size_t j=1;j<=n_columns;j++)
+    double max= Valor(1,1);
+    for(size_t i=1;i<=n_rows;i++)
+      for(size_t j=1;j<=n_columns;j++)
         {
           const double tmp= Valor(i,j);
           if(max < tmp)
@@ -64,9 +64,9 @@ FunctionFromPointsR2_R::row_column FunctionFromPointsR2_R::PosMin(void) const
     retval.second= 1;
     const size_t n_rows= getNumberOfRows();
     const size_t n_columns= getNumberOfColumns();
-    register double min= Valor(1,1);
-    for(register size_t i=1;i<=n_rows;i++)
-      for(register size_t j=1;j<=n_columns;j++)
+    double min= Valor(1,1);
+    for(size_t i=1;i<=n_rows;i++)
+      for(size_t j=1;j<=n_columns;j++)
         {
           const double tmp= Valor(i,j);
           if(min > tmp)

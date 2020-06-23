@@ -122,7 +122,7 @@ const Pos2d &Pos2dList::operator[](const size_t &i) const
 //! @brief Return true if the point belongs to the set.
 bool Pos2dList::In(const Pos2d &p, const double &tol) const
   {
-    for(register point_const_iterator j=lista_ptos.begin();j != lista_ptos.end();j++)
+    for(point_const_iterator j=lista_ptos.begin();j != lista_ptos.end();j++)
       if(dist2(*j,p)<=tol) return true;
     return false;
   }
@@ -186,7 +186,7 @@ double Pos2dList::GetSeparacionMedia(void) const
 void Pos2dList::Print(std::ostream &stream) const
   {
     if(lista_ptos.empty()) return;
-    register point_const_iterator i= lista_ptos.begin();
+    point_const_iterator i= lista_ptos.begin();
     stream << *i; i++;
     for(; i!=lista_ptos.end(); i++)
       stream << ", " << *i;

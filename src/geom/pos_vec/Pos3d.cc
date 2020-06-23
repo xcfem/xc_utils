@@ -197,7 +197,7 @@ Pos3d Pos3d::getModArgZ(const GEOM_FT &mod,const GEOM_FT &giroZ) const
 
 bool Pos3d::domina_a(const Pos3d &b) const
   {
-    for(register size_t i= 1;i<=dimension();i++)
+    for(size_t i= 1;i<=dimension();i++)
       if ((*this)(i)<b(i)) return false;
     return true;
   }

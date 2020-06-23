@@ -123,7 +123,7 @@ void Pos2d::Set(unsigned short int i,const GEOM_FT &v)
 
 bool Pos2d::domina_a(const Pos2d &b) const
   {
-    for(register size_t i= 1;i<=dimension();i++)
+    for(size_t i= 1;i<=dimension();i++)
       if ((*this)(i)<b(i)) return false;
     return true;
   }

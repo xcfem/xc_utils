@@ -42,7 +42,7 @@ ExprAlgebra::ExprAlgebra(const double &d)
 void ExprAlgebra::expand(void)
   {
     ConjVariables cv= Variables();
-    for(register ConjVariables::const_iterator i=cv.begin();i!=cv.end();i++)
+    for(ConjVariables::const_iterator i=cv.begin();i!=cv.end();i++)
       {
         const std::string &nmb_var= (*i)->getName();
         if(LexA().EsExpresion(nmb_var))
@@ -79,7 +79,7 @@ double ExprAlgebra::RaizNewton(const double &tol,size_t max_iter,const std::stri
       }
     const ExprAlgebra dif= (*this)/(this->Diferencia(var)).Colct();
     double D,x= d;
-    register size_t iter= 0;
+    size_t iter= 0;
     do
       {
         D= dif(var,x).ToNum();

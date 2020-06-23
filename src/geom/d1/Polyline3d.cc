@@ -76,12 +76,12 @@ Segment3d Polyline3d::getSegment(const size_t &i) const
 //! @brief Moves the polyline.
 void Polyline3d::Move(const Vector3d &v)
   {
-    for(register list_Pos3d::iterator j=begin();j != end();j++)
+    for(list_Pos3d::iterator j=begin();j != end();j++)
       (*j)= (*j) + v;
   }
 bool Polyline3d::In(const Pos3d &p, const double &tol) const
   {
-    for(register list_Pos3d::const_iterator j=begin();j != end();j++)
+    for(list_Pos3d::const_iterator j=begin();j != end();j++)
       if(getSegment(j).In(p,tol)) return true;
     return false;
   }
@@ -91,7 +91,7 @@ GeomObj3d::list_Pos3d Polyline3d::getIntersection(const Plane &p) const
     list_Pos3d retval;
     list_Pos3d::iterator i= retval.end();
     Segment3d s;
-    for(register list_Pos3d::const_iterator j=begin();j != end();j++)
+    for(list_Pos3d::const_iterator j=begin();j != end();j++)
       {
         s= getSegment(j);
         list_Pos3d lp= intersection(p,s);
@@ -107,7 +107,7 @@ GEOM_FT Polyline3d::GetMax(unsigned short int i) const
     if(empty()) return 0.0;
     const list_Pos3d::const_iterator primero= begin();
     GEOM_FT mx= (*primero)(i);
-    for(register list_Pos3d::const_iterator j=primero;j != end();j++)
+    for(list_Pos3d::const_iterator j=primero;j != end();j++)
       mx= std::max((*j)(i),mx);
     return mx;
   }
@@ -118,7 +118,7 @@ GEOM_FT Polyline3d::GetMin(unsigned short int i) const
     if(empty()) return 0.0;
     const list_Pos3d::const_iterator primero= begin();
     GEOM_FT mn= (*primero)(i);
-    for(register list_Pos3d::const_iterator j=primero;j != end();j++)
+    for(list_Pos3d::const_iterator j=primero;j != end();j++)
       mn= std::min((*j)(i),mn);
     return mn;
   }
@@ -128,7 +128,7 @@ GEOM_FT Polyline3d::GetMin(unsigned short int i) const
 Polyline3d Polyline3d::GetMayores(unsigned short int i,const GEOM_FT &d) const
   {
     Polyline3d retval;
-    for(register list_Pos3d::const_iterator j=begin();j != end();j++)
+    for(list_Pos3d::const_iterator j=begin();j != end();j++)
       if ((*j)(i) > d) retval.push_back(*j);
     return retval;
   }
@@ -138,7 +138,7 @@ Polyline3d Polyline3d::GetMayores(unsigned short int i,const GEOM_FT &d) const
 Polyline3d Polyline3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
   {
     Polyline3d retval;
-    for(register list_Pos3d::const_iterator j=begin();j != end();j++)
+    for(list_Pos3d::const_iterator j=begin();j != end();j++)
       if ((*j)(i) < d) retval.push_back(*j);
     return retval;
   }
@@ -150,7 +150,7 @@ Polyline3d Polyline3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 //     list_Pos3d l_int; //List of intersections
 // 	list_Pos3d::const_iterator ultimo= end();
 //     ultimo--;
-//     for(register list_Pos3d::const_iterator j= begin();j != ultimo;j++)
+//     for(list_Pos3d::const_iterator j= begin();j != ultimo;j++)
 //       {
 //         Segment3d s= getSegment(j);
 //         list_Pos3d l_temp= s.Int(i,d);
@@ -168,7 +168,7 @@ Polyline3d Polyline3d::GetMenores(unsigned short int i,const GEOM_FT &d) const
 //     Polyline3d result; //List of intersections
 // 	list_Pos3d::const_iterator ultimo= end();
 //     ultimo--;
-//     for(register list_Pos3d::const_iterator j=begin();j != ultimo;j++)
+//     for(list_Pos3d::const_iterator j=begin();j != ultimo;j++)
 //       {
 //         Segment3d s= getSegment(j);
 //         list_Pos3d l_temp= s.Int(i,d);
@@ -258,7 +258,7 @@ Polyline3d::iterator Polyline3d::getFarthestPointFromSegment(iterator it1, itera
 void Polyline3d::Print(std::ostream &stream) const
   {
     if(empty()) return;
-    register Polyline3d::list_Pos3d::const_iterator i= begin();
+    Polyline3d::list_Pos3d::const_iterator i= begin();
     stream << *i; i++;
     for(; i!=end(); i++)
       stream << ", " << *i;

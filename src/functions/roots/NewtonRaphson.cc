@@ -24,7 +24,7 @@
 bool norma_inf_nula(const m_double &x,const double &tolerance)
   {
     size_t sz= x.getNumberOfRows();
-    for(register size_t i= 1;i<= sz;i++)
+    for(size_t i= 1;i<= sz;i++)
       if(fabs(x(i)) > tolerance) return false;
     return true;
   }
@@ -34,8 +34,8 @@ double dot_trn(const m_double &v1,const m_double &v2)
      //Sirve para evitar calcular la traspuesta de v1.
       {
         const size_t n_rows= v1.getNumberOfRows();
-        register double retval(v1(1,1)*v2(1,1));
-        for(register m_double::size_type i=2;i<=n_rows;i++)
+        double retval(v1(1,1)*v2(1,1));
+        for(m_double::size_type i=2;i<=n_rows;i++)
           { retval+= v1(i,1) * v2(i,1); }
         return retval;
       }

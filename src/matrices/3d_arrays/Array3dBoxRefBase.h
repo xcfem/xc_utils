@@ -72,12 +72,12 @@ inline void PrintArray3d(const ARRAY_3D &t,std::ostream &os)
       {
         os << '[';
         const size_t n_rows= t.getNumberOfRows();
-        for(register size_t j= 1;j<=n_rows;j++)
+        for(size_t j= 1;j<=n_rows;j++)
           {
             os << '[';
             const size_t n_columns= t.getNumberOfColumns();
             if(n_columns > 0) os << t(i,j,1);
-	    for(register size_t k= 2;k<=n_columns;k++)
+	    for(size_t k= 2;k<=n_columns;k++)
 	      os << ',' << t(i,j,k);
             os << ']';
           }

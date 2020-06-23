@@ -25,32 +25,32 @@
 PolynomialMatrix::PolynomialMatrix(const m_double &m)
   : polynomial_matrix(m.getNumberOfRows(),m.getNumberOfColumns())
   {
-    for(register size_type i=1;i<=n_rows;i++)
-      for(register size_type j=1;j<=n_columns;j++)
+    for(size_type i=1;i<=n_rows;i++)
+      for(size_type j=1;j<=n_columns;j++)
         (*this)(i,j)= Polynomial(m(i,j));
   }
 void PolynomialMatrix::eval(short unsigned int k,const double &val)
   {
-    for(register size_type i=1;i<=n_rows;i++)
-      for(register size_type j=1;j<=n_columns;j++)
+    for(size_type i=1;i<=n_rows;i++)
+      for(size_type j=1;j<=n_columns;j++)
         (*this)(i,j)= (*this)(i,j).Eval(k,val);
   }
 void PolynomialMatrix::eval(short unsigned int k,const Polynomial &val)
   {
-    for(register size_type i=1;i<=n_rows;i++)
-      for(register size_type j=1;j<=n_columns;j++)
+    for(size_type i=1;i<=n_rows;i++)
+      for(size_type j=1;j<=n_columns;j++)
         (*this)(i,j)= (*this)(i,j).Eval(k,val);
   }
 void PolynomialMatrix::eval(const vZ_double &v)
   {
-    for(register size_type i=1;i<=n_rows;i++)
-      for(register size_type j=1;j<=n_columns;j++)
+    for(size_type i=1;i<=n_rows;i++)
+      for(size_type j=1;j<=n_columns;j++)
         (*this)(i,j)= (*this)(i,j).Eval(v);
   }
 void PolynomialMatrix::eval(const mZ_double &v)
   {
-    for(register size_type i=1;i<=n_rows;i++)
-      for(register size_type j=1;j<=n_columns;j++)
+    for(size_type i=1;i<=n_rows;i++)
+      for(size_type j=1;j<=n_columns;j++)
         (*this)(i,j)= (*this)(i,j).Eval(v);
   }
 PolynomialMatrix PolynomialMatrix::Eval(short unsigned int j,const double &val) const
@@ -91,7 +91,7 @@ PolynomialMatrix PolynomialMatrix::GetTrn(void) const
 PolynomialMatrix &PolynomialMatrix::operator*=(const double &d)
   {
     const size_type sz= size();      
-    for(register size_type i= 0;i<sz;i++)
+    for(size_type i= 0;i<sz;i++)
       (*this)[i]*=d;
     return *this;
   }
@@ -103,7 +103,7 @@ PolynomialMatrix &PolynomialMatrix::operator+=(const m_double &m)
         abort();
       }
     PolynomialMatrix::size_type n_rows= getNumberOfRows(), n_columns= getNumberOfColumns();
-    register PolynomialMatrix::size_type i,j;
+    PolynomialMatrix::size_type i,j;
     for (i=1;i<=n_rows;i++)
       for (j=1;j<=n_columns;j++)
         (*this)(i,j)+= m(i,j);
@@ -117,7 +117,7 @@ PolynomialMatrix &PolynomialMatrix::operator-=(const m_double &m)
         abort();
       }
     PolynomialMatrix::size_type n_rows= getNumberOfRows(), n_columns= getNumberOfColumns();
-    register PolynomialMatrix::size_type i,j;
+    PolynomialMatrix::size_type i,j;
     for (i=1;i<=n_rows;i++)
       for (j=1;j<=n_columns;j++)
         (*this)(i,j)-= m(i,j);
@@ -240,7 +240,7 @@ Polynomial dot(const PolynomialMatrix &v1,const m_double &v2)
         abort();      
       }
     Polynomial retval= Polynomial::neutro_suma();
-    for(register PolynomialMatrix::size_type i=1;i<=n_columns;i++)
+    for(PolynomialMatrix::size_type i=1;i<=n_columns;i++)
       retval+= v1(1,i) * v2(i,1);
     return retval;
   }
@@ -258,7 +258,7 @@ Polynomial dot(const m_double &v1,const PolynomialMatrix &v2)
         abort();
       }
     Polynomial retval= Polynomial::neutro_suma();
-    for(register PolynomialMatrix::size_type i=1;i<=n_columns;i++)
+    for(PolynomialMatrix::size_type i=1;i<=n_columns;i++)
       retval+= v1(1,i) * v2(i,1);
     return retval;  
   }
@@ -267,8 +267,8 @@ PolynomialMatrix operator*(const Polynomial &p,const m_double &m)
     const m_double::size_type n_rows= m.getNumberOfRows();
     const m_double::size_type n_columns= m.getNumberOfColumns();
     PolynomialMatrix prod(n_rows,n_columns);
-    for(register PolynomialMatrix::size_type i= 1;i<=n_rows;i++)
-      for(register PolynomialMatrix::size_type j= 1;j<=n_columns;j++)
+    for(PolynomialMatrix::size_type i= 1;i<=n_rows;i++)
+      for(PolynomialMatrix::size_type j= 1;j<=n_columns;j++)
         prod(i,j)= m(i,j) * p;
     return prod;
   }

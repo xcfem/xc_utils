@@ -107,7 +107,7 @@ Rama *ArbolExpr::Traduce(const ExprPostfija &e)
   {
     if (e.Size() == 0) return nullptr;
     Pila pila;
-    register ExprPostfija::const_iterator_segnales i= e.Begin();
+    ExprPostfija::const_iterator_segnales i= e.Begin();
     const Operando *s= nullptr;
     while(i != e.End())
       {

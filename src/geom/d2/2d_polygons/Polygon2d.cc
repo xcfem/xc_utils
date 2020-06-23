@@ -264,7 +264,7 @@ GeomObj::list_Pos2d Polygon2d::getVertexList(void) const
   {
     GeomObj::list_Pos2d lv;
     if(GetNumVertices() > 0)
-      for(register CGPolygon_2::Vertex_iterator j=cgpol.vertices_begin(); j != cgpol.vertices_end();j++)
+      for(CGPolygon_2::Vertex_iterator j=cgpol.vertices_begin(); j != cgpol.vertices_end();j++)
         lv.push_back(Pos2d(*j));
     return lv;
   }
@@ -348,7 +348,7 @@ Polygon2d append_mid_points(const Polygon2d &plg)
         Pos2d p1= plg.Vertice(1);
         retval.push_back(p1);
         Pos2d pmed,p2;
-        for(register size_t i=2;i<=num_vertices;i++)
+        for(size_t i=2;i<=num_vertices;i++)
           {
             p2= plg.Vertice(i);
             pmed= Segment2d(p1,p2).getCenterOfMass();

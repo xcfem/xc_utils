@@ -27,9 +27,6 @@
 #include "xc_utils/src/geom/d1/Line2d.h"
 #include <plotter.h>
 
-#include "boost/progress.hpp"
-
-
 //! @brief Circular sector defined by three points p1->p2->p3.
 CircularSector2d CircularSector2dThreepoints(const Pos2d &p1,const Pos2d &p2,const Pos2d &p3)
   {

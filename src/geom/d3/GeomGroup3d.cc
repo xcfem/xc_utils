@@ -39,8 +39,8 @@ GEOM_FT GeomGroup3d::inertia(const Line3d &e) const
 		  << "; Warning!, the objects of the group have"
 	          << " different dimensions." << std::endl;
       }
-    register pdeque_geom_obj::const_iterator i(objetos.begin());
-    register GEOM_FT retval((*i)->I(e));
+    pdeque_geom_obj::const_iterator i(objetos.begin());
+    GEOM_FT retval((*i)->I(e));
     i++;
     for(;i!=objetos.end();i++)
       retval+= (*i)->I(e);
@@ -80,7 +80,7 @@ Pos3d GeomGroup3d::getCenterOfMass(void) const
         std::cerr << getClassName() << "::" << __FUNCTION__
 	          << "; Warning!, the objects of this group"
 	          << " have different dimensions." << std::endl;
-      }    register pdeque_geom_obj::const_iterator i(objetos.begin());
+      }    pdeque_geom_obj::const_iterator i(objetos.begin());
     GEOM_FT area_i= (*i)->getCenterOfMassArea();
     Vector3d num= (*i)->getCenterOfMass().VectorPos()*area_i;
     GEOM_FT denom(area_i);

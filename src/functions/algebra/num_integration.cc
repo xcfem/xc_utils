@@ -29,7 +29,7 @@ ExprAlgebra integ_trapecio(const ExprAlgebra &f,const std::string &palabra,const
     // Evaluate endpoints
     ExprAlgebra value= 0.5*( f(palabra,x0) + f(palabra,x1) );
      // Now the midpoints
-    for(register size_t k=2; k<n; k++)
+    for(size_t k=2; k<n; k++)
       { value+=f(palabra,x0 + h*(k-1)); }
     value*=h;
     return value;
@@ -49,7 +49,7 @@ ExprAlgebra integ_simpson(const ExprAlgebra &f,const std::string &palabra,const 
    // Etape 3
    unsigned int nn = n-1;
    ExprAlgebra x;
-   for(register size_t i=1;i<=nn;i++)
+   for(size_t i=1;i<=nn;i++)
      {
        // Etape 4
        x= a + i*h;
@@ -79,7 +79,7 @@ std::vector<ExprAlgebra> integ_simpson(const ExprAlgebra &f,const std::string &n
   {
     const size_t sz= intervalos.size()-1;
     std::vector<ExprAlgebra> retval(sz,ExprAlgebra(0.0));
-    for(register size_t i= 0;i<sz;i++)
+    for(size_t i= 0;i<sz;i++)
       retval[i]= f.IntegSimpson(Intervalo1D(nmb_var,intervalos[i],intervalos[i+1],n));
     return retval;
   }

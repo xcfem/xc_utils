@@ -262,7 +262,7 @@ void ExprInfija::Traduce(std::istream &is)
     int cta_parent= 0;
     std::streampos pos= 0;
     std::string carac_leidos; //Caracteres leídos.
-    register char c=' ';
+    char c=' ';
     while(true)
       {
         c= is.peek();
