@@ -43,7 +43,7 @@ Polygon3d::Polygon3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
 GeomObj::list_Pos3d Polygon3d::getVertexList(void) const
   {
     GeomObj::list_Pos3d retval;
-    register Polygon2d::vertex_iterator i= plg2d.vertices_begin();
+    Polygon2d::vertex_iterator i= plg2d.vertices_begin();
     for(;i!=plg2d.vertices_end();i++)
       retval.push_back(to_3d(Pos2d(*i)));
     return retval;
@@ -134,7 +134,7 @@ void Polygon3d::Print(std::ostream &os) const
     unsigned int nv= GetNumVertices();
     if(nv<1) return;
     os << Vertice(1);
-    for(register unsigned int i= 2; i <= nv; i++)
+    for(unsigned int i= 2; i <= nv; i++)
       os << ", " << Vertice(i);
   }
 
@@ -158,9 +158,9 @@ GEOM_FT Polygon3d::distSigno2(const Pos3d &p,const bool &sentido_horario) const
     if(nv==1) return p.dist2(Vertice(1));
      
     //Distance to the plane that contains the polygon.
-    register GEOM_FT d= getPlane().dist2(p);
+    GEOM_FT d= getPlane().dist2(p);
     // Distance to the half spaces defined by the sides.
-    for(register unsigned int i=1; i<=nl; i++)
+    for(unsigned int i=1; i<=nl; i++)
       {
         HalfSpace3d se3d(getPlaneFromSide(i));
         const GEOM_FT d_i= signo*se3d.distSigno2(p);
@@ -223,7 +223,7 @@ std::list<Polygon3d> Polygon3d::Corta(const Plane &pl) const
 //! que se pasa como parámetro.
 bool Polygon3d::TocaCuadrante(const int &cuadrante) const
   {
-    register Polygon2d::vertex_iterator i= plg2d.vertices_begin();
+    Polygon2d::vertex_iterator i= plg2d.vertices_begin();
     for(;i!=plg2d.vertices_end();i++)
       if(to_3d(Pos2d(*i)).Cuadrante() == cuadrante)
         return true;

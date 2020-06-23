@@ -75,7 +75,7 @@ class GeomGroup : public GO
 template <typename GO>
 void GeomGroup<GO>::copia_objetos(const pdeque_geom_obj &objs)
   {
-    for(register const_iterator i= objs.begin();i!=objs.end();i++)
+    for(const_iterator i= objs.begin();i!=objs.end();i++)
       objetos.push_back(downcast((*i)->clon()));
   }
 
@@ -84,7 +84,7 @@ template <typename GO>
 bool GeomGroup<GO>::equal_dimension(void) const
   {
     if(objetos.empty()) return true;
-    register const_iterator i(objetos.begin());
+    const_iterator i(objetos.begin());
     const unsigned short int d((*i)->Dimension());
     i++;
     for(;i!=objetos.end();i++)
@@ -97,8 +97,8 @@ template <typename GO>
 unsigned short int GeomGroup<GO>::Dimension(void) const
   {
     if(objetos.empty()) return 0;
-    register const_iterator i(objetos.begin());
-    register unsigned short int d((*i)->Dimension());
+    const_iterator i(objetos.begin());
+    unsigned short int d((*i)->Dimension());
     i++;
     for(;i!=objetos.end();i++)
       d= std::max(d,(*i)->Dimension());
@@ -109,8 +109,8 @@ template <typename GO>
 GEOM_FT GeomGroup<GO>::GetMax(unsigned short int i) const
   {
     if(objetos.empty()) return 0.0;
-    register const_iterator j=objetos.begin();
-    register GEOM_FT mx= (*j)->GetMax(i);
+    const_iterator j=objetos.begin();
+    GEOM_FT mx= (*j)->GetMax(i);
     j++;
     for(;j != objetos.end();j++)
       mx= std::max((*j)->GetMax(i),mx);
@@ -120,8 +120,8 @@ template <typename GO>
 GEOM_FT GeomGroup<GO>::GetMin(unsigned short int i) const
   {
     if(objetos.empty()) return 0.0;
-    register const_iterator j=objetos.begin();
-    register GEOM_FT mn= (*j)->GetMin(i);
+    const_iterator j=objetos.begin();
+    GEOM_FT mn= (*j)->GetMin(i);
     j++;
     for(;j != objetos.end();j++)
       mn= std::min((*j)->GetMin(i),mn);
@@ -133,8 +133,8 @@ template <typename GO>
 GEOM_FT GeomGroup<GO>::getLength(void) const
   {
     if(objetos.empty()) return 0.0;
-	register const_iterator i(objetos.begin());
-    register GEOM_FT retval((*i)->getLength());
+	const_iterator i(objetos.begin());
+    GEOM_FT retval((*i)->getLength());
     i++;
     for(;i!=objetos.end();i++)
       retval+= (*i)->getLength();
@@ -146,8 +146,8 @@ template <typename GO>
 GEOM_FT GeomGroup<GO>::getArea(void) const
   {
     if(objetos.empty()) return 0.0;
-	register const_iterator i(objetos.begin());
-    register GEOM_FT retval((*i)->getArea());
+	const_iterator i(objetos.begin());
+    GEOM_FT retval((*i)->getArea());
     i++;
     for(;i!=objetos.end();i++)
       retval+= (*i)->getArea();
@@ -159,8 +159,8 @@ template <typename GO>
 GEOM_FT GeomGroup<GO>::getVolume(void) const
   {
     if(objetos.empty()) return 0.0;
-	register const_iterator i(objetos.begin());
-    register GEOM_FT retval((*i)->getVolume());
+	const_iterator i(objetos.begin());
+    GEOM_FT retval((*i)->getVolume());
     i++;
     for(;i!=objetos.end();i++)
       retval+= (*i)->getVolume();
@@ -171,7 +171,7 @@ template <typename GO>
 void GeomGroup<GO>::Print(std::ostream &os) const
   {
     if(Vacio()) return;
-    register const_iterator i= begin();
+    const_iterator i= begin();
     os << **i; i++;
     for(;i!=end();i++)
       os << std::endl << **i;

@@ -120,14 +120,14 @@ Pos3d SolidExtruPolygon3d<PG>::Vertice(unsigned int i) const
 /*     if(ifac == 0) //Es la base. */
 /*       { */
 /* 	    Polyhedron::v_ind_vertices iv(num_vert_plgno); */
-/*         for(register size_t i= 0;i<num_vert_plgno;i++) */
+/*         for(size_t i= 0;i<num_vert_plgno;i++) */
 /*           iv[i]= i; */
 /*         return iv; */
 /*       } */
 /*     if(ifac == num_facetas-1) //Es la tapa. */
 /*       { */
 /* 	    Polyhedron::v_ind_vertices iv(num_vert_plgno); */
-/*         for(register size_t i= nv-1,j=0;i>=num_vert_plgno;i--,j++) */
+/*         for(size_t i= nv-1,j=0;i>=num_vert_plgno;i--,j++) */
 /*           iv[j]= i; */
 /*         return iv; */
 /*       } */

@@ -121,8 +121,8 @@ GEOM_FT PolyPos<pos>::getLength(void) const
   {
     if(this->size()<2) return 0.0;
     GEOM_FT temp = 0;
-    register const_iterator j;
-    for(register const_iterator i=this->begin(); i != this->end(); i++)
+    const_iterator j;
+    for(const_iterator i=this->begin(); i != this->end(); i++)
       {
         j= i;j++;
         if (j!=this->end()) temp += dist(*i,*j);
@@ -137,7 +137,7 @@ GEOM_FT PolyPos<pos>::GetMax(unsigned short j) const
     GEOM_FT retval(0.0);
     if(!this->empty())
       {
-        register const_iterator i=this->begin();
+        const_iterator i=this->begin();
         retval= (*i)(j);
         for(; i != this->end(); i++)
           retval= std::max(retval,(*i)(j));
@@ -152,7 +152,7 @@ GEOM_FT PolyPos<pos>::GetMin(unsigned short j) const
     GEOM_FT retval(0.0);
     if(!this->empty())
       {
-        register const_iterator i=this->begin();
+        const_iterator i=this->begin();
         retval= (*i)(j);
         for(; i != this->end(); i++)
           retval= std::min(retval,(*i)(j));
@@ -217,7 +217,7 @@ PolyPos<pos> PolyPos<pos>::GetSwap(void) const
     PolyPos<pos> retval(*this);
     const size_t sz= this->size();
     if (sz<2) return retval;
-    for(register size_t i=0; i<sz; i++) 
+    for(size_t i=0; i<sz; i++) 
       retval[sz-i-1]= (*this)[i];
     return retval;
   }
@@ -270,7 +270,7 @@ template <class pos>
 PolyPos<pos> PolyPos<pos>::GetMayores(unsigned short int i,const GEOM_FT &d) const
   {
     PolyPos<pos> retval;
-    for(register const_iterator j=this->begin();j != this->end();j++)
+    for(const_iterator j=this->begin();j != this->end();j++)
       if ((*j)(i) > d) retval.push_back(*j);
     return retval;
   }
@@ -279,7 +279,7 @@ template <class pos>
 PolyPos<pos> PolyPos<pos>::GetMenores(unsigned short int i,const GEOM_FT &d) const
   {
     PolyPos<pos> retval;
-    for(register const_iterator j=this->begin();j != this->end();j++)
+    for(const_iterator j=this->begin();j != this->end();j++)
       if ((*j)(i) < d) retval.push_back(*j);
     return retval;
   }
@@ -377,7 +377,7 @@ void PolyPos<pos>::simplify(GEOM_FT epsilon)
 template <class pos>
 void PolyPos<pos>::Cat(const PolyPos<pos> &l)
   {
-    for(register typename PolyPos<pos>::const_iterator k= l.begin();k!=l.end();k++)
+    for(typename PolyPos<pos>::const_iterator k= l.begin();k!=l.end();k++)
       this->push_back(*k);
   }
 
@@ -394,7 +394,7 @@ std::ostream &operator<<(std::ostream &os,const PolyPos<pos> &l)
   {
     if(l.size()<1) return os;
     typedef typename PolyPos<pos>::const_iterator c_iterator;
-    register c_iterator i= l.begin();
+    c_iterator i= l.begin();
     os << *i; i++;
     for(;i!= l.end();i++)
       os << " , " << *i;

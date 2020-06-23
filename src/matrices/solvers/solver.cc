@@ -24,7 +24,7 @@
 void Solver::inic_p(void)
   { 
     PP= m_sizet(n,1);
-    for(register size_t i= 1;i<= n;i++) P(i)= i;
+    for(size_t i= 1;i<= n;i++) P(i)= i;
   }
 int Solver::check_pp(const size_t n_rows) const
   {

@@ -60,8 +60,9 @@ class GTSSurfaceIntersection
 
     ~GTSSurfaceIntersection(void);
 
-    friend GTSSurface BoolOp(const GTSSurfaceIntersection &si,GTSSurface &s1, GTSSurface &s2,const std::string &str_op,bool check_self_intersection,bool verbose=false);
+    friend GTSSurface BoolOp(const GTSSurfaceIntersection &si,GTSSurface &s1, GTSSurface &s2,const std::string &str_op,bool check_self_intersection,bool verbose);
   };
 
+GTSSurface BoolOp(const GTSSurfaceIntersection &,GTSSurface &, GTSSurface &,const std::string &,bool check_self_intersection,bool verbose= false);
 
 #endif

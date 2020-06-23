@@ -226,7 +226,7 @@ MATR GetMenor(const MATR &matrix,const size_t &f,const size_t &c)
     const size_t fl= matrix.getNumberOfRows();
     const size_t cl= matrix.getNumberOfColumns();
     MATR menor(fl-1,cl-1);
-    register size_t m,m1,p,p1;
+    size_t m,m1,p,p1;
     for(m= m1= 1; m<=fl;m++)
       {
         if (m == f) continue;
@@ -252,8 +252,8 @@ template <class T,class STO>
 void TMatrix<T,STO>::putBox(size_t f,size_t c,const TMatrix<T,STO> &box)
   {
     check_put_box(f,c,box);
-    for(register size_t i=1;i<=box.n_rows;i++)
-      for(register size_t j=1;j<=box.n_columns;j++)
+    for(size_t i=1;i<=box.n_rows;i++)
+      for(size_t j=1;j<=box.n_columns;j++)
         TMatrix<T,STO>::operator()(i+f-1,j+c-1)= box(i,j);
   }
 
@@ -297,16 +297,16 @@ template<class T,class STO>
 TMatrix<T,STO>::TMatrix(const TMatrix<T,STO> &orig,size_t f1, size_t c1, size_t f2, size_t c2): ProtoMatrix(f2-f1+1,c2-c1+1), STO(Tam()) 
   {
     orig.check_get_box(f1,c1,f2,c2);
-    for(register size_t i=1;i<=n_rows;i++)
-      for(register size_t j=1;j<=n_columns;j++)
+    for(size_t i=1;i<=n_rows;i++)
+      for(size_t j=1;j<=n_columns;j++)
         (*this)(i,j)= orig(i+f1-1,j+c1-1);
   }
 
 template<class T,class STO>
 TMatrix<T,STO>& TMatrix<T,STO>::Con(const T &t)
   {
-    for(register size_t i=1;i<=n_rows;i++)
-      for(register size_t j=1;j<=n_columns;j++)
+    for(size_t i=1;i<=n_rows;i++)
+      for(size_t j=1;j<=n_columns;j++)
         (*this)(i,j)= t;
     return *this;
   }
@@ -315,27 +315,27 @@ template<class T,class STO>
 TMatrix<T,STO> TMatrix<T,STO>::GetTrn(void) const
   {
     TMatrix<T,STO> retval(n_columns,n_rows);
-    for(register size_t i=1;i<=n_rows;i++)
-      for(register size_t j=1;j<=n_columns;j++)
+    for(size_t i=1;i<=n_rows;i++)
+      for(size_t j=1;j<=n_columns;j++)
         retval(j,i)= (*this)(i,j); 
     return retval;
   }
 template<class T,class STO>
 void TMatrix<T,STO>::swapRows(size_t f1,size_t f2)
-  { for(register size_t c=1;c<=n_columns;c++) Swap(f1,c,f2,c); }
+  { for(size_t c=1;c<=n_columns;c++) Swap(f1,c,f2,c); }
 template<class T,class STO>
 void TMatrix<T,STO>::swapColumns(size_t c1,size_t c2)
-  { for(register size_t f=1;f<=n_rows;f++) Swap(f,c1,f,c2); }
+  { for(size_t f=1;f<=n_rows;f++) Swap(f,c1,f,c2); }
 template<class T,class STO>
 void TMatrix<T,STO>::Print(std::ostream &os) const
   {
     os << '[';
     const size_t n_rows= getNumberOfRows(),n_columns= getNumberOfColumns();
-    for(register size_t i= 1;i<=n_rows;i++)
+    for(size_t i= 1;i<=n_rows;i++)
       {
         os << '[';
         if(n_columns > 0) os << (*this)(i,1);
-	for(register size_t j= 2;j<=n_columns;j++)
+	for(size_t j= 2;j<=n_columns;j++)
 	  os << ',' << (*this)(i,j);
         os << ']';
       }
@@ -345,8 +345,8 @@ template<class T,class STO>
 bool TMatrix<T,STO>::equal_to(const TMatrix<T,STO> &m2) const
   {
     if (!CompDim(*this,m2)) return false;
-    for(register size_t i=1;i<=n_rows;i++)
-      for(register size_t j=1;j<=n_columns;j++)
+    for(size_t i=1;i<=n_rows;i++)
+      for(size_t j=1;j<=n_columns;j++)
         if ((*this)(i,j) != m2(i,j)) return false;
     return true;
   }
@@ -361,7 +361,7 @@ template <class MATRV,class MATRI>
 MATRV ExtraeValores(const MATRV &matrix,const MATRI &row_indexes,const size_t &icol= 1)
   {
     MATRV retval(row_indexes.getNumberOfRows(),1);
-    for(register size_t iRow=1;iRow<=retval.getNumberOfRows();iRow++)
+    for(size_t iRow=1;iRow<=retval.getNumberOfRows();iRow++)
       retval(iRow,1)= matrix(row_indexes(iRow),icol);
     return retval;
   }

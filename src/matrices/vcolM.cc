@@ -37,7 +37,7 @@ vcolM::vcolM(const MMatrix &m,const size_type &c)
   : MMatrix(m.getNumberOfRows(),1)
   {
     const size_type nf= m.getNumberOfRows();
-    for(register size_type i=1;i<=nf;i++)
+    for(size_type i=1;i<=nf;i++)
       (*this)(i)= m(i,1);
   }
 vcolM &vcolM::operator*=(const m_double &m)

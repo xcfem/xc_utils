@@ -78,7 +78,7 @@ const Pos3d &Pos3dList::operator[](const size_t &i) const
 //! @brief Returns true if the points belongs to the list.
 bool Pos3dList::In(const Pos3d &p, const double &tol) const
   {
-    for(register point_const_iterator j=lista_ptos.begin();j != lista_ptos.end();j++)
+    for(point_const_iterator j=lista_ptos.begin();j != lista_ptos.end();j++)
       if(dist2(*j,p)<=tol) return true;
     return false;
   }
@@ -140,7 +140,7 @@ void Pos3dList::Print(std::ostream &stream) const
   {
     if(!lista_ptos.empty())
       {
-        register point_const_iterator i= lista_ptos.begin();
+        point_const_iterator i= lista_ptos.begin();
         stream << *i; i++;
         for(; i!=lista_ptos.end(); i++)
           stream << ", " << *i;

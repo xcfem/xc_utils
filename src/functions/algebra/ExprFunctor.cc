@@ -32,7 +32,7 @@ void FctorOperaToNum::operator()(Rama *r) const
   {
     if(r->EsToNum()) //Es operador ToNum;
       {
-        register FctorOpera f;
+        FctorOpera f;
         RecorrePostorden(r,f);
       }
   }

@@ -172,11 +172,11 @@ class ZMatrix : public TMatrix<numero,vectorZ<numero> >
 /*       { */
 /*         check_prod(m1,m2); */
 /*         ZMatrix<numero> producto(m1.n_rows,m2.n_columns); */
-/*         for(register size_type i=1;i<=m1.n_rows;i++) */
-/*           for(register size_type j=1;j<=m2.n_columns;j++) */
+/*         for(size_type i=1;i<=m1.n_rows;i++) */
+/*           for(size_type j=1;j<=m2.n_columns;j++) */
 /*  	    { */
-/*               register numero t=numero(); */
-/*               for(register size_type k=1;k<= m1.n_columns;k++) */
+/*               numero t=numero(); */
+/*               for(size_type k=1;k<= m1.n_columns;k++) */
 /*                 t+= m1(i,k) * m2(k,j); */
 /*               producto(i,j)= t; */
 /* 	    } */
@@ -214,7 +214,7 @@ ZMatrix<numero> ZMatrix<numero>::GetMenor(size_t f,size_t c) const
 template <class numero>  
 void ZMatrix<numero>::sumBox(size_t f,size_t c,const ZMatrix<numero> &box)
   {
-    register size_type i,j;
+    size_type i,j;
     for(i=1;i<=box.n_rows;i++)
       for(j=1;j<=box.n_columns;j++)
         PutSuma(i+f-1,j+c-1,box(i,j));
@@ -223,7 +223,7 @@ void ZMatrix<numero>::sumBox(size_t f,size_t c,const ZMatrix<numero> &box)
 template <class numero>
 void ZMatrix<numero>::Idn(void)
   {
-    register size_type i;
+    size_type i;
     if(this->Cuadrada())
       {
 	vectorZ_numero::Con(numero());
@@ -281,7 +281,7 @@ numero ZMatrix<numero>::GetDetLento(void) const
           break;
         default:
           {
-            for(register size_type i= 1;i<= n;i++)
+            for(size_type i= 1;i<= n;i++)
 	      {
                 ZMatrix<numero> menor= (*this).GetMenor(i,1);
                 numero n= (*this)(i,1)*menor.GetDetLento();
@@ -306,7 +306,7 @@ template <class numero>
 std::ostream &operator<<(std::ostream &os,const ZMatrix<numero> &m)
   {
     os << '[';
-    register typename ZMatrix<numero>::size_type i,j;
+    typename ZMatrix<numero>::size_type i,j;
     typename ZMatrix<numero>::size_type n_rows= m.getNumberOfRows(),n_columns= m.getNumberOfColumns();
     for(i= 1;i<=n_rows;i++)
       {
@@ -345,11 +345,11 @@ inline ZMatrix<numero> operator*(const ZMatrix<numero> &m1,const ZMatrix<numero>
     size_t ncols_m1= m1.getNumberOfColumns();
     size_t ncols= m2.getNumberOfColumns();
     typedef typename ZMatrix<numero>::size_type sz_type;
-    for(register sz_type i=1;i<=n_rows;i++)
-      for(register sz_type j=1;j<=ncols;j++)
+    for(sz_type i=1;i<=n_rows;i++)
+      for(sz_type j=1;j<=ncols;j++)
         {
-          register numero t= m1(i,1) * m2(1,j); //Initialize (they can be matrices of boxes).
-          for(register sz_type k=2;k<= ncols_m1;k++)
+          numero t= m1(i,1) * m2(1,j); //Initialize (they can be matrices of boxes).
+          for(sz_type k=2;k<= ncols_m1;k++)
             t+= m1(i,k) * m2(k,j);
           producto(i,j)= t;
         }
@@ -384,7 +384,7 @@ its line number and its column number.
 -----------------------------------------------------------------------------*/
   {
     const size_t n= this->n_rows;
-    register size_t i,j,k;
+    size_t i,j,k;
     size_t ko,lo; numero po,t0;
     //Copy this matrix into C
     C= *this;
@@ -450,7 +450,7 @@ except local variables C,Kp,Lp allocated (and disposed of) here.
   {
     const size_t n= this->n_rows;
     size_t it;
-    register size_t k,l;
+    size_t k,l;
     numero d0;
     const numero cero= neutro_suma(d0);
     const numero uno= neutro_producto(d0);
@@ -482,8 +482,8 @@ ZMatrix<numero> ZMatrix<numero>::getBox(size_t f1, size_t c1, size_t f2, size_t 
   {
     this->check_get_box(f1,c1,f2,c2);
     ZMatrix<numero> box(f2-f1+1,c2-c1+1);
-    for(register size_type i=1;i<=box.n_rows;i++)
-      for(register size_type j=1;j<=box.n_columns;j++)
+    for(size_type i=1;i<=box.n_rows;i++)
+      for(size_type j=1;j<=box.n_columns;j++)
         box(i,j)= ZMatrix<numero>::operator()(i+f1-1,j+c1-1);
     return box;
   }
@@ -494,14 +494,14 @@ numero ZMatrix<numero>::Traza(void) const
   {
     this->check_traza();
     numero n= numero();
-    for(register size_type i= 1;i<=this->n_rows;i++) n+= (*this)(i,i);
+    for(size_type i= 1;i<=this->n_rows;i++) n+= (*this)(i,i);
     return n;
   }
 template <class numero>
 numero ZMatrix<numero>::row_sum(size_type i) const
   {
     numero sumaf= (*this)(i,1);
-    for(register size_t j=2;j<=this->n_columns;j++)
+    for(size_t j=2;j<=this->n_columns;j++)
       sumaf+= (*this)(i,j);
     return sumaf;
   }
@@ -509,7 +509,7 @@ template <class numero>
 numero ZMatrix<numero>::column_sum(size_type j) const
   {
     numero sumac= (*this)(1,j);
-    for(register size_t i=2;i<=this->n_columns;i++)
+    for(size_t i=2;i<=this->n_columns;i++)
       sumac+= (*this)(i,j);
     return sumac;
   }
@@ -517,7 +517,7 @@ template <class numero>
 numero ZMatrix<numero>::row_maximum(size_type i) const
   {
     numero maxf= (*this)(i,1);
-    for(register size_t j=2;j<=this->n_columns;j++)
+    for(size_t j=2;j<=this->n_columns;j++)
       maxf= std::max(maxf,(*this)(i,j));
     return maxf;
   }
@@ -525,7 +525,7 @@ template <class numero>
 numero ZMatrix<numero>::column_maximum(size_type j) const
   {
     numero maxc= (*this)(1,j);
-    for(register size_t i=2;i<=this->n_columns;i++)
+    for(size_t i=2;i<=this->n_columns;i++)
       maxc+= std::max(maxc,(*this)(i,j));
     return maxc;
   }
@@ -535,7 +535,7 @@ template <class numero>
 numero ZMatrix<numero>::getRowNorm(void) const
   {
     numero maximo= row_sum(1);
-    for(register size_t i=2;i<=this->n_rows;i++) maximo= max(maximo,row_sum(i));
+    for(size_t i=2;i<=this->n_rows;i++) maximo= max(maximo,row_sum(i));
     return maximo;
   }
 //! @brief Return the maximum value of the components of the vector obtained by
@@ -544,7 +544,7 @@ template <class numero>
 numero ZMatrix<numero>::getColumnNorm(void) const
   {
     numero maximo= column_sum(1);
-    for(register size_t j=2;j<=this->n_columns;j++) maximo= max(maximo,column_sum(j));
+    for(size_t j=2;j<=this->n_columns;j++) maximo= max(maximo,column_sum(j));
     return maximo;
   }
 template <class numero>
@@ -554,7 +554,7 @@ numero ZMatrix<numero>::dot(const ZMatrix<numero> &v2) const
   {
     check_dot(*this,v2);
     numero retval((*this)(1,1)*v2(1,1));
-    register typename ZMatrix<numero>::size_type i;
+    typename ZMatrix<numero>::size_type i;
     for(i=2;i<=this->n_columns;i++)
       { retval+= (*this)(1,i) * v2(i,1); }
     return retval;

@@ -77,7 +77,7 @@ Polyhedron3d get_convex_hull(InputIterator first,InputIterator last)
     const size_t num_points= last-first;
     std::vector<Point_3> points(num_points);
     GeomObj::list_Pos3d::const_iterator j= first;
-    for(register size_t i=0;i<num_points;i++)
+    for(size_t i=0;i<num_points;i++)
       {
         points[i]= Pos3d_to_Point_3(*j);
         j++;

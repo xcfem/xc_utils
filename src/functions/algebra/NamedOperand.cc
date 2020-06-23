@@ -26,7 +26,7 @@ std::istream &operator>>(std::istream &is, NamedOperand &s)
   {
     if(is.eof()) return is;
     s.name= "";
-    register char c; c= is.get();
+    char c; c= is.get();
     while(isalnum(c))
       {
         s.name+= c;

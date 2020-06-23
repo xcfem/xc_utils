@@ -39,8 +39,8 @@ inline GEOM_FT get_max_i( short unsigned int i,
 		  << std::endl;
         return 0.0;
       }
-    register InputIterator j= first;
-    register GEOM_FT mx= (*j)(i); j++;
+    InputIterator j= first;
+    GEOM_FT mx= (*j)(i); j++;
     for(;j!=last;j++)
       mx= std::max((*j)(i),mx);
     return mx;
@@ -60,8 +60,8 @@ inline GEOM_FT get_min_i( short unsigned int i,
 		  << std::endl;
         return 0.0;
       }
-    register InputIterator j= first;
-    register GEOM_FT mn= (*j)(i); j++;
+    InputIterator j= first;
+    GEOM_FT mn= (*j)(i); j++;
     for(;j!=last;j++)
       mn= std::min((*j)(i),mn);
     return mn;

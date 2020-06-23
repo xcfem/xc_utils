@@ -44,8 +44,8 @@ FT_matrix::FT_matrix(const FT_matrix &orig,size_t f1, size_t c1, size_t f2, size
   : ZMatrix<GEOM_FT>(f2-f1+1,c2-c1+1)
   {
     orig.check_get_box(f1,c1,f2,c2);
-    for(register size_t i=1;i<=n_rows;i++)
-      for(register size_t j=1;j<=n_columns;j++)
+    for(size_t i=1;i<=n_rows;i++)
+      for(size_t j=1;j<=n_columns;j++)
         (*this)(i,j)= orig(i+f1-1,j+c1-1);
   }
 
@@ -187,8 +187,8 @@ ZMatrix<double> to_double(const FT_matrix &m)
   {
     const size_t n_rows= m.getNumberOfRows(),n_columns= m.getNumberOfColumns();
     m_double retval(n_rows,n_columns);
-    for(register size_t i= 1;i<=n_rows;i++)
-      for(register size_t j= 1;j<=n_columns;j++)
+    for(size_t i= 1;i<=n_rows;i++)
+      for(size_t j= 1;j<=n_columns;j++)
 	retval(i,j)= m(i,j);
     return retval;
   }
@@ -197,8 +197,8 @@ FT_matrix from_double(const ZMatrix<double> &m)
   {
     const size_t n_rows= m.getNumberOfRows(),n_columns= m.getNumberOfColumns();
     FT_matrix retval(n_rows,n_columns);
-    for(register size_t i= 1;i<=n_rows;i++)
-      for(register size_t j= 1;j<=n_columns;j++)
+    for(size_t i= 1;i<=n_rows;i++)
+      for(size_t j= 1;j<=n_columns;j++)
 	retval(i,j)= double_to_FT(m(i,j));
     return retval;
   }

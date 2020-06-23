@@ -37,7 +37,7 @@ void plot(Plotter &plt,const GeomObj::list_Pos2d &l)
 //! @brief Moves the points of the list.
 void move(GeomObj::list_Pos2d &l,const Vector2d &v)
   {
-    for(register GeomObj::list_Pos2d::iterator j=l.begin();j != l.end();j++)
+    for(GeomObj::list_Pos2d::iterator j=l.begin();j != l.end();j++)
       (*j)= (*j) + v;
   }
 

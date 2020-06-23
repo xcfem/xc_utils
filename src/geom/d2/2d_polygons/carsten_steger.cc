@@ -46,8 +46,8 @@ double sumatorio_k_l(const double &xi,const double &xi_1,
                      const int &p, const int &q)
   {
     double retval= 0.0;
-    for(register int k=0;k<=p;k++)
-      for(register int l=0;l<=q;l++)
+    for(int k=0;k<=p;k++)
+      for(int l=0;l<=q;l++)
         retval+=sumando_p_q_k_l(xi,xi_1,yi,yi_1,p,q,k,l);
     return retval;
   }
@@ -55,7 +55,7 @@ double sumatorio_i_p_q(const PolygonalSurface2d &sp,const int &p, const int &q)
   {
     double retval= 0;
     const size_t num_vertices= sp.GetNumVertices();
-    for(register size_t i=1;i<=num_vertices;i++)
+    for(size_t i=1;i<=num_vertices;i++)
       {
         
         const size_t imas1= i%num_vertices+1;

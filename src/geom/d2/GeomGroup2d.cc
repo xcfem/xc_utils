@@ -43,8 +43,8 @@ GEOM_FT GeomGroup2d::inertia(const Line2d &e) const
 	     << "; warning, the object of the group have"
 	     << " different dimensions." << endl;
       }
-    register pdeque_geom_obj::const_iterator i(objetos.begin());
-    register GEOM_FT retval((*i)->I(e));
+    pdeque_geom_obj::const_iterator i(objetos.begin());
+    GEOM_FT retval((*i)->I(e));
     i++;
     for(;i!=objetos.end();i++)
       retval+= (*i)->I(e);
@@ -80,7 +80,7 @@ Pos2d GeomGroup2d::getCenterOfMass(void) const
 	     << "; Warning!, the objects in the group"
 	     << " have different dimensions." << endl;
       }
-    register pdeque_geom_obj::const_iterator i(objetos.begin());
+    pdeque_geom_obj::const_iterator i(objetos.begin());
     GEOM_FT area_i= (*i)->getCenterOfMassArea();
     Vector2d num= (*i)->getCenterOfMass().VectorPos()*area_i;
     GEOM_FT denom(area_i);
@@ -104,12 +104,12 @@ void GeomGroup2d::Transform(const Trf2d &trf2d)
 
 void GeomGroup2d::Print(std::ostream &stream) const
   {
-    for(register pdeque_geom_obj::const_iterator i= objetos.begin();i!=objetos.end();i++)
+    for(pdeque_geom_obj::const_iterator i= objetos.begin();i!=objetos.end();i++)
       (*i)->Print(stream);
   }
 void GeomGroup2d::Plot(Plotter &plotter) const
   {
-    for(register pdeque_geom_obj::const_iterator i= objetos.begin();i!=objetos.end();i++)
+    for(pdeque_geom_obj::const_iterator i= objetos.begin();i!=objetos.end();i++)
       (*i)->Plot(plotter);
   }
 

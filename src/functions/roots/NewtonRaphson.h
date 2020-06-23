@@ -174,7 +174,7 @@ m_double NewtonRaphson<MF>::Itera( const MF &F,const m_double &Xguess,
                                    const double &tol_f,
                                    const double &tol_dx)
   {
-    register bool moreIter;
+    bool moreIter;
     iter= 0;
     m_double X(Xguess);
     m_double X_buena(X); //Última X para la que no se produjo error.

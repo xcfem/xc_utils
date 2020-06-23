@@ -102,7 +102,7 @@ void print(std::ostream &os,input_iterator begin,input_iterator end)
   {
     if(begin!=end)
       {
-        register input_iterator i= begin;
+        input_iterator i= begin;
         os << *i; i++;
         for(;i!=end;i++)
           os << ", " << *i;

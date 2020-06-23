@@ -74,7 +74,7 @@ inline short int sgn_prod(const double &num,const double &denom)
 //Division por cero  
 inline double divide(const double &num,const double &denom)
   {
-    register double retval(num);
+    double retval(num);
     if(fabs(denom) > 0 )
       retval/= denom;
     else

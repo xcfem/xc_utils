@@ -57,7 +57,7 @@ Polygon2d return_polygon(const Polygon2d &p)
   {
     Polygon2d retval;
     const size_t num_vertices= p.GetNumVertices();
-    for(register size_t i=1;i<=num_vertices;i++)
+    for(size_t i=1;i<=num_vertices;i++)
       {
         const Pos2d &pto= p.Vertice(i);
         retval.push_back(Pos2d(pto.x()/escala,pto.y()/escala));

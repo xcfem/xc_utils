@@ -29,8 +29,6 @@
 #include "xc_utils/src/geom/pos_vec/Pos2dArray.h"
 #include "xc_utils/src/geom/pos_vec/Pos3dArray.h"
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
-#include "boost/progress.hpp"
-
 
 //! @brief Constructor virtual.
 D2to3d *CircularSector3d::clon(void) const

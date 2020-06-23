@@ -36,7 +36,7 @@ GeomObj::list_Pos2d PolygonalSurface2d::getVertices(void) const
   {
     unsigned int nv= GetNumVertices();
     GeomObj::list_Pos2d lv;
-    for(register size_t i= 1; i <= nv; i++) lv.push_back(Vertice(i));
+    for(size_t i= 1; i <= nv; i++) lv.push_back(Vertice(i));
     return lv;
   }
 
@@ -63,7 +63,7 @@ Polyline2d PolygonalSurface2d::getPolyline(void) const
   {
     Polyline2d retval;
     unsigned int nv= GetNumVertices();
-    for(register size_t i= 1; i <= nv; i++) retval.AgregaVertice(Vertice(i));
+    for(size_t i= 1; i <= nv; i++) retval.AgregaVertice(Vertice(i));
     retval.AgregaVertice(Vertice(1)); //Close the polyline.
     return retval;
   }
@@ -85,8 +85,8 @@ Segment2d PolygonalSurface2d::Lado(unsigned int i) const
 GEOM_FT PolygonalSurface2d::getLength(void) const
   {
     unsigned int nl= GetNumLados();
-    register GEOM_FT temp = 0;
-    for(register unsigned int i= 1; i<=nl;i++)
+    GEOM_FT temp = 0;
+    for(unsigned int i= 1; i<=nl;i++)
       temp += Lado(i).getLength();
     return temp;
   }
@@ -98,9 +98,9 @@ GEOM_FT PolygonalSurface2d::getArea(void) const
 //! @brief Return the maximum value of the i-th coordinate.
 GEOM_FT PolygonalSurface2d::GetMax(unsigned short int i) const
   { 
-    register GEOM_FT mx= Vertice(0)(i);
+    GEOM_FT mx= Vertice(0)(i);
     unsigned int nv= GetNumVertices();
-    for(register unsigned short int j= 0;j < nv;j++)
+    for(unsigned short int j= 0;j < nv;j++)
       mx= max(Vertice(j)(i),mx);
     return mx;
   }
@@ -108,9 +108,9 @@ GEOM_FT PolygonalSurface2d::GetMax(unsigned short int i) const
 //! @brief Return the minimum value of the i-th coordinate.
 GEOM_FT PolygonalSurface2d::GetMin(unsigned short int i) const
   {
-    register GEOM_FT mn= Vertice(0)(i);
+    GEOM_FT mn= Vertice(0)(i);
     unsigned int nv= GetNumVertices();
-    for(register unsigned short int j= 0;j < nv;j++)
+    for(unsigned short int j= 0;j < nv;j++)
       mn= min(Vertice(j)(i),mn);
     return mn;
   }
@@ -257,7 +257,7 @@ GEOM_FT PolygonalSurface2d::DistSigno(const Pos2d &p,const bool &sentido_horario
              Pos2d p2= Vertice(2);
              HalfPlane2d half_plane(p1,p2);
              retval= signo*half_plane.DistSigno(p);
-             for(register unsigned int i=2; i<nv; i++)
+             for(unsigned int i=2; i<nv; i++)
                {
                  p1= Vertice(i);
                  p2= Vertice(i+1);
@@ -293,7 +293,7 @@ void PolygonalSurface2d::Print(std::ostream &os) const
     unsigned int nv= GetNumVertices();
     if(nv<1) return;
     os << Vertice(1);
-    for(register unsigned int i= 2; i <= nv; i++)
+    for(unsigned int i= 2; i <= nv; i++)
       os << ", " << Vertice(i);
   }
 void PolygonalSurface2d::Plot(Plotter &plotter) const
@@ -301,7 +301,7 @@ void PolygonalSurface2d::Plot(Plotter &plotter) const
     unsigned int nv= GetNumVertices();
     if(nv<2) return;
     Pos2d p1= Vertice(1);
-    for(register unsigned int i= 2; i <= nv; i++)
+    for(unsigned int i= 2; i <= nv; i++)
       {
         Pos2d p2= Vertice(i);
         plotter.fline(p1.x(),p1.y(),p2.x(),p2.y());

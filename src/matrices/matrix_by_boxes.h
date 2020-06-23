@@ -84,8 +84,8 @@ template <class TBOX>
 MatrixByBoxes<TBOX>::MatrixByBoxes(const std::vector<size_t> &dim)
   :  box_matrix(dim.size(),dim.size())
   {
-    for(register size_t i=1;i<=this->n_rows;i++)
-      for(register size_t j=1;j<=this->n_columns;j++)
+    for(size_t i=1;i<=this->n_rows;i++)
+      for(size_t j=1;j<=this->n_columns;j++)
         (*this)(i,j)= m_double(dim[i-1],dim[j-1]);
   }
 
@@ -97,8 +97,8 @@ template <class TBOX>
 MatrixByBoxes<TBOX>::MatrixByBoxes(const std::vector<size_t> &dim_rows,const std::vector<size_t> &dim_columns)
   :  box_matrix(dim_rows.size(),dim_columns.size())
   {
-    for(register size_t i=1;i<=this->n_rows;i++)
-      for(register size_t j=1;j<=this->n_columns;j++)
+    for(size_t i=1;i<=this->n_rows;i++)
+      for(size_t j=1;j<=this->n_columns;j++)
         (*this)(i,j)= m_double(dim_rows[i-1],dim_columns[j-1]);
   }
 
@@ -122,7 +122,7 @@ size_t MatrixByBoxes<TBOX>::get_rows_row(const size_t &iRow) const
   {
     size_t retval= 0;
     const size_t ncls= this->getNumberOfColumns();
-    for(register size_t j=1;j<=ncls;j++)
+    for(size_t j=1;j<=ncls;j++)
       {
         const size_t nrows_j= (*this)(iRow,j).getNumberOfRows();
         if(nrows_j>retval) retval= nrows_j;
@@ -136,7 +136,7 @@ size_t MatrixByBoxes<TBOX>::get_columns_column(const size_t c) const
   {
     size_t retval= 0;
     const size_t nrows= this->getNumberOfRows();
-    for(register size_t i=1;i<=nrows;i++)
+    for(size_t i=1;i<=nrows;i++)
       {
         const size_t ncls_i= (*this)(i,c).getNumberOfRows();
         if(ncls_i>retval) retval= ncls_i;
@@ -150,7 +150,7 @@ std::vector<size_t> MatrixByBoxes<TBOX>::get_dim_rows(void) const
   {
     const size_t nrows= this->getNumberOfRows();
     std::vector<size_t> retval(nrows,0);
-    for(register size_t i=1;i<=nrows;i++)
+    for(size_t i=1;i<=nrows;i++)
       retval[i-1]= get_rows_row(i);
     return retval;
   }
@@ -160,7 +160,7 @@ std::vector<size_t> MatrixByBoxes<TBOX>::get_dim_columns(void) const
   {
     const size_t ncls= this->getNumberOfColumns();
     std::vector<size_t> retval(ncls,0);
-    for(register size_t j=1;j<=ncls;j++)
+    for(size_t j=1;j<=ncls;j++)
       retval[j-1]= get_columns_column(j);
     return retval;
   }
@@ -170,7 +170,7 @@ size_t MatrixByBoxes<TBOX>::getTotalNumberOfRows(void) const
   {
     std::vector<size_t> dim_rows= get_dim_rows();
     size_t tot_rows= dim_rows[0];
-    for(register size_t i=1;i<this->n_rows;i++)
+    for(size_t i=1;i<this->n_rows;i++)
       tot_rows+= dim_rows[i];
     return tot_rows;
   }
@@ -180,7 +180,7 @@ size_t MatrixByBoxes<TBOX>::getTotalNumberOfColumns(void) const
   {
     std::vector<size_t> dim_columns= get_dim_columns();
     size_t tot_n_columns= dim_columns[0];
-    for(register size_t j=1;j<=this->n_columns;j++)
+    for(size_t j=1;j<=this->n_columns;j++)
       tot_n_columns+= dim_columns[j];
     return tot_n_columns;
   }

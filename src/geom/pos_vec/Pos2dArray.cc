@@ -296,7 +296,7 @@ Pos2d Pos2dArray::getQuadCentroid(const size_t &i,const size_t &j) const
 //! @brief Return the maximum value of the k coordinate.
 GEOM_FT Pos2dArray::GetMax(unsigned short int k) const
   {
-    register GEOM_FT mx= (*this)(1,1)(k);
+    GEOM_FT mx= (*this)(1,1)(k);
     for(size_t i=1;i<=n_rows;i++)
       for(size_t j=1;j<=n_columns;j++)
         mx= std::max((*this)(i,j)(k),mx);
@@ -306,7 +306,7 @@ GEOM_FT Pos2dArray::GetMax(unsigned short int k) const
 //! @brief Return the minimum value of the k coordinate.
 GEOM_FT Pos2dArray::GetMin(unsigned short int k) const
   {
-    register GEOM_FT mn= (*this)(1,1)(k);
+    GEOM_FT mn= (*this)(1,1)(k);
     for(size_t i=1;i<=n_rows;i++)
       for(size_t j=1;j<=n_columns;j++)
         mn= std::min((*this)(i,j)(k),mn);
