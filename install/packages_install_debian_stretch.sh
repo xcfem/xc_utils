@@ -30,6 +30,7 @@ apt-get install -y $packages_build
 
 packages_lib="\
     libcgal-dev                 \
+    libqt5svg5-dev              \
     libglib2.0-dev              \
     libgmp3-dev                 \
     libgtk2.0-dev               \
