@@ -206,8 +206,11 @@ boost::python::object CommandEntity_eval(boost::python::object self, const std::
         boost::python::object self_dict= self.attr("__dict__");
 
         // Inject the __builtin__ module into the Python object's __dict__.
-        self_dict["__builtins__"]= boost::python::import("__builtin__");
-
+        #ifdef PYTHON2
+          self_dict["__builtins__"]= boost::python::import("__builtin__");
+	#else
+          self_dict["__builtins__"]= boost::python::import("builtins");
+        #endif  
         self_dict["self"]= self;
 
         // Extract the C++ object from the Python object.
