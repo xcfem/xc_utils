@@ -30,6 +30,9 @@
 # Depends on distribution so ignored
 distro_name.txt
 
+#Depends on the computer so ignored
+python_modules/installed_files_history.txt
+
 #Python
 *~
 python_modules/build/lib*

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
 import math
-import frictional_soil as fs
+from geotechnics import frictional_soil as fs
 from misc_utils import log_messages as lmsg
 from scipy.optimize import fminbound
 

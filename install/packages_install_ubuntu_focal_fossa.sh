@@ -1,4 +1,6 @@
 scriptName=`basename "$0"`
+echo "Work in progress; use with CAUTION."
+
 # Must run as root so that we can shutdown backuppc and mount drives
 if [ $(whoami) != "root" ]; then
     echo "You must run this script as root."
@@ -19,7 +21,6 @@ if [ $1 != "DoNotAsk" ]; then
 fi
 
 # packages installed by debian package manager apt-get
-# tested on Debian Stretch
 packages_build="\
     git         \
     cmake       \
@@ -29,53 +30,52 @@ packages_build="\
 apt-get install -y $packages_build
 
 packages_lib="\
-    libcgal-dev                 \
-    libqt5svg5-dev              \
-    libglib2.0-dev              \
-    libgmp3-dev                 \
-    libgtk2.0-dev               \
-    libgtkgl2.0-dev             \
-    libgtkglextmm-x11-1.2-dev   \
-    libgtkmm-2.4-dev            \
-    libgtkglext1-dev            \
-    libX11-dev                  \
-    libgts-bin                  \
-    libgts-dev                  \
-    libmpfr-dev                 \
-    libmysql++-dev              \
-    libplot-dev                 \
-    libsqlite3-dev              \
-    libvtk6-dev                 \
-    libmetis-dev"
-apt-get install -y $packages_lib
+    libcgal-dev               \
+    libcgal-qt5-dev           \
+    libglib2.0-dev            \
+    libgmp3-dev               \
+    libgtk2.0-dev             \
+    libgtkgl2.0-dev           \
+    libgtkglextmm-x11-1.2-dev \
+    libgtkmm-2.4-dev          \
+    libgtkglext1-dev          \
+    libgts-bin                \
+    libgts-dev                \
+    libmpfr-dev               \
+    libmysql++-dev            \
+    libplot-dev               \
+    libsqlite3-dev            \
+    libvtk7-dev               \   
+    libx11-dev"
+sudo apt-get install -y $packages_lib
 
 packages_dev="\
-    python-dev          \
+    python3-dev          \
     cimg-dev"
-apt-get install -y $packages_dev
+sudo apt-get install -y $packages_dev
 
 packages_python="\
-    python-vtk6         \
-    python-numpy        \
-    python-scipy        \
-    python-sympy        \
-    python-matplotlib   \
-    python-pandas       \
-    python-sklearn      \
-    python-dev          \
-    python-pip"
-apt-get install -y $packages_python
+    python3-vtk7         \
+    python3-numpy        \
+    python3-scipy        \
+    python3-sympy        \
+    python3-matplotlib   \
+    python3-pandas       \
+    python3-sklearn      \
+    python3-pip"
+sudo apt-get install -y $packages_python
 
 packages_div="\
     gnuplot \
     bc"
 # bc is needed by xc_utils verification tests
-apt-get install -y $packages_div
+sudo apt-get install -y $packages_div
 
 # free disk space by cleaning install files
-apt-get clean
+sudo apt-get clean
+
+apt-get install  
 
 # cairo installation. 
 sudo -H pip install pycairo
-
 
