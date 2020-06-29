@@ -26,6 +26,7 @@
 
 #include "ZMatrix.h"
 #include <map>
+#include <deque>
 #include <algorithm>
 
 template <class numero>
