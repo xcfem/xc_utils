@@ -26,6 +26,7 @@
 
 #include "ZMatrix.h"
 #include <map>
+#include <deque>
 #include <algorithm>
 
 template <class numero>
@@ -42,6 +43,7 @@ class matdispZ : public ZMatrix<numero>
         typedef typename map_elem::iterator iterator;
         typedef typename map_elem::const_iterator const_iterator;
         typedef typename map_elem::const_reverse_iterator const_reverse_iterator;
+        typedef typename map_elem::key_type key_type;
       private:
         inline int hasRow(const typename sp_vector::size_type f) const
           { return (find(f)!=this->end()); }
@@ -102,12 +104,14 @@ class matdispZ : public ZMatrix<numero>
     size_t ndiagL(void) const;
     size_t ndiagU(void) const;
     void FillVectorBanda(numero *vptr) const;
-    //Acceso a los elementos.
+    //Access to matrix elements.
     numero &operator()(size_t iRow=1,size_t col=1)
       {
         assert(col>0 && col<=this->n_columns);
         assert(iRow>0 && iRow<=this->n_rows);
-        return columns[col][iRow];
+	sp_vector &column= columns[col];
+	numero &retval= column[iRow];
+        return retval;
       }
     const numero &operator()(size_t iRow=1,size_t col=1) const
       {
@@ -271,10 +275,12 @@ typename matdispZ<numero>::sp_vector &matdispZ<numero>::sp_vector::operator-=(co
 template<class numero>
 void matdispZ<numero>::sp_vector::QuitaElem(const numero &n)
   {
-    iterator f;
-    for(f= this->begin();f!=this->end();f++)
+    std::deque<key_type> markedForDeath;
+    for(const_iterator f= this->begin();f!=this->end();f++)
       if(f->second == n)
-        this->erase(f);
+	markedForDeath.push_back(f->first);
+    for(auto i= markedForDeath.begin();i!=markedForDeath.end();i++)
+      this->erase(*i);
   }
 template<class numero>
 void matdispZ<numero>::sp_vector::PutCol(const typename sp_vector::size_type c,ZMatrix_number &m) const
