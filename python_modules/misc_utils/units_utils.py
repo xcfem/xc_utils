@@ -40,7 +40,7 @@ def feet_and_inches(n):
     if not n:
         return "0 feet 0 inches"
     else:
-        feet, inches, fractions = convert(n)
+        feet, inches, fractions = convert_inches(n)
         ft = pluralize_feet(feet)
         i  = show_inches(inches, fractions)
         return ft + (ft and i and ' ') + i
