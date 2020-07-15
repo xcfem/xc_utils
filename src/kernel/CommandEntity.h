@@ -71,6 +71,8 @@ class CommandEntity: public EntityWithProperties
     bool hasPyProp(const std::string &);
     boost::python::object getPyProp(const std::string &str);
     void setPyProp(std::string str, boost::python::object val);
+    boost::python::list getPropNames(void) const;
+   
     boost::python::object evalPy(boost::python::object dict,const std::string &);
     boost::python::object execPy(boost::python::object dict,const std::string &);
     boost::python::object execFilePy(boost::python::object dict,const std::string &);

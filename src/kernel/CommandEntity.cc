@@ -137,6 +137,14 @@ void CommandEntity::setPyProp(std::string str, boost::python::object val)
     python_dict[str] = val;
   }
 
+//! @brief Return the names of the object properties weightings.
+boost::python::list CommandEntity::getPropNames(void) const
+  {
+    boost::python::list retval;
+    for(PythonDict::const_iterator i= python_dict.begin();i!= python_dict.end();i++)
+      retval.append((*i).first);
+    return retval;
+  }
 //! @brief Return the Python object that results from evaluating the argument.
 boost::python::object CommandEntity::evalPy(boost::python::object dict,const std::string &str)
    {
