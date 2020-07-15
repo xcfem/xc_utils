@@ -160,6 +160,7 @@ boost::python::list cmb_acc::ActionWeightingMap::getKeys(void) const
       retval.append((*i).first);
     return retval;    
   }
+
 //! @bried Return the combinations that correspond to all actions_and_factors.
 cmb_acc::LoadCombinations cmb_acc::ActionWeightingMap::getLoadCombinations(void)
   {
