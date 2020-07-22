@@ -52,6 +52,7 @@ Line3d::Line3d(const Pos3d &p1,const Pos3d &p2)
 		<< p1 << " and " << p2 << " are too close d(p1,p2)= "
                 << d << ".\n";
   }
+
 Line3d::Line3d(const Pos3d &p,const Dir3d &dir)
   : Linear3d(), cgr(p.ToCGAL(),dir.ToCGAL()) {}
 
@@ -79,6 +80,41 @@ Dir3d Line3d::GetDir(void) const
 //! @brief Return the direction vector.
 Vector3d Line3d::VDir(void) const
   { return Vector3d(cgr.to_vector()); }
+
+//! @brief Returns a vector in the direction of the local
+//! X axis.
+Vector3d Line3d::getIVector(void) const
+  {
+    Vector3d retval= VDir();
+    retval.Normalize();
+    return retval;
+  }
+
+//! @brief Returns a vector in the direction of the local
+//! Y axis.
+Vector3d Line3d::getJVector(void) const
+  {
+    const Vector3d i= getIVector();
+    const Vector3d K(0.0,0.0,1.0); //Global Z.
+    Vector3d retval= K.getCross(i);
+    const double d= retval.GetModulus2();
+    if(d<1e-12) // parallel to z axis.
+      {
+	const Vector3d J(0.0,1.0,0.0); //Global Y.
+        retval= J.getCross(i);
+      }
+    retval.Normalize();
+    return retval;
+  }
+
+//! @brief Returns a vector in the direction of the local
+//! Z axis
+Vector3d Line3d::getKVector(void) const
+  {
+    const Vector3d vI= getIVector();
+    const Vector3d vJ= getJVector();
+    return vI.getCross(vJ);
+  }
 
 double Line3d::getLambda(unsigned short int i,const double &d,const Vector3d &i_) const
       { return (d-Point(0)(i))/i_(i);}

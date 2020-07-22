@@ -106,8 +106,24 @@ void Segment3d::TwoPoints(const Pos3d &p1,const Pos3d &p2)
 
 Dir3d Segment3d::GetDir(void) const
   { return Dir3d(cgseg.direction()); }
+
 Vector3d Segment3d::VDir(void) const
   { return GetDir().GetVector(); }
+
+//! @brief Returns a vector in the direction of the local
+//! X axis.
+Vector3d Segment3d::getIVector(void) const
+  { return getSupportLine().getIVector(); }
+
+//! @brief Returns a vector in the direction of the local
+//! Y axis.
+Vector3d Segment3d::getJVector(void) const
+  { return getSupportLine().getJVector(); }
+
+//! @brief Returns a vector in the direction of the local
+//! Z axis
+Vector3d Segment3d::getKVector(void) const
+  { return getSupportLine().getKVector(); }
 
 //! @brief Return the lambda parameter: p= getFromPoint()+lambda*VDir()
 GEOM_FT Segment3d::getLambda(const Pos3d &p) const

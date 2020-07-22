@@ -103,6 +103,9 @@ class Ray2d : public Linear2d
       { return Pos2d(NAN,NAN); }
     Dir2d GetDir(void) const;
     Vector2d VDir(void) const;
+    Vector2d Normal(void) const;
+    virtual Vector2d getIVector(void) const;
+    virtual Vector2d getJVector(void) const;
     inline GEOM_FT getAngle(const Vector2d &v) const
       { return angle(VDir(),v); }
     inline friend GEOM_FT angle(const Ray2d &r,const Vector2d &v)

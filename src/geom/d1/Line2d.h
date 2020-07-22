@@ -129,7 +129,10 @@ class Line2d : public Linear2d
     virtual Pos2d getCenterOfMass(void) const;
     Dir2d GetDir(void) const;
     Vector2d VDir(void) const;
+    Vector2d Normal(void) const;
     Vector2d VersorDir(void) const;
+    virtual Vector2d getIVector(void) const;
+    virtual Vector2d getJVector(void) const;
     Line2d Bisectriz(const Line2d &r) const;
     Line2d getNormalized(void) const;
 

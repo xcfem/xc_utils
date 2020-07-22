@@ -94,6 +94,9 @@ class Ray3d : public Linear3d
       { return Pos3d(NAN,NAN,NAN); }
     Dir3d GetDir(void) const;
     Vector3d VDir(void) const;
+    virtual Vector3d getIVector(void) const;
+    virtual Vector3d getJVector(void) const;
+    virtual Vector3d getKVector(void) const;
     inline double getAngle(const Vector3d &v) const
       { return angle(VDir(),v); }
     //Moment of inertia with respect to the center of mass in local coordinates.

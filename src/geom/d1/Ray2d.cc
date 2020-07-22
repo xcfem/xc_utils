@@ -64,6 +64,28 @@ Dir2d Ray2d::GetDir(void) const
 Vector2d Ray2d::VDir(void) const
   { return GetDir().GetVector(); }
 
+//! @brief Return the direction vector of the segment.
+Vector2d Ray2d::Normal(void) const
+  { return VDir().Normal(); }
+
+//! @brief Returns a vector in the direction of the local
+//! X axis.
+Vector2d Ray2d::getIVector(void) const
+  {
+    Vector2d retval= VDir();
+    retval.Normalize();
+    return retval;
+  }
+
+//! @brief Returns a vector in the direction of the local
+//! Y axis.
+Vector2d Ray2d::getJVector(void) const
+  {
+    Vector2d retval= Normal();
+    retval.Normalize();
+    return retval;
+  }
+
 //! @brief Return the squared distance 
 //! from the point to the ray.
 GEOM_FT Ray2d::dist2(const Pos2d &p) const

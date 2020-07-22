@@ -69,13 +69,31 @@ GeomObj *Segment2d::clon(void) const
 Dir2d Segment2d::GetDir(void) const
   { return Dir2d(cgseg.direction()); }
 
-//! @brief Return el direction vector of the segment.
+//! @brief Return the direction vector of the segment.
 Vector2d Segment2d::VDir(void) const
   { return GetDir().GetVector(); }
 
-//! @brief Return el direction vector of the segment.
+//! @brief Return the direction vector of the segment.
 Vector2d Segment2d::Normal(void) const
   { return VDir().Normal(); }
+
+//! @brief Returns a vector in the direction of the local
+//! X axis.
+Vector2d Segment2d::getIVector(void) const
+  {
+    Vector2d retval= VDir();
+    retval.Normalize();
+    return retval;
+  }
+
+//! @brief Returns a vector in the direction of the local
+//! Y axis.
+Vector2d Segment2d::getJVector(void) const
+  {
+    Vector2d retval= Normal();
+    retval.Normalize();
+    return retval;
+  }
 
 //! @brief Return the vector from origin to the segment end point.
 Vector2d Segment2d::GetVector(void) const

@@ -60,6 +60,21 @@ Dir3d Ray3d::GetDir(void) const
 Vector3d Ray3d::VDir(void) const
   { return GetDir().GetVector(); }
 
+//! @brief Returns a vector in the direction of the local
+//! X axis.
+Vector3d Ray3d::getIVector(void) const
+  { return getSupportLine().getIVector(); }
+
+//! @brief Returns a vector in the direction of the local
+//! Y axis.
+Vector3d Ray3d::getJVector(void) const
+  { return getSupportLine().getJVector(); }
+
+//! @brief Returns a vector in the direction of the local
+//! Z axis
+Vector3d Ray3d::getKVector(void) const
+  { return getSupportLine().getKVector(); }
+
 //! @brief Returns the squared distand from the point.
 GEOM_FT Ray3d::dist2(const Pos3d &p) const
   {

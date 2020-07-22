@@ -26,6 +26,8 @@ class_<Ray2d, bases<Linear2d> >("Ray2d")
   .def(init<Pos2d, Pos2d>())
   .def(init<Ray2d>())
   .def("distPos2d", &Ray2d::dist,"return the distance to the point.")
+  .add_property("getIVector", &Ray2d::getIVector,"Return the local x vector.")
+  .add_property("getJVector", &Ray2d::getJVector,"Return the local y vector.")
   ;
 
 
@@ -48,12 +50,18 @@ class_<Line2d, bases<Linear2d> >("Line2d")
   .def("getVDir",&Line2d::VDir,"return the line direction vector.")
   .def("getSlope", &Line2d::getSlope)
   .def("distPos2d", &Line2d::dist,"return the distance to the point.")
+  .add_property("getIVector", &Line2d::getIVector,"Return the local x vector.")
+  .add_property("getJVector", &Line2d::getJVector,"Return the local y vector.")
   ;
 
 class_<Linear3d, bases<GeomObj3d>, boost::noncopyable  >("Linear3d", no_init);
 
 class_<Ray3d, bases<Linear3d> >("Ray3d")
-  .def(init<Ray3d>());
+  .def(init<Ray3d>())
+  .add_property("getIVector", &Ray3d::getIVector,"Return the local x vector.")
+  .add_property("getJVector", &Ray3d::getJVector,"Return the local y vector.")
+  .add_property("getKVector", &Ray3d::getKVector,"Return the local z vector.")
+  ;
 
 GEOM_FT (Segment3d::*AngleVector3D)(const Vector3d &v) const= &Segment3d::getAngle;
 GEOM_FT (Segment3d::*AngleSegment3D)(const Segment3d &v) const= &Segment3d::getAngle;
@@ -75,6 +83,9 @@ class_<Segment3d, bases<Linear3d> >("Segment3d")
   .def("getIntersectionWithLine", segment3dIntersectionWithLine, "Return the intersection with the line argument.")
   .def("getIntersectionWithRay", segment3dIntersectionWithRay, "Return the intersection with the ray argument.")
   .def("getIntersectionWithSegment", segment3dIntersectionWithSegment, "Return the intersection with the segment argument.")
+  .add_property("getIVector", &Segment3d::getIVector,"Return the local x vector.")
+  .add_property("getJVector", &Segment3d::getJVector,"Return the local y vector.")
+  .add_property("getKVector", &Segment3d::getKVector,"Return the local z vector.")
   .def("getVDir",&Segment3d::VDir,"return the direction vector of the segment.")
   .def("Divide", &Segment3d::Divide,"Divide(numparts); returns the points that divide the segment.")
   ;
@@ -98,6 +109,9 @@ class_<Line3d, bases<Linear3d> >("Line3d")
   .def("getYZ3DProjection",&Line3d::YZ3DProjection,"Return the projection of the line onto the YZ plane as a 3D line.")
   .def("distPos3d", &Line3d::dist,"return the distance to the point.")
   .def("linearLeastSquaresFitting", &Plane::linearLeastSquaresFitting,"compute the line that best suits the point cloud.")
+  .add_property("getIVector", &Line3d::getIVector,"Return the local x vector.")
+  .add_property("getJVector", &Line3d::getJVector,"Return the local y vector.")
+  .add_property("getKVector", &Line3d::getKVector,"Return the local z vector.")
  ;
 
 GeomObj::list_Pos2d (Polyline2d::*intersectionWithLine)(const Line2d &) const= &Polyline2d::getIntersection;
@@ -124,6 +138,8 @@ class_<Polyline2d, bases<Linear2d, polyPos2d> >("Polyline2d")
   .def("isClosed",&Polyline2d::isClosed,"returns true if the last vertex is coincident with the first one -dist(first,last)<tol*length-.")
   .def("simplify", simplify2DPoly,"simplification of the polyline (Douglas-Peucker algorithm).")
   .def("getSegment", get2DSegment, "return the i-th segment.")  
+  .add_property("getIVector", &Segment2d::getIVector,"Return the local x vector.")
+  .add_property("getJVector", &Segment2d::getJVector,"Return the local y vector.")
   ;
 
 

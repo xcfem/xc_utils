@@ -110,10 +110,34 @@ Pos2d Line2d::getCenterOfMass(void) const
 
 Dir2d Line2d::GetDir(void) const
   { return Dir2d(cgr.direction()); }
+
 Vector2d Line2d::VDir(void) const
   { return GetDir().GetVector(); }
+
+//! @brief Return the direction vector of the segment.
+Vector2d Line2d::Normal(void) const
+  { return VDir().Normal(); }
+
 Vector2d Line2d::VersorDir(void) const
   { return VDir().getNormalized(); }
+
+//! @brief Returns a vector in the direction of the local
+//! X axis.
+Vector2d Line2d::getIVector(void) const
+  {
+    Vector2d retval= VDir();
+    retval.Normalize();
+    return retval;
+  }
+
+//! @brief Returns a vector in the direction of the local
+//! Y axis.
+Vector2d Line2d::getJVector(void) const
+  {
+    Vector2d retval= Normal();
+    retval.Normalize();
+    return retval;
+  }
 
 double Line2d::getLambda(unsigned short int i,const double &d,const Vector2d &i_) const
   { return (d-Point(0)(i))/i_(i);}
