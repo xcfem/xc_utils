@@ -11,7 +11,7 @@ hip_elu_tex.open("./hipotesis_elu.tex","w")
         \for_each
           {
             def_hip_elu.write("\combination[\"",format(int(conta),"ULS%03u"),"\"]{ \descomp{\"",getName,"\"}}\n")
-            calc_hip_elu.write("\\resuelveCombEstatLin(\"",format(int(conta),"ULS%03u"),"\"){}","\n")
+            calc_hip_elu.write("\\solveStaticLinearComb(\"",format(int(conta),"ULS%03u"),"\"){}","\n")
             calc_hip_elu.write("\\trataResultsComb(\"",format(int(conta),"ULS%03u"),"\"){}","\n")
             hip_elu_tex.write(format(int(conta),"ULS%03u")," & ",getName,"\\\\\n")
             \expr{conta= tonum(conta+1)}
