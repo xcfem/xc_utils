@@ -13,6 +13,7 @@ yPt= pos1.y
 import os
 fname= os.path.basename(__file__)
 if(xPt==1. and yPt==2.):
-  print("test ",fname,": ok.")
+    print("test ",fname,": ok.")
 else:
-  print("test ",fname,": ERROR.")
+    print("test ",fname,": ERROR.")
+ 
