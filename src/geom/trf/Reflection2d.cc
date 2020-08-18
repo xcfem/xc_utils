@@ -45,6 +45,11 @@
 // // contanins the translational part of the transformation.
 //   : Trf2d(m00,m01,m02,m10,m11,m12,hw) {}
 
+//! @brief Default constructor.
+Reflection2d::Reflection2d(void)
+  : Trf2d(1.0,0.0,0.0,0.0,1.0,0.0)
+  {}
+
 Reflection2d::Reflection2d(const GEOM_FT &m00,const GEOM_FT &m01,const GEOM_FT &m02,
 			 const GEOM_FT &m10,const GEOM_FT &m11,const GEOM_FT &m12)
   : Trf2d(m00,m01,m02,m10,m11,m12) {}

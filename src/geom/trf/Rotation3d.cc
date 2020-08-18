@@ -50,7 +50,7 @@ FT_matrix rotation_3d_matrix(const Line3d &axis,const double &theta)
 Rotation3d::Rotation3d(void)
   : Trf3d()
   {
-    FT_matrix rr=  identity(4);
+    FT_matrix rr= identity(4);
     putHomogenousMatrix(rr);
   }
 

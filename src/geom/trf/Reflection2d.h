@@ -43,6 +43,7 @@ class Reflection2d: public Trf2d
 /*                  const GEOM_RT & m10,const GEOM_RT & m11,const GEOM_RT & m12, */
 /*                  const GEOM_RT & hw = GEOM_RT(1.0)); */
   public:
+    Reflection2d(void);
     Reflection2d(const Pos2d &Q,const Vector2d &d);
     Reflection2d(const Line2d &r);
   };

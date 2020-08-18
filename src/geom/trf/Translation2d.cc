@@ -23,5 +23,8 @@
 #include "Translation2d.h"
 #include "../pos_vec/Vector2d.h"
 
+Translation2d::Translation2d(void)
+  : Trf2d(CGAL::Translation(),Vector2d(0,0)) {}
+
 Translation2d::Translation2d(const Vector2d &v)
   : Trf2d(CGAL::Translation(),v) {}

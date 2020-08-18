@@ -30,13 +30,25 @@ class_<Trf2d, bases<Trf>, boost::noncopyable >("Trf2d", no_init)
   .def("getTrfPos2d", TrfPos2d)
    ;
 
-// class_<Identity2d, bases<Trf2d> >("Identity2d");
-// class_<Escalado2d, bases<Trf2d> >("Escalado2d");
-// class_<Reflexion2d, bases<Trf2d> >("Reflexion2d");
+class_<Identity2d, bases<Trf2d> >("Identity2d")
+  .def(init<>())
+  ;
+
+class_<Translation2d, bases<Trf2d> >("Translation2d")
+  .def(init<Vector2d>())
+  ;
+
 class_<Rotation2d, bases<Trf2d> >("Rotation2d")
   .def(init<double>())
   ;
-//class_<Translation2d, bases<Trf2d> >("Translation2d");
+
+class_<Scaling2d, bases<Trf2d> >("Scaling2d")
+  .def(init<double>())
+  ;
+
+class_<Reflection2d, bases<Trf2d> >("Reflection2d")
+  .def(init<Line2d>())
+  ;
 
 Pos3d (Trf3d::*TrfPos3d)(const Pos3d &) const= &Trf3d::Transform;
 Vector3d (Trf3d::*TrfVector3d)(const Vector3d &) const= &Trf3d::Transform;
@@ -45,13 +57,24 @@ class_<Trf3d, bases<Trf>, boost::noncopyable >("Trf3d", no_init)
   .def("getTrfPos3d", TrfPos3d)
   ;
 
-// class_<Escalado3d, bases<Trf3d> >("Escalado3d");
-// class_<Identity3d, bases<Trf3d> >("Identity3d");
-// class_<Reflexion3d, bases<Trf3d> >("Reflexion3d");
-// class_<Rotation3d, bases<Trf3d> >("Rotation3d");
+class_<Identity3d, bases<Trf3d> >("Identity3d")
+  .def(init<>())
+  ;
 
 class_<Translation3d, bases<Trf3d> >("Translation3d")
   .def(init<Vector3d>())
-;
+  ;
+
+class_<Rotation3d, bases<Trf3d> >("Rotation3d")
+  .def(init<Line3d,double>())
+  ;
+
+class_<Scaling3d, bases<Trf3d> >("Scaling3d")
+  .def(init<double>())
+  ;
+
+class_<Reflection3d, bases<Trf3d> >("Reflection3d")
+  .def(init<Plane>())
+  ;
 
 
