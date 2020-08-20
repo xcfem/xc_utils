@@ -29,6 +29,7 @@
 #include "xc_utils/src/geom/pos_vec/VectorPos2d.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
 
+const double quiet_nan= std::numeric_limits<double>::quiet_NaN();
 
 
 
@@ -448,7 +449,7 @@ void Segment2d::Print(std::ostream &os) const
 //! @brief Return the point de intersection of the segment with the line, if it exists.
 Pos2d intersection_point(const Segment2d &s, const Line2d &r)
   {
-    Pos2d retval;
+    Pos2d retval(quiet_nan,quiet_nan);
     GeomObj2d::list_Pos2d tmp= intersection(s,r);
     if(tmp.empty())
       retval.setExists(false);
@@ -464,7 +465,7 @@ Pos2d intersection_point(const Line2d &r, const Segment2d &s)
 //! @brief Return the intersection of the segments if exists.
 Pos2d intersection_point(const Segment2d &s1, const Segment2d &s2)
   {
-    Pos2d retval;
+    Pos2d retval(quiet_nan,quiet_nan);
     GeomObj2d::list_Pos2d tmp= intersection(s1,s2);
     if(tmp.empty())
       retval.setExists(false);

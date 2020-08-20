@@ -31,6 +31,7 @@
 
 #include "Segment2d.h"
 #include "xc_utils/src/geom/trf/Trf2d.h"
+const double quiet_nan= std::numeric_limits<double>::quiet_NaN();
 
 
 //! @brief Return the parameter that corresponds to the point over the line.
@@ -498,7 +499,7 @@ GeomObj2d::list_Pos2d intersection(const Line2d &r1,const Line2d &r2)
 //! @brief Return the point de intersection (if exists).
 Pos2d intersection_point(const Line2d &r1, const Line2d &r2)
   {
-    Pos2d retval;
+    Pos2d retval(quiet_nan,quiet_nan);
     GeomObj2d::list_Pos2d tmp= intersection(r1,r2);
     if(tmp.empty())
       retval.setExists(false);

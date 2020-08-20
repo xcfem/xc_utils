@@ -23,6 +23,8 @@
 #include "mark_bayazit.h"
 #include "xc_utils/src/geom/d2/2d_polygons/Polygon2d.h"
 
+const double quiet_nan= std::numeric_limits<double>::quiet_NaN();
+
 GEOM_FT area(const Pos2d &a, const Pos2d &b, const Pos2d &c)
   { return (((b.x() - a.x())*(c.y() - a.y()))-((c.x() - a.x())*(b.y() - a.y()))); }
 
@@ -62,7 +64,7 @@ bool eq(const GEOM_FT &a, const GEOM_FT &b)
 
 Pos2d intersection(const Pos2d &p1, const Pos2d &p2, const Pos2d &q1, const Pos2d &q2)
   {
-    Pos2d i;
+    Pos2d i(quiet_nan,quiet_nan);
     GEOM_FT a1, b1, c1, a2, b2, c2, det;
     a1 = p2.y() - p1.y();
     b1 = p1.x() - p2.x();
