@@ -33,6 +33,8 @@
 #include "xc_utils/src/utils/misc_utils/mchne_eps.h"
 #include "CGAL/linear_least_squares_fitting_3.h"
 
+const double quiet_nan= std::numeric_limits<double>::quiet_NaN();
+
 Plane::Plane(void)
   : Surface3d(), cgp(CGPoint_3(0,0,0), CGPoint_3(1,0,0), CGPoint_3(0,1,0)) {}
 
@@ -309,7 +311,7 @@ bool Plane::intersects(const Line3d &r) const
 //! @brief Return (if exists) the intersection with the line argument.
 Pos3d Plane::getIntersection(const Line3d &r) const
   {
-    Pos3d retval;
+    Pos3d retval(quiet_nan, quiet_nan,quiet_nan);
     GeomObj3d::list_Pos3d tmp= intersection(*this,r);
     if(!tmp.empty())
       retval= *tmp.begin();
@@ -336,7 +338,7 @@ bool Plane::intersects(const Ray3d &sr) const
 //! @brief Return (if exists) the intersection with the ray argument.
 Pos3d Plane::getIntersection(const Ray3d &sr) const
   {
-    Pos3d retval;
+    Pos3d retval(quiet_nan, quiet_nan,quiet_nan);
     GeomObj3d::list_Pos3d tmp= intersection(*this,sr);
     if(!tmp.empty())
       retval= *tmp.begin();
@@ -353,7 +355,7 @@ bool Plane::intersects(const Segment3d &sg) const
 //! @brief Return (if exists) the intersection with the segment argument.
 Pos3d Plane::getIntersection(const Segment3d &sg) const
   {
-    Pos3d retval;
+    Pos3d retval(quiet_nan, quiet_nan, quiet_nan);
     GeomObj3d::list_Pos3d tmp= intersection(*this,sg);
     if(!tmp.empty())
       retval= *tmp.begin();
