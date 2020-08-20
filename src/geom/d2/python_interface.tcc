@@ -122,6 +122,7 @@ class_<Polygon3d, bases<D2to3d> >("Polygon3d")
   .def("appendVertex",&Polygon3d::push_back)
   .def("getArea",&Polygon3d::getArea, "Return the object area.")
   .def("getPerimeter",&Polygon3d::getPerimeter, "Return the object perimeter.")
+  .def("getVertexList",&Polygon3d::getVertexListPy,"Return a Python list containing the positions of the polygon vertices.")
   ;
 
 class_<Triangle3d, bases<Polygon3d>  >("Triangle3d")

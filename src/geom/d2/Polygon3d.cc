@@ -40,6 +40,8 @@ Polygon3d::Polygon3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
     push_back(p3);
   }
 
+//! @brief Return a Python list containing the positions
+//! of the polygon vertices.
 GeomObj::list_Pos3d Polygon3d::getVertexList(void) const
   {
     GeomObj::list_Pos3d retval;
@@ -48,6 +50,19 @@ GeomObj::list_Pos3d Polygon3d::getVertexList(void) const
       retval.push_back(to_3d(Pos2d(*i)));
     return retval;
   }
+
+//! @brief Return a Python list containing the positions
+//! of the polygon vertices.
+boost::python::list Polygon3d::getVertexListPy(void) const
+  {
+    boost::python::list retval;
+    GeomObj::list_Pos3d lst= getVertexList();
+    GeomObj::list_Pos3d::const_iterator i= lst.begin();
+    for(;i!=lst.end();i++)
+      retval.append(*i);
+    return retval;
+  }
+
 Segment3d Polygon3d::Lado(unsigned int i) const
   {
     Segment2d sg2d= plg2d.Lado(i);

@@ -72,6 +72,7 @@ class_<Polygon2d, Polygon2d *, bases<PolygonalSurface2d> >("Polygon2d")
   .def("clipSegment",clipSegment)
   .def("clipUsingPolygon",&Polygon2d::clipBy)
   .def("getBayazitDecomposition",&Polygon2d::getBayazitDecomposition)
+  .def("getVertexList",&Polygon2d::getVertexListPy,"Return a Python list containing the positions of the polygon vertices.")
   ;
 
 class_<Quadrilateral2d, bases<Polygon2d> >("Quadrilateral2d")

@@ -72,6 +72,7 @@ class Polygon3d: public D2to3d
     inline Pos3d Vertice0(unsigned int j) const
       { return to_3d(plg2d.Vertice0(j)); }
     GeomObj::list_Pos3d getVertexList(void) const;
+    boost::python::list getVertexListPy(void) const;
     Segment3d Lado0(unsigned int i) const;
     Segment3d Lado(unsigned int i) const;
 
