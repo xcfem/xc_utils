@@ -306,6 +306,19 @@ GEOM_FT Segment3d::Iz(void) const
 VectorPos3d Segment3d::Divide(int num_partes) const
   { return VectorPos3d(getFromPoint(),getToPoint(),num_partes); }
 
+//! @brief Return a Python list containing the points that results
+//! from the segment division.
+//!
+//! @param num_partes: number of segments.
+boost::python::list Segment3d::DividePy(int num_partes) const
+  {
+    VectorPos3d tmp= Divide(num_partes);
+    boost::python::list retval;
+    for(VectorPos3d::const_iterator i= tmp.begin();i!=tmp.end(); i++)
+      retval.append(*i);
+    return retval;
+  }
+
 void Segment3d::Print(std::ostream &os) const
   { os << getFromPoint() << " " << getToPoint(); }
 

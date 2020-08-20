@@ -87,7 +87,7 @@ class_<Segment3d, bases<Linear3d> >("Segment3d")
   .add_property("getJVector", &Segment3d::getJVector,"Return the local y vector.")
   .add_property("getKVector", &Segment3d::getKVector,"Return the local z vector.")
   .def("getVDir",&Segment3d::VDir,"return the direction vector of the segment.")
-  .def("Divide", &Segment3d::Divide,"Divide(numparts); returns the points that divide the segment.")
+  .def("Divide", &Segment3d::DividePy,"Divide(numparts); returns the points that divide the segment.")
   ;
 
 Pos3d (Line3d::*Pos3dProj)(const Pos3d &) const= &Line3d::Projection;
@@ -169,7 +169,7 @@ class_<Segment2d, bases<Linear2d> >("Segment2d")
   .def("offsetDouble",OffsetSegmentDouble)
   .def("getIntersectionWithLine", segment2dIntersectionWithLine, "Return the intersection with the line argument.")
   .def("getIntersectionWithRay", segment2dIntersectionWithRay, "Return the intersection with the ray argument.")
-  .def("Divide", &Segment2d::Divide,"Divide(numparts); returns the points that divide the segment.")
+  .def("Divide", &Segment2d::DividePy,"Divide(numparts); returns the points that divide the segment.")
   ;
 
 void (Polyline3d::*simplify3DPoly)(GEOM_FT epsilon)= &Polyline3d::simplify;

@@ -435,6 +435,19 @@ GEOM_FT dist(const Pos2d &p,const Segment2d &r)
 VectorPos2d Segment2d::Divide(int num_partes) const
   { return VectorPos2d(getFromPoint(),getToPoint(),num_partes); }
 
+//! @brief Return a Python list containing the points that results
+//! from the segment division.
+//!
+//! @param num_partes: number of segments.
+boost::python::list Segment2d::DividePy(int num_partes) const
+  {
+    VectorPos2d tmp= Divide(num_partes);
+    boost::python::list retval;
+    for(VectorPos2d::const_iterator i= tmp.begin();i!=tmp.end(); i++)
+      retval.append(*i);
+    return retval;
+  }
+
 //! @brief Applies to the segment the transformation argument.
 void Segment2d::Transform(const Trf2d &trf2d)
   {

@@ -91,6 +91,7 @@ class Segment3d : public Linear3d
     virtual GEOM_FT Iz(void) const;
     
     VectorPos3d Divide(int num_partes) const;
+    boost::python::list DividePy(int num_partes) const;
     
     void Print(std::ostream &os) const;    
   };

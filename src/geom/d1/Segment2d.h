@@ -136,6 +136,7 @@ class Segment2d : public Linear2d
       { return NAN; }
     
     VectorPos2d Divide(int num_partes) const;
+    boost::python::list DividePy(int num_partes) const;
 
     void Transform(const Trf2d &trf2d);
 
