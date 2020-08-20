@@ -54,3 +54,24 @@ def slugify(s):
     s = s.replace(' ', '-')
 
     return s
+
+
+def get_closest_inlist(lst,value):
+    '''Return the number in a list that is 
+    the closest to the target value.
+
+    :param lst: list of numbers
+    :param value: target value. 
+    '''
+    closest_value=min(lst, key=lambda list_value : abs(list_value - value))
+    return closest_value
+
+def get_index_closest_inlist(lst,value):
+    '''Return the index in a list that matches 
+    the closest element to the target value.
+
+    :param lst: list of numbers.
+    :param value: target value. 
+    '''
+    closest_value=get_closest_inlist(lst,value)
+    return lst.index(closest_value)
