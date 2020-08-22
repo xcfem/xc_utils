@@ -22,14 +22,6 @@
 
 class_<Linear2d, bases<GeomObj2d>, boost::noncopyable  >("Linear2d", no_init)
   ;
-class_<Ray2d, bases<Linear2d> >("Ray2d")
-  .def(init<Pos2d, Pos2d>())
-  .def(init<Ray2d>())
-  .def("distPos2d", &Ray2d::dist,"return the distance to the point.")
-  .add_property("getIVector", &Ray2d::getIVector,"Return the local x vector.")
-  .add_property("getJVector", &Ray2d::getJVector,"Return the local y vector.")
-  ;
-
 
 Line2d (Line2d::*OffsetVector)(const Vector2d &v) const= &Line2d::Offset;
 Line2d (Line2d::*OffsetDouble)(const GEOM_FT &) const= &Line2d::Offset;
@@ -50,17 +42,83 @@ class_<Line2d, bases<Linear2d> >("Line2d")
   .def("getVDir",&Line2d::VDir,"return the line direction vector.")
   .def("getSlope", &Line2d::getSlope)
   .def("distPos2d", &Line2d::dist,"return the distance to the point.")
+  .def("swap", &Line2d::Swap,"changes the orientation of the line.")
   .add_property("getIVector", &Line2d::getIVector,"Return the local x vector.")
   .add_property("getJVector", &Line2d::getJVector,"Return the local y vector.")
   ;
 
+class_<Ray2d, bases<Linear2d> >("Ray2d")
+  .def(init<Pos2d, Pos2d>())
+  .def(init<Ray2d>())
+  .def("distPos2d", &Ray2d::dist,"return the distance to the point.")
+  .def("swap", &Ray2d::Swap,"changes the orientation of the ray.")
+  .add_property("getIVector", &Ray2d::getIVector,"Return the local x vector.")
+  .add_property("getJVector", &Ray2d::getJVector,"Return the local y vector.")
+  ;
+
+GEOM_FT (Segment2d::*AngleVector)(const Vector2d &v) const= &Segment2d::getAngle;
+GEOM_FT (Segment2d::*AngleSegment)(const Segment2d &v) const= &Segment2d::getAngle;
+
+Segment2d (Segment2d::*OffsetSegmentVector)(const Vector2d &v) const= &Segment2d::Offset;
+Segment2d (Segment2d::*OffsetSegmentDouble)(const GEOM_FT &d) const= &Segment2d::Offset;
+GeomObj::list_Pos2d (Segment2d::*segment2dIntersectionWithLine)(const Line2d &) const= &Segment2d::getIntersection;
+GeomObj::list_Pos2d (Segment2d::*segment2dIntersectionWithRay)(const Ray2d &) const= &Segment2d::getIntersection;
+class_<Segment2d, bases<Linear2d> >("Segment2d")
+  .def(init<>())
+  .def(init<Pos2d,Pos2d>())
+  .def(init<Segment2d>())
+  .def("getFromPoint", &Segment2d::getFromPoint,"return the back endpoint of the segment.")
+  .def("getToPoint", &Segment2d::getToPoint,"return the front endpoint of the segment.")
+  .def("getSlope", &Segment2d::getSlope,"return the segment slope.")
+  .def("getXAxisAngle", &Segment2d::XAxisAngle,"return the segment angle with respect to the X axis.")
+  .def("getYAxisAngle", &Segment2d::YAxisAngle,"return the segment angle with respect to the Y axis.")
+  .def("getNormal", &Segment2d::Normal,"return a vector perpendicular to the segment.")
+  .def("distPos3d", &Segment2d::dist,"return the distance to the point.")
+  .def("getLength", &Segment2d::getLength,"Return the length of the segment.")
+  .def("getCenterOfMass", &Segment2d::getCenterOfMass, "Return the position of the center of mass.")
+  .def("angleVector",AngleVector)
+  .def("angleSegment",AngleSegment)
+  .def("offsetVector",OffsetSegmentVector)
+  .def("offsetDouble",OffsetSegmentDouble)
+  .def("getIntersectionWithLine", segment2dIntersectionWithLine, "Return the intersection with the line argument.")
+  .def("getIntersectionWithRay", segment2dIntersectionWithRay, "Return the intersection with the ray argument.")
+  .def("Divide", &Segment2d::DividePy,"Divide(numparts); returns the points that divide the segment.")
+  .def("swap", &Segment2d::Swap,"changes the orientation of the segment.")
+  ;
+
 class_<Linear3d, bases<GeomObj3d>, boost::noncopyable  >("Linear3d", no_init);
+
+Pos3d (Line3d::*Pos3dProj)(const Pos3d &) const= &Line3d::Projection;
+Vector3d (Line3d::*Vector3dProj)(const Vector3d &) const= &Line3d::Projection;
+
+class_<Line3d, bases<Linear3d> >("Line3d")
+  .def(init<Pos3d, Pos3d>())
+  .def(init<Pos3d, Dir3d>())
+  .def(init<Line3d>())
+  .def("getPos3dProj",Pos3dProj,"return the projection of a point onto the line.")
+  .def("getVector3dProj",Vector3dProj,"return the projection of a vector onto the line.")
+  .def("getVDir",&Line3d::VDir,"return the line direction vector.")
+  .def("getPoint",&Line3d::PtoParametricas)
+  .def("getXY2DProjection",&Line3d::XY2DProjection,"Return the projection of the line onto the XY plane as a 2D line.")
+  .def("getXZ2DProjection",&Line3d::XZ2DProjection,"Return the projection of the line onto the XZ plane as a 2D line.")
+  .def("getYZ2DProjection",&Line3d::YZ2DProjection,"Return the projection of the line onto the YZ plane as a 2D line.")
+  .def("getXY3DProjection",&Line3d::XY3DProjection,"Return the projection of the line onto the XY plane as a 3D line.")
+  .def("getXZ3DProjection",&Line3d::XZ3DProjection,"Return the projection of the line onto the XZ plane as a 3D line.")
+  .def("getYZ3DProjection",&Line3d::YZ3DProjection,"Return the projection of the line onto the YZ plane as a 3D line.")
+  .def("distPos3d", &Line3d::dist,"return the distance to the point.")
+  .def("linearLeastSquaresFitting", &Plane::linearLeastSquaresFitting,"compute the line that best suits the point cloud.")
+  .add_property("getIVector", &Line3d::getIVector,"Return the local x vector.")
+  .add_property("getJVector", &Line3d::getJVector,"Return the local y vector.")
+  .add_property("getKVector", &Line3d::getKVector,"Return the local z vector.")
+  .def("swap", &Line3d::Swap,"changes the orientation of the line.")
+ ;
 
 class_<Ray3d, bases<Linear3d> >("Ray3d")
   .def(init<Ray3d>())
   .add_property("getIVector", &Ray3d::getIVector,"Return the local x vector.")
   .add_property("getJVector", &Ray3d::getJVector,"Return the local y vector.")
   .add_property("getKVector", &Ray3d::getKVector,"Return the local z vector.")
+  .def("swap", &Ray3d::Swap,"changes the orientation of the ray.")
   ;
 
 GEOM_FT (Segment3d::*AngleVector3D)(const Vector3d &v) const= &Segment3d::getAngle;
@@ -88,31 +146,8 @@ class_<Segment3d, bases<Linear3d> >("Segment3d")
   .add_property("getKVector", &Segment3d::getKVector,"Return the local z vector.")
   .def("getVDir",&Segment3d::VDir,"return the direction vector of the segment.")
   .def("Divide", &Segment3d::DividePy,"Divide(numparts); returns the points that divide the segment.")
+  .def("swap", &Segment3d::Swap,"changes the orientation of the segment.")
   ;
-
-Pos3d (Line3d::*Pos3dProj)(const Pos3d &) const= &Line3d::Projection;
-Vector3d (Line3d::*Vector3dProj)(const Vector3d &) const= &Line3d::Projection;
-
-class_<Line3d, bases<Linear3d> >("Line3d")
-  .def(init<Pos3d, Pos3d>())
-  .def(init<Pos3d, Dir3d>())
-  .def(init<Line3d>())
-  .def("getPos3dProj",Pos3dProj,"return the projection of a point onto the line.")
-  .def("getVector3dProj",Vector3dProj,"return the projection of a vector onto the line.")
-  .def("getVDir",&Line3d::VDir,"return the line direction vector.")
-  .def("getPoint",&Line3d::PtoParametricas)
-  .def("getXY2DProjection",&Line3d::XY2DProjection,"Return the projection of the line onto the XY plane as a 2D line.")
-  .def("getXZ2DProjection",&Line3d::XZ2DProjection,"Return the projection of the line onto the XZ plane as a 2D line.")
-  .def("getYZ2DProjection",&Line3d::YZ2DProjection,"Return the projection of the line onto the YZ plane as a 2D line.")
-  .def("getXY3DProjection",&Line3d::XY3DProjection,"Return the projection of the line onto the XY plane as a 3D line.")
-  .def("getXZ3DProjection",&Line3d::XZ3DProjection,"Return the projection of the line onto the XZ plane as a 3D line.")
-  .def("getYZ3DProjection",&Line3d::YZ3DProjection,"Return the projection of the line onto the YZ plane as a 3D line.")
-  .def("distPos3d", &Line3d::dist,"return the distance to the point.")
-  .def("linearLeastSquaresFitting", &Plane::linearLeastSquaresFitting,"compute the line that best suits the point cloud.")
-  .add_property("getIVector", &Line3d::getIVector,"Return the local x vector.")
-  .add_property("getJVector", &Line3d::getJVector,"Return the local y vector.")
-  .add_property("getKVector", &Line3d::getKVector,"Return the local z vector.")
- ;
 
 GeomObj::list_Pos2d (Polyline2d::*intersectionWithLine)(const Line2d &) const= &Polyline2d::getIntersection;
 GeomObj::list_Pos2d (Polyline2d::*intersectionWithRay)(const Ray2d &) const= &Polyline2d::getIntersection;
@@ -143,34 +178,6 @@ class_<Polyline2d, bases<Linear2d, polyPos2d> >("Polyline2d")
   ;
 
 
-GEOM_FT (Segment2d::*AngleVector)(const Vector2d &v) const= &Segment2d::getAngle;
-GEOM_FT (Segment2d::*AngleSegment)(const Segment2d &v) const= &Segment2d::getAngle;
-
-Segment2d (Segment2d::*OffsetSegmentVector)(const Vector2d &v) const= &Segment2d::Offset;
-Segment2d (Segment2d::*OffsetSegmentDouble)(const GEOM_FT &d) const= &Segment2d::Offset;
-GeomObj::list_Pos2d (Segment2d::*segment2dIntersectionWithLine)(const Line2d &) const= &Segment2d::getIntersection;
-GeomObj::list_Pos2d (Segment2d::*segment2dIntersectionWithRay)(const Ray2d &) const= &Segment2d::getIntersection;
-class_<Segment2d, bases<Linear2d> >("Segment2d")
-  .def(init<>())
-  .def(init<Pos2d,Pos2d>())
-  .def(init<Segment2d>())
-  .def("getFromPoint", &Segment2d::getFromPoint,"return the back endpoint of the segment.")
-  .def("getToPoint", &Segment2d::getToPoint,"return the front endpoint of the segment.")
-  .def("getSlope", &Segment2d::getSlope,"return the segment slope.")
-  .def("getXAxisAngle", &Segment2d::XAxisAngle,"return the segment angle with respect to the X axis.")
-  .def("getYAxisAngle", &Segment2d::YAxisAngle,"return the segment angle with respect to the Y axis.")
-  .def("getNormal", &Segment2d::Normal,"return a vector perpendicular to the segment.")
-  .def("distPos3d", &Segment2d::dist,"return the distance to the point.")
-  .def("getLength", &Segment2d::getLength,"Return the length of the segment.")
-  .def("getCenterOfMass", &Segment2d::getCenterOfMass, "Return the position of the center of mass.")
-  .def("angleVector",AngleVector)
-  .def("angleSegment",AngleSegment)
-  .def("offsetVector",OffsetSegmentVector)
-  .def("offsetDouble",OffsetSegmentDouble)
-  .def("getIntersectionWithLine", segment2dIntersectionWithLine, "Return the intersection with the line argument.")
-  .def("getIntersectionWithRay", segment2dIntersectionWithRay, "Return the intersection with the ray argument.")
-  .def("Divide", &Segment2d::DividePy,"Divide(numparts); returns the points that divide the segment.")
-  ;
 
 void (Polyline3d::*simplify3DPoly)(GEOM_FT epsilon)= &Polyline3d::simplify;
 Segment3d (Polyline3d::*get3DSegment)(const size_t &) const= &Polyline3d::getSegment;

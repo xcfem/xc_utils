@@ -49,6 +49,7 @@ class Ray2d : public Linear2d
       { return cgsr; }
     virtual GeomObj *clon(void) const
       { return new Ray2d(*this); }
+    void Swap(void);
     void TwoPoints(const Pos2d &p1,const Pos2d &p2);
     virtual GEOM_FT GetMax(unsigned short int) const
       { return NAN; }

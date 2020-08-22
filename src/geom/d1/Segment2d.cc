@@ -60,6 +60,10 @@ bool Segment2d::operator==(const Segment2d &other) const
     return retval;
   }
 
+//! @brief Swaps the ray orientation.
+void Segment2d::Swap(void)
+  { cgseg= cgseg.opposite(); }
+
 void Segment2d::TwoPoints(const Pos2d &p1,const Pos2d &p2)
   { (*this)= Segment2d(p1,p2); }
 

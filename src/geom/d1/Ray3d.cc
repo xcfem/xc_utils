@@ -52,6 +52,10 @@ bool Ray3d::operator==(const Ray3d &other) const
     return retval;
   }
 
+//! @brief Swaps the ray orientation.
+void Ray3d::Swap(void)
+  { cgsr= cgsr.opposite(); }
+
 void Ray3d::TwoPoints(const Pos3d &p1,const Pos3d &p2)
   { (*this)= Ray3d(p1,p2); }
 

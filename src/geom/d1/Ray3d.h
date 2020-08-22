@@ -41,16 +41,9 @@ class Ray3d : public Linear3d
     Ray3d(const CGRay_3 &r)
       : Linear3d(), cgsr(r) {}
     Ray3d(const Pos3d &p1,const Pos3d &p2);
-    Ray3d(const Ray3d &r)
-      : Linear3d(),cgsr(r.cgsr) {}
-    Ray3d &operator=(const Ray3d &r)
-      {
-	Linear3d::operator=(r);
-        cgsr= r.cgsr;
-        return *this;
-      }
     virtual GeomObj *clon(void) const
       { return new Ray3d(*this); }
+    void Swap(void);
     virtual bool operator==(const Ray3d &) const;
     const CGRay_3 &ToCGAL(void) const
       { return cgsr; }

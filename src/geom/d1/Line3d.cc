@@ -71,6 +71,10 @@ Line3d::Line3d(const Line3dParametricForm &param)
   : Linear3d(), cgr(defaultOrg.ToCGAL(),defaultDest.ToCGAL())
   { Parametricas(param); }
 
+//! @brief Swaps the line orientation.
+void Line3d::Swap(void)
+  { cgr= cgr.opposite(); }
+
 void Line3d::TwoPoints(const Pos3d &p1,const Pos3d &p2)
   { (*this)= Line3d(p1,p2); }
 
