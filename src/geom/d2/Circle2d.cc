@@ -189,7 +189,7 @@ Pos2dArray Circle2d::getPointsOnPerimeter(const size_t &n,const double &theta_in
     return retval;
   }
 
-//! @brief Return el polígono de n lados inscrito en la circunferencia que forma el perímetro.
+//! @brief Return the n-gon inscribed int the circle.
 Polygon2d Circle2d::getInscribedPolygon(const size_t &n,const double &theta_inic) const
   {
     Polygon2d retval;

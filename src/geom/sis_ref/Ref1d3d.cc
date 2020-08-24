@@ -20,6 +20,8 @@
 //----------------------------------------------------------------------------
 //Ref1d3d.cc
 #include "Ref1d3d.h"
+#include "Ref2d3d.h"
+#include "Ref3d3d.h"
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
 #include "xc_utils/src/geom/pos_vec/Dir3d.h"
 #include "xc_utils/src/geom/d1/Line3d.h"
@@ -32,6 +34,14 @@ Ref1d3d::Ref1d3d(const Pos3d &o,const Rect1d3dCooSys &sc): BaseRef(o,sc) {}
 Ref1d3d::Ref1d3d(const Pos3d &o,const Vector3d &vX): BaseRef(o,vX) {}
 Ref1d3d::Ref1d3d(const Pos3d &o,const Dir3d &dirX): BaseRef(o,dirX) {}
 Ref1d3d::Ref1d3d(const Pos3d &o,const Pos3d &p) : BaseRef(o,p) {}
+
+//! @brief Constructor.
+Ref1d3d::Ref1d3d(const Ref2d3d &r2d3d)
+  : BaseRef(r2d3d.Org(),Rect1d3dCooSys(r2d3d.GetI())) {}
+
+//! @brief Constructor.
+Ref1d3d::Ref1d3d(const Ref3d3d &r3d3d)
+  : BaseRef(r3d3d.Org(),Rect1d3dCooSys(r3d3d.GetI())) {}
 
 //! @brief Return the global coordinates of unit vector I.
 Vector3d Ref1d3d::GetI(void) const

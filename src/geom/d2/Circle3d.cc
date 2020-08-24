@@ -21,6 +21,7 @@
 //Circle3d.cc
 
 #include "Circle3d.h"
+#include "Polygon3d.h"
 #include "../cgal_types.h"
 #include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/utils/misc_utils/matem.h"
@@ -30,19 +31,37 @@
 #include "xc_utils/src/geom/pos_vec/Pos3dArray.h"
 
 
+//! @brief Constructor.
+Circle3d::Circle3d(void)
+  : D2to3d(), circ() {}
+
 //! @brief Circle defined by three points.
 Circle3d Circle3dThreepoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   { return Circle3d(p1,p2,p3); }
 
+//! @brief Constructor.
 Circle3d::Circle3d(const Pos3d &centro,const GEOM_FT &rad)
  : D2to3d(), circ()
   { circ= Circle2d(to_2d(centro),rad); }
+
+//! @brief Constructor.
 Circle3d::Circle3d(const GEOM_FT &rad2,const Pos3d &centro)
  : D2to3d(), circ()
   { circ= Circle2d(rad2,to_2d(centro)); }
+
+//! @brief Constructor.
 Circle3d::Circle3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   : D2to3d(p1,p2,p3), circ()
   { circ= Circle2d(to_2d(p1),to_2d(p2),to_2d(p3)); }
+
+//! @brief Constructor.
+Circle3d::Circle3d(const Ref2d3d &ref,const Circle2d &c)
+  : D2to3d(ref), circ(c) {}
+
+//! @brief Constructor.
+Circle3d::Circle3d(const Ref3d3d &ref,const Circle2d &c)
+  : D2to3d(ref), circ(c) {}
+
 Pos3d Circle3d::Centro(void) const
   { return to_3d(circ.Centro()); }
 Pos3d Circle3d::getCenterOfMass(void) const
@@ -89,6 +108,13 @@ const Pos3dArray &Circle3d::getPointsOnPerimeter(const size_t &n,const double &t
   {
     static Pos3dArray retval= to_3d(circ.getPointsOnPerimeter(n,theta_inic));
     return retval;
+  }
+
+//! @brief Return the n-gon inscribed int the circle.
+Polygon3d Circle3d::getInscribedPolygon(const size_t &n,const double &theta_inic) const
+  {
+    Polygon2d plg2d= circ.getInscribedPolygon(n, theta_inic);
+    return Polygon3d(get_ref(), plg2d);
   }
 
 void Circle3d::Print(std::ostream &os) const

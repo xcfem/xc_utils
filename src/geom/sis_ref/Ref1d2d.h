@@ -32,6 +32,7 @@
 
 class Line2d;
 class Dir2d;
+class Ref2d2d;
 
 //! @ingroup SisRef
 //! 
@@ -50,6 +51,7 @@ class Ref1d2d : public Ref<Rect1d2dCooSys>
     Ref1d2d(const Pos2d &o,const Vector2d &vX);
     Ref1d2d(const Pos2d &o,const Dir2d &dirX);
     Ref1d2d(const Pos2d &o,const Pos2d &p);
+    explicit Ref1d2d(const Ref2d2d &);
 
     Vector2d GetI(void) const;
     //! @brief Return the I unary vector of the global system.

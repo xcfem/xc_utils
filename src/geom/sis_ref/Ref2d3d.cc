@@ -20,6 +20,7 @@
 //----------------------------------------------------------------------------
 //Ref2d3d.cc
 #include "Ref2d3d.h"
+#include "Ref3d3d.h"
 #include "xc_utils/src/geom/pos_vec/Vector3d.h"
 #include "xc_utils/src/geom/pos_vec/Dir3d.h"
 #include "xc_utils/src/geom/d1/Line3d.h"
@@ -48,6 +49,10 @@ Ref2d3d::Ref2d3d(const Pos3d &o,const Vector3d &v)
 //! @brief Constructor.
 Ref2d3d::Ref2d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2)
   : BaseRef(o,Rect2d3dCooSys(v1,v2)) {}
+
+//! @brief Constructor.
+Ref2d3d::Ref2d3d(const Ref3d3d &r3d3d)
+  : BaseRef(r3d3d.Org(),Rect2d3dCooSys(r3d3d.GetI(),r3d3d.GetJ())) {}
 
 
 //! @brief Return the unary vector I expressed in global coordinates.

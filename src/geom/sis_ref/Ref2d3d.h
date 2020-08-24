@@ -32,6 +32,7 @@ class Line3d;
 class Dir3d;
 class Plane;
 class Vector3d;
+class Ref3d3d;
 
 //! @ingroup SisRef
 //! 
@@ -49,6 +50,8 @@ class Ref2d3d : public Ref<Rect2d3dCooSys>
     Ref2d3d(const Pos3d &o,const Pos3d &p,const Pos3d &q);
     Ref2d3d(const Pos3d &o,const Vector3d &v);
     Ref2d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2);
+    explicit Ref2d3d(const Ref3d3d &);
+    
     Vector3d GetI(void) const; //I unary vector.
     Vector3d GetJ(void) const; //J unary vector.
     Line3d getXAxis(void) const; //Return the x axis.

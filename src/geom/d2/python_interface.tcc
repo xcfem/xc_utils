@@ -65,7 +65,8 @@ class_<Circle2d, bases<Surface2d> >("Circle2d")
   .def("getIx", &Circle2d::Ix)
   .def("getIy", &Circle2d::Iy)
   .def("getPxy", &Circle2d::Pxy)
-  .def("getCenterOfMass", &Circle2d::getCenterOfMass);
+  .def("getCenterOfMass", &Circle2d::getCenterOfMass)
+  ;
 
 #include "2d_polygons/python_interface.tcc"
 
@@ -125,11 +126,26 @@ class_<Polygon3d, bases<D2to3d> >("Polygon3d")
   .def("getVertexList",&Polygon3d::getVertexListPy,"Return a Python list containing the positions of the polygon vertices.")
   ;
 
+class_<Circle3d, bases<D2to3d> >("Circle3d")
+  .def(init<Pos3d,Pos3d,Pos3d>())
+  .def(init<Ref2d3d,Circle2d>())
+  .def(init<Ref3d3d,Circle2d>())
+  .def("getCenter",&Circle3d::Centro)
+  .def("getRadius",&Circle3d::getRadius,"Return the object radius.")
+  .def("getDiameter",&Circle3d::getDiameter, "Return the object diameter.")
+  .def("getPerimeter",&Circle3d::getPerimeter, "Return the object perimeter.")
+//.def("getInscribedPolygon",&Circle3d::getInscribedPolygon,"getInscribedPolygon(n,theta_inic) return an inscribed regular polygon with n sides starting in the angle argument")
+  .def("getArea", &Circle3d::getArea, "Return the object area.")
+  .def("getIx", &Circle3d::Ix)
+  .def("getIy", &Circle3d::Iy)
+  .def("getPxy", &Circle3d::Pxy)
+  .def("getCenterOfMass", &Circle3d::getCenterOfMass)
+  ;
+
 class_<Triangle3d, bases<Polygon3d>  >("Triangle3d")
   .def(init<Pos3d,Pos3d,Pos3d>())
   .def(init<Triangle3d>())
   ;
-
 
 class_<Grid2d, bases<Surface2d> >("Grid2d")
   .def(init<>())

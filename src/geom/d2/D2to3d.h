@@ -47,8 +47,8 @@ class D2to3d: public Surface3d
     Pos3dArray to_3d(const Pos2dArray &p2d) const;
     Pos2d to_2d(const Pos3d &p3d) const;
 
-    explicit D2to3d(const Ref2d3d &rf)
-      : ref(rf) {}
+    explicit D2to3d(const Ref2d3d &);
+    explicit D2to3d(const Ref3d3d &);
     explicit D2to3d(const Pos3d &o);
     D2to3d(const Pos3d &o,const Pos3d &p,const Pos3d &q);
     D2to3d(const Pos3d &o,const Vector3d &n,const Vector3d &i);

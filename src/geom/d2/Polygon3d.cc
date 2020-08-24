@@ -40,6 +40,14 @@ Polygon3d::Polygon3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
     push_back(p3);
   }
 
+//! @brief Constructor.
+Polygon3d::Polygon3d(const Ref2d3d &rf,const Polygon2d &p)
+  : D2to3d(rf), plg2d(p) {}
+
+//! @brief Constructor.
+Polygon3d::Polygon3d(const Ref3d3d &rf,const Polygon2d &p)
+  : D2to3d(rf), plg2d(p) {}
+
 //! @brief Return a Python list containing the positions
 //! of the polygon vertices.
 GeomObj::list_Pos3d Polygon3d::getVertexList(void) const
