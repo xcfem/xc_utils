@@ -224,6 +224,14 @@ GEOM_FT Vector3d::getAngle(const Vector3d &v) const
     return retval;
   }
 
+//! @brief Get the polar angle (spherical coordinates)
+GEOM_FT Vector3d::getPolarAngle(void) const
+  { return acos(z()/GetModulus()); }
+      
+//! @brief Get the azimuthal angle (spherical coordinates)
+GEOM_FT Vector3d::getAzimuthalAngle(void) const
+    { return atan2(y(),x()); }
+
 bool parallel(const Vector3d &v1,const Vector3d &v2)
   { return parallel(v1.getDirection(),v2.getDirection()); } 
 bool coplanarios(const Vector3d &v1,const Vector3d &v2,const Vector3d &v3)

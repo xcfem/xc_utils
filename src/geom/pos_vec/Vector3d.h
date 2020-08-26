@@ -85,6 +85,8 @@ class Vector3d: public ProtoGeom
     virtual GEOM_FT GetDot(const FT_matrix &m) const;
     Vector3d getCross(const Vector3d &v) const;
     GEOM_FT getAngle(const Vector3d &v) const;
+    GEOM_FT getPolarAngle(void) const;
+    GEOM_FT getAzimuthalAngle(void) const;
 
 
     inline friend GEOM_FT dot(const Vector3d &v1, const Vector3d &v2)
