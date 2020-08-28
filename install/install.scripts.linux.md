@@ -1,8 +1,8 @@
-XC installation scripts for Linux operating system
-==================================================
+xc_utils installation scripts for Linux operating system
+========================================================
 
 ## Dependencies
-Depending on the various distribution out there we gone provide scripts to install the needed dependency packages needed to compile XC.
+Depending on the various distribution out there we gone provide scripts to install the needed dependency packages needed to compile xc_utils.
 
 #### Debian Stretch 
 
