@@ -145,9 +145,9 @@ Rect2d3dCooSys Plane::getCooSys(void) const
 Ref2d3d Plane::getRef(const Pos3d &org) const
   { return Ref2d3d(org,Base1(),Base2()); }
 
-void Plane::Swap(void)
-  { operator=(GetSwap()); }
-Plane Plane::GetSwap(void) const
+void Plane::swap(void)
+  { operator=(getSwap()); }
+Plane Plane::getSwap(void) const
   { return Plane(cgp.opposite()); }
 
 //! @brief Return the projection of the point onto this plane.

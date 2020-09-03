@@ -49,7 +49,7 @@ class Segment3d : public Linear3d
     const CGSegment_3 &ToCGAL(void) const
       { return cgseg; }
     virtual GeomObj *clon(void) const;
-    void Swap(void);
+    void swap(void);
     void TwoPoints(const Pos3d &p1,const Pos3d &p2);
     virtual GEOM_FT GetMax(unsigned short int i) const;
     virtual GEOM_FT GetMin(unsigned short int i) const;

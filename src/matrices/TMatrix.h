@@ -95,7 +95,7 @@ class TMatrix: public ProtoMatrix, public STO
     //! @brief Put the box int the position (f,c) of this matrix.
     void assign(size_t row,size_t col,const T &value)
       { STO::assign(Indice(row,col),value); }
-    void Swap(size_t f1,size_t c1,size_t f2, size_t c2)
+    void swap(size_t f1,size_t c1,size_t f2, size_t c2)
       { std::swap((*this)(f1,c1),(*this)(f2,c2)); }    
     TMatrix<T,STO> &Trn(void)
       {
@@ -322,10 +322,10 @@ TMatrix<T,STO> TMatrix<T,STO>::GetTrn(void) const
   }
 template<class T,class STO>
 void TMatrix<T,STO>::swapRows(size_t f1,size_t f2)
-  { for(size_t c=1;c<=n_columns;c++) Swap(f1,c,f2,c); }
+  { for(size_t c=1;c<=n_columns;c++) swap(f1,c,f2,c); }
 template<class T,class STO>
 void TMatrix<T,STO>::swapColumns(size_t c1,size_t c2)
-  { for(size_t f=1;f<=n_rows;f++) Swap(f,c1,f,c2); }
+  { for(size_t f=1;f<=n_rows;f++) swap(f,c1,f,c2); }
 template<class T,class STO>
 void TMatrix<T,STO>::Print(std::ostream &os) const
   {

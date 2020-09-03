@@ -88,8 +88,8 @@ class Plane : public Surface3d
     Rect2d3dCooSys getCooSys(void) const;
     Ref2d3d getRef(const Pos3d &) const;
 
-    void Swap(void);
-    Plane GetSwap(void) const;
+    void swap(void);
+    Plane getSwap(void) const;
 
     bool LadoPositivo(const Pos3d &p) const;
     bool LadoNegativo(const Pos3d &p) const;

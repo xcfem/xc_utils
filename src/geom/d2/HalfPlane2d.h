@@ -46,8 +46,8 @@ class HalfPlane2d : public Surface2d
 
     virtual bool operator==(const HalfPlane2d &) const;
     virtual GeomObj *clon(void) const;
-    inline void Swap(void);
-    HalfPlane2d GetSwap(void) const;
+    inline void swap(void);
+    HalfPlane2d getSwap(void) const;
 
     //! @brief Return the value of a that corresponds to the
     //! equation of the line: a*x + b*y + c= 0

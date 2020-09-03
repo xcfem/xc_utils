@@ -93,7 +93,7 @@ class vectorZ : public std::vector<numero>
       { (*this)[i]-= n; }
     void PutProd(size_type i,const numero &n)
       { (*this)[i]*= n; }
-    void Swap(size_type n1,size_type n2)
+    void swap(size_type n1,size_type n2)
       { std::swap((*this)[n1],(*this)[n2]); }
     long Busca(const numero &n) const;
     void Neg(void);

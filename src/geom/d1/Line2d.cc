@@ -94,8 +94,8 @@ const CGLine_2 &Line2d::ToCGAL(void) const
 GeomObj *Line2d::clon(void) const
   { return new Line2d(*this); }
 
-//! @brief Swaps the line orientation.
-void Line2d::Swap(void)
+//! @ brief Swaps the line orientation.
+void Line2d::swap(void)
   { cgr= cgr.opposite(); }
 
 void Line2d::TwoPoints(const Pos2d &p1,const Pos2d &p2)

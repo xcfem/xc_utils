@@ -43,7 +43,7 @@ class VerticesArista
     size_t v1;
   public:
     VerticesArista(const size_t &i,const size_t &j);
-    void Swap(void);
+    void swap(void);
     const size_t &getVI(void) const
       { return v0; }
     const size_t &getVJ(void) const
@@ -67,7 +67,7 @@ class VerticesCara: public std::list<size_t>
     VerticesCara(void);
     void setVisitada(const bool &);
     const bool &yaVisitada(void) const;
-    void Swap(void);
+    void swap(void);
     Pos3dList getPosVertices(const std::vector<Pos3d> &) const;
     Pos3d getCentroide(const std::vector<Pos3d> &) const;
     std::list<VerticesArista> getEdges(void) const;

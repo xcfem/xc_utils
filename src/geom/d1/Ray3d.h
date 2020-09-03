@@ -43,7 +43,7 @@ class Ray3d : public Linear3d
     Ray3d(const Pos3d &p1,const Pos3d &p2);
     virtual GeomObj *clon(void) const
       { return new Ray3d(*this); }
-    void Swap(void);
+    void swap(void);
     virtual bool operator==(const Ray3d &) const;
     const CGRay_3 &ToCGAL(void) const
       { return cgsr; }

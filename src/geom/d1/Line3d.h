@@ -73,7 +73,7 @@ class Line3d : public Linear3d
     explicit Line3d(const Line3dParametricForm &param);
     virtual GeomObj *clon(void) const
       { return new Line3d(*this); }
-    void Swap(void);
+    void swap(void);
     void TwoPoints(const Pos3d &p1,const Pos3d &p2);
     virtual GEOM_FT GetMax(unsigned short int) const
       { return NAN; }

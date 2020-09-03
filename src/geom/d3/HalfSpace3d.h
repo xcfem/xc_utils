@@ -51,12 +51,12 @@ class HalfSpace3d : public GeomObj3d
     
     virtual GeomObj *clon(void) const
       { return new HalfSpace3d(*this); }
-    inline void Swap(void)
-      { lim.Swap(); }
-    HalfSpace3d GetSwap(void) const
+    inline void swap(void)
+      { lim.swap(); }
+    HalfSpace3d getSwap(void) const
       {
         HalfSpace3d retval(*this);
-        retval.Swap();
+        retval.swap();
         return retval;
       }
     virtual GEOM_FT GetMax(unsigned short int) const

@@ -138,7 +138,7 @@ bool Polygon2d::In(const Polygon2d &p) const
 void Polygon2d::makeCounterClockWise(void)
   {
     if(clockwise())
-      Swap();
+      swap();
   }
 
 //! @brief Return true if the polygon contains the point.
@@ -295,7 +295,7 @@ std::list<Polygon2d> corta(const Polygon2d &p,const Line2d &r)
     std::list<Polygon2d> retval;
     if(!intersecan(p.Bnd(),r)) return retval;
     HalfPlane2d sp1(r);
-    HalfPlane2d sp2= sp1.GetSwap();
+    HalfPlane2d sp2= sp1.getSwap();
     retval= intersection(p,sp1);
     const std::list<Polygon2d> inter2= intersection(p,sp2);
     retval.insert(retval.end(),inter2.begin(),inter2.end());

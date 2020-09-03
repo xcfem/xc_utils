@@ -42,7 +42,7 @@ class_<Line2d, bases<Linear2d> >("Line2d")
   .def("getVDir",&Line2d::VDir,"return the line direction vector.")
   .def("getSlope", &Line2d::getSlope)
   .def("distPos2d", &Line2d::dist,"return the distance to the point.")
-  .def("swap", &Line2d::Swap,"changes the orientation of the line.")
+  .def("swap", &Line2d::swap,"changes the orientation of the line.")
   .add_property("getIVector", &Line2d::getIVector,"Return the local x vector.")
   .add_property("getJVector", &Line2d::getJVector,"Return the local y vector.")
   ;
@@ -51,7 +51,7 @@ class_<Ray2d, bases<Linear2d> >("Ray2d")
   .def(init<Pos2d, Pos2d>())
   .def(init<Ray2d>())
   .def("distPos2d", &Ray2d::dist,"return the distance to the point.")
-  .def("swap", &Ray2d::Swap,"changes the orientation of the ray.")
+  .def("swap", &Ray2d::swap,"changes the orientation of the ray.")
   .add_property("getIVector", &Ray2d::getIVector,"Return the local x vector.")
   .add_property("getJVector", &Ray2d::getJVector,"Return the local y vector.")
   ;
@@ -83,7 +83,7 @@ class_<Segment2d, bases<Linear2d> >("Segment2d")
   .def("getIntersectionWithLine", segment2dIntersectionWithLine, "Return the intersection with the line argument.")
   .def("getIntersectionWithRay", segment2dIntersectionWithRay, "Return the intersection with the ray argument.")
   .def("Divide", &Segment2d::DividePy,"Divide(numparts); returns the points that divide the segment.")
-  .def("swap", &Segment2d::Swap,"changes the orientation of the segment.")
+  .def("swap", &Segment2d::swap,"changes the orientation of the segment.")
   ;
 
 class_<Linear3d, bases<GeomObj3d>, boost::noncopyable  >("Linear3d", no_init);
@@ -110,7 +110,7 @@ class_<Line3d, bases<Linear3d> >("Line3d")
   .add_property("getIVector", &Line3d::getIVector,"Return the local x vector.")
   .add_property("getJVector", &Line3d::getJVector,"Return the local y vector.")
   .add_property("getKVector", &Line3d::getKVector,"Return the local z vector.")
-  .def("swap", &Line3d::Swap,"changes the orientation of the line.")
+  .def("swap", &Line3d::swap,"changes the orientation of the line.")
  ;
 
 class_<Ray3d, bases<Linear3d> >("Ray3d")
@@ -118,7 +118,7 @@ class_<Ray3d, bases<Linear3d> >("Ray3d")
   .add_property("getIVector", &Ray3d::getIVector,"Return the local x vector.")
   .add_property("getJVector", &Ray3d::getJVector,"Return the local y vector.")
   .add_property("getKVector", &Ray3d::getKVector,"Return the local z vector.")
-  .def("swap", &Ray3d::Swap,"changes the orientation of the ray.")
+  .def("swap", &Ray3d::swap,"changes the orientation of the ray.")
   ;
 
 GEOM_FT (Segment3d::*AngleVector3D)(const Vector3d &v) const= &Segment3d::getAngle;
@@ -146,7 +146,7 @@ class_<Segment3d, bases<Linear3d> >("Segment3d")
   .add_property("getKVector", &Segment3d::getKVector,"Return the local z vector.")
   .def("getVDir",&Segment3d::VDir,"return the direction vector of the segment.")
   .def("Divide", &Segment3d::DividePy,"Divide(numparts); returns the points that divide the segment.")
-  .def("swap", &Segment3d::Swap,"changes the orientation of the segment.")
+  .def("swap", &Segment3d::swap,"changes the orientation of the segment.")
   ;
 
 GeomObj::list_Pos2d (Polyline2d::*intersectionWithLine)(const Line2d &) const= &Polyline2d::getIntersection;

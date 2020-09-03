@@ -78,6 +78,8 @@ class Polygon3d: public D2to3d
       { return plg2d.clockwise(); }
     inline bool counterclockwise(void) const
       { return plg2d.counterclockwise(); }
+    inline void swap(void)
+      { plg2d.swap(); }
 
     Plane getPlaneFromSide0(unsigned int i) const;
     Plane getPlaneFromSide(unsigned int i) const;

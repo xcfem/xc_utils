@@ -339,12 +339,6 @@ vtkXOpenGLOffScreenRenderWindow::~vtkXOpenGLOffScreenRenderWindow()
 void vtkXOpenGLOffScreenRenderWindow::Frame(void)
 {
   this->MakeCurrent();
- //  glFlush();
-//   if(!this->AbortRender && this->DoubleBuffer && this->SwapBuffers)
-//     {
-//     glXSwapBuffers(this->DisplayId, this->WindowId);
-//     vtkDebugMacro(<< " glXSwapBuffers\n");
-//     }
 }
  
 //
@@ -420,7 +414,7 @@ void vtkXOpenGLOffScreenRenderWindow::CreateAWindow(void)
     glEnable( GL_NORMALIZE );
     glAlphaFunc(GL_GREATER,0);
     this->Mapped = 0; // if its mapped, then it trys windowgetattributes which fails!
-    this->SwapBuffers = 0;
+    this->swapBuffers = 0;
     this->DoubleBuffer = 0;
   }
 

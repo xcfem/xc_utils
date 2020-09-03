@@ -229,7 +229,7 @@ namespace kd_tree
 	cur = _S_node_descend(cur_dim % __k, __cmp, __acc, __val, cur);
 	++cur_dim;
       }
-    // Swap cur to prev, only prev is a valid node.
+    // swap cur to prev, only prev is a valid node.
     cur = pcur;
     --cur_dim;
     pcur = NULL;

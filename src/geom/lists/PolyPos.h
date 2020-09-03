@@ -72,9 +72,9 @@ class PolyPos : public std::deque<pos>
     PolyPos GetMenores(unsigned short int i,const GEOM_FT &d) const;
     pos getCenterOfMass(void) const;
     pos getWeightedCenterOfMass(const std::deque<GEOM_FT> &) const;
-    PolyPos<pos> GetSwap(void) const;
-    void Swap(void)
-      { *this= this->GetSwap(); }
+    PolyPos<pos> getSwap(void) const;
+    void swap(void)
+      { *this= this->getSwap(); }
     std::deque<GEOM_FT> &GetSeparaciones(void) const;
     GEOM_FT GetSeparacionMedia(void) const;
 
@@ -209,10 +209,9 @@ pos PolyPos<pos>::getWeightedCenterOfMass(const std::deque<GEOM_FT> &areas) cons
     return retval;
   }
 
+//! @brief Return a list with the elements in reverse order.
 template <class pos>
-PolyPos<pos> PolyPos<pos>::GetSwap(void) const
-  //Return una lista con los elementos en orden inverso
-  //al de esta.
+PolyPos<pos> PolyPos<pos>::getSwap(void) const
   {
     PolyPos<pos> retval(*this);
     const size_t sz= this->size();

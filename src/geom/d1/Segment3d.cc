@@ -67,8 +67,8 @@ bool Segment3d::operator==(const Segment3d &other) const
 GeomObj *Segment3d::clon(void) const
   { return new Segment3d(*this); }
 
-//! @brief Swaps the ray orientation.
-void Segment3d::Swap(void)
+//! @ brief Swaps the ray orientation.
+void Segment3d::swap(void)
   { cgseg= cgseg.opposite(); }
 
 GEOM_FT Segment3d::GetMax(unsigned short int i) const

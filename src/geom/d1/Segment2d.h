@@ -47,7 +47,7 @@ class Segment2d : public Linear2d
     const CGSegment_2 &ToCGAL(void) const
       { return cgseg; }
     virtual GeomObj *clon(void) const;
-    void Swap(void);
+    void swap(void);
     void TwoPoints(const Pos2d &p1,const Pos2d &p2);
     virtual GEOM_FT GetMax(unsigned short int i) const
       { return std::max(getFromPoint()(i),getToPoint()(i)); }

@@ -56,8 +56,8 @@ bool Ray2d::operator==(const Ray2d &other) const
     return retval;
   }
 
-//! @brief Swaps the ray orientation.
-void Ray2d::Swap(void)
+//! @ brief Swaps the ray orientation.
+void Ray2d::swap(void)
   { cgsr= cgsr.opposite(); }
 
 void Ray2d::TwoPoints(const Pos2d &p1,const Pos2d &p2)

@@ -113,17 +113,17 @@ class Polygon2d: public PolygonalSurface2d
     //traverse the edges of the polygon p.
       { return cgpol.edges_circulator(); }
 
-    Polygon2d GetSwap(void) const
+    Polygon2d getSwap(void) const
       {
         Polygon2d retval(*this);
-        retval.Swap();
+        retval.swap();
         return retval;
       }
     inline bool clockwise(void) const
       { return (cgpol.is_clockwise_oriented());}
     inline bool counterclockwise(void) const
       { return (cgpol.is_counterclockwise_oriented()); }
-    inline void Swap(void)
+    inline void swap(void)
       { cgpol.reverse_orientation(); }
     void makeCounterClockWise(void);
 

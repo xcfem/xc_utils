@@ -28,7 +28,7 @@
 VerticesArista::VerticesArista(const size_t &i,const size_t &j)
   : v0(i), v1(j) { assert(i!=j); }
 
-void VerticesArista::Swap(void)
+void VerticesArista::swap(void)
   { std::swap(v0,v1); }
 
 bool VerticesArista::comparteVertices(const VerticesArista &other) const
@@ -53,7 +53,7 @@ void VerticesCara::setVisitada(const bool &b)
 const bool &VerticesCara::yaVisitada(void) const
   { return visitada; }
 
-void VerticesCara::Swap(void)
+void VerticesCara::swap(void)
   { reverse(); }
 
 
@@ -265,7 +265,7 @@ void VertexMap::makeConsistent(void)
               if(!((*j)->yaVisitada()))
                 {
                   if((*j)->tieneAristaOrientada(*i))
-                    (*j)->Swap();
+                    (*j)->swap();
                   (*j)->setVisitada(true);
                   pilaCaras.push(*(*j));
                 }

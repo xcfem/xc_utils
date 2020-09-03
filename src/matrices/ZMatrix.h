@@ -105,8 +105,8 @@ class ZMatrix : public TMatrix<numero,vectorZ<numero> >
     void PutProd(size_type i,size_type j,const numero &n)
     //Multiplica la posici'on i por n.
       { vectorZ_numero::PutProd(Indice(i,j),n); }
-    void Swap(size_type f1,size_type c1,size_type f2, size_type c2)
-      { vectorZ_numero::Swap(Indice(f1,c1),Indice(f2,c2)); }    
+    void swap(size_type f1,size_type c1,size_type f2, size_type c2)
+      { vectorZ_numero::swap(Indice(f1,c1),Indice(f2,c2)); }    
     ZMatrix<numero> &Trn(void)
       {
 	mT_numero::Trn();

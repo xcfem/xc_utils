@@ -38,7 +38,7 @@ HalfPlane2d::HalfPlane2d(const Line2d &r, const Pos2d &p)
   : Surface2d(), lim(r)
   {
     if(!In(p))
-      Swap();
+      swap();
   }
 
 HalfPlane2d::HalfPlane2d(const Pos2d &p1,const Pos2d &p2)
@@ -61,18 +61,18 @@ bool HalfPlane2d::operator==(const HalfPlane2d &other) const
 
 GeomObj *HalfPlane2d::clon(void) const
   { return new HalfPlane2d(*this); }
-void HalfPlane2d::Swap(void)
-  { lim.Swap(); }
+void HalfPlane2d::swap(void)
+  { lim.swap(); }
 
 bool HalfPlane2d::intersects(const Ray2d &sr) const
   { return sr.intersects(lim); }
 bool HalfPlane2d::intersects(const Segment2d &sg) const
   { return sg.intersects(lim); }
 
-HalfPlane2d HalfPlane2d::GetSwap(void) const
+HalfPlane2d HalfPlane2d::getSwap(void) const
   {
     HalfPlane2d retval(*this);
-    retval.Swap();
+    retval.swap();
     return retval;
   }
 
