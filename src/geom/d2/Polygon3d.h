@@ -74,10 +74,10 @@ class Polygon3d: public D2to3d
     Segment3d Lado0(unsigned int i) const;
     Segment3d Lado(unsigned int i) const;
 
-    inline bool Horario(void) const
-      { return plg2d.Horario(); }
-    inline bool Antihorario(void) const
-      { return plg2d.Antihorario(); }
+    inline bool clockwise(void) const
+      { return plg2d.clockwise(); }
+    inline bool counterclockwise(void) const
+      { return plg2d.counterclockwise(); }
 
     Plane getPlaneFromSide0(unsigned int i) const;
     Plane getPlaneFromSide(unsigned int i) const;
@@ -92,9 +92,9 @@ class Polygon3d: public D2to3d
     bool In(const Pos3d &p,const double &tol);
     bool TocaCuadrante(const int &) const;
 
-    GEOM_FT distSigno(const Pos3d &p,const bool &sentido_horario= false) const;
+    GEOM_FT distSigno(const Pos3d &p,const bool &clockwise= false) const;
     GEOM_FT dist(const Pos3d &p) const;
-    GEOM_FT distSigno2(const Pos3d &p,const bool &sentido_horario= false) const;
+    GEOM_FT distSigno2(const Pos3d &p,const bool &clockwise= false) const;
     GEOM_FT dist2(const Pos3d &p) const;
 
     std::list<Polygon3d> Corta(const Plane &p) const;

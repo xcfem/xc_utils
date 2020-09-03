@@ -137,7 +137,7 @@ bool Polygon2d::In(const Polygon2d &p) const
 //! @brief Makes the polygon counter clockwise.
 void Polygon2d::makeCounterClockWise(void)
   {
-    if(Horario())
+    if(clockwise())
       Swap();
   }
 

@@ -119,9 +119,9 @@ class Polygon2d: public PolygonalSurface2d
         retval.Swap();
         return retval;
       }
-    inline bool Horario(void) const
+    inline bool clockwise(void) const
       { return (cgpol.is_clockwise_oriented());}
-    inline bool Antihorario(void) const
+    inline bool counterclockwise(void) const
       { return (cgpol.is_counterclockwise_oriented()); }
     inline void Swap(void)
       { cgpol.reverse_orientation(); }

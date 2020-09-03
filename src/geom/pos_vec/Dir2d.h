@@ -52,8 +52,8 @@ class Dir2d
       { return cgd.dx(); }
     inline GEOM_FT dy(void) const
       { return cgd.dy(); }
+    //! @brief Return the perpendicular direction in counterclockwise sense.
     inline Dir2d Perpendicular(void) const
-      //Return la dirección perpendicular en sentido antihorario.
       { return Dir2d(-dy(),dx()); }
     FT_matrix getMatrix(void) const;
     Vector2d GetVector(void) const;

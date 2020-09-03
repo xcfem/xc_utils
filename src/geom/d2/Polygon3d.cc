@@ -172,9 +172,9 @@ void Polygon3d::Print(std::ostream &os) const
 // correspond to point AT THE SAME SIDE OF THE POLYGON with respect
 // to the segment, otherwise the sign of the computed distance must
 // be changed.
-GEOM_FT Polygon3d::distSigno2(const Pos3d &p,const bool &sentido_horario) const
+GEOM_FT Polygon3d::distSigno2(const Pos3d &p,const bool &clockwise) const
   {
-    const short int signo= (sentido_horario ? 1 : -1);
+    const short int signo= (clockwise ? 1 : -1);
     const size_t nv= GetNumVertices();
     const size_t nl= GetNumLados();
     if(nv==0) return NAN;
@@ -191,8 +191,8 @@ GEOM_FT Polygon3d::distSigno2(const Pos3d &p,const bool &sentido_horario) const
       }
     return d;
   }
-GEOM_FT Polygon3d::distSigno(const Pos3d &p,const bool &sentido_horario) const
-  { return sqrt_FT(::Abs(distSigno2(p,sentido_horario))); }
+GEOM_FT Polygon3d::distSigno(const Pos3d &p,const bool &clockwise) const
+  { return sqrt_FT(::Abs(distSigno2(p,clockwise))); }
 
 //! @brief Return the distance from point to polygon.
 //! Distance is computed as the maximum of the distances

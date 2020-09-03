@@ -236,9 +236,9 @@ GeomObj::list_Pos2d PolygonalSurface2d::getApproxTangentPositions(const Vector2d
 // correspond to point AT THE SAME SIDE OF THE POLYGON with respect
 // to the segment, otherwise the sign of the computed distance must
 // be changed.
-GEOM_FT PolygonalSurface2d::DistSigno(const Pos2d &p,const bool &sentido_horario) const
+GEOM_FT PolygonalSurface2d::DistSigno(const Pos2d &p,const bool &clockwise) const
   {
-     const short int signo= (sentido_horario ? 1 : -1);
+     const short int signo= (clockwise ? 1 : -1);
      const size_t nv= GetNumVertices();
      GEOM_FT retval= NAN;
      if(nv>0)

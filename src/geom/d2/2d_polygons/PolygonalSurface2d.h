@@ -84,7 +84,7 @@ class PolygonalSurface2d: public Surface2d
 
     GeomObj::list_Pos2d getApproxTangentPositions(const Vector2d &) const;
 
-    GEOM_FT DistSigno(const Pos2d &p,const bool &sentido_horario= false) const;
+    GEOM_FT DistSigno(const Pos2d &p,const bool &clockwise= false) const;
     GEOM_FT Dist(const Pos2d &p) const;
     inline GEOM_FT GetRecubrimiento(const Pos2d &p) const
       { return -DistSigno(p); }
