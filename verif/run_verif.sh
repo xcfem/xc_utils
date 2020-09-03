@@ -100,7 +100,6 @@ python ./python_tests/geom/refsys3d3d_test_01.py
 python ./python_tests/geom/refsys2d3d_test_01.py
 echo "$BLEU" "  Transformations." "$NORMAL"
 python ./python_tests/geom/rotation2d_test_01.py
-python ./python_tests/geom/rotation3d_test_01.py
 echo "$BLEU" "  Mechanical properties." "$NORMAL"
 python ./python_tests/geom/principal_axes_of_inertia_2d_test_01.py
 
