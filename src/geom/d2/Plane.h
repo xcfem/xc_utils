@@ -86,7 +86,7 @@ class Plane : public Surface3d
     Vector3d Base1(void) const;
     Vector3d Base2(void) const;
     Rect2d3dCooSys getCooSys(void) const;
-    Ref2d3d getRef(const Pos3d &) const;
+    Ref2d3d getRef(void) const;
 
     void swap(void);
     Plane getSwap(void) const;

@@ -35,7 +35,8 @@
 
 
 //! @brief Constructor.
-D2to3d::D2to3d(void): Surface3d(), ref() {}
+D2to3d::D2to3d(void)
+  : Surface3d(), ref() {}
 
 //! @brief Constructor.
 D2to3d::D2to3d(const Pos3d &o,const Pos3d &p,const Pos3d &q)

@@ -106,8 +106,13 @@ Plane::Plane(const GeomObj3d::list_Pos3d &lp): Surface3d(), cgp()
 		  << "; the list must contain at least three points." 
              << std::endl;
       }
-    GeomObj3d::list_Pos3d::const_iterator i= lp.begin();
-    ThreePoints(*i,*i++,*i++);
+    else if(lp.size()==3)
+      {
+        GeomObj3d::list_Pos3d::const_iterator i= lp.begin();
+        ThreePoints(*i,*i++,*i++);
+      }
+    else
+      linearLeastSquaresFitting(lp);
   }
 
 //! @brief Constructor
@@ -142,11 +147,12 @@ Rect2d3dCooSys Plane::getCooSys(void) const
 
 //! @brief Return a reference frame whose XY plane corresponds to
 //! this one.
-Ref2d3d Plane::getRef(const Pos3d &org) const
-  { return Ref2d3d(org,Base1(),Base2()); }
+Ref2d3d Plane::getRef(void) const
+  { return Ref2d3d(Point(),Base1(),Base2()); }
 
 void Plane::swap(void)
   { operator=(getSwap()); }
+
 Plane Plane::getSwap(void) const
   { return Plane(cgp.opposite()); }
 

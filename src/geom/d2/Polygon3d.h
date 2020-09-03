@@ -27,21 +27,20 @@
 #include "xc_utils/src/geom/d2/2d_polygons/Polygon2d.h"
 #include "../cgal_types.h"
 
-
 //! @ingroup GEOM
 //
 //! @brief Polígono en tres dimensiones.
 class Polygon3d: public D2to3d
   {
     Polygon2d plg2d;
-
   public:
     Polygon3d(void): D2to3d(),plg2d() {}
     template <typename InputIterator>
     Polygon3d(InputIterator first,InputIterator last);
     Polygon3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
-    Polygon3d(const Ref2d3d &,const Polygon2d &);
-    Polygon3d(const Ref3d3d &,const Polygon2d &);
+    Polygon3d(const Ref2d3d &,const Polygon2d &p= Polygon2d());
+    Polygon3d(const Ref3d3d &,const Polygon2d &p= Polygon2d());
+    explicit Polygon3d(const boost::python::list &);
 
     virtual GeomObj *clon(void) const
       { return new Polygon3d(*this); }
@@ -106,7 +105,7 @@ class Polygon3d: public D2to3d
 
 template <typename InputIterator>
 Polygon3d::Polygon3d(InputIterator first,InputIterator last)
-  : D2to3d(),plg2d()
+  : D2to3d(), plg2d()
   {
     InputIterator i= first;
     const Pos3d p1= *i; i++;

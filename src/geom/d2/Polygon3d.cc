@@ -32,6 +32,7 @@
 #include "xc_utils/src/geom/lists/auxiliary.h"
 
 
+//! @brief Constructor.
 Polygon3d::Polygon3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   : D2to3d(p1,p2,p3), plg2d()
   {
@@ -47,6 +48,22 @@ Polygon3d::Polygon3d(const Ref2d3d &rf,const Polygon2d &p)
 //! @brief Constructor.
 Polygon3d::Polygon3d(const Ref3d3d &rf,const Polygon2d &p)
   : D2to3d(rf), plg2d(p) {}
+
+//! @brief Constructor.
+Polygon3d::Polygon3d(const boost::python::list &l)
+  : D2to3d(), plg2d()
+  {
+    GeomObj::list_Pos3d vertices;
+    const size_t sz= len(l);
+    for(size_t i=0; i<sz; i++)
+      vertices.push_back(boost::python::extract<Pos3d>(l[i]));
+
+    Plane p(vertices);
+    Polygon3d tmp(p.getRef());
+    for(GeomObj::list_Pos3d::const_iterator i= vertices.begin(); i!= vertices.end(); i++)
+      tmp.push_back(*i);
+    (*this)= tmp;
+  }
 
 //! @brief Return a Python list containing the positions
 //! of the polygon vertices.
