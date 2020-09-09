@@ -50,6 +50,17 @@ Polygon3d::Polygon3d(const Ref3d3d &rf,const Polygon2d &p)
   : D2to3d(rf), plg2d(p) {}
 
 //! @brief Constructor.
+Polygon3d::Polygon3d(const GeomObj::list_Pos3d &vertices)
+  : D2to3d(), plg2d()
+  {
+    Plane p(vertices);
+    Polygon3d tmp(p.getRef());
+    for(GeomObj::list_Pos3d::const_iterator i= vertices.begin(); i!= vertices.end(); i++)
+      tmp.push_back(*i);
+    (*this)= tmp;
+  }
+
+//! @brief Constructor.
 Polygon3d::Polygon3d(const boost::python::list &l)
   : D2to3d(), plg2d()
   {
@@ -58,11 +69,7 @@ Polygon3d::Polygon3d(const boost::python::list &l)
     for(size_t i=0; i<sz; i++)
       vertices.push_back(boost::python::extract<Pos3d>(l[i]));
 
-    Plane p(vertices);
-    Polygon3d tmp(p.getRef());
-    for(GeomObj::list_Pos3d::const_iterator i= vertices.begin(); i!= vertices.end(); i++)
-      tmp.push_back(*i);
-    (*this)= tmp;
+    (*this)= Polygon3d(vertices);
   }
 
 //! @brief Return a Python list containing the positions
@@ -127,7 +134,7 @@ std::vector<Polygon3d> Polygon3d::getTributaryPolygons(void) const
     const size_t sz= tmp.size();
     std::vector<Polygon3d> retval(sz);
     for(size_t i= 0;i<sz;i++)
-      retval[i]= Polygon3d(get_ref(),tmp[i]);
+      retval[i]= Polygon3d(getRef(),tmp[i]);
     return retval;
   }
 
@@ -254,7 +261,7 @@ std::list<Polygon3d> Polygon3d::Corta(const Plane &pl) const
 
     std::list<Polygon2d> inter= corta(plg2d,r2d);
     for(std::list<Polygon2d>::const_iterator i= inter.begin(); i!=inter.end();i++)
-      retval.push_back(Polygon3d(get_ref(),*i));
+      retval.push_back(Polygon3d(getRef(),*i));
 
     return retval;
   }

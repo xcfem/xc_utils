@@ -42,29 +42,28 @@ class D2to3d: public Surface3d
     Ref2d3d ref;
 
   protected:
-    Pos3d to_3d(const Pos2d &p2d) const;
-    Segment3d to_3d(const Segment2d &sg2d) const;
-    Pos3dArray to_3d(const Pos2dArray &p2d) const;
-    Pos2d to_2d(const Pos3d &p3d) const;
-
     explicit D2to3d(const Ref2d3d &);
     explicit D2to3d(const Ref3d3d &);
     explicit D2to3d(const Pos3d &o);
     D2to3d(const Pos3d &o,const Pos3d &p,const Pos3d &q);
     D2to3d(const Pos3d &o,const Vector3d &n,const Vector3d &i);
 
-    const Ref2d3d &get_ref(void) const
-      { return ref; }
   public:
     D2to3d(void);
     
     virtual bool operator==(const D2to3d &) const;
     void ThreePoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
 
+    //! @brief Return the dimension of the object: 0, 1, 2 or 3.
     inline virtual unsigned short int Dimension(void) const
-    //Return the dimensión del objeto 0, 1, 2 ó 3.
       { return 2; }
 
+    Pos3d to_3d(const Pos2d &p2d) const;
+    Segment3d to_3d(const Segment2d &sg2d) const;
+    Pos3dArray to_3d(const Pos2dArray &p2d) const;
+    Pos2d to_2d(const Pos3d &p3d) const;
+    const Ref2d3d &getRef(void) const
+      { return ref; }
     Plane getPlane(void) const;
 
     void Print(std::ostream &os) const;

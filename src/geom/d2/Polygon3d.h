@@ -40,6 +40,7 @@ class Polygon3d: public D2to3d
     Polygon3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
     Polygon3d(const Ref2d3d &,const Polygon2d &p= Polygon2d());
     Polygon3d(const Ref3d3d &,const Polygon2d &p= Polygon2d());
+    explicit Polygon3d(const GeomObj::list_Pos3d &);
     explicit Polygon3d(const boost::python::list &);
 
     virtual GeomObj *clon(void) const

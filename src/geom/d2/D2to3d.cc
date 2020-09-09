@@ -103,6 +103,7 @@ Pos3dArray D2to3d::to_3d(const Pos2dArray &p2d) const
 
 Pos2d D2to3d::to_2d(const Pos3d &p3d) const
   { return ref.GetPosLocal(p3d); }
+
 void D2to3d::ThreePoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   {
     ref= Ref2d3d(p1,p2,p3);

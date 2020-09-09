@@ -114,7 +114,7 @@ const Pos3dArray &Circle3d::getPointsOnPerimeter(const size_t &n,const double &t
 Polygon3d Circle3d::getInscribedPolygon(const size_t &n,const double &theta_inic) const
   {
     Polygon2d plg2d= circ.getInscribedPolygon(n, theta_inic);
-    return Polygon3d(get_ref(), plg2d);
+    return Polygon3d(getRef(), plg2d);
   }
 
 void Circle3d::Print(std::ostream &os) const
