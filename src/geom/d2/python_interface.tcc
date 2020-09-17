@@ -123,10 +123,11 @@ class_<Polygon3d, bases<D2to3d> >("Polygon3d")
   .def(init<const Ref2d3d &,const Polygon2d &>())
   .def(init<const Ref3d3d &,const Polygon2d &>())
   .def(init<boost::python::list>())
-  .def("appendVertex",&Polygon3d::push_back)
+  .def("appendVertex",&Polygon3d::push_back,"Append the vertex to this polygon.")
   .def("getArea",&Polygon3d::getArea, "Return the object area.")
   .def("getPerimeter",&Polygon3d::getPerimeter, "Return the object perimeter.")
   .def("getVertexList",&Polygon3d::getVertexListPy,"Return a Python list containing the positions of the polygon vertices.")
+  .def("distPos3d",&Polygon3d::dist,"Return the distance from point to this polygon.")
   ;
 
 class_<Circle3d, bases<D2to3d> >("Circle3d")
