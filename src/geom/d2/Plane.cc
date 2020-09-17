@@ -31,7 +31,6 @@
 #include "xc_utils/src/geom/d2/Triangle3d.h"
 #include "xc_utils/src/geom/d3/GeomGroup3d.h"
 #include "xc_utils/src/utils/misc_utils/mchne_eps.h"
-#include "CGAL/linear_least_squares_fitting_3.h"
 
 const double quiet_nan= std::numeric_limits<double>::quiet_NaN();
 
@@ -98,21 +97,11 @@ Plane::Plane(const Pos3d &p,const Vector3d &v1,const Vector3d &v2)
   : Surface3d(), cgp(p.ToCGAL(),(p+v1).ToCGAL(),(p+v2).ToCGAL()) {}
 
 //! @brief Constructor
-Plane::Plane(const GeomObj3d::list_Pos3d &lp): Surface3d(), cgp()
+Plane::Plane(const GeomObj3d::list_Pos3d &lp)
+  : Surface3d(), cgp()
   {
-    if(lp.size()<3)
-      {
-        std::cerr << getClassName() << "::" << __FUNCTION__
-		  << "; the list must contain at least three points." 
-             << std::endl;
-      }
-    else if(lp.size()==3)
-      {
-        GeomObj3d::list_Pos3d::const_iterator i= lp.begin();
-        ThreePoints(*i,*i++,*i++);
-      }
-    else
-      linearLeastSquaresFitting(lp);
+    Plane tmp(lp.begin(),lp.end());
+    (*this)= tmp;
   }
 
 //! @brief Constructor
@@ -457,13 +446,7 @@ GEOM_FT Plane::getSlopeAngleYZ(void) const
 
 //! @brief Compute the plane that best suits the point cloud.
 GEOM_FT Plane::linearLeastSquaresFitting(const GeomObj3d::list_Pos3d &lp)
-  {
-    std::list<CGPoint_3> points;
-    for(GeomObj3d::list_Pos3d::const_iterator i=lp.begin(); i!=lp.end();i++)
-      points.push_back((*i).ToCGAL()); 
-    GEOM_FT quality= linear_least_squares_fitting_3(points.begin(),points.end(),cgp,CGAL::Dimension_tag<0>());
-    return quality;
-  }
+  { return linearLeastSquaresFitting(lp.begin(), lp.end()); }
 
 //! @brief Return the plane normal to r that passes through p.
 Plane perpendicular(const Line3d &r, const Pos3d &p)

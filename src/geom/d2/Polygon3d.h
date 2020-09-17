@@ -26,6 +26,7 @@
 #include "xc_utils/src/geom/d2/D2to3d.h"
 #include "xc_utils/src/geom/d2/2d_polygons/Polygon2d.h"
 #include "../cgal_types.h"
+#include "xc_utils/src/geom/d2/Plane.h"
 
 //! @ingroup GEOM
 //
@@ -105,19 +106,14 @@ class Polygon3d: public D2to3d
   };
 
 template <typename InputIterator>
-Polygon3d::Polygon3d(InputIterator first,InputIterator last)
+Polygon3d::Polygon3d(InputIterator begin,InputIterator end)
   : D2to3d(), plg2d()
   {
-    InputIterator i= first;
-    const Pos3d p1= *i; i++;
-    const Pos3d p2= *i; i++;
-    const Pos3d p3= *i; i++;
-    ThreePoints(p1,p2,p3);
-    push_back(p1);
-    push_back(p2);
-    push_back(p3);
-    for(;i!=last;i++)
-      push_back(*i);
+    Plane p(begin, end);
+    Polygon3d tmp(p.getRef());
+    for(InputIterator i= begin; i!= end; i++)
+      tmp.push_back(*i);
+    (*this)= tmp;
   }
 
 inline std::list<Polygon3d> corta(const Polygon3d &pol,const Plane &pl)

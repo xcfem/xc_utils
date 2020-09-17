@@ -88,10 +88,11 @@ double (Plane::*getAngleWithVector3d)(const Vector3d &) const= &Plane::getAngle;
 Pos3d (Plane::*Pos3dProjection)(const Pos3d &) const= &Plane::Projection;
 Vector3d (Plane::*Vector3dProjection)(const Vector3d &) const= &Plane::Projection;
 Line3d (Plane::*Line3dProjection)(const Line3d &) const= &Plane::Projection;
-Line3d (Plane::*IntersPlane)(const Plane &p) const= &Plane::getIntersection;
-Pos3d (Plane::*IntersLine3d)(const Line3d &p) const= &Plane::getIntersection;
-Pos3d (Plane::*IntersRay3d)(const Ray3d &p) const= &Plane::getIntersection;
-Pos3d (Plane::*IntersSegment3d)(const Segment3d &p) const= &Plane::getIntersection;
+Line3d (Plane::*IntersPlane)(const Plane &) const= &Plane::getIntersection;
+Pos3d (Plane::*IntersLine3d)(const Line3d &) const= &Plane::getIntersection;
+Pos3d (Plane::*IntersRay3d)(const Ray3d &) const= &Plane::getIntersection;
+Pos3d (Plane::*IntersSegment3d)(const Segment3d &) const= &Plane::getIntersection;
+double (Plane::*linearLeastSquaresFittingPtr)(const GeomObj3d::list_Pos3d &)= &Plane::linearLeastSquaresFitting;
 class_<Plane, bases<Surface3d> >("Plane3d")
   .def(init<Pos3d,Pos3d,Pos3d>())
   .def(init<Pos3d,Vector3d>())
@@ -115,7 +116,7 @@ class_<Plane, bases<Surface3d> >("Plane3d")
   .def("getBase1", &Plane::Base1)
   .def("getBase2", &Plane::Base2)
   .def("getBase2", &Plane::Base2)
-  .def("linearLeastSquaresFitting", &Plane::linearLeastSquaresFitting,"compute the plane that best suits the point cloud.")
+  .def("linearLeastSquaresFitting", linearLeastSquaresFittingPtr,"compute the plane that best suits the point cloud.")
   ;
 
 class_<Polygon3d, bases<D2to3d> >("Polygon3d")

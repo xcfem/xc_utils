@@ -30,6 +30,7 @@
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
 #include "../cgal_types.h"
 #include <list>
+#include "CGAL/linear_least_squares_fitting_3.h"
 
 class Line3d;
 class Ray3d;
@@ -65,6 +66,8 @@ class Plane : public Surface3d
     explicit Plane(const Polygon3d &trg);
     explicit Plane(const GeneralEquationOfPlane &eg);
     explicit Plane(const GeomObj3d::list_Pos3d &lp);
+    template <typename InputIterator>
+    Plane(InputIterator begin,InputIterator end);
     
     virtual bool operator==(const Plane &) const;
 
@@ -150,6 +153,8 @@ class Plane : public Surface3d
     GEOM_FT getSlopeAngleYZ(void) const;
 
     GEOM_FT linearLeastSquaresFitting(const GeomObj3d::list_Pos3d &lp);
+    template <typename InputIterator>
+    GEOM_FT linearLeastSquaresFitting(InputIterator begin,InputIterator end);
 
     friend Plane FromCGAL(const CGPlane_3 &p);
     void Print(std::ostream &os) const;
@@ -224,6 +229,35 @@ Plane::polygon_classification Plane::ClassifyPoints(InputIterator first,InputIte
     return clfpnt2clfpol(cf_pinic);
   }
 
+//! @brief Compute the plane that best suits the point cloud.
+template <typename InputIterator>
+GEOM_FT Plane::linearLeastSquaresFitting(InputIterator begin,InputIterator end)
+  {
+    std::list<CGPoint_3> points;
+    for(InputIterator i=begin; i!=end;i++)
+      points.push_back((*i).ToCGAL()); 
+    GEOM_FT quality= linear_least_squares_fitting_3(points.begin(),points.end(),cgp,CGAL::Dimension_tag<0>());
+    return quality;
+  }
+template <typename InputIterator>
+Plane::Plane(InputIterator begin,InputIterator end)
+  : Surface3d(), cgp()
+  {
+    const size_t sz= end-begin;
+    if(sz<3)
+      {
+        std::cerr << getClassName() << "::" << __FUNCTION__
+		  << "; the list must contain at least three points." 
+             << std::endl;
+      }
+    else if(sz==3)
+      {
+        InputIterator i= begin;
+        ThreePoints(*i,*i++,*i++);
+      }
+    else
+      linearLeastSquaresFitting(begin,end);
+  }
 
 /* class Ray; */
 

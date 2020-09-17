@@ -22,7 +22,6 @@
 
 #include "Polygon3d.h"
 #include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
-#include "xc_utils/src/geom/d2/Plane.h"
 #include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
@@ -53,10 +52,7 @@ Polygon3d::Polygon3d(const Ref3d3d &rf,const Polygon2d &p)
 Polygon3d::Polygon3d(const GeomObj::list_Pos3d &vertices)
   : D2to3d(), plg2d()
   {
-    Plane p(vertices);
-    Polygon3d tmp(p.getRef());
-    for(GeomObj::list_Pos3d::const_iterator i= vertices.begin(); i!= vertices.end(); i++)
-      tmp.push_back(*i);
+    Polygon3d tmp(vertices.begin(), vertices.end());
     (*this)= tmp;
   }
 
