@@ -59,7 +59,7 @@ void HalfSpace3d::setBoundaryPlane(const Plane &p)
 bool HalfSpace3d::In(const Pos3d &p, const double &tol) const
   {
     bool retval= false;
-    if(lim.LadoNegativo(p))
+    if(lim.negativeSide(p))
       retval= true;
     else if(lim.In(p,tol))
       retval= true;

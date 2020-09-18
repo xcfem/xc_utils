@@ -106,7 +106,7 @@ Segment3d Polygon3d::Lado0(unsigned int i) const
 Plane Polygon3d::getPlaneFromSide(unsigned int i) const
   {
     Segment3d lado= Lado(i);
-    Vector3d v= getPlane().Normal();
+    Vector3d v= -getPlane().Normal(); // interior points -> negative distance.
     return Plane(lado,v);
   }
 

@@ -94,8 +94,8 @@ class Plane : public Surface3d
     void swap(void);
     Plane getSwap(void) const;
 
-    bool LadoPositivo(const Pos3d &p) const;
-    bool LadoNegativo(const Pos3d &p) const;
+    bool positiveSide(const Pos3d &p) const;
+    bool negativeSide(const Pos3d &p) const;
     virtual bool In(const Pos3d &p, const GEOM_FT &tol= 0.0) const;
 
     CGAL::Oriented_side ClassifyPoint(const Pos3d &p) const;

@@ -70,6 +70,7 @@ python ./python_tests/geom/polygon2D_test_2d_07.py
 python ./python_tests/geom/polygon2D_test_2d_08.py
 python ./python_tests/geom/polygon2D_test_2d_09.py
 python ./python_tests/geom/polygon2D_test_2d_10.py
+python ./python_tests/geom/polygon3D_test_01.py
 echo "$BLEU" "  Alpha shapes." "$NORMAL"
 python ./python_tests/geom/basic_alpha_shape2d_test.py
 echo "$BLEU" "  Circles." "$NORMAL"

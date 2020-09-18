@@ -46,8 +46,8 @@ class_<BND2d, bases<GeomObj2d> >("BND2d")
   .def("getIx", &BND2d::Ix)
   .def("getIy", &BND2d::Iy)
   .def("getPxy", &BND2d::Pxy)
-  .def("getCenterOfMass", &BND2d::getCenterOfMass)
-  .def("getMax", &BND2d::GetMax,"returns maximum value of i coordinate.")
+  .def("getCenterOfMass", &BND2d::getCenterOfMass, " return the center of mass.")
+  .def("getMax", &BND2d::GetMax,"return maximum value of i coordinate.")
   .def("getMin", &BND2d::GetMin,"return minimum value of i coordinate.")
   ;
 
@@ -65,7 +65,7 @@ class_<Circle2d, bases<Surface2d> >("Circle2d")
   .def("getIx", &Circle2d::Ix)
   .def("getIy", &Circle2d::Iy)
   .def("getPxy", &Circle2d::Pxy)
-  .def("getCenterOfMass", &Circle2d::getCenterOfMass)
+  .def("getCenterOfMass", &Circle2d::getCenterOfMass, " return the center of mass.")
   ;
 
 #include "2d_polygons/python_interface.tcc"
@@ -131,6 +131,7 @@ class_<Polygon3d, bases<D2to3d> >("Polygon3d")
   .def("getPerimeter",&Polygon3d::getPerimeter, "Return the object perimeter.")
   .def("getVertexList",&Polygon3d::getVertexListPy,"Return a Python list containing the positions of the polygon vertices.")
   .def("distPos3d",&Polygon3d::dist,"Return the distance from point to this polygon.")
+  .def("getCenterOfMass", &Polygon3d::getCenterOfMass, " return the center of mass.")
   ;
 
 class_<Circle3d, bases<D2to3d> >("Circle3d")
@@ -146,7 +147,7 @@ class_<Circle3d, bases<D2to3d> >("Circle3d")
   .def("getIx", &Circle3d::Ix)
   .def("getIy", &Circle3d::Iy)
   .def("getPxy", &Circle3d::Pxy)
-  .def("getCenterOfMass", &Circle3d::getCenterOfMass)
+  .def("getCenterOfMass", &Circle3d::getCenterOfMass, " return the center of mass.")
   ;
 
 class_<Triangle3d, bases<Polygon3d>  >("Triangle3d")
@@ -162,7 +163,7 @@ class_<Grid2d, bases<Surface2d> >("Grid2d")
   .def("Ix",&Grid2d::Ix)
   .def("Iy",&Grid2d::Iy)
   .def("Pxy",&Grid2d::Pxy)
-  .def("getCenterOfMass",&Grid2d::getCenterOfMass)
+  .def("getCenterOfMass",&Grid2d::getCenterOfMass, " return the center of mass.")
   .def("getPoint",&Grid2d::getPoint)
   .def("getQuad",&Grid2d::GetQuad)
   .def("In",&Grid2d::In)

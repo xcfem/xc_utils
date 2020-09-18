@@ -184,9 +184,9 @@ GeomObj3d::list_Pos3d Plane::Projection(const GeomObj3d::list_Pos3d &ptos) const
 Pos3d Plane::Point(void) const
   { return Pos3d(cgp.point()); }
 
-bool Plane::LadoPositivo(const Pos3d &p) const
+bool Plane::positiveSide(const Pos3d &p) const
   { return cgp.has_on_positive_side(p.ToCGAL()); }
-bool Plane::LadoNegativo(const Pos3d &p) const
+bool Plane::negativeSide(const Pos3d &p) const
   { return cgp.has_on_negative_side(p.ToCGAL()); }
 
 //! @brief Return true if the point is in the plane.
@@ -210,19 +210,17 @@ GEOM_FT Plane::dist(const Pos3d &p) const
 GEOM_FT Plane::PseudoDist(const Pos3d &p) const
   {
     GEOM_FT retval= dist(p);
-    if(LadoNegativo(p))
-      return -retval;
-    else
-      return retval;
+    if(negativeSide(p))
+      retval= -retval;
+    return retval;
   }
 //! @brief Return the signed squared distance from the point.
 GEOM_FT Plane::PseudoDist2(const Pos3d &p) const
   {
     GEOM_FT retval= dist2(p);
-    if(LadoNegativo(p))
-      return -retval;
-    else
-      return retval;
+    if(negativeSide(p))
+      retval= -retval;
+    return retval;
   }
 
 //! @brief Return the squared distance from the point.
