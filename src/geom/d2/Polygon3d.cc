@@ -188,7 +188,7 @@ void Polygon3d::Print(std::ostream &os) const
 //!  -The signed distances from the point to each of the half spaces
 //!  defined by the plane that contains the polygon.
 //!
-// If the vertices are in couterclockwise order, positive distances
+// If the vertices are in counterclockwise order, positive distances
 // correspond to point AT THE SAME SIDE OF THE POLYGON with respect
 // to the segment, otherwise the sign of the computed distance must
 // be changed.
