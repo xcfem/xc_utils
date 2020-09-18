@@ -42,17 +42,25 @@ for p in pointsB:
 
 ratio4= dvB
 
+pointsC= [geom.Pos3d(-2.2305,-1.8744,0), geom.Pos3d(-2.045,-1.8744,0), geom.Pos3d(-2.045,-1.8744,1.5), geom.Pos3d(-2.2305,-1.8744,1.5)]
+
+plgC= geom.Polygon3d(pointsC)
+p= geom.Pos3d(-2.045,-1.8744,0.607318)
+dcC= plgC.distPos3d(p)
+ratio5= dcC
+
 '''
 print('center A: ', centerA, 'distance: ', dcA)
 print('ratio1= ', ratio1)
 print('ratio2= ', ratio2)
 print('ratio3= ', ratio3)
 print('ratio4= ', ratio4)
+print('ratio5= ', ratio5)
 '''
 
 import os
 fname= os.path.basename(__file__)
-if (abs(ratio1)<1e-12) and (abs(ratio2)<1e-12) and (abs(ratio3)<1e-12) and (abs(ratio4)<1e-12) :
+if (abs(ratio1)<1e-12) and (abs(ratio2)<1e-12) and (abs(ratio3)<1e-12) and (abs(ratio4)<1e-12)and (abs(ratio5)<1e-12) :
   print("test "+fname+": ok.")
 else:
   print("test "+fname+": ERROR.")
