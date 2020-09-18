@@ -243,7 +243,7 @@ template <typename InputIterator>
 Plane::Plane(InputIterator begin,InputIterator end)
   : Surface3d(), cgp()
   {
-    const size_t sz= end-begin;
+    const size_t sz= std::distance(begin,end); // number of elements.
     if(sz<3)
       {
         std::cerr << getClassName() << "::" << __FUNCTION__
