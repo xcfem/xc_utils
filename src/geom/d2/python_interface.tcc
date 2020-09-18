@@ -74,7 +74,9 @@ def("get_convex_hull2d",get_convex_hull2d);
 def("get_basic_alpha_shape2d",get_basic_alpha_shape2d);
 
 
-class_<Surface3d, bases<GeomObj3d>, boost::noncopyable  >("Surface3d", no_init);
+class_<Surface3d, bases<GeomObj3d>, boost::noncopyable  >("Surface3d", no_init)
+  .def("distPos3d",&Surface3d::dist,"Return the distance from point to this surface.")
+  ;
 
 class_<D2to3d, bases<Surface3d>, boost::noncopyable  >("D2to3d", no_init)
   .def("getPlane",&D2to3d::getPlane)

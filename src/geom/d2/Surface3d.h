@@ -51,6 +51,7 @@ class Surface3d : public GeomObj3d
       { return 0.0; }
     virtual inline GEOM_FT IArea(void) const
       { return getArea(); }
+    virtual GEOM_FT dist(const Pos3d &p) const;
   };
 #endif
 
