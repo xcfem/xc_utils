@@ -119,6 +119,8 @@ class_<Plane, bases<Surface3d> >("Plane3d")
   .def("getBase2", &Plane::Base2)
   .def("getBase2", &Plane::Base2)
   .def("linearLeastSquaresFitting", linearLeastSquaresFittingPtr,"compute the plane that best suits the point cloud.")
+  .def("positiveSide", &Plane::positiveSide, " return true if the point is on the positive side of the plane (local coordinate z>0).")
+  .def("negativeSide", &Plane::negativeSide, " return true if the point is on the negative side of the plane (local coordinate z<0).")
   ;
 
 class_<Polygon3d, bases<D2to3d> >("Polygon3d")
