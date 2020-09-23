@@ -21,7 +21,7 @@ vDir=geom.Dir3d(2,-2,3)
 
 r=geom.Line3d(pto,vDir)
 dr=ITeor.distLine3d(r)
-I=P.getIntersLine3d(r)
+I=P.getIntersection(r)
 d=I.distPlane(P)
 
 ratio1=ITeor.distPos3d(I)
