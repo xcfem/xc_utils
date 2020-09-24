@@ -42,7 +42,7 @@ class SlidingVectorsSystem3d: public SlidingVector3d
   public:
     SlidingVectorsSystem3d(const Pos3d &O= Pos3d(),const Vector3d &R= Vector3d(),const Vector3d &Mo= Vector3d());
     explicit SlidingVectorsSystem3d(const SlidingVector3d &v);
-    const Vector3d &getResultant(void) const
+    Vector3d getResultant(void) const
       { return getVector(); }
     Vector3d getResultant(const Ref3d3d &ref) const;
     const Vector3d &getMoment(void) const
