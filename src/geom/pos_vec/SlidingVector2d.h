@@ -40,26 +40,24 @@ class SlidingVector2d : public Vector2d
       : Vector2d(v), org(o) {}
     SlidingVector2d(const Pos2d &o,const Pos2d &p);
 
-    GEOM_FT getMoment(const Pos2d &o) const;
-    const Pos2d &getOrg(void) const
+    virtual GEOM_FT getMoment(const Pos2d &o) const;
+    virtual const Pos2d &getOrg(void) const
       { return org; }
     const Pos2d getDest(void) const
       { return org+(const Vector2d &)(*this); }
     const Vector2d &getVector(void) const
       { return *this; }
-    friend SlidingVector2d operator*(const SlidingVector2d &m,const GEOM_FT &p)
-      { return SlidingVector2d(m.getOrg(),m.getVector()*p); }
-    friend SlidingVector2d operator*(const GEOM_FT &p,const SlidingVector2d &m)
-      { return m*p; }
+    SlidingVector2d &operator*=(const GEOM_FT &);
+    friend SlidingVector2d operator*(const SlidingVector2d &m,const GEOM_FT &p);
+    friend SlidingVector2d operator*(const GEOM_FT &p,const SlidingVector2d &m);
     friend SlidingVector2d operator/(const SlidingVector2d &m,const GEOM_FT &p);
-    friend std::ostream &operator<<(std::ostream &os,const SlidingVector2d &v)
-      {
-        os << (const Vector2d &) v;
-        os << " (O=" << v.org << ')';
-        return os;
-      }
+    friend std::ostream &operator<<(std::ostream &os,const SlidingVector2d &v);
   };
 
+SlidingVector2d operator*(const SlidingVector2d &m,const GEOM_FT &p);
+SlidingVector2d operator*(const GEOM_FT &p,const SlidingVector2d &m);
+SlidingVector2d operator/(const SlidingVector2d &m,const GEOM_FT &p);
+std::ostream &operator<<(std::ostream &os,const SlidingVector2d &v);
 SlidingVector2d operator-(const SlidingVector2d &v);
 
 inline GEOM_FT Abs(const SlidingVector2d &v)

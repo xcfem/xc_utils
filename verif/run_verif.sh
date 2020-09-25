@@ -82,8 +82,10 @@ python ./python_tests/geom/sliding_vector_3d_test_02.py
 python ./python_tests/geom/sliding_vector_3d_test_03.py
 python ./python_tests/geom/sliding_vectors_system_2d_test_01.py
 python ./python_tests/geom/sliding_vectors_system_2d_test_02.py
+python ./python_tests/geom/sliding_vectors_system_2d_test_03.py
 python ./python_tests/geom/sliding_vectors_system_3d_test_01.py
 python ./python_tests/geom/sliding_vectors_system_3d_test_02.py
+python ./python_tests/geom/sliding_vectors_system_3d_test_03.py
 echo "$BLEU" "  Planes." "$NORMAL"
 python ./python_tests/geom/plane_test_01.py
 python ./python_tests/geom/plane_test_02.py

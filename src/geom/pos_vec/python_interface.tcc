@@ -212,6 +212,7 @@ class_<SlidingVector2d, bases<Vector2d> >("SlidingVector2d")
 
 
 GEOM_FT (SlidingVectorsSystem2d::*getMoment2D)(void) const= &SlidingVectorsSystem2d::getMoment;
+GEOM_FT (SlidingVectorsSystem2d::*getMomentPos2d)(const Pos2d &) const= &SlidingVectorsSystem2d::getMoment;
 Vector2d (SlidingVectorsSystem2d::*getResultant2D)(void) const= &SlidingVectorsSystem2d::getResultant;
 
 class_<SlidingVectorsSystem2d, bases<SlidingVector2d> >("SlidingVectorsSystem2d")
@@ -219,6 +220,7 @@ class_<SlidingVectorsSystem2d, bases<SlidingVector2d> >("SlidingVectorsSystem2d"
   .def(init<SlidingVector2d>())
   .def("getResultant",getResultant2D,"Return the resultant of the SVS.")
   .def("getMoment",getMoment2D)
+  .def("getMomentPos2d",getMomentPos2d)
   .def("reduceTo",&SlidingVectorsSystem2d::reduceTo,"Sets the reference point to express the moments with respect to.")
   .def("zeroMomentLine",&SlidingVectorsSystem2d::getZeroMomentLine,"Return zero moment line (if it exists).")
   // //.def("getMomentPos2d",getMomentPos2d)
@@ -269,8 +271,6 @@ class_<SlidingVectorsSystem3d, bases<SlidingVector3d> >("SlidingVectorsSystem3d"
   .def("getResultant",getResultant3D," return the resultant of the SVS.")
   .def("getMoment",make_function(getMoment3D,return_internal_reference<>()), "return the SVS moment.")
   .def("zeroMomentLine",&SlidingVectorsSystem3d::getZeroMomentLine,"Return zero moment line (if it exists).")
-  //.def("getMomentPos3d",getMomentPos3d)
-  //.def("getMomentLine3d",getMomentLine3d)
   .def("reduceTo",&SlidingVectorsSystem3d::reduceTo,"Sets the reference point to express the moments with respect to.")
   .def(SlidingVector3d()+self) //Sobrecarga de operadores
   .def(self+SlidingVector3d())

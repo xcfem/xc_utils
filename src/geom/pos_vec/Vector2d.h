@@ -56,6 +56,12 @@ class Vector2d: public ProtoGeom
       { return cgvct; }
     void Neg(void)
       { cgvct= -cgvct; }
+    inline Vector2d operator-(void) const
+      {
+	Vector2d retval(*this);
+	retval.Neg();
+	return retval;
+      }
     bool Nulo(void) const;
     void SetX(const GEOM_FT &vx);
     void SetY(const GEOM_FT &vy);
@@ -70,6 +76,8 @@ class Vector2d: public ProtoGeom
     inline const GEOM_FT y() const
       { return Vector2d::operator()(2); }
     FT_matrix getMatrix(void) const;
+    Vector2d &operator+=(const Vector2d &);
+    Vector2d &operator-=(const Vector2d &);
     Vector2d operator+(const Vector2d &) const;
     Vector2d operator-(const Vector2d &) const;
     Vector2d operator*(const GEOM_FT &) const;
@@ -111,13 +119,6 @@ class Vector2d: public ProtoGeom
     friend std::ostream &operator<<(std::ostream &stream,const Vector2d &n);
     inline virtual ~Vector2d(void) {}
   };
-
-inline Vector2d operator-(const Vector2d &d)
-  {
-    Vector2d retval(d);
-    retval.Neg();
-    return retval;
-  }
 
 inline GEOM_FT Abs2(const Vector2d &v)
   { return v.GetModulus2(); }

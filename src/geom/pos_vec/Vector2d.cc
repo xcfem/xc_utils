@@ -82,6 +82,19 @@ void Vector2d::Set(unsigned short int i,const GEOM_FT &v)
       }
   }
 
+Vector2d &Vector2d::operator+=(const Vector2d &v)
+  {
+    (*this)= (*this)+v;
+    return *this;
+  }
+
+Vector2d &Vector2d::operator-=(const Vector2d &v)
+  {
+    (*this)= (*this)-v;
+    return *this;
+  }
+  
+
 //! @brief Return la suma de los vectores.
 Vector2d Vector2d::operator+(const Vector2d &v) const
   {  return Vector2d(ToCGAL()+v.ToCGAL()); }

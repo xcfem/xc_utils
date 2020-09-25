@@ -28,72 +28,124 @@
 
 
 SlidingVectorsSystem2d::SlidingVectorsSystem2d(const SlidingVector2d &v)
-  : org(v.getOrg()), resul(v),mom(0.0) {}
+  : SlidingVector2d(v), mom(0.0) {}
 
 //! @brief Return the moment about P.
 GEOM_FT SlidingVectorsSystem2d::getMoment(const Pos2d &P) const
   {
-    SlidingVector2d R(org,resul);
-    return mom+R.getMoment(P);
+    const GEOM_FT m2= SlidingVector2d::getMoment(P);
+    return mom+m2;
   }
 
 void SlidingVectorsSystem2d::Print(std::ostream &os) const
   {
-    os << "Resultant R=" << resul
-       << " , moment with respect to " << org << " Mo= " << mom; 
+    os << "Resultant R=" << getResultant()
+       << " , moment with respect to " << getOrg() << " Mo= " << mom; 
   }
 
 void SlidingVectorsSystem2d::PrintLtx(std::ostream &os,const std::string &ud_long,const GEOM_FT &f_long, const std::string &ud_f,const GEOM_FT &f_f) const
   {
     //Se asume que imprimimos en una tabla.
-    os << "Point of application: " << org.VectorPos()*f_long << ud_long << "\\\\" << std::endl
-       << "Resultant: " << resul*f_f << ud_f << "\\\\" << std::endl 
+    os << "Point of application: " << getOrg().VectorPos()*f_long << ud_long << "\\\\" << std::endl
+       << "Resultant: " << getResultant()*f_f << ud_f << "\\\\" << std::endl 
        << "Moment: " << mom*f_f << ud_f << ud_long << "\\\\" << std::endl;
   }
 Vector2d SlidingVectorsSystem2d::getResultant(const Ref2d2d &ref) const
-  { return ref.GetCooLocales(resul); } 
+  { return ref.GetCooLocales(getResultant()); } 
 
 SlidingVectorsSystem2d SlidingVectorsSystem2d::reduceTo(const Pos2d &Q)
-  { return SlidingVectorsSystem2d(Q,resul,getMoment(Q)); }
+  { return SlidingVectorsSystem2d(Q,getResultant(),getMoment(Q)); }
 
 SlidingVectorsSystem2d &SlidingVectorsSystem2d::operator+=(const SlidingVector2d &v)
   {
-    resul= resul+v;
-    mom= mom + v.getMoment(org);
+    SlidingVector2d::operator+=(v);
+    mom-= v.getMoment(getOrg());
     return *this;
   }
 SlidingVectorsSystem2d &SlidingVectorsSystem2d::operator-=(const SlidingVector2d &v)
   {
-    resul= resul - v;
-    mom= mom - v.getMoment(org);
+    SlidingVector2d::operator-=(v);
+    mom-= v.getMoment(getOrg());
     return *this;
   }
 SlidingVectorsSystem2d &SlidingVectorsSystem2d::operator+=(const SlidingVectorsSystem2d &s)
   //The origin is preserved.
   {
-    resul= resul + s.resul;
-    mom= mom + s.getMoment(org);
+    SlidingVector2d::operator+=(s);
+    mom+= s.getMoment(getOrg());
     return *this;
   }
 SlidingVectorsSystem2d &SlidingVectorsSystem2d::operator-=(const SlidingVectorsSystem2d &s)
   //The origin is preserved.
   {
-    resul= resul - s.resul;
-    mom= mom - s.getMoment(org);
+    SlidingVector2d::operator-=(s);
+    mom-= s.getMoment(getOrg());
     return *this;
   }
 SlidingVectorsSystem2d &SlidingVectorsSystem2d::operator*=(const GEOM_FT &d)
   {
-    resul= resul * d;
-    mom= mom * d;
+    SlidingVector2d::operator*=(d);
+    mom*= d;
     return *this;
   }
+
+SlidingVectorsSystem2d operator+(const SlidingVectorsSystem2d &s1,const SlidingVectorsSystem2d &s2)
+  {
+    SlidingVectorsSystem2d retval(s1);
+    retval+=s2;
+    return retval;
+  }
+SlidingVectorsSystem2d operator-(const SlidingVectorsSystem2d &s1,const SlidingVectorsSystem2d &s2)
+  {
+    SlidingVectorsSystem2d retval(s1);
+    retval-=s2;
+    return retval;
+  }
+SlidingVectorsSystem2d operator*(const GEOM_FT &d, const SlidingVectorsSystem2d &s)
+  {
+    SlidingVectorsSystem2d retval(s);
+    return retval*=d;
+  }
+
+SlidingVectorsSystem2d operator*(const SlidingVectorsSystem2d &s,const GEOM_FT &d)
+  { return d*s; }
+
+SlidingVectorsSystem2d operator+(const SlidingVector2d &v1,const SlidingVector2d &v2)
+  {
+    SlidingVectorsSystem2d suma(v1);
+    suma+=v2;
+    return suma;
+  }
+
+SlidingVectorsSystem2d operator+(const SlidingVectorsSystem2d &s,const SlidingVector2d &v)
+  {
+    SlidingVectorsSystem2d suma(s);
+    suma+=v;
+    return suma;
+  }
+
+SlidingVectorsSystem2d operator+(const SlidingVector2d &v,const SlidingVectorsSystem2d &s)
+  { return s+v; }
 
 bool SlidingVectorsSystem2d::Nulo(void) const
   {
     bool retval= true;
-    if(!resul.Nulo()) retval= false;
+    if(!SlidingVector2d::Nulo()) retval= false;
     if(mom!=0) retval= false;
+    return retval;
+  }
+
+void SlidingVectorsSystem2d::Neg(void)
+  {
+    SlidingVector2d::Neg();
+    mom= -mom;
+  }
+
+//! @brief Cambia de signo al sliding vector.
+SlidingVectorsSystem2d operator-(const SlidingVectorsSystem2d &svd2d)
+  {
+    SlidingVectorsSystem2d retval(svd2d);
+    retval.Neg();
     return retval;
   }
 
@@ -101,9 +153,10 @@ bool SlidingVectorsSystem2d::Nulo(void) const
 Line2d SlidingVectorsSystem2d::getZeroMomentLine(void) const
   {
     Line2d retval; //= Line2d(Pos2d(NAN,NAN),Pos2d(NAN,NAN));
+    const Vector2d resul= getResultant();
     const GEOM_FT rx= resul.x();
     const GEOM_FT ry= resul.y();
-    const GEOM_FT k= rx*org.y()-ry*org.x()-mom; 
+    const GEOM_FT k= rx*getOrg().y()-ry*getOrg().x()-mom; 
     if(rx!=0.0)
       {
 	const GEOM_FT xA= 1.0;
@@ -133,3 +186,8 @@ Line2d SlidingVectorsSystem2d::getZeroMomentLine(void) const
     return retval;
   }
 
+std::ostream &operator<<(std::ostream &os, const SlidingVectorsSystem2d &svd2d)
+  {
+    svd2d.Print(os);
+    return os;
+  }

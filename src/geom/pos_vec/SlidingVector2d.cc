@@ -22,10 +22,6 @@
 
 #include "SlidingVector2d.h"
 
-
-
-
-
 //! @brief Constructor.
 SlidingVector2d::SlidingVector2d(const Pos2d &o,const Pos2d &p)
   : Vector2d(p-o), org(o) {}
@@ -47,8 +43,27 @@ GEOM_FT SlidingVector2d::getMoment(const Pos2d &o) const
 GEOM_FT inverso(const GEOM_FT &p)
   { return GEOM_FT(1.0/p); }
 
+SlidingVector2d &SlidingVector2d::operator*=(const GEOM_FT &p)
+  {
+    (*this)= SlidingVector2d(getOrg(),getVector()*p);
+    return *this;
+  }
+
+SlidingVector2d operator*(const SlidingVector2d &m,const GEOM_FT &p)
+  { return SlidingVector2d(m.getOrg(),m.getVector()*p); }
+
+SlidingVector2d operator*(const GEOM_FT &p,const SlidingVector2d &m)
+  { return m*p; }
+
 SlidingVector2d operator/(const SlidingVector2d &m,const GEOM_FT &p)
   { return m*inverso(p); }
+
+std::ostream &operator<<(std::ostream &os,const SlidingVector2d &v)
+  {
+    os << (const Vector2d &) v;
+    os << " (O=" << v.org << ')';
+    return os;
+  }
 
 SlidingVector2d operator-(const SlidingVector2d &v)
   {
