@@ -40,8 +40,8 @@ class SlidingVector3d : public Vector3d
   public:
     SlidingVector3d(const Pos3d &o= Pos3d(),const Vector3d &v= Vector3d());
     SlidingVector3d(const Pos3d &o,const Pos3d &p);
-    SlidingVector3d getMoment(const Pos3d &o) const;
-    GEOM_FT getMoment(const Line3d &e) const;
+    virtual SlidingVector3d getMoment(const Pos3d &o) const;
+    virtual GEOM_FT getMoment(const Line3d &e) const;
     const Pos3d &getOrg(void) const;
     const Pos3d getDest(void) const;
     const Vector3d &getVector(void) const;
