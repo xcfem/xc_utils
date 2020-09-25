@@ -219,7 +219,7 @@ class_<SlidingVectorsSystem2d, bases<SlidingVector2d> >("SlidingVectorsSystem2d"
   .def(init<SlidingVector2d>())
   .def("getResultant",getResultant2D,"Return the resultant of the SVS.")
   .def("getMoment",getMoment2D)
-  .def("reduceTo",&SlidingVectorsSystem2d::ReduceA,"Sets the reference point to express the moments with respect to.")
+  .def("reduceTo",&SlidingVectorsSystem2d::reduceTo,"Sets the reference point to express the moments with respect to.")
   .def("zeroMomentLine",&SlidingVectorsSystem2d::getZeroMomentLine,"Return zero moment line (if it exists).")
   // //.def("getMomentPos2d",getMomentPos2d)
   // //.def("getMomentLine2d",getMomentLine2d)
@@ -271,7 +271,7 @@ class_<SlidingVectorsSystem3d, bases<SlidingVector3d> >("SlidingVectorsSystem3d"
   .def("zeroMomentLine",&SlidingVectorsSystem3d::getZeroMomentLine,"Return zero moment line (if it exists).")
   //.def("getMomentPos3d",getMomentPos3d)
   //.def("getMomentLine3d",getMomentLine3d)
-  .def("reduceTo",&SlidingVectorsSystem3d::ReduceA,"Sets the reference point to express the moments with respect to.")
+  .def("reduceTo",&SlidingVectorsSystem3d::reduceTo,"Sets the reference point to express the moments with respect to.")
   .def(SlidingVector3d()+self) //Sobrecarga de operadores
   .def(self+SlidingVector3d())
   .def(SlidingVector3d()-self)

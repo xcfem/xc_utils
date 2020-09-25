@@ -148,7 +148,7 @@ bool SlidingVectorsSystem3d::existsZeroMomentLine(const double &tol) const
     return true;
   }
 
-SlidingVectorsSystem3d SlidingVectorsSystem3d::ReduceA(const Pos3d &Q) const
+SlidingVectorsSystem3d SlidingVectorsSystem3d::reduceTo(const Pos3d &Q) const
   { return SlidingVectorsSystem3d(Q,getResultant(),getMoment(Q)); }
 
 SlidingVectorsSystem3d &SlidingVectorsSystem3d::operator+=(const SlidingVector3d &v)

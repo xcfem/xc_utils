@@ -59,7 +59,7 @@ class SlidingVectorsSystem2d: public ProtoGeom
         resul= -resul;
         mom= -mom;
       }
-    SlidingVectorsSystem2d ReduceA(const Pos2d &Q);
+    SlidingVectorsSystem2d reduceTo(const Pos2d &Q);
     Line2d getZeroMomentLine(void) const;
 
     SlidingVectorsSystem2d &operator+=(const SlidingVector2d &v);

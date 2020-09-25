@@ -57,7 +57,7 @@ class SlidingVectorsSystem3d: public SlidingVector3d
     Line3d getZeroMomentLine(const double &tol= sqrt_mchne_eps_dbl) const;
     Pos3d PointOfApplication(const Plane &p) const;
 
-    SlidingVectorsSystem3d ReduceA(const Pos3d &Q) const;
+    SlidingVectorsSystem3d reduceTo(const Pos3d &Q) const;
 
     SlidingVectorsSystem3d &operator+=(const SlidingVector3d &v);
     SlidingVectorsSystem3d &operator-=(const SlidingVector3d &v);

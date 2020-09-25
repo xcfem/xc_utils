@@ -53,7 +53,7 @@ void SlidingVectorsSystem2d::PrintLtx(std::ostream &os,const std::string &ud_lon
 Vector2d SlidingVectorsSystem2d::getResultant(const Ref2d2d &ref) const
   { return ref.GetCooLocales(resul); } 
 
-SlidingVectorsSystem2d SlidingVectorsSystem2d::ReduceA(const Pos2d &Q)
+SlidingVectorsSystem2d SlidingVectorsSystem2d::reduceTo(const Pos2d &Q)
   { return SlidingVectorsSystem2d(Q,resul,getMoment(Q)); }
 
 SlidingVectorsSystem2d &SlidingVectorsSystem2d::operator+=(const SlidingVector2d &v)
