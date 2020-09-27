@@ -44,7 +44,7 @@ class Array3dRange
     Array3dRange(const RangoIndice &rcp,const RangoIndice &rf,const size_t &col)
       : layer_range(rcp), row_range(rf),column_range(col,col) {}
     template <class TTZ>
-    Array3dRange(const TTZ &);
+    explicit Array3dRange(const TTZ &);
 
     size_t getNumberOfLayers(void) const
       { return row_range.Size(); }
@@ -53,7 +53,7 @@ class Array3dRange
     size_t getNumberOfColumns(void) const
       { return column_range.Size(); }
     size_t Size(void) const
-    { return getNumberOfLayers()*getNumberOfRows()*getNumberOfColumns(); }
+      { return getNumberOfLayers()*getNumberOfRows()*getNumberOfColumns(); }
     bool Vacio(void) const;
     const RangoIndice &getLayerRange(void) const
       { return layer_range; }
