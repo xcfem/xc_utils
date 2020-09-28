@@ -43,7 +43,13 @@ Plane::Plane(const CGPlane_3 &cgp)
 //! @brief Constructor: plane defined by three points.
 Plane::Plane(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   : Surface3d(), cgp(p1.ToCGAL(),p2.ToCGAL(),p3.ToCGAL()) 
-  { }
+  {
+    if(cgp.is_degenerate())
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; degenerate plane "
+		<< " p1= " << p1 << " p2= " << p2 << " p3= " << p3
+	        << std::endl;
+  }
 
 
 //! @brief Constructor: plane defined by the point and the normal vector.
@@ -121,13 +127,25 @@ void Plane::ThreePoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
 
 //! @brief Return el normal vector oriented to the "positive" side.
 Vector3d Plane::Normal(void) const
-  { return Vector3d(cgp.orthogonal_vector()); }
+  {
+    Vector3d retval(cgp.orthogonal_vector());
+    retval.Normalize();
+    return retval;    
+  }
 //! @brief Return un vector ortogonal al devuelto por Normal().
 Vector3d Plane::Base1(void) const
-  { return Vector3d(cgp.base1()); }
+  {
+    Vector3d retval(cgp.base1());
+    retval.Normalize();
+    return retval;
+  }
 //! @brief Return un vector ortogonal al devuelto por Normal() y al devuelto por Base1().
 Vector3d Plane::Base2(void) const
-  { return Vector3d(cgp.base2()); }
+  {
+    Vector3d retval(cgp.base2());
+    retval.Normalize();
+    return retval;
+  }
 
 //! @brief Return a coordinate system whose XY plane corresponds to
 //! this one.

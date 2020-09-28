@@ -122,7 +122,10 @@ bool Polygon3d::In(const Pos3d &p,const double &tol)
 
 //! @brief Return the center of mass of the polygon.
 Pos3d Polygon3d::getCenterOfMass(void) const
-  { return to_3d(plg2d.getCenterOfMass()); }
+  {
+    const Pos2d centroid= plg2d.getCenterOfMass();
+    return to_3d(centroid);
+  }
 
 std::vector<Polygon3d> Polygon3d::getTributaryPolygons(void) const
   {

@@ -110,10 +110,12 @@ Polygon3d::Polygon3d(InputIterator begin,InputIterator end)
   : D2to3d(), plg2d()
   {
     Plane p(begin, end);
-    Polygon3d tmp(p.getRef());
+    const Ref2d3d ref= Ref2d3d(*begin,p.Base1(), p.Base2());
+    Polygon3d tmp(ref);
     for(InputIterator i= begin; i!= end; i++)
       tmp.push_back(*i);
-    (*this)= tmp;
+    (*this)= tmp;    
+
   }
 
 inline std::list<Polygon3d> corta(const Polygon3d &pol,const Plane &pl)

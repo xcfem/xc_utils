@@ -252,8 +252,13 @@ Plane::Plane(InputIterator begin,InputIterator end)
       }
     else if(sz==3)
       {
-        InputIterator i= begin;
-        ThreePoints(*i,*i++,*i++);
+        const InputIterator i= begin;
+	const Pos3d &pi= *i;
+	const InputIterator j= i+1;
+	const Pos3d &pj= *j;
+	InputIterator k= j; k++;
+	const Pos3d &pk= *k;
+        ThreePoints(pi,pj,pk);
       }
     else
       linearLeastSquaresFitting(begin,end);
