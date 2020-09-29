@@ -254,7 +254,7 @@ Plane::Plane(InputIterator begin,InputIterator end)
       {
         const InputIterator i= begin;
 	const Pos3d &pi= *i;
-	const InputIterator j= i+1;
+	InputIterator j= i;j++;
 	const Pos3d &pj= *j;
 	InputIterator k= j; k++;
 	const Pos3d &pk= *k;
