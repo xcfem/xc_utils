@@ -45,6 +45,7 @@ class SlidingVector3d : public Vector3d
     const Pos3d &getOrg(void) const;
     const Pos3d getDest(void) const;
     const Vector3d &getVector(void) const;
+    Vector3d getVector3d(void) const;
     SlidingVector3d &operator*=(const GEOM_FT &);
     friend SlidingVector3d operator*(const SlidingVector3d &m,const GEOM_FT &p);
     friend SlidingVector3d operator*(const GEOM_FT &p,const SlidingVector3d &m);

@@ -151,6 +151,144 @@ bool SlidingVectorsSystem3d::existsZeroMomentLine(const double &tol) const
 SlidingVectorsSystem3d SlidingVectorsSystem3d::reduceTo(const Pos3d &Q) const
   { return SlidingVectorsSystem3d(Q,getResultant(),getMoment(Q)); }
 
+//! @brief Assigns a vector to each point to obtain an equivalent
+//! sliding vector system.
+//! @param point_list: list of positions.
+std::vector<SlidingVector3d> SlidingVectorsSystem3d::distribute(const std::vector<Pos3d> &point_list) const
+  {
+    const size_t sz= point_list.size();
+    // Calculate the position of the center of gravity:
+    Vector3d num;
+    const double W(sz);
+    for(size_t i= 0;i<sz;i++)
+      {
+	const Pos3d p_i= point_list[i];
+	num+= p_i.VectorPos();
+      }
+    Pos3d cg(0,0,0);
+    cg+= (num/W);
+    // Calculate the equivalent sliding vector system at cg:
+    SlidingVectorsSystem3d newSVS= this->reduceTo(cg);
+    const Vector3d Fcg= newSVS.getResultant();
+    const Vector3d Mcg= newSVS.getMoment();
+    std::vector<Vector3d> f_i(sz);
+    std::vector<Vector3d> p_i(sz);
+    double denom= 0.0; 
+    for(size_t i= 0;i<sz;i++)
+      {
+	f_i[i]= Fcg/W; // force distribution.
+	const Pos3d pt_i= point_list[i];
+	const Vector3d r_i= pt_i-cg;
+	p_i[i]= -cross(Mcg,r_i); // moment distribution.
+	denom+= dot(r_i,r_i);
+      }
+    std::vector<SlidingVector3d> retval(sz);
+    const double factor= 1.0/denom;
+    for(size_t i= 0;i<sz;i++)
+      {
+	const Pos3d pt_i= point_list[i];
+	p_i[i]= factor*p_i[i];
+	retval[i]= SlidingVector3d(pt_i, f_i[i]+p_i[i]);
+      }
+    return retval;
+  }
+
+//! @brief Assigns a vector to each point to obtain an equivalent
+//! sliding vector system.
+//! @param point_list: list of positions.
+//! @param weights: list of weights (one for each position).
+boost::python::list SlidingVectorsSystem3d::distributePyNoWeights(const boost::python::list &pt_list) const
+  {
+    const size_t sz= len(pt_list);
+    std::vector<Pos3d> point_list(sz);
+    for(size_t i= 0;i<sz;i++)
+      { point_list[i]= boost::python::extract<Pos3d>(pt_list[i]); }
+    std::vector<SlidingVector3d> tmp= distribute(point_list);
+    boost::python::list retval;
+    for(size_t i= 0;i<sz;i++)
+      { retval.append(tmp[i]); }
+    return retval;
+  }
+
+//! @brief Assigns a vector to each point to obtain an equivalent
+//! sliding vector system.
+//! @param point_list: list of positions.
+//! @param weights: list of weights (one for each position).
+std::vector<SlidingVector3d> SlidingVectorsSystem3d::distribute(const std::vector<Pos3d> &point_list, const std::vector<double> &weights) const
+  {
+    const size_t szpl= point_list.size();
+    const size_t szw= weights.size();
+    if(szpl!=szw)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+	        << "; point list and weight list of different sizes."
+	        << std::endl;
+    const size_t sz= std::min(szpl,szw);
+    // Calculate the position of the center of gravity:
+    Vector3d num;
+    double W;
+    for(size_t i= 0;i<sz;i++)
+      {
+	const double w_i= weights[i];
+	const Pos3d p_i= point_list[i];
+	num+= w_i*p_i.VectorPos();
+	W+= w_i;
+      }
+    Pos3d cg(0,0,0);
+    cg+= (num/W);
+    // Calculate the equivalent sliding vector system at cg:
+    SlidingVectorsSystem3d newSVS= this->reduceTo(cg);
+    const Vector3d Fcg= newSVS.getResultant();
+    const Vector3d Mcg= newSVS.getMoment();
+    std::vector<Vector3d> f_i(sz);
+    std::vector<Vector3d> p_i(sz);
+    double denom= 0.0; 
+    for(size_t i= 0;i<sz;i++)
+      {
+	const double w_i= weights[i];
+	f_i[i]= Fcg*w_i/W; // force distribution.
+	const Pos3d pt_i= point_list[i];
+	const Vector3d r_i= pt_i-cg;
+	p_i[i]= -w_i*cross(Mcg,r_i); // moment distribution.
+	denom+= w_i*dot(r_i,r_i);
+      }
+    std::vector<SlidingVector3d> retval(sz);
+    const double factor= 1.0/denom;
+    for(size_t i= 0;i<sz;i++)
+      {
+	const Pos3d pt_i= point_list[i];
+	p_i[i]= factor*p_i[i];
+	retval[i]= SlidingVector3d(pt_i, f_i[i]+p_i[i]);
+      }
+    return retval;
+  }
+
+//! @brief Assigns a vector to each point to obtain an equivalent
+//! sliding vector system.
+//! @param point_list: list of positions.
+//! @param weights: list of weights (one for each position).
+boost::python::list SlidingVectorsSystem3d::distributePy(const boost::python::list &pt_list, const boost::python::list &w) const
+  {
+    const size_t szpl= len(pt_list);
+    const size_t szw= len(w);
+    if(szpl!=szw)
+      std::cerr << getClassName() << "::" << __FUNCTION__
+                << "; point list and weight list of different sizes."
+                << std::endl;
+    const size_t sz= std::min(szpl,szw);
+    std::vector<Pos3d> point_list(sz);
+    std::vector<double> weights(sz);
+    for(size_t i= 0;i<sz;i++)
+      {
+	point_list[i]= boost::python::extract<Pos3d>(pt_list[i]);
+	weights[i]= boost::python::extract<double>(w[i]);
+      }
+    std::vector<SlidingVector3d> tmp= distribute(point_list, weights);
+    boost::python::list retval;
+    for(size_t i= 0;i<sz;i++)
+      { retval.append(tmp[i]); }
+    return retval;
+  }
+
 SlidingVectorsSystem3d &SlidingVectorsSystem3d::operator+=(const SlidingVector3d &v)
   {
     Vector3d::operator+=(v);

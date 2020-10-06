@@ -45,8 +45,8 @@ class SlidingVector2d : public Vector2d
       { return org; }
     const Pos2d getDest(void) const
       { return org+(const Vector2d &)(*this); }
-    const Vector2d &getVector(void) const
-      { return *this; }
+    const Vector2d &getVector(void) const;
+    Vector2d getVector2d(void) const;
     SlidingVector2d &operator*=(const GEOM_FT &);
     friend SlidingVector2d operator*(const SlidingVector2d &m,const GEOM_FT &p);
     friend SlidingVector2d operator*(const GEOM_FT &p,const SlidingVector2d &m);

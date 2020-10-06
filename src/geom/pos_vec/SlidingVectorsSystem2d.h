@@ -39,8 +39,7 @@ class SlidingVectorsSystem2d: public SlidingVector2d
   {
     GEOM_FT mom; //!< Moment with respect to org;
   public:
-    SlidingVectorsSystem2d(const Pos2d &O= Pos2d(),const Vector2d &R= Vector2d(),const GEOM_FT &Mo= 0.0)
-      : SlidingVector2d(O,R), mom(Mo) {}
+    SlidingVectorsSystem2d(const Pos2d &O= Pos2d(),const Vector2d &R= Vector2d(),const GEOM_FT &Mo= 0.0);
     explicit SlidingVectorsSystem2d(const SlidingVector2d &v);
     //Resultant and moment.
     Vector2d getResultant(void) const
@@ -51,8 +50,12 @@ class SlidingVectorsSystem2d: public SlidingVector2d
     GEOM_FT getMoment(const Pos2d &P) const;
     bool Nulo(void) const;
     void Neg(void);
-    SlidingVectorsSystem2d reduceTo(const Pos2d &Q);
+    SlidingVectorsSystem2d reduceTo(const Pos2d &Q) const;
     Line2d getZeroMomentLine(void) const;
+    std::vector<SlidingVector2d> distribute(const std::vector<Pos2d> &) const;
+    boost::python::list distributePyNoWeights(const boost::python::list &) const;
+    std::vector<SlidingVector2d> distribute(const std::vector<Pos2d> &, const std::vector<double> &) const;
+    boost::python::list distributePy(const boost::python::list &, const boost::python::list &) const;
 
     SlidingVectorsSystem2d &operator+=(const SlidingVector2d &v);
     SlidingVectorsSystem2d &operator-=(const SlidingVector2d &v);

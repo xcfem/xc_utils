@@ -40,6 +40,17 @@ GEOM_FT SlidingVector2d::getMoment(const Pos2d &o) const
     return retval;
   }
 
+//! @brief Return the vector part of the object.
+const Vector2d &SlidingVector2d::getVector(void) const
+  { return *this; }
+
+//! @brief Return the vector part of the object.
+//! This function exists because Python "recongnizes"
+//! the address returned by getVector as a SlidingVector2d
+//! object.
+Vector2d SlidingVector2d::getVector2d(void) const
+  { return *this; }
+
 GEOM_FT inverso(const GEOM_FT &p)
   { return GEOM_FT(1.0/p); }
 

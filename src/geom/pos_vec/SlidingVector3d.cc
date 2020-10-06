@@ -61,7 +61,15 @@ const Pos3d &SlidingVector3d::getOrg(void) const
 const Pos3d SlidingVector3d::getDest(void) const
   { return org+(const Vector3d &)(*this); }
 
+//! @brief Return the vector part of the object.
 const Vector3d &SlidingVector3d::getVector(void) const
+  { return *this; }
+
+//! @brief Return the vector part of the object.
+//! This function exists because Python "recongnizes"
+//! the address returned by getVector as a SlidingVector3d
+//! object.
+Vector3d SlidingVector3d::getVector3d(void) const
   { return *this; }
 
 SlidingVector3d operator-(const SlidingVector3d &v)

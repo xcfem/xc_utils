@@ -58,6 +58,11 @@ class SlidingVectorsSystem3d: public SlidingVector3d
     Pos3d PointOfApplication(const Plane &p) const;
 
     SlidingVectorsSystem3d reduceTo(const Pos3d &Q) const;
+    std::vector<SlidingVector3d> distribute(const std::vector<Pos3d> &) const;
+    boost::python::list distributePyNoWeights(const boost::python::list &) const;
+    std::vector<SlidingVector3d> distribute(const std::vector<Pos3d> &, const std::vector<double> &) const;
+    boost::python::list distributePy(const boost::python::list &, const boost::python::list &) const;
+    
 
     SlidingVectorsSystem3d &operator+=(const SlidingVector3d &v);
     SlidingVectorsSystem3d &operator-=(const SlidingVector3d &v);
