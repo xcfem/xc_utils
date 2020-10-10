@@ -40,7 +40,7 @@ class_<Ref1d2d , bases<ref_Rect1d2dCooSys> >("Ref1d2d")
   .def(init<const Pos2d &,const Vector2d &>())
   .def(init<const Pos2d &,const Dir2d &>())
   .def(init<const Pos2d &,const Pos2d &>())
-  .def("getIVector",&Ref1d2d::getIVector)
+  .def("getIVector",&Ref1d2d::getIVector, "Return unary vector i")
   ;
 
 typedef Ref<Rect1d3dCooSys> ref_Rect1d3dCooSys;
@@ -64,7 +64,7 @@ class_<Ref1d3d , bases<ref_Rect1d3dCooSys> >("Ref1d3d")
   .def(init<const Pos3d &,const Vector3d &>())
   .def(init<const Pos3d &,const Dir3d &>())
   .def(init<const Pos3d &,const Pos3d &>())
-  .def("getIVector",&Ref1d3d::getIVector)
+  .def("getIVector",&Ref1d3d::getIVector, "Return unary vector i")
   ;
 
 typedef Ref<Rect2d2dCooSys> ref_Rect2d2dCooSys;
@@ -88,8 +88,8 @@ class_<Ref2d2d , bases<ref_Rect2d2dCooSys> >("Ref2d2d")
   .def(init<const Pos2d &,const Vector2d &>())
   .def(init<const Pos2d &,const Dir2d &>())
   .def(init<const Pos2d &,const Pos2d &>())
-  .def("getIVector",&Ref2d2d::getIVector)
-  .def("getJVector",&Ref2d2d::getJVector)
+  .def("getIVector",&Ref2d2d::getIVector, "Return unary vector i")
+  .def("getJVector",&Ref2d2d::getJVector, "Return unary vector j")
   ;
 
 typedef Ref<Rect2d3dCooSys> ref_Rect2d3dCooSys;
@@ -113,8 +113,8 @@ class_<Ref2d3d , bases<ref_Rect2d3dCooSys> >("Ref2d3d")
   .def(init<const Pos3d &,const Pos3d &,const Pos3d &>())
   .def(init<const Pos3d &,const Vector3d &>())
   .def(init<const Pos3d &,const Vector3d &,const Vector3d &>())
-  .def("getIVector",&Ref2d3d::getIVector)
-  .def("getJVector",&Ref2d3d::getJVector)
+  .def("getIVector",&Ref2d3d::getIVector, "Return unary vector i")
+  .def("getJVector",&Ref2d3d::getJVector, "Return unary vector j")
   ;
 
 typedef Ref<Rect3d3dCooSys> ref_Rect3d3dCooSys;
@@ -140,9 +140,9 @@ class_<Ref3d3d , bases<ref_Rect3d3dCooSys> >("Ref3d3d")
   .def(init<const Pos3d &,const Vector3d &,const Vector3d &>())
   .def(init<const Pos3d &,const Vector3d &,const Vector3d &,const Vector3d &>())
   .def(init<const Line3d &,const Pos3d &>())
-  .def("getIVector",&Ref3d3d::getIVector)
-  .def("getJVector",&Ref3d3d::getJVector)
-  .def("getKVector",&Ref3d3d::getKVector)
+  .def("getIVector",&Ref3d3d::getIVector, "Return unary vector i.")
+  .def("getJVector",&Ref3d3d::getJVector, "Return unary vector j.")
+  .def("getKVector",&Ref3d3d::getKVector, "Return unary vector k.")
  ;
 
 class_<PrincipalAxesOfInertia2D>("PrincipalAxesOfInertia2D",init<const Pos2d &,const GEOM_FT &,const GEOM_FT &,const GEOM_FT &>())
