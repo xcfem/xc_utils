@@ -35,16 +35,16 @@ Ref1d2d::Ref1d2d(const Pos2d &o,const Pos2d &p): BaseRef(o,p) {}
 
 //! @brief Constructor.
 Ref1d2d::Ref1d2d(const Ref2d2d &r2d2d)
-  : BaseRef(r2d2d.Org(),Rect1d2dCooSys(r2d2d.GetI())) {}
+  : BaseRef(r2d2d.Org(),Rect1d2dCooSys(r2d2d.getIVector())) {}
 
 //! @brief Return the unary vector I in the global system.
-Vector2d Ref1d2d::GetI(void) const
+Vector2d Ref1d2d::getIVector(void) const
   { return getAxisVDir(1); }
 
 //! @brief Return the line defining the x axis.
 Line2d Ref1d2d::getXAxis(void) const
   {
-    const Pos2d dest(org+1000.0*GetI());
+    const Pos2d dest(org+1000.0*getIVector());
     return Line2d(org,dest);
   }
 

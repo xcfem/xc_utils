@@ -275,3 +275,13 @@ bool Polygon3d::TocaCuadrante(const int &cuadrante) const
         return true;
     return false;
   }
+
+//! @brief Return the orientation of the polygon (clockwise or
+//! counterclockwise).
+std::string Polygon3d::orientation(void) const
+  {
+    std::string retval= "counterclockwise";
+    if(clockwise())
+      { retval= "clockwise"; }
+    return retval;
+  }

@@ -30,7 +30,7 @@ Rama Operando::Diferencia(const Variable &,const Rama &r) const
     std::cerr << "Operando::" << __FUNCTION__
               << " not implemented." << std::endl;
     return Rama();
-//     r->Put(Lex().NuevoLiteral(0.0),r->GetIzdo(),r->GetDcho());
+//     r->Put(Lex().NuevoLiteral(0.0),r->getLeft(),r->getRight());
 //     return r;
   }
 

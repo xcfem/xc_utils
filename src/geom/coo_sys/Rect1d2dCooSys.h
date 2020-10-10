@@ -42,7 +42,7 @@ class Rect1d2dCooSys: public Xd2dCooSys
     virtual CooSys *Copia(void) const
       { return new Rect1d2dCooSys(*this); }
 
-    VGlobal GetI(void) const; //Return global coordinates of unit vector I.
+    VGlobal getIVector(void) const; //Return global coordinates of unit vector I.
 
     VGlobal GetCooGlobales(const VLocal &v) const;
     VLocal GetCooLocales(const VGlobal &v) const;

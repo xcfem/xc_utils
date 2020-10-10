@@ -46,9 +46,9 @@ class Rect3d3dCooSys: public Xd3dCooSys
     virtual Xd3dCooSys *CopiaXd3d(void) const
       { return new Rect3d3dCooSys(*this); }
 
-    VGlobal GetI(void) const; //Return unary vector I in global coordinates.
-    VGlobal GetJ(void) const; //Return unary vector J in global coordinates.
-    VGlobal GetK(void) const; //Return unary vector K in global coordinates.
+    VGlobal getIVector(void) const; //Return unary vector I in global coordinates.
+    VGlobal getJVector(void) const; //Return unary vector J in global coordinates.
+    VGlobal getKVector(void) const; //Return unary vector K in global coordinates.
 
     VGlobal GetCooGlobales(const VLocal &v) const;
     VLocal GetCooLocales(const VGlobal &v) const;

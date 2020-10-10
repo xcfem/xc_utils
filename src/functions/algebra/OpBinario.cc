@@ -34,16 +34,16 @@ Rama OpSuma::Diferencia(const Variable &v,const Rama &r) const
               << " not implemented." << std::endl;
     return Rama();
 //     Rama retval(r.GetData());
-//     if(r.GetIzdo())
-//       retval.PutIzdo(diferencia(*r.GetIzdo(),v));
-//     if(r.GetDcho())
-//       retval.PutDcho(diferencia(*r.GetDcho(),v));
+//     if(r.getLeft())
+//       retval.PutIzdo(diferencia(*r.getLeft(),v));
+//     if(r.getRight())
+//       retval.PutDcho(diferencia(*r.getRight(),v));
 //    return retval;
   }
 Rama *OpSuma::Simplifica(Rama *r) const
   {
-    if(*(r->GetIzdo()) == 0.0) r= ContraeIzdo(r);
-    if(*(r->GetDcho()) == 0.0) r= ContraeDcho(r);
+    if(*(r->getLeft()) == 0.0) r= ContraeIzdo(r);
+    if(*(r->getRight()) == 0.0) r= ContraeDcho(r);
     return r;
   }
 const Operando &OpSuma::Opera(const Operando *v1,const Operando *v2) const
@@ -55,8 +55,8 @@ Rama OpResta::Diferencia(const Variable &v,const Rama &r) const
               << " not implemented." << std::endl;
     return Rama();
 //     Rama retval(r.GetData());
-//     retval.PutIzdo(diferencia(r->GetIzdo(),v));
-//     retval.PutDcho(diferencia(r->GetDcho(),v));
+//     retval.PutIzdo(diferencia(r->getLeft(),v));
+//     retval.PutDcho(diferencia(r->getRight(),v));
 //     return r;
   }
 
@@ -68,25 +68,25 @@ Rama OpProd::Diferencia(const Variable &v,const Rama &r) const
     std::cerr << "OpProd::" << __FUNCTION__
               << " not implemented." << std::endl;
     return Rama();
-//     Rama *ap= diferencia(Copia(r->GetIzdo()),v);
-//     Rama *bp= diferencia(Copia(r->GetDcho()),v);
-//     Rama *sum1= Lex().prodt(ap,r->GetDcho());
-//     Rama *sum2= Lex().prodt(r->GetIzdo(),bp);
+//     Rama *ap= diferencia(Copia(r->getLeft()),v);
+//     Rama *bp= diferencia(Copia(r->getRight()),v);
+//     Rama *sum1= Lex().prodt(ap,r->getRight());
+//     Rama *sum2= Lex().prodt(r->getLeft(),bp);
 //     r= Lex().suma(sum1,sum2);
 //     return r;
   }
 Rama *OpProd::Simplifica(Rama *r) const
   {
-    if(*(r->GetIzdo()) == 1.0)
+    if(*(r->getLeft()) == 1.0)
       r= ContraeIzdo(r);
     else
-      if(*(r->GetDcho()) == 1.0)
+      if(*(r->getRight()) == 1.0)
         r= ContraeDcho(r);
       else
-        if(*(r->GetIzdo()) == 0.0)
+        if(*(r->getLeft()) == 0.0)
           r= ContraeDcho(r);
         else
-          if(*(r->GetDcho()) == 0.0)
+          if(*(r->getRight()) == 0.0)
             r= ContraeIzdo(r);
     return r;
   }
@@ -95,10 +95,10 @@ Rama *OpProd::Simplifica(Rama *r) const
 //! la suma está a la derecha.
 Rama *OpProd::DistribDcha(Rama *raiz) const
   {
-    Rama *ri= raiz->GetIzdo(); //Factor que multiplica a la suma.
-    Rama *rd= raiz->GetDcho(); //Suma.
-    Rama *si= new Rama(&(Lex().prodt),ri->getCopy(),rd->GetIzdo()->getCopy());
-    Rama *sd= new Rama(&(Lex().prodt),ri->getCopy(),rd->GetDcho()->getCopy());
+    Rama *ri= raiz->getLeft(); //Factor que multiplica a la suma.
+    Rama *rd= raiz->getRight(); //Suma.
+    Rama *si= new Rama(&(Lex().prodt),ri->getCopy(),rd->getLeft()->getCopy());
+    Rama *sd= new Rama(&(Lex().prodt),ri->getCopy(),rd->getRight()->getCopy());
     delete raiz;
     raiz= new Rama(&(Lex().suma),si,sd);
     return raiz;
@@ -108,10 +108,10 @@ Rama *OpProd::DistribDcha(Rama *raiz) const
 //! la suma está a la derecha.
 Rama *OpProd::DistribIzda(Rama *raiz) const
   {
-    Rama *ri= raiz->GetIzdo(); //Suma.
-    Rama *rd= raiz->GetDcho(); //Factor que multiplica a la suma.
-    Rama *si= new Rama(&(Lex().prodt),ri->GetIzdo()->getCopy(),rd->getCopy());
-    Rama *sd= new Rama(&(Lex().prodt),ri->GetDcho()->getCopy(),rd->getCopy());
+    Rama *ri= raiz->getLeft(); //Suma.
+    Rama *rd= raiz->getRight(); //Factor que multiplica a la suma.
+    Rama *si= new Rama(&(Lex().prodt),ri->getLeft()->getCopy(),rd->getCopy());
+    Rama *sd= new Rama(&(Lex().prodt),ri->getRight()->getCopy(),rd->getCopy());
     delete raiz;
     raiz= new Rama(&(Lex().suma),si,sd);
     return raiz;
@@ -145,11 +145,11 @@ Rama OpDiv::Diferencia(const Variable &v,const Rama &r) const
     std::cerr << "OpDiv::" << __FUNCTION__
               << " not implemented." << std::endl;
     return Rama();
-//     Rama *up= diferencia(Copia(r->GetIzdo()),v);
-//     Rama *vp= diferencia(Copia(r->GetDcho()),v);
-//     Rama *sum1= Lex().prodt(r->GetDcho(),up);
-//     Rama *sum2= Lex().prodt(r->GetIzdo(),vp);
-//     r= Lex().divn(Lex().resta(sum1,sum2),Lex().sqr(Copia(r->GetDcho())));
+//     Rama *up= diferencia(Copia(r->getLeft()),v);
+//     Rama *vp= diferencia(Copia(r->getRight()),v);
+//     Rama *sum1= Lex().prodt(r->getRight(),up);
+//     Rama *sum2= Lex().prodt(r->getLeft(),vp);
+//     r= Lex().divn(Lex().resta(sum1,sum2),Lex().sqr(Copia(r->getRight())));
 //     return r;
   }
 const Operando &OpDiv::Opera(const Operando *v1,const Operando *v2) const

@@ -53,7 +53,7 @@ class Ref1d2d : public Ref<Rect1d2dCooSys>
     Ref1d2d(const Pos2d &o,const Pos2d &p);
     explicit Ref1d2d(const Ref2d2d &);
 
-    Vector2d GetI(void) const;
+    Vector2d getIVector(void) const;
     //! @brief Return the I unary vector of the global system.
     Line2d getXAxis(void) const; //Return the line defining x axis.
 

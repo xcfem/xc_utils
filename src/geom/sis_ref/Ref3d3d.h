@@ -51,9 +51,9 @@ class Ref3d3d : public Ref<Rect3d3dCooSys>
     Ref3d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2);
     Ref3d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2,const Vector3d &v3);
     Ref3d3d(const Line3d &r,const Pos3d &p);
-    Vector3d GetI(void) const; //I unary vector.
-    Vector3d GetJ(void) const; //J unary vector.
-    Vector3d GetK(void) const; //K unary vector.
+    Vector3d getIVector(void) const; //I unary vector.
+    Vector3d getJVector(void) const; //J unary vector.
+    Vector3d getKVector(void) const; //K unary vector.
     Line3d getXAxis(void) const; //Return the x axis.
     Line3d getYAxis(void) const; //Return the y axis.
     Line3d getZAxis(void) const; //Return the z axis.

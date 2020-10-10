@@ -57,42 +57,42 @@ Ref3d3d::~Ref3d3d(void)
   {}
 
 //! @brief Return the unary vector I expressed in global coordinates.
-Vector3d Ref3d3d::GetI(void) const
+Vector3d Ref3d3d::getIVector(void) const
   { return getAxisVDir(1); }
 //! @brief Return the unary vector J expressed in global coordinates.
-Vector3d Ref3d3d::GetJ(void) const
+Vector3d Ref3d3d::getJVector(void) const
   { return getAxisVDir(2); }
 //! @brief Return the unary vector K expressed in global coordinates.
-Vector3d Ref3d3d::GetK(void) const
+Vector3d Ref3d3d::getKVector(void) const
   { return getAxisVDir(3); }
 
 //! @brief Return the line defining the x axis.
 Line3d Ref3d3d::getXAxis(void) const
   {
-    const Pos3d dest(org+1000.0*GetI());
+    const Pos3d dest(org+1000.0*getIVector());
     return Line3d(org,dest);
   }
 
 //! @brief Return the line defining the y axis.
 Line3d Ref3d3d::getYAxis(void) const
   {
-    const Pos3d dest(org+1000.0*GetJ());
+    const Pos3d dest(org+1000.0*getJVector());
     return Line3d(org,dest);
   }
 
 //! @brief Return the line defining the z axis.
 Line3d Ref3d3d::getZAxis(void) const
   {
-    const Pos3d dest(org+1000.0*GetK());
+    const Pos3d dest(org+1000.0*getKVector());
     return Line3d(org,dest);
   }
 
 Plane Ref3d3d::getXYPlane(void) const
-  { return Plane(org,1000.0*GetI(),1000.0*GetJ()); }
+  { return Plane(org,1000.0*getIVector(),1000.0*getJVector()); }
 Plane Ref3d3d::getXZPlane(void) const
-  { return Plane(org,1000.0*GetI(),1000.0*GetK()); }
+  { return Plane(org,1000.0*getIVector(),1000.0*getKVector()); }
 Plane Ref3d3d::getYZPlane(void) const
-  { return Plane(org,1000.0*GetJ(),1000.0*GetK()); }
+  { return Plane(org,1000.0*getJVector(),1000.0*getKVector()); }
 
 // GEOM_FT Ref3d3d::GetZLocal(const Pos3d &p) const
 // //Return the local Z of the point p expressed in local coordinates

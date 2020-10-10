@@ -194,8 +194,8 @@ Rama *simplifica(Rama *raiz)
   {
     if(raiz)
       {
-        raiz->PutDcho(simplifica(raiz->GetDcho()));
-        raiz->PutIzdo(simplifica(raiz->GetIzdo()));
+        raiz->PutDcho(simplifica(raiz->getRight()));
+        raiz->PutIzdo(simplifica(raiz->getLeft()));
         if(raiz->GetData())
           return raiz= raiz->GetData()->Simplifica(raiz);
         else
@@ -209,13 +209,13 @@ Rama *distrib(Rama *raiz)
   {
     if(raiz)
       {
-        Rama *ri= raiz->GetIzdo();
+        Rama *ri= raiz->getLeft();
         if(ri)
           {
             Rama *rid= distrib(ri);
             raiz->izdo= rid;
           }
-        Rama *rd= raiz->GetDcho();
+        Rama *rd= raiz->getRight();
         if(rd)
           {
             Rama *rdd= distrib(rd);
@@ -235,25 +235,25 @@ void RecorrePreorden(Rama *raiz,const ExprFunctor &f)
     if(raiz)
       {
         f(raiz);
-        RecorrePreorden(raiz->GetIzdo(),f);
-        RecorrePreorden(raiz->GetDcho(),f);
+        RecorrePreorden(raiz->getLeft(),f);
+        RecorrePreorden(raiz->getRight(),f);
       }
   }
 void RecorreEnorden(Rama *raiz,const ExprFunctor &f)
   {
     if(raiz)
       {
-        RecorreEnorden(raiz->GetIzdo(),f);
+        RecorreEnorden(raiz->getLeft(),f);
         f(raiz);
-        RecorreEnorden(raiz->GetDcho(),f);
+        RecorreEnorden(raiz->getRight(),f);
       }
   }
 void RecorrePostorden(Rama *raiz,const ExprFunctor &f)
   {
     if(raiz)
       {
-        RecorrePostorden(raiz->GetIzdo(),f);
-        RecorrePostorden(raiz->GetDcho(),f);
+        RecorrePostorden(raiz->getLeft(),f);
+        RecorrePostorden(raiz->getRight(),f);
         f(raiz);
       }
   }
@@ -265,9 +265,9 @@ void Escribe(const Rama *raiz,const int &prior, std::ostream &stream)
         //int parent= ( (raiz->GetPrioridad() <= prior) && (raiz->GetClase()!=operando));
         bool parent= true;
         if(parent) stream << '(';
-        Escribe(raiz->GetIzdo(),raiz->GetPrioridad(),stream);
+        Escribe(raiz->getLeft(),raiz->GetPrioridad(),stream);
         stream << *raiz;
-        Escribe(raiz->GetDcho(),raiz->GetPrioridad(),stream);
+        Escribe(raiz->getRight(),raiz->GetPrioridad(),stream);
         if(parent) stream << ')';
       }
   }

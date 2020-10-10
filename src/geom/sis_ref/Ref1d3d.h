@@ -53,7 +53,7 @@ class Ref1d3d : public Ref<Rect1d3dCooSys>
     explicit Ref1d3d(const Ref2d3d &);
     explicit Ref1d3d(const Ref3d3d &);
 
-    Vector3d GetI(void) const;
+    Vector3d getIVector(void) const;
     Line3d getXAxis(void) const;
 
     virtual ~Ref1d3d(void)

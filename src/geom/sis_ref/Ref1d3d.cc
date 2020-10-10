@@ -37,20 +37,20 @@ Ref1d3d::Ref1d3d(const Pos3d &o,const Pos3d &p) : BaseRef(o,p) {}
 
 //! @brief Constructor.
 Ref1d3d::Ref1d3d(const Ref2d3d &r2d3d)
-  : BaseRef(r2d3d.Org(),Rect1d3dCooSys(r2d3d.GetI())) {}
+  : BaseRef(r2d3d.Org(),Rect1d3dCooSys(r2d3d.getIVector())) {}
 
 //! @brief Constructor.
 Ref1d3d::Ref1d3d(const Ref3d3d &r3d3d)
-  : BaseRef(r3d3d.Org(),Rect1d3dCooSys(r3d3d.GetI())) {}
+  : BaseRef(r3d3d.Org(),Rect1d3dCooSys(r3d3d.getIVector())) {}
 
 //! @brief Return the global coordinates of unit vector I.
-Vector3d Ref1d3d::GetI(void) const
+Vector3d Ref1d3d::getIVector(void) const
   { return getAxisVDir(1); }
 
 //! @brief Returns the line defined by X axis.
 Line3d Ref1d3d::getXAxis(void) const
   {
-    const Pos3d dest(org+1000.0*GetI());
+    const Pos3d dest(org+1000.0*getIVector());
     return Line3d(org,dest);
   }
 

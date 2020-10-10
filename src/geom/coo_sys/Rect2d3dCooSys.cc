@@ -46,11 +46,16 @@ Rect2d3dCooSys::Rect2d3dCooSys(const PGlobal &p1,const PGlobal &p2, const PGloba
   : Xd3dCooSys(2,p1,p2,p3) {}
 
 //! @brief Return the unary vector I in global coordinates.
-Rect2d3dCooSys::VGlobal Rect2d3dCooSys::GetI(void) const
+Rect2d3dCooSys::VGlobal Rect2d3dCooSys::getIVector(void) const
   { return getAxisVDir(1); }
+
 //! @brief Return the unary vector J in global coordinates.
-Rect2d3dCooSys::VGlobal Rect2d3dCooSys::GetJ(void) const
+Rect2d3dCooSys::VGlobal Rect2d3dCooSys::getJVector(void) const
   { return getAxisVDir(2); }
+
+//! @brief Return the unary vector K in global coordinates.
+Rect2d3dCooSys::VGlobal Rect2d3dCooSys::getKVector(void) const
+  { return cross(getIVector(),getJVector()); }
 
 //! @brief Return the global coordinates of the vector.
 //!

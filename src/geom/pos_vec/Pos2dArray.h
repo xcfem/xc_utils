@@ -54,8 +54,8 @@ class Pos2dArray: public PosArray<Pos2d>
     size_t GetNumQuads(void) const;
     GEOM_FT GetMax(unsigned short int i) const;
     GEOM_FT GetMin(unsigned short int i) const;
-    GEOM_FT GetIx(void) const;
-    GEOM_FT GetIy(void) const;
+    GEOM_FT getIx(void) const;
+    GEOM_FT getIy(void) const;
     GEOM_FT GetPxy(void) const;
     GEOM_FT Ix(void) const;
     GEOM_FT Iy(void) const;

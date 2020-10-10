@@ -34,22 +34,22 @@ Ref2d2d::Ref2d2d(const Pos2d &o,const Dir2d &dirX): BaseRef(o,dirX) {}
 Ref2d2d::Ref2d2d(const Pos2d &o,const Pos2d &p): BaseRef(o,p) {}
 
 //! @brief Return the unary vector I expressed in global coordinates.
-Vector2d Ref2d2d::GetI(void) const
+Vector2d Ref2d2d::getIVector(void) const
   { return getAxisVDir(1); }
 //! @brief Return the unary vector J expressed in global coordinates.
-Vector2d Ref2d2d::GetJ(void) const
+Vector2d Ref2d2d::getJVector(void) const
   { return getAxisVDir(2); }
 
 //! @brief Return la line defining the x axis.
 Line2d Ref2d2d::getXAxis(void) const
   {
-    const Pos2d dest(org+1000.0*GetI());
+    const Pos2d dest(org+1000.0*getIVector());
     return Line2d(org,dest);
   }
 //! @brief Return la line defining the y axis.
 Line2d Ref2d2d::getYAxis(void) const
   {
-    const Pos2d dest(org+1000.0*GetJ());
+    const Pos2d dest(org+1000.0*getJVector());
     return Line2d(org,dest);
   }
 

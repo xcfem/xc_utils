@@ -33,13 +33,13 @@ Rect3d3dCooSys::Rect3d3dCooSys(const PGlobal &p1,const PGlobal &p2, const PGloba
 Rect3d3dCooSys::Rect3d3dCooSys(const VGlobal &v1,const VGlobal &v2,const VGlobal &v3)
   : Xd3dCooSys(3,v1,v2,v3) {}
 //! @brief Return the unary vector I in global coordinates.
-Rect3d3dCooSys::VGlobal Rect3d3dCooSys::GetI(void) const
+Rect3d3dCooSys::VGlobal Rect3d3dCooSys::getIVector(void) const
   { return getAxisVDir(1); }
 //! @brief Return the unary vector J in global coordinates.
-Rect3d3dCooSys::VGlobal Rect3d3dCooSys::GetJ(void) const
+Rect3d3dCooSys::VGlobal Rect3d3dCooSys::getJVector(void) const
   { return getAxisVDir(2); }
 //! @brief Return the unary vector K in global coordinates.
-Rect3d3dCooSys::VGlobal Rect3d3dCooSys::GetK(void) const
+Rect3d3dCooSys::VGlobal Rect3d3dCooSys::getKVector(void) const
   { return getAxisVDir(3); }
 
 //! @brief Return the global coordinates of the vector.

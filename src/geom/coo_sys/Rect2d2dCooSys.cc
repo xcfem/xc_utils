@@ -43,10 +43,10 @@ CooSys *Rect2d2dCooSys::Copia(void) const
   { return new Rect2d2dCooSys(*this); }
 
 //! @brief Return the unary vector I in global coordinates.
-Rect2d2dCooSys::VGlobal Rect2d2dCooSys::GetI(void) const
+Rect2d2dCooSys::VGlobal Rect2d2dCooSys::getIVector(void) const
   { return getAxisVDir(1); }
 //! @brief Return the unary vector J in global coordinates.
-Rect2d2dCooSys::VGlobal Rect2d2dCooSys::GetJ(void) const
+Rect2d2dCooSys::VGlobal Rect2d2dCooSys::getJVector(void) const
   { return getAxisVDir(2); }
 
 //! @brief Set the unary vector I.

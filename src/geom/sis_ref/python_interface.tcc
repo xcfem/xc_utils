@@ -40,7 +40,7 @@ class_<Ref1d2d , bases<ref_Rect1d2dCooSys> >("Ref1d2d")
   .def(init<const Pos2d &,const Vector2d &>())
   .def(init<const Pos2d &,const Dir2d &>())
   .def(init<const Pos2d &,const Pos2d &>())
-  .def("getI",&Ref1d2d::GetI)
+  .def("getIVector",&Ref1d2d::getIVector)
   ;
 
 typedef Ref<Rect1d3dCooSys> ref_Rect1d3dCooSys;
@@ -64,7 +64,7 @@ class_<Ref1d3d , bases<ref_Rect1d3dCooSys> >("Ref1d3d")
   .def(init<const Pos3d &,const Vector3d &>())
   .def(init<const Pos3d &,const Dir3d &>())
   .def(init<const Pos3d &,const Pos3d &>())
-  .def("getI",&Ref1d3d::GetI)
+  .def("getIVector",&Ref1d3d::getIVector)
   ;
 
 typedef Ref<Rect2d2dCooSys> ref_Rect2d2dCooSys;
@@ -88,8 +88,8 @@ class_<Ref2d2d , bases<ref_Rect2d2dCooSys> >("Ref2d2d")
   .def(init<const Pos2d &,const Vector2d &>())
   .def(init<const Pos2d &,const Dir2d &>())
   .def(init<const Pos2d &,const Pos2d &>())
-  .def("getI",&Ref2d2d::GetI)
-  .def("getJ",&Ref2d2d::GetJ)
+  .def("getIVector",&Ref2d2d::getIVector)
+  .def("getJVector",&Ref2d2d::getJVector)
   ;
 
 typedef Ref<Rect2d3dCooSys> ref_Rect2d3dCooSys;
@@ -113,8 +113,8 @@ class_<Ref2d3d , bases<ref_Rect2d3dCooSys> >("Ref2d3d")
   .def(init<const Pos3d &,const Pos3d &,const Pos3d &>())
   .def(init<const Pos3d &,const Vector3d &>())
   .def(init<const Pos3d &,const Vector3d &,const Vector3d &>())
-  .def("getI",&Ref2d3d::GetI)
-  .def("getJ",&Ref2d3d::GetJ)
+  .def("getIVector",&Ref2d3d::getIVector)
+  .def("getJVector",&Ref2d3d::getJVector)
   ;
 
 typedef Ref<Rect3d3dCooSys> ref_Rect3d3dCooSys;
@@ -140,9 +140,9 @@ class_<Ref3d3d , bases<ref_Rect3d3dCooSys> >("Ref3d3d")
   .def(init<const Pos3d &,const Vector3d &,const Vector3d &>())
   .def(init<const Pos3d &,const Vector3d &,const Vector3d &,const Vector3d &>())
   .def(init<const Line3d &,const Pos3d &>())
-  .def("getI",&Ref3d3d::GetI)
-  .def("getJ",&Ref3d3d::GetJ)
-  .def("getK",&Ref3d3d::GetK)
+  .def("getIVector",&Ref3d3d::getIVector)
+  .def("getJVector",&Ref3d3d::getJVector)
+  .def("getKVector",&Ref3d3d::getKVector)
  ;
 
 class_<PrincipalAxesOfInertia2D>("PrincipalAxesOfInertia2D",init<const Pos2d &,const GEOM_FT &,const GEOM_FT &,const GEOM_FT &>())

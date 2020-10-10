@@ -122,9 +122,9 @@ class Rama : public ProtoExpresion
 /*       } */
     inline const Operando *GetData(void) const
       { return data; }
-    inline Rama *GetIzdo(void) const
+    inline Rama *getLeft(void) const
       { return izdo; }
-    inline Rama *GetDcho(void) const
+    inline Rama *getRight(void) const
       { return dcho; }
     Clase GetClase(void) const;
     const std::string &StrClase(void) const;

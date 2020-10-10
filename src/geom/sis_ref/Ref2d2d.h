@@ -49,8 +49,8 @@ class Ref2d2d : public Ref<Rect2d2dCooSys>
     Ref2d2d(const Pos2d &o,const Vector2d &vX);
     Ref2d2d(const Pos2d &o,const Dir2d &dirX);
     Ref2d2d(const Pos2d &o,const Pos2d &p);
-    Vector2d GetI(void) const; //I unary vector.
-    Vector2d GetJ(void) const; //J unary vector.
+    Vector2d getIVector(void) const; //I unary vector.
+    Vector2d getJVector(void) const; //J unary vector.
     Line2d getXAxis(void) const; //Return the x axis.
     Line2d getYAxis(void) const; //Return the y axis.
 

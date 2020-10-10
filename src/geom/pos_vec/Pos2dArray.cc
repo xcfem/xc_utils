@@ -132,7 +132,7 @@ Pos2d Pos2dArray::getCenterOfMass(void) const
 
 //! @brief Return the moment of inertia with respect to the
 //! axis which is parallel to the y axis through the origin.
-GEOM_FT Pos2dArray::GetIy(void) const
+GEOM_FT Pos2dArray::getIy(void) const
   {
     GEOM_FT retval= 0.0;
     Pos2d c;
@@ -148,7 +148,7 @@ GEOM_FT Pos2dArray::GetIy(void) const
   }
 
 //! @brief Return el moment of inertia with respect to axis parallel to x por el origen
-GEOM_FT Pos2dArray::GetIx(void) const
+GEOM_FT Pos2dArray::getIx(void) const
   {
     GEOM_FT retval= 0.0;
     Pos2d c;
@@ -191,11 +191,11 @@ GEOM_FT Pos2dArray::GetArea(void) const
 
 //! @brief Moment of inertia with respect to axis parallel to x through the center of mass.
 GEOM_FT Pos2dArray::Ix(void) const
-  { return GetIx()-GetArea()*sqr(getCenterOfMass().y()); }
+  { return getIx()-GetArea()*sqr(getCenterOfMass().y()); }
 
 //! @brief Moment of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Pos2dArray::Iy(void) const
-  { return GetIy()-GetArea()*sqr(getCenterOfMass().x()); }
+  { return getIy()-GetArea()*sqr(getCenterOfMass().x()); }
 
 //! @brief product of inertia with respect to the center of mass in local coordinates.
 GEOM_FT Pos2dArray::Pxy(void) const

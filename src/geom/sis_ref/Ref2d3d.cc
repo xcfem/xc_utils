@@ -52,31 +52,34 @@ Ref2d3d::Ref2d3d(const Pos3d &o,const Vector3d &v1,const Vector3d &v2)
 
 //! @brief Constructor.
 Ref2d3d::Ref2d3d(const Ref3d3d &r3d3d)
-  : BaseRef(r3d3d.Org(),Rect2d3dCooSys(r3d3d.GetI(),r3d3d.GetJ())) {}
-
+  : BaseRef(r3d3d.Org(),Rect2d3dCooSys(r3d3d.getIVector(),r3d3d.getJVector())) {}
 
 //! @brief Return the unary vector I expressed in global coordinates.
-Vector3d Ref2d3d::GetI(void) const
+Vector3d Ref2d3d::getIVector(void) const
   { return getAxisVDir(1); }
 
 //! @brief Return the unary vector J expressed in global coordinates.
-Vector3d Ref2d3d::GetJ(void) const
+Vector3d Ref2d3d::getJVector(void) const
   { return getAxisVDir(2); }
+
+//! @brief Return the unary vector K expressed in global coordinates.
+Vector3d Ref2d3d::getKVector(void) const
+  { return cross(getIVector(), getJVector()); }
 
 //! @brief Return the line defining the x axis.
 Line3d Ref2d3d::getXAxis(void) const
   {
-    const Pos3d dest(org+1000.0*GetI());
+    const Pos3d dest(org+1000.0*getIVector());
     return Line3d(org,dest);
   }
 
 //! @brief Return the line defining the y axis.
 Line3d Ref2d3d::getYAxis(void) const
   {
-    const Pos3d dest(org+1000.0*GetJ());
+    const Pos3d dest(org+1000.0*getJVector());
     return Line3d(org,dest);
   }
 
 Plane Ref2d3d::getXYPlane(void) const
-  { return Plane(org,1000.0*GetI(),1000.0*GetJ()); }
+  { return Plane(org,1000.0*getIVector(),1000.0*getJVector()); }
 

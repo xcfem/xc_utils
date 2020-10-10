@@ -35,7 +35,7 @@ Rect1d2dCooSys::Rect1d2dCooSys(const PGlobal &p1,const PGlobal &p2)
   : Xd2dCooSys(1,p1,p2) {} //Axis 1 desde p1 a p2.
 
 //! @brief Return unary vector I in global coordinates.
-Rect1d2dCooSys::VGlobal Rect1d2dCooSys::GetI(void) const
+Rect1d2dCooSys::VGlobal Rect1d2dCooSys::getIVector(void) const
   { return getAxisVDir(1); }
 
 //! @brief Return the global coordinates components of the vector from

@@ -30,7 +30,7 @@
 
 //! @ingroup GEOM
 //
-//! @brief Polígono en tres dimensiones.
+//! @brief Plane polygon in a 3D space.
 class Polygon3d: public D2to3d
   {
     Polygon2d plg2d;
@@ -81,6 +81,7 @@ class Polygon3d: public D2to3d
       { return plg2d.counterclockwise(); }
     inline void swap(void)
       { plg2d.swap(); }
+    std::string orientation(void) const;
 
     Plane getPlaneFromSide0(unsigned int i) const;
     Plane getPlaneFromSide(unsigned int i) const;

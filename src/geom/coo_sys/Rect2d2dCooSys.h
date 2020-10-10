@@ -43,8 +43,8 @@ class Rect2d2dCooSys: public Xd2dCooSys
     virtual CooSys *Copia(void) const;
 
     //Acceso a miembros.
-    VGlobal GetI(void) const;
-    VGlobal GetJ(void) const;
+    VGlobal getIVector(void) const;
+    VGlobal getJVector(void) const;
     void PutI(const VGlobal &);
     void PutJ(const VGlobal &);
 

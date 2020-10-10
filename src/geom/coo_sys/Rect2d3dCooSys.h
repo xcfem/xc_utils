@@ -50,9 +50,10 @@ class Rect2d3dCooSys: public Xd3dCooSys
     virtual Xd3dCooSys *CopiaXd3d(void) const
       { return new Rect2d3dCooSys(*this); }
 
-    //Acceso a miembros.
-    VGlobal GetI(void) const;
-    VGlobal GetJ(void) const;
+    //Access to members.
+    VGlobal getIVector(void) const;
+    VGlobal getJVector(void) const;
+    VGlobal getKVector(void) const;
 
     VGlobal GetCooGlobales(const VLocal &v) const;
     VLocal GetCooLocales(const VGlobal &v) const;
