@@ -201,6 +201,27 @@ Vector3d Vector3d::Perpendicular(const Vector3d &v) const
   }
 
 //! @brief Return the angle between this vector and the argument.
+GEOM_FT Vector3d::getSignedAngle(const Vector3d &v) const
+  {
+    if( this->Nulo() || v.Nulo() )
+      {
+	std::clog << getClassName() << "::" << __FUNCTION__
+		  << "(Vector3d) one of the vectors: v1= "
+                  << (*this) << " or v2= " << v
+		  << " is null. Zero returned." << std::endl;
+        return 0.0;
+      }
+    const GEOM_FT prod_mod= sqrt_FT(this->GetModulus2()*v.GetModulus2());
+    const GEOM_FT prod_escalar= this->GetDot(v);
+    const GEOM_FT coseno= prod_escalar/prod_mod;
+    const Vector3d cross_product= this->getCross(v);
+    const GEOM_FT seno= cross_product.GetModulus()/prod_mod;
+    std::cout << "v1= " << *this << " v2= " << v
+              << " cos= " << coseno << " sin= " << seno << std::endl;
+    return atan2(seno,coseno);
+  }
+
+//! @brief Return the angle between this vector and the argument.
 GEOM_FT Vector3d::getAngle(const Vector3d &v) const
   {
     GEOM_FT retval= 0;
@@ -259,8 +280,11 @@ std::ostream &operator<<(std::ostream &stream,const Vector3d &n)
     return stream;
   }
 
+GEOM_FT signedAngle(const Vector3d &v1,const Vector3d &v2)
+  { return v1.getSignedAngle(v2); }
+
 //! @brief Return el angle between vectors.
-double angle(const Vector3d &v1,const Vector3d &v2)
+GEOM_FT angle(const Vector3d &v1,const Vector3d &v2)
   { return v1.getAngle(v2); }
 
 

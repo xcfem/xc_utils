@@ -23,7 +23,7 @@
 #include "SlidingVectorsSystem2d.h"
 #include "SlidingVector2d.h"
 #include "xc_utils/src/geom/d1/Line2d.h"
-#include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
+#include "xc_utils/src/geom/ref_sys/Ref2d2d.h"
 
 
 SlidingVectorsSystem2d::SlidingVectorsSystem2d(const Pos2d &O,const Vector2d &R,const GEOM_FT &Mo)

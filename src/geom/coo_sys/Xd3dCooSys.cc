@@ -29,6 +29,8 @@
 //! @brief Defines a coordinate system of dimension i
 //! the x axis will have the orientation and sense of the vector
 //! argument.
+//! @param i: dimension of the coordinate system.
+//! @param v: direction of the x axis.
 Xd3dCooSys::Xd3dCooSys(const size_t &i,const VGlobal &v)
   : CooSys(i,3)
   { XAxisVector(v); }
@@ -36,17 +38,27 @@ Xd3dCooSys::Xd3dCooSys(const size_t &i,const VGlobal &v)
 //! @brief Defines a coordinate system of dimension i
 //! the x axis will have the orientation and sense of the v1
 //! argument.
+//! @param i: dimension of the coordinate system.
+//! @param v1: direction of the x axis.
+//! @param v2: direction of the y axis.
 Xd3dCooSys::Xd3dCooSys(const size_t &i,const VGlobal &v1,const VGlobal &v2)
   : CooSys(i,3)
   { vectores_unitarios(v1,v2,v1 ^ v2); }
 
+//! @brief Defines a coordinate system of dimension i.
+//! @param i: dimension of the coordinate system.
 Xd3dCooSys::Xd3dCooSys(const size_t &i,const PGlobal &o,const PGlobal &p)
   : CooSys(i,3)
   { TwoPoints(o,p); }
 
+//! @brief Defines a coordinate system of dimension i.
+//! @param i: dimension of the coordinate system.
 Xd3dCooSys::Xd3dCooSys(const size_t &i,const PGlobal &p1,const PGlobal &p2, const PGlobal &p3)
   : CooSys(i,3)
   { ThreePoints(p1,p2,p3); }
+
+//! @brief Defines a coordinate system of dimension i.
+//! @param i: dimension of the coordinate system.
 Xd3dCooSys::Xd3dCooSys(const size_t &i,const VGlobal &v1,const VGlobal &v2,const VGlobal &v3)
   : CooSys(i,3)
   { vectores_unitarios(v1,v2,v3); }

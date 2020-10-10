@@ -24,7 +24,7 @@
 #define D2TO3D_H
 
 #include "xc_utils/src/geom/d2/Surface3d.h"
-#include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
+#include "xc_utils/src/geom/ref_sys/Ref2d3d.h"
 #include "../cgal_types.h"
 
 class Plane;
@@ -57,6 +57,11 @@ class D2to3d: public Surface3d
     //! @brief Return the dimension of the object: 0, 1, 2 or 3.
     inline virtual unsigned short int Dimension(void) const
       { return 2; }
+
+    
+    Vector3d getIVector(void) const; //I unary vector.
+    Vector3d getJVector(void) const; //J unary vector.
+    Vector3d getKVector(void) const; //K unary vector.
 
     Pos3d to_3d(const Pos2d &p2d) const;
     Segment3d to_3d(const Segment2d &sg2d) const;

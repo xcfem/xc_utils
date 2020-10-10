@@ -25,7 +25,7 @@
 #include "xc_utils/src/geom/d1/Line3d.h"
 
 #include "xc_utils/src/geom/pos_vec/Vector2d.h"
-#include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
+#include "xc_utils/src/geom/ref_sys/Ref2d3d.h"
 
 
 //! @brief Return el haz de vectors that results from intersecting the

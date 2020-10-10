@@ -28,9 +28,9 @@
 #include "xc_utils/src/utils/misc_utils/matem.h"
 #include "Surface3d.h"
 #include "xc_utils/src/geom/pos_vec/Pos3d.h"
+#include "xc_utils/src/geom/pos_vec/Pos3dList.h"
 #include "../cgal_types.h"
 #include <list>
-#include "CGAL/linear_least_squares_fitting_3.h"
 
 class Line3d;
 class Ray3d;
@@ -233,10 +233,9 @@ Plane::polygon_classification Plane::ClassifyPoints(InputIterator first,InputIte
 template <typename InputIterator>
 GEOM_FT Plane::linearLeastSquaresFitting(InputIterator begin,InputIterator end)
   {
-    std::list<CGPoint_3> points;
-    for(InputIterator i=begin; i!=end;i++)
-      points.push_back((*i).ToCGAL()); 
-    GEOM_FT quality= linear_least_squares_fitting_3(points.begin(),points.end(),cgp,CGAL::Dimension_tag<0>());
+    Pos3dList pointList(begin,end);
+    GEOM_FT quality(0.0);
+    cgp= pointList.linearLeastSquaresFittingPlane(quality);
     return quality;
   }
 template <typename InputIterator>

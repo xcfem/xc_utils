@@ -24,7 +24,7 @@
 #include "xc_utils/src/utils/misc_utils/inertia.h"
 #include "xc_utils/src/geom/pos_vec/Dir2d.h"
 #include "xc_utils/src/geom/d1/Line2d.h"
-#include "xc_utils/src/geom/sis_ref/Ref2d2d.h"
+#include "xc_utils/src/geom/ref_sys/Ref2d2d.h"
 #include "xc_utils/src/geom/FT_matrix.h"
 #include "BND2d.h"
 

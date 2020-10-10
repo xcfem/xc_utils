@@ -21,7 +21,7 @@
 //Polygon3d.cc
 
 #include "Polygon3d.h"
-#include "xc_utils/src/geom/sis_ref/Ref2d3d.h"
+#include "xc_utils/src/geom/ref_sys/Ref2d3d.h"
 #include "xc_utils/src/geom/d1/Line2d.h"
 #include "xc_utils/src/geom/d1/Segment2d.h"
 #include "xc_utils/src/geom/d1/Segment3d.h"
@@ -197,7 +197,7 @@ void Polygon3d::Print(std::ostream &os) const
 // be changed.
 GEOM_FT Polygon3d::distSigno2(const Pos3d &p) const
   {
-    const short int signo= (this->clockwise() ? 1 : -1);
+    const short int signo= (this->plg2d.clockwise() ? 1 : -1);
     const size_t nv= GetNumVertices();
     const size_t nl= GetNumLados();
     if(nv==0) return NAN;
@@ -214,6 +214,7 @@ GEOM_FT Polygon3d::distSigno2(const Pos3d &p) const
       }
     return d;
   }
+
 GEOM_FT Polygon3d::distSigno(const Pos3d &p) const
   { return sqrt_FT(::Abs(distSigno2(p))); }
 
@@ -276,12 +277,40 @@ bool Polygon3d::TocaCuadrante(const int &cuadrante) const
     return false;
   }
 
+//! @brief Return true if the point list is oriented clockwise.
+//! @param vPoint: position of the point of view.
+bool Polygon3d::clockwise(const Pos3d &vPoint) const
+  { return !counterclockwise(vPoint); }
+
+bool Polygon3d::counterclockwise(const Pos3d &vPoint) const
+  {
+    bool retval= plg2d.counterclockwise();
+    const Pos3d O= getCenterOfMass();
+    const Vector3d K= getKVector();
+    const Vector3d vDir= vPoint-O;
+    const GEOM_FT dot_product= K.GetDot(vDir);
+    if(dot_product<0)
+      retval= !retval;
+    else
+      if(dot_product<1e-6)
+	{
+	  std::cerr << getClassName() << "::" << __FUNCTION__
+		    << "; the point of view: " << vPoint
+		    << " is almost contained in the reference plane."
+		    << std::endl;
+	}
+    return retval;
+  }
+
+void Polygon3d::swap(void)
+  { plg2d.swap(); }
+
 //! @brief Return the orientation of the polygon (clockwise or
 //! counterclockwise).
-std::string Polygon3d::orientation(void) const
+std::string Polygon3d::orientation(const Pos3d &vPoint) const
   {
     std::string retval= "counterclockwise";
-    if(clockwise())
+    if(clockwise(vPoint))
       { retval= "clockwise"; }
     return retval;
   }

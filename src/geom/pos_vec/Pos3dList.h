@@ -40,31 +40,34 @@ class Pos3dList: public GeomObj3d
     typedef GeomObj::list_Pos3d::iterator point_iterator;
     typedef GeomObj::list_Pos3d::const_iterator point_const_iterator;
   protected:
-    list_Pos3d lista_ptos;
+    list_Pos3d point_lst;
     Pos3d &operator[](const size_t &i);
   public:
     Pos3dList(void);
     explicit Pos3dList(const GeomObj::list_Pos3d &l);
+    explicit Pos3dList(const boost::python::list &);
+    template <typename InputIterator>
+    explicit Pos3dList(InputIterator first,InputIterator last);
     virtual GeomObj *clon(void) const
       { return new Pos3dList(*this); }
     inline size_t getNumberOfPoints(void) const
-      { return lista_ptos.size(); }
+      { return point_lst.size(); }
     inline point_const_iterator points_begin(void) const
-      { return lista_ptos.begin(); }
+      { return point_lst.begin(); }
     const point_const_iterator points_end(void) const
-      { return lista_ptos.end(); }
+      { return point_lst.end(); }
     inline short unsigned int Dimension(void) const
       { return 0; }
 
     const GeomObj::list_Pos3d &getPoints(void) const
-      { return lista_ptos; }
+      { return point_lst; }
     const Pos3d &operator[](const size_t &i) const;
 
     const Pos3d *appendPoint(const Pos3d &p);
     //! @brief Insert the vertices between [first,last).
     template <class InputIterator>
     inline void assign(InputIterator first, InputIterator last)
-      { lista_ptos.assign(first,last); }
+      { point_lst.assign(first,last); }
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const;
 
     virtual GEOM_FT Ix(void) const;
@@ -89,16 +92,29 @@ class Pos3dList: public GeomObj3d
     Pos3dList GetMenores(unsigned short int i,const GEOM_FT &d) const;
     const Pos3d &Point(const size_t &i) const;
     Pos3d getCenterOfMass(void) const
-      { return lista_ptos.getCenterOfMass(); }
+      { return point_lst.getCenterOfMass(); }
+    Vector3d getAvgKVector(void) const;
+    bool clockwise(const Pos3d &) const;
+    bool counterclockwise(const Pos3d &) const;
+    std::string orientation(const Pos3d &) const;
 
     void Transform(const Trf3d &trf3d);
 
     std::deque<GEOM_FT> &GetSeparaciones(void) const;
     double GetSeparacionMedia(void) const;
 
+    CGPlane_3 linearLeastSquaresFittingPlane(GEOM_FT &quality);
     void Print(std::ostream &stream) const;
     void Plot(Plotter &) const;
   };
+
+template <typename InputIterator>
+Pos3dList::Pos3dList(InputIterator begin,InputIterator end)
+  : GeomObj3d()
+  {
+    for(InputIterator i= begin; i!= end; i++)
+      point_lst.push_back(*i);
+  }
 
 #endif
 

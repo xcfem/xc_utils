@@ -43,6 +43,7 @@ python ./python_tests/geom/vector3d_angle_test_01.py
 echo "$BLEU" "  Points." "$NORMAL"
 python ./python_tests/geom/pos2d_test_01.py
 python ./python_tests/geom/pos3d_test_01.py
+python ./python_tests/geom/pos3d_list_test_01.py
 echo "$BLEU" "  Lines, rays and segments." "$NORMAL"
 python ./python_tests/geom/line2d_test_01.py
 python ./python_tests/geom/line3d_test_01.py
@@ -72,6 +73,7 @@ python ./python_tests/geom/polygon2D_test_2d_09.py
 python ./python_tests/geom/polygon2D_test_2d_10.py
 python ./python_tests/geom/polygon3D_test_01.py
 python ./python_tests/geom/polygon3D_test_02.py
+python ./python_tests/geom/polygon3D_test_03.py
 echo "$BLEU" "  Alpha shapes." "$NORMAL"
 python ./python_tests/geom/basic_alpha_shape2d_test.py
 echo "$BLEU" "  Circles." "$NORMAL"

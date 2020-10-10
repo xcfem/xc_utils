@@ -82,6 +82,18 @@ bool D2to3d::operator==(const D2to3d &other) const
     return retval;
   }
 
+//! @brief Return the unary vector I expressed in global coordinates.
+Vector3d D2to3d::getIVector(void) const
+  { return ref.getIVector(); }
+
+//! @brief Return the unary vector J expressed in global coordinates.
+Vector3d D2to3d::getJVector(void) const
+  { return ref.getJVector(); }
+
+//! @brief Return the unary vector K expressed in global coordinates.
+Vector3d D2to3d::getKVector(void) const
+  { return ref.getKVector(); }
+
 
 Pos3d D2to3d::to_3d(const Pos2d &p2d) const
   { return ref.GetPosGlobal(p2d); }

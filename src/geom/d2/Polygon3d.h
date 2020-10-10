@@ -24,6 +24,7 @@
 #define POLYGON3D_H
 
 #include "xc_utils/src/geom/d2/D2to3d.h"
+#include "xc_utils/src/geom/pos_vec/Vector3d.h"
 #include "xc_utils/src/geom/d2/2d_polygons/Polygon2d.h"
 #include "../cgal_types.h"
 #include "xc_utils/src/geom/d2/Plane.h"
@@ -37,7 +38,7 @@ class Polygon3d: public D2to3d
   public:
     Polygon3d(void): D2to3d(),plg2d() {}
     template <typename InputIterator>
-    Polygon3d(InputIterator first,InputIterator last);
+    explicit Polygon3d(InputIterator first,InputIterator last);
     Polygon3d(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3);
     Polygon3d(const Ref2d3d &,const Polygon2d &p= Polygon2d());
     Polygon3d(const Ref3d3d &,const Polygon2d &p= Polygon2d());
@@ -75,13 +76,10 @@ class Polygon3d: public D2to3d
     Segment3d Lado0(unsigned int i) const;
     Segment3d Lado(unsigned int i) const;
 
-    inline bool clockwise(void) const
-      { return plg2d.clockwise(); }
-    inline bool counterclockwise(void) const
-      { return plg2d.counterclockwise(); }
-    inline void swap(void)
-      { plg2d.swap(); }
-    std::string orientation(void) const;
+    bool clockwise(const Pos3d &) const;
+    bool counterclockwise(const Pos3d &) const;
+    void swap(void);
+    std::string orientation(const Pos3d &) const;
 
     Plane getPlaneFromSide0(unsigned int i) const;
     Plane getPlaneFromSide(unsigned int i) const;
@@ -111,11 +109,15 @@ Polygon3d::Polygon3d(InputIterator begin,InputIterator end)
   : D2to3d(), plg2d()
   {
     Plane p(begin, end);
+    auto i= begin;
+    const Pos3d A= *i; i++;
+    const Pos3d B= *i; i++;
+    const Pos3d C= *i;
     const Ref2d3d ref= Ref2d3d(*begin,p.Base1(), p.Base2());
     Polygon3d tmp(ref);
     for(InputIterator i= begin; i!= end; i++)
       tmp.push_back(*i);
-    (*this)= tmp;    
+    (*this)= tmp;
 
   }
 
