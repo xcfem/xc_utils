@@ -35,6 +35,8 @@ class_<PolygonalSurface2d, bases<Surface2d>, boost::noncopyable >("PolygonalSurf
   .def("getPolyline",&PolygonalSurface2d::getPolyline)
   .def("getVertices",&PolygonalSurface2d::getVertices,"Return the vertices list.")
   .def("getApproxTangentPositions",&PolygonalSurface2d::getApproxTangentPositions,"Return the points for which the polygon is almost tangent to the direction argument.")
+  .def("getRecubrimiento",&PolygonalSurface2d::GetRecubrimiento,"TO DEPRECATE. Return the cover of the position inside the surface.")
+  .def("getCover",&PolygonalSurface2d::GetRecubrimiento,"Return the cover of the position inside the surface.")
   ;
 
 typedef std::list<Polygon2d> polygon_2D_list;
@@ -65,7 +67,6 @@ class_<Polygon2d, Polygon2d *, bases<PolygonalSurface2d> >("Polygon2d")
   .def("getTributaryAreas",&Polygon2d::getTributaryAreas,"Return the tributary areas.")
   .def("appendVertex",&Polygon2d::push_back)
   .def("getArea",&Polygon2d::getArea,"Return the polygon area.")
-  .def("getRecubrimiento",&Polygon2d::GetRecubrimiento)
   .def("unePolygon2d",unePolygon2d,"Return the union of this polygon with the argument.")
   .def("clipLine",clipLine)
   .def("clipRay",clipRay)

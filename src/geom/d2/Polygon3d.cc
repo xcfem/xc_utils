@@ -282,6 +282,8 @@ bool Polygon3d::TocaCuadrante(const int &cuadrante) const
 bool Polygon3d::clockwise(const Pos3d &vPoint) const
   { return !counterclockwise(vPoint); }
 
+//! @brief Return true if the point list is oriented counterclockwise.
+//! @param vPoint: position of the point of view.
 bool Polygon3d::counterclockwise(const Pos3d &vPoint) const
   {
     bool retval= plg2d.counterclockwise();
