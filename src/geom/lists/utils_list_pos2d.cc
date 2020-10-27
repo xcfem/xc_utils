@@ -58,12 +58,12 @@ BND2d getBnd(const GeomObj::list_Pos2d &l)
   { return BND2d(getPMin(l),getPMax(l)); }
 
 //! @brief Compute the cover of the positions in the polygon.
-std::deque<GEOM_FT> &getRecubrimientos(const GeomObj::list_Pos2d &l,const Polygon2d &plg)
+std::deque<GEOM_FT> &getCovers(const GeomObj::list_Pos2d &l,const Polygon2d &plg)
   {
     const size_t sz= l.size();
     static std::deque<GEOM_FT> retval;
     retval.resize(sz);
     for(size_t i= 0;i<sz;i++)
-      retval[i]= plg.GetRecubrimiento(l[i]);
+      retval[i]= plg.getCover(l[i]);
     return retval;
   }

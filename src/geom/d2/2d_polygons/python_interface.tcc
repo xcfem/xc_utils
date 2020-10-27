@@ -35,8 +35,8 @@ class_<PolygonalSurface2d, bases<Surface2d>, boost::noncopyable >("PolygonalSurf
   .def("getPolyline",&PolygonalSurface2d::getPolyline)
   .def("getVertices",&PolygonalSurface2d::getVertices,"Return the vertices list.")
   .def("getApproxTangentPositions",&PolygonalSurface2d::getApproxTangentPositions,"Return the points for which the polygon is almost tangent to the direction argument.")
-  .def("getRecubrimiento",&PolygonalSurface2d::GetRecubrimiento,"TO DEPRECATE. Return the cover of the position inside the surface.")
-  .def("getCover",&PolygonalSurface2d::GetRecubrimiento,"Return the cover of the position inside the surface.")
+  .def("getRecubrimiento",&PolygonalSurface2d::getCover,"TO DEPRECATE. Return the cover of the position inside the surface.")
+  .def("getCover",&PolygonalSurface2d::getCover,"Return the cover of the position inside the surface.")
   ;
 
 typedef std::list<Polygon2d> polygon_2D_list;

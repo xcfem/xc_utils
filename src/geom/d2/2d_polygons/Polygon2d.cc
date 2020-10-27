@@ -346,8 +346,8 @@ std::vector<double> Polygon2d::getTributaryAreas(void) const
   }
 
 //! @brief Return the cover of the positions in the argument.
-std::deque<GEOM_FT> &Polygon2d::GetRecubrimientos(const Pos2dList &l) const
-  { return l.GetRecubrimientos(*this); }
+std::deque<GEOM_FT> &Polygon2d::getCovers(const Pos2dList &l) const
+  { return l.getCovers(*this); }
 
 //! @brief Return a polygon with a vertex on the mid-point of each side of
 //! the argument (used in GeomSection::getAnchoMecanico).

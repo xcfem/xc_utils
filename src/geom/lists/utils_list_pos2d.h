@@ -13,7 +13,7 @@
 //  WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU General Public License for more details.  
-//
+//!
 // You should have received a copy of the GNU General Public License 
 // along with this program.
 // If not, see <http://www.gnu.org/licenses/>.
@@ -38,6 +38,6 @@ void plot(Plotter &,const GeomObj::list_Pos2d &l);
 Pos2d getPMax(const GeomObj::list_Pos2d &l);
 Pos2d getPMin(const GeomObj::list_Pos2d &l);
 BND2d getBnd(const GeomObj::list_Pos2d &l);
-std::deque<GEOM_FT> &getRecubrimientos(const GeomObj::list_Pos2d &l,const Polygon2d &);
+std::deque<GEOM_FT> &getCovers(const GeomObj::list_Pos2d &l,const Polygon2d &);
 #endif
 

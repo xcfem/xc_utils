@@ -161,7 +161,7 @@ class Polygon2d: public PolygonalSurface2d
 
     void Transform(const Trf2d &trf2d);
 
-    std::deque<GEOM_FT> &GetRecubrimientos(const Pos2dList &) const;
+    std::deque<GEOM_FT> &getCovers(const Pos2dList &) const;
 
     Polygon2d getUnion(const Polygon2d &other) const;
     void une(const Polygon2d &);

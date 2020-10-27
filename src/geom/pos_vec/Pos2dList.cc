@@ -177,8 +177,8 @@ GEOM_FT Pos2dList::Iz(void) const
 std::deque<GEOM_FT> &Pos2dList::GetSeparaciones(void) const
   { return lista_ptos.GetSeparaciones(); }
 
-std::deque<GEOM_FT> &Pos2dList::GetRecubrimientos(const Polygon2d &plg) const
-  { return getRecubrimientos(lista_ptos,plg); }
+std::deque<GEOM_FT> &Pos2dList::getCovers(const Polygon2d &plg) const
+  { return ::getCovers(lista_ptos,plg); }
 
 double Pos2dList::GetSeparacionMedia(void) const
   { return lista_ptos.GetSeparacionMedia(); }
