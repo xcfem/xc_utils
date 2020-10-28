@@ -287,6 +287,33 @@ GEOM_FT PolygonalSurface2d::Dist(const Pos2d &p) const
     return (retval >= 0 ? retval : 0);
   }
 
+//! @brief Return the distance from the point to the nearest edge.
+GEOM_FT PolygonalSurface2d::getCover(const Pos2d &p) const
+  { return -DistSigno(p); }
+
+//! @brief Return the distance from the point to the nearest
+//! of the intersections of the ray defined by the point and
+//! the vector with the nearest edge.
+GEOM_FT PolygonalSurface2d::getCover(const Pos2d &p, const Vector2d &vdir) const
+  {
+    GEOM_FT retval= std::nan("0");
+    Ray2d r(p,vdir);
+    GeomObj::list_Pos2d intersections= getPolyline().getIntersection(r);
+    if(!intersections.empty())
+      {
+	GeomObj::list_Pos2d::const_iterator i= intersections.begin();
+	Pos2d q= *i;
+	retval= dist2(p,q);
+	i++;
+	for(; i!= intersections.end(); i++)
+	  {
+	    q= *i;
+            retval= min(retval, dist2(p,q));
+	  }
+	retval= sqrt(retval);
+      }
+    return retval;
+  }
 
 void PolygonalSurface2d::Print(std::ostream &os) const
   {

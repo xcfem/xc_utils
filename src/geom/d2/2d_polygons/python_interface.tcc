@@ -22,6 +22,8 @@
 
 
 Segment2d (PolygonalSurface2d::*getSide0Segment)(unsigned int i) const= &PolygonalSurface2d::Lado0;
+GEOM_FT (PolygonalSurface2d::*getCoverA)(const Pos2d &) const= &PolygonalSurface2d::getCover;
+GEOM_FT  (PolygonalSurface2d::*getCoverB)(const Pos2d &, const Vector2d &) const= &PolygonalSurface2d::getCover;
 class_<PolygonalSurface2d, bases<Surface2d>, boost::noncopyable >("PolygonalSurface2d", no_init)
   .def("getPerimeter",&PolygonalSurface2d::getPerimeter)
   .def("getCenterOfMass",&PolygonalSurface2d::getCenterOfMass)
@@ -35,8 +37,9 @@ class_<PolygonalSurface2d, bases<Surface2d>, boost::noncopyable >("PolygonalSurf
   .def("getPolyline",&PolygonalSurface2d::getPolyline)
   .def("getVertices",&PolygonalSurface2d::getVertices,"Return the vertices list.")
   .def("getApproxTangentPositions",&PolygonalSurface2d::getApproxTangentPositions,"Return the points for which the polygon is almost tangent to the direction argument.")
-  .def("getRecubrimiento",&PolygonalSurface2d::getCover,"TO DEPRECATE. Return the cover of the position inside the surface.")
-  .def("getCover",&PolygonalSurface2d::getCover,"Return the cover of the position inside the surface.")
+  .def("getRecubrimiento",getCoverA,"TO DEPRECATE. Return the cover of the position inside the surface.")
+  .def("getCover",getCoverA,"Return the cover of the position inside the surface.")
+  .def("getCover",getCoverB,"Return the distance from the point to the nearest of the intersections of the ray defined by the point and the vector with the nearest edge.")
   ;
 
 typedef std::list<Polygon2d> polygon_2D_list;

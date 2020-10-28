@@ -86,8 +86,8 @@ class PolygonalSurface2d: public Surface2d
 
     GEOM_FT DistSigno(const Pos2d &p,const bool &clockwise= false) const;
     GEOM_FT Dist(const Pos2d &p) const;
-    inline GEOM_FT getCover(const Pos2d &p) const
-      { return -DistSigno(p); }
+    GEOM_FT getCover(const Pos2d &) const;
+    GEOM_FT getCover(const Pos2d &, const Vector2d &) const;
 
     bool Overlap(const Line2d &r) const;
     bool Overlap(const Ray2d &sr) const;
