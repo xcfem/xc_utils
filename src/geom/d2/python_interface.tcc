@@ -75,7 +75,7 @@ def("get_basic_alpha_shape2d",get_basic_alpha_shape2d);
 
 
 class_<Surface3d, bases<GeomObj3d>, boost::noncopyable  >("Surface3d", no_init)
-  .def("distPos3d",&Surface3d::dist,"Return the distance from point to this surface.")
+  .def("dist",&Surface3d::dist,"Return the distance from point to this surface.")
   ;
 
 class_<D2to3d, bases<Surface3d>, boost::noncopyable  >("D2to3d", no_init)
@@ -144,7 +144,7 @@ class_<Polygon3d, bases<D2to3d> >("Polygon3d")
   .def("getArea",&Polygon3d::getArea, "Return the object area.")
   .def("getPerimeter",&Polygon3d::getPerimeter, "Return the object perimeter.")
   .def("getVertexList",&Polygon3d::getVertexListPy,"Return a Python list containing the positions of the polygon vertices.")
-  .def("distPos3d",&Polygon3d::dist,"Return the distance from point to this polygon.")
+  .def("dist",&Polygon3d::dist,"Return the distance from point to this polygon.")
   .def("getCenterOfMass", &Polygon3d::getCenterOfMass, " return the center of mass.")
   ;
 

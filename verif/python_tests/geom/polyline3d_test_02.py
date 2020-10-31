@@ -25,7 +25,7 @@ lp= pol1.getIntersection(plane)
 ptInt= lp[0]
 
 ratio1=(longPol1-3)/3.
-ratio2= ptInt.distPos3d(o)
+ratio2= ptInt.dist(o)
 
 # print("ratio1= ", ratio1)
 # print("ratio2= ", ratio2)

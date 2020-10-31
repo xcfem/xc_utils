@@ -21,7 +21,7 @@ pB= geom.Pos3d(0,1,0)
 
 ref= geom.Ref2d3d(p0,pA,pB)
 ref.Org+=geom.Vector3d(1,1,1)
-ratio3= p1.distPos3d(ref.Org)
+ratio3= p1.dist(ref.Org)
 
 '''
 print("vTrf= ", vTrf)

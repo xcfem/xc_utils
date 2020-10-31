@@ -47,7 +47,7 @@ secondSegment= segments[firstIntersection.second]
 p1= firstSegment.getCenterOfMass()
 p2= secondSegment.getCenterOfMass()
 ratio1= len(pairList)-1
-ratio2= p1.distPos3d(p2)
+ratio2= p1.dist(p2)
 
 '''
 print('p1: '+str(p1)) 

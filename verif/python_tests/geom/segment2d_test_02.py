@@ -14,7 +14,7 @@ s3=s1.offsetDouble(-2)
 p1=s2.getCenterOfMass()
 p2=s3.getCenterOfMass()
 
-ratio1=math.fabs(p1.distPos2d(p2)-4)
+ratio1=math.fabs(p1.dist(p2)-4)
 
 import os
 fname= os.path.basename(__file__)

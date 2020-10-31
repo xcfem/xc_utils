@@ -24,6 +24,9 @@
 Segment2d (PolygonalSurface2d::*getSide0Segment)(unsigned int i) const= &PolygonalSurface2d::Lado0;
 GEOM_FT (PolygonalSurface2d::*getCoverA)(const Pos2d &) const= &PolygonalSurface2d::getCover;
 GEOM_FT  (PolygonalSurface2d::*getCoverB)(const Pos2d &, const Vector2d &) const= &PolygonalSurface2d::getCover;
+Segment2d (PolygonalSurface2d::*clipLine)(const Line2d &) const=&PolygonalSurface2d::Clip;
+Segment2d (PolygonalSurface2d::*clipRay)(const Ray2d &) const=&PolygonalSurface2d::Clip;
+Segment2d (PolygonalSurface2d::*clipSegment)(const Segment2d &) const=&PolygonalSurface2d::Clip;
 class_<PolygonalSurface2d, bases<Surface2d>, boost::noncopyable >("PolygonalSurface2d", no_init)
   .def("getPerimeter",&PolygonalSurface2d::getPerimeter)
   .def("getCenterOfMass",&PolygonalSurface2d::getCenterOfMass)
@@ -40,6 +43,9 @@ class_<PolygonalSurface2d, bases<Surface2d>, boost::noncopyable >("PolygonalSurf
   .def("getRecubrimiento",getCoverA,"TO DEPRECATE. Return the cover of the position inside the surface.")
   .def("getCover",getCoverA,"Return the cover of the position inside the surface.")
   .def("getCover",getCoverB,"Return the distance from the point to the nearest of the intersections of the ray defined by the point and the vector with the nearest edge.")
+  .def("clip",clipLine, "Clips the line by the polygonal surface.")
+  .def("clip",clipRay, "Clips the ray by the polygonal surface.")
+  .def("clip",clipSegment, "Clips the segment by the polygonal surface.")
   ;
 
 typedef std::list<Polygon2d> polygon_2D_list;
@@ -53,9 +59,6 @@ class_<polygon_2D_list >("polygon_2D_list")
   ;
 
 void (Polygon2d::*unePolygon2d)(const Polygon2d &) =&Polygon2d::une;
-Segment2d (Polygon2d::*clipLine)(const Line2d &) const=&Polygon2d::Clip;
-Segment2d (Polygon2d::*clipRay)(const Ray2d &) const=&Polygon2d::Clip;
-Segment2d (Polygon2d::*clipSegment)(const Segment2d &) const=&Polygon2d::Clip;
 class_<Polygon2d, Polygon2d *, bases<PolygonalSurface2d> >("Polygon2d")
   .def(init<>())
 //.def(init<GeomObj::list_Pos2d>()) # Apparently this doesn't works.
@@ -71,9 +74,6 @@ class_<Polygon2d, Polygon2d *, bases<PolygonalSurface2d> >("Polygon2d")
   .def("appendVertex",&Polygon2d::push_back)
   .def("getArea",&Polygon2d::getArea,"Return the polygon area.")
   .def("unePolygon2d",unePolygon2d,"Return the union of this polygon with the argument.")
-  .def("clipLine",clipLine)
-  .def("clipRay",clipRay)
-  .def("clipSegment",clipSegment)
   .def("clipUsingPolygon",&Polygon2d::clipBy)
   .def("getBayazitDecomposition",&Polygon2d::getBayazitDecomposition)
   .def("getVertexList",&Polygon2d::getVertexListPy,"Return a Python list containing the positions of the polygon vertices.")

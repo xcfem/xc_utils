@@ -20,11 +20,11 @@ pto=geom.Pos3d(1,1,-2)
 vDir=geom.Dir3d(2,-2,3)
 
 r=geom.Line3d(pto,vDir)
-dr=ITeor.distLine3d(r)
+dr=ITeor.dist(r)
 I=P.getIntersection(r)
-d=I.distPlane(P)
+d=I.dist(P)
 
-ratio1=ITeor.distPos3d(I)
+ratio1=ITeor.dist(I)
 ratio2=math.fabs(dr)
 ratio3=math.fabs(d)
 

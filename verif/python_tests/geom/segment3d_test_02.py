@@ -18,7 +18,7 @@ A.logFileName= "/tmp/erase.log" # Ignore warning messages
 p= a.getIntersectionWithSegment(b)[0]
 A.logFileName= "clog" # Display warnings if any.
 pRef= geom.Segment3d(B,C).getCenterOfMass()
-ratio= p.dist2Pos3d(pRef)
+ratio= p.dist2(pRef)
 
 '''
 print('p: '+str(p)) 

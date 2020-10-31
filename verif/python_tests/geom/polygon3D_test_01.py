@@ -19,12 +19,12 @@ pointsA= [geom.Pos3d(0,0,0), geom.Pos3d(0,1,0), geom.Pos3d(0,1,1), geom.Pos3d(0,
 plgA= geom.Polygon3d(pointsA)
 centerA= plgA.getCenterOfMass()
 
-dcA= plgA.distPos3d(centerA)
+dcA= plgA.dist(centerA)
 ratio1= dcA
 
 dvA= -1e6
 for p in pointsA:
-    dvA= max(dvA, plgA.distPos3d(p))
+    dvA= max(dvA, plgA.dist(p))
 
 ratio2= dvA
 
@@ -33,12 +33,12 @@ pointsB= [geom.Pos3d(1.97898,-2.045,0.271598), geom.Pos3d(2.045,-2.045,0.271598)
 plgB= geom.Polygon3d(pointsB)
 centerB= plgB.getCenterOfMass()
 
-dcB= plgB.distPos3d(centerB)
+dcB= plgB.dist(centerB)
 ratio3= dcB
 
 dvB= -1e6
 for p in pointsB:
-    dvB= max(dvB, plgB.distPos3d(p))
+    dvB= max(dvB, plgB.dist(p))
 
 ratio4= dvB
 
@@ -46,7 +46,7 @@ pointsC= [geom.Pos3d(-2.2305,-1.8744,0), geom.Pos3d(-2.045,-1.8744,0), geom.Pos3
 
 plgC= geom.Polygon3d(pointsC)
 p= geom.Pos3d(-2.045,-1.8744,0.607318)
-dcC= plgC.distPos3d(p)
+dcC= plgC.dist(p)
 ratio5= dcC
 
 '''

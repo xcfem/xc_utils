@@ -73,16 +73,16 @@ ptsTang= pol1.getApproxTangentPositions(v)
 pt9Teor= geom.Pos2d(0.4375,-0.32476)
 pt9= ptsTang[0]
 
-ratio0= pt0.distPos2d(pt0Teor)
-ratio1= pt1.distPos2d(pt1Teor)
-ratio2= pt2.distPos2d(pt2Teor)
-ratio3= pt3.distPos2d(pt3Teor)
-ratio4= pt4.distPos2d(pt4Teor)
-ratio5= pt5.distPos2d(pt5Teor)
-ratio6= pt6.distPos2d(pt6Teor)
-ratio7= pt7.distPos2d(pt7Teor)
-ratio8= pt8.distPos2d(pt8Teor)
-ratio9= pt9.distPos2d(pt9Teor)
+ratio0= pt0.dist(pt0Teor)
+ratio1= pt1.dist(pt1Teor)
+ratio2= pt2.dist(pt2Teor)
+ratio3= pt3.dist(pt3Teor)
+ratio4= pt4.dist(pt4Teor)
+ratio5= pt5.dist(pt5Teor)
+ratio6= pt6.dist(pt6Teor)
+ratio7= pt7.dist(pt7Teor)
+ratio8= pt8.dist(pt8Teor)
+ratio9= pt9.dist(pt9Teor)
 
 
 
