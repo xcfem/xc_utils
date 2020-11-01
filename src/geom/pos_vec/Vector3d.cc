@@ -237,10 +237,9 @@ GEOM_FT Vector3d::getAngle(const Vector3d &v) const
       }
     else
       {
-        const GEOM_FT mod_v1= GetModulus();
-        const GEOM_FT mod_v2= v.GetModulus();
-        const GEOM_FT prod_escalar= dot(*this,v);
-        retval= acos(prod_escalar/(mod_v1*mod_v2));
+        const GEOM_FT dot_product= dot(*this,v);
+	const GEOM_FT cross_product= cross(*this,v).GetModulus();
+	retval= atan2(cross_product,dot_product);
       }
     return retval;
   }
