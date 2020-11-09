@@ -75,3 +75,8 @@ def get_index_closest_inlist(lst,value):
     '''
     closest_value=get_closest_inlist(lst,value)
     return lst.index(closest_value)
+
+def remove_duplicates_list(lst):
+    '''Return a list from lst without items duplicated
+    '''
+    return list(dict.fromkeys(lst))

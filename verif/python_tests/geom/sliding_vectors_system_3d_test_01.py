@@ -8,23 +8,23 @@ svd1=geom.SlidingVectorsSystem3d()
 
 # Defina a sliding vector.
 ptoAplic=geom.Pos3d(1,1,0)
-vectorDir=geom.Vector3d(0,0,1)
-vec= geom.SlidingVector3d(ptoAplic,vectorDir)
+testVector=geom.Vector3d(0,0,1)
+vec= geom.SlidingVector3d(ptoAplic,testVector)
 svd1+=vec # add it to the system.
 
 # Another sliding vector.
 ptoAplic=geom.Pos3d(-1,1,0)
-vec=geom.SlidingVector3d(ptoAplic,vectorDir)
+vec=geom.SlidingVector3d(ptoAplic,testVector)
 svd1+=vec # add it to the system.
 
 # And another one
 ptoAplic=geom.Pos3d(-1,-1,0)
-vec=geom.SlidingVector3d(ptoAplic,vectorDir)
+vec=geom.SlidingVector3d(ptoAplic,testVector)
 svd1+=vec # add it to the system
 
 # Again...
 ptoAplic=geom.Pos3d(1,-1,0)
-vec=geom.SlidingVector3d(ptoAplic,vectorDir)
+vec=geom.SlidingVector3d(ptoAplic,testVector)
 svd1+=vec # add it to the system
 
 Res= svd1.getResultant()
