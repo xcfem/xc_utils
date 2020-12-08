@@ -26,9 +26,8 @@
 
 class Pos3d;
 
-//! \ingroup GEOM
-//
-//! @brief Classe base para posiciones en el KDTree.
+//! @brief Base class for KDTree positions.
+//! @ingroup GEOM
 class KDTreePos
   {
   public:
