@@ -179,7 +179,7 @@ std::vector<SlidingVector3d> SlidingVectorsSystem3d::distribute(const std::vecto
 	f_i[i]= Fcg/W; // force distribution.
 	const Pos3d pt_i= point_list[i];
 	const Vector3d r_i= pt_i-cg;
-	p_i[i]= -cross(Mcg,r_i); // moment distribution.
+	p_i[i]= cross(Mcg,r_i); // moment distribution.
 	denom+= dot(r_i,r_i);
       }
     std::vector<SlidingVector3d> retval(sz);
@@ -248,7 +248,7 @@ std::vector<SlidingVector3d> SlidingVectorsSystem3d::distribute(const std::vecto
 	f_i[i]= Fcg*w_i/W; // force distribution.
 	const Pos3d pt_i= point_list[i];
 	const Vector3d r_i= pt_i-cg;
-	p_i[i]= -w_i*cross(Mcg,r_i); // moment distribution.
+	p_i[i]= w_i*cross(Mcg,r_i); // moment distribution.
 	denom+= w_i*dot(r_i,r_i);
       }
     std::vector<SlidingVector3d> retval(sz);

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-''' Trivial sliding vector system 
-    load distribution verification test.'''
+''' Trivial verification test for sliding vector system 
+    load distribution.'''
 
 from __future__ import print_function
 import xc_base
@@ -18,12 +18,12 @@ weights= [1.0,1.0]
 
 vectors1= svs1.distribute(points,weights)
 
-error= (vectors1[0].getVector2d()-geom.Vector2d(0.5,-0.5)).getModulus()
-error+= (vectors1[1].getVector2d()-geom.Vector2d(0.5,0.5)).getModulus()
+error= (vectors1[0].getVector2d()-geom.Vector2d(0.5,0.5)).getModulus()
+error+= (vectors1[1].getVector2d()-geom.Vector2d(0.5,-0.5)).getModulus()
 
 vectors2= svs1.distribute(points)
-error+= (vectors2[0].getVector2d()-geom.Vector2d(0.5,-0.5)).getModulus()
-error+= (vectors2[1].getVector2d()-geom.Vector2d(0.5,0.5)).getModulus()
+error+= (vectors2[0].getVector2d()-geom.Vector2d(0.5,0.5)).getModulus()
+error+= (vectors2[1].getVector2d()-geom.Vector2d(0.5,-0.5)).getModulus()
 
 
 '''
