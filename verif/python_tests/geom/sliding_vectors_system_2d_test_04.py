@@ -6,8 +6,8 @@ import geom
 import math
 
 # Sliding vector system.
-O=geom.Pos2d(0,0)
-V=geom.Vector2d(0,22.0)
+O= geom.Pos2d(0,0)
+V= geom.Vector2d(0,22.0)
 svs1= geom.SlidingVectorsSystem2d(O,V,0.0)
 
 # Points and weights.
