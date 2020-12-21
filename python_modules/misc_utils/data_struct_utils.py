@@ -11,10 +11,35 @@ __email__= "l.pereztato@gmail.com"
 
 import re
 import unicodedata
+import chardet
+
+def get_encoding(input_str):
+    ''' Return the encoding of the the string argument.'''
+    encoding= chardet.detect(input_str)
+    return encoding['encoding']
+
+def is_ascii(input_str):
+    ''' Return true if the argument is an ascii string.'''
+    encoding= get_encoding(input_str)
+    return (encoding == 'ascii')
+
+def to_unicode(input_str):
+    ''' Return a unicode string from the input.'''
+    retval= input_str
+    if(not isinstance(input_str, unicode)): # input string is Unicode
+        encoding= get_encoding(input_str)
+        retval= unicode(input_str, encoding)
+    return retval    
 
 def remove_accents(input_str):
-    nfkd_form = unicodedata.normalize('NFKD', str(input_str))
-    only_ascii = nfkd_form.encode('ASCII', 'ignore')
+    ''' Remove the accenct from the string argument.'''
+    if(len(input_str)>0):
+        tmp= to_unicode(input_str)
+        # Remove accents.
+        nfkd_form= unicodedata.normalize('NFKD', tmp)
+        only_ascii= nfkd_form.encode('ASCII', 'ignore')
+    else:
+        only_ascii= input_str
     return only_ascii
 
 def slugify(s):

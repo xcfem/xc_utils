@@ -19,7 +19,7 @@ python ./python_tests/test_evalPy.py
 python ./python_tests/test_execPy.py
 python ./python_tests/miscUtils/testStairCaseFunction.py
 python ./python_tests/miscUtils/test_linear_interpolation.py
-
+python ./python_tests/miscUtils/test_remove_accents.py
 
 #Soil mechanics
 echo "$BLEU" "Soil mechanics." "$NORMAL"
