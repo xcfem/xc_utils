@@ -12,6 +12,10 @@ __email__= "l.pereztato@gmail.com"
 import re
 import unicodedata
 import chardet
+import sys
+
+if sys.version_info[0] >= 3:
+    unicode = str
 
 def get_encoding(input_str):
     ''' Return the encoding of the the string argument.'''
