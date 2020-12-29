@@ -164,15 +164,17 @@ template <class pos>
 //! @brief Return the center of mass del polígono.
 pos PolyPos<pos>::getCenterOfMass(void) const
   {
-    if(this->size()<1) return pos();
-    if(this->size()<2) return *(this->begin());
+    const size_t sz= this->size();
+    const pos org= pos();
+    if(sz<1) return org;
+    if(sz<2) return *(this->begin());
     const_iterator i= this->begin();
     vector vpos_center_of_mass((*i).VectorPos());
     i++;
     for(; i != this->end(); i++) 
       vpos_center_of_mass= vpos_center_of_mass + (*i).VectorPos();
-    vpos_center_of_mass= vpos_center_of_mass * (1.0/this->size());
-    return pos()+ vpos_center_of_mass;
+    vpos_center_of_mass= vpos_center_of_mass * (1.0/sz);
+    return org+ vpos_center_of_mass;
   }
 
 template <class pos>
