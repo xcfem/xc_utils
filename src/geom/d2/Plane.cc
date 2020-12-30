@@ -51,45 +51,9 @@ Plane::Plane(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
 	        << std::endl;
   }
 
-
 //! @brief Constructor: plane defined by the point and the normal vector.
 Plane::Plane(const Pos3d &o,const Vector3d &v)
   : Surface3d(), cgp(o.ToCGAL(),v.ToCGAL()) {}
-
-//! @brief Comparison operator.
-bool Plane::operator==(const Plane &other) const
-  {
-    bool retval= false;
-    if(this==&other)
-      retval= true;
-    else
-      {
-        retval= Surface3d::operator==(other);
-        if(retval)
-          retval= (cgp==other.cgp); 
-       }
-    return retval;
-  }
-
-//! @brief Converts the point classification to the polygon one.
-Plane::polygon_classification Plane::clfpnt2clfpol(const CGAL::Oriented_side os)
-  {
-    polygon_classification retval= DETRAS;
-    switch(os)
-      {
-        case CGAL::ON_NEGATIVE_SIDE:
-          retval= DETRAS;
-          break;
-        case CGAL::ON_POSITIVE_SIDE:
-          retval= DELANTE;
-          break;
-        case CGAL::ON_ORIENTED_BOUNDARY:
-          retval= DENTRO;
-          break;
-      }
-    return retval;
-  }
-
 //! @brief Constructor
 Plane::Plane(const Line3d &r,const Pos3d &p)
   : Surface3d(), cgp(r.ToCGAL(),p.ToCGAL()) {}
@@ -121,6 +85,40 @@ Plane::Plane(const GeneralEquationOfPlane &eg)
 
 GeomObj *Plane::clon(void) const
   { return new Plane(*this); }
+
+//! @brief Comparison operator.
+bool Plane::operator==(const Plane &other) const
+  {
+    bool retval= false;
+    if(this==&other)
+      retval= true;
+    else
+      {
+        retval= Surface3d::operator==(other);
+        if(retval)
+          retval= (cgp==other.cgp); 
+       }
+    return retval;
+  }
+
+//! @brief Converts the point classification to the polygon one.
+Plane::polygon_classification Plane::clfpnt2clfpol(const CGAL::Oriented_side os)
+  {
+    polygon_classification retval= BEHIND;
+    switch(os)
+      {
+        case CGAL::ON_NEGATIVE_SIDE:
+          retval= BEHIND;
+          break;
+        case CGAL::ON_POSITIVE_SIDE:
+          retval= AHEAD;
+          break;
+        case CGAL::ON_ORIENTED_BOUNDARY:
+          retval= INSIDE;
+          break;
+      }
+    return retval;
+  }
 
 void Plane::ThreePoints(const Pos3d &p1,const Pos3d &p2,const Pos3d &p3)
   { operator=(Plane(p1,p2,p3)); }

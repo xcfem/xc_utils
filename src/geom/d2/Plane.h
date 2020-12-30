@@ -51,7 +51,7 @@ class Plane : public Surface3d
     CGPlane_3 cgp;
   public:
 
-    typedef enum{DELANTE,DETRAS,DENTRO,CRUZA} polygon_classification;
+    typedef enum{AHEAD,BEHIND,INSIDE,CROSSES} polygon_classification;
 
   protected:
     static polygon_classification clfpnt2clfpol(const CGAL::Oriented_side os);
@@ -211,7 +211,7 @@ Plane::polygon_classification Plane::ClassifyPoints(InputIterator first,InputIte
           {
             if(cf_pinic!=CGAL::ON_ORIENTED_BOUNDARY) //Start point out of plane.
               if(cf_point!=CGAL::ON_ORIENTED_BOUNDARY) //Point *i out of plane.
-                return CRUZA;
+                return CROSSES;
               else //Point *i inside the plane.
                 continue;
             else //Start point inside the plane.

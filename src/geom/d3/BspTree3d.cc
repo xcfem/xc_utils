@@ -31,7 +31,7 @@ void Split_Polygon(const BspTree3d::polygon &pg,const Plane &particion,
 
     for(BspTree3d::polygons_list::const_iterator i= inter.begin();i!=inter.end();i++)
       {
-        if(particion.classifyPolygon(*i) == Plane::DELANTE)
+        if(particion.classifyPolygon(*i) == Plane::AHEAD)
           front_pieces.push_back(*i);
         else
           back_pieces.push_back(*i);
@@ -51,18 +51,18 @@ void Build_BSP_Tree(BspTree3d *tree,const BspTree3d::BspTree3d::polygons_list &p
     for(;pol_iter!=polygons.end();pol_iter++)
       {
 	Plane::polygon_classification result= tree->particion.classifyPolygon(*pol_iter);
-        switch (result)
+        switch(result)
           {
-	   case Plane::DENTRO:
+	   case Plane::INSIDE:
               tree->polygons.push_back(*pol_iter);
               break;
-           case Plane::DETRAS:
+           case Plane::BEHIND:
               backlist.push_back(*pol_iter);
               break;
-           case Plane::DELANTE:
+           case Plane::AHEAD:
               frontlist.push_back(*pol_iter);
               break;
-           case Plane::CRUZA:
+           case Plane::CROSSES:
               BspTree3d::polygons_list front_pieces,back_pieces;
               Split_Polygon(*pol_iter,tree->particion,front_pieces,back_pieces);
               backlist.insert(backlist.end(),back_pieces.begin(),back_pieces.end());
