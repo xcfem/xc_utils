@@ -60,3 +60,14 @@ class_<BND3d, bases<GeomObj3d> >("BND3d")
   ;
 
 #include "xc_utils/src/geom/d3/3d_polyhedrons/python_interface.tcc"
+
+class_<GeomGroup3d, bases<GeomObj3d> >("GeomGroup3d")
+  .def("append",&GeomGroup3d::push_back,"Append the argument to the group.")
+  .def("getArea", &GeomGroup3d::getArea, "Return the object area.")
+  .def("getIx", &GeomGroup3d::Ix)
+  .def("getIy", &GeomGroup3d::Iy)
+  .def("getPxy", &GeomGroup3d::Pxy)
+  .def("getCenterOfMass", &GeomGroup3d::getCenterOfMass, " return the center of mass.")
+  .def("empty", &GeomGroup3d::empty, " return true if the container is empty.")
+  .def("size", &GeomGroup3d::size, " return the number of object in the container.")
+  ;
