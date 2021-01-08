@@ -113,6 +113,8 @@ echo "$BLEU" "  Transformations." "$NORMAL"
 python ./python_tests/geom/rotation2d_test_01.py
 echo "$BLEU" "  Mechanical properties." "$NORMAL"
 python ./python_tests/geom/principal_axes_of_inertia_2d_test_01.py
+echo "$BLEU" "  DXF reading." "$NORMAL"
+python ./python_tests/geom/ezdxf_test_01.py
 
 #VTK
 #python ./python_tests/vtk/plot_cone.py
