@@ -73,6 +73,15 @@ class_<Circle2d, bases<Surface2d> >("Circle2d")
 def("get_convex_hull2d",get_convex_hull2d);
 def("get_basic_alpha_shape2d",get_basic_alpha_shape2d);
 
+class_<GeomGroup2d, bases<GeomObj2d> >("GeomGroup2d")
+  .def("append",&GeomGroup2d::push_back,"Append the argument to the group.")
+  .def("getArea", &GeomGroup2d::getArea, "Return the object area.")
+  .def("getIx", &GeomGroup2d::Ix)
+  .def("getIy", &GeomGroup2d::Iy)
+  .def("getPxy", &GeomGroup2d::Pxy)
+  .def("getCenterOfMass", &GeomGroup2d::getCenterOfMass, " return the center of mass.")
+  ;
+
 
 class_<Surface3d, bases<GeomObj3d>, boost::noncopyable  >("Surface3d", no_init)
   .def("dist",&Surface3d::dist,"Return the distance from point to this surface.")

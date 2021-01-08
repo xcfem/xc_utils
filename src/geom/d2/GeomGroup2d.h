@@ -59,8 +59,6 @@ class GeomGroup2d : public GeomGroup<GeomObj2d>
     void Plot(Plotter &) const;
 
     void Transform(const Trf2d &trf2d);
-
-    
   };
 
 #endif
