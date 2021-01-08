@@ -192,3 +192,12 @@ class_<Grid2d, bases<Surface2d> >("Grid2d")
   .def("In",&Grid2d::In)
   .def("getPoints",make_function(&Grid2d::getPoints,return_internal_reference<>()))
    ;
+
+class_<GeomGroup3d, bases<GeomObj3d> >("GeomGroup3d")
+  .def("append",&GeomGroup3d::push_back,"Append the argument to the group.")
+  .def("getArea", &GeomGroup3d::getArea, "Return the object area.")
+  .def("getIx", &GeomGroup3d::Ix)
+  .def("getIy", &GeomGroup3d::Iy)
+  .def("getPxy", &GeomGroup3d::Pxy)
+  .def("getCenterOfMass", &GeomGroup3d::getCenterOfMass, " return the center of mass.")
+  ;
