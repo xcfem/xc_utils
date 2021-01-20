@@ -31,8 +31,6 @@
 
 const double quiet_nan= std::numeric_limits<double>::quiet_NaN();
 
-
-
 //! @brief Constructor.
 Segment2d::Segment2d(const Pos2d &p1,const Pos2d &p2)
   : Linear2d(), cgseg(p1.ToCGAL(),p2.ToCGAL())
@@ -428,6 +426,22 @@ GeomObj2d::list_Pos2d Segment2d::getIntersection(const Segment2d &r2) const
           }
       }
     return retval;
+  }
+
+//! @brief Return the orthogonal projection onto the line.
+//! @param p: point to project.
+Pos2d Segment2d::Projection(const Pos2d &p) const
+  {
+    const Line2d l= getSupportLine();
+    return l.Projection(p);
+  }
+
+//! @brief Return the projection onto the line.
+//! @param v: vector to project.
+Vector2d Segment2d::Projection(const Vector2d &v) const
+  {
+    const Line2d l= getSupportLine();
+    return l.Projection(v);
   }
 
 GEOM_FT dist(const Pos2d &p,const Segment2d &r)

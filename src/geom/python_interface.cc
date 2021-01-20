@@ -94,6 +94,8 @@ BOOST_PYTHON_MODULE(geom)
       .def("getPxy", pure_virtual(&GeomObj2d::Pxy))
       .def("move",&GeomObj2d::Move,"move(vector): move the object.")
       .def("In",&GeomObj2d::In)
+      .def<Pos2d (GeomObj2d::*)(const Pos2d &) const>("getProjection", &GeomObj2d::Projection)
+      .def<Vector2d (GeomObj2d::*)(const Vector2d &) const>("getProjection", &GeomObj2d::Projection)
       ;
 
     class_<GeomObj3d, bases<GeomObj>, boost::noncopyable >("GeomObj3d", no_init)
@@ -110,7 +112,10 @@ BOOST_PYTHON_MODULE(geom)
       .def("getIz", &GeomObj3d::Iz)
       .def("getPxy", pure_virtual(&GeomObj3d::Pxy)) 
       .def("getPxz", pure_virtual(&GeomObj3d::Pxz)) 
-      .def("getPyz", pure_virtual(&GeomObj3d::Pyz));
+      .def("getPyz", pure_virtual(&GeomObj3d::Pyz))
+      .def<Pos3d (GeomObj3d::*)(const Pos3d &) const>("getProjection", &GeomObj3d::Projection)
+      .def<Vector3d (GeomObj3d::*)(const Vector3d &) const>("getProjection", &GeomObj3d::Projection)
+      ;
 
     #include "lists/python_interface.tcc"
     #include "pos_vec/python_interface.tcc"

@@ -51,6 +51,8 @@ class GeomObj2d: public GeomObj
     GEOM_FT GetYMin(void) const { return GetMin(2); }
     Pos2d GetPMax(void) const;
     Pos2d GetPMin(void) const;
+    virtual Pos2d Projection(const Pos2d &) const;
+    virtual Vector2d Projection(const Vector2d &) const;
     BND2d Bnd(void) const;
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const;
     virtual bool Out(const Pos2d &p, const double &tol= 0.0) const;

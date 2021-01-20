@@ -43,6 +43,25 @@ Pos2d GeomObj2d::GetPMin(void) const
     return p;
   }
 
+//! @brief Return the orthogonal projection onto the line.
+//! @param p: point to project.
+Pos2d GeomObj2d::Projection(const Pos2d &p) const
+  {
+    Pos2d retval;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+              << "; not implemented yet." << std::endl;
+    return retval;
+  }
+
+//! @brief Return the projection onto the line.
+//! @param v: vector to project.
+Vector2d GeomObj2d::Projection(const Vector2d &v) const
+  {
+    Vector2d retval;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+              << "; not implemented yet." << std::endl;
+    return retval;
+  }
 
 //! @brief Return the bounding rectangle.
 BND2d GeomObj2d::Bnd(void) const

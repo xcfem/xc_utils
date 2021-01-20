@@ -91,6 +91,9 @@ class Ray2d : public Linear2d
     GeomObj2d::list_Pos2d getIntersection(unsigned short int, const double &) const;
     GeomObj2d::list_Pos2d getIntersection(const Line2d &r) const;
     GeomObj2d::list_Pos2d getIntersection(const Ray2d &sr) const;
+    
+    Pos2d Projection(const Pos2d &) const;
+    Vector2d Projection(const Vector2d &) const;
 
     bool isParallel(const Line2d &r) const
       { return parallel(getSupportLine(),r); }

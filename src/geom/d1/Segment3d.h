@@ -77,6 +77,9 @@ class Segment3d : public Linear3d
     GeomObj3d::list_Pos3d getIntersection(const Ray3d &sr) const;
     GeomObj3d::list_Pos3d getIntersection(const Segment3d &sg) const;
 
+    Pos3d Projection(const Pos3d &) const;
+    Vector3d Projection(const Vector3d &) const;
+    
     virtual GEOM_FT getLength(void) const;
     virtual Pos3d getCenterOfMass(void) const;
     Dir3d GetDir(void) const;

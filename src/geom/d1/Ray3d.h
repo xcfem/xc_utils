@@ -81,6 +81,9 @@ class Ray3d : public Linear3d
     GeomObj3d::list_Pos3d getIntersection(const Line3d &r) const;
     GeomObj3d::list_Pos3d getIntersection(const Ray3d &sr) const;
 
+    Pos3d Projection(const Pos3d &) const;
+    Vector3d Projection(const Vector3d &) const;
+    
     inline virtual GEOM_FT getLength(void) const
       { return NAN; }
     inline virtual Pos3d getCenterOfMass(void) const

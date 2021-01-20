@@ -149,5 +149,19 @@ GeomObj3d::list_Pos3d Ray3d::getIntersection(const Ray3d &sr) const
     return retval;
   }
 
+//! @brief Return the orthogonal projection onto the line.
+//! @param p: point to project.
+Pos3d Ray3d::Projection(const Pos3d &p) const
+  {
+    const Line3d l= getSupportLine();
+    return l.Projection(p);
+  }
 
+//! @brief Return the projection onto the line.
+//! @param v: vector to project.
+Vector3d Ray3d::Projection(const Vector3d &v) const
+  {
+    const Line3d l= getSupportLine();
+    return l.Projection(v);
+  }
 

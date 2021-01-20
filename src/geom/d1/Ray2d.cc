@@ -181,6 +181,22 @@ GeomObj2d::list_Pos2d Ray2d::getIntersection(const Ray2d &r2) const
   }
 
 
+//! @brief Return the orthogonal projection onto the line.
+//! @param p: point to project.
+Pos2d Ray2d::Projection(const Pos2d &p) const
+  {
+    const Line2d l= getSupportLine();
+    return l.Projection(p);
+  }
+
+//! @brief Return the projection onto the line.
+//! @param v: vector to project.
+Vector2d Ray2d::Projection(const Vector2d &v) const
+  {
+    const Line2d l= getSupportLine();
+    return l.Projection(v);
+  }
+
 //! @brief Applies to the ray the transformation argument.
 void Ray2d::Transform(const Trf2d &trf2d)
   {

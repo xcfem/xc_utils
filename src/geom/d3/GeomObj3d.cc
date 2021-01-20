@@ -47,6 +47,26 @@
 //     return retval;
 //   }
 
+//! @brief Return the orthogonal projection onto the line.
+//! @param p: point to project.
+Pos3d GeomObj3d::Projection(const Pos3d &p) const
+  {
+    Pos3d retval;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+              << "; not implemented yet." << std::endl;
+    return retval;
+  }
+
+//! @brief Return the projection onto the line.
+//! @param v: vector to project.
+Vector3d GeomObj3d::Projection(const Vector3d &v) const
+  {
+    Vector3d retval;
+    std::cerr << getClassName() << "::" << __FUNCTION__
+              << "; not implemented yet." << std::endl;
+    return retval;
+  }
+
 Pos3d GeomObj3d::GetPMax(void) const
   {
     Pos3d p(GetXMax(),GetYMax(),GetZMax());

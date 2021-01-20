@@ -124,10 +124,12 @@ double Line3d::getLambda(unsigned short int i,const double &d,const Vector3d &i_
       { return (d-Point(0)(i))/i_(i);}
 
 //! @brief Return the orthogonal projection onto the line.
+//! @param p: point to project.
 Pos3d Line3d::Projection(const Pos3d &p) const
   { return Pos3d(cgr.projection(p.ToCGAL())); }
 
 //! @brief Return the projection onto the line.
+//! @param v: vector to project.
 Vector3d Line3d::Projection(const Vector3d &v) const
   {
     const Vector3d d= VDir().getNormalized();
