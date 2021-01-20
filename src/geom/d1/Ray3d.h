@@ -63,7 +63,7 @@ class Ray3d : public Linear3d
     //! @brief Return a point of the line at a distance lambda from its origin.
     Pos3d PtoParametricas(const GEOM_FT &lambda) const
       { return Point(0)+lambda*VDir(); }
-    inline bool EsDegenerada(void) const
+    inline bool isDegenerated(void) const
       { return cgsr.is_degenerate(); }
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const
     //Return true if the point is on the object.

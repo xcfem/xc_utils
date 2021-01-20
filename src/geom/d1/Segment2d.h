@@ -68,7 +68,7 @@ class Segment2d : public Linear2d
     Pos2d getPointNaturalCoord(const GEOM_FT &) const;
     inline bool EsVertical(void) const
       { return cgseg.is_vertical(); }
-    inline bool EsDegenerada(void) const
+    inline bool isDegenerated(void) const
       { return cgseg.is_degenerate(); }
     virtual bool In(const Pos2d &, const double &tol= 0.0) const;
     virtual GEOM_FT dist2(const Pos2d &p) const;
@@ -209,7 +209,7 @@ Pos2d intersection_point(const Segment2d &, const Segment2d &);
 inline Line2d perpendicular_bisector(const Segment2d &sg)
   { return sg.getPerpendicularBisector(); }
 
-std::list<Segment2d> sin_degenerados(const std::list<Segment2d> &);
+std::list<Segment2d> without_degenerated(const std::list<Segment2d> &);
 
 
 #endif

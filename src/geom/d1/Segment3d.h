@@ -62,7 +62,7 @@ class Segment3d : public Linear3d
     double getParamNaturalCoord(const GEOM_FT &) const;
     Pos3d getPointNaturalCoord(const GEOM_FT &chi) const;
     GEOM_FT getLambda(const Pos3d &p) const;
-    bool EsDegenerada(void) const;
+    bool isDegenerated(void) const;
     virtual bool In(const Pos3d &p, const double &tol= 0.0) const;
     virtual GEOM_FT dist2(const Pos3d &p) const;
     GEOM_FT dist(const Pos3d &p) const;

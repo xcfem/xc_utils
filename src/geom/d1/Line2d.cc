@@ -49,7 +49,7 @@ Line2d::Line2d(void): Linear2d(),cgr(CGPoint_2(0,0),CGPoint_2(1,0))
 Line2d::Line2d(const Pos2d &p1,const Pos2d &p2)
   : Linear2d(), cgr(p1.ToCGAL(),p2.ToCGAL())
   {
-    if(EsDegenerada())
+    if(isDegenerated())
       {
         clog << getClassName() << "::" << __FUNCTION__
 	     << "; degenerated line, the points: "
@@ -339,14 +339,14 @@ GeomObj2d::list_Pos2d Line2d::getIntersection(unsigned short int i, const double
 GeomObj2d::list_Pos2d Line2d::getIntersection(const Line2d &r2) const
   {
     GeomObj2d::list_Pos2d retval;
-    if(EsDegenerada())
+    if(isDegenerated())
       {
         std::cerr << getClassName() << "::" << __FUNCTION__
 	          << "; degenerated line: "
                   << *this << std::endl;
         return retval;
       }
-    if(r2.EsDegenerada())
+    if(r2.isDegenerated())
       {
         std::cerr << getClassName() << "::" << __FUNCTION__
                   << "; degenerated line: " << r2
@@ -432,7 +432,7 @@ bool Line2d::EsVertical(void) const
   { return cgr.is_vertical(); }
 
 //! @brief Return true if the line is degenerated.
-bool Line2d::EsDegenerada(void) const
+bool Line2d::isDegenerated(void) const
   { return cgr.is_degenerate(); }
 
 //! @brief Return true if the point is on the line.

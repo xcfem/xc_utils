@@ -35,7 +35,7 @@ const double quiet_nan= std::numeric_limits<double>::quiet_NaN();
 Segment2d::Segment2d(const Pos2d &p1,const Pos2d &p2)
   : Linear2d(), cgseg(p1.ToCGAL(),p2.ToCGAL())
   {
-    if(verbosity>2 && EsDegenerada())
+    if(verbosity>2 && isDegenerated())
       {
         clog << getClassName() << "::" << __FUNCTION__
 	     << "; degenerated line, the points: "
@@ -505,11 +505,11 @@ Pos2d intersection_point(const Segment2d &s1, const Segment2d &s2)
     return retval;
   }
 
-std::list<Segment2d> sin_degenerados(const std::list<Segment2d> &lista)
+std::list<Segment2d> without_degenerated(const std::list<Segment2d> &lista)
   {
     std::list<Segment2d> retval;
     for(list<Segment2d>::const_iterator i=lista.begin();i!=lista.end();i++)
-      if(!(*i).EsDegenerada())
+      if(!(*i).isDegenerated())
         retval.push_back(*i);
     return retval;
   }

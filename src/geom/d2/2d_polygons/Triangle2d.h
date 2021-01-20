@@ -48,7 +48,7 @@ class Triangle2d : public PolygonalSurface2d
       { return new Triangle2d(*this); }
     inline virtual unsigned int GetNumVertices(void) const
       { return 3; }
-    bool Degenerado(void) const
+    bool isDegenerated(void) const
       { return cgtriang.is_degenerate(); }
     Pos2d Vertice(unsigned int i) const
       { return Vertice0(i-1); }

@@ -31,7 +31,7 @@
 Ray2d::Ray2d(const Pos2d &p1,const Pos2d &p2)
   : Linear2d(), cgsr(p1.ToCGAL(),p2.ToCGAL())
   {
-    if(EsDegenerada())
+    if(isDegenerated())
       {
         clog << getClassName() << "::" << __FUNCTION__
 	     << "; degenerated line, the points: "

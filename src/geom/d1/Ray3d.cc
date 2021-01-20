@@ -29,7 +29,7 @@
 Ray3d::Ray3d(const Pos3d &p1,const Pos3d &p2)
   : Linear3d(), cgsr(p1.ToCGAL(),p2.ToCGAL())
   {
-    if(EsDegenerada())
+    if(isDegenerated())
       {
         std::clog << getClassName() << "::" << __FUNCTION__
 		  << "; degenerate line, the points: "

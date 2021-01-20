@@ -33,7 +33,7 @@ Segment2d Triangle2d::Base(const size_t &i) const
 //! @brief Return the height corresponding to the i-th vertex.
 Segment2d Triangle2d::Altura(const size_t &i) const
   {
-    if(Degenerado())
+    if(isDegenerated())
       {
         cerr << getClassName() << "::" << __FUNCTION__
 	     << "; warning!, is a degenerated triangle." << endl;

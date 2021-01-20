@@ -68,7 +68,7 @@ class Ray2d : public Linear2d
       { return Point(0)+lambda*VDir(); }
     inline bool EsVertical(void) const
       { return cgsr.is_vertical(); }
-    inline bool EsDegenerada(void) const
+    inline bool isDegenerated(void) const
       { return cgsr.is_degenerate(); }
     //@brief Return true if the points is on the ray.
     virtual bool In(const Pos2d &p, const double &tol= 0.0) const

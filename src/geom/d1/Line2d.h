@@ -105,7 +105,7 @@ class Line2d : public Linear2d
     Pos2d PtoParametricas(const GEOM_FT &lambda) const;
     void Parametricas(const Line2dParametricForm &param);
     bool EsVertical(void) const;
-    bool EsDegenerada(void) const;
+    bool isDegenerated(void) const;
     bool In(const Pos2d &p, const double &tol= 0.0) const;
     bool LadoDerecho(const Pos2d &p) const;
     bool LadoIzquierdo(const Pos2d &p) const;

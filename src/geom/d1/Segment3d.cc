@@ -41,7 +41,7 @@ Segment3d::Segment3d(const CGSegment_3 &r)
 Segment3d::Segment3d(const Pos3d &p1,const Pos3d &p2)
   : Linear3d(), cgseg(p1.ToCGAL(),p2.ToCGAL())
   {
-    if(EsDegenerada())
+    if(isDegenerated())
       {
         std::clog << getClassName() << "::" << __FUNCTION__
 		  << "; degenerated line, the points: "
@@ -100,7 +100,7 @@ double Segment3d::getParamNaturalCoord(const GEOM_FT &chi) const
 Pos3d Segment3d::getPointNaturalCoord(const GEOM_FT &chi) const
   { return PtoParametricas(getParamNaturalCoord(chi)); }
 
-inline bool Segment3d::EsDegenerada(void) const
+inline bool Segment3d::isDegenerated(void) const
   { return cgseg.is_degenerate(); }
 //! @brief Return true if the point is in the segment.
 bool Segment3d::In(const Pos3d &p, const double &tol) const

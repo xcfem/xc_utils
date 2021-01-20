@@ -65,8 +65,8 @@ class HalfPlane2d : public Surface2d
       { return NAN; }
     virtual GEOM_FT GetMin(unsigned short int) const
       { return NAN; }
-    inline bool EsDegenerado(void) const
-      { return lim.EsDegenerada(); }
+    inline bool isDegenerated(void) const
+      { return lim.isDegenerated(); }
     inline const Line2d &getBorde(void) const
       { return lim; }
     //! @brief Return true if the point is inside the half-plane.

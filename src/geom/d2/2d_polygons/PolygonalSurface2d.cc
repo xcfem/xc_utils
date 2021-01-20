@@ -381,7 +381,7 @@ std::list<Segment2d> empalma(const std::list<Segment2d> &lista)
 Segment2d PolygonalSurface2d::Clip(const Line2d &r) const
   {
     Segment2d retval;
-    list<Segment2d> sg_list= sin_degenerados(intersection(*this,r));
+    list<Segment2d> sg_list= without_degenerated(intersection(*this,r));
     if(sg_list.size()>1)
       sg_list= empalma(sg_list);
     if(!sg_list.empty())
@@ -404,7 +404,7 @@ Segment2d PolygonalSurface2d::Clip(const Line2d &r) const
 Segment2d PolygonalSurface2d::Clip(const Ray2d &sr) const
   {
     Segment2d retval;
-    list<Segment2d> sg_list= sin_degenerados(intersection(*this,sr));
+    list<Segment2d> sg_list= without_degenerated(intersection(*this,sr));
     if(!sg_list.empty())
       {
         retval= *sg_list.begin();
@@ -421,7 +421,7 @@ Segment2d PolygonalSurface2d::Clip(const Ray2d &sr) const
 Segment2d PolygonalSurface2d::Clip(const Segment2d &sg) const
   {
     Segment2d retval;
-    list<Segment2d> sg_list= sin_degenerados(intersection(*this,sg));
+    list<Segment2d> sg_list= without_degenerated(intersection(*this,sg));
     if(!sg_list.empty())
       {
         retval= *sg_list.begin();
