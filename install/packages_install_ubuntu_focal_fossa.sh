@@ -67,6 +67,7 @@ sudo apt-get install -y $packages_python
 
 packages_div="\
     gnuplot \
+    python3-pip \
     bc"
 # bc is needed by xc_utils verification tests
 sudo apt-get install -y $packages_div
@@ -77,5 +78,5 @@ sudo apt-get clean
 apt-get install  
 
 # cairo installation. 
-sudo -H pip install pycairo
+sudo -H pip3 install pycairo
 
