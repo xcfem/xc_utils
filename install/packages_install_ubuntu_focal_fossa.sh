@@ -45,7 +45,7 @@ packages_lib="\
     libmysql++-dev            \
     libplot-dev               \
     libsqlite3-dev            \
-    libvtk7-dev               \   
+    libvtk7-dev               \
     libx11-dev"
 sudo apt-get install -y $packages_lib
 
