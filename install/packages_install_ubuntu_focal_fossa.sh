@@ -79,4 +79,5 @@ apt-get install
 
 # cairo installation. 
 sudo -H pip3 install pycairo
+sudo -H pip3 install ezdxf
 
