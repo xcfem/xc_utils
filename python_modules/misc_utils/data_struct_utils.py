@@ -28,7 +28,10 @@ def is_ascii(input_str):
     return (encoding == 'ascii')
 
 def to_unicode(input_str):
-    ''' Return a unicode string from the input.'''
+    ''' Return a unicode string from the input.
+
+    :param input_str: input string.
+    '''
     retval= input_str
     if(not isinstance(input_str, unicode)): # input string is Unicode
         encoding= get_encoding(input_str)
@@ -36,12 +39,15 @@ def to_unicode(input_str):
     return retval    
 
 def remove_accents(input_str):
-    ''' Remove the accenct from the string argument.'''
+    ''' Remove the accents from the string argument.
+
+    :param input_str: string to remove accents from. 
+    '''
     if(len(input_str)>0):
         tmp= to_unicode(input_str)
         # Remove accents.
         nfkd_form= unicodedata.normalize('NFKD', tmp)
-        only_ascii= nfkd_form.encode('ASCII', 'ignore')
+        only_ascii= nfkd_form.encode('ASCII', 'ignore').decode('ascii')
     else:
         only_ascii= input_str
     return only_ascii

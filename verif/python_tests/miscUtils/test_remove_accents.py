@@ -16,7 +16,7 @@ from misc_utils import data_struct_utils
 testList= ['abcdEFG', 'áéíóúÁÉÍÓÚüñÑç', 'Montrèal', u'über', '$12.89', u'Mère', '', u'noël', '889']
 testResults= ['abcdEFG', 'aeiouAEIOUunNc', 'Montreal', 'uber', '$12.89', 'Mere', '', 'noel', '889']
 if sys.version_info[0] >= 3:
-    testResults= [b'abcdEFG', b'aeiouAEIOUunNc', b'Montreal', b'uber', b'$12.89', b'Mere', '', b'noel', b'889']
+    testResults= ['abcdEFG', 'aeiouAEIOUunNc', 'Montreal', 'uber', '$12.89', 'Mere', '', 'noel', '889']
 error= False
 results= list()
 for s1,s2 in zip(testList,testResults):
@@ -24,6 +24,7 @@ for s1,s2 in zip(testList,testResults):
     if(r!=s2):
         error= True
     results.append(r)
+    
 '''
 print(results)
 print(testResults)
