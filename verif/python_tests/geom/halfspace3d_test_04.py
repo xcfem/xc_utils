@@ -26,7 +26,7 @@ P2=geom.HalfSpace3d(plBuz2)
 
 r=P1.getLima(P2)
 
-s=r.getVector3dProj(R)
+s=r.getProj(R)
 s=s.normalized()
 sTeor=geom.Vector3d(-0.7650,-0.5992,-0.2363)
 ratio1= sTeor-s
