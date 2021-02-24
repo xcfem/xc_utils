@@ -86,7 +86,7 @@ BND3d GeomObj3d::Bnd(void) const
 bool GeomObj3d::In(const Pos3d &p, const double &tol) const
   {
     std::cerr << "Function: '" << __FUNCTION__
-              << "' undefined." << std::endl;
+              << "' not implemented yet." << std::endl;
     return (BND3d().In(p,tol));
   }
 

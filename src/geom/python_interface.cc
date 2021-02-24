@@ -115,7 +115,8 @@ BOOST_PYTHON_MODULE(geom)
       .def("getPyz", pure_virtual(&GeomObj3d::Pyz))
       .def<Pos3d (GeomObj3d::*)(const Pos3d &) const>("getProjection", &GeomObj3d::Projection)
       .def<Vector3d (GeomObj3d::*)(const Vector3d &) const>("getProjection", &GeomObj3d::Projection)
-      ;
+      .def("In", &GeomObj3d::In, "In(pos3d,tol) return true if the points lies inside the polygon (distance from the point to the polygon less than the tolerance argument).")
+     ;
 
     #include "lists/python_interface.tcc"
     #include "pos_vec/python_interface.tcc"
