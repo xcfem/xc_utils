@@ -116,7 +116,7 @@ Plane Polygon3d::getPlaneFromSide0(unsigned int i) const
 //! @brief Return true if the point lies inside the polygon
 //! (i. e. the distance from the point to the polygon is less
 //! than the tolerance argument).
-bool Polygon3d::In(const Pos3d &p,const double &tol)
+bool Polygon3d::In(const Pos3d &p,const double &tol) const
   {
     if(!getPlane().In(p,tol)) return false;
     const Pos2d p2d(to_2d(p));

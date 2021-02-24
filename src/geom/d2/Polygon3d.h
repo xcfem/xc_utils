@@ -91,7 +91,7 @@ class Polygon3d: public D2to3d
 
     GEOM_FT GetMax(unsigned short int i) const;
     GEOM_FT GetMin(unsigned short int i) const;
-    bool In(const Pos3d &p,const double &tol);
+    bool In(const Pos3d &p,const double &tol) const;
     bool TocaCuadrante(const int &) const;
 
     GEOM_FT distSigno(const Pos3d &p) const;
