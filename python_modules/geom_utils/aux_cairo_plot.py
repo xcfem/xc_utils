@@ -2,9 +2,16 @@
 
 from __future__ import division
 
+__author__= "Luis C. Pérez Tato (LCPT)"
+__cppyright__= "Copyright 2017 LCPT"
+__license__= "GPL"
+__version__= "3.0"
+__email__= "l.pereztato@ciccp.es"
+
 import math
 import cairo
 import geom
+
 
 class ArrowHead(object):
   def __init__(self,style,lineColor):
