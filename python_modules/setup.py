@@ -51,6 +51,6 @@ print('path to libs: '+pth_to_libs)
 setup(name='LcmdModules',
       version='0.12.0',
       author='Luis C. Pérez Tato',
-      packages=['load_combination_utils','geom_utils','misc_utils','sqlite_utils','latex','vtk_utils'],
+      packages=['geom_utils','misc_utils','sqlite_utils','latex','vtk_utils'],
       data_files=[(pth_to_libs, ['extensions/xc_base.so','extensions/loadCombinations.so','extensions/geom.so','extensions/xcGnuGts.so'])]
      )
