@@ -32,7 +32,6 @@ python ./python_tests/geom/vector3d_test_02.py
 python ./python_tests/geom/vector3d_angle_test_01.py
 echo "$BLEU" "  Points." "$NORMAL"
 python ./python_tests/geom/pos2d_test_01.py
-python ./python_tests/geom/closest_pair_of_points.py
 python ./python_tests/geom/pos3d_test_01.py
 python ./python_tests/geom/pos3d_list_test_01.py
 echo "$BLEU" "  Lines, rays and segments." "$NORMAL"
