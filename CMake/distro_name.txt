@@ -1,1 +1,0 @@
-SET(DISTRO_NAME "Ubuntu")
